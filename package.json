@@ -6,5 +6,8 @@
   "repository": "git@github.com:izumin5210/protoc-gen-nexus.git",
   "author": "izumin5210 <m@izum.in>",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "devDependencies": {
+    "typescript": "^3.9.5"
+  }
 }
