@@ -19,5 +19,21 @@
   "dependencies": {
     "@types/google-protobuf": "^3.7.2",
     "google-protobuf": "^3.12.2"
+  },
+  "scripts": {
+    "lint": "frolint --branch master --bail"
+  },
+  "eslintConfig": {
+    "extends": [
+      "wantedly-typescript"
+    ],
+    "parserOptions": {
+      "project": [
+        "./tsconfig.json"
+      ]
+    },
+    "rules": {
+      "import/no-default-export": "error"
+    }
   }
 }
