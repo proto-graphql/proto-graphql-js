@@ -11,6 +11,7 @@
   "private": false,
   "devDependencies": {
     "@types/jest": "^25.2.3",
+    "frolint": "^2.0.1",
     "jest": "^26.0.1",
     "ts-jest": "^26.1.0",
     "typescript": "^3.9.5"
