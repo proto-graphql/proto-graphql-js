@@ -15,7 +15,7 @@ withCodeGeneratorRequest((req) => {
     const file = new CodeGeneratorResponse.File();
     file.setName(`${fn}.dump`);
     file.setContent(
-      Buffer.from(files[fn].serializeBinary()).toString("base64"),
+      Buffer.from(files[fn].serializeBinary()).toString("base64")
     );
     resp.addFile(file);
   }

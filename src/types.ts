@@ -5,21 +5,21 @@ import {
 } from "google-protobuf/google/protobuf/descriptor_pb";
 
 export class Message {
-  readonly #d: DescriptorProto;
+  private readonly d: DescriptorProto;
   public readonly fields: Field[];
-  #comments?: Comments;
+  private comments?: Comments;
 
   constructor(d: DescriptorProto) {
-    this.#d = d;
+    this.d = d;
     this.fields = d.getFieldList()!.map((fd) => new Field(fd));
   }
 
-  public get name(): string {
-    return this.#d.getName()!;
+  get name(): string {
+    return this.d.getName()!;
   }
 
-  public get description(): string {
-    return this.#comments?.leadingComments || "";
+  get description(): string {
+    return this.comments?.leadingComments || "";
   }
 
   public addSourceCodeInfoLocation(l: SourceCodeInfo.Location) {
@@ -32,70 +32,66 @@ export class Message {
         .map((s) => s.trim()),
     };
     if (pathList.length === 2) {
-      this.#comments = comments;
-    } else if (pathList[2] == 2) {
+      this.comments = comments;
+    } else if (pathList[2] === 2) {
       this.fields[pathList[3]].addComments(comments, pathList);
     }
   }
 }
 
 export class Field {
-  readonly #fd: FieldDescriptorProto;
-  readonly #type: Type;
+  private readonly fd: FieldDescriptorProto;
+  public readonly type: Type;
   // https://github.com/protocolbuffers/protobuf/blob/v3.12.3/src/google/protobuf/descriptor.proto#L770
-  #comments?: Comments;
-  #labelComments?: Comments;
-  #typeComments?: Comments;
-  #nameComments?: Comments;
-  #numberComments?: Comments;
+  private comments?: Comments;
+  private labelComments?: Comments;
+  private typeComments?: Comments;
+  private nameComments?: Comments;
+  private numberComments?: Comments;
 
   constructor(fd: FieldDescriptorProto) {
-    this.#fd = fd;
-    this.#type = Field.convertType(fd);
+    this.fd = fd;
+    this.type = Field.convertType(fd);
   }
 
-  public get name(): string {
-    return this.#fd.getJsonName()!;
+  get name(): string {
+    return this.fd.getJsonName()!;
   }
 
-  public get type(): Type {
-    return this.#type;
-  }
-
-  public get description(): string {
-    return this.#comments?.leadingComments || "";
+  get description(): string {
+    return this.comments?.leadingComments || "";
   }
 
   public isNullable(): boolean {
     return !(
-      this.#fd.getLabel() === FieldDescriptorProto.Label.LABEL_REQUIRED ||
-      this.#comments?.leadingComments?.startsWith("Required. ")
+      this.fd.getLabel() === FieldDescriptorProto.Label.LABEL_REQUIRED ||
+      this.comments?.leadingComments?.startsWith("Required. ")
     );
   }
 
   public addComments(comments: Comments, pathList: number[]) {
     if (pathList.length === 4) {
-      this.#comments = comments;
+      this.comments = comments;
       return;
     }
     switch (pathList[4]) {
       case 4:
-        this.#labelComments = comments;
+        this.labelComments = comments;
         break;
       case 5:
-        this.#typeComments = comments;
+        this.typeComments = comments;
         break;
       case 1:
-        this.#nameComments = comments;
+        this.nameComments = comments;
         break;
       case 3:
-        this.#numberComments = comments;
+        this.numberComments = comments;
         break;
     }
   }
 
   private static convertType(f: FieldDescriptorProto): Type {
-    if (f.getLabel() == FieldDescriptorProto.Label.LABEL_REPEATED) {
+    if (f.getLabel() === FieldDescriptorProto.Label.LABEL_REPEATED) {
       return {
         kind: "list",
         type: this.convertItemType(f),
@@ -176,8 +172,7 @@ export class Field {
             };
         }
       default:
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const _exhaustiveCheck: never = pbtype;
+        const _exhaustiveCheck: never = pbtype; // eslint-disable-line
         throw "unreachable";
     }
   }

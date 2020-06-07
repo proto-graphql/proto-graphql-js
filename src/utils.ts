@@ -25,7 +25,7 @@ function withAllStdIn(callback: (buffer: Buffer) => void): void {
 }
 
 export function withCodeGeneratorRequest(
-  f: (req: CodeGeneratorRequest) => CodeGeneratorResponse,
+  f: (req: CodeGeneratorRequest) => CodeGeneratorResponse
 ): void {
   withAllStdIn((inputBuf) => {
     const typedInputBuf = new Uint8Array(inputBuf.length);

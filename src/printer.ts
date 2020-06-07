@@ -13,12 +13,12 @@ export function printSource(fd: FileDescriptorProto, msgs: Message[]): string {
         ts.createNamedImports([
           ts.createImportSpecifier(
             undefined,
-            ts.createIdentifier("objectType"),
+            ts.createIdentifier("objectType")
           ),
         ]),
-        false,
+        false
       ),
-      ts.createStringLiteral("@nexus/schema"),
+      ts.createStringLiteral("@nexus/schema")
     ),
     ...msgs.map(createMessageAST),
   ];
@@ -28,10 +28,10 @@ export function printSource(fd: FileDescriptorProto, msgs: Message[]): string {
       "",
       ts.ScriptTarget.Latest,
       false,
-      ts.ScriptKind.TS,
+      ts.ScriptKind.TS
     ),
     ast,
-    false,
+    false
   );
   const result = printer.printFile(file);
 
@@ -48,14 +48,14 @@ function createMessageAST(msg: Message): ts.Statement {
 }
 
 class MessageAST {
-  readonly #msg: Message;
+  private readonly msg: Message;
 
   constructor(msg: Message) {
-    this.#msg = msg;
+    this.msg = msg;
   }
 
   public build(): ts.Statement {
-    const { name, description, fields } = this.#msg;
+    const { name, description, fields } = this.msg;
 
     return ts.createFunctionDeclaration(
       undefined,
@@ -73,11 +73,11 @@ class MessageAST {
                 [
                   ts.createPropertyAssignment(
                     "name",
-                    ts.createStringLiteral(name),
+                    ts.createStringLiteral(name)
                   ),
                   ts.createPropertyAssignment(
                     "description",
-                    ts.createStringLiteral(description),
+                    ts.createStringLiteral(description)
                   ),
                   // TODO: "description" property
                   ts.createMethod(
@@ -95,60 +95,60 @@ class MessageAST {
                         "t",
                         undefined,
                         undefined,
-                        undefined,
+                        undefined
                       ),
                     ],
                     undefined,
                     ts.createBlock(
                       fields.map((f) => new FieldAST(f).build()),
-                      true,
-                    ),
+                      true
+                    )
                   ),
                 ],
-                true,
+                true
               ),
-            ]),
+            ])
           ),
         ],
-        true,
-      ),
+        true
+      )
     );
   }
 }
 
 class FieldAST {
-  readonly #field: Field;
+  private readonly field: Field;
 
   constructor(field: Field) {
-    this.#field = field;
+    this.field = field;
   }
 
   public build(): ts.Statement {
-    const { name, description, type } = this.#field;
+    const { name } = this.field;
 
     return ts.createStatement(
       ts.createCall(this.fieldFunction, undefined, [
         ts.createStringLiteral(name),
         this.options,
-      ]),
+      ])
     );
   }
 
   private get fieldFunction(): ts.Expression {
     let left: ts.Expression = ts.createIdentifier("t");
 
-    if (this.#field.type.kind === "list") {
+    if (this.field.type.kind === "list") {
       left = ts.createPropertyAccess(left, ts.createIdentifier("list"));
     }
 
     return ts.createPropertyAccess(
       left,
-      ts.createIdentifier(this.nexusTypeName),
+      ts.createIdentifier(this.nexusTypeName)
     );
   }
 
   private get nexusTypeName(): string {
-    const { type } = this.#field;
+    const { type } = this.field;
 
     switch (type.kind) {
       case "list":
@@ -166,44 +166,42 @@ class FieldAST {
           case "ID":
             return "id";
           default:
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            const _exhaustiveCheck: never = type.type;
+            const _exhaustiveCheck: never = type.type; // eslint-disable-line
             throw "unreachable";
         }
       case "object":
         return "field";
       default:
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const _exhaustiveCheck: never = type;
+        const _exhaustiveCheck: never = type; // eslint-disable-line
         throw "unreachable";
     }
   }
 
   private get options(): ts.ObjectLiteralExpression {
-    const { description, type } = this.#field;
+    const { description, type } = this.field;
     const props: ts.ObjectLiteralElementLike[] = [
       ts.createPropertyAssignment(
         "nullable",
-        this.#field.isNullable() ? ts.createTrue() : ts.createFalse(),
+        this.field.isNullable() ? ts.createTrue() : ts.createFalse()
       ),
       ts.createPropertyAssignment(
         "description",
-        ts.createStringLiteral(description),
+        ts.createStringLiteral(description)
       ),
     ];
 
-    if (type.kind == "list") {
+    if (type.kind === "list") {
       props.push(
         ts.createPropertyAssignment(
           "type",
-          ts.createStringLiteral(type.type.type),
-        ),
+          ts.createStringLiteral(type.type.type)
+        )
       );
     }
 
-    if (type.kind == "object") {
+    if (type.kind === "object") {
       props.push(
-        ts.createPropertyAssignment("type", ts.createStringLiteral(type.type)),
+        ts.createPropertyAssignment("type", ts.createStringLiteral(type.type))
       );
     }
 
