@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package example;
+
+import "google/protobuf/timestamp.proto";
+
+// User entity
+message User {
+  // Required. Output only. ID.
+  uint64 id = 1;
+  // Required. User's login name.
+  string name = 2;
+  // Required. Posts that are written by the user.
+  repeated Post posts = 3;
+}
+
+// Post entity
+message Post {
+  // Required. Output only. ID.
+  uint64 id = 1;
+  // Required. Article.
+  string title = 2;
+  // Required. Body.
+  string body = 3;
+  // Required. Output only. Published time.
+  google.protobuf.Timestamp published_time = 4;
+}

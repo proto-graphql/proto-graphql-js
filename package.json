@@ -21,7 +21,11 @@
     "google-protobuf": "^3.12.2"
   },
   "scripts": {
-    "lint": "frolint --branch master --bail"
+    "build": "tsc --build .",
+    "generate:fixtures": "protoc -I ./src/__fixtures__ --include_source_info --include_imports --descriptor_set_out=./src/__fixtures__/fixtures.protoset $(find ./src/__fixtures__ -name '*.proto')",
+    "lint": "frolint --branch master --bail",
+    "pretest": "yarn generate:fixtures",
+    "test": "jest"
   },
   "eslintConfig": {
     "extends": [
