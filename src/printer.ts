@@ -57,17 +57,13 @@ class MessageAST {
   public build(): ts.Statement {
     const { name, description, fields } = this.msg;
 
-    return ts.createFunctionDeclaration(
-      undefined,
+    return ts.createVariableStatement(
       [ts.createToken(ts.SyntaxKind.ExportKeyword)],
-      undefined,
-      `objectType${name}`,
-      undefined,
-      [],
-      undefined,
-      ts.createBlock(
+      ts.createVariableDeclarationList(
         [
-          ts.createReturn(
+          ts.createVariableDeclaration(
+            name,
+            undefined,
             ts.createCall(ts.createIdentifier("objectType"), undefined, [
               ts.createObjectLiteral(
                 [
@@ -110,7 +106,7 @@ class MessageAST {
             ])
           ),
         ],
-        true
+        ts.NodeFlags.Const
       )
     );
   }
