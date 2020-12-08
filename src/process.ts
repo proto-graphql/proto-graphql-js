@@ -2,11 +2,16 @@ import { FileDescriptorProto } from "google-protobuf/google/protobuf/descriptor_
 import { printSource } from "./printer";
 import { Message } from "./types";
 
-export function processFileDescriptor(fd: FileDescriptorProto): string {
+export type Parameters = Record<string, string>;
+
+export function processFileDescriptor(
+  fd: FileDescriptorProto,
+  params: Parameters
+): string {
   const msgs: Message[] = [];
 
   for (const d of fd.getMessageTypeList()) {
-    msgs.push(new Message(d));
+    msgs.push(new Message(fd, d, { importPrefix: params.importPrefix }));
   }
 
   for (const l of fd.getSourceCodeInfo()?.getLocationList() || []) {

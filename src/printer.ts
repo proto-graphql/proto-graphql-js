@@ -55,60 +55,71 @@ class MessageAST {
   }
 
   public build(): ts.Statement {
-    const { name, description, fields } = this.msg;
-
     return ts.createVariableStatement(
       [ts.createToken(ts.SyntaxKind.ExportKeyword)],
       ts.createVariableDeclarationList(
         [
           ts.createVariableDeclaration(
-            name,
+            this.msg.name,
             undefined,
-            ts.createCall(ts.createIdentifier("objectType"), undefined, [
-              ts.createObjectLiteral(
-                [
-                  ts.createPropertyAssignment(
-                    "name",
-                    ts.createStringLiteral(name)
-                  ),
-                  ts.createPropertyAssignment(
-                    "description",
-                    ts.createStringLiteral(description)
-                  ),
-                  // TODO: "description" property
-                  ts.createMethod(
-                    undefined,
-                    undefined,
-                    undefined,
-                    "definition",
-                    undefined,
-                    undefined,
-                    [
-                      ts.createParameter(
-                        undefined,
-                        undefined,
-                        undefined,
-                        "t",
-                        undefined,
-                        undefined,
-                        undefined
-                      ),
-                    ],
-                    undefined,
-                    ts.createBlock(
-                      fields.map((f) => new FieldAST(f).build()),
-                      true
-                    )
-                  ),
-                ],
-                true
-              ),
-            ])
+            this.buildObjectType()
           ),
         ],
         ts.NodeFlags.Const
       )
     );
+  }
+
+  private buildObjectType(): ts.Expression {
+    const { name, description, fields } = this.msg;
+
+    return ts.createCall(ts.createIdentifier("objectType"), undefined, [
+      ts.createObjectLiteral(
+        [
+          ts.createPropertyAssignment("name", ts.createStringLiteral(name)),
+          ts.createPropertyAssignment(
+            "description",
+            ts.createStringLiteral(description)
+          ),
+          // TODO: "description" property
+          ts.createMethod(
+            undefined,
+            undefined,
+            undefined,
+            "definition",
+            undefined,
+            undefined,
+            [
+              ts.createParameter(
+                undefined,
+                undefined,
+                undefined,
+                "t",
+                undefined,
+                undefined,
+                undefined
+              ),
+            ],
+            undefined,
+            ts.createBlock(
+              fields.map((f) => new FieldAST(f).build()),
+              true
+            )
+          ),
+          ts.createPropertyAssignment(
+            "rootTyping",
+            ts.createObjectLiteral([
+              ts.createPropertyAssignment("name", ts.createStringLiteral(name)),
+              ts.createPropertyAssignment(
+                "path",
+                ts.createStringLiteral(this.msg.importPath)
+              ),
+            ])
+          ),
+        ],
+        true
+      ),
+    ]);
   }
 }
 
@@ -162,7 +173,7 @@ class FieldAST {
           case "ID":
             return "id";
           default:
-            const _exhaustiveCheck: never = type.type; // eslint-disable-line
+            const _exhaustiveCheck: never = type; // eslint-disable-line
             throw "unreachable";
         }
       case "object":

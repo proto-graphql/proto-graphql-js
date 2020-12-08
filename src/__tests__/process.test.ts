@@ -21,5 +21,5 @@ function getFixtureFileDescriptor(name: string): FileDescriptorProto {
 
 test("geenrates nexus DSL from simple proto file", () => {
   const fd = getFixtureFileDescriptor("sample.proto");
-  expect(processFileDescriptor(fd)).toMatchSnapshot();
+  expect(processFileDescriptor(fd, {})).toMatchSnapshot();
 });

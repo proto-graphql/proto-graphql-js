@@ -22,7 +22,8 @@ export const User = objectType({
             description: \\"Required. Posts that are written by the user.\\",
             type: \\".example.Post\\"
         });
-    }
+    },
+    rootTyping: { name: \\"User\\", path: \\"./sample\\" }
 });
 export const Post = objectType({
     name: \\"Post\\",
@@ -44,7 +45,8 @@ export const Post = objectType({
             nullable: false,
             description: \\"Required. Output only. Published time.\\"
         });
-    }
+    },
+    rootTyping: { name: \\"Post\\", path: \\"./sample\\" }
 });
 "
 `;

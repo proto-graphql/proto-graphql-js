@@ -2,16 +2,25 @@ import {
   FieldDescriptorProto,
   DescriptorProto,
   SourceCodeInfo,
+  FileDescriptorProto,
 } from "google-protobuf/google/protobuf/descriptor_pb";
 
 export class Message {
+  private readonly fd: FileDescriptorProto;
   private readonly d: DescriptorProto;
+  private readonly importPrefix: string;
   public readonly fields: Field[];
   private comments?: Comments;
 
-  constructor(d: DescriptorProto) {
+  constructor(
+    fd: FileDescriptorProto,
+    d: DescriptorProto,
+    params: { importPrefix?: string }
+  ) {
     this.d = d;
+    this.fd = fd;
     this.fields = d.getFieldList()!.map((fd) => new Field(fd));
+    this.importPrefix = params.importPrefix ?? ".";
   }
 
   get name(): string {
@@ -20,6 +29,14 @@ export class Message {
 
   get description(): string {
     return this.comments?.leadingComments || "";
+  }
+
+  get importPath(): string {
+    return `${this.importPrefix}/${this.fd
+      .getName()!
+      .split(".")
+      .slice(0, -1)
+      .join(".")}`;
   }
 
   public addSourceCodeInfoLocation(l: SourceCodeInfo.Location) {
