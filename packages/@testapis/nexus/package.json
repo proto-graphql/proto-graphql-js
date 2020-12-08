@@ -1,0 +1,6 @@
+{
+  "name": "@testapis/nexus",
+  "version": "0.0.1",
+  "description": "Generated codes from protobuf IDL",
+  "private": true
+}

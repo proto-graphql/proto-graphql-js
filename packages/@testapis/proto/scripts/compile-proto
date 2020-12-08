@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+
+set -eu
+set -o pipefail
+
+cd $(dirname $0)/..
+
+clean() {
+  rm -rf ../node/lib
+  rm -rf ../nexus/lib
+}
+
+init() {
+  mkdir ../node/lib
+  mkdir ../nexus/lib
+}
+
+protocw() {
+  ./scripts/protocw -I src "$@"
+}
+
+execProtoc() {
+  for protoDir in ./src/*; do
+    protocw --include_source_info --include_imports --descriptor_set_out=${protoDir}/descriptor_set.pb ${protoDir}/*.proto
+    protocw \
+      --plugin=protoc-gen-ts=`yarn bin protoc-gen-ts` \
+      --js_out="../node/lib" --js_opt=import_style=commonjs,binary \
+      --ts_out="../node/lib" \
+      ${protoDir}/*.proto
+    protocw \
+      --plugin=protoc-gen-nexus=`yarn bin protoc-gen-nexus` \
+      --nexus_out="../nexus/lib" --nexus_opt=import_prefix=@testapis/node \
+      ${protoDir}/*.proto
+  done
+}
+
+_main() {
+  clean
+  init
+  execProtoc
+}
+
+_main

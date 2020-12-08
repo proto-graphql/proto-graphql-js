@@ -14,7 +14,6 @@
     "frolint": "^2.0.1",
     "jest": "^26.0.1",
     "ts-jest": "^26.1.0",
-    "ts-protoc-gen": "^0.13.0",
     "typescript": "^4.1.2"
   },
   "dependencies": {
@@ -23,9 +22,7 @@
   },
   "scripts": {
     "build": "tsc --build .",
-    "generate:fixtures": "protoc -I ./src/__fixtures__ --include_source_info --include_imports --descriptor_set_out=./src/__fixtures__/fixtures.protoset $(find ./src/__fixtures__ -name '*.proto')",
     "lint": "frolint --branch master --bail",
-    "pretest": "yarn generate:fixtures",
     "test": "jest"
   }
 }

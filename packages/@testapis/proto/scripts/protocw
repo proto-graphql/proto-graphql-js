@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+
+set -eu
+set -o pipefail
+
+ROOT_DIR=$(dirname $0)/..
+
+PROTOC_VERSION='3.14.0'
+PROTOC_DIR=$ROOT_DIR/tmp/protoc-${PROTOC_VERSION}
+PROTOC_BIN=$PROTOC_DIR/bin/protoc
+
+unameOs() {
+  os=$(uname -s | tr '[:upper:]' '[:lower:]')
+  case "$os" in
+    cygwin_nt*) os="windows" ;;
+    mingw*) os="windows" ;;
+    msys_nt*) os="windows" ;;
+    darwin) os="osx" ;;
+  esac
+  echo "$os"
+}
+
+downloadProtoc() {
+  if [ -f $PROTOC_BIN ]; then
+    return
+  fi
+
+  mkdir -p $PROTOC_DIR
+
+  archive="protoc-${PROTOC_VERSION}-$(unameOs)-$(uname -m).zip"
+  curl -sfOL https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/${archive}
+  unzip $archive -d $PROTOC_DIR
+  rm -rf $archive
+}
+
+_main() {
+  downloadProtoc
+
+  $PROTOC_BIN -I $PROTOC_DIR/include "$@"
+}
+
+_main "$@"

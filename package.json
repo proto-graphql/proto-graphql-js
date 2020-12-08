@@ -1,8 +1,10 @@
 {
   "private": true,
-  "workspaces": ["packages/*"],
+  "workspaces": ["packages/*", "packages/@testapis/*"],
   "scripts": {
-    "build": "yarn workspace protoc-gen-nexus build",
+    "build": "yarn build:protoc-gen-nexus && yarn build:testapis",
+    "build:protoc-gen-nexus": "yarn workspace protoc-gen-nexus build",
+    "build:testapis": "yarn workspace @testapis/proto build",
     "lint": "yarn workspace protoc-gen-nexus lint",
     "test": "yarn workspace protoc-gen-nexus test"
   },
