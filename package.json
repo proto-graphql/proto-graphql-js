@@ -1,31 +1,10 @@
 {
-  "name": "protoc-gen-nexus",
-  "version": "0.0.1",
-  "description": "Generate DSL for GraphQL Nexus from Protocol Buffers IDL",
-  "bin": {
-    "protoc-gen-nexus": "./bin/protoc-gen-nexus"
-  },
-  "repository": "git@github.com:izumin5210/protoc-gen-nexus.git",
-  "author": "izumin5210 <m@izum.in>",
-  "license": "MIT",
-  "private": false,
-  "devDependencies": {
-    "@types/jest": "^26.0.16",
-    "frolint": "^2.0.1",
-    "jest": "^26.0.1",
-    "ts-jest": "^26.1.0",
-    "typescript": "^4.1.2"
-  },
-  "dependencies": {
-    "@types/google-protobuf": "^3.7.2",
-    "google-protobuf": "^3.12.2"
-  },
+  "private": true,
+  "workspaces": ["packages/*"],
   "scripts": {
-    "build": "tsc --build .",
-    "generate:fixtures": "protoc -I ./src/__fixtures__ --include_source_info --include_imports --descriptor_set_out=./src/__fixtures__/fixtures.protoset $(find ./src/__fixtures__ -name '*.proto')",
-    "lint": "frolint --branch master --bail",
-    "pretest": "yarn generate:fixtures",
-    "test": "jest"
+    "build": "yarn workspace protoc-gen-nexus build",
+    "lint": "yarn workspace protoc-gen-nexus lint",
+    "test": "yarn workspace protoc-gen-nexus test"
   },
   "eslintConfig": {
     "extends": [
