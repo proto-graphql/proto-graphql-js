@@ -5,24 +5,25 @@ import { Field, Message } from "./types";
 export function printSource(fd: FileDescriptorProto, msgs: Message[]): string {
   const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed });
   const ast = [
-    ts.createImportDeclaration(
+    ts.factory.createImportDeclaration(
       undefined,
       undefined,
-      ts.createImportClause(
+      ts.factory.createImportClause(
+        false,
         undefined,
-        ts.createNamedImports([
-          ts.createImportSpecifier(
+        ts.factory.createNamedImports([
+          ts.factory.createImportSpecifier(
             undefined,
-            ts.createIdentifier("objectType")
+            ts.factory.createIdentifier("objectType")
           ),
-        ]),
-        false
+        ])
       ),
-      ts.createStringLiteral("@nexus/schema")
+      ts.factory.createStringLiteral("@nexus/schema")
     ),
     ...msgs.map(createMessageAST),
   ];
-  const file = ts.updateSourceFileNode(
+
+  const file = ts.factory.updateSourceFile(
     ts.createSourceFile(
       "generated.ts",
       "",
@@ -55,12 +56,13 @@ class MessageAST {
   }
 
   public build(): ts.Statement {
-    return ts.createVariableStatement(
-      [ts.createToken(ts.SyntaxKind.ExportKeyword)],
-      ts.createVariableDeclarationList(
+    return ts.factory.createVariableStatement(
+      [ts.factory.createToken(ts.SyntaxKind.ExportKeyword)],
+      ts.factory.createVariableDeclarationList(
         [
-          ts.createVariableDeclaration(
+          ts.factory.createVariableDeclaration(
             this.msg.name,
+            undefined,
             undefined,
             this.buildObjectType()
           ),
@@ -73,16 +75,16 @@ class MessageAST {
   private buildObjectType(): ts.Expression {
     const { name, description, fields } = this.msg;
 
-    return ts.createCall(ts.createIdentifier("objectType"), undefined, [
-      ts.createObjectLiteral(
+    return ts.factory.createCallExpression(ts.factory.createIdentifier("objectType"), undefined, [
+      ts.factory.createObjectLiteralExpression(
         [
-          ts.createPropertyAssignment("name", ts.createStringLiteral(name)),
-          ts.createPropertyAssignment(
+          ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(name)),
+          ts.factory.createPropertyAssignment(
             "description",
-            ts.createStringLiteral(description)
+            ts.factory.createStringLiteral(description)
           ),
           // TODO: "description" property
-          ts.createMethod(
+          ts.factory.createMethodDeclaration(
             undefined,
             undefined,
             undefined,
@@ -90,7 +92,7 @@ class MessageAST {
             undefined,
             undefined,
             [
-              ts.createParameter(
+              ts.factory.createParameterDeclaration(
                 undefined,
                 undefined,
                 undefined,
@@ -101,18 +103,18 @@ class MessageAST {
               ),
             ],
             undefined,
-            ts.createBlock(
+            ts.factory.createBlock(
               fields.map((f) => new FieldAST(f).build()),
               true
             )
           ),
-          ts.createPropertyAssignment(
+          ts.factory.createPropertyAssignment(
             "rootTyping",
-            ts.createObjectLiteral([
-              ts.createPropertyAssignment("name", ts.createStringLiteral(name)),
-              ts.createPropertyAssignment(
+            ts.factory.createObjectLiteralExpression([
+              ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(name)),
+              ts.factory.createPropertyAssignment(
                 "path",
-                ts.createStringLiteral(this.msg.importPath)
+                ts.factory.createStringLiteral(this.msg.importPath)
               ),
             ])
           ),
@@ -133,24 +135,24 @@ class FieldAST {
   public build(): ts.Statement {
     const { name } = this.field;
 
-    return ts.createStatement(
-      ts.createCall(this.fieldFunction, undefined, [
-        ts.createStringLiteral(name),
+    return ts.factory.createExpressionStatement(
+      ts.factory.createCallExpression(this.fieldFunction, undefined, [
+        ts.factory.createStringLiteral(name),
         this.options,
       ])
     );
   }
 
   private get fieldFunction(): ts.Expression {
-    let left: ts.Expression = ts.createIdentifier("t");
+    let left: ts.Expression = ts.factory.createIdentifier("t");
 
     if (this.field.type.kind === "list") {
-      left = ts.createPropertyAccess(left, ts.createIdentifier("list"));
+      left = ts.factory.createPropertyAccessExpression(left, ts.factory.createIdentifier("list"));
     }
 
-    return ts.createPropertyAccess(
+    return ts.factory.createPropertyAccessExpression(
       left,
-      ts.createIdentifier(this.nexusTypeName)
+      ts.factory.createIdentifier(this.nexusTypeName)
     );
   }
 
@@ -187,31 +189,31 @@ class FieldAST {
   private get options(): ts.ObjectLiteralExpression {
     const { description, type } = this.field;
     const props: ts.ObjectLiteralElementLike[] = [
-      ts.createPropertyAssignment(
+      ts.factory.createPropertyAssignment(
         "nullable",
-        this.field.isNullable() ? ts.createTrue() : ts.createFalse()
+        this.field.isNullable() ? ts.factory.createTrue() : ts.factory.createFalse()
       ),
-      ts.createPropertyAssignment(
+      ts.factory.createPropertyAssignment(
         "description",
-        ts.createStringLiteral(description)
+        ts.factory.createStringLiteral(description)
       ),
     ];
 
     if (type.kind === "list") {
       props.push(
-        ts.createPropertyAssignment(
+        ts.factory.createPropertyAssignment(
           "type",
-          ts.createStringLiteral(type.type.type)
+          ts.factory.createStringLiteral(type.type.type)
         )
       );
     }
 
     if (type.kind === "object") {
       props.push(
-        ts.createPropertyAssignment("type", ts.createStringLiteral(type.type))
+        ts.factory.createPropertyAssignment("type", ts.factory.createStringLiteral(type.type))
       );
     }
 
-    return ts.createObjectLiteral(props, true);
+    return ts.factory.createObjectLiteralExpression(props, true);
   }
 }
