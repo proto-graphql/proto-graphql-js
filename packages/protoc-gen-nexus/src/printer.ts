@@ -207,7 +207,7 @@ class FieldAST {
   }
 
   private get options(): ts.ObjectLiteralExpression {
-    const { description, type } = this.field;
+    const { getterName, description, type } = this.field;
     const props: ts.ObjectLiteralElementLike[] = [
       ts.factory.createPropertyAssignment(
         "description",
@@ -232,6 +232,41 @@ class FieldAST {
         )
       );
     }
+
+    props.push(
+      ts.factory.createMethodDeclaration(
+        undefined,
+        undefined,
+        undefined,
+        "resolve",
+        undefined,
+        undefined,
+        [
+          ts.factory.createParameterDeclaration(
+            undefined,
+            undefined,
+            undefined,
+            "root",
+            undefined,
+            undefined,
+            undefined
+          ),
+        ],
+        undefined,
+        ts.factory.createBlock([
+          ts.factory.createReturnStatement(
+            ts.factory.createCallExpression(
+              ts.factory.createPropertyAccessExpression(
+                ts.factory.createIdentifier("root"),
+                ts.factory.createIdentifier(getterName)
+              ),
+              undefined,
+              undefined
+            )
+          ),
+        ])
+      )
+    );
 
     return ts.factory.createObjectLiteralExpression(props, true);
   }

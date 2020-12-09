@@ -10,14 +10,17 @@ export const User = objectType({
     description: \\"User entity\\",
     definition(t) {
         t.nonNull.int(\\"id\\", {
-            description: \\"Required. Output only. ID.\\"
+            description: \\"Required. Output only. ID.\\",
+            resolve(root) { return root.getId(); }
         });
         t.nonNull.string(\\"name\\", {
-            description: \\"Required. User's login name.\\"
+            description: \\"Required. User's login name.\\",
+            resolve(root) { return root.getName(); }
         });
         t.nonNull.list.field(\\"posts\\", {
             description: \\"Required. Posts that are written by the user.\\",
-            type: \\"Post\\"
+            type: \\"Post\\",
+            resolve(root) { return root.getPostsList(); }
         });
     },
     rootTyping: { name: \\"User\\", path: \\"./hello/hello_pb\\" }
@@ -27,16 +30,20 @@ export const Post = objectType({
     description: \\"Post entity\\",
     definition(t) {
         t.nonNull.int(\\"id\\", {
-            description: \\"Required. Output only. ID.\\"
+            description: \\"Required. Output only. ID.\\",
+            resolve(root) { return root.getId(); }
         });
         t.nonNull.string(\\"title\\", {
-            description: \\"Required. Article.\\"
+            description: \\"Required. Article.\\",
+            resolve(root) { return root.getTitle(); }
         });
         t.nonNull.string(\\"body\\", {
-            description: \\"Required. Body.\\"
+            description: \\"Required. Body.\\",
+            resolve(root) { return root.getBody(); }
         });
         t.nonNull.string(\\"publishedTime\\", {
-            description: \\"Required. Output only. Published time.\\"
+            description: \\"Required. Output only. Published time.\\",
+            resolve(root) { return root.getPublishedTime(); }
         });
     },
     rootTyping: { name: \\"Post\\", path: \\"./hello/hello_pb\\" }

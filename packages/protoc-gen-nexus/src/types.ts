@@ -68,15 +68,28 @@ export class Field {
 
   constructor(fd: FieldDescriptorProto) {
     this.fd = fd;
-    this.type = Field.convertType(fd);
+    this.type = this.convertType(fd);
   }
 
   get name(): string {
     return this.fd.getJsonName()!;
   }
 
+  get getterName(): string {
+    const name = this.name;
+    let suffix = "";
+    if (this.isList()) {
+      suffix += "List";
+    }
+    return `get${name.charAt(0).toUpperCase()}${name.slice(1)}${suffix}`;
+  }
+
   get description(): string {
     return this.comments?.leadingComments || "";
+  }
+
+  public isList(): boolean {
+    return this.fd.getLabel() === FieldDescriptorProto.Label.LABEL_REPEATED;
   }
 
   public isNullable(): boolean {
@@ -107,15 +120,15 @@ export class Field {
     }
   }
 
-  private static convertType(f: FieldDescriptorProto): Type {
-    if (f.getLabel() === FieldDescriptorProto.Label.LABEL_REPEATED) {
+  private convertType(f: FieldDescriptorProto): Type {
+    if (this.isList()) {
       return {
         kind: "list",
-        type: this.convertItemType(f),
+        type: Field.convertItemType(f),
       };
     }
 
-    return this.convertItemType(f);
+    return Field.convertItemType(f);
   }
 
   private static convertItemType(f: FieldDescriptorProto): ItemType {
