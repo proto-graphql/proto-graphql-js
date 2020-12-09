@@ -4,7 +4,9 @@
   "scripts": {
     "build": "yarn build:protoc-gen-nexus && yarn build:testapis",
     "build:protoc-gen-nexus": "yarn workspace protoc-gen-nexus build",
-    "build:testapis": "yarn workspace @testapis/proto build",
+    "build:testapis": "yarn run build:testapis:proto && yarn run build:testapis:nexus",
+    "build:testapis:nexus": "yarn workspace @testapis/nexus build",
+    "build:testapis:proto": "yarn workspace @testapis/proto build",
     "lint": "yarn workspace protoc-gen-nexus lint",
     "test": "yarn workspace protoc-gen-nexus test"
   },

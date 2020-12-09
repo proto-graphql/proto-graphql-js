@@ -4,6 +4,16 @@
   "description": "Generated codes from protobuf IDL",
   "private": true,
   "dependencies": {
-    "@nexus/schema": "^0.19.2"
+    "@nexus/schema": "^0.19.2",
+    "@testapis/node": "^0.0.1",
+    "graphql": "^15.4.0"
+  },
+  "scripts": {
+    "build": "ts-node ./src/schema/index.ts",
+    "clean": "rm -rf src/__generated__",
+    "prebuild": "yarn clean"
+  },
+  "devDependencies": {
+    "ts-node": "^9.1.1"
   }
 }
