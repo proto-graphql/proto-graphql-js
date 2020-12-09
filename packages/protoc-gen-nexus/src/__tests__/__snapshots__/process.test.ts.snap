@@ -9,16 +9,13 @@ export const User = objectType({
     name: \\"User\\",
     description: \\"User entity\\",
     definition(t) {
-        t.int(\\"id\\", {
-            nullable: false,
+        t.nonNull.int(\\"id\\", {
             description: \\"Required. Output only. ID.\\"
         });
-        t.string(\\"name\\", {
-            nullable: false,
+        t.nonNull.string(\\"name\\", {
             description: \\"Required. User's login name.\\"
         });
-        t.list.field(\\"posts\\", {
-            nullable: false,
+        t.nonNull.list.field(\\"posts\\", {
             description: \\"Required. Posts that are written by the user.\\",
             type: \\".testapi.hello.Post\\"
         });
@@ -29,20 +26,16 @@ export const Post = objectType({
     name: \\"Post\\",
     description: \\"Post entity\\",
     definition(t) {
-        t.int(\\"id\\", {
-            nullable: false,
+        t.nonNull.int(\\"id\\", {
             description: \\"Required. Output only. ID.\\"
         });
-        t.string(\\"title\\", {
-            nullable: false,
+        t.nonNull.string(\\"title\\", {
             description: \\"Required. Article.\\"
         });
-        t.string(\\"body\\", {
-            nullable: false,
+        t.nonNull.string(\\"body\\", {
             description: \\"Required. Body.\\"
         });
-        t.string(\\"publishedTime\\", {
-            nullable: false,
+        t.nonNull.string(\\"publishedTime\\", {
             description: \\"Required. Output only. Published time.\\"
         });
     },

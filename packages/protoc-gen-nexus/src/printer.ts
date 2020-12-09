@@ -75,53 +75,63 @@ class MessageAST {
   private buildObjectType(): ts.Expression {
     const { name, description, fields } = this.msg;
 
-    return ts.factory.createCallExpression(ts.factory.createIdentifier("objectType"), undefined, [
-      ts.factory.createObjectLiteralExpression(
-        [
-          ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(name)),
-          ts.factory.createPropertyAssignment(
-            "description",
-            ts.factory.createStringLiteral(description)
-          ),
-          // TODO: "description" property
-          ts.factory.createMethodDeclaration(
-            undefined,
-            undefined,
-            undefined,
-            "definition",
-            undefined,
-            undefined,
-            [
-              ts.factory.createParameterDeclaration(
-                undefined,
-                undefined,
-                undefined,
-                "t",
-                undefined,
-                undefined,
-                undefined
-              ),
-            ],
-            undefined,
-            ts.factory.createBlock(
-              fields.map((f) => new FieldAST(f).build()),
-              true
-            )
-          ),
-          ts.factory.createPropertyAssignment(
-            "rootTyping",
-            ts.factory.createObjectLiteralExpression([
-              ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(name)),
-              ts.factory.createPropertyAssignment(
-                "path",
-                ts.factory.createStringLiteral(this.msg.importPath)
-              ),
-            ])
-          ),
-        ],
-        true
-      ),
-    ]);
+    return ts.factory.createCallExpression(
+      ts.factory.createIdentifier("objectType"),
+      undefined,
+      [
+        ts.factory.createObjectLiteralExpression(
+          [
+            ts.factory.createPropertyAssignment(
+              "name",
+              ts.factory.createStringLiteral(name)
+            ),
+            ts.factory.createPropertyAssignment(
+              "description",
+              ts.factory.createStringLiteral(description)
+            ),
+            // TODO: "description" property
+            ts.factory.createMethodDeclaration(
+              undefined,
+              undefined,
+              undefined,
+              "definition",
+              undefined,
+              undefined,
+              [
+                ts.factory.createParameterDeclaration(
+                  undefined,
+                  undefined,
+                  undefined,
+                  "t",
+                  undefined,
+                  undefined,
+                  undefined
+                ),
+              ],
+              undefined,
+              ts.factory.createBlock(
+                fields.map((f) => new FieldAST(f).build()),
+                true
+              )
+            ),
+            ts.factory.createPropertyAssignment(
+              "rootTyping",
+              ts.factory.createObjectLiteralExpression([
+                ts.factory.createPropertyAssignment(
+                  "name",
+                  ts.factory.createStringLiteral(name)
+                ),
+                ts.factory.createPropertyAssignment(
+                  "path",
+                  ts.factory.createStringLiteral(this.msg.importPath)
+                ),
+              ])
+            ),
+          ],
+          true
+        ),
+      ]
+    );
   }
 }
 
@@ -146,8 +156,18 @@ class FieldAST {
   private get fieldFunction(): ts.Expression {
     let left: ts.Expression = ts.factory.createIdentifier("t");
 
+    left = ts.factory.createPropertyAccessExpression(
+      left,
+      ts.factory.createIdentifier(
+        this.field.isNullable() ? "nullable" : "nonNull"
+      )
+    );
+
     if (this.field.type.kind === "list") {
-      left = ts.factory.createPropertyAccessExpression(left, ts.factory.createIdentifier("list"));
+      left = ts.factory.createPropertyAccessExpression(
+        left,
+        ts.factory.createIdentifier("list")
+      );
     }
 
     return ts.factory.createPropertyAccessExpression(
@@ -190,10 +210,6 @@ class FieldAST {
     const { description, type } = this.field;
     const props: ts.ObjectLiteralElementLike[] = [
       ts.factory.createPropertyAssignment(
-        "nullable",
-        this.field.isNullable() ? ts.factory.createTrue() : ts.factory.createFalse()
-      ),
-      ts.factory.createPropertyAssignment(
         "description",
         ts.factory.createStringLiteral(description)
       ),
@@ -210,7 +226,10 @@ class FieldAST {
 
     if (type.kind === "object") {
       props.push(
-        ts.factory.createPropertyAssignment("type", ts.factory.createStringLiteral(type.type))
+        ts.factory.createPropertyAssignment(
+          "type",
+          ts.factory.createStringLiteral(type.type)
+        )
       );
     }
 
