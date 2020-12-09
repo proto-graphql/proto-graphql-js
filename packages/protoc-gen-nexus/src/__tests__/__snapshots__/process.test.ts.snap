@@ -20,7 +20,7 @@ export const User = objectType({
             type: \\"Post\\"
         });
     },
-    rootTyping: { name: \\"User\\", path: \\"./hello/hello\\" }
+    rootTyping: { name: \\"User\\", path: \\"./hello/hello_pb\\" }
 });
 export const Post = objectType({
     name: \\"Post\\",
@@ -39,7 +39,7 @@ export const Post = objectType({
             description: \\"Required. Output only. Published time.\\"
         });
     },
-    rootTyping: { name: \\"Post\\", path: \\"./hello/hello\\" }
+    rootTyping: { name: \\"Post\\", path: \\"./hello/hello_pb\\" }
 });
 "
 `;

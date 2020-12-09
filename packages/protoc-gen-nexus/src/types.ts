@@ -36,7 +36,7 @@ export class Message {
       .getName()!
       .split(".")
       .slice(0, -1)
-      .join(".")}`;
+      .join(".")}_pb`;
   }
 
   public addSourceCodeInfoLocation(l: SourceCodeInfo.Location) {
