@@ -31,7 +31,7 @@ export namespace User {
     id: number,
     name: string,
     postsList: Array<Post.AsObject>,
-  };
+  }
 }
 
 export class Post extends jspb.Message {
@@ -65,6 +65,6 @@ export namespace Post {
     title: string,
     body: string,
     publishedTime?: google_protobuf_timestamp_pb.Timestamp.AsObject,
-  };
+  }
 }
 

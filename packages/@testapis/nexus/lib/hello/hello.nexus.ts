@@ -8,19 +8,19 @@ export const User = objectType({
     definition(t) {
         t.int("id", {
             nullable: false,
-            description: "Required. Output only. ID.",
+            description: "Required. Output only. ID."
         });
         t.string("name", {
             nullable: false,
-            description: "Required. User's login name.",
+            description: "Required. User's login name."
         });
         t.list.field("posts", {
             nullable: false,
             description: "Required. Posts that are written by the user.",
-            type: ".testapi.hello.Post",
+            type: ".testapi.hello.Post"
         });
     },
-    rootTyping: { name: "User", path: "./hello/hello" },
+    rootTyping: { name: "User", path: "./hello/hello" }
 });
 export const Post = objectType({
     name: "Post",
@@ -28,20 +28,20 @@ export const Post = objectType({
     definition(t) {
         t.int("id", {
             nullable: false,
-            description: "Required. Output only. ID.",
+            description: "Required. Output only. ID."
         });
         t.string("title", {
             nullable: false,
-            description: "Required. Article.",
+            description: "Required. Article."
         });
         t.string("body", {
             nullable: false,
-            description: "Required. Body.",
+            description: "Required. Body."
         });
         t.string("publishedTime", {
             nullable: false,
-            description: "Required. Output only. Published time.",
+            description: "Required. Output only. Published time."
         });
     },
-    rootTyping: { name: "Post", path: "./hello/hello" },
+    rootTyping: { name: "Post", path: "./hello/hello" }
 });
