@@ -11,7 +11,8 @@ clean() {
 }
 
 init() {
-  mkdir ../node/lib
+  mkdir -p ../node/lib
+  mkdir -p ../nexus/src/schema/types
 }
 
 protocw() {
@@ -27,11 +28,9 @@ execProtoc() {
       --ts_out="../node/lib" \
       ${protoDir}/*.proto
 
-    nexusDir="../nexus/src/$(basename $protoDir)/schema"
-    mkdir -p ${nexusDir}
     protocw \
       --plugin=protoc-gen-nexus=`yarn bin protoc-gen-nexus` \
-      --nexus_out=${nexusDir} --nexus_opt=import_prefix=@testapis/node \
+      --nexus_out="../nexus/src/schema/types" --nexus_opt=import_prefix=@testapis/node \
       ${protoDir}/*.proto
   done
 }
