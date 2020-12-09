@@ -23,7 +23,7 @@ export const processRequest = (
 
     const file = new CodeGeneratorResponse.File();
     file.setContent(result);
-    file.setName(fn.replace(/.proto$/, ".nexus.ts"));
+    file.setName(fn.replace(/.proto$/, "_nexus_pb.ts"));
     resp.addFile(file);
   }
 

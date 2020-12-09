@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 set -eu
 set -o pipefail
 
@@ -8,12 +7,11 @@ cd $(dirname $0)/..
 
 clean() {
   rm -rf ../node/lib
-  rm -rf ../nexus/lib
+  find ../nexus/src -name '*_nexus_pb.ts' -type f | xargs rm
 }
 
 init() {
   mkdir ../node/lib
-  mkdir ../nexus/lib
 }
 
 protocw() {
@@ -28,9 +26,12 @@ execProtoc() {
       --js_out="../node/lib" --js_opt=import_style=commonjs,binary \
       --ts_out="../node/lib" \
       ${protoDir}/*.proto
+
+    nexusDir="../nexus/src/$(basename $protoDir)/schema"
+    mkdir -p ${nexusDir}
     protocw \
       --plugin=protoc-gen-nexus=`yarn bin protoc-gen-nexus` \
-      --nexus_out="../nexus/lib" --nexus_opt=import_prefix=@testapis/node \
+      --nexus_out=${nexusDir} --nexus_opt=import_prefix=@testapis/node \
       ${protoDir}/*.proto
   done
 }

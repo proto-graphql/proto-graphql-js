@@ -48,7 +48,7 @@ test("geenrates nexus DSL from simple proto file", () => {
       return m;
     }, {} as Record<string, string>);
 
-  expect(fileByName["hello/hello.nexus.ts"]).toMatchSnapshot();
+  expect(fileByName["hello/hello_nexus_pb.ts"]).toMatchSnapshot();
 
   expect(Object.keys(fileByName)).toHaveLength(1);
 });
