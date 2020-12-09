@@ -16,7 +16,7 @@ exports.User = schema_1.objectType({
         });
         t.nonNull.list.field("posts", {
             description: "Required. Posts that are written by the user.",
-            type: ".testapi.hello.Post"
+            type: "Post"
         });
     },
     rootTyping: { name: "User", path: "./hello/hello" }

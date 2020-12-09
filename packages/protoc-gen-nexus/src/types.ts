@@ -185,7 +185,8 @@ export class Field {
           default:
             return {
               kind: "object",
-              type: f.getTypeName()!,
+              // FIXME
+              type: f.getTypeName()!.split(".").slice(-1)[0]!,
             };
         }
       default:
