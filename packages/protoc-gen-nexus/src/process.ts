@@ -35,7 +35,7 @@ type Parameters = Record<string, string>;
 const parseParams = (input: string | undefined) =>
   (input ?? "").split(",").reduce((o, kv) => {
     const [k, v] = kv.split("=", 2);
-    o[k] = v;
+    o[k.replace(/(_[a-z])/g, (g) => g.toUpperCase().replace("_", ""))] = v;
     return o;
   }, {} as Parameters);
 
