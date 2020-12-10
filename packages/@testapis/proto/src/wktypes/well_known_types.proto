@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package testapi.wktypes;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+message Message {
+  google.protobuf.Timestamp timestamp = 1;
+  google.protobuf.Int32Value int32_value = 2;
+  google.protobuf.Int64Value int64_value = 3;
+  google.protobuf.UInt32Value uint32_value = 4;
+  google.protobuf.UInt64Value uint64_value = 5;
+  google.protobuf.FloatValue float_value = 6;
+  google.protobuf.DoubleValue double_value = 7;
+  google.protobuf.BoolValue bool_value = 8;
+  google.protobuf.StringValue string_value = 9;
+}

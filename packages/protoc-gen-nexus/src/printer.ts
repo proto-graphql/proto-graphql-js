@@ -4,7 +4,8 @@ import { Field, Message } from "./types";
 
 export function printSource(fd: FileDescriptorProto, msgs: Message[]): string {
   const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed });
-  const ast = [
+  const msgASTs = msgs.map((m) => new MessageAST(m));
+  let ast: ts.Statement[] = [
     ts.factory.createImportDeclaration(
       undefined,
       undefined,
@@ -20,7 +21,22 @@ export function printSource(fd: FileDescriptorProto, msgs: Message[]): string {
       ),
       ts.factory.createStringLiteral("@nexus/schema")
     ),
-    ...msgs.map(createMessageAST),
+  ];
+
+  const unwrapFuncs = uniq(
+    compact(msgASTs.flatMap((m) => m.fields.map((f) => f.unwrapFunc))),
+    (f) => f.decl.name
+  );
+
+  const imports = [...new Set(unwrapFuncs.flatMap((f) => f.imports))];
+  for (const imp of imports) {
+    ast.push(createImportAllWithAliastDecl(imp));
+  }
+
+  ast = [
+    ...ast,
+    ...unwrapFuncs.map((f) => f.decl),
+    ...msgASTs.map((m) => m.build()),
   ];
 
   const file = ts.factory.updateSourceFile(
@@ -44,15 +60,15 @@ export function printSource(fd: FileDescriptorProto, msgs: Message[]): string {
   ].join("\n");
 }
 
-function createMessageAST(msg: Message): ts.Statement {
-  return new MessageAST(msg).build();
-}
-
 class MessageAST {
   private readonly msg: Message;
 
   constructor(msg: Message) {
     this.msg = msg;
+  }
+
+  get fields(): FieldAST[] {
+    return this.msg.fields.map((f) => new FieldAST(f));
   }
 
   public build(): ts.Statement {
@@ -73,7 +89,7 @@ class MessageAST {
   }
 
   private buildObjectType(): ts.Expression {
-    const { name, description, fields } = this.msg;
+    const { name, description } = this.msg;
 
     return ts.factory.createCallExpression(
       ts.factory.createIdentifier("objectType"),
@@ -110,7 +126,7 @@ class MessageAST {
               ],
               undefined,
               ts.factory.createBlock(
-                fields.map((f) => new FieldAST(f).build()),
+                this.fields.map((f) => f.build()),
                 true
               )
             ),
@@ -151,6 +167,10 @@ class FieldAST {
         this.options,
       ])
     );
+  }
+
+  get unwrapFunc(): UnwrapFunc | null {
+    return unwrapFuncs[this.field.protoTypeName] || null;
   }
 
   private get fieldFunction(): ts.Expression {
@@ -233,6 +253,22 @@ class FieldAST {
       );
     }
 
+    let resolverRet: ts.Expression = ts.factory.createCallExpression(
+      ts.factory.createPropertyAccessExpression(
+        ts.factory.createIdentifier("root"),
+        ts.factory.createIdentifier(getterName)
+      ),
+      undefined,
+      undefined
+    );
+    if (this.unwrapFunc !== null) {
+      resolverRet = ts.factory.createCallExpression(
+        this.unwrapFunc.decl.name!,
+        undefined,
+        [resolverRet]
+      );
+    }
+
     props.push(
       ts.factory.createMethodDeclaration(
         undefined,
@@ -253,21 +289,183 @@ class FieldAST {
           ),
         ],
         undefined,
-        ts.factory.createBlock([
-          ts.factory.createReturnStatement(
-            ts.factory.createCallExpression(
-              ts.factory.createPropertyAccessExpression(
-                ts.factory.createIdentifier("root"),
-                ts.factory.createIdentifier(getterName)
-              ),
-              undefined,
-              undefined
-            )
-          ),
-        ])
+        ts.factory.createBlock([ts.factory.createReturnStatement(resolverRet)])
       )
     );
 
     return ts.factory.createObjectLiteralExpression(props, true);
   }
+}
+
+function compact<T>(input: T[]): NonNullable<T>[] {
+  return input.filter((v): v is NonNullable<T> => v != null);
+}
+
+function uniq<T, V>(input: T[], f?: (t: T) => V) {
+  const out = [] as T[];
+  const set = new Set<T | V>();
+
+  for (const v of input) {
+    const key = f ? f(v) : v;
+    if (!set.has(key)) {
+      set.add(key);
+      out.push(v);
+    }
+  }
+
+  return out;
+}
+
+function uniqueImportAlias(path: string) {
+  return path.replace(/@/g, "$$").replace(/\//g, "$").replace(/-/g, "_");
+}
+
+type UnwrapFunc = {
+  imports: string[];
+  decl: ts.FunctionDeclaration;
+};
+
+const unwrapFuncs: Record<string, UnwrapFunc> = {
+  ".google.protobuf.Int32Value": {
+    imports: ["google-protobuf/google/protobuf/wrappers_pb"],
+    decl: createUnwrapWrapperFuncDecl({
+      path: "google-protobuf/google/protobuf/wrappers_pb",
+      typeName: "Int32Value",
+      returnType: ts.factory.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword),
+    }),
+  },
+  ".google.protobuf.UInt32Value": {
+    imports: ["google-protobuf/google/protobuf/wrappers_pb"],
+    decl: createUnwrapWrapperFuncDecl({
+      path: "google-protobuf/google/protobuf/wrappers_pb",
+      typeName: "UInt32Value",
+      returnType: ts.factory.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword),
+    }),
+  },
+  ".google.protobuf.Int64Value": {
+    imports: ["google-protobuf/google/protobuf/wrappers_pb"],
+    decl: createUnwrapWrapperFuncDecl({
+      path: "google-protobuf/google/protobuf/wrappers_pb",
+      typeName: "Int64Value",
+      returnType: ts.factory.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword),
+    }),
+  },
+  ".google.protobuf.UInt64Value": {
+    imports: ["google-protobuf/google/protobuf/wrappers_pb"],
+    decl: createUnwrapWrapperFuncDecl({
+      path: "google-protobuf/google/protobuf/wrappers_pb",
+      typeName: "UInt64Value",
+      returnType: ts.factory.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword),
+    }),
+  },
+  ".google.protobuf.FloatValue": {
+    imports: ["google-protobuf/google/protobuf/wrappers_pb"],
+    decl: createUnwrapWrapperFuncDecl({
+      path: "google-protobuf/google/protobuf/wrappers_pb",
+      typeName: "FloatValue",
+      returnType: ts.factory.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword),
+    }),
+  },
+  ".google.protobuf.DoubleValue": {
+    imports: ["google-protobuf/google/protobuf/wrappers_pb"],
+    decl: createUnwrapWrapperFuncDecl({
+      path: "google-protobuf/google/protobuf/wrappers_pb",
+      typeName: "DoubleValue",
+      returnType: ts.factory.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword),
+    }),
+  },
+  ".google.protobuf.StringValue": {
+    imports: ["google-protobuf/google/protobuf/wrappers_pb"],
+    decl: createUnwrapWrapperFuncDecl({
+      path: "google-protobuf/google/protobuf/wrappers_pb",
+      typeName: "StringValue",
+      returnType: ts.factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
+    }),
+  },
+  ".google.protobuf.BoolValue": {
+    imports: ["google-protobuf/google/protobuf/wrappers_pb"],
+    decl: createUnwrapWrapperFuncDecl({
+      path: "google-protobuf/google/protobuf/wrappers_pb",
+      typeName: "BoolValue",
+      returnType: ts.factory.createKeywordTypeNode(
+        ts.SyntaxKind.BooleanKeyword
+      ),
+    }),
+  },
+};
+
+function createImportAllWithAliastDecl(path: string): ts.ImportDeclaration {
+  return ts.factory.createImportDeclaration(
+    undefined,
+    undefined,
+    ts.factory.createImportClause(
+      false,
+      undefined,
+      ts.factory.createNamespaceImport(
+        ts.factory.createIdentifier(uniqueImportAlias(path))
+      )
+    ),
+    ts.factory.createStringLiteral(path)
+  );
+}
+
+function createUnwrapWrapperFuncDecl({
+  path,
+  typeName,
+  returnType,
+}: {
+  path: string;
+  typeName: string;
+  returnType: ts.TypeNode;
+}): ts.FunctionDeclaration {
+  return ts.factory.createFunctionDeclaration(
+    undefined,
+    undefined,
+    undefined,
+    `unwrap__${uniqueImportAlias(path)}__${typeName}`,
+    undefined,
+    [
+      ts.factory.createParameterDeclaration(
+        undefined,
+        undefined,
+        undefined,
+        "input",
+        undefined,
+        ts.factory.createUnionTypeNode([
+          ts.factory.createTypeReferenceNode(
+            ts.factory.createQualifiedName(
+              ts.factory.createIdentifier(uniqueImportAlias(path)),
+              typeName
+            )
+          ),
+          ts.factory.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword),
+        ]),
+        undefined
+      ),
+    ],
+    ts.factory.createUnionTypeNode([
+      returnType,
+      ts.factory.createLiteralTypeNode(ts.factory.createNull()),
+    ]),
+    ts.factory.createBlock([
+      ts.factory.createIfStatement(
+        ts.factory.createBinaryExpression(
+          ts.factory.createIdentifier("input"),
+          ts.SyntaxKind.EqualsEqualsEqualsToken,
+          ts.factory.createIdentifier("undefined")
+        ),
+        ts.factory.createReturnStatement(ts.factory.createNull())
+      ),
+      ts.factory.createReturnStatement(
+        ts.factory.createCallExpression(
+          ts.factory.createPropertyAccessExpression(
+            ts.factory.createIdentifier("input"),
+            ts.factory.createIdentifier("getValue")
+          ),
+          undefined,
+          undefined
+        )
+      ),
+    ])
+  );
 }

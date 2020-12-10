@@ -5,6 +5,7 @@
 
 
 import { User, Post } from "@testapis/node/lib/hello/hello_pb"
+import { Message } from "@testapis/node/lib/wktypes/well_known_types_pb"
 
 
 
@@ -28,6 +29,7 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  Message: Message;
   Post: Post;
   Query: {};
   User: User;
@@ -44,6 +46,17 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  Message: { // field return type
+    boolValue: boolean | null; // Boolean
+    doubleValue: number | null; // Float
+    floatValue: number | null; // Float
+    int32Value: number | null; // Int
+    int64Value: number | null; // Int
+    stringValue: string | null; // String
+    timestamp: string | null; // String
+    uint32Value: number | null; // Int
+    uint64Value: number | null; // Int
+  }
   Post: { // field return type
     body: string; // String!
     id: number; // Int!
@@ -61,6 +74,17 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
+  Message: { // field return type name
+    boolValue: 'Boolean'
+    doubleValue: 'Float'
+    floatValue: 'Float'
+    int32Value: 'Int'
+    int64Value: 'Int'
+    stringValue: 'String'
+    timestamp: 'String'
+    uint32Value: 'Int'
+    uint64Value: 'Int'
+  }
   Post: { // field return type name
     body: 'String'
     id: 'Int'

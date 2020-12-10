@@ -50,3 +50,5 @@ export const Post = objectType({
 });
 "
 `;
+
+exports[`generates nexus DSL from proto well-known types 1`] = `undefined`;

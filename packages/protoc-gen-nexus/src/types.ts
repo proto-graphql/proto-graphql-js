@@ -84,6 +84,10 @@ export class Field {
     return `get${name.charAt(0).toUpperCase()}${name.slice(1)}${suffix}`;
   }
 
+  get protoTypeName(): string {
+    return this.fd.getTypeName()!;
+  }
+
   get description(): string {
     return this.comments?.leadingComments || "";
   }

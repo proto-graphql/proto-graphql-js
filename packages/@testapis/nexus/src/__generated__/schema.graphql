@@ -2,6 +2,36 @@
 ### Do not make changes to this file directly
 
 
+""""""
+type Message {
+  """"""
+  boolValue: Boolean
+
+  """"""
+  doubleValue: Float
+
+  """"""
+  floatValue: Float
+
+  """"""
+  int32Value: Int
+
+  """"""
+  int64Value: Int
+
+  """"""
+  stringValue: String
+
+  """"""
+  timestamp: String
+
+  """"""
+  uint32Value: Int
+
+  """"""
+  uint64Value: Int
+}
+
 """Post entity"""
 type Post {
   """Required. Body."""

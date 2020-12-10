@@ -2,7 +2,10 @@ import { readFileSync } from "fs";
 import { join } from "path";
 import { FileDescriptorSet } from "google-protobuf/google/protobuf/descriptor_pb";
 import { processRequest } from "../process";
-import { CodeGeneratorRequest } from "google-protobuf/google/protobuf/compiler/plugin_pb";
+import {
+  CodeGeneratorRequest,
+  CodeGeneratorResponse,
+} from "google-protobuf/google/protobuf/compiler/plugin_pb";
 
 function getFixtureFileDescriptorSet(name: string): FileDescriptorSet {
   const buf = readFileSync(
@@ -37,18 +40,33 @@ function buildCodeGeneratorRequest(name: string): CodeGeneratorRequest {
   return req;
 }
 
+function getFileMap(resp: CodeGeneratorResponse): Record<string, string> {
+  return resp
+    .getFileList()
+    .reduce(
+      (m, f) => ({ ...m, [f.getName()!]: f.getContent()! }),
+      {} as Record<string, string>
+    );
+}
+
 test("geenrates nexus DSL from simple proto file", () => {
   const req = buildCodeGeneratorRequest("hello");
   const resp = processRequest(req);
 
-  const fileByName: Record<string, string> = resp
-    .getFileList()
-    .reduce((m, f) => {
-      m[f.getName()!] = f.getContent()!;
-      return m;
-    }, {} as Record<string, string>);
+  expect(Object.keys(resp.getFileList())).toHaveLength(1);
+
+  const fileByName = getFileMap(resp);
 
   expect(fileByName["hello/hello_nexus_pb.ts"]).toMatchSnapshot();
+});
 
-  expect(Object.keys(fileByName)).toHaveLength(1);
+test("generates nexus DSL from proto well-known types", () => {
+  const req = buildCodeGeneratorRequest("wktypes");
+  const resp = processRequest(req);
+
+  expect(Object.keys(resp.getFileList())).toHaveLength(1);
+
+  const fileByName = getFileMap(resp);
+
+  expect(fileByName["hello/hello_nexus_pb.ts"]).toMatchSnapshot();
 });
