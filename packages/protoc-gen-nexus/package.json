@@ -9,6 +9,9 @@
   "author": "izumin5210 <m@izum.in>",
   "license": "MIT",
   "private": false,
+  "engines":{
+    "node": ">= 14.0.0"
+  },
   "devDependencies": {
     "@types/jest": "^26.0.16",
     "frolint": "^2.0.1",
