@@ -15,4 +15,9 @@ jobs:
         node-version: 14.x
     - run: yarn --frozen-lockfile
     - run: yarn lint
-    - run: yarn test
+    - run: yarn test --coverage
+    - name: Coveralls
+      uses: coverallsapp/github-action@v1.1.2
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: packages/protoc-gen-nexus/coverage/lcov.info
