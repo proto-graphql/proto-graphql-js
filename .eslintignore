@@ -1,2 +1,3 @@
 lib/
 packages/@testapis/nexus/src/**/*_nexus_pb.ts
+packages/@testapis/nexus/src/__generated__
