@@ -49,7 +49,7 @@ function getFileMap(resp: CodeGeneratorResponse): Record<string, string> {
     );
 }
 
-test("geenrates nexus DSL from simple proto file", () => {
+test("generates nexus DSL from simple proto file", () => {
   const req = buildCodeGeneratorRequest("hello");
   const resp = processRequest(req);
 
@@ -68,5 +68,5 @@ test("generates nexus DSL from proto well-known types", () => {
 
   const fileByName = getFileMap(resp);
 
-  expect(fileByName["hello/hello_nexus_pb.ts"]).toMatchSnapshot();
+  expect(fileByName["wktypes/well_known_types_nexus_pb.ts"]).toMatchSnapshot();
 });
