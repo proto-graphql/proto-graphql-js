@@ -6,6 +6,8 @@ exports[`geenrates nexus DSL from simple proto file 1`] = `
 
 import { objectType } from \\"@nexus/schema\\";
 import * as proto_nexus from \\"proto-nexus\\";
+export { User as _$hello$hello_pb$User } from \\"./hello/hello_pb\\";
+export { Post as _$hello$hello_pb$Post } from \\"./hello/hello_pb\\";
 export const User = objectType({
     name: \\"User\\",
     description: \\"User entity\\",
@@ -24,7 +26,7 @@ export const User = objectType({
             resolve(root) { return root.getPostsList(); }
         });
     },
-    rootTyping: { name: \\"User\\", path: \\"./hello/hello_pb\\" }
+    sourceType: { module: __filename, export: \\"_$hello$hello_pb$User\\" }
 });
 export const Post = objectType({
     name: \\"Post\\",
@@ -47,7 +49,7 @@ export const Post = objectType({
             resolve(root) { return proto_nexus.timestampToDate(root.getPublishedTime()); }
         });
     },
-    rootTyping: { name: \\"Post\\", path: \\"./hello/hello_pb\\" }
+    sourceType: { module: __filename, export: \\"_$hello$hello_pb$Post\\" }
 });
 "
 `;
