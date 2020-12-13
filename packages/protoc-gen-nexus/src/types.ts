@@ -197,7 +197,7 @@ export class Field {
           case ".google.protobuf.Timestamp":
             return {
               kind: "scalar",
-              type: "String",
+              type: "DateTime",
             };
           default:
             return {
@@ -219,7 +219,7 @@ interface Comments {
   leadingDetachedCommentsList?: string[];
 }
 
-type ScalarType = "Int" | "Float" | "String" | "Boolean" | "ID";
+type ScalarType = "Int" | "Float" | "String" | "Boolean" | "ID" | "DateTime";
 
 export type ItemType =
   | {

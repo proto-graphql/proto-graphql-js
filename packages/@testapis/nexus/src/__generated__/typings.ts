@@ -4,14 +4,29 @@
  */
 
 
-import { User, Post } from "@testapis/node/lib/hello/hello_pb"
-import { Message } from "@testapis/node/lib/wktypes/well_known_types_pb"
-
-
+import { User, Post } from "@testapis/node/lib/hello/hello_pb";
+import { Message } from "@testapis/node/lib/wktypes/well_known_types_pb";
+import { core } from "@nexus/schema";
+declare global {
+  interface NexusGenCustomInputMethods<TypeName extends string> {
+    /**
+     * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+     */
+    dateTime<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "DateTime";
+  }
+}
+declare global {
+  interface NexusGenCustomOutputMethods<TypeName extends string> {
+    /**
+     * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+     */
+    dateTime<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "DateTime";
+  }
+}
 
 
 declare global {
-  interface NexusGen extends NexusGenTypes {}
+  type NexusGen = NexusGenTypes;
 }
 
 export interface NexusGenInputs {
@@ -26,6 +41,7 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
+  DateTime: any
 }
 
 export interface NexusGenObjects {
@@ -41,9 +57,9 @@ export interface NexusGenInterfaces {
 export interface NexusGenUnions {
 }
 
-export type NexusGenRootTypes = NexusGenObjects
+export type NexusGenRootTypes = NexusGenObjects;
 
-export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
+export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars;
 
 export interface NexusGenFieldTypes {
   Message: { // field return type
@@ -53,14 +69,14 @@ export interface NexusGenFieldTypes {
     int32Value: number | null; // Int
     int64Value: number | null; // Int
     stringValue: string | null; // String
-    timestamp: string | null; // String
+    timestamp: NexusGenScalars['DateTime'] | null; // DateTime
     uint32Value: number | null; // Int
     uint64Value: number | null; // Int
   }
   Post: { // field return type
     body: string; // String!
     id: number; // Int!
-    publishedTime: string; // String!
+    publishedTime: NexusGenScalars['DateTime']; // DateTime!
     title: string; // String!
   }
   Query: { // field return type
@@ -81,14 +97,14 @@ export interface NexusGenFieldTypeNames {
     int32Value: 'Int'
     int64Value: 'Int'
     stringValue: 'String'
-    timestamp: 'String'
+    timestamp: 'DateTime'
     uint32Value: 'Int'
     uint64Value: 'Int'
   }
   Post: { // field return type name
     body: 'String'
     id: 'Int'
-    publishedTime: 'String'
+    publishedTime: 'DateTime'
     title: 'String'
   }
   Query: { // field return type name
@@ -132,7 +148,7 @@ export type NexusGenFeaturesConfig = {
     resolveType: true
     __typename: false
   }
-}
+};
 
 export interface NexusGenTypes {
   context: any;

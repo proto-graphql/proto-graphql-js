@@ -7,10 +7,11 @@
     "@nexus/schema": "^0.19.2",
     "@testapis/node": "^0.0.1",
     "graphql": "^15.4.0",
+    "graphql-scalars": "^1.6.1",
     "proto-nexus": "^0.0.1"
   },
   "scripts": {
-    "build": "ts-node ./src/schema/index.ts",
+    "build": "ts-node --transpile-only ./src/schema/index.ts",
     "clean": "rm -rf src/__generated__",
     "prebuild": "yarn clean"
   },

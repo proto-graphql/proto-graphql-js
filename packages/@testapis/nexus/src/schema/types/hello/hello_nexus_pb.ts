@@ -2,6 +2,7 @@
 // source: hello/hello.proto
 
 import { objectType } from "@nexus/schema";
+import * as proto_nexus from "proto-nexus";
 export const User = objectType({
     name: "User",
     description: "User entity",
@@ -38,9 +39,9 @@ export const Post = objectType({
             description: "Required. Body.",
             resolve(root) { return root.getBody(); }
         });
-        t.nonNull.string("publishedTime", {
+        t.nonNull.dateTime("publishedTime", {
             description: "Required. Output only. Published time.",
-            resolve(root) { return root.getPublishedTime(); }
+            resolve(root) { return proto_nexus.timestampToDate(root.getPublishedTime()); }
         });
     },
     rootTyping: { name: "Post", path: "@testapis/node/lib/hello/hello_pb" }

@@ -210,6 +210,8 @@ class FieldAST {
             return "boolean";
           case "ID":
             return "id";
+          case "DateTime":
+            return "dateTime";
           default:
             const _exhaustiveCheck: never = type; // eslint-disable-line
             throw "unreachable";
@@ -353,6 +355,10 @@ const unwrapFuncs: Record<string, UnwrapFunc> = {
   ".google.protobuf.BoolValue": {
     imports: ["proto-nexus"],
     name: `${uniqueImportAlias("proto-nexus")}.unwrapBoolValue`,
+  },
+  ".google.protobuf.Timestamp": {
+    imports: ["proto-nexus"],
+    name: `${uniqueImportAlias("proto-nexus")}.timestampToDate`,
   },
 };
 
