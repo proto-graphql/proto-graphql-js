@@ -3,6 +3,7 @@
 
 import { objectType } from "@nexus/schema";
 import * as proto_nexus from "proto-nexus";
+export { Message as $testapis$node$lib$wktypes$well_known_types_pb$Message } from "@testapis/node/lib/wktypes/well_known_types_pb";
 export const Message = objectType({
     name: "Message",
     description: "",
@@ -44,5 +45,5 @@ export const Message = objectType({
             resolve(root) { return proto_nexus.unwrapStringValue(root.getStringValue()); }
         });
     },
-    rootTyping: { name: "Message", path: "@testapis/node/lib/wktypes/well_known_types_pb" }
+    sourceType: { module: __filename, export: "$testapis$node$lib$wktypes$well_known_types_pb$Message" }
 });

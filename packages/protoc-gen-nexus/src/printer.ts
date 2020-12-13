@@ -28,9 +28,16 @@ export function printSource(fd: FileDescriptorProto, msgs: Message[]): string {
     (f) => f.name
   );
 
-  const imports = [...new Set(unwrapFuncs.flatMap((f) => f.imports))];
+  const imports = uniq([...unwrapFuncs.flatMap((f) => f.imports)]);
   for (const imp of imports) {
     ast.push(createImportAllWithAliastDecl(imp));
+  }
+
+  const exports = uniq([
+    ...msgASTs.map((m) => ({ path: m.import, name: m.name })),
+  ]);
+  for (const exp of exports) {
+    ast.push(createExportAllWithAliastDecl(exp));
   }
 
   ast = [...ast, ...msgASTs.map((m) => m.build())];
@@ -63,8 +70,35 @@ class MessageAST {
     this.msg = msg;
   }
 
+  get name(): string {
+    return this.msg.name;
+  }
+
   get fields(): FieldAST[] {
     return this.msg.fields.map((f) => new FieldAST(f));
+  }
+
+  get sourceTypeExpression(): ts.Expression {
+    return ts.factory.createObjectLiteralExpression([
+      ts.factory.createPropertyAssignment(
+        "module",
+        ts.factory.createIdentifier("__filename")
+      ),
+      ts.factory.createPropertyAssignment(
+        "export",
+        ts.factory.createStringLiteral(
+          uniqueImportAlias(`${this.import}/${this.name}`)
+        )
+      ),
+    ]);
+  }
+
+  get import(): string {
+    return this.msg.importPath;
+  }
+
+  get importDecl(): ts.ImportDeclaration {
+    return createImportAllWithAliastDecl(this.import);
   }
 
   public build(): ts.Statement {
@@ -73,7 +107,7 @@ class MessageAST {
       ts.factory.createVariableDeclarationList(
         [
           ts.factory.createVariableDeclaration(
-            this.msg.name,
+            this.name,
             undefined,
             undefined,
             this.buildObjectType()
@@ -127,17 +161,8 @@ class MessageAST {
               )
             ),
             ts.factory.createPropertyAssignment(
-              "rootTyping",
-              ts.factory.createObjectLiteralExpression([
-                ts.factory.createPropertyAssignment(
-                  "name",
-                  ts.factory.createStringLiteral(name)
-                ),
-                ts.factory.createPropertyAssignment(
-                  "path",
-                  ts.factory.createStringLiteral(this.msg.importPath)
-                ),
-              ])
+              "sourceType",
+              this.sourceTypeExpression
             ),
           ],
           true
@@ -315,7 +340,12 @@ function uniq<T, V>(input: T[], f?: (t: T) => V) {
 }
 
 function uniqueImportAlias(path: string) {
-  return path.replace(/@/g, "$$").replace(/\//g, "$").replace(/-/g, "_");
+  return path
+    .replace(/@/g, "$$")
+    .replace(/\.\.\//g, "__$")
+    .replace(/\.\//g, "_$")
+    .replace(/\//g, "$")
+    .replace(/-/g, "_");
 }
 
 type UnwrapFunc = {
@@ -373,6 +403,27 @@ function createImportAllWithAliastDecl(path: string): ts.ImportDeclaration {
         ts.factory.createIdentifier(uniqueImportAlias(path))
       )
     ),
+    ts.factory.createStringLiteral(path)
+  );
+}
+
+function createExportAllWithAliastDecl({
+  path,
+  name,
+}: {
+  path: string;
+  name: string;
+}): ts.ExportDeclaration {
+  return ts.factory.createExportDeclaration(
+    undefined,
+    undefined,
+    false,
+    ts.factory.createNamedExports([
+      ts.factory.createExportSpecifier(
+        name,
+        uniqueImportAlias(`${path}/${name}`)
+      ),
+    ]),
     ts.factory.createStringLiteral(path)
   );
 }

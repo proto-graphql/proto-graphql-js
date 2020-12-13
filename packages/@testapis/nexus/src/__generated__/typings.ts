@@ -4,9 +4,9 @@
  */
 
 
-import { User, Post } from "@testapis/node/lib/hello/hello_pb";
-import { Message } from "@testapis/node/lib/wktypes/well_known_types_pb";
-import { core } from "@nexus/schema";
+import { $testapis$node$lib$hello$hello_pb$User, $testapis$node$lib$hello$hello_pb$Post } from "./../schema/types/hello/hello_nexus_pb"
+import { $testapis$node$lib$wktypes$well_known_types_pb$Message } from "./../schema/types/wktypes/well_known_types_nexus_pb"
+import { core } from "@nexus/schema"
 declare global {
   interface NexusGenCustomInputMethods<TypeName extends string> {
     /**
@@ -26,7 +26,7 @@ declare global {
 
 
 declare global {
-  type NexusGen = NexusGenTypes;
+  interface NexusGen extends NexusGenTypes {}
 }
 
 export interface NexusGenInputs {
@@ -45,10 +45,10 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
-  Message: Message;
-  Post: Post;
+  Message: $testapis$node$lib$wktypes$well_known_types_pb$Message;
+  Post: $testapis$node$lib$hello$hello_pb$Post;
   Query: {};
-  User: User;
+  User: $testapis$node$lib$hello$hello_pb$User;
 }
 
 export interface NexusGenInterfaces {
@@ -57,9 +57,9 @@ export interface NexusGenInterfaces {
 export interface NexusGenUnions {
 }
 
-export type NexusGenRootTypes = NexusGenObjects;
+export type NexusGenRootTypes = NexusGenObjects
 
-export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars;
+export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
   Message: { // field return type
@@ -148,12 +148,13 @@ export type NexusGenFeaturesConfig = {
     resolveType: true
     __typename: false
   }
-};
+}
 
 export interface NexusGenTypes {
   context: any;
   inputTypes: NexusGenInputs;
   rootTypes: NexusGenRootTypes;
+  inputTypeShapes: NexusGenInputs & NexusGenEnums & NexusGenScalars;
   argTypes: NexusGenArgTypes;
   fieldTypes: NexusGenFieldTypes;
   fieldTypeNames: NexusGenFieldTypeNames;
