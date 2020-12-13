@@ -25,7 +25,7 @@ export function printSource(fd: FileDescriptorProto, msgs: Message[]): string {
 
   const unwrapFuncs = uniq(
     compact(msgASTs.flatMap((m) => m.fields.map((f) => f.unwrapFunc))),
-    (f) => f.decl.name
+    (f) => f.name
   );
 
   const imports = [...new Set(unwrapFuncs.flatMap((f) => f.imports))];
@@ -33,11 +33,7 @@ export function printSource(fd: FileDescriptorProto, msgs: Message[]): string {
     ast.push(createImportAllWithAliastDecl(imp));
   }
 
-  ast = [
-    ...ast,
-    ...unwrapFuncs.map((f) => f.decl),
-    ...msgASTs.map((m) => m.build()),
-  ];
+  ast = [...ast, ...msgASTs.map((m) => m.build())];
 
   const file = ts.factory.updateSourceFile(
     ts.createSourceFile(
@@ -263,7 +259,7 @@ class FieldAST {
     );
     if (this.unwrapFunc !== null) {
       resolverRet = ts.factory.createCallExpression(
-        this.unwrapFunc.decl.name!,
+        ts.factory.createIdentifier(this.unwrapFunc.name),
         undefined,
         [resolverRet]
       );
@@ -322,75 +318,41 @@ function uniqueImportAlias(path: string) {
 
 type UnwrapFunc = {
   imports: string[];
-  decl: ts.FunctionDeclaration;
+  name: string;
 };
 
 const unwrapFuncs: Record<string, UnwrapFunc> = {
   ".google.protobuf.Int32Value": {
-    imports: ["google-protobuf/google/protobuf/wrappers_pb"],
-    decl: createUnwrapWrapperFuncDecl({
-      path: "google-protobuf/google/protobuf/wrappers_pb",
-      typeName: "Int32Value",
-      returnType: ts.factory.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword),
-    }),
+    imports: ["proto-nexus"],
+    name: `${uniqueImportAlias("proto-nexus")}.unwrapInt32Value`,
   },
   ".google.protobuf.UInt32Value": {
-    imports: ["google-protobuf/google/protobuf/wrappers_pb"],
-    decl: createUnwrapWrapperFuncDecl({
-      path: "google-protobuf/google/protobuf/wrappers_pb",
-      typeName: "UInt32Value",
-      returnType: ts.factory.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword),
-    }),
+    imports: ["proto-nexus"],
+    name: `${uniqueImportAlias("proto-nexus")}.unwrapUInt32Value`,
   },
   ".google.protobuf.Int64Value": {
-    imports: ["google-protobuf/google/protobuf/wrappers_pb"],
-    decl: createUnwrapWrapperFuncDecl({
-      path: "google-protobuf/google/protobuf/wrappers_pb",
-      typeName: "Int64Value",
-      returnType: ts.factory.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword),
-    }),
+    imports: ["proto-nexus"],
+    name: `${uniqueImportAlias("proto-nexus")}.unwrapInt64Value`,
   },
   ".google.protobuf.UInt64Value": {
-    imports: ["google-protobuf/google/protobuf/wrappers_pb"],
-    decl: createUnwrapWrapperFuncDecl({
-      path: "google-protobuf/google/protobuf/wrappers_pb",
-      typeName: "UInt64Value",
-      returnType: ts.factory.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword),
-    }),
+    imports: ["proto-nexus"],
+    name: `${uniqueImportAlias("proto-nexus")}.unwrapUInt64Value`,
   },
   ".google.protobuf.FloatValue": {
-    imports: ["google-protobuf/google/protobuf/wrappers_pb"],
-    decl: createUnwrapWrapperFuncDecl({
-      path: "google-protobuf/google/protobuf/wrappers_pb",
-      typeName: "FloatValue",
-      returnType: ts.factory.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword),
-    }),
+    imports: ["proto-nexus"],
+    name: `${uniqueImportAlias("proto-nexus")}.unwrapFloatValue`,
   },
   ".google.protobuf.DoubleValue": {
-    imports: ["google-protobuf/google/protobuf/wrappers_pb"],
-    decl: createUnwrapWrapperFuncDecl({
-      path: "google-protobuf/google/protobuf/wrappers_pb",
-      typeName: "DoubleValue",
-      returnType: ts.factory.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword),
-    }),
+    imports: ["proto-nexus"],
+    name: `${uniqueImportAlias("proto-nexus")}.unwrapDoubleValue`,
   },
   ".google.protobuf.StringValue": {
-    imports: ["google-protobuf/google/protobuf/wrappers_pb"],
-    decl: createUnwrapWrapperFuncDecl({
-      path: "google-protobuf/google/protobuf/wrappers_pb",
-      typeName: "StringValue",
-      returnType: ts.factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
-    }),
+    imports: ["proto-nexus"],
+    name: `${uniqueImportAlias("proto-nexus")}.unwrapStringValue`,
   },
   ".google.protobuf.BoolValue": {
-    imports: ["google-protobuf/google/protobuf/wrappers_pb"],
-    decl: createUnwrapWrapperFuncDecl({
-      path: "google-protobuf/google/protobuf/wrappers_pb",
-      typeName: "BoolValue",
-      returnType: ts.factory.createKeywordTypeNode(
-        ts.SyntaxKind.BooleanKeyword
-      ),
-    }),
+    imports: ["proto-nexus"],
+    name: `${uniqueImportAlias("proto-nexus")}.unwrapBoolValue`,
   },
 };
 
@@ -406,66 +368,5 @@ function createImportAllWithAliastDecl(path: string): ts.ImportDeclaration {
       )
     ),
     ts.factory.createStringLiteral(path)
-  );
-}
-
-function createUnwrapWrapperFuncDecl({
-  path,
-  typeName,
-  returnType,
-}: {
-  path: string;
-  typeName: string;
-  returnType: ts.TypeNode;
-}): ts.FunctionDeclaration {
-  return ts.factory.createFunctionDeclaration(
-    undefined,
-    undefined,
-    undefined,
-    `unwrap__${uniqueImportAlias(path)}__${typeName}`,
-    undefined,
-    [
-      ts.factory.createParameterDeclaration(
-        undefined,
-        undefined,
-        undefined,
-        "input",
-        undefined,
-        ts.factory.createUnionTypeNode([
-          ts.factory.createTypeReferenceNode(
-            ts.factory.createQualifiedName(
-              ts.factory.createIdentifier(uniqueImportAlias(path)),
-              typeName
-            )
-          ),
-          ts.factory.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword),
-        ]),
-        undefined
-      ),
-    ],
-    ts.factory.createUnionTypeNode([
-      returnType,
-      ts.factory.createLiteralTypeNode(ts.factory.createNull()),
-    ]),
-    ts.factory.createBlock([
-      ts.factory.createIfStatement(
-        ts.factory.createBinaryExpression(
-          ts.factory.createIdentifier("input"),
-          ts.SyntaxKind.EqualsEqualsEqualsToken,
-          ts.factory.createIdentifier("undefined")
-        ),
-        ts.factory.createReturnStatement(ts.factory.createNull())
-      ),
-      ts.factory.createReturnStatement(
-        ts.factory.createCallExpression(
-          ts.factory.createPropertyAccessExpression(
-            ts.factory.createIdentifier("input"),
-            ts.factory.createIdentifier("getValue")
-          ),
-          undefined,
-          undefined
-        )
-      ),
-    ])
   );
 }

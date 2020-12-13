@@ -6,7 +6,8 @@
   "dependencies": {
     "@nexus/schema": "^0.19.2",
     "@testapis/node": "^0.0.1",
-    "graphql": "^15.4.0"
+    "graphql": "^15.4.0",
+    "proto-nexus": "^0.0.1"
   },
   "scripts": {
     "build": "ts-node ./src/schema/index.ts",

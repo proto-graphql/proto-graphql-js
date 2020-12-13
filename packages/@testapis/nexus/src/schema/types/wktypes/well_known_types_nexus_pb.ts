@@ -2,63 +2,47 @@
 // source: wktypes/well_known_types.proto
 
 import { objectType } from "@nexus/schema";
-import * as google_protobuf$google$protobuf$wrappers_pb from "google-protobuf/google/protobuf/wrappers_pb";
-function unwrap__google_protobuf$google$protobuf$wrappers_pb__Int32Value(input: google_protobuf$google$protobuf$wrappers_pb.Int32Value | undefined): number | null { if (input === undefined)
-    return null; return input.getValue(); }
-function unwrap__google_protobuf$google$protobuf$wrappers_pb__Int64Value(input: google_protobuf$google$protobuf$wrappers_pb.Int64Value | undefined): number | null { if (input === undefined)
-    return null; return input.getValue(); }
-function unwrap__google_protobuf$google$protobuf$wrappers_pb__UInt32Value(input: google_protobuf$google$protobuf$wrappers_pb.UInt32Value | undefined): number | null { if (input === undefined)
-    return null; return input.getValue(); }
-function unwrap__google_protobuf$google$protobuf$wrappers_pb__UInt64Value(input: google_protobuf$google$protobuf$wrappers_pb.UInt64Value | undefined): number | null { if (input === undefined)
-    return null; return input.getValue(); }
-function unwrap__google_protobuf$google$protobuf$wrappers_pb__FloatValue(input: google_protobuf$google$protobuf$wrappers_pb.FloatValue | undefined): number | null { if (input === undefined)
-    return null; return input.getValue(); }
-function unwrap__google_protobuf$google$protobuf$wrappers_pb__DoubleValue(input: google_protobuf$google$protobuf$wrappers_pb.DoubleValue | undefined): number | null { if (input === undefined)
-    return null; return input.getValue(); }
-function unwrap__google_protobuf$google$protobuf$wrappers_pb__BoolValue(input: google_protobuf$google$protobuf$wrappers_pb.BoolValue | undefined): boolean | null { if (input === undefined)
-    return null; return input.getValue(); }
-function unwrap__google_protobuf$google$protobuf$wrappers_pb__StringValue(input: google_protobuf$google$protobuf$wrappers_pb.StringValue | undefined): string | null { if (input === undefined)
-    return null; return input.getValue(); }
+import * as proto_nexus from "proto-nexus";
 export const Message = objectType({
     name: "Message",
     description: "",
     definition(t) {
         t.nullable.string("timestamp", {
             description: "",
-            resolve(root) { return root.getTimestamp(); }
+            resolve(root) { return root.getTimestamp(); },
         });
         t.nullable.int("int32Value", {
             description: "",
-            resolve(root) { return unwrap__google_protobuf$google$protobuf$wrappers_pb__Int32Value(root.getInt32Value()); }
+            resolve(root) { return proto_nexus.unwrapInt32Value(root.getInt32Value()); },
         });
         t.nullable.int("int64Value", {
             description: "",
-            resolve(root) { return unwrap__google_protobuf$google$protobuf$wrappers_pb__Int64Value(root.getInt64Value()); }
+            resolve(root) { return proto_nexus.unwrapInt64Value(root.getInt64Value()); },
         });
         t.nullable.int("uint32Value", {
             description: "",
-            resolve(root) { return unwrap__google_protobuf$google$protobuf$wrappers_pb__UInt32Value(root.getUint32Value()); }
+            resolve(root) { return proto_nexus.unwrapUInt32Value(root.getUint32Value()); },
         });
         t.nullable.int("uint64Value", {
             description: "",
-            resolve(root) { return unwrap__google_protobuf$google$protobuf$wrappers_pb__UInt64Value(root.getUint64Value()); }
+            resolve(root) { return proto_nexus.unwrapUInt64Value(root.getUint64Value()); },
         });
         t.nullable.float("floatValue", {
             description: "",
-            resolve(root) { return unwrap__google_protobuf$google$protobuf$wrappers_pb__FloatValue(root.getFloatValue()); }
+            resolve(root) { return proto_nexus.unwrapFloatValue(root.getFloatValue()); },
         });
         t.nullable.float("doubleValue", {
             description: "",
-            resolve(root) { return unwrap__google_protobuf$google$protobuf$wrappers_pb__DoubleValue(root.getDoubleValue()); }
+            resolve(root) { return proto_nexus.unwrapDoubleValue(root.getDoubleValue()); },
         });
         t.nullable.boolean("boolValue", {
             description: "",
-            resolve(root) { return unwrap__google_protobuf$google$protobuf$wrappers_pb__BoolValue(root.getBoolValue()); }
+            resolve(root) { return proto_nexus.unwrapBoolValue(root.getBoolValue()); },
         });
         t.nullable.string("stringValue", {
             description: "",
-            resolve(root) { return unwrap__google_protobuf$google$protobuf$wrappers_pb__StringValue(root.getStringValue()); }
+            resolve(root) { return proto_nexus.unwrapStringValue(root.getStringValue()); },
         });
     },
-    rootTyping: { name: "Message", path: "@testapis/node/lib/wktypes/well_known_types_pb" }
+    rootTyping: { name: "Message", path: "@testapis/node/lib/wktypes/well_known_types_pb" },
 });
