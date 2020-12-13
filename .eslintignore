@@ -1,1 +1,2 @@
-packages/@testapis
+lib/
+packages/@testapis/nexus/src/**/*_nexus_pb.ts
