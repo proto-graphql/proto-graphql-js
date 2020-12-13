@@ -341,10 +341,10 @@ function uniq<T, V>(input: T[], f?: (t: T) => V) {
 
 function uniqueImportAlias(path: string) {
   return path
-    .replace(/@/g, "$$")
-    .replace(/\.\.\//g, "__$")
-    .replace(/\.\//g, "_$")
-    .replace(/\//g, "$")
+    .replace(/@/g, "$$$$")
+    .replace(/\.\.\//g, "__$$")
+    .replace(/\.\//g, "_$$")
+    .replace(/\//g, "$$")
     .replace(/-/g, "_");
 }
 

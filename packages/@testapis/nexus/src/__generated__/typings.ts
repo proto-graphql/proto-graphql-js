@@ -4,8 +4,8 @@
  */
 
 
-import { $testapis$node$lib$hello$hello_pb$User, $testapis$node$lib$hello$hello_pb$Post } from "./../schema/types/hello/hello_nexus_pb"
-import { $testapis$node$lib$wktypes$well_known_types_pb$Message } from "./../schema/types/wktypes/well_known_types_nexus_pb"
+import { $$testapis$node$lib$hello$hello_pb$User, $$testapis$node$lib$hello$hello_pb$Post } from "./../schema/types/hello/hello_nexus_pb"
+import { $$testapis$node$lib$wktypes$well_known_types_pb$Message } from "./../schema/types/wktypes/well_known_types_nexus_pb"
 import { core } from "@nexus/schema"
 declare global {
   interface NexusGenCustomInputMethods<TypeName extends string> {
@@ -45,10 +45,10 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
-  Message: $testapis$node$lib$wktypes$well_known_types_pb$Message;
-  Post: $testapis$node$lib$hello$hello_pb$Post;
+  Message: $$testapis$node$lib$wktypes$well_known_types_pb$Message;
+  Post: $$testapis$node$lib$hello$hello_pb$Post;
   Query: {};
-  User: $testapis$node$lib$hello$hello_pb$User;
+  User: $$testapis$node$lib$hello$hello_pb$User;
 }
 
 export interface NexusGenInterfaces {
