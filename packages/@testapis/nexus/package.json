@@ -4,7 +4,7 @@
   "description": "Generated codes from protobuf IDL",
   "private": true,
   "dependencies": {
-    "@nexus/schema": "^0.19.2",
+    "@nexus/schema": "0.20.0-next.16",
     "@testapis/node": "^0.0.1",
     "graphql": "^15.4.0",
     "graphql-scalars": "^1.6.1",
