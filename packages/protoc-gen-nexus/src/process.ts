@@ -4,7 +4,7 @@ import {
 } from "google-protobuf/google/protobuf/compiler/plugin_pb";
 import { FileDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
 import { printSource } from "./printer";
-import { Message } from "./types";
+import { ProtoFile, ProtoMessage } from "./protoTypes";
 
 export const processRequest = (
   req: CodeGeneratorRequest
@@ -43,18 +43,24 @@ function processFileDescriptor(
   fd: FileDescriptorProto,
   params: Parameters
 ): string {
-  const msgs: Message[] = [];
+  const file = new ProtoFile(fd);
 
-  for (const d of fd.getMessageTypeList()) {
-    msgs.push(new Message(fd, d, { importPrefix: params.importPrefix }));
+  const msgs: ProtoMessage[] = [];
+
+  for (const m of file.messages) {
+    msgs.push(...collectMessages(m));
   }
 
-  for (const l of fd.getSourceCodeInfo()?.getLocationList() || []) {
-    const pathList = l.getPathList()!;
-    if (pathList[0] === 4) {
-      msgs[pathList[1]].addSourceCodeInfoLocation(l);
-    }
+  return printSource(fd, msgs, params);
+}
+
+function collectMessages(m: ProtoMessage): ProtoMessage[] {
+  const msgs: ProtoMessage[] = [];
+
+  msgs.push(m);
+  for (const cm of m.messages) {
+    msgs.push(...collectMessages(cm));
   }
 
-  return printSource(fd, msgs);
+  return msgs;
 }

@@ -1,10 +1,17 @@
-import { FileDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
+import {
+  FileDescriptorProto,
+  FieldDescriptorProto,
+} from "google-protobuf/google/protobuf/descriptor_pb";
 import ts from "typescript";
-import { Field, Message } from "./types";
+import { ProtoField, ProtoMessage } from "./protoTypes";
 
-export function printSource(fd: FileDescriptorProto, msgs: Message[]): string {
+export function printSource(
+  fd: FileDescriptorProto,
+  msgs: ProtoMessage[],
+  params: { importPrefix?: string }
+): string {
   const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed });
-  const msgASTs = msgs.map((m) => new MessageAST(m));
+  const msgASTs = msgs.map((m) => new MessageAST(m, params));
   let ast: ts.Statement[] = [
     ts.factory.createImportDeclaration(
       undefined,
@@ -64,11 +71,10 @@ export function printSource(fd: FileDescriptorProto, msgs: Message[]): string {
 }
 
 class MessageAST {
-  private readonly msg: Message;
-
-  constructor(msg: Message) {
-    this.msg = msg;
-  }
+  constructor(
+    private readonly msg: ProtoMessage,
+    private readonly params: { importPrefix?: string }
+  ) {}
 
   get name(): string {
     return this.msg.name;
@@ -94,7 +100,8 @@ class MessageAST {
   }
 
   get import(): string {
-    return this.msg.importPath;
+    const { importPrefix } = this.params;
+    return `${importPrefix ? `${importPrefix}/` : "./"}${this.msg.importPath}`;
   }
 
   get importDecl(): ts.ImportDeclaration {
@@ -173,10 +180,12 @@ class MessageAST {
 }
 
 class FieldAST {
-  private readonly field: Field;
+  private readonly field: ProtoField;
+  private readonly type: Type;
 
-  constructor(field: Field) {
+  constructor(field: ProtoField) {
     this.field = field;
+    this.type = convertType(field);
   }
 
   public build(): ts.Statement {
@@ -204,7 +213,7 @@ class FieldAST {
       )
     );
 
-    if (this.field.type.kind === "list") {
+    if (this.type.kind === "list") {
       left = ts.factory.createPropertyAccessExpression(
         left,
         ts.factory.createIdentifier("list")
@@ -218,7 +227,7 @@ class FieldAST {
   }
 
   private get nexusTypeName(): string {
-    const { type } = this.field;
+    const { type } = this;
 
     switch (type.kind) {
       case "list":
@@ -250,7 +259,8 @@ class FieldAST {
   }
 
   private get options(): ts.ObjectLiteralExpression {
-    const { getterName, description, type } = this.field;
+    const { type } = this;
+    const { getterName, description } = this.field;
     const props: ts.ObjectLiteralElementLike[] = [
       ts.factory.createPropertyAssignment(
         "description",
@@ -426,4 +436,111 @@ function createExportAllWithAliastDecl({
     ]),
     ts.factory.createStringLiteral(path)
   );
+}
+
+type ScalarType = "Int" | "Float" | "String" | "Boolean" | "ID" | "DateTime";
+
+export type ItemType =
+  | {
+      kind: "scalar";
+      type: ScalarType;
+    }
+  | {
+      kind: "object";
+      type: string;
+    };
+
+export type Type =
+  | ItemType
+  | {
+      kind: "list";
+      type: ItemType;
+    };
+
+function convertType(f: ProtoField): Type {
+  if (f.isList()) {
+    return {
+      kind: "list",
+      type: convertItemType(f),
+    };
+  }
+
+  return convertItemType(f);
+}
+
+function convertItemType(f: ProtoField): ItemType {
+  const pbtype = f.descriptor.getType()!;
+  switch (pbtype) {
+    case FieldDescriptorProto.Type.TYPE_STRING:
+      return { kind: "scalar", type: "String" };
+    case FieldDescriptorProto.Type.TYPE_DOUBLE:
+    case FieldDescriptorProto.Type.TYPE_FLOAT:
+      return { kind: "scalar", type: "Float" };
+    case FieldDescriptorProto.Type.TYPE_INT64:
+    case FieldDescriptorProto.Type.TYPE_UINT64:
+    case FieldDescriptorProto.Type.TYPE_INT32:
+    case FieldDescriptorProto.Type.TYPE_FIXED64:
+    case FieldDescriptorProto.Type.TYPE_FIXED32:
+    case FieldDescriptorProto.Type.TYPE_UINT32:
+    case FieldDescriptorProto.Type.TYPE_SFIXED32:
+    case FieldDescriptorProto.Type.TYPE_SFIXED64:
+    case FieldDescriptorProto.Type.TYPE_SINT32:
+    case FieldDescriptorProto.Type.TYPE_SINT64:
+      return { kind: "scalar", type: "Int" };
+    case FieldDescriptorProto.Type.TYPE_BOOL:
+      return { kind: "scalar", type: "Boolean" };
+    case FieldDescriptorProto.Type.TYPE_GROUP:
+      throw "not supported";
+    case FieldDescriptorProto.Type.TYPE_BYTES:
+      throw "not supported";
+    case FieldDescriptorProto.Type.TYPE_ENUM:
+      throw "not implemented";
+    case FieldDescriptorProto.Type.TYPE_MESSAGE:
+      switch (f.descriptor.getTypeName()) {
+        case ".google.protobuf.Any":
+          throw "not supported";
+        case ".google.protobuf.BoolValue":
+          return {
+            kind: "scalar",
+            type: "Boolean",
+          };
+        case ".google.protobuf.BytesValue":
+          throw "not supported";
+        case ".google.protobuf.DoubleValue":
+        case ".google.protobuf.FloatValue":
+          return {
+            kind: "scalar",
+            type: "Float",
+          };
+        case ".google.protobuf.Duration":
+          throw "not implemented";
+        case ".google.protobuf.Int32Value":
+        case ".google.protobuf.Int64Value":
+        case ".google.protobuf.UInt32Value":
+        case ".google.protobuf.UInt64Value":
+          return {
+            kind: "scalar",
+            type: "Int",
+          };
+        case ".google.protobuf.StringValue":
+          return {
+            kind: "scalar",
+            type: "String",
+          };
+        case ".google.protobuf.Timestamp":
+          return {
+            kind: "scalar",
+            type: "DateTime",
+          };
+        default:
+          return {
+            kind: "object",
+            // FIXME
+            type: f.descriptor.getTypeName()!.split(".").slice(-1)[0]!,
+          };
+      }
+    default:
+      const _exhaustiveCheck: never = pbtype; // eslint-disable-line
+      throw "unreachable";
+  }
 }
