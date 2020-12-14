@@ -5,6 +5,7 @@
 
 
 import { $$testapis$node$lib$hello$hello_pb$User, $$testapis$node$lib$hello$hello_pb$Post } from "./../schema/types/hello/hello_nexus_pb"
+import { $$testapis$node$lib$nested$nested_pb$ParentMessage, $$testapis$node$lib$nested$nested_pb$ParentMessageNestedMessage } from "./../schema/types/nested/nested_nexus_pb"
 import { $$testapis$node$lib$wktypes$well_known_types_pb$Message } from "./../schema/types/wktypes/well_known_types_nexus_pb"
 import { core } from "@nexus/schema"
 declare global {
@@ -46,6 +47,8 @@ export interface NexusGenScalars {
 
 export interface NexusGenObjects {
   Message: $$testapis$node$lib$wktypes$well_known_types_pb$Message;
+  NestedMessage: $$testapis$node$lib$nested$nested_pb$ParentMessageNestedMessage;
+  ParentMessage: $$testapis$node$lib$nested$nested_pb$ParentMessage;
   Post: $$testapis$node$lib$hello$hello_pb$Post;
   Query: {};
   User: $$testapis$node$lib$hello$hello_pb$User;
@@ -72,6 +75,13 @@ export interface NexusGenFieldTypes {
     timestamp: NexusGenScalars['DateTime'] | null; // DateTime
     uint32Value: number | null; // Int
     uint64Value: number | null; // Int
+  }
+  NestedMessage: { // field return type
+    nestedBody: string | null; // String
+  }
+  ParentMessage: { // field return type
+    body: string | null; // String
+    nested: NexusGenRootTypes['NestedMessage'] | null; // NestedMessage
   }
   Post: { // field return type
     body: string; // String!
@@ -100,6 +110,13 @@ export interface NexusGenFieldTypeNames {
     timestamp: 'DateTime'
     uint32Value: 'Int'
     uint64Value: 'Int'
+  }
+  NestedMessage: { // field return type name
+    nestedBody: 'String'
+  }
+  ParentMessage: { // field return type name
+    body: 'String'
+    nested: 'NestedMessage'
   }
   Post: { // field return type name
     body: 'String'
