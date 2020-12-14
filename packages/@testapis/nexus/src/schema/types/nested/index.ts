@@ -1,1 +1,1 @@
-export * from "./nested_nexus_pb";
+export * from "./nested_pb_nexus";

@@ -57,7 +57,7 @@ test("generates nexus DSL from simple proto file", () => {
 
   const fileByName = getFileMap(resp);
 
-  expect(fileByName["hello/hello_nexus_pb.ts"]).toMatchSnapshot();
+  expect(fileByName["hello/hello_pb_nexus.ts"]).toMatchSnapshot();
 });
 
 test("generates nexus DSL from proto well-known types", () => {
@@ -68,7 +68,7 @@ test("generates nexus DSL from proto well-known types", () => {
 
   const fileByName = getFileMap(resp);
 
-  expect(fileByName["wktypes/well_known_types_nexus_pb.ts"]).toMatchSnapshot();
+  expect(fileByName["wktypes/well_known_types_pb_nexus.ts"]).toMatchSnapshot();
 });
 
 test("generates nexus DSL from nested proto types", () => {
@@ -79,5 +79,5 @@ test("generates nexus DSL from nested proto types", () => {
 
   const fileByName = getFileMap(resp);
 
-  expect(fileByName["nested/nested_nexus_pb.ts"]).toMatchSnapshot();
+  expect(fileByName["nested/nested_pb_nexus.ts"]).toMatchSnapshot();
 });

@@ -1,1 +1,1 @@
-export * from "./hello_nexus_pb";
+export * from "./hello_pb_nexus";
