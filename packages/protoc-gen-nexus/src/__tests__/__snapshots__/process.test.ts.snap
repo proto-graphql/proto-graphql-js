@@ -22,7 +22,25 @@ export const MessageWithEnums = objectType({
 export const MyEnum1 = enumType({
     name: \\"MyEnum1\\",
     description: \\"\\",
-    members: { MY_ENUM_1_UNSPECIRED: 0, FOO: 1, BAR: 2, BAZ: 3 }
+    members: [
+        {
+            name: \\"MY_ENUM_1_UNSPECIRED\\",
+            value: 0
+        },
+        {
+            name: \\"FOO\\",
+            value: 1
+        },
+        {
+            name: \\"BAR\\",
+            description: \\"This is Bar.\\",
+            value: 2
+        },
+        {
+            name: \\"BAZ\\",
+            value: 3
+        }
+    ]
 });
 "
 `;

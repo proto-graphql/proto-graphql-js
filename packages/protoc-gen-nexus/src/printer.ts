@@ -3,7 +3,13 @@ import {
   FieldDescriptorProto,
 } from "google-protobuf/google/protobuf/descriptor_pb";
 import ts from "typescript";
-import { ProtoFile, ProtoField, ProtoEnum, ProtoMessage } from "./protoTypes";
+import {
+  ProtoFile,
+  ProtoField,
+  ProtoEnum,
+  ProtoMessage,
+  ProtoEnumValue,
+} from "./protoTypes";
 
 export function printSource(
   fd: FileDescriptorProto,
@@ -433,6 +439,27 @@ class EnumAST {
   private buildEnumType(): ts.Expression {
     const { name, description } = this.proto;
 
+    const createMember = (ev: ProtoEnumValue) =>
+      ts.factory.createObjectLiteralExpression(
+        compact([
+          ts.factory.createPropertyAssignment(
+            "name",
+            ts.factory.createStringLiteral(ev.name)
+          ),
+          ev.description
+            ? ts.factory.createPropertyAssignment(
+                "description",
+                ts.factory.createStringLiteral(ev.description)
+              )
+            : null,
+          ts.factory.createPropertyAssignment(
+            "value",
+            ts.factory.createNumericLiteral(ev.tagNumber)
+          ),
+        ]),
+        true // multiline
+      );
+
     return ts.factory.createCallExpression(
       ts.factory.createIdentifier("enumType"),
       undefined,
@@ -449,13 +476,9 @@ class EnumAST {
             ),
             ts.factory.createPropertyAssignment(
               "members",
-              ts.factory.createObjectLiteralExpression(
-                this.proto.values.map((ev) =>
-                  ts.factory.createPropertyAssignment(
-                    ev.name,
-                    ts.factory.createNumericLiteral(ev.tagNumber)
-                  )
-                )
+              ts.factory.createArrayLiteralExpression(
+                this.proto.values.map(createMember),
+                true // multiline
               )
             ),
             // ts.factory.createPropertyAssignment(

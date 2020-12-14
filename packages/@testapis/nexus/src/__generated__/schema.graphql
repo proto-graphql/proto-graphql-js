@@ -45,6 +45,7 @@ type MessageWithEnums {
 
 """"""
 enum MyEnum1 {
+  """This is Bar."""
   BAR
   BAZ
   FOO
