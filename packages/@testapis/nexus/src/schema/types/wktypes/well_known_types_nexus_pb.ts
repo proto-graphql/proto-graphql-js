@@ -3,7 +3,8 @@
 
 import { objectType } from "@nexus/schema";
 import * as proto_nexus from "proto-nexus";
-export { Message as $$testapis$node$lib$wktypes$well_known_types_pb$Message } from "@testapis/node/lib/wktypes/well_known_types_pb";
+import * as $$testapis$node$lib$wktypes$well_known_types_pb from "@testapis/node/lib/wktypes/well_known_types_pb";
+export type $$testapis$node$lib$wktypes$well_known_types_pb$Message = $$testapis$node$lib$wktypes$well_known_types_pb.Message;
 export const Message = objectType({
     name: "Message",
     description: "",

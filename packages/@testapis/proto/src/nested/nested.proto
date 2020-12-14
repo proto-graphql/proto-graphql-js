@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package testapi.nested;
+
+message ParentMessage {
+  message NestedMessage {
+    string nested_body = 1;
+  }
+
+  string body = 1;
+  NestedMessage nested = 2;
+}

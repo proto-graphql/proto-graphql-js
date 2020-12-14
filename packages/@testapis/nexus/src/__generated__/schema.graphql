@@ -37,6 +37,21 @@ type Message {
   uint64Value: Int
 }
 
+""""""
+type NestedMessage {
+  """"""
+  nestedBody: String
+}
+
+""""""
+type ParentMessage {
+  """"""
+  body: String
+
+  """"""
+  nested: NestedMessage
+}
+
 """Post entity"""
 type Post {
   """Required. Body."""

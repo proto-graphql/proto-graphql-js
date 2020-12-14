@@ -3,8 +3,9 @@
 
 import { objectType } from "@nexus/schema";
 import * as proto_nexus from "proto-nexus";
-export { User as $$testapis$node$lib$hello$hello_pb$User } from "@testapis/node/lib/hello/hello_pb";
-export { Post as $$testapis$node$lib$hello$hello_pb$Post } from "@testapis/node/lib/hello/hello_pb";
+import * as $$testapis$node$lib$hello$hello_pb from "@testapis/node/lib/hello/hello_pb";
+export type $$testapis$node$lib$hello$hello_pb$User = $$testapis$node$lib$hello$hello_pb.User;
+export type $$testapis$node$lib$hello$hello_pb$Post = $$testapis$node$lib$hello$hello_pb.Post;
 export const User = objectType({
     name: "User",
     description: "User entity",

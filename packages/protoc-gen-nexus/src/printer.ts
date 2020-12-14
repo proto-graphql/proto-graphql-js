@@ -3,7 +3,7 @@ import {
   FieldDescriptorProto,
 } from "google-protobuf/google/protobuf/descriptor_pb";
 import ts from "typescript";
-import { ProtoField, ProtoMessage } from "./protoTypes";
+import { ProtoFile, ProtoField, ProtoMessage } from "./protoTypes";
 
 export function printSource(
   fd: FileDescriptorProto,
@@ -40,12 +40,8 @@ export function printSource(
     ast.push(createImportAllWithAliastDecl(imp));
   }
 
-  const exports = uniq([
-    ...msgASTs.map((m) => ({ path: m.import, name: m.name })),
-  ]);
-  for (const exp of exports) {
-    ast.push(createExportAllWithAliastDecl(exp));
-  }
+  ast.push(...compact(uniq(msgASTs, (m) => m.import).map((m) => m.importDecl)));
+  ast.push(...compact(msgASTs.map((m) => m.exportDecl)));
 
   ast = [...ast, ...msgASTs.map((m) => m.build())];
 
@@ -77,7 +73,20 @@ class MessageAST {
   ) {}
 
   get name(): string {
-    return this.msg.name;
+    return nameWithParent(this.msg);
+  }
+
+  get aliasName(): string {
+    return uniqueImportAlias(`${this.import}/${this.name}`);
+  }
+
+  get qualifiedName(): ts.QualifiedName {
+    return ts.factory.createQualifiedName(
+      this.msg.parent instanceof ProtoFile
+        ? ts.factory.createIdentifier(uniqueImportAlias(this.import))
+        : new MessageAST(this.msg.parent, this.params).qualifiedName,
+      this.msg.name
+    );
   }
 
   get fields(): FieldAST[] {
@@ -92,9 +101,7 @@ class MessageAST {
       ),
       ts.factory.createPropertyAssignment(
         "export",
-        ts.factory.createStringLiteral(
-          uniqueImportAlias(`${this.import}/${this.name}`)
-        )
+        ts.factory.createStringLiteral(this.aliasName)
       ),
     ]);
   }
@@ -104,8 +111,20 @@ class MessageAST {
     return `${importPrefix ? `${importPrefix}/` : "./"}${this.msg.importPath}`;
   }
 
-  get importDecl(): ts.ImportDeclaration {
+  get importDecl(): ts.ImportDeclaration | null {
+    if (!(this.msg.parent instanceof ProtoFile)) return null;
+
     return createImportAllWithAliastDecl(this.import);
+  }
+
+  get exportDecl(): ts.Statement | null {
+    return ts.factory.createTypeAliasDeclaration(
+      undefined,
+      [ts.factory.createToken(ts.SyntaxKind.ExportKeyword)],
+      this.aliasName,
+      undefined,
+      ts.factory.createTypeReferenceNode(this.qualifiedName)
+    );
   }
 
   public build(): ts.Statement {
@@ -417,25 +436,18 @@ function createImportAllWithAliastDecl(path: string): ts.ImportDeclaration {
   );
 }
 
-function createExportAllWithAliastDecl({
-  path,
-  name,
-}: {
-  path: string;
-  name: string;
-}): ts.ExportDeclaration {
-  return ts.factory.createExportDeclaration(
-    undefined,
-    undefined,
-    false,
-    ts.factory.createNamedExports([
-      ts.factory.createExportSpecifier(
-        name,
-        uniqueImportAlias(`${path}/${name}`)
-      ),
-    ]),
-    ts.factory.createStringLiteral(path)
-  );
+function nameWithParent(typ: ProtoMessage): string {
+  let name = "";
+  let t: ProtoMessage | ProtoFile = typ;
+  for (;;) {
+    if (t instanceof ProtoMessage) {
+      name = `${t.name}${name}`;
+      t = t.parent;
+    } else {
+      break;
+    }
+  }
+  return name;
 }
 
 type ScalarType = "Int" | "Float" | "String" | "Boolean" | "ID" | "DateTime";
