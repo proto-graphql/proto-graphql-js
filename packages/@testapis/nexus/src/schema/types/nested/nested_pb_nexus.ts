@@ -11,15 +11,15 @@ export const ParentMessage = objectType({
     definition(t) {
         t.nullable.string("body", {
             description: "",
-            resolve(root) { return root.getBody(); }
+            resolve(root) { return root.getBody(); },
         });
         t.nullable.field("nested", {
             description: "",
             type: "NestedMessage",
-            resolve(root) { return root.getNested(); }
+            resolve(root) { return root.getNested(); },
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$nested$nested_pb$ParentMessage" }
+    sourceType: { module: __filename, export: "$$testapis$node$lib$nested$nested_pb$ParentMessage" },
 });
 export const ParentMessageNestedMessage = objectType({
     name: "NestedMessage",
@@ -27,8 +27,8 @@ export const ParentMessageNestedMessage = objectType({
     definition(t) {
         t.nullable.string("nestedBody", {
             description: "",
-            resolve(root) { return root.getNestedBody(); }
+            resolve(root) { return root.getNestedBody(); },
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$nested$nested_pb$ParentMessageNestedMessage" }
+    sourceType: { module: __filename, export: "$$testapis$node$lib$nested$nested_pb$ParentMessageNestedMessage" },
 });

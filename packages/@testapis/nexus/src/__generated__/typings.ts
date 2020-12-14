@@ -4,9 +4,9 @@
  */
 
 
-import { $$testapis$node$lib$hello$hello_pb$User, $$testapis$node$lib$hello$hello_pb$Post } from "./../schema/types/hello/hello_nexus_pb"
-import { $$testapis$node$lib$nested$nested_pb$ParentMessage, $$testapis$node$lib$nested$nested_pb$ParentMessageNestedMessage } from "./../schema/types/nested/nested_nexus_pb"
-import { $$testapis$node$lib$wktypes$well_known_types_pb$Message } from "./../schema/types/wktypes/well_known_types_nexus_pb"
+import { $$testapis$node$lib$hello$hello_pb$User, $$testapis$node$lib$hello$hello_pb$Post } from "./../schema/types/hello/hello_pb_nexus"
+import { $$testapis$node$lib$nested$nested_pb$ParentMessage, $$testapis$node$lib$nested$nested_pb$ParentMessageNestedMessage } from "./../schema/types/nested/nested_pb_nexus"
+import { $$testapis$node$lib$wktypes$well_known_types_pb$Message } from "./../schema/types/wktypes/well_known_types_pb_nexus"
 import { core } from "@nexus/schema"
 declare global {
   interface NexusGenCustomInputMethods<TypeName extends string> {
