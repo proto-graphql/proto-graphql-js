@@ -4,7 +4,7 @@ import {
 } from "google-protobuf/google/protobuf/compiler/plugin_pb";
 import { FileDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
 import { printSource } from "./printer";
-import { ProtoFile, ProtoMessage } from "./protoTypes";
+import { ProtoFile, ProtoMessage, ProtoEnum } from "./protoTypes";
 
 export const processRequest = (
   req: CodeGeneratorRequest
@@ -45,22 +45,21 @@ function processFileDescriptor(
 ): string {
   const file = new ProtoFile(fd);
 
-  const msgs: ProtoMessage[] = [];
+  const [msgs, enums] = collectTypes(file.messages);
+  enums.push(...file.enums);
 
-  for (const m of file.messages) {
-    msgs.push(...collectMessages(m));
-  }
-
-  return printSource(fd, msgs, params);
+  return printSource(fd, msgs, enums, params);
 }
 
-function collectMessages(m: ProtoMessage): ProtoMessage[] {
+function collectTypes(inputs: ProtoMessage[]): [ProtoMessage[], ProtoEnum[]] {
   const msgs: ProtoMessage[] = [];
+  const enums: ProtoEnum[] = [];
 
-  msgs.push(m);
-  for (const cm of m.messages) {
-    msgs.push(...collectMessages(cm));
+  for (const input of inputs) {
+    const [childMsgs, childEnums] = collectTypes(input.messages);
+    msgs.push(input, ...childMsgs);
+    enums.push(...input.enums, ...childEnums);
   }
 
-  return msgs;
+  return [msgs, enums];
 }

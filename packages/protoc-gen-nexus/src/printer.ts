@@ -3,15 +3,14 @@ import {
   FieldDescriptorProto,
 } from "google-protobuf/google/protobuf/descriptor_pb";
 import ts from "typescript";
-import { ProtoFile, ProtoField, ProtoMessage } from "./protoTypes";
+import { ProtoFile, ProtoField, ProtoEnum, ProtoMessage } from "./protoTypes";
 
 export function printSource(
   fd: FileDescriptorProto,
   msgs: ProtoMessage[],
+  enums: ProtoEnum[],
   params: { importPrefix?: string }
 ): string {
-  const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed });
-  const msgASTs = msgs.map((m) => new MessageAST(m, params));
   let ast: ts.Statement[] = [
     ts.factory.createImportDeclaration(
       undefined,
@@ -19,16 +18,29 @@ export function printSource(
       ts.factory.createImportClause(
         false,
         undefined,
-        ts.factory.createNamedImports([
-          ts.factory.createImportSpecifier(
-            undefined,
-            ts.factory.createIdentifier("objectType")
-          ),
-        ])
+        ts.factory.createNamedImports(
+          compact([
+            msgs.length === 0
+              ? null
+              : ts.factory.createImportSpecifier(
+                  undefined,
+                  ts.factory.createIdentifier("objectType")
+                ),
+            enums.length === 0
+              ? null
+              : ts.factory.createImportSpecifier(
+                  undefined,
+                  ts.factory.createIdentifier("enumType")
+                ),
+          ])
+        )
       ),
       ts.factory.createStringLiteral("@nexus/schema")
     ),
   ];
+
+  const msgASTs = msgs.map((m) => new MessageAST(m, params));
+  const enumASTs = enums.map((e) => new EnumAST(e, params));
 
   const unwrapFuncs = uniq(
     compact(msgASTs.flatMap((m) => m.fields.map((f) => f.unwrapFunc))),
@@ -43,7 +55,11 @@ export function printSource(
   ast.push(...compact(uniq(msgASTs, (m) => m.import).map((m) => m.importDecl)));
   ast.push(...compact(msgASTs.map((m) => m.exportDecl)));
 
-  ast = [...ast, ...msgASTs.map((m) => m.build())];
+  ast = [
+    ...ast,
+    ...msgASTs.map((m) => m.build()),
+    ...enumASTs.map((e) => e.build()),
+  ];
 
   const file = ts.factory.updateSourceFile(
     ts.createSourceFile(
@@ -56,6 +72,7 @@ export function printSource(
     ast,
     false
   );
+  const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed });
   const result = printer.printFile(file);
 
   return [
@@ -270,6 +287,7 @@ class FieldAST {
             throw "unreachable";
         }
       case "object":
+      case "enum":
         return "field";
       default:
         const _exhaustiveCheck: never = type; // eslint-disable-line
@@ -296,7 +314,7 @@ class FieldAST {
       );
     }
 
-    if (type.kind === "object") {
+    if (type.kind === "object" || type.kind === "enum") {
       props.push(
         ts.factory.createPropertyAssignment(
           "type",
@@ -346,6 +364,109 @@ class FieldAST {
     );
 
     return ts.factory.createObjectLiteralExpression(props, true);
+  }
+}
+
+class EnumAST {
+  constructor(
+    private readonly proto: ProtoEnum,
+    private readonly params: { importPrefix?: string }
+  ) {}
+
+  get name(): string {
+    return nameWithParent(this.proto);
+  }
+
+  get aliasName(): string {
+    return uniqueImportAlias(`${this.import}/${this.name}`);
+  }
+
+  get qualifiedName(): ts.QualifiedName {
+    return ts.factory.createQualifiedName(
+      this.proto.parent instanceof ProtoFile
+        ? ts.factory.createIdentifier(uniqueImportAlias(this.import))
+        : new MessageAST(this.proto.parent, this.params).qualifiedName,
+      this.proto.name
+    );
+  }
+
+  get import(): string {
+    const { importPrefix } = this.params;
+    return `${importPrefix ? `${importPrefix}/` : "./"}${
+      this.proto.importPath
+    }`;
+  }
+
+  get importDecl(): ts.ImportDeclaration | null {
+    if (!(this.proto.parent instanceof ProtoFile)) return null;
+
+    return createImportAllWithAliastDecl(this.import);
+  }
+
+  get exportDecl(): ts.Statement | null {
+    return ts.factory.createTypeAliasDeclaration(
+      undefined,
+      [ts.factory.createToken(ts.SyntaxKind.ExportKeyword)],
+      this.aliasName,
+      undefined,
+      ts.factory.createTypeReferenceNode(this.qualifiedName)
+    );
+  }
+
+  public build(): ts.Statement {
+    return ts.factory.createVariableStatement(
+      [ts.factory.createToken(ts.SyntaxKind.ExportKeyword)],
+      ts.factory.createVariableDeclarationList(
+        [
+          ts.factory.createVariableDeclaration(
+            this.name,
+            undefined,
+            undefined,
+            this.buildEnumType()
+          ),
+        ],
+        ts.NodeFlags.Const
+      )
+    );
+  }
+
+  private buildEnumType(): ts.Expression {
+    const { name, description } = this.proto;
+
+    return ts.factory.createCallExpression(
+      ts.factory.createIdentifier("enumType"),
+      undefined,
+      [
+        ts.factory.createObjectLiteralExpression(
+          [
+            ts.factory.createPropertyAssignment(
+              "name",
+              ts.factory.createStringLiteral(name)
+            ),
+            ts.factory.createPropertyAssignment(
+              "description",
+              ts.factory.createStringLiteral(description)
+            ),
+            ts.factory.createPropertyAssignment(
+              "members",
+              ts.factory.createObjectLiteralExpression(
+                this.proto.values.map((ev) =>
+                  ts.factory.createPropertyAssignment(
+                    ev.name,
+                    ts.factory.createNumericLiteral(ev.tagNumber)
+                  )
+                )
+              )
+            ),
+            // ts.factory.createPropertyAssignment(
+            //   "sourceType",
+            //   this.sourceTypeExpression,
+            // ),
+          ],
+          true
+        ),
+      ]
+    );
   }
 }
 
@@ -436,11 +557,11 @@ function createImportAllWithAliastDecl(path: string): ts.ImportDeclaration {
   );
 }
 
-function nameWithParent(typ: ProtoMessage): string {
+function nameWithParent(typ: ProtoMessage | ProtoEnum): string {
   let name = "";
-  let t: ProtoMessage | ProtoFile = typ;
+  let t: ProtoMessage | ProtoEnum | ProtoFile = typ;
   for (;;) {
-    if (t instanceof ProtoMessage) {
+    if (t instanceof ProtoMessage || t instanceof ProtoEnum) {
       name = `${t.name}${name}`;
       t = t.parent;
     } else {
@@ -459,6 +580,10 @@ export type ItemType =
     }
   | {
       kind: "object";
+      type: string;
+    }
+  | {
+      kind: "enum";
       type: string;
     };
 
@@ -506,7 +631,11 @@ function convertItemType(f: ProtoField): ItemType {
     case FieldDescriptorProto.Type.TYPE_BYTES:
       throw "not supported";
     case FieldDescriptorProto.Type.TYPE_ENUM:
-      throw "not implemented";
+      return {
+        kind: "enum",
+        // FIXME
+        type: f.descriptor.getTypeName()!.split(".").slice(-1)[0]!,
+      };
     case FieldDescriptorProto.Type.TYPE_MESSAGE:
       switch (f.descriptor.getTypeName()) {
         case ".google.protobuf.Any":

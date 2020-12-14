@@ -12,19 +12,19 @@ export const User = objectType({
     definition(t) {
         t.nonNull.int("id", {
             description: "Required. Output only. ID.",
-            resolve(root) { return root.getId(); },
+            resolve(root) { return root.getId(); }
         });
         t.nonNull.string("name", {
             description: "Required. User's login name.",
-            resolve(root) { return root.getName(); },
+            resolve(root) { return root.getName(); }
         });
         t.nonNull.list.field("posts", {
             description: "Required. Posts that are written by the user.",
             type: "Post",
-            resolve(root) { return root.getPostsList(); },
+            resolve(root) { return root.getPostsList(); }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$hello$hello_pb$User" },
+    sourceType: { module: __filename, export: "$$testapis$node$lib$hello$hello_pb$User" }
 });
 export const Post = objectType({
     name: "Post",
@@ -32,20 +32,20 @@ export const Post = objectType({
     definition(t) {
         t.nonNull.int("id", {
             description: "Required. Output only. ID.",
-            resolve(root) { return root.getId(); },
+            resolve(root) { return root.getId(); }
         });
         t.nonNull.string("title", {
             description: "Required. Article.",
-            resolve(root) { return root.getTitle(); },
+            resolve(root) { return root.getTitle(); }
         });
         t.nonNull.string("body", {
             description: "Required. Body.",
-            resolve(root) { return root.getBody(); },
+            resolve(root) { return root.getBody(); }
         });
         t.nonNull.dateTime("publishedTime", {
             description: "Required. Output only. Published time.",
-            resolve(root) { return proto_nexus.timestampToDate(root.getPublishedTime()); },
+            resolve(root) { return proto_nexus.timestampToDate(root.getPublishedTime()); }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$hello$hello_pb$Post" },
+    sourceType: { module: __filename, export: "$$testapis$node$lib$hello$hello_pb$Post" }
 });

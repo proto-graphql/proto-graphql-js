@@ -3,6 +3,8 @@ import {
   DescriptorProto,
   SourceCodeInfo,
   FileDescriptorProto,
+  EnumDescriptorProto,
+  EnumValueDescriptorProto,
 } from "google-protobuf/google/protobuf/descriptor_pb";
 
 export class ProtoFile {
@@ -18,7 +20,15 @@ export class ProtoFile {
       .map((d, i) => new ProtoMessage(d, this, i));
   }
 
-  public findComments(d: ProtoMessage | ProtoField): Comments {
+  get enums(): ProtoEnum[] {
+    return this.descriptor
+      .getEnumTypeList()
+      .map((d, i) => new ProtoEnum(d, this, i));
+  }
+
+  public findComments(
+    d: ProtoMessage | ProtoField | ProtoEnum | ProtoEnumValue
+  ): Comments {
     const l = this.findSourceLocation(d);
     if (l === null) return {};
     return {
@@ -31,10 +41,15 @@ export class ProtoFile {
   }
 
   private findSourceLocation(
-    d: ProtoMessage | ProtoField
+    d: ProtoMessage | ProtoField | ProtoEnum | ProtoEnumValue
   ): SourceCodeInfo.Location | null {
     let paths: number[] = [];
-    let desc: ProtoFile | ProtoMessage | ProtoField = d;
+    let desc:
+      | ProtoFile
+      | ProtoMessage
+      | ProtoField
+      | ProtoEnum
+      | ProtoEnumValue = d;
 
     for (;;) {
       if (desc instanceof ProtoFile) {
@@ -53,14 +68,30 @@ export class ProtoFile {
         paths.push(desc.index);
         desc = desc.parent;
         if (desc instanceof ProtoFile) {
-          paths.push(4);
+          paths.push(4); // FileDescriptorProto.message_type
         } else if (desc instanceof ProtoMessage) {
-          paths.push(3);
+          paths.push(3); // DescriptorProto.nested_type
+        } else {
+          const _exhaustiveCheck: never = desc;
         }
       } else if (desc instanceof ProtoField) {
         paths.push(desc.index);
         desc = desc.parent;
-        paths.push(2);
+        paths.push(2); // DescriptorProto.field
+      } else if (desc instanceof ProtoEnum) {
+        paths.push(desc.index);
+        desc = desc.parent;
+        if (desc instanceof ProtoFile) {
+          paths.push(5); // FileDescriptorProto.enum_type
+        } else if (desc instanceof ProtoMessage) {
+          paths.push(4); // DescriptorProto.enum_type
+        } else {
+          const _exhaustiveCheck: never = desc;
+        }
+      } else if (desc instanceof ProtoEnumValue) {
+        paths.push(desc.index);
+        desc = desc.parent;
+        paths.push(2); // EnumDescriptorProto.value
       } else {
         const _exhaustiveCheck: never = desc;
       }
@@ -103,6 +134,12 @@ export class ProtoMessage {
     return this.descriptor
       .getNestedTypeList()
       .map((d, i) => new ProtoMessage(d, this, i));
+  }
+
+  get enums(): ProtoEnum[] {
+    return this.descriptor
+      .getEnumTypeList()
+      .map((d, i) => new ProtoEnum(d, this, i));
   }
 
   get fields(): ProtoField[] {
@@ -163,4 +200,78 @@ interface Comments {
   leadingComments?: string;
   trailingComments?: string;
   leadingDetachedCommentsList?: string[];
+}
+
+export class ProtoEnum {
+  constructor(
+    readonly descriptor: EnumDescriptorProto,
+    readonly parent: ProtoFile | ProtoMessage,
+    readonly index: number
+  ) {}
+
+  get name(): string {
+    return this.descriptor.getName()!;
+  }
+
+  get description(): string {
+    return this.comments?.leadingComments || "";
+  }
+
+  get importPath(): string {
+    return this.file.importPath;
+  }
+
+  get comments(): Comments {
+    return this.file.findComments(this);
+  }
+
+  get file(): ProtoFile {
+    let parent = this.parent;
+    for (;;) {
+      if (parent instanceof ProtoFile) return parent;
+      parent = parent.parent;
+    }
+  }
+
+  get values(): ProtoEnumValue[] {
+    return this.descriptor
+      .getValueList()
+      .map((d, i) => new ProtoEnumValue(d, this, i));
+  }
+}
+
+export class ProtoEnumValue {
+  constructor(
+    readonly descriptor: EnumValueDescriptorProto,
+    readonly parent: ProtoEnum,
+    readonly index: number
+  ) {}
+
+  get name(): string {
+    return this.descriptor.getName()!;
+  }
+
+  get tagNumber(): number {
+    return this.descriptor.getNumber()!;
+  }
+
+  get description(): string {
+    return this.comments?.leadingComments || "";
+  }
+
+  get importPath(): string {
+    return this.file.importPath;
+  }
+
+  get comments(): Comments {
+    return this.file.findComments(this);
+  }
+
+  get file(): ProtoFile {
+    let parent: ProtoFile | ProtoMessage | ProtoEnum = this.parent;
+    for (;;) {
+      if (parent instanceof ProtoFile) return parent;
+      parent = parent.parent;
+    }
+  }
 }

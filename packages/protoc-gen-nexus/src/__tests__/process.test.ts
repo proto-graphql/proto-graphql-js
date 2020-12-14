@@ -71,6 +71,17 @@ test("generates nexus DSL from proto well-known types", () => {
   expect(fileByName["wktypes/well_known_types_pb_nexus.ts"]).toMatchSnapshot();
 });
 
+test("generates nexus DSL from enum proto types", () => {
+  const req = buildCodeGeneratorRequest("enums");
+  const resp = processRequest(req);
+
+  expect(Object.keys(resp.getFileList())).toHaveLength(1);
+
+  const fileByName = getFileMap(resp);
+
+  expect(fileByName["enums/enums_pb_nexus.ts"]).toMatchSnapshot();
+});
+
 test("generates nexus DSL from nested proto types", () => {
   const req = buildCodeGeneratorRequest("nested");
   const resp = processRequest(req);
