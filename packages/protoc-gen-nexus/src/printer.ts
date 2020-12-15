@@ -383,42 +383,6 @@ class EnumAST {
     return nameWithParent(this.proto);
   }
 
-  get aliasName(): string {
-    return uniqueImportAlias(`${this.import}/${this.name}`);
-  }
-
-  get qualifiedName(): ts.QualifiedName {
-    return ts.factory.createQualifiedName(
-      this.proto.parent instanceof ProtoFile
-        ? ts.factory.createIdentifier(uniqueImportAlias(this.import))
-        : new MessageAST(this.proto.parent, this.params).qualifiedName,
-      this.proto.name
-    );
-  }
-
-  get import(): string {
-    const { importPrefix } = this.params;
-    return `${importPrefix ? `${importPrefix}/` : "./"}${
-      this.proto.importPath
-    }`;
-  }
-
-  get importDecl(): ts.ImportDeclaration | null {
-    if (!(this.proto.parent instanceof ProtoFile)) return null;
-
-    return createImportAllWithAliastDecl(this.import);
-  }
-
-  get exportDecl(): ts.Statement | null {
-    return ts.factory.createTypeAliasDeclaration(
-      undefined,
-      [ts.factory.createToken(ts.SyntaxKind.ExportKeyword)],
-      this.aliasName,
-      undefined,
-      ts.factory.createTypeReferenceNode(this.qualifiedName)
-    );
-  }
-
   public build(): ts.Statement {
     return ts.factory.createVariableStatement(
       [ts.factory.createToken(ts.SyntaxKind.ExportKeyword)],

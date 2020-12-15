@@ -217,10 +217,6 @@ export class ProtoEnum {
     return this.comments?.leadingComments || "";
   }
 
-  get importPath(): string {
-    return this.file.importPath;
-  }
-
   get comments(): Comments {
     return this.file.findComments(this);
   }
@@ -257,10 +253,6 @@ export class ProtoEnumValue {
 
   get description(): string {
     return this.comments?.leadingComments || "";
-  }
-
-  get importPath(): string {
-    return this.file.importPath;
   }
 
   get comments(): Comments {
