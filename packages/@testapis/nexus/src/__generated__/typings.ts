@@ -36,7 +36,7 @@ export interface NexusGenInputs {
 
 export interface NexusGenEnums {
   MyEnum1: 2 | 3 | 1 | 0
-  NestedEnum: 2 | 1 | 0
+  ParentMessageNestedEnum: 2 | 1 | 0
 }
 
 export interface NexusGenScalars {
@@ -51,8 +51,8 @@ export interface NexusGenScalars {
 export interface NexusGenObjects {
   Message: $$testapis$node$lib$wktypes$well_known_types_pb$Message;
   MessageWithEnums: $$testapis$node$lib$enums$enums_pb$MessageWithEnums;
-  NestedMessage: $$testapis$node$lib$nested$nested_pb$ParentMessageNestedMessage;
   ParentMessage: $$testapis$node$lib$nested$nested_pb$ParentMessage;
+  ParentMessageNestedMessage: $$testapis$node$lib$nested$nested_pb$ParentMessageNestedMessage;
   Post: $$testapis$node$lib$hello$hello_pb$Post;
   Query: {};
   User: $$testapis$node$lib$hello$hello_pb$User;
@@ -83,13 +83,13 @@ export interface NexusGenFieldTypes {
   MessageWithEnums: { // field return type
     myEnum1: NexusGenEnums['MyEnum1'] | null; // MyEnum1
   }
-  NestedMessage: { // field return type
-    nestedBody: string | null; // String
-  }
   ParentMessage: { // field return type
     body: string | null; // String
-    nested: NexusGenRootTypes['NestedMessage'] | null; // NestedMessage
-    nestedEnum: NexusGenEnums['NestedEnum'] | null; // NestedEnum
+    nested: NexusGenRootTypes['ParentMessageNestedMessage'] | null; // ParentMessageNestedMessage
+    nestedEnum: NexusGenEnums['ParentMessageNestedEnum'] | null; // ParentMessageNestedEnum
+  }
+  ParentMessageNestedMessage: { // field return type
+    nestedBody: string | null; // String
   }
   Post: { // field return type
     body: string; // String!
@@ -122,13 +122,13 @@ export interface NexusGenFieldTypeNames {
   MessageWithEnums: { // field return type name
     myEnum1: 'MyEnum1'
   }
-  NestedMessage: { // field return type name
-    nestedBody: 'String'
-  }
   ParentMessage: { // field return type name
     body: 'String'
-    nested: 'NestedMessage'
-    nestedEnum: 'NestedEnum'
+    nested: 'ParentMessageNestedMessage'
+    nestedEnum: 'ParentMessageNestedEnum'
+  }
+  ParentMessageNestedMessage: { // field return type name
+    nestedBody: 'String'
   }
   Post: { // field return type name
     body: 'String'

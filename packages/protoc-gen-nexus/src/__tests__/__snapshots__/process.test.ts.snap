@@ -63,19 +63,19 @@ export const ParentMessage = objectType({
         });
         t.nullable.field(\\"nested\\", {
             description: \\"\\",
-            type: \\"NestedMessage\\",
+            type: \\"ParentMessageNestedMessage\\",
             resolve(root) { return root.getNested(); }
         });
         t.nullable.field(\\"nestedEnum\\", {
             description: \\"\\",
-            type: \\"NestedEnum\\",
+            type: \\"ParentMessageNestedEnum\\",
             resolve(root) { return root.getNestedEnum(); }
         });
     },
     sourceType: { module: __filename, export: \\"_$nested$nested_pb$ParentMessage\\" }
 });
 export const ParentMessageNestedMessage = objectType({
-    name: \\"NestedMessage\\",
+    name: \\"ParentMessageNestedMessage\\",
     description: \\"\\",
     definition(t) {
         t.nullable.string(\\"nestedBody\\", {

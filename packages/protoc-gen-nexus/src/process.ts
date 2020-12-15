@@ -2,24 +2,24 @@ import {
   CodeGeneratorRequest,
   CodeGeneratorResponse,
 } from "google-protobuf/google/protobuf/compiler/plugin_pb";
-import { FileDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
 import { printSource } from "./printer";
-import { ProtoFile, ProtoMessage, ProtoEnum } from "./protoTypes";
+import { ProtoRegistry } from "./protoTypes";
 
 export const processRequest = (
   req: CodeGeneratorRequest
 ): CodeGeneratorResponse => {
   const resp = new CodeGeneratorResponse();
-  const files: Record<string, FileDescriptorProto> = {};
+
+  const registry = new ProtoRegistry();
 
   for (const fd of req.getProtoFileList()) {
-    files[fd.getName()!] = fd;
+    registry.addFile(fd);
   }
 
   const params = parseParams(req.getParameter());
 
   for (const fn of req.getFileToGenerateList()) {
-    const result = processFileDescriptor(files[fn], params);
+    const result = printSource(registry, registry.findFile(fn), params);
 
     const file = new CodeGeneratorResponse.File();
     file.setContent(result);
@@ -38,28 +38,3 @@ const parseParams = (input: string | undefined) =>
     o[k.replace(/(_[a-z])/g, (g) => g.toUpperCase().replace("_", ""))] = v;
     return o;
   }, {} as Parameters);
-
-function processFileDescriptor(
-  fd: FileDescriptorProto,
-  params: Parameters
-): string {
-  const file = new ProtoFile(fd);
-
-  const [msgs, enums] = collectTypes(file.messages);
-  enums.push(...file.enums);
-
-  return printSource(fd, msgs, enums, params);
-}
-
-function collectTypes(inputs: ProtoMessage[]): [ProtoMessage[], ProtoEnum[]] {
-  const msgs: ProtoMessage[] = [];
-  const enums: ProtoEnum[] = [];
-
-  for (const input of inputs) {
-    const [childMsgs, childEnums] = collectTypes(input.messages);
-    msgs.push(input, ...childMsgs);
-    enums.push(...input.enums, ...childEnums);
-  }
-
-  return [msgs, enums];
-}

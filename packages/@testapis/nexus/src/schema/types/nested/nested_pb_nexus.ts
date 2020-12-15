@@ -15,19 +15,19 @@ export const ParentMessage = objectType({
         });
         t.nullable.field("nested", {
             description: "",
-            type: "NestedMessage",
+            type: "ParentMessageNestedMessage",
             resolve(root) { return root.getNested(); }
         });
         t.nullable.field("nestedEnum", {
             description: "",
-            type: "NestedEnum",
+            type: "ParentMessageNestedEnum",
             resolve(root) { return root.getNestedEnum(); }
         });
     },
     sourceType: { module: __filename, export: "$$testapis$node$lib$nested$nested_pb$ParentMessage" }
 });
 export const ParentMessageNestedMessage = objectType({
-    name: "NestedMessage",
+    name: "ParentMessageNestedMessage",
     description: "",
     definition(t) {
         t.nullable.string("nestedBody", {
@@ -38,7 +38,7 @@ export const ParentMessageNestedMessage = objectType({
     sourceType: { module: __filename, export: "$$testapis$node$lib$nested$nested_pb$ParentMessageNestedMessage" }
 });
 export const ParentMessageNestedEnum = enumType({
-    name: "NestedEnum",
+    name: "ParentMessageNestedEnum",
     description: "",
     members: [
         {

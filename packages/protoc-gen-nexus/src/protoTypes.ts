@@ -7,8 +7,66 @@ import {
   EnumValueDescriptorProto,
 } from "google-protobuf/google/protobuf/descriptor_pb";
 
+export class ProtoRegistry {
+  private files: Record<string, ProtoFile>;
+  private types: Record<string, ProtoMessage | ProtoEnum>;
+
+  constructor() {
+    this.types = {};
+    this.files = {};
+  }
+
+  public findFile(name: string): ProtoFile {
+    return this.files[name];
+  }
+
+  public findByFieldDescriptor(
+    desc: FieldDescriptorProto
+  ): ProtoMessage | ProtoEnum {
+    return this.types[desc.getTypeName()!.replace(/^\./, "")];
+  }
+
+  public addFile(fd: FileDescriptorProto) {
+    const file = new ProtoFile(fd);
+    this.files[fd.getName()!] = file;
+
+    const [msgs, enums] = this.collectTypes(file);
+    for (const m of msgs) {
+      this.types[m.qualifiedName] = m;
+    }
+    for (const e of enums) {
+      this.types[e.qualifiedName] = e;
+    }
+  }
+
+  public collectTypes(file: ProtoFile): [ProtoMessage[], ProtoEnum[]] {
+    const [msgs, enums] = [file.messages, file.enums];
+    const [childMsgs, childEnums] = this.collectTypesFromMessage(file.messages);
+    msgs.push(...childMsgs);
+    enums.push(...childEnums);
+    return [msgs, enums];
+  }
+
+  private collectTypesFromMessage(
+    inputs: ProtoMessage[]
+  ): [ProtoMessage[], ProtoEnum[]] {
+    const msgs: ProtoMessage[] = [];
+    const enums: ProtoEnum[] = [];
+
+    for (const input of inputs) {
+      const [childMsgs, childEnums] = this.collectTypesFromMessage(
+        input.messages
+      );
+      msgs.push(...input.messages, ...childMsgs);
+      enums.push(...input.enums, ...childEnums);
+    }
+
+    return [msgs, enums];
+  }
+}
+
 export class ProtoFile {
-  constructor(private readonly descriptor: FileDescriptorProto) {}
+  constructor(readonly descriptor: FileDescriptorProto) {}
 
   get importPath(): string {
     return `${this.descriptor.getName()!.split(".").slice(0, -1).join(".")}_pb`;
@@ -18,6 +76,10 @@ export class ProtoFile {
     return this.descriptor
       .getMessageTypeList()
       .map((d, i) => new ProtoMessage(d, this, i));
+  }
+
+  get package(): string {
+    return this.descriptor.getPackage()!;
   }
 
   get enums(): ProtoEnum[] {
@@ -108,6 +170,17 @@ export class ProtoMessage {
 
   get name(): string {
     return this.descriptor.getName()!;
+  }
+
+  /**
+   * @example "google.protobuf.Field.Kind"
+   */
+  get qualifiedName(): string {
+    return `${
+      this.parent instanceof ProtoFile
+        ? this.parent.package
+        : this.parent.qualifiedName
+    }.${this.descriptor.getName()}`;
   }
 
   get description(): string {
@@ -211,6 +284,17 @@ export class ProtoEnum {
 
   get name(): string {
     return this.descriptor.getName()!;
+  }
+
+  /**
+   * @example "google.protobuf.Field.Kind"
+   */
+  get qualifiedName(): string {
+    return `${
+      this.parent instanceof ProtoFile
+        ? this.parent.package
+        : this.parent.qualifiedName
+    }.${this.descriptor.getName()}`;
   }
 
   get description(): string {
