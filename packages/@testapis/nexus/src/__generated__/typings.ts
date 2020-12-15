@@ -36,6 +36,7 @@ export interface NexusGenInputs {
 
 export interface NexusGenEnums {
   MyEnum1: 2 | 3 | 1 | 0
+  NestedEnum: 2 | 1 | 0
 }
 
 export interface NexusGenScalars {
@@ -88,6 +89,7 @@ export interface NexusGenFieldTypes {
   ParentMessage: { // field return type
     body: string | null; // String
     nested: NexusGenRootTypes['NestedMessage'] | null; // NestedMessage
+    nestedEnum: NexusGenEnums['NestedEnum'] | null; // NestedEnum
   }
   Post: { // field return type
     body: string; // String!
@@ -126,6 +128,7 @@ export interface NexusGenFieldTypeNames {
   ParentMessage: { // field return type name
     body: 'String'
     nested: 'NestedMessage'
+    nestedEnum: 'NestedEnum'
   }
   Post: { // field return type name
     body: 'String'

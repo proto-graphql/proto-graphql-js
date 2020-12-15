@@ -12,6 +12,9 @@ export class ParentMessage extends jspb.Message {
   getNested(): ParentMessage.NestedMessage | undefined;
   setNested(value?: ParentMessage.NestedMessage): void;
 
+  getNestedEnum(): ParentMessage.NestedEnumMap[keyof ParentMessage.NestedEnumMap];
+  setNestedEnum(value: ParentMessage.NestedEnumMap[keyof ParentMessage.NestedEnumMap]): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): ParentMessage.AsObject;
   static toObject(includeInstance: boolean, msg: ParentMessage): ParentMessage.AsObject;
@@ -26,6 +29,7 @@ export namespace ParentMessage {
   export type AsObject = {
     body: string,
     nested?: ParentMessage.NestedMessage.AsObject,
+    nestedEnum: ParentMessage.NestedEnumMap[keyof ParentMessage.NestedEnumMap],
   }
 
   export class NestedMessage extends jspb.Message {
@@ -47,5 +51,13 @@ export namespace ParentMessage {
       nestedBody: string,
     }
   }
+
+  export interface NestedEnumMap {
+    NESTED_ENUM_UNSPECIFIED: 0;
+    FOO: 1;
+    BAR: 2;
+  }
+
+  export const NestedEnum: NestedEnumMap;
 }
 

@@ -437,7 +437,7 @@ class EnumAST {
   }
 
   private buildEnumType(): ts.Expression {
-    const { name, description } = this.proto;
+    const { description } = this.proto;
 
     const createMember = (ev: ProtoEnumValue) =>
       ts.factory.createObjectLiteralExpression(
@@ -468,7 +468,7 @@ class EnumAST {
           [
             ts.factory.createPropertyAssignment(
               "name",
-              ts.factory.createStringLiteral(name)
+              ts.factory.createStringLiteral(this.name)
             ),
             ts.factory.createPropertyAssignment(
               "description",
