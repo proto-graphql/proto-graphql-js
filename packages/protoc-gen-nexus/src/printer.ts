@@ -168,8 +168,6 @@ class MessageAST {
   }
 
   private buildObjectType(): ts.Expression {
-    const { name, description } = this.msg;
-
     return ts.factory.createCallExpression(
       ts.factory.createIdentifier("objectType"),
       undefined,
@@ -178,11 +176,11 @@ class MessageAST {
           [
             ts.factory.createPropertyAssignment(
               "name",
-              ts.factory.createStringLiteral(name)
+              ts.factory.createStringLiteral(this.name)
             ),
             ts.factory.createPropertyAssignment(
               "description",
-              ts.factory.createStringLiteral(description)
+              ts.factory.createStringLiteral(this.msg.description)
             ),
             // TODO: "description" property
             ts.factory.createMethodDeclaration(

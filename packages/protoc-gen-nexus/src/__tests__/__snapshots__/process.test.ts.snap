@@ -75,7 +75,7 @@ export const ParentMessage = objectType({
     sourceType: { module: __filename, export: \\"_$nested$nested_pb$ParentMessage\\" }
 });
 export const ParentMessageNestedMessage = objectType({
-    name: \\"NestedMessage\\",
+    name: \\"ParentMessageNestedMessage\\",
     description: \\"\\",
     definition(t) {
         t.nullable.string(\\"nestedBody\\", {
