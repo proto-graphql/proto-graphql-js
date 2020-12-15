@@ -4,6 +4,7 @@
  */
 
 
+import { $$testapis$node$lib$enums$enums_pb$MessageWithEnums } from "./../schema/types/enums/enums_pb_nexus"
 import { $$testapis$node$lib$hello$hello_pb$User, $$testapis$node$lib$hello$hello_pb$Post } from "./../schema/types/hello/hello_pb_nexus"
 import { $$testapis$node$lib$nested$nested_pb$ParentMessage, $$testapis$node$lib$nested$nested_pb$ParentMessageNestedMessage } from "./../schema/types/nested/nested_pb_nexus"
 import { $$testapis$node$lib$wktypes$well_known_types_pb$Message } from "./../schema/types/wktypes/well_known_types_pb_nexus"
@@ -34,6 +35,8 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  MyEnum1: 2 | 3 | 1 | 0
+  NestedEnum: 2 | 1 | 0
 }
 
 export interface NexusGenScalars {
@@ -47,6 +50,7 @@ export interface NexusGenScalars {
 
 export interface NexusGenObjects {
   Message: $$testapis$node$lib$wktypes$well_known_types_pb$Message;
+  MessageWithEnums: $$testapis$node$lib$enums$enums_pb$MessageWithEnums;
   NestedMessage: $$testapis$node$lib$nested$nested_pb$ParentMessageNestedMessage;
   ParentMessage: $$testapis$node$lib$nested$nested_pb$ParentMessage;
   Post: $$testapis$node$lib$hello$hello_pb$Post;
@@ -62,7 +66,7 @@ export interface NexusGenUnions {
 
 export type NexusGenRootTypes = NexusGenObjects
 
-export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
+export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
   Message: { // field return type
@@ -76,12 +80,16 @@ export interface NexusGenFieldTypes {
     uint32Value: number | null; // Int
     uint64Value: number | null; // Int
   }
+  MessageWithEnums: { // field return type
+    myEnum1: NexusGenEnums['MyEnum1'] | null; // MyEnum1
+  }
   NestedMessage: { // field return type
     nestedBody: string | null; // String
   }
   ParentMessage: { // field return type
     body: string | null; // String
     nested: NexusGenRootTypes['NestedMessage'] | null; // NestedMessage
+    nestedEnum: NexusGenEnums['NestedEnum'] | null; // NestedEnum
   }
   Post: { // field return type
     body: string; // String!
@@ -111,12 +119,16 @@ export interface NexusGenFieldTypeNames {
     uint32Value: 'Int'
     uint64Value: 'Int'
   }
+  MessageWithEnums: { // field return type name
+    myEnum1: 'MyEnum1'
+  }
   NestedMessage: { // field return type name
     nestedBody: 'String'
   }
   ParentMessage: { // field return type name
     body: 'String'
     nested: 'NestedMessage'
+    nestedEnum: 'NestedEnum'
   }
   Post: { // field return type name
     body: 'String'
@@ -147,7 +159,7 @@ export type NexusGenObjectNames = keyof NexusGenObjects;
 
 export type NexusGenInputNames = never;
 
-export type NexusGenEnumNames = never;
+export type NexusGenEnumNames = keyof NexusGenEnums;
 
 export type NexusGenInterfaceNames = never;
 

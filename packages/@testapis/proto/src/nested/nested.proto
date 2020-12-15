@@ -7,6 +7,13 @@ message ParentMessage {
     string nested_body = 1;
   }
 
+  enum NestedEnum {
+    NESTED_ENUM_UNSPECIFIED = 0;
+    FOO = 1;
+    BAR = 2;
+  }
+
   string body = 1;
   NestedMessage nested = 2;
+  NestedEnum nested_enum = 3;
 }

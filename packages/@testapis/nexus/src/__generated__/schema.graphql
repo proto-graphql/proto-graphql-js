@@ -38,6 +38,28 @@ type Message {
 }
 
 """"""
+type MessageWithEnums {
+  """"""
+  myEnum1: MyEnum1
+}
+
+""""""
+enum MyEnum1 {
+  """This is Bar."""
+  BAR
+  BAZ
+  FOO
+  MY_ENUM_1_UNSPECIRED
+}
+
+""""""
+enum NestedEnum {
+  BAR
+  FOO
+  NESTED_ENUM_UNSPECIFIED
+}
+
+""""""
 type NestedMessage {
   """"""
   nestedBody: String
@@ -50,6 +72,9 @@ type ParentMessage {
 
   """"""
   nested: NestedMessage
+
+  """"""
+  nestedEnum: NestedEnum
 }
 
 """Post entity"""

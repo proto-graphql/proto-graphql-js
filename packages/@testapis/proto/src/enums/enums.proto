@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package testapi.nested;
+
+message MessageWithEnums {
+  MyEnum1 my_enum_1 = 1;
+}
+
+enum MyEnum1 {
+  MY_ENUM_1_UNSPECIRED = 0;
+  FOO = 1;
+  // This is Bar.
+  BAR = 2;
+  BAZ = 3;
+}
