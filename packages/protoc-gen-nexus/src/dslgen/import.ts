@@ -2,10 +2,10 @@ import ts from "typescript";
 import { ProtoEnum, ProtoMessage } from "../protoTypes";
 import { getUnwrapFunc } from "./unwrap";
 import {
-  compact,
   createImportAllWithAliastDecl,
+  onlyNonNull,
+  onlyUnique,
   protoImportPath,
-  uniq,
 } from "./util";
 
 /**
@@ -25,7 +25,7 @@ export function createImportNexusDecl(
       false,
       undefined,
       ts.factory.createNamedImports(
-        compact([
+        [
           msgs.length === 0
             ? null
             : ts.factory.createImportSpecifier(
@@ -38,7 +38,7 @@ export function createImportNexusDecl(
                 undefined,
                 ts.factory.createIdentifier("enumType")
               ),
-        ])
+        ].filter(onlyNonNull())
       )
     ),
     ts.factory.createStringLiteral("@nexus/schema")
@@ -54,13 +54,11 @@ export function createImportNexusDecl(
 export function createImportUnwrapFuncDecls(
   msgs: ReadonlyArray<ProtoMessage>
 ): ts.ImportDeclaration[] {
-  const unwrapFuncImports = uniq(
-    msgs
-      .flatMap((m) => m.fields)
-      .flatMap((f) => getUnwrapFunc(f)?.imports ?? [])
-  );
-
-  return unwrapFuncImports.map(createImportAllWithAliastDecl);
+  return msgs
+    .flatMap((m) => m.fields)
+    .flatMap((f) => getUnwrapFunc(f)?.imports ?? [])
+    .filter(onlyUnique())
+    .map(createImportAllWithAliastDecl);
 }
 
 /**
@@ -73,7 +71,8 @@ export function createImportProtoDecls(
   msgs: ReadonlyArray<ProtoMessage>,
   opts: { importPrefix?: string }
 ): ts.ImportDeclaration[] {
-  return uniq(msgs.map((m) => protoImportPath(m, opts))).map(
-    createImportAllWithAliastDecl
-  );
+  return msgs
+    .map((m) => protoImportPath(m, opts))
+    .filter(onlyUnique())
+    .map(createImportAllWithAliastDecl);
 }

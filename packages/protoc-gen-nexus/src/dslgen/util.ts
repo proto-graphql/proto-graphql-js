@@ -93,21 +93,18 @@ export function uniqueImportAlias(path: string) {
     .replace(/-/g, "_");
 }
 
-export function compact<T>(input: T[]): NonNullable<T>[] {
-  return input.filter((v): v is NonNullable<T> => v != null);
+export function onlyNonNull<T>(): (t: T) => t is NonNullable<T> {
+  return (t): t is NonNullable<T> => t != null;
 }
 
-export function uniq<T, V>(input: T[], f?: (t: T) => V) {
-  const out = [] as T[];
+export function onlyUnique<T, V>(f?: (t: T) => V): (t: T) => boolean {
   const set = new Set<T | V>();
+  return (t) => {
+    const key = f ? f(t) : t;
 
-  for (const v of input) {
-    const key = f ? f(v) : v;
-    if (!set.has(key)) {
-      set.add(key);
-      out.push(v);
-    }
-  }
+    if (set.has(key)) return false;
 
-  return out;
+    set.add(key);
+    return true;
+  };
 }

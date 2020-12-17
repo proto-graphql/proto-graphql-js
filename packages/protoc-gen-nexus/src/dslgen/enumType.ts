@@ -1,6 +1,6 @@
 import ts from "typescript";
 import { ProtoEnum, ProtoEnumValue } from "../protoTypes";
-import { createDslExportConstStmt, gqlTypeName, compact } from "./util";
+import { createDslExportConstStmt, gqlTypeName, onlyNonNull } from "./util";
 
 /**
  * @example
@@ -61,7 +61,7 @@ function createEnumTypeDslStmt(en: ProtoEnum): ts.Statement {
 
 function createEnumValueExpr(ev: ProtoEnumValue): ts.Expression {
   return ts.factory.createObjectLiteralExpression(
-    compact([
+    [
       ts.factory.createPropertyAssignment(
         "name",
         ts.factory.createStringLiteral(ev.name)
@@ -76,7 +76,7 @@ function createEnumValueExpr(ev: ProtoEnumValue): ts.Expression {
         "value",
         ts.factory.createNumericLiteral(ev.tagNumber)
       ),
-    ]),
+    ].filter(onlyNonNull()),
     true // multiline
   );
 }

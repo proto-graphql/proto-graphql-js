@@ -1,6 +1,10 @@
 import ts from "typescript";
 import { ProtoMessage } from "../protoTypes";
-import { compact, createProtoQualifiedName, protoExportAlias } from "./util";
+import {
+  createProtoQualifiedName,
+  onlyNonNull,
+  protoExportAlias,
+} from "./util";
 
 /**
  * @example
@@ -12,7 +16,9 @@ export function createReExportProtoStmts(
   types: ReadonlyArray<ProtoMessage>,
   opts: { importPrefix?: string }
 ): ts.Statement[] {
-  return compact(types.map((t) => createReExportProtoStmt(t, opts)));
+  return types
+    .map((t) => createReExportProtoStmt(t, opts))
+    .filter(onlyNonNull());
 }
 
 /**
