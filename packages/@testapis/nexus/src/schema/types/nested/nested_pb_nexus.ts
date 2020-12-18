@@ -9,14 +9,14 @@ export const ParentMessage = objectType({
     name: "ParentMessage",
     description: "",
     definition(t) {
-        t.nullable.string("body", {
+        t.nonNull.string("body", {
             description: "",
             resolve(root) { return root.getBody(); }
         });
         t.nullable.field("nested", {
             description: "",
             type: "ParentMessageNestedMessage",
-            resolve(root) { return root.getNested(); }
+            resolve(root) { return root.getNested() ?? null; }
         });
         t.nullable.field("nestedEnum", {
             description: "",
@@ -30,7 +30,7 @@ export const ParentMessageNestedMessage = objectType({
     name: "ParentMessageNestedMessage",
     description: "",
     definition(t) {
-        t.nullable.string("nestedBody", {
+        t.nonNull.string("nestedBody", {
             description: "",
             resolve(root) { return root.getNestedBody(); }
         });

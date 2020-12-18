@@ -16,10 +16,10 @@ type Hello {
   optionalPrimitivesList: Primitives
 
   """Required."""
-  requiredPrimitives: Primitives
+  requiredPrimitives: Primitives!
 
   """Required."""
-  requiredPrimitivesList: [Primitives]
+  requiredPrimitivesList: [Primitives]!
 }
 
 """"""
@@ -70,7 +70,7 @@ enum MyEnum1 {
 """"""
 type ParentMessage {
   """"""
-  body: String
+  body: String!
 
   """"""
   nested: ParentMessageNestedMessage
@@ -89,52 +89,52 @@ enum ParentMessageNestedEnum {
 """"""
 type ParentMessageNestedMessage {
   """"""
-  nestedBody: String
+  nestedBody: String!
 }
 
 """"""
 type Primitives {
   """"""
-  requiredBoolValue: Boolean
+  requiredBoolValue: Boolean!
 
   """"""
-  requiredDoubleValue: Float
+  requiredDoubleValue: Float!
 
   """"""
-  requiredFixed32Value: Int
+  requiredFixed32Value: Int!
 
   """"""
-  requiredFixed64Value: Int
+  requiredFixed64Value: Int!
 
   """"""
-  requiredFloatValue: Float
+  requiredFloatValue: Float!
 
   """"""
-  requiredInt32Value: Int
+  requiredInt32Value: Int!
 
   """"""
-  requiredInt64Value: Int
+  requiredInt64Value: Int!
 
   """"""
-  requiredSfixed32Value: Int
+  requiredSfixed32Value: Int!
 
   """"""
-  requiredSfixed64Value: Int
+  requiredSfixed64Value: Int!
 
   """"""
-  requiredSint32Value: Int
+  requiredSint32Value: Int!
 
   """"""
-  requiredSint64Value: Int
+  requiredSint64Value: Int!
 
   """"""
-  requiredStringValue: String
+  requiredStringValue: String!
 
   """"""
-  requiredUint32Value: Int
+  requiredUint32Value: Int!
 
   """"""
-  requiredUint64Value: Int
+  requiredUint64Value: Int!
 }
 
 type Query {

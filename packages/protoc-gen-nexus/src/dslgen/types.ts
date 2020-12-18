@@ -64,26 +64,22 @@ export function detectGqlType(f: ProtoField, reg: ProtoRegistry): GqlType {
   if (f.isList()) {
     return {
       kind: "list",
-      type: detectGqlItemType(f, reg, false),
-      nullable: f.isNullable(), // TODO
+      type: detectGqlItemType(f, reg),
+      nullable: false,
     };
   }
 
-  return detectGqlItemType(f, reg, f.isNullable());
+  return detectGqlItemType(f, reg);
 }
 
-function detectGqlItemType(
-  f: ProtoField,
-  reg: ProtoRegistry,
-  nullable: boolean
-): GqlItemType {
+function detectGqlItemType(f: ProtoField, reg: ProtoRegistry): GqlItemType {
   const pbtype = f.descriptor.getType()!;
   switch (pbtype) {
     case FieldDescriptorProto.Type.TYPE_STRING:
-      return { kind: "scalar", type: "String", nullable };
+      return { kind: "scalar", type: "String", nullable: false };
     case FieldDescriptorProto.Type.TYPE_DOUBLE:
     case FieldDescriptorProto.Type.TYPE_FLOAT:
-      return { kind: "scalar", type: "Float", nullable };
+      return { kind: "scalar", type: "Float", nullable: false };
     case FieldDescriptorProto.Type.TYPE_INT64:
     case FieldDescriptorProto.Type.TYPE_UINT64:
     case FieldDescriptorProto.Type.TYPE_INT32:
@@ -94,9 +90,9 @@ function detectGqlItemType(
     case FieldDescriptorProto.Type.TYPE_SFIXED64:
     case FieldDescriptorProto.Type.TYPE_SINT32:
     case FieldDescriptorProto.Type.TYPE_SINT64:
-      return { kind: "scalar", type: "Int", nullable };
+      return { kind: "scalar", type: "Int", nullable: false };
     case FieldDescriptorProto.Type.TYPE_BOOL:
-      return { kind: "scalar", type: "Boolean", nullable };
+      return { kind: "scalar", type: "Boolean", nullable: false };
     case FieldDescriptorProto.Type.TYPE_GROUP:
       throw "not supported";
     case FieldDescriptorProto.Type.TYPE_BYTES:
@@ -105,7 +101,7 @@ function detectGqlItemType(
       return {
         kind: "enum",
         type: gqlTypeName(reg.findByFieldDescriptor(f.descriptor)),
-        nullable,
+        nullable: f.isNullable(),
       };
     case FieldDescriptorProto.Type.TYPE_MESSAGE:
       switch (f.descriptor.getTypeName()) {
@@ -115,7 +111,7 @@ function detectGqlItemType(
           return {
             kind: "scalar",
             type: "Boolean",
-            nullable,
+            nullable: f.isNullable(),
           };
         case ".google.protobuf.BytesValue":
           throw "not supported";
@@ -124,7 +120,7 @@ function detectGqlItemType(
           return {
             kind: "scalar",
             type: "Float",
-            nullable,
+            nullable: f.isNullable(),
           };
         case ".google.protobuf.Duration":
           throw "not implemented";
@@ -135,25 +131,25 @@ function detectGqlItemType(
           return {
             kind: "scalar",
             type: "Int",
-            nullable,
+            nullable: f.isNullable(),
           };
         case ".google.protobuf.StringValue":
           return {
             kind: "scalar",
             type: "String",
-            nullable,
+            nullable: f.isNullable(),
           };
         case ".google.protobuf.Timestamp":
           return {
             kind: "scalar",
             type: "DateTime",
-            nullable,
+            nullable: f.isNullable(),
           };
         default:
           return {
             kind: "object",
             type: gqlTypeName(reg.findByFieldDescriptor(f.descriptor)),
-            nullable,
+            nullable: f.isNullable(),
           };
       }
     default:

@@ -229,6 +229,17 @@ function createFieldOptionExpr(
     undefined,
     undefined
   );
+  if (type.kind === "object") {
+    if (type.nullable) {
+      resolverRet = ts.factory.createBinaryExpression(
+        resolverRet,
+        ts.SyntaxKind.QuestionQuestionToken,
+        ts.factory.createToken(ts.SyntaxKind.NullKeyword)
+      );
+    } else {
+      resolverRet = ts.factory.createNonNullExpression(resolverRet);
+    }
+  }
 
   const unwrapFunc = getUnwrapFunc(field);
   if (unwrapFunc !== null) {

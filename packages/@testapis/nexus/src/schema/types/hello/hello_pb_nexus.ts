@@ -9,17 +9,17 @@ export const Hello = objectType({
     name: "Hello",
     description: "",
     definition(t) {
-        t.nullable.field("requiredPrimitives", {
+        t.nonNull.field("requiredPrimitives", {
             description: "Required.",
             type: "Primitives",
-            resolve(root) { return root.getRequiredPrimitives(); }
+            resolve(root) { return root.getRequiredPrimitives()!; }
         });
         t.nullable.field("optionalPrimitives", {
             description: "Optional.",
             type: "Primitives",
-            resolve(root) { return root.getOptionalPrimitives(); }
+            resolve(root) { return root.getOptionalPrimitives() ?? null; }
         });
-        t.nullable.list.field("requiredPrimitivesList", {
+        t.nonNull.list.field("requiredPrimitivesList", {
             description: "Required.",
             type: "Primitives",
             resolve(root) { return root.getRequiredPrimitivesListList(); }
@@ -27,7 +27,7 @@ export const Hello = objectType({
         t.nullable.field("optionalPrimitivesList", {
             description: "Optional.",
             type: "Primitives",
-            resolve(root) { return root.getOptionalPrimitivesList(); }
+            resolve(root) { return root.getOptionalPrimitivesList() ?? null; }
         });
     },
     sourceType: { module: __filename, export: "$$testapis$node$lib$hello$hello_pb$Hello" }
@@ -36,59 +36,59 @@ export const Primitives = objectType({
     name: "Primitives",
     description: "",
     definition(t) {
-        t.nullable.float("requiredDoubleValue", {
+        t.nonNull.float("requiredDoubleValue", {
             description: "",
             resolve(root) { return root.getRequiredDoubleValue(); }
         });
-        t.nullable.float("requiredFloatValue", {
+        t.nonNull.float("requiredFloatValue", {
             description: "",
             resolve(root) { return root.getRequiredFloatValue(); }
         });
-        t.nullable.int("requiredInt32Value", {
+        t.nonNull.int("requiredInt32Value", {
             description: "",
             resolve(root) { return root.getRequiredInt32Value(); }
         });
-        t.nullable.int("requiredInt64Value", {
+        t.nonNull.int("requiredInt64Value", {
             description: "",
             resolve(root) { return root.getRequiredInt64Value(); }
         });
-        t.nullable.int("requiredUint32Value", {
+        t.nonNull.int("requiredUint32Value", {
             description: "",
             resolve(root) { return root.getRequiredUint32Value(); }
         });
-        t.nullable.int("requiredUint64Value", {
+        t.nonNull.int("requiredUint64Value", {
             description: "",
             resolve(root) { return root.getRequiredUint64Value(); }
         });
-        t.nullable.int("requiredSint32Value", {
+        t.nonNull.int("requiredSint32Value", {
             description: "",
             resolve(root) { return root.getRequiredSint32Value(); }
         });
-        t.nullable.int("requiredSint64Value", {
+        t.nonNull.int("requiredSint64Value", {
             description: "",
             resolve(root) { return root.getRequiredSint64Value(); }
         });
-        t.nullable.int("requiredFixed32Value", {
+        t.nonNull.int("requiredFixed32Value", {
             description: "",
             resolve(root) { return root.getRequiredFixed32Value(); }
         });
-        t.nullable.int("requiredFixed64Value", {
+        t.nonNull.int("requiredFixed64Value", {
             description: "",
             resolve(root) { return root.getRequiredFixed64Value(); }
         });
-        t.nullable.int("requiredSfixed32Value", {
+        t.nonNull.int("requiredSfixed32Value", {
             description: "",
             resolve(root) { return root.getRequiredSfixed32Value(); }
         });
-        t.nullable.int("requiredSfixed64Value", {
+        t.nonNull.int("requiredSfixed64Value", {
             description: "",
             resolve(root) { return root.getRequiredSfixed64Value(); }
         });
-        t.nullable.boolean("requiredBoolValue", {
+        t.nonNull.boolean("requiredBoolValue", {
             description: "",
             resolve(root) { return root.getRequiredBoolValue(); }
         });
-        t.nullable.string("requiredStringValue", {
+        t.nonNull.string("requiredStringValue", {
             description: "",
             resolve(root) { return root.getRequiredStringValue(); }
         });

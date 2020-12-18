@@ -260,7 +260,7 @@ export class ProtoField {
     return !(
       this.descriptor.getLabel() ===
         FieldDescriptorProto.Label.LABEL_REQUIRED ||
-      this.comments?.leadingComments?.startsWith("Required. ")
+      this.comments?.leadingComments?.startsWith("Required.")
     );
   }
 

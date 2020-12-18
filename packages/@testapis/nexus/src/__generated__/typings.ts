@@ -72,8 +72,8 @@ export interface NexusGenFieldTypes {
   Hello: { // field return type
     optionalPrimitives: NexusGenRootTypes['Primitives'] | null; // Primitives
     optionalPrimitivesList: NexusGenRootTypes['Primitives'] | null; // Primitives
-    requiredPrimitives: NexusGenRootTypes['Primitives'] | null; // Primitives
-    requiredPrimitivesList: Array<NexusGenRootTypes['Primitives'] | null> | null; // [Primitives]
+    requiredPrimitives: NexusGenRootTypes['Primitives']; // Primitives!
+    requiredPrimitivesList: Array<NexusGenRootTypes['Primitives'] | null>; // [Primitives]!
   }
   Message: { // field return type
     boolValue: boolean | null; // Boolean
@@ -90,28 +90,28 @@ export interface NexusGenFieldTypes {
     myEnum1: NexusGenEnums['MyEnum1'] | null; // MyEnum1
   }
   ParentMessage: { // field return type
-    body: string | null; // String
+    body: string; // String!
     nested: NexusGenRootTypes['ParentMessageNestedMessage'] | null; // ParentMessageNestedMessage
     nestedEnum: NexusGenEnums['ParentMessageNestedEnum'] | null; // ParentMessageNestedEnum
   }
   ParentMessageNestedMessage: { // field return type
-    nestedBody: string | null; // String
+    nestedBody: string; // String!
   }
   Primitives: { // field return type
-    requiredBoolValue: boolean | null; // Boolean
-    requiredDoubleValue: number | null; // Float
-    requiredFixed32Value: number | null; // Int
-    requiredFixed64Value: number | null; // Int
-    requiredFloatValue: number | null; // Float
-    requiredInt32Value: number | null; // Int
-    requiredInt64Value: number | null; // Int
-    requiredSfixed32Value: number | null; // Int
-    requiredSfixed64Value: number | null; // Int
-    requiredSint32Value: number | null; // Int
-    requiredSint64Value: number | null; // Int
-    requiredStringValue: string | null; // String
-    requiredUint32Value: number | null; // Int
-    requiredUint64Value: number | null; // Int
+    requiredBoolValue: boolean; // Boolean!
+    requiredDoubleValue: number; // Float!
+    requiredFixed32Value: number; // Int!
+    requiredFixed64Value: number; // Int!
+    requiredFloatValue: number; // Float!
+    requiredInt32Value: number; // Int!
+    requiredInt64Value: number; // Int!
+    requiredSfixed32Value: number; // Int!
+    requiredSfixed64Value: number; // Int!
+    requiredSint32Value: number; // Int!
+    requiredSint64Value: number; // Int!
+    requiredStringValue: string; // String!
+    requiredUint32Value: number; // Int!
+    requiredUint64Value: number; // Int!
   }
   Query: { // field return type
     ok: boolean; // Boolean!
