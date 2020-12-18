@@ -2,69 +2,116 @@
 // file: hello/hello.proto
 
 import * as jspb from "google-protobuf";
-import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/timestamp_pb";
 
-export class User extends jspb.Message {
-  getId(): number;
-  setId(value: number): void;
+export class Hello extends jspb.Message {
+  hasRequiredPrimitives(): boolean;
+  clearRequiredPrimitives(): void;
+  getRequiredPrimitives(): Primitives | undefined;
+  setRequiredPrimitives(value?: Primitives): void;
 
-  getName(): string;
-  setName(value: string): void;
+  hasOptionalPrimitives(): boolean;
+  clearOptionalPrimitives(): void;
+  getOptionalPrimitives(): Primitives | undefined;
+  setOptionalPrimitives(value?: Primitives): void;
 
-  clearPostsList(): void;
-  getPostsList(): Array<Post>;
-  setPostsList(value: Array<Post>): void;
-  addPosts(value?: Post, index?: number): Post;
+  clearRequiredPrimitivesListList(): void;
+  getRequiredPrimitivesListList(): Array<Primitives>;
+  setRequiredPrimitivesListList(value: Array<Primitives>): void;
+  addRequiredPrimitivesList(value?: Primitives, index?: number): Primitives;
+
+  hasOptionalPrimitivesList(): boolean;
+  clearOptionalPrimitivesList(): void;
+  getOptionalPrimitivesList(): Primitives | undefined;
+  setOptionalPrimitivesList(value?: Primitives): void;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): User.AsObject;
-  static toObject(includeInstance: boolean, msg: User): User.AsObject;
+  toObject(includeInstance?: boolean): Hello.AsObject;
+  static toObject(includeInstance: boolean, msg: Hello): Hello.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: User, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): User;
-  static deserializeBinaryFromReader(message: User, reader: jspb.BinaryReader): User;
+  static serializeBinaryToWriter(message: Hello, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): Hello;
+  static deserializeBinaryFromReader(message: Hello, reader: jspb.BinaryReader): Hello;
 }
 
-export namespace User {
+export namespace Hello {
   export type AsObject = {
-    id: number,
-    name: string,
-    postsList: Array<Post.AsObject>,
+    requiredPrimitives?: Primitives.AsObject,
+    optionalPrimitives?: Primitives.AsObject,
+    requiredPrimitivesListList: Array<Primitives.AsObject>,
+    optionalPrimitivesList?: Primitives.AsObject,
   }
 }
 
-export class Post extends jspb.Message {
-  getId(): number;
-  setId(value: number): void;
+export class Primitives extends jspb.Message {
+  getRequiredDoubleValue(): number;
+  setRequiredDoubleValue(value: number): void;
 
-  getTitle(): string;
-  setTitle(value: string): void;
+  getRequiredFloatValue(): number;
+  setRequiredFloatValue(value: number): void;
 
-  getBody(): string;
-  setBody(value: string): void;
+  getRequiredInt32Value(): number;
+  setRequiredInt32Value(value: number): void;
 
-  hasPublishedTime(): boolean;
-  clearPublishedTime(): void;
-  getPublishedTime(): google_protobuf_timestamp_pb.Timestamp | undefined;
-  setPublishedTime(value?: google_protobuf_timestamp_pb.Timestamp): void;
+  getRequiredInt64Value(): number;
+  setRequiredInt64Value(value: number): void;
+
+  getRequiredUint32Value(): number;
+  setRequiredUint32Value(value: number): void;
+
+  getRequiredUint64Value(): number;
+  setRequiredUint64Value(value: number): void;
+
+  getRequiredSint32Value(): number;
+  setRequiredSint32Value(value: number): void;
+
+  getRequiredSint64Value(): number;
+  setRequiredSint64Value(value: number): void;
+
+  getRequiredFixed32Value(): number;
+  setRequiredFixed32Value(value: number): void;
+
+  getRequiredFixed64Value(): number;
+  setRequiredFixed64Value(value: number): void;
+
+  getRequiredSfixed32Value(): number;
+  setRequiredSfixed32Value(value: number): void;
+
+  getRequiredSfixed64Value(): number;
+  setRequiredSfixed64Value(value: number): void;
+
+  getRequiredBoolValue(): boolean;
+  setRequiredBoolValue(value: boolean): void;
+
+  getRequiredStringValue(): string;
+  setRequiredStringValue(value: string): void;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): Post.AsObject;
-  static toObject(includeInstance: boolean, msg: Post): Post.AsObject;
+  toObject(includeInstance?: boolean): Primitives.AsObject;
+  static toObject(includeInstance: boolean, msg: Primitives): Primitives.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: Post, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): Post;
-  static deserializeBinaryFromReader(message: Post, reader: jspb.BinaryReader): Post;
+  static serializeBinaryToWriter(message: Primitives, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): Primitives;
+  static deserializeBinaryFromReader(message: Primitives, reader: jspb.BinaryReader): Primitives;
 }
 
-export namespace Post {
+export namespace Primitives {
   export type AsObject = {
-    id: number,
-    title: string,
-    body: string,
-    publishedTime?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+    requiredDoubleValue: number,
+    requiredFloatValue: number,
+    requiredInt32Value: number,
+    requiredInt64Value: number,
+    requiredUint32Value: number,
+    requiredUint64Value: number,
+    requiredSint32Value: number,
+    requiredSint64Value: number,
+    requiredFixed32Value: number,
+    requiredFixed64Value: number,
+    requiredSfixed32Value: number,
+    requiredSfixed64Value: number,
+    requiredBoolValue: boolean,
+    requiredStringValue: string,
   }
 }
 

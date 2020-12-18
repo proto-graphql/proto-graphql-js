@@ -2,26 +2,31 @@ syntax = "proto3";
 
 package testapi.hello;
 
-import "google/protobuf/timestamp.proto";
-
-// User entity
-message User {
-  // Required. Output only. ID.
-  uint64 id = 1;
-  // Required. User's login name.
-  string name = 2;
-  // Required. Posts that are written by the user.
-  repeated Post posts = 3;
+message Hello {
+  // Required.
+  Primitives required_primitives = 1;
+  // Optional.
+  Primitives optional_primitives = 2;
+  // Required.
+  repeated Primitives required_primitives_list = 3;
+  // Optional.
+  Primitives optional_primitives_list = 4;
 }
 
-// Post entity
-message Post {
-  // Required. Output only. ID.
-  uint64 id = 1;
-  // Required. Article.
-  string title = 2;
-  // Required. Body.
-  string body = 3;
-  // Required. Output only. Published time.
-  google.protobuf.Timestamp published_time = 4;
+message Primitives {
+  double required_double_value =1;
+  float required_float_value = 2;
+  int32 required_int32_value = 3;
+  int64 required_int64_value = 4;
+  uint32 required_uint32_value = 5;
+  uint64 required_uint64_value = 6;
+  sint32 required_sint32_value = 7;
+  sint64 required_sint64_value = 8;
+  fixed32 required_fixed32_value = 9;
+  fixed64 required_fixed64_value = 10;
+  sfixed32 required_sfixed32_value = 11;
+  sfixed64 required_sfixed64_value = 12;
+  bool required_bool_value = 13;
+  string required_string_value = 14;
+  // bytes required_bytes_value = 1;
 }

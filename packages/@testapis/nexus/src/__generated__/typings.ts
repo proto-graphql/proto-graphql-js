@@ -5,7 +5,7 @@
 
 
 import { $$testapis$node$lib$enums$enums_pb$MessageWithEnums } from "./../schema/types/enums/enums_pb_nexus"
-import { $$testapis$node$lib$hello$hello_pb$User, $$testapis$node$lib$hello$hello_pb$Post } from "./../schema/types/hello/hello_pb_nexus"
+import { $$testapis$node$lib$hello$hello_pb$Hello, $$testapis$node$lib$hello$hello_pb$Primitives } from "./../schema/types/hello/hello_pb_nexus"
 import { $$testapis$node$lib$nested$nested_pb$ParentMessage, $$testapis$node$lib$nested$nested_pb$ParentMessageNestedMessage } from "./../schema/types/nested/nested_pb_nexus"
 import { $$testapis$node$lib$wktypes$well_known_types_pb$Message } from "./../schema/types/wktypes/well_known_types_pb_nexus"
 import { core } from "@nexus/schema"
@@ -49,13 +49,13 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  Hello: $$testapis$node$lib$hello$hello_pb$Hello;
   Message: $$testapis$node$lib$wktypes$well_known_types_pb$Message;
   MessageWithEnums: $$testapis$node$lib$enums$enums_pb$MessageWithEnums;
   ParentMessage: $$testapis$node$lib$nested$nested_pb$ParentMessage;
   ParentMessageNestedMessage: $$testapis$node$lib$nested$nested_pb$ParentMessageNestedMessage;
-  Post: $$testapis$node$lib$hello$hello_pb$Post;
+  Primitives: $$testapis$node$lib$hello$hello_pb$Primitives;
   Query: {};
-  User: $$testapis$node$lib$hello$hello_pb$User;
 }
 
 export interface NexusGenInterfaces {
@@ -69,6 +69,12 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
+  Hello: { // field return type
+    optionalPrimitives: NexusGenRootTypes['Primitives'] | null; // Primitives
+    optionalPrimitivesList: NexusGenRootTypes['Primitives'] | null; // Primitives
+    requiredPrimitives: NexusGenRootTypes['Primitives'] | null; // Primitives
+    requiredPrimitivesList: Array<NexusGenRootTypes['Primitives'] | null> | null; // [Primitives]
+  }
   Message: { // field return type
     boolValue: boolean | null; // Boolean
     doubleValue: number | null; // Float
@@ -91,23 +97,34 @@ export interface NexusGenFieldTypes {
   ParentMessageNestedMessage: { // field return type
     nestedBody: string | null; // String
   }
-  Post: { // field return type
-    body: string; // String!
-    id: number; // Int!
-    publishedTime: NexusGenScalars['DateTime']; // DateTime!
-    title: string; // String!
+  Primitives: { // field return type
+    requiredBoolValue: boolean | null; // Boolean
+    requiredDoubleValue: number | null; // Float
+    requiredFixed32Value: number | null; // Int
+    requiredFixed64Value: number | null; // Int
+    requiredFloatValue: number | null; // Float
+    requiredInt32Value: number | null; // Int
+    requiredInt64Value: number | null; // Int
+    requiredSfixed32Value: number | null; // Int
+    requiredSfixed64Value: number | null; // Int
+    requiredSint32Value: number | null; // Int
+    requiredSint64Value: number | null; // Int
+    requiredStringValue: string | null; // String
+    requiredUint32Value: number | null; // Int
+    requiredUint64Value: number | null; // Int
   }
   Query: { // field return type
     ok: boolean; // Boolean!
   }
-  User: { // field return type
-    id: number; // Int!
-    name: string; // String!
-    posts: Array<NexusGenRootTypes['Post'] | null>; // [Post]!
-  }
 }
 
 export interface NexusGenFieldTypeNames {
+  Hello: { // field return type name
+    optionalPrimitives: 'Primitives'
+    optionalPrimitivesList: 'Primitives'
+    requiredPrimitives: 'Primitives'
+    requiredPrimitivesList: 'Primitives'
+  }
   Message: { // field return type name
     boolValue: 'Boolean'
     doubleValue: 'Float'
@@ -130,19 +147,24 @@ export interface NexusGenFieldTypeNames {
   ParentMessageNestedMessage: { // field return type name
     nestedBody: 'String'
   }
-  Post: { // field return type name
-    body: 'String'
-    id: 'Int'
-    publishedTime: 'DateTime'
-    title: 'String'
+  Primitives: { // field return type name
+    requiredBoolValue: 'Boolean'
+    requiredDoubleValue: 'Float'
+    requiredFixed32Value: 'Int'
+    requiredFixed64Value: 'Int'
+    requiredFloatValue: 'Float'
+    requiredInt32Value: 'Int'
+    requiredInt64Value: 'Int'
+    requiredSfixed32Value: 'Int'
+    requiredSfixed64Value: 'Int'
+    requiredSint32Value: 'Int'
+    requiredSint64Value: 'Int'
+    requiredStringValue: 'String'
+    requiredUint32Value: 'Int'
+    requiredUint64Value: 'Int'
   }
   Query: { // field return type name
     ok: 'Boolean'
-  }
-  User: { // field return type name
-    id: 'Int'
-    name: 'String'
-    posts: 'Post'
   }
 }
 
