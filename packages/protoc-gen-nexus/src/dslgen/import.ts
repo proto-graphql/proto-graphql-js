@@ -11,13 +11,23 @@ import {
 /**
  * @example
  * ```ts
- * import { objectType, enumType } from "@nexus/schema";
+ * import { objectType, enumType } from "nexus";
  * ```
  */
 export function createImportNexusDecl(
   msgs: ReadonlyArray<ProtoMessage>,
   enums: ReadonlyArray<ProtoEnum>
 ): ts.ImportDeclaration {
+  let [list, nullable, nonNull] = [false, false, false];
+  for (const m of msgs) {
+    for (const f of m.fields) {
+      list ||= f.isList();
+      nullable ||= f.isNullable();
+      nonNull ||= f.isList() || !f.isNullable();
+    }
+    if (list && nullable && nonNull) break;
+  }
+
   return ts.factory.createImportDeclaration(
     undefined,
     undefined,
@@ -26,22 +36,15 @@ export function createImportNexusDecl(
       undefined,
       ts.factory.createNamedImports(
         [
-          msgs.length === 0
-            ? null
-            : ts.factory.createImportSpecifier(
-                undefined,
-                ts.factory.createIdentifier("objectType")
-              ),
-          enums.length === 0
-            ? null
-            : ts.factory.createImportSpecifier(
-                undefined,
-                ts.factory.createIdentifier("enumType")
-              ),
+          msgs.length > 0 ? createImportSpecifier("objectType") : null,
+          enums.length > 0 ? createImportSpecifier("enumType") : null,
+          list ? createImportSpecifier("list") : null,
+          nullable ? createImportSpecifier("nullable") : null,
+          nonNull ? createImportSpecifier("nonNull") : null,
         ].filter(onlyNonNull())
       )
     ),
-    ts.factory.createStringLiteral("@nexus/schema")
+    ts.factory.createStringLiteral("nexus")
   );
 }
 
@@ -75,4 +78,11 @@ export function createImportProtoDecls(
     .map((m) => protoImportPath(m, opts))
     .filter(onlyUnique())
     .map(createImportAllWithAliastDecl);
+}
+
+function createImportSpecifier(name: string): ts.ImportSpecifier {
+  return ts.factory.createImportSpecifier(
+    undefined,
+    ts.factory.createIdentifier(name)
+  );
 }

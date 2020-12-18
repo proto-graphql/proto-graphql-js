@@ -19,7 +19,7 @@ type Hello {
   requiredPrimitives: Primitives!
 
   """Required."""
-  requiredPrimitivesList: [Primitives]!
+  requiredPrimitivesList: [Primitives!]
 }
 
 """"""

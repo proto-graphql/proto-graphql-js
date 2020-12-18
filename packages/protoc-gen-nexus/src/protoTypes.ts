@@ -260,6 +260,8 @@ export class ProtoField {
     return !(
       this.descriptor.getLabel() ===
         FieldDescriptorProto.Label.LABEL_REQUIRED ||
+      (this.descriptor.getType() !== FieldDescriptorProto.Type.TYPE_MESSAGE &&
+        this.descriptor.getType() !== FieldDescriptorProto.Type.TYPE_ENUM) ||
       this.comments?.leadingComments?.startsWith("Required.")
     );
   }

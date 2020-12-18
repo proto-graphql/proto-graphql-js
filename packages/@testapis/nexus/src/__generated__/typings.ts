@@ -8,7 +8,7 @@ import { $$testapis$node$lib$enums$enums_pb$MessageWithEnums } from "./../schema
 import { $$testapis$node$lib$hello$hello_pb$Hello, $$testapis$node$lib$hello$hello_pb$Primitives } from "./../schema/types/hello/hello_pb_nexus"
 import { $$testapis$node$lib$nested$nested_pb$ParentMessage, $$testapis$node$lib$nested$nested_pb$ParentMessageNestedMessage } from "./../schema/types/nested/nested_pb_nexus"
 import { $$testapis$node$lib$wktypes$well_known_types_pb$Message } from "./../schema/types/wktypes/well_known_types_pb_nexus"
-import { core } from "@nexus/schema"
+import { core } from "nexus"
 declare global {
   interface NexusGenCustomInputMethods<TypeName extends string> {
     /**
@@ -73,7 +73,7 @@ export interface NexusGenFieldTypes {
     optionalPrimitives: NexusGenRootTypes['Primitives'] | null; // Primitives
     optionalPrimitivesList: NexusGenRootTypes['Primitives'] | null; // Primitives
     requiredPrimitives: NexusGenRootTypes['Primitives']; // Primitives!
-    requiredPrimitivesList: Array<NexusGenRootTypes['Primitives'] | null>; // [Primitives]!
+    requiredPrimitivesList: NexusGenRootTypes['Primitives'][] | null; // [Primitives!]
   }
   Message: { // field return type
     boolValue: boolean | null; // Boolean
