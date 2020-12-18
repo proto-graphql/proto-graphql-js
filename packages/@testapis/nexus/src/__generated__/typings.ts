@@ -73,7 +73,7 @@ export interface NexusGenFieldTypes {
     optionalPrimitives: NexusGenRootTypes['Primitives'] | null; // Primitives
     optionalPrimitivesList: NexusGenRootTypes['Primitives'] | null; // Primitives
     requiredPrimitives: NexusGenRootTypes['Primitives']; // Primitives!
-    requiredPrimitivesList: Array<NexusGenRootTypes['Primitives'] | null>; // [Primitives]!
+    requiredPrimitivesList: NexusGenRootTypes['Primitives'][] | null; // [Primitives!]
   }
   Message: { // field return type
     boolValue: boolean | null; // Boolean

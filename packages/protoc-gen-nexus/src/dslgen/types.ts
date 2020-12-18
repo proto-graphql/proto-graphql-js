@@ -29,37 +29,6 @@ export type GqlType =
       nullable: boolean;
     };
 
-export function nexusFieldFuncName(type: GqlType): string {
-  switch (type.kind) {
-    case "list":
-      return "field";
-    case "scalar":
-      switch (type.type) {
-        case "Int":
-          return "int";
-        case "Float":
-          return "float";
-        case "String":
-          return "string";
-        case "Boolean":
-          return "boolean";
-        case "ID":
-          return "id";
-        case "DateTime":
-          return "dateTime";
-        default:
-          const _exhaustiveCheck: never = type; // eslint-disable-line
-          throw "unreachable";
-      }
-    case "object":
-    case "enum":
-      return "field";
-    default:
-      const _exhaustiveCheck: never = type; // eslint-disable-line
-      throw "unreachable";
-  }
-}
-
 export function detectGqlType(f: ProtoField, reg: ProtoRegistry): GqlType {
   if (f.isList()) {
     return {
