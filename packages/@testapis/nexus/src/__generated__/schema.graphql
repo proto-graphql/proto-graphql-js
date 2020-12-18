@@ -8,6 +8,21 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 scalar DateTime
 
 """"""
+type Hello {
+  """Optional."""
+  optionalPrimitives: Primitives
+
+  """Optional."""
+  optionalPrimitivesList: Primitives
+
+  """Required."""
+  requiredPrimitives: Primitives!
+
+  """Required."""
+  requiredPrimitivesList: [Primitives]!
+}
+
+""""""
 type Message {
   """"""
   boolValue: Boolean
@@ -55,7 +70,7 @@ enum MyEnum1 {
 """"""
 type ParentMessage {
   """"""
-  body: String
+  body: String!
 
   """"""
   nested: ParentMessageNestedMessage
@@ -74,36 +89,54 @@ enum ParentMessageNestedEnum {
 """"""
 type ParentMessageNestedMessage {
   """"""
-  nestedBody: String
+  nestedBody: String!
 }
 
-"""Post entity"""
-type Post {
-  """Required. Body."""
-  body: String!
+""""""
+type Primitives {
+  """"""
+  requiredBoolValue: Boolean!
 
-  """Required. Output only. ID."""
-  id: Int!
+  """"""
+  requiredDoubleValue: Float!
 
-  """Required. Output only. Published time."""
-  publishedTime: DateTime!
+  """"""
+  requiredFixed32Value: Int!
 
-  """Required. Article."""
-  title: String!
+  """"""
+  requiredFixed64Value: Int!
+
+  """"""
+  requiredFloatValue: Float!
+
+  """"""
+  requiredInt32Value: Int!
+
+  """"""
+  requiredInt64Value: Int!
+
+  """"""
+  requiredSfixed32Value: Int!
+
+  """"""
+  requiredSfixed64Value: Int!
+
+  """"""
+  requiredSint32Value: Int!
+
+  """"""
+  requiredSint64Value: Int!
+
+  """"""
+  requiredStringValue: String!
+
+  """"""
+  requiredUint32Value: Int!
+
+  """"""
+  requiredUint64Value: Int!
 }
 
 type Query {
   ok: Boolean!
-}
-
-"""User entity"""
-type User {
-  """Required. Output only. ID."""
-  id: Int!
-
-  """Required. User's login name."""
-  name: String!
-
-  """Required. Posts that are written by the user."""
-  posts: [Post]!
 }
