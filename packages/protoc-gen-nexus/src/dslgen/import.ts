@@ -11,7 +11,7 @@ import {
 /**
  * @example
  * ```ts
- * import { objectType, enumType } from "@nexus/schema";
+ * import { objectType, enumType } from "nexus";
  * ```
  */
 export function createImportNexusDecl(
@@ -41,7 +41,7 @@ export function createImportNexusDecl(
         ].filter(onlyNonNull())
       )
     ),
-    ts.factory.createStringLiteral("@nexus/schema")
+    ts.factory.createStringLiteral("nexus")
   );
 }
 

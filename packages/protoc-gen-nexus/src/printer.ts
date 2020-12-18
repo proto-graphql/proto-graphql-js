@@ -17,7 +17,7 @@ export function printSource(
   const [msgs, enums] = registry.collectTypes(file);
 
   const ast: ts.Statement[] = [
-    // `import { objectType, enumTpye } from "@nexus/schema";`
+    // `import { objectType, enumTpye } from "nexus";`
     createImportNexusDecl(msgs, enums),
     // `import * as proto_nexus from "proto-nexus";`
     ...createImportUnwrapFuncDecls(msgs),
