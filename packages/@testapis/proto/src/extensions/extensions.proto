@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package testapi.extensions;
+
+import "graphql/schema.proto";
+
+option (graphql.schema) = {
+  type_prefix: "TestPrefix";
+};
+
+message PrefixedMessage {
+  message InnerMessage {
+    string body = 1;
+  }
+
+  string body = 1;
+  PrefixedEnum prefixed_enum = 2;
+}
+
+enum PrefixedEnum {
+  PREFIXED_ENUM_UNSPECIFIED = 0;
+  PREFIXED_FOO = 1;
+  PREFIXED_BAR = 2;
+}

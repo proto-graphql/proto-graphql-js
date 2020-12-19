@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+set -eu
+set -o pipefail
+
+cd $(dirname $0)/..
+
+PLUGIN_ROOT=./packages/protoc-gen-nexus
+TESTAPIS_ROOT=./packages/@testapis
+
+clean() {
+  rm -rf $TESTAPIS_ROOT/node/lib
+  find $TESTAPIS_ROOT/nexus/src -name '*_nexus_pb.ts' -type f | xargs rm
+}
+
+init() {
+  mkdir -p $TESTAPIS_ROOT/node/lib
+  mkdir -p $TESTAPIS_ROOT/nexus/src/schema/types
+}
+
+protocw() {
+  ./scripts/protocw \
+    -I $PLUGIN_ROOT/include \
+    -I $TESTAPIS_ROOT/proto/src \
+  "$@"
+}
+
+execProtoc() {
+  for protoDir in $TESTAPIS_ROOT/proto/src/*; do
+    protocw --include_source_info --include_imports --descriptor_set_out=${protoDir}/descriptor_set.pb ${protoDir}/*.proto
+    protocw \
+      --plugin=protoc-gen-ts=`yarn bin protoc-gen-ts` \
+      --js_out="$TESTAPIS_ROOT/node/lib" --js_opt=import_style=commonjs,binary \
+      --ts_out="$TESTAPIS_ROOT/node/lib" \
+      ${protoDir}/*.proto
+
+    protocw \
+      --plugin=protoc-gen-nexus=`yarn bin protoc-gen-nexus` \
+      --nexus_out="$TESTAPIS_ROOT/nexus/src/schema/types" --nexus_opt=import_prefix=@testapis/node/lib \
+      ${protoDir}/*.proto
+  done
+}
+
+_main() {
+  clean
+  init
+  execProtoc
+}
+
+_main

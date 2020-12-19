@@ -1,5 +1,6 @@
 import ts from "typescript";
 import { ProtoEnum, ProtoFile, ProtoMessage } from "../protoTypes";
+import * as extensions from "../__generated__/extensions/graphql/schema_pb";
 
 export function protoExportAlias(
   t: ProtoMessage,
@@ -74,12 +75,16 @@ function nameWithParent(typ: ProtoMessage | ProtoEnum): string {
   let name = "";
   let t: ProtoMessage | ProtoEnum | ProtoFile = typ;
   for (;;) {
-    if (t instanceof ProtoMessage || t instanceof ProtoEnum) {
-      name = `${t.name}${name}`;
-      t = t.parent;
-    } else {
-      break;
-    }
+    if (t instanceof ProtoFile) break;
+    name = `${t.name}${name}`;
+    t = t.parent;
+  }
+  const prefix = t.descriptor
+    .getOptions()
+    ?.getExtension(extensions.schema)
+    .getTypePrefix();
+  if (prefix) {
+    name = `${prefix}${name}`;
   }
   return name;
 }
