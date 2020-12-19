@@ -92,3 +92,14 @@ test("generates nexus DSL from nested proto types", () => {
 
   expect(fileByName["nested/nested_pb_nexus.ts"]).toMatchSnapshot();
 });
+
+test("generates nexus DSL with proto custom options", () => {
+  const req = buildCodeGeneratorRequest("extensions");
+  const resp = processRequest(req);
+
+  expect(Object.keys(resp.getFileList())).toHaveLength(1);
+
+  const fileByName = getFileMap(resp);
+
+  expect(fileByName["extensions/extensions_pb_nexus.ts"]).toMatchSnapshot();
+});

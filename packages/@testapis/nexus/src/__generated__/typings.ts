@@ -5,6 +5,7 @@
 
 
 import { $$testapis$node$lib$enums$enums_pb$MessageWithEnums } from "./../schema/types/enums/enums_pb_nexus"
+import { $$testapis$node$lib$extensions$extensions_pb$TestPrefixPrefixedMessage, $$testapis$node$lib$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage } from "./../schema/types/extensions/extensions_pb_nexus"
 import { $$testapis$node$lib$hello$hello_pb$Hello, $$testapis$node$lib$hello$hello_pb$Primitives } from "./../schema/types/hello/hello_pb_nexus"
 import { $$testapis$node$lib$nested$nested_pb$ParentMessage, $$testapis$node$lib$nested$nested_pb$ParentMessageNestedMessage } from "./../schema/types/nested/nested_pb_nexus"
 import { $$testapis$node$lib$wktypes$well_known_types_pb$Message } from "./../schema/types/wktypes/well_known_types_pb_nexus"
@@ -37,6 +38,7 @@ export interface NexusGenInputs {
 export interface NexusGenEnums {
   MyEnum1: 2 | 3 | 1 | 0
   ParentMessageNestedEnum: 2 | 1 | 0
+  TestPrefixPrefixedEnum: 2 | 0 | 1
 }
 
 export interface NexusGenScalars {
@@ -56,6 +58,8 @@ export interface NexusGenObjects {
   ParentMessageNestedMessage: $$testapis$node$lib$nested$nested_pb$ParentMessageNestedMessage;
   Primitives: $$testapis$node$lib$hello$hello_pb$Primitives;
   Query: {};
+  TestPrefixPrefixedMessage: $$testapis$node$lib$extensions$extensions_pb$TestPrefixPrefixedMessage;
+  TestPrefixPrefixedMessageInnerMessage: $$testapis$node$lib$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage;
 }
 
 export interface NexusGenInterfaces {
@@ -116,6 +120,13 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     ok: boolean; // Boolean!
   }
+  TestPrefixPrefixedMessage: { // field return type
+    body: string; // String!
+    prefixedEnum: NexusGenEnums['TestPrefixPrefixedEnum'] | null; // TestPrefixPrefixedEnum
+  }
+  TestPrefixPrefixedMessageInnerMessage: { // field return type
+    body: string; // String!
+  }
 }
 
 export interface NexusGenFieldTypeNames {
@@ -165,6 +176,13 @@ export interface NexusGenFieldTypeNames {
   }
   Query: { // field return type name
     ok: 'Boolean'
+  }
+  TestPrefixPrefixedMessage: { // field return type name
+    body: 'String'
+    prefixedEnum: 'TestPrefixPrefixedEnum'
+  }
+  TestPrefixPrefixedMessageInnerMessage: { // field return type name
+    body: 'String'
   }
 }
 
