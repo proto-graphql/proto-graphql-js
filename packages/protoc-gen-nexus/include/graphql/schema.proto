@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package graphql;
+
+import "google/protobuf/descriptor.proto";
+
+message GraphqlSchemaOptions {
+  string type_prefix = 1;
+}
+
+extend google.protobuf.FileOptions {
+  GraphqlSchemaOptions schema = 2056;
+}

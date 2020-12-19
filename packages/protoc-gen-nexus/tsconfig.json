@@ -3,6 +3,8 @@
   "compilerOptions": {
     "outDir": "./lib",
     "rootDir": "./src",
+    "allowJs": true,
   },
-  "exclude": ["**/*.test.*", "./lib/**", "./package.json"]
+  "include": ["./src"],
+  "exclude": ["**/*.test.*"]
 }
