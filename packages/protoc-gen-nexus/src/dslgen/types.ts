@@ -50,16 +50,25 @@ function detectGqlItemType(f: ProtoField, reg: ProtoRegistry): GqlItemType {
     case FieldDescriptorProto.Type.TYPE_FLOAT:
       return { kind: "scalar", type: "Float", nullable: false };
     case FieldDescriptorProto.Type.TYPE_INT64:
+      return { kind: "scalar", type: "String", nullable: false };
     case FieldDescriptorProto.Type.TYPE_UINT64:
+      return { kind: "scalar", type: "String", nullable: false };
     case FieldDescriptorProto.Type.TYPE_INT32:
-    case FieldDescriptorProto.Type.TYPE_FIXED64:
-    case FieldDescriptorProto.Type.TYPE_FIXED32:
-    case FieldDescriptorProto.Type.TYPE_UINT32:
-    case FieldDescriptorProto.Type.TYPE_SFIXED32:
-    case FieldDescriptorProto.Type.TYPE_SFIXED64:
-    case FieldDescriptorProto.Type.TYPE_SINT32:
-    case FieldDescriptorProto.Type.TYPE_SINT64:
       return { kind: "scalar", type: "Int", nullable: false };
+    case FieldDescriptorProto.Type.TYPE_FIXED64:
+      return { kind: "scalar", type: "String", nullable: false };
+    case FieldDescriptorProto.Type.TYPE_FIXED32:
+      return { kind: "scalar", type: "Int", nullable: false };
+    case FieldDescriptorProto.Type.TYPE_UINT32:
+      return { kind: "scalar", type: "Int", nullable: false };
+    case FieldDescriptorProto.Type.TYPE_SFIXED32:
+      return { kind: "scalar", type: "Int", nullable: false };
+    case FieldDescriptorProto.Type.TYPE_SFIXED64:
+      return { kind: "scalar", type: "String", nullable: false };
+    case FieldDescriptorProto.Type.TYPE_SINT32:
+      return { kind: "scalar", type: "Int", nullable: false };
+    case FieldDescriptorProto.Type.TYPE_SINT64:
+      return { kind: "scalar", type: "String", nullable: false };
     case FieldDescriptorProto.Type.TYPE_BOOL:
       return { kind: "scalar", type: "Boolean", nullable: false };
     case FieldDescriptorProto.Type.TYPE_GROUP:
@@ -94,12 +103,27 @@ function detectGqlItemType(f: ProtoField, reg: ProtoRegistry): GqlItemType {
         case ".google.protobuf.Duration":
           throw "not implemented";
         case ".google.protobuf.Int32Value":
-        case ".google.protobuf.Int64Value":
-        case ".google.protobuf.UInt32Value":
-        case ".google.protobuf.UInt64Value":
           return {
             kind: "scalar",
             type: "Int",
+            nullable: f.isNullable(),
+          };
+        case ".google.protobuf.Int64Value":
+          return {
+            kind: "scalar",
+            type: "String",
+            nullable: f.isNullable(),
+          };
+        case ".google.protobuf.UInt32Value":
+          return {
+            kind: "scalar",
+            type: "Int",
+            nullable: f.isNullable(),
+          };
+        case ".google.protobuf.UInt64Value":
+          return {
+            kind: "scalar",
+            type: "String",
             nullable: f.isNullable(),
           };
         case ".google.protobuf.StringValue":

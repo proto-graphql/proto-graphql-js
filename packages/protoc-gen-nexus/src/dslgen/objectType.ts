@@ -14,6 +14,7 @@ import {
 } from "./util";
 import { detectGqlType, GqlType } from "./types";
 import { getUnwrapFunc } from "./unwrap";
+import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
 
 /**
  * @example
@@ -238,6 +239,43 @@ function createFieldOptionExpr(
       undefined,
       [resolverRet]
     );
+  }
+  if (type.kind === "scalar") {
+    switch (field.descriptor.getType()!) {
+      case FieldDescriptorProto.Type.TYPE_INT64:
+      case FieldDescriptorProto.Type.TYPE_UINT64:
+      case FieldDescriptorProto.Type.TYPE_FIXED64:
+      case FieldDescriptorProto.Type.TYPE_SFIXED64:
+      case FieldDescriptorProto.Type.TYPE_SINT64: {
+        resolverRet = ts.factory.createCallExpression(
+          ts.factory.createPropertyAccessExpression(resolverRet, "toString"),
+          undefined,
+          undefined
+        );
+        break;
+      }
+      case FieldDescriptorProto.Type.TYPE_MESSAGE: {
+        switch (field.descriptor.getTypeName()) {
+          case ".google.protobuf.Int64Value":
+          case ".google.protobuf.UInt64Value":
+            resolverRet = ts.factory.createBinaryExpression(
+              ts.factory.createCallExpression(
+                ts.factory.createPropertyAccessChain(
+                  resolverRet,
+                  ts.factory.createToken(ts.SyntaxKind.QuestionDotToken),
+                  ts.factory.createIdentifier("toString")
+                ),
+                undefined,
+                undefined
+              ),
+              ts.factory.createToken(ts.SyntaxKind.QuestionQuestionToken),
+              ts.factory.createToken(ts.SyntaxKind.NullKeyword)
+            );
+            break;
+        }
+        break;
+      }
+    }
   }
 
   return ts.factory.createObjectLiteralExpression(

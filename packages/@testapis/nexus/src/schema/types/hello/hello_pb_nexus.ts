@@ -52,9 +52,9 @@ export const Primitives = objectType({
             resolve(root) { return root.getRequiredInt32Value(); }
         });
         t.field("requiredInt64Value", {
-            type: nonNull("Int"),
+            type: nonNull("String"),
             description: "",
-            resolve(root) { return root.getRequiredInt64Value(); }
+            resolve(root) { return root.getRequiredInt64Value().toString(); }
         });
         t.field("requiredUint32Value", {
             type: nonNull("Int"),
@@ -62,9 +62,9 @@ export const Primitives = objectType({
             resolve(root) { return root.getRequiredUint32Value(); }
         });
         t.field("requiredUint64Value", {
-            type: nonNull("Int"),
+            type: nonNull("String"),
             description: "",
-            resolve(root) { return root.getRequiredUint64Value(); }
+            resolve(root) { return root.getRequiredUint64Value().toString(); }
         });
         t.field("requiredSint32Value", {
             type: nonNull("Int"),
@@ -72,9 +72,9 @@ export const Primitives = objectType({
             resolve(root) { return root.getRequiredSint32Value(); }
         });
         t.field("requiredSint64Value", {
-            type: nonNull("Int"),
+            type: nonNull("String"),
             description: "",
-            resolve(root) { return root.getRequiredSint64Value(); }
+            resolve(root) { return root.getRequiredSint64Value().toString(); }
         });
         t.field("requiredFixed32Value", {
             type: nonNull("Int"),
@@ -82,9 +82,9 @@ export const Primitives = objectType({
             resolve(root) { return root.getRequiredFixed32Value(); }
         });
         t.field("requiredFixed64Value", {
-            type: nonNull("Int"),
+            type: nonNull("String"),
             description: "",
-            resolve(root) { return root.getRequiredFixed64Value(); }
+            resolve(root) { return root.getRequiredFixed64Value().toString(); }
         });
         t.field("requiredSfixed32Value", {
             type: nonNull("Int"),
@@ -92,9 +92,9 @@ export const Primitives = objectType({
             resolve(root) { return root.getRequiredSfixed32Value(); }
         });
         t.field("requiredSfixed64Value", {
-            type: nonNull("Int"),
+            type: nonNull("String"),
             description: "",
-            resolve(root) { return root.getRequiredSfixed64Value(); }
+            resolve(root) { return root.getRequiredSfixed64Value().toString(); }
         });
         t.field("requiredBoolValue", {
             type: nonNull("Boolean"),
