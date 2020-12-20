@@ -20,9 +20,9 @@ export const Message = objectType({
             resolve(root) { return proto_nexus.unwrapInt32Value(root.getInt32Value()); }
         });
         t.field("int64Value", {
-            type: nullable("Int"),
+            type: nullable("String"),
             description: "",
-            resolve(root) { return proto_nexus.unwrapInt64Value(root.getInt64Value()); }
+            resolve(root) { return proto_nexus.unwrapInt64Value(root.getInt64Value())?.toString() ?? null; }
         });
         t.field("uint32Value", {
             type: nullable("Int"),
@@ -30,9 +30,9 @@ export const Message = objectType({
             resolve(root) { return proto_nexus.unwrapUInt32Value(root.getUint32Value()); }
         });
         t.field("uint64Value", {
-            type: nullable("Int"),
+            type: nullable("String"),
             description: "",
-            resolve(root) { return proto_nexus.unwrapUInt64Value(root.getUint64Value()); }
+            resolve(root) { return proto_nexus.unwrapUInt64Value(root.getUint64Value())?.toString() ?? null; }
         });
         t.field("floatValue", {
             type: nullable("Float"),

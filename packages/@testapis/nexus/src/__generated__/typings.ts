@@ -90,11 +90,11 @@ export interface NexusGenFieldTypes {
     doubleValue: number | null; // Float
     floatValue: number | null; // Float
     int32Value: number | null; // Int
-    int64Value: number | null; // Int
+    int64Value: string | null; // String
     stringValue: string | null; // String
     timestamp: NexusGenScalars['DateTime'] | null; // DateTime
     uint32Value: number | null; // Int
-    uint64Value: number | null; // Int
+    uint64Value: string | null; // String
   }
   MessageWithEnums: { // field return type
     myEnum1: NexusGenEnums['MyEnum1'] | null; // MyEnum1
@@ -122,17 +122,17 @@ export interface NexusGenFieldTypes {
     requiredBoolValue: boolean; // Boolean!
     requiredDoubleValue: number; // Float!
     requiredFixed32Value: number; // Int!
-    requiredFixed64Value: number; // Int!
+    requiredFixed64Value: string; // String!
     requiredFloatValue: number; // Float!
     requiredInt32Value: number; // Int!
-    requiredInt64Value: number; // Int!
+    requiredInt64Value: string; // String!
     requiredSfixed32Value: number; // Int!
-    requiredSfixed64Value: number; // Int!
+    requiredSfixed64Value: string; // String!
     requiredSint32Value: number; // Int!
-    requiredSint64Value: number; // Int!
+    requiredSint64Value: string; // String!
     requiredStringValue: string; // String!
     requiredUint32Value: number; // Int!
-    requiredUint64Value: number; // Int!
+    requiredUint64Value: string; // String!
   }
   Query: { // field return type
     ok: boolean; // Boolean!
@@ -158,11 +158,11 @@ export interface NexusGenFieldTypeNames {
     doubleValue: 'Float'
     floatValue: 'Float'
     int32Value: 'Int'
-    int64Value: 'Int'
+    int64Value: 'String'
     stringValue: 'String'
     timestamp: 'DateTime'
     uint32Value: 'Int'
-    uint64Value: 'Int'
+    uint64Value: 'String'
   }
   MessageWithEnums: { // field return type name
     myEnum1: 'MyEnum1'
@@ -190,17 +190,17 @@ export interface NexusGenFieldTypeNames {
     requiredBoolValue: 'Boolean'
     requiredDoubleValue: 'Float'
     requiredFixed32Value: 'Int'
-    requiredFixed64Value: 'Int'
+    requiredFixed64Value: 'String'
     requiredFloatValue: 'Float'
     requiredInt32Value: 'Int'
-    requiredInt64Value: 'Int'
+    requiredInt64Value: 'String'
     requiredSfixed32Value: 'Int'
-    requiredSfixed64Value: 'Int'
+    requiredSfixed64Value: 'String'
     requiredSint32Value: 'Int'
-    requiredSint64Value: 'Int'
+    requiredSint64Value: 'String'
     requiredStringValue: 'String'
     requiredUint32Value: 'Int'
-    requiredUint64Value: 'Int'
+    requiredUint64Value: 'String'
   }
   Query: { // field return type name
     ok: 'Boolean'

@@ -37,7 +37,7 @@ type Message {
   int32Value: Int
 
   """"""
-  int64Value: Int
+  int64Value: String
 
   """"""
   stringValue: String
@@ -49,7 +49,7 @@ type Message {
   uint32Value: Int
 
   """"""
-  uint64Value: Int
+  uint64Value: String
 }
 
 """"""
@@ -134,7 +134,7 @@ type Primitives {
   requiredFixed32Value: Int!
 
   """"""
-  requiredFixed64Value: Int!
+  requiredFixed64Value: String!
 
   """"""
   requiredFloatValue: Float!
@@ -143,19 +143,19 @@ type Primitives {
   requiredInt32Value: Int!
 
   """"""
-  requiredInt64Value: Int!
+  requiredInt64Value: String!
 
   """"""
   requiredSfixed32Value: Int!
 
   """"""
-  requiredSfixed64Value: Int!
+  requiredSfixed64Value: String!
 
   """"""
   requiredSint32Value: Int!
 
   """"""
-  requiredSint64Value: Int!
+  requiredSint64Value: String!
 
   """"""
   requiredStringValue: String!
@@ -164,7 +164,7 @@ type Primitives {
   requiredUint32Value: Int!
 
   """"""
-  requiredUint64Value: Int!
+  requiredUint64Value: String!
 }
 
 type Query {
