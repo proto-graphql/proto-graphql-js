@@ -3,6 +3,7 @@ import { ProtoField, ProtoRegistry } from "../protoTypes";
 import { detectGqlType, GqlType } from "./types";
 import { getUnwrapFunc } from "./unwrap";
 import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
+import { onlyNonNull } from "./util";
 
 /**
  * @example
@@ -14,9 +15,10 @@ import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor
  */
 export function createFieldDefinitionStmt(
   field: ProtoField,
-  registry: ProtoRegistry
+  registry: ProtoRegistry,
+  opts?: { input?: boolean }
 ): ts.Statement {
-  const type = detectGqlType(field, registry);
+  const type = detectGqlType(field, registry, opts);
   return ts.factory.createExpressionStatement(
     ts.factory.createCallExpression(
       ts.factory.createPropertyAccessExpression(
@@ -26,7 +28,7 @@ export function createFieldDefinitionStmt(
       undefined,
       [
         ts.factory.createStringLiteral(field.name),
-        createFieldOptionExpr(field, type),
+        createFieldOptionExpr(field, type, opts),
       ]
     )
   );
@@ -45,7 +47,8 @@ export function createFieldDefinitionStmt(
  */
 function createFieldOptionExpr(
   field: ProtoField,
-  type: GqlType
+  type: GqlType,
+  opts?: { input?: boolean }
 ): ts.Expression {
   const createTypeSpecifier = (type: GqlType): ts.Expression => {
     switch (type.kind) {
@@ -69,6 +72,23 @@ function createFieldOptionExpr(
     }
   };
 
+  return ts.factory.createObjectLiteralExpression(
+    [
+      ts.factory.createPropertyAssignment("type", createTypeSpecifier(type)),
+      ts.factory.createPropertyAssignment(
+        "description",
+        ts.factory.createStringLiteral(field.description)
+      ),
+      opts?.input ? null : createFieldResolverDecl(field, type),
+    ].filter(onlyNonNull()),
+    true
+  );
+}
+
+function createFieldResolverDecl(
+  field: ProtoField,
+  type: GqlType
+): ts.MethodDeclaration {
   let resolverRet: ts.Expression = ts.factory.createCallExpression(
     ts.factory.createPropertyAccessExpression(
       ts.factory.createIdentifier("root"),
@@ -135,35 +155,25 @@ function createFieldOptionExpr(
     }
   }
 
-  return ts.factory.createObjectLiteralExpression(
+  return ts.factory.createMethodDeclaration(
+    undefined,
+    undefined,
+    undefined,
+    "resolve",
+    undefined,
+    undefined,
     [
-      ts.factory.createPropertyAssignment("type", createTypeSpecifier(type)),
-      ts.factory.createPropertyAssignment(
-        "description",
-        ts.factory.createStringLiteral(field.description)
-      ),
-      ts.factory.createMethodDeclaration(
+      ts.factory.createParameterDeclaration(
         undefined,
         undefined,
         undefined,
-        "resolve",
+        "root",
         undefined,
         undefined,
-        [
-          ts.factory.createParameterDeclaration(
-            undefined,
-            undefined,
-            undefined,
-            "root",
-            undefined,
-            undefined,
-            undefined
-          ),
-        ],
-        undefined,
-        ts.factory.createBlock([ts.factory.createReturnStatement(resolverRet)])
+        undefined
       ),
     ],
-    true
+    undefined,
+    ts.factory.createBlock([ts.factory.createReturnStatement(resolverRet)])
   );
 }

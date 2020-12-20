@@ -29,19 +29,27 @@ export type GqlType =
       nullable: boolean;
     };
 
-export function detectGqlType(f: ProtoField, reg: ProtoRegistry): GqlType {
+export function detectGqlType(
+  f: ProtoField,
+  reg: ProtoRegistry,
+  opts?: { input?: boolean }
+): GqlType {
   if (f.isList()) {
     return {
       kind: "list",
-      type: detectGqlItemType(f, reg),
+      type: detectGqlItemType(f, reg, opts),
       nullable: false,
     };
   }
 
-  return detectGqlItemType(f, reg);
+  return detectGqlItemType(f, reg, opts);
 }
 
-function detectGqlItemType(f: ProtoField, reg: ProtoRegistry): GqlItemType {
+function detectGqlItemType(
+  f: ProtoField,
+  reg: ProtoRegistry,
+  opts?: { input?: boolean }
+): GqlItemType {
   const pbtype = f.descriptor.getType()!;
   switch (pbtype) {
     case FieldDescriptorProto.Type.TYPE_STRING:
@@ -141,7 +149,7 @@ function detectGqlItemType(f: ProtoField, reg: ProtoRegistry): GqlItemType {
         default:
           return {
             kind: "object",
-            type: gqlTypeName(reg.findByFieldDescriptor(f.descriptor)),
+            type: gqlTypeName(reg.findByFieldDescriptor(f.descriptor), opts),
             nullable: f.isNullable(),
           };
       }

@@ -43,6 +43,7 @@ export function createImportNexusDecl(
       ts.factory.createNamedImports(
         [
           msgs.length > 0 ? createImportSpecifier("objectType") : null,
+          msgs.length > 0 ? createImportSpecifier("inputObjectType") : null,
           enums.length > 0 ? createImportSpecifier("enumType") : null,
           oneof ? createImportSpecifier("unionType") : null,
           list ? createImportSpecifier("list") : null,
