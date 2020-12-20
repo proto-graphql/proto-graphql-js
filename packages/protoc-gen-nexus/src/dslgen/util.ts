@@ -15,9 +15,12 @@ export function protoImportPath(t: ProtoMessage, o: { importPrefix?: string }) {
 }
 
 export function gqlTypeName(
-  typ: ProtoMessage | ProtoOneof | ProtoEnum
+  typ: ProtoMessage | ProtoOneof | ProtoEnum,
+  opts?: { input?: boolean }
 ): string {
-  return nameWithParent(typ);
+  const name = nameWithParent(typ);
+  const suffix = typ instanceof ProtoMessage && opts?.input ? "Input" : "";
+  return name + suffix;
 }
 
 /**

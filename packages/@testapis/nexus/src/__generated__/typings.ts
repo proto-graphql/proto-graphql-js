@@ -34,6 +34,70 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  HelloInput: { // input type
+    optionalPrimitives?: NexusGenInputs['PrimitivesInput'] | null; // PrimitivesInput
+    optionalPrimitivesList?: NexusGenInputs['PrimitivesInput'] | null; // PrimitivesInput
+    requiredPrimitives: NexusGenInputs['PrimitivesInput']; // PrimitivesInput!
+    requiredPrimitivesList?: NexusGenInputs['PrimitivesInput'][] | null; // [PrimitivesInput!]
+  }
+  MessageInput: { // input type
+    boolValue?: boolean | null; // Boolean
+    doubleValue?: number | null; // Float
+    floatValue?: number | null; // Float
+    int32Value?: number | null; // Int
+    int64Value?: string | null; // String
+    stringValue?: string | null; // String
+    timestamp?: NexusGenScalars['DateTime'] | null; // DateTime
+    uint32Value?: number | null; // Int
+    uint64Value?: string | null; // String
+  }
+  MessageWithEnumsInput: { // input type
+    myEnum1?: NexusGenEnums['MyEnum1'] | null; // MyEnum1
+  }
+  OneofMemberMessage1Input: { // input type
+    body: string; // String!
+  }
+  OneofMemberMessage2Input: { // input type
+    imageUrl: string; // String!
+  }
+  OneofParentInput: { // input type
+    normalField: string; // String!
+    optoinalMessage1?: NexusGenInputs['OneofMemberMessage1Input'] | null; // OneofMemberMessage1Input
+    optoinalMessage2?: NexusGenInputs['OneofMemberMessage2Input'] | null; // OneofMemberMessage2Input
+    requiredMessage1?: NexusGenInputs['OneofMemberMessage1Input'] | null; // OneofMemberMessage1Input
+    requiredMessage2?: NexusGenInputs['OneofMemberMessage2Input'] | null; // OneofMemberMessage2Input
+  }
+  ParentMessageInput: { // input type
+    body: string; // String!
+    nested?: NexusGenInputs['ParentMessageNestedMessageInput'] | null; // ParentMessageNestedMessageInput
+    nestedEnum?: NexusGenEnums['ParentMessageNestedEnum'] | null; // ParentMessageNestedEnum
+  }
+  ParentMessageNestedMessageInput: { // input type
+    nestedBody: string; // String!
+  }
+  PrimitivesInput: { // input type
+    requiredBoolValue: boolean; // Boolean!
+    requiredDoubleValue: number; // Float!
+    requiredFixed32Value: number; // Int!
+    requiredFixed64Value: string; // String!
+    requiredFloatValue: number; // Float!
+    requiredInt32Value: number; // Int!
+    requiredInt64Value: string; // String!
+    requiredSfixed32Value: number; // Int!
+    requiredSfixed64Value: string; // String!
+    requiredSint32Value: number; // Int!
+    requiredSint64Value: string; // String!
+    requiredStringValue: string; // String!
+    requiredUint32Value: number; // Int!
+    requiredUint64Value: string; // String!
+  }
+  TestPrefixPrefixedMessageInnerMessageInput: { // input type
+    body: string; // String!
+  }
+  TestPrefixPrefixedMessageInput: { // input type
+    body: string; // String!
+    prefixedEnum?: NexusGenEnums['TestPrefixPrefixedEnum'] | null; // TestPrefixPrefixedEnum
+  }
 }
 
 export interface NexusGenEnums {
@@ -227,7 +291,7 @@ export interface NexusGenTypeInterfaces {
 
 export type NexusGenObjectNames = keyof NexusGenObjects;
 
-export type NexusGenInputNames = never;
+export type NexusGenInputNames = keyof NexusGenInputs;
 
 export type NexusGenEnumNames = keyof NexusGenEnums;
 

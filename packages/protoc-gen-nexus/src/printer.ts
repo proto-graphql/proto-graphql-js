@@ -4,6 +4,7 @@ import {
   createImportNexusDecl,
   createImportProtoDecls,
   createImportUnwrapFuncDecls,
+  createInputObjectTypeDslStmts,
   createObjectTypeDslStmts,
   createOneofUnionTypeDslStmts,
   createReExportProtoStmts,
@@ -30,6 +31,8 @@ export function printSource(
     ...createOneofUnionTypeDslStmts(msgs, registry, params),
     // `export cosnt Hello = objectType({ ... });`
     ...createObjectTypeDslStmts(msgs, registry, params),
+    // `export cosnt HelloInput = inputObjectType({ ... });`
+    ...createInputObjectTypeDslStmts(msgs, registry),
     // `export const Role = enumType({ ... });`
     ...createEnumTypeDslStmts(enums),
   ];

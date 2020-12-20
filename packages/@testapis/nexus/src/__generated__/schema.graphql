@@ -23,7 +23,52 @@ type Hello {
 }
 
 """"""
+input HelloInput {
+  """Optional."""
+  optionalPrimitives: PrimitivesInput
+
+  """Optional."""
+  optionalPrimitivesList: PrimitivesInput
+
+  """Required."""
+  requiredPrimitives: PrimitivesInput!
+
+  """Required."""
+  requiredPrimitivesList: [PrimitivesInput!]
+}
+
+""""""
 type Message {
+  """"""
+  boolValue: Boolean
+
+  """"""
+  doubleValue: Float
+
+  """"""
+  floatValue: Float
+
+  """"""
+  int32Value: Int
+
+  """"""
+  int64Value: String
+
+  """"""
+  stringValue: String
+
+  """"""
+  timestamp: DateTime
+
+  """"""
+  uint32Value: Int
+
+  """"""
+  uint64Value: String
+}
+
+""""""
+input MessageInput {
   """"""
   boolValue: Boolean
 
@@ -59,6 +104,12 @@ type MessageWithEnums {
 }
 
 """"""
+input MessageWithEnumsInput {
+  """"""
+  myEnum1: MyEnum1
+}
+
+""""""
 enum MyEnum1 {
   """This is Bar."""
   BAR
@@ -74,7 +125,19 @@ type OneofMemberMessage1 {
 }
 
 """"""
+input OneofMemberMessage1Input {
+  """"""
+  body: String!
+}
+
+""""""
 type OneofMemberMessage2 {
+  """"""
+  imageUrl: String!
+}
+
+""""""
+input OneofMemberMessage2Input {
   """"""
   imageUrl: String!
 }
@@ -89,6 +152,24 @@ type OneofParent {
 
   """Required. disallow not_set."""
   required_oneof_members: OneofParentRequiredOneofMembers!
+}
+
+""""""
+input OneofParentInput {
+  """"""
+  normalField: String!
+
+  """"""
+  optoinalMessage1: OneofMemberMessage1Input
+
+  """"""
+  optoinalMessage2: OneofMemberMessage2Input
+
+  """"""
+  requiredMessage1: OneofMemberMessage1Input
+
+  """"""
+  requiredMessage2: OneofMemberMessage2Input
 }
 
 """"""
@@ -110,6 +191,18 @@ type ParentMessage {
 }
 
 """"""
+input ParentMessageInput {
+  """"""
+  body: String!
+
+  """"""
+  nested: ParentMessageNestedMessageInput
+
+  """"""
+  nestedEnum: ParentMessageNestedEnum
+}
+
+""""""
 enum ParentMessageNestedEnum {
   BAR
   FOO
@@ -123,7 +216,58 @@ type ParentMessageNestedMessage {
 }
 
 """"""
+input ParentMessageNestedMessageInput {
+  """"""
+  nestedBody: String!
+}
+
+""""""
 type Primitives {
+  """"""
+  requiredBoolValue: Boolean!
+
+  """"""
+  requiredDoubleValue: Float!
+
+  """"""
+  requiredFixed32Value: Int!
+
+  """"""
+  requiredFixed64Value: String!
+
+  """"""
+  requiredFloatValue: Float!
+
+  """"""
+  requiredInt32Value: Int!
+
+  """"""
+  requiredInt64Value: String!
+
+  """"""
+  requiredSfixed32Value: Int!
+
+  """"""
+  requiredSfixed64Value: String!
+
+  """"""
+  requiredSint32Value: Int!
+
+  """"""
+  requiredSint64Value: String!
+
+  """"""
+  requiredStringValue: String!
+
+  """"""
+  requiredUint32Value: Int!
+
+  """"""
+  requiredUint64Value: String!
+}
+
+""""""
+input PrimitivesInput {
   """"""
   requiredBoolValue: Boolean!
 
@@ -191,4 +335,19 @@ type TestPrefixPrefixedMessage {
 type TestPrefixPrefixedMessageInnerMessage {
   """"""
   body: String!
+}
+
+""""""
+input TestPrefixPrefixedMessageInnerMessageInput {
+  """"""
+  body: String!
+}
+
+""""""
+input TestPrefixPrefixedMessageInput {
+  """"""
+  body: String!
+
+  """"""
+  prefixedEnum: TestPrefixPrefixedEnum
 }
