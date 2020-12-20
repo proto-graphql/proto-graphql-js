@@ -103,3 +103,14 @@ test("generates nexus DSL with proto custom options", () => {
 
   expect(fileByName["extensions/extensions_pb_nexus.ts"]).toMatchSnapshot();
 });
+
+test("generates nexus DSL of union type with proto oneofs", () => {
+  const req = buildCodeGeneratorRequest("oneof");
+  const resp = processRequest(req);
+
+  expect(Object.keys(resp.getFileList())).toHaveLength(1);
+
+  const fileByName = getFileMap(resp);
+
+  expect(fileByName["oneof/oneof_pb_nexus.ts"]).toMatchSnapshot();
+});

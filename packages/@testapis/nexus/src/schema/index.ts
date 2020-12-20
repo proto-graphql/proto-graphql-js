@@ -7,6 +7,7 @@ import * as enumsTypes from "./types/enums";
 import * as extensionsTypes from "./types/extensions";
 import * as helloTypes from "./types/hello";
 import * as nestedTypes from "./types/nested";
+import * as oneofTypes from "./types/oneof";
 import * as wktypesTypes from "./types/wktypes";
 
 export const schema = makeSchema({
@@ -16,6 +17,7 @@ export const schema = makeSchema({
     ...extensionsTypes,
     ...helloTypes,
     ...nestedTypes,
+    ...oneofTypes,
     ...wktypesTypes,
   },
   outputs: {

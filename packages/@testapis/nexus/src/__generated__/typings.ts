@@ -8,6 +8,7 @@ import { $$testapis$node$lib$enums$enums_pb$MessageWithEnums } from "./../schema
 import { $$testapis$node$lib$extensions$extensions_pb$TestPrefixPrefixedMessage, $$testapis$node$lib$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage } from "./../schema/types/extensions/extensions_pb_nexus"
 import { $$testapis$node$lib$hello$hello_pb$Hello, $$testapis$node$lib$hello$hello_pb$Primitives } from "./../schema/types/hello/hello_pb_nexus"
 import { $$testapis$node$lib$nested$nested_pb$ParentMessage, $$testapis$node$lib$nested$nested_pb$ParentMessageNestedMessage } from "./../schema/types/nested/nested_pb_nexus"
+import { $$testapis$node$lib$oneof$oneof_pb$OneofParent, $$testapis$node$lib$oneof$oneof_pb$OneofMemberMessage1, $$testapis$node$lib$oneof$oneof_pb$OneofMemberMessage2 } from "./../schema/types/oneof/oneof_pb_nexus"
 import { $$testapis$node$lib$wktypes$well_known_types_pb$Message } from "./../schema/types/wktypes/well_known_types_pb_nexus"
 import { core } from "nexus"
 declare global {
@@ -54,6 +55,9 @@ export interface NexusGenObjects {
   Hello: $$testapis$node$lib$hello$hello_pb$Hello;
   Message: $$testapis$node$lib$wktypes$well_known_types_pb$Message;
   MessageWithEnums: $$testapis$node$lib$enums$enums_pb$MessageWithEnums;
+  OneofMemberMessage1: $$testapis$node$lib$oneof$oneof_pb$OneofMemberMessage1;
+  OneofMemberMessage2: $$testapis$node$lib$oneof$oneof_pb$OneofMemberMessage2;
+  OneofParent: $$testapis$node$lib$oneof$oneof_pb$OneofParent;
   ParentMessage: $$testapis$node$lib$nested$nested_pb$ParentMessage;
   ParentMessageNestedMessage: $$testapis$node$lib$nested$nested_pb$ParentMessageNestedMessage;
   Primitives: $$testapis$node$lib$hello$hello_pb$Primitives;
@@ -66,9 +70,11 @@ export interface NexusGenInterfaces {
 }
 
 export interface NexusGenUnions {
+  OneofParentOptionalOneofMembers: NexusGenRootTypes['OneofMemberMessage1'] | NexusGenRootTypes['OneofMemberMessage2'];
+  OneofParentRequiredOneofMembers: NexusGenRootTypes['OneofMemberMessage1'] | NexusGenRootTypes['OneofMemberMessage2'];
 }
 
-export type NexusGenRootTypes = NexusGenObjects
+export type NexusGenRootTypes = NexusGenObjects & NexusGenUnions
 
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
@@ -92,6 +98,17 @@ export interface NexusGenFieldTypes {
   }
   MessageWithEnums: { // field return type
     myEnum1: NexusGenEnums['MyEnum1'] | null; // MyEnum1
+  }
+  OneofMemberMessage1: { // field return type
+    body: string; // String!
+  }
+  OneofMemberMessage2: { // field return type
+    imageUrl: string; // String!
+  }
+  OneofParent: { // field return type
+    normalField: string; // String!
+    optional_oneof_members: NexusGenRootTypes['OneofParentOptionalOneofMembers'] | null; // OneofParentOptionalOneofMembers
+    required_oneof_members: NexusGenRootTypes['OneofParentRequiredOneofMembers']; // OneofParentRequiredOneofMembers!
   }
   ParentMessage: { // field return type
     body: string; // String!
@@ -150,6 +167,17 @@ export interface NexusGenFieldTypeNames {
   MessageWithEnums: { // field return type name
     myEnum1: 'MyEnum1'
   }
+  OneofMemberMessage1: { // field return type name
+    body: 'String'
+  }
+  OneofMemberMessage2: { // field return type name
+    imageUrl: 'String'
+  }
+  OneofParent: { // field return type name
+    normalField: 'String'
+    optional_oneof_members: 'OneofParentOptionalOneofMembers'
+    required_oneof_members: 'OneofParentRequiredOneofMembers'
+  }
   ParentMessage: { // field return type name
     body: 'String'
     nested: 'ParentMessageNestedMessage'
@@ -190,6 +218,8 @@ export interface NexusGenArgTypes {
 }
 
 export interface NexusGenAbstractTypeMembers {
+  OneofParentOptionalOneofMembers: "OneofMemberMessage1" | "OneofMemberMessage2"
+  OneofParentRequiredOneofMembers: "OneofMemberMessage1" | "OneofMemberMessage2"
 }
 
 export interface NexusGenTypeInterfaces {
@@ -205,11 +235,11 @@ export type NexusGenInterfaceNames = never;
 
 export type NexusGenScalarNames = keyof NexusGenScalars;
 
-export type NexusGenUnionNames = never;
+export type NexusGenUnionNames = keyof NexusGenUnions;
 
 export type NexusGenObjectsUsingAbstractStrategyIsTypeOf = never;
 
-export type NexusGenAbstractsUsingStrategyResolveType = never;
+export type NexusGenAbstractsUsingStrategyResolveType = "OneofParentOptionalOneofMembers" | "OneofParentRequiredOneofMembers";
 
 export type NexusGenFeaturesConfig = {
   abstractTypeStrategies: {

@@ -5,6 +5,7 @@ import {
   FileDescriptorProto,
   EnumDescriptorProto,
   EnumValueDescriptorProto,
+  OneofDescriptorProto,
 } from "google-protobuf/google/protobuf/descriptor_pb";
 
 export class ProtoRegistry {
@@ -89,7 +90,7 @@ export class ProtoFile {
   }
 
   public findComments(
-    d: ProtoMessage | ProtoField | ProtoEnum | ProtoEnumValue
+    d: ProtoMessage | ProtoOneof | ProtoField | ProtoEnum | ProtoEnumValue
   ): Comments {
     const l = this.findSourceLocation(d);
     if (l === null) return {};
@@ -103,12 +104,13 @@ export class ProtoFile {
   }
 
   private findSourceLocation(
-    d: ProtoMessage | ProtoField | ProtoEnum | ProtoEnumValue
+    d: ProtoMessage | ProtoOneof | ProtoField | ProtoEnum | ProtoEnumValue
   ): SourceCodeInfo.Location | null {
     let paths: number[] = [];
     let desc:
       | ProtoFile
       | ProtoMessage
+      | ProtoOneof
       | ProtoField
       | ProtoEnum
       | ProtoEnumValue = d;
@@ -136,6 +138,10 @@ export class ProtoFile {
         } else {
           const _exhaustiveCheck: never = desc;
         }
+      } else if (desc instanceof ProtoOneof) {
+        paths.push(desc.index);
+        desc = desc.parent;
+        paths.push(8); // DescriptorProto.oneof_decl
       } else if (desc instanceof ProtoField) {
         paths.push(desc.index);
         desc = desc.parent;
@@ -220,6 +226,52 @@ export class ProtoMessage {
       .getFieldList()
       .map((d, i) => new ProtoField(d, this, i));
   }
+
+  get oneofs(): ProtoOneof[] {
+    return this.descriptor
+      .getOneofDeclList()
+      .map((o, i) => new ProtoOneof(o, this, i));
+  }
+}
+
+export class ProtoOneof {
+  constructor(
+    readonly descriptor: OneofDescriptorProto,
+    readonly parent: ProtoMessage,
+    readonly index: number
+  ) {}
+
+  get name(): string {
+    return this.descriptor.getName()!;
+  }
+
+  get file(): ProtoFile {
+    let parent: ProtoFile | ProtoMessage = this.parent;
+    for (;;) {
+      if (parent instanceof ProtoFile) return parent;
+      parent = parent.parent;
+    }
+  }
+
+  get comments(): Comments {
+    return this.file.findComments(this);
+  }
+
+  get description(): string {
+    return this.comments?.leadingComments || "";
+  }
+
+  public isNullable(): boolean {
+    return !this.comments?.leadingComments?.startsWith("Required.");
+  }
+
+  get fields(): ProtoField[] {
+    return this.parent.fields.filter(
+      (f): f is NonNullable<ProtoField> =>
+        f.descriptor.hasOneofIndex() &&
+        f.descriptor.getOneofIndex() === this.index
+    );
+  }
 }
 
 export class ProtoField {
@@ -248,6 +300,10 @@ export class ProtoField {
 
   get description(): string {
     return this.comments?.leadingComments || "";
+  }
+
+  public isOneofMember(): boolean {
+    return this.descriptor.hasOneofIndex();
   }
 
   public isList(): boolean {
