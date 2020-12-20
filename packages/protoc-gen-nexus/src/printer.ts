@@ -5,6 +5,7 @@ import {
   createImportProtoDecls,
   createImportUnwrapFuncDecls,
   createObjectTypeDslStmts,
+  createOneofUnionTypeDslStmts,
   createReExportProtoStmts,
 } from "./dslgen";
 import { ProtoFile, ProtoRegistry } from "./protoTypes";
@@ -25,6 +26,8 @@ export function printSource(
     ...createImportProtoDecls(msgs, params),
     // `export _$hello$hello_pb$Hello = _$hello$hello_pb.Hello;`
     ...createReExportProtoStmts(msgs, params),
+    // `export cosnt Oneof = unionType({ ... });`
+    ...createOneofUnionTypeDslStmts(msgs, registry, params),
     // `export cosnt Hello = objectType({ ... });`
     ...createObjectTypeDslStmts(msgs, registry, params),
     // `export const Role = enumType({ ... });`

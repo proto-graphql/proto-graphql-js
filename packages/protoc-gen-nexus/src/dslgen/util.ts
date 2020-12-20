@@ -1,5 +1,6 @@
 import ts from "typescript";
-import { ProtoEnum, ProtoFile, ProtoMessage } from "../protoTypes";
+import { pascalCase } from "change-case";
+import { ProtoEnum, ProtoFile, ProtoMessage, ProtoOneof } from "../protoTypes";
 import * as extensions from "../__generated__/extensions/graphql/schema_pb";
 
 export function protoExportAlias(
@@ -13,8 +14,28 @@ export function protoImportPath(t: ProtoMessage, o: { importPrefix?: string }) {
   return `${o.importPrefix ? `${o.importPrefix}/` : "./"}${t.importPath}`;
 }
 
-export function gqlTypeName(typ: ProtoMessage | ProtoEnum): string {
+export function gqlTypeName(
+  typ: ProtoMessage | ProtoOneof | ProtoEnum
+): string {
   return nameWithParent(typ);
+}
+
+/**
+ * @example
+ * ```
+ * _$hello$hello_pb.User
+ * ```
+ */
+export function createProtoExpr(
+  t: ProtoMessage,
+  o: { importPrefix?: string }
+): ts.Expression {
+  return ts.factory.createPropertyAccessExpression(
+    t.parent instanceof ProtoFile
+      ? ts.factory.createIdentifier(uniqueImportAlias(protoImportPath(t, o)))
+      : createProtoExpr(t.parent, o),
+    t.name
+  );
 }
 
 /**
@@ -71,12 +92,12 @@ export function createDslExportConstStmt(
   );
 }
 
-function nameWithParent(typ: ProtoMessage | ProtoEnum): string {
+function nameWithParent(typ: ProtoMessage | ProtoOneof | ProtoEnum): string {
   let name = "";
-  let t: ProtoMessage | ProtoEnum | ProtoFile = typ;
+  let t: ProtoMessage | ProtoOneof | ProtoEnum | ProtoFile = typ;
   for (;;) {
     if (t instanceof ProtoFile) break;
-    name = `${t.name}${name}`;
+    name = `${t instanceof ProtoOneof ? pascalCase(t.name) : t.name}${name}`;
     t = t.parent;
   }
   const prefix = t.descriptor

@@ -18,14 +18,20 @@ export function createImportNexusDecl(
   msgs: ReadonlyArray<ProtoMessage>,
   enums: ReadonlyArray<ProtoEnum>
 ): ts.ImportDeclaration {
-  let [list, nullable, nonNull] = [false, false, false];
+  let [oneof, list, nullable, nonNull] = [false, false, false, false];
   for (const m of msgs) {
+    oneof ||= m.oneofs.length > 0;
     for (const f of m.fields) {
+      if (f.isOneofMember()) continue;
       list ||= f.isList();
       nullable ||= f.isNullable();
       nonNull ||= f.isList() || !f.isNullable();
     }
-    if (list && nullable && nonNull) break;
+    for (const o of m.oneofs) {
+      nullable ||= o.isNullable();
+      nonNull ||= !o.isNullable();
+    }
+    if (oneof && list && nullable && nonNull) break;
   }
 
   return ts.factory.createImportDeclaration(
@@ -38,6 +44,7 @@ export function createImportNexusDecl(
         [
           msgs.length > 0 ? createImportSpecifier("objectType") : null,
           enums.length > 0 ? createImportSpecifier("enumType") : null,
+          oneof ? createImportSpecifier("unionType") : null,
           list ? createImportSpecifier("list") : null,
           nullable ? createImportSpecifier("nullable") : null,
           nonNull ? createImportSpecifier("nonNull") : null,

@@ -68,6 +68,36 @@ enum MyEnum1 {
 }
 
 """"""
+type OneofMemberMessage1 {
+  """"""
+  body: String!
+}
+
+""""""
+type OneofMemberMessage2 {
+  """"""
+  imageUrl: String!
+}
+
+""""""
+type OneofParent {
+  """"""
+  normalField: String!
+
+  """"""
+  optional_oneof_members: OneofParentOptionalOneofMembers
+
+  """Required. disallow not_set."""
+  required_oneof_members: OneofParentRequiredOneofMembers!
+}
+
+""""""
+union OneofParentOptionalOneofMembers = OneofMemberMessage1 | OneofMemberMessage2
+
+"""Required. disallow not_set."""
+union OneofParentRequiredOneofMembers = OneofMemberMessage1 | OneofMemberMessage2
+
+""""""
 type ParentMessage {
   """"""
   body: String!
