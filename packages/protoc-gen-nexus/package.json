@@ -1,6 +1,6 @@
 {
   "name": "protoc-gen-nexus",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Generate DSL for GraphQL Nexus from Protocol Buffers IDL",
   "bin": {
     "protoc-gen-nexus": "./bin/protoc-gen-nexus"
