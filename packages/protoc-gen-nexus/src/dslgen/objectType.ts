@@ -3,6 +3,7 @@ import { ProtoMessage, ProtoRegistry } from "../protoTypes";
 import {
   createDslExportConstStmt,
   gqlTypeName,
+  isInputOnlyField,
   protoExportAlias,
 } from "./util";
 import { createFieldDefinitionStmt } from "./field";
@@ -105,8 +106,11 @@ function createObjectTypeDefinitionMethodDecl(
       [
         ...msg.fields
           .filter((f) => !f.isOneofMember())
+          .filter((f) => !isInputOnlyField(f))
           .map((f) => createFieldDefinitionStmt(f, reg)),
-        ...msg.oneofs.map((o) => createOneofFieldDefinitionStmt(o, opts)),
+        ...msg.oneofs
+          .filter((f) => !isInputOnlyField(f))
+          .map((o) => createOneofFieldDefinitionStmt(o, opts)),
       ],
       true
     )

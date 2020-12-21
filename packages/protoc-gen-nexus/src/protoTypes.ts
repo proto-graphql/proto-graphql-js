@@ -278,10 +278,6 @@ export class ProtoOneof {
     return this.comments?.leadingComments || "";
   }
 
-  public isNullable(): boolean {
-    return !this.comments?.leadingComments?.startsWith("Required.");
-  }
-
   get fields(): ProtoField[] {
     return this.parent.fields.filter(
       (f): f is NonNullable<ProtoField> =>
@@ -332,16 +328,6 @@ export class ProtoField {
   public isList(): boolean {
     return (
       this.descriptor.getLabel() === FieldDescriptorProto.Label.LABEL_REPEATED
-    );
-  }
-
-  public isNullable(): boolean {
-    return !(
-      this.descriptor.getLabel() ===
-        FieldDescriptorProto.Label.LABEL_REQUIRED ||
-      (this.descriptor.getType() !== FieldDescriptorProto.Type.TYPE_MESSAGE &&
-        this.descriptor.getType() !== FieldDescriptorProto.Type.TYPE_ENUM) ||
-      this.comments?.leadingComments?.startsWith("Required.")
     );
   }
 

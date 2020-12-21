@@ -3,6 +3,7 @@ import { ProtoEnum, ProtoMessage } from "../protoTypes";
 import { getUnwrapFunc } from "./unwrap";
 import {
   createImportAllWithAliastDecl,
+  isRequiredField,
   onlyNonNull,
   onlyUnique,
   protoImportPath,
@@ -23,13 +24,15 @@ export function createImportNexusDecl(
     oneof ||= m.oneofs.length > 0;
     for (const f of m.fields) {
       if (f.isOneofMember()) continue;
+      const required = isRequiredField(f);
       list ||= f.isList();
-      nullable ||= f.isNullable();
-      nonNull ||= f.isList() || !f.isNullable();
+      nullable ||= !required;
+      nonNull ||= f.isList() || required;
     }
     for (const o of m.oneofs) {
-      nullable ||= o.isNullable();
-      nonNull ||= !o.isNullable();
+      const required = isRequiredField(o);
+      nullable ||= !required;
+      nonNull ||= required;
     }
     if (oneof && list && nullable && nonNull) break;
   }

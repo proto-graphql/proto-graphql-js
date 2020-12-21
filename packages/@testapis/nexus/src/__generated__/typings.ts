@@ -8,6 +8,7 @@ import { $$testapis$node$lib$deprecation$deprecation_pb$DeprecatedMessage, $$tes
 import { $$testapis$node$lib$deprecation$file_deprecation_pb$DeprecatedFileMessage, $$testapis$node$lib$deprecation$file_deprecation_pb$DeprecatedFileMessageInnerMessage } from "./../schema/types/deprecation/file_deprecation_pb_nexus"
 import { $$testapis$node$lib$enums$enums_pb$MessageWithEnums } from "./../schema/types/enums/enums_pb_nexus"
 import { $$testapis$node$lib$extensions$extensions_pb$TestPrefixPrefixedMessage, $$testapis$node$lib$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage } from "./../schema/types/extensions/extensions_pb_nexus"
+import { $$testapis$node$lib$field_behavior$comments_pb$FieldBehaviorComentsMessage, $$testapis$node$lib$field_behavior$comments_pb$FieldBehaviorComentsMessagePost } from "./../schema/types/field_behavior/comments_pb_nexus"
 import { $$testapis$node$lib$hello$hello_pb$Hello, $$testapis$node$lib$hello$hello_pb$Primitives } from "./../schema/types/hello/hello_pb_nexus"
 import { $$testapis$node$lib$nested$nested_pb$ParentMessage, $$testapis$node$lib$nested$nested_pb$ParentMessageNestedMessage } from "./../schema/types/nested/nested_pb_nexus"
 import { $$testapis$node$lib$oneof$oneof_pb$OneofParent, $$testapis$node$lib$oneof$oneof_pb$OneofMemberMessage1, $$testapis$node$lib$oneof$oneof_pb$OneofMemberMessage2 } from "./../schema/types/oneof/oneof_pb_nexus"
@@ -49,6 +50,15 @@ export interface NexusGenInputs {
   DeprecatedMessageInput: { // input type
     body: string; // String!
     enum?: NexusGenEnums['NotDeprecatedEnum'] | null; // NotDeprecatedEnum
+  }
+  FieldBehaviorComentsMessageInput: { // input type
+    inputOnlyField?: NexusGenInputs['FieldBehaviorComentsMessagePostInput'] | null; // FieldBehaviorComentsMessagePostInput
+    inputOnlyRequiredField: NexusGenInputs['FieldBehaviorComentsMessagePostInput']; // FieldBehaviorComentsMessagePostInput!
+    requiredField: NexusGenInputs['FieldBehaviorComentsMessagePostInput']; // FieldBehaviorComentsMessagePostInput!
+    requiredInputOnlyField: NexusGenInputs['FieldBehaviorComentsMessagePostInput']; // FieldBehaviorComentsMessagePostInput!
+  }
+  FieldBehaviorComentsMessagePostInput: { // input type
+    body: string; // String!
   }
   HelloInput: { // input type
     optionalPrimitives?: NexusGenInputs['PrimitivesInput'] | null; // PrimitivesInput
@@ -153,6 +163,8 @@ export interface NexusGenObjects {
   DeprecatedFileMessageInnerMessage: $$testapis$node$lib$deprecation$file_deprecation_pb$DeprecatedFileMessageInnerMessage;
   DeprecatedMessage: $$testapis$node$lib$deprecation$deprecation_pb$DeprecatedMessage;
   DeprecatedMessageInnerMessage: $$testapis$node$lib$deprecation$deprecation_pb$DeprecatedMessageInnerMessage;
+  FieldBehaviorComentsMessage: $$testapis$node$lib$field_behavior$comments_pb$FieldBehaviorComentsMessage;
+  FieldBehaviorComentsMessagePost: $$testapis$node$lib$field_behavior$comments_pb$FieldBehaviorComentsMessagePost;
   Hello: $$testapis$node$lib$hello$hello_pb$Hello;
   Message: $$testapis$node$lib$wktypes$well_known_types_pb$Message;
   MessageWithEnums: $$testapis$node$lib$enums$enums_pb$MessageWithEnums;
@@ -197,6 +209,15 @@ export interface NexusGenFieldTypes {
     enum: NexusGenEnums['NotDeprecatedEnum'] | null; // NotDeprecatedEnum
   }
   DeprecatedMessageInnerMessage: { // field return type
+    body: string; // String!
+  }
+  FieldBehaviorComentsMessage: { // field return type
+    outputOnlyField: NexusGenRootTypes['FieldBehaviorComentsMessagePost'] | null; // FieldBehaviorComentsMessagePost
+    outputOnlyRequiredField: NexusGenRootTypes['FieldBehaviorComentsMessagePost']; // FieldBehaviorComentsMessagePost!
+    requiredField: NexusGenRootTypes['FieldBehaviorComentsMessagePost']; // FieldBehaviorComentsMessagePost!
+    requiredOutputOnlyField: NexusGenRootTypes['FieldBehaviorComentsMessagePost']; // FieldBehaviorComentsMessagePost!
+  }
+  FieldBehaviorComentsMessagePost: { // field return type
     body: string; // String!
   }
   Hello: { // field return type
@@ -291,6 +312,15 @@ export interface NexusGenFieldTypeNames {
     enum: 'NotDeprecatedEnum'
   }
   DeprecatedMessageInnerMessage: { // field return type name
+    body: 'String'
+  }
+  FieldBehaviorComentsMessage: { // field return type name
+    outputOnlyField: 'FieldBehaviorComentsMessagePost'
+    outputOnlyRequiredField: 'FieldBehaviorComentsMessagePost'
+    requiredField: 'FieldBehaviorComentsMessagePost'
+    requiredOutputOnlyField: 'FieldBehaviorComentsMessagePost'
+  }
+  FieldBehaviorComentsMessagePost: { // field return type name
     body: 'String'
   }
   Hello: { // field return type name

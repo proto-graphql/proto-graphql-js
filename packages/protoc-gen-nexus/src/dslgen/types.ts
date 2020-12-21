@@ -1,6 +1,6 @@
 import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
 import { ProtoField, ProtoRegistry } from "../protoTypes";
-import { gqlTypeName } from "./util";
+import { gqlTypeName, isRequiredField } from "./util";
 
 type GqlScalarType = "Int" | "Float" | "String" | "Boolean" | "ID" | "DateTime";
 
@@ -50,7 +50,9 @@ function detectGqlItemType(
   reg: ProtoRegistry,
   opts?: { input?: boolean }
 ): GqlItemType {
+  const nullable = !isRequiredField(f);
   const pbtype = f.descriptor.getType()!;
+
   switch (pbtype) {
     case FieldDescriptorProto.Type.TYPE_STRING:
       return { kind: "scalar", type: "String", nullable: false };
@@ -87,7 +89,7 @@ function detectGqlItemType(
       return {
         kind: "enum",
         type: gqlTypeName(reg.findByFieldDescriptor(f.descriptor)),
-        nullable: f.isNullable(),
+        nullable,
       };
     case FieldDescriptorProto.Type.TYPE_MESSAGE:
       switch (f.descriptor.getTypeName()) {
@@ -97,7 +99,7 @@ function detectGqlItemType(
           return {
             kind: "scalar",
             type: "Boolean",
-            nullable: f.isNullable(),
+            nullable,
           };
         case ".google.protobuf.BytesValue":
           throw "not supported";
@@ -106,7 +108,7 @@ function detectGqlItemType(
           return {
             kind: "scalar",
             type: "Float",
-            nullable: f.isNullable(),
+            nullable,
           };
         case ".google.protobuf.Duration":
           throw "not implemented";
@@ -114,43 +116,43 @@ function detectGqlItemType(
           return {
             kind: "scalar",
             type: "Int",
-            nullable: f.isNullable(),
+            nullable,
           };
         case ".google.protobuf.Int64Value":
           return {
             kind: "scalar",
             type: "String",
-            nullable: f.isNullable(),
+            nullable,
           };
         case ".google.protobuf.UInt32Value":
           return {
             kind: "scalar",
             type: "Int",
-            nullable: f.isNullable(),
+            nullable,
           };
         case ".google.protobuf.UInt64Value":
           return {
             kind: "scalar",
             type: "String",
-            nullable: f.isNullable(),
+            nullable,
           };
         case ".google.protobuf.StringValue":
           return {
             kind: "scalar",
             type: "String",
-            nullable: f.isNullable(),
+            nullable,
           };
         case ".google.protobuf.Timestamp":
           return {
             kind: "scalar",
             type: "DateTime",
-            nullable: f.isNullable(),
+            nullable,
           };
         default:
           return {
             kind: "object",
             type: gqlTypeName(reg.findByFieldDescriptor(f.descriptor), opts),
-            nullable: f.isNullable(),
+            nullable,
           };
       }
     default:

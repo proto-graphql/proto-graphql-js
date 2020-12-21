@@ -5,6 +5,7 @@ import {
   createDeprecationPropertyAssignment,
   createProtoExpr,
   gqlTypeName,
+  isRequiredField,
   onlyNonNull,
 } from "./util";
 
@@ -51,14 +52,13 @@ function createOneofFieldOptionExpr(
   oneof: ProtoOneof,
   opts: { importPrefix?: string }
 ): ts.Expression {
+  const nullable = !isRequiredField(oneof);
   return ts.factory.createObjectLiteralExpression(
     [
       ts.factory.createPropertyAssignment(
         "type",
         ts.factory.createCallExpression(
-          ts.factory.createIdentifier(
-            oneof.isNullable() ? "nullable" : "nonNull"
-          ),
+          ts.factory.createIdentifier(nullable ? "nullable" : "nonNull"),
           undefined,
           [ts.factory.createStringLiteral(gqlTypeName(oneof))]
         )
@@ -110,7 +110,7 @@ function createOneofFieldOptionExpr(
                   [
                     ts.factory.createBlock(
                       [
-                        oneof.isNullable()
+                        nullable
                           ? ts.factory.createReturnStatement(
                               ts.factory.createToken(ts.SyntaxKind.NullKeyword)
                             )

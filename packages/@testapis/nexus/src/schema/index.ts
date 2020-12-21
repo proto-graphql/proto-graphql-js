@@ -6,6 +6,7 @@ import * as scalars from "./scalars";
 import * as deprecationsTypes from "./types/deprecation";
 import * as enumsTypes from "./types/enums";
 import * as extensionsTypes from "./types/extensions";
+import * as fieldBehaviorTyeps from "./types/field_behavior";
 import * as helloTypes from "./types/hello";
 import * as nestedTypes from "./types/nested";
 import * as oneofTypes from "./types/oneof";
@@ -17,6 +18,7 @@ export const schema = makeSchema({
     ...deprecationsTypes,
     ...enumsTypes,
     ...extensionsTypes,
+    ...fieldBehaviorTyeps,
     ...helloTypes,
     ...nestedTypes,
     ...oneofTypes,
