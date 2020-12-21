@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package testapi.deprecation;
+
+message DeprecatedMessage {
+  option deprecated = true;
+
+  message InnerMessage {
+    string body = 1;
+  }
+
+  string body = 1;
+  NotDeprecatedEnum enum = 2;
+}
+
+message NotDeprecatedMessage {
+  string body = 1 [deprecated = true];
+  DeprecatedEnum enum = 2;
+
+  message InnerMessage1 {
+    string body = 1;
+  }
+
+  message InnerMessage2 {
+    string body = 1;
+  }
+
+  oneof not_deprecated_oneof {
+    InnerMessage1 msg1 = 3 [deprecated = true];
+    InnerMessage2 msg2 = 4;
+  }
+
+  oneof deprecated_oneof {
+    InnerMessage1 msg3 = 5 [deprecated = true];
+    InnerMessage2 msg4 = 6 [deprecated = true];
+  }
+}
+
+enum NotDeprecatedEnum {
+  NOT_DEPRECATED_ENUM_UNSPECIFIED = 0;
+  NOT_DEPRECATED_FOO = 1;
+  DEPRECATED_BAR = 2 [deprecated = true];
+}
+
+enum DeprecatedEnum {
+  option deprecated = true;
+  DEPRECATED_ENUM_UNSPECIFIED = 0;
+  DEPRECATED_BAZ = 1;
+  DEPRECATED_QUX = 2;
+}

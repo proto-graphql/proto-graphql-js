@@ -1,6 +1,13 @@
 import ts from "typescript";
 import { pascalCase } from "change-case";
-import { ProtoEnum, ProtoFile, ProtoMessage, ProtoOneof } from "../protoTypes";
+import {
+  ProtoEnum,
+  ProtoEnumValue,
+  ProtoField,
+  ProtoFile,
+  ProtoMessage,
+  ProtoOneof,
+} from "../protoTypes";
 import * as extensions from "../__generated__/extensions/graphql/schema_pb";
 
 export function protoExportAlias(
@@ -21,6 +28,42 @@ export function gqlTypeName(
   const name = nameWithParent(typ);
   const suffix = typ instanceof ProtoMessage && opts?.input ? "Input" : "";
   return name + suffix;
+}
+
+export function createDeprecationPropertyAssignment(
+  t: ProtoField | ProtoEnumValue | ProtoOneof
+): ts.PropertyAssignment | null {
+  const reason = t.deprecationReason;
+  if (!reason) return null;
+
+  if (reason instanceof ProtoFile) {
+    return ts.factory.createPropertyAssignment(
+      "deprecation",
+      ts.factory.createStringLiteral(`${reason.name} is mark as deprecated.`)
+    );
+  }
+
+  let reasonName: string;
+
+  if ("qualifiedName" in reason) {
+    reasonName = reason.qualifiedName;
+  } else if (reason instanceof ProtoField) {
+    reasonName = `${reason.parent.qualifiedName}.${reason.name}`;
+  } else if (reason instanceof ProtoOneof) {
+    reasonName = `${reason.parent.qualifiedName}.${reason.name}`;
+  } else if (reason instanceof ProtoEnumValue) {
+    reasonName = `${reason.parent.qualifiedName}.${reason.name}`;
+  } else {
+    const _exhaustiveCheck: never = reason;
+    throw "unreachable";
+  }
+
+  const msg = `${reasonName} is mark as deprecated in a *.proto file.`;
+
+  return ts.factory.createPropertyAssignment(
+    "deprecation",
+    ts.factory.createStringLiteral(msg)
+  );
 }
 
 /**
@@ -106,7 +149,7 @@ function nameWithParent(typ: ProtoMessage | ProtoOneof | ProtoEnum): string {
   const prefix = t.descriptor
     .getOptions()
     ?.getExtension(extensions.schema)
-    .getTypePrefix();
+    ?.getTypePrefix();
   if (prefix) {
     name = `${prefix}${name}`;
   }

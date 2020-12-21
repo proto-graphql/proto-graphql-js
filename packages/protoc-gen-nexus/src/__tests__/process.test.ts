@@ -114,3 +114,17 @@ test("generates nexus DSL of union type with proto oneofs", () => {
 
   expect(fileByName["oneof/oneof_pb_nexus.ts"]).toMatchSnapshot();
 });
+
+test("generates nexus DSL of deprecated fiels from proto", () => {
+  const req = buildCodeGeneratorRequest("deprecation");
+  const resp = processRequest(req);
+
+  expect(Object.keys(resp.getFileList())).toHaveLength(2);
+
+  const fileByName = getFileMap(resp);
+
+  expect(fileByName["deprecation/deprecation_pb_nexus.ts"]).toMatchSnapshot();
+  expect(
+    fileByName["deprecation/file_deprecation_pb_nexus.ts"]
+  ).toMatchSnapshot();
+});

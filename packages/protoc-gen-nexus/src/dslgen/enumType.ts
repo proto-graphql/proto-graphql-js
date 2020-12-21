@@ -1,6 +1,11 @@
 import ts from "typescript";
 import { ProtoEnum, ProtoEnumValue } from "../protoTypes";
-import { createDslExportConstStmt, gqlTypeName, onlyNonNull } from "./util";
+import {
+  createDeprecationPropertyAssignment,
+  createDslExportConstStmt,
+  gqlTypeName,
+  onlyNonNull,
+} from "./util";
 
 /**
  * @example
@@ -72,6 +77,7 @@ function createEnumValueExpr(ev: ProtoEnumValue): ts.Expression {
             ts.factory.createStringLiteral(ev.description)
           )
         : null,
+      createDeprecationPropertyAssignment(ev),
       ts.factory.createPropertyAssignment(
         "value",
         ts.factory.createNumericLiteral(ev.tagNumber)

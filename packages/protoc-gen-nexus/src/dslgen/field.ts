@@ -3,7 +3,7 @@ import { ProtoField, ProtoRegistry } from "../protoTypes";
 import { detectGqlType, GqlType } from "./types";
 import { getUnwrapFunc } from "./unwrap";
 import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
-import { onlyNonNull } from "./util";
+import { createDeprecationPropertyAssignment, onlyNonNull } from "./util";
 
 /**
  * @example
@@ -79,6 +79,7 @@ function createFieldOptionExpr(
         "description",
         ts.factory.createStringLiteral(field.description)
       ),
+      createDeprecationPropertyAssignment(field),
       opts?.input ? null : createFieldResolverDecl(field, type),
     ].filter(onlyNonNull()),
     true

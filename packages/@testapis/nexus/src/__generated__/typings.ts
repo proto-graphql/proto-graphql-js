@@ -4,6 +4,8 @@
  */
 
 
+import { $$testapis$node$lib$deprecation$deprecation_pb$DeprecatedMessage, $$testapis$node$lib$deprecation$deprecation_pb$NotDeprecatedMessage, $$testapis$node$lib$deprecation$deprecation_pb$DeprecatedMessageInnerMessage, $$testapis$node$lib$deprecation$deprecation_pb$NotDeprecatedMessageInnerMessage1, $$testapis$node$lib$deprecation$deprecation_pb$NotDeprecatedMessageInnerMessage2 } from "./../schema/types/deprecation/deprecation_pb_nexus"
+import { $$testapis$node$lib$deprecation$file_deprecation_pb$DeprecatedFileMessage, $$testapis$node$lib$deprecation$file_deprecation_pb$DeprecatedFileMessageInnerMessage } from "./../schema/types/deprecation/file_deprecation_pb_nexus"
 import { $$testapis$node$lib$enums$enums_pb$MessageWithEnums } from "./../schema/types/enums/enums_pb_nexus"
 import { $$testapis$node$lib$extensions$extensions_pb$TestPrefixPrefixedMessage, $$testapis$node$lib$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage } from "./../schema/types/extensions/extensions_pb_nexus"
 import { $$testapis$node$lib$hello$hello_pb$Hello, $$testapis$node$lib$hello$hello_pb$Primitives } from "./../schema/types/hello/hello_pb_nexus"
@@ -34,6 +36,20 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  DeprecatedFileMessageInnerMessageInput: { // input type
+    body: string; // String!
+  }
+  DeprecatedFileMessageInput: { // input type
+    body: string; // String!
+    enum?: NexusGenEnums['DeprecatedFileEnum'] | null; // DeprecatedFileEnum
+  }
+  DeprecatedMessageInnerMessageInput: { // input type
+    body: string; // String!
+  }
+  DeprecatedMessageInput: { // input type
+    body: string; // String!
+    enum?: NexusGenEnums['NotDeprecatedEnum'] | null; // NotDeprecatedEnum
+  }
   HelloInput: { // input type
     optionalPrimitives?: NexusGenInputs['PrimitivesInput'] | null; // PrimitivesInput
     optionalPrimitivesList?: NexusGenInputs['PrimitivesInput'] | null; // PrimitivesInput
@@ -53,6 +69,20 @@ export interface NexusGenInputs {
   }
   MessageWithEnumsInput: { // input type
     myEnum1?: NexusGenEnums['MyEnum1'] | null; // MyEnum1
+  }
+  NotDeprecatedMessageInnerMessage1Input: { // input type
+    body: string; // String!
+  }
+  NotDeprecatedMessageInnerMessage2Input: { // input type
+    body: string; // String!
+  }
+  NotDeprecatedMessageInput: { // input type
+    body: string; // String!
+    enum?: NexusGenEnums['DeprecatedEnum'] | null; // DeprecatedEnum
+    msg1?: NexusGenInputs['NotDeprecatedMessageInnerMessage1Input'] | null; // NotDeprecatedMessageInnerMessage1Input
+    msg2?: NexusGenInputs['NotDeprecatedMessageInnerMessage2Input'] | null; // NotDeprecatedMessageInnerMessage2Input
+    msg3?: NexusGenInputs['NotDeprecatedMessageInnerMessage1Input'] | null; // NotDeprecatedMessageInnerMessage1Input
+    msg4?: NexusGenInputs['NotDeprecatedMessageInnerMessage2Input'] | null; // NotDeprecatedMessageInnerMessage2Input
   }
   OneofMemberMessage1Input: { // input type
     body: string; // String!
@@ -101,7 +131,10 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  DeprecatedEnum: 1 | 0 | 2
+  DeprecatedFileEnum: 2 | 0 | 1
   MyEnum1: 2 | 3 | 1 | 0
+  NotDeprecatedEnum: 2 | 0 | 1
   ParentMessageNestedEnum: 2 | 1 | 0
   TestPrefixPrefixedEnum: 2 | 0 | 1
 }
@@ -116,9 +149,16 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  DeprecatedFileMessage: $$testapis$node$lib$deprecation$file_deprecation_pb$DeprecatedFileMessage;
+  DeprecatedFileMessageInnerMessage: $$testapis$node$lib$deprecation$file_deprecation_pb$DeprecatedFileMessageInnerMessage;
+  DeprecatedMessage: $$testapis$node$lib$deprecation$deprecation_pb$DeprecatedMessage;
+  DeprecatedMessageInnerMessage: $$testapis$node$lib$deprecation$deprecation_pb$DeprecatedMessageInnerMessage;
   Hello: $$testapis$node$lib$hello$hello_pb$Hello;
   Message: $$testapis$node$lib$wktypes$well_known_types_pb$Message;
   MessageWithEnums: $$testapis$node$lib$enums$enums_pb$MessageWithEnums;
+  NotDeprecatedMessage: $$testapis$node$lib$deprecation$deprecation_pb$NotDeprecatedMessage;
+  NotDeprecatedMessageInnerMessage1: $$testapis$node$lib$deprecation$deprecation_pb$NotDeprecatedMessageInnerMessage1;
+  NotDeprecatedMessageInnerMessage2: $$testapis$node$lib$deprecation$deprecation_pb$NotDeprecatedMessageInnerMessage2;
   OneofMemberMessage1: $$testapis$node$lib$oneof$oneof_pb$OneofMemberMessage1;
   OneofMemberMessage2: $$testapis$node$lib$oneof$oneof_pb$OneofMemberMessage2;
   OneofParent: $$testapis$node$lib$oneof$oneof_pb$OneofParent;
@@ -134,6 +174,8 @@ export interface NexusGenInterfaces {
 }
 
 export interface NexusGenUnions {
+  NotDeprecatedMessageDeprecatedOneof: NexusGenRootTypes['NotDeprecatedMessageInnerMessage1'] | NexusGenRootTypes['NotDeprecatedMessageInnerMessage2'];
+  NotDeprecatedMessageNotDeprecatedOneof: NexusGenRootTypes['NotDeprecatedMessageInnerMessage1'] | NexusGenRootTypes['NotDeprecatedMessageInnerMessage2'];
   OneofParentOptionalOneofMembers: NexusGenRootTypes['OneofMemberMessage1'] | NexusGenRootTypes['OneofMemberMessage2'];
   OneofParentRequiredOneofMembers: NexusGenRootTypes['OneofMemberMessage1'] | NexusGenRootTypes['OneofMemberMessage2'];
 }
@@ -143,6 +185,20 @@ export type NexusGenRootTypes = NexusGenObjects & NexusGenUnions
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
+  DeprecatedFileMessage: { // field return type
+    body: string; // String!
+    enum: NexusGenEnums['DeprecatedFileEnum'] | null; // DeprecatedFileEnum
+  }
+  DeprecatedFileMessageInnerMessage: { // field return type
+    body: string; // String!
+  }
+  DeprecatedMessage: { // field return type
+    body: string; // String!
+    enum: NexusGenEnums['NotDeprecatedEnum'] | null; // NotDeprecatedEnum
+  }
+  DeprecatedMessageInnerMessage: { // field return type
+    body: string; // String!
+  }
   Hello: { // field return type
     optionalPrimitives: NexusGenRootTypes['Primitives'] | null; // Primitives
     optionalPrimitivesList: NexusGenRootTypes['Primitives'] | null; // Primitives
@@ -162,6 +218,18 @@ export interface NexusGenFieldTypes {
   }
   MessageWithEnums: { // field return type
     myEnum1: NexusGenEnums['MyEnum1'] | null; // MyEnum1
+  }
+  NotDeprecatedMessage: { // field return type
+    body: string; // String!
+    deprecated_oneof: NexusGenRootTypes['NotDeprecatedMessageDeprecatedOneof'] | null; // NotDeprecatedMessageDeprecatedOneof
+    enum: NexusGenEnums['DeprecatedEnum'] | null; // DeprecatedEnum
+    not_deprecated_oneof: NexusGenRootTypes['NotDeprecatedMessageNotDeprecatedOneof'] | null; // NotDeprecatedMessageNotDeprecatedOneof
+  }
+  NotDeprecatedMessageInnerMessage1: { // field return type
+    body: string; // String!
+  }
+  NotDeprecatedMessageInnerMessage2: { // field return type
+    body: string; // String!
   }
   OneofMemberMessage1: { // field return type
     body: string; // String!
@@ -211,6 +279,20 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
+  DeprecatedFileMessage: { // field return type name
+    body: 'String'
+    enum: 'DeprecatedFileEnum'
+  }
+  DeprecatedFileMessageInnerMessage: { // field return type name
+    body: 'String'
+  }
+  DeprecatedMessage: { // field return type name
+    body: 'String'
+    enum: 'NotDeprecatedEnum'
+  }
+  DeprecatedMessageInnerMessage: { // field return type name
+    body: 'String'
+  }
   Hello: { // field return type name
     optionalPrimitives: 'Primitives'
     optionalPrimitivesList: 'Primitives'
@@ -230,6 +312,18 @@ export interface NexusGenFieldTypeNames {
   }
   MessageWithEnums: { // field return type name
     myEnum1: 'MyEnum1'
+  }
+  NotDeprecatedMessage: { // field return type name
+    body: 'String'
+    deprecated_oneof: 'NotDeprecatedMessageDeprecatedOneof'
+    enum: 'DeprecatedEnum'
+    not_deprecated_oneof: 'NotDeprecatedMessageNotDeprecatedOneof'
+  }
+  NotDeprecatedMessageInnerMessage1: { // field return type name
+    body: 'String'
+  }
+  NotDeprecatedMessageInnerMessage2: { // field return type name
+    body: 'String'
   }
   OneofMemberMessage1: { // field return type name
     body: 'String'
@@ -282,6 +376,8 @@ export interface NexusGenArgTypes {
 }
 
 export interface NexusGenAbstractTypeMembers {
+  NotDeprecatedMessageDeprecatedOneof: "NotDeprecatedMessageInnerMessage1" | "NotDeprecatedMessageInnerMessage2"
+  NotDeprecatedMessageNotDeprecatedOneof: "NotDeprecatedMessageInnerMessage1" | "NotDeprecatedMessageInnerMessage2"
   OneofParentOptionalOneofMembers: "OneofMemberMessage1" | "OneofMemberMessage2"
   OneofParentRequiredOneofMembers: "OneofMemberMessage1" | "OneofMemberMessage2"
 }
@@ -303,7 +399,7 @@ export type NexusGenUnionNames = keyof NexusGenUnions;
 
 export type NexusGenObjectsUsingAbstractStrategyIsTypeOf = never;
 
-export type NexusGenAbstractsUsingStrategyResolveType = "OneofParentOptionalOneofMembers" | "OneofParentRequiredOneofMembers";
+export type NexusGenAbstractsUsingStrategyResolveType = "NotDeprecatedMessageDeprecatedOneof" | "NotDeprecatedMessageNotDeprecatedOneof" | "OneofParentOptionalOneofMembers" | "OneofParentRequiredOneofMembers";
 
 export type NexusGenFeaturesConfig = {
   abstractTypeStrategies: {
