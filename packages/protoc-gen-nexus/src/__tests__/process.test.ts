@@ -128,3 +128,14 @@ test("generates nexus DSL of deprecated fiels from proto", () => {
     fileByName["deprecation/file_deprecation_pb_nexus.ts"]
   ).toMatchSnapshot();
 });
+
+test("generates nexus DSL cnosidering field behavior comments in proto", () => {
+  const req = buildCodeGeneratorRequest("field_behavior");
+  const resp = processRequest(req);
+
+  expect(Object.keys(resp.getFileList())).toHaveLength(1);
+
+  const fileByName = getFileMap(resp);
+
+  expect(fileByName["field_behavior/comments_pb_nexus.ts"]).toMatchSnapshot();
+});

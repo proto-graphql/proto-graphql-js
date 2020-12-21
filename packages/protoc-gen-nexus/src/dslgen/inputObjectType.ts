@@ -1,6 +1,10 @@
 import ts from "typescript";
 import { ProtoMessage, ProtoRegistry } from "../protoTypes";
-import { createDslExportConstStmt, gqlTypeName } from "./util";
+import {
+  createDslExportConstStmt,
+  gqlTypeName,
+  isOutputOnlyField,
+} from "./util";
 import { createFieldDefinitionStmt } from "./field";
 
 /**
@@ -90,7 +94,9 @@ function createInputObjectTypeDefinitionMethodDecl(
     ],
     undefined,
     ts.factory.createBlock(
-      msg.fields.map((f) => createFieldDefinitionStmt(f, reg, { input: true })),
+      msg.fields
+        .filter((f) => !isOutputOnlyField(f))
+        .map((f) => createFieldDefinitionStmt(f, reg, { input: true })),
       true
     )
   );

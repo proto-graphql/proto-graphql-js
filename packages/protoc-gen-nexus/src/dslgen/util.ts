@@ -9,6 +9,7 @@ import {
   ProtoOneof,
 } from "../protoTypes";
 import * as extensions from "../__generated__/extensions/graphql/schema_pb";
+import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
 
 export function protoExportAlias(
   t: ProtoMessage,
@@ -64,6 +65,43 @@ export function createDeprecationPropertyAssignment(
     "deprecation",
     ts.factory.createStringLiteral(msg)
   );
+}
+
+export function isRequiredField(field: ProtoField | ProtoOneof): boolean {
+  if (
+    field instanceof ProtoField &&
+    (field.descriptor.getLabel() ===
+      FieldDescriptorProto.Label.LABEL_REQUIRED ||
+      (field.descriptor.getType() !== FieldDescriptorProto.Type.TYPE_MESSAGE &&
+        field.descriptor.getType() !== FieldDescriptorProto.Type.TYPE_ENUM))
+  ) {
+    return true;
+  }
+  return extractBehaviorComments(field).includes("Required");
+}
+
+export function isOutputOnlyField(field: ProtoField | ProtoOneof): boolean {
+  const cs = extractBehaviorComments(field);
+  return cs.includes("Output only");
+}
+
+export function isInputOnlyField(field: ProtoField | ProtoOneof): boolean {
+  const cs = extractBehaviorComments(field);
+  return cs.includes("Input only");
+}
+
+const behaviorComments = ["Required", "Input only", "Output only"] as const;
+
+function extractBehaviorComments(
+  field: ProtoField | ProtoOneof
+): typeof behaviorComments[number][] {
+  return (field.comments.leadingComments ?? "")
+    .split(/\.\s+/, 3)
+    .slice(0, 2)
+    .map((c) => c.replace(/\.\s*$/, ""))
+    .filter((c): c is typeof behaviorComments[number] =>
+      behaviorComments.includes(c as any)
+    );
 }
 
 /**
