@@ -1,7 +1,12 @@
 import ts from "typescript";
 import { pascalCase, constantCase } from "change-case";
 import { ProtoOneof } from "../protoTypes";
-import { createProtoExpr, gqlTypeName } from "./util";
+import {
+  createDeprecationPropertyAssignment,
+  createProtoExpr,
+  gqlTypeName,
+  onlyNonNull,
+} from "./util";
 
 /**
  * @example
@@ -62,6 +67,7 @@ function createOneofFieldOptionExpr(
         "description",
         ts.factory.createStringLiteral(oneof.description)
       ),
+      createDeprecationPropertyAssignment(oneof),
       ts.factory.createMethodDeclaration(
         undefined,
         undefined,
@@ -163,7 +169,7 @@ function createOneofFieldOptionExpr(
           true // multiline
         )
       ),
-    ],
+    ].filter(onlyNonNull()),
     true
   );
 }

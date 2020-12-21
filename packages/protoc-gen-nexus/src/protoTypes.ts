@@ -28,7 +28,7 @@ export class ProtoRegistry {
   }
 
   public addFile(fd: FileDescriptorProto) {
-    const file = new ProtoFile(fd);
+    const file = new ProtoFile(fd, this);
     this.files[fd.getName()!] = file;
 
     const [msgs, enums] = this.collectTypes(file);
@@ -67,10 +67,17 @@ export class ProtoRegistry {
 }
 
 export class ProtoFile {
-  constructor(readonly descriptor: FileDescriptorProto) {}
+  constructor(
+    readonly descriptor: FileDescriptorProto,
+    readonly registry: ProtoRegistry
+  ) {}
+
+  get name(): string {
+    return this.descriptor.getName()!;
+  }
 
   get importPath(): string {
-    return `${this.descriptor.getName()!.split(".").slice(0, -1).join(".")}_pb`;
+    return `${this.name!.split(".").slice(0, -1).join(".")}_pb`;
   }
 
   get messages(): ProtoMessage[] {
@@ -87,6 +94,10 @@ export class ProtoFile {
     return this.descriptor
       .getEnumTypeList()
       .map((d, i) => new ProtoEnum(d, this, i));
+  }
+
+  get deprecationReason(): ProtoFile | null {
+    return this.descriptor.getOptions()?.getDeprecated() ? this : null;
   }
 
   public findComments(
@@ -232,6 +243,12 @@ export class ProtoMessage {
       .getOneofDeclList()
       .map((o, i) => new ProtoOneof(o, this, i));
   }
+
+  get deprecationReason(): ProtoFile | ProtoMessage | null {
+    return this.descriptor.getOptions()?.getDeprecated()
+      ? this
+      : this.parent.deprecationReason;
+  }
 }
 
 export class ProtoOneof {
@@ -271,6 +288,12 @@ export class ProtoOneof {
         f.descriptor.hasOneofIndex() &&
         f.descriptor.getOneofIndex() === this.index
     );
+  }
+
+  get deprecationReason(): ProtoFile | ProtoMessage | ProtoOneof | null {
+    return this.fields.every((f) => f.deprecationReason)
+      ? this
+      : this.parent.deprecationReason;
   }
 }
 
@@ -325,6 +348,21 @@ export class ProtoField {
   get comments(): Comments {
     return this.parent.file.findComments(this);
   }
+
+  get type(): ProtoMessage | ProtoEnum | null {
+    return this.parent.file.registry.findByFieldDescriptor(this.descriptor);
+  }
+
+  get deprecationReason():
+    | ProtoFile
+    | ProtoMessage
+    | ProtoField
+    | ProtoEnum
+    | null {
+    return this.descriptor.getOptions()?.getDeprecated()
+      ? this
+      : this.type?.deprecationReason || this.parent.deprecationReason;
+  }
 }
 
 interface Comments {
@@ -376,6 +414,12 @@ export class ProtoEnum {
       .getValueList()
       .map((d, i) => new ProtoEnumValue(d, this, i));
   }
+
+  get deprecationReason(): ProtoFile | ProtoMessage | ProtoEnum | null {
+    return this.descriptor.getOptions()?.getDeprecated()
+      ? this
+      : this.parent.deprecationReason;
+  }
 }
 
 export class ProtoEnumValue {
@@ -407,5 +451,16 @@ export class ProtoEnumValue {
       if (parent instanceof ProtoFile) return parent;
       parent = parent.parent;
     }
+  }
+
+  get deprecationReason():
+    | ProtoFile
+    | ProtoMessage
+    | ProtoEnum
+    | ProtoEnumValue
+    | null {
+    return this.descriptor.getOptions()?.getDeprecated()
+      ? this
+      : this.parent.deprecationReason;
   }
 }
