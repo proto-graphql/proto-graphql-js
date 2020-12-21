@@ -6,7 +6,7 @@
   "dependencies": {
     "@types/google-protobuf": "^3.7.4",
     "google-protobuf": "^3.14.0",
-    "protoc-gen-nexus": "^0.0.1"
+    "protoc-gen-nexus": "^0.1.0"
   },
   "scripts": {
     "build": "../../../scripts/compile-testapis-proto"

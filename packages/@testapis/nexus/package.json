@@ -8,7 +8,7 @@
     "@testapis/node": "^0.0.1",
     "graphql": "^15.4.0",
     "graphql-scalars": "^1.6.1",
-    "proto-nexus": "^0.0.1"
+    "proto-nexus": "^0.1.0"
   },
   "scripts": {
     "build": "ts-node --transpile-only ./src/schema/index.ts",
