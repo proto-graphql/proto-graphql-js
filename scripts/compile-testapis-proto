@@ -10,7 +10,7 @@ TESTAPIS_ROOT=./packages/@testapis
 
 clean() {
   rm -rf $TESTAPIS_ROOT/node/lib
-  find $TESTAPIS_ROOT/nexus/src -name '*_nexus_pb.ts' -type f | xargs rm
+  find $TESTAPIS_ROOT/nexus/src -name '*_pb_nexus.ts' -type f | xargs rm
 }
 
 init() {
