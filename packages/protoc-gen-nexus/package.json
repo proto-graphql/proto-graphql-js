@@ -8,6 +8,9 @@
   "repository": "git@github.com:izumin5210/protoc-gen-nexus.git",
   "author": "izumin5210 <m@izum.in>",
   "license": "MIT",
+  "main": "./lib/index.js",
+  "module": "./module/index.js",
+  "types": "./lib/index.d.ts",
   "private": false,
   "engines": {
     "node": ">= 14.0.0"
@@ -18,8 +21,13 @@
     "change-case": "^4.1.2",
     "google-protobuf": "^3.12.2"
   },
+  "files:": [
+    "bin/",
+    "lib/",
+    "module/"
+  ],
   "scripts": {
-    "build": "tsc --build .",
+    "build": "tsc --build . && tsc --build tsconfig.module.json",
     "prebuild": "../../scripts/compile-extensions-proto",
     "test": "jest"
   }
