@@ -16,7 +16,7 @@
     "@types/google-protobuf": "^3.7.2",
     "google-protobuf": "^3.12.2"
   },
-  "files:": [
+  "files": [
     "bin/",
     "lib/",
     "module/"
