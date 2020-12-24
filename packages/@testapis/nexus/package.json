@@ -1,14 +1,14 @@
 {
   "name": "@testapis/nexus",
-  "version": "0.0.1",
+  "version": "0.1.2",
   "description": "Generated codes from protobuf IDL",
   "private": true,
   "dependencies": {
-    "nexus": "1.0.0",
-    "@testapis/node": "^0.0.1",
+    "@testapis/node": "^0.1.2",
     "graphql": "^15.4.0",
     "graphql-scalars": "^1.6.1",
-    "proto-nexus": "^0.1.0"
+    "nexus": "1.0.0",
+    "proto-nexus": "^0.1.2"
   },
   "scripts": {
     "build": "ts-node --transpile-only ./src/schema/index.ts",
@@ -16,7 +16,7 @@
     "prebuild": "yarn clean"
   },
   "devDependencies": {
-    "@testapis/proto": "0.0.1",
+    "@testapis/proto": "^0.1.2",
     "ts-node": "^9.1.1"
   }
 }
