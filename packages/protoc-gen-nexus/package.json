@@ -23,6 +23,7 @@
   },
   "files": [
     "bin/",
+    "include/",
     "lib/",
     "module/"
   ],
