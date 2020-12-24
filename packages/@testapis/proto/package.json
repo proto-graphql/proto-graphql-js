@@ -1,12 +1,12 @@
 {
   "name": "@testapis/proto",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Generated codes from protobuf IDL",
   "private": true,
   "dependencies": {
     "@types/google-protobuf": "^3.7.4",
     "google-protobuf": "^3.14.0",
-    "protoc-gen-nexus": "^0.1.2"
+    "protoc-gen-nexus": "^0.1.3"
   },
   "scripts": {
     "build": "../../../scripts/compile-testapis-proto"
