@@ -31,6 +31,7 @@
     "clean": "rimraf lib/ module/ && tsc --build . --clean && tsc --build tsconfig.module.json --clean",
     "prebuild": "../../scripts/compile-extensions-proto",
     "prepublish": "yarn clean && yarn build",
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   }
 }

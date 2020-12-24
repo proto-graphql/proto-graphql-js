@@ -5,19 +5,16 @@
     "packages/@testapis/*"
   ],
   "scripts": {
-    "build": "yarn build:proto-nexus && yarn build:protoc-gen-nexus && yarn build:testapis",
-    "build:proto-nexus": "yarn workspace proto-nexus build",
-    "build:protoc-gen-nexus": "yarn workspace protoc-gen-nexus build",
-    "build:testapis": "yarn run build:testapis:proto && yarn run build:testapis:nexus",
-    "build:testapis:nexus": "yarn workspace @testapis/nexus build",
-    "build:testapis:proto": "yarn workspace @testapis/proto build",
+    "build": "yarn lerna run build",
     "lint:ci": "frolint --branch origin/master --bail",
-    "test": "yarn workspace protoc-gen-nexus test"
+    "test": "yarn lerna run test",
+    "test:coverage": "yarn lerna run test:coverage"
   },
   "devDependencies": {
     "@types/jest": "^26.0.16",
     "frolint": "^2.0.1",
     "jest": "^26.0.1",
+    "lerna": "^3.22.1",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.1.0",
     "ts-protoc-gen": "^0.13.0",
@@ -39,5 +36,6 @@
         "smart"
       ]
     }
-  }
+  },
+  "name": "proto-nexus"
 }

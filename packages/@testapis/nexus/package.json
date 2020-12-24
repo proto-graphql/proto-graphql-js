@@ -16,6 +16,7 @@
     "prebuild": "yarn clean"
   },
   "devDependencies": {
+    "@testapis/proto": "0.0.1",
     "ts-node": "^9.1.1"
   }
 }
