@@ -2,7 +2,14 @@
   "name": "proto-nexus",
   "version": "0.1.3",
   "description": "Generate DSL for GraphQL Nexus from Protocol Buffers IDL",
-  "repository": "git@github.com:izumin5210/protoc-gen-nexus.git",
+  "keywords": [
+    "graphql",
+    "grpc",
+    "nexus",
+    "protobuf",
+    "typescript"
+  ],
+  "repository": "git@github.com:izumin5210/proto-nexus.git",
   "author": "izumin5210 <m@izum.in>",
   "license": "MIT",
   "main": "./lib/index.js",
