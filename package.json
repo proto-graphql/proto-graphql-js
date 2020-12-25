@@ -15,6 +15,7 @@
     "frolint": "^2.0.1",
     "jest": "^26.0.1",
     "lerna": "^3.22.1",
+    "protobufjs": "^6.10.2",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.1.0",
     "ts-protoc-gen": "^0.13.0",

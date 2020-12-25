@@ -5,7 +5,7 @@ package testapi.extensions;
 import "graphql/schema.proto";
 
 option (graphql.schema) = {
-  type_prefix: "TestPrefix";
+  type_prefix: "TestPrefix"
 };
 
 message PrefixedMessage {
