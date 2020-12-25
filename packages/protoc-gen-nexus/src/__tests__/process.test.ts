@@ -7,6 +7,97 @@ import {
   CodeGeneratorResponse,
 } from "google-protobuf/google/protobuf/compiler/plugin_pb";
 
+describe("simple proto file", () => {
+  const assertResponse = (param?: string) => {
+    const resp = processCodeGeneration("hello", param);
+    snapshotGeneratedFiles(resp, ["hello/hello_pb_nexus.ts"]);
+  };
+
+  it("generates nexus DSL with native protobuf js_out", () => {
+    assertResponse();
+  });
+});
+
+describe("well-known protobuf types", () => {
+  const assertResponse = (param?: string) => {
+    const resp = processCodeGeneration("wktypes", param);
+    snapshotGeneratedFiles(resp, ["wktypes/well_known_types_pb_nexus.ts"]);
+  };
+
+  it("generates nexus DSL with native protobuf js_out", () => {
+    assertResponse();
+  });
+});
+
+describe("protobuf enums", () => {
+  const assertResponse = (param?: string) => {
+    const resp = processCodeGeneration("enums", param);
+    snapshotGeneratedFiles(resp, ["enums/enums_pb_nexus.ts"]);
+  };
+
+  it("generates nexus DSL with native protobuf js_out", () => {
+    assertResponse();
+  });
+});
+
+describe("nested protobuf types", () => {
+  const assertResponse = (param?: string) => {
+    const resp = processCodeGeneration("nested", param);
+    snapshotGeneratedFiles(resp, ["nested/nested_pb_nexus.ts"]);
+  };
+
+  it("generates nexus DSL with native protobuf js_out", () => {
+    assertResponse();
+  });
+});
+
+describe("protobuf custom options", () => {
+  const assertResponse = (param?: string) => {
+    const resp = processCodeGeneration("extensions", param);
+    snapshotGeneratedFiles(resp, ["extensions/extensions_pb_nexus.ts"]);
+  };
+
+  it("generates nexus DSL with native protobuf js_out", () => {
+    assertResponse();
+  });
+});
+
+describe("protobuf oneof", () => {
+  const assertResponse = (param?: string) => {
+    const resp = processCodeGeneration("oneof", param);
+    snapshotGeneratedFiles(resp, ["oneof/oneof_pb_nexus.ts"]);
+  };
+
+  it("generates nexus DSL with native protobuf js_out", () => {
+    assertResponse();
+  });
+});
+
+describe("deprecation", () => {
+  const assertResponse = (param?: string) => {
+    const resp = processCodeGeneration("deprecation", param);
+    snapshotGeneratedFiles(resp, [
+      "deprecation/deprecation_pb_nexus.ts",
+      "deprecation/file_deprecation_pb_nexus.ts",
+    ]);
+  };
+
+  it("generates nexus DSL with native protobuf js_out", () => {
+    assertResponse();
+  });
+});
+
+describe("field_behavior", () => {
+  const assertResponse = (param?: string) => {
+    const resp = processCodeGeneration("field_behavior", param);
+    snapshotGeneratedFiles(resp, ["field_behavior/comments_pb_nexus.ts"]);
+  };
+
+  it("generates nexus DSL with native protobuf js_out", () => {
+    assertResponse();
+  });
+});
+
 function getFixtureFileDescriptorSet(name: string): FileDescriptorSet {
   const buf = readFileSync(
     join(
@@ -49,93 +140,24 @@ function getFileMap(resp: CodeGeneratorResponse): Record<string, string> {
     );
 }
 
-test("generates nexus DSL from simple proto file", () => {
-  const req = buildCodeGeneratorRequest("hello");
-  const resp = processRequest(req);
+function processCodeGeneration(
+  name: string,
+  param?: string
+): CodeGeneratorResponse {
+  const req = buildCodeGeneratorRequest(name);
+  if (param) {
+    req.setParameter(param);
+  }
+  return processRequest(req);
+}
 
-  expect(Object.keys(resp.getFileList())).toHaveLength(1);
-
-  const fileByName = getFileMap(resp);
-
-  expect(fileByName["hello/hello_pb_nexus.ts"]).toMatchSnapshot();
-});
-
-test("generates nexus DSL from proto well-known types", () => {
-  const req = buildCodeGeneratorRequest("wktypes");
-  const resp = processRequest(req);
-
-  expect(Object.keys(resp.getFileList())).toHaveLength(1);
+function snapshotGeneratedFiles(resp: CodeGeneratorResponse, files: string[]) {
+  expect(Object.keys(resp.getFileList())).toHaveLength(files.length);
 
   const fileByName = getFileMap(resp);
-
-  expect(fileByName["wktypes/well_known_types_pb_nexus.ts"]).toMatchSnapshot();
-});
-
-test("generates nexus DSL from enum proto types", () => {
-  const req = buildCodeGeneratorRequest("enums");
-  const resp = processRequest(req);
-
-  expect(Object.keys(resp.getFileList())).toHaveLength(1);
-
-  const fileByName = getFileMap(resp);
-
-  expect(fileByName["enums/enums_pb_nexus.ts"]).toMatchSnapshot();
-});
-
-test("generates nexus DSL from nested proto types", () => {
-  const req = buildCodeGeneratorRequest("nested");
-  const resp = processRequest(req);
-
-  expect(Object.keys(resp.getFileList())).toHaveLength(1);
-
-  const fileByName = getFileMap(resp);
-
-  expect(fileByName["nested/nested_pb_nexus.ts"]).toMatchSnapshot();
-});
-
-test("generates nexus DSL with proto custom options", () => {
-  const req = buildCodeGeneratorRequest("extensions");
-  const resp = processRequest(req);
-
-  expect(Object.keys(resp.getFileList())).toHaveLength(1);
-
-  const fileByName = getFileMap(resp);
-
-  expect(fileByName["extensions/extensions_pb_nexus.ts"]).toMatchSnapshot();
-});
-
-test("generates nexus DSL of union type with proto oneofs", () => {
-  const req = buildCodeGeneratorRequest("oneof");
-  const resp = processRequest(req);
-
-  expect(Object.keys(resp.getFileList())).toHaveLength(1);
-
-  const fileByName = getFileMap(resp);
-
-  expect(fileByName["oneof/oneof_pb_nexus.ts"]).toMatchSnapshot();
-});
-
-test("generates nexus DSL of deprecated fiels from proto", () => {
-  const req = buildCodeGeneratorRequest("deprecation");
-  const resp = processRequest(req);
-
-  expect(Object.keys(resp.getFileList())).toHaveLength(2);
-
-  const fileByName = getFileMap(resp);
-
-  expect(fileByName["deprecation/deprecation_pb_nexus.ts"]).toMatchSnapshot();
-  expect(
-    fileByName["deprecation/file_deprecation_pb_nexus.ts"]
-  ).toMatchSnapshot();
-});
-
-test("generates nexus DSL cnosidering field behavior comments in proto", () => {
-  const req = buildCodeGeneratorRequest("field_behavior");
-  const resp = processRequest(req);
-
-  expect(Object.keys(resp.getFileList())).toHaveLength(1);
-
-  const fileByName = getFileMap(resp);
-
-  expect(fileByName["field_behavior/comments_pb_nexus.ts"]).toMatchSnapshot();
-});
+  for (const filename of files) {
+    const content = fileByName[filename];
+    expect(content).toBeTruthy();
+    expect(content).toMatchSnapshot();
+  }
+}
