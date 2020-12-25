@@ -46,6 +46,11 @@ execProtoc() {
     mkdir -p $nodeOutDir
     yarn pbjs --target static-module --wrap commonjs --out "$nodeOutDir/index.js" ${protoDir}/*.proto
     yarn pbts --out "$nodeOutDir/index.d.ts" "$nodeOutDir/index.js"
+
+    protocw \
+      --plugin=protoc-gen-nexus=`yarn bin protoc-gen-nexus` \
+      --nexus_out="$TESTAPIS_ROOT/nexus/src/schema/types" --nexus_opt=import_prefix=@testapis/node/lib,use_protobufjs \
+      ${protoDir}/*.proto
   done
 }
 

@@ -1,0 +1,22 @@
+{
+  "name": "@testapis/nexus",
+  "version": "0.1.4",
+  "description": "Generated codes depends on protocolbuffers/protobuf's js_out",
+  "private": true,
+  "dependencies": {
+    "@testapis/node": "^0.1.4",
+    "graphql": "^15.4.0",
+    "graphql-scalars": "^1.6.1",
+    "nexus": "1.0.0",
+    "proto-nexus": "^0.1.4"
+  },
+  "scripts": {
+    "build": "ts-node --transpile-only ./src/schema/index.ts",
+    "clean": "rm -rf src/__generated__",
+    "prebuild": "yarn clean"
+  },
+  "devDependencies": {
+    "@testapis/proto": "^0.1.4",
+    "ts-node": "^9.1.1"
+  }
+}

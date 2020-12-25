@@ -4,6 +4,7 @@ import { detectGqlType, GqlType } from "./types";
 import { getUnwrapFunc } from "./unwrap";
 import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
 import { createDeprecationPropertyAssignment, onlyNonNull } from "./util";
+import { camelCase } from "change-case";
 
 /**
  * @example
@@ -16,7 +17,7 @@ import { createDeprecationPropertyAssignment, onlyNonNull } from "./util";
 export function createFieldDefinitionStmt(
   field: ProtoField,
   registry: ProtoRegistry,
-  opts?: { input?: boolean }
+  opts?: { input?: boolean; useProtobufjs?: boolean }
 ): ts.Statement {
   const type = detectGqlType(field, registry, opts);
   return ts.factory.createExpressionStatement(
@@ -48,7 +49,7 @@ export function createFieldDefinitionStmt(
 function createFieldOptionExpr(
   field: ProtoField,
   type: GqlType,
-  opts?: { input?: boolean }
+  opts?: { input?: boolean; useProtobufjs?: boolean }
 ): ts.Expression {
   const createTypeSpecifier = (type: GqlType): ts.Expression => {
     switch (type.kind) {
@@ -80,7 +81,11 @@ function createFieldOptionExpr(
         ts.factory.createStringLiteral(field.description)
       ),
       createDeprecationPropertyAssignment(field),
-      opts?.input ? null : createFieldResolverDecl(field, type),
+      opts?.input
+        ? null
+        : createFieldResolverDecl(field, type, {
+            useProtobufjs: opts?.useProtobufjs,
+          }),
     ].filter(onlyNonNull()),
     true
   );
@@ -88,16 +93,26 @@ function createFieldOptionExpr(
 
 function createFieldResolverDecl(
   field: ProtoField,
-  type: GqlType
+  type: GqlType,
+  opts: { useProtobufjs?: boolean }
 ): ts.MethodDeclaration {
-  let resolverRet: ts.Expression = ts.factory.createCallExpression(
-    ts.factory.createPropertyAccessExpression(
-      ts.factory.createIdentifier("root"),
-      ts.factory.createIdentifier(field.getterName)
-    ),
-    undefined,
-    undefined
+  let resolverRet: ts.Expression = ts.factory.createPropertyAccessExpression(
+    ts.factory.createIdentifier("root"),
+    ts.factory.createIdentifier(
+      opts.useProtobufjs
+        ? camelCase(field.descriptor.getName()!)
+        : field.getterName
+    )
   );
+
+  if (!opts.useProtobufjs) {
+    resolverRet = ts.factory.createCallExpression(
+      resolverRet,
+      undefined,
+      undefined
+    );
+  }
+
   if (type.kind === "object") {
     if (type.nullable) {
       resolverRet = ts.factory.createBinaryExpression(
@@ -108,6 +123,16 @@ function createFieldResolverDecl(
     } else {
       resolverRet = ts.factory.createNonNullExpression(resolverRet);
     }
+  } else if (opts.useProtobufjs && !type.nullable) {
+    resolverRet = ts.factory.createNonNullExpression(resolverRet);
+  }
+
+  if (opts.useProtobufjs && type.kind === "enum" && type.nullable) {
+    resolverRet = ts.factory.createBinaryExpression(
+      resolverRet,
+      ts.factory.createToken(ts.SyntaxKind.QuestionQuestionToken),
+      ts.factory.createToken(ts.SyntaxKind.NullKeyword)
+    );
   }
 
   const unwrapFunc = getUnwrapFunc(field);

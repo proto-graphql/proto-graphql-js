@@ -14,7 +14,7 @@ import {
  */
 export function createReExportProtoStmts(
   types: ReadonlyArray<ProtoMessage>,
-  opts: { importPrefix?: string }
+  opts: { importPrefix?: string; useProtobufjs?: boolean }
 ): ts.Statement[] {
   return types
     .map((t) => createReExportProtoStmt(t, opts))
@@ -22,14 +22,19 @@ export function createReExportProtoStmts(
 }
 
 /**
- * @example
+ * @example js_out
  * ```
  * export _$hello$hello_pb$Hello = _$hello$hello_pb.Hello;
+ * ```
+ *
+ * @example protobufjs
+ * ```
+ * export _$hello$hello$Hello = _$hello.hello.Hello;
  * ```
  */
 function createReExportProtoStmt(
   typ: ProtoMessage,
-  opts: { importPrefix?: string }
+  opts: { importPrefix?: string; useProtobufjs?: boolean }
 ): ts.Statement {
   return ts.factory.createTypeAliasDeclaration(
     undefined,

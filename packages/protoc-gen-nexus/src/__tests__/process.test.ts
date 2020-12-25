@@ -16,6 +16,10 @@ describe("simple proto file", () => {
   it("generates nexus DSL with native protobuf js_out", () => {
     assertResponse();
   });
+
+  it("generates nexus DSL with protobuf.js", () => {
+    assertResponse("use_protobufjs");
+  });
 });
 
 describe("well-known protobuf types", () => {
@@ -26,6 +30,10 @@ describe("well-known protobuf types", () => {
 
   it("generates nexus DSL with native protobuf js_out", () => {
     assertResponse();
+  });
+
+  it("generates nexus DSL with protobuf.js", () => {
+    assertResponse("use_protobufjs");
   });
 });
 
@@ -38,6 +46,10 @@ describe("protobuf enums", () => {
   it("generates nexus DSL with native protobuf js_out", () => {
     assertResponse();
   });
+
+  it("generates nexus DSL with protobuf.js", () => {
+    assertResponse("use_protobufjs");
+  });
 });
 
 describe("nested protobuf types", () => {
@@ -48,6 +60,10 @@ describe("nested protobuf types", () => {
 
   it("generates nexus DSL with native protobuf js_out", () => {
     assertResponse();
+  });
+
+  it("generates nexus DSL with protobuf.js", () => {
+    assertResponse("use_protobufjs");
   });
 });
 
@@ -60,6 +76,10 @@ describe("protobuf custom options", () => {
   it("generates nexus DSL with native protobuf js_out", () => {
     assertResponse();
   });
+
+  it("generates nexus DSL with protobuf.js", () => {
+    assertResponse("use_protobufjs");
+  });
 });
 
 describe("protobuf oneof", () => {
@@ -70,6 +90,10 @@ describe("protobuf oneof", () => {
 
   it("generates nexus DSL with native protobuf js_out", () => {
     assertResponse();
+  });
+
+  it("generates nexus DSL with protobuf.js", () => {
+    assertResponse("use_protobufjs");
   });
 });
 
@@ -85,6 +109,10 @@ describe("deprecation", () => {
   it("generates nexus DSL with native protobuf js_out", () => {
     assertResponse();
   });
+
+  it("generates nexus DSL with protobuf.js", () => {
+    assertResponse("use_protobufjs");
+  });
 });
 
 describe("field_behavior", () => {
@@ -95,6 +123,10 @@ describe("field_behavior", () => {
 
   it("generates nexus DSL with native protobuf js_out", () => {
     assertResponse();
+  });
+
+  it("generates nexus DSL with protobuf.js", () => {
+    assertResponse("use_protobufjs");
   });
 });
 

@@ -76,14 +76,19 @@ export function createImportUnwrapFuncDecls(
 }
 
 /**
- * @example
+ * @example js_out
  * ```
  * import * as _$hello$hello_pb from "./hello/hello_pb";
+ * ```
+ *
+ * @example protobufjs
+ * ```
+ * import * as _$hello from "./hello";
  * ```
  */
 export function createImportProtoDecls(
   msgs: ReadonlyArray<ProtoMessage>,
-  opts: { importPrefix?: string }
+  opts: { importPrefix?: string; useProtobufjs?: boolean }
 ): ts.ImportDeclaration[] {
   return msgs
     .map((m) => protoImportPath(m, opts))
