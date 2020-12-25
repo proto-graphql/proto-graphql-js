@@ -2,9 +2,9 @@
 // source: hello/hello.proto
 
 import { objectType, inputObjectType, list, nullable, nonNull } from "nexus";
-import * as $$testapis$node$lib$hello$hello_pb from "@testapis/node/lib/hello/hello_pb";
-export type $$testapis$node$lib$hello$hello_pb$Hello = $$testapis$node$lib$hello$hello_pb.Hello;
-export type $$testapis$node$lib$hello$hello_pb$Primitives = $$testapis$node$lib$hello$hello_pb.Primitives;
+import * as $$testapis$node_native$lib$hello$hello_pb from "@testapis/node-native/lib/hello/hello_pb";
+export type $$testapis$node_native$lib$hello$hello_pb$Hello = $$testapis$node_native$lib$hello$hello_pb.Hello;
+export type $$testapis$node_native$lib$hello$hello_pb$Primitives = $$testapis$node_native$lib$hello$hello_pb.Primitives;
 export const Hello = objectType({
     name: "Hello",
     description: "",
@@ -30,7 +30,7 @@ export const Hello = objectType({
             resolve(root) { return root.getOptionalPrimitivesList() ?? null; }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$hello$hello_pb$Hello" }
+    sourceType: { module: __filename, export: "$$testapis$node_native$lib$hello$hello_pb$Hello" }
 });
 export const Primitives = objectType({
     name: "Primitives",
@@ -107,7 +107,7 @@ export const Primitives = objectType({
             resolve(root) { return root.getRequiredStringValue(); }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$hello$hello_pb$Primitives" }
+    sourceType: { module: __filename, export: "$$testapis$node_native$lib$hello$hello_pb$Primitives" }
 });
 export const HelloInput = inputObjectType({
     name: "HelloInput",

@@ -2,9 +2,9 @@
 // source: deprecation/file_deprecation.proto
 
 import { objectType, inputObjectType, enumType, nullable, nonNull } from "nexus";
-import * as $$testapis$node$lib$deprecation$file_deprecation_pb from "@testapis/node/lib/deprecation/file_deprecation_pb";
-export type $$testapis$node$lib$deprecation$file_deprecation_pb$DeprecatedFileMessage = $$testapis$node$lib$deprecation$file_deprecation_pb.DeprecatedFileMessage;
-export type $$testapis$node$lib$deprecation$file_deprecation_pb$DeprecatedFileMessageInnerMessage = $$testapis$node$lib$deprecation$file_deprecation_pb.DeprecatedFileMessage.InnerMessage;
+import * as $$testapis$node_native$lib$deprecation$file_deprecation_pb from "@testapis/node-native/lib/deprecation/file_deprecation_pb";
+export type $$testapis$node_native$lib$deprecation$file_deprecation_pb$DeprecatedFileMessage = $$testapis$node_native$lib$deprecation$file_deprecation_pb.DeprecatedFileMessage;
+export type $$testapis$node_native$lib$deprecation$file_deprecation_pb$DeprecatedFileMessageInnerMessage = $$testapis$node_native$lib$deprecation$file_deprecation_pb.DeprecatedFileMessage.InnerMessage;
 export const DeprecatedFileMessage = objectType({
     name: "DeprecatedFileMessage",
     description: "",
@@ -22,7 +22,7 @@ export const DeprecatedFileMessage = objectType({
             resolve(root) { return root.getEnum(); }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$deprecation$file_deprecation_pb$DeprecatedFileMessage" }
+    sourceType: { module: __filename, export: "$$testapis$node_native$lib$deprecation$file_deprecation_pb$DeprecatedFileMessage" }
 });
 export const DeprecatedFileMessageInnerMessage = objectType({
     name: "DeprecatedFileMessageInnerMessage",
@@ -35,7 +35,7 @@ export const DeprecatedFileMessageInnerMessage = objectType({
             resolve(root) { return root.getBody(); }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$deprecation$file_deprecation_pb$DeprecatedFileMessageInnerMessage" }
+    sourceType: { module: __filename, export: "$$testapis$node_native$lib$deprecation$file_deprecation_pb$DeprecatedFileMessageInnerMessage" }
 });
 export const DeprecatedFileMessageInput = inputObjectType({
     name: "DeprecatedFileMessageInput",

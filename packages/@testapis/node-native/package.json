@@ -1,7 +1,7 @@
 {
-  "name": "@testapis/node",
+  "name": "@testapis/node-native",
   "version": "0.1.4",
-  "description": "Generated codes from protobuf IDL",
+  "description": "Generated codes with protocolbuffers/protobuf's js_out",
   "private": true,
   "dependencies": {
     "@types/google-protobuf": "^3.7.4",

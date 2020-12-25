@@ -2,9 +2,9 @@
 // source: nested/nested.proto
 
 import { objectType, inputObjectType, enumType, nullable, nonNull } from "nexus";
-import * as $$testapis$node$lib$nested$nested_pb from "@testapis/node/lib/nested/nested_pb";
-export type $$testapis$node$lib$nested$nested_pb$ParentMessage = $$testapis$node$lib$nested$nested_pb.ParentMessage;
-export type $$testapis$node$lib$nested$nested_pb$ParentMessageNestedMessage = $$testapis$node$lib$nested$nested_pb.ParentMessage.NestedMessage;
+import * as $$testapis$node_native$lib$nested$nested_pb from "@testapis/node-native/lib/nested/nested_pb";
+export type $$testapis$node_native$lib$nested$nested_pb$ParentMessage = $$testapis$node_native$lib$nested$nested_pb.ParentMessage;
+export type $$testapis$node_native$lib$nested$nested_pb$ParentMessageNestedMessage = $$testapis$node_native$lib$nested$nested_pb.ParentMessage.NestedMessage;
 export const ParentMessage = objectType({
     name: "ParentMessage",
     description: "",
@@ -25,7 +25,7 @@ export const ParentMessage = objectType({
             resolve(root) { return root.getNestedEnum(); }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$nested$nested_pb$ParentMessage" }
+    sourceType: { module: __filename, export: "$$testapis$node_native$lib$nested$nested_pb$ParentMessage" }
 });
 export const ParentMessageNestedMessage = objectType({
     name: "ParentMessageNestedMessage",
@@ -37,7 +37,7 @@ export const ParentMessageNestedMessage = objectType({
             resolve(root) { return root.getNestedBody(); }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$nested$nested_pb$ParentMessageNestedMessage" }
+    sourceType: { module: __filename, export: "$$testapis$node_native$lib$nested$nested_pb$ParentMessageNestedMessage" }
 });
 export const ParentMessageInput = inputObjectType({
     name: "ParentMessageInput",

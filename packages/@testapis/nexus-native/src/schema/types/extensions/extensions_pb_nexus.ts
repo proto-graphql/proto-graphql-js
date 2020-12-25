@@ -2,9 +2,9 @@
 // source: extensions/extensions.proto
 
 import { objectType, inputObjectType, enumType, nullable, nonNull } from "nexus";
-import * as $$testapis$node$lib$extensions$extensions_pb from "@testapis/node/lib/extensions/extensions_pb";
-export type $$testapis$node$lib$extensions$extensions_pb$TestPrefixPrefixedMessage = $$testapis$node$lib$extensions$extensions_pb.PrefixedMessage;
-export type $$testapis$node$lib$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage = $$testapis$node$lib$extensions$extensions_pb.PrefixedMessage.InnerMessage;
+import * as $$testapis$node_native$lib$extensions$extensions_pb from "@testapis/node-native/lib/extensions/extensions_pb";
+export type $$testapis$node_native$lib$extensions$extensions_pb$TestPrefixPrefixedMessage = $$testapis$node_native$lib$extensions$extensions_pb.PrefixedMessage;
+export type $$testapis$node_native$lib$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage = $$testapis$node_native$lib$extensions$extensions_pb.PrefixedMessage.InnerMessage;
 export const TestPrefixPrefixedMessage = objectType({
     name: "TestPrefixPrefixedMessage",
     description: "",
@@ -20,7 +20,7 @@ export const TestPrefixPrefixedMessage = objectType({
             resolve(root) { return root.getPrefixedEnum(); }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$extensions$extensions_pb$TestPrefixPrefixedMessage" }
+    sourceType: { module: __filename, export: "$$testapis$node_native$lib$extensions$extensions_pb$TestPrefixPrefixedMessage" }
 });
 export const TestPrefixPrefixedMessageInnerMessage = objectType({
     name: "TestPrefixPrefixedMessageInnerMessage",
@@ -32,7 +32,7 @@ export const TestPrefixPrefixedMessageInnerMessage = objectType({
             resolve(root) { return root.getBody(); }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage" }
+    sourceType: { module: __filename, export: "$$testapis$node_native$lib$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage" }
 });
 export const TestPrefixPrefixedMessageInput = inputObjectType({
     name: "TestPrefixPrefixedMessageInput",

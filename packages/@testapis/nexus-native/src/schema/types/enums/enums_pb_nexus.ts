@@ -2,8 +2,8 @@
 // source: enums/enums.proto
 
 import { objectType, inputObjectType, enumType, nullable } from "nexus";
-import * as $$testapis$node$lib$enums$enums_pb from "@testapis/node/lib/enums/enums_pb";
-export type $$testapis$node$lib$enums$enums_pb$MessageWithEnums = $$testapis$node$lib$enums$enums_pb.MessageWithEnums;
+import * as $$testapis$node_native$lib$enums$enums_pb from "@testapis/node-native/lib/enums/enums_pb";
+export type $$testapis$node_native$lib$enums$enums_pb$MessageWithEnums = $$testapis$node_native$lib$enums$enums_pb.MessageWithEnums;
 export const MessageWithEnums = objectType({
     name: "MessageWithEnums",
     description: "",
@@ -14,7 +14,7 @@ export const MessageWithEnums = objectType({
             resolve(root) { return root.getMyEnum1(); }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$enums$enums_pb$MessageWithEnums" }
+    sourceType: { module: __filename, export: "$$testapis$node_native$lib$enums$enums_pb$MessageWithEnums" }
 });
 export const MessageWithEnumsInput = inputObjectType({
     name: "MessageWithEnumsInput",

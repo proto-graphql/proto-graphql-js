@@ -2,10 +2,10 @@
 // source: oneof/oneof.proto
 
 import { objectType, inputObjectType, unionType, nullable, nonNull } from "nexus";
-import * as $$testapis$node$lib$oneof$oneof_pb from "@testapis/node/lib/oneof/oneof_pb";
-export type $$testapis$node$lib$oneof$oneof_pb$OneofParent = $$testapis$node$lib$oneof$oneof_pb.OneofParent;
-export type $$testapis$node$lib$oneof$oneof_pb$OneofMemberMessage1 = $$testapis$node$lib$oneof$oneof_pb.OneofMemberMessage1;
-export type $$testapis$node$lib$oneof$oneof_pb$OneofMemberMessage2 = $$testapis$node$lib$oneof$oneof_pb.OneofMemberMessage2;
+import * as $$testapis$node_native$lib$oneof$oneof_pb from "@testapis/node-native/lib/oneof/oneof_pb";
+export type $$testapis$node_native$lib$oneof$oneof_pb$OneofParent = $$testapis$node_native$lib$oneof$oneof_pb.OneofParent;
+export type $$testapis$node_native$lib$oneof$oneof_pb$OneofMemberMessage1 = $$testapis$node_native$lib$oneof$oneof_pb.OneofMemberMessage1;
+export type $$testapis$node_native$lib$oneof$oneof_pb$OneofMemberMessage2 = $$testapis$node_native$lib$oneof$oneof_pb.OneofMemberMessage2;
 export const OneofParentRequiredOneofMembers = unionType({
     name: "OneofParentRequiredOneofMembers",
     description: "Required. disallow not_set.",
@@ -13,10 +13,10 @@ export const OneofParentRequiredOneofMembers = unionType({
         t.members("OneofMemberMessage1", "OneofMemberMessage2");
     },
     resolveType(item) {
-        if (item instanceof $$testapis$node$lib$oneof$oneof_pb.OneofMemberMessage1) {
+        if (item instanceof $$testapis$node_native$lib$oneof$oneof_pb.OneofMemberMessage1) {
             return "OneofMemberMessage1";
         }
-        if (item instanceof $$testapis$node$lib$oneof$oneof_pb.OneofMemberMessage2) {
+        if (item instanceof $$testapis$node_native$lib$oneof$oneof_pb.OneofMemberMessage2) {
             return "OneofMemberMessage2";
         }
         throw "unreachable";
@@ -29,10 +29,10 @@ export const OneofParentOptionalOneofMembers = unionType({
         t.members("OneofMemberMessage1", "OneofMemberMessage2");
     },
     resolveType(item) {
-        if (item instanceof $$testapis$node$lib$oneof$oneof_pb.OneofMemberMessage1) {
+        if (item instanceof $$testapis$node_native$lib$oneof$oneof_pb.OneofMemberMessage1) {
             return "OneofMemberMessage1";
         }
-        if (item instanceof $$testapis$node$lib$oneof$oneof_pb.OneofMemberMessage2) {
+        if (item instanceof $$testapis$node_native$lib$oneof$oneof_pb.OneofMemberMessage2) {
             return "OneofMemberMessage2";
         }
         throw "unreachable";
@@ -52,13 +52,13 @@ export const OneofParent = objectType({
             description: "Required. disallow not_set.",
             resolve(root) {
                 switch (root.getRequiredOneofMembersCase()) {
-                    case $$testapis$node$lib$oneof$oneof_pb.OneofParent.RequiredOneofMembersCase.REQUIRED_ONEOF_MEMBERS_NOT_SET: {
+                    case $$testapis$node_native$lib$oneof$oneof_pb.OneofParent.RequiredOneofMembersCase.REQUIRED_ONEOF_MEMBERS_NOT_SET: {
                         throw "unreachable";
                     }
-                    case $$testapis$node$lib$oneof$oneof_pb.OneofParent.RequiredOneofMembersCase.REQUIRED_MESSAGE1: {
+                    case $$testapis$node_native$lib$oneof$oneof_pb.OneofParent.RequiredOneofMembersCase.REQUIRED_MESSAGE1: {
                         return root.getRequiredMessage1()!;
                     }
-                    case $$testapis$node$lib$oneof$oneof_pb.OneofParent.RequiredOneofMembersCase.REQUIRED_MESSAGE2: {
+                    case $$testapis$node_native$lib$oneof$oneof_pb.OneofParent.RequiredOneofMembersCase.REQUIRED_MESSAGE2: {
                         return root.getRequiredMessage2()!;
                     }
                     default: {
@@ -72,13 +72,13 @@ export const OneofParent = objectType({
             description: "",
             resolve(root) {
                 switch (root.getOptionalOneofMembersCase()) {
-                    case $$testapis$node$lib$oneof$oneof_pb.OneofParent.OptionalOneofMembersCase.OPTIONAL_ONEOF_MEMBERS_NOT_SET: {
+                    case $$testapis$node_native$lib$oneof$oneof_pb.OneofParent.OptionalOneofMembersCase.OPTIONAL_ONEOF_MEMBERS_NOT_SET: {
                         return null;
                     }
-                    case $$testapis$node$lib$oneof$oneof_pb.OneofParent.OptionalOneofMembersCase.OPTOINAL_MESSAGE1: {
+                    case $$testapis$node_native$lib$oneof$oneof_pb.OneofParent.OptionalOneofMembersCase.OPTOINAL_MESSAGE1: {
                         return root.getOptoinalMessage1()!;
                     }
-                    case $$testapis$node$lib$oneof$oneof_pb.OneofParent.OptionalOneofMembersCase.OPTOINAL_MESSAGE2: {
+                    case $$testapis$node_native$lib$oneof$oneof_pb.OneofParent.OptionalOneofMembersCase.OPTOINAL_MESSAGE2: {
                         return root.getOptoinalMessage2()!;
                     }
                     default: {
@@ -88,7 +88,7 @@ export const OneofParent = objectType({
             }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$oneof$oneof_pb$OneofParent" }
+    sourceType: { module: __filename, export: "$$testapis$node_native$lib$oneof$oneof_pb$OneofParent" }
 });
 export const OneofMemberMessage1 = objectType({
     name: "OneofMemberMessage1",
@@ -100,7 +100,7 @@ export const OneofMemberMessage1 = objectType({
             resolve(root) { return root.getBody(); }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$oneof$oneof_pb$OneofMemberMessage1" }
+    sourceType: { module: __filename, export: "$$testapis$node_native$lib$oneof$oneof_pb$OneofMemberMessage1" }
 });
 export const OneofMemberMessage2 = objectType({
     name: "OneofMemberMessage2",
@@ -112,7 +112,7 @@ export const OneofMemberMessage2 = objectType({
             resolve(root) { return root.getImageUrl(); }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$oneof$oneof_pb$OneofMemberMessage2" }
+    sourceType: { module: __filename, export: "$$testapis$node_native$lib$oneof$oneof_pb$OneofMemberMessage2" }
 });
 export const OneofParentInput = inputObjectType({
     name: "OneofParentInput",

@@ -2,9 +2,9 @@
 // source: field_behavior/comments.proto
 
 import { objectType, inputObjectType, nullable, nonNull } from "nexus";
-import * as $$testapis$node$lib$field_behavior$comments_pb from "@testapis/node/lib/field_behavior/comments_pb";
-export type $$testapis$node$lib$field_behavior$comments_pb$FieldBehaviorComentsMessage = $$testapis$node$lib$field_behavior$comments_pb.FieldBehaviorComentsMessage;
-export type $$testapis$node$lib$field_behavior$comments_pb$FieldBehaviorComentsMessagePost = $$testapis$node$lib$field_behavior$comments_pb.FieldBehaviorComentsMessage.Post;
+import * as $$testapis$node_native$lib$field_behavior$comments_pb from "@testapis/node-native/lib/field_behavior/comments_pb";
+export type $$testapis$node_native$lib$field_behavior$comments_pb$FieldBehaviorComentsMessage = $$testapis$node_native$lib$field_behavior$comments_pb.FieldBehaviorComentsMessage;
+export type $$testapis$node_native$lib$field_behavior$comments_pb$FieldBehaviorComentsMessagePost = $$testapis$node_native$lib$field_behavior$comments_pb.FieldBehaviorComentsMessage.Post;
 export const FieldBehaviorComentsMessage = objectType({
     name: "FieldBehaviorComentsMessage",
     description: "",
@@ -30,7 +30,7 @@ export const FieldBehaviorComentsMessage = objectType({
             resolve(root) { return root.getOutputOnlyField() ?? null; }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$field_behavior$comments_pb$FieldBehaviorComentsMessage" }
+    sourceType: { module: __filename, export: "$$testapis$node_native$lib$field_behavior$comments_pb$FieldBehaviorComentsMessage" }
 });
 export const FieldBehaviorComentsMessagePost = objectType({
     name: "FieldBehaviorComentsMessagePost",
@@ -42,7 +42,7 @@ export const FieldBehaviorComentsMessagePost = objectType({
             resolve(root) { return root.getBody(); }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$field_behavior$comments_pb$FieldBehaviorComentsMessagePost" }
+    sourceType: { module: __filename, export: "$$testapis$node_native$lib$field_behavior$comments_pb$FieldBehaviorComentsMessagePost" }
 });
 export const FieldBehaviorComentsMessageInput = inputObjectType({
     name: "FieldBehaviorComentsMessageInput",

@@ -3,8 +3,8 @@
 
 import { objectType, inputObjectType, nullable } from "nexus";
 import * as proto_nexus from "proto-nexus";
-import * as $$testapis$node$lib$wktypes$well_known_types_pb from "@testapis/node/lib/wktypes/well_known_types_pb";
-export type $$testapis$node$lib$wktypes$well_known_types_pb$Message = $$testapis$node$lib$wktypes$well_known_types_pb.Message;
+import * as $$testapis$node_native$lib$wktypes$well_known_types_pb from "@testapis/node-native/lib/wktypes/well_known_types_pb";
+export type $$testapis$node_native$lib$wktypes$well_known_types_pb$Message = $$testapis$node_native$lib$wktypes$well_known_types_pb.Message;
 export const Message = objectType({
     name: "Message",
     description: "",
@@ -55,7 +55,7 @@ export const Message = objectType({
             resolve(root) { return proto_nexus.unwrapStringValue(root.getStringValue()); }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$wktypes$well_known_types_pb$Message" }
+    sourceType: { module: __filename, export: "$$testapis$node_native$lib$wktypes$well_known_types_pb$Message" }
 });
 export const MessageInput = inputObjectType({
     name: "MessageInput",

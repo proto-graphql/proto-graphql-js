@@ -4,15 +4,15 @@
  */
 
 
-import { $$testapis$node$lib$deprecation$deprecation_pb$DeprecatedMessage, $$testapis$node$lib$deprecation$deprecation_pb$NotDeprecatedMessage, $$testapis$node$lib$deprecation$deprecation_pb$DeprecatedMessageInnerMessage, $$testapis$node$lib$deprecation$deprecation_pb$NotDeprecatedMessageInnerMessage1, $$testapis$node$lib$deprecation$deprecation_pb$NotDeprecatedMessageInnerMessage2 } from "./../schema/types/deprecation/deprecation_pb_nexus"
-import { $$testapis$node$lib$deprecation$file_deprecation_pb$DeprecatedFileMessage, $$testapis$node$lib$deprecation$file_deprecation_pb$DeprecatedFileMessageInnerMessage } from "./../schema/types/deprecation/file_deprecation_pb_nexus"
-import { $$testapis$node$lib$enums$enums_pb$MessageWithEnums } from "./../schema/types/enums/enums_pb_nexus"
-import { $$testapis$node$lib$extensions$extensions_pb$TestPrefixPrefixedMessage, $$testapis$node$lib$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage } from "./../schema/types/extensions/extensions_pb_nexus"
-import { $$testapis$node$lib$field_behavior$comments_pb$FieldBehaviorComentsMessage, $$testapis$node$lib$field_behavior$comments_pb$FieldBehaviorComentsMessagePost } from "./../schema/types/field_behavior/comments_pb_nexus"
-import { $$testapis$node$lib$hello$hello_pb$Hello, $$testapis$node$lib$hello$hello_pb$Primitives } from "./../schema/types/hello/hello_pb_nexus"
-import { $$testapis$node$lib$nested$nested_pb$ParentMessage, $$testapis$node$lib$nested$nested_pb$ParentMessageNestedMessage } from "./../schema/types/nested/nested_pb_nexus"
-import { $$testapis$node$lib$oneof$oneof_pb$OneofParent, $$testapis$node$lib$oneof$oneof_pb$OneofMemberMessage1, $$testapis$node$lib$oneof$oneof_pb$OneofMemberMessage2 } from "./../schema/types/oneof/oneof_pb_nexus"
-import { $$testapis$node$lib$wktypes$well_known_types_pb$Message } from "./../schema/types/wktypes/well_known_types_pb_nexus"
+import { $$testapis$node_native$lib$deprecation$deprecation_pb$DeprecatedMessage, $$testapis$node_native$lib$deprecation$deprecation_pb$NotDeprecatedMessage, $$testapis$node_native$lib$deprecation$deprecation_pb$DeprecatedMessageInnerMessage, $$testapis$node_native$lib$deprecation$deprecation_pb$NotDeprecatedMessageInnerMessage1, $$testapis$node_native$lib$deprecation$deprecation_pb$NotDeprecatedMessageInnerMessage2 } from "./../schema/types/deprecation/deprecation_pb_nexus"
+import { $$testapis$node_native$lib$deprecation$file_deprecation_pb$DeprecatedFileMessage, $$testapis$node_native$lib$deprecation$file_deprecation_pb$DeprecatedFileMessageInnerMessage } from "./../schema/types/deprecation/file_deprecation_pb_nexus"
+import { $$testapis$node_native$lib$enums$enums_pb$MessageWithEnums } from "./../schema/types/enums/enums_pb_nexus"
+import { $$testapis$node_native$lib$extensions$extensions_pb$TestPrefixPrefixedMessage, $$testapis$node_native$lib$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage } from "./../schema/types/extensions/extensions_pb_nexus"
+import { $$testapis$node_native$lib$field_behavior$comments_pb$FieldBehaviorComentsMessage, $$testapis$node_native$lib$field_behavior$comments_pb$FieldBehaviorComentsMessagePost } from "./../schema/types/field_behavior/comments_pb_nexus"
+import { $$testapis$node_native$lib$hello$hello_pb$Hello, $$testapis$node_native$lib$hello$hello_pb$Primitives } from "./../schema/types/hello/hello_pb_nexus"
+import { $$testapis$node_native$lib$nested$nested_pb$ParentMessage, $$testapis$node_native$lib$nested$nested_pb$ParentMessageNestedMessage } from "./../schema/types/nested/nested_pb_nexus"
+import { $$testapis$node_native$lib$oneof$oneof_pb$OneofParent, $$testapis$node_native$lib$oneof$oneof_pb$OneofMemberMessage1, $$testapis$node_native$lib$oneof$oneof_pb$OneofMemberMessage2 } from "./../schema/types/oneof/oneof_pb_nexus"
+import { $$testapis$node_native$lib$wktypes$well_known_types_pb$Message } from "./../schema/types/wktypes/well_known_types_pb_nexus"
 import { core } from "nexus"
 declare global {
   interface NexusGenCustomInputMethods<TypeName extends string> {
@@ -159,27 +159,27 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
-  DeprecatedFileMessage: $$testapis$node$lib$deprecation$file_deprecation_pb$DeprecatedFileMessage;
-  DeprecatedFileMessageInnerMessage: $$testapis$node$lib$deprecation$file_deprecation_pb$DeprecatedFileMessageInnerMessage;
-  DeprecatedMessage: $$testapis$node$lib$deprecation$deprecation_pb$DeprecatedMessage;
-  DeprecatedMessageInnerMessage: $$testapis$node$lib$deprecation$deprecation_pb$DeprecatedMessageInnerMessage;
-  FieldBehaviorComentsMessage: $$testapis$node$lib$field_behavior$comments_pb$FieldBehaviorComentsMessage;
-  FieldBehaviorComentsMessagePost: $$testapis$node$lib$field_behavior$comments_pb$FieldBehaviorComentsMessagePost;
-  Hello: $$testapis$node$lib$hello$hello_pb$Hello;
-  Message: $$testapis$node$lib$wktypes$well_known_types_pb$Message;
-  MessageWithEnums: $$testapis$node$lib$enums$enums_pb$MessageWithEnums;
-  NotDeprecatedMessage: $$testapis$node$lib$deprecation$deprecation_pb$NotDeprecatedMessage;
-  NotDeprecatedMessageInnerMessage1: $$testapis$node$lib$deprecation$deprecation_pb$NotDeprecatedMessageInnerMessage1;
-  NotDeprecatedMessageInnerMessage2: $$testapis$node$lib$deprecation$deprecation_pb$NotDeprecatedMessageInnerMessage2;
-  OneofMemberMessage1: $$testapis$node$lib$oneof$oneof_pb$OneofMemberMessage1;
-  OneofMemberMessage2: $$testapis$node$lib$oneof$oneof_pb$OneofMemberMessage2;
-  OneofParent: $$testapis$node$lib$oneof$oneof_pb$OneofParent;
-  ParentMessage: $$testapis$node$lib$nested$nested_pb$ParentMessage;
-  ParentMessageNestedMessage: $$testapis$node$lib$nested$nested_pb$ParentMessageNestedMessage;
-  Primitives: $$testapis$node$lib$hello$hello_pb$Primitives;
+  DeprecatedFileMessage: $$testapis$node_native$lib$deprecation$file_deprecation_pb$DeprecatedFileMessage;
+  DeprecatedFileMessageInnerMessage: $$testapis$node_native$lib$deprecation$file_deprecation_pb$DeprecatedFileMessageInnerMessage;
+  DeprecatedMessage: $$testapis$node_native$lib$deprecation$deprecation_pb$DeprecatedMessage;
+  DeprecatedMessageInnerMessage: $$testapis$node_native$lib$deprecation$deprecation_pb$DeprecatedMessageInnerMessage;
+  FieldBehaviorComentsMessage: $$testapis$node_native$lib$field_behavior$comments_pb$FieldBehaviorComentsMessage;
+  FieldBehaviorComentsMessagePost: $$testapis$node_native$lib$field_behavior$comments_pb$FieldBehaviorComentsMessagePost;
+  Hello: $$testapis$node_native$lib$hello$hello_pb$Hello;
+  Message: $$testapis$node_native$lib$wktypes$well_known_types_pb$Message;
+  MessageWithEnums: $$testapis$node_native$lib$enums$enums_pb$MessageWithEnums;
+  NotDeprecatedMessage: $$testapis$node_native$lib$deprecation$deprecation_pb$NotDeprecatedMessage;
+  NotDeprecatedMessageInnerMessage1: $$testapis$node_native$lib$deprecation$deprecation_pb$NotDeprecatedMessageInnerMessage1;
+  NotDeprecatedMessageInnerMessage2: $$testapis$node_native$lib$deprecation$deprecation_pb$NotDeprecatedMessageInnerMessage2;
+  OneofMemberMessage1: $$testapis$node_native$lib$oneof$oneof_pb$OneofMemberMessage1;
+  OneofMemberMessage2: $$testapis$node_native$lib$oneof$oneof_pb$OneofMemberMessage2;
+  OneofParent: $$testapis$node_native$lib$oneof$oneof_pb$OneofParent;
+  ParentMessage: $$testapis$node_native$lib$nested$nested_pb$ParentMessage;
+  ParentMessageNestedMessage: $$testapis$node_native$lib$nested$nested_pb$ParentMessageNestedMessage;
+  Primitives: $$testapis$node_native$lib$hello$hello_pb$Primitives;
   Query: {};
-  TestPrefixPrefixedMessage: $$testapis$node$lib$extensions$extensions_pb$TestPrefixPrefixedMessage;
-  TestPrefixPrefixedMessageInnerMessage: $$testapis$node$lib$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage;
+  TestPrefixPrefixedMessage: $$testapis$node_native$lib$extensions$extensions_pb$TestPrefixPrefixedMessage;
+  TestPrefixPrefixedMessageInnerMessage: $$testapis$node_native$lib$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage;
 }
 
 export interface NexusGenInterfaces {
