@@ -27,7 +27,7 @@ export function printSource(
     // `import { objectType, enumTpye } from "nexus";`
     createImportNexusDecl(msgs, enums),
     // `import * as proto_nexus from "proto-nexus";`
-    ...createImportUnwrapFuncDecls(msgs),
+    ...createImportUnwrapFuncDecls(msgs, opts),
     // `import * as _$hello$hello_pb from "./hello/hello_pb";`
     ...createImportProtoDecls(msgs, opts),
     // `export _$hello$hello_pb$Hello = _$hello$hello_pb.Hello;`

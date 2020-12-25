@@ -66,11 +66,12 @@ export function createImportNexusDecl(
  * ```
  */
 export function createImportUnwrapFuncDecls(
-  msgs: ReadonlyArray<ProtoMessage>
+  msgs: ReadonlyArray<ProtoMessage>,
+  opts: { useProtobufjs?: boolean }
 ): ts.ImportDeclaration[] {
   return msgs
     .flatMap((m) => m.fields)
-    .flatMap((f) => getUnwrapFunc(f)?.imports ?? [])
+    .flatMap((f) => getUnwrapFunc(f, opts)?.imports ?? [])
     .filter(onlyUnique())
     .map(createImportAllWithAliastDecl);
 }

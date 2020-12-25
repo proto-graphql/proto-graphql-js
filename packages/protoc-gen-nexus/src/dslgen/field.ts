@@ -135,7 +135,7 @@ function createFieldResolverDecl(
     );
   }
 
-  const unwrapFunc = getUnwrapFunc(field);
+  const unwrapFunc = getUnwrapFunc(field, opts);
   if (unwrapFunc !== null) {
     resolverRet = ts.factory.createCallExpression(
       ts.factory.createIdentifier(unwrapFunc.name),

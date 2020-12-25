@@ -1,0 +1,35 @@
+{
+  "name": "@proto-nexus/protobufjs-adapter",
+  "version": "0.1.4",
+  "description": "Generate DSL for GraphQL Nexus from Protocol Buffers IDL",
+  "keywords": [
+    "graphql",
+    "grpc",
+    "nexus",
+    "protobuf",
+    "typescript"
+  ],
+  "repository": "git@github.com:izumin5210/proto-nexus.git",
+  "author": "izumin5210 <m@izum.in>",
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "module": "./module/index.js",
+  "types": "./lib/index.d.ts",
+  "private": false,
+  "engines": {
+    "node": ">= 14.0.0"
+  },
+  "files": [
+    "lib/",
+    "module/"
+  ],
+  "dependencies": {
+    "protobufjs": "^6.10.2"
+  },
+  "scripts": {
+    "build": "tsc --build . && tsc --build tsconfig.module.json",
+    "clean": "rimraf lib/ module/ && tsc --build . --clean && tsc --build tsconfig.module.json --clean",
+    "lint": "frolint --branch master --bail",
+    "prepublish": "yarn clean && yarn build"
+  }
+}
