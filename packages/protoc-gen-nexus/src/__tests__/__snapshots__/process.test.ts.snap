@@ -383,9 +383,19 @@ import { objectType, inputObjectType, enumType, unionType, nullable, nonNull } f
 import * as _$deprecation from \\"./deprecation\\";
 export type _$deprecation$testapi$deprecation$DeprecatedMessage = _$deprecation.testapi.deprecation.IDeprecatedMessage;
 export type _$deprecation$testapi$deprecation$NotDeprecatedMessage = _$deprecation.testapi.deprecation.INotDeprecatedMessage;
-export type _$deprecation$testapi$deprecation$DeprecatedMessageInnerMessage = _$deprecation.testapi.deprecation.IDeprecatedMessage.InnerMessage;
-export type _$deprecation$testapi$deprecation$NotDeprecatedMessageInnerMessage1 = _$deprecation.testapi.deprecation.INotDeprecatedMessage.InnerMessage1;
-export type _$deprecation$testapi$deprecation$NotDeprecatedMessageInnerMessage2 = _$deprecation.testapi.deprecation.INotDeprecatedMessage.InnerMessage2;
+export type _$deprecation$testapi$deprecation$DeprecatedMessageInnerMessage = _$deprecation.testapi.deprecation.DeprecatedMessage.IInnerMessage;
+export type _$deprecation$testapi$deprecation$NotDeprecatedMessageInnerMessage1 = _$deprecation.testapi.deprecation.NotDeprecatedMessage.IInnerMessage1;
+export type _$deprecation$testapi$deprecation$NotDeprecatedMessageInnerMessage2 = _$deprecation.testapi.deprecation.NotDeprecatedMessage.IInnerMessage2;
+export type _$deprecation$testapi$deprecation$NotDeprecatedMessage_not_deprecated_oneof = (_$deprecation.testapi.deprecation.NotDeprecatedMessage.IInnerMessage1 & {
+    __protobufTypeName: \\"testapi.deprecation.NotDeprecatedMessage.InnerMessage1\\";
+}) | (_$deprecation.testapi.deprecation.NotDeprecatedMessage.IInnerMessage2 & {
+    __protobufTypeName: \\"testapi.deprecation.NotDeprecatedMessage.InnerMessage2\\";
+});
+export type _$deprecation$testapi$deprecation$NotDeprecatedMessage_deprecated_oneof = (_$deprecation.testapi.deprecation.NotDeprecatedMessage.IInnerMessage1 & {
+    __protobufTypeName: \\"testapi.deprecation.NotDeprecatedMessage.InnerMessage1\\";
+}) | (_$deprecation.testapi.deprecation.NotDeprecatedMessage.IInnerMessage2 & {
+    __protobufTypeName: \\"testapi.deprecation.NotDeprecatedMessage.InnerMessage2\\";
+});
 export const NotDeprecatedMessageNotDeprecatedOneof = unionType({
     name: \\"NotDeprecatedMessageNotDeprecatedOneof\\",
     description: \\"\\",
@@ -393,14 +403,15 @@ export const NotDeprecatedMessageNotDeprecatedOneof = unionType({
         t.members(\\"NotDeprecatedMessageInnerMessage1\\", \\"NotDeprecatedMessageInnerMessage2\\");
     },
     resolveType(item) {
-        if (item instanceof _$deprecation.testapi.deprecation.INotDeprecatedMessage.InnerMessage1) {
+        if (item.__protobufTypeName === \\"testapi.deprecation.NotDeprecatedMessage.InnerMessage1\\") {
             return \\"NotDeprecatedMessageInnerMessage1\\";
         }
-        if (item instanceof _$deprecation.testapi.deprecation.INotDeprecatedMessage.InnerMessage2) {
+        if (item.__protobufTypeName === \\"testapi.deprecation.NotDeprecatedMessage.InnerMessage2\\") {
             return \\"NotDeprecatedMessageInnerMessage2\\";
         }
         throw \\"unreachable\\";
-    }
+    },
+    sourceType: { module: __filename, export: \\"_$deprecation$testapi$deprecation$NotDeprecatedMessage_not_deprecated_oneof\\" }
 });
 export const NotDeprecatedMessageDeprecatedOneof = unionType({
     name: \\"NotDeprecatedMessageDeprecatedOneof\\",
@@ -409,14 +420,15 @@ export const NotDeprecatedMessageDeprecatedOneof = unionType({
         t.members(\\"NotDeprecatedMessageInnerMessage1\\", \\"NotDeprecatedMessageInnerMessage2\\");
     },
     resolveType(item) {
-        if (item instanceof _$deprecation.testapi.deprecation.INotDeprecatedMessage.InnerMessage1) {
+        if (item.__protobufTypeName === \\"testapi.deprecation.NotDeprecatedMessage.InnerMessage1\\") {
             return \\"NotDeprecatedMessageInnerMessage1\\";
         }
-        if (item instanceof _$deprecation.testapi.deprecation.INotDeprecatedMessage.InnerMessage2) {
+        if (item.__protobufTypeName === \\"testapi.deprecation.NotDeprecatedMessage.InnerMessage2\\") {
             return \\"NotDeprecatedMessageInnerMessage2\\";
         }
         throw \\"unreachable\\";
-    }
+    },
+    sourceType: { module: __filename, export: \\"_$deprecation$testapi$deprecation$NotDeprecatedMessage_deprecated_oneof\\" }
 });
 export const DeprecatedMessage = objectType({
     name: \\"DeprecatedMessage\\",
@@ -457,20 +469,13 @@ export const NotDeprecatedMessage = objectType({
             type: nullable(\\"NotDeprecatedMessageNotDeprecatedOneof\\"),
             description: \\"\\",
             resolve(root) {
-                switch (root.getNotDeprecatedOneofCase()) {
-                    case _$deprecation.testapi.deprecation.INotDeprecatedMessage.NotDeprecatedOneofCase.NOT_DEPRECATED_ONEOF_NOT_SET: {
-                        return null;
-                    }
-                    case _$deprecation.testapi.deprecation.INotDeprecatedMessage.NotDeprecatedOneofCase.MSG1: {
-                        return root.getMsg1()!;
-                    }
-                    case _$deprecation.testapi.deprecation.INotDeprecatedMessage.NotDeprecatedOneofCase.MSG2: {
-                        return root.getMsg2()!;
-                    }
-                    default: {
-                        throw \\"unreachable\\";
-                    }
+                if (root.msg1) {
+                    return Object.assign(root.msg1, { __protobufTypeName: (\\"testapi.deprecation.NotDeprecatedMessage.InnerMessage1\\" as const) });
                 }
+                if (root.msg2) {
+                    return Object.assign(root.msg2, { __protobufTypeName: (\\"testapi.deprecation.NotDeprecatedMessage.InnerMessage2\\" as const) });
+                }
+                return null;
             }
         });
         t.field(\\"deprecated_oneof\\", {
@@ -478,20 +483,13 @@ export const NotDeprecatedMessage = objectType({
             description: \\"\\",
             deprecation: \\"testapi.deprecation.NotDeprecatedMessage.deprecated_oneof is mark as deprecated in a *.proto file.\\",
             resolve(root) {
-                switch (root.getDeprecatedOneofCase()) {
-                    case _$deprecation.testapi.deprecation.INotDeprecatedMessage.DeprecatedOneofCase.DEPRECATED_ONEOF_NOT_SET: {
-                        return null;
-                    }
-                    case _$deprecation.testapi.deprecation.INotDeprecatedMessage.DeprecatedOneofCase.MSG3: {
-                        return root.getMsg3()!;
-                    }
-                    case _$deprecation.testapi.deprecation.INotDeprecatedMessage.DeprecatedOneofCase.MSG4: {
-                        return root.getMsg4()!;
-                    }
-                    default: {
-                        throw \\"unreachable\\";
-                    }
+                if (root.msg3) {
+                    return Object.assign(root.msg3, { __protobufTypeName: (\\"testapi.deprecation.NotDeprecatedMessage.InnerMessage1\\" as const) });
                 }
+                if (root.msg4) {
+                    return Object.assign(root.msg4, { __protobufTypeName: (\\"testapi.deprecation.NotDeprecatedMessage.InnerMessage2\\" as const) });
+                }
+                return null;
             }
         });
     },
@@ -666,7 +664,7 @@ exports[`deprecation generates nexus DSL with protobuf.js 2`] = `
 import { objectType, inputObjectType, enumType, nullable, nonNull } from \\"nexus\\";
 import * as _$deprecation from \\"./deprecation\\";
 export type _$deprecation$testapi$deprecation$DeprecatedFileMessage = _$deprecation.testapi.deprecation.IDeprecatedFileMessage;
-export type _$deprecation$testapi$deprecation$DeprecatedFileMessageInnerMessage = _$deprecation.testapi.deprecation.IDeprecatedFileMessage.InnerMessage;
+export type _$deprecation$testapi$deprecation$DeprecatedFileMessageInnerMessage = _$deprecation.testapi.deprecation.DeprecatedFileMessage.IInnerMessage;
 export const DeprecatedFileMessage = objectType({
     name: \\"DeprecatedFileMessage\\",
     description: \\"\\",
@@ -839,7 +837,7 @@ exports[`field_behavior generates nexus DSL with protobuf.js 1`] = `
 import { objectType, inputObjectType, nullable, nonNull } from \\"nexus\\";
 import * as _$field_behavior from \\"./field_behavior\\";
 export type _$field_behavior$testapi$deprecation$FieldBehaviorComentsMessage = _$field_behavior.testapi.deprecation.IFieldBehaviorComentsMessage;
-export type _$field_behavior$testapi$deprecation$FieldBehaviorComentsMessagePost = _$field_behavior.testapi.deprecation.IFieldBehaviorComentsMessage.Post;
+export type _$field_behavior$testapi$deprecation$FieldBehaviorComentsMessagePost = _$field_behavior.testapi.deprecation.FieldBehaviorComentsMessage.IPost;
 export const FieldBehaviorComentsMessage = objectType({
     name: \\"FieldBehaviorComentsMessage\\",
     description: \\"\\",
@@ -1012,7 +1010,7 @@ exports[`nested protobuf types generates nexus DSL with protobuf.js 1`] = `
 import { objectType, inputObjectType, enumType, nullable, nonNull } from \\"nexus\\";
 import * as _$nested from \\"./nested\\";
 export type _$nested$testapi$nested$ParentMessage = _$nested.testapi.nested.IParentMessage;
-export type _$nested$testapi$nested$ParentMessageNestedMessage = _$nested.testapi.nested.IParentMessage.NestedMessage;
+export type _$nested$testapi$nested$ParentMessageNestedMessage = _$nested.testapi.nested.ParentMessage.INestedMessage;
 export const ParentMessage = objectType({
     name: \\"ParentMessage\\",
     description: \\"\\",
@@ -1185,7 +1183,7 @@ exports[`protobuf custom options generates nexus DSL with protobuf.js 1`] = `
 import { objectType, inputObjectType, enumType, nullable, nonNull } from \\"nexus\\";
 import * as _$extensions from \\"./extensions\\";
 export type _$extensions$testapi$extensions$TestPrefixPrefixedMessage = _$extensions.testapi.extensions.IPrefixedMessage;
-export type _$extensions$testapi$extensions$TestPrefixPrefixedMessageInnerMessage = _$extensions.testapi.extensions.IPrefixedMessage.InnerMessage;
+export type _$extensions$testapi$extensions$TestPrefixPrefixedMessageInnerMessage = _$extensions.testapi.extensions.PrefixedMessage.IInnerMessage;
 export const TestPrefixPrefixedMessage = objectType({
     name: \\"TestPrefixPrefixedMessage\\",
     description: \\"\\",
@@ -1545,6 +1543,16 @@ import * as _$oneof from \\"./oneof\\";
 export type _$oneof$testapi$oneof$OneofParent = _$oneof.testapi.oneof.IOneofParent;
 export type _$oneof$testapi$oneof$OneofMemberMessage1 = _$oneof.testapi.oneof.IOneofMemberMessage1;
 export type _$oneof$testapi$oneof$OneofMemberMessage2 = _$oneof.testapi.oneof.IOneofMemberMessage2;
+export type _$oneof$testapi$oneof$OneofParent_required_oneof_members = (_$oneof.testapi.oneof.IOneofMemberMessage1 & {
+    __protobufTypeName: \\"testapi.oneof.OneofMemberMessage1\\";
+}) | (_$oneof.testapi.oneof.IOneofMemberMessage2 & {
+    __protobufTypeName: \\"testapi.oneof.OneofMemberMessage2\\";
+});
+export type _$oneof$testapi$oneof$OneofParent_optional_oneof_members = (_$oneof.testapi.oneof.IOneofMemberMessage1 & {
+    __protobufTypeName: \\"testapi.oneof.OneofMemberMessage1\\";
+}) | (_$oneof.testapi.oneof.IOneofMemberMessage2 & {
+    __protobufTypeName: \\"testapi.oneof.OneofMemberMessage2\\";
+});
 export const OneofParentRequiredOneofMembers = unionType({
     name: \\"OneofParentRequiredOneofMembers\\",
     description: \\"Required. disallow not_set.\\",
@@ -1552,14 +1560,15 @@ export const OneofParentRequiredOneofMembers = unionType({
         t.members(\\"OneofMemberMessage1\\", \\"OneofMemberMessage2\\");
     },
     resolveType(item) {
-        if (item instanceof _$oneof.testapi.oneof.IOneofMemberMessage1) {
+        if (item.__protobufTypeName === \\"testapi.oneof.OneofMemberMessage1\\") {
             return \\"OneofMemberMessage1\\";
         }
-        if (item instanceof _$oneof.testapi.oneof.IOneofMemberMessage2) {
+        if (item.__protobufTypeName === \\"testapi.oneof.OneofMemberMessage2\\") {
             return \\"OneofMemberMessage2\\";
         }
         throw \\"unreachable\\";
-    }
+    },
+    sourceType: { module: __filename, export: \\"_$oneof$testapi$oneof$OneofParent_required_oneof_members\\" }
 });
 export const OneofParentOptionalOneofMembers = unionType({
     name: \\"OneofParentOptionalOneofMembers\\",
@@ -1568,14 +1577,15 @@ export const OneofParentOptionalOneofMembers = unionType({
         t.members(\\"OneofMemberMessage1\\", \\"OneofMemberMessage2\\");
     },
     resolveType(item) {
-        if (item instanceof _$oneof.testapi.oneof.IOneofMemberMessage1) {
+        if (item.__protobufTypeName === \\"testapi.oneof.OneofMemberMessage1\\") {
             return \\"OneofMemberMessage1\\";
         }
-        if (item instanceof _$oneof.testapi.oneof.IOneofMemberMessage2) {
+        if (item.__protobufTypeName === \\"testapi.oneof.OneofMemberMessage2\\") {
             return \\"OneofMemberMessage2\\";
         }
         throw \\"unreachable\\";
-    }
+    },
+    sourceType: { module: __filename, export: \\"_$oneof$testapi$oneof$OneofParent_optional_oneof_members\\" }
 });
 export const OneofParent = objectType({
     name: \\"OneofParent\\",
@@ -1590,40 +1600,26 @@ export const OneofParent = objectType({
             type: nonNull(\\"OneofParentRequiredOneofMembers\\"),
             description: \\"Required. disallow not_set.\\",
             resolve(root) {
-                switch (root.getRequiredOneofMembersCase()) {
-                    case _$oneof.testapi.oneof.IOneofParent.RequiredOneofMembersCase.REQUIRED_ONEOF_MEMBERS_NOT_SET: {
-                        throw \\"unreachable\\";
-                    }
-                    case _$oneof.testapi.oneof.IOneofParent.RequiredOneofMembersCase.REQUIRED_MESSAGE1: {
-                        return root.getRequiredMessage1()!;
-                    }
-                    case _$oneof.testapi.oneof.IOneofParent.RequiredOneofMembersCase.REQUIRED_MESSAGE2: {
-                        return root.getRequiredMessage2()!;
-                    }
-                    default: {
-                        throw \\"unreachable\\";
-                    }
+                if (root.requiredMessage1) {
+                    return Object.assign(root.requiredMessage1, { __protobufTypeName: (\\"testapi.oneof.OneofMemberMessage1\\" as const) });
                 }
+                if (root.requiredMessage2) {
+                    return Object.assign(root.requiredMessage2, { __protobufTypeName: (\\"testapi.oneof.OneofMemberMessage2\\" as const) });
+                }
+                throw \\"unreachable\\";
             }
         });
         t.field(\\"optional_oneof_members\\", {
             type: nullable(\\"OneofParentOptionalOneofMembers\\"),
             description: \\"\\",
             resolve(root) {
-                switch (root.getOptionalOneofMembersCase()) {
-                    case _$oneof.testapi.oneof.IOneofParent.OptionalOneofMembersCase.OPTIONAL_ONEOF_MEMBERS_NOT_SET: {
-                        return null;
-                    }
-                    case _$oneof.testapi.oneof.IOneofParent.OptionalOneofMembersCase.OPTOINAL_MESSAGE1: {
-                        return root.getOptoinalMessage1()!;
-                    }
-                    case _$oneof.testapi.oneof.IOneofParent.OptionalOneofMembersCase.OPTOINAL_MESSAGE2: {
-                        return root.getOptoinalMessage2()!;
-                    }
-                    default: {
-                        throw \\"unreachable\\";
-                    }
+                if (root.optoinalMessage1) {
+                    return Object.assign(root.optoinalMessage1, { __protobufTypeName: (\\"testapi.oneof.OneofMemberMessage1\\" as const) });
                 }
+                if (root.optoinalMessage2) {
+                    return Object.assign(root.optoinalMessage2, { __protobufTypeName: (\\"testapi.oneof.OneofMemberMessage2\\" as const) });
+                }
+                return null;
             }
         });
     },

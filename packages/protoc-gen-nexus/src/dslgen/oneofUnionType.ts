@@ -6,6 +6,7 @@ import {
   createProtoExpr,
   gqlTypeName,
   onlyNonNull,
+  protoExportAlias,
 } from "./util";
 
 /**
@@ -20,7 +21,7 @@ import {
 export function createOneofUnionTypeDslStmts(
   msgs: ReadonlyArray<ProtoMessage>,
   reg: ProtoRegistry,
-  opts: { importPrefix?: string }
+  opts: { importPrefix?: string; useProtobufjs?: boolean }
 ): ts.Statement[] {
   return msgs
     .flatMap((m) => m.oneofs)
@@ -39,7 +40,7 @@ export function createOneofUnionTypeDslStmts(
 function createOneofUnionTypeDslStmt(
   oneof: ProtoOneof,
   reg: ProtoRegistry,
-  opts: { importPrefix?: string }
+  opts: { importPrefix?: string; useProtobufjs?: boolean }
 ): ts.Statement {
   const typeName = gqlTypeName(oneof);
   return createDslExportConstStmt(
@@ -60,7 +61,13 @@ function createOneofUnionTypeDslStmt(
             ),
             createOneofUnionTypeDefinitionMethodDecl(oneof, reg),
             createOneofUnionTypeResolveTypeMethodDecl(oneof, reg, opts),
-          ],
+            opts.useProtobufjs
+              ? ts.factory.createPropertyAssignment(
+                  "sourceType",
+                  sourceTypeExpr(oneof, opts)
+                )
+              : null,
+          ].filter(onlyNonNull()),
           true
         ),
       ]
@@ -132,7 +139,7 @@ function createOneofUnionTypeDefinitionMethodDecl(
 function createOneofUnionTypeResolveTypeMethodDecl(
   oneof: ProtoOneof,
   reg: ProtoRegistry,
-  opts: { importPrefix?: string }
+  opts: { importPrefix?: string; useProtobufjs?: boolean }
 ): ts.MethodDeclaration {
   return ts.factory.createMethodDeclaration(
     undefined,
@@ -159,20 +166,7 @@ function createOneofUnionTypeResolveTypeMethodDecl(
           .map((f) => reg.findByFieldDescriptor(f.descriptor))
           // TODO: throw error when `t` is unallowed type
           .filter((t): t is ProtoMessage => t instanceof ProtoMessage)
-          .map((t) =>
-            ts.factory.createIfStatement(
-              ts.factory.createBinaryExpression(
-                ts.factory.createIdentifier("item"),
-                ts.SyntaxKind.InstanceOfKeyword,
-                createProtoExpr(t, opts)
-              ),
-              ts.factory.createBlock([
-                ts.factory.createReturnStatement(
-                  ts.factory.createStringLiteral(gqlTypeName(t))
-                ),
-              ])
-            )
-          ),
+          .map((t) => craeteOneofUnionTypeResolveTypeMethodStatement(t, opts)),
         ts.factory.createThrowStatement(
           // TODO: throw custom error
           ts.factory.createStringLiteral("unreachable")
@@ -181,4 +175,63 @@ function createOneofUnionTypeResolveTypeMethodDecl(
       true
     )
   );
+}
+function craeteOneofUnionTypeResolveTypeMethodStatement(
+  t: ProtoMessage,
+  opts: { importPrefix?: string; useProtobufjs?: boolean }
+) {
+  if (opts.useProtobufjs) {
+    return ts.factory.createIfStatement(
+      ts.factory.createBinaryExpression(
+        ts.factory.createPropertyAccessExpression(
+          ts.factory.createIdentifier("item"),
+          "__protobufTypeName"
+        ),
+        ts.SyntaxKind.EqualsEqualsEqualsToken,
+        ts.factory.createStringLiteral(t.qualifiedName)
+      ),
+      ts.factory.createBlock([
+        ts.factory.createReturnStatement(
+          ts.factory.createStringLiteral(gqlTypeName(t))
+        ),
+      ])
+    );
+  }
+  return ts.factory.createIfStatement(
+    ts.factory.createBinaryExpression(
+      ts.factory.createIdentifier("item"),
+      ts.SyntaxKind.InstanceOfKeyword,
+      createProtoExpr(t, opts)
+    ),
+    ts.factory.createBlock([
+      ts.factory.createReturnStatement(
+        ts.factory.createStringLiteral(gqlTypeName(t))
+      ),
+    ])
+  );
+}
+
+/**
+ * @example
+ * ```ts
+ * {
+ *   module: __filename,
+ *   export: "_$hello$hello_pb$User"
+ * }
+ * ```
+ */
+function sourceTypeExpr(
+  oneof: ProtoOneof,
+  opts: { importPrefix?: string }
+): ts.Expression {
+  return ts.factory.createObjectLiteralExpression([
+    ts.factory.createPropertyAssignment(
+      "module",
+      ts.factory.createIdentifier("__filename")
+    ),
+    ts.factory.createPropertyAssignment(
+      "export",
+      ts.factory.createStringLiteral(protoExportAlias(oneof, opts))
+    ),
+  ]);
 }

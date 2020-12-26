@@ -4,7 +4,7 @@
 import { objectType, inputObjectType, enumType, nullable, nonNull } from "nexus";
 import * as $$testapis$node$lib$deprecation from "@testapis/node/lib/deprecation";
 export type $$testapis$node$lib$deprecation$testapi$deprecation$DeprecatedFileMessage = $$testapis$node$lib$deprecation.testapi.deprecation.IDeprecatedFileMessage;
-export type $$testapis$node$lib$deprecation$testapi$deprecation$DeprecatedFileMessageInnerMessage = $$testapis$node$lib$deprecation.testapi.deprecation.IDeprecatedFileMessage.InnerMessage;
+export type $$testapis$node$lib$deprecation$testapi$deprecation$DeprecatedFileMessageInnerMessage = $$testapis$node$lib$deprecation.testapi.deprecation.DeprecatedFileMessage.IInnerMessage;
 export const DeprecatedFileMessage = objectType({
     name: "DeprecatedFileMessage",
     description: "",

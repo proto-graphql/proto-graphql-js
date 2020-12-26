@@ -4,7 +4,7 @@
 import { objectType, inputObjectType, nullable, nonNull } from "nexus";
 import * as $$testapis$node$lib$field_behavior from "@testapis/node/lib/field_behavior";
 export type $$testapis$node$lib$field_behavior$testapi$deprecation$FieldBehaviorComentsMessage = $$testapis$node$lib$field_behavior.testapi.deprecation.IFieldBehaviorComentsMessage;
-export type $$testapis$node$lib$field_behavior$testapi$deprecation$FieldBehaviorComentsMessagePost = $$testapis$node$lib$field_behavior.testapi.deprecation.IFieldBehaviorComentsMessage.Post;
+export type $$testapis$node$lib$field_behavior$testapi$deprecation$FieldBehaviorComentsMessagePost = $$testapis$node$lib$field_behavior.testapi.deprecation.FieldBehaviorComentsMessage.IPost;
 export const FieldBehaviorComentsMessage = objectType({
     name: "FieldBehaviorComentsMessage",
     description: "",

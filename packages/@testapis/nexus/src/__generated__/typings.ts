@@ -4,14 +4,14 @@
  */
 
 
-import { $$testapis$node$lib$deprecation$testapi$deprecation$DeprecatedMessage, $$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessage, $$testapis$node$lib$deprecation$testapi$deprecation$DeprecatedMessageInnerMessage, $$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessageInnerMessage1, $$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessageInnerMessage2 } from "./../schema/types/deprecation/deprecation_pb_nexus"
+import { $$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessage_not_deprecated_oneof, $$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessage_deprecated_oneof, $$testapis$node$lib$deprecation$testapi$deprecation$DeprecatedMessage, $$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessage, $$testapis$node$lib$deprecation$testapi$deprecation$DeprecatedMessageInnerMessage, $$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessageInnerMessage1, $$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessageInnerMessage2 } from "./../schema/types/deprecation/deprecation_pb_nexus"
 import { $$testapis$node$lib$deprecation$testapi$deprecation$DeprecatedFileMessage, $$testapis$node$lib$deprecation$testapi$deprecation$DeprecatedFileMessageInnerMessage } from "./../schema/types/deprecation/file_deprecation_pb_nexus"
 import { $$testapis$node$lib$enums$testapi$nested$MessageWithEnums } from "./../schema/types/enums/enums_pb_nexus"
 import { $$testapis$node$lib$extensions$testapi$extensions$TestPrefixPrefixedMessage, $$testapis$node$lib$extensions$testapi$extensions$TestPrefixPrefixedMessageInnerMessage } from "./../schema/types/extensions/extensions_pb_nexus"
 import { $$testapis$node$lib$field_behavior$testapi$deprecation$FieldBehaviorComentsMessage, $$testapis$node$lib$field_behavior$testapi$deprecation$FieldBehaviorComentsMessagePost } from "./../schema/types/field_behavior/comments_pb_nexus"
 import { $$testapis$node$lib$hello$testapi$hello$Hello, $$testapis$node$lib$hello$testapi$hello$Primitives } from "./../schema/types/hello/hello_pb_nexus"
 import { $$testapis$node$lib$nested$testapi$nested$ParentMessage, $$testapis$node$lib$nested$testapi$nested$ParentMessageNestedMessage } from "./../schema/types/nested/nested_pb_nexus"
-import { $$testapis$node$lib$oneof$testapi$oneof$OneofParent, $$testapis$node$lib$oneof$testapi$oneof$OneofMemberMessage1, $$testapis$node$lib$oneof$testapi$oneof$OneofMemberMessage2 } from "./../schema/types/oneof/oneof_pb_nexus"
+import { $$testapis$node$lib$oneof$testapi$oneof$OneofParent_required_oneof_members, $$testapis$node$lib$oneof$testapi$oneof$OneofParent_optional_oneof_members, $$testapis$node$lib$oneof$testapi$oneof$OneofParent, $$testapis$node$lib$oneof$testapi$oneof$OneofMemberMessage1, $$testapis$node$lib$oneof$testapi$oneof$OneofMemberMessage2 } from "./../schema/types/oneof/oneof_pb_nexus"
 import { $$testapis$node$lib$wktypes$testapi$wktypes$Message } from "./../schema/types/wktypes/well_known_types_pb_nexus"
 import { core } from "nexus"
 declare global {
@@ -186,10 +186,10 @@ export interface NexusGenInterfaces {
 }
 
 export interface NexusGenUnions {
-  NotDeprecatedMessageDeprecatedOneof: NexusGenRootTypes['NotDeprecatedMessageInnerMessage1'] | NexusGenRootTypes['NotDeprecatedMessageInnerMessage2'];
-  NotDeprecatedMessageNotDeprecatedOneof: NexusGenRootTypes['NotDeprecatedMessageInnerMessage1'] | NexusGenRootTypes['NotDeprecatedMessageInnerMessage2'];
-  OneofParentOptionalOneofMembers: NexusGenRootTypes['OneofMemberMessage1'] | NexusGenRootTypes['OneofMemberMessage2'];
-  OneofParentRequiredOneofMembers: NexusGenRootTypes['OneofMemberMessage1'] | NexusGenRootTypes['OneofMemberMessage2'];
+  NotDeprecatedMessageDeprecatedOneof: $$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessage_deprecated_oneof;
+  NotDeprecatedMessageNotDeprecatedOneof: $$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessage_not_deprecated_oneof;
+  OneofParentOptionalOneofMembers: $$testapis$node$lib$oneof$testapi$oneof$OneofParent_optional_oneof_members;
+  OneofParentRequiredOneofMembers: $$testapis$node$lib$oneof$testapi$oneof$OneofParent_required_oneof_members;
 }
 
 export type NexusGenRootTypes = NexusGenObjects & NexusGenUnions

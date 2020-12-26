@@ -4,7 +4,7 @@
 import { objectType, inputObjectType, enumType, nullable, nonNull } from "nexus";
 import * as $$testapis$node$lib$extensions from "@testapis/node/lib/extensions";
 export type $$testapis$node$lib$extensions$testapi$extensions$TestPrefixPrefixedMessage = $$testapis$node$lib$extensions.testapi.extensions.IPrefixedMessage;
-export type $$testapis$node$lib$extensions$testapi$extensions$TestPrefixPrefixedMessageInnerMessage = $$testapis$node$lib$extensions.testapi.extensions.IPrefixedMessage.InnerMessage;
+export type $$testapis$node$lib$extensions$testapi$extensions$TestPrefixPrefixedMessageInnerMessage = $$testapis$node$lib$extensions.testapi.extensions.PrefixedMessage.IInnerMessage;
 export const TestPrefixPrefixedMessage = objectType({
     name: "TestPrefixPrefixedMessage",
     description: "",

@@ -4,7 +4,7 @@
 import { objectType, inputObjectType, enumType, nullable, nonNull } from "nexus";
 import * as $$testapis$node$lib$nested from "@testapis/node/lib/nested";
 export type $$testapis$node$lib$nested$testapi$nested$ParentMessage = $$testapis$node$lib$nested.testapi.nested.IParentMessage;
-export type $$testapis$node$lib$nested$testapi$nested$ParentMessageNestedMessage = $$testapis$node$lib$nested.testapi.nested.IParentMessage.NestedMessage;
+export type $$testapis$node$lib$nested$testapi$nested$ParentMessageNestedMessage = $$testapis$node$lib$nested.testapi.nested.ParentMessage.INestedMessage;
 export const ParentMessage = objectType({
     name: "ParentMessage",
     description: "",

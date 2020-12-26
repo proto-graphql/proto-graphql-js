@@ -5,9 +5,19 @@ import { objectType, inputObjectType, enumType, unionType, nullable, nonNull } f
 import * as $$testapis$node$lib$deprecation from "@testapis/node/lib/deprecation";
 export type $$testapis$node$lib$deprecation$testapi$deprecation$DeprecatedMessage = $$testapis$node$lib$deprecation.testapi.deprecation.IDeprecatedMessage;
 export type $$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessage = $$testapis$node$lib$deprecation.testapi.deprecation.INotDeprecatedMessage;
-export type $$testapis$node$lib$deprecation$testapi$deprecation$DeprecatedMessageInnerMessage = $$testapis$node$lib$deprecation.testapi.deprecation.IDeprecatedMessage.InnerMessage;
-export type $$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessageInnerMessage1 = $$testapis$node$lib$deprecation.testapi.deprecation.INotDeprecatedMessage.InnerMessage1;
-export type $$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessageInnerMessage2 = $$testapis$node$lib$deprecation.testapi.deprecation.INotDeprecatedMessage.InnerMessage2;
+export type $$testapis$node$lib$deprecation$testapi$deprecation$DeprecatedMessageInnerMessage = $$testapis$node$lib$deprecation.testapi.deprecation.DeprecatedMessage.IInnerMessage;
+export type $$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessageInnerMessage1 = $$testapis$node$lib$deprecation.testapi.deprecation.NotDeprecatedMessage.IInnerMessage1;
+export type $$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessageInnerMessage2 = $$testapis$node$lib$deprecation.testapi.deprecation.NotDeprecatedMessage.IInnerMessage2;
+export type $$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessage_not_deprecated_oneof = ($$testapis$node$lib$deprecation.testapi.deprecation.NotDeprecatedMessage.IInnerMessage1 & {
+    __protobufTypeName: "testapi.deprecation.NotDeprecatedMessage.InnerMessage1";
+}) | ($$testapis$node$lib$deprecation.testapi.deprecation.NotDeprecatedMessage.IInnerMessage2 & {
+    __protobufTypeName: "testapi.deprecation.NotDeprecatedMessage.InnerMessage2";
+});
+export type $$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessage_deprecated_oneof = ($$testapis$node$lib$deprecation.testapi.deprecation.NotDeprecatedMessage.IInnerMessage1 & {
+    __protobufTypeName: "testapi.deprecation.NotDeprecatedMessage.InnerMessage1";
+}) | ($$testapis$node$lib$deprecation.testapi.deprecation.NotDeprecatedMessage.IInnerMessage2 & {
+    __protobufTypeName: "testapi.deprecation.NotDeprecatedMessage.InnerMessage2";
+});
 export const NotDeprecatedMessageNotDeprecatedOneof = unionType({
     name: "NotDeprecatedMessageNotDeprecatedOneof",
     description: "",
@@ -15,14 +25,15 @@ export const NotDeprecatedMessageNotDeprecatedOneof = unionType({
         t.members("NotDeprecatedMessageInnerMessage1", "NotDeprecatedMessageInnerMessage2");
     },
     resolveType(item) {
-        if (item instanceof $$testapis$node$lib$deprecation.testapi.deprecation.INotDeprecatedMessage.InnerMessage1) {
+        if (item.__protobufTypeName === "testapi.deprecation.NotDeprecatedMessage.InnerMessage1") {
             return "NotDeprecatedMessageInnerMessage1";
         }
-        if (item instanceof $$testapis$node$lib$deprecation.testapi.deprecation.INotDeprecatedMessage.InnerMessage2) {
+        if (item.__protobufTypeName === "testapi.deprecation.NotDeprecatedMessage.InnerMessage2") {
             return "NotDeprecatedMessageInnerMessage2";
         }
         throw "unreachable";
-    }
+    },
+    sourceType: { module: __filename, export: "$$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessage_not_deprecated_oneof" }
 });
 export const NotDeprecatedMessageDeprecatedOneof = unionType({
     name: "NotDeprecatedMessageDeprecatedOneof",
@@ -31,14 +42,15 @@ export const NotDeprecatedMessageDeprecatedOneof = unionType({
         t.members("NotDeprecatedMessageInnerMessage1", "NotDeprecatedMessageInnerMessage2");
     },
     resolveType(item) {
-        if (item instanceof $$testapis$node$lib$deprecation.testapi.deprecation.INotDeprecatedMessage.InnerMessage1) {
+        if (item.__protobufTypeName === "testapi.deprecation.NotDeprecatedMessage.InnerMessage1") {
             return "NotDeprecatedMessageInnerMessage1";
         }
-        if (item instanceof $$testapis$node$lib$deprecation.testapi.deprecation.INotDeprecatedMessage.InnerMessage2) {
+        if (item.__protobufTypeName === "testapi.deprecation.NotDeprecatedMessage.InnerMessage2") {
             return "NotDeprecatedMessageInnerMessage2";
         }
         throw "unreachable";
-    }
+    },
+    sourceType: { module: __filename, export: "$$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessage_deprecated_oneof" }
 });
 export const DeprecatedMessage = objectType({
     name: "DeprecatedMessage",
@@ -79,20 +91,13 @@ export const NotDeprecatedMessage = objectType({
             type: nullable("NotDeprecatedMessageNotDeprecatedOneof"),
             description: "",
             resolve(root) {
-                switch (root.getNotDeprecatedOneofCase()) {
-                    case $$testapis$node$lib$deprecation.testapi.deprecation.INotDeprecatedMessage.NotDeprecatedOneofCase.NOT_DEPRECATED_ONEOF_NOT_SET: {
-                        return null;
-                    }
-                    case $$testapis$node$lib$deprecation.testapi.deprecation.INotDeprecatedMessage.NotDeprecatedOneofCase.MSG1: {
-                        return root.getMsg1()!;
-                    }
-                    case $$testapis$node$lib$deprecation.testapi.deprecation.INotDeprecatedMessage.NotDeprecatedOneofCase.MSG2: {
-                        return root.getMsg2()!;
-                    }
-                    default: {
-                        throw "unreachable";
-                    }
+                if (root.msg1) {
+                    return Object.assign(root.msg1, { __protobufTypeName: ("testapi.deprecation.NotDeprecatedMessage.InnerMessage1" as const) });
                 }
+                if (root.msg2) {
+                    return Object.assign(root.msg2, { __protobufTypeName: ("testapi.deprecation.NotDeprecatedMessage.InnerMessage2" as const) });
+                }
+                return null;
             }
         });
         t.field("deprecated_oneof", {
@@ -100,20 +105,13 @@ export const NotDeprecatedMessage = objectType({
             description: "",
             deprecation: "testapi.deprecation.NotDeprecatedMessage.deprecated_oneof is mark as deprecated in a *.proto file.",
             resolve(root) {
-                switch (root.getDeprecatedOneofCase()) {
-                    case $$testapis$node$lib$deprecation.testapi.deprecation.INotDeprecatedMessage.DeprecatedOneofCase.DEPRECATED_ONEOF_NOT_SET: {
-                        return null;
-                    }
-                    case $$testapis$node$lib$deprecation.testapi.deprecation.INotDeprecatedMessage.DeprecatedOneofCase.MSG3: {
-                        return root.getMsg3()!;
-                    }
-                    case $$testapis$node$lib$deprecation.testapi.deprecation.INotDeprecatedMessage.DeprecatedOneofCase.MSG4: {
-                        return root.getMsg4()!;
-                    }
-                    default: {
-                        throw "unreachable";
-                    }
+                if (root.msg3) {
+                    return Object.assign(root.msg3, { __protobufTypeName: ("testapi.deprecation.NotDeprecatedMessage.InnerMessage1" as const) });
                 }
+                if (root.msg4) {
+                    return Object.assign(root.msg4, { __protobufTypeName: ("testapi.deprecation.NotDeprecatedMessage.InnerMessage2" as const) });
+                }
+                return null;
             }
         });
     },
