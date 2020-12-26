@@ -15,6 +15,7 @@ message PrefixedMessage {
 
   string body = 1;
   PrefixedEnum prefixed_enum = 2;
+  InnerMessage ignored_field = 3 [(graphql.field).ignore = true];
 }
 
 enum PrefixedEnum {

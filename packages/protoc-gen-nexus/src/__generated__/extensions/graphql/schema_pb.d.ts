@@ -24,5 +24,27 @@ export namespace GraphqlSchemaOptions {
   }
 }
 
+export class GraphqlFieldOptions extends jspb.Message {
+  getIgnore(): boolean;
+  setIgnore(value: boolean): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GraphqlFieldOptions.AsObject;
+  static toObject(includeInstance: boolean, msg: GraphqlFieldOptions): GraphqlFieldOptions.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GraphqlFieldOptions, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GraphqlFieldOptions;
+  static deserializeBinaryFromReader(message: GraphqlFieldOptions, reader: jspb.BinaryReader): GraphqlFieldOptions;
+}
+
+export namespace GraphqlFieldOptions {
+  export type AsObject = {
+    ignore: boolean,
+  }
+}
+
   export const schema: jspb.ExtensionFieldInfo<GraphqlSchemaOptions>;
+
+  export const field: jspb.ExtensionFieldInfo<GraphqlFieldOptions>;
 

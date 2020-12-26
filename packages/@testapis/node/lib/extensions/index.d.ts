@@ -13,6 +13,9 @@ export namespace testapi {
 
             /** PrefixedMessage prefixedEnum */
             prefixedEnum?: (testapi.extensions.PrefixedEnum|null);
+
+            /** PrefixedMessage ignoredField */
+            ignoredField?: (testapi.extensions.PrefixedMessage.IInnerMessage|null);
         }
 
         /** Represents a PrefixedMessage. */
@@ -29,6 +32,9 @@ export namespace testapi {
 
             /** PrefixedMessage prefixedEnum. */
             public prefixedEnum: testapi.extensions.PrefixedEnum;
+
+            /** PrefixedMessage ignoredField. */
+            public ignoredField?: (testapi.extensions.PrefixedMessage.IInnerMessage|null);
 
             /**
              * Creates a new PrefixedMessage instance using the specified properties.

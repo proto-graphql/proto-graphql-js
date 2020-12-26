@@ -3,6 +3,7 @@ import { ProtoMessage, ProtoRegistry } from "../protoTypes";
 import {
   createDslExportConstStmt,
   gqlTypeName,
+  isIgnoredField,
   isOutputOnlyField,
 } from "./util";
 import { createFieldDefinitionStmt } from "./field";
@@ -96,6 +97,7 @@ function createInputObjectTypeDefinitionMethodDecl(
     ts.factory.createBlock(
       msg.fields
         .filter((f) => !isOutputOnlyField(f))
+        .filter((f) => !isIgnoredField(f))
         .map((f) => createFieldDefinitionStmt(f, reg, { input: true })),
       true
     )
