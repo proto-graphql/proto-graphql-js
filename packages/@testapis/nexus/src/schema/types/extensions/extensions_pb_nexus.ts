@@ -2,9 +2,9 @@
 // source: extensions/extensions.proto
 
 import { objectType, inputObjectType, enumType, nullable, nonNull } from "nexus";
-import * as $$testapis$node$lib$extensions$extensions_pb from "@testapis/node/lib/extensions/extensions_pb";
-export type $$testapis$node$lib$extensions$extensions_pb$TestPrefixPrefixedMessage = $$testapis$node$lib$extensions$extensions_pb.PrefixedMessage;
-export type $$testapis$node$lib$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage = $$testapis$node$lib$extensions$extensions_pb.PrefixedMessage.InnerMessage;
+import * as $$testapis$node$lib$extensions from "@testapis/node/lib/extensions";
+export type $$testapis$node$lib$extensions$testapi$extensions$TestPrefixPrefixedMessage = $$testapis$node$lib$extensions.testapi.extensions.IPrefixedMessage;
+export type $$testapis$node$lib$extensions$testapi$extensions$TestPrefixPrefixedMessageInnerMessage = $$testapis$node$lib$extensions.testapi.extensions.PrefixedMessage.IInnerMessage;
 export const TestPrefixPrefixedMessage = objectType({
     name: "TestPrefixPrefixedMessage",
     description: "",
@@ -12,15 +12,15 @@ export const TestPrefixPrefixedMessage = objectType({
         t.field("body", {
             type: nonNull("String"),
             description: "",
-            resolve(root) { return root.getBody(); }
+            resolve(root) { return root.body!; }
         });
         t.field("prefixedEnum", {
             type: nullable("TestPrefixPrefixedEnum"),
             description: "",
-            resolve(root) { return root.getPrefixedEnum(); }
+            resolve(root) { return root.prefixedEnum ?? null; }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$extensions$extensions_pb$TestPrefixPrefixedMessage" }
+    sourceType: { module: __filename, export: "$$testapis$node$lib$extensions$testapi$extensions$TestPrefixPrefixedMessage" }
 });
 export const TestPrefixPrefixedMessageInnerMessage = objectType({
     name: "TestPrefixPrefixedMessageInnerMessage",
@@ -29,10 +29,10 @@ export const TestPrefixPrefixedMessageInnerMessage = objectType({
         t.field("body", {
             type: nonNull("String"),
             description: "",
-            resolve(root) { return root.getBody(); }
+            resolve(root) { return root.body!; }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage" }
+    sourceType: { module: __filename, export: "$$testapis$node$lib$extensions$testapi$extensions$TestPrefixPrefixedMessageInnerMessage" }
 });
 export const TestPrefixPrefixedMessageInput = inputObjectType({
     name: "TestPrefixPrefixedMessageInput",

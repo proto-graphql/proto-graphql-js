@@ -21,7 +21,7 @@ import { createOneofFieldDefinitionStmt } from "./oneofField";
 export function createObjectTypeDslStmts(
   msgs: ReadonlyArray<ProtoMessage>,
   reg: ProtoRegistry,
-  opts: { importPrefix?: string }
+  opts: { importPrefix?: string; useProtobufjs?: boolean }
 ): ts.Statement[] {
   return msgs.map((m) => createObjectTypeDslStmt(m, reg, opts));
 }
@@ -38,7 +38,7 @@ export function createObjectTypeDslStmts(
 function createObjectTypeDslStmt(
   msg: ProtoMessage,
   reg: ProtoRegistry,
-  opts: { importPrefix?: string }
+  opts: { importPrefix?: string; useProtobufjs?: boolean }
 ): ts.Statement {
   const typeName = gqlTypeName(msg);
   return createDslExportConstStmt(
@@ -81,7 +81,7 @@ function createObjectTypeDslStmt(
 function createObjectTypeDefinitionMethodDecl(
   msg: ProtoMessage,
   reg: ProtoRegistry,
-  opts: { importPrefix?: string }
+  opts: { importPrefix?: string; useProtobufjs?: boolean }
 ): ts.MethodDeclaration {
   return ts.factory.createMethodDeclaration(
     undefined,
@@ -107,7 +107,11 @@ function createObjectTypeDefinitionMethodDecl(
         ...msg.fields
           .filter((f) => !f.isOneofMember())
           .filter((f) => !isInputOnlyField(f))
-          .map((f) => createFieldDefinitionStmt(f, reg)),
+          .map((f) =>
+            createFieldDefinitionStmt(f, reg, {
+              useProtobufjs: opts.useProtobufjs,
+            })
+          ),
         ...msg.oneofs
           .filter((f) => !isInputOnlyField(f))
           .map((o) => createOneofFieldDefinitionStmt(o, opts)),
@@ -128,7 +132,7 @@ function createObjectTypeDefinitionMethodDecl(
  */
 function sourceTypeExpr(
   msg: ProtoMessage,
-  opts: { importPrefix?: string }
+  opts: { importPrefix?: string; useProtobufjs?: boolean }
 ): ts.Expression {
   return ts.factory.createObjectLiteralExpression([
     ts.factory.createPropertyAssignment(

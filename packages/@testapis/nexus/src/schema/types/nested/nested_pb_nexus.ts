@@ -2,9 +2,9 @@
 // source: nested/nested.proto
 
 import { objectType, inputObjectType, enumType, nullable, nonNull } from "nexus";
-import * as $$testapis$node$lib$nested$nested_pb from "@testapis/node/lib/nested/nested_pb";
-export type $$testapis$node$lib$nested$nested_pb$ParentMessage = $$testapis$node$lib$nested$nested_pb.ParentMessage;
-export type $$testapis$node$lib$nested$nested_pb$ParentMessageNestedMessage = $$testapis$node$lib$nested$nested_pb.ParentMessage.NestedMessage;
+import * as $$testapis$node$lib$nested from "@testapis/node/lib/nested";
+export type $$testapis$node$lib$nested$testapi$nested$ParentMessage = $$testapis$node$lib$nested.testapi.nested.IParentMessage;
+export type $$testapis$node$lib$nested$testapi$nested$ParentMessageNestedMessage = $$testapis$node$lib$nested.testapi.nested.ParentMessage.INestedMessage;
 export const ParentMessage = objectType({
     name: "ParentMessage",
     description: "",
@@ -12,20 +12,20 @@ export const ParentMessage = objectType({
         t.field("body", {
             type: nonNull("String"),
             description: "",
-            resolve(root) { return root.getBody(); }
+            resolve(root) { return root.body!; }
         });
         t.field("nested", {
             type: nullable("ParentMessageNestedMessage"),
             description: "",
-            resolve(root) { return root.getNested() ?? null; }
+            resolve(root) { return root.nested ?? null; }
         });
         t.field("nestedEnum", {
             type: nullable("ParentMessageNestedEnum"),
             description: "",
-            resolve(root) { return root.getNestedEnum(); }
+            resolve(root) { return root.nestedEnum ?? null; }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$nested$nested_pb$ParentMessage" }
+    sourceType: { module: __filename, export: "$$testapis$node$lib$nested$testapi$nested$ParentMessage" }
 });
 export const ParentMessageNestedMessage = objectType({
     name: "ParentMessageNestedMessage",
@@ -34,10 +34,10 @@ export const ParentMessageNestedMessage = objectType({
         t.field("nestedBody", {
             type: nonNull("String"),
             description: "",
-            resolve(root) { return root.getNestedBody(); }
+            resolve(root) { return root.nestedBody!; }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$nested$nested_pb$ParentMessageNestedMessage" }
+    sourceType: { module: __filename, export: "$$testapis$node$lib$nested$testapi$nested$ParentMessageNestedMessage" }
 });
 export const ParentMessageInput = inputObjectType({
     name: "ParentMessageInput",

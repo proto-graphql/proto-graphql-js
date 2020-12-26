@@ -2,9 +2,9 @@
 // source: field_behavior/comments.proto
 
 import { objectType, inputObjectType, nullable, nonNull } from "nexus";
-import * as $$testapis$node$lib$field_behavior$comments_pb from "@testapis/node/lib/field_behavior/comments_pb";
-export type $$testapis$node$lib$field_behavior$comments_pb$FieldBehaviorComentsMessage = $$testapis$node$lib$field_behavior$comments_pb.FieldBehaviorComentsMessage;
-export type $$testapis$node$lib$field_behavior$comments_pb$FieldBehaviorComentsMessagePost = $$testapis$node$lib$field_behavior$comments_pb.FieldBehaviorComentsMessage.Post;
+import * as $$testapis$node$lib$field_behavior from "@testapis/node/lib/field_behavior";
+export type $$testapis$node$lib$field_behavior$testapi$deprecation$FieldBehaviorComentsMessage = $$testapis$node$lib$field_behavior.testapi.deprecation.IFieldBehaviorComentsMessage;
+export type $$testapis$node$lib$field_behavior$testapi$deprecation$FieldBehaviorComentsMessagePost = $$testapis$node$lib$field_behavior.testapi.deprecation.FieldBehaviorComentsMessage.IPost;
 export const FieldBehaviorComentsMessage = objectType({
     name: "FieldBehaviorComentsMessage",
     description: "",
@@ -12,25 +12,25 @@ export const FieldBehaviorComentsMessage = objectType({
         t.field("requiredField", {
             type: nonNull("FieldBehaviorComentsMessagePost"),
             description: "Required.",
-            resolve(root) { return root.getRequiredField()!; }
+            resolve(root) { return root.requiredField!; }
         });
         t.field("requiredOutputOnlyField", {
             type: nonNull("FieldBehaviorComentsMessagePost"),
             description: "Required. Output only.",
-            resolve(root) { return root.getRequiredOutputOnlyField()!; }
+            resolve(root) { return root.requiredOutputOnlyField!; }
         });
         t.field("outputOnlyRequiredField", {
             type: nonNull("FieldBehaviorComentsMessagePost"),
             description: "Output only. Required.",
-            resolve(root) { return root.getOutputOnlyRequiredField()!; }
+            resolve(root) { return root.outputOnlyRequiredField!; }
         });
         t.field("outputOnlyField", {
             type: nullable("FieldBehaviorComentsMessagePost"),
             description: "Output only.",
-            resolve(root) { return root.getOutputOnlyField() ?? null; }
+            resolve(root) { return root.outputOnlyField ?? null; }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$field_behavior$comments_pb$FieldBehaviorComentsMessage" }
+    sourceType: { module: __filename, export: "$$testapis$node$lib$field_behavior$testapi$deprecation$FieldBehaviorComentsMessage" }
 });
 export const FieldBehaviorComentsMessagePost = objectType({
     name: "FieldBehaviorComentsMessagePost",
@@ -39,10 +39,10 @@ export const FieldBehaviorComentsMessagePost = objectType({
         t.field("body", {
             type: nonNull("String"),
             description: "",
-            resolve(root) { return root.getBody(); }
+            resolve(root) { return root.body!; }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$field_behavior$comments_pb$FieldBehaviorComentsMessagePost" }
+    sourceType: { module: __filename, export: "$$testapis$node$lib$field_behavior$testapi$deprecation$FieldBehaviorComentsMessagePost" }
 });
 export const FieldBehaviorComentsMessageInput = inputObjectType({
     name: "FieldBehaviorComentsMessageInput",

@@ -1,5 +1,5 @@
 import ts from "typescript";
-import { ProtoMessage } from "../protoTypes";
+import { ProtoMessage, ProtoOneof } from "../protoTypes";
 import {
   createProtoQualifiedName,
   onlyNonNull,
@@ -14,22 +14,37 @@ import {
  */
 export function createReExportProtoStmts(
   types: ReadonlyArray<ProtoMessage>,
-  opts: { importPrefix?: string }
+  opts: { importPrefix?: string; useProtobufjs?: boolean }
 ): ts.Statement[] {
-  return types
+  const stmts = types
     .map((t) => createReExportProtoStmt(t, opts))
     .filter(onlyNonNull());
+
+  if (opts.useProtobufjs) {
+    stmts.push(
+      ...types
+        .flatMap((m) => m.oneofs)
+        .map((o) => createReExportOneofUnionSourceStmt(o, opts))
+    );
+  }
+
+  return stmts;
 }
 
 /**
- * @example
+ * @example js_out
  * ```
  * export _$hello$hello_pb$Hello = _$hello$hello_pb.Hello;
+ * ```
+ *
+ * @example protobufjs
+ * ```
+ * export _$hello$hello$Hello = _$hello.hello.Hello;
  * ```
  */
 function createReExportProtoStmt(
   typ: ProtoMessage,
-  opts: { importPrefix?: string }
+  opts: { importPrefix?: string; useProtobufjs?: boolean }
 ): ts.Statement {
   return ts.factory.createTypeAliasDeclaration(
     undefined,
@@ -37,5 +52,51 @@ function createReExportProtoStmt(
     protoExportAlias(typ, opts),
     undefined,
     ts.factory.createTypeReferenceNode(createProtoQualifiedName(typ, opts))
+  );
+}
+
+/**
+ * @example js_out
+ * ```
+ * export _$hello$hello_pb$Hello = _$hello$hello_pb.Hello;
+ * ```
+ *
+ * @example protobufjs
+ * ```
+ * export _$hello$hello$Hello = _$hello.hello.Hello;
+ * ```
+ */
+function createReExportOneofUnionSourceStmt(
+  o: ProtoOneof,
+  opts: { importPrefix?: string }
+): ts.Statement {
+  return ts.factory.createTypeAliasDeclaration(
+    undefined,
+    [ts.factory.createToken(ts.SyntaxKind.ExportKeyword)],
+    protoExportAlias(o, opts),
+    undefined,
+    ts.factory.createUnionTypeNode(
+      o.fields.map((f) => {
+        const type = f.type as ProtoMessage;
+        return ts.factory.createParenthesizedType(
+          ts.factory.createIntersectionTypeNode([
+            ts.factory.createTypeReferenceNode(
+              // TODO: throw error when f.type is not message
+              createProtoQualifiedName(type, opts)
+            ),
+            ts.factory.createTypeLiteralNode([
+              ts.factory.createPropertySignature(
+                undefined,
+                "__protobufTypeName",
+                undefined,
+                ts.factory.createLiteralTypeNode(
+                  ts.factory.createStringLiteral(type.qualifiedName)
+                )
+              ),
+            ]),
+          ])
+        );
+      })
+    )
   );
 }

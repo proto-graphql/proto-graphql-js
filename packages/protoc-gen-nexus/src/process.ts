@@ -30,11 +30,12 @@ export const processRequest = (
   return resp;
 };
 
-type Parameters = Record<string, string>;
+type Parameters = Record<string, string | boolean>;
 
 const parseParams = (input: string | undefined) =>
   (input ?? "").split(",").reduce((o, kv) => {
     const [k, v] = kv.split("=", 2);
-    o[k.replace(/(_[a-z])/g, (g) => g.toUpperCase().replace("_", ""))] = v;
+    o[k.replace(/(_[a-z])/g, (g) => g.toUpperCase().replace("_", ""))] =
+      v ?? true;
     return o;
   }, {} as Parameters);

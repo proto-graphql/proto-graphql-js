@@ -11,10 +11,15 @@ import {
 } from "./dslgen";
 import { ProtoFile, ProtoRegistry } from "./protoTypes";
 
+type PrintOptions = {
+  importPrefix?: string;
+  useProtobufjs?: boolean;
+};
+
 export function printSource(
   registry: ProtoRegistry,
   file: ProtoFile,
-  params: { importPrefix?: string }
+  opts: PrintOptions
 ): string {
   const [msgs, enums] = registry.collectTypes(file);
 
@@ -22,15 +27,15 @@ export function printSource(
     // `import { objectType, enumTpye } from "nexus";`
     createImportNexusDecl(msgs, enums),
     // `import * as proto_nexus from "proto-nexus";`
-    ...createImportUnwrapFuncDecls(msgs),
+    ...createImportUnwrapFuncDecls(msgs, opts),
     // `import * as _$hello$hello_pb from "./hello/hello_pb";`
-    ...createImportProtoDecls(msgs, params),
+    ...createImportProtoDecls(msgs, opts),
     // `export _$hello$hello_pb$Hello = _$hello$hello_pb.Hello;`
-    ...createReExportProtoStmts(msgs, params),
+    ...createReExportProtoStmts(msgs, opts),
     // `export cosnt Oneof = unionType({ ... });`
-    ...createOneofUnionTypeDslStmts(msgs, registry, params),
+    ...createOneofUnionTypeDslStmts(msgs, registry, opts),
     // `export cosnt Hello = objectType({ ... });`
-    ...createObjectTypeDslStmts(msgs, registry, params),
+    ...createObjectTypeDslStmts(msgs, registry, opts),
     // `export cosnt HelloInput = inputObjectType({ ... });`
     ...createInputObjectTypeDslStmts(msgs, registry),
     // `export const Role = enumType({ ... });`

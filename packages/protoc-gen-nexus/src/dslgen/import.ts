@@ -66,24 +66,30 @@ export function createImportNexusDecl(
  * ```
  */
 export function createImportUnwrapFuncDecls(
-  msgs: ReadonlyArray<ProtoMessage>
+  msgs: ReadonlyArray<ProtoMessage>,
+  opts: { useProtobufjs?: boolean }
 ): ts.ImportDeclaration[] {
   return msgs
     .flatMap((m) => m.fields)
-    .flatMap((f) => getUnwrapFunc(f)?.imports ?? [])
+    .flatMap((f) => getUnwrapFunc(f, opts)?.imports ?? [])
     .filter(onlyUnique())
     .map(createImportAllWithAliastDecl);
 }
 
 /**
- * @example
+ * @example js_out
  * ```
  * import * as _$hello$hello_pb from "./hello/hello_pb";
+ * ```
+ *
+ * @example protobufjs
+ * ```
+ * import * as _$hello from "./hello";
  * ```
  */
 export function createImportProtoDecls(
   msgs: ReadonlyArray<ProtoMessage>,
-  opts: { importPrefix?: string }
+  opts: { importPrefix?: string; useProtobufjs?: boolean }
 ): ts.ImportDeclaration[] {
   return msgs
     .map((m) => protoImportPath(m, opts))

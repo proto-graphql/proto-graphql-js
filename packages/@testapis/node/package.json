@@ -1,12 +1,8 @@
 {
   "name": "@testapis/node",
   "version": "0.1.4",
-  "description": "Generated codes from protobuf IDL",
+  "description": "Generated codes with protobufjs",
   "private": true,
-  "dependencies": {
-    "@types/google-protobuf": "^3.7.4",
-    "google-protobuf": "^3.14.0"
-  },
   "devDependencies": {
     "@testapis/proto": "^0.1.4"
   }

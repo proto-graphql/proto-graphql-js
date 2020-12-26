@@ -2,9 +2,9 @@
 // source: wktypes/well_known_types.proto
 
 import { objectType, inputObjectType, nullable } from "nexus";
-import * as proto_nexus from "proto-nexus";
-import * as $$testapis$node$lib$wktypes$well_known_types_pb from "@testapis/node/lib/wktypes/well_known_types_pb";
-export type $$testapis$node$lib$wktypes$well_known_types_pb$Message = $$testapis$node$lib$wktypes$well_known_types_pb.Message;
+import * as $$proto_nexus$protobufjs_adapter from "@proto-nexus/protobufjs-adapter";
+import * as $$testapis$node$lib$wktypes from "@testapis/node/lib/wktypes";
+export type $$testapis$node$lib$wktypes$testapi$wktypes$Message = $$testapis$node$lib$wktypes.testapi.wktypes.IMessage;
 export const Message = objectType({
     name: "Message",
     description: "",
@@ -12,50 +12,50 @@ export const Message = objectType({
         t.field("timestamp", {
             type: nullable("DateTime"),
             description: "",
-            resolve(root) { return proto_nexus.timestampToDate(root.getTimestamp()); }
+            resolve(root) { return $$proto_nexus$protobufjs_adapter.timestampToDate(root.timestamp); }
         });
         t.field("int32Value", {
             type: nullable("Int"),
             description: "",
-            resolve(root) { return proto_nexus.unwrapInt32Value(root.getInt32Value()); }
+            resolve(root) { return $$proto_nexus$protobufjs_adapter.unwrapInt32Value(root.int32Value); }
         });
         t.field("int64Value", {
             type: nullable("String"),
             description: "",
-            resolve(root) { return proto_nexus.unwrapInt64Value(root.getInt64Value())?.toString() ?? null; }
+            resolve(root) { return $$proto_nexus$protobufjs_adapter.unwrapInt64Value(root.int64Value)?.toString() ?? null; }
         });
         t.field("uint32Value", {
             type: nullable("Int"),
             description: "",
-            resolve(root) { return proto_nexus.unwrapUInt32Value(root.getUint32Value()); }
+            resolve(root) { return $$proto_nexus$protobufjs_adapter.unwrapUInt32Value(root.uint32Value); }
         });
         t.field("uint64Value", {
             type: nullable("String"),
             description: "",
-            resolve(root) { return proto_nexus.unwrapUInt64Value(root.getUint64Value())?.toString() ?? null; }
+            resolve(root) { return $$proto_nexus$protobufjs_adapter.unwrapUInt64Value(root.uint64Value)?.toString() ?? null; }
         });
         t.field("floatValue", {
             type: nullable("Float"),
             description: "",
-            resolve(root) { return proto_nexus.unwrapFloatValue(root.getFloatValue()); }
+            resolve(root) { return $$proto_nexus$protobufjs_adapter.unwrapFloatValue(root.floatValue); }
         });
         t.field("doubleValue", {
             type: nullable("Float"),
             description: "",
-            resolve(root) { return proto_nexus.unwrapDoubleValue(root.getDoubleValue()); }
+            resolve(root) { return $$proto_nexus$protobufjs_adapter.unwrapDoubleValue(root.doubleValue); }
         });
         t.field("boolValue", {
             type: nullable("Boolean"),
             description: "",
-            resolve(root) { return proto_nexus.unwrapBoolValue(root.getBoolValue()); }
+            resolve(root) { return $$proto_nexus$protobufjs_adapter.unwrapBoolValue(root.boolValue); }
         });
         t.field("stringValue", {
             type: nullable("String"),
             description: "",
-            resolve(root) { return proto_nexus.unwrapStringValue(root.getStringValue()); }
+            resolve(root) { return $$proto_nexus$protobufjs_adapter.unwrapStringValue(root.stringValue); }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$wktypes$well_known_types_pb$Message" }
+    sourceType: { module: __filename, export: "$$testapis$node$lib$wktypes$testapi$wktypes$Message" }
 });
 export const MessageInput = inputObjectType({
     name: "MessageInput",

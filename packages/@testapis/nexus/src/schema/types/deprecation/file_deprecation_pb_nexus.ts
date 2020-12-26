@@ -2,9 +2,9 @@
 // source: deprecation/file_deprecation.proto
 
 import { objectType, inputObjectType, enumType, nullable, nonNull } from "nexus";
-import * as $$testapis$node$lib$deprecation$file_deprecation_pb from "@testapis/node/lib/deprecation/file_deprecation_pb";
-export type $$testapis$node$lib$deprecation$file_deprecation_pb$DeprecatedFileMessage = $$testapis$node$lib$deprecation$file_deprecation_pb.DeprecatedFileMessage;
-export type $$testapis$node$lib$deprecation$file_deprecation_pb$DeprecatedFileMessageInnerMessage = $$testapis$node$lib$deprecation$file_deprecation_pb.DeprecatedFileMessage.InnerMessage;
+import * as $$testapis$node$lib$deprecation from "@testapis/node/lib/deprecation";
+export type $$testapis$node$lib$deprecation$testapi$deprecation$DeprecatedFileMessage = $$testapis$node$lib$deprecation.testapi.deprecation.IDeprecatedFileMessage;
+export type $$testapis$node$lib$deprecation$testapi$deprecation$DeprecatedFileMessageInnerMessage = $$testapis$node$lib$deprecation.testapi.deprecation.DeprecatedFileMessage.IInnerMessage;
 export const DeprecatedFileMessage = objectType({
     name: "DeprecatedFileMessage",
     description: "",
@@ -13,16 +13,16 @@ export const DeprecatedFileMessage = objectType({
             type: nonNull("String"),
             description: "",
             deprecation: "deprecation/file_deprecation.proto is mark as deprecated.",
-            resolve(root) { return root.getBody(); }
+            resolve(root) { return root.body!; }
         });
         t.field("enum", {
             type: nullable("DeprecatedFileEnum"),
             description: "",
             deprecation: "deprecation/file_deprecation.proto is mark as deprecated.",
-            resolve(root) { return root.getEnum(); }
+            resolve(root) { return root.enum ?? null; }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$deprecation$file_deprecation_pb$DeprecatedFileMessage" }
+    sourceType: { module: __filename, export: "$$testapis$node$lib$deprecation$testapi$deprecation$DeprecatedFileMessage" }
 });
 export const DeprecatedFileMessageInnerMessage = objectType({
     name: "DeprecatedFileMessageInnerMessage",
@@ -32,10 +32,10 @@ export const DeprecatedFileMessageInnerMessage = objectType({
             type: nonNull("String"),
             description: "",
             deprecation: "deprecation/file_deprecation.proto is mark as deprecated.",
-            resolve(root) { return root.getBody(); }
+            resolve(root) { return root.body!; }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$deprecation$file_deprecation_pb$DeprecatedFileMessageInnerMessage" }
+    sourceType: { module: __filename, export: "$$testapis$node$lib$deprecation$testapi$deprecation$DeprecatedFileMessageInnerMessage" }
 });
 export const DeprecatedFileMessageInput = inputObjectType({
     name: "DeprecatedFileMessageInput",

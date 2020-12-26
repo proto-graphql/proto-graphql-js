@@ -1,3 +1,4 @@
+import path from "path";
 import ts from "typescript";
 import { pascalCase } from "change-case";
 import {
@@ -12,14 +13,26 @@ import * as extensions from "../__generated__/extensions/graphql/schema_pb";
 import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
 
 export function protoExportAlias(
-  t: ProtoMessage,
-  o: { importPrefix?: string }
-) {
-  return uniqueImportAlias(`${protoImportPath(t, o)}/${gqlTypeName(t)}`);
+  t: ProtoMessage | ProtoOneof,
+  o: { importPrefix?: string; useProtobufjs?: boolean }
+): string {
+  if (t instanceof ProtoOneof) {
+    return uniqueImportAlias(`${protoExportAlias(t.parent, o)}.${t.name}`);
+  }
+  const chunks = [protoImportPath(t, o)];
+  if (o.useProtobufjs) {
+    chunks.push(...t.file.package.split("."));
+  }
+  chunks.push(nameWithParent(t));
+  return uniqueImportAlias(chunks.join("/"));
 }
 
-export function protoImportPath(t: ProtoMessage, o: { importPrefix?: string }) {
-  return `${o.importPrefix ? `${o.importPrefix}/` : "./"}${t.importPath}`;
+export function protoImportPath(
+  t: ProtoMessage,
+  o: { importPrefix?: string; useProtobufjs?: boolean }
+) {
+  const importPath = o.useProtobufjs ? path.dirname(t.file.name) : t.importPath;
+  return `${o.importPrefix ? `${o.importPrefix}/` : "./"}${importPath}`;
 }
 
 export function gqlTypeName(
@@ -112,32 +125,58 @@ function extractBehaviorComments(
  */
 export function createProtoExpr(
   t: ProtoMessage,
-  o: { importPrefix?: string }
+  o: { importPrefix?: string; useProtobufjs?: boolean }
 ): ts.Expression {
-  return ts.factory.createPropertyAccessExpression(
-    t.parent instanceof ProtoFile
-      ? ts.factory.createIdentifier(uniqueImportAlias(protoImportPath(t, o)))
-      : createProtoExpr(t.parent, o),
-    t.name
-  );
+  if (o.useProtobufjs) throw "not used";
+
+  let left: ts.Expression;
+  if (t.parent instanceof ProtoFile) {
+    left = ts.factory.createIdentifier(
+      uniqueImportAlias(protoImportPath(t, o))
+    );
+  } else {
+    left = createProtoExpr(t.parent, o);
+  }
+  return ts.factory.createPropertyAccessExpression(left, t.name);
 }
 
 /**
- * @example
+ * @example js_out
  * ```
  * _$hello$hello_pb.User
+ * ```
+ *
+ * @example protobufjs
+ * ```
+ * _$hello.hello.User
  * ```
  */
 export function createProtoQualifiedName(
   t: ProtoMessage,
-  o: { importPrefix?: string }
+  o: { importPrefix?: string; useProtobufjs?: boolean },
+  isLeft = false
 ): ts.QualifiedName {
-  return ts.factory.createQualifiedName(
-    t.parent instanceof ProtoFile
-      ? ts.factory.createIdentifier(uniqueImportAlias(protoImportPath(t, o)))
-      : createProtoQualifiedName(t.parent, o),
-    t.name
-  );
+  let left: ts.EntityName;
+  if (t.parent instanceof ProtoFile) {
+    if (o.useProtobufjs) {
+      const pkgs = t.parent.package.split(".");
+      left = pkgs.reduce<ts.EntityName>(
+        (n, pkg) => ts.factory.createQualifiedName(n, pkg),
+        ts.factory.createIdentifier(uniqueImportAlias(protoImportPath(t, o)))
+      );
+    } else {
+      left = ts.factory.createIdentifier(
+        uniqueImportAlias(protoImportPath(t, o))
+      );
+    }
+  } else {
+    left = createProtoQualifiedName(t.parent, o, true);
+  }
+  let name = t.name;
+  if (!isLeft && o.useProtobufjs) {
+    name = `I${name}`;
+  }
+  return ts.factory.createQualifiedName(left, name);
 }
 
 /**
@@ -200,6 +239,7 @@ export function uniqueImportAlias(path: string) {
     .replace(/\.\.\//g, "__$$")
     .replace(/\.\//g, "_$$")
     .replace(/\//g, "$$")
+    .replace(/\./g, "_")
     .replace(/-/g, "_");
 }
 

@@ -2,9 +2,9 @@
 // source: hello/hello.proto
 
 import { objectType, inputObjectType, list, nullable, nonNull } from "nexus";
-import * as $$testapis$node$lib$hello$hello_pb from "@testapis/node/lib/hello/hello_pb";
-export type $$testapis$node$lib$hello$hello_pb$Hello = $$testapis$node$lib$hello$hello_pb.Hello;
-export type $$testapis$node$lib$hello$hello_pb$Primitives = $$testapis$node$lib$hello$hello_pb.Primitives;
+import * as $$testapis$node$lib$hello from "@testapis/node/lib/hello";
+export type $$testapis$node$lib$hello$testapi$hello$Hello = $$testapis$node$lib$hello.testapi.hello.IHello;
+export type $$testapis$node$lib$hello$testapi$hello$Primitives = $$testapis$node$lib$hello.testapi.hello.IPrimitives;
 export const Hello = objectType({
     name: "Hello",
     description: "",
@@ -12,25 +12,25 @@ export const Hello = objectType({
         t.field("requiredPrimitives", {
             type: nonNull("Primitives"),
             description: "Required.",
-            resolve(root) { return root.getRequiredPrimitives()!; }
+            resolve(root) { return root.requiredPrimitives!; }
         });
         t.field("optionalPrimitives", {
             type: nullable("Primitives"),
             description: "Optional.",
-            resolve(root) { return root.getOptionalPrimitives() ?? null; }
+            resolve(root) { return root.optionalPrimitives ?? null; }
         });
         t.field("requiredPrimitivesList", {
             type: list(nonNull("Primitives")),
             description: "Required.",
-            resolve(root) { return root.getRequiredPrimitivesListList(); }
+            resolve(root) { return root.requiredPrimitivesList!; }
         });
         t.field("optionalPrimitivesList", {
             type: nullable("Primitives"),
             description: "Optional.",
-            resolve(root) { return root.getOptionalPrimitivesList() ?? null; }
+            resolve(root) { return root.optionalPrimitivesList ?? null; }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$hello$hello_pb$Hello" }
+    sourceType: { module: __filename, export: "$$testapis$node$lib$hello$testapi$hello$Hello" }
 });
 export const Primitives = objectType({
     name: "Primitives",
@@ -39,75 +39,75 @@ export const Primitives = objectType({
         t.field("requiredDoubleValue", {
             type: nonNull("Float"),
             description: "",
-            resolve(root) { return root.getRequiredDoubleValue(); }
+            resolve(root) { return root.requiredDoubleValue!; }
         });
         t.field("requiredFloatValue", {
             type: nonNull("Float"),
             description: "",
-            resolve(root) { return root.getRequiredFloatValue(); }
+            resolve(root) { return root.requiredFloatValue!; }
         });
         t.field("requiredInt32Value", {
             type: nonNull("Int"),
             description: "",
-            resolve(root) { return root.getRequiredInt32Value(); }
+            resolve(root) { return root.requiredInt32Value!; }
         });
         t.field("requiredInt64Value", {
             type: nonNull("String"),
             description: "",
-            resolve(root) { return root.getRequiredInt64Value().toString(); }
+            resolve(root) { return root.requiredInt64Value!.toString(); }
         });
         t.field("requiredUint32Value", {
             type: nonNull("Int"),
             description: "",
-            resolve(root) { return root.getRequiredUint32Value(); }
+            resolve(root) { return root.requiredUint32Value!; }
         });
         t.field("requiredUint64Value", {
             type: nonNull("String"),
             description: "",
-            resolve(root) { return root.getRequiredUint64Value().toString(); }
+            resolve(root) { return root.requiredUint64Value!.toString(); }
         });
         t.field("requiredSint32Value", {
             type: nonNull("Int"),
             description: "",
-            resolve(root) { return root.getRequiredSint32Value(); }
+            resolve(root) { return root.requiredSint32Value!; }
         });
         t.field("requiredSint64Value", {
             type: nonNull("String"),
             description: "",
-            resolve(root) { return root.getRequiredSint64Value().toString(); }
+            resolve(root) { return root.requiredSint64Value!.toString(); }
         });
         t.field("requiredFixed32Value", {
             type: nonNull("Int"),
             description: "",
-            resolve(root) { return root.getRequiredFixed32Value(); }
+            resolve(root) { return root.requiredFixed32Value!; }
         });
         t.field("requiredFixed64Value", {
             type: nonNull("String"),
             description: "",
-            resolve(root) { return root.getRequiredFixed64Value().toString(); }
+            resolve(root) { return root.requiredFixed64Value!.toString(); }
         });
         t.field("requiredSfixed32Value", {
             type: nonNull("Int"),
             description: "",
-            resolve(root) { return root.getRequiredSfixed32Value(); }
+            resolve(root) { return root.requiredSfixed32Value!; }
         });
         t.field("requiredSfixed64Value", {
             type: nonNull("String"),
             description: "",
-            resolve(root) { return root.getRequiredSfixed64Value().toString(); }
+            resolve(root) { return root.requiredSfixed64Value!.toString(); }
         });
         t.field("requiredBoolValue", {
             type: nonNull("Boolean"),
             description: "",
-            resolve(root) { return root.getRequiredBoolValue(); }
+            resolve(root) { return root.requiredBoolValue!; }
         });
         t.field("requiredStringValue", {
             type: nonNull("String"),
             description: "",
-            resolve(root) { return root.getRequiredStringValue(); }
+            resolve(root) { return root.requiredStringValue!; }
         });
     },
-    sourceType: { module: __filename, export: "$$testapis$node$lib$hello$hello_pb$Primitives" }
+    sourceType: { module: __filename, export: "$$testapis$node$lib$hello$testapi$hello$Primitives" }
 });
 export const HelloInput = inputObjectType({
     name: "HelloInput",
