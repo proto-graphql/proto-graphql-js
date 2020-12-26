@@ -6,5 +6,5 @@
     "outDir": "./lib",
     "rootDir": "./src",
   },
-  "exclude": ["**/*.test.*", "./lib/**", "./package.json"]
+  "exclude": ["**/*.test.*", "./lib/**", "./module/**", "./package.json"]
 }
