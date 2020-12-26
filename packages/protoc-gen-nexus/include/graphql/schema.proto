@@ -11,3 +11,11 @@ message GraphqlSchemaOptions {
 extend google.protobuf.FileOptions {
   GraphqlSchemaOptions schema = 2056;
 }
+
+message GraphqlFieldOptions {
+  bool ignore = 1;
+}
+
+extend google.protobuf.FieldOptions {
+  GraphqlFieldOptions field = 2056;
+}

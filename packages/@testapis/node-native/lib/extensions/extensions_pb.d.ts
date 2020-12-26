@@ -11,6 +11,11 @@ export class PrefixedMessage extends jspb.Message {
   getPrefixedEnum(): PrefixedEnumMap[keyof PrefixedEnumMap];
   setPrefixedEnum(value: PrefixedEnumMap[keyof PrefixedEnumMap]): void;
 
+  hasIgnoredField(): boolean;
+  clearIgnoredField(): void;
+  getIgnoredField(): PrefixedMessage.InnerMessage | undefined;
+  setIgnoredField(value?: PrefixedMessage.InnerMessage): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): PrefixedMessage.AsObject;
   static toObject(includeInstance: boolean, msg: PrefixedMessage): PrefixedMessage.AsObject;
@@ -25,6 +30,7 @@ export namespace PrefixedMessage {
   export type AsObject = {
     body: string,
     prefixedEnum: PrefixedEnumMap[keyof PrefixedEnumMap],
+    ignoredField?: PrefixedMessage.InnerMessage.AsObject,
   }
 
   export class InnerMessage extends jspb.Message {

@@ -3,6 +3,7 @@ import { ProtoMessage, ProtoRegistry } from "../protoTypes";
 import {
   createDslExportConstStmt,
   gqlTypeName,
+  isIgnoredField,
   isInputOnlyField,
   protoExportAlias,
 } from "./util";
@@ -107,6 +108,7 @@ function createObjectTypeDefinitionMethodDecl(
         ...msg.fields
           .filter((f) => !f.isOneofMember())
           .filter((f) => !isInputOnlyField(f))
+          .filter((f) => !isIgnoredField(f))
           .map((f) =>
             createFieldDefinitionStmt(f, reg, {
               useProtobufjs: opts.useProtobufjs,

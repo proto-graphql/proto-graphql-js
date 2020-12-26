@@ -94,7 +94,8 @@ proto.testapi.extensions.PrefixedMessage.prototype.toObject = function(opt_inclu
 proto.testapi.extensions.PrefixedMessage.toObject = function(includeInstance, msg) {
   var f, obj = {
     body: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    prefixedEnum: jspb.Message.getFieldWithDefault(msg, 2, 0)
+    prefixedEnum: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    ignoredField: (f = msg.getIgnoredField()) && proto.testapi.extensions.PrefixedMessage.InnerMessage.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -139,6 +140,11 @@ proto.testapi.extensions.PrefixedMessage.deserializeBinaryFromReader = function(
       var value = /** @type {!proto.testapi.extensions.PrefixedEnum} */ (reader.readEnum());
       msg.setPrefixedEnum(value);
       break;
+    case 3:
+      var value = new proto.testapi.extensions.PrefixedMessage.InnerMessage;
+      reader.readMessage(value,proto.testapi.extensions.PrefixedMessage.InnerMessage.deserializeBinaryFromReader);
+      msg.setIgnoredField(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -180,6 +186,14 @@ proto.testapi.extensions.PrefixedMessage.serializeBinaryToWriter = function(mess
     writer.writeEnum(
       2,
       f
+    );
+  }
+  f = message.getIgnoredField();
+  if (f != null) {
+    writer.writeMessage(
+      3,
+      f,
+      proto.testapi.extensions.PrefixedMessage.InnerMessage.serializeBinaryToWriter
     );
   }
 };
@@ -348,6 +362,43 @@ proto.testapi.extensions.PrefixedMessage.prototype.getPrefixedEnum = function() 
  */
 proto.testapi.extensions.PrefixedMessage.prototype.setPrefixedEnum = function(value) {
   return jspb.Message.setProto3EnumField(this, 2, value);
+};
+
+
+/**
+ * optional InnerMessage ignored_field = 3;
+ * @return {?proto.testapi.extensions.PrefixedMessage.InnerMessage}
+ */
+proto.testapi.extensions.PrefixedMessage.prototype.getIgnoredField = function() {
+  return /** @type{?proto.testapi.extensions.PrefixedMessage.InnerMessage} */ (
+    jspb.Message.getWrapperField(this, proto.testapi.extensions.PrefixedMessage.InnerMessage, 3));
+};
+
+
+/**
+ * @param {?proto.testapi.extensions.PrefixedMessage.InnerMessage|undefined} value
+ * @return {!proto.testapi.extensions.PrefixedMessage} returns this
+*/
+proto.testapi.extensions.PrefixedMessage.prototype.setIgnoredField = function(value) {
+  return jspb.Message.setWrapperField(this, 3, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.testapi.extensions.PrefixedMessage} returns this
+ */
+proto.testapi.extensions.PrefixedMessage.prototype.clearIgnoredField = function() {
+  return this.setIgnoredField(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.testapi.extensions.PrefixedMessage.prototype.hasIgnoredField = function() {
+  return jspb.Message.getField(this, 3) != null;
 };
 
 

@@ -35,6 +35,7 @@ $root.testapi = (function() {
              * @interface IPrefixedMessage
              * @property {string|null} [body] PrefixedMessage body
              * @property {testapi.extensions.PrefixedEnum|null} [prefixedEnum] PrefixedMessage prefixedEnum
+             * @property {testapi.extensions.PrefixedMessage.IInnerMessage|null} [ignoredField] PrefixedMessage ignoredField
              */
 
             /**
@@ -69,6 +70,14 @@ $root.testapi = (function() {
             PrefixedMessage.prototype.prefixedEnum = 0;
 
             /**
+             * PrefixedMessage ignoredField.
+             * @member {testapi.extensions.PrefixedMessage.IInnerMessage|null|undefined} ignoredField
+             * @memberof testapi.extensions.PrefixedMessage
+             * @instance
+             */
+            PrefixedMessage.prototype.ignoredField = null;
+
+            /**
              * Creates a new PrefixedMessage instance using the specified properties.
              * @function create
              * @memberof testapi.extensions.PrefixedMessage
@@ -96,6 +105,8 @@ $root.testapi = (function() {
                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.body);
                 if (message.prefixedEnum != null && Object.hasOwnProperty.call(message, "prefixedEnum"))
                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.prefixedEnum);
+                if (message.ignoredField != null && Object.hasOwnProperty.call(message, "ignoredField"))
+                    $root.testapi.extensions.PrefixedMessage.InnerMessage.encode(message.ignoredField, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                 return writer;
             };
 
@@ -135,6 +146,9 @@ $root.testapi = (function() {
                         break;
                     case 2:
                         message.prefixedEnum = reader.int32();
+                        break;
+                    case 3:
+                        message.ignoredField = $root.testapi.extensions.PrefixedMessage.InnerMessage.decode(reader, reader.uint32());
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -183,6 +197,11 @@ $root.testapi = (function() {
                     case 2:
                         break;
                     }
+                if (message.ignoredField != null && message.hasOwnProperty("ignoredField")) {
+                    var error = $root.testapi.extensions.PrefixedMessage.InnerMessage.verify(message.ignoredField);
+                    if (error)
+                        return "ignoredField." + error;
+                }
                 return null;
             };
 
@@ -214,6 +233,11 @@ $root.testapi = (function() {
                     message.prefixedEnum = 2;
                     break;
                 }
+                if (object.ignoredField != null) {
+                    if (typeof object.ignoredField !== "object")
+                        throw TypeError(".testapi.extensions.PrefixedMessage.ignoredField: object expected");
+                    message.ignoredField = $root.testapi.extensions.PrefixedMessage.InnerMessage.fromObject(object.ignoredField);
+                }
                 return message;
             };
 
@@ -233,11 +257,14 @@ $root.testapi = (function() {
                 if (options.defaults) {
                     object.body = "";
                     object.prefixedEnum = options.enums === String ? "PREFIXED_ENUM_UNSPECIFIED" : 0;
+                    object.ignoredField = null;
                 }
                 if (message.body != null && message.hasOwnProperty("body"))
                     object.body = message.body;
                 if (message.prefixedEnum != null && message.hasOwnProperty("prefixedEnum"))
                     object.prefixedEnum = options.enums === String ? $root.testapi.extensions.PrefixedEnum[message.prefixedEnum] : message.prefixedEnum;
+                if (message.ignoredField != null && message.hasOwnProperty("ignoredField"))
+                    object.ignoredField = $root.testapi.extensions.PrefixedMessage.InnerMessage.toObject(message.ignoredField, options);
                 return object;
             };
 

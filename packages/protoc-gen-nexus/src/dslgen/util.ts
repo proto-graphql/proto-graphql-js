@@ -103,6 +103,15 @@ export function isInputOnlyField(field: ProtoField | ProtoOneof): boolean {
   return cs.includes("Input only");
 }
 
+export function isIgnoredField(field: ProtoField): boolean {
+  return (
+    field.descriptor
+      .getOptions()
+      ?.getExtension(extensions.field)
+      ?.getIgnore() ?? false
+  );
+}
+
 const behaviorComments = ["Required", "Input only", "Output only"] as const;
 
 function extractBehaviorComments(
