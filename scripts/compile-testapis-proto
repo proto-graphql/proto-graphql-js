@@ -28,7 +28,13 @@ protocw() {
 }
 
 execProtoc() {
-  for protoDir in $TESTAPIS_ROOT/proto/src/*; do
+  protocw \
+    --plugin=protoc-gen-ts=`yarn bin protoc-gen-ts` \
+    --js_out="$TESTAPIS_ROOT/node-native/lib" --js_opt=import_style=commonjs,binary \
+    --ts_out="$TESTAPIS_ROOT/node-native/lib" \
+    ${PLUGIN_ROOT}/include/graphql/*.proto
+
+  for protoDir in $TESTAPIS_ROOT/proto/src/testapis/*; do
     protocw --include_source_info --include_imports --descriptor_set_out=${protoDir}/descriptor_set.pb ${protoDir}/*.proto
 
     protocw \

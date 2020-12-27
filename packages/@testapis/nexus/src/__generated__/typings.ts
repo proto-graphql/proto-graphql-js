@@ -4,15 +4,15 @@
  */
 
 
-import { $$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessage_not_deprecated_oneof, $$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessage_deprecated_oneof, $$testapis$node$lib$deprecation$testapi$deprecation$DeprecatedMessage, $$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessage, $$testapis$node$lib$deprecation$testapi$deprecation$DeprecatedMessageInnerMessage, $$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessageInnerMessage1, $$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessageInnerMessage2 } from "./../schema/types/deprecation/deprecation_pb_nexus"
-import { $$testapis$node$lib$deprecation$testapi$deprecation$DeprecatedFileMessage, $$testapis$node$lib$deprecation$testapi$deprecation$DeprecatedFileMessageInnerMessage } from "./../schema/types/deprecation/file_deprecation_pb_nexus"
-import { $$testapis$node$lib$enums$testapi$nested$MessageWithEnums } from "./../schema/types/enums/enums_pb_nexus"
-import { $$testapis$node$lib$extensions$testapi$extensions$TestPrefixPrefixedMessage, $$testapis$node$lib$extensions$testapi$extensions$TestPrefixPrefixedMessageInnerMessage } from "./../schema/types/extensions/extensions_pb_nexus"
-import { $$testapis$node$lib$field_behavior$testapi$deprecation$FieldBehaviorComentsMessage, $$testapis$node$lib$field_behavior$testapi$deprecation$FieldBehaviorComentsMessagePost } from "./../schema/types/field_behavior/comments_pb_nexus"
-import { $$testapis$node$lib$hello$testapi$hello$Hello, $$testapis$node$lib$hello$testapi$hello$Primitives } from "./../schema/types/hello/hello_pb_nexus"
-import { $$testapis$node$lib$nested$testapi$nested$ParentMessage, $$testapis$node$lib$nested$testapi$nested$ParentMessageNestedMessage } from "./../schema/types/nested/nested_pb_nexus"
-import { $$testapis$node$lib$oneof$testapi$oneof$OneofParent_required_oneof_members, $$testapis$node$lib$oneof$testapi$oneof$OneofParent_optional_oneof_members, $$testapis$node$lib$oneof$testapi$oneof$OneofParent, $$testapis$node$lib$oneof$testapi$oneof$OneofMemberMessage1, $$testapis$node$lib$oneof$testapi$oneof$OneofMemberMessage2 } from "./../schema/types/oneof/oneof_pb_nexus"
-import { $$testapis$node$lib$wktypes$testapi$wktypes$Message } from "./../schema/types/wktypes/well_known_types_pb_nexus"
+import { $$testapis$node$lib$testapis$deprecation$testapis$deprecation$NotDeprecatedMessage_not_deprecated_oneof, $$testapis$node$lib$testapis$deprecation$testapis$deprecation$NotDeprecatedMessage_deprecated_oneof, $$testapis$node$lib$testapis$deprecation$testapis$deprecation$DeprecatedMessage, $$testapis$node$lib$testapis$deprecation$testapis$deprecation$NotDeprecatedMessage, $$testapis$node$lib$testapis$deprecation$testapis$deprecation$DeprecatedMessageInnerMessage, $$testapis$node$lib$testapis$deprecation$testapis$deprecation$NotDeprecatedMessageInnerMessage1, $$testapis$node$lib$testapis$deprecation$testapis$deprecation$NotDeprecatedMessageInnerMessage2 } from "./../schema/types/testapis/deprecation/deprecation_pb_nexus"
+import { $$testapis$node$lib$testapis$deprecation$testapis$deprecation$DeprecatedFileMessage, $$testapis$node$lib$testapis$deprecation$testapis$deprecation$DeprecatedFileMessageInnerMessage } from "./../schema/types/testapis/deprecation/file_deprecation_pb_nexus"
+import { $$testapis$node$lib$testapis$enums$testapi$enums$MessageWithEnums } from "./../schema/types/testapis/enums/enums_pb_nexus"
+import { $$testapis$node$lib$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessage, $$testapis$node$lib$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageInnerMessage } from "./../schema/types/testapis/extensions/extensions_pb_nexus"
+import { $$testapis$node$lib$testapis$field_behavior$testapis$deprecation$FieldBehaviorComentsMessage, $$testapis$node$lib$testapis$field_behavior$testapis$deprecation$FieldBehaviorComentsMessagePost } from "./../schema/types/testapis/field_behavior/comments_pb_nexus"
+import { $$testapis$node$lib$testapis$hello$testapis$hello$Hello, $$testapis$node$lib$testapis$hello$testapis$hello$Primitives } from "./../schema/types/testapis/hello/hello_pb_nexus"
+import { $$testapis$node$lib$testapis$nested$testapis$nested$ParentMessage, $$testapis$node$lib$testapis$nested$testapis$nested$ParentMessageNestedMessage } from "./../schema/types/testapis/nested/nested_pb_nexus"
+import { $$testapis$node$lib$testapis$oneof$testapis$oneof$OneofParent_required_oneof_members, $$testapis$node$lib$testapis$oneof$testapis$oneof$OneofParent_optional_oneof_members, $$testapis$node$lib$testapis$oneof$testapis$oneof$OneofParent, $$testapis$node$lib$testapis$oneof$testapis$oneof$OneofMemberMessage1, $$testapis$node$lib$testapis$oneof$testapis$oneof$OneofMemberMessage2 } from "./../schema/types/testapis/oneof/oneof_pb_nexus"
+import { $$testapis$node$lib$testapis$wktypes$testapis$wktypes$Message } from "./../schema/types/testapis/wktypes/well_known_types_pb_nexus"
 import { core } from "nexus"
 declare global {
   interface NexusGenCustomInputMethods<TypeName extends string> {
@@ -159,37 +159,37 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
-  DeprecatedFileMessage: $$testapis$node$lib$deprecation$testapi$deprecation$DeprecatedFileMessage;
-  DeprecatedFileMessageInnerMessage: $$testapis$node$lib$deprecation$testapi$deprecation$DeprecatedFileMessageInnerMessage;
-  DeprecatedMessage: $$testapis$node$lib$deprecation$testapi$deprecation$DeprecatedMessage;
-  DeprecatedMessageInnerMessage: $$testapis$node$lib$deprecation$testapi$deprecation$DeprecatedMessageInnerMessage;
-  FieldBehaviorComentsMessage: $$testapis$node$lib$field_behavior$testapi$deprecation$FieldBehaviorComentsMessage;
-  FieldBehaviorComentsMessagePost: $$testapis$node$lib$field_behavior$testapi$deprecation$FieldBehaviorComentsMessagePost;
-  Hello: $$testapis$node$lib$hello$testapi$hello$Hello;
-  Message: $$testapis$node$lib$wktypes$testapi$wktypes$Message;
-  MessageWithEnums: $$testapis$node$lib$enums$testapi$nested$MessageWithEnums;
-  NotDeprecatedMessage: $$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessage;
-  NotDeprecatedMessageInnerMessage1: $$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessageInnerMessage1;
-  NotDeprecatedMessageInnerMessage2: $$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessageInnerMessage2;
-  OneofMemberMessage1: $$testapis$node$lib$oneof$testapi$oneof$OneofMemberMessage1;
-  OneofMemberMessage2: $$testapis$node$lib$oneof$testapi$oneof$OneofMemberMessage2;
-  OneofParent: $$testapis$node$lib$oneof$testapi$oneof$OneofParent;
-  ParentMessage: $$testapis$node$lib$nested$testapi$nested$ParentMessage;
-  ParentMessageNestedMessage: $$testapis$node$lib$nested$testapi$nested$ParentMessageNestedMessage;
-  Primitives: $$testapis$node$lib$hello$testapi$hello$Primitives;
+  DeprecatedFileMessage: $$testapis$node$lib$testapis$deprecation$testapis$deprecation$DeprecatedFileMessage;
+  DeprecatedFileMessageInnerMessage: $$testapis$node$lib$testapis$deprecation$testapis$deprecation$DeprecatedFileMessageInnerMessage;
+  DeprecatedMessage: $$testapis$node$lib$testapis$deprecation$testapis$deprecation$DeprecatedMessage;
+  DeprecatedMessageInnerMessage: $$testapis$node$lib$testapis$deprecation$testapis$deprecation$DeprecatedMessageInnerMessage;
+  FieldBehaviorComentsMessage: $$testapis$node$lib$testapis$field_behavior$testapis$deprecation$FieldBehaviorComentsMessage;
+  FieldBehaviorComentsMessagePost: $$testapis$node$lib$testapis$field_behavior$testapis$deprecation$FieldBehaviorComentsMessagePost;
+  Hello: $$testapis$node$lib$testapis$hello$testapis$hello$Hello;
+  Message: $$testapis$node$lib$testapis$wktypes$testapis$wktypes$Message;
+  MessageWithEnums: $$testapis$node$lib$testapis$enums$testapi$enums$MessageWithEnums;
+  NotDeprecatedMessage: $$testapis$node$lib$testapis$deprecation$testapis$deprecation$NotDeprecatedMessage;
+  NotDeprecatedMessageInnerMessage1: $$testapis$node$lib$testapis$deprecation$testapis$deprecation$NotDeprecatedMessageInnerMessage1;
+  NotDeprecatedMessageInnerMessage2: $$testapis$node$lib$testapis$deprecation$testapis$deprecation$NotDeprecatedMessageInnerMessage2;
+  OneofMemberMessage1: $$testapis$node$lib$testapis$oneof$testapis$oneof$OneofMemberMessage1;
+  OneofMemberMessage2: $$testapis$node$lib$testapis$oneof$testapis$oneof$OneofMemberMessage2;
+  OneofParent: $$testapis$node$lib$testapis$oneof$testapis$oneof$OneofParent;
+  ParentMessage: $$testapis$node$lib$testapis$nested$testapis$nested$ParentMessage;
+  ParentMessageNestedMessage: $$testapis$node$lib$testapis$nested$testapis$nested$ParentMessageNestedMessage;
+  Primitives: $$testapis$node$lib$testapis$hello$testapis$hello$Primitives;
   Query: {};
-  TestPrefixPrefixedMessage: $$testapis$node$lib$extensions$testapi$extensions$TestPrefixPrefixedMessage;
-  TestPrefixPrefixedMessageInnerMessage: $$testapis$node$lib$extensions$testapi$extensions$TestPrefixPrefixedMessageInnerMessage;
+  TestPrefixPrefixedMessage: $$testapis$node$lib$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessage;
+  TestPrefixPrefixedMessageInnerMessage: $$testapis$node$lib$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageInnerMessage;
 }
 
 export interface NexusGenInterfaces {
 }
 
 export interface NexusGenUnions {
-  NotDeprecatedMessageDeprecatedOneof: $$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessage_deprecated_oneof;
-  NotDeprecatedMessageNotDeprecatedOneof: $$testapis$node$lib$deprecation$testapi$deprecation$NotDeprecatedMessage_not_deprecated_oneof;
-  OneofParentOptionalOneofMembers: $$testapis$node$lib$oneof$testapi$oneof$OneofParent_optional_oneof_members;
-  OneofParentRequiredOneofMembers: $$testapis$node$lib$oneof$testapi$oneof$OneofParent_required_oneof_members;
+  NotDeprecatedMessageDeprecatedOneof: $$testapis$node$lib$testapis$deprecation$testapis$deprecation$NotDeprecatedMessage_deprecated_oneof;
+  NotDeprecatedMessageNotDeprecatedOneof: $$testapis$node$lib$testapis$deprecation$testapis$deprecation$NotDeprecatedMessage_not_deprecated_oneof;
+  OneofParentOptionalOneofMembers: $$testapis$node$lib$testapis$oneof$testapis$oneof$OneofParent_optional_oneof_members;
+  OneofParentRequiredOneofMembers: $$testapis$node$lib$testapis$oneof$testapis$oneof$OneofParent_required_oneof_members;
 }
 
 export type NexusGenRootTypes = NexusGenObjects & NexusGenUnions

@@ -140,6 +140,7 @@ function getFixtureFileDescriptorSet(name: string): FileDescriptorSet {
       "@testapis",
       "proto",
       "src",
+      "testapis",
       name,
       "descriptor_set.pb"
     )
@@ -155,7 +156,7 @@ function buildCodeGeneratorRequest(name: string): CodeGeneratorRequest {
     req.addProtoFile(fd);
 
     const filename = fd.getName();
-    if (filename && filename.startsWith(`${name}/`)) {
+    if (filename && filename.startsWith(`testapis/${name}/`)) {
       req.addFileToGenerate(filename);
     }
   }
@@ -188,7 +189,7 @@ function snapshotGeneratedFiles(resp: CodeGeneratorResponse, files: string[]) {
 
   const fileByName = getFileMap(resp);
   for (const filename of files) {
-    const content = fileByName[filename];
+    const content = fileByName[`testapis/${filename}`];
     expect(content).toBeTruthy();
     expect(content).toMatchSnapshot();
   }
