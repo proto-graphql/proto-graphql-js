@@ -2,6 +2,7 @@ import {
   CodeGeneratorRequest,
   CodeGeneratorResponse,
 } from "google-protobuf/google/protobuf/compiler/plugin_pb";
+import { GenerationParams } from "./dslgen";
 import { printSource } from "./printer";
 import { ProtoRegistry } from "./protoTypes";
 
@@ -30,12 +31,38 @@ export const processRequest = (
   return resp;
 };
 
-type Parameters = Record<string, string | boolean>;
+// export for testing
+export const parseParams = (input: string | undefined): GenerationParams => {
+  const params: GenerationParams = {
+    useProtobufjs: false,
+    importPrefix: null,
+  };
 
-const parseParams = (input: string | undefined) =>
-  (input ?? "").split(",").reduce((o, kv) => {
+  if (!input) return params;
+
+  const toBool = (name: string, v: string | undefined): boolean => {
+    if (!v || v === "true") return true;
+    if (v === "false") return false;
+    throw new Error(`${name} should be bool, got string: ${v}`);
+  };
+  const toString = (name: string, v: string | undefined): string => {
+    if (!v) throw new Error(`${name} should be string`);
+    return v;
+  };
+
+  for (const kv of input.split(",")) {
     const [k, v] = kv.split("=", 2);
-    o[k.replace(/(_[a-z])/g, (g) => g.toUpperCase().replace("_", ""))] =
-      v ?? true;
-    return o;
-  }, {} as Parameters);
+    switch (k) {
+      case "use_protobufjs":
+        params.useProtobufjs = toBool(k, v);
+        break;
+      case "import_prefix":
+        params.importPrefix = toString(k, v);
+        break;
+      default:
+        throw new Error(`unknown param: ${kv}`);
+    }
+  }
+
+  return params;
+};

@@ -7,6 +7,7 @@ import {
   isOutputOnlyField,
 } from "./util";
 import { createFieldDefinitionStmt } from "./field";
+import { GenerationParams } from "./types";
 
 /**
  * @example
@@ -19,9 +20,10 @@ import { createFieldDefinitionStmt } from "./field";
  */
 export function createInputObjectTypeDslStmts(
   msgs: ReadonlyArray<ProtoMessage>,
-  reg: ProtoRegistry
+  reg: ProtoRegistry,
+  opts: GenerationParams
 ): ts.Statement[] {
-  return msgs.map((m) => createInputObjectTypeDslStmt(m, reg));
+  return msgs.map((m) => createInputObjectTypeDslStmt(m, reg, opts));
 }
 
 /**
@@ -35,7 +37,8 @@ export function createInputObjectTypeDslStmts(
  */
 function createInputObjectTypeDslStmt(
   msg: ProtoMessage,
-  reg: ProtoRegistry
+  reg: ProtoRegistry,
+  opts: GenerationParams
 ): ts.Statement {
   const typeName = `${gqlTypeName(msg)}Input`;
   return createDslExportConstStmt(
@@ -54,7 +57,7 @@ function createInputObjectTypeDslStmt(
               "description",
               ts.factory.createStringLiteral(msg.description)
             ),
-            createInputObjectTypeDefinitionMethodDecl(msg, reg),
+            createInputObjectTypeDefinitionMethodDecl(msg, reg, opts),
           ],
           true
         ),
@@ -73,7 +76,8 @@ function createInputObjectTypeDslStmt(
  */
 function createInputObjectTypeDefinitionMethodDecl(
   msg: ProtoMessage,
-  reg: ProtoRegistry
+  reg: ProtoRegistry,
+  opts: GenerationParams
 ): ts.MethodDeclaration {
   return ts.factory.createMethodDeclaration(
     undefined,
@@ -98,7 +102,9 @@ function createInputObjectTypeDefinitionMethodDecl(
       msg.fields
         .filter((f) => !isOutputOnlyField(f))
         .filter((f) => !isIgnoredField(f))
-        .map((f) => createFieldDefinitionStmt(f, reg, { input: true })),
+        .map((f) =>
+          createFieldDefinitionStmt(f, reg, { ...opts, input: true })
+        ),
       true
     )
   );

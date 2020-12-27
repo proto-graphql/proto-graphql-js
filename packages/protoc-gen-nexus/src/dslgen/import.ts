@@ -1,5 +1,6 @@
 import ts from "typescript";
 import { ProtoEnum, ProtoMessage } from "../protoTypes";
+import { GenerationParams } from "./types";
 import { getUnwrapFunc } from "./unwrap";
 import {
   createImportAllWithAliastDecl,
@@ -67,7 +68,7 @@ export function createImportNexusDecl(
  */
 export function createImportUnwrapFuncDecls(
   msgs: ReadonlyArray<ProtoMessage>,
-  opts: { useProtobufjs?: boolean }
+  opts: GenerationParams
 ): ts.ImportDeclaration[] {
   return msgs
     .flatMap((m) => m.fields)
@@ -89,7 +90,7 @@ export function createImportUnwrapFuncDecls(
  */
 export function createImportProtoDecls(
   msgs: ReadonlyArray<ProtoMessage>,
-  opts: { importPrefix?: string; useProtobufjs?: boolean }
+  opts: GenerationParams
 ): ts.ImportDeclaration[] {
   return msgs
     .map((m) => protoImportPath(m, opts))

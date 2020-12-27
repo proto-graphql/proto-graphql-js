@@ -1,6 +1,6 @@
 import ts from "typescript";
 import { ProtoEnum, ProtoField, ProtoRegistry } from "../protoTypes";
-import { detectGqlType, GqlType } from "./types";
+import { detectGqlType, GenerationParams, GqlType } from "./types";
 import { getUnwrapFunc } from "./unwrap";
 import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
 import {
@@ -23,7 +23,7 @@ import { camelCase } from "change-case";
 export function createFieldDefinitionStmt(
   field: ProtoField,
   registry: ProtoRegistry,
-  opts?: { input?: boolean; importPrefix?: string; useProtobufjs?: boolean }
+  opts: GenerationParams & { input?: boolean }
 ): ts.Statement {
   const type = detectGqlType(field, registry, opts);
   return ts.factory.createExpressionStatement(
@@ -55,7 +55,7 @@ export function createFieldDefinitionStmt(
 function createFieldOptionExpr(
   field: ProtoField,
   type: GqlType,
-  opts?: { input?: boolean; importPrefix?: string; useProtobufjs?: boolean }
+  opts: GenerationParams & { input?: boolean }
 ): ts.Expression {
   const createTypeSpecifier = (type: GqlType): ts.Expression => {
     switch (type.kind) {
@@ -90,8 +90,8 @@ function createFieldOptionExpr(
       opts?.input
         ? null
         : createFieldResolverDecl(field, type, {
-            importPrefix: opts?.importPrefix,
-            useProtobufjs: opts?.useProtobufjs,
+            importPrefix: opts.importPrefix,
+            useProtobufjs: opts.useProtobufjs,
           }),
     ].filter(onlyNonNull()),
     true
@@ -101,7 +101,7 @@ function createFieldOptionExpr(
 function createFieldResolverDecl(
   field: ProtoField,
   type: GqlType,
-  opts: { importPrefix?: string; useProtobufjs?: boolean }
+  opts: GenerationParams
 ): ts.MethodDeclaration {
   if (field.type instanceof ProtoEnum) {
     return ts.factory.createMethodDeclaration(
@@ -247,7 +247,7 @@ function createFieldResolverBlockForEnum(
   field: ProtoField,
   type: GqlType,
   en: ProtoEnum,
-  opts: { importPrefix?: string; useProtobufjs?: boolean }
+  opts: GenerationParams
 ): ts.Block {
   const value = ts.factory.createPropertyAccessExpression(
     ts.factory.createIdentifier("root"),

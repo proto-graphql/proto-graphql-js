@@ -8,18 +8,14 @@ import {
   createObjectTypeDslStmts,
   createOneofUnionTypeDslStmts,
   createReExportProtoStmts,
+  GenerationParams,
 } from "./dslgen";
 import { ProtoFile, ProtoRegistry } from "./protoTypes";
-
-type PrintOptions = {
-  importPrefix?: string;
-  useProtobufjs?: boolean;
-};
 
 export function printSource(
   registry: ProtoRegistry,
   file: ProtoFile,
-  opts: PrintOptions
+  opts: GenerationParams
 ): string {
   const [msgs, enums] = registry.collectTypes(file);
 
@@ -37,7 +33,7 @@ export function printSource(
     // `export cosnt Hello = objectType({ ... });`
     ...createObjectTypeDslStmts(msgs, registry, opts),
     // `export cosnt HelloInput = inputObjectType({ ... });`
-    ...createInputObjectTypeDslStmts(msgs, registry),
+    ...createInputObjectTypeDslStmts(msgs, registry, opts),
     // `export const Role = enumType({ ... });`
     ...createEnumTypeDslStmts(enums),
   ];

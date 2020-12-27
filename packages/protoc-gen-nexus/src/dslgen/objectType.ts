@@ -9,6 +9,7 @@ import {
 } from "./util";
 import { createFieldDefinitionStmt } from "./field";
 import { createOneofFieldDefinitionStmt } from "./oneofField";
+import { GenerationParams } from "./types";
 
 /**
  * @example
@@ -22,7 +23,7 @@ import { createOneofFieldDefinitionStmt } from "./oneofField";
 export function createObjectTypeDslStmts(
   msgs: ReadonlyArray<ProtoMessage>,
   reg: ProtoRegistry,
-  opts: { importPrefix?: string; useProtobufjs?: boolean }
+  opts: GenerationParams
 ): ts.Statement[] {
   return msgs.map((m) => createObjectTypeDslStmt(m, reg, opts));
 }
@@ -39,7 +40,7 @@ export function createObjectTypeDslStmts(
 function createObjectTypeDslStmt(
   msg: ProtoMessage,
   reg: ProtoRegistry,
-  opts: { importPrefix?: string; useProtobufjs?: boolean }
+  opts: GenerationParams
 ): ts.Statement {
   const typeName = gqlTypeName(msg);
   return createDslExportConstStmt(
@@ -82,7 +83,7 @@ function createObjectTypeDslStmt(
 function createObjectTypeDefinitionMethodDecl(
   msg: ProtoMessage,
   reg: ProtoRegistry,
-  opts: { importPrefix?: string; useProtobufjs?: boolean }
+  opts: GenerationParams
 ): ts.MethodDeclaration {
   return ts.factory.createMethodDeclaration(
     undefined,
@@ -130,7 +131,7 @@ function createObjectTypeDefinitionMethodDecl(
  */
 function sourceTypeExpr(
   msg: ProtoMessage,
-  opts: { importPrefix?: string; useProtobufjs?: boolean }
+  opts: GenerationParams
 ): ts.Expression {
   return ts.factory.createObjectLiteralExpression([
     ts.factory.createPropertyAssignment(

@@ -2,6 +2,11 @@ import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor
 import { ProtoField, ProtoRegistry } from "../protoTypes";
 import { gqlTypeName, isRequiredField } from "./util";
 
+export type GenerationParams = {
+  importPrefix: string | null;
+  useProtobufjs: boolean;
+};
+
 type GqlScalarType = "Int" | "Float" | "String" | "Boolean" | "ID" | "DateTime";
 
 export type GqlItemType =
