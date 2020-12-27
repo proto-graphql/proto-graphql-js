@@ -154,30 +154,17 @@ export function isEnumValueForUnspecified(ev: ProtoEnumValue): boolean {
  */
 export function createProtoExpr(
   t: ProtoMessage | ProtoEnum,
-  o: { importPrefix?: string; useProtobufjs?: boolean },
-  isLeft = false
+  o: { importPrefix?: string; useProtobufjs?: boolean }
 ): ts.Expression {
-  let left: ts.Expression;
-  if (t.parent instanceof ProtoFile) {
-    if (o.useProtobufjs) {
-      const pkgs = t.parent.package.split(".");
-      left = pkgs.reduce<ts.Expression>(
-        (n, pkg) => ts.factory.createPropertyAccessExpression(n, pkg),
-        ts.factory.createIdentifier(uniqueImportAlias(protoImportPath(t, o)))
-      );
-    } else {
-      left = ts.factory.createIdentifier(
-        uniqueImportAlias(protoImportPath(t, o))
-      );
-    }
-  } else {
-    left = createProtoExpr(t.parent, o, true);
-  }
-  let name = t.name;
-  if (!isLeft && t instanceof ProtoMessage && o.useProtobufjs) {
-    name = `I${name}`;
-  }
-  return ts.factory.createPropertyAccessExpression(left, name);
+  const buildExpr = ([left, name]: Selector): ts.Expression => {
+    return ts.factory.createPropertyAccessExpression(
+      typeof left === "string"
+        ? ts.factory.createIdentifier(left)
+        : buildExpr(left),
+      name
+    );
+  };
+  return buildExpr(createProtoFullName(t, o));
 }
 
 /**
@@ -193,31 +180,57 @@ export function createProtoExpr(
  */
 export function createProtoQualifiedName(
   t: ProtoMessage,
+  o: { importPrefix?: string; useProtobufjs?: boolean }
+): ts.QualifiedName {
+  const buildExpr = ([left, name]: Selector): ts.QualifiedName => {
+    return ts.factory.createQualifiedName(
+      typeof left === "string"
+        ? ts.factory.createIdentifier(left)
+        : buildExpr(left),
+      name
+    );
+  };
+  return buildExpr(createProtoFullName(t, o));
+}
+
+/**
+ * @example js_out
+ * ```
+ * ["_$hello$hello_pb", "User"]
+ * ```
+ *
+ * @example protobufjs
+ * ```
+ * [["_$hello", "hello"], "User"]
+ * ```
+ */
+function createProtoFullName(
+  t: ProtoMessage | ProtoEnum,
   o: { importPrefix?: string; useProtobufjs?: boolean },
   isLeft = false
-): ts.QualifiedName {
-  let left: ts.EntityName;
+): Selector {
+  let left: Selector[0];
   if (t.parent instanceof ProtoFile) {
     if (o.useProtobufjs) {
       const pkgs = t.parent.package.split(".");
-      left = pkgs.reduce<ts.EntityName>(
-        (n, pkg) => ts.factory.createQualifiedName(n, pkg),
-        ts.factory.createIdentifier(uniqueImportAlias(protoImportPath(t, o)))
-      );
-    } else {
-      left = ts.factory.createIdentifier(
+      left = pkgs.reduce<typeof left>(
+        (n, pkg) => [n, pkg],
         uniqueImportAlias(protoImportPath(t, o))
       );
+    } else {
+      left = uniqueImportAlias(protoImportPath(t, o));
     }
   } else {
-    left = createProtoQualifiedName(t.parent, o, true);
+    left = createProtoFullName(t.parent, o, true);
   }
   let name = t.name;
-  if (!isLeft && o.useProtobufjs) {
+  if (!isLeft && t instanceof ProtoMessage && o.useProtobufjs) {
     name = `I${name}`;
   }
-  return ts.factory.createQualifiedName(left, name);
+  return [left, name];
 }
+
+type Selector = [Selector | string, string];
 
 /**
  * @example
