@@ -8,6 +8,7 @@ import {
   isRequiredField,
   onlyNonNull,
 } from "./util";
+import { GenerationParams } from "./types";
 
 /**
  * @example
@@ -19,7 +20,7 @@ import {
  */
 export function createOneofFieldDefinitionStmt(
   oneof: ProtoOneof,
-  opts: { importPrefix?: string; useProtobufjs?: boolean }
+  opts: GenerationParams
 ): ts.Statement {
   return ts.factory.createExpressionStatement(
     ts.factory.createCallExpression(
@@ -50,7 +51,7 @@ export function createOneofFieldDefinitionStmt(
  */
 function createOneofFieldOptionExpr(
   oneof: ProtoOneof,
-  opts: { importPrefix?: string; useProtobufjs?: boolean }
+  opts: GenerationParams
 ): ts.Expression {
   const nullable = !isRequiredField(oneof);
   return ts.factory.createObjectLiteralExpression(
@@ -96,7 +97,7 @@ function createOneofFieldOptionExpr(
 
 function craeteOneofUnionTypeResolveMethodBlock(
   oneof: ProtoOneof,
-  opts: { importPrefix?: string; useProtobufjs?: boolean }
+  opts: GenerationParams
 ) {
   const nullable = !isRequiredField(oneof);
   if (opts.useProtobufjs) {

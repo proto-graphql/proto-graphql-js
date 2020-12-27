@@ -1,6 +1,6 @@
 import ts from "typescript";
 import { ProtoMessage, ProtoOneof, ProtoRegistry } from "../protoTypes";
-import { detectGqlType } from "./types";
+import { detectGqlType, GenerationParams } from "./types";
 import {
   createDslExportConstStmt,
   createProtoExpr,
@@ -21,7 +21,7 @@ import {
 export function createOneofUnionTypeDslStmts(
   msgs: ReadonlyArray<ProtoMessage>,
   reg: ProtoRegistry,
-  opts: { importPrefix?: string; useProtobufjs?: boolean }
+  opts: GenerationParams
 ): ts.Statement[] {
   return msgs
     .flatMap((m) => m.oneofs)
@@ -40,7 +40,7 @@ export function createOneofUnionTypeDslStmts(
 function createOneofUnionTypeDslStmt(
   oneof: ProtoOneof,
   reg: ProtoRegistry,
-  opts: { importPrefix?: string; useProtobufjs?: boolean }
+  opts: GenerationParams
 ): ts.Statement {
   const typeName = gqlTypeName(oneof);
   return createDslExportConstStmt(
@@ -139,7 +139,7 @@ function createOneofUnionTypeDefinitionMethodDecl(
 function createOneofUnionTypeResolveTypeMethodDecl(
   oneof: ProtoOneof,
   reg: ProtoRegistry,
-  opts: { importPrefix?: string; useProtobufjs?: boolean }
+  opts: GenerationParams
 ): ts.MethodDeclaration {
   return ts.factory.createMethodDeclaration(
     undefined,
@@ -178,7 +178,7 @@ function createOneofUnionTypeResolveTypeMethodDecl(
 }
 function craeteOneofUnionTypeResolveTypeMethodStatement(
   t: ProtoMessage,
-  opts: { importPrefix?: string; useProtobufjs?: boolean }
+  opts: GenerationParams
 ) {
   if (opts.useProtobufjs) {
     return ts.factory.createIfStatement(
@@ -222,7 +222,7 @@ function craeteOneofUnionTypeResolveTypeMethodStatement(
  */
 function sourceTypeExpr(
   oneof: ProtoOneof,
-  opts: { importPrefix?: string }
+  opts: GenerationParams
 ): ts.Expression {
   return ts.factory.createObjectLiteralExpression([
     ts.factory.createPropertyAssignment(

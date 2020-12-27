@@ -1,5 +1,6 @@
 import ts from "typescript";
 import { ProtoMessage, ProtoOneof } from "../protoTypes";
+import { GenerationParams } from "./types";
 import {
   createProtoQualifiedName,
   onlyNonNull,
@@ -14,7 +15,7 @@ import {
  */
 export function createReExportProtoStmts(
   types: ReadonlyArray<ProtoMessage>,
-  opts: { importPrefix?: string; useProtobufjs?: boolean }
+  opts: GenerationParams
 ): ts.Statement[] {
   const stmts = types
     .map((t) => createReExportProtoStmt(t, opts))
@@ -44,7 +45,7 @@ export function createReExportProtoStmts(
  */
 function createReExportProtoStmt(
   typ: ProtoMessage,
-  opts: { importPrefix?: string; useProtobufjs?: boolean }
+  opts: GenerationParams
 ): ts.Statement {
   return ts.factory.createTypeAliasDeclaration(
     undefined,
@@ -68,7 +69,7 @@ function createReExportProtoStmt(
  */
 function createReExportOneofUnionSourceStmt(
   o: ProtoOneof,
-  opts: { importPrefix?: string }
+  opts: GenerationParams
 ): ts.Statement {
   return ts.factory.createTypeAliasDeclaration(
     undefined,

@@ -11,10 +11,11 @@ import {
 } from "../protoTypes";
 import * as extensions from "../__generated__/extensions/graphql/schema_pb";
 import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
+import { GenerationParams } from "./types";
 
 export function protoExportAlias(
   t: ProtoMessage | ProtoOneof,
-  o: { importPrefix?: string; useProtobufjs?: boolean }
+  o: GenerationParams
 ): string {
   if (t instanceof ProtoOneof) {
     return uniqueImportAlias(`${protoExportAlias(t.parent, o)}.${t.name}`);
@@ -29,7 +30,7 @@ export function protoExportAlias(
 
 export function protoImportPath(
   t: ProtoMessage | ProtoEnum,
-  o: { importPrefix?: string; useProtobufjs?: boolean }
+  o: GenerationParams
 ) {
   const importPath = o.useProtobufjs
     ? path.dirname(t.file.name)
@@ -154,7 +155,7 @@ export function isEnumValueForUnspecified(ev: ProtoEnumValue): boolean {
  */
 export function createProtoExpr(
   t: ProtoMessage | ProtoEnum,
-  o: { importPrefix?: string; useProtobufjs?: boolean }
+  o: GenerationParams
 ): ts.Expression {
   const buildExpr = ([left, name]: Selector): ts.Expression => {
     return ts.factory.createPropertyAccessExpression(
@@ -180,7 +181,7 @@ export function createProtoExpr(
  */
 export function createProtoQualifiedName(
   t: ProtoMessage,
-  o: { importPrefix?: string; useProtobufjs?: boolean }
+  o: GenerationParams
 ): ts.QualifiedName {
   const buildExpr = ([left, name]: Selector): ts.QualifiedName => {
     return ts.factory.createQualifiedName(
@@ -206,7 +207,7 @@ export function createProtoQualifiedName(
  */
 function createProtoFullName(
   t: ProtoMessage | ProtoEnum,
-  o: { importPrefix?: string; useProtobufjs?: boolean },
+  o: GenerationParams,
   isLeft = false
 ): Selector {
   let left: Selector[0];
