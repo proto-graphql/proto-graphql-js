@@ -158,14 +158,6 @@ function createFieldResolverDecl(
     resolverRet = ts.factory.createNonNullExpression(resolverRet);
   }
 
-  if (opts.useProtobufjs && type.kind === "enum" && type.nullable) {
-    resolverRet = ts.factory.createBinaryExpression(
-      resolverRet,
-      ts.factory.createToken(ts.SyntaxKind.QuestionQuestionToken),
-      ts.factory.createToken(ts.SyntaxKind.NullKeyword)
-    );
-  }
-
   const unwrapFunc = getUnwrapFunc(field, opts);
   if (unwrapFunc !== null) {
     resolverRet = ts.factory.createCallExpression(
