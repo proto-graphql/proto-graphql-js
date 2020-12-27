@@ -1,9 +1,15 @@
 import ts from "typescript";
-import { ProtoField, ProtoRegistry } from "../protoTypes";
+import { ProtoEnum, ProtoField, ProtoRegistry } from "../protoTypes";
 import { detectGqlType, GqlType } from "./types";
 import { getUnwrapFunc } from "./unwrap";
 import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
-import { createDeprecationPropertyAssignment, onlyNonNull } from "./util";
+import {
+  createDeprecationPropertyAssignment,
+  createProtoExpr,
+  getEnumValueForUnspecified,
+  gqlTypeName,
+  onlyNonNull,
+} from "./util";
 import { camelCase } from "change-case";
 
 /**
@@ -17,7 +23,7 @@ import { camelCase } from "change-case";
 export function createFieldDefinitionStmt(
   field: ProtoField,
   registry: ProtoRegistry,
-  opts?: { input?: boolean; useProtobufjs?: boolean }
+  opts?: { input?: boolean; importPrefix?: string; useProtobufjs?: boolean }
 ): ts.Statement {
   const type = detectGqlType(field, registry, opts);
   return ts.factory.createExpressionStatement(
@@ -49,7 +55,7 @@ export function createFieldDefinitionStmt(
 function createFieldOptionExpr(
   field: ProtoField,
   type: GqlType,
-  opts?: { input?: boolean; useProtobufjs?: boolean }
+  opts?: { input?: boolean; importPrefix?: string; useProtobufjs?: boolean }
 ): ts.Expression {
   const createTypeSpecifier = (type: GqlType): ts.Expression => {
     switch (type.kind) {
@@ -84,6 +90,7 @@ function createFieldOptionExpr(
       opts?.input
         ? null
         : createFieldResolverDecl(field, type, {
+            importPrefix: opts?.importPrefix,
             useProtobufjs: opts?.useProtobufjs,
           }),
     ].filter(onlyNonNull()),
@@ -94,8 +101,32 @@ function createFieldOptionExpr(
 function createFieldResolverDecl(
   field: ProtoField,
   type: GqlType,
-  opts: { useProtobufjs?: boolean }
+  opts: { importPrefix?: string; useProtobufjs?: boolean }
 ): ts.MethodDeclaration {
+  if (field.type instanceof ProtoEnum) {
+    return ts.factory.createMethodDeclaration(
+      undefined,
+      undefined,
+      undefined,
+      "resolve",
+      undefined,
+      undefined,
+      [
+        ts.factory.createParameterDeclaration(
+          undefined,
+          undefined,
+          undefined,
+          "root",
+          undefined,
+          undefined,
+          undefined
+        ),
+      ],
+      undefined,
+      createFieldResolverBlockForEnum(field, type, field.type, opts)
+    );
+  }
+
   let resolverRet: ts.Expression = ts.factory.createPropertyAccessExpression(
     ts.factory.createIdentifier("root"),
     ts.factory.createIdentifier(
@@ -201,5 +232,87 @@ function createFieldResolverDecl(
     ],
     undefined,
     ts.factory.createBlock([ts.factory.createReturnStatement(resolverRet)])
+  );
+}
+
+/**
+ * @example nullable
+ * ```ts
+ * if (!root.myEnum || root.myEnum === _$enums.myEnum.MY_ENUM_UNSPECIFIED) {
+ *   return null
+ * }
+ * return root.myEnum
+ * ```
+ * @example notNull
+ * ```ts
+ * if (!root.myEnum || root.myEnum === _$enums.myEnum.MY_ENUM_UNSPECIFIED) {
+ *   throw new Error("Message.field is required field. but got null or unspecified.")
+ * }
+ * return root.myEnum
+ * ```
+ */
+function createFieldResolverBlockForEnum(
+  field: ProtoField,
+  type: GqlType,
+  en: ProtoEnum,
+  opts: { importPrefix?: string; useProtobufjs?: boolean }
+): ts.Block {
+  const value = ts.factory.createPropertyAccessExpression(
+    ts.factory.createIdentifier("root"),
+    ts.factory.createIdentifier(
+      opts.useProtobufjs
+        ? camelCase(field.descriptor.getName()!)
+        : field.getterName
+    )
+  );
+  let whenNullStmt: ts.Statement = type.nullable
+    ? ts.factory.createReturnStatement(
+        ts.factory.createToken(ts.SyntaxKind.NullKeyword)
+      )
+    : ts.factory.createThrowStatement(
+        ts.factory.createNewExpression(
+          ts.factory.createIdentifier("Error"),
+          undefined,
+          [
+            ts.factory.createStringLiteral(
+              `${gqlTypeName(field.parent)}.${
+                field.name
+              } is required field. But got null or unspecified.`
+            ),
+          ]
+        )
+      );
+  whenNullStmt = ts.factory.createBlock(
+    [whenNullStmt],
+    true // multiline
+  );
+  const unspecified = getEnumValueForUnspecified(en);
+
+  return ts.factory.createBlock(
+    [
+      ts.factory.createIfStatement(
+        ts.factory.createBinaryExpression(
+          value,
+          ts.SyntaxKind.EqualsEqualsToken,
+          ts.factory.createToken(ts.SyntaxKind.NullKeyword)
+        ),
+        whenNullStmt
+      ),
+      unspecified
+        ? ts.factory.createIfStatement(
+            ts.factory.createBinaryExpression(
+              value,
+              ts.SyntaxKind.EqualsEqualsEqualsToken,
+              ts.factory.createPropertyAccessExpression(
+                createProtoExpr(field.type!, opts),
+                ts.factory.createIdentifier(unspecified.name)
+              )
+            ),
+            whenNullStmt
+          )
+        : null,
+      ts.factory.createReturnStatement(value),
+    ].filter(onlyNonNull()),
+    true // multiline
   );
 }

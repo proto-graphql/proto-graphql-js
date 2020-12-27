@@ -1,6 +1,6 @@
 import path from "path";
 import ts from "typescript";
-import { pascalCase } from "change-case";
+import { constantCase, pascalCase } from "change-case";
 import {
   ProtoEnum,
   ProtoEnumValue,
@@ -28,10 +28,12 @@ export function protoExportAlias(
 }
 
 export function protoImportPath(
-  t: ProtoMessage,
+  t: ProtoMessage | ProtoEnum,
   o: { importPrefix?: string; useProtobufjs?: boolean }
 ) {
-  const importPath = o.useProtobufjs ? path.dirname(t.file.name) : t.importPath;
+  const importPath = o.useProtobufjs
+    ? path.dirname(t.file.name)
+    : t.file.importPath;
   return `${o.importPrefix ? `${o.importPrefix}/` : "./"}${importPath}`;
 }
 
@@ -126,6 +128,24 @@ function extractBehaviorComments(
     );
 }
 
+export function getEnumValueForUnspecified(
+  en: ProtoEnum
+): ProtoEnumValue | null {
+  return (
+    en.values.find(
+      (ev) =>
+        ev.index === 0 &&
+        ev.name === `${constantCase(ev.parent.name)}_UNSPECIFIED`
+    ) ?? null
+  );
+}
+
+export function isEnumValueForUnspecified(ev: ProtoEnumValue): boolean {
+  return (
+    ev.index === 0 && ev.name === `${constantCase(ev.parent.name)}_UNSPECIFIED`
+  );
+}
+
 /**
  * @example
  * ```
@@ -133,20 +153,31 @@ function extractBehaviorComments(
  * ```
  */
 export function createProtoExpr(
-  t: ProtoMessage,
-  o: { importPrefix?: string; useProtobufjs?: boolean }
+  t: ProtoMessage | ProtoEnum,
+  o: { importPrefix?: string; useProtobufjs?: boolean },
+  isLeft = false
 ): ts.Expression {
-  if (o.useProtobufjs) throw "not used";
-
   let left: ts.Expression;
   if (t.parent instanceof ProtoFile) {
-    left = ts.factory.createIdentifier(
-      uniqueImportAlias(protoImportPath(t, o))
-    );
+    if (o.useProtobufjs) {
+      const pkgs = t.parent.package.split(".");
+      left = pkgs.reduce<ts.Expression>(
+        (n, pkg) => ts.factory.createPropertyAccessExpression(n, pkg),
+        ts.factory.createIdentifier(uniqueImportAlias(protoImportPath(t, o)))
+      );
+    } else {
+      left = ts.factory.createIdentifier(
+        uniqueImportAlias(protoImportPath(t, o))
+      );
+    }
   } else {
-    left = createProtoExpr(t.parent, o);
+    left = createProtoExpr(t.parent, o, true);
   }
-  return ts.factory.createPropertyAccessExpression(left, t.name);
+  let name = t.name;
+  if (!isLeft && t instanceof ProtoMessage && o.useProtobufjs) {
+    name = `I${name}`;
+  }
+  return ts.factory.createPropertyAccessExpression(left, name);
 }
 
 /**
