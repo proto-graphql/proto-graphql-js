@@ -17,7 +17,15 @@ export const TestPrefixPrefixedMessage = objectType({
         t.field("prefixedEnum", {
             type: nullable("TestPrefixPrefixedEnum"),
             description: "",
-            resolve(root) { return root.prefixedEnum ?? null; }
+            resolve(root) {
+                if (root.prefixedEnum == null) {
+                    return null;
+                }
+                if (root.prefixedEnum === $$testapis$node$lib$testapis$extensions.testapis.extensions.PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
+                    return null;
+                }
+                return root.prefixedEnum;
+            }
         });
     },
     sourceType: { module: __filename, export: "$$testapis$node$lib$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessage" }
@@ -62,10 +70,6 @@ export const TestPrefixPrefixedEnum = enumType({
     name: "TestPrefixPrefixedEnum",
     description: "",
     members: [
-        {
-            name: "PREFIXED_ENUM_UNSPECIFIED",
-            value: 0
-        },
         {
             name: "PREFIXED_FOO",
             value: 1

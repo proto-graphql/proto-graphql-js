@@ -78,7 +78,10 @@ export interface NexusGenInputs {
     uint64Value?: string | null; // String
   }
   MessageWithEnumsInput: { // input type
-    myEnum1?: NexusGenEnums['MyEnum1'] | null; // MyEnum1
+    optionalMyEnum?: NexusGenEnums['MyEnum'] | null; // MyEnum
+    optionalMyEnumWithoutUnspecified?: NexusGenEnums['MyEnumWithoutUnspecified'] | null; // MyEnumWithoutUnspecified
+    requiredMyEnum: NexusGenEnums['MyEnum']; // MyEnum!
+    requiredMyEnumWithoutUnspecified: NexusGenEnums['MyEnumWithoutUnspecified']; // MyEnumWithoutUnspecified!
   }
   NotDeprecatedMessageInnerMessage1Input: { // input type
     body: string; // String!
@@ -141,12 +144,13 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
-  DeprecatedEnum: 1 | 0 | 2
-  DeprecatedFileEnum: 2 | 0 | 1
-  MyEnum1: 2 | 3 | 1 | 0
-  NotDeprecatedEnum: 2 | 0 | 1
-  ParentMessageNestedEnum: 2 | 1 | 0
-  TestPrefixPrefixedEnum: 2 | 0 | 1
+  DeprecatedEnum: 1 | 2
+  DeprecatedFileEnum: 2 | 1
+  MyEnum: 2 | 3 | 1
+  MyEnumWithoutUnspecified: 1 | 2 | 0
+  NotDeprecatedEnum: 2 | 1
+  ParentMessageNestedEnum: 2 | 1
+  TestPrefixPrefixedEnum: 2 | 1
 }
 
 export interface NexusGenScalars {
@@ -238,7 +242,10 @@ export interface NexusGenFieldTypes {
     uint64Value: string | null; // String
   }
   MessageWithEnums: { // field return type
-    myEnum1: NexusGenEnums['MyEnum1'] | null; // MyEnum1
+    optionalMyEnum: NexusGenEnums['MyEnum'] | null; // MyEnum
+    optionalMyEnumWithoutUnspecified: NexusGenEnums['MyEnumWithoutUnspecified'] | null; // MyEnumWithoutUnspecified
+    requiredMyEnum: NexusGenEnums['MyEnum']; // MyEnum!
+    requiredMyEnumWithoutUnspecified: NexusGenEnums['MyEnumWithoutUnspecified']; // MyEnumWithoutUnspecified!
   }
   NotDeprecatedMessage: { // field return type
     body: string; // String!
@@ -341,7 +348,10 @@ export interface NexusGenFieldTypeNames {
     uint64Value: 'String'
   }
   MessageWithEnums: { // field return type name
-    myEnum1: 'MyEnum1'
+    optionalMyEnum: 'MyEnum'
+    optionalMyEnumWithoutUnspecified: 'MyEnumWithoutUnspecified'
+    requiredMyEnum: 'MyEnum'
+    requiredMyEnumWithoutUnspecified: 'MyEnumWithoutUnspecified'
   }
   NotDeprecatedMessage: { // field return type name
     body: 'String'

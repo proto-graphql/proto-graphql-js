@@ -204,10 +204,6 @@ export class ProtoMessage {
     return this.comments?.leadingComments || "";
   }
 
-  get importPath(): string {
-    return this.file.importPath;
-  }
-
   get comments(): Comments {
     return this.file.findComments(this);
   }

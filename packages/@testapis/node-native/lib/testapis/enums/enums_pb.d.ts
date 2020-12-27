@@ -4,8 +4,17 @@
 import * as jspb from "google-protobuf";
 
 export class MessageWithEnums extends jspb.Message {
-  getMyEnum1(): MyEnum1Map[keyof MyEnum1Map];
-  setMyEnum1(value: MyEnum1Map[keyof MyEnum1Map]): void;
+  getRequiredMyEnum(): MyEnumMap[keyof MyEnumMap];
+  setRequiredMyEnum(value: MyEnumMap[keyof MyEnumMap]): void;
+
+  getOptionalMyEnum(): MyEnumMap[keyof MyEnumMap];
+  setOptionalMyEnum(value: MyEnumMap[keyof MyEnumMap]): void;
+
+  getRequiredMyEnumWithoutUnspecified(): MyEnumWithoutUnspecifiedMap[keyof MyEnumWithoutUnspecifiedMap];
+  setRequiredMyEnumWithoutUnspecified(value: MyEnumWithoutUnspecifiedMap[keyof MyEnumWithoutUnspecifiedMap]): void;
+
+  getOptionalMyEnumWithoutUnspecified(): MyEnumWithoutUnspecifiedMap[keyof MyEnumWithoutUnspecifiedMap];
+  setOptionalMyEnumWithoutUnspecified(value: MyEnumWithoutUnspecifiedMap[keyof MyEnumWithoutUnspecifiedMap]): void;
 
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): MessageWithEnums.AsObject;
@@ -19,16 +28,27 @@ export class MessageWithEnums extends jspb.Message {
 
 export namespace MessageWithEnums {
   export type AsObject = {
-    myEnum1: MyEnum1Map[keyof MyEnum1Map],
+    requiredMyEnum: MyEnumMap[keyof MyEnumMap],
+    optionalMyEnum: MyEnumMap[keyof MyEnumMap],
+    requiredMyEnumWithoutUnspecified: MyEnumWithoutUnspecifiedMap[keyof MyEnumWithoutUnspecifiedMap],
+    optionalMyEnumWithoutUnspecified: MyEnumWithoutUnspecifiedMap[keyof MyEnumWithoutUnspecifiedMap],
   }
 }
 
-export interface MyEnum1Map {
-  MY_ENUM_1_UNSPECIRED: 0;
-  FOO: 1;
-  BAR: 2;
-  BAZ: 3;
+export interface MyEnumMap {
+  MY_ENUM_UNSPECIFIED: 0;
+  MY_ENUM_FOO: 1;
+  MY_ENUM_BAR: 2;
+  MY_ENUM_BAZ: 3;
 }
 
-export const MyEnum1: MyEnum1Map;
+export const MyEnum: MyEnumMap;
+
+export interface MyEnumWithoutUnspecifiedMap {
+  MY_ENUM_WITHOUT_UNSPECIFIED_FOO: 0;
+  MY_ENUM_WITHOUT_UNSPECIFIED_BAR: 1;
+  MY_ENUM_WITHOUT_UNSPECIFIED_BAZ: 2;
+}
+
+export const MyEnumWithoutUnspecified: MyEnumWithoutUnspecifiedMap;
 

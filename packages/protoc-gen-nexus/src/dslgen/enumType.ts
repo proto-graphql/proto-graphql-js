@@ -4,6 +4,7 @@ import {
   createDeprecationPropertyAssignment,
   createDslExportConstStmt,
   gqlTypeName,
+  isEnumValueForUnspecified,
   onlyNonNull,
 } from "./util";
 
@@ -52,7 +53,9 @@ function createEnumTypeDslStmt(en: ProtoEnum): ts.Statement {
             ts.factory.createPropertyAssignment(
               "members",
               ts.factory.createArrayLiteralExpression(
-                en.values.map(createEnumValueExpr),
+                en.values
+                  .filter((ev) => !isEnumValueForUnspecified(ev))
+                  .map(createEnumValueExpr),
                 true // multiline
               )
             ),

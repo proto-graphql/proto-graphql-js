@@ -22,7 +22,15 @@ export const ParentMessage = objectType({
         t.field("nestedEnum", {
             type: nullable("ParentMessageNestedEnum"),
             description: "",
-            resolve(root) { return root.getNestedEnum(); }
+            resolve(root) {
+                if (root.getNestedEnum == null) {
+                    return null;
+                }
+                if (root.getNestedEnum === $$testapis$node_native$lib$testapis$nested$nested_pb.ParentMessage.NestedEnum.NESTED_ENUM_UNSPECIFIED) {
+                    return null;
+                }
+                return root.getNestedEnum;
+            }
         });
     },
     sourceType: { module: __filename, export: "$$testapis$node_native$lib$testapis$nested$nested_pb$ParentMessage" }
@@ -71,10 +79,6 @@ export const ParentMessageNestedEnum = enumType({
     name: "ParentMessageNestedEnum",
     description: "",
     members: [
-        {
-            name: "NESTED_ENUM_UNSPECIFIED",
-            value: 0
-        },
         {
             name: "FOO",
             value: 1

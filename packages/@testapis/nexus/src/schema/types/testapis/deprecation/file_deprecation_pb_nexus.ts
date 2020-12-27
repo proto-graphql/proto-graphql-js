@@ -19,7 +19,15 @@ export const DeprecatedFileMessage = objectType({
             type: nullable("DeprecatedFileEnum"),
             description: "",
             deprecation: "testapis/deprecation/file_deprecation.proto is mark as deprecated.",
-            resolve(root) { return root.enum ?? null; }
+            resolve(root) {
+                if (root.enum == null) {
+                    return null;
+                }
+                if (root.enum === $$testapis$node$lib$testapis$deprecation.testapis.deprecation.DeprecatedFileEnum.DEPRECATED_FILE_ENUM_UNSPECIFIED) {
+                    return null;
+                }
+                return root.enum;
+            }
         });
     },
     sourceType: { module: __filename, export: "$$testapis$node$lib$testapis$deprecation$testapis$deprecation$DeprecatedFileMessage" }
@@ -68,11 +76,6 @@ export const DeprecatedFileEnum = enumType({
     name: "DeprecatedFileEnum",
     description: "",
     members: [
-        {
-            name: "DEPRECATED_FILE_ENUM_UNSPECIFIED",
-            deprecation: "testapis/deprecation/file_deprecation.proto is mark as deprecated.",
-            value: 0
-        },
         {
             name: "DEPRECATED_FILE_FOO",
             deprecation: "testapis/deprecation/file_deprecation.proto is mark as deprecated.",

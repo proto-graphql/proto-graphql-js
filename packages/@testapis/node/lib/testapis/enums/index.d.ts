@@ -8,8 +8,17 @@ export namespace testapi {
         /** Properties of a MessageWithEnums. */
         interface IMessageWithEnums {
 
-            /** MessageWithEnums myEnum_1 */
-            myEnum_1?: (testapi.enums.MyEnum1|null);
+            /** MessageWithEnums requiredMyEnum */
+            requiredMyEnum?: (testapi.enums.MyEnum|null);
+
+            /** MessageWithEnums optionalMyEnum */
+            optionalMyEnum?: (testapi.enums.MyEnum|null);
+
+            /** MessageWithEnums requiredMyEnumWithoutUnspecified */
+            requiredMyEnumWithoutUnspecified?: (testapi.enums.MyEnumWithoutUnspecified|null);
+
+            /** MessageWithEnums optionalMyEnumWithoutUnspecified */
+            optionalMyEnumWithoutUnspecified?: (testapi.enums.MyEnumWithoutUnspecified|null);
         }
 
         /** Represents a MessageWithEnums. */
@@ -21,8 +30,17 @@ export namespace testapi {
              */
             constructor(properties?: testapi.enums.IMessageWithEnums);
 
-            /** MessageWithEnums myEnum_1. */
-            public myEnum_1: testapi.enums.MyEnum1;
+            /** MessageWithEnums requiredMyEnum. */
+            public requiredMyEnum: testapi.enums.MyEnum;
+
+            /** MessageWithEnums optionalMyEnum. */
+            public optionalMyEnum: testapi.enums.MyEnum;
+
+            /** MessageWithEnums requiredMyEnumWithoutUnspecified. */
+            public requiredMyEnumWithoutUnspecified: testapi.enums.MyEnumWithoutUnspecified;
+
+            /** MessageWithEnums optionalMyEnumWithoutUnspecified. */
+            public optionalMyEnumWithoutUnspecified: testapi.enums.MyEnumWithoutUnspecified;
 
             /**
              * Creates a new MessageWithEnums instance using the specified properties.
@@ -95,12 +113,19 @@ export namespace testapi {
             public toJSON(): { [k: string]: any };
         }
 
-        /** MyEnum1 enum. */
-        enum MyEnum1 {
-            MY_ENUM_1_UNSPECIRED = 0,
-            FOO = 1,
-            BAR = 2,
-            BAZ = 3
+        /** MyEnum enum. */
+        enum MyEnum {
+            MY_ENUM_UNSPECIFIED = 0,
+            MY_ENUM_FOO = 1,
+            MY_ENUM_BAR = 2,
+            MY_ENUM_BAZ = 3
+        }
+
+        /** MyEnumWithoutUnspecified enum. */
+        enum MyEnumWithoutUnspecified {
+            MY_ENUM_WITHOUT_UNSPECIFIED_FOO = 0,
+            MY_ENUM_WITHOUT_UNSPECIFIED_BAR = 1,
+            MY_ENUM_WITHOUT_UNSPECIFIED_BAZ = 2
         }
     }
 }

@@ -33,7 +33,10 @@ $root.testapi = (function() {
              * Properties of a MessageWithEnums.
              * @memberof testapi.enums
              * @interface IMessageWithEnums
-             * @property {testapi.enums.MyEnum1|null} [myEnum_1] MessageWithEnums myEnum_1
+             * @property {testapi.enums.MyEnum|null} [requiredMyEnum] MessageWithEnums requiredMyEnum
+             * @property {testapi.enums.MyEnum|null} [optionalMyEnum] MessageWithEnums optionalMyEnum
+             * @property {testapi.enums.MyEnumWithoutUnspecified|null} [requiredMyEnumWithoutUnspecified] MessageWithEnums requiredMyEnumWithoutUnspecified
+             * @property {testapi.enums.MyEnumWithoutUnspecified|null} [optionalMyEnumWithoutUnspecified] MessageWithEnums optionalMyEnumWithoutUnspecified
              */
 
             /**
@@ -52,12 +55,36 @@ $root.testapi = (function() {
             }
 
             /**
-             * MessageWithEnums myEnum_1.
-             * @member {testapi.enums.MyEnum1} myEnum_1
+             * MessageWithEnums requiredMyEnum.
+             * @member {testapi.enums.MyEnum} requiredMyEnum
              * @memberof testapi.enums.MessageWithEnums
              * @instance
              */
-            MessageWithEnums.prototype.myEnum_1 = 0;
+            MessageWithEnums.prototype.requiredMyEnum = 0;
+
+            /**
+             * MessageWithEnums optionalMyEnum.
+             * @member {testapi.enums.MyEnum} optionalMyEnum
+             * @memberof testapi.enums.MessageWithEnums
+             * @instance
+             */
+            MessageWithEnums.prototype.optionalMyEnum = 0;
+
+            /**
+             * MessageWithEnums requiredMyEnumWithoutUnspecified.
+             * @member {testapi.enums.MyEnumWithoutUnspecified} requiredMyEnumWithoutUnspecified
+             * @memberof testapi.enums.MessageWithEnums
+             * @instance
+             */
+            MessageWithEnums.prototype.requiredMyEnumWithoutUnspecified = 0;
+
+            /**
+             * MessageWithEnums optionalMyEnumWithoutUnspecified.
+             * @member {testapi.enums.MyEnumWithoutUnspecified} optionalMyEnumWithoutUnspecified
+             * @memberof testapi.enums.MessageWithEnums
+             * @instance
+             */
+            MessageWithEnums.prototype.optionalMyEnumWithoutUnspecified = 0;
 
             /**
              * Creates a new MessageWithEnums instance using the specified properties.
@@ -83,8 +110,14 @@ $root.testapi = (function() {
             MessageWithEnums.encode = function encode(message, writer) {
                 if (!writer)
                     writer = $Writer.create();
-                if (message.myEnum_1 != null && Object.hasOwnProperty.call(message, "myEnum_1"))
-                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.myEnum_1);
+                if (message.requiredMyEnum != null && Object.hasOwnProperty.call(message, "requiredMyEnum"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.requiredMyEnum);
+                if (message.optionalMyEnum != null && Object.hasOwnProperty.call(message, "optionalMyEnum"))
+                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.optionalMyEnum);
+                if (message.requiredMyEnumWithoutUnspecified != null && Object.hasOwnProperty.call(message, "requiredMyEnumWithoutUnspecified"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.requiredMyEnumWithoutUnspecified);
+                if (message.optionalMyEnumWithoutUnspecified != null && Object.hasOwnProperty.call(message, "optionalMyEnumWithoutUnspecified"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).int32(message.optionalMyEnumWithoutUnspecified);
                 return writer;
             };
 
@@ -120,7 +153,16 @@ $root.testapi = (function() {
                     var tag = reader.uint32();
                     switch (tag >>> 3) {
                     case 1:
-                        message.myEnum_1 = reader.int32();
+                        message.requiredMyEnum = reader.int32();
+                        break;
+                    case 2:
+                        message.optionalMyEnum = reader.int32();
+                        break;
+                    case 3:
+                        message.requiredMyEnumWithoutUnspecified = reader.int32();
+                        break;
+                    case 4:
+                        message.optionalMyEnumWithoutUnspecified = reader.int32();
                         break;
                     default:
                         reader.skipType(tag & 7);
@@ -157,14 +199,42 @@ $root.testapi = (function() {
             MessageWithEnums.verify = function verify(message) {
                 if (typeof message !== "object" || message === null)
                     return "object expected";
-                if (message.myEnum_1 != null && message.hasOwnProperty("myEnum_1"))
-                    switch (message.myEnum_1) {
+                if (message.requiredMyEnum != null && message.hasOwnProperty("requiredMyEnum"))
+                    switch (message.requiredMyEnum) {
                     default:
-                        return "myEnum_1: enum value expected";
+                        return "requiredMyEnum: enum value expected";
                     case 0:
                     case 1:
                     case 2:
                     case 3:
+                        break;
+                    }
+                if (message.optionalMyEnum != null && message.hasOwnProperty("optionalMyEnum"))
+                    switch (message.optionalMyEnum) {
+                    default:
+                        return "optionalMyEnum: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                        break;
+                    }
+                if (message.requiredMyEnumWithoutUnspecified != null && message.hasOwnProperty("requiredMyEnumWithoutUnspecified"))
+                    switch (message.requiredMyEnumWithoutUnspecified) {
+                    default:
+                        return "requiredMyEnumWithoutUnspecified: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                        break;
+                    }
+                if (message.optionalMyEnumWithoutUnspecified != null && message.hasOwnProperty("optionalMyEnumWithoutUnspecified"))
+                    switch (message.optionalMyEnumWithoutUnspecified) {
+                    default:
+                        return "optionalMyEnumWithoutUnspecified: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
                         break;
                     }
                 return null;
@@ -182,22 +252,68 @@ $root.testapi = (function() {
                 if (object instanceof $root.testapi.enums.MessageWithEnums)
                     return object;
                 var message = new $root.testapi.enums.MessageWithEnums();
-                switch (object.myEnum_1) {
-                case "MY_ENUM_1_UNSPECIRED":
+                switch (object.requiredMyEnum) {
+                case "MY_ENUM_UNSPECIFIED":
                 case 0:
-                    message.myEnum_1 = 0;
+                    message.requiredMyEnum = 0;
                     break;
-                case "FOO":
+                case "MY_ENUM_FOO":
                 case 1:
-                    message.myEnum_1 = 1;
+                    message.requiredMyEnum = 1;
                     break;
-                case "BAR":
+                case "MY_ENUM_BAR":
                 case 2:
-                    message.myEnum_1 = 2;
+                    message.requiredMyEnum = 2;
                     break;
-                case "BAZ":
+                case "MY_ENUM_BAZ":
                 case 3:
-                    message.myEnum_1 = 3;
+                    message.requiredMyEnum = 3;
+                    break;
+                }
+                switch (object.optionalMyEnum) {
+                case "MY_ENUM_UNSPECIFIED":
+                case 0:
+                    message.optionalMyEnum = 0;
+                    break;
+                case "MY_ENUM_FOO":
+                case 1:
+                    message.optionalMyEnum = 1;
+                    break;
+                case "MY_ENUM_BAR":
+                case 2:
+                    message.optionalMyEnum = 2;
+                    break;
+                case "MY_ENUM_BAZ":
+                case 3:
+                    message.optionalMyEnum = 3;
+                    break;
+                }
+                switch (object.requiredMyEnumWithoutUnspecified) {
+                case "MY_ENUM_WITHOUT_UNSPECIFIED_FOO":
+                case 0:
+                    message.requiredMyEnumWithoutUnspecified = 0;
+                    break;
+                case "MY_ENUM_WITHOUT_UNSPECIFIED_BAR":
+                case 1:
+                    message.requiredMyEnumWithoutUnspecified = 1;
+                    break;
+                case "MY_ENUM_WITHOUT_UNSPECIFIED_BAZ":
+                case 2:
+                    message.requiredMyEnumWithoutUnspecified = 2;
+                    break;
+                }
+                switch (object.optionalMyEnumWithoutUnspecified) {
+                case "MY_ENUM_WITHOUT_UNSPECIFIED_FOO":
+                case 0:
+                    message.optionalMyEnumWithoutUnspecified = 0;
+                    break;
+                case "MY_ENUM_WITHOUT_UNSPECIFIED_BAR":
+                case 1:
+                    message.optionalMyEnumWithoutUnspecified = 1;
+                    break;
+                case "MY_ENUM_WITHOUT_UNSPECIFIED_BAZ":
+                case 2:
+                    message.optionalMyEnumWithoutUnspecified = 2;
                     break;
                 }
                 return message;
@@ -216,10 +332,20 @@ $root.testapi = (function() {
                 if (!options)
                     options = {};
                 var object = {};
-                if (options.defaults)
-                    object.myEnum_1 = options.enums === String ? "MY_ENUM_1_UNSPECIRED" : 0;
-                if (message.myEnum_1 != null && message.hasOwnProperty("myEnum_1"))
-                    object.myEnum_1 = options.enums === String ? $root.testapi.enums.MyEnum1[message.myEnum_1] : message.myEnum_1;
+                if (options.defaults) {
+                    object.requiredMyEnum = options.enums === String ? "MY_ENUM_UNSPECIFIED" : 0;
+                    object.optionalMyEnum = options.enums === String ? "MY_ENUM_UNSPECIFIED" : 0;
+                    object.requiredMyEnumWithoutUnspecified = options.enums === String ? "MY_ENUM_WITHOUT_UNSPECIFIED_FOO" : 0;
+                    object.optionalMyEnumWithoutUnspecified = options.enums === String ? "MY_ENUM_WITHOUT_UNSPECIFIED_FOO" : 0;
+                }
+                if (message.requiredMyEnum != null && message.hasOwnProperty("requiredMyEnum"))
+                    object.requiredMyEnum = options.enums === String ? $root.testapi.enums.MyEnum[message.requiredMyEnum] : message.requiredMyEnum;
+                if (message.optionalMyEnum != null && message.hasOwnProperty("optionalMyEnum"))
+                    object.optionalMyEnum = options.enums === String ? $root.testapi.enums.MyEnum[message.optionalMyEnum] : message.optionalMyEnum;
+                if (message.requiredMyEnumWithoutUnspecified != null && message.hasOwnProperty("requiredMyEnumWithoutUnspecified"))
+                    object.requiredMyEnumWithoutUnspecified = options.enums === String ? $root.testapi.enums.MyEnumWithoutUnspecified[message.requiredMyEnumWithoutUnspecified] : message.requiredMyEnumWithoutUnspecified;
+                if (message.optionalMyEnumWithoutUnspecified != null && message.hasOwnProperty("optionalMyEnumWithoutUnspecified"))
+                    object.optionalMyEnumWithoutUnspecified = options.enums === String ? $root.testapi.enums.MyEnumWithoutUnspecified[message.optionalMyEnumWithoutUnspecified] : message.optionalMyEnumWithoutUnspecified;
                 return object;
             };
 
@@ -238,20 +364,36 @@ $root.testapi = (function() {
         })();
 
         /**
-         * MyEnum1 enum.
-         * @name testapi.enums.MyEnum1
+         * MyEnum enum.
+         * @name testapi.enums.MyEnum
          * @enum {number}
-         * @property {number} MY_ENUM_1_UNSPECIRED=0 MY_ENUM_1_UNSPECIRED value
-         * @property {number} FOO=1 FOO value
-         * @property {number} BAR=2 BAR value
-         * @property {number} BAZ=3 BAZ value
+         * @property {number} MY_ENUM_UNSPECIFIED=0 MY_ENUM_UNSPECIFIED value
+         * @property {number} MY_ENUM_FOO=1 MY_ENUM_FOO value
+         * @property {number} MY_ENUM_BAR=2 MY_ENUM_BAR value
+         * @property {number} MY_ENUM_BAZ=3 MY_ENUM_BAZ value
          */
-        enums.MyEnum1 = (function() {
+        enums.MyEnum = (function() {
             var valuesById = {}, values = Object.create(valuesById);
-            values[valuesById[0] = "MY_ENUM_1_UNSPECIRED"] = 0;
-            values[valuesById[1] = "FOO"] = 1;
-            values[valuesById[2] = "BAR"] = 2;
-            values[valuesById[3] = "BAZ"] = 3;
+            values[valuesById[0] = "MY_ENUM_UNSPECIFIED"] = 0;
+            values[valuesById[1] = "MY_ENUM_FOO"] = 1;
+            values[valuesById[2] = "MY_ENUM_BAR"] = 2;
+            values[valuesById[3] = "MY_ENUM_BAZ"] = 3;
+            return values;
+        })();
+
+        /**
+         * MyEnumWithoutUnspecified enum.
+         * @name testapi.enums.MyEnumWithoutUnspecified
+         * @enum {number}
+         * @property {number} MY_ENUM_WITHOUT_UNSPECIFIED_FOO=0 MY_ENUM_WITHOUT_UNSPECIFIED_FOO value
+         * @property {number} MY_ENUM_WITHOUT_UNSPECIFIED_BAR=1 MY_ENUM_WITHOUT_UNSPECIFIED_BAR value
+         * @property {number} MY_ENUM_WITHOUT_UNSPECIFIED_BAZ=2 MY_ENUM_WITHOUT_UNSPECIFIED_BAZ value
+         */
+        enums.MyEnumWithoutUnspecified = (function() {
+            var valuesById = {}, values = Object.create(valuesById);
+            values[valuesById[0] = "MY_ENUM_WITHOUT_UNSPECIFIED_FOO"] = 0;
+            values[valuesById[1] = "MY_ENUM_WITHOUT_UNSPECIFIED_BAR"] = 1;
+            values[valuesById[2] = "MY_ENUM_WITHOUT_UNSPECIFIED_BAZ"] = 2;
             return values;
         })();
 

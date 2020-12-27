@@ -66,7 +66,15 @@ export const DeprecatedMessage = objectType({
             type: nullable("NotDeprecatedEnum"),
             description: "",
             deprecation: "testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.",
-            resolve(root) { return root.enum ?? null; }
+            resolve(root) {
+                if (root.enum == null) {
+                    return null;
+                }
+                if (root.enum === $$testapis$node$lib$testapis$deprecation.testapis.deprecation.NotDeprecatedEnum.NOT_DEPRECATED_ENUM_UNSPECIFIED) {
+                    return null;
+                }
+                return root.enum;
+            }
         });
     },
     sourceType: { module: __filename, export: "$$testapis$node$lib$testapis$deprecation$testapis$deprecation$DeprecatedMessage" }
@@ -85,7 +93,15 @@ export const NotDeprecatedMessage = objectType({
             type: nullable("DeprecatedEnum"),
             description: "",
             deprecation: "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
-            resolve(root) { return root.enum ?? null; }
+            resolve(root) {
+                if (root.enum == null) {
+                    return null;
+                }
+                if (root.enum === $$testapis$node$lib$testapis$deprecation.testapis.deprecation.DeprecatedEnum.DEPRECATED_ENUM_UNSPECIFIED) {
+                    return null;
+                }
+                return root.enum;
+            }
         });
         t.field("not_deprecated_oneof", {
             type: nullable("NotDeprecatedMessageNotDeprecatedOneof"),
@@ -241,10 +257,6 @@ export const NotDeprecatedEnum = enumType({
     description: "",
     members: [
         {
-            name: "NOT_DEPRECATED_ENUM_UNSPECIFIED",
-            value: 0
-        },
-        {
             name: "NOT_DEPRECATED_FOO",
             value: 1
         },
@@ -259,11 +271,6 @@ export const DeprecatedEnum = enumType({
     name: "DeprecatedEnum",
     description: "",
     members: [
-        {
-            name: "DEPRECATED_ENUM_UNSPECIFIED",
-            deprecation: "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
-            value: 0
-        },
         {
             name: "DEPRECATED_BAZ",
             deprecation: "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",

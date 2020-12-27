@@ -109,11 +109,7 @@ function createObjectTypeDefinitionMethodDecl(
           .filter((f) => !f.isOneofMember())
           .filter((f) => !isInputOnlyField(f))
           .filter((f) => !isIgnoredField(f))
-          .map((f) =>
-            createFieldDefinitionStmt(f, reg, {
-              useProtobufjs: opts.useProtobufjs,
-            })
-          ),
+          .map((f) => createFieldDefinitionStmt(f, reg, opts)),
         ...msg.oneofs
           .filter((f) => !isInputOnlyField(f))
           .map((o) => createOneofFieldDefinitionStmt(o, opts)),
