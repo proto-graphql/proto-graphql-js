@@ -11,7 +11,7 @@
     "lint:ci": "frolint --branch origin/master --bail",
     "test": "yarn lerna run test",
     "test:coverage": "yarn lerna run test:coverage",
-    "test:integration": "yarn generate:testapis && yarn lerna run test:integration"
+    "test:integration": "yarn generate:testapis && yarn build && yarn lerna run test:integration"
   },
   "devDependencies": {
     "@types/google-protobuf": "^3.7.2",
