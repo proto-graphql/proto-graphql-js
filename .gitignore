@@ -120,3 +120,4 @@ dist
 
 ### misc
 tmp/
+__tests__/__helpers__/__generated__/
