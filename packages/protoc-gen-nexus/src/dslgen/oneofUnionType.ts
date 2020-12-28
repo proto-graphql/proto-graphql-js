@@ -5,6 +5,7 @@ import {
   createDslExportConstStmt,
   createProtoExpr,
   gqlTypeName,
+  isIgnoredField,
   onlyNonNull,
   protoExportAlias,
 } from "./util";
@@ -25,6 +26,7 @@ export function createOneofUnionTypeDslStmts(
 ): ts.Statement[] {
   return msgs
     .flatMap((m) => m.oneofs)
+    .filter((o) => !isIgnoredField(o))
     .map((o) => createOneofUnionTypeDslStmt(o, reg, opts));
 }
 

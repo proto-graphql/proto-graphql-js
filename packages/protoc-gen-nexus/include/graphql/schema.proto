@@ -19,3 +19,19 @@ message GraphqlFieldOptions {
 extend google.protobuf.FieldOptions {
   GraphqlFieldOptions field = 2056;
 }
+
+message GraphqlOneofOptions {
+  bool ignore = 1;
+}
+
+extend google.protobuf.OneofOptions {
+  GraphqlOneofOptions oneof = 2056;
+}
+
+message GraphqlEnumValueOptions {
+  bool ignore = 1;
+}
+
+extend google.protobuf.EnumValueOptions {
+  GraphqlEnumValueOptions enum_value = 2056;
+}

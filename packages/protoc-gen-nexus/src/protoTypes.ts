@@ -317,6 +317,15 @@ export class ProtoField {
     return this.comments?.leadingComments || "";
   }
 
+  public containingOneof(): ProtoOneof | null {
+    if (!this.isOneofMember()) return null;
+
+    const idx = this.descriptor.getOneofIndex();
+    if (idx == null) return null;
+
+    return this.parent.oneofs[idx];
+  }
+
   public isOneofMember(): boolean {
     return this.descriptor.hasOneofIndex();
   }

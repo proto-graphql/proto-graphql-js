@@ -5,6 +5,7 @@ import {
   createDslExportConstStmt,
   gqlTypeName,
   isEnumValueForUnspecified,
+  isIgnoredField,
   onlyNonNull,
 } from "./util";
 
@@ -55,6 +56,7 @@ function createEnumTypeDslStmt(en: ProtoEnum): ts.Statement {
               ts.factory.createArrayLiteralExpression(
                 en.values
                   .filter((ev) => !isEnumValueForUnspecified(ev))
+                  .filter((ev) => !isIgnoredField(ev))
                   .map(createEnumValueExpr),
                 true // multiline
               )

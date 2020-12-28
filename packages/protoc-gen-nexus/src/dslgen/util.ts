@@ -12,6 +12,7 @@ import {
 import * as extensions from "../__generated__/extensions/graphql/schema_pb";
 import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
 import { GenerationParams } from "./types";
+import { ExtensionFieldInfo } from "google-protobuf";
 
 export function protoExportAlias(
   t: ProtoMessage | ProtoOneof,
@@ -106,13 +107,25 @@ export function isInputOnlyField(field: ProtoField | ProtoOneof): boolean {
   return cs.includes("Input only");
 }
 
-export function isIgnoredField(field: ProtoField): boolean {
-  return (
-    field.descriptor
-      .getOptions()
-      ?.getExtension(extensions.field)
-      ?.getIgnore() ?? false
-  );
+export function isIgnoredField(
+  field: ProtoField | ProtoEnumValue | ProtoOneof
+): boolean {
+  let ext: ExtensionFieldInfo<{ getIgnore(): boolean }>;
+  if (field instanceof ProtoField) {
+    const oneof = field.containingOneof();
+    if (oneof && isIgnoredField(oneof)) {
+      return true;
+    }
+    ext = extensions.field;
+  } else if (field instanceof ProtoEnumValue) {
+    ext = extensions.enumValue;
+  } else if (field instanceof ProtoOneof) {
+    ext = extensions.oneof;
+  } else {
+    const _exhaustiveCheck: never = field;
+    throw "unreachable";
+  }
+  return field.descriptor.getOptions()?.getExtension(ext)?.getIgnore() ?? false;
 }
 
 const behaviorComments = ["Required", "Input only", "Output only"] as const;

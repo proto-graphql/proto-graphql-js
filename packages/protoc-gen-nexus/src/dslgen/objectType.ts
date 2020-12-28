@@ -113,6 +113,7 @@ function createObjectTypeDefinitionMethodDecl(
           .map((f) => createFieldDefinitionStmt(f, reg, opts)),
         ...msg.oneofs
           .filter((f) => !isInputOnlyField(f))
+          .filter((f) => !isIgnoredField(f))
           .map((o) => createOneofFieldDefinitionStmt(o, opts)),
       ],
       true
