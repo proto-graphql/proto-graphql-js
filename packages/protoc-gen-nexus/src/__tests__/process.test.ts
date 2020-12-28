@@ -1,5 +1,5 @@
 import { parseParams } from "../process";
-import { itGeenratesNexusDSLsToMatchSnapshtos } from "./__helpers__/process.test.helper";
+import { itGeneratesNexusDSLsToMatchSnapshtos } from "./__helpers__/process.test.helper";
 
 describe("parseParams", () => {
   it("reutrns true if value is empty", () => {
@@ -40,42 +40,42 @@ describe("parseParams", () => {
 });
 
 describe("simple proto file", () => {
-  itGeenratesNexusDSLsToMatchSnapshtos("hello", ["hello/hello_pb_nexus.ts"]);
+  itGeneratesNexusDSLsToMatchSnapshtos("hello", ["hello/hello_pb_nexus.ts"]);
 });
 
 describe("well-known protobuf types", () => {
-  itGeenratesNexusDSLsToMatchSnapshtos("wktypes", [
+  itGeneratesNexusDSLsToMatchSnapshtos("wktypes", [
     "wktypes/well_known_types_pb_nexus.ts",
   ]);
 });
 
 describe("protobuf enums", () => {
-  itGeenratesNexusDSLsToMatchSnapshtos("enums", ["enums/enums_pb_nexus.ts"]);
+  itGeneratesNexusDSLsToMatchSnapshtos("enums", ["enums/enums_pb_nexus.ts"]);
 });
 
 describe("nested protobuf types", () => {
-  itGeenratesNexusDSLsToMatchSnapshtos("nested", ["nested/nested_pb_nexus.ts"]);
+  itGeneratesNexusDSLsToMatchSnapshtos("nested", ["nested/nested_pb_nexus.ts"]);
 });
 
 describe("protobuf custom options", () => {
-  itGeenratesNexusDSLsToMatchSnapshtos("extensions", [
+  itGeneratesNexusDSLsToMatchSnapshtos("extensions", [
     "extensions/extensions_pb_nexus.ts",
   ]);
 });
 
 describe("protobuf oneof", () => {
-  itGeenratesNexusDSLsToMatchSnapshtos("oneof", ["oneof/oneof_pb_nexus.ts"]);
+  itGeneratesNexusDSLsToMatchSnapshtos("oneof", ["oneof/oneof_pb_nexus.ts"]);
 });
 
 describe("deprecation", () => {
-  itGeenratesNexusDSLsToMatchSnapshtos("deprecation", [
+  itGeneratesNexusDSLsToMatchSnapshtos("deprecation", [
     "deprecation/deprecation_pb_nexus.ts",
     "deprecation/file_deprecation_pb_nexus.ts",
   ]);
 });
 
 describe("field_behavior", () => {
-  itGeenratesNexusDSLsToMatchSnapshtos("field_behavior", [
+  itGeneratesNexusDSLsToMatchSnapshtos("field_behavior", [
     "field_behavior/comments_pb_nexus.ts",
   ]);
 });
