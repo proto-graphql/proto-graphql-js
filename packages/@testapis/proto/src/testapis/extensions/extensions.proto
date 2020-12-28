@@ -16,10 +16,18 @@ message PrefixedMessage {
   string body = 1;
   PrefixedEnum prefixed_enum = 2;
   InnerMessage ignored_field = 3 [(graphql.field).ignore = true];
+
+  oneof ignored_oneof {
+    option (graphql.oneof).ignore = true;
+
+    PrefixedEnum oneof_prefixed_enum = 4;
+    InnerMessage oneof_ignored_field = 5;
+  }
 }
 
 enum PrefixedEnum {
   PREFIXED_ENUM_UNSPECIFIED = 0;
   PREFIXED_FOO = 1;
   PREFIXED_BAR = 2;
+  PREFIXED_IGNORED = 3 [(graphql.enum_value).ignore = true];
 }

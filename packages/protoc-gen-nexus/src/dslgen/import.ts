@@ -5,6 +5,7 @@ import { getUnwrapFunc } from "./unwrap";
 import {
   createImportAllWithAliastDecl,
   getEnumValueForUnspecified,
+  isIgnoredField,
   isRequiredField,
   onlyNonNull,
   onlyUnique,
@@ -23,7 +24,6 @@ export function createImportNexusDecl(
 ): ts.ImportDeclaration {
   let [oneof, list, nullable, nonNull] = [false, false, false, false];
   for (const m of msgs) {
-    oneof ||= m.oneofs.length > 0;
     for (const f of m.fields) {
       if (f.isOneofMember()) continue;
       const required = isRequiredField(f);
@@ -32,6 +32,8 @@ export function createImportNexusDecl(
       nonNull ||= f.isList() || required;
     }
     for (const o of m.oneofs) {
+      if (isIgnoredField(o)) continue;
+      oneof = true;
       const required = isRequiredField(o);
       nullable ||= !required;
       nonNull ||= required;
@@ -98,6 +100,7 @@ export function createImportProtoDecls(
     ...msgs
       .flatMap((m) =>
         m.fields
+          .filter((f) => !isIgnoredField(f))
           .map((f) => f.type)
           .filter(
             (t): t is ProtoEnum =>

@@ -3,6 +3,7 @@ import { ProtoMessage, ProtoOneof } from "../protoTypes";
 import { GenerationParams } from "./types";
 import {
   createProtoQualifiedName,
+  isIgnoredField,
   onlyNonNull,
   protoExportAlias,
 } from "./util";
@@ -25,6 +26,7 @@ export function createReExportProtoStmts(
     stmts.push(
       ...types
         .flatMap((m) => m.oneofs)
+        .filter((o) => !isIgnoredField(o))
         .map((o) => createReExportOneofUnionSourceStmt(o, opts))
     );
   }
