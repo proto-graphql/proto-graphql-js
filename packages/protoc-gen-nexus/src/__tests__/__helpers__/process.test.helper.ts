@@ -50,7 +50,7 @@ export function itGeneratesNexusDSLsToMatchSnapshtos(
 }
 
 export function testSchemaGeneration(
-  name: string,
+  name: string | string[],
   target: GenerationTarget,
   opts: {
     types?: Record<string, any>;
@@ -62,13 +62,21 @@ export function testSchemaGeneration(
   } = {}
 ) {
   describe(`schema generation with ${target}`, () => {
-    let resp: CodeGeneratorResponse;
+    let files: CodeGeneratorResponse.File[];
     beforeEach(async () => {
-      resp = await generateDSLs(name, target, { withPrefix: true });
+      files = [];
+
+      for (const n of Array.isArray(name) ? name : [name]) {
+        files.push(
+          ...(
+            await generateDSLs(n, target, { withPrefix: true })
+          ).getFileList()
+        );
+      }
     });
 
     it("can make GraphQL schema from generated DSLs", async () => {
-      await withGeneratedSchema(resp, opts?.types ?? {}, async (dir) => {
+      await withGeneratedSchema(files, opts?.types ?? {}, async (dir) => {
         try {
           await validateGeneratedFiles(dir);
           const gqlSchema = await fs.readFile(
@@ -88,7 +96,7 @@ export function testSchemaGeneration(
       it.each(opts.schemaTests)("%s", async (_name, types, f) => {
         try {
           await withGeneratedSchema(
-            resp,
+            files,
             { ...(opts.types ?? {}), ...types },
             async (_dir, schema) => {
               await f(schema);
@@ -175,7 +183,7 @@ function getFileMap(resp: CodeGeneratorResponse): Record<string, string> {
 }
 
 async function withGeneratedResults(
-  resp: CodeGeneratorResponse,
+  files: CodeGeneratorResponse.File[],
   cb: (dir: string) => Promise<void>
 ) {
   const suffix = Math.random().toString(36).substring(7);
@@ -185,19 +193,15 @@ async function withGeneratedResults(
     .then(() =>
       Promise.all(
         [
-          ...new Set(
-            resp.getFileList().map((f) => join(dir, dirname(f.getName()!)))
-          ),
+          ...new Set(files.map((f) => join(dir, dirname(f.getName()!)))),
         ].map((p) => fs.mkdir(p, { recursive: true }))
       ).then(() => dir)
     )
     .then((dir) =>
       Promise.all(
-        resp
-          .getFileList()
-          .map((f) =>
-            fs.writeFile(join(dir, f.getName()!), f.getContent()!, "utf-8")
-          )
+        files.map((f) =>
+          fs.writeFile(join(dir, f.getName()!), f.getContent()!, "utf-8")
+        )
       ).then(() => dir)
     )
     .then(cb)
@@ -205,22 +209,31 @@ async function withGeneratedResults(
 }
 
 async function withGeneratedSchema(
-  resp: CodeGeneratorResponse,
+  files: CodeGeneratorResponse.File[],
   queries: Record<string, NexusExtendTypeDef<"Query">>,
   cb: (dir: string, schema: NexusGraphQLSchema) => Promise<void>
 ) {
-  await withGeneratedResults(resp, async (dir) => {
-    const paths = resp.getFileList().map((f) => join(dir, f.getName()!));
-    const types = paths.reduce((o, p) => ({ ...o, ...require(p) }), {} as any);
-    const schema = makeSchema({
-      types: { ...types, ...queries },
-      outputs: {
-        schema: join(dir, "schema.graphql"),
-        typegen: join(dir, "typings.ts"),
-      },
-      shouldGenerateArtifacts: true,
-    });
-    await cb(dir, schema);
+  await withGeneratedResults(files, async (dir) => {
+    const paths = files.map((f) => join(dir, f.getName()!));
+    try {
+      const types = paths.reduce(
+        (o, p) => ({ ...o, ...require(p) }),
+        {} as any
+      );
+      const schema = makeSchema({
+        types: { ...types, ...queries },
+        outputs: {
+          schema: join(dir, "schema.graphql"),
+          typegen: join(dir, "typings.ts"),
+        },
+        shouldGenerateArtifacts: true,
+      });
+      await cb(dir, schema);
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e);
+      throw e;
+    }
   });
 }
 
