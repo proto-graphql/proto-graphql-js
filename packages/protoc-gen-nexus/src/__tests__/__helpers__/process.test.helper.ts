@@ -29,7 +29,7 @@ function snapshotGeneratedFiles(resp: CodeGeneratorResponse, files: string[]) {
   for (const filename of files) {
     const content = fileByName[`testapis/${filename}`];
     expect(content).toBeTruthy();
-    expect(content).toMatchSnapshot();
+    expect(content).toMatchSnapshot(filename);
   }
 }
 
