@@ -22,110 +22,110 @@ const unwrapFuncs: Record<
 > = {
   ".google.protobuf.Int32Value": {
     native: {
-      imports: ["proto-nexus"],
-      name: `${uniqueImportAlias("proto-nexus")}.unwrapInt32Value`,
+      imports: ["@proto-nexus/google-protobuf"],
+      name: `${uniqueImportAlias(
+        "@proto-nexus/google-protobuf"
+      )}.unwrapInt32Value`,
     },
     protobufjs: {
-      imports: ["@proto-nexus/protobufjs-adapter"],
-      name: `${uniqueImportAlias(
-        "@proto-nexus/protobufjs-adapter"
-      )}.unwrapInt32Value`,
+      imports: ["@proto-nexus/protobufjs"],
+      name: `${uniqueImportAlias("@proto-nexus/protobufjs")}.unwrapInt32Value`,
     },
   },
   ".google.protobuf.UInt32Value": {
     native: {
-      imports: ["proto-nexus"],
-      name: `${uniqueImportAlias("proto-nexus")}.unwrapUInt32Value`,
+      imports: ["@proto-nexus/google-protobuf"],
+      name: `${uniqueImportAlias(
+        "@proto-nexus/google-protobuf"
+      )}.unwrapUInt32Value`,
     },
     protobufjs: {
-      imports: ["@proto-nexus/protobufjs-adapter"],
-      name: `${uniqueImportAlias(
-        "@proto-nexus/protobufjs-adapter"
-      )}.unwrapUInt32Value`,
+      imports: ["@proto-nexus/protobufjs"],
+      name: `${uniqueImportAlias("@proto-nexus/protobufjs")}.unwrapUInt32Value`,
     },
   },
   ".google.protobuf.Int64Value": {
     native: {
-      imports: ["proto-nexus"],
-      name: `${uniqueImportAlias("proto-nexus")}.unwrapInt64Value`,
+      imports: ["@proto-nexus/google-protobuf"],
+      name: `${uniqueImportAlias(
+        "@proto-nexus/google-protobuf"
+      )}.unwrapInt64Value`,
     },
     protobufjs: {
-      imports: ["@proto-nexus/protobufjs-adapter"],
-      name: `${uniqueImportAlias(
-        "@proto-nexus/protobufjs-adapter"
-      )}.unwrapInt64Value`,
+      imports: ["@proto-nexus/protobufjs"],
+      name: `${uniqueImportAlias("@proto-nexus/protobufjs")}.unwrapInt64Value`,
     },
   },
   ".google.protobuf.UInt64Value": {
     native: {
-      imports: ["proto-nexus"],
-      name: `${uniqueImportAlias("proto-nexus")}.unwrapUInt64Value`,
+      imports: ["@proto-nexus/google-protobuf"],
+      name: `${uniqueImportAlias(
+        "@proto-nexus/google-protobuf"
+      )}.unwrapUInt64Value`,
     },
     protobufjs: {
-      imports: ["@proto-nexus/protobufjs-adapter"],
-      name: `${uniqueImportAlias(
-        "@proto-nexus/protobufjs-adapter"
-      )}.unwrapUInt64Value`,
+      imports: ["@proto-nexus/protobufjs"],
+      name: `${uniqueImportAlias("@proto-nexus/protobufjs")}.unwrapUInt64Value`,
     },
   },
   ".google.protobuf.FloatValue": {
     native: {
-      imports: ["proto-nexus"],
-      name: `${uniqueImportAlias("proto-nexus")}.unwrapFloatValue`,
+      imports: ["@proto-nexus/google-protobuf"],
+      name: `${uniqueImportAlias(
+        "@proto-nexus/google-protobuf"
+      )}.unwrapFloatValue`,
     },
     protobufjs: {
-      imports: ["@proto-nexus/protobufjs-adapter"],
-      name: `${uniqueImportAlias(
-        "@proto-nexus/protobufjs-adapter"
-      )}.unwrapFloatValue`,
+      imports: ["@proto-nexus/protobufjs"],
+      name: `${uniqueImportAlias("@proto-nexus/protobufjs")}.unwrapFloatValue`,
     },
   },
   ".google.protobuf.DoubleValue": {
     native: {
-      imports: ["proto-nexus"],
-      name: `${uniqueImportAlias("proto-nexus")}.unwrapDoubleValue`,
+      imports: ["@proto-nexus/google-protobuf"],
+      name: `${uniqueImportAlias(
+        "@proto-nexus/google-protobuf"
+      )}.unwrapDoubleValue`,
     },
     protobufjs: {
-      imports: ["@proto-nexus/protobufjs-adapter"],
-      name: `${uniqueImportAlias(
-        "@proto-nexus/protobufjs-adapter"
-      )}.unwrapDoubleValue`,
+      imports: ["@proto-nexus/protobufjs"],
+      name: `${uniqueImportAlias("@proto-nexus/protobufjs")}.unwrapDoubleValue`,
     },
   },
   ".google.protobuf.StringValue": {
     native: {
-      imports: ["proto-nexus"],
-      name: `${uniqueImportAlias("proto-nexus")}.unwrapStringValue`,
+      imports: ["@proto-nexus/google-protobuf"],
+      name: `${uniqueImportAlias(
+        "@proto-nexus/google-protobuf"
+      )}.unwrapStringValue`,
     },
     protobufjs: {
-      imports: ["@proto-nexus/protobufjs-adapter"],
-      name: `${uniqueImportAlias(
-        "@proto-nexus/protobufjs-adapter"
-      )}.unwrapStringValue`,
+      imports: ["@proto-nexus/protobufjs"],
+      name: `${uniqueImportAlias("@proto-nexus/protobufjs")}.unwrapStringValue`,
     },
   },
   ".google.protobuf.BoolValue": {
     native: {
-      imports: ["proto-nexus"],
-      name: `${uniqueImportAlias("proto-nexus")}.unwrapBoolValue`,
+      imports: ["@proto-nexus/google-protobuf"],
+      name: `${uniqueImportAlias(
+        "@proto-nexus/google-protobuf"
+      )}.unwrapBoolValue`,
     },
     protobufjs: {
-      imports: ["@proto-nexus/protobufjs-adapter"],
-      name: `${uniqueImportAlias(
-        "@proto-nexus/protobufjs-adapter"
-      )}.unwrapBoolValue`,
+      imports: ["@proto-nexus/protobufjs"],
+      name: `${uniqueImportAlias("@proto-nexus/protobufjs")}.unwrapBoolValue`,
     },
   },
   ".google.protobuf.Timestamp": {
     native: {
-      imports: ["proto-nexus"],
-      name: `${uniqueImportAlias("proto-nexus")}.timestampToDate`,
+      imports: ["@proto-nexus/google-protobuf"],
+      name: `${uniqueImportAlias(
+        "@proto-nexus/google-protobuf"
+      )}.timestampToDate`,
     },
     protobufjs: {
-      imports: ["@proto-nexus/protobufjs-adapter"],
-      name: `${uniqueImportAlias(
-        "@proto-nexus/protobufjs-adapter"
-      )}.timestampToDate`,
+      imports: ["@proto-nexus/protobufjs"],
+      name: `${uniqueImportAlias("@proto-nexus/protobufjs")}.timestampToDate`,
     },
   },
 };

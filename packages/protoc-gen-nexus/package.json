@@ -29,7 +29,8 @@
     "google-protobuf": "^3.12.2"
   },
   "devDependencies": {
-    "@proto-nexus/protobufjs-adapter": "^0.1.4",
+    "@proto-nexus/google-protobuf": "^0.1.4",
+    "@proto-nexus/protobufjs": "^0.1.4",
     "@testapis/node": "^0.1.4",
     "@testapis/node-native": "^0.1.4",
     "glob": "^7.1.6",

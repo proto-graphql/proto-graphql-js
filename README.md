@@ -9,8 +9,9 @@ Build GraphQL schema from Protobuf and Nexus
 
 | package | description | version |
 | ------- | ----------- | ------- |
-| [proto-nexus](./packages/proto-nexus) | Runtime library | [![npm version](https://badge.fury.io/js/proto-nexus.svg)](https://badge.fury.io/js/proto-nexus) |
 | [protoc-gen-nexus](./packages/protoc-gen-nexus) | `protoc` plugin for generating Nexus type definitions | [![npm version](https://badge.fury.io/js/protoc-gen-nexus.svg)](https://badge.fury.io/js/protoc-gen-nexus) |
+| [@proto-nexus/google-protobuf](./packages/@proto-nexus/google-protobuf) | Runtime library | [![npm version](https://badge.fury.io/js/proto-nexus.svg)](https://badge.fury.io/js/proto-nexus) |
+| [@proto-nexus/protobufjs](./packages/@proto-nexus/protobufjs) | Runtime library | [![npm version](https://badge.fury.io/js/proto-nexus.svg)](https://badge.fury.io/js/proto-nexus) |
 
 ## Installation
 
