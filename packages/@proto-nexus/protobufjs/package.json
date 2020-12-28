@@ -23,7 +23,7 @@
     "lib/",
     "module/"
   ],
-  "dependencies": {
+  "peerDependencies": {
     "protobufjs": "^6.10.2"
   },
   "scripts": {

@@ -19,15 +19,15 @@
   "engines": {
     "node": ">= 14.0.0"
   },
-  "dependencies": {
-    "@types/google-protobuf": "^3.7.2",
-    "google-protobuf": "^3.12.2"
-  },
   "files": [
     "bin/",
     "lib/",
     "module/"
   ],
+  "peerDependencies": {
+    "@types/google-protobuf": "^3.7.2",
+    "google-protobuf": "^3.12.2"
+  },
   "scripts": {
     "build": "tsc --build . && tsc --build tsconfig.module.json",
     "clean": "rimraf lib/ module/ && tsc --build . --clean && tsc --build tsconfig.module.json --clean",
