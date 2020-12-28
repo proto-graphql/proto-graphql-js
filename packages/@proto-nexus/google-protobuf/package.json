@@ -1,5 +1,5 @@
 {
-  "name": "@proto-nexus/protobufjs-adapter",
+  "name": "@proto-nexus/google-protobuf",
   "version": "0.1.4",
   "description": "Generate DSL for GraphQL Nexus from Protocol Buffers IDL",
   "keywords": [
@@ -19,12 +19,17 @@
   "engines": {
     "node": ">= 14.0.0"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
+    "bin/",
     "lib/",
     "module/"
   ],
-  "dependencies": {
-    "protobufjs": "^6.10.2"
+  "peerDependencies": {
+    "@types/google-protobuf": "^3.7.2",
+    "google-protobuf": "^3.12.2"
   },
   "scripts": {
     "build": "tsc --build . && tsc --build tsconfig.module.json",

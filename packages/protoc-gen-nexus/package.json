@@ -24,17 +24,17 @@
   },
   "dependencies": {
     "@types/change-case": "^2.3.1",
-    "@types/google-protobuf": "^3.7.2",
-    "change-case": "^4.1.2",
-    "google-protobuf": "^3.12.2"
+    "change-case": "^4.1.2"
   },
   "devDependencies": {
-    "@proto-nexus/protobufjs-adapter": "^0.1.4",
+    "@proto-nexus/google-protobuf": "^0.1.4",
+    "@proto-nexus/protobufjs": "^0.1.4",
     "@testapis/node": "^0.1.4",
     "@testapis/node-native": "^0.1.4",
-    "glob": "^7.1.6",
+    "glob": "^7.1.6"
+  },
+  "peerDependencies": {
     "graphql": "^15.4.0",
-    "graphql-scalars": "^1.6.1",
     "nexus": "1.0.0"
   },
   "files": [
