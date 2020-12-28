@@ -11,13 +11,11 @@ TESTAPIS_ROOT=./packages/@testapis
 clean() {
   rm -rf $TESTAPIS_ROOT/node-native/lib
   rm -rf $TESTAPIS_ROOT/node/lib
-  find $TESTAPIS_ROOT/nexus-native/src -name '*_pb_nexus.ts' -type f | xargs rm
 }
 
 init() {
   mkdir -p $TESTAPIS_ROOT/node-native/lib
   mkdir -p $TESTAPIS_ROOT/node/lib
-  mkdir -p $TESTAPIS_ROOT/nexus-native/src/schema/types
 }
 
 protocw() {
@@ -43,20 +41,11 @@ execProtoc() {
       --ts_out="$TESTAPIS_ROOT/node-native/lib" \
       ${protoDir}/*.proto
 
-    protocw \
-      --plugin=protoc-gen-nexus=`yarn bin protoc-gen-nexus` \
-      --nexus_out="$TESTAPIS_ROOT/nexus-native/src/schema/types" --nexus_opt=import_prefix=@testapis/node-native/lib \
-      ${protoDir}/*.proto
-
     nodeOutDir="${protoDir/"/proto/src/"/"/node/lib/"}"
     mkdir -p $nodeOutDir
     yarn pbjs --target static-module --wrap commonjs --out "$nodeOutDir/index.js" ${protoDir}/*.proto
     yarn pbts --out "$nodeOutDir/index.d.ts" "$nodeOutDir/index.js"
 
-    protocw \
-      --plugin=protoc-gen-nexus=`yarn bin protoc-gen-nexus` \
-      --nexus_out="$TESTAPIS_ROOT/nexus/src/schema/types" --nexus_opt=import_prefix=@testapis/node/lib,use_protobufjs \
-      ${protoDir}/*.proto
   done
 }
 
