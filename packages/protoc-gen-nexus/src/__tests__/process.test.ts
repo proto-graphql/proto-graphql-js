@@ -67,6 +67,15 @@ describe("protobuf oneof", () => {
   itGeneratesNexusDSLsToMatchSnapshtos("oneof", ["oneof/oneof_pb_nexus.ts"]);
 });
 
+describe("multipkgs", () => {
+  itGeneratesNexusDSLsToMatchSnapshtos("multipkgs/subpkg1", [
+    "multipkgs/subpkg1/types_pb_nexus.ts",
+  ]);
+  itGeneratesNexusDSLsToMatchSnapshtos("multipkgs/subpkg2", [
+    "multipkgs/subpkg2/types_pb_nexus.ts",
+  ]);
+});
+
 describe("deprecation", () => {
   itGeneratesNexusDSLsToMatchSnapshtos("deprecation", [
     "deprecation/deprecation_pb_nexus.ts",

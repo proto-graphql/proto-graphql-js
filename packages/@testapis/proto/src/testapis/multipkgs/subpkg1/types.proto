@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package testapis.multipkgs.subpkg1;
+
+message SubpkgMessage {
+  string body = 1;
+}
+
+enum SubpkgEnum {
+  SUBPKG_ENUM_UNSPECIFIED = 0;
+  FOO = 1;
+  BAR = 2;
+}

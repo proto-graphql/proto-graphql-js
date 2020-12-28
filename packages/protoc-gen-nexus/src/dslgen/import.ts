@@ -4,6 +4,7 @@ import { GenerationParams } from "./types";
 import { getUnwrapFunc } from "./unwrap";
 import {
   createImportAllWithAliastDecl,
+  getEnumValueForUnspecified,
   isRequiredField,
   onlyNonNull,
   onlyUnique,
@@ -92,8 +93,19 @@ export function createImportProtoDecls(
   msgs: ReadonlyArray<ProtoMessage>,
   opts: GenerationParams
 ): ts.ImportDeclaration[] {
-  return msgs
-    .map((m) => protoImportPath(m, opts))
+  return [
+    ...msgs.map((m) => protoImportPath(m, opts)),
+    ...msgs
+      .flatMap((m) =>
+        m.fields
+          .map((f) => f.type)
+          .filter(
+            (t): t is ProtoEnum =>
+              t instanceof ProtoEnum && getEnumValueForUnspecified(t) != null
+          )
+      )
+      .map((e) => protoImportPath(e, opts)),
+  ]
     .filter(onlyUnique())
     .map(createImportAllWithAliastDecl);
 }
