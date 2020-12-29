@@ -47,7 +47,8 @@ message PrefixedMessage {
 
   IgnoredMessage ignored_message = 7;
   OutputOnlyMessage output_only_message = 8;
-  IgnoredEnum ignored_enum = 9;
+  InputOnlyMessage input_only_message = 9;
+  IgnoredEnum ignored_enum = 10;
 }
 
 enum PrefixedEnum {
@@ -58,6 +59,14 @@ enum PrefixedEnum {
 }
 
 message IgnoredMessage {
+  option (graphql.object_type).ignore = true;
+  option (graphql.input_type).ignore = true;
+
+  string body = 1;
+  PrefixedEnum prefixed_enum = 2;
+}
+
+message InputOnlyMessage {
   option (graphql.object_type).ignore = true;
 
   string body = 1;

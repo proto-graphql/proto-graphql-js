@@ -94,12 +94,7 @@ export function isIgnoredType(
     return true;
   }
   if (type instanceof ProtoMessage) {
-    if (opts?.input) {
-      if (isIgnoredType(type)) return true;
-      ext = extensions.inputType;
-    } else {
-      ext = extensions.objectType;
-    }
+    ext = opts?.input ? extensions.inputType : extensions.objectType;
   } else if (type instanceof ProtoEnum) {
     ext = extensions.enumType;
   } else {

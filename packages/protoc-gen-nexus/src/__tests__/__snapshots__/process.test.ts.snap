@@ -1325,6 +1325,7 @@ export type _$testapis$extensions$extensions_pb$TestPrefixBatchGetPrefixedMessag
 export type _$testapis$extensions$extensions_pb$TestPrefixCreatePrefixedMessageRequest = _$testapis$extensions$extensions_pb.CreatePrefixedMessageRequest;
 export type _$testapis$extensions$extensions_pb$TestPrefixPrefixedMessage = _$testapis$extensions$extensions_pb.PrefixedMessage;
 export type _$testapis$extensions$extensions_pb$TestPrefixIgnoredMessage = _$testapis$extensions$extensions_pb.IgnoredMessage;
+export type _$testapis$extensions$extensions_pb$TestPrefixInputOnlyMessage = _$testapis$extensions$extensions_pb.InputOnlyMessage;
 export type _$testapis$extensions$extensions_pb$TestPrefixOutputOnlyMessage = _$testapis$extensions$extensions_pb.OutputOnlyMessage;
 export type _$testapis$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage = _$testapis$extensions$extensions_pb.PrefixedMessage.InnerMessage;
 export const TestPrefixPrefixedMessage = objectType({
@@ -1411,6 +1412,24 @@ export const TestPrefixPrefixedMessageInput = inputObjectType({
             type: nullable(\\"TestPrefixPrefixedEnum\\"),
             description: \\"\\"
         });
+        t.field(\\"inputOnlyMessage\\", {
+            type: nullable(\\"TestPrefixInputOnlyMessageInput\\"),
+            description: \\"\\"
+        });
+    }
+});
+export const TestPrefixInputOnlyMessageInput = inputObjectType({
+    name: \\"TestPrefixInputOnlyMessageInput\\",
+    description: \\"\\",
+    definition(t) {
+        t.field(\\"body\\", {
+            type: nonNull(\\"String\\"),
+            description: \\"\\"
+        });
+        t.field(\\"prefixedEnum\\", {
+            type: nullable(\\"TestPrefixPrefixedEnum\\"),
+            description: \\"\\"
+        });
     }
 });
 export const TestPrefixPrefixedMessageInnerMessageInput = inputObjectType({
@@ -1451,6 +1470,7 @@ export type _$testapis$extensions$testapis$extensions$TestPrefixBatchGetPrefixed
 export type _$testapis$extensions$testapis$extensions$TestPrefixCreatePrefixedMessageRequest = _$testapis$extensions.testapis.extensions.ICreatePrefixedMessageRequest;
 export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessage = _$testapis$extensions.testapis.extensions.IPrefixedMessage;
 export type _$testapis$extensions$testapis$extensions$TestPrefixIgnoredMessage = _$testapis$extensions.testapis.extensions.IIgnoredMessage;
+export type _$testapis$extensions$testapis$extensions$TestPrefixInputOnlyMessage = _$testapis$extensions.testapis.extensions.IInputOnlyMessage;
 export type _$testapis$extensions$testapis$extensions$TestPrefixOutputOnlyMessage = _$testapis$extensions.testapis.extensions.IOutputOnlyMessage;
 export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageInnerMessage = _$testapis$extensions.testapis.extensions.PrefixedMessage.IInnerMessage;
 export const TestPrefixPrefixedMessage = objectType({
@@ -1527,6 +1547,24 @@ export const TestPrefixPrefixedMessageInnerMessage = objectType({
 });
 export const TestPrefixPrefixedMessageInput = inputObjectType({
     name: \\"TestPrefixPrefixedMessageInput\\",
+    description: \\"\\",
+    definition(t) {
+        t.field(\\"body\\", {
+            type: nonNull(\\"String\\"),
+            description: \\"\\"
+        });
+        t.field(\\"prefixedEnum\\", {
+            type: nullable(\\"TestPrefixPrefixedEnum\\"),
+            description: \\"\\"
+        });
+        t.field(\\"inputOnlyMessage\\", {
+            type: nullable(\\"TestPrefixInputOnlyMessageInput\\"),
+            description: \\"\\"
+        });
+    }
+});
+export const TestPrefixInputOnlyMessageInput = inputObjectType({
+    name: \\"TestPrefixInputOnlyMessageInput\\",
     description: \\"\\",
     definition(t) {
         t.field(\\"body\\", {

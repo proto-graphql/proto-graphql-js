@@ -10,6 +10,15 @@ type Query {
 }
 
 \\"\\"\\"\\"\\"\\"
+input TestPrefixInputOnlyMessageInput {
+  \\"\\"\\"\\"\\"\\"
+  body: String!
+
+  \\"\\"\\"\\"\\"\\"
+  prefixedEnum: TestPrefixPrefixedEnum
+}
+
+\\"\\"\\"\\"\\"\\"
 type TestPrefixOutputOnlyMessage {
   \\"\\"\\"\\"\\"\\"
   body: String!
@@ -55,6 +64,9 @@ input TestPrefixPrefixedMessageInnerMessageInput {
 input TestPrefixPrefixedMessageInput {
   \\"\\"\\"\\"\\"\\"
   body: String!
+
+  \\"\\"\\"\\"\\"\\"
+  inputOnlyMessage: TestPrefixInputOnlyMessageInput
 
   \\"\\"\\"\\"\\"\\"
   prefixedEnum: TestPrefixPrefixedEnum
