@@ -4,6 +4,7 @@ import {
   createDslExportConstStmt,
   gqlTypeName,
   isIgnoredField,
+  isIgnoredType,
   isInputOnlyField,
   protoExportAlias,
 } from "./util";
@@ -25,7 +26,9 @@ export function createObjectTypeDslStmts(
   reg: ProtoRegistry,
   opts: GenerationParams
 ): ts.Statement[] {
-  return msgs.map((m) => createObjectTypeDslStmt(m, reg, opts));
+  return msgs
+    .filter((m) => !isIgnoredType(m))
+    .map((m) => createObjectTypeDslStmt(m, reg, opts));
 }
 
 /**

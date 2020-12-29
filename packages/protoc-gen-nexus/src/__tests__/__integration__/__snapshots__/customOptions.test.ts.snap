@@ -10,6 +10,15 @@ type Query {
 }
 
 \\"\\"\\"\\"\\"\\"
+type TestPrefixOutputOnlyMessage {
+  \\"\\"\\"\\"\\"\\"
+  body: String!
+
+  \\"\\"\\"\\"\\"\\"
+  prefixedEnum: TestPrefixPrefixedEnum
+}
+
+\\"\\"\\"\\"\\"\\"
 enum TestPrefixPrefixedEnum {
   PREFIXED_BAR
   PREFIXED_FOO
@@ -19,6 +28,9 @@ enum TestPrefixPrefixedEnum {
 type TestPrefixPrefixedMessage {
   \\"\\"\\"\\"\\"\\"
   body: String!
+
+  \\"\\"\\"\\"\\"\\"
+  outputOnlyMessage: TestPrefixOutputOnlyMessage
 
   \\"\\"\\"\\"\\"\\"
   prefixedEnum: TestPrefixPrefixedEnum
