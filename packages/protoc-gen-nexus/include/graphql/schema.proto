@@ -12,6 +12,19 @@ extend google.protobuf.FileOptions {
   GraphqlSchemaOptions schema = 2056;
 }
 
+message GraphqlObjectTypeOptions {
+  bool ignore = 1;
+}
+
+message GraphqlInputObjectTypeOptions {
+  bool ignore = 1;
+}
+
+extend google.protobuf.MessageOptions {
+  GraphqlObjectTypeOptions object_type = 2056;
+  GraphqlInputObjectTypeOptions input_type = 2057;
+}
+
 message GraphqlFieldOptions {
   bool ignore = 1;
 }
@@ -26,6 +39,14 @@ message GraphqlOneofOptions {
 
 extend google.protobuf.OneofOptions {
   GraphqlOneofOptions oneof = 2056;
+}
+
+message GraphqlEnumOptions {
+  bool ignore = 1;
+}
+
+extend google.protobuf.EnumOptions {
+  GraphqlEnumOptions enum_type = 2056;
 }
 
 message GraphqlEnumValueOptions {

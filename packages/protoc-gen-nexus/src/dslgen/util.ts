@@ -84,6 +84,30 @@ export function createDeprecationPropertyAssignment(
   );
 }
 
+export function isIgnoredType(
+  type: ProtoMessage | ProtoEnum,
+  opts?: { input: boolean }
+): boolean {
+  let ext: ExtensionFieldInfo<{ getIgnore(): boolean }>;
+  if (type.parent instanceof ProtoMessage && isIgnoredType(type.parent)) {
+    return true;
+  }
+  if (type instanceof ProtoMessage) {
+    if (opts?.input) {
+      if (isIgnoredType(type)) return true;
+      ext = extensions.inputType;
+    } else {
+      ext = extensions.objectType;
+    }
+  } else if (type instanceof ProtoEnum) {
+    ext = extensions.enumType;
+  } else {
+    const _exhaustiveCheck: never = type;
+    throw "unreachable";
+  }
+  return type.descriptor.getOptions()?.getExtension(ext)?.getIgnore() ?? false;
+}
+
 export function isRequiredField(field: ProtoField | ProtoOneof): boolean {
   if (
     field instanceof ProtoField &&
@@ -108,10 +132,17 @@ export function isInputOnlyField(field: ProtoField | ProtoOneof): boolean {
 }
 
 export function isIgnoredField(
-  field: ProtoField | ProtoEnumValue | ProtoOneof
+  field: ProtoField | ProtoEnumValue | ProtoOneof,
+  opts?: { input: boolean }
 ): boolean {
   let ext: ExtensionFieldInfo<{ getIgnore(): boolean }>;
   if (field instanceof ProtoField) {
+    if (
+      (field.type instanceof ProtoMessage || field.type instanceof ProtoEnum) &&
+      isIgnoredType(field.type, opts)
+    ) {
+      return true;
+    }
     const oneof = field.containingOneof();
     if (oneof && isIgnoredField(oneof)) {
       return true;

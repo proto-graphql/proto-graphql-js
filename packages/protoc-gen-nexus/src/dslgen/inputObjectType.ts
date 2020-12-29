@@ -4,6 +4,7 @@ import {
   createDslExportConstStmt,
   gqlTypeName,
   isIgnoredField,
+  isIgnoredType,
   isOutputOnlyField,
 } from "./util";
 import { createFieldDefinitionStmt } from "./field";
@@ -23,7 +24,9 @@ export function createInputObjectTypeDslStmts(
   reg: ProtoRegistry,
   opts: GenerationParams
 ): ts.Statement[] {
-  return msgs.map((m) => createInputObjectTypeDslStmt(m, reg, opts));
+  return msgs
+    .filter((m) => !isIgnoredType(m, { input: true }))
+    .map((m) => createInputObjectTypeDslStmt(m, reg, opts));
 }
 
 /**
@@ -101,7 +104,7 @@ function createInputObjectTypeDefinitionMethodDecl(
     ts.factory.createBlock(
       msg.fields
         .filter((f) => !isOutputOnlyField(f))
-        .filter((f) => !isIgnoredField(f))
+        .filter((f) => !isIgnoredField(f, { input: true }))
         .map((f) =>
           createFieldDefinitionStmt(f, reg, { ...opts, input: true })
         ),

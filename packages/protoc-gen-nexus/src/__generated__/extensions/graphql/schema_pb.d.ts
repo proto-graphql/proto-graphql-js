@@ -24,6 +24,46 @@ export namespace GraphqlSchemaOptions {
   }
 }
 
+export class GraphqlObjectTypeOptions extends jspb.Message {
+  getIgnore(): boolean;
+  setIgnore(value: boolean): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GraphqlObjectTypeOptions.AsObject;
+  static toObject(includeInstance: boolean, msg: GraphqlObjectTypeOptions): GraphqlObjectTypeOptions.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GraphqlObjectTypeOptions, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GraphqlObjectTypeOptions;
+  static deserializeBinaryFromReader(message: GraphqlObjectTypeOptions, reader: jspb.BinaryReader): GraphqlObjectTypeOptions;
+}
+
+export namespace GraphqlObjectTypeOptions {
+  export type AsObject = {
+    ignore: boolean,
+  }
+}
+
+export class GraphqlInputObjectTypeOptions extends jspb.Message {
+  getIgnore(): boolean;
+  setIgnore(value: boolean): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GraphqlInputObjectTypeOptions.AsObject;
+  static toObject(includeInstance: boolean, msg: GraphqlInputObjectTypeOptions): GraphqlInputObjectTypeOptions.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GraphqlInputObjectTypeOptions, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GraphqlInputObjectTypeOptions;
+  static deserializeBinaryFromReader(message: GraphqlInputObjectTypeOptions, reader: jspb.BinaryReader): GraphqlInputObjectTypeOptions;
+}
+
+export namespace GraphqlInputObjectTypeOptions {
+  export type AsObject = {
+    ignore: boolean,
+  }
+}
+
 export class GraphqlFieldOptions extends jspb.Message {
   getIgnore(): boolean;
   setIgnore(value: boolean): void;
@@ -64,6 +104,26 @@ export namespace GraphqlOneofOptions {
   }
 }
 
+export class GraphqlEnumOptions extends jspb.Message {
+  getIgnore(): boolean;
+  setIgnore(value: boolean): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GraphqlEnumOptions.AsObject;
+  static toObject(includeInstance: boolean, msg: GraphqlEnumOptions): GraphqlEnumOptions.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: GraphqlEnumOptions, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GraphqlEnumOptions;
+  static deserializeBinaryFromReader(message: GraphqlEnumOptions, reader: jspb.BinaryReader): GraphqlEnumOptions;
+}
+
+export namespace GraphqlEnumOptions {
+  export type AsObject = {
+    ignore: boolean,
+  }
+}
+
 export class GraphqlEnumValueOptions extends jspb.Message {
   getIgnore(): boolean;
   setIgnore(value: boolean): void;
@@ -86,9 +146,15 @@ export namespace GraphqlEnumValueOptions {
 
   export const schema: jspb.ExtensionFieldInfo<GraphqlSchemaOptions>;
 
+  export const objectType: jspb.ExtensionFieldInfo<GraphqlObjectTypeOptions>;
+
+  export const inputType: jspb.ExtensionFieldInfo<GraphqlInputObjectTypeOptions>;
+
   export const field: jspb.ExtensionFieldInfo<GraphqlFieldOptions>;
 
   export const oneof: jspb.ExtensionFieldInfo<GraphqlOneofOptions>;
+
+  export const enumType: jspb.ExtensionFieldInfo<GraphqlEnumOptions>;
 
   export const enumValue: jspb.ExtensionFieldInfo<GraphqlEnumValueOptions>;
 

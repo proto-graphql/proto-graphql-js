@@ -23,6 +23,10 @@ message PrefixedMessage {
     PrefixedEnum oneof_prefixed_enum = 4;
     InnerMessage oneof_ignored_field = 5;
   }
+
+  IgnoredMessage ignored_message = 6;
+  OutputOnlyMessage output_only_message = 7;
+  IgnoredEnum ignored_enum = 8;
 }
 
 enum PrefixedEnum {
@@ -30,4 +34,26 @@ enum PrefixedEnum {
   PREFIXED_FOO = 1;
   PREFIXED_BAR = 2;
   PREFIXED_IGNORED = 3 [(graphql.enum_value).ignore = true];
+}
+
+message IgnoredMessage {
+  option (graphql.object_type).ignore = true;
+
+  string body = 1;
+  PrefixedEnum prefixed_enum = 2;
+}
+
+message OutputOnlyMessage {
+  option (graphql.input_type).ignore = true;
+
+  string body = 1;
+  PrefixedEnum prefixed_enum = 2;
+}
+
+enum IgnoredEnum {
+  option (graphql.enum_type).ignore = true;
+
+  IGNORED_ENUM_UNSPECIFIED = 0;
+  IGNORED_FOO = 1;
+  IGNORED_BAR = 2;
 }

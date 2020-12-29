@@ -6,6 +6,7 @@ import {
   gqlTypeName,
   isEnumValueForUnspecified,
   isIgnoredField,
+  isIgnoredType,
   onlyNonNull,
 } from "./util";
 
@@ -21,7 +22,7 @@ import {
 export function createEnumTypeDslStmts(
   enums: ReadonlyArray<ProtoEnum>
 ): ts.Statement[] {
-  return enums.map(createEnumTypeDslStmt);
+  return enums.filter((e) => !isIgnoredType(e)).map(createEnumTypeDslStmt);
 }
 
 /**

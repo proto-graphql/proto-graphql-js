@@ -1321,6 +1321,8 @@ exports[`protobuf custom options with native protobuf generates nexus DSLs: exte
 import { objectType, inputObjectType, enumType, nullable, nonNull } from \\"nexus\\";
 import * as _$testapis$extensions$extensions_pb from \\"./testapis/extensions/extensions_pb\\";
 export type _$testapis$extensions$extensions_pb$TestPrefixPrefixedMessage = _$testapis$extensions$extensions_pb.PrefixedMessage;
+export type _$testapis$extensions$extensions_pb$TestPrefixIgnoredMessage = _$testapis$extensions$extensions_pb.IgnoredMessage;
+export type _$testapis$extensions$extensions_pb$TestPrefixOutputOnlyMessage = _$testapis$extensions$extensions_pb.OutputOnlyMessage;
 export type _$testapis$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage = _$testapis$extensions$extensions_pb.PrefixedMessage.InnerMessage;
 export const TestPrefixPrefixedMessage = objectType({
     name: \\"TestPrefixPrefixedMessage\\",
@@ -1344,8 +1346,38 @@ export const TestPrefixPrefixedMessage = objectType({
                 return root.getPrefixedEnum;
             }
         });
+        t.field(\\"outputOnlyMessage\\", {
+            type: nullable(\\"TestPrefixOutputOnlyMessage\\"),
+            description: \\"\\",
+            resolve(root) { return root.getOutputOnlyMessage() ?? null; }
+        });
     },
     sourceType: { module: __filename, export: \\"_$testapis$extensions$extensions_pb$TestPrefixPrefixedMessage\\" }
+});
+export const TestPrefixOutputOnlyMessage = objectType({
+    name: \\"TestPrefixOutputOnlyMessage\\",
+    description: \\"\\",
+    definition(t) {
+        t.field(\\"body\\", {
+            type: nonNull(\\"String\\"),
+            description: \\"\\",
+            resolve(root) { return root.getBody(); }
+        });
+        t.field(\\"prefixedEnum\\", {
+            type: nullable(\\"TestPrefixPrefixedEnum\\"),
+            description: \\"\\",
+            resolve(root) {
+                if (root.getPrefixedEnum == null) {
+                    return null;
+                }
+                if (root.getPrefixedEnum === _$testapis$extensions$extensions_pb.PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
+                    return null;
+                }
+                return root.getPrefixedEnum;
+            }
+        });
+    },
+    sourceType: { module: __filename, export: \\"_$testapis$extensions$extensions_pb$TestPrefixOutputOnlyMessage\\" }
 });
 export const TestPrefixPrefixedMessageInnerMessage = objectType({
     name: \\"TestPrefixPrefixedMessageInnerMessage\\",
@@ -1407,6 +1439,8 @@ exports[`protobuf custom options with protobufjs generates nexus DSLs: extension
 import { objectType, inputObjectType, enumType, nullable, nonNull } from \\"nexus\\";
 import * as _$testapis$extensions from \\"./testapis/extensions\\";
 export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessage = _$testapis$extensions.testapis.extensions.IPrefixedMessage;
+export type _$testapis$extensions$testapis$extensions$TestPrefixIgnoredMessage = _$testapis$extensions.testapis.extensions.IIgnoredMessage;
+export type _$testapis$extensions$testapis$extensions$TestPrefixOutputOnlyMessage = _$testapis$extensions.testapis.extensions.IOutputOnlyMessage;
 export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageInnerMessage = _$testapis$extensions.testapis.extensions.PrefixedMessage.IInnerMessage;
 export const TestPrefixPrefixedMessage = objectType({
     name: \\"TestPrefixPrefixedMessage\\",
@@ -1430,8 +1464,38 @@ export const TestPrefixPrefixedMessage = objectType({
                 return root.prefixedEnum;
             }
         });
+        t.field(\\"outputOnlyMessage\\", {
+            type: nullable(\\"TestPrefixOutputOnlyMessage\\"),
+            description: \\"\\",
+            resolve(root) { return root.outputOnlyMessage ?? null; }
+        });
     },
     sourceType: { module: __filename, export: \\"_$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessage\\" }
+});
+export const TestPrefixOutputOnlyMessage = objectType({
+    name: \\"TestPrefixOutputOnlyMessage\\",
+    description: \\"\\",
+    definition(t) {
+        t.field(\\"body\\", {
+            type: nonNull(\\"String\\"),
+            description: \\"\\",
+            resolve(root) { return root.body!; }
+        });
+        t.field(\\"prefixedEnum\\", {
+            type: nullable(\\"TestPrefixPrefixedEnum\\"),
+            description: \\"\\",
+            resolve(root) {
+                if (root.prefixedEnum == null) {
+                    return null;
+                }
+                if (root.prefixedEnum === _$testapis$extensions.testapis.extensions.PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
+                    return null;
+                }
+                return root.prefixedEnum;
+            }
+        });
+    },
+    sourceType: { module: __filename, export: \\"_$testapis$extensions$testapis$extensions$TestPrefixOutputOnlyMessage\\" }
 });
 export const TestPrefixPrefixedMessageInnerMessage = objectType({
     name: \\"TestPrefixPrefixedMessageInnerMessage\\",
