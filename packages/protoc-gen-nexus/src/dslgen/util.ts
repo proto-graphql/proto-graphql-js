@@ -104,6 +104,15 @@ export function isIgnoredType(
   return type.descriptor.getOptions()?.getExtension(ext)?.getIgnore() ?? false;
 }
 
+export function isSquashedUnion(m: ProtoMessage): boolean {
+  return (
+    m.descriptor
+      .getOptions()
+      ?.getExtension(extensions.objectType)
+      ?.getSquashUnion() ?? false
+  );
+}
+
 export function isRequiredField(field: ProtoField | ProtoOneof): boolean {
   if (
     field instanceof ProtoField &&

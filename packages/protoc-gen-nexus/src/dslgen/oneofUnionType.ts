@@ -6,6 +6,7 @@ import {
   createProtoExpr,
   gqlTypeName,
   isIgnoredField,
+  isSquashedUnion,
   onlyNonNull,
   protoExportAlias,
 } from "./util";
@@ -24,10 +25,20 @@ export function createOneofUnionTypeDslStmts(
   reg: ProtoRegistry,
   opts: GenerationParams
 ): ts.Statement[] {
-  return msgs
-    .flatMap((m) => m.oneofs)
-    .filter((o) => !isIgnoredField(o))
-    .map((o) => createOneofUnionTypeDslStmt(o, reg, opts));
+  return [
+    ...msgs
+      .filter((m) => !isSquashedUnion(m))
+      .flatMap((m) => m.oneofs)
+      .filter((o) => !isIgnoredField(o))
+      .map((o) => createOneofUnionTypeDslStmt(gqlTypeName(o), o, reg, opts)),
+    ...msgs
+      .filter((m) => isSquashedUnion(m))
+      .map((m) => m.oneofs[0])
+      .filter((o) => !isIgnoredField(o))
+      .map((o) =>
+        createOneofUnionTypeDslStmt(gqlTypeName(o.parent), o, reg, opts)
+      ),
+  ];
 }
 
 /**
@@ -40,11 +51,11 @@ export function createOneofUnionTypeDslStmts(
  * ```
  */
 function createOneofUnionTypeDslStmt(
+  typeName: string,
   oneof: ProtoOneof,
   reg: ProtoRegistry,
   opts: GenerationParams
 ): ts.Statement {
-  const typeName = gqlTypeName(oneof);
   return createDslExportConstStmt(
     typeName,
     ts.factory.createCallExpression(

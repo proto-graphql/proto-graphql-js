@@ -16,6 +16,22 @@ extend google.protobuf.FileOptions {
 
 message GraphqlObjectTypeOptions {
   bool ignore = 1;
+  // If `squash_union` is true, the message is converted to `union` type.
+  //
+  // ```proto
+  // message Content {
+  //   option (graphql.object_type).squash_union = true;
+  //   oneof content {
+  //     Blog blog = 2;
+  //     Video video = 2;
+  //   }
+  // }
+  // ```
+  //
+  // ```grahpql
+  // union Content = Blog | Video
+  // ```
+  bool squash_union = 2;
 }
 
 message GraphqlInputObjectTypeOptions {

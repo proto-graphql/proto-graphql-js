@@ -36,6 +36,9 @@ export class GraphqlObjectTypeOptions extends jspb.Message {
   getIgnore(): boolean;
   setIgnore(value: boolean): void;
 
+  getSquashUnion(): boolean;
+  setSquashUnion(value: boolean): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GraphqlObjectTypeOptions.AsObject;
   static toObject(includeInstance: boolean, msg: GraphqlObjectTypeOptions): GraphqlObjectTypeOptions.AsObject;
@@ -49,6 +52,7 @@ export class GraphqlObjectTypeOptions extends jspb.Message {
 export namespace GraphqlObjectTypeOptions {
   export type AsObject = {
     ignore: boolean,
+    squashUnion: boolean,
   }
 }
 

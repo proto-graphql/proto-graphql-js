@@ -7,6 +7,7 @@ import {
   isIgnoredField,
   isIgnoredType,
   isInputOnlyField,
+  isSquashedUnion,
   protoExportAlias,
 } from "./util";
 import { createFieldDefinitionStmt } from "./field";
@@ -29,6 +30,7 @@ export function createObjectTypeDslStmts(
 ): ts.Statement[] {
   return msgs
     .filter((m) => !isIgnoredType(m))
+    .filter((m) => !isSquashedUnion(m))
     .filter(exceptRequestOrResponse(reg))
     .map((m) => createObjectTypeDslStmt(m, reg, opts));
 }

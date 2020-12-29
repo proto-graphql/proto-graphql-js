@@ -6,26 +6,84 @@ import { createEnumFieldResolverStmts } from "./enumFieldResolver";
 import { createObjectFieldResolverStmts } from "./objectFieldResolver";
 import { craeteOneofUnionFieldResolverStmts } from "./oneoUnionfFieldResolver";
 import { createScalarFieldResolverStmts } from "./scalarFieldResolver";
+import { isSquashedUnion } from "../util";
 
 export function createFieldResolverDecl(
   field: ProtoField,
   type: GqlType,
   opts: GenerationParams
 ): ts.MethodDeclaration {
-  return createMethodDeclWithValueExpr(field, type, opts, (valueExpr) =>
-    field.type instanceof ProtoEnum
-      ? createEnumFieldResolverStmts(valueExpr, field, type, field.type, opts)
-      : type.kind === "scalar"
-      ? createScalarFieldResolverStmts(valueExpr, field, opts)
-      : createObjectFieldResolverStmts(valueExpr, type)
-  );
+  return createMethodDeclWithValueExpr(field, type, opts, (valueExpr) => {
+    if (field.type instanceof ProtoEnum) {
+      return createEnumFieldResolverStmts(
+        valueExpr,
+        field,
+        type,
+        field.type,
+        opts
+      );
+    }
+    if (field.type == null || type.kind === "scalar") {
+      return createScalarFieldResolverStmts(valueExpr, field, opts);
+    }
+    if (isSquashedUnion(field.type)) {
+      const oneof = field.type.oneofs[0];
+      const stmts = [];
+      let oneofRoot = valueExpr;
+      if (type.nullable) {
+        oneofRoot = ts.factory.createIdentifier("value");
+        stmts.push(
+          ts.factory.createVariableStatement(
+            undefined,
+            ts.factory.createVariableDeclarationList(
+              [
+                ts.factory.createVariableDeclaration(
+                  "value",
+                  undefined,
+                  undefined,
+                  valueExpr
+                ),
+              ],
+              ts.NodeFlags.Const
+            )
+          ),
+          ts.factory.createIfStatement(
+            ts.factory.createBinaryExpression(
+              oneofRoot,
+              ts.SyntaxKind.EqualsEqualsToken,
+              ts.factory.createToken(ts.SyntaxKind.NullKeyword)
+            ),
+            ts.factory.createBlock(
+              [
+                ts.factory.createReturnStatement(
+                  ts.factory.createToken(ts.SyntaxKind.NullKeyword)
+                ),
+              ],
+              true // multiline
+            )
+          )
+        );
+      }
+      return [
+        ...stmts,
+        ...craeteOneofUnionFieldResolverStmts(oneofRoot, oneof, opts),
+      ];
+    }
+    return createObjectFieldResolverStmts(valueExpr, type);
+  });
 }
 
 export function createOneofFieldResolverDecl(
   oneof: ProtoOneof,
   opts: GenerationParams
 ): ts.MethodDeclaration {
-  return createMethodDecl(craeteOneofUnionFieldResolverStmts(oneof, opts));
+  return createMethodDecl(
+    craeteOneofUnionFieldResolverStmts(
+      ts.factory.createIdentifier("root"),
+      oneof,
+      opts
+    )
+  );
 }
 
 function createMethodDeclWithValueExpr(
