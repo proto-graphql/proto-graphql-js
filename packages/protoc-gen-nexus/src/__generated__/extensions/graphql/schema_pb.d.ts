@@ -8,6 +8,12 @@ export class GraphqlSchemaOptions extends jspb.Message {
   getTypePrefix(): string;
   setTypePrefix(value: string): void;
 
+  getIgnoreRequests(): boolean;
+  setIgnoreRequests(value: boolean): void;
+
+  getIgnoreResponses(): boolean;
+  setIgnoreResponses(value: boolean): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GraphqlSchemaOptions.AsObject;
   static toObject(includeInstance: boolean, msg: GraphqlSchemaOptions): GraphqlSchemaOptions.AsObject;
@@ -21,6 +27,8 @@ export class GraphqlSchemaOptions extends jspb.Message {
 export namespace GraphqlSchemaOptions {
   export type AsObject = {
     typePrefix: string,
+    ignoreRequests: boolean,
+    ignoreResponses: boolean,
   }
 }
 

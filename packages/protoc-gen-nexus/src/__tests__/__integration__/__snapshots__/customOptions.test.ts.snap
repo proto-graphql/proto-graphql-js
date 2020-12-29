@@ -29,6 +29,9 @@ type TestPrefixPrefixedMessage {
   \\"\\"\\"\\"\\"\\"
   body: String!
 
+  \\"\\"\\"Output only.\\"\\"\\"
+  id: String!
+
   \\"\\"\\"\\"\\"\\"
   outputOnlyMessage: TestPrefixOutputOnlyMessage
 

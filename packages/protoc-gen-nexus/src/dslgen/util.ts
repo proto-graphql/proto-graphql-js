@@ -8,6 +8,7 @@ import {
   ProtoFile,
   ProtoMessage,
   ProtoOneof,
+  ProtoRegistry,
 } from "../protoTypes";
 import * as extensions from "../__generated__/extensions/graphql/schema_pb";
 import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
@@ -157,6 +158,37 @@ export function isIgnoredField(
     throw "unreachable";
   }
   return field.descriptor.getOptions()?.getExtension(ext)?.getIgnore() ?? false;
+}
+
+export function exceptRequestOrResponse(
+  reg: ProtoRegistry
+): (m: ProtoMessage) => boolean {
+  const reqSet = new Set();
+  const respSet = new Set();
+  const last = (arr: string[]): string => arr[arr.length - 1];
+  for (const f of Object.values(reg.files)) {
+    for (const s of f.services) {
+      for (const m of s.methods) {
+        const inputName = last(m.descriptor.getInputType()!.split("."));
+        const outputName = last(m.descriptor.getOutputType()!.split("."));
+        if (inputName === `${m.descriptor.getName()!}Request`) {
+          reqSet.add(m.descriptor.getInputType()!.replace(/^\./, ""));
+        }
+        if (outputName === `${m.descriptor.getName()!}Response`) {
+          respSet.add(m.descriptor.getOutputType()!.replace(/^\./, ""));
+        }
+      }
+    }
+  }
+
+  return (m) => {
+    const ext = m.file.descriptor.getOptions()?.getExtension(extensions.schema);
+
+    if (ext?.getIgnoreRequests() && reqSet.has(m.qualifiedName)) return false;
+    if (ext?.getIgnoreResponses() && respSet.has(m.qualifiedName)) return false;
+
+    return true;
+  };
 }
 
 const behaviorComments = ["Required", "Input only", "Output only"] as const;

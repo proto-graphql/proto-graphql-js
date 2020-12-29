@@ -6,10 +6,12 @@ import {
   EnumDescriptorProto,
   EnumValueDescriptorProto,
   OneofDescriptorProto,
+  MethodDescriptorProto,
+  ServiceDescriptorProto,
 } from "google-protobuf/google/protobuf/descriptor_pb";
 
 export class ProtoRegistry {
-  private files: Record<string, ProtoFile>;
+  public files: Record<string, ProtoFile>;
   private types: Record<string, ProtoMessage | ProtoEnum>;
 
   constructor() {
@@ -94,6 +96,12 @@ export class ProtoFile {
     return this.descriptor
       .getEnumTypeList()
       .map((d, i) => new ProtoEnum(d, this, i));
+  }
+
+  get services(): ProtoService[] {
+    return this.descriptor
+      .getServiceList()
+      .map((d, i) => new ProtoService(d, this, i));
   }
 
   get deprecationReason(): ProtoFile | null {
@@ -454,4 +462,26 @@ export class ProtoEnumValue {
       ? this
       : this.parent.deprecationReason;
   }
+}
+
+export class ProtoService {
+  constructor(
+    readonly descriptor: ServiceDescriptorProto,
+    readonly parent: ProtoFile,
+    readonly index: number
+  ) {
+    this.methods = descriptor
+      .getMethodList()
+      .map((m, i) => new ProtoMethod(m, this, i));
+  }
+
+  public readonly methods: ProtoMethod[];
+}
+
+export class ProtoMethod {
+  constructor(
+    readonly descriptor: MethodDescriptorProto,
+    readonly parent: ProtoService,
+    readonly index: number
+  ) {}
 }
