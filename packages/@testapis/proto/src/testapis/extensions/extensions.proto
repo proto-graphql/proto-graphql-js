@@ -6,27 +6,48 @@ import "graphql/schema.proto";
 
 option (graphql.schema) = {
   type_prefix: "TestPrefix"
+  ignore_requests: true
+  ignore_responses: true
 };
+
+service PrefixedMessageService {
+  rpc BatchGetPrefixedMessages(BatchGetPrefixedMessagesRequest) returns (BatchGetPrefixedMessagesResponse);
+  rpc CreatePrefixedMessage(CreatePrefixedMessageRequest) returns (PrefixedMessage);
+}
+
+message BatchGetPrefixedMessagesRequest {
+  repeated uint64 id = 1;
+}
+
+message BatchGetPrefixedMessagesResponse {
+  repeated PrefixedMessage prefixed_messages = 1;
+}
+
+message CreatePrefixedMessageRequest {
+  PrefixedMessage prefixed_message = 1;
+}
 
 message PrefixedMessage {
   message InnerMessage {
     string body = 1;
   }
 
-  string body = 1;
-  PrefixedEnum prefixed_enum = 2;
-  InnerMessage ignored_field = 3 [(graphql.field).ignore = true];
+  // Output only.
+  uint64 id = 1;
+  string body = 2;
+  PrefixedEnum prefixed_enum = 3;
+  InnerMessage ignored_field = 4 [(graphql.field).ignore = true];
 
   oneof ignored_oneof {
     option (graphql.oneof).ignore = true;
 
-    PrefixedEnum oneof_prefixed_enum = 4;
-    InnerMessage oneof_ignored_field = 5;
+    PrefixedEnum oneof_prefixed_enum = 5;
+    InnerMessage oneof_ignored_field = 6;
   }
 
-  IgnoredMessage ignored_message = 6;
-  OutputOnlyMessage output_only_message = 7;
-  IgnoredEnum ignored_enum = 8;
+  IgnoredMessage ignored_message = 7;
+  OutputOnlyMessage output_only_message = 8;
+  IgnoredEnum ignored_enum = 9;
 }
 
 enum PrefixedEnum {

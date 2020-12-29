@@ -2,6 +2,7 @@ import ts from "typescript";
 import { ProtoMessage, ProtoRegistry } from "../protoTypes";
 import {
   createDslExportConstStmt,
+  exceptRequestOrResponse,
   gqlTypeName,
   isIgnoredField,
   isIgnoredType,
@@ -26,6 +27,7 @@ export function createInputObjectTypeDslStmts(
 ): ts.Statement[] {
   return msgs
     .filter((m) => !isIgnoredType(m, { input: true }))
+    .filter(exceptRequestOrResponse(reg))
     .map((m) => createInputObjectTypeDslStmt(m, reg, opts));
 }
 

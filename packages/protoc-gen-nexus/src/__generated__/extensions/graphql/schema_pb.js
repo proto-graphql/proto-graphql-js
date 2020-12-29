@@ -209,7 +209,9 @@ proto.graphql.GraphqlSchemaOptions.prototype.toObject = function(opt_includeInst
  */
 proto.graphql.GraphqlSchemaOptions.toObject = function(includeInstance, msg) {
   var f, obj = {
-    typePrefix: jspb.Message.getFieldWithDefault(msg, 1, "")
+    typePrefix: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    ignoreRequests: jspb.Message.getBooleanFieldWithDefault(msg, 2, false),
+    ignoreResponses: jspb.Message.getBooleanFieldWithDefault(msg, 3, false)
   };
 
   if (includeInstance) {
@@ -250,6 +252,14 @@ proto.graphql.GraphqlSchemaOptions.deserializeBinaryFromReader = function(msg, r
       var value = /** @type {string} */ (reader.readString());
       msg.setTypePrefix(value);
       break;
+    case 2:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIgnoreRequests(value);
+      break;
+    case 3:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIgnoreResponses(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -286,6 +296,20 @@ proto.graphql.GraphqlSchemaOptions.serializeBinaryToWriter = function(message, w
       f
     );
   }
+  f = message.getIgnoreRequests();
+  if (f) {
+    writer.writeBool(
+      2,
+      f
+    );
+  }
+  f = message.getIgnoreResponses();
+  if (f) {
+    writer.writeBool(
+      3,
+      f
+    );
+  }
 };
 
 
@@ -304,6 +328,42 @@ proto.graphql.GraphqlSchemaOptions.prototype.getTypePrefix = function() {
  */
 proto.graphql.GraphqlSchemaOptions.prototype.setTypePrefix = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional bool ignore_requests = 2;
+ * @return {boolean}
+ */
+proto.graphql.GraphqlSchemaOptions.prototype.getIgnoreRequests = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 2, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.graphql.GraphqlSchemaOptions} returns this
+ */
+proto.graphql.GraphqlSchemaOptions.prototype.setIgnoreRequests = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 2, value);
+};
+
+
+/**
+ * optional bool ignore_responses = 3;
+ * @return {boolean}
+ */
+proto.graphql.GraphqlSchemaOptions.prototype.getIgnoreResponses = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 3, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.graphql.GraphqlSchemaOptions} returns this
+ */
+proto.graphql.GraphqlSchemaOptions.prototype.setIgnoreResponses = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 3, value);
 };
 
 
