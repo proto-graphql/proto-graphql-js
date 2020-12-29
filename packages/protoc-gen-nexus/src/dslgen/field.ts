@@ -249,7 +249,7 @@ function createFieldResolverBlockForEnum(
   en: ProtoEnum,
   opts: GenerationParams
 ): ts.Block {
-  const value = ts.factory.createPropertyAccessExpression(
+  let value: ts.Expression = ts.factory.createPropertyAccessExpression(
     ts.factory.createIdentifier("root"),
     ts.factory.createIdentifier(
       opts.useProtobufjs
@@ -257,6 +257,10 @@ function createFieldResolverBlockForEnum(
         : field.getterName
     )
   );
+
+  if (!opts.useProtobufjs) {
+    value = ts.factory.createCallExpression(value, undefined, undefined);
+  }
   let whenNullStmt: ts.Statement = type.nullable
     ? ts.factory.createReturnStatement(
         ts.factory.createToken(ts.SyntaxKind.NullKeyword)
