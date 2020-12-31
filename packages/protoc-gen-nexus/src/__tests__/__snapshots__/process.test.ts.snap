@@ -51,16 +51,15 @@ export const DeprecatedMessage = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             deprecation: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\",
-            resolve(root) { return root.getBody(); }
+            resolve(root) {
+                return root.getBody();
+            }
         });
         t.field(\\"enum\\", {
             type: nullable(\\"NotDeprecatedEnum\\"),
             description: \\"\\",
             deprecation: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\",
             resolve(root) {
-                if (root.getEnum() == null) {
-                    return null;
-                }
                 if (root.getEnum() === _$testapis$deprecation$deprecation_pb.NotDeprecatedEnum.NOT_DEPRECATED_ENUM_UNSPECIFIED) {
                     return null;
                 }
@@ -78,16 +77,15 @@ export const NotDeprecatedMessage = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             deprecation: \\"testapis.deprecation.NotDeprecatedMessage.body is mark as deprecated in a *.proto file.\\",
-            resolve(root) { return root.getBody(); }
+            resolve(root) {
+                return root.getBody();
+            }
         });
         t.field(\\"enum\\", {
             type: nullable(\\"DeprecatedEnum\\"),
             description: \\"\\",
             deprecation: \\"testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.\\",
             resolve(root) {
-                if (root.getEnum() == null) {
-                    return null;
-                }
                 if (root.getEnum() === _$testapis$deprecation$deprecation_pb.DeprecatedEnum.DEPRECATED_ENUM_UNSPECIFIED) {
                     return null;
                 }
@@ -146,7 +144,9 @@ export const DeprecatedMessageInnerMessage = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             deprecation: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\",
-            resolve(root) { return root.getBody(); }
+            resolve(root) {
+                return root.getBody();
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$deprecation$deprecation_pb$DeprecatedMessageInnerMessage\\" }
@@ -158,7 +158,9 @@ export const NotDeprecatedMessageInnerMessage1 = objectType({
         t.field(\\"body\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.getBody(); }
+            resolve(root) {
+                return root.getBody();
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$deprecation$deprecation_pb$NotDeprecatedMessageInnerMessage1\\" }
@@ -170,7 +172,9 @@ export const NotDeprecatedMessageInnerMessage2 = objectType({
         t.field(\\"body\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.getBody(); }
+            resolve(root) {
+                return root.getBody();
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$deprecation$deprecation_pb$NotDeprecatedMessageInnerMessage2\\" }
@@ -307,16 +311,15 @@ export const DeprecatedFileMessage = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\",
-            resolve(root) { return root.getBody(); }
+            resolve(root) {
+                return root.getBody();
+            }
         });
         t.field(\\"enum\\", {
             type: nullable(\\"DeprecatedFileEnum\\"),
             description: \\"\\",
             deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\",
             resolve(root) {
-                if (root.getEnum() == null) {
-                    return null;
-                }
                 if (root.getEnum() === _$testapis$deprecation$file_deprecation_pb.DeprecatedFileEnum.DEPRECATED_FILE_ENUM_UNSPECIFIED) {
                     return null;
                 }
@@ -334,7 +337,9 @@ export const DeprecatedFileMessageInnerMessage = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\",
-            resolve(root) { return root.getBody(); }
+            resolve(root) {
+                return root.getBody();
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$deprecation$file_deprecation_pb$DeprecatedFileMessageInnerMessage\\" }
@@ -448,16 +453,15 @@ export const DeprecatedMessage = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             deprecation: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\",
-            resolve(root) { return root.body!; }
+            resolve(root) {
+                return root.body!;
+            }
         });
         t.field(\\"enum\\", {
             type: nullable(\\"NotDeprecatedEnum\\"),
             description: \\"\\",
             deprecation: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\",
             resolve(root) {
-                if (root.enum == null) {
-                    return null;
-                }
                 if (root.enum === _$testapis$deprecation.testapis.deprecation.NotDeprecatedEnum.NOT_DEPRECATED_ENUM_UNSPECIFIED) {
                     return null;
                 }
@@ -475,16 +479,15 @@ export const NotDeprecatedMessage = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             deprecation: \\"testapis.deprecation.NotDeprecatedMessage.body is mark as deprecated in a *.proto file.\\",
-            resolve(root) { return root.body!; }
+            resolve(root) {
+                return root.body!;
+            }
         });
         t.field(\\"enum\\", {
             type: nullable(\\"DeprecatedEnum\\"),
             description: \\"\\",
             deprecation: \\"testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.\\",
             resolve(root) {
-                if (root.enum == null) {
-                    return null;
-                }
                 if (root.enum === _$testapis$deprecation.testapis.deprecation.DeprecatedEnum.DEPRECATED_ENUM_UNSPECIFIED) {
                     return null;
                 }
@@ -529,7 +532,9 @@ export const DeprecatedMessageInnerMessage = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             deprecation: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\",
-            resolve(root) { return root.body!; }
+            resolve(root) {
+                return root.body!;
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$deprecation$testapis$deprecation$DeprecatedMessageInnerMessage\\" }
@@ -541,7 +546,9 @@ export const NotDeprecatedMessageInnerMessage1 = objectType({
         t.field(\\"body\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.body!; }
+            resolve(root) {
+                return root.body!;
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$deprecation$testapis$deprecation$NotDeprecatedMessageInnerMessage1\\" }
@@ -553,7 +560,9 @@ export const NotDeprecatedMessageInnerMessage2 = objectType({
         t.field(\\"body\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.body!; }
+            resolve(root) {
+                return root.body!;
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$deprecation$testapis$deprecation$NotDeprecatedMessageInnerMessage2\\" }
@@ -690,16 +699,15 @@ export const DeprecatedFileMessage = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\",
-            resolve(root) { return root.body!; }
+            resolve(root) {
+                return root.body!;
+            }
         });
         t.field(\\"enum\\", {
             type: nullable(\\"DeprecatedFileEnum\\"),
             description: \\"\\",
             deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\",
             resolve(root) {
-                if (root.enum == null) {
-                    return null;
-                }
                 if (root.enum === _$testapis$deprecation.testapis.deprecation.DeprecatedFileEnum.DEPRECATED_FILE_ENUM_UNSPECIFIED) {
                     return null;
                 }
@@ -717,7 +725,9 @@ export const DeprecatedFileMessageInnerMessage = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\",
-            resolve(root) { return root.body!; }
+            resolve(root) {
+                return root.body!;
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$deprecation$testapis$deprecation$DeprecatedFileMessageInnerMessage\\" }
@@ -783,22 +793,30 @@ export const FieldBehaviorComentsMessage = objectType({
         t.field(\\"requiredField\\", {
             type: nonNull(\\"FieldBehaviorComentsMessagePost\\"),
             description: \\"Required.\\",
-            resolve(root) { return root.getRequiredField()!; }
+            resolve(root) {
+                return root.getRequiredField()!;
+            }
         });
         t.field(\\"requiredOutputOnlyField\\", {
             type: nonNull(\\"FieldBehaviorComentsMessagePost\\"),
             description: \\"Required. Output only.\\",
-            resolve(root) { return root.getRequiredOutputOnlyField()!; }
+            resolve(root) {
+                return root.getRequiredOutputOnlyField()!;
+            }
         });
         t.field(\\"outputOnlyRequiredField\\", {
             type: nonNull(\\"FieldBehaviorComentsMessagePost\\"),
             description: \\"Output only. Required.\\",
-            resolve(root) { return root.getOutputOnlyRequiredField()!; }
+            resolve(root) {
+                return root.getOutputOnlyRequiredField()!;
+            }
         });
         t.field(\\"outputOnlyField\\", {
             type: nullable(\\"FieldBehaviorComentsMessagePost\\"),
             description: \\"Output only.\\",
-            resolve(root) { return root.getOutputOnlyField() ?? null; }
+            resolve(root) {
+                return root.getOutputOnlyField() ?? null;
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$field_behavior$comments_pb$FieldBehaviorComentsMessage\\" }
@@ -810,7 +828,9 @@ export const FieldBehaviorComentsMessagePost = objectType({
         t.field(\\"body\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.getBody(); }
+            resolve(root) {
+                return root.getBody();
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$field_behavior$comments_pb$FieldBehaviorComentsMessagePost\\" }
@@ -865,22 +885,30 @@ export const FieldBehaviorComentsMessage = objectType({
         t.field(\\"requiredField\\", {
             type: nonNull(\\"FieldBehaviorComentsMessagePost\\"),
             description: \\"Required.\\",
-            resolve(root) { return root.requiredField!; }
+            resolve(root) {
+                return root.requiredField!;
+            }
         });
         t.field(\\"requiredOutputOnlyField\\", {
             type: nonNull(\\"FieldBehaviorComentsMessagePost\\"),
             description: \\"Required. Output only.\\",
-            resolve(root) { return root.requiredOutputOnlyField!; }
+            resolve(root) {
+                return root.requiredOutputOnlyField!;
+            }
         });
         t.field(\\"outputOnlyRequiredField\\", {
             type: nonNull(\\"FieldBehaviorComentsMessagePost\\"),
             description: \\"Output only. Required.\\",
-            resolve(root) { return root.outputOnlyRequiredField!; }
+            resolve(root) {
+                return root.outputOnlyRequiredField!;
+            }
         });
         t.field(\\"outputOnlyField\\", {
             type: nullable(\\"FieldBehaviorComentsMessagePost\\"),
             description: \\"Output only.\\",
-            resolve(root) { return root.outputOnlyField ?? null; }
+            resolve(root) {
+                return root.outputOnlyField ?? null;
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$field_behavior$testapis$deprecation$FieldBehaviorComentsMessage\\" }
@@ -892,7 +920,9 @@ export const FieldBehaviorComentsMessagePost = objectType({
         t.field(\\"body\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.body!; }
+            resolve(root) {
+                return root.body!;
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$field_behavior$testapis$deprecation$FieldBehaviorComentsMessagePost\\" }
@@ -946,7 +976,9 @@ export const SubpkgMessage = objectType({
         t.field(\\"body\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.getBody(); }
+            resolve(root) {
+                return root.getBody();
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$multipkgs$subpkg1$types_pb$SubpkgMessage\\" }
@@ -993,15 +1025,14 @@ export const MessageWithSubpkg = objectType({
         t.field(\\"message\\", {
             type: nullable(\\"SubpkgMessage\\"),
             description: \\"\\",
-            resolve(root) { return root.getMessage() ?? null; }
+            resolve(root) {
+                return root.getMessage() ?? null;
+            }
         });
         t.field(\\"enum\\", {
             type: nullable(\\"SubpkgEnum\\"),
             description: \\"\\",
             resolve(root) {
-                if (root.getEnum() == null) {
-                    return null;
-                }
                 if (root.getEnum() === _$testapis$multipkgs$subpkg1$types_pb.SubpkgEnum.SUBPKG_ENUM_UNSPECIFIED) {
                     return null;
                 }
@@ -1042,7 +1073,9 @@ export const SubpkgMessage = objectType({
         t.field(\\"body\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.body!; }
+            resolve(root) {
+                return root.body!;
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$multipkgs$subpkg1$testapis$multipkgs$subpkg1$SubpkgMessage\\" }
@@ -1089,15 +1122,14 @@ export const MessageWithSubpkg = objectType({
         t.field(\\"message\\", {
             type: nullable(\\"SubpkgMessage\\"),
             description: \\"\\",
-            resolve(root) { return root.message ?? null; }
+            resolve(root) {
+                return root.message ?? null;
+            }
         });
         t.field(\\"enum\\", {
             type: nullable(\\"SubpkgEnum\\"),
             description: \\"\\",
             resolve(root) {
-                if (root.enum == null) {
-                    return null;
-                }
                 if (root.enum === _$testapis$multipkgs$subpkg1.testapis.multipkgs.subpkg1.SubpkgEnum.SUBPKG_ENUM_UNSPECIFIED) {
                     return null;
                 }
@@ -1139,20 +1171,21 @@ export const ParentMessage = objectType({
         t.field(\\"body\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.getBody(); }
+            resolve(root) {
+                return root.getBody();
+            }
         });
         t.field(\\"nested\\", {
             type: nullable(\\"ParentMessageNestedMessage\\"),
             description: \\"\\",
-            resolve(root) { return root.getNested() ?? null; }
+            resolve(root) {
+                return root.getNested() ?? null;
+            }
         });
         t.field(\\"nestedEnum\\", {
             type: nullable(\\"ParentMessageNestedEnum\\"),
             description: \\"\\",
             resolve(root) {
-                if (root.getNestedEnum() == null) {
-                    return null;
-                }
                 if (root.getNestedEnum() === _$testapis$nested$nested_pb.ParentMessage.NestedEnum.NESTED_ENUM_UNSPECIFIED) {
                     return null;
                 }
@@ -1169,7 +1202,9 @@ export const ParentMessageNestedMessage = objectType({
         t.field(\\"nestedBody\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.getNestedBody(); }
+            resolve(root) {
+                return root.getNestedBody();
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$nested$nested_pb$ParentMessageNestedMessage\\" }
@@ -1234,20 +1269,21 @@ export const ParentMessage = objectType({
         t.field(\\"body\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.body!; }
+            resolve(root) {
+                return root.body!;
+            }
         });
         t.field(\\"nested\\", {
             type: nullable(\\"ParentMessageNestedMessage\\"),
             description: \\"\\",
-            resolve(root) { return root.nested ?? null; }
+            resolve(root) {
+                return root.nested ?? null;
+            }
         });
         t.field(\\"nestedEnum\\", {
             type: nullable(\\"ParentMessageNestedEnum\\"),
             description: \\"\\",
             resolve(root) {
-                if (root.nestedEnum == null) {
-                    return null;
-                }
                 if (root.nestedEnum === _$testapis$nested.testapis.nested.ParentMessage.NestedEnum.NESTED_ENUM_UNSPECIFIED) {
                     return null;
                 }
@@ -1264,7 +1300,9 @@ export const ParentMessageNestedMessage = objectType({
         t.field(\\"nestedBody\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.nestedBody!; }
+            resolve(root) {
+                return root.nestedBody!;
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$nested$testapis$nested$ParentMessageNestedMessage\\" }
@@ -1335,20 +1373,21 @@ export const TestPrefixPrefixedMessage = objectType({
         t.field(\\"id\\", {
             type: nonNull(\\"String\\"),
             description: \\"Output only.\\",
-            resolve(root) { return root.getId().toString(); }
+            resolve(root) {
+                return root.getId().toString();
+            }
         });
         t.field(\\"body\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.getBody(); }
+            resolve(root) {
+                return root.getBody();
+            }
         });
         t.field(\\"prefixedEnum\\", {
             type: nullable(\\"TestPrefixPrefixedEnum\\"),
             description: \\"\\",
             resolve(root) {
-                if (root.getPrefixedEnum() == null) {
-                    return null;
-                }
                 if (root.getPrefixedEnum() === _$testapis$extensions$extensions_pb.PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
                     return null;
                 }
@@ -1358,7 +1397,9 @@ export const TestPrefixPrefixedMessage = objectType({
         t.field(\\"outputOnlyMessage\\", {
             type: nullable(\\"TestPrefixOutputOnlyMessage\\"),
             description: \\"\\",
-            resolve(root) { return root.getOutputOnlyMessage() ?? null; }
+            resolve(root) {
+                return root.getOutputOnlyMessage() ?? null;
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$extensions$extensions_pb$TestPrefixPrefixedMessage\\" }
@@ -1370,15 +1411,14 @@ export const TestPrefixOutputOnlyMessage = objectType({
         t.field(\\"body\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.getBody(); }
+            resolve(root) {
+                return root.getBody();
+            }
         });
         t.field(\\"prefixedEnum\\", {
             type: nullable(\\"TestPrefixPrefixedEnum\\"),
             description: \\"\\",
             resolve(root) {
-                if (root.getPrefixedEnum() == null) {
-                    return null;
-                }
                 if (root.getPrefixedEnum() === _$testapis$extensions$extensions_pb.PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
                     return null;
                 }
@@ -1395,7 +1435,9 @@ export const TestPrefixPrefixedMessageInnerMessage = objectType({
         t.field(\\"body\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.getBody(); }
+            resolve(root) {
+                return root.getBody();
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage\\" }
@@ -1480,20 +1522,21 @@ export const TestPrefixPrefixedMessage = objectType({
         t.field(\\"id\\", {
             type: nonNull(\\"String\\"),
             description: \\"Output only.\\",
-            resolve(root) { return root.id!.toString(); }
+            resolve(root) {
+                return root.id!.toString();
+            }
         });
         t.field(\\"body\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.body!; }
+            resolve(root) {
+                return root.body!;
+            }
         });
         t.field(\\"prefixedEnum\\", {
             type: nullable(\\"TestPrefixPrefixedEnum\\"),
             description: \\"\\",
             resolve(root) {
-                if (root.prefixedEnum == null) {
-                    return null;
-                }
                 if (root.prefixedEnum === _$testapis$extensions.testapis.extensions.PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
                     return null;
                 }
@@ -1503,7 +1546,9 @@ export const TestPrefixPrefixedMessage = objectType({
         t.field(\\"outputOnlyMessage\\", {
             type: nullable(\\"TestPrefixOutputOnlyMessage\\"),
             description: \\"\\",
-            resolve(root) { return root.outputOnlyMessage ?? null; }
+            resolve(root) {
+                return root.outputOnlyMessage ?? null;
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessage\\" }
@@ -1515,15 +1560,14 @@ export const TestPrefixOutputOnlyMessage = objectType({
         t.field(\\"body\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.body!; }
+            resolve(root) {
+                return root.body!;
+            }
         });
         t.field(\\"prefixedEnum\\", {
             type: nullable(\\"TestPrefixPrefixedEnum\\"),
             description: \\"\\",
             resolve(root) {
-                if (root.prefixedEnum == null) {
-                    return null;
-                }
                 if (root.prefixedEnum === _$testapis$extensions.testapis.extensions.PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
                     return null;
                 }
@@ -1540,7 +1584,9 @@ export const TestPrefixPrefixedMessageInnerMessage = objectType({
         t.field(\\"body\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.body!; }
+            resolve(root) {
+                return root.body!;
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageInnerMessage\\" }
@@ -1619,22 +1665,16 @@ export const MessageWithEnums = objectType({
             type: nonNull(\\"MyEnum\\"),
             description: \\"Required.\\",
             resolve(root) {
-                if (root.getRequiredMyEnum() == null) {
+                if ((root.getRequiredMyEnum()!) === _$testapis$enums$enums_pb.MyEnum.MY_ENUM_UNSPECIFIED) {
                     throw new Error(\\"MessageWithEnums.requiredMyEnum is required field. But got null or unspecified.\\");
                 }
-                if (root.getRequiredMyEnum() === _$testapis$enums$enums_pb.MyEnum.MY_ENUM_UNSPECIFIED) {
-                    throw new Error(\\"MessageWithEnums.requiredMyEnum is required field. But got null or unspecified.\\");
-                }
-                return root.getRequiredMyEnum();
+                return root.getRequiredMyEnum()!;
             }
         });
         t.field(\\"optionalMyEnum\\", {
             type: nullable(\\"MyEnum\\"),
             description: \\"Optional.\\",
             resolve(root) {
-                if (root.getOptionalMyEnum() == null) {
-                    return null;
-                }
                 if (root.getOptionalMyEnum() === _$testapis$enums$enums_pb.MyEnum.MY_ENUM_UNSPECIFIED) {
                     return null;
                 }
@@ -1645,19 +1685,13 @@ export const MessageWithEnums = objectType({
             type: nonNull(\\"MyEnumWithoutUnspecified\\"),
             description: \\"Required.\\",
             resolve(root) {
-                if (root.getRequiredMyEnumWithoutUnspecified() == null) {
-                    throw new Error(\\"MessageWithEnums.requiredMyEnumWithoutUnspecified is required field. But got null or unspecified.\\");
-                }
-                return root.getRequiredMyEnumWithoutUnspecified();
+                return root.getRequiredMyEnumWithoutUnspecified()!;
             }
         });
         t.field(\\"optionalMyEnumWithoutUnspecified\\", {
             type: nullable(\\"MyEnumWithoutUnspecified\\"),
             description: \\"Optional.\\",
             resolve(root) {
-                if (root.getOptionalMyEnumWithoutUnspecified() == null) {
-                    return null;
-                }
                 return root.getOptionalMyEnumWithoutUnspecified();
             }
         });
@@ -1741,22 +1775,16 @@ export const MessageWithEnums = objectType({
             type: nonNull(\\"MyEnum\\"),
             description: \\"Required.\\",
             resolve(root) {
-                if (root.requiredMyEnum == null) {
+                if ((root.requiredMyEnum!) === _$testapis$enums.testapi.enums.MyEnum.MY_ENUM_UNSPECIFIED) {
                     throw new Error(\\"MessageWithEnums.requiredMyEnum is required field. But got null or unspecified.\\");
                 }
-                if (root.requiredMyEnum === _$testapis$enums.testapi.enums.MyEnum.MY_ENUM_UNSPECIFIED) {
-                    throw new Error(\\"MessageWithEnums.requiredMyEnum is required field. But got null or unspecified.\\");
-                }
-                return root.requiredMyEnum;
+                return root.requiredMyEnum!;
             }
         });
         t.field(\\"optionalMyEnum\\", {
             type: nullable(\\"MyEnum\\"),
             description: \\"Optional.\\",
             resolve(root) {
-                if (root.optionalMyEnum == null) {
-                    return null;
-                }
                 if (root.optionalMyEnum === _$testapis$enums.testapi.enums.MyEnum.MY_ENUM_UNSPECIFIED) {
                     return null;
                 }
@@ -1767,19 +1795,13 @@ export const MessageWithEnums = objectType({
             type: nonNull(\\"MyEnumWithoutUnspecified\\"),
             description: \\"Required.\\",
             resolve(root) {
-                if (root.requiredMyEnumWithoutUnspecified == null) {
-                    throw new Error(\\"MessageWithEnums.requiredMyEnumWithoutUnspecified is required field. But got null or unspecified.\\");
-                }
-                return root.requiredMyEnumWithoutUnspecified;
+                return root.requiredMyEnumWithoutUnspecified!;
             }
         });
         t.field(\\"optionalMyEnumWithoutUnspecified\\", {
             type: nullable(\\"MyEnumWithoutUnspecified\\"),
             description: \\"Optional.\\",
             resolve(root) {
-                if (root.optionalMyEnumWithoutUnspecified == null) {
-                    return null;
-                }
                 return root.optionalMyEnumWithoutUnspecified;
             }
         });
@@ -1896,7 +1918,9 @@ export const OneofParent = objectType({
         t.field(\\"normalField\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.getNormalField(); }
+            resolve(root) {
+                return root.getNormalField();
+            }
         });
         t.field(\\"required_oneof_members\\", {
             type: nonNull(\\"OneofParentRequiredOneofMembers\\"),
@@ -1948,7 +1972,9 @@ export const OneofMemberMessage1 = objectType({
         t.field(\\"body\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.getBody(); }
+            resolve(root) {
+                return root.getBody();
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$oneof$oneof_pb$OneofMemberMessage1\\" }
@@ -1960,7 +1986,9 @@ export const OneofMemberMessage2 = objectType({
         t.field(\\"imageUrl\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.getImageUrl(); }
+            resolve(root) {
+                return root.getImageUrl();
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$oneof$oneof_pb$OneofMemberMessage2\\" }
@@ -2074,7 +2102,9 @@ export const OneofParent = objectType({
         t.field(\\"normalField\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.normalField!; }
+            resolve(root) {
+                return root.normalField!;
+            }
         });
         t.field(\\"required_oneof_members\\", {
             type: nonNull(\\"OneofParentRequiredOneofMembers\\"),
@@ -2112,7 +2142,9 @@ export const OneofMemberMessage1 = objectType({
         t.field(\\"body\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.body!; }
+            resolve(root) {
+                return root.body!;
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$oneof$testapis$oneof$OneofMemberMessage1\\" }
@@ -2124,7 +2156,9 @@ export const OneofMemberMessage2 = objectType({
         t.field(\\"imageUrl\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.imageUrl!; }
+            resolve(root) {
+                return root.imageUrl!;
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$oneof$testapis$oneof$OneofMemberMessage2\\" }
@@ -2193,22 +2227,30 @@ export const Hello = objectType({
         t.field(\\"requiredPrimitives\\", {
             type: nonNull(\\"Primitives\\"),
             description: \\"Required.\\",
-            resolve(root) { return root.getRequiredPrimitives()!; }
+            resolve(root) {
+                return root.getRequiredPrimitives()!;
+            }
         });
         t.field(\\"optionalPrimitives\\", {
             type: nullable(\\"Primitives\\"),
             description: \\"Optional.\\",
-            resolve(root) { return root.getOptionalPrimitives() ?? null; }
+            resolve(root) {
+                return root.getOptionalPrimitives() ?? null;
+            }
         });
         t.field(\\"requiredPrimitivesList\\", {
             type: list(nonNull(\\"Primitives\\")),
             description: \\"Required.\\",
-            resolve(root) { return root.getRequiredPrimitivesListList(); }
+            resolve(root) {
+                return root.getRequiredPrimitivesListList()!;
+            }
         });
         t.field(\\"optionalPrimitivesList\\", {
             type: nullable(\\"Primitives\\"),
             description: \\"Optional.\\",
-            resolve(root) { return root.getOptionalPrimitivesList() ?? null; }
+            resolve(root) {
+                return root.getOptionalPrimitivesList() ?? null;
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$hello$hello_pb$Hello\\" }
@@ -2220,72 +2262,100 @@ export const Primitives = objectType({
         t.field(\\"requiredDoubleValue\\", {
             type: nonNull(\\"Float\\"),
             description: \\"\\",
-            resolve(root) { return root.getRequiredDoubleValue(); }
+            resolve(root) {
+                return root.getRequiredDoubleValue();
+            }
         });
         t.field(\\"requiredFloatValue\\", {
             type: nonNull(\\"Float\\"),
             description: \\"\\",
-            resolve(root) { return root.getRequiredFloatValue(); }
+            resolve(root) {
+                return root.getRequiredFloatValue();
+            }
         });
         t.field(\\"requiredInt32Value\\", {
             type: nonNull(\\"Int\\"),
             description: \\"\\",
-            resolve(root) { return root.getRequiredInt32Value(); }
+            resolve(root) {
+                return root.getRequiredInt32Value();
+            }
         });
         t.field(\\"requiredInt64Value\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.getRequiredInt64Value().toString(); }
+            resolve(root) {
+                return root.getRequiredInt64Value().toString();
+            }
         });
         t.field(\\"requiredUint32Value\\", {
             type: nonNull(\\"Int\\"),
             description: \\"\\",
-            resolve(root) { return root.getRequiredUint32Value(); }
+            resolve(root) {
+                return root.getRequiredUint32Value();
+            }
         });
         t.field(\\"requiredUint64Value\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.getRequiredUint64Value().toString(); }
+            resolve(root) {
+                return root.getRequiredUint64Value().toString();
+            }
         });
         t.field(\\"requiredSint32Value\\", {
             type: nonNull(\\"Int\\"),
             description: \\"\\",
-            resolve(root) { return root.getRequiredSint32Value(); }
+            resolve(root) {
+                return root.getRequiredSint32Value();
+            }
         });
         t.field(\\"requiredSint64Value\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.getRequiredSint64Value().toString(); }
+            resolve(root) {
+                return root.getRequiredSint64Value().toString();
+            }
         });
         t.field(\\"requiredFixed32Value\\", {
             type: nonNull(\\"Int\\"),
             description: \\"\\",
-            resolve(root) { return root.getRequiredFixed32Value(); }
+            resolve(root) {
+                return root.getRequiredFixed32Value();
+            }
         });
         t.field(\\"requiredFixed64Value\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.getRequiredFixed64Value().toString(); }
+            resolve(root) {
+                return root.getRequiredFixed64Value().toString();
+            }
         });
         t.field(\\"requiredSfixed32Value\\", {
             type: nonNull(\\"Int\\"),
             description: \\"\\",
-            resolve(root) { return root.getRequiredSfixed32Value(); }
+            resolve(root) {
+                return root.getRequiredSfixed32Value();
+            }
         });
         t.field(\\"requiredSfixed64Value\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.getRequiredSfixed64Value().toString(); }
+            resolve(root) {
+                return root.getRequiredSfixed64Value().toString();
+            }
         });
         t.field(\\"requiredBoolValue\\", {
             type: nonNull(\\"Boolean\\"),
             description: \\"\\",
-            resolve(root) { return root.getRequiredBoolValue(); }
+            resolve(root) {
+                return root.getRequiredBoolValue();
+            }
         });
         t.field(\\"requiredStringValue\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.getRequiredStringValue(); }
+            resolve(root) {
+                return root.getRequiredStringValue();
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$hello$hello_pb$Primitives\\" }
@@ -2392,22 +2462,30 @@ export const Hello = objectType({
         t.field(\\"requiredPrimitives\\", {
             type: nonNull(\\"Primitives\\"),
             description: \\"Required.\\",
-            resolve(root) { return root.requiredPrimitives!; }
+            resolve(root) {
+                return root.requiredPrimitives!;
+            }
         });
         t.field(\\"optionalPrimitives\\", {
             type: nullable(\\"Primitives\\"),
             description: \\"Optional.\\",
-            resolve(root) { return root.optionalPrimitives ?? null; }
+            resolve(root) {
+                return root.optionalPrimitives ?? null;
+            }
         });
         t.field(\\"requiredPrimitivesList\\", {
             type: list(nonNull(\\"Primitives\\")),
             description: \\"Required.\\",
-            resolve(root) { return root.requiredPrimitivesList!; }
+            resolve(root) {
+                return root.requiredPrimitivesList!;
+            }
         });
         t.field(\\"optionalPrimitivesList\\", {
             type: nullable(\\"Primitives\\"),
             description: \\"Optional.\\",
-            resolve(root) { return root.optionalPrimitivesList ?? null; }
+            resolve(root) {
+                return root.optionalPrimitivesList ?? null;
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$hello$testapis$hello$Hello\\" }
@@ -2419,72 +2497,100 @@ export const Primitives = objectType({
         t.field(\\"requiredDoubleValue\\", {
             type: nonNull(\\"Float\\"),
             description: \\"\\",
-            resolve(root) { return root.requiredDoubleValue!; }
+            resolve(root) {
+                return root.requiredDoubleValue!;
+            }
         });
         t.field(\\"requiredFloatValue\\", {
             type: nonNull(\\"Float\\"),
             description: \\"\\",
-            resolve(root) { return root.requiredFloatValue!; }
+            resolve(root) {
+                return root.requiredFloatValue!;
+            }
         });
         t.field(\\"requiredInt32Value\\", {
             type: nonNull(\\"Int\\"),
             description: \\"\\",
-            resolve(root) { return root.requiredInt32Value!; }
+            resolve(root) {
+                return root.requiredInt32Value!;
+            }
         });
         t.field(\\"requiredInt64Value\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.requiredInt64Value!.toString(); }
+            resolve(root) {
+                return root.requiredInt64Value!.toString();
+            }
         });
         t.field(\\"requiredUint32Value\\", {
             type: nonNull(\\"Int\\"),
             description: \\"\\",
-            resolve(root) { return root.requiredUint32Value!; }
+            resolve(root) {
+                return root.requiredUint32Value!;
+            }
         });
         t.field(\\"requiredUint64Value\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.requiredUint64Value!.toString(); }
+            resolve(root) {
+                return root.requiredUint64Value!.toString();
+            }
         });
         t.field(\\"requiredSint32Value\\", {
             type: nonNull(\\"Int\\"),
             description: \\"\\",
-            resolve(root) { return root.requiredSint32Value!; }
+            resolve(root) {
+                return root.requiredSint32Value!;
+            }
         });
         t.field(\\"requiredSint64Value\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.requiredSint64Value!.toString(); }
+            resolve(root) {
+                return root.requiredSint64Value!.toString();
+            }
         });
         t.field(\\"requiredFixed32Value\\", {
             type: nonNull(\\"Int\\"),
             description: \\"\\",
-            resolve(root) { return root.requiredFixed32Value!; }
+            resolve(root) {
+                return root.requiredFixed32Value!;
+            }
         });
         t.field(\\"requiredFixed64Value\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.requiredFixed64Value!.toString(); }
+            resolve(root) {
+                return root.requiredFixed64Value!.toString();
+            }
         });
         t.field(\\"requiredSfixed32Value\\", {
             type: nonNull(\\"Int\\"),
             description: \\"\\",
-            resolve(root) { return root.requiredSfixed32Value!; }
+            resolve(root) {
+                return root.requiredSfixed32Value!;
+            }
         });
         t.field(\\"requiredSfixed64Value\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.requiredSfixed64Value!.toString(); }
+            resolve(root) {
+                return root.requiredSfixed64Value!.toString();
+            }
         });
         t.field(\\"requiredBoolValue\\", {
             type: nonNull(\\"Boolean\\"),
             description: \\"\\",
-            resolve(root) { return root.requiredBoolValue!; }
+            resolve(root) {
+                return root.requiredBoolValue!;
+            }
         });
         t.field(\\"requiredStringValue\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return root.requiredStringValue!; }
+            resolve(root) {
+                return root.requiredStringValue!;
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$hello$testapis$hello$Primitives\\" }
@@ -2591,47 +2697,65 @@ export const Message = objectType({
         t.field(\\"timestamp\\", {
             type: nullable(\\"DateTime\\"),
             description: \\"\\",
-            resolve(root) { return $$proto_nexus$google_protobuf.timestampToDate(root.getTimestamp()); }
+            resolve(root) {
+                return $$proto_nexus$google_protobuf.timestampToDate(root.getTimestamp());
+            }
         });
         t.field(\\"int32Value\\", {
             type: nullable(\\"Int\\"),
             description: \\"\\",
-            resolve(root) { return $$proto_nexus$google_protobuf.unwrapInt32Value(root.getInt32Value()); }
+            resolve(root) {
+                return $$proto_nexus$google_protobuf.unwrapInt32Value(root.getInt32Value());
+            }
         });
         t.field(\\"int64Value\\", {
             type: nullable(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return $$proto_nexus$google_protobuf.unwrapInt64Value(root.getInt64Value())?.toString() ?? null; }
+            resolve(root) {
+                return $$proto_nexus$google_protobuf.unwrapInt64Value(root.getInt64Value())?.toString() ?? null;
+            }
         });
         t.field(\\"uint32Value\\", {
             type: nullable(\\"Int\\"),
             description: \\"\\",
-            resolve(root) { return $$proto_nexus$google_protobuf.unwrapUInt32Value(root.getUint32Value()); }
+            resolve(root) {
+                return $$proto_nexus$google_protobuf.unwrapUInt32Value(root.getUint32Value());
+            }
         });
         t.field(\\"uint64Value\\", {
             type: nullable(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return $$proto_nexus$google_protobuf.unwrapUInt64Value(root.getUint64Value())?.toString() ?? null; }
+            resolve(root) {
+                return $$proto_nexus$google_protobuf.unwrapUInt64Value(root.getUint64Value())?.toString() ?? null;
+            }
         });
         t.field(\\"floatValue\\", {
             type: nullable(\\"Float\\"),
             description: \\"\\",
-            resolve(root) { return $$proto_nexus$google_protobuf.unwrapFloatValue(root.getFloatValue()); }
+            resolve(root) {
+                return $$proto_nexus$google_protobuf.unwrapFloatValue(root.getFloatValue());
+            }
         });
         t.field(\\"doubleValue\\", {
             type: nullable(\\"Float\\"),
             description: \\"\\",
-            resolve(root) { return $$proto_nexus$google_protobuf.unwrapDoubleValue(root.getDoubleValue()); }
+            resolve(root) {
+                return $$proto_nexus$google_protobuf.unwrapDoubleValue(root.getDoubleValue());
+            }
         });
         t.field(\\"boolValue\\", {
             type: nullable(\\"Boolean\\"),
             description: \\"\\",
-            resolve(root) { return $$proto_nexus$google_protobuf.unwrapBoolValue(root.getBoolValue()); }
+            resolve(root) {
+                return $$proto_nexus$google_protobuf.unwrapBoolValue(root.getBoolValue());
+            }
         });
         t.field(\\"stringValue\\", {
             type: nullable(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return $$proto_nexus$google_protobuf.unwrapStringValue(root.getStringValue()); }
+            resolve(root) {
+                return $$proto_nexus$google_protobuf.unwrapStringValue(root.getStringValue());
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$wktypes$well_known_types_pb$Message\\" }
@@ -2696,47 +2820,65 @@ export const Message = objectType({
         t.field(\\"timestamp\\", {
             type: nullable(\\"DateTime\\"),
             description: \\"\\",
-            resolve(root) { return $$proto_nexus$protobufjs.timestampToDate(root.timestamp); }
+            resolve(root) {
+                return $$proto_nexus$protobufjs.timestampToDate(root.timestamp);
+            }
         });
         t.field(\\"int32Value\\", {
             type: nullable(\\"Int\\"),
             description: \\"\\",
-            resolve(root) { return $$proto_nexus$protobufjs.unwrapInt32Value(root.int32Value); }
+            resolve(root) {
+                return $$proto_nexus$protobufjs.unwrapInt32Value(root.int32Value);
+            }
         });
         t.field(\\"int64Value\\", {
             type: nullable(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return $$proto_nexus$protobufjs.unwrapInt64Value(root.int64Value)?.toString() ?? null; }
+            resolve(root) {
+                return $$proto_nexus$protobufjs.unwrapInt64Value(root.int64Value)?.toString() ?? null;
+            }
         });
         t.field(\\"uint32Value\\", {
             type: nullable(\\"Int\\"),
             description: \\"\\",
-            resolve(root) { return $$proto_nexus$protobufjs.unwrapUInt32Value(root.uint32Value); }
+            resolve(root) {
+                return $$proto_nexus$protobufjs.unwrapUInt32Value(root.uint32Value);
+            }
         });
         t.field(\\"uint64Value\\", {
             type: nullable(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return $$proto_nexus$protobufjs.unwrapUInt64Value(root.uint64Value)?.toString() ?? null; }
+            resolve(root) {
+                return $$proto_nexus$protobufjs.unwrapUInt64Value(root.uint64Value)?.toString() ?? null;
+            }
         });
         t.field(\\"floatValue\\", {
             type: nullable(\\"Float\\"),
             description: \\"\\",
-            resolve(root) { return $$proto_nexus$protobufjs.unwrapFloatValue(root.floatValue); }
+            resolve(root) {
+                return $$proto_nexus$protobufjs.unwrapFloatValue(root.floatValue);
+            }
         });
         t.field(\\"doubleValue\\", {
             type: nullable(\\"Float\\"),
             description: \\"\\",
-            resolve(root) { return $$proto_nexus$protobufjs.unwrapDoubleValue(root.doubleValue); }
+            resolve(root) {
+                return $$proto_nexus$protobufjs.unwrapDoubleValue(root.doubleValue);
+            }
         });
         t.field(\\"boolValue\\", {
             type: nullable(\\"Boolean\\"),
             description: \\"\\",
-            resolve(root) { return $$proto_nexus$protobufjs.unwrapBoolValue(root.boolValue); }
+            resolve(root) {
+                return $$proto_nexus$protobufjs.unwrapBoolValue(root.boolValue);
+            }
         });
         t.field(\\"stringValue\\", {
             type: nullable(\\"String\\"),
             description: \\"\\",
-            resolve(root) { return $$proto_nexus$protobufjs.unwrapStringValue(root.stringValue); }
+            resolve(root) {
+                return $$proto_nexus$protobufjs.unwrapStringValue(root.stringValue);
+            }
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$wktypes$testapis$wktypes$Message\\" }
