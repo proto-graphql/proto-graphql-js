@@ -32,6 +32,19 @@ message PrefixedMessage {
     string body = 1;
   }
 
+  message InnerMessage2 {
+    string body = 1;
+  }
+
+  message SquashedMessage {
+    option (graphql.object_type).squash_union = true;
+
+    oneof squashed_message {
+      InnerMessage oneof_ignored_field = 1;
+      InnerMessage2 oneof_ignored_field_2 = 2;
+    }
+  }
+
   // Output only.
   uint64 id = 1;
   string body = 2;
@@ -49,6 +62,7 @@ message PrefixedMessage {
   OutputOnlyMessage output_only_message = 8;
   InputOnlyMessage input_only_message = 9;
   IgnoredEnum ignored_enum = 10;
+  SquashedMessage squashed_message = 11;
 }
 
 enum PrefixedEnum {

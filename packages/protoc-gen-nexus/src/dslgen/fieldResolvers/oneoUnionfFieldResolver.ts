@@ -1,10 +1,11 @@
 import ts from "typescript";
-import { pascalCase, constantCase } from "change-case";
+import { pascalCase, constantCase, camelCase } from "change-case";
 import { ProtoOneof } from "../../protoTypes";
 import { createProtoExpr, isRequiredField } from "../util";
 import { GenerationParams } from "../types";
 
 export function craeteOneofUnionFieldResolverStmts(
+  parentExpr: ts.Expression,
   oneof: ProtoOneof,
   opts: GenerationParams
 ): ts.Statement[] {
@@ -14,8 +15,8 @@ export function craeteOneofUnionFieldResolverStmts(
       ...oneof.fields.map((f) =>
         ts.factory.createIfStatement(
           ts.factory.createPropertyAccessExpression(
-            ts.factory.createIdentifier("root"),
-            f.name
+            parentExpr,
+            camelCase(f.descriptor.getName()!)
           ),
           ts.factory.createBlock([
             ts.factory.createReturnStatement(
@@ -27,8 +28,8 @@ export function craeteOneofUnionFieldResolverStmts(
                 undefined,
                 [
                   ts.factory.createPropertyAccessExpression(
-                    ts.factory.createIdentifier("root"),
-                    f.name
+                    parentExpr,
+                    camelCase(f.descriptor.getName()!)
                   ),
                   ts.factory.createObjectLiteralExpression([
                     ts.factory.createPropertyAssignment(
@@ -61,7 +62,7 @@ export function craeteOneofUnionFieldResolverStmts(
     ts.factory.createSwitchStatement(
       ts.factory.createCallExpression(
         ts.factory.createPropertyAccessExpression(
-          ts.factory.createIdentifier("root"),
+          parentExpr,
           `get${pascalCase(oneof.name)}Case`
         ),
         undefined,
@@ -98,7 +99,9 @@ export function craeteOneofUnionFieldResolverStmts(
                 createProtoExpr(oneof.parent, opts),
                 `${pascalCase(oneof.name)}Case`
               ),
-              constantCase(f.name)
+              constantCase(f.name, {
+                splitRegexp: /([a-z])([A-Z0-9])/g,
+              })
             ),
             [
               ts.factory.createBlock(
@@ -107,7 +110,7 @@ export function craeteOneofUnionFieldResolverStmts(
                     ts.factory.createNonNullExpression(
                       ts.factory.createCallExpression(
                         ts.factory.createPropertyAccessExpression(
-                          ts.factory.createIdentifier("root"),
+                          parentExpr,
                           f.getterName
                         ),
                         undefined,

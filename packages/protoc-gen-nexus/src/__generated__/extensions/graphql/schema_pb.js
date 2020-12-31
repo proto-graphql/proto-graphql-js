@@ -399,7 +399,8 @@ proto.graphql.GraphqlObjectTypeOptions.prototype.toObject = function(opt_include
  */
 proto.graphql.GraphqlObjectTypeOptions.toObject = function(includeInstance, msg) {
   var f, obj = {
-    ignore: jspb.Message.getBooleanFieldWithDefault(msg, 1, false)
+    ignore: jspb.Message.getBooleanFieldWithDefault(msg, 1, false),
+    squashUnion: jspb.Message.getBooleanFieldWithDefault(msg, 2, false)
   };
 
   if (includeInstance) {
@@ -440,6 +441,10 @@ proto.graphql.GraphqlObjectTypeOptions.deserializeBinaryFromReader = function(ms
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setIgnore(value);
       break;
+    case 2:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setSquashUnion(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -476,6 +481,13 @@ proto.graphql.GraphqlObjectTypeOptions.serializeBinaryToWriter = function(messag
       f
     );
   }
+  f = message.getSquashUnion();
+  if (f) {
+    writer.writeBool(
+      2,
+      f
+    );
+  }
 };
 
 
@@ -494,6 +506,24 @@ proto.graphql.GraphqlObjectTypeOptions.prototype.getIgnore = function() {
  */
 proto.graphql.GraphqlObjectTypeOptions.prototype.setIgnore = function(value) {
   return jspb.Message.setProto3BooleanField(this, 1, value);
+};
+
+
+/**
+ * optional bool squash_union = 2;
+ * @return {boolean}
+ */
+proto.graphql.GraphqlObjectTypeOptions.prototype.getSquashUnion = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 2, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.graphql.GraphqlObjectTypeOptions} returns this
+ */
+proto.graphql.GraphqlObjectTypeOptions.prototype.setSquashUnion = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 2, value);
 };
 
 
