@@ -60,10 +60,14 @@ export const DeprecatedMessage = objectType({
             description: \\"\\",
             deprecation: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\",
             resolve(root) {
-                if (root.getEnum() === _$testapis$deprecation$deprecation_pb.NotDeprecatedEnum.NOT_DEPRECATED_ENUM_UNSPECIFIED) {
+                const value = root.getEnum();
+                if (value == null) {
                     return null;
                 }
-                return root.getEnum();
+                if (value === _$testapis$deprecation$deprecation_pb.NotDeprecatedEnum.NOT_DEPRECATED_ENUM_UNSPECIFIED) {
+                    return null;
+                }
+                return value;
             }
         });
     },
@@ -86,10 +90,14 @@ export const NotDeprecatedMessage = objectType({
             description: \\"\\",
             deprecation: \\"testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.\\",
             resolve(root) {
-                if (root.getEnum() === _$testapis$deprecation$deprecation_pb.DeprecatedEnum.DEPRECATED_ENUM_UNSPECIFIED) {
+                const value = root.getEnum();
+                if (value == null) {
                     return null;
                 }
-                return root.getEnum();
+                if (value === _$testapis$deprecation$deprecation_pb.DeprecatedEnum.DEPRECATED_ENUM_UNSPECIFIED) {
+                    return null;
+                }
+                return value;
             }
         });
         t.field(\\"not_deprecated_oneof\\", {
@@ -320,10 +328,14 @@ export const DeprecatedFileMessage = objectType({
             description: \\"\\",
             deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\",
             resolve(root) {
-                if (root.getEnum() === _$testapis$deprecation$file_deprecation_pb.DeprecatedFileEnum.DEPRECATED_FILE_ENUM_UNSPECIFIED) {
+                const value = root.getEnum();
+                if (value == null) {
                     return null;
                 }
-                return root.getEnum();
+                if (value === _$testapis$deprecation$file_deprecation_pb.DeprecatedFileEnum.DEPRECATED_FILE_ENUM_UNSPECIFIED) {
+                    return null;
+                }
+                return value;
             }
         });
     },
@@ -462,10 +474,14 @@ export const DeprecatedMessage = objectType({
             description: \\"\\",
             deprecation: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\",
             resolve(root) {
-                if (root.enum === _$testapis$deprecation.testapis.deprecation.NotDeprecatedEnum.NOT_DEPRECATED_ENUM_UNSPECIFIED) {
+                const value = root.enum;
+                if (value == null) {
                     return null;
                 }
-                return root.enum;
+                if (value === _$testapis$deprecation.testapis.deprecation.NotDeprecatedEnum.NOT_DEPRECATED_ENUM_UNSPECIFIED) {
+                    return null;
+                }
+                return value;
             }
         });
     },
@@ -488,10 +504,14 @@ export const NotDeprecatedMessage = objectType({
             description: \\"\\",
             deprecation: \\"testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.\\",
             resolve(root) {
-                if (root.enum === _$testapis$deprecation.testapis.deprecation.DeprecatedEnum.DEPRECATED_ENUM_UNSPECIFIED) {
+                const value = root.enum;
+                if (value == null) {
                     return null;
                 }
-                return root.enum;
+                if (value === _$testapis$deprecation.testapis.deprecation.DeprecatedEnum.DEPRECATED_ENUM_UNSPECIFIED) {
+                    return null;
+                }
+                return value;
             }
         });
         t.field(\\"not_deprecated_oneof\\", {
@@ -708,10 +728,14 @@ export const DeprecatedFileMessage = objectType({
             description: \\"\\",
             deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\",
             resolve(root) {
-                if (root.enum === _$testapis$deprecation.testapis.deprecation.DeprecatedFileEnum.DEPRECATED_FILE_ENUM_UNSPECIFIED) {
+                const value = root.enum;
+                if (value == null) {
                     return null;
                 }
-                return root.enum;
+                if (value === _$testapis$deprecation.testapis.deprecation.DeprecatedFileEnum.DEPRECATED_FILE_ENUM_UNSPECIFIED) {
+                    return null;
+                }
+                return value;
             }
         });
     },
@@ -1033,10 +1057,14 @@ export const MessageWithSubpkg = objectType({
             type: nullable(\\"SubpkgEnum\\"),
             description: \\"\\",
             resolve(root) {
-                if (root.getEnum() === _$testapis$multipkgs$subpkg1$types_pb.SubpkgEnum.SUBPKG_ENUM_UNSPECIFIED) {
+                const value = root.getEnum();
+                if (value == null) {
                     return null;
                 }
-                return root.getEnum();
+                if (value === _$testapis$multipkgs$subpkg1$types_pb.SubpkgEnum.SUBPKG_ENUM_UNSPECIFIED) {
+                    return null;
+                }
+                return value;
             }
         });
     },
@@ -1130,10 +1158,14 @@ export const MessageWithSubpkg = objectType({
             type: nullable(\\"SubpkgEnum\\"),
             description: \\"\\",
             resolve(root) {
-                if (root.enum === _$testapis$multipkgs$subpkg1.testapis.multipkgs.subpkg1.SubpkgEnum.SUBPKG_ENUM_UNSPECIFIED) {
+                const value = root.enum;
+                if (value == null) {
                     return null;
                 }
-                return root.enum;
+                if (value === _$testapis$multipkgs$subpkg1.testapis.multipkgs.subpkg1.SubpkgEnum.SUBPKG_ENUM_UNSPECIFIED) {
+                    return null;
+                }
+                return value;
             }
         });
     },
@@ -1186,10 +1218,14 @@ export const ParentMessage = objectType({
             type: nullable(\\"ParentMessageNestedEnum\\"),
             description: \\"\\",
             resolve(root) {
-                if (root.getNestedEnum() === _$testapis$nested$nested_pb.ParentMessage.NestedEnum.NESTED_ENUM_UNSPECIFIED) {
+                const value = root.getNestedEnum();
+                if (value == null) {
                     return null;
                 }
-                return root.getNestedEnum();
+                if (value === _$testapis$nested$nested_pb.ParentMessage.NestedEnum.NESTED_ENUM_UNSPECIFIED) {
+                    return null;
+                }
+                return value;
             }
         });
     },
@@ -1284,10 +1320,14 @@ export const ParentMessage = objectType({
             type: nullable(\\"ParentMessageNestedEnum\\"),
             description: \\"\\",
             resolve(root) {
-                if (root.nestedEnum === _$testapis$nested.testapis.nested.ParentMessage.NestedEnum.NESTED_ENUM_UNSPECIFIED) {
+                const value = root.nestedEnum;
+                if (value == null) {
                     return null;
                 }
-                return root.nestedEnum;
+                if (value === _$testapis$nested.testapis.nested.ParentMessage.NestedEnum.NESTED_ENUM_UNSPECIFIED) {
+                    return null;
+                }
+                return value;
             }
         });
     },
@@ -1406,10 +1446,14 @@ export const TestPrefixPrefixedMessage = objectType({
             type: nullable(\\"TestPrefixPrefixedEnum\\"),
             description: \\"\\",
             resolve(root) {
-                if (root.getPrefixedEnum() === _$testapis$extensions$extensions_pb.PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
+                const value = root.getPrefixedEnum();
+                if (value == null) {
                     return null;
                 }
-                return root.getPrefixedEnum();
+                if (value === _$testapis$extensions$extensions_pb.PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
+                    return null;
+                }
+                return value;
             }
         });
         t.field(\\"outputOnlyMessage\\", {
@@ -1461,10 +1505,14 @@ export const TestPrefixOutputOnlyMessage = objectType({
             type: nullable(\\"TestPrefixPrefixedEnum\\"),
             description: \\"\\",
             resolve(root) {
-                if (root.getPrefixedEnum() === _$testapis$extensions$extensions_pb.PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
+                const value = root.getPrefixedEnum();
+                if (value == null) {
                     return null;
                 }
-                return root.getPrefixedEnum();
+                if (value === _$testapis$extensions$extensions_pb.PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
+                    return null;
+                }
+                return value;
             }
         });
     },
@@ -1645,10 +1693,14 @@ export const TestPrefixPrefixedMessage = objectType({
             type: nullable(\\"TestPrefixPrefixedEnum\\"),
             description: \\"\\",
             resolve(root) {
-                if (root.prefixedEnum === _$testapis$extensions.testapis.extensions.PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
+                const value = root.prefixedEnum;
+                if (value == null) {
                     return null;
                 }
-                return root.prefixedEnum;
+                if (value === _$testapis$extensions.testapis.extensions.PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
+                    return null;
+                }
+                return value;
             }
         });
         t.field(\\"outputOnlyMessage\\", {
@@ -1693,10 +1745,14 @@ export const TestPrefixOutputOnlyMessage = objectType({
             type: nullable(\\"TestPrefixPrefixedEnum\\"),
             description: \\"\\",
             resolve(root) {
-                if (root.prefixedEnum === _$testapis$extensions.testapis.extensions.PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
+                const value = root.prefixedEnum;
+                if (value == null) {
                     return null;
                 }
-                return root.prefixedEnum;
+                if (value === _$testapis$extensions.testapis.extensions.PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
+                    return null;
+                }
+                return value;
             }
         });
     },
@@ -1832,34 +1888,50 @@ export const MessageWithEnums = objectType({
             type: nonNull(\\"MyEnum\\"),
             description: \\"Required.\\",
             resolve(root) {
-                if ((root.getRequiredMyEnum()!) === _$testapis$enums$enums_pb.MyEnum.MY_ENUM_UNSPECIFIED) {
+                const value = (root.getRequiredMyEnum()!);
+                if (value == null) {
                     throw new Error(\\"MessageWithEnums.requiredMyEnum is required field. But got null or unspecified.\\");
                 }
-                return root.getRequiredMyEnum()!;
+                if (value === _$testapis$enums$enums_pb.MyEnum.MY_ENUM_UNSPECIFIED) {
+                    throw new Error(\\"MessageWithEnums.requiredMyEnum is required field. But got null or unspecified.\\");
+                }
+                return value;
             }
         });
         t.field(\\"optionalMyEnum\\", {
             type: nullable(\\"MyEnum\\"),
             description: \\"Optional.\\",
             resolve(root) {
-                if (root.getOptionalMyEnum() === _$testapis$enums$enums_pb.MyEnum.MY_ENUM_UNSPECIFIED) {
+                const value = root.getOptionalMyEnum();
+                if (value == null) {
                     return null;
                 }
-                return root.getOptionalMyEnum();
+                if (value === _$testapis$enums$enums_pb.MyEnum.MY_ENUM_UNSPECIFIED) {
+                    return null;
+                }
+                return value;
             }
         });
         t.field(\\"requiredMyEnumWithoutUnspecified\\", {
             type: nonNull(\\"MyEnumWithoutUnspecified\\"),
             description: \\"Required.\\",
             resolve(root) {
-                return root.getRequiredMyEnumWithoutUnspecified()!;
+                const value = (root.getRequiredMyEnumWithoutUnspecified()!);
+                if (value == null) {
+                    throw new Error(\\"MessageWithEnums.requiredMyEnumWithoutUnspecified is required field. But got null or unspecified.\\");
+                }
+                return value;
             }
         });
         t.field(\\"optionalMyEnumWithoutUnspecified\\", {
             type: nullable(\\"MyEnumWithoutUnspecified\\"),
             description: \\"Optional.\\",
             resolve(root) {
-                return root.getOptionalMyEnumWithoutUnspecified();
+                const value = root.getOptionalMyEnumWithoutUnspecified();
+                if (value == null) {
+                    return null;
+                }
+                return value;
             }
         });
     },
@@ -1942,34 +2014,50 @@ export const MessageWithEnums = objectType({
             type: nonNull(\\"MyEnum\\"),
             description: \\"Required.\\",
             resolve(root) {
-                if ((root.requiredMyEnum!) === _$testapis$enums.testapi.enums.MyEnum.MY_ENUM_UNSPECIFIED) {
+                const value = (root.requiredMyEnum!);
+                if (value == null) {
                     throw new Error(\\"MessageWithEnums.requiredMyEnum is required field. But got null or unspecified.\\");
                 }
-                return root.requiredMyEnum!;
+                if (value === _$testapis$enums.testapi.enums.MyEnum.MY_ENUM_UNSPECIFIED) {
+                    throw new Error(\\"MessageWithEnums.requiredMyEnum is required field. But got null or unspecified.\\");
+                }
+                return value;
             }
         });
         t.field(\\"optionalMyEnum\\", {
             type: nullable(\\"MyEnum\\"),
             description: \\"Optional.\\",
             resolve(root) {
-                if (root.optionalMyEnum === _$testapis$enums.testapi.enums.MyEnum.MY_ENUM_UNSPECIFIED) {
+                const value = root.optionalMyEnum;
+                if (value == null) {
                     return null;
                 }
-                return root.optionalMyEnum;
+                if (value === _$testapis$enums.testapi.enums.MyEnum.MY_ENUM_UNSPECIFIED) {
+                    return null;
+                }
+                return value;
             }
         });
         t.field(\\"requiredMyEnumWithoutUnspecified\\", {
             type: nonNull(\\"MyEnumWithoutUnspecified\\"),
             description: \\"Required.\\",
             resolve(root) {
-                return root.requiredMyEnumWithoutUnspecified!;
+                const value = (root.requiredMyEnumWithoutUnspecified!);
+                if (value == null) {
+                    throw new Error(\\"MessageWithEnums.requiredMyEnumWithoutUnspecified is required field. But got null or unspecified.\\");
+                }
+                return value;
             }
         });
         t.field(\\"optionalMyEnumWithoutUnspecified\\", {
             type: nullable(\\"MyEnumWithoutUnspecified\\"),
             description: \\"Optional.\\",
             resolve(root) {
-                return root.optionalMyEnumWithoutUnspecified;
+                const value = root.optionalMyEnumWithoutUnspecified;
+                if (value == null) {
+                    return null;
+                }
+                return value;
             }
         });
     },
