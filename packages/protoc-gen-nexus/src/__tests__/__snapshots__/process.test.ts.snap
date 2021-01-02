@@ -1453,6 +1453,9 @@ export const TestPrefixPrefixedMessage = objectType({
                 if (value === _$testapis$extensions$extensions_pb.PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
                     return null;
                 }
+                if (value === _$testapis$extensions$extensions_pb.PrefixedEnum.PREFIXED_IGNORED) {
+                    throw new Error(\\"PrefixedEnum.PREFIXED_IGNORED is ignored in GraphQL schema\\");
+                }
                 return value;
             }
         });
@@ -1511,6 +1514,9 @@ export const TestPrefixOutputOnlyMessage = objectType({
                 }
                 if (value === _$testapis$extensions$extensions_pb.PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
                     return null;
+                }
+                if (value === _$testapis$extensions$extensions_pb.PrefixedEnum.PREFIXED_IGNORED) {
+                    throw new Error(\\"PrefixedEnum.PREFIXED_IGNORED is ignored in GraphQL schema\\");
                 }
                 return value;
             }
@@ -1700,6 +1706,9 @@ export const TestPrefixPrefixedMessage = objectType({
                 if (value === _$testapis$extensions.testapis.extensions.PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
                     return null;
                 }
+                if (value === _$testapis$extensions.testapis.extensions.PrefixedEnum.PREFIXED_IGNORED) {
+                    throw new Error(\\"PrefixedEnum.PREFIXED_IGNORED is ignored in GraphQL schema\\");
+                }
                 return value;
             }
         });
@@ -1751,6 +1760,9 @@ export const TestPrefixOutputOnlyMessage = objectType({
                 }
                 if (value === _$testapis$extensions.testapis.extensions.PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
                     return null;
+                }
+                if (value === _$testapis$extensions.testapis.extensions.PrefixedEnum.PREFIXED_IGNORED) {
+                    throw new Error(\\"PrefixedEnum.PREFIXED_IGNORED is ignored in GraphQL schema\\");
                 }
                 return value;
             }

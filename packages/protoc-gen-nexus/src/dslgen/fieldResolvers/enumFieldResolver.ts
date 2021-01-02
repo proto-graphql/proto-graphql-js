@@ -5,6 +5,7 @@ import {
   createProtoExpr,
   getEnumValueForUnspecified,
   gqlTypeName,
+  isIgnoredField,
   onlyNonNull,
 } from "../util";
 
@@ -25,12 +26,13 @@ import {
  * ```
  */
 export function createEnumFieldResolverStmts(
-  valueExpr: ts.Expression,
+  valueExprOrig: ts.Expression,
   field: ProtoField,
   type: GqlType,
   en: ProtoEnum,
   opts: GenerationParams
 ): ts.Statement[] {
+  const valueExpr = ts.factory.createIdentifier("value");
   let whenNullStmt: ts.Statement = type.nullable
     ? ts.factory.createReturnStatement(
         ts.factory.createToken(ts.SyntaxKind.NullKeyword)
@@ -55,6 +57,28 @@ export function createEnumFieldResolverStmts(
   const unspecified = getEnumValueForUnspecified(en);
 
   return [
+    ts.factory.createVariableStatement(
+      undefined,
+      ts.factory.createVariableDeclarationList(
+        [
+          ts.factory.createVariableDeclaration(
+            "value",
+            undefined,
+            undefined,
+            valueExprOrig
+          ),
+        ],
+        ts.NodeFlags.Const
+      )
+    ),
+    ts.factory.createIfStatement(
+      ts.factory.createBinaryExpression(
+        valueExpr,
+        ts.SyntaxKind.EqualsEqualsToken,
+        ts.factory.createToken(ts.SyntaxKind.NullKeyword)
+      ),
+      whenNullStmt
+    ),
     unspecified
       ? ts.factory.createIfStatement(
           ts.factory.createBinaryExpression(
@@ -68,6 +92,36 @@ export function createEnumFieldResolverStmts(
           whenNullStmt
         )
       : null,
+    ...en.values
+      .filter((ev) => isIgnoredField(ev))
+      .map((ev) =>
+        ts.factory.createIfStatement(
+          ts.factory.createBinaryExpression(
+            valueExpr,
+            ts.SyntaxKind.EqualsEqualsEqualsToken,
+            ts.factory.createPropertyAccessExpression(
+              createProtoExpr(field.type!, opts),
+              ts.factory.createIdentifier(ev.name)
+            )
+          ),
+          ts.factory.createBlock(
+            [
+              ts.factory.createThrowStatement(
+                ts.factory.createNewExpression(
+                  ts.factory.createIdentifier("Error"),
+                  undefined,
+                  [
+                    ts.factory.createStringLiteral(
+                      `${en.name}.${ev.name} is ignored in GraphQL schema`
+                    ),
+                  ]
+                )
+              ),
+            ],
+            true // multiline
+          )
+        )
+      ),
     ts.factory.createReturnStatement(valueExpr),
   ].filter(onlyNonNull());
 }
