@@ -2,14 +2,17 @@ import { promises as fs } from "fs";
 import { join, dirname } from "path";
 import { glob } from "glob";
 import * as ts from "typescript";
-import { makeSchema } from "nexus";
 import { FileDescriptorSet } from "google-protobuf/google/protobuf/descriptor_pb";
 import { processRequest } from "../../process";
 import {
   CodeGeneratorRequest,
   CodeGeneratorResponse,
 } from "google-protobuf/google/protobuf/compiler/plugin_pb";
-import { NexusExtendTypeDef, NexusGraphQLSchema } from "nexus/dist/core";
+import {
+  generateSchema,
+  NexusExtendTypeDef,
+  NexusGraphQLSchema,
+} from "nexus/dist/core";
 
 const generationTargets = ["native protobuf", "protobufjs"] as const;
 type GenerationTarget = typeof generationTargets[number];
@@ -17,7 +20,7 @@ type GenerationTarget = typeof generationTargets[number];
 async function generateDSLs(
   name: string,
   target: GenerationTarget,
-  opts: { withPrefix?: boolean } = {}
+  opts: { withPrefix?: boolean } = {},
 ) {
   const params = [];
   switch (target) {
@@ -39,7 +42,7 @@ async function generateDSLs(
 
 export function itGeneratesNexusDSLsToMatchSnapshtos(
   name: string,
-  expectedGeneratedFiles: string[]
+  expectedGeneratedFiles: string[],
 ) {
   describe.each(generationTargets)("with %s", (target) => {
     it("generates nexus DSLs", async () => {
@@ -59,7 +62,7 @@ export function testSchemaGeneration(
       types: Record<string, any>,
       test: (schema: NexusGraphQLSchema) => Promise<void>,
     ][];
-  } = {}
+  } = {},
 ) {
   describe(`schema generation with ${target}`, () => {
     let files: CodeGeneratorResponse.File[];
@@ -70,7 +73,7 @@ export function testSchemaGeneration(
         files.push(
           ...(
             await generateDSLs(n, target, { withPrefix: true })
-          ).getFileList()
+          ).getFileList(),
         );
       }
     });
@@ -81,7 +84,7 @@ export function testSchemaGeneration(
           await validateGeneratedFiles(dir);
           const gqlSchema = await fs.readFile(
             join(dir, "schema.graphql"),
-            "utf-8"
+            "utf-8",
           );
           expect(gqlSchema).toMatchSnapshot("schema.graphql");
         } catch (e) {
@@ -100,7 +103,7 @@ export function testSchemaGeneration(
             { ...(opts.types ?? {}), ...types },
             async (_dir, schema) => {
               await f(schema);
-            }
+            },
           );
         } catch (e) {
           // eslint-disable-next-line no-console
@@ -125,7 +128,7 @@ function snapshotGeneratedFiles(resp: CodeGeneratorResponse, files: string[]) {
 
 async function processCodeGeneration(
   name: string,
-  param?: string
+  param?: string,
 ): Promise<CodeGeneratorResponse> {
   const req = await buildCodeGeneratorRequest(name);
   if (param) {
@@ -135,7 +138,7 @@ async function processCodeGeneration(
 }
 
 async function getFixtureFileDescriptorSet(
-  name: string
+  name: string,
 ): Promise<FileDescriptorSet> {
   const buf = await fs.readFile(
     join(
@@ -149,14 +152,14 @@ async function getFixtureFileDescriptorSet(
       "src",
       "testapis",
       name,
-      "descriptor_set.pb"
-    )
+      "descriptor_set.pb",
+    ),
   );
   return FileDescriptorSet.deserializeBinary(buf);
 }
 
 async function buildCodeGeneratorRequest(
-  name: string
+  name: string,
 ): Promise<CodeGeneratorRequest> {
   const descSet = await getFixtureFileDescriptorSet(name);
   const req = new CodeGeneratorRequest();
@@ -178,13 +181,13 @@ function getFileMap(resp: CodeGeneratorResponse): Record<string, string> {
     .getFileList()
     .reduce(
       (m, f) => ({ ...m, [f.getName()!]: f.getContent()! }),
-      {} as Record<string, string>
+      {} as Record<string, string>,
     );
 }
 
 async function withGeneratedResults(
   files: CodeGeneratorResponse.File[],
-  cb: (dir: string) => Promise<void>
+  cb: (dir: string) => Promise<void>,
 ) {
   const suffix = Math.random().toString(36).substring(7);
   const dir = join(__dirname, "__generated__", suffix);
@@ -194,15 +197,15 @@ async function withGeneratedResults(
       Promise.all(
         [
           ...new Set(files.map((f) => join(dir, dirname(f.getName()!)))),
-        ].map((p) => fs.mkdir(p, { recursive: true }))
-      ).then(() => dir)
+        ].map((p) => fs.mkdir(p, { recursive: true })),
+      ).then(() => dir),
     )
     .then((dir) =>
       Promise.all(
         files.map((f) =>
-          fs.writeFile(join(dir, f.getName()!), f.getContent()!, "utf-8")
-        )
-      ).then(() => dir)
+          fs.writeFile(join(dir, f.getName()!), f.getContent()!, "utf-8"),
+        ),
+      ).then(() => dir),
     )
     .then(cb)
     .finally(() => fs.rm(dir, { recursive: true, force: true, maxRetries: 3 }));
@@ -211,16 +214,16 @@ async function withGeneratedResults(
 async function withGeneratedSchema(
   files: CodeGeneratorResponse.File[],
   queries: Record<string, NexusExtendTypeDef<"Query">>,
-  cb: (dir: string, schema: NexusGraphQLSchema) => Promise<void>
+  cb: (dir: string, schema: NexusGraphQLSchema) => Promise<void>,
 ) {
   await withGeneratedResults(files, async (dir) => {
     const paths = files.map((f) => join(dir, f.getName()!));
     try {
       const types = paths.reduce(
         (o, p) => ({ ...o, ...require(p) }),
-        {} as any
+        {} as any,
       );
-      const schema = makeSchema({
+      const schema = await generateSchema({
         types: { ...types, ...queries },
         outputs: {
           schema: join(dir, "schema.graphql"),
