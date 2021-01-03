@@ -26,7 +26,7 @@ export function createInputObjectTypeDslStmts(
   opts: GenerationParams
 ): ts.Statement[] {
   return msgs
-    .filter((m) => !isIgnoredType(m, { input: true }))
+    .filter((m) => !isIgnoredType(m))
     .filter(exceptRequestOrResponse(reg))
     .map((m) => createInputObjectTypeDslStmt(m, reg, opts));
 }
@@ -82,7 +82,7 @@ function createInputObjectTypeDefinitionMethodDecl(
     ts.factory.createBlock(
       msg.fields
         .filter((f) => !isOutputOnlyField(f))
-        .filter((f) => !isIgnoredField(f, { input: true }))
+        .filter((f) => !isIgnoredField(f))
         .map((f) => createFieldDefinitionStmt(f, reg, { ...opts, input: true })),
       true
     )

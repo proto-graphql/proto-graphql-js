@@ -10,24 +10,6 @@ type Query {
 }
 
 \\"\\"\\"\\"\\"\\"
-input TestPrefixInputOnlyMessageInput {
-  \\"\\"\\"\\"\\"\\"
-  body: String!
-
-  \\"\\"\\"\\"\\"\\"
-  prefixedEnum: TestPrefixPrefixedEnum
-}
-
-\\"\\"\\"\\"\\"\\"
-type TestPrefixOutputOnlyMessage {
-  \\"\\"\\"\\"\\"\\"
-  body: String!
-
-  \\"\\"\\"\\"\\"\\"
-  prefixedEnum: TestPrefixPrefixedEnum
-}
-
-\\"\\"\\"\\"\\"\\"
 enum TestPrefixPrefixedEnum {
   PREFIXED_BAR
   PREFIXED_FOO
@@ -40,9 +22,6 @@ type TestPrefixPrefixedMessage {
 
   \\"\\"\\"Output only.\\"\\"\\"
   id: String!
-
-  \\"\\"\\"\\"\\"\\"
-  outputOnlyMessage: TestPrefixOutputOnlyMessage
 
   \\"\\"\\"\\"\\"\\"
   prefixedEnum: TestPrefixPrefixedEnum
@@ -82,9 +61,6 @@ input TestPrefixPrefixedMessageInnerMessageInput {
 input TestPrefixPrefixedMessageInput {
   \\"\\"\\"\\"\\"\\"
   body: String!
-
-  \\"\\"\\"\\"\\"\\"
-  inputOnlyMessage: TestPrefixInputOnlyMessageInput
 
   \\"\\"\\"\\"\\"\\"
   prefixedEnum: TestPrefixPrefixedEnum
@@ -132,24 +108,6 @@ type Query {
 }
 
 \\"\\"\\"\\"\\"\\"
-input TestPrefixInputOnlyMessageInput {
-  \\"\\"\\"\\"\\"\\"
-  body: String!
-
-  \\"\\"\\"\\"\\"\\"
-  prefixedEnum: TestPrefixPrefixedEnum
-}
-
-\\"\\"\\"\\"\\"\\"
-type TestPrefixOutputOnlyMessage {
-  \\"\\"\\"\\"\\"\\"
-  body: String!
-
-  \\"\\"\\"\\"\\"\\"
-  prefixedEnum: TestPrefixPrefixedEnum
-}
-
-\\"\\"\\"\\"\\"\\"
 enum TestPrefixPrefixedEnum {
   PREFIXED_BAR
   PREFIXED_FOO
@@ -162,9 +120,6 @@ type TestPrefixPrefixedMessage {
 
   \\"\\"\\"Output only.\\"\\"\\"
   id: String!
-
-  \\"\\"\\"\\"\\"\\"
-  outputOnlyMessage: TestPrefixOutputOnlyMessage
 
   \\"\\"\\"\\"\\"\\"
   prefixedEnum: TestPrefixPrefixedEnum
@@ -204,9 +159,6 @@ input TestPrefixPrefixedMessageInnerMessageInput {
 input TestPrefixPrefixedMessageInput {
   \\"\\"\\"\\"\\"\\"
   body: String!
-
-  \\"\\"\\"\\"\\"\\"
-  inputOnlyMessage: TestPrefixInputOnlyMessageInput
 
   \\"\\"\\"\\"\\"\\"
   prefixedEnum: TestPrefixPrefixedEnum

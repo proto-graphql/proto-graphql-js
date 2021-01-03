@@ -71,13 +71,13 @@ export function createDeprecationPropertyAssignment(
   return ts.factory.createPropertyAssignment("deprecation", ts.factory.createStringLiteral(msg));
 }
 
-export function isIgnoredType(type: ProtoMessage | ProtoEnum, opts?: { input: boolean }): boolean {
+export function isIgnoredType(type: ProtoMessage | ProtoEnum): boolean {
   let ext: ExtensionFieldInfo<{ getIgnore(): boolean }>;
   if (type.parent instanceof ProtoMessage && isIgnoredType(type.parent)) {
     return true;
   }
   if (type instanceof ProtoMessage) {
-    ext = opts?.input ? extensions.inputType : extensions.objectType;
+    ext = extensions.objectType;
   } else if (type instanceof ProtoEnum) {
     ext = extensions.enumType;
   } else {
@@ -113,10 +113,10 @@ export function isInputOnlyField(field: ProtoField | ProtoOneof): boolean {
   return cs.includes("Input only");
 }
 
-export function isIgnoredField(field: ProtoField | ProtoEnumValue | ProtoOneof, opts?: { input: boolean }): boolean {
+export function isIgnoredField(field: ProtoField | ProtoEnumValue | ProtoOneof): boolean {
   let ext: ExtensionFieldInfo<{ getIgnore(): boolean }>;
   if (field instanceof ProtoField) {
-    if ((field.type instanceof ProtoMessage || field.type instanceof ProtoEnum) && isIgnoredType(field.type, opts)) {
+    if ((field.type instanceof ProtoMessage || field.type instanceof ProtoEnum) && isIgnoredType(field.type)) {
       return true;
     }
     const oneof = field.containingOneof();
