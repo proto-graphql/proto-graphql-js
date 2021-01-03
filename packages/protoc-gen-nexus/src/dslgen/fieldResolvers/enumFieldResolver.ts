@@ -26,13 +26,12 @@ import {
  * ```
  */
 export function createEnumFieldResolverStmts(
-  valueExprOrig: ts.Expression,
+  valueExpr: ts.Expression,
   field: ProtoField,
   type: GqlType,
   en: ProtoEnum,
   opts: GenerationParams
 ): ts.Statement[] {
-  const valueExpr = ts.factory.createIdentifier("value");
   let whenNullStmt: ts.Statement = type.nullable
     ? ts.factory.createReturnStatement(
         ts.factory.createToken(ts.SyntaxKind.NullKeyword)
@@ -45,7 +44,7 @@ export function createEnumFieldResolverStmts(
             ts.factory.createStringLiteral(
               `${gqlTypeName(field.parent)}.${
                 field.name
-              } is required field. But got null or unspecified.`
+              } is required field. But got unspecified.`
             ),
           ]
         )
@@ -57,28 +56,6 @@ export function createEnumFieldResolverStmts(
   const unspecified = getEnumValueForUnspecified(en);
 
   return [
-    ts.factory.createVariableStatement(
-      undefined,
-      ts.factory.createVariableDeclarationList(
-        [
-          ts.factory.createVariableDeclaration(
-            "value",
-            undefined,
-            undefined,
-            valueExprOrig
-          ),
-        ],
-        ts.NodeFlags.Const
-      )
-    ),
-    ts.factory.createIfStatement(
-      ts.factory.createBinaryExpression(
-        valueExpr,
-        ts.SyntaxKind.EqualsEqualsToken,
-        ts.factory.createToken(ts.SyntaxKind.NullKeyword)
-      ),
-      whenNullStmt
-    ),
     unspecified
       ? ts.factory.createIfStatement(
           ts.factory.createBinaryExpression(

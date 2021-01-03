@@ -6,7 +6,7 @@ import { createEnumFieldResolverStmts } from "./enumFieldResolver";
 import { createObjectFieldResolverStmts } from "./objectFieldResolver";
 import { craeteOneofUnionFieldResolverStmts } from "./oneoUnionfFieldResolver";
 import { createScalarFieldResolverStmts } from "./scalarFieldResolver";
-import { isSquashedUnion } from "../util";
+import { isSquashedUnion, onlyNonNull } from "../util";
 
 export function createFieldResolverDecl(
   field: ProtoField,
@@ -28,48 +28,9 @@ export function createFieldResolverDecl(
     }
     if (isSquashedUnion(field.type)) {
       const oneof = field.type.oneofs[0];
-      const stmts = [];
-      let oneofRoot = valueExpr;
-      if (type.nullable) {
-        oneofRoot = ts.factory.createIdentifier("value");
-        stmts.push(
-          ts.factory.createVariableStatement(
-            undefined,
-            ts.factory.createVariableDeclarationList(
-              [
-                ts.factory.createVariableDeclaration(
-                  "value",
-                  undefined,
-                  undefined,
-                  valueExpr
-                ),
-              ],
-              ts.NodeFlags.Const
-            )
-          ),
-          ts.factory.createIfStatement(
-            ts.factory.createBinaryExpression(
-              oneofRoot,
-              ts.SyntaxKind.EqualsEqualsToken,
-              ts.factory.createToken(ts.SyntaxKind.NullKeyword)
-            ),
-            ts.factory.createBlock(
-              [
-                ts.factory.createReturnStatement(
-                  ts.factory.createToken(ts.SyntaxKind.NullKeyword)
-                ),
-              ],
-              true // multiline
-            )
-          )
-        );
-      }
-      return [
-        ...stmts,
-        ...craeteOneofUnionFieldResolverStmts(oneofRoot, oneof, opts),
-      ];
+      return craeteOneofUnionFieldResolverStmts(valueExpr, oneof, opts);
     }
-    return createObjectFieldResolverStmts(valueExpr, type);
+    return createObjectFieldResolverStmts(valueExpr);
   });
 }
 
@@ -107,19 +68,14 @@ function createMethodDeclWithValueExpr(
       undefined
     );
   }
-  if (
-    !type.nullable &&
-    !(
-      // google-protobuf, primitive field
-      (
-        !opts.useProtobufjs &&
-        type.kind === "scalar" &&
-        !field.descriptor.getTypeName()
-      )
+  const shouldNullCheck = !(
+    // google-protobuf, primitive or list field
+    (
+      !opts.useProtobufjs &&
+      (type.kind === "list" ||
+        (type.kind === "scalar" && !field.descriptor.getTypeName()))
     )
-  ) {
-    valueExpr = ts.factory.createNonNullExpression(valueExpr);
-  }
+  );
 
   return ts.factory.createMethodDeclaration(
     undefined,
@@ -141,7 +97,52 @@ function createMethodDeclWithValueExpr(
     ],
     undefined,
     ts.factory.createBlock(
-      stmtsFn(valueExpr),
+      [
+        ts.factory.createVariableStatement(
+          undefined,
+          ts.factory.createVariableDeclarationList(
+            [
+              ts.factory.createVariableDeclaration(
+                "value",
+                undefined,
+                undefined,
+                valueExpr
+              ),
+            ],
+            ts.NodeFlags.Const
+          )
+        ),
+        shouldNullCheck
+          ? ts.factory.createIfStatement(
+              ts.factory.createBinaryExpression(
+                ts.factory.createIdentifier("value"),
+                ts.SyntaxKind.EqualsEqualsToken,
+                ts.factory.createToken(ts.SyntaxKind.NullKeyword)
+              ),
+              ts.factory.createBlock(
+                [
+                  type.nullable
+                    ? ts.factory.createReturnStatement(
+                        ts.factory.createToken(ts.SyntaxKind.NullKeyword)
+                      )
+                    : ts.factory.createThrowStatement(
+                        ts.factory.createNewExpression(
+                          ts.factory.createIdentifier("Error"),
+                          undefined,
+                          [
+                            ts.factory.createStringLiteral(
+                              "Cannot return null for non-nullable field"
+                            ),
+                          ]
+                        )
+                      ),
+                ],
+                true // multiline
+              )
+            )
+          : null,
+        ...stmtsFn(ts.factory.createIdentifier("value")),
+      ].filter(onlyNonNull()),
       true // multiline
     )
   );

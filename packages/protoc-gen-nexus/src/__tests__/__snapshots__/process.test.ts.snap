@@ -52,7 +52,8 @@ export const DeprecatedMessage = objectType({
             description: \\"\\",
             deprecation: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\",
             resolve(root) {
-                return root.getBody();
+                const value = root.getBody();
+                return value;
             }
         });
         t.field(\\"enum\\", {
@@ -82,7 +83,8 @@ export const NotDeprecatedMessage = objectType({
             description: \\"\\",
             deprecation: \\"testapis.deprecation.NotDeprecatedMessage.body is mark as deprecated in a *.proto file.\\",
             resolve(root) {
-                return root.getBody();
+                const value = root.getBody();
+                return value;
             }
         });
         t.field(\\"enum\\", {
@@ -153,7 +155,8 @@ export const DeprecatedMessageInnerMessage = objectType({
             description: \\"\\",
             deprecation: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\",
             resolve(root) {
-                return root.getBody();
+                const value = root.getBody();
+                return value;
             }
         });
     },
@@ -167,7 +170,8 @@ export const NotDeprecatedMessageInnerMessage1 = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getBody();
+                const value = root.getBody();
+                return value;
             }
         });
     },
@@ -181,7 +185,8 @@ export const NotDeprecatedMessageInnerMessage2 = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getBody();
+                const value = root.getBody();
+                return value;
             }
         });
     },
@@ -320,7 +325,8 @@ export const DeprecatedFileMessage = objectType({
             description: \\"\\",
             deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\",
             resolve(root) {
-                return root.getBody();
+                const value = root.getBody();
+                return value;
             }
         });
         t.field(\\"enum\\", {
@@ -350,7 +356,8 @@ export const DeprecatedFileMessageInnerMessage = objectType({
             description: \\"\\",
             deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\",
             resolve(root) {
-                return root.getBody();
+                const value = root.getBody();
+                return value;
             }
         });
     },
@@ -466,7 +473,11 @@ export const DeprecatedMessage = objectType({
             description: \\"\\",
             deprecation: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\",
             resolve(root) {
-                return root.body!;
+                const value = root.body;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
         t.field(\\"enum\\", {
@@ -496,7 +507,11 @@ export const NotDeprecatedMessage = objectType({
             description: \\"\\",
             deprecation: \\"testapis.deprecation.NotDeprecatedMessage.body is mark as deprecated in a *.proto file.\\",
             resolve(root) {
-                return root.body!;
+                const value = root.body;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
         t.field(\\"enum\\", {
@@ -553,7 +568,11 @@ export const DeprecatedMessageInnerMessage = objectType({
             description: \\"\\",
             deprecation: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\",
             resolve(root) {
-                return root.body!;
+                const value = root.body;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
     },
@@ -567,7 +586,11 @@ export const NotDeprecatedMessageInnerMessage1 = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.body!;
+                const value = root.body;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
     },
@@ -581,7 +604,11 @@ export const NotDeprecatedMessageInnerMessage2 = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.body!;
+                const value = root.body;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
     },
@@ -720,7 +747,11 @@ export const DeprecatedFileMessage = objectType({
             description: \\"\\",
             deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\",
             resolve(root) {
-                return root.body!;
+                const value = root.body;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
         t.field(\\"enum\\", {
@@ -750,7 +781,11 @@ export const DeprecatedFileMessageInnerMessage = objectType({
             description: \\"\\",
             deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\",
             resolve(root) {
-                return root.body!;
+                const value = root.body;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
     },
@@ -818,28 +853,44 @@ export const FieldBehaviorComentsMessage = objectType({
             type: nonNull(\\"FieldBehaviorComentsMessagePost\\"),
             description: \\"Required.\\",
             resolve(root) {
-                return root.getRequiredField()!;
+                const value = root.getRequiredField();
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
         t.field(\\"requiredOutputOnlyField\\", {
             type: nonNull(\\"FieldBehaviorComentsMessagePost\\"),
             description: \\"Required. Output only.\\",
             resolve(root) {
-                return root.getRequiredOutputOnlyField()!;
+                const value = root.getRequiredOutputOnlyField();
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
         t.field(\\"outputOnlyRequiredField\\", {
             type: nonNull(\\"FieldBehaviorComentsMessagePost\\"),
             description: \\"Output only. Required.\\",
             resolve(root) {
-                return root.getOutputOnlyRequiredField()!;
+                const value = root.getOutputOnlyRequiredField();
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
         t.field(\\"outputOnlyField\\", {
             type: nullable(\\"FieldBehaviorComentsMessagePost\\"),
             description: \\"Output only.\\",
             resolve(root) {
-                return root.getOutputOnlyField() ?? null;
+                const value = root.getOutputOnlyField();
+                if (value == null) {
+                    return null;
+                }
+                return value;
             }
         });
     },
@@ -853,7 +904,8 @@ export const FieldBehaviorComentsMessagePost = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getBody();
+                const value = root.getBody();
+                return value;
             }
         });
     },
@@ -910,28 +962,44 @@ export const FieldBehaviorComentsMessage = objectType({
             type: nonNull(\\"FieldBehaviorComentsMessagePost\\"),
             description: \\"Required.\\",
             resolve(root) {
-                return root.requiredField!;
+                const value = root.requiredField;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
         t.field(\\"requiredOutputOnlyField\\", {
             type: nonNull(\\"FieldBehaviorComentsMessagePost\\"),
             description: \\"Required. Output only.\\",
             resolve(root) {
-                return root.requiredOutputOnlyField!;
+                const value = root.requiredOutputOnlyField;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
         t.field(\\"outputOnlyRequiredField\\", {
             type: nonNull(\\"FieldBehaviorComentsMessagePost\\"),
             description: \\"Output only. Required.\\",
             resolve(root) {
-                return root.outputOnlyRequiredField!;
+                const value = root.outputOnlyRequiredField;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
         t.field(\\"outputOnlyField\\", {
             type: nullable(\\"FieldBehaviorComentsMessagePost\\"),
             description: \\"Output only.\\",
             resolve(root) {
-                return root.outputOnlyField ?? null;
+                const value = root.outputOnlyField;
+                if (value == null) {
+                    return null;
+                }
+                return value;
             }
         });
     },
@@ -945,7 +1013,11 @@ export const FieldBehaviorComentsMessagePost = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.body!;
+                const value = root.body;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
     },
@@ -1001,7 +1073,8 @@ export const SubpkgMessage = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getBody();
+                const value = root.getBody();
+                return value;
             }
         });
     },
@@ -1050,7 +1123,11 @@ export const MessageWithSubpkg = objectType({
             type: nullable(\\"SubpkgMessage\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getMessage() ?? null;
+                const value = root.getMessage();
+                if (value == null) {
+                    return null;
+                }
+                return value;
             }
         });
         t.field(\\"enum\\", {
@@ -1102,7 +1179,11 @@ export const SubpkgMessage = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.body!;
+                const value = root.body;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
     },
@@ -1151,7 +1232,11 @@ export const MessageWithSubpkg = objectType({
             type: nullable(\\"SubpkgMessage\\"),
             description: \\"\\",
             resolve(root) {
-                return root.message ?? null;
+                const value = root.message;
+                if (value == null) {
+                    return null;
+                }
+                return value;
             }
         });
         t.field(\\"enum\\", {
@@ -1204,14 +1289,19 @@ export const ParentMessage = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getBody();
+                const value = root.getBody();
+                return value;
             }
         });
         t.field(\\"nested\\", {
             type: nullable(\\"ParentMessageNestedMessage\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getNested() ?? null;
+                const value = root.getNested();
+                if (value == null) {
+                    return null;
+                }
+                return value;
             }
         });
         t.field(\\"nestedEnum\\", {
@@ -1239,7 +1329,8 @@ export const ParentMessageNestedMessage = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getNestedBody();
+                const value = root.getNestedBody();
+                return value;
             }
         });
     },
@@ -1306,14 +1397,22 @@ export const ParentMessage = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.body!;
+                const value = root.body;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
         t.field(\\"nested\\", {
             type: nullable(\\"ParentMessageNestedMessage\\"),
             description: \\"\\",
             resolve(root) {
-                return root.nested ?? null;
+                const value = root.nested;
+                if (value == null) {
+                    return null;
+                }
+                return value;
             }
         });
         t.field(\\"nestedEnum\\", {
@@ -1341,7 +1440,11 @@ export const ParentMessageNestedMessage = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.nestedBody!;
+                const value = root.nestedBody;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
     },
@@ -1432,14 +1535,16 @@ export const TestPrefixPrefixedMessage = objectType({
             type: nonNull(\\"String\\"),
             description: \\"Output only.\\",
             resolve(root) {
-                return root.getId().toString();
+                const value = root.getId();
+                return value.toString();
             }
         });
         t.field(\\"body\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getBody();
+                const value = root.getBody();
+                return value;
             }
         });
         t.field(\\"prefixedEnum\\", {
@@ -1463,7 +1568,11 @@ export const TestPrefixPrefixedMessage = objectType({
             type: nullable(\\"TestPrefixOutputOnlyMessage\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getOutputOnlyMessage() ?? null;
+                const value = root.getOutputOnlyMessage();
+                if (value == null) {
+                    return null;
+                }
+                return value;
             }
         });
         t.field(\\"squashedMessage\\", {
@@ -1501,7 +1610,8 @@ export const TestPrefixOutputOnlyMessage = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getBody();
+                const value = root.getBody();
+                return value;
             }
         });
         t.field(\\"prefixedEnum\\", {
@@ -1532,7 +1642,8 @@ export const TestPrefixPrefixedMessageInnerMessage = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getBody();
+                const value = root.getBody();
+                return value;
             }
         });
     },
@@ -1546,7 +1657,8 @@ export const TestPrefixPrefixedMessageInnerMessage2 = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getBody();
+                const value = root.getBody();
+                return value;
             }
         });
     },
@@ -1685,14 +1797,22 @@ export const TestPrefixPrefixedMessage = objectType({
             type: nonNull(\\"String\\"),
             description: \\"Output only.\\",
             resolve(root) {
-                return root.id!.toString();
+                const value = root.id;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value.toString();
             }
         });
         t.field(\\"body\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.body!;
+                const value = root.body;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
         t.field(\\"prefixedEnum\\", {
@@ -1716,7 +1836,11 @@ export const TestPrefixPrefixedMessage = objectType({
             type: nullable(\\"TestPrefixOutputOnlyMessage\\"),
             description: \\"\\",
             resolve(root) {
-                return root.outputOnlyMessage ?? null;
+                const value = root.outputOnlyMessage;
+                if (value == null) {
+                    return null;
+                }
+                return value;
             }
         });
         t.field(\\"squashedMessage\\", {
@@ -1747,7 +1871,11 @@ export const TestPrefixOutputOnlyMessage = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.body!;
+                const value = root.body;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
         t.field(\\"prefixedEnum\\", {
@@ -1778,7 +1906,11 @@ export const TestPrefixPrefixedMessageInnerMessage = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.body!;
+                const value = root.body;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
     },
@@ -1792,7 +1924,11 @@ export const TestPrefixPrefixedMessageInnerMessage2 = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.body!;
+                const value = root.body;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
     },
@@ -1900,12 +2036,12 @@ export const MessageWithEnums = objectType({
             type: nonNull(\\"MyEnum\\"),
             description: \\"Required.\\",
             resolve(root) {
-                const value = (root.getRequiredMyEnum()!);
+                const value = root.getRequiredMyEnum();
                 if (value == null) {
-                    throw new Error(\\"MessageWithEnums.requiredMyEnum is required field. But got null or unspecified.\\");
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
                 }
                 if (value === _$testapis$enums$enums_pb.MyEnum.MY_ENUM_UNSPECIFIED) {
-                    throw new Error(\\"MessageWithEnums.requiredMyEnum is required field. But got null or unspecified.\\");
+                    throw new Error(\\"MessageWithEnums.requiredMyEnum is required field. But got unspecified.\\");
                 }
                 return value;
             }
@@ -1928,9 +2064,9 @@ export const MessageWithEnums = objectType({
             type: nonNull(\\"MyEnumWithoutUnspecified\\"),
             description: \\"Required.\\",
             resolve(root) {
-                const value = (root.getRequiredMyEnumWithoutUnspecified()!);
+                const value = root.getRequiredMyEnumWithoutUnspecified();
                 if (value == null) {
-                    throw new Error(\\"MessageWithEnums.requiredMyEnumWithoutUnspecified is required field. But got null or unspecified.\\");
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
                 }
                 return value;
             }
@@ -2026,12 +2162,12 @@ export const MessageWithEnums = objectType({
             type: nonNull(\\"MyEnum\\"),
             description: \\"Required.\\",
             resolve(root) {
-                const value = (root.requiredMyEnum!);
+                const value = root.requiredMyEnum;
                 if (value == null) {
-                    throw new Error(\\"MessageWithEnums.requiredMyEnum is required field. But got null or unspecified.\\");
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
                 }
                 if (value === _$testapis$enums.testapi.enums.MyEnum.MY_ENUM_UNSPECIFIED) {
-                    throw new Error(\\"MessageWithEnums.requiredMyEnum is required field. But got null or unspecified.\\");
+                    throw new Error(\\"MessageWithEnums.requiredMyEnum is required field. But got unspecified.\\");
                 }
                 return value;
             }
@@ -2054,9 +2190,9 @@ export const MessageWithEnums = objectType({
             type: nonNull(\\"MyEnumWithoutUnspecified\\"),
             description: \\"Required.\\",
             resolve(root) {
-                const value = (root.requiredMyEnumWithoutUnspecified!);
+                const value = root.requiredMyEnumWithoutUnspecified;
                 if (value == null) {
-                    throw new Error(\\"MessageWithEnums.requiredMyEnumWithoutUnspecified is required field. But got null or unspecified.\\");
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
                 }
                 return value;
             }
@@ -2186,7 +2322,8 @@ export const OneofParent = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getNormalField();
+                const value = root.getNormalField();
+                return value;
             }
         });
         t.field(\\"required_oneof_members\\", {
@@ -2240,7 +2377,8 @@ export const OneofMemberMessage1 = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getBody();
+                const value = root.getBody();
+                return value;
             }
         });
     },
@@ -2254,7 +2392,8 @@ export const OneofMemberMessage2 = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getImageUrl();
+                const value = root.getImageUrl();
+                return value;
             }
         });
     },
@@ -2370,7 +2509,11 @@ export const OneofParent = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.normalField!;
+                const value = root.normalField;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
         t.field(\\"required_oneof_members\\", {
@@ -2410,7 +2553,11 @@ export const OneofMemberMessage1 = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.body!;
+                const value = root.body;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
     },
@@ -2424,7 +2571,11 @@ export const OneofMemberMessage2 = objectType({
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.imageUrl!;
+                const value = root.imageUrl;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
     },
@@ -2495,28 +2646,41 @@ export const Hello = objectType({
             type: nonNull(\\"Primitives\\"),
             description: \\"Required.\\",
             resolve(root) {
-                return root.getRequiredPrimitives()!;
+                const value = root.getRequiredPrimitives();
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
         t.field(\\"optionalPrimitives\\", {
             type: nullable(\\"Primitives\\"),
             description: \\"Optional.\\",
             resolve(root) {
-                return root.getOptionalPrimitives() ?? null;
+                const value = root.getOptionalPrimitives();
+                if (value == null) {
+                    return null;
+                }
+                return value;
             }
         });
         t.field(\\"requiredPrimitivesList\\", {
             type: list(nonNull(\\"Primitives\\")),
             description: \\"Required.\\",
             resolve(root) {
-                return root.getRequiredPrimitivesListList()!;
+                const value = root.getRequiredPrimitivesListList();
+                return value;
             }
         });
         t.field(\\"optionalPrimitivesList\\", {
             type: nullable(\\"Primitives\\"),
             description: \\"Optional.\\",
             resolve(root) {
-                return root.getOptionalPrimitivesList() ?? null;
+                const value = root.getOptionalPrimitivesList();
+                if (value == null) {
+                    return null;
+                }
+                return value;
             }
         });
     },
@@ -2530,98 +2694,112 @@ export const Primitives = objectType({
             type: nonNull(\\"Float\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getRequiredDoubleValue();
+                const value = root.getRequiredDoubleValue();
+                return value;
             }
         });
         t.field(\\"requiredFloatValue\\", {
             type: nonNull(\\"Float\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getRequiredFloatValue();
+                const value = root.getRequiredFloatValue();
+                return value;
             }
         });
         t.field(\\"requiredInt32Value\\", {
             type: nonNull(\\"Int\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getRequiredInt32Value();
+                const value = root.getRequiredInt32Value();
+                return value;
             }
         });
         t.field(\\"requiredInt64Value\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getRequiredInt64Value().toString();
+                const value = root.getRequiredInt64Value();
+                return value.toString();
             }
         });
         t.field(\\"requiredUint32Value\\", {
             type: nonNull(\\"Int\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getRequiredUint32Value();
+                const value = root.getRequiredUint32Value();
+                return value;
             }
         });
         t.field(\\"requiredUint64Value\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getRequiredUint64Value().toString();
+                const value = root.getRequiredUint64Value();
+                return value.toString();
             }
         });
         t.field(\\"requiredSint32Value\\", {
             type: nonNull(\\"Int\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getRequiredSint32Value();
+                const value = root.getRequiredSint32Value();
+                return value;
             }
         });
         t.field(\\"requiredSint64Value\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getRequiredSint64Value().toString();
+                const value = root.getRequiredSint64Value();
+                return value.toString();
             }
         });
         t.field(\\"requiredFixed32Value\\", {
             type: nonNull(\\"Int\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getRequiredFixed32Value();
+                const value = root.getRequiredFixed32Value();
+                return value;
             }
         });
         t.field(\\"requiredFixed64Value\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getRequiredFixed64Value().toString();
+                const value = root.getRequiredFixed64Value();
+                return value.toString();
             }
         });
         t.field(\\"requiredSfixed32Value\\", {
             type: nonNull(\\"Int\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getRequiredSfixed32Value();
+                const value = root.getRequiredSfixed32Value();
+                return value;
             }
         });
         t.field(\\"requiredSfixed64Value\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getRequiredSfixed64Value().toString();
+                const value = root.getRequiredSfixed64Value();
+                return value.toString();
             }
         });
         t.field(\\"requiredBoolValue\\", {
             type: nonNull(\\"Boolean\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getRequiredBoolValue();
+                const value = root.getRequiredBoolValue();
+                return value;
             }
         });
         t.field(\\"requiredStringValue\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.getRequiredStringValue();
+                const value = root.getRequiredStringValue();
+                return value;
             }
         });
     },
@@ -2730,28 +2908,44 @@ export const Hello = objectType({
             type: nonNull(\\"Primitives\\"),
             description: \\"Required.\\",
             resolve(root) {
-                return root.requiredPrimitives!;
+                const value = root.requiredPrimitives;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
         t.field(\\"optionalPrimitives\\", {
             type: nullable(\\"Primitives\\"),
             description: \\"Optional.\\",
             resolve(root) {
-                return root.optionalPrimitives ?? null;
+                const value = root.optionalPrimitives;
+                if (value == null) {
+                    return null;
+                }
+                return value;
             }
         });
         t.field(\\"requiredPrimitivesList\\", {
             type: list(nonNull(\\"Primitives\\")),
             description: \\"Required.\\",
             resolve(root) {
-                return root.requiredPrimitivesList!;
+                const value = root.requiredPrimitivesList;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
         t.field(\\"optionalPrimitivesList\\", {
             type: nullable(\\"Primitives\\"),
             description: \\"Optional.\\",
             resolve(root) {
-                return root.optionalPrimitivesList ?? null;
+                const value = root.optionalPrimitivesList;
+                if (value == null) {
+                    return null;
+                }
+                return value;
             }
         });
     },
@@ -2765,98 +2959,154 @@ export const Primitives = objectType({
             type: nonNull(\\"Float\\"),
             description: \\"\\",
             resolve(root) {
-                return root.requiredDoubleValue!;
+                const value = root.requiredDoubleValue;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
         t.field(\\"requiredFloatValue\\", {
             type: nonNull(\\"Float\\"),
             description: \\"\\",
             resolve(root) {
-                return root.requiredFloatValue!;
+                const value = root.requiredFloatValue;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
         t.field(\\"requiredInt32Value\\", {
             type: nonNull(\\"Int\\"),
             description: \\"\\",
             resolve(root) {
-                return root.requiredInt32Value!;
+                const value = root.requiredInt32Value;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
         t.field(\\"requiredInt64Value\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.requiredInt64Value!.toString();
+                const value = root.requiredInt64Value;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value.toString();
             }
         });
         t.field(\\"requiredUint32Value\\", {
             type: nonNull(\\"Int\\"),
             description: \\"\\",
             resolve(root) {
-                return root.requiredUint32Value!;
+                const value = root.requiredUint32Value;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
         t.field(\\"requiredUint64Value\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.requiredUint64Value!.toString();
+                const value = root.requiredUint64Value;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value.toString();
             }
         });
         t.field(\\"requiredSint32Value\\", {
             type: nonNull(\\"Int\\"),
             description: \\"\\",
             resolve(root) {
-                return root.requiredSint32Value!;
+                const value = root.requiredSint32Value;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
         t.field(\\"requiredSint64Value\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.requiredSint64Value!.toString();
+                const value = root.requiredSint64Value;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value.toString();
             }
         });
         t.field(\\"requiredFixed32Value\\", {
             type: nonNull(\\"Int\\"),
             description: \\"\\",
             resolve(root) {
-                return root.requiredFixed32Value!;
+                const value = root.requiredFixed32Value;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
         t.field(\\"requiredFixed64Value\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.requiredFixed64Value!.toString();
+                const value = root.requiredFixed64Value;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value.toString();
             }
         });
         t.field(\\"requiredSfixed32Value\\", {
             type: nonNull(\\"Int\\"),
             description: \\"\\",
             resolve(root) {
-                return root.requiredSfixed32Value!;
+                const value = root.requiredSfixed32Value;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
         t.field(\\"requiredSfixed64Value\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.requiredSfixed64Value!.toString();
+                const value = root.requiredSfixed64Value;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value.toString();
             }
         });
         t.field(\\"requiredBoolValue\\", {
             type: nonNull(\\"Boolean\\"),
             description: \\"\\",
             resolve(root) {
-                return root.requiredBoolValue!;
+                const value = root.requiredBoolValue;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
         t.field(\\"requiredStringValue\\", {
             type: nonNull(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return root.requiredStringValue!;
+                const value = root.requiredStringValue;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
             }
         });
     },
@@ -2965,63 +3215,99 @@ export const Message = objectType({
             type: nullable(\\"DateTime\\"),
             description: \\"\\",
             resolve(root) {
-                return $$proto_nexus$google_protobuf.timestampToDate(root.getTimestamp());
+                const value = root.getTimestamp();
+                if (value == null) {
+                    return null;
+                }
+                return $$proto_nexus$google_protobuf.timestampToDate(value);
             }
         });
         t.field(\\"int32Value\\", {
             type: nullable(\\"Int\\"),
             description: \\"\\",
             resolve(root) {
-                return $$proto_nexus$google_protobuf.unwrapInt32Value(root.getInt32Value());
+                const value = root.getInt32Value();
+                if (value == null) {
+                    return null;
+                }
+                return $$proto_nexus$google_protobuf.unwrapInt32Value(value);
             }
         });
         t.field(\\"int64Value\\", {
             type: nullable(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return $$proto_nexus$google_protobuf.unwrapInt64Value(root.getInt64Value())?.toString() ?? null;
+                const value = root.getInt64Value();
+                if (value == null) {
+                    return null;
+                }
+                return $$proto_nexus$google_protobuf.unwrapInt64Value(value)?.toString() ?? null;
             }
         });
         t.field(\\"uint32Value\\", {
             type: nullable(\\"Int\\"),
             description: \\"\\",
             resolve(root) {
-                return $$proto_nexus$google_protobuf.unwrapUInt32Value(root.getUint32Value());
+                const value = root.getUint32Value();
+                if (value == null) {
+                    return null;
+                }
+                return $$proto_nexus$google_protobuf.unwrapUInt32Value(value);
             }
         });
         t.field(\\"uint64Value\\", {
             type: nullable(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return $$proto_nexus$google_protobuf.unwrapUInt64Value(root.getUint64Value())?.toString() ?? null;
+                const value = root.getUint64Value();
+                if (value == null) {
+                    return null;
+                }
+                return $$proto_nexus$google_protobuf.unwrapUInt64Value(value)?.toString() ?? null;
             }
         });
         t.field(\\"floatValue\\", {
             type: nullable(\\"Float\\"),
             description: \\"\\",
             resolve(root) {
-                return $$proto_nexus$google_protobuf.unwrapFloatValue(root.getFloatValue());
+                const value = root.getFloatValue();
+                if (value == null) {
+                    return null;
+                }
+                return $$proto_nexus$google_protobuf.unwrapFloatValue(value);
             }
         });
         t.field(\\"doubleValue\\", {
             type: nullable(\\"Float\\"),
             description: \\"\\",
             resolve(root) {
-                return $$proto_nexus$google_protobuf.unwrapDoubleValue(root.getDoubleValue());
+                const value = root.getDoubleValue();
+                if (value == null) {
+                    return null;
+                }
+                return $$proto_nexus$google_protobuf.unwrapDoubleValue(value);
             }
         });
         t.field(\\"boolValue\\", {
             type: nullable(\\"Boolean\\"),
             description: \\"\\",
             resolve(root) {
-                return $$proto_nexus$google_protobuf.unwrapBoolValue(root.getBoolValue());
+                const value = root.getBoolValue();
+                if (value == null) {
+                    return null;
+                }
+                return $$proto_nexus$google_protobuf.unwrapBoolValue(value);
             }
         });
         t.field(\\"stringValue\\", {
             type: nullable(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return $$proto_nexus$google_protobuf.unwrapStringValue(root.getStringValue());
+                const value = root.getStringValue();
+                if (value == null) {
+                    return null;
+                }
+                return $$proto_nexus$google_protobuf.unwrapStringValue(value);
             }
         });
     },
@@ -3088,63 +3374,99 @@ export const Message = objectType({
             type: nullable(\\"DateTime\\"),
             description: \\"\\",
             resolve(root) {
-                return $$proto_nexus$protobufjs.timestampToDate(root.timestamp);
+                const value = root.timestamp;
+                if (value == null) {
+                    return null;
+                }
+                return $$proto_nexus$protobufjs.timestampToDate(value);
             }
         });
         t.field(\\"int32Value\\", {
             type: nullable(\\"Int\\"),
             description: \\"\\",
             resolve(root) {
-                return $$proto_nexus$protobufjs.unwrapInt32Value(root.int32Value);
+                const value = root.int32Value;
+                if (value == null) {
+                    return null;
+                }
+                return $$proto_nexus$protobufjs.unwrapInt32Value(value);
             }
         });
         t.field(\\"int64Value\\", {
             type: nullable(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return $$proto_nexus$protobufjs.unwrapInt64Value(root.int64Value)?.toString() ?? null;
+                const value = root.int64Value;
+                if (value == null) {
+                    return null;
+                }
+                return $$proto_nexus$protobufjs.unwrapInt64Value(value)?.toString() ?? null;
             }
         });
         t.field(\\"uint32Value\\", {
             type: nullable(\\"Int\\"),
             description: \\"\\",
             resolve(root) {
-                return $$proto_nexus$protobufjs.unwrapUInt32Value(root.uint32Value);
+                const value = root.uint32Value;
+                if (value == null) {
+                    return null;
+                }
+                return $$proto_nexus$protobufjs.unwrapUInt32Value(value);
             }
         });
         t.field(\\"uint64Value\\", {
             type: nullable(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return $$proto_nexus$protobufjs.unwrapUInt64Value(root.uint64Value)?.toString() ?? null;
+                const value = root.uint64Value;
+                if (value == null) {
+                    return null;
+                }
+                return $$proto_nexus$protobufjs.unwrapUInt64Value(value)?.toString() ?? null;
             }
         });
         t.field(\\"floatValue\\", {
             type: nullable(\\"Float\\"),
             description: \\"\\",
             resolve(root) {
-                return $$proto_nexus$protobufjs.unwrapFloatValue(root.floatValue);
+                const value = root.floatValue;
+                if (value == null) {
+                    return null;
+                }
+                return $$proto_nexus$protobufjs.unwrapFloatValue(value);
             }
         });
         t.field(\\"doubleValue\\", {
             type: nullable(\\"Float\\"),
             description: \\"\\",
             resolve(root) {
-                return $$proto_nexus$protobufjs.unwrapDoubleValue(root.doubleValue);
+                const value = root.doubleValue;
+                if (value == null) {
+                    return null;
+                }
+                return $$proto_nexus$protobufjs.unwrapDoubleValue(value);
             }
         });
         t.field(\\"boolValue\\", {
             type: nullable(\\"Boolean\\"),
             description: \\"\\",
             resolve(root) {
-                return $$proto_nexus$protobufjs.unwrapBoolValue(root.boolValue);
+                const value = root.boolValue;
+                if (value == null) {
+                    return null;
+                }
+                return $$proto_nexus$protobufjs.unwrapBoolValue(value);
             }
         });
         t.field(\\"stringValue\\", {
             type: nullable(\\"String\\"),
             description: \\"\\",
             resolve(root) {
-                return $$proto_nexus$protobufjs.unwrapStringValue(root.stringValue);
+                const value = root.stringValue;
+                if (value == null) {
+                    return null;
+                }
+                return $$proto_nexus$protobufjs.unwrapStringValue(value);
             }
         });
     },
