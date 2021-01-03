@@ -102,10 +102,7 @@ export function createImportProtoDecls(
         m.fields
           .filter((f) => !isIgnoredField(f))
           .map((f) => f.type)
-          .filter(
-            (t): t is ProtoEnum =>
-              t instanceof ProtoEnum && getEnumValueForUnspecified(t) != null
-          )
+          .filter((t): t is ProtoEnum => t instanceof ProtoEnum && getEnumValueForUnspecified(t) != null)
       )
       .map((e) => protoImportPath(e, opts)),
   ]
@@ -114,8 +111,5 @@ export function createImportProtoDecls(
 }
 
 function createImportSpecifier(name: string): ts.ImportSpecifier {
-  return ts.factory.createImportSpecifier(
-    undefined,
-    ts.factory.createIdentifier(name)
-  );
+  return ts.factory.createImportSpecifier(undefined, ts.factory.createIdentifier(name));
 }

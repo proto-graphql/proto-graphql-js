@@ -2,9 +2,7 @@ import { common } from "protobufjs";
 
 type Nullable<T> = { [K in keyof T]?: T[K] | null | undefined };
 
-export function timestampToDate(
-  input: Nullable<common.ITimestamp> | undefined | null
-): Date | null {
+export function timestampToDate(input: Nullable<common.ITimestamp> | undefined | null): Date | null {
   if (input == null) return null;
 
   let seconds: number;

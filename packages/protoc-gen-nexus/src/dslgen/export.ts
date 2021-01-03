@@ -1,12 +1,7 @@
 import ts from "typescript";
 import { ProtoMessage, ProtoOneof } from "../protoTypes";
 import { GenerationParams } from "./types";
-import {
-  createProtoQualifiedName,
-  isIgnoredField,
-  onlyNonNull,
-  protoExportAlias,
-} from "./util";
+import { createProtoQualifiedName, isIgnoredField, onlyNonNull, protoExportAlias } from "./util";
 
 /**
  * @example
@@ -14,13 +9,8 @@ import {
  * export _$hello$hello_pb$Hello = _$hello$hello_pb.Hello;
  * ```
  */
-export function createReExportProtoStmts(
-  types: ReadonlyArray<ProtoMessage>,
-  opts: GenerationParams
-): ts.Statement[] {
-  const stmts = types
-    .map((t) => createReExportProtoStmt(t, opts))
-    .filter(onlyNonNull());
+export function createReExportProtoStmts(types: ReadonlyArray<ProtoMessage>, opts: GenerationParams): ts.Statement[] {
+  const stmts = types.map((t) => createReExportProtoStmt(t, opts)).filter(onlyNonNull());
 
   if (opts.useProtobufjs) {
     stmts.push(
@@ -45,10 +35,7 @@ export function createReExportProtoStmts(
  * export _$hello$hello$Hello = _$hello.hello.Hello;
  * ```
  */
-function createReExportProtoStmt(
-  typ: ProtoMessage,
-  opts: GenerationParams
-): ts.Statement {
+function createReExportProtoStmt(typ: ProtoMessage, opts: GenerationParams): ts.Statement {
   return ts.factory.createTypeAliasDeclaration(
     undefined,
     [ts.factory.createToken(ts.SyntaxKind.ExportKeyword)],
@@ -69,10 +56,7 @@ function createReExportProtoStmt(
  * export _$hello$hello$Hello = _$hello.hello.Hello;
  * ```
  */
-function createReExportOneofUnionSourceStmt(
-  o: ProtoOneof,
-  opts: GenerationParams
-): ts.Statement {
+function createReExportOneofUnionSourceStmt(o: ProtoOneof, opts: GenerationParams): ts.Statement {
   return ts.factory.createTypeAliasDeclaration(
     undefined,
     [ts.factory.createToken(ts.SyntaxKind.ExportKeyword)],
@@ -92,9 +76,7 @@ function createReExportOneofUnionSourceStmt(
                 undefined,
                 "__protobufTypeName",
                 undefined,
-                ts.factory.createLiteralTypeNode(
-                  ts.factory.createStringLiteral(type.qualifiedName)
-                )
+                ts.factory.createLiteralTypeNode(ts.factory.createStringLiteral(type.qualifiedName))
               ),
             ]),
           ])

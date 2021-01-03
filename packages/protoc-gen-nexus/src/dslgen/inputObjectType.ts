@@ -40,34 +40,20 @@ export function createInputObjectTypeDslStmts(
  * })
  * ```
  */
-function createInputObjectTypeDslStmt(
-  msg: ProtoMessage,
-  reg: ProtoRegistry,
-  opts: GenerationParams
-): ts.Statement {
+function createInputObjectTypeDslStmt(msg: ProtoMessage, reg: ProtoRegistry, opts: GenerationParams): ts.Statement {
   const typeName = `${gqlTypeName(msg)}Input`;
   return createDslExportConstStmt(
     typeName,
-    ts.factory.createCallExpression(
-      ts.factory.createIdentifier("inputObjectType"),
-      undefined,
-      [
-        ts.factory.createObjectLiteralExpression(
-          [
-            ts.factory.createPropertyAssignment(
-              "name",
-              ts.factory.createStringLiteral(typeName)
-            ),
-            ts.factory.createPropertyAssignment(
-              "description",
-              ts.factory.createStringLiteral(msg.description)
-            ),
-            createInputObjectTypeDefinitionMethodDecl(msg, reg, opts),
-          ],
-          true
-        ),
-      ]
-    )
+    ts.factory.createCallExpression(ts.factory.createIdentifier("inputObjectType"), undefined, [
+      ts.factory.createObjectLiteralExpression(
+        [
+          ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(typeName)),
+          ts.factory.createPropertyAssignment("description", ts.factory.createStringLiteral(msg.description)),
+          createInputObjectTypeDefinitionMethodDecl(msg, reg, opts),
+        ],
+        true
+      ),
+    ])
   );
 }
 
@@ -91,25 +77,13 @@ function createInputObjectTypeDefinitionMethodDecl(
     "definition",
     undefined,
     undefined,
-    [
-      ts.factory.createParameterDeclaration(
-        undefined,
-        undefined,
-        undefined,
-        "t",
-        undefined,
-        undefined,
-        undefined
-      ),
-    ],
+    [ts.factory.createParameterDeclaration(undefined, undefined, undefined, "t", undefined, undefined, undefined)],
     undefined,
     ts.factory.createBlock(
       msg.fields
         .filter((f) => !isOutputOnlyField(f))
         .filter((f) => !isIgnoredField(f, { input: true }))
-        .map((f) =>
-          createFieldDefinitionStmt(f, reg, { ...opts, input: true })
-        ),
+        .map((f) => createFieldDefinitionStmt(f, reg, { ...opts, input: true })),
       true
     )
   );

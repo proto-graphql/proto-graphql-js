@@ -1,14 +1,9 @@
-import {
-  CodeGeneratorRequest,
-  CodeGeneratorResponse,
-} from "google-protobuf/google/protobuf/compiler/plugin_pb";
+import { CodeGeneratorRequest, CodeGeneratorResponse } from "google-protobuf/google/protobuf/compiler/plugin_pb";
 import { GenerationParams } from "./dslgen";
 import { printSource } from "./printer";
 import { ProtoRegistry } from "./protoTypes";
 
-export const processRequest = (
-  req: CodeGeneratorRequest
-): CodeGeneratorResponse => {
+export const processRequest = (req: CodeGeneratorRequest): CodeGeneratorResponse => {
   const resp = new CodeGeneratorResponse();
 
   const registry = new ProtoRegistry();

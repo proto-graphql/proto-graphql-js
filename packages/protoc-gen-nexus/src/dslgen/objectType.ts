@@ -44,38 +44,21 @@ export function createObjectTypeDslStmts(
  * })
  * ```
  */
-function createObjectTypeDslStmt(
-  msg: ProtoMessage,
-  reg: ProtoRegistry,
-  opts: GenerationParams
-): ts.Statement {
+function createObjectTypeDslStmt(msg: ProtoMessage, reg: ProtoRegistry, opts: GenerationParams): ts.Statement {
   const typeName = gqlTypeName(msg);
   return createDslExportConstStmt(
     typeName,
-    ts.factory.createCallExpression(
-      ts.factory.createIdentifier("objectType"),
-      undefined,
-      [
-        ts.factory.createObjectLiteralExpression(
-          [
-            ts.factory.createPropertyAssignment(
-              "name",
-              ts.factory.createStringLiteral(typeName)
-            ),
-            ts.factory.createPropertyAssignment(
-              "description",
-              ts.factory.createStringLiteral(msg.description)
-            ),
-            createObjectTypeDefinitionMethodDecl(msg, reg, opts),
-            ts.factory.createPropertyAssignment(
-              "sourceType",
-              sourceTypeExpr(msg, opts)
-            ),
-          ],
-          true
-        ),
-      ]
-    )
+    ts.factory.createCallExpression(ts.factory.createIdentifier("objectType"), undefined, [
+      ts.factory.createObjectLiteralExpression(
+        [
+          ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(typeName)),
+          ts.factory.createPropertyAssignment("description", ts.factory.createStringLiteral(msg.description)),
+          createObjectTypeDefinitionMethodDecl(msg, reg, opts),
+          ts.factory.createPropertyAssignment("sourceType", sourceTypeExpr(msg, opts)),
+        ],
+        true
+      ),
+    ])
   );
 }
 
@@ -99,17 +82,7 @@ function createObjectTypeDefinitionMethodDecl(
     "definition",
     undefined,
     undefined,
-    [
-      ts.factory.createParameterDeclaration(
-        undefined,
-        undefined,
-        undefined,
-        "t",
-        undefined,
-        undefined,
-        undefined
-      ),
-    ],
+    [ts.factory.createParameterDeclaration(undefined, undefined, undefined, "t", undefined, undefined, undefined)],
     undefined,
     ts.factory.createBlock(
       [
@@ -137,18 +110,9 @@ function createObjectTypeDefinitionMethodDecl(
  * }
  * ```
  */
-function sourceTypeExpr(
-  msg: ProtoMessage,
-  opts: GenerationParams
-): ts.Expression {
+function sourceTypeExpr(msg: ProtoMessage, opts: GenerationParams): ts.Expression {
   return ts.factory.createObjectLiteralExpression([
-    ts.factory.createPropertyAssignment(
-      "module",
-      ts.factory.createIdentifier("__filename")
-    ),
-    ts.factory.createPropertyAssignment(
-      "export",
-      ts.factory.createStringLiteral(protoExportAlias(msg, opts))
-    ),
+    ts.factory.createPropertyAssignment("module", ts.factory.createIdentifier("__filename")),
+    ts.factory.createPropertyAssignment("export", ts.factory.createStringLiteral(protoExportAlias(msg, opts))),
   ]);
 }

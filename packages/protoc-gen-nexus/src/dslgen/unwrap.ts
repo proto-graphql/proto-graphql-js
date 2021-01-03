@@ -2,10 +2,7 @@ import { ProtoField } from "../protoTypes";
 import { GenerationParams } from "./types";
 import { uniqueImportAlias } from "./util";
 
-export function getUnwrapFunc(
-  f: ProtoField,
-  opts: GenerationParams
-): UnwrapFunc | null {
+export function getUnwrapFunc(f: ProtoField, opts: GenerationParams): UnwrapFunc | null {
   const uf = unwrapFuncs[f.protoTypeName];
   if (!uf) return null;
   return uf[opts.useProtobufjs ? "protobufjs" : "native"];
@@ -16,16 +13,11 @@ export type UnwrapFunc = {
   name: string;
 };
 
-const unwrapFuncs: Record<
-  string,
-  { native: UnwrapFunc; protobufjs: UnwrapFunc }
-> = {
+const unwrapFuncs: Record<string, { native: UnwrapFunc; protobufjs: UnwrapFunc }> = {
   ".google.protobuf.Int32Value": {
     native: {
       imports: ["@proto-nexus/google-protobuf"],
-      name: `${uniqueImportAlias(
-        "@proto-nexus/google-protobuf"
-      )}.unwrapInt32Value`,
+      name: `${uniqueImportAlias("@proto-nexus/google-protobuf")}.unwrapInt32Value`,
     },
     protobufjs: {
       imports: ["@proto-nexus/protobufjs"],
@@ -35,9 +27,7 @@ const unwrapFuncs: Record<
   ".google.protobuf.UInt32Value": {
     native: {
       imports: ["@proto-nexus/google-protobuf"],
-      name: `${uniqueImportAlias(
-        "@proto-nexus/google-protobuf"
-      )}.unwrapUInt32Value`,
+      name: `${uniqueImportAlias("@proto-nexus/google-protobuf")}.unwrapUInt32Value`,
     },
     protobufjs: {
       imports: ["@proto-nexus/protobufjs"],
@@ -47,9 +37,7 @@ const unwrapFuncs: Record<
   ".google.protobuf.Int64Value": {
     native: {
       imports: ["@proto-nexus/google-protobuf"],
-      name: `${uniqueImportAlias(
-        "@proto-nexus/google-protobuf"
-      )}.unwrapInt64Value`,
+      name: `${uniqueImportAlias("@proto-nexus/google-protobuf")}.unwrapInt64Value`,
     },
     protobufjs: {
       imports: ["@proto-nexus/protobufjs"],
@@ -59,9 +47,7 @@ const unwrapFuncs: Record<
   ".google.protobuf.UInt64Value": {
     native: {
       imports: ["@proto-nexus/google-protobuf"],
-      name: `${uniqueImportAlias(
-        "@proto-nexus/google-protobuf"
-      )}.unwrapUInt64Value`,
+      name: `${uniqueImportAlias("@proto-nexus/google-protobuf")}.unwrapUInt64Value`,
     },
     protobufjs: {
       imports: ["@proto-nexus/protobufjs"],
@@ -71,9 +57,7 @@ const unwrapFuncs: Record<
   ".google.protobuf.FloatValue": {
     native: {
       imports: ["@proto-nexus/google-protobuf"],
-      name: `${uniqueImportAlias(
-        "@proto-nexus/google-protobuf"
-      )}.unwrapFloatValue`,
+      name: `${uniqueImportAlias("@proto-nexus/google-protobuf")}.unwrapFloatValue`,
     },
     protobufjs: {
       imports: ["@proto-nexus/protobufjs"],
@@ -83,9 +67,7 @@ const unwrapFuncs: Record<
   ".google.protobuf.DoubleValue": {
     native: {
       imports: ["@proto-nexus/google-protobuf"],
-      name: `${uniqueImportAlias(
-        "@proto-nexus/google-protobuf"
-      )}.unwrapDoubleValue`,
+      name: `${uniqueImportAlias("@proto-nexus/google-protobuf")}.unwrapDoubleValue`,
     },
     protobufjs: {
       imports: ["@proto-nexus/protobufjs"],
@@ -95,9 +77,7 @@ const unwrapFuncs: Record<
   ".google.protobuf.StringValue": {
     native: {
       imports: ["@proto-nexus/google-protobuf"],
-      name: `${uniqueImportAlias(
-        "@proto-nexus/google-protobuf"
-      )}.unwrapStringValue`,
+      name: `${uniqueImportAlias("@proto-nexus/google-protobuf")}.unwrapStringValue`,
     },
     protobufjs: {
       imports: ["@proto-nexus/protobufjs"],
@@ -107,9 +87,7 @@ const unwrapFuncs: Record<
   ".google.protobuf.BoolValue": {
     native: {
       imports: ["@proto-nexus/google-protobuf"],
-      name: `${uniqueImportAlias(
-        "@proto-nexus/google-protobuf"
-      )}.unwrapBoolValue`,
+      name: `${uniqueImportAlias("@proto-nexus/google-protobuf")}.unwrapBoolValue`,
     },
     protobufjs: {
       imports: ["@proto-nexus/protobufjs"],
@@ -119,9 +97,7 @@ const unwrapFuncs: Record<
   ".google.protobuf.Timestamp": {
     native: {
       imports: ["@proto-nexus/google-protobuf"],
-      name: `${uniqueImportAlias(
-        "@proto-nexus/google-protobuf"
-      )}.timestampToDate`,
+      name: `${uniqueImportAlias("@proto-nexus/google-protobuf")}.timestampToDate`,
     },
     protobufjs: {
       imports: ["@proto-nexus/protobufjs"],

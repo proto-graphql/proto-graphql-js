@@ -15,13 +15,7 @@ export function createFieldResolverDecl(
 ): ts.MethodDeclaration {
   return createMethodDeclWithValueExpr(field, type, opts, (valueExpr) => {
     if (field.type instanceof ProtoEnum) {
-      return createEnumFieldResolverStmts(
-        valueExpr,
-        field,
-        type,
-        field.type,
-        opts
-      );
+      return createEnumFieldResolverStmts(valueExpr, field, type, field.type, opts);
     }
     if (field.type == null || type.kind === "scalar") {
       return createScalarFieldResolverStmts(valueExpr, field, opts);
@@ -34,17 +28,8 @@ export function createFieldResolverDecl(
   });
 }
 
-export function createOneofFieldResolverDecl(
-  oneof: ProtoOneof,
-  opts: GenerationParams
-): ts.MethodDeclaration {
-  return createMethodDecl(
-    craeteOneofUnionFieldResolverStmts(
-      ts.factory.createIdentifier("root"),
-      oneof,
-      opts
-    )
-  );
+export function createOneofFieldResolverDecl(oneof: ProtoOneof, opts: GenerationParams): ts.MethodDeclaration {
+  return createMethodDecl(craeteOneofUnionFieldResolverStmts(ts.factory.createIdentifier("root"), oneof, opts));
 }
 
 function createMethodDeclWithValueExpr(
@@ -55,26 +40,14 @@ function createMethodDeclWithValueExpr(
 ): ts.MethodDeclaration {
   let valueExpr: ts.Expression = ts.factory.createPropertyAccessExpression(
     ts.factory.createIdentifier("root"),
-    ts.factory.createIdentifier(
-      opts.useProtobufjs
-        ? camelCase(field.descriptor.getName()!)
-        : field.getterName
-    )
+    ts.factory.createIdentifier(opts.useProtobufjs ? camelCase(field.descriptor.getName()!) : field.getterName)
   );
   if (!opts.useProtobufjs) {
-    valueExpr = ts.factory.createCallExpression(
-      valueExpr,
-      undefined,
-      undefined
-    );
+    valueExpr = ts.factory.createCallExpression(valueExpr, undefined, undefined);
   }
   const shouldNullCheck = !(
     // google-protobuf, primitive or list field
-    (
-      !opts.useProtobufjs &&
-      (type.kind === "list" ||
-        (type.kind === "scalar" && !field.descriptor.getTypeName()))
-    )
+    (!opts.useProtobufjs && (type.kind === "list" || (type.kind === "scalar" && !field.descriptor.getTypeName())))
   );
 
   return ts.factory.createMethodDeclaration(
@@ -84,31 +57,14 @@ function createMethodDeclWithValueExpr(
     "resolve",
     undefined,
     undefined,
-    [
-      ts.factory.createParameterDeclaration(
-        undefined,
-        undefined,
-        undefined,
-        "root",
-        undefined,
-        undefined,
-        undefined
-      ),
-    ],
+    [ts.factory.createParameterDeclaration(undefined, undefined, undefined, "root", undefined, undefined, undefined)],
     undefined,
     ts.factory.createBlock(
       [
         ts.factory.createVariableStatement(
           undefined,
           ts.factory.createVariableDeclarationList(
-            [
-              ts.factory.createVariableDeclaration(
-                "value",
-                undefined,
-                undefined,
-                valueExpr
-              ),
-            ],
+            [ts.factory.createVariableDeclaration("value", undefined, undefined, valueExpr)],
             ts.NodeFlags.Const
           )
         ),
@@ -122,19 +78,11 @@ function createMethodDeclWithValueExpr(
               ts.factory.createBlock(
                 [
                   type.nullable
-                    ? ts.factory.createReturnStatement(
-                        ts.factory.createToken(ts.SyntaxKind.NullKeyword)
-                      )
+                    ? ts.factory.createReturnStatement(ts.factory.createToken(ts.SyntaxKind.NullKeyword))
                     : ts.factory.createThrowStatement(
-                        ts.factory.createNewExpression(
-                          ts.factory.createIdentifier("Error"),
-                          undefined,
-                          [
-                            ts.factory.createStringLiteral(
-                              "Cannot return null for non-nullable field"
-                            ),
-                          ]
-                        )
+                        ts.factory.createNewExpression(ts.factory.createIdentifier("Error"), undefined, [
+                          ts.factory.createStringLiteral("Cannot return null for non-nullable field"),
+                        ])
                       ),
                 ],
                 true // multiline
@@ -156,17 +104,7 @@ function createMethodDecl(stmts: ts.Statement[]): ts.MethodDeclaration {
     "resolve",
     undefined,
     undefined,
-    [
-      ts.factory.createParameterDeclaration(
-        undefined,
-        undefined,
-        undefined,
-        "root",
-        undefined,
-        undefined,
-        undefined
-      ),
-    ],
+    [ts.factory.createParameterDeclaration(undefined, undefined, undefined, "root", undefined, undefined, undefined)],
     undefined,
     ts.factory.createBlock(
       stmts,

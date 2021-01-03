@@ -35,9 +35,7 @@ export function createOneofUnionTypeDslStmts(
       .filter((m) => isSquashedUnion(m))
       .map((m) => m.oneofs[0])
       .filter((o) => !isIgnoredField(o))
-      .map((o) =>
-        createOneofUnionTypeDslStmt(gqlTypeName(o.parent), o, reg, opts)
-      ),
+      .map((o) => createOneofUnionTypeDslStmt(gqlTypeName(o.parent), o, reg, opts)),
   ];
 }
 
@@ -58,33 +56,18 @@ function createOneofUnionTypeDslStmt(
 ): ts.Statement {
   return createDslExportConstStmt(
     typeName,
-    ts.factory.createCallExpression(
-      ts.factory.createIdentifier("unionType"),
-      undefined,
-      [
-        ts.factory.createObjectLiteralExpression(
-          [
-            ts.factory.createPropertyAssignment(
-              "name",
-              ts.factory.createStringLiteral(typeName)
-            ),
-            ts.factory.createPropertyAssignment(
-              "description",
-              ts.factory.createStringLiteral(oneof.description)
-            ),
-            createOneofUnionTypeDefinitionMethodDecl(oneof, reg),
-            createOneofUnionTypeResolveTypeMethodDecl(oneof, reg, opts),
-            opts.useProtobufjs
-              ? ts.factory.createPropertyAssignment(
-                  "sourceType",
-                  sourceTypeExpr(oneof, opts)
-                )
-              : null,
-          ].filter(onlyNonNull()),
-          true
-        ),
-      ]
-    )
+    ts.factory.createCallExpression(ts.factory.createIdentifier("unionType"), undefined, [
+      ts.factory.createObjectLiteralExpression(
+        [
+          ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(typeName)),
+          ts.factory.createPropertyAssignment("description", ts.factory.createStringLiteral(oneof.description)),
+          createOneofUnionTypeDefinitionMethodDecl(oneof, reg),
+          createOneofUnionTypeResolveTypeMethodDecl(oneof, reg, opts),
+          opts.useProtobufjs ? ts.factory.createPropertyAssignment("sourceType", sourceTypeExpr(oneof, opts)) : null,
+        ].filter(onlyNonNull()),
+        true
+      ),
+    ])
   );
 }
 
@@ -96,10 +79,7 @@ function createOneofUnionTypeDslStmt(
  * }
  * ```
  */
-function createOneofUnionTypeDefinitionMethodDecl(
-  oneof: ProtoOneof,
-  reg: ProtoRegistry
-): ts.MethodDeclaration {
+function createOneofUnionTypeDefinitionMethodDecl(oneof: ProtoOneof, reg: ProtoRegistry): ts.MethodDeclaration {
   return ts.factory.createMethodDeclaration(
     undefined,
     undefined,
@@ -107,17 +87,7 @@ function createOneofUnionTypeDefinitionMethodDecl(
     "definition",
     undefined,
     undefined,
-    [
-      ts.factory.createParameterDeclaration(
-        undefined,
-        undefined,
-        undefined,
-        "t",
-        undefined,
-        undefined,
-        undefined
-      ),
-    ],
+    [ts.factory.createParameterDeclaration(undefined, undefined, undefined, "t", undefined, undefined, undefined)],
     undefined,
     ts.factory.createBlock(
       [
@@ -161,17 +131,7 @@ function createOneofUnionTypeResolveTypeMethodDecl(
     "resolveType",
     undefined,
     undefined,
-    [
-      ts.factory.createParameterDeclaration(
-        undefined,
-        undefined,
-        undefined,
-        "item",
-        undefined,
-        undefined,
-        undefined
-      ),
-    ],
+    [ts.factory.createParameterDeclaration(undefined, undefined, undefined, "item", undefined, undefined, undefined)],
     undefined,
     ts.factory.createBlock(
       [
@@ -189,25 +149,15 @@ function createOneofUnionTypeResolveTypeMethodDecl(
     )
   );
 }
-function craeteOneofUnionTypeResolveTypeMethodStatement(
-  t: ProtoMessage,
-  opts: GenerationParams
-) {
+function craeteOneofUnionTypeResolveTypeMethodStatement(t: ProtoMessage, opts: GenerationParams) {
   if (opts.useProtobufjs) {
     return ts.factory.createIfStatement(
       ts.factory.createBinaryExpression(
-        ts.factory.createPropertyAccessExpression(
-          ts.factory.createIdentifier("item"),
-          "__protobufTypeName"
-        ),
+        ts.factory.createPropertyAccessExpression(ts.factory.createIdentifier("item"), "__protobufTypeName"),
         ts.SyntaxKind.EqualsEqualsEqualsToken,
         ts.factory.createStringLiteral(t.qualifiedName)
       ),
-      ts.factory.createBlock([
-        ts.factory.createReturnStatement(
-          ts.factory.createStringLiteral(gqlTypeName(t))
-        ),
-      ])
+      ts.factory.createBlock([ts.factory.createReturnStatement(ts.factory.createStringLiteral(gqlTypeName(t)))])
     );
   }
   return ts.factory.createIfStatement(
@@ -216,11 +166,7 @@ function craeteOneofUnionTypeResolveTypeMethodStatement(
       ts.SyntaxKind.InstanceOfKeyword,
       createProtoExpr(t, opts)
     ),
-    ts.factory.createBlock([
-      ts.factory.createReturnStatement(
-        ts.factory.createStringLiteral(gqlTypeName(t))
-      ),
-    ])
+    ts.factory.createBlock([ts.factory.createReturnStatement(ts.factory.createStringLiteral(gqlTypeName(t)))])
   );
 }
 
@@ -233,18 +179,9 @@ function craeteOneofUnionTypeResolveTypeMethodStatement(
  * }
  * ```
  */
-function sourceTypeExpr(
-  oneof: ProtoOneof,
-  opts: GenerationParams
-): ts.Expression {
+function sourceTypeExpr(oneof: ProtoOneof, opts: GenerationParams): ts.Expression {
   return ts.factory.createObjectLiteralExpression([
-    ts.factory.createPropertyAssignment(
-      "module",
-      ts.factory.createIdentifier("__filename")
-    ),
-    ts.factory.createPropertyAssignment(
-      "export",
-      ts.factory.createStringLiteral(protoExportAlias(oneof, opts))
-    ),
+    ts.factory.createPropertyAssignment("module", ts.factory.createIdentifier("__filename")),
+    ts.factory.createPropertyAssignment("export", ts.factory.createStringLiteral(protoExportAlias(oneof, opts))),
   ]);
 }

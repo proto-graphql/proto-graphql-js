@@ -23,9 +23,7 @@ export class ProtoRegistry {
     return this.files[name];
   }
 
-  public findByFieldDescriptor(
-    desc: FieldDescriptorProto
-  ): ProtoMessage | ProtoEnum {
+  public findByFieldDescriptor(desc: FieldDescriptorProto): ProtoMessage | ProtoEnum {
     return this.types[desc.getTypeName()!.replace(/^\./, "")];
   }
 
@@ -50,16 +48,12 @@ export class ProtoRegistry {
     return [msgs, enums];
   }
 
-  private collectTypesFromMessage(
-    inputs: ProtoMessage[]
-  ): [ProtoMessage[], ProtoEnum[]] {
+  private collectTypesFromMessage(inputs: ProtoMessage[]): [ProtoMessage[], ProtoEnum[]] {
     const msgs: ProtoMessage[] = [];
     const enums: ProtoEnum[] = [];
 
     for (const input of inputs) {
-      const [childMsgs, childEnums] = this.collectTypesFromMessage(
-        input.messages
-      );
+      const [childMsgs, childEnums] = this.collectTypesFromMessage(input.messages);
       msgs.push(...input.messages, ...childMsgs);
       enums.push(...input.enums, ...childEnums);
     }
@@ -69,10 +63,7 @@ export class ProtoRegistry {
 }
 
 export class ProtoFile {
-  constructor(
-    readonly descriptor: FileDescriptorProto,
-    readonly registry: ProtoRegistry
-  ) {}
+  constructor(readonly descriptor: FileDescriptorProto, readonly registry: ProtoRegistry) {}
 
   get name(): string {
     return this.descriptor.getName()!;
@@ -83,9 +74,7 @@ export class ProtoFile {
   }
 
   get messages(): ProtoMessage[] {
-    return this.descriptor
-      .getMessageTypeList()
-      .map((d, i) => new ProtoMessage(d, this, i));
+    return this.descriptor.getMessageTypeList().map((d, i) => new ProtoMessage(d, this, i));
   }
 
   get package(): string {
@@ -93,32 +82,24 @@ export class ProtoFile {
   }
 
   get enums(): ProtoEnum[] {
-    return this.descriptor
-      .getEnumTypeList()
-      .map((d, i) => new ProtoEnum(d, this, i));
+    return this.descriptor.getEnumTypeList().map((d, i) => new ProtoEnum(d, this, i));
   }
 
   get services(): ProtoService[] {
-    return this.descriptor
-      .getServiceList()
-      .map((d, i) => new ProtoService(d, this, i));
+    return this.descriptor.getServiceList().map((d, i) => new ProtoService(d, this, i));
   }
 
   get deprecationReason(): ProtoFile | null {
     return this.descriptor.getOptions()?.getDeprecated() ? this : null;
   }
 
-  public findComments(
-    d: ProtoMessage | ProtoOneof | ProtoField | ProtoEnum | ProtoEnumValue
-  ): Comments {
+  public findComments(d: ProtoMessage | ProtoOneof | ProtoField | ProtoEnum | ProtoEnumValue): Comments {
     const l = this.findSourceLocation(d);
     if (l === null) return {};
     return {
       leadingComments: l.getLeadingComments()!.trim(),
       trailingComments: l.getTrailingComments()!.trim(),
-      leadingDetachedCommentsList: l
-        .getLeadingDetachedCommentsList()!
-        .map((s) => s.trim()),
+      leadingDetachedCommentsList: l.getLeadingDetachedCommentsList()!.map((s) => s.trim()),
     };
   }
 
@@ -126,13 +107,7 @@ export class ProtoFile {
     d: ProtoMessage | ProtoOneof | ProtoField | ProtoEnum | ProtoEnumValue
   ): SourceCodeInfo.Location | null {
     let paths: number[] = [];
-    let desc:
-      | ProtoFile
-      | ProtoMessage
-      | ProtoOneof
-      | ProtoField
-      | ProtoEnum
-      | ProtoEnumValue = d;
+    let desc: ProtoFile | ProtoMessage | ProtoOneof | ProtoField | ProtoEnum | ProtoEnumValue = d;
 
     for (;;) {
       if (desc instanceof ProtoFile) {
@@ -141,11 +116,8 @@ export class ProtoFile {
           this.descriptor
             .getSourceCodeInfo()
             ?.getLocationList()
-            .find(
-              (l) =>
-                l.getPathList().length === paths.length &&
-                l.getPathList().every((v, i) => v === paths[i])
-            ) || null
+            .find((l) => l.getPathList().length === paths.length && l.getPathList().every((v, i) => v === paths[i])) ||
+          null
         );
       } else if (desc instanceof ProtoMessage) {
         paths.push(desc.index);
@@ -202,9 +174,7 @@ export class ProtoMessage {
    */
   get qualifiedName(): string {
     return `${
-      this.parent instanceof ProtoFile
-        ? this.parent.package
-        : this.parent.qualifiedName
+      this.parent instanceof ProtoFile ? this.parent.package : this.parent.qualifiedName
     }.${this.descriptor.getName()}`;
   }
 
@@ -225,42 +195,28 @@ export class ProtoMessage {
   }
 
   get messages(): ProtoMessage[] {
-    return this.descriptor
-      .getNestedTypeList()
-      .map((d, i) => new ProtoMessage(d, this, i));
+    return this.descriptor.getNestedTypeList().map((d, i) => new ProtoMessage(d, this, i));
   }
 
   get enums(): ProtoEnum[] {
-    return this.descriptor
-      .getEnumTypeList()
-      .map((d, i) => new ProtoEnum(d, this, i));
+    return this.descriptor.getEnumTypeList().map((d, i) => new ProtoEnum(d, this, i));
   }
 
   get fields(): ProtoField[] {
-    return this.descriptor
-      .getFieldList()
-      .map((d, i) => new ProtoField(d, this, i));
+    return this.descriptor.getFieldList().map((d, i) => new ProtoField(d, this, i));
   }
 
   get oneofs(): ProtoOneof[] {
-    return this.descriptor
-      .getOneofDeclList()
-      .map((o, i) => new ProtoOneof(o, this, i));
+    return this.descriptor.getOneofDeclList().map((o, i) => new ProtoOneof(o, this, i));
   }
 
   get deprecationReason(): ProtoFile | ProtoMessage | null {
-    return this.descriptor.getOptions()?.getDeprecated()
-      ? this
-      : this.parent.deprecationReason;
+    return this.descriptor.getOptions()?.getDeprecated() ? this : this.parent.deprecationReason;
   }
 }
 
 export class ProtoOneof {
-  constructor(
-    readonly descriptor: OneofDescriptorProto,
-    readonly parent: ProtoMessage,
-    readonly index: number
-  ) {}
+  constructor(readonly descriptor: OneofDescriptorProto, readonly parent: ProtoMessage, readonly index: number) {}
 
   get name(): string {
     return this.descriptor.getName()!;
@@ -284,25 +240,17 @@ export class ProtoOneof {
 
   get fields(): ProtoField[] {
     return this.parent.fields.filter(
-      (f): f is NonNullable<ProtoField> =>
-        f.descriptor.hasOneofIndex() &&
-        f.descriptor.getOneofIndex() === this.index
+      (f): f is NonNullable<ProtoField> => f.descriptor.hasOneofIndex() && f.descriptor.getOneofIndex() === this.index
     );
   }
 
   get deprecationReason(): ProtoFile | ProtoMessage | ProtoOneof | null {
-    return this.fields.every((f) => f.deprecationReason)
-      ? this
-      : this.parent.deprecationReason;
+    return this.fields.every((f) => f.deprecationReason) ? this : this.parent.deprecationReason;
   }
 }
 
 export class ProtoField {
-  constructor(
-    readonly descriptor: FieldDescriptorProto,
-    readonly parent: ProtoMessage,
-    readonly index: number
-  ) {}
+  constructor(readonly descriptor: FieldDescriptorProto, readonly parent: ProtoMessage, readonly index: number) {}
 
   get name(): string {
     return this.descriptor.getJsonName()!;
@@ -339,9 +287,7 @@ export class ProtoField {
   }
 
   public isList(): boolean {
-    return (
-      this.descriptor.getLabel() === FieldDescriptorProto.Label.LABEL_REPEATED
-    );
+    return this.descriptor.getLabel() === FieldDescriptorProto.Label.LABEL_REPEATED;
   }
 
   get comments(): Comments {
@@ -352,12 +298,7 @@ export class ProtoField {
     return this.parent.file.registry.findByFieldDescriptor(this.descriptor);
   }
 
-  get deprecationReason():
-    | ProtoFile
-    | ProtoMessage
-    | ProtoField
-    | ProtoEnum
-    | null {
+  get deprecationReason(): ProtoFile | ProtoMessage | ProtoField | ProtoEnum | null {
     return this.descriptor.getOptions()?.getDeprecated()
       ? this
       : this.type?.deprecationReason || this.parent.deprecationReason;
@@ -386,9 +327,7 @@ export class ProtoEnum {
    */
   get qualifiedName(): string {
     return `${
-      this.parent instanceof ProtoFile
-        ? this.parent.package
-        : this.parent.qualifiedName
+      this.parent instanceof ProtoFile ? this.parent.package : this.parent.qualifiedName
     }.${this.descriptor.getName()}`;
   }
 
@@ -409,24 +348,16 @@ export class ProtoEnum {
   }
 
   get values(): ProtoEnumValue[] {
-    return this.descriptor
-      .getValueList()
-      .map((d, i) => new ProtoEnumValue(d, this, i));
+    return this.descriptor.getValueList().map((d, i) => new ProtoEnumValue(d, this, i));
   }
 
   get deprecationReason(): ProtoFile | ProtoMessage | ProtoEnum | null {
-    return this.descriptor.getOptions()?.getDeprecated()
-      ? this
-      : this.parent.deprecationReason;
+    return this.descriptor.getOptions()?.getDeprecated() ? this : this.parent.deprecationReason;
   }
 }
 
 export class ProtoEnumValue {
-  constructor(
-    readonly descriptor: EnumValueDescriptorProto,
-    readonly parent: ProtoEnum,
-    readonly index: number
-  ) {}
+  constructor(readonly descriptor: EnumValueDescriptorProto, readonly parent: ProtoEnum, readonly index: number) {}
 
   get name(): string {
     return this.descriptor.getName()!;
@@ -452,36 +383,19 @@ export class ProtoEnumValue {
     }
   }
 
-  get deprecationReason():
-    | ProtoFile
-    | ProtoMessage
-    | ProtoEnum
-    | ProtoEnumValue
-    | null {
-    return this.descriptor.getOptions()?.getDeprecated()
-      ? this
-      : this.parent.deprecationReason;
+  get deprecationReason(): ProtoFile | ProtoMessage | ProtoEnum | ProtoEnumValue | null {
+    return this.descriptor.getOptions()?.getDeprecated() ? this : this.parent.deprecationReason;
   }
 }
 
 export class ProtoService {
-  constructor(
-    readonly descriptor: ServiceDescriptorProto,
-    readonly parent: ProtoFile,
-    readonly index: number
-  ) {
-    this.methods = descriptor
-      .getMethodList()
-      .map((m, i) => new ProtoMethod(m, this, i));
+  constructor(readonly descriptor: ServiceDescriptorProto, readonly parent: ProtoFile, readonly index: number) {
+    this.methods = descriptor.getMethodList().map((m, i) => new ProtoMethod(m, this, i));
   }
 
   public readonly methods: ProtoMethod[];
 }
 
 export class ProtoMethod {
-  constructor(
-    readonly descriptor: MethodDescriptorProto,
-    readonly parent: ProtoService,
-    readonly index: number
-  ) {}
+  constructor(readonly descriptor: MethodDescriptorProto, readonly parent: ProtoService, readonly index: number) {}
 }

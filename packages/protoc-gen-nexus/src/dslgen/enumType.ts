@@ -19,9 +19,7 @@ import {
  * })
  * ```
  */
-export function createEnumTypeDslStmts(
-  enums: ReadonlyArray<ProtoEnum>
-): ts.Statement[] {
+export function createEnumTypeDslStmts(enums: ReadonlyArray<ProtoEnum>): ts.Statement[] {
   return enums.filter((e) => !isIgnoredType(e)).map(createEnumTypeDslStmt);
 }
 
@@ -38,56 +36,37 @@ function createEnumTypeDslStmt(en: ProtoEnum): ts.Statement {
   const typeName = gqlTypeName(en);
   return createDslExportConstStmt(
     typeName,
-    ts.factory.createCallExpression(
-      ts.factory.createIdentifier("enumType"),
-      undefined,
-      [
-        ts.factory.createObjectLiteralExpression(
-          [
-            ts.factory.createPropertyAssignment(
-              "name",
-              ts.factory.createStringLiteral(typeName)
-            ),
-            ts.factory.createPropertyAssignment(
-              "description",
-              ts.factory.createStringLiteral(en.description)
-            ),
-            ts.factory.createPropertyAssignment(
-              "members",
-              ts.factory.createArrayLiteralExpression(
-                en.values
-                  .filter((ev) => !isEnumValueForUnspecified(ev))
-                  .filter((ev) => !isIgnoredField(ev))
-                  .map(createEnumValueExpr),
-                true // multiline
-              )
-            ),
-          ],
-          true
-        ),
-      ]
-    )
+    ts.factory.createCallExpression(ts.factory.createIdentifier("enumType"), undefined, [
+      ts.factory.createObjectLiteralExpression(
+        [
+          ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(typeName)),
+          ts.factory.createPropertyAssignment("description", ts.factory.createStringLiteral(en.description)),
+          ts.factory.createPropertyAssignment(
+            "members",
+            ts.factory.createArrayLiteralExpression(
+              en.values
+                .filter((ev) => !isEnumValueForUnspecified(ev))
+                .filter((ev) => !isIgnoredField(ev))
+                .map(createEnumValueExpr),
+              true // multiline
+            )
+          ),
+        ],
+        true
+      ),
+    ])
   );
 }
 
 function createEnumValueExpr(ev: ProtoEnumValue): ts.Expression {
   return ts.factory.createObjectLiteralExpression(
     [
-      ts.factory.createPropertyAssignment(
-        "name",
-        ts.factory.createStringLiteral(ev.name)
-      ),
+      ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(ev.name)),
       ev.description
-        ? ts.factory.createPropertyAssignment(
-            "description",
-            ts.factory.createStringLiteral(ev.description)
-          )
+        ? ts.factory.createPropertyAssignment("description", ts.factory.createStringLiteral(ev.description))
         : null,
       createDeprecationPropertyAssignment(ev),
-      ts.factory.createPropertyAssignment(
-        "value",
-        ts.factory.createNumericLiteral(ev.tagNumber)
-      ),
+      ts.factory.createPropertyAssignment("value", ts.factory.createNumericLiteral(ev.tagNumber)),
     ].filter(onlyNonNull()),
     true // multiline
   );
