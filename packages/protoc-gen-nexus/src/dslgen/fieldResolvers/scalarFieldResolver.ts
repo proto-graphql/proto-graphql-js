@@ -13,11 +13,9 @@ export function createScalarFieldResolverStmts(
 
   const unwrapFunc = getUnwrapFunc(field, opts);
   if (unwrapFunc !== null) {
-    resolverRet = ts.factory.createCallExpression(
-      ts.factory.createIdentifier(unwrapFunc.name),
-      undefined,
-      [resolverRet]
-    );
+    resolverRet = ts.factory.createCallExpression(ts.factory.createIdentifier(unwrapFunc.name), undefined, [
+      resolverRet,
+    ]);
   }
   switch (field.descriptor.getType()!) {
     case FieldDescriptorProto.Type.TYPE_INT64:

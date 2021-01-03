@@ -1,13 +1,7 @@
 import ts from "typescript";
 import { ProtoEnum, ProtoField } from "../../protoTypes";
 import { GenerationParams, GqlType } from "../types";
-import {
-  createProtoExpr,
-  getEnumValueForUnspecified,
-  gqlTypeName,
-  isIgnoredField,
-  onlyNonNull,
-} from "../util";
+import { createProtoExpr, getEnumValueForUnspecified, gqlTypeName, isIgnoredField, onlyNonNull } from "../util";
 
 /**
  * @example nullable
@@ -33,21 +27,13 @@ export function createEnumFieldResolverStmts(
   opts: GenerationParams
 ): ts.Statement[] {
   let whenNullStmt: ts.Statement = type.nullable
-    ? ts.factory.createReturnStatement(
-        ts.factory.createToken(ts.SyntaxKind.NullKeyword)
-      )
+    ? ts.factory.createReturnStatement(ts.factory.createToken(ts.SyntaxKind.NullKeyword))
     : ts.factory.createThrowStatement(
-        ts.factory.createNewExpression(
-          ts.factory.createIdentifier("Error"),
-          undefined,
-          [
-            ts.factory.createStringLiteral(
-              `${gqlTypeName(field.parent)}.${
-                field.name
-              } is required field. But got unspecified.`
-            ),
-          ]
-        )
+        ts.factory.createNewExpression(ts.factory.createIdentifier("Error"), undefined, [
+          ts.factory.createStringLiteral(
+            `${gqlTypeName(field.parent)}.${field.name} is required field. But got unspecified.`
+          ),
+        ])
       );
   whenNullStmt = ts.factory.createBlock(
     [whenNullStmt],
@@ -84,15 +70,9 @@ export function createEnumFieldResolverStmts(
           ts.factory.createBlock(
             [
               ts.factory.createThrowStatement(
-                ts.factory.createNewExpression(
-                  ts.factory.createIdentifier("Error"),
-                  undefined,
-                  [
-                    ts.factory.createStringLiteral(
-                      `${en.name}.${ev.name} is ignored in GraphQL schema`
-                    ),
-                  ]
-                )
+                ts.factory.createNewExpression(ts.factory.createIdentifier("Error"), undefined, [
+                  ts.factory.createStringLiteral(`${en.name}.${ev.name} is ignored in GraphQL schema`),
+                ])
               ),
             ],
             true // multiline

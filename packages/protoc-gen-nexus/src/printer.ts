@@ -12,11 +12,7 @@ import {
 } from "./dslgen";
 import { ProtoFile, ProtoRegistry } from "./protoTypes";
 
-export function printSource(
-  registry: ProtoRegistry,
-  file: ProtoFile,
-  opts: GenerationParams
-): string {
+export function printSource(registry: ProtoRegistry, file: ProtoFile, opts: GenerationParams): string {
   const [msgs, enums] = registry.collectTypes(file);
 
   const ast: ts.Statement[] = [
@@ -39,13 +35,7 @@ export function printSource(
   ];
 
   const nexusFile = ts.factory.updateSourceFile(
-    ts.createSourceFile(
-      "generated.ts",
-      "",
-      ts.ScriptTarget.Latest,
-      false,
-      ts.ScriptKind.TS
-    ),
+    ts.createSourceFile("generated.ts", "", ts.ScriptTarget.Latest, false, ts.ScriptKind.TS),
     ast,
     false
   );

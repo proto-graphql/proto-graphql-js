@@ -4,24 +4,13 @@ import { glob } from "glob";
 import * as ts from "typescript";
 import { FileDescriptorSet } from "google-protobuf/google/protobuf/descriptor_pb";
 import { processRequest } from "../../process";
-import {
-  CodeGeneratorRequest,
-  CodeGeneratorResponse,
-} from "google-protobuf/google/protobuf/compiler/plugin_pb";
-import {
-  generateSchema,
-  NexusExtendTypeDef,
-  NexusGraphQLSchema,
-} from "nexus/dist/core";
+import { CodeGeneratorRequest, CodeGeneratorResponse } from "google-protobuf/google/protobuf/compiler/plugin_pb";
+import { generateSchema, NexusExtendTypeDef, NexusGraphQLSchema } from "nexus/dist/core";
 
 const generationTargets = ["native protobuf", "protobufjs"] as const;
 type GenerationTarget = typeof generationTargets[number];
 
-async function generateDSLs(
-  name: string,
-  target: GenerationTarget,
-  opts: { withPrefix?: boolean } = {},
-) {
+async function generateDSLs(name: string, target: GenerationTarget, opts: { withPrefix?: boolean } = {}) {
   const params = [];
   switch (target) {
     case "protobufjs":
@@ -29,8 +18,7 @@ async function generateDSLs(
       params.push("use_protobufjs");
       break;
     case "native protobuf":
-      if (opts.withPrefix)
-        params.push("import_prefix=@testapis/node-native/lib");
+      if (opts.withPrefix) params.push("import_prefix=@testapis/node-native/lib");
       break;
     default: {
       const _exhaustiveCheck: never = target;
@@ -40,10 +28,7 @@ async function generateDSLs(
   return await processCodeGeneration(name, params.join(","));
 }
 
-export function itGeneratesNexusDSLsToMatchSnapshtos(
-  name: string,
-  expectedGeneratedFiles: string[],
-) {
+export function itGeneratesNexusDSLsToMatchSnapshtos(name: string, expectedGeneratedFiles: string[]) {
   describe.each(generationTargets)("with %s", (target) => {
     it("generates nexus DSLs", async () => {
       const resp = await generateDSLs(name, target);
@@ -57,12 +42,8 @@ export function testSchemaGeneration(
   target: GenerationTarget,
   opts: {
     types?: Record<string, any>;
-    schemaTests?: [
-      name: string,
-      types: Record<string, any>,
-      test: (schema: NexusGraphQLSchema) => Promise<void>,
-    ][];
-  } = {},
+    schemaTests?: [name: string, types: Record<string, any>, test: (schema: NexusGraphQLSchema) => Promise<void>][];
+  } = {}
 ) {
   describe(`schema generation with ${target}`, () => {
     let files: CodeGeneratorResponse.File[];
@@ -70,11 +51,7 @@ export function testSchemaGeneration(
       files = [];
 
       for (const n of Array.isArray(name) ? name : [name]) {
-        files.push(
-          ...(
-            await generateDSLs(n, target, { withPrefix: true })
-          ).getFileList(),
-        );
+        files.push(...(await generateDSLs(n, target, { withPrefix: true })).getFileList());
       }
     });
 
@@ -82,10 +59,7 @@ export function testSchemaGeneration(
       await withGeneratedSchema(files, opts?.types ?? {}, async (dir) => {
         try {
           await validateGeneratedFiles(dir);
-          const gqlSchema = await fs.readFile(
-            join(dir, "schema.graphql"),
-            "utf-8",
-          );
+          const gqlSchema = await fs.readFile(join(dir, "schema.graphql"), "utf-8");
           expect(gqlSchema).toMatchSnapshot("schema.graphql");
         } catch (e) {
           // eslint-disable-next-line no-console
@@ -98,13 +72,9 @@ export function testSchemaGeneration(
     if (opts.schemaTests && opts.schemaTests.length > 0) {
       it.each(opts.schemaTests)("%s", async (_name, types, f) => {
         try {
-          await withGeneratedSchema(
-            files,
-            { ...(opts.types ?? {}), ...types },
-            async (_dir, schema) => {
-              await f(schema);
-            },
-          );
+          await withGeneratedSchema(files, { ...(opts.types ?? {}), ...types }, async (_dir, schema) => {
+            await f(schema);
+          });
         } catch (e) {
           // eslint-disable-next-line no-console
           console.error(e);
@@ -126,10 +96,7 @@ function snapshotGeneratedFiles(resp: CodeGeneratorResponse, files: string[]) {
   }
 }
 
-async function processCodeGeneration(
-  name: string,
-  param?: string,
-): Promise<CodeGeneratorResponse> {
+async function processCodeGeneration(name: string, param?: string): Promise<CodeGeneratorResponse> {
   const req = await buildCodeGeneratorRequest(name);
   if (param) {
     req.setParameter(param);
@@ -137,30 +104,14 @@ async function processCodeGeneration(
   return processRequest(req);
 }
 
-async function getFixtureFileDescriptorSet(
-  name: string,
-): Promise<FileDescriptorSet> {
+async function getFixtureFileDescriptorSet(name: string): Promise<FileDescriptorSet> {
   const buf = await fs.readFile(
-    join(
-      __dirname,
-      "..",
-      "..",
-      "..",
-      "..",
-      "@testapis",
-      "proto",
-      "src",
-      "testapis",
-      name,
-      "descriptor_set.pb",
-    ),
+    join(__dirname, "..", "..", "..", "..", "@testapis", "proto", "src", "testapis", name, "descriptor_set.pb")
   );
   return FileDescriptorSet.deserializeBinary(buf);
 }
 
-async function buildCodeGeneratorRequest(
-  name: string,
-): Promise<CodeGeneratorRequest> {
+async function buildCodeGeneratorRequest(name: string): Promise<CodeGeneratorRequest> {
   const descSet = await getFixtureFileDescriptorSet(name);
   const req = new CodeGeneratorRequest();
 
@@ -177,35 +128,21 @@ async function buildCodeGeneratorRequest(
 }
 
 function getFileMap(resp: CodeGeneratorResponse): Record<string, string> {
-  return resp
-    .getFileList()
-    .reduce(
-      (m, f) => ({ ...m, [f.getName()!]: f.getContent()! }),
-      {} as Record<string, string>,
-    );
+  return resp.getFileList().reduce((m, f) => ({ ...m, [f.getName()!]: f.getContent()! }), {} as Record<string, string>);
 }
 
-async function withGeneratedResults(
-  files: CodeGeneratorResponse.File[],
-  cb: (dir: string) => Promise<void>,
-) {
+async function withGeneratedResults(files: CodeGeneratorResponse.File[], cb: (dir: string) => Promise<void>) {
   const suffix = Math.random().toString(36).substring(7);
   const dir = join(__dirname, "__generated__", suffix);
   await fs
     .mkdir(dir, { recursive: true })
     .then(() =>
       Promise.all(
-        [
-          ...new Set(files.map((f) => join(dir, dirname(f.getName()!)))),
-        ].map((p) => fs.mkdir(p, { recursive: true })),
-      ).then(() => dir),
+        [...new Set(files.map((f) => join(dir, dirname(f.getName()!))))].map((p) => fs.mkdir(p, { recursive: true }))
+      ).then(() => dir)
     )
     .then((dir) =>
-      Promise.all(
-        files.map((f) =>
-          fs.writeFile(join(dir, f.getName()!), f.getContent()!, "utf-8"),
-        ),
-      ).then(() => dir),
+      Promise.all(files.map((f) => fs.writeFile(join(dir, f.getName()!), f.getContent()!, "utf-8"))).then(() => dir)
     )
     .then(cb)
     .finally(() => fs.rm(dir, { recursive: true, force: true, maxRetries: 3 }));
@@ -214,15 +151,12 @@ async function withGeneratedResults(
 async function withGeneratedSchema(
   files: CodeGeneratorResponse.File[],
   queries: Record<string, NexusExtendTypeDef<"Query">>,
-  cb: (dir: string, schema: NexusGraphQLSchema) => Promise<void>,
+  cb: (dir: string, schema: NexusGraphQLSchema) => Promise<void>
 ) {
   await withGeneratedResults(files, async (dir) => {
     const paths = files.map((f) => join(dir, f.getName()!));
     try {
-      const types = paths.reduce(
-        (o, p) => ({ ...o, ...require(p) }),
-        {} as any,
-      );
+      const types = paths.reduce((o, p) => ({ ...o, ...require(p) }), {} as any);
       const schema = await generateSchema({
         types: { ...types, ...queries },
         outputs: {

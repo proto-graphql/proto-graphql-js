@@ -13,15 +13,11 @@ testSchemaGeneration("extensions", "protobufjs", {
           type: nonNull("TestPrefixPrefixedMessage"),
           resolve() {
             return new pbjs.testapis.extensions.PrefixedMessage({
-              squashedMessage: new pbjs.testapis.extensions.PrefixedMessage.SquashedMessage(
-                {
-                  oneofIgnoredField_2: new pbjs.testapis.extensions.PrefixedMessage.InnerMessage2(
-                    {
-                      body: "field 2",
-                    }
-                  ),
-                }
-              ),
+              squashedMessage: new pbjs.testapis.extensions.PrefixedMessage.SquashedMessage({
+                oneofIgnoredField_2: new pbjs.testapis.extensions.PrefixedMessage.InnerMessage2({
+                  body: "field 2",
+                }),
+              }),
             });
           },
         }),

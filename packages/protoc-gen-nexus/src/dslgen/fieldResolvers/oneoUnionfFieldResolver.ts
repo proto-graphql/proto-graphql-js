@@ -14,32 +14,21 @@ export function craeteOneofUnionFieldResolverStmts(
     return [
       ...oneof.fields.map((f) =>
         ts.factory.createIfStatement(
-          ts.factory.createPropertyAccessExpression(
-            parentExpr,
-            camelCase(f.descriptor.getName()!)
-          ),
+          ts.factory.createPropertyAccessExpression(parentExpr, camelCase(f.descriptor.getName()!)),
           ts.factory.createBlock([
             ts.factory.createReturnStatement(
               ts.factory.createCallExpression(
-                ts.factory.createPropertyAccessExpression(
-                  ts.factory.createIdentifier("Object"),
-                  "assign"
-                ),
+                ts.factory.createPropertyAccessExpression(ts.factory.createIdentifier("Object"), "assign"),
                 undefined,
                 [
-                  ts.factory.createPropertyAccessExpression(
-                    parentExpr,
-                    camelCase(f.descriptor.getName()!)
-                  ),
+                  ts.factory.createPropertyAccessExpression(parentExpr, camelCase(f.descriptor.getName()!)),
                   ts.factory.createObjectLiteralExpression([
                     ts.factory.createPropertyAssignment(
                       "__protobufTypeName",
                       ts.factory.createAsExpression(
                         // TODO: throw error if the type is not ProtoMesssage
                         ts.factory.createStringLiteral(f.type!.qualifiedName),
-                        ts.factory.createTypeReferenceNode(
-                          ts.factory.createIdentifier("const")
-                        )
+                        ts.factory.createTypeReferenceNode(ts.factory.createIdentifier("const"))
                       )
                     ),
                   ]),
@@ -50,21 +39,14 @@ export function craeteOneofUnionFieldResolverStmts(
         )
       ),
       nullable
-        ? ts.factory.createReturnStatement(
-            ts.factory.createToken(ts.SyntaxKind.NullKeyword)
-          )
-        : ts.factory.createThrowStatement(
-            ts.factory.createStringLiteral("unreachable")
-          ),
+        ? ts.factory.createReturnStatement(ts.factory.createToken(ts.SyntaxKind.NullKeyword))
+        : ts.factory.createThrowStatement(ts.factory.createStringLiteral("unreachable")),
     ];
   }
   return [
     ts.factory.createSwitchStatement(
       ts.factory.createCallExpression(
-        ts.factory.createPropertyAccessExpression(
-          parentExpr,
-          `get${pascalCase(oneof.name)}Case`
-        ),
+        ts.factory.createPropertyAccessExpression(parentExpr, `get${pascalCase(oneof.name)}Case`),
         undefined,
         undefined
       ),
@@ -81,12 +63,8 @@ export function craeteOneofUnionFieldResolverStmts(
             ts.factory.createBlock(
               [
                 nullable
-                  ? ts.factory.createReturnStatement(
-                      ts.factory.createToken(ts.SyntaxKind.NullKeyword)
-                    )
-                  : ts.factory.createThrowStatement(
-                      ts.factory.createStringLiteral("unreachable")
-                    ),
+                  ? ts.factory.createReturnStatement(ts.factory.createToken(ts.SyntaxKind.NullKeyword))
+                  : ts.factory.createThrowStatement(ts.factory.createStringLiteral("unreachable")),
               ],
               true // multiline
             ),
@@ -109,10 +87,7 @@ export function craeteOneofUnionFieldResolverStmts(
                   ts.factory.createReturnStatement(
                     ts.factory.createNonNullExpression(
                       ts.factory.createCallExpression(
-                        ts.factory.createPropertyAccessExpression(
-                          parentExpr,
-                          f.getterName
-                        ),
+                        ts.factory.createPropertyAccessExpression(parentExpr, f.getterName),
                         undefined,
                         undefined
                       )

@@ -34,11 +34,7 @@ export type GqlType =
       nullable: boolean;
     };
 
-export function detectGqlType(
-  f: ProtoField,
-  reg: ProtoRegistry,
-  opts?: { input?: boolean }
-): GqlType {
+export function detectGqlType(f: ProtoField, reg: ProtoRegistry, opts?: { input?: boolean }): GqlType {
   if (f.isList()) {
     return {
       kind: "list",
@@ -50,11 +46,7 @@ export function detectGqlType(
   return detectGqlItemType(f, reg, opts);
 }
 
-function detectGqlItemType(
-  f: ProtoField,
-  reg: ProtoRegistry,
-  opts?: { input?: boolean }
-): GqlItemType {
+function detectGqlItemType(f: ProtoField, reg: ProtoRegistry, opts?: { input?: boolean }): GqlItemType {
   const nullable = !isRequiredField(f);
   const pbtype = f.descriptor.getType()!;
 

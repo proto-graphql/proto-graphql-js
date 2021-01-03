@@ -20,15 +20,9 @@ export function createFieldDefinitionStmt(
   const type = detectGqlType(field, registry, opts);
   return ts.factory.createExpressionStatement(
     ts.factory.createCallExpression(
-      ts.factory.createPropertyAccessExpression(
-        ts.factory.createIdentifier("t"),
-        ts.factory.createIdentifier("field")
-      ),
+      ts.factory.createPropertyAccessExpression(ts.factory.createIdentifier("t"), ts.factory.createIdentifier("field")),
       undefined,
-      [
-        ts.factory.createStringLiteral(field.name),
-        createFieldOptionExpr(field, type, opts),
-      ]
+      [ts.factory.createStringLiteral(field.name), createFieldOptionExpr(field, type, opts)]
     )
   );
 }
@@ -52,11 +46,9 @@ function createFieldOptionExpr(
   const createTypeSpecifier = (type: GqlType): ts.Expression => {
     switch (type.kind) {
       case "list":
-        return ts.factory.createCallExpression(
-          ts.factory.createIdentifier("list"),
-          undefined,
-          [createTypeSpecifier(type.type)]
-        );
+        return ts.factory.createCallExpression(ts.factory.createIdentifier("list"), undefined, [
+          createTypeSpecifier(type.type),
+        ]);
       case "object":
       case "scalar":
       case "enum":
@@ -74,10 +66,7 @@ function createFieldOptionExpr(
   return ts.factory.createObjectLiteralExpression(
     [
       ts.factory.createPropertyAssignment("type", createTypeSpecifier(type)),
-      ts.factory.createPropertyAssignment(
-        "description",
-        ts.factory.createStringLiteral(field.description)
-      ),
+      ts.factory.createPropertyAssignment("description", ts.factory.createStringLiteral(field.description)),
       createDeprecationPropertyAssignment(field),
       opts?.input
         ? null

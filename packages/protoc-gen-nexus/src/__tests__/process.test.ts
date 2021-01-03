@@ -15,9 +15,7 @@ describe("parseParams", () => {
   });
 
   it("parses importPrefix", () => {
-    expect(parseParams("import_prefix=@foobar/baz").importPrefix).toBe(
-      "@foobar/baz"
-    );
+    expect(parseParams("import_prefix=@foobar/baz").importPrefix).toBe("@foobar/baz");
   });
 
   it("throws an erorr when useProtobufjs is string", () => {
@@ -44,9 +42,7 @@ describe("simple proto file", () => {
 });
 
 describe("well-known protobuf types", () => {
-  itGeneratesNexusDSLsToMatchSnapshtos("wktypes", [
-    "wktypes/well_known_types_pb_nexus.ts",
-  ]);
+  itGeneratesNexusDSLsToMatchSnapshtos("wktypes", ["wktypes/well_known_types_pb_nexus.ts"]);
 });
 
 describe("protobuf enums", () => {
@@ -58,9 +54,7 @@ describe("nested protobuf types", () => {
 });
 
 describe("protobuf custom options", () => {
-  itGeneratesNexusDSLsToMatchSnapshtos("extensions", [
-    "extensions/extensions_pb_nexus.ts",
-  ]);
+  itGeneratesNexusDSLsToMatchSnapshtos("extensions", ["extensions/extensions_pb_nexus.ts"]);
 });
 
 describe("protobuf oneof", () => {
@@ -68,12 +62,8 @@ describe("protobuf oneof", () => {
 });
 
 describe("multipkgs", () => {
-  itGeneratesNexusDSLsToMatchSnapshtos("multipkgs/subpkg1", [
-    "multipkgs/subpkg1/types_pb_nexus.ts",
-  ]);
-  itGeneratesNexusDSLsToMatchSnapshtos("multipkgs/subpkg2", [
-    "multipkgs/subpkg2/types_pb_nexus.ts",
-  ]);
+  itGeneratesNexusDSLsToMatchSnapshtos("multipkgs/subpkg1", ["multipkgs/subpkg1/types_pb_nexus.ts"]);
+  itGeneratesNexusDSLsToMatchSnapshtos("multipkgs/subpkg2", ["multipkgs/subpkg2/types_pb_nexus.ts"]);
 });
 
 describe("deprecation", () => {
@@ -84,7 +74,5 @@ describe("deprecation", () => {
 });
 
 describe("field_behavior", () => {
-  itGeneratesNexusDSLsToMatchSnapshtos("field_behavior", [
-    "field_behavior/comments_pb_nexus.ts",
-  ]);
+  itGeneratesNexusDSLsToMatchSnapshtos("field_behavior", ["field_behavior/comments_pb_nexus.ts"]);
 });

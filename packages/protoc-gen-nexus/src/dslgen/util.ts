@@ -15,10 +15,7 @@ import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor
 import { GenerationParams } from "./types";
 import { ExtensionFieldInfo } from "google-protobuf";
 
-export function protoExportAlias(
-  t: ProtoMessage | ProtoOneof,
-  o: GenerationParams
-): string {
+export function protoExportAlias(t: ProtoMessage | ProtoOneof, o: GenerationParams): string {
   if (t instanceof ProtoOneof) {
     return uniqueImportAlias(`${protoExportAlias(t.parent, o)}.${t.name}`);
   }
@@ -30,20 +27,12 @@ export function protoExportAlias(
   return uniqueImportAlias(chunks.join("/"));
 }
 
-export function protoImportPath(
-  t: ProtoMessage | ProtoEnum,
-  o: GenerationParams
-) {
-  const importPath = o.useProtobufjs
-    ? path.dirname(t.file.name)
-    : t.file.importPath;
+export function protoImportPath(t: ProtoMessage | ProtoEnum, o: GenerationParams) {
+  const importPath = o.useProtobufjs ? path.dirname(t.file.name) : t.file.importPath;
   return `${o.importPrefix ? `${o.importPrefix}/` : "./"}${importPath}`;
 }
 
-export function gqlTypeName(
-  typ: ProtoMessage | ProtoOneof | ProtoEnum,
-  opts?: { input?: boolean }
-): string {
+export function gqlTypeName(typ: ProtoMessage | ProtoOneof | ProtoEnum, opts?: { input?: boolean }): string {
   const name = nameWithParent(typ);
   const suffix = typ instanceof ProtoMessage && opts?.input ? "Input" : "";
   return name + suffix;
@@ -79,16 +68,10 @@ export function createDeprecationPropertyAssignment(
 
   const msg = `${reasonName} is mark as deprecated in a *.proto file.`;
 
-  return ts.factory.createPropertyAssignment(
-    "deprecation",
-    ts.factory.createStringLiteral(msg)
-  );
+  return ts.factory.createPropertyAssignment("deprecation", ts.factory.createStringLiteral(msg));
 }
 
-export function isIgnoredType(
-  type: ProtoMessage | ProtoEnum,
-  opts?: { input: boolean }
-): boolean {
+export function isIgnoredType(type: ProtoMessage | ProtoEnum, opts?: { input: boolean }): boolean {
   let ext: ExtensionFieldInfo<{ getIgnore(): boolean }>;
   if (type.parent instanceof ProtoMessage && isIgnoredType(type.parent)) {
     return true;
@@ -105,19 +88,13 @@ export function isIgnoredType(
 }
 
 export function isSquashedUnion(m: ProtoMessage): boolean {
-  return (
-    m.descriptor
-      .getOptions()
-      ?.getExtension(extensions.objectType)
-      ?.getSquashUnion() ?? false
-  );
+  return m.descriptor.getOptions()?.getExtension(extensions.objectType)?.getSquashUnion() ?? false;
 }
 
 export function isRequiredField(field: ProtoField | ProtoOneof): boolean {
   if (
     field instanceof ProtoField &&
-    (field.descriptor.getLabel() ===
-      FieldDescriptorProto.Label.LABEL_REQUIRED ||
+    (field.descriptor.getLabel() === FieldDescriptorProto.Label.LABEL_REQUIRED ||
       (field.descriptor.getType() !== FieldDescriptorProto.Type.TYPE_MESSAGE &&
         field.descriptor.getType() !== FieldDescriptorProto.Type.TYPE_ENUM))
   ) {
@@ -136,16 +113,10 @@ export function isInputOnlyField(field: ProtoField | ProtoOneof): boolean {
   return cs.includes("Input only");
 }
 
-export function isIgnoredField(
-  field: ProtoField | ProtoEnumValue | ProtoOneof,
-  opts?: { input: boolean }
-): boolean {
+export function isIgnoredField(field: ProtoField | ProtoEnumValue | ProtoOneof, opts?: { input: boolean }): boolean {
   let ext: ExtensionFieldInfo<{ getIgnore(): boolean }>;
   if (field instanceof ProtoField) {
-    if (
-      (field.type instanceof ProtoMessage || field.type instanceof ProtoEnum) &&
-      isIgnoredType(field.type, opts)
-    ) {
+    if ((field.type instanceof ProtoMessage || field.type instanceof ProtoEnum) && isIgnoredType(field.type, opts)) {
       return true;
     }
     const oneof = field.containingOneof();
@@ -164,9 +135,7 @@ export function isIgnoredField(
   return field.descriptor.getOptions()?.getExtension(ext)?.getIgnore() ?? false;
 }
 
-export function exceptRequestOrResponse(
-  reg: ProtoRegistry
-): (m: ProtoMessage) => boolean {
+export function exceptRequestOrResponse(reg: ProtoRegistry): (m: ProtoMessage) => boolean {
   const reqSet = new Set();
   const respSet = new Set();
   const last = (arr: string[]): string => arr[arr.length - 1];
@@ -197,34 +166,20 @@ export function exceptRequestOrResponse(
 
 const behaviorComments = ["Required", "Input only", "Output only"] as const;
 
-function extractBehaviorComments(
-  field: ProtoField | ProtoOneof
-): typeof behaviorComments[number][] {
+function extractBehaviorComments(field: ProtoField | ProtoOneof): typeof behaviorComments[number][] {
   return (field.comments.leadingComments ?? "")
     .split(/\.\s+/, 3)
     .slice(0, 2)
     .map((c) => c.replace(/\.\s*$/, ""))
-    .filter((c): c is typeof behaviorComments[number] =>
-      behaviorComments.includes(c as any)
-    );
+    .filter((c): c is typeof behaviorComments[number] => behaviorComments.includes(c as any));
 }
 
-export function getEnumValueForUnspecified(
-  en: ProtoEnum
-): ProtoEnumValue | null {
-  return (
-    en.values.find(
-      (ev) =>
-        ev.index === 0 &&
-        ev.name === `${constantCase(ev.parent.name)}_UNSPECIFIED`
-    ) ?? null
-  );
+export function getEnumValueForUnspecified(en: ProtoEnum): ProtoEnumValue | null {
+  return en.values.find((ev) => ev.index === 0 && ev.name === `${constantCase(ev.parent.name)}_UNSPECIFIED`) ?? null;
 }
 
 export function isEnumValueForUnspecified(ev: ProtoEnumValue): boolean {
-  return (
-    ev.index === 0 && ev.name === `${constantCase(ev.parent.name)}_UNSPECIFIED`
-  );
+  return ev.index === 0 && ev.name === `${constantCase(ev.parent.name)}_UNSPECIFIED`;
 }
 
 /**
@@ -233,15 +188,10 @@ export function isEnumValueForUnspecified(ev: ProtoEnumValue): boolean {
  * _$hello$hello_pb.User
  * ```
  */
-export function createProtoExpr(
-  t: ProtoMessage | ProtoEnum,
-  o: GenerationParams
-): ts.Expression {
+export function createProtoExpr(t: ProtoMessage | ProtoEnum, o: GenerationParams): ts.Expression {
   const buildExpr = ([left, name]: Selector): ts.Expression => {
     return ts.factory.createPropertyAccessExpression(
-      typeof left === "string"
-        ? ts.factory.createIdentifier(left)
-        : buildExpr(left),
+      typeof left === "string" ? ts.factory.createIdentifier(left) : buildExpr(left),
       name
     );
   };
@@ -259,15 +209,10 @@ export function createProtoExpr(
  * _$hello.hello.User
  * ```
  */
-export function createProtoQualifiedName(
-  t: ProtoMessage,
-  o: GenerationParams
-): ts.QualifiedName {
+export function createProtoQualifiedName(t: ProtoMessage, o: GenerationParams): ts.QualifiedName {
   const buildExpr = ([left, name]: Selector): ts.QualifiedName => {
     return ts.factory.createQualifiedName(
-      typeof left === "string"
-        ? ts.factory.createIdentifier(left)
-        : buildExpr(left),
+      typeof left === "string" ? ts.factory.createIdentifier(left) : buildExpr(left),
       name
     );
   };
@@ -285,19 +230,12 @@ export function createProtoQualifiedName(
  * [["_$hello", "hello"], "User"]
  * ```
  */
-function createProtoFullName(
-  t: ProtoMessage | ProtoEnum,
-  o: GenerationParams,
-  isLeft = false
-): Selector {
+function createProtoFullName(t: ProtoMessage | ProtoEnum, o: GenerationParams, isLeft = false): Selector {
   let left: Selector[0];
   if (t.parent instanceof ProtoFile) {
     if (o.useProtobufjs) {
       const pkgs = t.parent.package.split(".");
-      left = pkgs.reduce<typeof left>(
-        (n, pkg) => [n, pkg],
-        uniqueImportAlias(protoImportPath(t, o))
-      );
+      left = pkgs.reduce<typeof left>((n, pkg) => [n, pkg], uniqueImportAlias(protoImportPath(t, o)));
     } else {
       left = uniqueImportAlias(protoImportPath(t, o));
     }
@@ -319,27 +257,20 @@ type Selector = [Selector | string, string];
  * import * as foo$bar$baz from "foo/bar/baz";
  * ```
  */
-export function createImportAllWithAliastDecl(
-  path: string
-): ts.ImportDeclaration {
+export function createImportAllWithAliastDecl(path: string): ts.ImportDeclaration {
   return ts.factory.createImportDeclaration(
     undefined,
     undefined,
     ts.factory.createImportClause(
       false,
       undefined,
-      ts.factory.createNamespaceImport(
-        ts.factory.createIdentifier(uniqueImportAlias(path))
-      )
+      ts.factory.createNamespaceImport(ts.factory.createIdentifier(uniqueImportAlias(path)))
     ),
     ts.factory.createStringLiteral(path)
   );
 }
 
-export function createDslExportConstStmt(
-  name: string,
-  exp: ts.Expression
-): ts.Statement {
+export function createDslExportConstStmt(name: string, exp: ts.Expression): ts.Statement {
   return ts.factory.createVariableStatement(
     [ts.factory.createToken(ts.SyntaxKind.ExportKeyword)],
     ts.factory.createVariableDeclarationList(
@@ -357,10 +288,7 @@ function nameWithParent(typ: ProtoMessage | ProtoOneof | ProtoEnum): string {
     name = `${t instanceof ProtoOneof ? pascalCase(t.name) : t.name}${name}`;
     t = t.parent;
   }
-  const prefix = t.descriptor
-    .getOptions()
-    ?.getExtension(extensions.schema)
-    ?.getTypePrefix();
+  const prefix = t.descriptor.getOptions()?.getExtension(extensions.schema)?.getTypePrefix();
   if (prefix) {
     name = `${prefix}${name}`;
   }

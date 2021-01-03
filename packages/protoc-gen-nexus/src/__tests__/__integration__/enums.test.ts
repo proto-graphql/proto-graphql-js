@@ -15,8 +15,7 @@ testSchemaGeneration("enums", "protobufjs", {
             return new pbjs.testapi.enums.MessageWithEnums({
               requiredMyEnum: pbjs.testapi.enums.MyEnum.MY_ENUM_BAR,
               requiredMyEnumWithoutUnspecified:
-                pbjs.testapi.enums.MyEnumWithoutUnspecified
-                  .MY_ENUM_WITHOUT_UNSPECIFIED_FOO,
+                pbjs.testapi.enums.MyEnumWithoutUnspecified.MY_ENUM_WITHOUT_UNSPECIFIED_FOO,
             });
           },
         }),
