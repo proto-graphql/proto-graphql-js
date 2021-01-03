@@ -46,5 +46,6 @@
       ]
     }
   },
+  "prettier": "prettier-config-wantedly",
   "name": "proto-nexus"
 }
