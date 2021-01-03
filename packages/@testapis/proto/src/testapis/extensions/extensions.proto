@@ -63,6 +63,7 @@ message PrefixedMessage {
   InputOnlyMessage input_only_message = 9;
   IgnoredEnum ignored_enum = 10;
   SquashedMessage squashed_message = 11;
+  string this_field_will_be_renamed = 12 [(graphql.field).name = "thisFieldWasRenamed"];
 }
 
 enum PrefixedEnum {

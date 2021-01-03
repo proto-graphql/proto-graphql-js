@@ -49,6 +49,9 @@ type TestPrefixPrefixedMessage {
 
   \\"\\"\\"\\"\\"\\"
   squashedMessage: TestPrefixPrefixedMessageSquashedMessage
+
+  \\"\\"\\"\\"\\"\\"
+  thisFieldWasRenamed: String!
 }
 
 \\"\\"\\"\\"\\"\\"
@@ -88,6 +91,9 @@ input TestPrefixPrefixedMessageInput {
 
   \\"\\"\\"\\"\\"\\"
   squashedMessage: TestPrefixPrefixedMessageSquashedMessageInput
+
+  \\"\\"\\"\\"\\"\\"
+  thisFieldWasRenamed: String!
 }
 
 \\"\\"\\"\\"\\"\\"
@@ -165,6 +171,9 @@ type TestPrefixPrefixedMessage {
 
   \\"\\"\\"\\"\\"\\"
   squashedMessage: TestPrefixPrefixedMessageSquashedMessage
+
+  \\"\\"\\"\\"\\"\\"
+  thisFieldWasRenamed: String!
 }
 
 \\"\\"\\"\\"\\"\\"
@@ -204,6 +213,9 @@ input TestPrefixPrefixedMessageInput {
 
   \\"\\"\\"\\"\\"\\"
   squashedMessage: TestPrefixPrefixedMessageSquashedMessageInput
+
+  \\"\\"\\"\\"\\"\\"
+  thisFieldWasRenamed: String!
 }
 
 \\"\\"\\"\\"\\"\\"

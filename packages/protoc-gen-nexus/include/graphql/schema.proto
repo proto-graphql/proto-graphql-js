@@ -45,6 +45,21 @@ extend google.protobuf.MessageOptions {
 
 message GraphqlFieldOptions {
   bool ignore = 1;
+  // Specify a field name in GraphQL. If do not specified, use the same as a Protobuf message field name.
+  //
+  // ```proto
+  // message User {
+  //   // Required. Output only.
+  //   uint64 id = 1 [(graphql.field).name = "datebaseId"];
+  // }
+  // ````
+  //
+  // ```grahpql
+  // object User {
+  //   databaseId: String!
+  // }
+  // ```
+  string name = 2;
 }
 
 extend google.protobuf.FieldOptions {

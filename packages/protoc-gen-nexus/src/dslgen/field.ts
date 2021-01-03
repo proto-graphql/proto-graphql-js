@@ -3,6 +3,7 @@ import { ProtoField, ProtoRegistry } from "../protoTypes";
 import { detectGqlType, GenerationParams, GqlType } from "./types";
 import { createDeprecationPropertyAssignment, onlyNonNull } from "./util";
 import { createFieldResolverDecl } from "./fieldResolvers";
+import * as extensions from "../__generated__/extensions/graphql/schema_pb";
 
 /**
  * @example
@@ -18,11 +19,12 @@ export function createFieldDefinitionStmt(
   opts: GenerationParams & { input?: boolean }
 ): ts.Statement {
   const type = detectGqlType(field, registry, opts);
+  const name = field.descriptor.getOptions()?.getExtension(extensions.field)?.getName() || field.name;
   return ts.factory.createExpressionStatement(
     ts.factory.createCallExpression(
       ts.factory.createPropertyAccessExpression(ts.factory.createIdentifier("t"), ts.factory.createIdentifier("field")),
       undefined,
-      [ts.factory.createStringLiteral(field.name), createFieldOptionExpr(field, type, opts)]
+      [ts.factory.createStringLiteral(name), createFieldOptionExpr(field, type, opts)]
     )
   );
 }

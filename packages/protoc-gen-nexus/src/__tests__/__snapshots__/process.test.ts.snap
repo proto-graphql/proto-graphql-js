@@ -1599,6 +1599,14 @@ export const TestPrefixPrefixedMessage = objectType({
                 }
             }
         });
+        t.field(\\"thisFieldWasRenamed\\", {
+            type: nonNull(\\"String\\"),
+            description: \\"\\",
+            resolve(root) {
+                const value = root.getThisFieldWillBeRenamed();
+                return value;
+            }
+        });
     },
     sourceType: { module: __filename, export: \\"_$testapis$extensions$extensions_pb$TestPrefixPrefixedMessage\\" }
 });
@@ -1682,6 +1690,10 @@ export const TestPrefixPrefixedMessageInput = inputObjectType({
         });
         t.field(\\"squashedMessage\\", {
             type: nullable(\\"TestPrefixPrefixedMessageSquashedMessageInput\\"),
+            description: \\"\\"
+        });
+        t.field(\\"thisFieldWasRenamed\\", {
+            type: nonNull(\\"String\\"),
             description: \\"\\"
         });
     }
@@ -1860,6 +1872,17 @@ export const TestPrefixPrefixedMessage = objectType({
                 return null;
             }
         });
+        t.field(\\"thisFieldWasRenamed\\", {
+            type: nonNull(\\"String\\"),
+            description: \\"\\",
+            resolve(root) {
+                const value = root.thisFieldWillBeRenamed;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
+            }
+        });
     },
     sourceType: { module: __filename, export: \\"_$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessage\\" }
 });
@@ -1952,6 +1975,10 @@ export const TestPrefixPrefixedMessageInput = inputObjectType({
         });
         t.field(\\"squashedMessage\\", {
             type: nullable(\\"TestPrefixPrefixedMessageSquashedMessageInput\\"),
+            description: \\"\\"
+        });
+        t.field(\\"thisFieldWasRenamed\\", {
+            type: nonNull(\\"String\\"),
             description: \\"\\"
         });
     }
