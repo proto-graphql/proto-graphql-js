@@ -29,6 +29,14 @@
     "ts-protoc-gen": "^0.13.0",
     "typescript": "^4.1.2"
   },
+  "frolint": {
+    "eslint": {
+      "ignorePath": "./.eslintignore"
+    },
+    "prettier": {
+      "ignorePath": "./.prettierignore"
+    }
+  },
   "eslintConfig": {
     "extends": [
       "wantedly-typescript/without-react"
