@@ -46,7 +46,7 @@ message GraphqlFieldOptions {
   // ```proto
   // message User {
   //   // Required. Output only.
-  //   uint64 id = 1 [(graphql.field).name = "datebaseId"];
+  //   uint64 id = 1 [(graphql.field).name = "databaseId"];
   // }
   // ````
   //
