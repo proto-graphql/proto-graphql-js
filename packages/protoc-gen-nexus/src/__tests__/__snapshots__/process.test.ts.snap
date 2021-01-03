@@ -1506,8 +1506,6 @@ export type _$testapis$extensions$extensions_pb$TestPrefixBatchGetPrefixedMessag
 export type _$testapis$extensions$extensions_pb$TestPrefixCreatePrefixedMessageRequest = _$testapis$extensions$extensions_pb.CreatePrefixedMessageRequest;
 export type _$testapis$extensions$extensions_pb$TestPrefixPrefixedMessage = _$testapis$extensions$extensions_pb.PrefixedMessage;
 export type _$testapis$extensions$extensions_pb$TestPrefixIgnoredMessage = _$testapis$extensions$extensions_pb.IgnoredMessage;
-export type _$testapis$extensions$extensions_pb$TestPrefixInputOnlyMessage = _$testapis$extensions$extensions_pb.InputOnlyMessage;
-export type _$testapis$extensions$extensions_pb$TestPrefixOutputOnlyMessage = _$testapis$extensions$extensions_pb.OutputOnlyMessage;
 export type _$testapis$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage = _$testapis$extensions$extensions_pb.PrefixedMessage.InnerMessage;
 export type _$testapis$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage2 = _$testapis$extensions$extensions_pb.PrefixedMessage.InnerMessage2;
 export type _$testapis$extensions$extensions_pb$TestPrefixPrefixedMessageSquashedMessage = _$testapis$extensions$extensions_pb.PrefixedMessage.SquashedMessage;
@@ -1564,17 +1562,6 @@ export const TestPrefixPrefixedMessage = objectType({
                 return value;
             }
         });
-        t.field(\\"outputOnlyMessage\\", {
-            type: nullable(\\"TestPrefixOutputOnlyMessage\\"),
-            description: \\"\\",
-            resolve(root) {
-                const value = root.getOutputOnlyMessage();
-                if (value == null) {
-                    return null;
-                }
-                return value;
-            }
-        });
         t.field(\\"squashedMessage\\", {
             type: nullable(\\"TestPrefixPrefixedMessageSquashedMessage\\"),
             description: \\"\\",
@@ -1609,38 +1596,6 @@ export const TestPrefixPrefixedMessage = objectType({
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$extensions$extensions_pb$TestPrefixPrefixedMessage\\" }
-});
-export const TestPrefixOutputOnlyMessage = objectType({
-    name: \\"TestPrefixOutputOnlyMessage\\",
-    description: \\"\\",
-    definition(t) {
-        t.field(\\"body\\", {
-            type: nonNull(\\"String\\"),
-            description: \\"\\",
-            resolve(root) {
-                const value = root.getBody();
-                return value;
-            }
-        });
-        t.field(\\"prefixedEnum\\", {
-            type: nullable(\\"TestPrefixPrefixedEnum\\"),
-            description: \\"\\",
-            resolve(root) {
-                const value = root.getPrefixedEnum();
-                if (value == null) {
-                    return null;
-                }
-                if (value === _$testapis$extensions$extensions_pb.PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
-                    return null;
-                }
-                if (value === _$testapis$extensions$extensions_pb.PrefixedEnum.PREFIXED_IGNORED) {
-                    throw new Error(\\"PrefixedEnum.PREFIXED_IGNORED is ignored in GraphQL schema\\");
-                }
-                return value;
-            }
-        });
-    },
-    sourceType: { module: __filename, export: \\"_$testapis$extensions$extensions_pb$TestPrefixOutputOnlyMessage\\" }
 });
 export const TestPrefixPrefixedMessageInnerMessage = objectType({
     name: \\"TestPrefixPrefixedMessageInnerMessage\\",
@@ -1684,30 +1639,12 @@ export const TestPrefixPrefixedMessageInput = inputObjectType({
             type: nullable(\\"TestPrefixPrefixedEnum\\"),
             description: \\"\\"
         });
-        t.field(\\"inputOnlyMessage\\", {
-            type: nullable(\\"TestPrefixInputOnlyMessageInput\\"),
-            description: \\"\\"
-        });
         t.field(\\"squashedMessage\\", {
             type: nullable(\\"TestPrefixPrefixedMessageSquashedMessageInput\\"),
             description: \\"\\"
         });
         t.field(\\"thisFieldWasRenamed\\", {
             type: nonNull(\\"String\\"),
-            description: \\"\\"
-        });
-    }
-});
-export const TestPrefixInputOnlyMessageInput = inputObjectType({
-    name: \\"TestPrefixInputOnlyMessageInput\\",
-    description: \\"\\",
-    definition(t) {
-        t.field(\\"body\\", {
-            type: nonNull(\\"String\\"),
-            description: \\"\\"
-        });
-        t.field(\\"prefixedEnum\\", {
-            type: nullable(\\"TestPrefixPrefixedEnum\\"),
             description: \\"\\"
         });
     }
@@ -1774,8 +1711,6 @@ export type _$testapis$extensions$testapis$extensions$TestPrefixBatchGetPrefixed
 export type _$testapis$extensions$testapis$extensions$TestPrefixCreatePrefixedMessageRequest = _$testapis$extensions.testapis.extensions.ICreatePrefixedMessageRequest;
 export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessage = _$testapis$extensions.testapis.extensions.IPrefixedMessage;
 export type _$testapis$extensions$testapis$extensions$TestPrefixIgnoredMessage = _$testapis$extensions.testapis.extensions.IIgnoredMessage;
-export type _$testapis$extensions$testapis$extensions$TestPrefixInputOnlyMessage = _$testapis$extensions.testapis.extensions.IInputOnlyMessage;
-export type _$testapis$extensions$testapis$extensions$TestPrefixOutputOnlyMessage = _$testapis$extensions.testapis.extensions.IOutputOnlyMessage;
 export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageInnerMessage = _$testapis$extensions.testapis.extensions.PrefixedMessage.IInnerMessage;
 export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageInnerMessage2 = _$testapis$extensions.testapis.extensions.PrefixedMessage.IInnerMessage2;
 export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageSquashedMessage = _$testapis$extensions.testapis.extensions.PrefixedMessage.ISquashedMessage;
@@ -1844,17 +1779,6 @@ export const TestPrefixPrefixedMessage = objectType({
                 return value;
             }
         });
-        t.field(\\"outputOnlyMessage\\", {
-            type: nullable(\\"TestPrefixOutputOnlyMessage\\"),
-            description: \\"\\",
-            resolve(root) {
-                const value = root.outputOnlyMessage;
-                if (value == null) {
-                    return null;
-                }
-                return value;
-            }
-        });
         t.field(\\"squashedMessage\\", {
             type: nullable(\\"TestPrefixPrefixedMessageSquashedMessage\\"),
             description: \\"\\",
@@ -1885,41 +1809,6 @@ export const TestPrefixPrefixedMessage = objectType({
         });
     },
     sourceType: { module: __filename, export: \\"_$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessage\\" }
-});
-export const TestPrefixOutputOnlyMessage = objectType({
-    name: \\"TestPrefixOutputOnlyMessage\\",
-    description: \\"\\",
-    definition(t) {
-        t.field(\\"body\\", {
-            type: nonNull(\\"String\\"),
-            description: \\"\\",
-            resolve(root) {
-                const value = root.body;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
-                return value;
-            }
-        });
-        t.field(\\"prefixedEnum\\", {
-            type: nullable(\\"TestPrefixPrefixedEnum\\"),
-            description: \\"\\",
-            resolve(root) {
-                const value = root.prefixedEnum;
-                if (value == null) {
-                    return null;
-                }
-                if (value === _$testapis$extensions.testapis.extensions.PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
-                    return null;
-                }
-                if (value === _$testapis$extensions.testapis.extensions.PrefixedEnum.PREFIXED_IGNORED) {
-                    throw new Error(\\"PrefixedEnum.PREFIXED_IGNORED is ignored in GraphQL schema\\");
-                }
-                return value;
-            }
-        });
-    },
-    sourceType: { module: __filename, export: \\"_$testapis$extensions$testapis$extensions$TestPrefixOutputOnlyMessage\\" }
 });
 export const TestPrefixPrefixedMessageInnerMessage = objectType({
     name: \\"TestPrefixPrefixedMessageInnerMessage\\",
@@ -1969,30 +1858,12 @@ export const TestPrefixPrefixedMessageInput = inputObjectType({
             type: nullable(\\"TestPrefixPrefixedEnum\\"),
             description: \\"\\"
         });
-        t.field(\\"inputOnlyMessage\\", {
-            type: nullable(\\"TestPrefixInputOnlyMessageInput\\"),
-            description: \\"\\"
-        });
         t.field(\\"squashedMessage\\", {
             type: nullable(\\"TestPrefixPrefixedMessageSquashedMessageInput\\"),
             description: \\"\\"
         });
         t.field(\\"thisFieldWasRenamed\\", {
             type: nonNull(\\"String\\"),
-            description: \\"\\"
-        });
-    }
-});
-export const TestPrefixInputOnlyMessageInput = inputObjectType({
-    name: \\"TestPrefixInputOnlyMessageInput\\",
-    description: \\"\\",
-    definition(t) {
-        t.field(\\"body\\", {
-            type: nonNull(\\"String\\"),
-            description: \\"\\"
-        });
-        t.field(\\"prefixedEnum\\", {
-            type: nullable(\\"TestPrefixPrefixedEnum\\"),
             description: \\"\\"
         });
     }
