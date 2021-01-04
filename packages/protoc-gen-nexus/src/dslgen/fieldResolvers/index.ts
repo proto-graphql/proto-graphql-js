@@ -1,6 +1,6 @@
 import ts from "typescript";
 import { camelCase } from "change-case";
-import { ProtoEnum, ProtoField, ProtoOneof } from "../../protoTypes";
+import { ProtoField, ProtoOneof } from "../../protogen";
 import { GenerationParams, GqlType } from "../types";
 import { createEnumFieldResolverStmts } from "./enumFieldResolver";
 import { createObjectFieldResolverStmts } from "./objectFieldResolver";
@@ -14,11 +14,11 @@ export function createFieldResolverDecl(
   opts: GenerationParams
 ): ts.MethodDeclaration {
   return createMethodDeclWithValueExpr(field, type, opts, (valueExpr) => {
-    if (field.type instanceof ProtoEnum) {
-      return createEnumFieldResolverStmts(valueExpr, field, type, field.type, opts);
-    }
     if (field.type == null || type.kind === "scalar") {
       return createScalarFieldResolverStmts(valueExpr, field, opts);
+    }
+    if (field.type.kind === "Enum") {
+      return createEnumFieldResolverStmts(valueExpr, field, type, field.type, opts);
     }
     if (isSquashedUnion(field.type)) {
       const oneof = field.type.oneofs[0];
@@ -40,7 +40,7 @@ function createMethodDeclWithValueExpr(
 ): ts.MethodDeclaration {
   let valueExpr: ts.Expression = ts.factory.createPropertyAccessExpression(
     ts.factory.createIdentifier("root"),
-    ts.factory.createIdentifier(opts.useProtobufjs ? camelCase(field.descriptor.getName()!) : field.getterName)
+    ts.factory.createIdentifier(opts.useProtobufjs ? camelCase(field.name) : field.googleProtobufGetterName)
   );
   if (!opts.useProtobufjs) {
     valueExpr = ts.factory.createCallExpression(valueExpr, undefined, undefined);

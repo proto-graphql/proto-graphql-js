@@ -1,5 +1,5 @@
 import ts from "typescript";
-import { ProtoEnum, ProtoField } from "../../protoTypes";
+import { ProtoEnum, ProtoField } from "../../protogen";
 import { GenerationParams, GqlType } from "../types";
 import { createProtoExpr, getEnumValueForUnspecified, gqlTypeName, isIgnoredField, onlyNonNull } from "../util";
 
@@ -31,7 +31,7 @@ export function createEnumFieldResolverStmts(
     : ts.factory.createThrowStatement(
         ts.factory.createNewExpression(ts.factory.createIdentifier("Error"), undefined, [
           ts.factory.createStringLiteral(
-            `${gqlTypeName(field.parent)}.${field.name} is required field. But got unspecified.`
+            `${gqlTypeName(field.parent)}.${field.jsonName} is required field. But got unspecified.`
           ),
         ])
       );

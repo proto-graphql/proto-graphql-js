@@ -1,7 +1,7 @@
 import { CodeGeneratorRequest, CodeGeneratorResponse } from "google-protobuf/google/protobuf/compiler/plugin_pb";
 import { GenerationParams } from "./dslgen";
 import { printSource } from "./printer";
-import { ProtoRegistry } from "./protoTypes";
+import { ProtoRegistry } from "./protogen";
 
 export const processRequest = (req: CodeGeneratorRequest): CodeGeneratorResponse => {
   const resp = new CodeGeneratorResponse();
@@ -15,12 +15,14 @@ export const processRequest = (req: CodeGeneratorRequest): CodeGeneratorResponse
   const params = parseParams(req.getParameter());
 
   for (const fn of req.getFileToGenerateList()) {
-    const result = printSource(registry, registry.findFile(fn), params);
+    const file = registry.findFile(fn);
+    if (file == null) throw new Error(`${fn} is not found`);
+    const result = printSource(registry, file, params);
 
-    const file = new CodeGeneratorResponse.File();
-    file.setContent(result);
-    file.setName(fn.replace(/.proto$/, "_pb_nexus.ts"));
-    resp.addFile(file);
+    const genfile = new CodeGeneratorResponse.File();
+    genfile.setContent(result);
+    genfile.setName(fn.replace(/.proto$/, "_pb_nexus.ts"));
+    resp.addFile(genfile);
   }
 
   return resp;

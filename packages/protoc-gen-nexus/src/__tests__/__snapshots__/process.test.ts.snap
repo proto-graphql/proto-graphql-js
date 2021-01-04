@@ -280,10 +280,12 @@ export const NotDeprecatedEnum = enumType({
     members: [
         {
             name: \\"NOT_DEPRECATED_FOO\\",
+            description: \\"\\",
             value: 1
         },
         {
             name: \\"DEPRECATED_BAR\\",
+            description: \\"\\",
             deprecation: \\"testapis.deprecation.NotDeprecatedEnum.DEPRECATED_BAR is mark as deprecated in a *.proto file.\\",
             value: 2
         }
@@ -295,11 +297,13 @@ export const DeprecatedEnum = enumType({
     members: [
         {
             name: \\"DEPRECATED_BAZ\\",
+            description: \\"\\",
             deprecation: \\"testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.\\",
             value: 1
         },
         {
             name: \\"DEPRECATED_QUX\\",
+            description: \\"\\",
             deprecation: \\"testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.\\",
             value: 2
         }
@@ -396,11 +400,13 @@ export const DeprecatedFileEnum = enumType({
     members: [
         {
             name: \\"DEPRECATED_FILE_FOO\\",
+            description: \\"\\",
             deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\",
             value: 1
         },
         {
             name: \\"DEPRECATED_FILE_BAR\\",
+            description: \\"\\",
             deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\",
             value: 2
         }
@@ -702,10 +708,12 @@ export const NotDeprecatedEnum = enumType({
     members: [
         {
             name: \\"NOT_DEPRECATED_FOO\\",
+            description: \\"\\",
             value: 1
         },
         {
             name: \\"DEPRECATED_BAR\\",
+            description: \\"\\",
             deprecation: \\"testapis.deprecation.NotDeprecatedEnum.DEPRECATED_BAR is mark as deprecated in a *.proto file.\\",
             value: 2
         }
@@ -717,11 +725,13 @@ export const DeprecatedEnum = enumType({
     members: [
         {
             name: \\"DEPRECATED_BAZ\\",
+            description: \\"\\",
             deprecation: \\"testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.\\",
             value: 1
         },
         {
             name: \\"DEPRECATED_QUX\\",
+            description: \\"\\",
             deprecation: \\"testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.\\",
             value: 2
         }
@@ -824,11 +834,13 @@ export const DeprecatedFileEnum = enumType({
     members: [
         {
             name: \\"DEPRECATED_FILE_FOO\\",
+            description: \\"\\",
             deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\",
             value: 1
         },
         {
             name: \\"DEPRECATED_FILE_BAR\\",
+            description: \\"\\",
             deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\",
             value: 2
         }
@@ -1096,10 +1108,12 @@ export const SubpkgEnum = enumType({
     members: [
         {
             name: \\"FOO\\",
+            description: \\"\\",
             value: 1
         },
         {
             name: \\"BAR\\",
+            description: \\"\\",
             value: 2
         }
     ]
@@ -1205,10 +1219,12 @@ export const SubpkgEnum = enumType({
     members: [
         {
             name: \\"FOO\\",
+            description: \\"\\",
             value: 1
         },
         {
             name: \\"BAR\\",
+            description: \\"\\",
             value: 2
         }
     ]
@@ -1370,10 +1386,12 @@ export const ParentMessageNestedEnum = enumType({
     members: [
         {
             name: \\"FOO\\",
+            description: \\"\\",
             value: 1
         },
         {
             name: \\"BAR\\",
+            description: \\"\\",
             value: 2
         }
     ]
@@ -1484,10 +1502,12 @@ export const ParentMessageNestedEnum = enumType({
     members: [
         {
             name: \\"FOO\\",
+            description: \\"\\",
             value: 1
         },
         {
             name: \\"BAR\\",
+            description: \\"\\",
             value: 2
         }
     ]
@@ -1689,10 +1709,12 @@ export const TestPrefixPrefixedEnum = enumType({
     members: [
         {
             name: \\"PREFIXED_FOO\\",
+            description: \\"\\",
             value: 1
         },
         {
             name: \\"PREFIXED_BAR\\",
+            description: \\"\\",
             value: 2
         }
     ]
@@ -1908,10 +1930,12 @@ export const TestPrefixPrefixedEnum = enumType({
     members: [
         {
             name: \\"PREFIXED_FOO\\",
+            description: \\"\\",
             value: 1
         },
         {
             name: \\"PREFIXED_BAR\\",
+            description: \\"\\",
             value: 2
         }
     ]
@@ -2011,6 +2035,7 @@ export const MyEnum = enumType({
     members: [
         {
             name: \\"MY_ENUM_FOO\\",
+            description: \\"\\",
             value: 1
         },
         {
@@ -2020,6 +2045,7 @@ export const MyEnum = enumType({
         },
         {
             name: \\"MY_ENUM_BAZ\\",
+            description: \\"\\",
             value: 3
         }
     ]
@@ -2030,14 +2056,17 @@ export const MyEnumWithoutUnspecified = enumType({
     members: [
         {
             name: \\"MY_ENUM_WITHOUT_UNSPECIFIED_FOO\\",
+            description: \\"\\",
             value: 0
         },
         {
             name: \\"MY_ENUM_WITHOUT_UNSPECIFIED_BAR\\",
+            description: \\"\\",
             value: 1
         },
         {
             name: \\"MY_ENUM_WITHOUT_UNSPECIFIED_BAZ\\",
+            description: \\"\\",
             value: 2
         }
     ]
@@ -2137,6 +2166,7 @@ export const MyEnum = enumType({
     members: [
         {
             name: \\"MY_ENUM_FOO\\",
+            description: \\"\\",
             value: 1
         },
         {
@@ -2146,6 +2176,7 @@ export const MyEnum = enumType({
         },
         {
             name: \\"MY_ENUM_BAZ\\",
+            description: \\"\\",
             value: 3
         }
     ]
@@ -2156,14 +2187,17 @@ export const MyEnumWithoutUnspecified = enumType({
     members: [
         {
             name: \\"MY_ENUM_WITHOUT_UNSPECIFIED_FOO\\",
+            description: \\"\\",
             value: 0
         },
         {
             name: \\"MY_ENUM_WITHOUT_UNSPECIFIED_BAR\\",
+            description: \\"\\",
             value: 1
         },
         {
             name: \\"MY_ENUM_WITHOUT_UNSPECIFIED_BAZ\\",
+            description: \\"\\",
             value: 2
         }
     ]

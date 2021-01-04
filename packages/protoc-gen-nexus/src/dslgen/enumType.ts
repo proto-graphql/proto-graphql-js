@@ -1,7 +1,8 @@
 import ts from "typescript";
-import { ProtoEnum, ProtoEnumValue } from "../protoTypes";
+import { ProtoEnum, ProtoEnumValue } from "../protogen";
 import {
   createDeprecationPropertyAssignment,
+  createDescriptionPropertyAssignment,
   createDslExportConstStmt,
   gqlTypeName,
   isEnumValueForUnspecified,
@@ -40,7 +41,7 @@ function createEnumTypeDslStmt(en: ProtoEnum): ts.Statement {
       ts.factory.createObjectLiteralExpression(
         [
           ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(typeName)),
-          ts.factory.createPropertyAssignment("description", ts.factory.createStringLiteral(en.description)),
+          createDescriptionPropertyAssignment(en),
           ts.factory.createPropertyAssignment(
             "members",
             ts.factory.createArrayLiteralExpression(
@@ -62,11 +63,9 @@ function createEnumValueExpr(ev: ProtoEnumValue): ts.Expression {
   return ts.factory.createObjectLiteralExpression(
     [
       ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(ev.name)),
-      ev.description
-        ? ts.factory.createPropertyAssignment("description", ts.factory.createStringLiteral(ev.description))
-        : null,
+      createDescriptionPropertyAssignment(ev),
       createDeprecationPropertyAssignment(ev),
-      ts.factory.createPropertyAssignment("value", ts.factory.createNumericLiteral(ev.tagNumber)),
+      ts.factory.createPropertyAssignment("value", ts.factory.createNumericLiteral(ev.number)),
     ].filter(onlyNonNull()),
     true // multiline
   );

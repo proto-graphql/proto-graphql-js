@@ -1,9 +1,9 @@
-import { ProtoField } from "../protoTypes";
+import { ProtoField } from "../protogen";
 import { GenerationParams } from "./types";
 import { uniqueImportAlias } from "./util";
 
 export function getUnwrapFunc(f: ProtoField, opts: GenerationParams): UnwrapFunc | null {
-  const uf = unwrapFuncs[f.protoTypeName];
+  const uf = unwrapFuncs[f.descriptor.getTypeName()!];
   if (!uf) return null;
   return uf[opts.useProtobufjs ? "protobufjs" : "native"];
 }

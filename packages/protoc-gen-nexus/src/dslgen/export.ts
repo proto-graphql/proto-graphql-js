@@ -1,5 +1,5 @@
 import ts from "typescript";
-import { ProtoMessage, ProtoOneof } from "../protoTypes";
+import { ProtoMessage, ProtoOneof } from "../protogen";
 import { GenerationParams } from "./types";
 import { createProtoQualifiedName, isIgnoredField, onlyNonNull, protoExportAlias } from "./util";
 
@@ -76,7 +76,7 @@ function createReExportOneofUnionSourceStmt(o: ProtoOneof, opts: GenerationParam
                 undefined,
                 "__protobufTypeName",
                 undefined,
-                ts.factory.createLiteralTypeNode(ts.factory.createStringLiteral(type.qualifiedName))
+                ts.factory.createLiteralTypeNode(ts.factory.createStringLiteral(type.fullName.toString()))
               ),
             ]),
           ])

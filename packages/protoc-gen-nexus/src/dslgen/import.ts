@@ -1,5 +1,5 @@
 import ts from "typescript";
-import { ProtoEnum, ProtoMessage } from "../protoTypes";
+import { ProtoEnum, ProtoMessage } from "../protogen";
 import { GenerationParams } from "./types";
 import { getUnwrapFunc } from "./unwrap";
 import {
@@ -25,11 +25,11 @@ export function createImportNexusDecl(
   let [oneof, list, nullable, nonNull] = [false, false, false, false];
   for (const m of msgs) {
     for (const f of m.fields) {
-      if (f.isOneofMember()) continue;
+      if (f.containingOneof) continue;
       const required = isRequiredField(f);
-      list ||= f.isList();
+      list ||= f.list;
       nullable ||= !required;
-      nonNull ||= f.isList() || required;
+      nonNull ||= f.list || required;
     }
     for (const o of m.oneofs) {
       if (isIgnoredField(o)) continue;
@@ -102,7 +102,7 @@ export function createImportProtoDecls(
         m.fields
           .filter((f) => !isIgnoredField(f))
           .map((f) => f.type)
-          .filter((t): t is ProtoEnum => t instanceof ProtoEnum && getEnumValueForUnspecified(t) != null)
+          .filter((t): t is ProtoEnum => t != null && t.kind === "Enum" && getEnumValueForUnspecified(t) != null)
       )
       .map((e) => protoImportPath(e, opts)),
   ]

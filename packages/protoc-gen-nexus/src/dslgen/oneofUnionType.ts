@@ -1,7 +1,8 @@
 import ts from "typescript";
-import { ProtoMessage, ProtoOneof, ProtoRegistry } from "../protoTypes";
+import { ProtoMessage, ProtoOneof, ProtoRegistry } from "../protogen";
 import { detectGqlType, GenerationParams } from "./types";
 import {
+  createDescriptionPropertyAssignment,
   createDslExportConstStmt,
   createProtoExpr,
   gqlTypeName,
@@ -60,7 +61,7 @@ function createOneofUnionTypeDslStmt(
       ts.factory.createObjectLiteralExpression(
         [
           ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(typeName)),
-          ts.factory.createPropertyAssignment("description", ts.factory.createStringLiteral(oneof.description)),
+          createDescriptionPropertyAssignment(oneof),
           createOneofUnionTypeDefinitionMethodDecl(oneof, reg),
           createOneofUnionTypeResolveTypeMethodDecl(oneof, reg, opts),
           opts.useProtobufjs ? ts.factory.createPropertyAssignment("sourceType", sourceTypeExpr(oneof, opts)) : null,
@@ -136,9 +137,9 @@ function createOneofUnionTypeResolveTypeMethodDecl(
     ts.factory.createBlock(
       [
         ...oneof.fields
-          .map((f) => reg.findByFieldDescriptor(f.descriptor))
+          .map((f) => f.type)
           // TODO: throw error when `t` is unallowed type
-          .filter((t): t is ProtoMessage => t instanceof ProtoMessage)
+          .filter((t): t is ProtoMessage => t != null && t.kind === "Message")
           .map((t) => craeteOneofUnionTypeResolveTypeMethodStatement(t, opts)),
         ts.factory.createThrowStatement(
           // TODO: throw custom error
@@ -155,7 +156,7 @@ function craeteOneofUnionTypeResolveTypeMethodStatement(t: ProtoMessage, opts: G
       ts.factory.createBinaryExpression(
         ts.factory.createPropertyAccessExpression(ts.factory.createIdentifier("item"), "__protobufTypeName"),
         ts.SyntaxKind.EqualsEqualsEqualsToken,
-        ts.factory.createStringLiteral(t.qualifiedName)
+        ts.factory.createStringLiteral(t.fullName.toString())
       ),
       ts.factory.createBlock([ts.factory.createReturnStatement(ts.factory.createStringLiteral(gqlTypeName(t)))])
     );

@@ -1,6 +1,7 @@
 import ts from "typescript";
-import { ProtoMessage, ProtoRegistry } from "../protoTypes";
+import { ProtoMessage, ProtoRegistry } from "../protogen";
 import {
+  createDescriptionPropertyAssignment,
   createDslExportConstStmt,
   exceptRequestOrResponse,
   gqlTypeName,
@@ -48,7 +49,7 @@ function createInputObjectTypeDslStmt(msg: ProtoMessage, reg: ProtoRegistry, opt
       ts.factory.createObjectLiteralExpression(
         [
           ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(typeName)),
-          ts.factory.createPropertyAssignment("description", ts.factory.createStringLiteral(msg.description)),
+          createDescriptionPropertyAssignment(msg),
           createInputObjectTypeDefinitionMethodDecl(msg, reg, opts),
         ],
         true
