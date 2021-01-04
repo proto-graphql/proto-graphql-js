@@ -9,6 +9,7 @@ import {
   isIgnoredType,
   isInputOnlyField,
   isSquashedUnion,
+  onlyNonNull,
   protoExportAlias,
 } from "./util";
 import { createFieldDefinitionStmt } from "./field";
@@ -56,7 +57,7 @@ function createObjectTypeDslStmt(msg: ProtoMessage, reg: ProtoRegistry, opts: Ge
           createDescriptionPropertyAssignment(msg),
           createObjectTypeDefinitionMethodDecl(msg, reg, opts),
           ts.factory.createPropertyAssignment("sourceType", sourceTypeExpr(msg, opts)),
-        ],
+        ].filter(onlyNonNull()),
         true
       ),
     ])

@@ -5,7 +5,6 @@ exports[`schema generation with protobufjs can make GraphQL schema from generate
 ### Do not make changes to this file directly
 
 
-\\"\\"\\"\\"\\"\\"
 type FieldBehaviorComentsMessage {
   \\"\\"\\"Output only.\\"\\"\\"
   outputOnlyField: FieldBehaviorComentsMessagePost
@@ -20,7 +19,6 @@ type FieldBehaviorComentsMessage {
   requiredOutputOnlyField: FieldBehaviorComentsMessagePost!
 }
 
-\\"\\"\\"\\"\\"\\"
 input FieldBehaviorComentsMessageInput {
   \\"\\"\\"Input only.\\"\\"\\"
   inputOnlyField: FieldBehaviorComentsMessagePostInput
@@ -35,15 +33,11 @@ input FieldBehaviorComentsMessageInput {
   requiredInputOnlyField: FieldBehaviorComentsMessagePostInput!
 }
 
-\\"\\"\\"\\"\\"\\"
 type FieldBehaviorComentsMessagePost {
-  \\"\\"\\"\\"\\"\\"
   body: String!
 }
 
-\\"\\"\\"\\"\\"\\"
 input FieldBehaviorComentsMessagePostInput {
-  \\"\\"\\"\\"\\"\\"
   body: String!
 }
 

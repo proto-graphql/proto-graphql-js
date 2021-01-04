@@ -5,157 +5,91 @@ exports[`schema generation with protobufjs can make GraphQL schema from generate
 ### Do not make changes to this file directly
 
 
-\\"\\"\\"\\"\\"\\"
 enum DeprecatedEnum {
-  \\"\\"\\"\\"\\"\\"
   DEPRECATED_BAZ @deprecated(reason: \\"testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.\\")
-
-  \\"\\"\\"\\"\\"\\"
   DEPRECATED_QUX @deprecated(reason: \\"testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.\\")
 }
 
-\\"\\"\\"\\"\\"\\"
 enum DeprecatedFileEnum {
-  \\"\\"\\"\\"\\"\\"
   DEPRECATED_FILE_BAR @deprecated(reason: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\")
-
-  \\"\\"\\"\\"\\"\\"
   DEPRECATED_FILE_FOO @deprecated(reason: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\")
 }
 
-\\"\\"\\"\\"\\"\\"
 type DeprecatedFileMessage {
-  \\"\\"\\"\\"\\"\\"
   body: String! @deprecated(reason: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\")
-
-  \\"\\"\\"\\"\\"\\"
   enum: DeprecatedFileEnum @deprecated(reason: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\")
 }
 
-\\"\\"\\"\\"\\"\\"
 type DeprecatedFileMessageInnerMessage {
-  \\"\\"\\"\\"\\"\\"
   body: String! @deprecated(reason: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\")
 }
 
-\\"\\"\\"\\"\\"\\"
 input DeprecatedFileMessageInnerMessageInput {
-  \\"\\"\\"\\"\\"\\"
   body: String!
 }
 
-\\"\\"\\"\\"\\"\\"
 input DeprecatedFileMessageInput {
-  \\"\\"\\"\\"\\"\\"
   body: String!
-
-  \\"\\"\\"\\"\\"\\"
   enum: DeprecatedFileEnum
 }
 
-\\"\\"\\"\\"\\"\\"
 type DeprecatedMessage {
-  \\"\\"\\"\\"\\"\\"
   body: String! @deprecated(reason: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\")
-
-  \\"\\"\\"\\"\\"\\"
   enum: NotDeprecatedEnum @deprecated(reason: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\")
 }
 
-\\"\\"\\"\\"\\"\\"
 type DeprecatedMessageInnerMessage {
-  \\"\\"\\"\\"\\"\\"
   body: String! @deprecated(reason: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\")
 }
 
-\\"\\"\\"\\"\\"\\"
 input DeprecatedMessageInnerMessageInput {
-  \\"\\"\\"\\"\\"\\"
   body: String!
 }
 
-\\"\\"\\"\\"\\"\\"
 input DeprecatedMessageInput {
-  \\"\\"\\"\\"\\"\\"
   body: String!
-
-  \\"\\"\\"\\"\\"\\"
   enum: NotDeprecatedEnum
 }
 
-\\"\\"\\"\\"\\"\\"
 enum NotDeprecatedEnum {
-  \\"\\"\\"\\"\\"\\"
   DEPRECATED_BAR @deprecated(reason: \\"testapis.deprecation.NotDeprecatedEnum.DEPRECATED_BAR is mark as deprecated in a *.proto file.\\")
-
-  \\"\\"\\"\\"\\"\\"
   NOT_DEPRECATED_FOO
 }
 
-\\"\\"\\"\\"\\"\\"
 type NotDeprecatedMessage {
-  \\"\\"\\"\\"\\"\\"
   body: String! @deprecated(reason: \\"testapis.deprecation.NotDeprecatedMessage.body is mark as deprecated in a *.proto file.\\")
-
-  \\"\\"\\"\\"\\"\\"
   deprecated_oneof: NotDeprecatedMessageDeprecatedOneof @deprecated(reason: \\"testapis.deprecation.NotDeprecatedMessage.deprecated_oneof is mark as deprecated in a *.proto file.\\")
-
-  \\"\\"\\"\\"\\"\\"
   enum: DeprecatedEnum @deprecated(reason: \\"testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.\\")
-
-  \\"\\"\\"\\"\\"\\"
   not_deprecated_oneof: NotDeprecatedMessageNotDeprecatedOneof
 }
 
-\\"\\"\\"\\"\\"\\"
 union NotDeprecatedMessageDeprecatedOneof = NotDeprecatedMessageInnerMessage1 | NotDeprecatedMessageInnerMessage2
 
-\\"\\"\\"\\"\\"\\"
 type NotDeprecatedMessageInnerMessage1 {
-  \\"\\"\\"\\"\\"\\"
   body: String!
 }
 
-\\"\\"\\"\\"\\"\\"
 input NotDeprecatedMessageInnerMessage1Input {
-  \\"\\"\\"\\"\\"\\"
   body: String!
 }
 
-\\"\\"\\"\\"\\"\\"
 type NotDeprecatedMessageInnerMessage2 {
-  \\"\\"\\"\\"\\"\\"
   body: String!
 }
 
-\\"\\"\\"\\"\\"\\"
 input NotDeprecatedMessageInnerMessage2Input {
-  \\"\\"\\"\\"\\"\\"
   body: String!
 }
 
-\\"\\"\\"\\"\\"\\"
 input NotDeprecatedMessageInput {
-  \\"\\"\\"\\"\\"\\"
   body: String!
-
-  \\"\\"\\"\\"\\"\\"
   enum: DeprecatedEnum
-
-  \\"\\"\\"\\"\\"\\"
   msg1: NotDeprecatedMessageInnerMessage1Input
-
-  \\"\\"\\"\\"\\"\\"
   msg2: NotDeprecatedMessageInnerMessage2Input
-
-  \\"\\"\\"\\"\\"\\"
   msg3: NotDeprecatedMessageInnerMessage1Input
-
-  \\"\\"\\"\\"\\"\\"
   msg4: NotDeprecatedMessageInnerMessage2Input
 }
 
-\\"\\"\\"\\"\\"\\"
 union NotDeprecatedMessageNotDeprecatedOneof = NotDeprecatedMessageInnerMessage1 | NotDeprecatedMessageInnerMessage2
 
 type Query {
