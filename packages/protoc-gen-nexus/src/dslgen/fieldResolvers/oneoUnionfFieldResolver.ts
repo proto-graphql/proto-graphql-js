@@ -1,7 +1,7 @@
 import ts from "typescript";
 import { pascalCase, constantCase, camelCase } from "change-case";
 import { ProtoOneof } from "../../protogen";
-import { createProtoExpr, isRequiredField } from "../util";
+import { createProtoExpr, isIgnoredField, isInputOnlyField, isRequiredField } from "../util";
 import { GenerationParams } from "../types";
 
 export function craeteOneofUnionFieldResolverStmts(
@@ -12,32 +12,35 @@ export function craeteOneofUnionFieldResolverStmts(
   const nullable = !isRequiredField(oneof);
   if (opts.useProtobufjs) {
     return [
-      ...oneof.fields.map((f) =>
-        ts.factory.createIfStatement(
-          ts.factory.createPropertyAccessExpression(parentExpr, camelCase(f.descriptor.getName()!)),
-          ts.factory.createBlock([
-            ts.factory.createReturnStatement(
-              ts.factory.createCallExpression(
-                ts.factory.createPropertyAccessExpression(ts.factory.createIdentifier("Object"), "assign"),
-                undefined,
-                [
-                  ts.factory.createPropertyAccessExpression(parentExpr, camelCase(f.descriptor.getName()!)),
-                  ts.factory.createObjectLiteralExpression([
-                    ts.factory.createPropertyAssignment(
-                      "__protobufTypeName",
-                      ts.factory.createAsExpression(
-                        // TODO: throw error if the type is not ProtoMesssage
-                        ts.factory.createStringLiteral(f.type!.fullName.toString()),
-                        ts.factory.createTypeReferenceNode(ts.factory.createIdentifier("const"))
-                      )
-                    ),
-                  ]),
-                ]
-              )
-            ),
-          ])
-        )
-      ),
+      ...oneof.fields
+        .filter((f) => !isIgnoredField(f))
+        .filter((f) => !isInputOnlyField(f))
+        .map((f) =>
+          ts.factory.createIfStatement(
+            ts.factory.createPropertyAccessExpression(parentExpr, camelCase(f.descriptor.getName()!)),
+            ts.factory.createBlock([
+              ts.factory.createReturnStatement(
+                ts.factory.createCallExpression(
+                  ts.factory.createPropertyAccessExpression(ts.factory.createIdentifier("Object"), "assign"),
+                  undefined,
+                  [
+                    ts.factory.createPropertyAccessExpression(parentExpr, camelCase(f.descriptor.getName()!)),
+                    ts.factory.createObjectLiteralExpression([
+                      ts.factory.createPropertyAssignment(
+                        "__protobufTypeName",
+                        ts.factory.createAsExpression(
+                          // TODO: throw error if the type is not ProtoMesssage
+                          ts.factory.createStringLiteral(f.type!.fullName.toString()),
+                          ts.factory.createTypeReferenceNode(ts.factory.createIdentifier("const"))
+                        )
+                      ),
+                    ]),
+                  ]
+                )
+              ),
+            ])
+          )
+        ),
       nullable
         ? ts.factory.createReturnStatement(ts.factory.createToken(ts.SyntaxKind.NullKeyword))
         : ts.factory.createThrowStatement(ts.factory.createStringLiteral("unreachable")),
@@ -70,35 +73,38 @@ export function craeteOneofUnionFieldResolverStmts(
             ),
           ]
         ),
-        ...oneof.fields.map((f) =>
-          ts.factory.createCaseClause(
-            ts.factory.createPropertyAccessExpression(
+        ...oneof.fields
+          .filter((f) => !isIgnoredField(f))
+          .filter((f) => !isInputOnlyField(f))
+          .map((f) =>
+            ts.factory.createCaseClause(
               ts.factory.createPropertyAccessExpression(
-                createProtoExpr(oneof.parent, opts),
-                `${pascalCase(oneof.name)}Case`
+                ts.factory.createPropertyAccessExpression(
+                  createProtoExpr(oneof.parent, opts),
+                  `${pascalCase(oneof.name)}Case`
+                ),
+                constantCase(f.name, {
+                  splitRegexp: /([a-z])([A-Z0-9])/g,
+                })
               ),
-              constantCase(f.name, {
-                splitRegexp: /([a-z])([A-Z0-9])/g,
-              })
-            ),
-            [
-              ts.factory.createBlock(
-                [
-                  ts.factory.createReturnStatement(
-                    ts.factory.createNonNullExpression(
-                      ts.factory.createCallExpression(
-                        ts.factory.createPropertyAccessExpression(parentExpr, f.googleProtobufGetterName),
-                        undefined,
-                        undefined
+              [
+                ts.factory.createBlock(
+                  [
+                    ts.factory.createReturnStatement(
+                      ts.factory.createNonNullExpression(
+                        ts.factory.createCallExpression(
+                          ts.factory.createPropertyAccessExpression(parentExpr, f.googleProtobufGetterName),
+                          undefined,
+                          undefined
+                        )
                       )
-                    )
-                  ),
-                ],
-                true // multiline
-              ),
-            ]
-          )
-        ),
+                    ),
+                  ],
+                  true // multiline
+                ),
+              ]
+            )
+          ),
         ts.factory.createDefaultClause([
           ts.factory.createBlock(
             [
