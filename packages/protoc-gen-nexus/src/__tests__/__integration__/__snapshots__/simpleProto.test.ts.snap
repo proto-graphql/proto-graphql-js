@@ -5,7 +5,6 @@ exports[`schema generation with native protobuf can make GraphQL schema from gen
 ### Do not make changes to this file directly
 
 
-\\"\\"\\"\\"\\"\\"
 type Hello {
   \\"\\"\\"Optional.\\"\\"\\"
   optionalPrimitives: Primitives
@@ -20,7 +19,6 @@ type Hello {
   requiredPrimitivesList: [Primitives!]
 }
 
-\\"\\"\\"\\"\\"\\"
 input HelloInput {
   \\"\\"\\"Optional.\\"\\"\\"
   optionalPrimitives: PrimitivesInput
@@ -35,93 +33,37 @@ input HelloInput {
   requiredPrimitivesList: [PrimitivesInput!]
 }
 
-\\"\\"\\"\\"\\"\\"
 type Primitives {
-  \\"\\"\\"\\"\\"\\"
   requiredBoolValue: Boolean!
-
-  \\"\\"\\"\\"\\"\\"
   requiredDoubleValue: Float!
-
-  \\"\\"\\"\\"\\"\\"
   requiredFixed32Value: Int!
-
-  \\"\\"\\"\\"\\"\\"
   requiredFixed64Value: String!
-
-  \\"\\"\\"\\"\\"\\"
   requiredFloatValue: Float!
-
-  \\"\\"\\"\\"\\"\\"
   requiredInt32Value: Int!
-
-  \\"\\"\\"\\"\\"\\"
   requiredInt64Value: String!
-
-  \\"\\"\\"\\"\\"\\"
   requiredSfixed32Value: Int!
-
-  \\"\\"\\"\\"\\"\\"
   requiredSfixed64Value: String!
-
-  \\"\\"\\"\\"\\"\\"
   requiredSint32Value: Int!
-
-  \\"\\"\\"\\"\\"\\"
   requiredSint64Value: String!
-
-  \\"\\"\\"\\"\\"\\"
   requiredStringValue: String!
-
-  \\"\\"\\"\\"\\"\\"
   requiredUint32Value: Int!
-
-  \\"\\"\\"\\"\\"\\"
   requiredUint64Value: String!
 }
 
-\\"\\"\\"\\"\\"\\"
 input PrimitivesInput {
-  \\"\\"\\"\\"\\"\\"
   requiredBoolValue: Boolean!
-
-  \\"\\"\\"\\"\\"\\"
   requiredDoubleValue: Float!
-
-  \\"\\"\\"\\"\\"\\"
   requiredFixed32Value: Int!
-
-  \\"\\"\\"\\"\\"\\"
   requiredFixed64Value: String!
-
-  \\"\\"\\"\\"\\"\\"
   requiredFloatValue: Float!
-
-  \\"\\"\\"\\"\\"\\"
   requiredInt32Value: Int!
-
-  \\"\\"\\"\\"\\"\\"
   requiredInt64Value: String!
-
-  \\"\\"\\"\\"\\"\\"
   requiredSfixed32Value: Int!
-
-  \\"\\"\\"\\"\\"\\"
   requiredSfixed64Value: String!
-
-  \\"\\"\\"\\"\\"\\"
   requiredSint32Value: Int!
-
-  \\"\\"\\"\\"\\"\\"
   requiredSint64Value: String!
-
-  \\"\\"\\"\\"\\"\\"
   requiredStringValue: String!
-
-  \\"\\"\\"\\"\\"\\"
   requiredUint32Value: Int!
-
-  \\"\\"\\"\\"\\"\\"
   requiredUint64Value: String!
 }
 
@@ -164,7 +106,6 @@ exports[`schema generation with protobufjs can make GraphQL schema from generate
 ### Do not make changes to this file directly
 
 
-\\"\\"\\"\\"\\"\\"
 type Hello {
   \\"\\"\\"Optional.\\"\\"\\"
   optionalPrimitives: Primitives
@@ -179,7 +120,6 @@ type Hello {
   requiredPrimitivesList: [Primitives!]
 }
 
-\\"\\"\\"\\"\\"\\"
 input HelloInput {
   \\"\\"\\"Optional.\\"\\"\\"
   optionalPrimitives: PrimitivesInput
@@ -194,93 +134,37 @@ input HelloInput {
   requiredPrimitivesList: [PrimitivesInput!]
 }
 
-\\"\\"\\"\\"\\"\\"
 type Primitives {
-  \\"\\"\\"\\"\\"\\"
   requiredBoolValue: Boolean!
-
-  \\"\\"\\"\\"\\"\\"
   requiredDoubleValue: Float!
-
-  \\"\\"\\"\\"\\"\\"
   requiredFixed32Value: Int!
-
-  \\"\\"\\"\\"\\"\\"
   requiredFixed64Value: String!
-
-  \\"\\"\\"\\"\\"\\"
   requiredFloatValue: Float!
-
-  \\"\\"\\"\\"\\"\\"
   requiredInt32Value: Int!
-
-  \\"\\"\\"\\"\\"\\"
   requiredInt64Value: String!
-
-  \\"\\"\\"\\"\\"\\"
   requiredSfixed32Value: Int!
-
-  \\"\\"\\"\\"\\"\\"
   requiredSfixed64Value: String!
-
-  \\"\\"\\"\\"\\"\\"
   requiredSint32Value: Int!
-
-  \\"\\"\\"\\"\\"\\"
   requiredSint64Value: String!
-
-  \\"\\"\\"\\"\\"\\"
   requiredStringValue: String!
-
-  \\"\\"\\"\\"\\"\\"
   requiredUint32Value: Int!
-
-  \\"\\"\\"\\"\\"\\"
   requiredUint64Value: String!
 }
 
-\\"\\"\\"\\"\\"\\"
 input PrimitivesInput {
-  \\"\\"\\"\\"\\"\\"
   requiredBoolValue: Boolean!
-
-  \\"\\"\\"\\"\\"\\"
   requiredDoubleValue: Float!
-
-  \\"\\"\\"\\"\\"\\"
   requiredFixed32Value: Int!
-
-  \\"\\"\\"\\"\\"\\"
   requiredFixed64Value: String!
-
-  \\"\\"\\"\\"\\"\\"
   requiredFloatValue: Float!
-
-  \\"\\"\\"\\"\\"\\"
   requiredInt32Value: Int!
-
-  \\"\\"\\"\\"\\"\\"
   requiredInt64Value: String!
-
-  \\"\\"\\"\\"\\"\\"
   requiredSfixed32Value: Int!
-
-  \\"\\"\\"\\"\\"\\"
   requiredSfixed64Value: String!
-
-  \\"\\"\\"\\"\\"\\"
   requiredSint32Value: Int!
-
-  \\"\\"\\"\\"\\"\\"
   requiredSint64Value: String!
-
-  \\"\\"\\"\\"\\"\\"
   requiredStringValue: String!
-
-  \\"\\"\\"\\"\\"\\"
   requiredUint32Value: Int!
-
-  \\"\\"\\"\\"\\"\\"
   requiredUint64Value: String!
 }
 

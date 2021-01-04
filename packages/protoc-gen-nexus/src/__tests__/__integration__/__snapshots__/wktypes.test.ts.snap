@@ -10,63 +10,27 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the \`da
 \\"\\"\\"
 scalar DateTime
 
-\\"\\"\\"\\"\\"\\"
 type Message {
-  \\"\\"\\"\\"\\"\\"
   boolValue: Boolean
-
-  \\"\\"\\"\\"\\"\\"
   doubleValue: Float
-
-  \\"\\"\\"\\"\\"\\"
   floatValue: Float
-
-  \\"\\"\\"\\"\\"\\"
   int32Value: Int
-
-  \\"\\"\\"\\"\\"\\"
   int64Value: String
-
-  \\"\\"\\"\\"\\"\\"
   stringValue: String
-
-  \\"\\"\\"\\"\\"\\"
   timestamp: DateTime
-
-  \\"\\"\\"\\"\\"\\"
   uint32Value: Int
-
-  \\"\\"\\"\\"\\"\\"
   uint64Value: String
 }
 
-\\"\\"\\"\\"\\"\\"
 input MessageInput {
-  \\"\\"\\"\\"\\"\\"
   boolValue: Boolean
-
-  \\"\\"\\"\\"\\"\\"
   doubleValue: Float
-
-  \\"\\"\\"\\"\\"\\"
   floatValue: Float
-
-  \\"\\"\\"\\"\\"\\"
   int32Value: Int
-
-  \\"\\"\\"\\"\\"\\"
   int64Value: String
-
-  \\"\\"\\"\\"\\"\\"
   stringValue: String
-
-  \\"\\"\\"\\"\\"\\"
   timestamp: DateTime
-
-  \\"\\"\\"\\"\\"\\"
   uint32Value: Int
-
-  \\"\\"\\"\\"\\"\\"
   uint64Value: String
 }
 
@@ -86,63 +50,27 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the \`da
 \\"\\"\\"
 scalar DateTime
 
-\\"\\"\\"\\"\\"\\"
 type Message {
-  \\"\\"\\"\\"\\"\\"
   boolValue: Boolean
-
-  \\"\\"\\"\\"\\"\\"
   doubleValue: Float
-
-  \\"\\"\\"\\"\\"\\"
   floatValue: Float
-
-  \\"\\"\\"\\"\\"\\"
   int32Value: Int
-
-  \\"\\"\\"\\"\\"\\"
   int64Value: String
-
-  \\"\\"\\"\\"\\"\\"
   stringValue: String
-
-  \\"\\"\\"\\"\\"\\"
   timestamp: DateTime
-
-  \\"\\"\\"\\"\\"\\"
   uint32Value: Int
-
-  \\"\\"\\"\\"\\"\\"
   uint64Value: String
 }
 
-\\"\\"\\"\\"\\"\\"
 input MessageInput {
-  \\"\\"\\"\\"\\"\\"
   boolValue: Boolean
-
-  \\"\\"\\"\\"\\"\\"
   doubleValue: Float
-
-  \\"\\"\\"\\"\\"\\"
   floatValue: Float
-
-  \\"\\"\\"\\"\\"\\"
   int32Value: Int
-
-  \\"\\"\\"\\"\\"\\"
   int64Value: String
-
-  \\"\\"\\"\\"\\"\\"
   stringValue: String
-
-  \\"\\"\\"\\"\\"\\"
   timestamp: DateTime
-
-  \\"\\"\\"\\"\\"\\"
   uint32Value: Int
-
-  \\"\\"\\"\\"\\"\\"
   uint64Value: String
 }
 

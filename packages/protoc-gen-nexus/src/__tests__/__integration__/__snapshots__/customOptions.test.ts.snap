@@ -9,81 +9,48 @@ type Query {
   ok: Boolean!
 }
 
-\\"\\"\\"\\"\\"\\"
 enum TestPrefixPrefixedEnum {
-  \\"\\"\\"\\"\\"\\"
   PREFIXED_BAR
-
-  \\"\\"\\"\\"\\"\\"
   PREFIXED_FOO
 }
 
-\\"\\"\\"\\"\\"\\"
 type TestPrefixPrefixedMessage {
-  \\"\\"\\"\\"\\"\\"
   body: String!
 
   \\"\\"\\"Output only.\\"\\"\\"
   id: String!
-
-  \\"\\"\\"\\"\\"\\"
   prefixedEnum: TestPrefixPrefixedEnum
-
-  \\"\\"\\"\\"\\"\\"
   squashedMessage: TestPrefixPrefixedMessageSquashedMessage
-
-  \\"\\"\\"\\"\\"\\"
   thisFieldWasRenamed: String!
 }
 
-\\"\\"\\"\\"\\"\\"
 type TestPrefixPrefixedMessageInnerMessage {
-  \\"\\"\\"\\"\\"\\"
   body: String!
 }
 
-\\"\\"\\"\\"\\"\\"
 type TestPrefixPrefixedMessageInnerMessage2 {
-  \\"\\"\\"\\"\\"\\"
   body: String!
 }
 
-\\"\\"\\"\\"\\"\\"
 input TestPrefixPrefixedMessageInnerMessage2Input {
-  \\"\\"\\"\\"\\"\\"
   body: String!
 }
 
-\\"\\"\\"\\"\\"\\"
 input TestPrefixPrefixedMessageInnerMessageInput {
-  \\"\\"\\"\\"\\"\\"
   body: String!
 }
 
-\\"\\"\\"\\"\\"\\"
 input TestPrefixPrefixedMessageInput {
-  \\"\\"\\"\\"\\"\\"
   body: String!
-
-  \\"\\"\\"\\"\\"\\"
   prefixedEnum: TestPrefixPrefixedEnum
-
-  \\"\\"\\"\\"\\"\\"
   squashedMessage: TestPrefixPrefixedMessageSquashedMessageInput
-
-  \\"\\"\\"\\"\\"\\"
   thisFieldWasRenamed: String!
 }
 
-\\"\\"\\"\\"\\"\\"
 union TestPrefixPrefixedMessageSquashedMessage = TestPrefixPrefixedMessageInnerMessage | TestPrefixPrefixedMessageInnerMessage2
 
-\\"\\"\\"\\"\\"\\"
 input TestPrefixPrefixedMessageSquashedMessageInput {
-  \\"\\"\\"\\"\\"\\"
   oneofIgnoredField: TestPrefixPrefixedMessageInnerMessageInput
-
-  \\"\\"\\"\\"\\"\\"
   oneofIgnoredField2: TestPrefixPrefixedMessageInnerMessage2Input
 }
 "
@@ -110,81 +77,48 @@ type Query {
   ok: Boolean!
 }
 
-\\"\\"\\"\\"\\"\\"
 enum TestPrefixPrefixedEnum {
-  \\"\\"\\"\\"\\"\\"
   PREFIXED_BAR
-
-  \\"\\"\\"\\"\\"\\"
   PREFIXED_FOO
 }
 
-\\"\\"\\"\\"\\"\\"
 type TestPrefixPrefixedMessage {
-  \\"\\"\\"\\"\\"\\"
   body: String!
 
   \\"\\"\\"Output only.\\"\\"\\"
   id: String!
-
-  \\"\\"\\"\\"\\"\\"
   prefixedEnum: TestPrefixPrefixedEnum
-
-  \\"\\"\\"\\"\\"\\"
   squashedMessage: TestPrefixPrefixedMessageSquashedMessage
-
-  \\"\\"\\"\\"\\"\\"
   thisFieldWasRenamed: String!
 }
 
-\\"\\"\\"\\"\\"\\"
 type TestPrefixPrefixedMessageInnerMessage {
-  \\"\\"\\"\\"\\"\\"
   body: String!
 }
 
-\\"\\"\\"\\"\\"\\"
 type TestPrefixPrefixedMessageInnerMessage2 {
-  \\"\\"\\"\\"\\"\\"
   body: String!
 }
 
-\\"\\"\\"\\"\\"\\"
 input TestPrefixPrefixedMessageInnerMessage2Input {
-  \\"\\"\\"\\"\\"\\"
   body: String!
 }
 
-\\"\\"\\"\\"\\"\\"
 input TestPrefixPrefixedMessageInnerMessageInput {
-  \\"\\"\\"\\"\\"\\"
   body: String!
 }
 
-\\"\\"\\"\\"\\"\\"
 input TestPrefixPrefixedMessageInput {
-  \\"\\"\\"\\"\\"\\"
   body: String!
-
-  \\"\\"\\"\\"\\"\\"
   prefixedEnum: TestPrefixPrefixedEnum
-
-  \\"\\"\\"\\"\\"\\"
   squashedMessage: TestPrefixPrefixedMessageSquashedMessageInput
-
-  \\"\\"\\"\\"\\"\\"
   thisFieldWasRenamed: String!
 }
 
-\\"\\"\\"\\"\\"\\"
 union TestPrefixPrefixedMessageSquashedMessage = TestPrefixPrefixedMessageInnerMessage | TestPrefixPrefixedMessageInnerMessage2
 
-\\"\\"\\"\\"\\"\\"
 input TestPrefixPrefixedMessageSquashedMessageInput {
-  \\"\\"\\"\\"\\"\\"
   oneofIgnoredField: TestPrefixPrefixedMessageInnerMessageInput
-
-  \\"\\"\\"\\"\\"\\"
   oneofIgnoredField2: TestPrefixPrefixedMessageInnerMessage2Input
 }
 "

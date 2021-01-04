@@ -8,6 +8,7 @@ import {
   isIgnoredField,
   isIgnoredType,
   isOutputOnlyField,
+  onlyNonNull,
 } from "./util";
 import { createFieldDefinitionStmt } from "./field";
 import { GenerationParams } from "./types";
@@ -51,7 +52,7 @@ function createInputObjectTypeDslStmt(msg: ProtoMessage, reg: ProtoRegistry, opt
           ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(typeName)),
           createDescriptionPropertyAssignment(msg),
           createInputObjectTypeDefinitionMethodDecl(msg, reg, opts),
-        ],
+        ].filter(onlyNonNull()),
         true
       ),
     ])

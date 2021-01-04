@@ -52,7 +52,7 @@ function createEnumTypeDslStmt(en: ProtoEnum): ts.Statement {
               true // multiline
             )
           ),
-        ],
+        ].filter(onlyNonNull()),
         true
       ),
     ])

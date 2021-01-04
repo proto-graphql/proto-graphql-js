@@ -5,21 +5,13 @@ exports[`schema generation with native protobuf can make GraphQL schema from gen
 ### Do not make changes to this file directly
 
 
-\\"\\"\\"\\"\\"\\"
 type MessageWithSubpkg {
-  \\"\\"\\"\\"\\"\\"
   enum: SubpkgEnum
-
-  \\"\\"\\"\\"\\"\\"
   message: SubpkgMessage
 }
 
-\\"\\"\\"\\"\\"\\"
 input MessageWithSubpkgInput {
-  \\"\\"\\"\\"\\"\\"
   enum: SubpkgEnum
-
-  \\"\\"\\"\\"\\"\\"
   message: SubpkgMessageInput
 }
 
@@ -27,24 +19,16 @@ type Query {
   ok: Boolean!
 }
 
-\\"\\"\\"\\"\\"\\"
 enum SubpkgEnum {
-  \\"\\"\\"\\"\\"\\"
   BAR
-
-  \\"\\"\\"\\"\\"\\"
   FOO
 }
 
-\\"\\"\\"\\"\\"\\"
 type SubpkgMessage {
-  \\"\\"\\"\\"\\"\\"
   body: String!
 }
 
-\\"\\"\\"\\"\\"\\"
 input SubpkgMessageInput {
-  \\"\\"\\"\\"\\"\\"
   body: String!
 }
 "
@@ -55,21 +39,13 @@ exports[`schema generation with protobufjs can make GraphQL schema from generate
 ### Do not make changes to this file directly
 
 
-\\"\\"\\"\\"\\"\\"
 type MessageWithSubpkg {
-  \\"\\"\\"\\"\\"\\"
   enum: SubpkgEnum
-
-  \\"\\"\\"\\"\\"\\"
   message: SubpkgMessage
 }
 
-\\"\\"\\"\\"\\"\\"
 input MessageWithSubpkgInput {
-  \\"\\"\\"\\"\\"\\"
   enum: SubpkgEnum
-
-  \\"\\"\\"\\"\\"\\"
   message: SubpkgMessageInput
 }
 
@@ -77,24 +53,16 @@ type Query {
   ok: Boolean!
 }
 
-\\"\\"\\"\\"\\"\\"
 enum SubpkgEnum {
-  \\"\\"\\"\\"\\"\\"
   BAR
-
-  \\"\\"\\"\\"\\"\\"
   FOO
 }
 
-\\"\\"\\"\\"\\"\\"
 type SubpkgMessage {
-  \\"\\"\\"\\"\\"\\"
   body: String!
 }
 
-\\"\\"\\"\\"\\"\\"
 input SubpkgMessageInput {
-  \\"\\"\\"\\"\\"\\"
   body: String!
 }
 "

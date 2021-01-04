@@ -5,61 +5,38 @@ exports[`schema generation with protobufjs can make GraphQL schema from generate
 ### Do not make changes to this file directly
 
 
-\\"\\"\\"\\"\\"\\"
 type OneofMemberMessage1 {
-  \\"\\"\\"\\"\\"\\"
   body: String!
 }
 
-\\"\\"\\"\\"\\"\\"
 input OneofMemberMessage1Input {
-  \\"\\"\\"\\"\\"\\"
   body: String!
 }
 
-\\"\\"\\"\\"\\"\\"
 type OneofMemberMessage2 {
-  \\"\\"\\"\\"\\"\\"
   imageUrl: String!
 }
 
-\\"\\"\\"\\"\\"\\"
 input OneofMemberMessage2Input {
-  \\"\\"\\"\\"\\"\\"
   imageUrl: String!
 }
 
-\\"\\"\\"\\"\\"\\"
 type OneofParent {
-  \\"\\"\\"\\"\\"\\"
   normalField: String!
-
-  \\"\\"\\"\\"\\"\\"
   optional_oneof_members: OneofParentOptionalOneofMembers
 
   \\"\\"\\"Required. disallow not_set.\\"\\"\\"
   required_oneof_members: OneofParentRequiredOneofMembers!
 }
 
-\\"\\"\\"\\"\\"\\"
 input OneofParentInput {
-  \\"\\"\\"\\"\\"\\"
   normalField: String!
-
-  \\"\\"\\"\\"\\"\\"
   optoinalMessage1: OneofMemberMessage1Input
-
-  \\"\\"\\"\\"\\"\\"
   optoinalMessage2: OneofMemberMessage2Input
-
-  \\"\\"\\"\\"\\"\\"
   requiredMessage1: OneofMemberMessage1Input
-
-  \\"\\"\\"\\"\\"\\"
   requiredMessage2: OneofMemberMessage2Input
 }
 
-\\"\\"\\"\\"\\"\\"
 union OneofParentOptionalOneofMembers = OneofMemberMessage1 | OneofMemberMessage2
 
 \\"\\"\\"Required. disallow not_set.\\"\\"\\"

@@ -39,11 +39,10 @@ export function gqlTypeName(typ: ProtoMessage | ProtoOneof | ProtoEnum, opts?: {
   return name + suffix;
 }
 
-export function createDescriptionPropertyAssignment(proto: { comments: CommentSet }): ts.PropertyAssignment {
-  return ts.factory.createPropertyAssignment(
-    "description",
-    ts.factory.createStringLiteral(proto.comments.leadingComments.trim())
-  );
+export function createDescriptionPropertyAssignment(proto: { comments: CommentSet }): ts.PropertyAssignment | null {
+  const desc = proto.comments.leadingComments.trim();
+  if (!desc) return null;
+  return ts.factory.createPropertyAssignment("description", ts.factory.createStringLiteral(desc));
 }
 
 function getDeprecationReason(
