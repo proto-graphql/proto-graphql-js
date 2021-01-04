@@ -31,7 +31,10 @@ input ParentMessageInput {
 
 \\"\\"\\"\\"\\"\\"
 enum ParentMessageNestedEnum {
+  \\"\\"\\"\\"\\"\\"
   BAR
+
+  \\"\\"\\"\\"\\"\\"
   FOO
 }
 

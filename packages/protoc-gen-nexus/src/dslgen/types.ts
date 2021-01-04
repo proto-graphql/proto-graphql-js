@@ -1,5 +1,5 @@
 import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
-import { ProtoField, ProtoRegistry } from "../protoTypes";
+import { ProtoField, ProtoRegistry } from "../protogen";
 import { gqlTypeName, isRequiredField } from "./util";
 
 export type GenerationParams = {
@@ -35,7 +35,7 @@ export type GqlType =
     };
 
 export function detectGqlType(f: ProtoField, reg: ProtoRegistry, opts?: { input?: boolean }): GqlType {
-  if (f.isList()) {
+  if (f.list) {
     return {
       kind: "list",
       type: detectGqlItemType(f, reg, opts),
@@ -48,8 +48,80 @@ export function detectGqlType(f: ProtoField, reg: ProtoRegistry, opts?: { input?
 
 function detectGqlItemType(f: ProtoField, reg: ProtoRegistry, opts?: { input?: boolean }): GqlItemType {
   const nullable = !isRequiredField(f);
-  const pbtype = f.descriptor.getType()!;
 
+  if (f.type?.kind === "Enum") {
+    return {
+      kind: "enum",
+      type: gqlTypeName(f.type),
+      nullable,
+    };
+  } else if (f.type?.kind === "Message") {
+    switch (f.descriptor.getTypeName()) {
+      case ".google.protobuf.Any":
+        throw "not supported";
+      case ".google.protobuf.BoolValue":
+        return {
+          kind: "scalar",
+          type: "Boolean",
+          nullable,
+        };
+      case ".google.protobuf.BytesValue":
+        throw "not supported";
+      case ".google.protobuf.DoubleValue":
+      case ".google.protobuf.FloatValue":
+        return {
+          kind: "scalar",
+          type: "Float",
+          nullable,
+        };
+      case ".google.protobuf.Duration":
+        throw "not implemented";
+      case ".google.protobuf.Int32Value":
+        return {
+          kind: "scalar",
+          type: "Int",
+          nullable,
+        };
+      case ".google.protobuf.Int64Value":
+        return {
+          kind: "scalar",
+          type: "String",
+          nullable,
+        };
+      case ".google.protobuf.UInt32Value":
+        return {
+          kind: "scalar",
+          type: "Int",
+          nullable,
+        };
+      case ".google.protobuf.UInt64Value":
+        return {
+          kind: "scalar",
+          type: "String",
+          nullable,
+        };
+      case ".google.protobuf.StringValue":
+        return {
+          kind: "scalar",
+          type: "String",
+          nullable,
+        };
+      case ".google.protobuf.Timestamp":
+        return {
+          kind: "scalar",
+          type: "DateTime",
+          nullable,
+        };
+      default:
+        return {
+          kind: "object",
+          type: gqlTypeName(f.type, opts),
+          nullable,
+        };
+    }
+  }
+
+  const pbtype = f.descriptor.getType()!;
   switch (pbtype) {
     case FieldDescriptorProto.Type.TYPE_STRING:
       return { kind: "scalar", type: "String", nullable: false };
@@ -82,76 +154,13 @@ function detectGqlItemType(f: ProtoField, reg: ProtoRegistry, opts?: { input?: b
       throw "not supported";
     case FieldDescriptorProto.Type.TYPE_BYTES:
       throw "not supported";
+    /* istanbul ignore next */
     case FieldDescriptorProto.Type.TYPE_ENUM:
-      return {
-        kind: "enum",
-        type: gqlTypeName(reg.findByFieldDescriptor(f.descriptor)),
-        nullable,
-      };
+      throw "unreachable";
+    /* istanbul ignore next */
     case FieldDescriptorProto.Type.TYPE_MESSAGE:
-      switch (f.descriptor.getTypeName()) {
-        case ".google.protobuf.Any":
-          throw "not supported";
-        case ".google.protobuf.BoolValue":
-          return {
-            kind: "scalar",
-            type: "Boolean",
-            nullable,
-          };
-        case ".google.protobuf.BytesValue":
-          throw "not supported";
-        case ".google.protobuf.DoubleValue":
-        case ".google.protobuf.FloatValue":
-          return {
-            kind: "scalar",
-            type: "Float",
-            nullable,
-          };
-        case ".google.protobuf.Duration":
-          throw "not implemented";
-        case ".google.protobuf.Int32Value":
-          return {
-            kind: "scalar",
-            type: "Int",
-            nullable,
-          };
-        case ".google.protobuf.Int64Value":
-          return {
-            kind: "scalar",
-            type: "String",
-            nullable,
-          };
-        case ".google.protobuf.UInt32Value":
-          return {
-            kind: "scalar",
-            type: "Int",
-            nullable,
-          };
-        case ".google.protobuf.UInt64Value":
-          return {
-            kind: "scalar",
-            type: "String",
-            nullable,
-          };
-        case ".google.protobuf.StringValue":
-          return {
-            kind: "scalar",
-            type: "String",
-            nullable,
-          };
-        case ".google.protobuf.Timestamp":
-          return {
-            kind: "scalar",
-            type: "DateTime",
-            nullable,
-          };
-        default:
-          return {
-            kind: "object",
-            type: gqlTypeName(reg.findByFieldDescriptor(f.descriptor), opts),
-            nullable,
-          };
-      }
+      throw "unreachable";
+    /* istanbul ignore next */
     default:
       const _exhaustiveCheck: never = pbtype; // eslint-disable-line
       throw "unreachable";

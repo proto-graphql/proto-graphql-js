@@ -1,6 +1,6 @@
 import ts from "typescript";
 import { pascalCase, constantCase, camelCase } from "change-case";
-import { ProtoOneof } from "../../protoTypes";
+import { ProtoOneof } from "../../protogen";
 import { createProtoExpr, isRequiredField } from "../util";
 import { GenerationParams } from "../types";
 
@@ -27,7 +27,7 @@ export function craeteOneofUnionFieldResolverStmts(
                       "__protobufTypeName",
                       ts.factory.createAsExpression(
                         // TODO: throw error if the type is not ProtoMesssage
-                        ts.factory.createStringLiteral(f.type!.qualifiedName),
+                        ts.factory.createStringLiteral(f.type!.fullName.toString()),
                         ts.factory.createTypeReferenceNode(ts.factory.createIdentifier("const"))
                       )
                     ),
@@ -87,7 +87,7 @@ export function craeteOneofUnionFieldResolverStmts(
                   ts.factory.createReturnStatement(
                     ts.factory.createNonNullExpression(
                       ts.factory.createCallExpression(
-                        ts.factory.createPropertyAccessExpression(parentExpr, f.getterName),
+                        ts.factory.createPropertyAccessExpression(parentExpr, f.googleProtobufGetterName),
                         undefined,
                         undefined
                       )

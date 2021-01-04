@@ -10,7 +10,7 @@ import {
   createReExportProtoStmts,
   GenerationParams,
 } from "./dslgen";
-import { ProtoFile, ProtoRegistry } from "./protoTypes";
+import { ProtoFile, ProtoRegistry } from "./protogen";
 
 export function printSource(registry: ProtoRegistry, file: ProtoFile, opts: GenerationParams): string {
   const [msgs, enums] = registry.collectTypes(file);

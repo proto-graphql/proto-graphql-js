@@ -39,14 +39,23 @@ input MessageWithEnumsInput {
 enum MyEnum {
   \\"\\"\\"This is Bar.\\"\\"\\"
   MY_ENUM_BAR
+
+  \\"\\"\\"\\"\\"\\"
   MY_ENUM_BAZ
+
+  \\"\\"\\"\\"\\"\\"
   MY_ENUM_FOO
 }
 
 \\"\\"\\"\\"\\"\\"
 enum MyEnumWithoutUnspecified {
+  \\"\\"\\"\\"\\"\\"
   MY_ENUM_WITHOUT_UNSPECIFIED_BAR
+
+  \\"\\"\\"\\"\\"\\"
   MY_ENUM_WITHOUT_UNSPECIFIED_BAZ
+
+  \\"\\"\\"\\"\\"\\"
   MY_ENUM_WITHOUT_UNSPECIFIED_FOO
 }
 
@@ -95,14 +104,23 @@ input MessageWithEnumsInput {
 enum MyEnum {
   \\"\\"\\"This is Bar.\\"\\"\\"
   MY_ENUM_BAR
+
+  \\"\\"\\"\\"\\"\\"
   MY_ENUM_BAZ
+
+  \\"\\"\\"\\"\\"\\"
   MY_ENUM_FOO
 }
 
 \\"\\"\\"\\"\\"\\"
 enum MyEnumWithoutUnspecified {
+  \\"\\"\\"\\"\\"\\"
   MY_ENUM_WITHOUT_UNSPECIFIED_BAR
+
+  \\"\\"\\"\\"\\"\\"
   MY_ENUM_WITHOUT_UNSPECIFIED_BAZ
+
+  \\"\\"\\"\\"\\"\\"
   MY_ENUM_WITHOUT_UNSPECIFIED_FOO
 }
 

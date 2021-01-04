@@ -2,6 +2,7 @@ import path from "path";
 import ts from "typescript";
 import { constantCase, pascalCase } from "change-case";
 import {
+  CommentSet,
   ProtoEnum,
   ProtoEnumValue,
   ProtoField,
@@ -9,14 +10,14 @@ import {
   ProtoMessage,
   ProtoOneof,
   ProtoRegistry,
-} from "../protoTypes";
+} from "../protogen";
 import * as extensions from "../__generated__/extensions/graphql/schema_pb";
 import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
 import { GenerationParams } from "./types";
 import { ExtensionFieldInfo } from "google-protobuf";
 
 export function protoExportAlias(t: ProtoMessage | ProtoOneof, o: GenerationParams): string {
-  if (t instanceof ProtoOneof) {
+  if (t.kind === "Oneof") {
     return uniqueImportAlias(`${protoExportAlias(t.parent, o)}.${t.name}`);
   }
   const chunks = [protoImportPath(t, o)];
@@ -28,57 +29,61 @@ export function protoExportAlias(t: ProtoMessage | ProtoOneof, o: GenerationPara
 }
 
 export function protoImportPath(t: ProtoMessage | ProtoEnum, o: GenerationParams) {
-  const importPath = o.useProtobufjs ? path.dirname(t.file.name) : t.file.importPath;
+  const importPath = o.useProtobufjs ? path.dirname(t.file.name) : t.file.googleProtobufImportPath;
   return `${o.importPrefix ? `${o.importPrefix}/` : "./"}${importPath}`;
 }
 
 export function gqlTypeName(typ: ProtoMessage | ProtoOneof | ProtoEnum, opts?: { input?: boolean }): string {
   const name = nameWithParent(typ);
-  const suffix = typ instanceof ProtoMessage && opts?.input ? "Input" : "";
+  const suffix = typ.kind === "Message" && opts?.input ? "Input" : "";
   return name + suffix;
 }
 
+export function createDescriptionPropertyAssignment(proto: { comments: CommentSet }): ts.PropertyAssignment {
+  return ts.factory.createPropertyAssignment(
+    "description",
+    ts.factory.createStringLiteral(proto.comments.leadingComments.trim())
+  );
+}
+
+function getDeprecationReason(
+  proto: ProtoFile | ProtoMessage | ProtoOneof | ProtoField | ProtoEnum | ProtoEnumValue
+): ProtoFile | ProtoMessage | ProtoOneof | ProtoField | ProtoEnum | ProtoEnumValue | null {
+  if (proto.deprecated) return proto;
+  if (proto.kind === "Field" && proto.type !== null) {
+    const r = getDeprecationReason(proto.type);
+    if (r !== null) return r;
+  }
+  if ("parent" in proto) return getDeprecationReason(proto.parent);
+  return null;
+}
+
 export function createDeprecationPropertyAssignment(
-  t: ProtoField | ProtoEnumValue | ProtoOneof
+  proto: ProtoField | ProtoEnumValue | ProtoOneof
 ): ts.PropertyAssignment | null {
-  const reason = t.deprecationReason;
+  const reason = getDeprecationReason(proto);
   if (!reason) return null;
 
-  if (reason instanceof ProtoFile) {
+  if (reason.kind === "File") {
     return ts.factory.createPropertyAssignment(
       "deprecation",
       ts.factory.createStringLiteral(`${reason.name} is mark as deprecated.`)
     );
   }
 
-  let reasonName: string;
-
-  if ("qualifiedName" in reason) {
-    reasonName = reason.qualifiedName;
-  } else if (reason instanceof ProtoField) {
-    reasonName = `${reason.parent.qualifiedName}.${reason.name}`;
-  } else if (reason instanceof ProtoOneof) {
-    reasonName = `${reason.parent.qualifiedName}.${reason.name}`;
-  } else if (reason instanceof ProtoEnumValue) {
-    reasonName = `${reason.parent.qualifiedName}.${reason.name}`;
-  } else {
-    const _exhaustiveCheck: never = reason;
-    throw "unreachable";
-  }
-
-  const msg = `${reasonName} is mark as deprecated in a *.proto file.`;
+  const msg = `${reason.fullName.toString()} is mark as deprecated in a *.proto file.`;
 
   return ts.factory.createPropertyAssignment("deprecation", ts.factory.createStringLiteral(msg));
 }
 
 export function isIgnoredType(type: ProtoMessage | ProtoEnum): boolean {
   let ext: ExtensionFieldInfo<{ getIgnore(): boolean }>;
-  if (type.parent instanceof ProtoMessage && isIgnoredType(type.parent)) {
+  if (type.parent.kind === "Message" && isIgnoredType(type.parent)) {
     return true;
   }
-  if (type instanceof ProtoMessage) {
+  if (type.kind === "Message") {
     ext = extensions.objectType;
-  } else if (type instanceof ProtoEnum) {
+  } else if (type.kind === "Enum") {
     ext = extensions.enumType;
   } else {
     const _exhaustiveCheck: never = type;
@@ -93,7 +98,7 @@ export function isSquashedUnion(m: ProtoMessage): boolean {
 
 export function isRequiredField(field: ProtoField | ProtoOneof): boolean {
   if (
-    field instanceof ProtoField &&
+    field.kind === "Field" &&
     (field.descriptor.getLabel() === FieldDescriptorProto.Label.LABEL_REQUIRED ||
       (field.descriptor.getType() !== FieldDescriptorProto.Type.TYPE_MESSAGE &&
         field.descriptor.getType() !== FieldDescriptorProto.Type.TYPE_ENUM))
@@ -115,18 +120,18 @@ export function isInputOnlyField(field: ProtoField | ProtoOneof): boolean {
 
 export function isIgnoredField(field: ProtoField | ProtoEnumValue | ProtoOneof): boolean {
   let ext: ExtensionFieldInfo<{ getIgnore(): boolean }>;
-  if (field instanceof ProtoField) {
-    if ((field.type instanceof ProtoMessage || field.type instanceof ProtoEnum) && isIgnoredType(field.type)) {
+  if (field.kind === "Field") {
+    if (field.type && (field.type.kind === "Message" || field.type.kind === "Enum") && isIgnoredType(field.type)) {
       return true;
     }
-    const oneof = field.containingOneof();
+    const oneof = field.containingOneof;
     if (oneof && isIgnoredField(oneof)) {
       return true;
     }
     ext = extensions.field;
-  } else if (field instanceof ProtoEnumValue) {
+  } else if (field.kind === "EnumValue") {
     ext = extensions.enumValue;
-  } else if (field instanceof ProtoOneof) {
+  } else if (field.kind === "Oneof") {
     ext = extensions.oneof;
   } else {
     const _exhaustiveCheck: never = field;
@@ -138,17 +143,14 @@ export function isIgnoredField(field: ProtoField | ProtoEnumValue | ProtoOneof):
 export function exceptRequestOrResponse(reg: ProtoRegistry): (m: ProtoMessage) => boolean {
   const reqSet = new Set();
   const respSet = new Set();
-  const last = (arr: string[]): string => arr[arr.length - 1];
-  for (const f of Object.values(reg.files)) {
+  for (const f of Object.values(reg.fileByName)) {
     for (const s of f.services) {
       for (const m of s.methods) {
-        const inputName = last(m.descriptor.getInputType()!.split("."));
-        const outputName = last(m.descriptor.getOutputType()!.split("."));
-        if (inputName === `${m.descriptor.getName()!}Request`) {
-          reqSet.add(m.descriptor.getInputType()!.replace(/^\./, ""));
+        if (m.input.name === `${m.name}Request`) {
+          reqSet.add(m.input.fullName.toString());
         }
-        if (outputName === `${m.descriptor.getName()!}Response`) {
-          respSet.add(m.descriptor.getOutputType()!.replace(/^\./, ""));
+        if (m.output.name === `${m.name}Response`) {
+          respSet.add(m.output.fullName.toString());
         }
       }
     }
@@ -157,8 +159,8 @@ export function exceptRequestOrResponse(reg: ProtoRegistry): (m: ProtoMessage) =
   return (m) => {
     const ext = m.file.descriptor.getOptions()?.getExtension(extensions.schema);
 
-    if (ext?.getIgnoreRequests() && reqSet.has(m.qualifiedName)) return false;
-    if (ext?.getIgnoreResponses() && respSet.has(m.qualifiedName)) return false;
+    if (ext?.getIgnoreRequests() && reqSet.has(m.fullName.toString())) return false;
+    if (ext?.getIgnoreResponses() && respSet.has(m.fullName.toString())) return false;
 
     return true;
   };
@@ -167,7 +169,7 @@ export function exceptRequestOrResponse(reg: ProtoRegistry): (m: ProtoMessage) =
 const behaviorComments = ["Required", "Input only", "Output only"] as const;
 
 function extractBehaviorComments(field: ProtoField | ProtoOneof): typeof behaviorComments[number][] {
-  return (field.comments.leadingComments ?? "")
+  return (field.comments.leadingComments.trim() ?? "")
     .split(/\.\s+/, 3)
     .slice(0, 2)
     .map((c) => c.replace(/\.\s*$/, ""))
@@ -232,7 +234,7 @@ export function createProtoQualifiedName(t: ProtoMessage, o: GenerationParams): 
  */
 function createProtoFullName(t: ProtoMessage | ProtoEnum, o: GenerationParams, isLeft = false): Selector {
   let left: Selector[0];
-  if (t.parent instanceof ProtoFile) {
+  if (t.parent.kind === "File") {
     if (o.useProtobufjs) {
       const pkgs = t.parent.package.split(".");
       left = pkgs.reduce<typeof left>((n, pkg) => [n, pkg], uniqueImportAlias(protoImportPath(t, o)));
@@ -243,7 +245,7 @@ function createProtoFullName(t: ProtoMessage | ProtoEnum, o: GenerationParams, i
     left = createProtoFullName(t.parent, o, true);
   }
   let name = t.name;
-  if (!isLeft && t instanceof ProtoMessage && o.useProtobufjs) {
+  if (!isLeft && t.kind === "Message" && o.useProtobufjs) {
     name = `I${name}`;
   }
   return [left, name];
@@ -284,8 +286,8 @@ function nameWithParent(typ: ProtoMessage | ProtoOneof | ProtoEnum): string {
   let name = "";
   let t: ProtoMessage | ProtoOneof | ProtoEnum | ProtoFile = typ;
   for (;;) {
-    if (t instanceof ProtoFile) break;
-    name = `${t instanceof ProtoOneof ? pascalCase(t.name) : t.name}${name}`;
+    if (t.kind === "File") break;
+    name = `${t.kind === "Oneof" ? pascalCase(t.name) : t.name}${name}`;
     t = t.parent;
   }
   const prefix = t.descriptor.getOptions()?.getExtension(extensions.schema)?.getTypePrefix();

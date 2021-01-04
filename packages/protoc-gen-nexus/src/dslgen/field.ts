@@ -1,7 +1,7 @@
 import ts from "typescript";
-import { ProtoField, ProtoRegistry } from "../protoTypes";
+import { ProtoField, ProtoRegistry } from "../protogen";
 import { detectGqlType, GenerationParams, GqlType } from "./types";
-import { createDeprecationPropertyAssignment, onlyNonNull } from "./util";
+import { createDeprecationPropertyAssignment, createDescriptionPropertyAssignment, onlyNonNull } from "./util";
 import { createFieldResolverDecl } from "./fieldResolvers";
 import * as extensions from "../__generated__/extensions/graphql/schema_pb";
 
@@ -19,7 +19,7 @@ export function createFieldDefinitionStmt(
   opts: GenerationParams & { input?: boolean }
 ): ts.Statement {
   const type = detectGqlType(field, registry, opts);
-  const name = field.descriptor.getOptions()?.getExtension(extensions.field)?.getName() || field.name;
+  const name = field.descriptor.getOptions()?.getExtension(extensions.field)?.getName() || field.jsonName;
   return ts.factory.createExpressionStatement(
     ts.factory.createCallExpression(
       ts.factory.createPropertyAccessExpression(ts.factory.createIdentifier("t"), ts.factory.createIdentifier("field")),
@@ -68,7 +68,7 @@ function createFieldOptionExpr(
   return ts.factory.createObjectLiteralExpression(
     [
       ts.factory.createPropertyAssignment("type", createTypeSpecifier(type)),
-      ts.factory.createPropertyAssignment("description", ts.factory.createStringLiteral(field.description)),
+      createDescriptionPropertyAssignment(field),
       createDeprecationPropertyAssignment(field),
       opts?.input
         ? null

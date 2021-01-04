@@ -1,6 +1,12 @@
 import ts from "typescript";
-import { ProtoOneof } from "../protoTypes";
-import { createDeprecationPropertyAssignment, gqlTypeName, isRequiredField, onlyNonNull } from "./util";
+import { ProtoOneof } from "../protogen";
+import {
+  createDeprecationPropertyAssignment,
+  createDescriptionPropertyAssignment,
+  gqlTypeName,
+  isRequiredField,
+  onlyNonNull,
+} from "./util";
 import { GenerationParams } from "./types";
 import { createOneofFieldResolverDecl } from "./fieldResolvers";
 
@@ -44,7 +50,7 @@ function createOneofFieldOptionExpr(oneof: ProtoOneof, opts: GenerationParams): 
           ts.factory.createStringLiteral(gqlTypeName(oneof)),
         ])
       ),
-      ts.factory.createPropertyAssignment("description", ts.factory.createStringLiteral(oneof.description)),
+      createDescriptionPropertyAssignment(oneof),
       createDeprecationPropertyAssignment(oneof),
       createOneofFieldResolverDecl(oneof, opts),
     ].filter(onlyNonNull()),

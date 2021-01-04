@@ -11,7 +11,10 @@ type Query {
 
 \\"\\"\\"\\"\\"\\"
 enum TestPrefixPrefixedEnum {
+  \\"\\"\\"\\"\\"\\"
   PREFIXED_BAR
+
+  \\"\\"\\"\\"\\"\\"
   PREFIXED_FOO
 }
 
@@ -109,7 +112,10 @@ type Query {
 
 \\"\\"\\"\\"\\"\\"
 enum TestPrefixPrefixedEnum {
+  \\"\\"\\"\\"\\"\\"
   PREFIXED_BAR
+
+  \\"\\"\\"\\"\\"\\"
   PREFIXED_FOO
 }
 

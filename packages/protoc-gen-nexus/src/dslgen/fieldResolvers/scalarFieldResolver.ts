@@ -1,6 +1,6 @@
 import ts from "typescript";
 import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
-import { ProtoField } from "../../protoTypes";
+import { ProtoField } from "../../protogen";
 import { GenerationParams } from "../types";
 import { getUnwrapFunc } from "../unwrap";
 

@@ -1,6 +1,7 @@
 import ts from "typescript";
-import { ProtoMessage, ProtoRegistry } from "../protoTypes";
+import { ProtoMessage, ProtoRegistry } from "../protogen";
 import {
+  createDescriptionPropertyAssignment,
   createDslExportConstStmt,
   exceptRequestOrResponse,
   gqlTypeName,
@@ -52,7 +53,7 @@ function createObjectTypeDslStmt(msg: ProtoMessage, reg: ProtoRegistry, opts: Ge
       ts.factory.createObjectLiteralExpression(
         [
           ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(typeName)),
-          ts.factory.createPropertyAssignment("description", ts.factory.createStringLiteral(msg.description)),
+          createDescriptionPropertyAssignment(msg),
           createObjectTypeDefinitionMethodDecl(msg, reg, opts),
           ts.factory.createPropertyAssignment("sourceType", sourceTypeExpr(msg, opts)),
         ],
@@ -87,7 +88,7 @@ function createObjectTypeDefinitionMethodDecl(
     ts.factory.createBlock(
       [
         ...msg.fields
-          .filter((f) => !f.isOneofMember())
+          .filter((f) => f.containingOneof == null)
           .filter((f) => !isInputOnlyField(f))
           .filter((f) => !isIgnoredField(f))
           .map((f) => createFieldDefinitionStmt(f, reg, opts)),
