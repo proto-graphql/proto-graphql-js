@@ -9,6 +9,7 @@ import {
 } from "./util";
 import { GenerationParams } from "./types";
 import { createOneofFieldResolverDecl } from "./fieldResolvers";
+import { camelCase } from "change-case";
 
 /**
  * @example
@@ -23,7 +24,7 @@ export function createOneofFieldDefinitionStmt(oneof: ProtoOneof, opts: Generati
     ts.factory.createCallExpression(
       ts.factory.createPropertyAccessExpression(ts.factory.createIdentifier("t"), ts.factory.createIdentifier("field")),
       undefined,
-      [ts.factory.createStringLiteral(oneof.name), createOneofFieldOptionExpr(oneof, opts)]
+      [ts.factory.createStringLiteral(camelCase(oneof.name)), createOneofFieldOptionExpr(oneof, opts)]
     )
   );
 }

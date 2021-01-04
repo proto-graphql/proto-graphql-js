@@ -94,7 +94,7 @@ export const NotDeprecatedMessage = objectType({
                 return value;
             }
         });
-        t.field(\\"not_deprecated_oneof\\", {
+        t.field(\\"notDeprecatedOneof\\", {
             type: nullable(\\"NotDeprecatedMessageNotDeprecatedOneof\\"),
             resolve(root) {
                 switch (root.getNotDeprecatedOneofCase()) {
@@ -113,7 +113,7 @@ export const NotDeprecatedMessage = objectType({
                 }
             }
         });
-        t.field(\\"deprecated_oneof\\", {
+        t.field(\\"deprecatedOneof\\", {
             type: nullable(\\"NotDeprecatedMessageDeprecatedOneof\\"),
             deprecation: \\"testapis.deprecation.NotDeprecatedMessage.deprecated_oneof is mark as deprecated in a *.proto file.\\",
             resolve(root) {
@@ -476,7 +476,7 @@ export const NotDeprecatedMessage = objectType({
                 return value;
             }
         });
-        t.field(\\"not_deprecated_oneof\\", {
+        t.field(\\"notDeprecatedOneof\\", {
             type: nullable(\\"NotDeprecatedMessageNotDeprecatedOneof\\"),
             resolve(root) {
                 if (root.msg1) {
@@ -488,7 +488,7 @@ export const NotDeprecatedMessage = objectType({
                 return null;
             }
         });
-        t.field(\\"deprecated_oneof\\", {
+        t.field(\\"deprecatedOneof\\", {
             type: nullable(\\"NotDeprecatedMessageDeprecatedOneof\\"),
             deprecation: \\"testapis.deprecation.NotDeprecatedMessage.deprecated_oneof is mark as deprecated in a *.proto file.\\",
             resolve(root) {
@@ -2017,7 +2017,7 @@ export const OneofParent = objectType({
                 return value;
             }
         });
-        t.field(\\"required_oneof_members\\", {
+        t.field(\\"requiredOneofMembers\\", {
             type: nonNull(\\"OneofParentRequiredOneofMembers\\"),
             description: \\"Required. disallow not_set.\\",
             resolve(root) {
@@ -2037,7 +2037,7 @@ export const OneofParent = objectType({
                 }
             }
         });
-        t.field(\\"optional_oneof_members\\", {
+        t.field(\\"optionalOneofMembers\\", {
             type: nullable(\\"OneofParentOptionalOneofMembers\\"),
             resolve(root) {
                 switch (root.getOptionalOneofMembersCase()) {
@@ -2189,7 +2189,7 @@ export const OneofParent = objectType({
                 return value;
             }
         });
-        t.field(\\"required_oneof_members\\", {
+        t.field(\\"requiredOneofMembers\\", {
             type: nonNull(\\"OneofParentRequiredOneofMembers\\"),
             description: \\"Required. disallow not_set.\\",
             resolve(root) {
@@ -2202,7 +2202,7 @@ export const OneofParent = objectType({
                 throw \\"unreachable\\";
             }
         });
-        t.field(\\"optional_oneof_members\\", {
+        t.field(\\"optionalOneofMembers\\", {
             type: nullable(\\"OneofParentOptionalOneofMembers\\"),
             resolve(root) {
                 if (root.optoinalMessage1) {

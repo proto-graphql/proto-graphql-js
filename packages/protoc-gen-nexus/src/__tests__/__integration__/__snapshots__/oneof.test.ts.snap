@@ -23,10 +23,10 @@ input OneofMemberMessage2Input {
 
 type OneofParent {
   normalField: String!
-  optional_oneof_members: OneofParentOptionalOneofMembers
+  optionalOneofMembers: OneofParentOptionalOneofMembers
 
   \\"\\"\\"Required. disallow not_set.\\"\\"\\"
-  required_oneof_members: OneofParentRequiredOneofMembers!
+  requiredOneofMembers: OneofParentRequiredOneofMembers!
 }
 
 input OneofParentInput {

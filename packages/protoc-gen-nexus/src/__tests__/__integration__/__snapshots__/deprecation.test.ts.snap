@@ -58,9 +58,9 @@ enum NotDeprecatedEnum {
 
 type NotDeprecatedMessage {
   body: String! @deprecated(reason: \\"testapis.deprecation.NotDeprecatedMessage.body is mark as deprecated in a *.proto file.\\")
-  deprecated_oneof: NotDeprecatedMessageDeprecatedOneof @deprecated(reason: \\"testapis.deprecation.NotDeprecatedMessage.deprecated_oneof is mark as deprecated in a *.proto file.\\")
+  deprecatedOneof: NotDeprecatedMessageDeprecatedOneof @deprecated(reason: \\"testapis.deprecation.NotDeprecatedMessage.deprecated_oneof is mark as deprecated in a *.proto file.\\")
   enum: DeprecatedEnum @deprecated(reason: \\"testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.\\")
-  not_deprecated_oneof: NotDeprecatedMessageNotDeprecatedOneof
+  notDeprecatedOneof: NotDeprecatedMessageNotDeprecatedOneof
 }
 
 union NotDeprecatedMessageDeprecatedOneof = NotDeprecatedMessageInnerMessage1 | NotDeprecatedMessageInnerMessage2
