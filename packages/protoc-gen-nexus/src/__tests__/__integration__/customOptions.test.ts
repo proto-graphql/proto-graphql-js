@@ -14,7 +14,7 @@ testSchemaGeneration("extensions", "protobufjs", {
           resolve() {
             return new pbjs.testapis.extensions.PrefixedMessage({
               squashedMessage: new pbjs.testapis.extensions.PrefixedMessage.SquashedMessage({
-                oneofIgnoredField_2: new pbjs.testapis.extensions.PrefixedMessage.InnerMessage2({
+                oneofField_2: new pbjs.testapis.extensions.PrefixedMessage.InnerMessage2({
                   body: "field 2",
                 }),
               }),
@@ -64,7 +64,7 @@ testSchemaGeneration("extensions", "native protobuf", {
             const inner2 = new pbnative.PrefixedMessage.InnerMessage2();
             inner2.setBody("field 2");
             const squashed = new pbnative.PrefixedMessage.SquashedMessage();
-            squashed.setOneofIgnoredField2(inner2);
+            squashed.setOneofField2(inner2);
             const msg = new pbnative.PrefixedMessage();
             msg.setSquashedMessage(squashed);
             return msg;

@@ -40,8 +40,8 @@ message PrefixedMessage {
     option (graphql.object_type).squash_union = true;
 
     oneof squashed_message {
-      InnerMessage oneof_ignored_field = 1;
-      InnerMessage2 oneof_ignored_field_2 = 2;
+      InnerMessage oneof_field = 1;
+      InnerMessage2 oneof_field_2 = 2;
     }
   }
 
@@ -54,14 +54,19 @@ message PrefixedMessage {
   oneof ignored_oneof {
     option (graphql.oneof).ignore = true;
 
-    PrefixedEnum oneof_prefixed_enum = 5;
-    InnerMessage oneof_ignored_field = 6;
+    PrefixedEnum ignored_oneof_prefixed_enum = 5;
+    InnerMessage ignored_oneof_field = 6;
   }
 
   IgnoredMessage ignored_message = 7;
   IgnoredEnum ignored_enum = 8;
   SquashedMessage squashed_message = 9;
   string this_field_will_be_renamed = 10 [(graphql.field).name = "thisFieldWasRenamed"];
+
+  oneof partial_ignore_oneof {
+    InnerMessage oneof_not_ignored_field = 11;
+    InnerMessage2 oneof_ignored_field = 12 [(graphql.field).ignore =  true];
+  }
 }
 
 enum PrefixedEnum {

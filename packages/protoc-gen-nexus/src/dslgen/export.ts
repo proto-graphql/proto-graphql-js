@@ -1,7 +1,7 @@
 import ts from "typescript";
 import { ProtoMessage, ProtoOneof } from "../protogen";
 import { GenerationParams } from "./types";
-import { createProtoQualifiedName, isIgnoredField, onlyNonNull, protoExportAlias } from "./util";
+import { createProtoQualifiedName, isIgnoredField, isInputOnlyField, onlyNonNull, protoExportAlias } from "./util";
 
 /**
  * @example
@@ -17,6 +17,7 @@ export function createReExportProtoStmts(types: ReadonlyArray<ProtoMessage>, opt
       ...types
         .flatMap((m) => m.oneofs)
         .filter((o) => !isIgnoredField(o))
+        .filter((o) => !isInputOnlyField(o))
         .map((o) => createReExportOneofUnionSourceStmt(o, opts))
     );
   }

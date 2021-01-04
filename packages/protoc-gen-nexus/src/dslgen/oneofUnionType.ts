@@ -7,6 +7,7 @@ import {
   createProtoExpr,
   gqlTypeName,
   isIgnoredField,
+  isInputOnlyField,
   isSquashedUnion,
   onlyNonNull,
   protoExportAlias,
@@ -100,6 +101,8 @@ function createOneofUnionTypeDefinitionMethodDecl(oneof: ProtoOneof, reg: ProtoR
             ),
             undefined,
             oneof.fields
+              .filter((f) => !isIgnoredField(f))
+              .filter((f) => !isInputOnlyField(f))
               .map((f) => detectGqlType(f, reg))
               .map((t) => (t.kind === "object" ? t.type : null))
               .filter(onlyNonNull())
@@ -137,6 +140,8 @@ function createOneofUnionTypeResolveTypeMethodDecl(
     ts.factory.createBlock(
       [
         ...oneof.fields
+          .filter((f) => !isIgnoredField(f))
+          .filter((f) => !isInputOnlyField(f))
           .map((f) => f.type)
           // TODO: throw error when `t` is unallowed type
           .filter((t): t is ProtoMessage => t != null && t.kind === "Message")

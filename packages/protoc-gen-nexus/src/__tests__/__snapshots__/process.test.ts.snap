@@ -1359,6 +1359,18 @@ export type _$testapis$extensions$extensions_pb$TestPrefixIgnoredMessage = _$tes
 export type _$testapis$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage = _$testapis$extensions$extensions_pb.PrefixedMessage.InnerMessage;
 export type _$testapis$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage2 = _$testapis$extensions$extensions_pb.PrefixedMessage.InnerMessage2;
 export type _$testapis$extensions$extensions_pb$TestPrefixPrefixedMessageSquashedMessage = _$testapis$extensions$extensions_pb.PrefixedMessage.SquashedMessage;
+export const TestPrefixPrefixedMessagePartialIgnoreOneof = unionType({
+    name: \\"TestPrefixPrefixedMessagePartialIgnoreOneof\\",
+    definition(t) {
+        t.members(\\"TestPrefixPrefixedMessageInnerMessage\\");
+    },
+    resolveType(item) {
+        if (item instanceof _$testapis$extensions$extensions_pb.PrefixedMessage.InnerMessage) {
+            return \\"TestPrefixPrefixedMessageInnerMessage\\";
+        }
+        throw \\"unreachable\\";
+    }
+});
 export const TestPrefixPrefixedMessageSquashedMessage = unionType({
     name: \\"TestPrefixPrefixedMessageSquashedMessage\\",
     definition(t) {
@@ -1419,11 +1431,11 @@ export const TestPrefixPrefixedMessage = objectType({
                     case _$testapis$extensions$extensions_pb.PrefixedMessage.SquashedMessage.SquashedMessageCase.SQUASHED_MESSAGE_NOT_SET: {
                         return null;
                     }
-                    case _$testapis$extensions$extensions_pb.PrefixedMessage.SquashedMessage.SquashedMessageCase.ONEOF_IGNORED_FIELD: {
-                        return value.getOneofIgnoredField()!;
+                    case _$testapis$extensions$extensions_pb.PrefixedMessage.SquashedMessage.SquashedMessageCase.ONEOF_FIELD: {
+                        return value.getOneofField()!;
                     }
-                    case _$testapis$extensions$extensions_pb.PrefixedMessage.SquashedMessage.SquashedMessageCase.ONEOF_IGNORED_FIELD_2: {
-                        return value.getOneofIgnoredField2()!;
+                    case _$testapis$extensions$extensions_pb.PrefixedMessage.SquashedMessage.SquashedMessageCase.ONEOF_FIELD_2: {
+                        return value.getOneofField2()!;
                     }
                     default: {
                         throw \\"unreachable\\";
@@ -1436,6 +1448,22 @@ export const TestPrefixPrefixedMessage = objectType({
             resolve(root) {
                 const value = root.getThisFieldWillBeRenamed();
                 return value;
+            }
+        });
+        t.field(\\"partialIgnoreOneof\\", {
+            type: nullable(\\"TestPrefixPrefixedMessagePartialIgnoreOneof\\"),
+            resolve(root) {
+                switch (root.getPartialIgnoreOneofCase()) {
+                    case _$testapis$extensions$extensions_pb.PrefixedMessage.PartialIgnoreOneofCase.PARTIAL_IGNORE_ONEOF_NOT_SET: {
+                        return null;
+                    }
+                    case _$testapis$extensions$extensions_pb.PrefixedMessage.PartialIgnoreOneofCase.ONEOF_NOT_IGNORED_FIELD: {
+                        return root.getOneofNotIgnoredField()!;
+                    }
+                    default: {
+                        throw \\"unreachable\\";
+                    }
+                }
             }
         });
     },
@@ -1482,6 +1510,9 @@ export const TestPrefixPrefixedMessageInput = inputObjectType({
         t.field(\\"thisFieldWasRenamed\\", {
             type: nonNull(\\"String\\")
         });
+        t.field(\\"oneofNotIgnoredField\\", {
+            type: nullable(\\"TestPrefixPrefixedMessageInnerMessageInput\\")
+        });
     }
 });
 export const TestPrefixPrefixedMessageInnerMessageInput = inputObjectType({
@@ -1503,10 +1534,10 @@ export const TestPrefixPrefixedMessageInnerMessage2Input = inputObjectType({
 export const TestPrefixPrefixedMessageSquashedMessageInput = inputObjectType({
     name: \\"TestPrefixPrefixedMessageSquashedMessageInput\\",
     definition(t) {
-        t.field(\\"oneofIgnoredField\\", {
+        t.field(\\"oneofField\\", {
             type: nullable(\\"TestPrefixPrefixedMessageInnerMessageInput\\")
         });
-        t.field(\\"oneofIgnoredField2\\", {
+        t.field(\\"oneofField2\\", {
             type: nullable(\\"TestPrefixPrefixedMessageInnerMessage2Input\\")
         });
     }
@@ -1541,10 +1572,28 @@ export type _$testapis$extensions$testapis$extensions$TestPrefixIgnoredMessage =
 export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageInnerMessage = _$testapis$extensions.testapis.extensions.PrefixedMessage.IInnerMessage;
 export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageInnerMessage2 = _$testapis$extensions.testapis.extensions.PrefixedMessage.IInnerMessage2;
 export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageSquashedMessage = _$testapis$extensions.testapis.extensions.PrefixedMessage.ISquashedMessage;
+export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessage_partial_ignore_oneof = (_$testapis$extensions.testapis.extensions.PrefixedMessage.IInnerMessage & {
+    __protobufTypeName: \\"testapis.extensions.PrefixedMessage.InnerMessage\\";
+}) | (_$testapis$extensions.testapis.extensions.PrefixedMessage.IInnerMessage2 & {
+    __protobufTypeName: \\"testapis.extensions.PrefixedMessage.InnerMessage2\\";
+});
 export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageSquashedMessage_squashed_message = (_$testapis$extensions.testapis.extensions.PrefixedMessage.IInnerMessage & {
     __protobufTypeName: \\"testapis.extensions.PrefixedMessage.InnerMessage\\";
 }) | (_$testapis$extensions.testapis.extensions.PrefixedMessage.IInnerMessage2 & {
     __protobufTypeName: \\"testapis.extensions.PrefixedMessage.InnerMessage2\\";
+});
+export const TestPrefixPrefixedMessagePartialIgnoreOneof = unionType({
+    name: \\"TestPrefixPrefixedMessagePartialIgnoreOneof\\",
+    definition(t) {
+        t.members(\\"TestPrefixPrefixedMessageInnerMessage\\");
+    },
+    resolveType(item) {
+        if (item.__protobufTypeName === \\"testapis.extensions.PrefixedMessage.InnerMessage\\") {
+            return \\"TestPrefixPrefixedMessageInnerMessage\\";
+        }
+        throw \\"unreachable\\";
+    },
+    sourceType: { module: __filename, export: \\"_$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessage_partial_ignore_oneof\\" }
 });
 export const TestPrefixPrefixedMessageSquashedMessage = unionType({
     name: \\"TestPrefixPrefixedMessageSquashedMessage\\",
@@ -1609,11 +1658,11 @@ export const TestPrefixPrefixedMessage = objectType({
                 if (value == null) {
                     return null;
                 }
-                if (value.oneofIgnoredField) {
-                    return Object.assign(value.oneofIgnoredField, { __protobufTypeName: (\\"testapis.extensions.PrefixedMessage.InnerMessage\\" as const) });
+                if (value.oneofField) {
+                    return Object.assign(value.oneofField, { __protobufTypeName: (\\"testapis.extensions.PrefixedMessage.InnerMessage\\" as const) });
                 }
-                if (value.oneofIgnoredField_2) {
-                    return Object.assign(value.oneofIgnoredField_2, { __protobufTypeName: (\\"testapis.extensions.PrefixedMessage.InnerMessage2\\" as const) });
+                if (value.oneofField_2) {
+                    return Object.assign(value.oneofField_2, { __protobufTypeName: (\\"testapis.extensions.PrefixedMessage.InnerMessage2\\" as const) });
                 }
                 return null;
             }
@@ -1626,6 +1675,15 @@ export const TestPrefixPrefixedMessage = objectType({
                     throw new Error(\\"Cannot return null for non-nullable field\\");
                 }
                 return value;
+            }
+        });
+        t.field(\\"partialIgnoreOneof\\", {
+            type: nullable(\\"TestPrefixPrefixedMessagePartialIgnoreOneof\\"),
+            resolve(root) {
+                if (root.oneofNotIgnoredField) {
+                    return Object.assign(root.oneofNotIgnoredField, { __protobufTypeName: (\\"testapis.extensions.PrefixedMessage.InnerMessage\\" as const) });
+                }
+                return null;
             }
         });
     },
@@ -1678,6 +1736,9 @@ export const TestPrefixPrefixedMessageInput = inputObjectType({
         t.field(\\"thisFieldWasRenamed\\", {
             type: nonNull(\\"String\\")
         });
+        t.field(\\"oneofNotIgnoredField\\", {
+            type: nullable(\\"TestPrefixPrefixedMessageInnerMessageInput\\")
+        });
     }
 });
 export const TestPrefixPrefixedMessageInnerMessageInput = inputObjectType({
@@ -1699,10 +1760,10 @@ export const TestPrefixPrefixedMessageInnerMessage2Input = inputObjectType({
 export const TestPrefixPrefixedMessageSquashedMessageInput = inputObjectType({
     name: \\"TestPrefixPrefixedMessageSquashedMessageInput\\",
     definition(t) {
-        t.field(\\"oneofIgnoredField\\", {
+        t.field(\\"oneofField\\", {
             type: nullable(\\"TestPrefixPrefixedMessageInnerMessageInput\\")
         });
-        t.field(\\"oneofIgnoredField2\\", {
+        t.field(\\"oneofField2\\", {
             type: nullable(\\"TestPrefixPrefixedMessageInnerMessage2Input\\")
         });
     }

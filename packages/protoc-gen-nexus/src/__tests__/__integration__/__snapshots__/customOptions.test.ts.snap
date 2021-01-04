@@ -19,6 +19,7 @@ type TestPrefixPrefixedMessage {
 
   \\"\\"\\"Output only.\\"\\"\\"
   id: String!
+  partialIgnoreOneof: TestPrefixPrefixedMessagePartialIgnoreOneof
   prefixedEnum: TestPrefixPrefixedEnum
   squashedMessage: TestPrefixPrefixedMessageSquashedMessage
   thisFieldWasRenamed: String!
@@ -42,16 +43,19 @@ input TestPrefixPrefixedMessageInnerMessageInput {
 
 input TestPrefixPrefixedMessageInput {
   body: String!
+  oneofNotIgnoredField: TestPrefixPrefixedMessageInnerMessageInput
   prefixedEnum: TestPrefixPrefixedEnum
   squashedMessage: TestPrefixPrefixedMessageSquashedMessageInput
   thisFieldWasRenamed: String!
 }
 
+union TestPrefixPrefixedMessagePartialIgnoreOneof = TestPrefixPrefixedMessageInnerMessage
+
 union TestPrefixPrefixedMessageSquashedMessage = TestPrefixPrefixedMessageInnerMessage | TestPrefixPrefixedMessageInnerMessage2
 
 input TestPrefixPrefixedMessageSquashedMessageInput {
-  oneofIgnoredField: TestPrefixPrefixedMessageInnerMessageInput
-  oneofIgnoredField2: TestPrefixPrefixedMessageInnerMessage2Input
+  oneofField: TestPrefixPrefixedMessageInnerMessageInput
+  oneofField2: TestPrefixPrefixedMessageInnerMessage2Input
 }
 "
 `;
@@ -87,6 +91,7 @@ type TestPrefixPrefixedMessage {
 
   \\"\\"\\"Output only.\\"\\"\\"
   id: String!
+  partialIgnoreOneof: TestPrefixPrefixedMessagePartialIgnoreOneof
   prefixedEnum: TestPrefixPrefixedEnum
   squashedMessage: TestPrefixPrefixedMessageSquashedMessage
   thisFieldWasRenamed: String!
@@ -110,16 +115,19 @@ input TestPrefixPrefixedMessageInnerMessageInput {
 
 input TestPrefixPrefixedMessageInput {
   body: String!
+  oneofNotIgnoredField: TestPrefixPrefixedMessageInnerMessageInput
   prefixedEnum: TestPrefixPrefixedEnum
   squashedMessage: TestPrefixPrefixedMessageSquashedMessageInput
   thisFieldWasRenamed: String!
 }
 
+union TestPrefixPrefixedMessagePartialIgnoreOneof = TestPrefixPrefixedMessageInnerMessage
+
 union TestPrefixPrefixedMessageSquashedMessage = TestPrefixPrefixedMessageInnerMessage | TestPrefixPrefixedMessageInnerMessage2
 
 input TestPrefixPrefixedMessageSquashedMessageInput {
-  oneofIgnoredField: TestPrefixPrefixedMessageInnerMessageInput
-  oneofIgnoredField2: TestPrefixPrefixedMessageInnerMessage2Input
+  oneofField: TestPrefixPrefixedMessageInnerMessageInput
+  oneofField2: TestPrefixPrefixedMessageInnerMessage2Input
 }
 "
 `;
