@@ -128,6 +128,7 @@ async function buildCodeGeneratorRequest(name: string): Promise<CodeGeneratorReq
 }
 
 function getFileMap(resp: CodeGeneratorResponse): Record<string, string> {
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   return resp.getFileList().reduce((m, f) => ({ ...m, [f.getName()!]: f.getContent()! }), {} as Record<string, string>);
 }
 
@@ -138,10 +139,12 @@ async function withGeneratedResults(files: CodeGeneratorResponse.File[], cb: (di
     .mkdir(dir, { recursive: true })
     .then(() =>
       Promise.all(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         [...new Set(files.map((f) => join(dir, dirname(f.getName()!))))].map((p) => fs.mkdir(p, { recursive: true }))
       ).then(() => dir)
     )
     .then((dir) =>
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       Promise.all(files.map((f) => fs.writeFile(join(dir, f.getName()!), f.getContent()!, "utf-8"))).then(() => dir)
     )
     .then(cb)
@@ -154,6 +157,7 @@ async function withGeneratedSchema(
   cb: (dir: string, schema: NexusGraphQLSchema) => Promise<void>
 ) {
   await withGeneratedResults(files, async (dir) => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const paths = files.map((f) => join(dir, f.getName()!));
     try {
       const types = paths.reduce((o, p) => ({ ...o, ...require(p) }), {} as any);

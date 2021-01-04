@@ -17,6 +17,7 @@ export function createScalarFieldResolverStmts(
       resolverRet,
     ]);
   }
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   switch (field.descriptor.getType()!) {
     case FieldDescriptorProto.Type.TYPE_INT64:
     case FieldDescriptorProto.Type.TYPE_UINT64:
