@@ -48,7 +48,7 @@ export function createEnumFieldResolverStmts(
             valueExpr,
             ts.SyntaxKind.EqualsEqualsEqualsToken,
             ts.factory.createPropertyAccessExpression(
-              createProtoExpr(field.type!, opts),
+              createProtoExpr(en, opts),
               ts.factory.createIdentifier(unspecified.name)
             )
           ),
@@ -62,10 +62,7 @@ export function createEnumFieldResolverStmts(
           ts.factory.createBinaryExpression(
             valueExpr,
             ts.SyntaxKind.EqualsEqualsEqualsToken,
-            ts.factory.createPropertyAccessExpression(
-              createProtoExpr(field.type!, opts),
-              ts.factory.createIdentifier(ev.name)
-            )
+            ts.factory.createPropertyAccessExpression(createProtoExpr(en, opts), ts.factory.createIdentifier(ev.name))
           ),
           ts.factory.createBlock(
             [

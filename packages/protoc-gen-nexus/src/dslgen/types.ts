@@ -121,6 +121,7 @@ function detectGqlItemType(f: ProtoField, reg: ProtoRegistry, opts?: { input?: b
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const pbtype = f.descriptor.getType()!;
   switch (pbtype) {
     case FieldDescriptorProto.Type.TYPE_STRING:
