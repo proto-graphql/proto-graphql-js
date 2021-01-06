@@ -1,16 +1,14 @@
 import ts from "typescript";
 import { ProtoMessage, ProtoOneof, ProtoRegistry } from "../protogen";
-import { detectGqlType, GenerationParams } from "./types";
+import { detectGqlType } from "./types";
 import {
   createDescriptionPropertyAssignment,
   createDslExportConstStmt,
-  createProtoExpr,
   gqlTypeName,
   isIgnoredField,
   isInputOnlyField,
   isSquashedUnion,
   onlyNonNull,
-  protoExportAlias,
 } from "./util";
 
 /**
@@ -22,22 +20,18 @@ import {
  * })
  * ```
  */
-export function createOneofUnionTypeDslStmts(
-  msgs: ReadonlyArray<ProtoMessage>,
-  reg: ProtoRegistry,
-  opts: GenerationParams
-): ts.Statement[] {
+export function createOneofUnionTypeDslStmts(msgs: ReadonlyArray<ProtoMessage>, reg: ProtoRegistry): ts.Statement[] {
   return [
     ...msgs
       .filter((m) => !isSquashedUnion(m))
       .flatMap((m) => m.oneofs)
       .filter((o) => !isIgnoredField(o))
-      .map((o) => createOneofUnionTypeDslStmt(gqlTypeName(o), o, reg, opts)),
+      .map((o) => createOneofUnionTypeDslStmt(gqlTypeName(o), o, reg)),
     ...msgs
       .filter((m) => isSquashedUnion(m))
       .map((m) => m.oneofs[0])
       .filter((o) => !isIgnoredField(o))
-      .map((o) => createOneofUnionTypeDslStmt(gqlTypeName(o.parent), o, reg, opts)),
+      .map((o) => createOneofUnionTypeDslStmt(gqlTypeName(o.parent), o, reg)),
   ];
 }
 
@@ -50,12 +44,7 @@ export function createOneofUnionTypeDslStmts(
  * })
  * ```
  */
-function createOneofUnionTypeDslStmt(
-  typeName: string,
-  oneof: ProtoOneof,
-  reg: ProtoRegistry,
-  opts: GenerationParams
-): ts.Statement {
+function createOneofUnionTypeDslStmt(typeName: string, oneof: ProtoOneof, reg: ProtoRegistry): ts.Statement {
   return createDslExportConstStmt(
     typeName,
     ts.factory.createCallExpression(ts.factory.createIdentifier("unionType"), undefined, [
@@ -64,8 +53,6 @@ function createOneofUnionTypeDslStmt(
           ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(typeName)),
           createDescriptionPropertyAssignment(oneof),
           createOneofUnionTypeDefinitionMethodDecl(oneof, reg),
-          createOneofUnionTypeResolveTypeMethodDecl(oneof, reg, opts),
-          opts.useProtobufjs ? ts.factory.createPropertyAssignment("sourceType", sourceTypeExpr(oneof, opts)) : null,
         ].filter(onlyNonNull()),
         true
       ),
@@ -113,81 +100,4 @@ function createOneofUnionTypeDefinitionMethodDecl(oneof: ProtoOneof, reg: ProtoR
       true
     )
   );
-}
-
-/**
- * @example
- * ```ts
- * resolveType(item) {
- *   // ...
- * }
- * ```
- */
-function createOneofUnionTypeResolveTypeMethodDecl(
-  oneof: ProtoOneof,
-  reg: ProtoRegistry,
-  opts: GenerationParams
-): ts.MethodDeclaration {
-  return ts.factory.createMethodDeclaration(
-    undefined,
-    undefined,
-    undefined,
-    "resolveType",
-    undefined,
-    undefined,
-    [ts.factory.createParameterDeclaration(undefined, undefined, undefined, "item", undefined, undefined, undefined)],
-    undefined,
-    ts.factory.createBlock(
-      [
-        ...oneof.fields
-          .filter((f) => !isIgnoredField(f))
-          .filter((f) => !isInputOnlyField(f))
-          .map((f) => f.type)
-          // TODO: throw error when `t` is unallowed type
-          .filter((t): t is ProtoMessage => t != null && t.kind === "Message")
-          .map((t) => craeteOneofUnionTypeResolveTypeMethodStatement(t, opts)),
-        ts.factory.createThrowStatement(
-          // TODO: throw custom error
-          ts.factory.createStringLiteral("unreachable")
-        ),
-      ],
-      true
-    )
-  );
-}
-function craeteOneofUnionTypeResolveTypeMethodStatement(t: ProtoMessage, opts: GenerationParams) {
-  if (opts.useProtobufjs) {
-    return ts.factory.createIfStatement(
-      ts.factory.createBinaryExpression(
-        ts.factory.createPropertyAccessExpression(ts.factory.createIdentifier("item"), "__protobufTypeName"),
-        ts.SyntaxKind.EqualsEqualsEqualsToken,
-        ts.factory.createStringLiteral(t.fullName.toString())
-      ),
-      ts.factory.createBlock([ts.factory.createReturnStatement(ts.factory.createStringLiteral(gqlTypeName(t)))])
-    );
-  }
-  return ts.factory.createIfStatement(
-    ts.factory.createBinaryExpression(
-      ts.factory.createIdentifier("item"),
-      ts.SyntaxKind.InstanceOfKeyword,
-      createProtoExpr(t, opts)
-    ),
-    ts.factory.createBlock([ts.factory.createReturnStatement(ts.factory.createStringLiteral(gqlTypeName(t)))])
-  );
-}
-
-/**
- * @example
- * ```ts
- * {
- *   module: __filename,
- *   export: "_$hello$hello_pb$User"
- * }
- * ```
- */
-function sourceTypeExpr(oneof: ProtoOneof, opts: GenerationParams): ts.Expression {
-  return ts.factory.createObjectLiteralExpression([
-    ts.factory.createPropertyAssignment("module", ts.factory.createIdentifier("__filename")),
-    ts.factory.createPropertyAssignment("export", ts.factory.createStringLiteral(protoExportAlias(oneof, opts))),
-  ]);
 }

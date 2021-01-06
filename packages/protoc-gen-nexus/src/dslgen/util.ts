@@ -16,10 +16,7 @@ import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor
 import { GenerationParams } from "./types";
 import { ExtensionFieldInfo } from "google-protobuf";
 
-export function protoExportAlias(t: ProtoMessage | ProtoOneof, o: GenerationParams): string {
-  if (t.kind === "Oneof") {
-    return uniqueImportAlias(`${protoExportAlias(t.parent, o)}.${t.name}`);
-  }
+export function protoExportAlias(t: ProtoMessage, o: GenerationParams): string {
   const chunks = [protoImportPath(t, o)];
   if (o.useProtobufjs) {
     chunks.push(...t.file.package.split("."));
@@ -231,7 +228,7 @@ export function createProtoQualifiedName(t: ProtoMessage, o: GenerationParams): 
  * [["_$hello", "hello"], "User"]
  * ```
  */
-function createProtoFullName(t: ProtoMessage | ProtoEnum, o: GenerationParams, isLeft = false): Selector {
+function createProtoFullName(t: ProtoMessage | ProtoEnum, o: GenerationParams): Selector {
   let left: Selector[0];
   if (t.parent.kind === "File") {
     if (o.useProtobufjs) {
@@ -241,13 +238,9 @@ function createProtoFullName(t: ProtoMessage | ProtoEnum, o: GenerationParams, i
       left = uniqueImportAlias(protoImportPath(t, o));
     }
   } else {
-    left = createProtoFullName(t.parent, o, true);
+    left = createProtoFullName(t.parent, o);
   }
-  let name = t.name;
-  if (!isLeft && t.kind === "Message" && o.useProtobufjs) {
-    name = `I${name}`;
-  }
-  return [left, name];
+  return [left, t.name];
 }
 
 type Selector = [Selector | string, string];

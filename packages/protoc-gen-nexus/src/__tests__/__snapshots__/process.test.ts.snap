@@ -15,30 +15,12 @@ export const NotDeprecatedMessageNotDeprecatedOneof = unionType({
     name: \\"NotDeprecatedMessageNotDeprecatedOneof\\",
     definition(t) {
         t.members(\\"NotDeprecatedMessageInnerMessage1\\", \\"NotDeprecatedMessageInnerMessage2\\");
-    },
-    resolveType(item) {
-        if (item instanceof _$testapis$deprecation$deprecation_pb.NotDeprecatedMessage.InnerMessage1) {
-            return \\"NotDeprecatedMessageInnerMessage1\\";
-        }
-        if (item instanceof _$testapis$deprecation$deprecation_pb.NotDeprecatedMessage.InnerMessage2) {
-            return \\"NotDeprecatedMessageInnerMessage2\\";
-        }
-        throw \\"unreachable\\";
     }
 });
 export const NotDeprecatedMessageDeprecatedOneof = unionType({
     name: \\"NotDeprecatedMessageDeprecatedOneof\\",
     definition(t) {
         t.members(\\"NotDeprecatedMessageInnerMessage1\\", \\"NotDeprecatedMessageInnerMessage2\\");
-    },
-    resolveType(item) {
-        if (item instanceof _$testapis$deprecation$deprecation_pb.NotDeprecatedMessage.InnerMessage1) {
-            return \\"NotDeprecatedMessageInnerMessage1\\";
-        }
-        if (item instanceof _$testapis$deprecation$deprecation_pb.NotDeprecatedMessage.InnerMessage2) {
-            return \\"NotDeprecatedMessageInnerMessage2\\";
-        }
-        throw \\"unreachable\\";
     }
 });
 export const DeprecatedMessage = objectType({
@@ -66,6 +48,9 @@ export const DeprecatedMessage = objectType({
                 return value;
             }
         });
+    },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$deprecation$deprecation_pb.DeprecatedMessage;
     },
     sourceType: { module: __filename, export: \\"_$testapis$deprecation$deprecation_pb$DeprecatedMessage\\" }
 });
@@ -134,6 +119,9 @@ export const NotDeprecatedMessage = objectType({
             }
         });
     },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$deprecation$deprecation_pb.NotDeprecatedMessage;
+    },
     sourceType: { module: __filename, export: \\"_$testapis$deprecation$deprecation_pb$NotDeprecatedMessage\\" }
 });
 export const DeprecatedMessageInnerMessage = objectType({
@@ -148,6 +136,9 @@ export const DeprecatedMessageInnerMessage = objectType({
             }
         });
     },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$deprecation$deprecation_pb.DeprecatedMessage.InnerMessage;
+    },
     sourceType: { module: __filename, export: \\"_$testapis$deprecation$deprecation_pb$DeprecatedMessageInnerMessage\\" }
 });
 export const NotDeprecatedMessageInnerMessage1 = objectType({
@@ -161,6 +152,9 @@ export const NotDeprecatedMessageInnerMessage1 = objectType({
             }
         });
     },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$deprecation$deprecation_pb.NotDeprecatedMessage.InnerMessage1;
+    },
     sourceType: { module: __filename, export: \\"_$testapis$deprecation$deprecation_pb$NotDeprecatedMessageInnerMessage1\\" }
 });
 export const NotDeprecatedMessageInnerMessage2 = objectType({
@@ -173,6 +167,9 @@ export const NotDeprecatedMessageInnerMessage2 = objectType({
                 return value;
             }
         });
+    },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$deprecation$deprecation_pb.NotDeprecatedMessage.InnerMessage2;
     },
     sourceType: { module: __filename, export: \\"_$testapis$deprecation$deprecation_pb$NotDeprecatedMessageInnerMessage2\\" }
 });
@@ -308,6 +305,9 @@ export const DeprecatedFileMessage = objectType({
             }
         });
     },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$deprecation$file_deprecation_pb.DeprecatedFileMessage;
+    },
     sourceType: { module: __filename, export: \\"_$testapis$deprecation$file_deprecation_pb$DeprecatedFileMessage\\" }
 });
 export const DeprecatedFileMessageInnerMessage = objectType({
@@ -321,6 +321,9 @@ export const DeprecatedFileMessageInnerMessage = objectType({
                 return value;
             }
         });
+    },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$deprecation$file_deprecation_pb.DeprecatedFileMessage.InnerMessage;
     },
     sourceType: { module: __filename, export: \\"_$testapis$deprecation$file_deprecation_pb$DeprecatedFileMessageInnerMessage\\" }
 });
@@ -370,52 +373,22 @@ exports[`deprecation with protobufjs generates nexus DSLs: deprecation/deprecati
 
 import { objectType, inputObjectType, enumType, unionType, nullable, nonNull } from \\"nexus\\";
 import * as _$testapis$deprecation from \\"./testapis/deprecation\\";
-export type _$testapis$deprecation$testapis$deprecation$DeprecatedMessage = _$testapis$deprecation.testapis.deprecation.IDeprecatedMessage;
-export type _$testapis$deprecation$testapis$deprecation$NotDeprecatedMessage = _$testapis$deprecation.testapis.deprecation.INotDeprecatedMessage;
-export type _$testapis$deprecation$testapis$deprecation$DeprecatedMessageInnerMessage = _$testapis$deprecation.testapis.deprecation.DeprecatedMessage.IInnerMessage;
-export type _$testapis$deprecation$testapis$deprecation$NotDeprecatedMessageInnerMessage1 = _$testapis$deprecation.testapis.deprecation.NotDeprecatedMessage.IInnerMessage1;
-export type _$testapis$deprecation$testapis$deprecation$NotDeprecatedMessageInnerMessage2 = _$testapis$deprecation.testapis.deprecation.NotDeprecatedMessage.IInnerMessage2;
-export type _$testapis$deprecation$testapis$deprecation$NotDeprecatedMessage_not_deprecated_oneof = (_$testapis$deprecation.testapis.deprecation.NotDeprecatedMessage.IInnerMessage1 & {
-    __protobufTypeName: \\"testapis.deprecation.NotDeprecatedMessage.InnerMessage1\\";
-}) | (_$testapis$deprecation.testapis.deprecation.NotDeprecatedMessage.IInnerMessage2 & {
-    __protobufTypeName: \\"testapis.deprecation.NotDeprecatedMessage.InnerMessage2\\";
-});
-export type _$testapis$deprecation$testapis$deprecation$NotDeprecatedMessage_deprecated_oneof = (_$testapis$deprecation.testapis.deprecation.NotDeprecatedMessage.IInnerMessage1 & {
-    __protobufTypeName: \\"testapis.deprecation.NotDeprecatedMessage.InnerMessage1\\";
-}) | (_$testapis$deprecation.testapis.deprecation.NotDeprecatedMessage.IInnerMessage2 & {
-    __protobufTypeName: \\"testapis.deprecation.NotDeprecatedMessage.InnerMessage2\\";
-});
+export type _$testapis$deprecation$testapis$deprecation$DeprecatedMessage = _$testapis$deprecation.testapis.deprecation.DeprecatedMessage;
+export type _$testapis$deprecation$testapis$deprecation$NotDeprecatedMessage = _$testapis$deprecation.testapis.deprecation.NotDeprecatedMessage;
+export type _$testapis$deprecation$testapis$deprecation$DeprecatedMessageInnerMessage = _$testapis$deprecation.testapis.deprecation.DeprecatedMessage.InnerMessage;
+export type _$testapis$deprecation$testapis$deprecation$NotDeprecatedMessageInnerMessage1 = _$testapis$deprecation.testapis.deprecation.NotDeprecatedMessage.InnerMessage1;
+export type _$testapis$deprecation$testapis$deprecation$NotDeprecatedMessageInnerMessage2 = _$testapis$deprecation.testapis.deprecation.NotDeprecatedMessage.InnerMessage2;
 export const NotDeprecatedMessageNotDeprecatedOneof = unionType({
     name: \\"NotDeprecatedMessageNotDeprecatedOneof\\",
     definition(t) {
         t.members(\\"NotDeprecatedMessageInnerMessage1\\", \\"NotDeprecatedMessageInnerMessage2\\");
-    },
-    resolveType(item) {
-        if (item.__protobufTypeName === \\"testapis.deprecation.NotDeprecatedMessage.InnerMessage1\\") {
-            return \\"NotDeprecatedMessageInnerMessage1\\";
-        }
-        if (item.__protobufTypeName === \\"testapis.deprecation.NotDeprecatedMessage.InnerMessage2\\") {
-            return \\"NotDeprecatedMessageInnerMessage2\\";
-        }
-        throw \\"unreachable\\";
-    },
-    sourceType: { module: __filename, export: \\"_$testapis$deprecation$testapis$deprecation$NotDeprecatedMessage_not_deprecated_oneof\\" }
+    }
 });
 export const NotDeprecatedMessageDeprecatedOneof = unionType({
     name: \\"NotDeprecatedMessageDeprecatedOneof\\",
     definition(t) {
         t.members(\\"NotDeprecatedMessageInnerMessage1\\", \\"NotDeprecatedMessageInnerMessage2\\");
-    },
-    resolveType(item) {
-        if (item.__protobufTypeName === \\"testapis.deprecation.NotDeprecatedMessage.InnerMessage1\\") {
-            return \\"NotDeprecatedMessageInnerMessage1\\";
-        }
-        if (item.__protobufTypeName === \\"testapis.deprecation.NotDeprecatedMessage.InnerMessage2\\") {
-            return \\"NotDeprecatedMessageInnerMessage2\\";
-        }
-        throw \\"unreachable\\";
-    },
-    sourceType: { module: __filename, export: \\"_$testapis$deprecation$testapis$deprecation$NotDeprecatedMessage_deprecated_oneof\\" }
+    }
 });
 export const DeprecatedMessage = objectType({
     name: \\"DeprecatedMessage\\",
@@ -445,6 +418,9 @@ export const DeprecatedMessage = objectType({
                 return value;
             }
         });
+    },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$deprecation.testapis.deprecation.DeprecatedMessage;
     },
     sourceType: { module: __filename, export: \\"_$testapis$deprecation$testapis$deprecation$DeprecatedMessage\\" }
 });
@@ -480,10 +456,10 @@ export const NotDeprecatedMessage = objectType({
             type: nullable(\\"NotDeprecatedMessageNotDeprecatedOneof\\"),
             resolve(root) {
                 if (root.msg1) {
-                    return Object.assign(root.msg1, { __protobufTypeName: (\\"testapis.deprecation.NotDeprecatedMessage.InnerMessage1\\" as const) });
+                    return root.msg1;
                 }
                 if (root.msg2) {
-                    return Object.assign(root.msg2, { __protobufTypeName: (\\"testapis.deprecation.NotDeprecatedMessage.InnerMessage2\\" as const) });
+                    return root.msg2;
                 }
                 return null;
             }
@@ -493,14 +469,17 @@ export const NotDeprecatedMessage = objectType({
             deprecation: \\"testapis.deprecation.NotDeprecatedMessage.deprecated_oneof is mark as deprecated in a *.proto file.\\",
             resolve(root) {
                 if (root.msg3) {
-                    return Object.assign(root.msg3, { __protobufTypeName: (\\"testapis.deprecation.NotDeprecatedMessage.InnerMessage1\\" as const) });
+                    return root.msg3;
                 }
                 if (root.msg4) {
-                    return Object.assign(root.msg4, { __protobufTypeName: (\\"testapis.deprecation.NotDeprecatedMessage.InnerMessage2\\" as const) });
+                    return root.msg4;
                 }
                 return null;
             }
         });
+    },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$deprecation.testapis.deprecation.NotDeprecatedMessage;
     },
     sourceType: { module: __filename, export: \\"_$testapis$deprecation$testapis$deprecation$NotDeprecatedMessage\\" }
 });
@@ -519,6 +498,9 @@ export const DeprecatedMessageInnerMessage = objectType({
             }
         });
     },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$deprecation.testapis.deprecation.DeprecatedMessage.InnerMessage;
+    },
     sourceType: { module: __filename, export: \\"_$testapis$deprecation$testapis$deprecation$DeprecatedMessageInnerMessage\\" }
 });
 export const NotDeprecatedMessageInnerMessage1 = objectType({
@@ -535,6 +517,9 @@ export const NotDeprecatedMessageInnerMessage1 = objectType({
             }
         });
     },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$deprecation.testapis.deprecation.NotDeprecatedMessage.InnerMessage1;
+    },
     sourceType: { module: __filename, export: \\"_$testapis$deprecation$testapis$deprecation$NotDeprecatedMessageInnerMessage1\\" }
 });
 export const NotDeprecatedMessageInnerMessage2 = objectType({
@@ -550,6 +535,9 @@ export const NotDeprecatedMessageInnerMessage2 = objectType({
                 return value;
             }
         });
+    },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$deprecation.testapis.deprecation.NotDeprecatedMessage.InnerMessage2;
     },
     sourceType: { module: __filename, export: \\"_$testapis$deprecation$testapis$deprecation$NotDeprecatedMessageInnerMessage2\\" }
 });
@@ -657,8 +645,8 @@ exports[`deprecation with protobufjs generates nexus DSLs: deprecation/file_depr
 
 import { objectType, inputObjectType, enumType, nullable, nonNull } from \\"nexus\\";
 import * as _$testapis$deprecation from \\"./testapis/deprecation\\";
-export type _$testapis$deprecation$testapis$deprecation$DeprecatedFileMessage = _$testapis$deprecation.testapis.deprecation.IDeprecatedFileMessage;
-export type _$testapis$deprecation$testapis$deprecation$DeprecatedFileMessageInnerMessage = _$testapis$deprecation.testapis.deprecation.DeprecatedFileMessage.IInnerMessage;
+export type _$testapis$deprecation$testapis$deprecation$DeprecatedFileMessage = _$testapis$deprecation.testapis.deprecation.DeprecatedFileMessage;
+export type _$testapis$deprecation$testapis$deprecation$DeprecatedFileMessageInnerMessage = _$testapis$deprecation.testapis.deprecation.DeprecatedFileMessage.InnerMessage;
 export const DeprecatedFileMessage = objectType({
     name: \\"DeprecatedFileMessage\\",
     definition(t) {
@@ -688,6 +676,9 @@ export const DeprecatedFileMessage = objectType({
             }
         });
     },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$deprecation.testapis.deprecation.DeprecatedFileMessage;
+    },
     sourceType: { module: __filename, export: \\"_$testapis$deprecation$testapis$deprecation$DeprecatedFileMessage\\" }
 });
 export const DeprecatedFileMessageInnerMessage = objectType({
@@ -704,6 +695,9 @@ export const DeprecatedFileMessageInnerMessage = objectType({
                 return value;
             }
         });
+    },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$deprecation.testapis.deprecation.DeprecatedFileMessage.InnerMessage;
     },
     sourceType: { module: __filename, export: \\"_$testapis$deprecation$testapis$deprecation$DeprecatedFileMessageInnerMessage\\" }
 });
@@ -803,6 +797,9 @@ export const FieldBehaviorComentsMessage = objectType({
             }
         });
     },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$field_behavior$comments_pb.FieldBehaviorComentsMessage;
+    },
     sourceType: { module: __filename, export: \\"_$testapis$field_behavior$comments_pb$FieldBehaviorComentsMessage\\" }
 });
 export const FieldBehaviorComentsMessagePost = objectType({
@@ -815,6 +812,9 @@ export const FieldBehaviorComentsMessagePost = objectType({
                 return value;
             }
         });
+    },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$field_behavior$comments_pb.FieldBehaviorComentsMessage.Post;
     },
     sourceType: { module: __filename, export: \\"_$testapis$field_behavior$comments_pb$FieldBehaviorComentsMessagePost\\" }
 });
@@ -856,8 +856,8 @@ exports[`field_behavior with protobufjs generates nexus DSLs: field_behavior/com
 
 import { objectType, inputObjectType, nullable, nonNull } from \\"nexus\\";
 import * as _$testapis$field_behavior from \\"./testapis/field_behavior\\";
-export type _$testapis$field_behavior$testapis$deprecation$FieldBehaviorComentsMessage = _$testapis$field_behavior.testapis.deprecation.IFieldBehaviorComentsMessage;
-export type _$testapis$field_behavior$testapis$deprecation$FieldBehaviorComentsMessagePost = _$testapis$field_behavior.testapis.deprecation.FieldBehaviorComentsMessage.IPost;
+export type _$testapis$field_behavior$testapis$deprecation$FieldBehaviorComentsMessage = _$testapis$field_behavior.testapis.deprecation.FieldBehaviorComentsMessage;
+export type _$testapis$field_behavior$testapis$deprecation$FieldBehaviorComentsMessagePost = _$testapis$field_behavior.testapis.deprecation.FieldBehaviorComentsMessage.Post;
 export const FieldBehaviorComentsMessage = objectType({
     name: \\"FieldBehaviorComentsMessage\\",
     definition(t) {
@@ -906,6 +906,9 @@ export const FieldBehaviorComentsMessage = objectType({
             }
         });
     },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$field_behavior.testapis.deprecation.FieldBehaviorComentsMessage;
+    },
     sourceType: { module: __filename, export: \\"_$testapis$field_behavior$testapis$deprecation$FieldBehaviorComentsMessage\\" }
 });
 export const FieldBehaviorComentsMessagePost = objectType({
@@ -921,6 +924,9 @@ export const FieldBehaviorComentsMessagePost = objectType({
                 return value;
             }
         });
+    },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$field_behavior.testapis.deprecation.FieldBehaviorComentsMessage.Post;
     },
     sourceType: { module: __filename, export: \\"_$testapis$field_behavior$testapis$deprecation$FieldBehaviorComentsMessagePost\\" }
 });
@@ -973,6 +979,9 @@ export const SubpkgMessage = objectType({
                 return value;
             }
         });
+    },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$multipkgs$subpkg1$types_pb.SubpkgMessage;
     },
     sourceType: { module: __filename, export: \\"_$testapis$multipkgs$subpkg1$types_pb$SubpkgMessage\\" }
 });
@@ -1035,6 +1044,9 @@ export const MessageWithSubpkg = objectType({
             }
         });
     },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$multipkgs$subpkg2$types_pb.MessageWithSubpkg;
+    },
     sourceType: { module: __filename, export: \\"_$testapis$multipkgs$subpkg2$types_pb$MessageWithSubpkg\\" }
 });
 export const MessageWithSubpkgInput = inputObjectType({
@@ -1057,7 +1069,7 @@ exports[`multipkgs with protobufjs generates nexus DSLs: multipkgs/subpkg1/types
 
 import { objectType, inputObjectType, enumType, nonNull } from \\"nexus\\";
 import * as _$testapis$multipkgs$subpkg1 from \\"./testapis/multipkgs/subpkg1\\";
-export type _$testapis$multipkgs$subpkg1$testapis$multipkgs$subpkg1$SubpkgMessage = _$testapis$multipkgs$subpkg1.testapis.multipkgs.subpkg1.ISubpkgMessage;
+export type _$testapis$multipkgs$subpkg1$testapis$multipkgs$subpkg1$SubpkgMessage = _$testapis$multipkgs$subpkg1.testapis.multipkgs.subpkg1.SubpkgMessage;
 export const SubpkgMessage = objectType({
     name: \\"SubpkgMessage\\",
     definition(t) {
@@ -1071,6 +1083,9 @@ export const SubpkgMessage = objectType({
                 return value;
             }
         });
+    },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$multipkgs$subpkg1.testapis.multipkgs.subpkg1.SubpkgMessage;
     },
     sourceType: { module: __filename, export: \\"_$testapis$multipkgs$subpkg1$testapis$multipkgs$subpkg1$SubpkgMessage\\" }
 });
@@ -1105,7 +1120,7 @@ exports[`multipkgs with protobufjs generates nexus DSLs: multipkgs/subpkg2/types
 import { objectType, inputObjectType, nullable } from \\"nexus\\";
 import * as _$testapis$multipkgs$subpkg2 from \\"./testapis/multipkgs/subpkg2\\";
 import * as _$testapis$multipkgs$subpkg1 from \\"./testapis/multipkgs/subpkg1\\";
-export type _$testapis$multipkgs$subpkg2$testapis$multipkgs$subpkg1$MessageWithSubpkg = _$testapis$multipkgs$subpkg2.testapis.multipkgs.subpkg1.IMessageWithSubpkg;
+export type _$testapis$multipkgs$subpkg2$testapis$multipkgs$subpkg1$MessageWithSubpkg = _$testapis$multipkgs$subpkg2.testapis.multipkgs.subpkg1.MessageWithSubpkg;
 export const MessageWithSubpkg = objectType({
     name: \\"MessageWithSubpkg\\",
     definition(t) {
@@ -1132,6 +1147,9 @@ export const MessageWithSubpkg = objectType({
                 return value;
             }
         });
+    },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$multipkgs$subpkg2.testapis.multipkgs.subpkg1.MessageWithSubpkg;
     },
     sourceType: { module: __filename, export: \\"_$testapis$multipkgs$subpkg2$testapis$multipkgs$subpkg1$MessageWithSubpkg\\" }
 });
@@ -1191,6 +1209,9 @@ export const ParentMessage = objectType({
             }
         });
     },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$nested$nested_pb.ParentMessage;
+    },
     sourceType: { module: __filename, export: \\"_$testapis$nested$nested_pb$ParentMessage\\" }
 });
 export const ParentMessageNestedMessage = objectType({
@@ -1203,6 +1224,9 @@ export const ParentMessageNestedMessage = objectType({
                 return value;
             }
         });
+    },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$nested$nested_pb.ParentMessage.NestedMessage;
     },
     sourceType: { module: __filename, export: \\"_$testapis$nested$nested_pb$ParentMessageNestedMessage\\" }
 });
@@ -1250,8 +1274,8 @@ exports[`nested protobuf types with protobufjs generates nexus DSLs: nested/nest
 
 import { objectType, inputObjectType, enumType, nullable, nonNull } from \\"nexus\\";
 import * as _$testapis$nested from \\"./testapis/nested\\";
-export type _$testapis$nested$testapis$nested$ParentMessage = _$testapis$nested.testapis.nested.IParentMessage;
-export type _$testapis$nested$testapis$nested$ParentMessageNestedMessage = _$testapis$nested.testapis.nested.ParentMessage.INestedMessage;
+export type _$testapis$nested$testapis$nested$ParentMessage = _$testapis$nested.testapis.nested.ParentMessage;
+export type _$testapis$nested$testapis$nested$ParentMessageNestedMessage = _$testapis$nested.testapis.nested.ParentMessage.NestedMessage;
 export const ParentMessage = objectType({
     name: \\"ParentMessage\\",
     definition(t) {
@@ -1289,6 +1313,9 @@ export const ParentMessage = objectType({
             }
         });
     },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$nested.testapis.nested.ParentMessage;
+    },
     sourceType: { module: __filename, export: \\"_$testapis$nested$testapis$nested$ParentMessage\\" }
 });
 export const ParentMessageNestedMessage = objectType({
@@ -1304,6 +1331,9 @@ export const ParentMessageNestedMessage = objectType({
                 return value;
             }
         });
+    },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$nested.testapis.nested.ParentMessage.NestedMessage;
     },
     sourceType: { module: __filename, export: \\"_$testapis$nested$testapis$nested$ParentMessageNestedMessage\\" }
 });
@@ -1363,27 +1393,12 @@ export const TestPrefixPrefixedMessagePartialIgnoreOneof = unionType({
     name: \\"TestPrefixPrefixedMessagePartialIgnoreOneof\\",
     definition(t) {
         t.members(\\"TestPrefixPrefixedMessageInnerMessage\\");
-    },
-    resolveType(item) {
-        if (item instanceof _$testapis$extensions$extensions_pb.PrefixedMessage.InnerMessage) {
-            return \\"TestPrefixPrefixedMessageInnerMessage\\";
-        }
-        throw \\"unreachable\\";
     }
 });
 export const TestPrefixPrefixedMessageSquashedMessage = unionType({
     name: \\"TestPrefixPrefixedMessageSquashedMessage\\",
     definition(t) {
         t.members(\\"TestPrefixPrefixedMessageInnerMessage\\", \\"TestPrefixPrefixedMessageInnerMessage2\\");
-    },
-    resolveType(item) {
-        if (item instanceof _$testapis$extensions$extensions_pb.PrefixedMessage.InnerMessage) {
-            return \\"TestPrefixPrefixedMessageInnerMessage\\";
-        }
-        if (item instanceof _$testapis$extensions$extensions_pb.PrefixedMessage.InnerMessage2) {
-            return \\"TestPrefixPrefixedMessageInnerMessage2\\";
-        }
-        throw \\"unreachable\\";
     }
 });
 export const TestPrefixPrefixedMessage = objectType({
@@ -1467,6 +1482,9 @@ export const TestPrefixPrefixedMessage = objectType({
             }
         });
     },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$extensions$extensions_pb.PrefixedMessage;
+    },
     sourceType: { module: __filename, export: \\"_$testapis$extensions$extensions_pb$TestPrefixPrefixedMessage\\" }
 });
 export const TestPrefixPrefixedMessageInnerMessage = objectType({
@@ -1480,6 +1498,9 @@ export const TestPrefixPrefixedMessageInnerMessage = objectType({
             }
         });
     },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$extensions$extensions_pb.PrefixedMessage.InnerMessage;
+    },
     sourceType: { module: __filename, export: \\"_$testapis$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage\\" }
 });
 export const TestPrefixPrefixedMessageInnerMessage2 = objectType({
@@ -1492,6 +1513,9 @@ export const TestPrefixPrefixedMessageInnerMessage2 = objectType({
                 return value;
             }
         });
+    },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$extensions$extensions_pb.PrefixedMessage.InnerMessage2;
     },
     sourceType: { module: __filename, export: \\"_$testapis$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage2\\" }
 });
@@ -1564,52 +1588,25 @@ exports[`protobuf custom options with protobufjs generates nexus DSLs: extension
 
 import { objectType, inputObjectType, enumType, unionType, list, nullable, nonNull } from \\"nexus\\";
 import * as _$testapis$extensions from \\"./testapis/extensions\\";
-export type _$testapis$extensions$testapis$extensions$TestPrefixBatchGetPrefixedMessagesRequest = _$testapis$extensions.testapis.extensions.IBatchGetPrefixedMessagesRequest;
-export type _$testapis$extensions$testapis$extensions$TestPrefixBatchGetPrefixedMessagesResponse = _$testapis$extensions.testapis.extensions.IBatchGetPrefixedMessagesResponse;
-export type _$testapis$extensions$testapis$extensions$TestPrefixCreatePrefixedMessageRequest = _$testapis$extensions.testapis.extensions.ICreatePrefixedMessageRequest;
-export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessage = _$testapis$extensions.testapis.extensions.IPrefixedMessage;
-export type _$testapis$extensions$testapis$extensions$TestPrefixIgnoredMessage = _$testapis$extensions.testapis.extensions.IIgnoredMessage;
-export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageInnerMessage = _$testapis$extensions.testapis.extensions.PrefixedMessage.IInnerMessage;
-export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageInnerMessage2 = _$testapis$extensions.testapis.extensions.PrefixedMessage.IInnerMessage2;
-export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageSquashedMessage = _$testapis$extensions.testapis.extensions.PrefixedMessage.ISquashedMessage;
-export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessage_partial_ignore_oneof = (_$testapis$extensions.testapis.extensions.PrefixedMessage.IInnerMessage & {
-    __protobufTypeName: \\"testapis.extensions.PrefixedMessage.InnerMessage\\";
-}) | (_$testapis$extensions.testapis.extensions.PrefixedMessage.IInnerMessage2 & {
-    __protobufTypeName: \\"testapis.extensions.PrefixedMessage.InnerMessage2\\";
-});
-export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageSquashedMessage_squashed_message = (_$testapis$extensions.testapis.extensions.PrefixedMessage.IInnerMessage & {
-    __protobufTypeName: \\"testapis.extensions.PrefixedMessage.InnerMessage\\";
-}) | (_$testapis$extensions.testapis.extensions.PrefixedMessage.IInnerMessage2 & {
-    __protobufTypeName: \\"testapis.extensions.PrefixedMessage.InnerMessage2\\";
-});
+export type _$testapis$extensions$testapis$extensions$TestPrefixBatchGetPrefixedMessagesRequest = _$testapis$extensions.testapis.extensions.BatchGetPrefixedMessagesRequest;
+export type _$testapis$extensions$testapis$extensions$TestPrefixBatchGetPrefixedMessagesResponse = _$testapis$extensions.testapis.extensions.BatchGetPrefixedMessagesResponse;
+export type _$testapis$extensions$testapis$extensions$TestPrefixCreatePrefixedMessageRequest = _$testapis$extensions.testapis.extensions.CreatePrefixedMessageRequest;
+export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessage = _$testapis$extensions.testapis.extensions.PrefixedMessage;
+export type _$testapis$extensions$testapis$extensions$TestPrefixIgnoredMessage = _$testapis$extensions.testapis.extensions.IgnoredMessage;
+export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageInnerMessage = _$testapis$extensions.testapis.extensions.PrefixedMessage.InnerMessage;
+export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageInnerMessage2 = _$testapis$extensions.testapis.extensions.PrefixedMessage.InnerMessage2;
+export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageSquashedMessage = _$testapis$extensions.testapis.extensions.PrefixedMessage.SquashedMessage;
 export const TestPrefixPrefixedMessagePartialIgnoreOneof = unionType({
     name: \\"TestPrefixPrefixedMessagePartialIgnoreOneof\\",
     definition(t) {
         t.members(\\"TestPrefixPrefixedMessageInnerMessage\\");
-    },
-    resolveType(item) {
-        if (item.__protobufTypeName === \\"testapis.extensions.PrefixedMessage.InnerMessage\\") {
-            return \\"TestPrefixPrefixedMessageInnerMessage\\";
-        }
-        throw \\"unreachable\\";
-    },
-    sourceType: { module: __filename, export: \\"_$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessage_partial_ignore_oneof\\" }
+    }
 });
 export const TestPrefixPrefixedMessageSquashedMessage = unionType({
     name: \\"TestPrefixPrefixedMessageSquashedMessage\\",
     definition(t) {
         t.members(\\"TestPrefixPrefixedMessageInnerMessage\\", \\"TestPrefixPrefixedMessageInnerMessage2\\");
-    },
-    resolveType(item) {
-        if (item.__protobufTypeName === \\"testapis.extensions.PrefixedMessage.InnerMessage\\") {
-            return \\"TestPrefixPrefixedMessageInnerMessage\\";
-        }
-        if (item.__protobufTypeName === \\"testapis.extensions.PrefixedMessage.InnerMessage2\\") {
-            return \\"TestPrefixPrefixedMessageInnerMessage2\\";
-        }
-        throw \\"unreachable\\";
-    },
-    sourceType: { module: __filename, export: \\"_$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageSquashedMessage_squashed_message\\" }
+    }
 });
 export const TestPrefixPrefixedMessage = objectType({
     name: \\"TestPrefixPrefixedMessage\\",
@@ -1659,10 +1656,10 @@ export const TestPrefixPrefixedMessage = objectType({
                     return null;
                 }
                 if (value.oneofField) {
-                    return Object.assign(value.oneofField, { __protobufTypeName: (\\"testapis.extensions.PrefixedMessage.InnerMessage\\" as const) });
+                    return value.oneofField;
                 }
                 if (value.oneofField_2) {
-                    return Object.assign(value.oneofField_2, { __protobufTypeName: (\\"testapis.extensions.PrefixedMessage.InnerMessage2\\" as const) });
+                    return value.oneofField_2;
                 }
                 return null;
             }
@@ -1681,11 +1678,14 @@ export const TestPrefixPrefixedMessage = objectType({
             type: nullable(\\"TestPrefixPrefixedMessagePartialIgnoreOneof\\"),
             resolve(root) {
                 if (root.oneofNotIgnoredField) {
-                    return Object.assign(root.oneofNotIgnoredField, { __protobufTypeName: (\\"testapis.extensions.PrefixedMessage.InnerMessage\\" as const) });
+                    return root.oneofNotIgnoredField;
                 }
                 return null;
             }
         });
+    },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$extensions.testapis.extensions.PrefixedMessage;
     },
     sourceType: { module: __filename, export: \\"_$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessage\\" }
 });
@@ -1703,6 +1703,9 @@ export const TestPrefixPrefixedMessageInnerMessage = objectType({
             }
         });
     },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$extensions.testapis.extensions.PrefixedMessage.InnerMessage;
+    },
     sourceType: { module: __filename, export: \\"_$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageInnerMessage\\" }
 });
 export const TestPrefixPrefixedMessageInnerMessage2 = objectType({
@@ -1718,6 +1721,9 @@ export const TestPrefixPrefixedMessageInnerMessage2 = objectType({
                 return value;
             }
         });
+    },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$extensions.testapis.extensions.PrefixedMessage.InnerMessage2;
     },
     sourceType: { module: __filename, export: \\"_$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageInnerMessage2\\" }
 });
@@ -1845,6 +1851,9 @@ export const MessageWithEnums = objectType({
             }
         });
     },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$enums$enums_pb.MessageWithEnums;
+    },
     sourceType: { module: __filename, export: \\"_$testapis$enums$enums_pb$MessageWithEnums\\" }
 });
 export const MessageWithEnumsInput = inputObjectType({
@@ -1912,7 +1921,7 @@ exports[`protobuf enums with protobufjs generates nexus DSLs: enums/enums_pb_nex
 
 import { objectType, inputObjectType, enumType, nullable, nonNull } from \\"nexus\\";
 import * as _$testapis$enums from \\"./testapis/enums\\";
-export type _$testapis$enums$testapi$enums$MessageWithEnums = _$testapis$enums.testapi.enums.IMessageWithEnums;
+export type _$testapis$enums$testapi$enums$MessageWithEnums = _$testapis$enums.testapi.enums.MessageWithEnums;
 export const MessageWithEnums = objectType({
     name: \\"MessageWithEnums\\",
     definition(t) {
@@ -1966,6 +1975,9 @@ export const MessageWithEnums = objectType({
                 return value;
             }
         });
+    },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$enums.testapi.enums.MessageWithEnums;
     },
     sourceType: { module: __filename, export: \\"_$testapis$enums$testapi$enums$MessageWithEnums\\" }
 });
@@ -2042,30 +2054,12 @@ export const OneofParentRequiredOneofMembers = unionType({
     description: \\"Required. disallow not_set.\\",
     definition(t) {
         t.members(\\"OneofMemberMessage1\\", \\"OneofMemberMessage2\\");
-    },
-    resolveType(item) {
-        if (item instanceof _$testapis$oneof$oneof_pb.OneofMemberMessage1) {
-            return \\"OneofMemberMessage1\\";
-        }
-        if (item instanceof _$testapis$oneof$oneof_pb.OneofMemberMessage2) {
-            return \\"OneofMemberMessage2\\";
-        }
-        throw \\"unreachable\\";
     }
 });
 export const OneofParentOptionalOneofMembers = unionType({
     name: \\"OneofParentOptionalOneofMembers\\",
     definition(t) {
         t.members(\\"OneofMemberMessage1\\", \\"OneofMemberMessage2\\");
-    },
-    resolveType(item) {
-        if (item instanceof _$testapis$oneof$oneof_pb.OneofMemberMessage1) {
-            return \\"OneofMemberMessage1\\";
-        }
-        if (item instanceof _$testapis$oneof$oneof_pb.OneofMemberMessage2) {
-            return \\"OneofMemberMessage2\\";
-        }
-        throw \\"unreachable\\";
     }
 });
 export const OneofParent = objectType({
@@ -2118,6 +2112,9 @@ export const OneofParent = objectType({
             }
         });
     },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$oneof$oneof_pb.OneofParent;
+    },
     sourceType: { module: __filename, export: \\"_$testapis$oneof$oneof_pb$OneofParent\\" }
 });
 export const OneofMemberMessage1 = objectType({
@@ -2131,6 +2128,9 @@ export const OneofMemberMessage1 = objectType({
             }
         });
     },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$oneof$oneof_pb.OneofMemberMessage1;
+    },
     sourceType: { module: __filename, export: \\"_$testapis$oneof$oneof_pb$OneofMemberMessage1\\" }
 });
 export const OneofMemberMessage2 = objectType({
@@ -2143,6 +2143,9 @@ export const OneofMemberMessage2 = objectType({
                 return value;
             }
         });
+    },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$oneof$oneof_pb.OneofMemberMessage2;
     },
     sourceType: { module: __filename, export: \\"_$testapis$oneof$oneof_pb$OneofMemberMessage2\\" }
 });
@@ -2191,51 +2194,21 @@ exports[`protobuf oneof with protobufjs generates nexus DSLs: oneof/oneof_pb_nex
 
 import { objectType, inputObjectType, unionType, nullable, nonNull } from \\"nexus\\";
 import * as _$testapis$oneof from \\"./testapis/oneof\\";
-export type _$testapis$oneof$testapis$oneof$OneofParent = _$testapis$oneof.testapis.oneof.IOneofParent;
-export type _$testapis$oneof$testapis$oneof$OneofMemberMessage1 = _$testapis$oneof.testapis.oneof.IOneofMemberMessage1;
-export type _$testapis$oneof$testapis$oneof$OneofMemberMessage2 = _$testapis$oneof.testapis.oneof.IOneofMemberMessage2;
-export type _$testapis$oneof$testapis$oneof$OneofParent_required_oneof_members = (_$testapis$oneof.testapis.oneof.IOneofMemberMessage1 & {
-    __protobufTypeName: \\"testapis.oneof.OneofMemberMessage1\\";
-}) | (_$testapis$oneof.testapis.oneof.IOneofMemberMessage2 & {
-    __protobufTypeName: \\"testapis.oneof.OneofMemberMessage2\\";
-});
-export type _$testapis$oneof$testapis$oneof$OneofParent_optional_oneof_members = (_$testapis$oneof.testapis.oneof.IOneofMemberMessage1 & {
-    __protobufTypeName: \\"testapis.oneof.OneofMemberMessage1\\";
-}) | (_$testapis$oneof.testapis.oneof.IOneofMemberMessage2 & {
-    __protobufTypeName: \\"testapis.oneof.OneofMemberMessage2\\";
-});
+export type _$testapis$oneof$testapis$oneof$OneofParent = _$testapis$oneof.testapis.oneof.OneofParent;
+export type _$testapis$oneof$testapis$oneof$OneofMemberMessage1 = _$testapis$oneof.testapis.oneof.OneofMemberMessage1;
+export type _$testapis$oneof$testapis$oneof$OneofMemberMessage2 = _$testapis$oneof.testapis.oneof.OneofMemberMessage2;
 export const OneofParentRequiredOneofMembers = unionType({
     name: \\"OneofParentRequiredOneofMembers\\",
     description: \\"Required. disallow not_set.\\",
     definition(t) {
         t.members(\\"OneofMemberMessage1\\", \\"OneofMemberMessage2\\");
-    },
-    resolveType(item) {
-        if (item.__protobufTypeName === \\"testapis.oneof.OneofMemberMessage1\\") {
-            return \\"OneofMemberMessage1\\";
-        }
-        if (item.__protobufTypeName === \\"testapis.oneof.OneofMemberMessage2\\") {
-            return \\"OneofMemberMessage2\\";
-        }
-        throw \\"unreachable\\";
-    },
-    sourceType: { module: __filename, export: \\"_$testapis$oneof$testapis$oneof$OneofParent_required_oneof_members\\" }
+    }
 });
 export const OneofParentOptionalOneofMembers = unionType({
     name: \\"OneofParentOptionalOneofMembers\\",
     definition(t) {
         t.members(\\"OneofMemberMessage1\\", \\"OneofMemberMessage2\\");
-    },
-    resolveType(item) {
-        if (item.__protobufTypeName === \\"testapis.oneof.OneofMemberMessage1\\") {
-            return \\"OneofMemberMessage1\\";
-        }
-        if (item.__protobufTypeName === \\"testapis.oneof.OneofMemberMessage2\\") {
-            return \\"OneofMemberMessage2\\";
-        }
-        throw \\"unreachable\\";
-    },
-    sourceType: { module: __filename, export: \\"_$testapis$oneof$testapis$oneof$OneofParent_optional_oneof_members\\" }
+    }
 });
 export const OneofParent = objectType({
     name: \\"OneofParent\\",
@@ -2255,10 +2228,10 @@ export const OneofParent = objectType({
             description: \\"Required. disallow not_set.\\",
             resolve(root) {
                 if (root.requiredMessage1) {
-                    return Object.assign(root.requiredMessage1, { __protobufTypeName: (\\"testapis.oneof.OneofMemberMessage1\\" as const) });
+                    return root.requiredMessage1;
                 }
                 if (root.requiredMessage2) {
-                    return Object.assign(root.requiredMessage2, { __protobufTypeName: (\\"testapis.oneof.OneofMemberMessage2\\" as const) });
+                    return root.requiredMessage2;
                 }
                 throw \\"unreachable\\";
             }
@@ -2267,14 +2240,17 @@ export const OneofParent = objectType({
             type: nullable(\\"OneofParentOptionalOneofMembers\\"),
             resolve(root) {
                 if (root.optoinalMessage1) {
-                    return Object.assign(root.optoinalMessage1, { __protobufTypeName: (\\"testapis.oneof.OneofMemberMessage1\\" as const) });
+                    return root.optoinalMessage1;
                 }
                 if (root.optoinalMessage2) {
-                    return Object.assign(root.optoinalMessage2, { __protobufTypeName: (\\"testapis.oneof.OneofMemberMessage2\\" as const) });
+                    return root.optoinalMessage2;
                 }
                 return null;
             }
         });
+    },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$oneof.testapis.oneof.OneofParent;
     },
     sourceType: { module: __filename, export: \\"_$testapis$oneof$testapis$oneof$OneofParent\\" }
 });
@@ -2292,6 +2268,9 @@ export const OneofMemberMessage1 = objectType({
             }
         });
     },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$oneof.testapis.oneof.OneofMemberMessage1;
+    },
     sourceType: { module: __filename, export: \\"_$testapis$oneof$testapis$oneof$OneofMemberMessage1\\" }
 });
 export const OneofMemberMessage2 = objectType({
@@ -2307,6 +2286,9 @@ export const OneofMemberMessage2 = objectType({
                 return value;
             }
         });
+    },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$oneof.testapis.oneof.OneofMemberMessage2;
     },
     sourceType: { module: __filename, export: \\"_$testapis$oneof$testapis$oneof$OneofMemberMessage2\\" }
 });
@@ -2401,6 +2383,9 @@ export const Hello = objectType({
                 return value;
             }
         });
+    },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$hello$hello_pb.Hello;
     },
     sourceType: { module: __filename, export: \\"_$testapis$hello$hello_pb$Hello\\" }
 });
@@ -2506,6 +2491,9 @@ export const Primitives = objectType({
             }
         });
     },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$hello$hello_pb.Primitives;
+    },
     sourceType: { module: __filename, export: \\"_$testapis$hello$hello_pb$Primitives\\" }
 });
 export const HelloInput = inputObjectType({
@@ -2585,8 +2573,8 @@ exports[`simple proto file with protobufjs generates nexus DSLs: hello/hello_pb_
 
 import { objectType, inputObjectType, list, nullable, nonNull } from \\"nexus\\";
 import * as _$testapis$hello from \\"./testapis/hello\\";
-export type _$testapis$hello$testapis$hello$Hello = _$testapis$hello.testapis.hello.IHello;
-export type _$testapis$hello$testapis$hello$Primitives = _$testapis$hello.testapis.hello.IPrimitives;
+export type _$testapis$hello$testapis$hello$Hello = _$testapis$hello.testapis.hello.Hello;
+export type _$testapis$hello$testapis$hello$Primitives = _$testapis$hello.testapis.hello.Primitives;
 export const Hello = objectType({
     name: \\"Hello\\",
     definition(t) {
@@ -2634,6 +2622,9 @@ export const Hello = objectType({
                 return value;
             }
         });
+    },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$hello.testapis.hello.Hello;
     },
     sourceType: { module: __filename, export: \\"_$testapis$hello$testapis$hello$Hello\\" }
 });
@@ -2780,6 +2771,9 @@ export const Primitives = objectType({
                 return value;
             }
         });
+    },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$hello.testapis.hello.Primitives;
     },
     sourceType: { module: __filename, export: \\"_$testapis$hello$testapis$hello$Primitives\\" }
 });
@@ -2956,6 +2950,9 @@ export const Message = objectType({
             }
         });
     },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$wktypes$well_known_types_pb.Message;
+    },
     sourceType: { module: __filename, export: \\"_$testapis$wktypes$well_known_types_pb$Message\\" }
 });
 export const MessageInput = inputObjectType({
@@ -3000,7 +2997,7 @@ exports[`well-known protobuf types with protobufjs generates nexus DSLs: wktypes
 import { objectType, inputObjectType, nullable } from \\"nexus\\";
 import * as $$proto_nexus$protobufjs from \\"@proto-nexus/protobufjs\\";
 import * as _$testapis$wktypes from \\"./testapis/wktypes\\";
-export type _$testapis$wktypes$testapis$wktypes$Message = _$testapis$wktypes.testapis.wktypes.IMessage;
+export type _$testapis$wktypes$testapis$wktypes$Message = _$testapis$wktypes.testapis.wktypes.Message;
 export const Message = objectType({
     name: \\"Message\\",
     definition(t) {
@@ -3094,6 +3091,9 @@ export const Message = objectType({
                 return $$proto_nexus$protobufjs.unwrapStringValue(value);
             }
         });
+    },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$wktypes.testapis.wktypes.Message;
     },
     sourceType: { module: __filename, export: \\"_$testapis$wktypes$testapis$wktypes$Message\\" }
 });
