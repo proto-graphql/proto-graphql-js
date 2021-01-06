@@ -1,7 +1,12 @@
 import ts from "typescript";
 import { ProtoField, ProtoRegistry } from "../protogen";
 import { detectGqlType, GenerationParams, GqlType } from "./types";
-import { createDeprecationPropertyAssignment, createDescriptionPropertyAssignment, onlyNonNull } from "./util";
+import {
+  createDeprecationPropertyAssignment,
+  createDescriptionPropertyAssignment,
+  createNexusCallExpr,
+  onlyNonNull,
+} from "./util";
 import { createFieldResolverDecl } from "./fieldResolvers";
 import * as extensions from "../__generated__/extensions/graphql/schema_pb";
 
@@ -48,17 +53,11 @@ function createFieldOptionExpr(
   const createTypeSpecifier = (type: GqlType): ts.Expression => {
     switch (type.kind) {
       case "list":
-        return ts.factory.createCallExpression(ts.factory.createIdentifier("list"), undefined, [
-          createTypeSpecifier(type.type),
-        ]);
+        return createNexusCallExpr("list", [createTypeSpecifier(type.type)]);
       case "object":
       case "scalar":
       case "enum":
-        return ts.factory.createCallExpression(
-          ts.factory.createIdentifier(type.nullable ? "nullable" : "nonNull"),
-          undefined,
-          [ts.factory.createStringLiteral(type.type)]
-        );
+        return createNexusCallExpr(type.nullable ? "nullable" : "nonNull", [ts.factory.createStringLiteral(type.type)]);
       default:
         const _exhaustiveCheck: never = type; // eslint-disable-line
         throw "unreachable";

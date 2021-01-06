@@ -16,6 +16,26 @@ import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor
 import { GenerationParams } from "./types";
 import { ExtensionFieldInfo } from "google-protobuf";
 
+/**
+ * @example
+ * ```
+ * nexus.objectType(...)
+ * ```
+ */
+export function createNexusCallExpr(name: string, args: readonly ts.Expression[]): ts.Expression {
+  return ts.factory.createCallExpression(createNexusProp(name), undefined, args);
+}
+
+/**
+ * @example
+ * ```
+ * nexus.objectType
+ * ```
+ */
+export function createNexusProp(name: string): ts.Expression {
+  return ts.factory.createPropertyAccessExpression(ts.factory.createIdentifier("nexus"), name);
+}
+
 export function protoExportAlias(t: ProtoMessage, o: GenerationParams): string {
   const chunks = [protoImportPath(t, o)];
   if (o.useProtobufjs) {

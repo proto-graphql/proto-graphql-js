@@ -16,8 +16,8 @@ export function printSource(registry: ProtoRegistry, file: ProtoFile, opts: Gene
   const [msgs, enums] = registry.collectTypes(file);
 
   const ast: ts.Statement[] = [
-    // `import { objectType, enumTpye } from "nexus";`
-    createImportNexusDecl(msgs, enums),
+    // `import * as nexus from "nexus";`
+    createImportNexusDecl(),
     // `import * as proto_nexus from "proto-nexus";`
     ...createImportUnwrapFuncDecls(msgs, opts),
     // `import * as _$hello$hello_pb from "./hello/hello_pb";`

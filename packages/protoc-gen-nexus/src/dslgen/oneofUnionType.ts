@@ -4,6 +4,7 @@ import { detectGqlType } from "./types";
 import {
   createDescriptionPropertyAssignment,
   createDslExportConstStmt,
+  createNexusCallExpr,
   gqlTypeName,
   isIgnoredField,
   isInputOnlyField,
@@ -47,7 +48,7 @@ export function createOneofUnionTypeDslStmts(msgs: ReadonlyArray<ProtoMessage>, 
 function createOneofUnionTypeDslStmt(typeName: string, oneof: ProtoOneof, reg: ProtoRegistry): ts.Statement {
   return createDslExportConstStmt(
     typeName,
-    ts.factory.createCallExpression(ts.factory.createIdentifier("unionType"), undefined, [
+    createNexusCallExpr("unionType", [
       ts.factory.createObjectLiteralExpression(
         [
           ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(typeName)),

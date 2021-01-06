@@ -6,8 +6,6 @@ import {
   createImportAllWithAliastDecl,
   getEnumValueForUnspecified,
   isIgnoredField,
-  isRequiredField,
-  onlyNonNull,
   onlyUnique,
   protoImportPath,
 } from "./util";
@@ -15,49 +13,17 @@ import {
 /**
  * @example
  * ```ts
- * import { objectType, enumType } from "nexus";
+ * import * as nexus from "nexus";
  * ```
  */
-export function createImportNexusDecl(
-  msgs: ReadonlyArray<ProtoMessage>,
-  enums: ReadonlyArray<ProtoEnum>
-): ts.ImportDeclaration {
-  let [oneof, list, nullable, nonNull] = [false, false, false, false];
-  for (const m of msgs) {
-    for (const f of m.fields) {
-      if (f.containingOneof) continue;
-      const required = isRequiredField(f);
-      list ||= f.list;
-      nullable ||= !required;
-      nonNull ||= f.list || required;
-    }
-    for (const o of m.oneofs) {
-      if (isIgnoredField(o)) continue;
-      oneof = true;
-      const required = isRequiredField(o);
-      nullable ||= !required;
-      nonNull ||= required;
-    }
-    if (oneof && list && nullable && nonNull) break;
-  }
-
+export function createImportNexusDecl(): ts.ImportDeclaration {
   return ts.factory.createImportDeclaration(
     undefined,
     undefined,
     ts.factory.createImportClause(
       false,
       undefined,
-      ts.factory.createNamedImports(
-        [
-          msgs.length > 0 ? createImportSpecifier("objectType") : null,
-          msgs.length > 0 ? createImportSpecifier("inputObjectType") : null,
-          enums.length > 0 ? createImportSpecifier("enumType") : null,
-          oneof ? createImportSpecifier("unionType") : null,
-          list ? createImportSpecifier("list") : null,
-          nullable ? createImportSpecifier("nullable") : null,
-          nonNull ? createImportSpecifier("nonNull") : null,
-        ].filter(onlyNonNull())
-      )
+      ts.factory.createNamespaceImport(ts.factory.createIdentifier("nexus"))
     ),
     ts.factory.createStringLiteral("nexus")
   );
@@ -108,8 +74,4 @@ export function createImportProtoDecls(
   ]
     .filter(onlyUnique())
     .map(createImportAllWithAliastDecl);
-}
-
-function createImportSpecifier(name: string): ts.ImportSpecifier {
-  return ts.factory.createImportSpecifier(undefined, ts.factory.createIdentifier(name));
 }

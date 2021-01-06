@@ -3,6 +3,7 @@ import { ProtoOneof } from "../protogen";
 import {
   createDeprecationPropertyAssignment,
   createDescriptionPropertyAssignment,
+  createNexusCallExpr,
   gqlTypeName,
   isRequiredField,
   onlyNonNull,
@@ -47,9 +48,7 @@ function createOneofFieldOptionExpr(oneof: ProtoOneof, opts: GenerationParams): 
     [
       ts.factory.createPropertyAssignment(
         "type",
-        ts.factory.createCallExpression(ts.factory.createIdentifier(nullable ? "nullable" : "nonNull"), undefined, [
-          ts.factory.createStringLiteral(gqlTypeName(oneof)),
-        ])
+        createNexusCallExpr(nullable ? "nullable" : "nonNull", [ts.factory.createStringLiteral(gqlTypeName(oneof))])
       ),
       createDescriptionPropertyAssignment(oneof),
       createDeprecationPropertyAssignment(oneof),
