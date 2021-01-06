@@ -4,6 +4,7 @@ import {
   createDeprecationPropertyAssignment,
   createDescriptionPropertyAssignment,
   createDslExportConstStmt,
+  createNexusCallExpr,
   gqlTypeName,
   isEnumValueForUnspecified,
   isIgnoredField,
@@ -37,7 +38,7 @@ function createEnumTypeDslStmt(en: ProtoEnum): ts.Statement {
   const typeName = gqlTypeName(en);
   return createDslExportConstStmt(
     typeName,
-    ts.factory.createCallExpression(ts.factory.createIdentifier("enumType"), undefined, [
+    createNexusCallExpr("enumType", [
       ts.factory.createObjectLiteralExpression(
         [
           ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(typeName)),

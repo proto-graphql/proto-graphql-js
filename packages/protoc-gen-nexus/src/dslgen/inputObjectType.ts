@@ -3,6 +3,7 @@ import { ProtoMessage, ProtoRegistry } from "../protogen";
 import {
   createDescriptionPropertyAssignment,
   createDslExportConstStmt,
+  createNexusCallExpr,
   exceptRequestOrResponse,
   gqlTypeName,
   isIgnoredField,
@@ -46,7 +47,7 @@ function createInputObjectTypeDslStmt(msg: ProtoMessage, reg: ProtoRegistry, opt
   const typeName = `${gqlTypeName(msg)}Input`;
   return createDslExportConstStmt(
     typeName,
-    ts.factory.createCallExpression(ts.factory.createIdentifier("inputObjectType"), undefined, [
+    createNexusCallExpr("inputObjectType", [
       ts.factory.createObjectLiteralExpression(
         [
           ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(typeName)),
