@@ -20,24 +20,7 @@ export function craeteOneofUnionFieldResolverStmts(
             ts.factory.createPropertyAccessExpression(parentExpr, camelCase(f.name)),
             ts.factory.createBlock([
               ts.factory.createReturnStatement(
-                ts.factory.createCallExpression(
-                  ts.factory.createPropertyAccessExpression(ts.factory.createIdentifier("Object"), "assign"),
-                  undefined,
-                  [
-                    ts.factory.createPropertyAccessExpression(parentExpr, camelCase(f.name)),
-                    ts.factory.createObjectLiteralExpression([
-                      ts.factory.createPropertyAssignment(
-                        "__protobufTypeName",
-                        ts.factory.createAsExpression(
-                          // TODO: throw error if the type is not ProtoMesssage
-                          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                          ts.factory.createStringLiteral(f.type!.fullName.toString()),
-                          ts.factory.createTypeReferenceNode(ts.factory.createIdentifier("const"))
-                        )
-                      ),
-                    ]),
-                  ]
-                )
+                ts.factory.createPropertyAccessExpression(parentExpr, camelCase(f.name))
               ),
             ])
           )

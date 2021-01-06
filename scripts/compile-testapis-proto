@@ -50,6 +50,7 @@ execProtoc() {
     yarn pbjs \
       --target static-module \
       --wrap commonjs \
+      --force-message \
       --path $TESTAPIS_ROOT/proto/src \
       --out "$nodeOutDir/index.js" \
       ${protoDir}/*.proto

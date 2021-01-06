@@ -3,6 +3,7 @@ import { ProtoMessage, ProtoRegistry } from "../protogen";
 import {
   createDescriptionPropertyAssignment,
   createDslExportConstStmt,
+  createProtoExpr,
   exceptRequestOrResponse,
   gqlTypeName,
   isIgnoredField,
@@ -56,6 +57,7 @@ function createObjectTypeDslStmt(msg: ProtoMessage, reg: ProtoRegistry, opts: Ge
           ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(typeName)),
           createDescriptionPropertyAssignment(msg),
           createObjectTypeDefinitionMethodDecl(msg, reg, opts),
+          createIsTypeOfMethodDecl(msg, opts),
           ts.factory.createPropertyAssignment("sourceType", sourceTypeExpr(msg, opts)),
         ].filter(onlyNonNull()),
         true
@@ -117,4 +119,47 @@ function sourceTypeExpr(msg: ProtoMessage, opts: GenerationParams): ts.Expressio
     ts.factory.createPropertyAssignment("module", ts.factory.createIdentifier("__filename")),
     ts.factory.createPropertyAssignment("export", ts.factory.createStringLiteral(protoExportAlias(msg, opts))),
   ]);
+}
+
+/**
+ * @example
+ * ```ts
+ * isTypeOf(data) {
+ *   return data instanceof _$hello$hello_pb.Hello;
+ * }
+ * ```
+ */
+function createIsTypeOfMethodDecl(msg: ProtoMessage, opts: GenerationParams): ts.MethodDeclaration {
+  return ts.factory.createMethodDeclaration(
+    undefined,
+    undefined,
+    undefined,
+    "isTypeOf",
+    undefined,
+    undefined,
+    [
+      ts.factory.createParameterDeclaration(
+        undefined,
+        undefined,
+        undefined,
+        "data",
+        undefined,
+        ts.factory.createKeywordTypeNode(ts.SyntaxKind.UnknownKeyword),
+        undefined
+      ),
+    ],
+    undefined,
+    ts.factory.createBlock(
+      [
+        ts.factory.createReturnStatement(
+          ts.factory.createBinaryExpression(
+            ts.factory.createIdentifier("data"),
+            ts.SyntaxKind.InstanceOfKeyword,
+            createProtoExpr(msg, opts)
+          )
+        ),
+      ],
+      true
+    )
+  );
 }

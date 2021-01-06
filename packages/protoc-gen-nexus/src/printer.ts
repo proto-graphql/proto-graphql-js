@@ -25,7 +25,7 @@ export function printSource(registry: ProtoRegistry, file: ProtoFile, opts: Gene
     // `export _$hello$hello_pb$Hello = _$hello$hello_pb.Hello;`
     ...createReExportProtoStmts(msgs, opts),
     // `export cosnt Oneof = unionType({ ... });`
-    ...createOneofUnionTypeDslStmts(msgs, registry, opts),
+    ...createOneofUnionTypeDslStmts(msgs, registry),
     // `export cosnt Hello = objectType({ ... });`
     ...createObjectTypeDslStmts(msgs, registry, opts),
     // `export cosnt HelloInput = inputObjectType({ ... });`

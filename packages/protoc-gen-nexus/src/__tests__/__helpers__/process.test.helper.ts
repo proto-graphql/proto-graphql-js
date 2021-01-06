@@ -168,6 +168,11 @@ async function withGeneratedSchema(
           typegen: join(dir, "typings.ts"),
         },
         shouldGenerateArtifacts: true,
+        features: {
+          abstractTypeStrategies: {
+            isTypeOf: true,
+          },
+        },
       });
       await cb(dir, schema);
     } catch (e) {
