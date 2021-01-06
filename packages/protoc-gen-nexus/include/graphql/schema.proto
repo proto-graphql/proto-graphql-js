@@ -17,7 +17,7 @@ extend google.protobuf.FileOptions {
 message GraphqlObjectTypeOptions {
   // If `ignore` is true, GraphQL object type and input type are not generated.
   bool ignore = 1;
-  // If `squash_union` is true, the message is converted to `union` type.
+  // If `squash_union` is true, the message is converted to `union` instead of object type.
   //
   // ```proto
   // message Content {
@@ -33,6 +33,8 @@ message GraphqlObjectTypeOptions {
   // union Content = Blog | Video
   // ```
   bool squash_union = 2;
+  // If `interface` is true, the message is converted to `interface` instead of object type.
+  bool interface = 3;
 }
 
 extend google.protobuf.MessageOptions {

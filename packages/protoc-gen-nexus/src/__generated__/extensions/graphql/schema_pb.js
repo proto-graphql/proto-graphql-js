@@ -377,7 +377,8 @@ proto.graphql.GraphqlObjectTypeOptions.prototype.toObject = function(opt_include
 proto.graphql.GraphqlObjectTypeOptions.toObject = function(includeInstance, msg) {
   var f, obj = {
     ignore: jspb.Message.getBooleanFieldWithDefault(msg, 1, false),
-    squashUnion: jspb.Message.getBooleanFieldWithDefault(msg, 2, false)
+    squashUnion: jspb.Message.getBooleanFieldWithDefault(msg, 2, false),
+    pb_interface: jspb.Message.getBooleanFieldWithDefault(msg, 3, false)
   };
 
   if (includeInstance) {
@@ -422,6 +423,10 @@ proto.graphql.GraphqlObjectTypeOptions.deserializeBinaryFromReader = function(ms
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setSquashUnion(value);
       break;
+    case 3:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setInterface(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -465,6 +470,13 @@ proto.graphql.GraphqlObjectTypeOptions.serializeBinaryToWriter = function(messag
       f
     );
   }
+  f = message.getInterface();
+  if (f) {
+    writer.writeBool(
+      3,
+      f
+    );
+  }
 };
 
 
@@ -501,6 +513,24 @@ proto.graphql.GraphqlObjectTypeOptions.prototype.getSquashUnion = function() {
  */
 proto.graphql.GraphqlObjectTypeOptions.prototype.setSquashUnion = function(value) {
   return jspb.Message.setProto3BooleanField(this, 2, value);
+};
+
+
+/**
+ * optional bool interface = 3;
+ * @return {boolean}
+ */
+proto.graphql.GraphqlObjectTypeOptions.prototype.getInterface = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 3, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.graphql.GraphqlObjectTypeOptions} returns this
+ */
+proto.graphql.GraphqlObjectTypeOptions.prototype.setInterface = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 3, value);
 };
 
 
