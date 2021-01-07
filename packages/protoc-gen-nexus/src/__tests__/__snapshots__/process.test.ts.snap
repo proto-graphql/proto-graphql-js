@@ -1390,6 +1390,7 @@ export type _$testapis$extensions$extensions_pb$TestPrefixInterfaceMessage = _$t
 export type _$testapis$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage = _$testapis$extensions$extensions_pb.PrefixedMessage.InnerMessage;
 export type _$testapis$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage2 = _$testapis$extensions$extensions_pb.PrefixedMessage.InnerMessage2;
 export type _$testapis$extensions$extensions_pb$TestPrefixPrefixedMessageSquashedMessage = _$testapis$extensions$extensions_pb.PrefixedMessage.SquashedMessage;
+export type _$testapis$extensions$extensions_pb$TestPrefixIgnoredMessageNotIgnored = _$testapis$extensions$extensions_pb.IgnoredMessage.NotIgnored;
 export const TestPrefixPrefixedMessagePartialIgnoreOneof = nexus.unionType({
     name: \\"TestPrefixPrefixedMessagePartialIgnoreOneof\\",
     definition(t) {
@@ -1432,6 +1433,16 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
                 }
                 if (value === _$testapis$extensions$extensions_pb.PrefixedEnum.PREFIXED_IGNORED) {
                     throw new Error(\\"PrefixedEnum.PREFIXED_IGNORED is ignored in GraphQL schema\\");
+                }
+                return value;
+            }
+        });
+        t.field(\\"notIgnoredMessage\\", {
+            type: nexus.nullable(\\"TestPrefixIgnoredMessageNotIgnored\\"),
+            resolve(root) {
+                const value = root.getNotIgnoredMessage();
+                if (value == null) {
+                    return null;
                 }
                 return value;
             }
@@ -1547,6 +1558,22 @@ export const TestPrefixPrefixedMessageInnerMessage2 = nexus.objectType({
     },
     sourceType: { module: __filename, export: \\"_$testapis$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage2\\" }
 });
+export const TestPrefixIgnoredMessageNotIgnored = nexus.objectType({
+    name: \\"TestPrefixIgnoredMessageNotIgnored\\",
+    definition(t) {
+        t.field(\\"body\\", {
+            type: nexus.nonNull(\\"String\\"),
+            resolve(root) {
+                const value = root.getBody();
+                return value;
+            }
+        });
+    },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$extensions$extensions_pb.IgnoredMessage.NotIgnored;
+    },
+    sourceType: { module: __filename, export: \\"_$testapis$extensions$extensions_pb$TestPrefixIgnoredMessageNotIgnored\\" }
+});
 export const TestPrefixPrefixedMessageInput = nexus.inputObjectType({
     name: \\"TestPrefixPrefixedMessageInput\\",
     definition(t) {
@@ -1555,6 +1582,9 @@ export const TestPrefixPrefixedMessageInput = nexus.inputObjectType({
         });
         t.field(\\"prefixedEnum\\", {
             type: nexus.nullable(\\"TestPrefixPrefixedEnum\\")
+        });
+        t.field(\\"notIgnoredMessage\\", {
+            type: nexus.nullable(\\"TestPrefixIgnoredMessageNotIgnoredInput\\")
         });
         t.field(\\"squashedMessage\\", {
             type: nexus.nullable(\\"TestPrefixPrefixedMessageSquashedMessageInput\\")
@@ -1608,6 +1638,14 @@ export const TestPrefixPrefixedMessageSquashedMessageInput = nexus.inputObjectTy
         });
     }
 });
+export const TestPrefixIgnoredMessageNotIgnoredInput = nexus.inputObjectType({
+    name: \\"TestPrefixIgnoredMessageNotIgnoredInput\\",
+    definition(t) {
+        t.field(\\"body\\", {
+            type: nexus.nonNull(\\"String\\")
+        });
+    }
+});
 export const TestPrefixPrefixedEnum = nexus.enumType({
     name: \\"TestPrefixPrefixedEnum\\",
     members: [
@@ -1652,6 +1690,7 @@ export type _$testapis$extensions$testapis$extensions$TestPrefixInterfaceMessage
 export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageInnerMessage = _$testapis$extensions.testapis.extensions.PrefixedMessage.InnerMessage;
 export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageInnerMessage2 = _$testapis$extensions.testapis.extensions.PrefixedMessage.InnerMessage2;
 export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageSquashedMessage = _$testapis$extensions.testapis.extensions.PrefixedMessage.SquashedMessage;
+export type _$testapis$extensions$testapis$extensions$TestPrefixIgnoredMessageNotIgnored = _$testapis$extensions.testapis.extensions.IgnoredMessage.NotIgnored;
 export const TestPrefixPrefixedMessagePartialIgnoreOneof = nexus.unionType({
     name: \\"TestPrefixPrefixedMessagePartialIgnoreOneof\\",
     definition(t) {
@@ -1700,6 +1739,16 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
                 }
                 if (value === _$testapis$extensions.testapis.extensions.PrefixedEnum.PREFIXED_IGNORED) {
                     throw new Error(\\"PrefixedEnum.PREFIXED_IGNORED is ignored in GraphQL schema\\");
+                }
+                return value;
+            }
+        });
+        t.field(\\"notIgnoredMessage\\", {
+            type: nexus.nullable(\\"TestPrefixIgnoredMessageNotIgnored\\"),
+            resolve(root) {
+                const value = root.notIgnoredMessage;
+                if (value == null) {
+                    return null;
                 }
                 return value;
             }
@@ -1819,6 +1868,25 @@ export const TestPrefixPrefixedMessageInnerMessage2 = nexus.objectType({
     },
     sourceType: { module: __filename, export: \\"_$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageInnerMessage2\\" }
 });
+export const TestPrefixIgnoredMessageNotIgnored = nexus.objectType({
+    name: \\"TestPrefixIgnoredMessageNotIgnored\\",
+    definition(t) {
+        t.field(\\"body\\", {
+            type: nexus.nonNull(\\"String\\"),
+            resolve(root) {
+                const value = root.body;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
+            }
+        });
+    },
+    isTypeOf(data: unknown) {
+        return data instanceof _$testapis$extensions.testapis.extensions.IgnoredMessage.NotIgnored;
+    },
+    sourceType: { module: __filename, export: \\"_$testapis$extensions$testapis$extensions$TestPrefixIgnoredMessageNotIgnored\\" }
+});
 export const TestPrefixPrefixedMessageInput = nexus.inputObjectType({
     name: \\"TestPrefixPrefixedMessageInput\\",
     definition(t) {
@@ -1827,6 +1895,9 @@ export const TestPrefixPrefixedMessageInput = nexus.inputObjectType({
         });
         t.field(\\"prefixedEnum\\", {
             type: nexus.nullable(\\"TestPrefixPrefixedEnum\\")
+        });
+        t.field(\\"notIgnoredMessage\\", {
+            type: nexus.nullable(\\"TestPrefixIgnoredMessageNotIgnoredInput\\")
         });
         t.field(\\"squashedMessage\\", {
             type: nexus.nullable(\\"TestPrefixPrefixedMessageSquashedMessageInput\\")
@@ -1877,6 +1948,14 @@ export const TestPrefixPrefixedMessageSquashedMessageInput = nexus.inputObjectTy
         });
         t.field(\\"oneofField2\\", {
             type: nexus.nullable(\\"TestPrefixPrefixedMessageInnerMessage2Input\\")
+        });
+    }
+});
+export const TestPrefixIgnoredMessageNotIgnoredInput = nexus.inputObjectType({
+    name: \\"TestPrefixIgnoredMessageNotIgnoredInput\\",
+    definition(t) {
+        t.field(\\"body\\", {
+            type: nexus.nonNull(\\"String\\")
         });
     }
 });
