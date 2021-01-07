@@ -8,7 +8,7 @@
   "scripts": {
     "build": "yarn lerna run build",
     "generate:testapis": "./scripts/compile-testapis-proto",
-    "lint:ci": "frolint --branch origin/master --bail",
+    "lint:ci": "frolint --branch origin/main --bail",
     "test": "yarn lerna run test",
     "test:coverage": "yarn lerna run test:coverage",
     "test:integration": "yarn generate:testapis && yarn build && yarn lerna run test:integration"
