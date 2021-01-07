@@ -10,6 +10,7 @@ import {
   isIgnoredField,
   isIgnoredType,
   isInputOnlyField,
+  isInterface,
   isSquashedUnion,
   onlyNonNull,
   protoExportAlias,
@@ -50,15 +51,16 @@ export function createObjectTypeDslStmts(
  */
 function createObjectTypeDslStmt(msg: ProtoMessage, reg: ProtoRegistry, opts: GenerationParams): ts.Statement {
   const typeName = gqlTypeName(msg);
+  const interfaceType = isInterface(msg);
   return createDslExportConstStmt(
     typeName,
-    createNexusCallExpr("objectType", [
+    createNexusCallExpr(interfaceType ? "interfaceType" : "objectType", [
       ts.factory.createObjectLiteralExpression(
         [
           ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(typeName)),
           createDescriptionPropertyAssignment(msg),
           createObjectTypeDefinitionMethodDecl(msg, reg, opts),
-          createIsTypeOfMethodDecl(msg, opts),
+          interfaceType ? null : createIsTypeOfMethodDecl(msg, opts),
           ts.factory.createPropertyAssignment("sourceType", sourceTypeExpr(msg, opts)),
         ].filter(onlyNonNull()),
         true

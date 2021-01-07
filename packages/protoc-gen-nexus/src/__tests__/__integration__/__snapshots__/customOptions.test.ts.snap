@@ -9,6 +9,19 @@ type Query {
   ok: Boolean!
 }
 
+interface TestPrefixInterfaceMessage {
+  id: String!
+}
+
+input TestPrefixInterfaceMessageInput {
+  id: String!
+}
+
+enum TestPrefixInterfaceMessageType {
+  INNER
+  INNER2
+}
+
 enum TestPrefixPrefixedEnum {
   PREFIXED_BAR
   PREFIXED_FOO
@@ -27,18 +40,22 @@ type TestPrefixPrefixedMessage {
 
 type TestPrefixPrefixedMessageInnerMessage {
   body: String!
+  id: String!
 }
 
 type TestPrefixPrefixedMessageInnerMessage2 {
   body: String!
+  id: String!
 }
 
 input TestPrefixPrefixedMessageInnerMessage2Input {
   body: String!
+  id: String!
 }
 
 input TestPrefixPrefixedMessageInnerMessageInput {
   body: String!
+  id: String!
 }
 
 input TestPrefixPrefixedMessageInput {
@@ -81,6 +98,19 @@ type Query {
   ok: Boolean!
 }
 
+interface TestPrefixInterfaceMessage {
+  id: String!
+}
+
+input TestPrefixInterfaceMessageInput {
+  id: String!
+}
+
+enum TestPrefixInterfaceMessageType {
+  INNER
+  INNER2
+}
+
 enum TestPrefixPrefixedEnum {
   PREFIXED_BAR
   PREFIXED_FOO
@@ -97,20 +127,24 @@ type TestPrefixPrefixedMessage {
   thisFieldWasRenamed: String!
 }
 
-type TestPrefixPrefixedMessageInnerMessage {
+type TestPrefixPrefixedMessageInnerMessage implements TestPrefixInterfaceMessage {
   body: String!
+  id: String!
 }
 
-type TestPrefixPrefixedMessageInnerMessage2 {
+type TestPrefixPrefixedMessageInnerMessage2 implements TestPrefixInterfaceMessage {
   body: String!
+  id: String!
 }
 
 input TestPrefixPrefixedMessageInnerMessage2Input {
   body: String!
+  id: String!
 }
 
 input TestPrefixPrefixedMessageInnerMessageInput {
   body: String!
+  id: String!
 }
 
 input TestPrefixPrefixedMessageInput {
@@ -130,6 +164,18 @@ input TestPrefixPrefixedMessageSquashedMessageInput {
   oneofField2: TestPrefixPrefixedMessageInnerMessage2Input
 }
 "
+`;
+
+exports[`schema generation with protobufjs interface 1`] = `
+Object {
+  "data": Object {
+    "test": Object {
+      "interfaceMessage": Object {
+        "body": "inner message2",
+      },
+    },
+  },
+}
 `;
 
 exports[`schema generation with protobufjs squashed union 1`] = `

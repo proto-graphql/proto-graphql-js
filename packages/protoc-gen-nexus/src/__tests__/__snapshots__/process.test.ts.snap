@@ -1386,6 +1386,7 @@ export type _$testapis$extensions$extensions_pb$TestPrefixBatchGetPrefixedMessag
 export type _$testapis$extensions$extensions_pb$TestPrefixCreatePrefixedMessageRequest = _$testapis$extensions$extensions_pb.CreatePrefixedMessageRequest;
 export type _$testapis$extensions$extensions_pb$TestPrefixPrefixedMessage = _$testapis$extensions$extensions_pb.PrefixedMessage;
 export type _$testapis$extensions$extensions_pb$TestPrefixIgnoredMessage = _$testapis$extensions$extensions_pb.IgnoredMessage;
+export type _$testapis$extensions$extensions_pb$TestPrefixInterfaceMessage = _$testapis$extensions$extensions_pb.InterfaceMessage;
 export type _$testapis$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage = _$testapis$extensions$extensions_pb.PrefixedMessage.InnerMessage;
 export type _$testapis$extensions$extensions_pb$TestPrefixPrefixedMessageInnerMessage2 = _$testapis$extensions$extensions_pb.PrefixedMessage.InnerMessage2;
 export type _$testapis$extensions$extensions_pb$TestPrefixPrefixedMessageSquashedMessage = _$testapis$extensions$extensions_pb.PrefixedMessage.SquashedMessage;
@@ -1487,9 +1488,29 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
     },
     sourceType: { module: __filename, export: \\"_$testapis$extensions$extensions_pb$TestPrefixPrefixedMessage\\" }
 });
+export const TestPrefixInterfaceMessage = nexus.interfaceType({
+    name: \\"TestPrefixInterfaceMessage\\",
+    definition(t) {
+        t.field(\\"id\\", {
+            type: nexus.nonNull(\\"String\\"),
+            resolve(root) {
+                const value = root.getId();
+                return value.toString();
+            }
+        });
+    },
+    sourceType: { module: __filename, export: \\"_$testapis$extensions$extensions_pb$TestPrefixInterfaceMessage\\" }
+});
 export const TestPrefixPrefixedMessageInnerMessage = nexus.objectType({
     name: \\"TestPrefixPrefixedMessageInnerMessage\\",
     definition(t) {
+        t.field(\\"id\\", {
+            type: nexus.nonNull(\\"String\\"),
+            resolve(root) {
+                const value = root.getId();
+                return value.toString();
+            }
+        });
         t.field(\\"body\\", {
             type: nexus.nonNull(\\"String\\"),
             resolve(root) {
@@ -1506,6 +1527,13 @@ export const TestPrefixPrefixedMessageInnerMessage = nexus.objectType({
 export const TestPrefixPrefixedMessageInnerMessage2 = nexus.objectType({
     name: \\"TestPrefixPrefixedMessageInnerMessage2\\",
     definition(t) {
+        t.field(\\"id\\", {
+            type: nexus.nonNull(\\"String\\"),
+            resolve(root) {
+                const value = root.getId();
+                return value.toString();
+            }
+        });
         t.field(\\"body\\", {
             type: nexus.nonNull(\\"String\\"),
             resolve(root) {
@@ -1539,9 +1567,20 @@ export const TestPrefixPrefixedMessageInput = nexus.inputObjectType({
         });
     }
 });
+export const TestPrefixInterfaceMessageInput = nexus.inputObjectType({
+    name: \\"TestPrefixInterfaceMessageInput\\",
+    definition(t) {
+        t.field(\\"id\\", {
+            type: nexus.nonNull(\\"String\\")
+        });
+    }
+});
 export const TestPrefixPrefixedMessageInnerMessageInput = nexus.inputObjectType({
     name: \\"TestPrefixPrefixedMessageInnerMessageInput\\",
     definition(t) {
+        t.field(\\"id\\", {
+            type: nexus.nonNull(\\"String\\")
+        });
         t.field(\\"body\\", {
             type: nexus.nonNull(\\"String\\")
         });
@@ -1550,6 +1589,9 @@ export const TestPrefixPrefixedMessageInnerMessageInput = nexus.inputObjectType(
 export const TestPrefixPrefixedMessageInnerMessage2Input = nexus.inputObjectType({
     name: \\"TestPrefixPrefixedMessageInnerMessage2Input\\",
     definition(t) {
+        t.field(\\"id\\", {
+            type: nexus.nonNull(\\"String\\")
+        });
         t.field(\\"body\\", {
             type: nexus.nonNull(\\"String\\")
         });
@@ -1579,6 +1621,19 @@ export const TestPrefixPrefixedEnum = nexus.enumType({
         }
     ]
 });
+export const TestPrefixInterfaceMessageType = nexus.enumType({
+    name: \\"TestPrefixInterfaceMessageType\\",
+    members: [
+        {
+            name: \\"INNER\\",
+            value: 1
+        },
+        {
+            name: \\"INNER2\\",
+            value: 2
+        }
+    ]
+});
 "
 `;
 
@@ -1593,6 +1648,7 @@ export type _$testapis$extensions$testapis$extensions$TestPrefixBatchGetPrefixed
 export type _$testapis$extensions$testapis$extensions$TestPrefixCreatePrefixedMessageRequest = _$testapis$extensions.testapis.extensions.CreatePrefixedMessageRequest;
 export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessage = _$testapis$extensions.testapis.extensions.PrefixedMessage;
 export type _$testapis$extensions$testapis$extensions$TestPrefixIgnoredMessage = _$testapis$extensions.testapis.extensions.IgnoredMessage;
+export type _$testapis$extensions$testapis$extensions$TestPrefixInterfaceMessage = _$testapis$extensions.testapis.extensions.InterfaceMessage;
 export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageInnerMessage = _$testapis$extensions.testapis.extensions.PrefixedMessage.InnerMessage;
 export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageInnerMessage2 = _$testapis$extensions.testapis.extensions.PrefixedMessage.InnerMessage2;
 export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageSquashedMessage = _$testapis$extensions.testapis.extensions.PrefixedMessage.SquashedMessage;
@@ -1689,9 +1745,35 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
     },
     sourceType: { module: __filename, export: \\"_$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessage\\" }
 });
+export const TestPrefixInterfaceMessage = nexus.interfaceType({
+    name: \\"TestPrefixInterfaceMessage\\",
+    definition(t) {
+        t.field(\\"id\\", {
+            type: nexus.nonNull(\\"String\\"),
+            resolve(root) {
+                const value = root.id;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value.toString();
+            }
+        });
+    },
+    sourceType: { module: __filename, export: \\"_$testapis$extensions$testapis$extensions$TestPrefixInterfaceMessage\\" }
+});
 export const TestPrefixPrefixedMessageInnerMessage = nexus.objectType({
     name: \\"TestPrefixPrefixedMessageInnerMessage\\",
     definition(t) {
+        t.field(\\"id\\", {
+            type: nexus.nonNull(\\"String\\"),
+            resolve(root) {
+                const value = root.id;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value.toString();
+            }
+        });
         t.field(\\"body\\", {
             type: nexus.nonNull(\\"String\\"),
             resolve(root) {
@@ -1711,6 +1793,16 @@ export const TestPrefixPrefixedMessageInnerMessage = nexus.objectType({
 export const TestPrefixPrefixedMessageInnerMessage2 = nexus.objectType({
     name: \\"TestPrefixPrefixedMessageInnerMessage2\\",
     definition(t) {
+        t.field(\\"id\\", {
+            type: nexus.nonNull(\\"String\\"),
+            resolve(root) {
+                const value = root.id;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value.toString();
+            }
+        });
         t.field(\\"body\\", {
             type: nexus.nonNull(\\"String\\"),
             resolve(root) {
@@ -1747,9 +1839,20 @@ export const TestPrefixPrefixedMessageInput = nexus.inputObjectType({
         });
     }
 });
+export const TestPrefixInterfaceMessageInput = nexus.inputObjectType({
+    name: \\"TestPrefixInterfaceMessageInput\\",
+    definition(t) {
+        t.field(\\"id\\", {
+            type: nexus.nonNull(\\"String\\")
+        });
+    }
+});
 export const TestPrefixPrefixedMessageInnerMessageInput = nexus.inputObjectType({
     name: \\"TestPrefixPrefixedMessageInnerMessageInput\\",
     definition(t) {
+        t.field(\\"id\\", {
+            type: nexus.nonNull(\\"String\\")
+        });
         t.field(\\"body\\", {
             type: nexus.nonNull(\\"String\\")
         });
@@ -1758,6 +1861,9 @@ export const TestPrefixPrefixedMessageInnerMessageInput = nexus.inputObjectType(
 export const TestPrefixPrefixedMessageInnerMessage2Input = nexus.inputObjectType({
     name: \\"TestPrefixPrefixedMessageInnerMessage2Input\\",
     definition(t) {
+        t.field(\\"id\\", {
+            type: nexus.nonNull(\\"String\\")
+        });
         t.field(\\"body\\", {
             type: nexus.nonNull(\\"String\\")
         });
@@ -1783,6 +1889,19 @@ export const TestPrefixPrefixedEnum = nexus.enumType({
         },
         {
             name: \\"PREFIXED_BAR\\",
+            value: 2
+        }
+    ]
+});
+export const TestPrefixInterfaceMessageType = nexus.enumType({
+    name: \\"TestPrefixInterfaceMessageType\\",
+    members: [
+        {
+            name: \\"INNER\\",
+            value: 1
+        },
+        {
+            name: \\"INNER2\\",
             value: 2
         }
     ]

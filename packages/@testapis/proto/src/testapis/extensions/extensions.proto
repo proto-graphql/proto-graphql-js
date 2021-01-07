@@ -29,11 +29,13 @@ message CreatePrefixedMessageRequest {
 
 message PrefixedMessage {
   message InnerMessage {
-    string body = 1;
+    uint64 id = 1;
+    string body = 2;
   }
 
   message InnerMessage2 {
-    string body = 1;
+    uint64 id = 1;
+    string body = 2;
   }
 
   message SquashedMessage {
@@ -67,6 +69,8 @@ message PrefixedMessage {
     InnerMessage oneof_not_ignored_field = 11;
     InnerMessage2 oneof_ignored_field = 12 [(graphql.field).ignore =  true];
   }
+
+  InterfaceMessage interface_message = 13 [(graphql.field).ignore = true];
 }
 
 enum PrefixedEnum {
@@ -89,4 +93,17 @@ enum IgnoredEnum {
   IGNORED_ENUM_UNSPECIFIED = 0;
   IGNORED_FOO = 1;
   IGNORED_BAR = 2;
+}
+
+message InterfaceMessage {
+  option (graphql.object_type).interface = true;
+
+  enum Type {
+    TYPE_UNSPECIFIED = 0;
+    INNER = 1;
+    INNER2 = 2;
+  }
+
+  uint64 id = 1;
+  Type type = 2 [(graphql.field).ignore = true];
 }

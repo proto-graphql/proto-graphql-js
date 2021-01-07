@@ -108,6 +108,10 @@ export function isIgnoredType(type: ProtoMessage | ProtoEnum): boolean {
   return type.descriptor.getOptions()?.getExtension(ext)?.getIgnore() ?? false;
 }
 
+export function isInterface(m: ProtoMessage): boolean {
+  return m.descriptor.getOptions()?.getExtension(extensions.objectType)?.getInterface() ?? false;
+}
+
 export function isSquashedUnion(m: ProtoMessage): boolean {
   return m.descriptor.getOptions()?.getExtension(extensions.objectType)?.getSquashUnion() ?? false;
 }
