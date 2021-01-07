@@ -1509,8 +1509,7 @@ export const TestPrefixInterfaceMessage = nexus.interfaceType({
                 return value.toString();
             }
         });
-    },
-    sourceType: { module: __filename, export: \\"_$testapis$extensions$extensions_pb$TestPrefixInterfaceMessage\\" }
+    }
 });
 export const TestPrefixPrefixedMessageInnerMessage = nexus.objectType({
     name: \\"TestPrefixPrefixedMessageInnerMessage\\",
@@ -1807,8 +1806,7 @@ export const TestPrefixInterfaceMessage = nexus.interfaceType({
                 return value.toString();
             }
         });
-    },
-    sourceType: { module: __filename, export: \\"_$testapis$extensions$testapis$extensions$TestPrefixInterfaceMessage\\" }
+    }
 });
 export const TestPrefixPrefixedMessageInnerMessage = nexus.objectType({
     name: \\"TestPrefixPrefixedMessageInnerMessage\\",

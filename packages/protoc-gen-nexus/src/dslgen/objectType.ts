@@ -61,7 +61,7 @@ function createObjectTypeDslStmt(msg: ProtoMessage, reg: ProtoRegistry, opts: Ge
           createDescriptionPropertyAssignment(msg),
           createObjectTypeDefinitionMethodDecl(msg, reg, opts),
           interfaceType ? null : createIsTypeOfMethodDecl(msg, opts),
-          ts.factory.createPropertyAssignment("sourceType", sourceTypeExpr(msg, opts)),
+          interfaceType ? null : ts.factory.createPropertyAssignment("sourceType", sourceTypeExpr(msg, opts)),
         ].filter(onlyNonNull()),
         true
       ),
