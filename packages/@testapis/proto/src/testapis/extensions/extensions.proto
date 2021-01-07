@@ -90,6 +90,11 @@ message IgnoredMessage {
   message NotIgnored {
     string body = 1;
   }
+
+  oneof ignored_oneof {
+    PrefixedMessage.InnerMessage ignored_oneof_field = 3;
+    PrefixedMessage.InnerMessage2 ignored_oneof_field_2 = 4;
+  }
 }
 
 enum IgnoredEnum {

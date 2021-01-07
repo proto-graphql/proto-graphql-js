@@ -149,6 +149,9 @@ export function isIgnoredField(field: ProtoField | ProtoEnumValue | ProtoOneof):
   } else if (field.kind === "EnumValue") {
     ext = extensions.enumValue;
   } else if (field.kind === "Oneof") {
+    if (isIgnoredType(field.parent)) {
+      return true;
+    }
     ext = extensions.oneof;
   } else {
     const _exhaustiveCheck: never = field;
