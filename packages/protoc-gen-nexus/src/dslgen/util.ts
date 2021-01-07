@@ -94,9 +94,6 @@ export function createDeprecationPropertyAssignment(
 
 export function isIgnoredType(type: ProtoMessage | ProtoEnum): boolean {
   let ext: ExtensionFieldInfo<{ getIgnore(): boolean }>;
-  if (type.parent.kind === "Message" && isIgnoredType(type.parent)) {
-    return true;
-  }
   if (type.kind === "Message") {
     ext = extensions.objectType;
   } else if (type.kind === "Enum") {

@@ -15,7 +15,7 @@ extend google.protobuf.FileOptions {
 }
 
 message GraphqlObjectTypeOptions {
-  // If `ignore` is true, GraphQL object type and input type are not generated.
+  // Do not generate GraphQL Object and Input. Nested types will not be ignored.
   bool ignore = 1;
   // If `squash_union` is true, the message is converted to `union` instead of object type.
   //
