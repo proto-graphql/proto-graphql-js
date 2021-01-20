@@ -56,6 +56,7 @@ export interface ProtoFile extends ProtoBase<"File"> {
    */
   readonly googleProtobufImportPath: string;
   readonly deprecated: boolean;
+  collectTypesRecursively(): [ProtoMessage[], ProtoEnum[]];
 }
 
 export interface ProtoService extends ProtoBase<"Service"> {

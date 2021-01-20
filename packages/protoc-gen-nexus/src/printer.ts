@@ -1,37 +1,28 @@
 import ts from "typescript";
 import {
-  createEnumTypeDslStmts,
-  createImportNexusDecl,
-  createImportProtoDecls,
-  createImportUnwrapFuncDecls,
-  createInputObjectTypeDslStmts,
-  createObjectTypeDslStmts,
-  createOneofUnionTypeDslStmts,
-  createReExportProtoStmts,
+  buildTypesFromFile,
+  createImportDecls,
+  createReExportStmts,
+  createTypeDslStmts,
   GenerationParams,
 } from "./dslgen";
 import { ProtoFile, ProtoRegistry } from "./protogen";
 
 export function printSource(registry: ProtoRegistry, file: ProtoFile, opts: GenerationParams): string {
-  const [msgs, enums] = registry.collectTypes(file);
+  const types = buildTypesFromFile(file, registry, opts);
 
   const ast: ts.Statement[] = [
     // `import * as nexus from "nexus";`
-    createImportNexusDecl(),
     // `import * as proto_nexus from "proto-nexus";`
-    ...createImportUnwrapFuncDecls(msgs, opts),
     // `import * as _$hello$hello_pb from "./hello/hello_pb";`
-    ...createImportProtoDecls(msgs, opts),
+    ...createImportDecls(types),
     // `export _$hello$hello_pb$Hello = _$hello$hello_pb.Hello;`
-    ...createReExportProtoStmts(msgs, opts),
-    // `export cosnt Oneof = unionType({ ... });`
-    ...createOneofUnionTypeDslStmts(msgs, registry),
+    ...createReExportStmts(types),
     // `export cosnt Hello = objectType({ ... });`
-    ...createObjectTypeDslStmts(msgs, registry, opts),
     // `export cosnt HelloInput = inputObjectType({ ... });`
-    ...createInputObjectTypeDslStmts(msgs, registry, opts),
+    // `export cosnt Oneof = unionType({ ... });`
     // `export const Role = enumType({ ... });`
-    ...createEnumTypeDslStmts(enums),
+    ...createTypeDslStmts(types),
   ];
 
   const nexusFile = ts.factory.updateSourceFile(
