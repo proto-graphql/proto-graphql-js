@@ -1,14 +1,10 @@
 import ts from "typescript";
-import { ProtoEnum, ProtoEnumValue } from "../protogen";
+import { EnumType, EnumTypeValue } from "../types";
 import {
   createDeprecationPropertyAssignment,
   createDescriptionPropertyAssignment,
   createDslExportConstStmt,
   createNexusCallExpr,
-  gqlTypeName,
-  isEnumValueForUnspecified,
-  isIgnoredField,
-  isIgnoredType,
   onlyNonNull,
 } from "./util";
 
@@ -21,35 +17,18 @@ import {
  * })
  * ```
  */
-export function createEnumTypeDslStmts(enums: ReadonlyArray<ProtoEnum>): ts.Statement[] {
-  return enums.filter((e) => !isIgnoredType(e)).map(createEnumTypeDslStmt);
-}
-
-/**
- * @example
- * ```ts
- * export cosnt Hello = enumType({
- *   name: "Hello",
- *   // ...
- * })
- * ```
- */
-function createEnumTypeDslStmt(en: ProtoEnum): ts.Statement {
-  const typeName = gqlTypeName(en);
+export function createEnumTypeDslStmt(type: EnumType): ts.Statement {
   return createDslExportConstStmt(
-    typeName,
+    type.typeName,
     createNexusCallExpr("enumType", [
       ts.factory.createObjectLiteralExpression(
         [
-          ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(typeName)),
-          createDescriptionPropertyAssignment(en),
+          ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(type.typeName)),
+          createDescriptionPropertyAssignment(type),
           ts.factory.createPropertyAssignment(
             "members",
             ts.factory.createArrayLiteralExpression(
-              en.values
-                .filter((ev) => !isEnumValueForUnspecified(ev))
-                .filter((ev) => !isIgnoredField(ev))
-                .map(createEnumValueExpr),
+              type.values.filter((v) => !v.isIgnored() && !v.isUnespecified()).map(createEnumValueExpr),
               true // multiline
             )
           ),
@@ -60,7 +39,7 @@ function createEnumTypeDslStmt(en: ProtoEnum): ts.Statement {
   );
 }
 
-function createEnumValueExpr(ev: ProtoEnumValue): ts.Expression {
+function createEnumValueExpr(ev: EnumTypeValue): ts.Expression {
   return ts.factory.createObjectLiteralExpression(
     [
       ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(ev.name)),

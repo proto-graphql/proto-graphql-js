@@ -1,7 +1,3 @@
-export * from "./objectType";
-export * from "./inputObjectType";
-export * from "./enumType";
-export * from "./oneofUnionType";
-export * from "./import";
-export * from "./export";
+export { buildTypesFromFile } from "./types";
 export type { GenerationParams } from "./types";
+export * from "./printers";

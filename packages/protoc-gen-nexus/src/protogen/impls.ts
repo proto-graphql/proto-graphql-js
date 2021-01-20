@@ -45,31 +45,10 @@ export class ProtoRegistry {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this.fileByName[fd.getName()!] = file;
 
-    const [msgs, enums] = this.collectTypes(file);
+    const [msgs, enums] = file.collectTypesRecursively();
     for (const t of [...msgs, ...enums]) {
       this.typeByFullName[t.fullName.toString()] = t;
     }
-  }
-
-  public collectTypes(file: ProtoFile): [ProtoMessage[], ProtoEnum[]] {
-    const [msgs, enums] = [file.messages, file.enums];
-    const [childMsgs, childEnums] = this.collectTypesFromMessage(file.messages);
-    msgs.push(...childMsgs);
-    enums.push(...childEnums);
-    return [msgs, enums];
-  }
-
-  private collectTypesFromMessage(inputs: ProtoMessage[]): [ProtoMessage[], ProtoEnum[]] {
-    const msgs: ProtoMessage[] = [];
-    const enums: ProtoEnum[] = [];
-
-    for (const input of inputs) {
-      const [childMsgs, childEnums] = this.collectTypesFromMessage(input.messages);
-      msgs.push(...input.messages, ...childMsgs);
-      enums.push(...input.enums, ...childEnums);
-    }
-
-    return [msgs, enums];
   }
 }
 
@@ -114,6 +93,27 @@ export class ProtoFileImpl implements ProtoFile {
   @memo()
   get deprecated(): boolean {
     return isDeprecated(this);
+  }
+
+  public collectTypesRecursively(): [ProtoMessage[], ProtoEnum[]] {
+    const [msgs, enums] = [this.messages, this.enums];
+    const [childMsgs, childEnums] = this.collectTypesRecursivelyFromMessage(this.messages);
+    msgs.push(...childMsgs);
+    enums.push(...childEnums);
+    return [msgs, enums];
+  }
+
+  private collectTypesRecursivelyFromMessage(inputs: ProtoMessage[]): [ProtoMessage[], ProtoEnum[]] {
+    const msgs: ProtoMessage[] = [];
+    const enums: ProtoEnum[] = [];
+
+    for (const input of inputs) {
+      const [childMsgs, childEnums] = this.collectTypesRecursivelyFromMessage(input.messages);
+      msgs.push(...input.messages, ...childMsgs);
+      enums.push(...input.enums, ...childEnums);
+    }
+
+    return [msgs, enums];
   }
 }
 

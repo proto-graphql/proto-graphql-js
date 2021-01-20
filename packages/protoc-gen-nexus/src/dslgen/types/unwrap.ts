@@ -1,6 +1,5 @@
-import { ProtoField } from "../protogen";
-import { GenerationParams } from "./types";
-import { uniqueImportAlias } from "./util";
+import { ProtoField } from "../../protogen";
+import { GenerationParams, uniqueImportAlias } from "./util";
 
 export function getUnwrapFunc(f: ProtoField, opts: GenerationParams): UnwrapFunc | null {
   if (!f.type) return null;
