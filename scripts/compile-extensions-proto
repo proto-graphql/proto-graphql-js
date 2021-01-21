@@ -6,10 +6,11 @@ set -o pipefail
 cd $(dirname $0)/..
 
 PLUGIN_ROOT=./packages/protoc-gen-nexus
+LIBRARY_PATH=./proto-graphql
 
 ./scripts/protocw \
-  -I "$PLUGIN_ROOT/include" \
+  -I $LIBRARY_PATH \
   --plugin=protoc-gen-ts=`yarn bin protoc-gen-ts` \
   --js_out="$PLUGIN_ROOT/src/__generated__/extensions" --js_opt=import_style=commonjs,binary \
   --ts_out="$PLUGIN_ROOT/src/__generated__/extensions" \
-  $PLUGIN_ROOT/include/graphql/*.proto
+  $LIBRARY_PATH/graphql/*.proto
