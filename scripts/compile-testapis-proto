@@ -7,6 +7,7 @@ cd $(dirname $0)/..
 
 PLUGIN_ROOT=./packages/protoc-gen-nexus
 TESTAPIS_ROOT=./packages/@testapis
+LIBRARY_PATH=./proto-graphql
 
 clean() {
   rm -rf $TESTAPIS_ROOT/node-native/lib
@@ -20,7 +21,7 @@ init() {
 
 protocw() {
   ./scripts/protocw \
-    -I $PLUGIN_ROOT/include \
+    -I $LIBRARY_PATH \
     -I $TESTAPIS_ROOT/proto/src \
   "$@"
 }
@@ -34,7 +35,7 @@ execProtoc() {
     --plugin=protoc-gen-ts=`yarn bin protoc-gen-ts` \
     --js_out="$TESTAPIS_ROOT/node-native/lib" --js_opt=import_style=commonjs,binary \
     --ts_out="$TESTAPIS_ROOT/node-native/lib" \
-    ${PLUGIN_ROOT}/include/graphql/*.proto
+    ${LIBRARY_PATH}/graphql/*.proto
 
   for protoDir in $(listPackages); do
     protocw --include_source_info --include_imports --descriptor_set_out=${protoDir}/descriptor_set.pb ${protoDir}/*.proto

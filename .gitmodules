@@ -1,0 +1,3 @@
+[submodule "proto-graphql"]
+	path = proto-graphql
+	url = https://github.com/proto-graphql/proto-graphql
