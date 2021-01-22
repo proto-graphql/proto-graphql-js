@@ -10,13 +10,25 @@ type MessageWithEnums {
   optionalMyEnum: MyEnum
 
   \\"\\"\\"Optional.\\"\\"\\"
+  optionalMyEnums: [MyEnum]
+
+  \\"\\"\\"Optional.\\"\\"\\"
   optionalMyEnumWithoutUnspecified: MyEnumWithoutUnspecified
+
+  \\"\\"\\"Optional.\\"\\"\\"
+  optionalMyEnumWithoutUnspecifieds: [MyEnumWithoutUnspecified]
 
   \\"\\"\\"Required.\\"\\"\\"
   requiredMyEnum: MyEnum!
 
   \\"\\"\\"Required.\\"\\"\\"
+  requiredMyEnums: [MyEnum!]
+
+  \\"\\"\\"Required.\\"\\"\\"
   requiredMyEnumWithoutUnspecified: MyEnumWithoutUnspecified!
+
+  \\"\\"\\"Required.\\"\\"\\"
+  requiredMyEnumWithoutUnspecifieds: [MyEnumWithoutUnspecified!]
 }
 
 input MessageWithEnumsInput {
@@ -24,13 +36,25 @@ input MessageWithEnumsInput {
   optionalMyEnum: MyEnum
 
   \\"\\"\\"Optional.\\"\\"\\"
+  optionalMyEnums: [MyEnum]
+
+  \\"\\"\\"Optional.\\"\\"\\"
   optionalMyEnumWithoutUnspecified: MyEnumWithoutUnspecified
+
+  \\"\\"\\"Optional.\\"\\"\\"
+  optionalMyEnumWithoutUnspecifieds: [MyEnumWithoutUnspecified]
 
   \\"\\"\\"Required.\\"\\"\\"
   requiredMyEnum: MyEnum!
 
   \\"\\"\\"Required.\\"\\"\\"
+  requiredMyEnums: [MyEnum!]
+
+  \\"\\"\\"Required.\\"\\"\\"
   requiredMyEnumWithoutUnspecified: MyEnumWithoutUnspecified!
+
+  \\"\\"\\"Required.\\"\\"\\"
+  requiredMyEnumWithoutUnspecifieds: [MyEnumWithoutUnspecified!]
 }
 
 enum MyEnum {
@@ -62,13 +86,25 @@ type MessageWithEnums {
   optionalMyEnum: MyEnum
 
   \\"\\"\\"Optional.\\"\\"\\"
+  optionalMyEnums: [MyEnum]
+
+  \\"\\"\\"Optional.\\"\\"\\"
   optionalMyEnumWithoutUnspecified: MyEnumWithoutUnspecified
+
+  \\"\\"\\"Optional.\\"\\"\\"
+  optionalMyEnumWithoutUnspecifieds: [MyEnumWithoutUnspecified]
 
   \\"\\"\\"Required.\\"\\"\\"
   requiredMyEnum: MyEnum!
 
   \\"\\"\\"Required.\\"\\"\\"
+  requiredMyEnums: [MyEnum!]
+
+  \\"\\"\\"Required.\\"\\"\\"
   requiredMyEnumWithoutUnspecified: MyEnumWithoutUnspecified!
+
+  \\"\\"\\"Required.\\"\\"\\"
+  requiredMyEnumWithoutUnspecifieds: [MyEnumWithoutUnspecified!]
 }
 
 input MessageWithEnumsInput {
@@ -76,13 +112,25 @@ input MessageWithEnumsInput {
   optionalMyEnum: MyEnum
 
   \\"\\"\\"Optional.\\"\\"\\"
+  optionalMyEnums: [MyEnum]
+
+  \\"\\"\\"Optional.\\"\\"\\"
   optionalMyEnumWithoutUnspecified: MyEnumWithoutUnspecified
+
+  \\"\\"\\"Optional.\\"\\"\\"
+  optionalMyEnumWithoutUnspecifieds: [MyEnumWithoutUnspecified]
 
   \\"\\"\\"Required.\\"\\"\\"
   requiredMyEnum: MyEnum!
 
   \\"\\"\\"Required.\\"\\"\\"
+  requiredMyEnums: [MyEnum!]
+
+  \\"\\"\\"Required.\\"\\"\\"
   requiredMyEnumWithoutUnspecified: MyEnumWithoutUnspecified!
+
+  \\"\\"\\"Required.\\"\\"\\"
+  requiredMyEnumWithoutUnspecifieds: [MyEnumWithoutUnspecified!]
 }
 
 enum MyEnum {

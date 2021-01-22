@@ -195,7 +195,9 @@ async function validateGeneratedFiles(dir: string) {
   });
   const prog = ts.createProgram({
     rootNames,
-    options: {},
+    options: {
+      strict: true,
+    },
   });
   const diagMsgs = ts.getPreEmitDiagnostics(prog).map((d) => d.messageText);
   expect(diagMsgs).toHaveLength(0);

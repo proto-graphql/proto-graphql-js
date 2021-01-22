@@ -1,6 +1,6 @@
 import ts from "typescript";
 import { createFullNameExpr, onlyNonNull } from "../util";
-import { ObjectField, EnumType } from "../../types";
+import { ObjectField, EnumType, EnumTypeValue } from "../../types";
 import { ProtoField } from "../../../protogen";
 
 /**
@@ -35,18 +35,69 @@ export function createEnumFieldResolverStmts(
     true // multiline
   );
 
+  if (field.isList()) {
+    const guardStmts = createGuardStmts(
+      ts.factory.createIdentifier("item"),
+      whenNullStmt,
+      field.type.unspecifiedValue,
+      field.type.valuesWithIgnored
+    );
+    if (guardStmts.length === 0) {
+      return [ts.factory.createReturnStatement(valueExpr)];
+    }
+    return [
+      ts.factory.createReturnStatement(
+        ts.factory.createCallExpression(ts.factory.createPropertyAccessExpression(valueExpr, "map"), undefined, [
+          ts.factory.createArrowFunction(
+            undefined,
+            undefined,
+            [
+              ts.factory.createParameterDeclaration(
+                undefined,
+                undefined,
+                undefined,
+                "item",
+                undefined,
+                undefined,
+                undefined
+              ),
+            ],
+            undefined,
+            ts.factory.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
+            ts.factory.createBlock(
+              [...guardStmts, ts.factory.createReturnStatement(ts.factory.createIdentifier("item"))],
+              true // multiline
+            )
+          ),
+        ])
+      ),
+    ];
+  }
+
   return [
-    field.type.unspecifiedValue
+    ...createGuardStmts(valueExpr, whenNullStmt, field.type.unspecifiedValue, field.type.valuesWithIgnored),
+    ts.factory.createReturnStatement(valueExpr),
+  ];
+}
+
+function createGuardStmts(
+  valueExpr: ts.Expression,
+  thenStmt: ts.Statement,
+  unspecifiedValue: EnumTypeValue | null,
+  ignoredValues: EnumTypeValue[]
+): ts.Statement[] {
+  return [
+    unspecifiedValue
       ? ts.factory.createIfStatement(
           ts.factory.createBinaryExpression(
             valueExpr,
             ts.SyntaxKind.EqualsEqualsEqualsToken,
-            createFullNameExpr(field.type.unspecifiedValue.fullName)
+            createFullNameExpr(unspecifiedValue.fullName)
           ),
-          whenNullStmt
+          thenStmt
         )
       : null,
-    ...field.type.valuesWithIgnored.map((ev) =>
+    ...ignoredValues.map((ev) =>
       ev.isIgnored()
         ? ts.factory.createIfStatement(
             ts.factory.createBinaryExpression(
@@ -67,6 +118,5 @@ export function createEnumFieldResolverStmts(
           )
         : null
     ),
-    ts.factory.createReturnStatement(valueExpr),
   ].filter(onlyNonNull());
 }
