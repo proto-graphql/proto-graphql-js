@@ -2036,6 +2036,48 @@ export const MessageWithEnums = nexus.objectType({
                 return value;
             }
         });
+        t.field(\\"requiredMyEnums\\", {
+            type: nexus.list(nexus.nonNull(\\"MyEnum\\")),
+            description: \\"Required.\\",
+            resolve(root) {
+                const value = root.getRequiredMyEnumsList();
+                return value.map(item => {
+                    if (item === _$testapis$enums$enums_pb.MyEnum.MY_ENUM_UNSPECIFIED) {
+                        throw new Error(\\"requiredMyEnums is required field. But got unspecified.\\");
+                    }
+                    return item;
+                });
+            }
+        });
+        t.field(\\"optionalMyEnums\\", {
+            type: nexus.list(nexus.nullable(\\"MyEnum\\")),
+            description: \\"Optional.\\",
+            resolve(root) {
+                const value = root.getOptionalMyEnumsList();
+                return value.map(item => {
+                    if (item === _$testapis$enums$enums_pb.MyEnum.MY_ENUM_UNSPECIFIED) {
+                        return null;
+                    }
+                    return item;
+                });
+            }
+        });
+        t.field(\\"requiredMyEnumWithoutUnspecifieds\\", {
+            type: nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\")),
+            description: \\"Required.\\",
+            resolve(root) {
+                const value = root.getRequiredMyEnumWithoutUnspecifiedsList();
+                return value;
+            }
+        });
+        t.field(\\"optionalMyEnumWithoutUnspecifieds\\", {
+            type: nexus.list(nexus.nullable(\\"MyEnumWithoutUnspecified\\")),
+            description: \\"Optional.\\",
+            resolve(root) {
+                const value = root.getOptionalMyEnumWithoutUnspecifiedsList();
+                return value;
+            }
+        });
     },
     isTypeOf(data: unknown) {
         return data instanceof _$testapis$enums$enums_pb.MessageWithEnums;
@@ -2059,6 +2101,22 @@ export const MessageWithEnumsInput = nexus.inputObjectType({
         });
         t.field(\\"optionalMyEnumWithoutUnspecified\\", {
             type: nexus.nullable(\\"MyEnumWithoutUnspecified\\"),
+            description: \\"Optional.\\"
+        });
+        t.field(\\"requiredMyEnums\\", {
+            type: nexus.list(nexus.nonNull(\\"MyEnum\\")),
+            description: \\"Required.\\"
+        });
+        t.field(\\"optionalMyEnums\\", {
+            type: nexus.list(nexus.nullable(\\"MyEnum\\")),
+            description: \\"Optional.\\"
+        });
+        t.field(\\"requiredMyEnumWithoutUnspecifieds\\", {
+            type: nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\")),
+            description: \\"Required.\\"
+        });
+        t.field(\\"optionalMyEnumWithoutUnspecifieds\\", {
+            type: nexus.list(nexus.nullable(\\"MyEnumWithoutUnspecified\\")),
             description: \\"Optional.\\"
         });
     }
@@ -2161,6 +2219,60 @@ export const MessageWithEnums = nexus.objectType({
                 return value;
             }
         });
+        t.field(\\"requiredMyEnums\\", {
+            type: nexus.list(nexus.nonNull(\\"MyEnum\\")),
+            description: \\"Required.\\",
+            resolve(root) {
+                const value = root.requiredMyEnums;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value.map(item => {
+                    if (item === _$testapis$enums.testapi.enums.MyEnum.MY_ENUM_UNSPECIFIED) {
+                        throw new Error(\\"requiredMyEnums is required field. But got unspecified.\\");
+                    }
+                    return item;
+                });
+            }
+        });
+        t.field(\\"optionalMyEnums\\", {
+            type: nexus.list(nexus.nullable(\\"MyEnum\\")),
+            description: \\"Optional.\\",
+            resolve(root) {
+                const value = root.optionalMyEnums;
+                if (value == null) {
+                    return null;
+                }
+                return value.map(item => {
+                    if (item === _$testapis$enums.testapi.enums.MyEnum.MY_ENUM_UNSPECIFIED) {
+                        return null;
+                    }
+                    return item;
+                });
+            }
+        });
+        t.field(\\"requiredMyEnumWithoutUnspecifieds\\", {
+            type: nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\")),
+            description: \\"Required.\\",
+            resolve(root) {
+                const value = root.requiredMyEnumWithoutUnspecifieds;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
+            }
+        });
+        t.field(\\"optionalMyEnumWithoutUnspecifieds\\", {
+            type: nexus.list(nexus.nullable(\\"MyEnumWithoutUnspecified\\")),
+            description: \\"Optional.\\",
+            resolve(root) {
+                const value = root.optionalMyEnumWithoutUnspecifieds;
+                if (value == null) {
+                    return null;
+                }
+                return value;
+            }
+        });
     },
     isTypeOf(data: unknown) {
         return data instanceof _$testapis$enums.testapi.enums.MessageWithEnums;
@@ -2184,6 +2296,22 @@ export const MessageWithEnumsInput = nexus.inputObjectType({
         });
         t.field(\\"optionalMyEnumWithoutUnspecified\\", {
             type: nexus.nullable(\\"MyEnumWithoutUnspecified\\"),
+            description: \\"Optional.\\"
+        });
+        t.field(\\"requiredMyEnums\\", {
+            type: nexus.list(nexus.nonNull(\\"MyEnum\\")),
+            description: \\"Required.\\"
+        });
+        t.field(\\"optionalMyEnums\\", {
+            type: nexus.list(nexus.nullable(\\"MyEnum\\")),
+            description: \\"Optional.\\"
+        });
+        t.field(\\"requiredMyEnumWithoutUnspecifieds\\", {
+            type: nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\")),
+            description: \\"Required.\\"
+        });
+        t.field(\\"optionalMyEnumWithoutUnspecifieds\\", {
+            type: nexus.list(nexus.nullable(\\"MyEnumWithoutUnspecified\\")),
             description: \\"Optional.\\"
         });
     }

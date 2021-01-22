@@ -11,6 +11,14 @@ message MessageWithEnums {
   MyEnumWithoutUnspecified required_my_enum_without_unspecified = 3;
   // Optional.
   MyEnumWithoutUnspecified optional_my_enum_without_unspecified = 4;
+  // Required.
+  repeated MyEnum required_my_enums = 5;
+  // Optional.
+  repeated MyEnum optional_my_enums = 6;
+  // Required.
+  repeated MyEnumWithoutUnspecified required_my_enum_without_unspecifieds = 7;
+  // Optional.
+  repeated MyEnumWithoutUnspecified optional_my_enum_without_unspecifieds = 8;
 }
 
 enum MyEnum {
