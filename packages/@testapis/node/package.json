@@ -1,9 +1,9 @@
 {
   "name": "@testapis/node",
-  "version": "0.4.2",
+  "version": "0.4.4",
   "description": "Generated codes with protobufjs",
   "private": true,
   "devDependencies": {
-    "@testapis/proto": "^0.4.2"
+    "@testapis/proto": "^0.4.4"
   }
 }
