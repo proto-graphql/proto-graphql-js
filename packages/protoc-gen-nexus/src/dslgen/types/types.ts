@@ -123,8 +123,8 @@ export class DslFile {
   }
 }
 
-export class ObjectType {
-  constructor(private readonly proto: ProtoMessage, private readonly opts: GenerationParams) {}
+abstract class TypeBase<P extends ProtoMessage | ProtoEnum | ProtoOneof> {
+  constructor(protected readonly proto: P, protected readonly opts: GenerationParams) {}
 
   get typeName(): string {
     return gqlTypeName(this.proto);
@@ -134,19 +134,36 @@ export class ObjectType {
     return descriptionFromProto(this.proto);
   }
 
-  get protoImportPath(): string {
-    return protoImportPath(this.proto, this.opts);
-  }
-
   get exportTypes(): { name: string; type: FullName }[] {
-    return [{ name: this.sourceTypeExportAlias, type: this.protoTypeFullName }];
+    return [];
   }
 
   get importModules(): { alias: string; module: string }[] {
+    return modulesWithUniqueImportAlias(["nexus"]);
+  }
+}
+
+export class ObjectType extends TypeBase<ProtoMessage> {
+  /**
+   * @override
+   */
+  get exportTypes(): { name: string; type: FullName }[] {
+    return [...super.exportTypes, { name: this.sourceTypeExportAlias, type: this.protoTypeFullName }];
+  }
+
+  /**
+   * @override
+   */
+  get importModules(): { alias: string; module: string }[] {
     return [
-      ...modulesWithUniqueImportAlias(["nexus", this.protoImportPath]),
+      ...super.importModules,
+      ...modulesWithUniqueImportAlias([this.protoImportPath]),
       ...this.fields.flatMap((f) => f.importModules),
     ];
+  }
+
+  get protoImportPath(): string {
+    return protoImportPath(this.proto, this.opts);
   }
 
   get sourceTypeExportAlias(): string {
@@ -262,23 +279,12 @@ class OneofMemberField extends ObjectField<ProtoField, ObjectType> {
   }
 }
 
-export class InputObjectType {
-  constructor(private readonly proto: ProtoMessage, private readonly opts: GenerationParams) {}
-
+export class InputObjectType extends TypeBase<ProtoMessage> {
+  /**
+   * @override
+   */
   get typeName(): string {
     return gqlTypeName(this.proto, { input: true });
-  }
-
-  get description(): string | null {
-    return descriptionFromProto(this.proto);
-  }
-
-  get exportTypes(): { name: string; type: FullName }[] {
-    return [];
-  }
-
-  get importModules(): { alias: string; module: string }[] {
-    return modulesWithUniqueImportAlias(["nexus"]);
   }
 
   get fields(): InputObjectField<any>[] {
@@ -319,25 +325,7 @@ export class InputObjectField<T extends GqlType> {
 
 export class InterfaceType extends ObjectType {}
 
-export class OneofUnionType {
-  constructor(private readonly proto: ProtoOneof, private readonly opts: GenerationParams) {}
-
-  get typeName(): string {
-    return gqlTypeName(this.proto);
-  }
-
-  get description(): string | null {
-    return descriptionFromProto(this.proto);
-  }
-
-  get exportTypes(): { name: string; type: FullName }[] {
-    return [];
-  }
-
-  get importModules(): { alias: string; module: string }[] {
-    return modulesWithUniqueImportAlias(["nexus"]);
-  }
-
+export class OneofUnionType extends TypeBase<ProtoOneof> {
   get fields(): OneofMemberField[] {
     return this.proto.fields
       .filter((f) => !isIgnoredField(f))
@@ -351,26 +339,11 @@ export class OneofUnionType {
   }
 }
 
-export class SquashedOneofUnionType {
+export class SquashedOneofUnionType extends TypeBase<ProtoMessage> {
   private readonly oneofUnionType: OneofUnionType;
-  constructor(private readonly proto: ProtoMessage, private readonly opts: GenerationParams) {
+  constructor(proto: ProtoMessage, opts: GenerationParams) {
+    super(proto, opts);
     this.oneofUnionType = new OneofUnionType(proto.oneofs[0], opts);
-  }
-
-  get typeName(): string {
-    return gqlTypeName(this.proto);
-  }
-
-  get description(): string | null {
-    return descriptionFromProto(this.proto);
-  }
-
-  get exportTypes(): { name: string; type: FullName }[] {
-    return [];
-  }
-
-  get importModules(): { alias: string; module: string }[] {
-    return modulesWithUniqueImportAlias(["nexus"]);
   }
 
   get fields(): OneofMemberField[] {
@@ -383,25 +356,7 @@ export class SquashedOneofUnionType {
   }
 }
 
-export class EnumType {
-  constructor(private readonly proto: ProtoEnum, private readonly opts: GenerationParams) {}
-
-  get typeName(): string {
-    return gqlTypeName(this.proto);
-  }
-
-  get description(): string | null {
-    return descriptionFromProto(this.proto);
-  }
-
-  get exportTypes(): { name: string; type: FullName }[] {
-    return [];
-  }
-
-  get importModules(): { alias: string; module: string }[] {
-    return modulesWithUniqueImportAlias(["nexus"]);
-  }
-
+export class EnumType extends TypeBase<ProtoEnum> {
   get protoImportPath(): string {
     return protoImportPath(this.proto, this.opts);
   }
