@@ -54,16 +54,16 @@ function buildFromProtoMessage(
   return new ObjectType(msg, opts);
 }
 
-export function buildTypesFromFile(proto: ProtoFile, registry: ProtoRegistry, options: GenerationParams) {
-  return new File(proto, registry, options).buildTypes();
-}
-
-class File {
+export class DslFile {
   constructor(
     private readonly proto: ProtoFile,
     private readonly registry: ProtoRegistry,
     private options: GenerationParams
   ) {}
+
+  get filename(): string {
+    return this.proto.name.replace(/\.proto$/, "_pb_nexus.ts");
+  }
 
   public buildTypes() {
     const [msgs, enums] = this.proto.collectTypesRecursively();
