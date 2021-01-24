@@ -1,5 +1,12 @@
 import ts from "typescript";
-import { DslFile, createImportDecls, createReExportStmts, createTypeDslStmts, GenerationParams } from "./dslgen";
+import {
+  collectTypesFromFile,
+  DslFile,
+  createImportDecls,
+  createReExportStmts,
+  createTypeDslStmts,
+  GenerationParams,
+} from "./dslgen";
 import { ProtoFile, ProtoRegistry } from "./protogen";
 
 export function printSource(
@@ -7,8 +14,8 @@ export function printSource(
   file: ProtoFile,
   opts: GenerationParams
 ): { filename: string; content: string } {
-  const dslFile = new DslFile(file, registry, opts);
-  const types = dslFile.buildTypes();
+  const dslFile = new DslFile(file, opts);
+  const types = collectTypesFromFile(dslFile, registry);
 
   const ast: ts.Statement[] = [
     // `import * as nexus from "nexus";`
