@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package testapis.extensions;
+
+import "graphql/schema.proto";
+
+option (graphql.schema) = {
+  ignore: true
+};
+
+message IgnoredFileMessage {
+  string body = 1;
+}

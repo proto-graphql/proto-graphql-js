@@ -54,7 +54,10 @@ describe("nested protobuf types", () => {
 });
 
 describe("protobuf custom options", () => {
-  itGeneratesNexusDSLsToMatchSnapshtos("extensions", ["extensions/extensions_pb_nexus.ts"]);
+  itGeneratesNexusDSLsToMatchSnapshtos("extensions", [
+    "extensions/extensions_pb_nexus.ts",
+    "extensions/ignored_pb_nexus.ts",
+  ]);
 });
 
 describe("protobuf oneof", () => {

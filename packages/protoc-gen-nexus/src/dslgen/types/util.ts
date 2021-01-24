@@ -148,6 +148,9 @@ export function exceptRequestOrResponse(reg: ProtoRegistry): (m: ProtoMessage) =
 
 export function isIgnoredType(type: ProtoMessage | ProtoEnum): boolean {
   let ext: ExtensionFieldInfo<{ getIgnore(): boolean }>;
+  if (type.file.descriptor.getOptions()?.getExtension(extensions.schema)?.getIgnore()) {
+    return true;
+  }
   if (type.kind === "Message") {
     ext = extensions.objectType;
   } else if (type.kind === "Enum") {
