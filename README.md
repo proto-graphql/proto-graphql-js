@@ -97,3 +97,7 @@ export const schema = makeSchema({
   },
 })
 ```
+
+## Author
+
+- [Masayuki Izumi (@izumin5210)](https://github.com/izumin5210)
