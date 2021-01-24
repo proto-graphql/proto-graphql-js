@@ -1,7 +1,6 @@
 import ts from "typescript";
 import { createFullNameExpr, onlyNonNull } from "../util";
 import { ObjectField, EnumType, EnumTypeValue } from "../../types";
-import { ProtoField } from "../../../protogen";
 import { createMapExpr } from "./utils";
 
 /**
@@ -20,10 +19,7 @@ import { createMapExpr } from "./utils";
  * return root.myEnum
  * ```
  */
-export function createEnumFieldResolverStmts(
-  valueExpr: ts.Expression,
-  field: ObjectField<ProtoField, EnumType>
-): ts.Statement[] {
+export function createEnumFieldResolverStmts(valueExpr: ts.Expression, field: ObjectField<EnumType>): ts.Statement[] {
   let whenNullStmt: ts.Statement = field.isNullable()
     ? ts.factory.createReturnStatement(ts.factory.createToken(ts.SyntaxKind.NullKeyword))
     : ts.factory.createThrowStatement(

@@ -4,18 +4,18 @@ import { createObjectFieldResolverStmts } from "./objectFieldResolver";
 import { craeteOneofUnionFieldResolverStmts } from "./oneoUnionfFieldResolver";
 import { createScalarFieldResolverStmts } from "./scalarFieldResolver";
 import { onlyNonNull } from "../util";
-import { EnumType, ObjectField, OneofUnionType, ScalarType, SquashedOneofUnionType } from "../../types";
+import { EnumType, ObjectField, ObjectOneofField, ScalarType, SquashedOneofUnionType } from "../../types";
 
-export function createFieldResolverDecl(field: ObjectField<any, any>): ts.MethodDeclaration {
+export function createFieldResolverDecl(field: ObjectField<any> | ObjectOneofField): ts.MethodDeclaration {
   return createMethodDeclWithValueExpr(field, (valueExpr) => {
+    if (field instanceof ObjectOneofField) {
+      return craeteOneofUnionFieldResolverStmts(valueExpr, field);
+    }
     if (field.type instanceof ScalarType) {
       return createScalarFieldResolverStmts(valueExpr, field);
     }
     if (field.type instanceof EnumType) {
       return createEnumFieldResolverStmts(valueExpr, field);
-    }
-    if (field.type instanceof OneofUnionType) {
-      return craeteOneofUnionFieldResolverStmts(valueExpr, field);
     }
     if (field.type instanceof SquashedOneofUnionType) {
       return craeteOneofUnionFieldResolverStmts(valueExpr, field);
@@ -25,7 +25,7 @@ export function createFieldResolverDecl(field: ObjectField<any, any>): ts.Method
 }
 
 function createMethodDeclWithValueExpr(
-  field: ObjectField<any, any>,
+  field: ObjectField<any> | ObjectOneofField,
   stmtsFn: (valueExpr: ts.Expression) => ts.Statement[]
 ): ts.MethodDeclaration {
   return ts.factory.createMethodDeclaration(
@@ -39,7 +39,7 @@ function createMethodDeclWithValueExpr(
     undefined,
     ts.factory.createBlock(
       [
-        !field.isOneof()
+        field instanceof ObjectField
           ? ts.factory.createVariableStatement(
               undefined,
               ts.factory.createVariableDeclarationList(
@@ -76,7 +76,7 @@ function createMethodDeclWithValueExpr(
               )
             )
           : null,
-        ...stmtsFn(ts.factory.createIdentifier(field.isOneof() ? "root" : "value")),
+        ...stmtsFn(ts.factory.createIdentifier(field instanceof ObjectField ? "value" : "root")),
       ].filter(onlyNonNull()),
       true // multiline
     )

@@ -1,11 +1,11 @@
 import ts from "typescript";
 import { pascalCase, constantCase } from "change-case";
 import { createFullNameExpr } from "../util";
-import { ObjectField, OneofUnionType, SquashedOneofUnionType } from "../../types";
+import { ObjectField, ObjectOneofField, SquashedOneofUnionType } from "../../types";
 
 export function craeteOneofUnionFieldResolverStmts(
   parentExpr: ts.Expression,
-  field: ObjectField<any, OneofUnionType | SquashedOneofUnionType>
+  field: ObjectField<SquashedOneofUnionType> | ObjectOneofField
 ): ts.Statement[] {
   const nullable = field.isNullable();
   // FIXME: remove
@@ -45,7 +45,7 @@ export function craeteOneofUnionFieldResolverStmts(
                   ? ts.factory.createReturnStatement(ts.factory.createToken(ts.SyntaxKind.NullKeyword))
                   : ts.factory.createThrowStatement(ts.factory.createStringLiteral("unreachable")),
               ],
-              true // multiline
+              true // multline
             ),
           ]
         ),

@@ -10,6 +10,7 @@ import {
   OneofUnionType,
   SquashedOneofUnionType,
   FullName,
+  ObjectOneofField,
 } from "../types";
 
 /**
@@ -40,7 +41,8 @@ export function createDescriptionPropertyAssignment(
     | OneofUnionType
     | SquashedOneofUnionType
     | EnumType
-    | ObjectField<any, any>
+    | ObjectField<any>
+    | ObjectOneofField
     | InputObjectField<any>
     | EnumTypeValue
 ): ts.PropertyAssignment | null {
@@ -49,7 +51,7 @@ export function createDescriptionPropertyAssignment(
 }
 
 export function createDeprecationPropertyAssignment(
-  gql: ObjectField<any, any> | InputObjectField<any> | EnumTypeValue
+  gql: ObjectField<any> | ObjectOneofField | InputObjectField<any> | EnumTypeValue
 ): ts.PropertyAssignment | null {
   const reason = gql.deprecationReason;
   if (!reason) return null;
