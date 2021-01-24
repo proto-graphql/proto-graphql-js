@@ -2804,6 +2804,114 @@ export const Primitives = nexus.objectType({
                 return value;
             }
         });
+        t.field(\\"requiredDoubleValues\\", {
+            type: nexus.list(nexus.nonNull(\\"Float\\")),
+            resolve(root) {
+                const value = root.getRequiredDoubleValuesList();
+                return value;
+            }
+        });
+        t.field(\\"requiredFloatValues\\", {
+            type: nexus.list(nexus.nonNull(\\"Float\\")),
+            resolve(root) {
+                const value = root.getRequiredFloatValuesList();
+                return value;
+            }
+        });
+        t.field(\\"requiredInt32Values\\", {
+            type: nexus.list(nexus.nonNull(\\"Int\\")),
+            resolve(root) {
+                const value = root.getRequiredInt32ValuesList();
+                return value;
+            }
+        });
+        t.field(\\"requiredInt64Values\\", {
+            type: nexus.list(nexus.nonNull(\\"String\\")),
+            resolve(root) {
+                const value = root.getRequiredInt64ValuesList();
+                return value.map(item => {
+                    return item.toString();
+                });
+            }
+        });
+        t.field(\\"requiredUint32Values\\", {
+            type: nexus.list(nexus.nonNull(\\"Int\\")),
+            resolve(root) {
+                const value = root.getRequiredUint32ValuesList();
+                return value;
+            }
+        });
+        t.field(\\"requiredUint64Values\\", {
+            type: nexus.list(nexus.nonNull(\\"String\\")),
+            resolve(root) {
+                const value = root.getRequiredUint64ValuesList();
+                return value.map(item => {
+                    return item.toString();
+                });
+            }
+        });
+        t.field(\\"requiredSint32Values\\", {
+            type: nexus.list(nexus.nonNull(\\"Int\\")),
+            resolve(root) {
+                const value = root.getRequiredSint32ValuesList();
+                return value;
+            }
+        });
+        t.field(\\"requiredSint64Values\\", {
+            type: nexus.list(nexus.nonNull(\\"String\\")),
+            resolve(root) {
+                const value = root.getRequiredSint64ValuesList();
+                return value.map(item => {
+                    return item.toString();
+                });
+            }
+        });
+        t.field(\\"requiredFixed32Values\\", {
+            type: nexus.list(nexus.nonNull(\\"Int\\")),
+            resolve(root) {
+                const value = root.getRequiredFixed32ValuesList();
+                return value;
+            }
+        });
+        t.field(\\"requiredFixed64Values\\", {
+            type: nexus.list(nexus.nonNull(\\"String\\")),
+            resolve(root) {
+                const value = root.getRequiredFixed64ValuesList();
+                return value.map(item => {
+                    return item.toString();
+                });
+            }
+        });
+        t.field(\\"requiredSfixed32Values\\", {
+            type: nexus.list(nexus.nonNull(\\"Int\\")),
+            resolve(root) {
+                const value = root.getRequiredSfixed32ValuesList();
+                return value;
+            }
+        });
+        t.field(\\"requiredSfixed64Values\\", {
+            type: nexus.list(nexus.nonNull(\\"String\\")),
+            resolve(root) {
+                const value = root.getRequiredSfixed64ValuesList();
+                return value.map(item => {
+                    return item.toString();
+                });
+            }
+        });
+        t.field(\\"requiredBoolValues\\", {
+            type: nexus.list(nexus.nonNull(\\"Boolean\\")),
+            resolve(root) {
+                const value = root.getRequiredBoolValuesList();
+                return value;
+            }
+        });
+        t.field(\\"requiredStringValues\\", {
+            type: nexus.list(nexus.nonNull(\\"String\\")),
+            resolve(root) {
+                const value = root.getRequiredStringValuesList();
+                return value;
+            }
+        });
     },
     isTypeOf(data: unknown) {
         return data instanceof _$testapis$hello$hello_pb.Primitives;
@@ -2875,6 +2983,48 @@ export const PrimitivesInput = nexus.inputObjectType({
         });
         t.field(\\"requiredStringValue\\", {
             type: nexus.nonNull(\\"String\\")
+        });
+        t.field(\\"requiredDoubleValues\\", {
+            type: nexus.list(nexus.nonNull(\\"Float\\"))
+        });
+        t.field(\\"requiredFloatValues\\", {
+            type: nexus.list(nexus.nonNull(\\"Float\\"))
+        });
+        t.field(\\"requiredInt32Values\\", {
+            type: nexus.list(nexus.nonNull(\\"Int\\"))
+        });
+        t.field(\\"requiredInt64Values\\", {
+            type: nexus.list(nexus.nonNull(\\"String\\"))
+        });
+        t.field(\\"requiredUint32Values\\", {
+            type: nexus.list(nexus.nonNull(\\"Int\\"))
+        });
+        t.field(\\"requiredUint64Values\\", {
+            type: nexus.list(nexus.nonNull(\\"String\\"))
+        });
+        t.field(\\"requiredSint32Values\\", {
+            type: nexus.list(nexus.nonNull(\\"Int\\"))
+        });
+        t.field(\\"requiredSint64Values\\", {
+            type: nexus.list(nexus.nonNull(\\"String\\"))
+        });
+        t.field(\\"requiredFixed32Values\\", {
+            type: nexus.list(nexus.nonNull(\\"Int\\"))
+        });
+        t.field(\\"requiredFixed64Values\\", {
+            type: nexus.list(nexus.nonNull(\\"String\\"))
+        });
+        t.field(\\"requiredSfixed32Values\\", {
+            type: nexus.list(nexus.nonNull(\\"Int\\"))
+        });
+        t.field(\\"requiredSfixed64Values\\", {
+            type: nexus.list(nexus.nonNull(\\"String\\"))
+        });
+        t.field(\\"requiredBoolValues\\", {
+            type: nexus.list(nexus.nonNull(\\"Boolean\\"))
+        });
+        t.field(\\"requiredStringValues\\", {
+            type: nexus.list(nexus.nonNull(\\"String\\"))
         });
     }
 });
@@ -3085,6 +3235,156 @@ export const Primitives = nexus.objectType({
                 return value;
             }
         });
+        t.field(\\"requiredDoubleValues\\", {
+            type: nexus.list(nexus.nonNull(\\"Float\\")),
+            resolve(root) {
+                const value = root.requiredDoubleValues;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
+            }
+        });
+        t.field(\\"requiredFloatValues\\", {
+            type: nexus.list(nexus.nonNull(\\"Float\\")),
+            resolve(root) {
+                const value = root.requiredFloatValues;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
+            }
+        });
+        t.field(\\"requiredInt32Values\\", {
+            type: nexus.list(nexus.nonNull(\\"Int\\")),
+            resolve(root) {
+                const value = root.requiredInt32Values;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
+            }
+        });
+        t.field(\\"requiredInt64Values\\", {
+            type: nexus.list(nexus.nonNull(\\"String\\")),
+            resolve(root) {
+                const value = root.requiredInt64Values;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value.map(item => {
+                    return item.toString();
+                });
+            }
+        });
+        t.field(\\"requiredUint32Values\\", {
+            type: nexus.list(nexus.nonNull(\\"Int\\")),
+            resolve(root) {
+                const value = root.requiredUint32Values;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
+            }
+        });
+        t.field(\\"requiredUint64Values\\", {
+            type: nexus.list(nexus.nonNull(\\"String\\")),
+            resolve(root) {
+                const value = root.requiredUint64Values;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value.map(item => {
+                    return item.toString();
+                });
+            }
+        });
+        t.field(\\"requiredSint32Values\\", {
+            type: nexus.list(nexus.nonNull(\\"Int\\")),
+            resolve(root) {
+                const value = root.requiredSint32Values;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
+            }
+        });
+        t.field(\\"requiredSint64Values\\", {
+            type: nexus.list(nexus.nonNull(\\"String\\")),
+            resolve(root) {
+                const value = root.requiredSint64Values;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value.map(item => {
+                    return item.toString();
+                });
+            }
+        });
+        t.field(\\"requiredFixed32Values\\", {
+            type: nexus.list(nexus.nonNull(\\"Int\\")),
+            resolve(root) {
+                const value = root.requiredFixed32Values;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
+            }
+        });
+        t.field(\\"requiredFixed64Values\\", {
+            type: nexus.list(nexus.nonNull(\\"String\\")),
+            resolve(root) {
+                const value = root.requiredFixed64Values;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value.map(item => {
+                    return item.toString();
+                });
+            }
+        });
+        t.field(\\"requiredSfixed32Values\\", {
+            type: nexus.list(nexus.nonNull(\\"Int\\")),
+            resolve(root) {
+                const value = root.requiredSfixed32Values;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
+            }
+        });
+        t.field(\\"requiredSfixed64Values\\", {
+            type: nexus.list(nexus.nonNull(\\"String\\")),
+            resolve(root) {
+                const value = root.requiredSfixed64Values;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value.map(item => {
+                    return item.toString();
+                });
+            }
+        });
+        t.field(\\"requiredBoolValues\\", {
+            type: nexus.list(nexus.nonNull(\\"Boolean\\")),
+            resolve(root) {
+                const value = root.requiredBoolValues;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
+            }
+        });
+        t.field(\\"requiredStringValues\\", {
+            type: nexus.list(nexus.nonNull(\\"String\\")),
+            resolve(root) {
+                const value = root.requiredStringValues;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return value;
+            }
+        });
     },
     isTypeOf(data: unknown) {
         return data instanceof _$testapis$hello.testapis.hello.Primitives;
@@ -3156,6 +3456,48 @@ export const PrimitivesInput = nexus.inputObjectType({
         });
         t.field(\\"requiredStringValue\\", {
             type: nexus.nonNull(\\"String\\")
+        });
+        t.field(\\"requiredDoubleValues\\", {
+            type: nexus.list(nexus.nonNull(\\"Float\\"))
+        });
+        t.field(\\"requiredFloatValues\\", {
+            type: nexus.list(nexus.nonNull(\\"Float\\"))
+        });
+        t.field(\\"requiredInt32Values\\", {
+            type: nexus.list(nexus.nonNull(\\"Int\\"))
+        });
+        t.field(\\"requiredInt64Values\\", {
+            type: nexus.list(nexus.nonNull(\\"String\\"))
+        });
+        t.field(\\"requiredUint32Values\\", {
+            type: nexus.list(nexus.nonNull(\\"Int\\"))
+        });
+        t.field(\\"requiredUint64Values\\", {
+            type: nexus.list(nexus.nonNull(\\"String\\"))
+        });
+        t.field(\\"requiredSint32Values\\", {
+            type: nexus.list(nexus.nonNull(\\"Int\\"))
+        });
+        t.field(\\"requiredSint64Values\\", {
+            type: nexus.list(nexus.nonNull(\\"String\\"))
+        });
+        t.field(\\"requiredFixed32Values\\", {
+            type: nexus.list(nexus.nonNull(\\"Int\\"))
+        });
+        t.field(\\"requiredFixed64Values\\", {
+            type: nexus.list(nexus.nonNull(\\"String\\"))
+        });
+        t.field(\\"requiredSfixed32Values\\", {
+            type: nexus.list(nexus.nonNull(\\"Int\\"))
+        });
+        t.field(\\"requiredSfixed64Values\\", {
+            type: nexus.list(nexus.nonNull(\\"String\\"))
+        });
+        t.field(\\"requiredBoolValues\\", {
+            type: nexus.list(nexus.nonNull(\\"Boolean\\"))
+        });
+        t.field(\\"requiredStringValues\\", {
+            type: nexus.list(nexus.nonNull(\\"String\\"))
         });
     }
 });
@@ -3263,6 +3605,87 @@ export const Message = nexus.objectType({
                 return $$proto_nexus$google_protobuf.unwrapStringValue(value);
             }
         });
+        t.field(\\"timestamps\\", {
+            type: nexus.list(nexus.nullable(\\"DateTime\\")),
+            resolve(root) {
+                const value = root.getTimestampsList();
+                return value.map(item => {
+                    return $$proto_nexus$google_protobuf.timestampToDate(item);
+                });
+            }
+        });
+        t.field(\\"int32Values\\", {
+            type: nexus.list(nexus.nullable(\\"Int\\")),
+            resolve(root) {
+                const value = root.getInt32ValuesList();
+                return value.map(item => {
+                    return $$proto_nexus$google_protobuf.unwrapInt32Value(item);
+                });
+            }
+        });
+        t.field(\\"int64Values\\", {
+            type: nexus.list(nexus.nullable(\\"String\\")),
+            resolve(root) {
+                const value = root.getInt64ValuesList();
+                return value.map(item => {
+                    return $$proto_nexus$google_protobuf.unwrapInt64Value(item)?.toString() ?? null;
+                });
+            }
+        });
+        t.field(\\"uint32Values\\", {
+            type: nexus.list(nexus.nullable(\\"Int\\")),
+            resolve(root) {
+                const value = root.getUint32ValuesList();
+                return value.map(item => {
+                    return $$proto_nexus$google_protobuf.unwrapUInt32Value(item);
+                });
+            }
+        });
+        t.field(\\"uint64Values\\", {
+            type: nexus.list(nexus.nullable(\\"String\\")),
+            resolve(root) {
+                const value = root.getUint64ValuesList();
+                return value.map(item => {
+                    return $$proto_nexus$google_protobuf.unwrapUInt64Value(item)?.toString() ?? null;
+                });
+            }
+        });
+        t.field(\\"floatValues\\", {
+            type: nexus.list(nexus.nullable(\\"Float\\")),
+            resolve(root) {
+                const value = root.getFloatValuesList();
+                return value.map(item => {
+                    return $$proto_nexus$google_protobuf.unwrapFloatValue(item);
+                });
+            }
+        });
+        t.field(\\"doubleValues\\", {
+            type: nexus.list(nexus.nullable(\\"Float\\")),
+            resolve(root) {
+                const value = root.getDoubleValuesList();
+                return value.map(item => {
+                    return $$proto_nexus$google_protobuf.unwrapDoubleValue(item);
+                });
+            }
+        });
+        t.field(\\"boolValues\\", {
+            type: nexus.list(nexus.nullable(\\"Boolean\\")),
+            resolve(root) {
+                const value = root.getBoolValuesList();
+                return value.map(item => {
+                    return $$proto_nexus$google_protobuf.unwrapBoolValue(item);
+                });
+            }
+        });
+        t.field(\\"stringValues\\", {
+            type: nexus.list(nexus.nullable(\\"String\\")),
+            resolve(root) {
+                const value = root.getStringValuesList();
+                return value.map(item => {
+                    return $$proto_nexus$google_protobuf.unwrapStringValue(item);
+                });
+            }
+        });
     },
     isTypeOf(data: unknown) {
         return data instanceof _$testapis$wktypes$well_known_types_pb.Message;
@@ -3298,6 +3721,33 @@ export const MessageInput = nexus.inputObjectType({
         });
         t.field(\\"stringValue\\", {
             type: nexus.nullable(\\"String\\")
+        });
+        t.field(\\"timestamps\\", {
+            type: nexus.list(nexus.nullable(\\"DateTime\\"))
+        });
+        t.field(\\"int32Values\\", {
+            type: nexus.list(nexus.nullable(\\"Int\\"))
+        });
+        t.field(\\"int64Values\\", {
+            type: nexus.list(nexus.nullable(\\"String\\"))
+        });
+        t.field(\\"uint32Values\\", {
+            type: nexus.list(nexus.nullable(\\"Int\\"))
+        });
+        t.field(\\"uint64Values\\", {
+            type: nexus.list(nexus.nullable(\\"String\\"))
+        });
+        t.field(\\"floatValues\\", {
+            type: nexus.list(nexus.nullable(\\"Float\\"))
+        });
+        t.field(\\"doubleValues\\", {
+            type: nexus.list(nexus.nullable(\\"Float\\"))
+        });
+        t.field(\\"boolValues\\", {
+            type: nexus.list(nexus.nullable(\\"Boolean\\"))
+        });
+        t.field(\\"stringValues\\", {
+            type: nexus.list(nexus.nullable(\\"String\\"))
         });
     }
 });
@@ -3405,6 +3855,114 @@ export const Message = nexus.objectType({
                 return $$proto_nexus$protobufjs.unwrapStringValue(value);
             }
         });
+        t.field(\\"timestamps\\", {
+            type: nexus.list(nexus.nullable(\\"DateTime\\")),
+            resolve(root) {
+                const value = root.timestamps;
+                if (value == null) {
+                    return null;
+                }
+                return value.map(item => {
+                    return $$proto_nexus$protobufjs.timestampToDate(item);
+                });
+            }
+        });
+        t.field(\\"int32Values\\", {
+            type: nexus.list(nexus.nullable(\\"Int\\")),
+            resolve(root) {
+                const value = root.int32Values;
+                if (value == null) {
+                    return null;
+                }
+                return value.map(item => {
+                    return $$proto_nexus$protobufjs.unwrapInt32Value(item);
+                });
+            }
+        });
+        t.field(\\"int64Values\\", {
+            type: nexus.list(nexus.nullable(\\"String\\")),
+            resolve(root) {
+                const value = root.int64Values;
+                if (value == null) {
+                    return null;
+                }
+                return value.map(item => {
+                    return $$proto_nexus$protobufjs.unwrapInt64Value(item)?.toString() ?? null;
+                });
+            }
+        });
+        t.field(\\"uint32Values\\", {
+            type: nexus.list(nexus.nullable(\\"Int\\")),
+            resolve(root) {
+                const value = root.uint32Values;
+                if (value == null) {
+                    return null;
+                }
+                return value.map(item => {
+                    return $$proto_nexus$protobufjs.unwrapUInt32Value(item);
+                });
+            }
+        });
+        t.field(\\"uint64Values\\", {
+            type: nexus.list(nexus.nullable(\\"String\\")),
+            resolve(root) {
+                const value = root.uint64Values;
+                if (value == null) {
+                    return null;
+                }
+                return value.map(item => {
+                    return $$proto_nexus$protobufjs.unwrapUInt64Value(item)?.toString() ?? null;
+                });
+            }
+        });
+        t.field(\\"floatValues\\", {
+            type: nexus.list(nexus.nullable(\\"Float\\")),
+            resolve(root) {
+                const value = root.floatValues;
+                if (value == null) {
+                    return null;
+                }
+                return value.map(item => {
+                    return $$proto_nexus$protobufjs.unwrapFloatValue(item);
+                });
+            }
+        });
+        t.field(\\"doubleValues\\", {
+            type: nexus.list(nexus.nullable(\\"Float\\")),
+            resolve(root) {
+                const value = root.doubleValues;
+                if (value == null) {
+                    return null;
+                }
+                return value.map(item => {
+                    return $$proto_nexus$protobufjs.unwrapDoubleValue(item);
+                });
+            }
+        });
+        t.field(\\"boolValues\\", {
+            type: nexus.list(nexus.nullable(\\"Boolean\\")),
+            resolve(root) {
+                const value = root.boolValues;
+                if (value == null) {
+                    return null;
+                }
+                return value.map(item => {
+                    return $$proto_nexus$protobufjs.unwrapBoolValue(item);
+                });
+            }
+        });
+        t.field(\\"stringValues\\", {
+            type: nexus.list(nexus.nullable(\\"String\\")),
+            resolve(root) {
+                const value = root.stringValues;
+                if (value == null) {
+                    return null;
+                }
+                return value.map(item => {
+                    return $$proto_nexus$protobufjs.unwrapStringValue(item);
+                });
+            }
+        });
     },
     isTypeOf(data: unknown) {
         return data instanceof _$testapis$wktypes.testapis.wktypes.Message;
@@ -3440,6 +3998,33 @@ export const MessageInput = nexus.inputObjectType({
         });
         t.field(\\"stringValue\\", {
             type: nexus.nullable(\\"String\\")
+        });
+        t.field(\\"timestamps\\", {
+            type: nexus.list(nexus.nullable(\\"DateTime\\"))
+        });
+        t.field(\\"int32Values\\", {
+            type: nexus.list(nexus.nullable(\\"Int\\"))
+        });
+        t.field(\\"int64Values\\", {
+            type: nexus.list(nexus.nullable(\\"String\\"))
+        });
+        t.field(\\"uint32Values\\", {
+            type: nexus.list(nexus.nullable(\\"Int\\"))
+        });
+        t.field(\\"uint64Values\\", {
+            type: nexus.list(nexus.nullable(\\"String\\"))
+        });
+        t.field(\\"floatValues\\", {
+            type: nexus.list(nexus.nullable(\\"Float\\"))
+        });
+        t.field(\\"doubleValues\\", {
+            type: nexus.list(nexus.nullable(\\"Float\\"))
+        });
+        t.field(\\"boolValues\\", {
+            type: nexus.list(nexus.nullable(\\"Boolean\\"))
+        });
+        t.field(\\"stringValues\\", {
+            type: nexus.list(nexus.nullable(\\"String\\"))
         });
     }
 });

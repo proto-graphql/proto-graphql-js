@@ -29,4 +29,19 @@ message Primitives {
   bool required_bool_value = 13;
   string required_string_value = 14;
   // bytes required_bytes_value = 1;
+
+  repeated double required_double_values = 101;
+  repeated float required_float_values = 102;
+  repeated int32 required_int32_values = 103;
+  repeated int64 required_int64_values = 104;
+  repeated uint32 required_uint32_values = 105;
+  repeated uint64 required_uint64_values = 106;
+  repeated sint32 required_sint32_values = 107;
+  repeated sint64 required_sint64_values = 108;
+  repeated fixed32 required_fixed32_values = 109;
+  repeated fixed64 required_fixed64_values = 110;
+  repeated sfixed32 required_sfixed32_values = 111;
+  repeated sfixed64 required_sfixed64_values = 112;
+  repeated bool required_bool_values = 113;
+  repeated string required_string_values = 114;
 }
