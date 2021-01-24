@@ -15,4 +15,14 @@ message Message {
   google.protobuf.DoubleValue double_value = 7;
   google.protobuf.BoolValue bool_value = 8;
   google.protobuf.StringValue string_value = 9;
+
+  repeated google.protobuf.Timestamp timestamps = 101;
+  repeated google.protobuf.Int32Value int32_values = 102;
+  repeated google.protobuf.Int64Value int64_values = 103;
+  repeated google.protobuf.UInt32Value uint32_values = 104;
+  repeated google.protobuf.UInt64Value uint64_values = 105;
+  repeated google.protobuf.FloatValue float_values = 106;
+  repeated google.protobuf.DoubleValue double_values = 107;
+  repeated google.protobuf.BoolValue bool_values = 108;
+  repeated google.protobuf.StringValue string_values = 109;
 }

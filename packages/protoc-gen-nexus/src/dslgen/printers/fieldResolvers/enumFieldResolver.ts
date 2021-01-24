@@ -2,6 +2,7 @@ import ts from "typescript";
 import { createFullNameExpr, onlyNonNull } from "../util";
 import { ObjectField, EnumType, EnumTypeValue } from "../../types";
 import { ProtoField } from "../../../protogen";
+import { createMapExpr } from "./utils";
 
 /**
  * @example nullable
@@ -47,29 +48,7 @@ export function createEnumFieldResolverStmts(
     }
     return [
       ts.factory.createReturnStatement(
-        ts.factory.createCallExpression(ts.factory.createPropertyAccessExpression(valueExpr, "map"), undefined, [
-          ts.factory.createArrowFunction(
-            undefined,
-            undefined,
-            [
-              ts.factory.createParameterDeclaration(
-                undefined,
-                undefined,
-                undefined,
-                "item",
-                undefined,
-                undefined,
-                undefined
-              ),
-            ],
-            undefined,
-            ts.factory.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
-            ts.factory.createBlock(
-              [...guardStmts, ts.factory.createReturnStatement(ts.factory.createIdentifier("item"))],
-              true // multiline
-            )
-          ),
-        ])
+        createMapExpr(valueExpr, (itemExpr) => [...guardStmts, ts.factory.createReturnStatement(itemExpr)])
       ),
     ];
   }
