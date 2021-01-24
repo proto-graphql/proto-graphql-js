@@ -20,8 +20,8 @@ export const processRequest = (req: CodeGeneratorRequest): CodeGeneratorResponse
     const result = printSource(registry, file, params);
 
     const genfile = new CodeGeneratorResponse.File();
-    genfile.setContent(result);
-    genfile.setName(fn.replace(/.proto$/, "_pb_nexus.ts"));
+    genfile.setContent(result.content);
+    genfile.setName(result.filename);
     resp.addFile(genfile);
   }
 
