@@ -1,7 +1,7 @@
 # ProtoNexus
-[![CI](https://github.com/izumin5210/proto-nexus/workflows/CI/badge.svg)](https://github.com/izumin5210/proto-nexus/actions?query=workflow%3ACI)
-[![Coverage Status](https://coveralls.io/repos/github/izumin5210/proto-nexus/badge.svg?branch=main)](https://coveralls.io/github/izumin5210/proto-nexus?branch=main)
-[![GitHub](https://img.shields.io/github/license/izumin5210/proto-nexus)](./LICENSE)
+[![CI](https://github.com/proto-graphql/proto-nexus/workflows/CI/badge.svg)](https://github.com/proto-graphql/proto-nexus/actions?query=workflow%3ACI)
+[![Coverage Status](https://coveralls.io/repos/github/proto-graphql/proto-nexus/badge.svg?branch=main)](https://coveralls.io/github/proto-graphql/proto-nexus?branch=main)
+[![GitHub](https://img.shields.io/github/license/proto-graphql/proto-nexus)](./LICENSE)
 
 Protobuf-First GraphQL Schemas with [GraphQL Nexus](https://nexusjs.org/)
 
