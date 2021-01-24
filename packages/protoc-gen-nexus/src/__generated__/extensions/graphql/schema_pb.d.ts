@@ -14,6 +14,9 @@ export class GraphqlSchemaOptions extends jspb.Message {
   getIgnoreResponses(): boolean;
   setIgnoreResponses(value: boolean): void;
 
+  getIgnore(): boolean;
+  setIgnore(value: boolean): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GraphqlSchemaOptions.AsObject;
   static toObject(includeInstance: boolean, msg: GraphqlSchemaOptions): GraphqlSchemaOptions.AsObject;
@@ -29,6 +32,7 @@ export namespace GraphqlSchemaOptions {
     typePrefix: string,
     ignoreRequests: boolean,
     ignoreResponses: boolean,
+    ignore: boolean,
   }
 }
 

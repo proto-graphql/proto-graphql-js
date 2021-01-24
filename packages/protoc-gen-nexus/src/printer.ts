@@ -25,6 +25,13 @@ export function printSource(registry: ProtoRegistry, file: ProtoFile, opts: Gene
     ...createTypeDslStmts(types),
   ];
 
+  if (ast.length === 0) {
+    ast.push(
+      // `export {}`
+      ts.factory.createExportDeclaration(undefined, undefined, false, ts.factory.createNamedExports([]), undefined)
+    );
+  }
+
   const nexusFile = ts.factory.updateSourceFile(
     ts.createSourceFile("generated.ts", "", ts.ScriptTarget.Latest, false, ts.ScriptKind.TS),
     ast,
