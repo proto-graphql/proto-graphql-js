@@ -1,11 +1,10 @@
 import ts from "typescript";
-import { ProtoField } from "../../../protogen";
 import { ObjectField, ScalarType } from "../../types";
 import { createMapExpr } from "./utils";
 
 export function createScalarFieldResolverStmts(
   valueExpr: ts.Expression,
-  field: ObjectField<ProtoField, ScalarType>
+  field: ObjectField<ScalarType>
 ): ts.Statement[] {
   if (field.isList() && (field.type.shouldToString() || field.type.unwrapFunc)) {
     return [
@@ -20,10 +19,7 @@ export function createScalarFieldResolverStmts(
   return [ts.factory.createReturnStatement(createValueConversionExpr(valueExpr, field))];
 }
 
-function createValueConversionExpr(
-  valueExpr: ts.Expression,
-  field: ObjectField<ProtoField, ScalarType>
-): ts.Expression {
+function createValueConversionExpr(valueExpr: ts.Expression, field: ObjectField<ScalarType>): ts.Expression {
   let resolverRet = valueExpr;
   if (field.type.unwrapFunc !== null) {
     resolverRet = ts.factory.createCallExpression(ts.factory.createIdentifier(field.type.unwrapFunc.name), undefined, [

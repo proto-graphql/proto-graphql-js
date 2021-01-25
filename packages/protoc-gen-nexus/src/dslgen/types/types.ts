@@ -44,87 +44,73 @@ export type GqlType =
   | EnumType
   | InputObjectType;
 
-function buildFromProtoMessage(
-  msg: ProtoMessage,
-  opts: GenerationParams & { input?: boolean }
-): ObjectType | InputObjectType | InterfaceType | SquashedOneofUnionType {
-  if (opts.input) return new InputObjectType(msg, opts);
-  if (isInterface(msg)) return new InterfaceType(msg, opts);
-  if (isSquashedUnion(msg)) return new SquashedOneofUnionType(msg, opts);
-  return new ObjectType(msg, opts);
+export function collectTypesFromFile(file: DslFile, registry: ProtoRegistry) {
+  const [msgs, enums] = file.proto.collectTypesRecursively();
+
+  return [
+    ...buildObjectTypes(msgs, file, registry),
+    ...buildInputObjectTypes(msgs, file, registry),
+    ...buildInterfaceType(msgs, file, registry),
+    ...buildSquashedOneofUnionTypes(msgs, file),
+    ...buildOneofUnionTypes(msgs, file),
+    ...buildEnumTypes(enums, file),
+  ];
+}
+
+function buildObjectTypes(msgs: ProtoMessage[], file: DslFile, registry: ProtoRegistry): ObjectType[] {
+  return msgs
+    .filter((m) => !isIgnoredType(m))
+    .filter((m) => !isSquashedUnion(m))
+    .filter((m) => !isInterface(m))
+    .filter(exceptRequestOrResponse(registry))
+    .map((m) => new ObjectType(m, file));
+}
+
+function buildInputObjectTypes(msgs: ProtoMessage[], file: DslFile, registry: ProtoRegistry): InputObjectType[] {
+  return msgs
+    .filter((m) => !isIgnoredType(m))
+    .filter(exceptRequestOrResponse(registry))
+    .map((m) => new InputObjectType(m, file));
+}
+
+function buildInterfaceType(msgs: ProtoMessage[], file: DslFile, registry: ProtoRegistry): InterfaceType[] {
+  return msgs
+    .filter((m) => !isIgnoredType(m))
+    .filter((m) => !isSquashedUnion(m))
+    .filter((m) => isInterface(m))
+    .filter(exceptRequestOrResponse(registry))
+    .map((m) => new InterfaceType(m, file));
+}
+
+function buildSquashedOneofUnionTypes(msgs: ProtoMessage[], file: DslFile): SquashedOneofUnionType[] {
+  return msgs
+    .filter((m) => !isIgnoredType(m))
+    .filter((m) => isSquashedUnion(m))
+    .map((m) => new SquashedOneofUnionType(m, file));
+}
+
+function buildOneofUnionTypes(msgs: ProtoMessage[], file: DslFile): OneofUnionType[] {
+  return msgs
+    .filter((m) => !isSquashedUnion(m))
+    .flatMap((m) => m.oneofs)
+    .filter((o) => !isIgnoredField(o))
+    .map((o) => new OneofUnionType(o, file));
+}
+
+function buildEnumTypes(enums: ProtoEnum[], file: DslFile): EnumType[] {
+  return enums.filter((e) => !isIgnoredType(e)).map((e) => new EnumType(e, file));
 }
 
 export class DslFile {
-  constructor(
-    private readonly proto: ProtoFile,
-    private readonly registry: ProtoRegistry,
-    private options: GenerationParams
-  ) {}
+  constructor(readonly proto: ProtoFile, readonly options: GenerationParams) {}
 
   get filename(): string {
     return this.proto.name.replace(/\.proto$/, "_pb_nexus.ts");
   }
-
-  public buildTypes() {
-    const [msgs, enums] = this.proto.collectTypesRecursively();
-
-    return [
-      ...this.buildObjectTypes(msgs),
-      ...this.buildInputObjectTypes(msgs),
-      ...this.buildInterfaceType(msgs),
-      ...this.buildSquashedOneofUnionTypes(msgs),
-      ...this.buildOneofUnionTypes(msgs),
-      ...this.buildEnumTypes(enums),
-    ];
-  }
-
-  private buildObjectTypes(msgs: ProtoMessage[]): ObjectType[] {
-    return msgs
-      .filter((m) => !isIgnoredType(m))
-      .filter((m) => !isSquashedUnion(m))
-      .filter((m) => !isInterface(m))
-      .filter(exceptRequestOrResponse(this.registry))
-      .map((m) => new ObjectType(m, this.options));
-  }
-
-  private buildInputObjectTypes(msgs: ProtoMessage[]): InputObjectType[] {
-    return msgs
-      .filter((m) => !isIgnoredType(m))
-      .filter(exceptRequestOrResponse(this.registry))
-      .map((m) => new InputObjectType(m, this.options));
-  }
-
-  private buildInterfaceType(msgs: ProtoMessage[]): InterfaceType[] {
-    return msgs
-      .filter((m) => !isIgnoredType(m))
-      .filter((m) => !isSquashedUnion(m))
-      .filter((m) => isInterface(m))
-      .filter(exceptRequestOrResponse(this.registry))
-      .map((m) => new InterfaceType(m, this.options));
-  }
-
-  private buildSquashedOneofUnionTypes(msgs: ProtoMessage[]): SquashedOneofUnionType[] {
-    return msgs
-      .filter((m) => !isIgnoredType(m))
-      .filter((m) => isSquashedUnion(m))
-      .map((m) => new SquashedOneofUnionType(m, this.options));
-  }
-
-  private buildOneofUnionTypes(msgs: ProtoMessage[]): OneofUnionType[] {
-    return msgs
-      .filter((m) => !isSquashedUnion(m))
-      .flatMap((m) => m.oneofs)
-      .filter((o) => !isIgnoredField(o))
-      .map((o) => new OneofUnionType(o, this.options));
-  }
-
-  private buildEnumTypes(enums: ProtoEnum[]): EnumType[] {
-    return enums.filter((e) => !isIgnoredType(e)).map((e) => new EnumType(e, this.options));
-  }
 }
 
 abstract class TypeBase<P extends ProtoMessage | ProtoEnum | ProtoOneof> {
-  constructor(protected readonly proto: P, protected readonly opts: GenerationParams) {}
+  constructor(protected readonly proto: P, protected readonly file: DslFile) {}
 
   get typeName(): string {
     return gqlTypeName(this.proto);
@@ -140,6 +126,10 @@ abstract class TypeBase<P extends ProtoMessage | ProtoEnum | ProtoOneof> {
 
   get importModules(): { alias: string; module: string }[] {
     return modulesWithUniqueImportAlias(["nexus"]);
+  }
+
+  protected get options(): GenerationParams {
+    return this.file.options;
   }
 }
 
@@ -163,56 +153,89 @@ export class ObjectType extends TypeBase<ProtoMessage> {
   }
 
   get protoImportPath(): string {
-    return protoImportPath(this.proto, this.opts);
+    return protoImportPath(this.proto, this.options);
   }
 
   get sourceTypeExportAlias(): string {
-    return protoExportAlias(this.proto, this.opts);
+    return protoExportAlias(this.proto, this.options);
   }
 
   get protoTypeFullName(): FullName {
-    return createProtoFullName(this.proto, this.opts);
+    return createProtoFullName(this.proto, this.options);
   }
 
-  get fields(): ObjectField<any, any>[] {
+  get fields(): (ObjectField<any> | ObjectOneofField)[] {
     return [
       ...this.proto.fields
         .filter((f) => f.containingOneof == null)
         .filter((f) => !isInputOnlyField(f))
         .filter((f) => !isIgnoredField(f))
-        .map((f) => new ObjectField(detectType(f, this.opts), f, this.opts)),
+        .map((f) => new ObjectField(getObjectFieldType(f, this.options), f, this.options)),
       ...this.proto.oneofs
         .filter((f) => !isInputOnlyField(f))
         .filter((f) => !isIgnoredField(f))
-        .map((o) => new ObjectField(new OneofUnionType(o, this.opts), o, this.opts)),
+        .map((o) => new ObjectOneofField(new OneofUnionType(o, this.file), o, this.options)),
     ];
   }
 }
 
-export class ObjectField<
-  P extends ProtoField | ProtoOneof,
-  T extends P extends ProtoOneof ? OneofUnionType : Exclude<GqlType, OneofUnionType>
-> {
-  constructor(readonly type: T, private readonly proto: P, private readonly opts: GenerationParams) {}
+abstract class FieldBase<P extends ProtoField | ProtoOneof> {
+  constructor(protected readonly proto: P, protected readonly opts: GenerationParams) {}
 
-  get name(): string {
-    const proto: ProtoField | ProtoOneof = this.proto;
-    if (proto.kind === "Oneof") {
-      return camelCase(proto.name);
-    }
-    return proto.descriptor.getOptions()?.getExtension(extensions.field)?.getName() || proto.jsonName;
-  }
-
-  get protoJsName(): string {
-    const proto: ProtoField | ProtoOneof = this.proto;
-    if (this.opts.useProtobufjs || proto.kind === "Oneof") return camelCase(proto.name);
-    return proto.jsonName;
-  }
+  abstract get name(): string;
+  abstract get protoJsName(): string;
 
   get description(): string | null {
     return descriptionFromProto(this.proto);
   }
 
+  public isList(): boolean {
+    const proto: ProtoField | ProtoOneof = this.proto;
+    return proto.kind === "Field" && proto.list;
+  }
+
+  public isNullable(): boolean {
+    return !isRequiredField(this.proto);
+  }
+
+  get deprecationReason(): string | null {
+    return getDeprecationReason(this.proto);
+  }
+
+  // FIXME: remove
+  public isProtobufjs(): boolean {
+    return this.opts.useProtobufjs;
+  }
+
+  abstract get importModules(): { alias: string; module: string }[];
+  abstract shouldNullCheck(): boolean;
+}
+
+export class ObjectField<
+  T extends ObjectType | InterfaceType | SquashedOneofUnionType | EnumType | ScalarType
+> extends FieldBase<ProtoField> {
+  constructor(readonly type: T, proto: ProtoField, opts: GenerationParams) {
+    super(proto, opts);
+  }
+
+  /**
+   * @override
+   */
+  get name(): string {
+    return this.proto.descriptor.getOptions()?.getExtension(extensions.field)?.getName() || this.proto.jsonName;
+  }
+
+  /**
+   * @override
+   */
+  get protoJsName(): string {
+    if (this.opts.useProtobufjs) return camelCase(this.proto.name);
+    return this.proto.jsonName;
+  }
+
+  /**
+   * @override
+   */
   get importModules(): { alias: string; module: string }[] {
     const modules = [];
     if (this.type instanceof ScalarType && this.type.unwrapFunc != null) {
@@ -224,37 +247,15 @@ export class ObjectField<
     return modulesWithUniqueImportAlias(modules);
   }
 
-  public isOneof(): boolean {
-    return this.proto.kind === "Oneof";
-  }
-
-  public isList(): boolean {
-    const proto: ProtoField | ProtoOneof = this.proto;
-    return proto.kind === "Field" && proto.list;
-  }
-
-  public isNullable(): boolean {
-    if (isRequiredField(this.proto)) return false;
-    return this.type instanceof ScalarType ? !this.type.isPrimitive() : true;
-  }
-
-  get deprecationReason(): string | null {
-    return getDeprecationReason(this.proto);
-  }
-
+  /**
+   * @override
+   */
   public shouldNullCheck(): boolean {
-    const proto: ProtoField | ProtoOneof = this.proto;
-    if (proto.kind === "Oneof") return false;
     if (this.opts.useProtobufjs) return true;
-    if (proto.kind === "Field" && proto.list) return false;
+    if (this.proto.list) return false;
     if (this.type instanceof ScalarType && this.type.isPrimitive()) return false;
 
     return true;
-  }
-
-  // FIXME: remove
-  public isProtobufjs(): boolean {
-    return this.opts.useProtobufjs;
   }
 
   public getProtoFieldAccessExpr(parentExpr: ts.Expression): ts.Expression {
@@ -272,10 +273,37 @@ export class ObjectField<
   }
 }
 
-class OneofMemberField extends ObjectField<ProtoField, ObjectType> {
-  constructor(proto: ProtoField, opts: GenerationParams) {
-    assert.strictEqual(proto.type?.kind, "Message" as const);
-    super(new ObjectType(proto.type, opts), proto, opts);
+export class ObjectOneofField extends FieldBase<ProtoOneof> {
+  constructor(readonly type: OneofUnionType, proto: ProtoOneof, opts: GenerationParams) {
+    super(proto, opts);
+  }
+
+  /**
+   * @override
+   */
+  get name(): string {
+    return camelCase(this.proto.name);
+  }
+
+  /**
+   * @override
+   */
+  get protoJsName(): string {
+    return camelCase(this.proto.name);
+  }
+
+  /**
+   * @override
+   */
+  public shouldNullCheck(): boolean {
+    return false;
+  }
+
+  /**
+   * @override
+   */
+  get importModules(): { alias: string; module: string }[] {
+    return this.type.fields.flatMap((f) => f.importModules);
   }
 }
 
@@ -292,12 +320,12 @@ export class InputObjectType extends TypeBase<ProtoMessage> {
       ...this.proto.fields
         .filter((f) => !isOutputOnlyField(f))
         .filter((f) => !isIgnoredField(f))
-        .map((f) => new InputObjectField(detectType(f, { ...this.opts, input: true }), f, this.opts)),
+        .map((f) => new InputObjectField(getInputObjectFieldType(f, this.options), f, this.options)),
     ];
   }
 }
 
-export class InputObjectField<T extends GqlType> {
+export class InputObjectField<T extends ScalarType | EnumType | InputObjectType> {
   constructor(readonly type: T, private readonly proto: ProtoField, private readonly opts: GenerationParams) {}
 
   get name(): string {
@@ -326,27 +354,32 @@ export class InputObjectField<T extends GqlType> {
 export class InterfaceType extends ObjectType {}
 
 export class OneofUnionType extends TypeBase<ProtoOneof> {
-  get fields(): OneofMemberField[] {
+  get fields(): ObjectField<ObjectType>[] {
     return this.proto.fields
       .filter((f) => !isIgnoredField(f))
       .filter((f) => !isInputOnlyField(f))
-      .map((f) => new OneofMemberField(f, this.opts));
+      .map((f) => {
+        const type = getObjectFieldType(f, this.options);
+        // FIXME: raise user-friendly error
+        assert(type instanceof ObjectType);
+        return new ObjectField(type, f, this.options);
+      });
   }
 
   // FIXME: remove
   get parentProtoTypeFullName(): FullName {
-    return createProtoFullName(this.proto.parent, this.opts);
+    return createProtoFullName(this.proto.parent, this.options);
   }
 }
 
 export class SquashedOneofUnionType extends TypeBase<ProtoMessage> {
   private readonly oneofUnionType: OneofUnionType;
-  constructor(proto: ProtoMessage, opts: GenerationParams) {
-    super(proto, opts);
-    this.oneofUnionType = new OneofUnionType(proto.oneofs[0], opts);
+  constructor(proto: ProtoMessage, file: DslFile) {
+    super(proto, file);
+    this.oneofUnionType = new OneofUnionType(proto.oneofs[0], file);
   }
 
-  get fields(): OneofMemberField[] {
+  get fields(): ObjectField<ObjectType>[] {
     return this.oneofUnionType.fields;
   }
 
@@ -358,7 +391,7 @@ export class SquashedOneofUnionType extends TypeBase<ProtoMessage> {
 
 export class EnumType extends TypeBase<ProtoEnum> {
   get protoImportPath(): string {
-    return protoImportPath(this.proto, this.opts);
+    return protoImportPath(this.proto, this.options);
   }
 
   get unspecifiedValue(): EnumTypeValue | null {
@@ -370,7 +403,7 @@ export class EnumType extends TypeBase<ProtoEnum> {
   }
 
   get valuesWithIgnored(): EnumTypeValue[] {
-    return this.proto.values.map((v) => new EnumTypeValue(v, this.opts));
+    return this.proto.values.map((v) => new EnumTypeValue(v, this.options));
   }
 }
 
@@ -450,7 +483,28 @@ export class ScalarType {
   }
 }
 
-function detectType(proto: ProtoField, opts: GenerationParams & { input?: boolean }): Exclude<GqlType, OneofUnionType> {
+function getObjectFieldType(
+  proto: ProtoField,
+  opts: GenerationParams
+): ScalarType | EnumType | ObjectType | InterfaceType | SquashedOneofUnionType {
+  return detectType<ObjectType | InterfaceType | SquashedOneofUnionType>(proto, opts, (msg, file) => {
+    if (isInterface(msg)) return new InterfaceType(msg, file);
+    if (isSquashedUnion(msg)) return new SquashedOneofUnionType(msg, file);
+    return new ObjectType(msg, file);
+  });
+}
+
+function getInputObjectFieldType(proto: ProtoField, opts: GenerationParams): ScalarType | EnumType | InputObjectType {
+  return detectType<InputObjectType>(proto, opts, (msg, file) => {
+    return new InputObjectType(msg, file);
+  });
+}
+
+function detectType<T extends ObjectType | InterfaceType | SquashedOneofUnionType | InputObjectType>(
+  proto: ProtoField,
+  opts: GenerationParams,
+  f: (msg: ProtoMessage, file: DslFile) => T
+): ScalarType | EnumType | T {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const pbtype = proto.descriptor.getType()!;
   switch (pbtype) {
@@ -487,7 +541,7 @@ function detectType(proto: ProtoField, opts: GenerationParams & { input?: boolea
       throw "not supported";
     case FieldDescriptorProto.Type.TYPE_ENUM:
       assert(proto.type && proto.type.kind === "Enum");
-      return new EnumType(proto.type, opts);
+      return new EnumType(proto.type, new DslFile(proto.type.file, opts));
     case FieldDescriptorProto.Type.TYPE_MESSAGE:
       assert(proto.type && proto.type.kind === "Message");
       switch (proto.type.fullName.toString()) {
@@ -514,8 +568,11 @@ function detectType(proto: ProtoField, opts: GenerationParams & { input?: boolea
           return new ScalarType(proto, "String", opts);
         case "google.protobuf.Timestamp":
           return new ScalarType(proto, "DateTime", opts);
-        default:
-          return buildFromProtoMessage(proto.type, opts);
+        default: {
+          const msg = proto.type;
+          const file = new DslFile(msg.file, opts);
+          return f(msg, file);
+        }
       }
     /* istanbul ignore next */
     default:

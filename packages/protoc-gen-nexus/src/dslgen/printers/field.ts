@@ -6,7 +6,7 @@ import {
   onlyNonNull,
 } from "./util";
 import { createFieldResolverDecl } from "./fieldResolvers";
-import { GqlType, InputObjectField, ObjectField } from "../types";
+import { InputObjectField, ObjectField, ObjectOneofField } from "../types";
 
 /**
  * @example
@@ -16,7 +16,9 @@ import { GqlType, InputObjectField, ObjectField } from "../types";
  * })
  * ```
  */
-export function createFieldDefinitionStmt(field: ObjectField<any, any> | InputObjectField<GqlType>): ts.Statement {
+export function createFieldDefinitionStmt(
+  field: ObjectField<any> | ObjectOneofField | InputObjectField<any>
+): ts.Statement {
   return ts.factory.createExpressionStatement(
     ts.factory.createCallExpression(
       ts.factory.createPropertyAccessExpression(ts.factory.createIdentifier("t"), ts.factory.createIdentifier("field")),
@@ -37,7 +39,7 @@ export function createFieldDefinitionStmt(field: ObjectField<any, any> | InputOb
  * }
  * ```
  */
-function createFieldOptionExpr(field: ObjectField<any, GqlType> | InputObjectField<GqlType>): ts.Expression {
+function createFieldOptionExpr(field: ObjectField<any> | ObjectOneofField | InputObjectField<any>): ts.Expression {
   let typeExpr: ts.Expression = createNexusCallExpr(field.isNullable() ? "nullable" : "nonNull", [
     ts.factory.createStringLiteral(field.type.typeName),
   ]);
@@ -50,7 +52,7 @@ function createFieldOptionExpr(field: ObjectField<any, GqlType> | InputObjectFie
       ts.factory.createPropertyAssignment("type", typeExpr),
       createDescriptionPropertyAssignment(field),
       createDeprecationPropertyAssignment(field),
-      field instanceof ObjectField ? createFieldResolverDecl(field) : null,
+      field instanceof InputObjectField ? null : createFieldResolverDecl(field),
     ].filter(onlyNonNull()),
     true
   );
