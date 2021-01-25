@@ -1,6 +1,6 @@
 {
   "name": "protoc-gen-nexus",
-  "version": "0.4.6",
+  "version": "0.5.0-alpha.0",
   "description": "Generate DSL for GraphQL Nexus from Protocol Buffers IDL",
   "keywords": [
     "graphql",
@@ -27,8 +27,8 @@
     "change-case": "^4.1.2"
   },
   "devDependencies": {
-    "@proto-nexus/google-protobuf": "^0.4.1",
-    "@proto-nexus/protobufjs": "^0.4.1",
+    "@proto-nexus/google-protobuf": "^0.5.0-alpha.0",
+    "@proto-nexus/protobufjs": "^0.5.0-alpha.0",
     "@testapis/node": "^0.4.6",
     "@testapis/node-native": "^0.4.6",
     "glob": "^7.1.6"
