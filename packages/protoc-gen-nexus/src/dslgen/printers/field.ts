@@ -2,7 +2,6 @@ import ts from "typescript";
 import {
   createDeprecationPropertyAssignment,
   createDescriptionPropertyAssignment,
-  createFullNameExpr,
   createNexusCallExpr,
   onlyNonNull,
 } from "./util";
@@ -42,7 +41,7 @@ export function createFieldDefinitionStmt(
  */
 function createFieldOptionExpr(field: ObjectField<any> | ObjectOneofField | InputObjectField<any>): ts.Expression {
   let typeExpr: ts.Expression = createNexusCallExpr(field.isNullable() ? "nullable" : "nonNull", [
-    field.typeFullName ? createFullNameExpr(field.typeFullName) : ts.factory.createStringLiteral(field.type.typeName),
+    ts.factory.createStringLiteral(field.type.typeName),
   ]);
   if (field.isList()) {
     typeExpr = createNexusCallExpr("list", [typeExpr]);

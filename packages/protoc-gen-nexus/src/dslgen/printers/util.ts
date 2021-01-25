@@ -59,30 +59,21 @@ export function createDeprecationPropertyAssignment(
   return ts.factory.createPropertyAssignment("deprecation", ts.factory.createStringLiteral(reason));
 }
 
-export function fullNameString(fn: FullName): string {
-  if (typeof fn === "string") {
-    return fn;
-  }
-  return `${typeof fn[0] === "string" ? fn[0] : fullNameString(fn[0])}.${fn[1]}`;
+export function fullNameString([left, name]: FullName): string {
+  return `${typeof left === "string" ? left : fullNameString(left)}.${name}`;
 }
 
-export function createFullNameExpr(fn: FullName): ts.Expression {
-  if (typeof fn === "string") {
-    return ts.factory.createIdentifier(fn);
-  }
+export function createFullNameExpr([left, name]: FullName): ts.Expression {
   return ts.factory.createPropertyAccessExpression(
-    typeof fn[0] === "string" ? ts.factory.createIdentifier(fn[0]) : createFullNameExpr(fn[0]),
-    fn[1]
+    typeof left === "string" ? ts.factory.createIdentifier(left) : createFullNameExpr(left),
+    name
   );
 }
 
-export function createQualifiedName(fn: FullName): ts.Identifier | ts.QualifiedName {
-  if (typeof fn === "string") {
-    return ts.factory.createIdentifier(fn);
-  }
+export function createQualifiedName([left, name]: FullName): ts.QualifiedName {
   return ts.factory.createQualifiedName(
-    typeof fn[0] === "string" ? ts.factory.createIdentifier(fn[0]) : createQualifiedName(fn[0]),
-    fn[1]
+    typeof left === "string" ? ts.factory.createIdentifier(left) : createQualifiedName(left),
+    name
   );
 }
 
