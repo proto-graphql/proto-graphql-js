@@ -3,6 +3,7 @@ import { OneofUnionType, SquashedOneofUnionType } from "../types";
 import {
   createDescriptionPropertyAssignment,
   createDslExportConstStmt,
+  createFullNameExpr,
   createNexusCallExpr,
   onlyNonNull,
 } from "./util";
@@ -59,7 +60,7 @@ function createOneofUnionTypeDefinitionMethodDecl(type: OneofUnionType | Squashe
               ts.factory.createIdentifier("members")
             ),
             undefined,
-            type.fields.map((f) => ts.factory.createStringLiteral(f.type.typeName))
+            type.fields.map((f) => createFullNameExpr(f.typeFullName!))
           )
         ),
       ],
