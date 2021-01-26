@@ -72,6 +72,8 @@ message PrefixedMessage {
   }
 
   InterfaceMessage interface_message = 14 [(graphql.field).ignore = true];
+
+  string skip_resolver = 15 [(graphql.field).skip_resolver = true];
 }
 
 enum PrefixedEnum {
