@@ -1460,6 +1460,12 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
                 return value;
             }
         });
+        t.field(\\"skipResolver\\", {
+            type: nexus.nonNull(\\"String\\"),
+            resolve(root) {
+                throw new Error(\\"not implemented\\");
+            }
+        });
         t.field(\\"partialIgnoreOneof\\", {
             type: nexus.nullable(\\"TestPrefixPrefixedMessagePartialIgnoreOneof\\"),
             resolve(root) {
@@ -1564,6 +1570,9 @@ export const TestPrefixPrefixedMessageInput = nexus.inputObjectType({
         });
         t.field(\\"oneofNotIgnoredField\\", {
             type: nexus.nullable(\\"TestPrefixPrefixedMessageInnerMessageInput\\")
+        });
+        t.field(\\"skipResolver\\", {
+            type: nexus.nonNull(\\"String\\")
         });
     }
 });
@@ -1764,6 +1773,12 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
                 return value;
             }
         });
+        t.field(\\"skipResolver\\", {
+            type: nexus.nonNull(\\"String\\"),
+            resolve(root) {
+                throw new Error(\\"not implemented\\");
+            }
+        });
         t.field(\\"partialIgnoreOneof\\", {
             type: nexus.nullable(\\"TestPrefixPrefixedMessagePartialIgnoreOneof\\"),
             resolve(root) {
@@ -1876,6 +1891,9 @@ export const TestPrefixPrefixedMessageInput = nexus.inputObjectType({
         });
         t.field(\\"oneofNotIgnoredField\\", {
             type: nexus.nullable(\\"TestPrefixPrefixedMessageInnerMessageInput\\")
+        });
+        t.field(\\"skipResolver\\", {
+            type: nexus.nonNull(\\"String\\")
         });
     }
 });

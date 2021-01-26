@@ -207,6 +207,10 @@ abstract class FieldBase<P extends ProtoField | ProtoOneof> {
     return this.opts.useProtobufjs;
   }
 
+  public isResolverSkipped(): boolean {
+    return this.proto.descriptor.getOptions()?.getExtension(extensions.field)?.getSkipResolver() ?? false;
+  }
+
   abstract get importModules(): { alias: string; module: string }[];
   abstract shouldNullCheck(): boolean;
 }

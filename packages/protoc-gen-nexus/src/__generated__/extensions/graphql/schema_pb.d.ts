@@ -71,6 +71,9 @@ export class GraphqlFieldOptions extends jspb.Message {
   getName(): string;
   setName(value: string): void;
 
+  getSkipResolver(): boolean;
+  setSkipResolver(value: boolean): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GraphqlFieldOptions.AsObject;
   static toObject(includeInstance: boolean, msg: GraphqlFieldOptions): GraphqlFieldOptions.AsObject;
@@ -85,6 +88,7 @@ export namespace GraphqlFieldOptions {
   export type AsObject = {
     ignore: boolean,
     name: string,
+    skipResolver: boolean,
   }
 }
 

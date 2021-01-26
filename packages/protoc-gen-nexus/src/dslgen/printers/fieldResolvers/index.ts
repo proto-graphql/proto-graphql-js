@@ -38,46 +38,54 @@ function createMethodDeclWithValueExpr(
     [ts.factory.createParameterDeclaration(undefined, undefined, undefined, "root", undefined, undefined, undefined)],
     undefined,
     ts.factory.createBlock(
-      [
-        field instanceof ObjectField
-          ? ts.factory.createVariableStatement(
-              undefined,
-              ts.factory.createVariableDeclarationList(
-                [
-                  ts.factory.createVariableDeclaration(
-                    "value",
-                    undefined,
-                    undefined,
-                    field.getProtoFieldAccessExpr(ts.factory.createIdentifier("root"))
-                  ),
-                ],
-                ts.NodeFlags.Const
-              )
-            )
-          : null,
-        field.shouldNullCheck()
-          ? ts.factory.createIfStatement(
-              ts.factory.createBinaryExpression(
-                ts.factory.createIdentifier("value"),
-                ts.SyntaxKind.EqualsEqualsToken,
-                ts.factory.createToken(ts.SyntaxKind.NullKeyword)
-              ),
-              ts.factory.createBlock(
-                [
-                  field.isNullable()
-                    ? ts.factory.createReturnStatement(ts.factory.createToken(ts.SyntaxKind.NullKeyword))
-                    : ts.factory.createThrowStatement(
-                        ts.factory.createNewExpression(ts.factory.createIdentifier("Error"), undefined, [
-                          ts.factory.createStringLiteral("Cannot return null for non-nullable field"),
-                        ])
+      field.isResolverSkipped()
+        ? [
+            ts.factory.createThrowStatement(
+              ts.factory.createNewExpression(ts.factory.createIdentifier("Error"), undefined, [
+                ts.factory.createStringLiteral("not implemented"),
+              ])
+            ),
+          ]
+        : [
+            field instanceof ObjectField
+              ? ts.factory.createVariableStatement(
+                  undefined,
+                  ts.factory.createVariableDeclarationList(
+                    [
+                      ts.factory.createVariableDeclaration(
+                        "value",
+                        undefined,
+                        undefined,
+                        field.getProtoFieldAccessExpr(ts.factory.createIdentifier("root"))
                       ),
-                ],
-                true // multiline
-              )
-            )
-          : null,
-        ...stmtsFn(ts.factory.createIdentifier(field instanceof ObjectField ? "value" : "root")),
-      ].filter(onlyNonNull()),
+                    ],
+                    ts.NodeFlags.Const
+                  )
+                )
+              : null,
+            field.shouldNullCheck()
+              ? ts.factory.createIfStatement(
+                  ts.factory.createBinaryExpression(
+                    ts.factory.createIdentifier("value"),
+                    ts.SyntaxKind.EqualsEqualsToken,
+                    ts.factory.createToken(ts.SyntaxKind.NullKeyword)
+                  ),
+                  ts.factory.createBlock(
+                    [
+                      field.isNullable()
+                        ? ts.factory.createReturnStatement(ts.factory.createToken(ts.SyntaxKind.NullKeyword))
+                        : ts.factory.createThrowStatement(
+                            ts.factory.createNewExpression(ts.factory.createIdentifier("Error"), undefined, [
+                              ts.factory.createStringLiteral("Cannot return null for non-nullable field"),
+                            ])
+                          ),
+                    ],
+                    true // multiline
+                  )
+                )
+              : null,
+            ...stmtsFn(ts.factory.createIdentifier(field instanceof ObjectField ? "value" : "root")),
+          ].filter(onlyNonNull()),
       true // multiline
     )
   );

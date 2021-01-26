@@ -20,6 +20,17 @@ testSchemaGeneration("extensions", "protobufjs", {
         t.implements("TestPrefixInterfaceMessage");
       },
     }),
+    implResolver: extendType({
+      type: "TestPrefixPrefixedMessageInnerMessage",
+      definition(t) {
+        t.field("skipResolver", {
+          type: nonNull("String"),
+          resolve() {
+            return "implemented";
+          },
+        });
+      },
+    }),
   },
   schemaTests: [
     [
@@ -128,6 +139,60 @@ testSchemaGeneration("extensions", "protobufjs", {
               }
               fragment Inner2 on TestPrefixPrefixedMessageInnerMessage2 {
                 body
+              }
+            `
+          )
+        ).toMatchSnapshot();
+      },
+    ],
+  ],
+});
+
+testSchemaGeneration("extensions", "protobufjs", {
+  types: {
+    implResolver: extendType({
+      type: "TestPrefixPrefixedMessageInnerMessage",
+      definition(t) {
+        t.field("skipResolver", {
+          type: nonNull("String"),
+          resolve() {
+            return "implemented";
+          },
+        });
+      },
+    }),
+  },
+  schemaTests: [
+    [
+      "implement skipResolver field",
+      {
+        test: queryField("test", {
+          type: nonNull("TestPrefixPrefixedMessage"),
+          resolve() {
+            return new pbjs.testapis.extensions.PrefixedMessage({
+              squashedMessage: new pbjs.testapis.extensions.PrefixedMessage.SquashedMessage({
+                oneofField: new pbjs.testapis.extensions.PrefixedMessage.InnerMessage({}),
+              }),
+            });
+          },
+        }),
+      },
+      async (schema) => {
+        expect(
+          await graphql(
+            schema,
+            `
+              query Test {
+                test {
+                  squashedMessage {
+                    ... on TestPrefixPrefixedMessageInnerMessage {
+                      ...Inner
+                    }
+                  }
+                }
+              }
+              fragment Inner on TestPrefixPrefixedMessageInnerMessage {
+                skipResolver
               }
             `
           )
