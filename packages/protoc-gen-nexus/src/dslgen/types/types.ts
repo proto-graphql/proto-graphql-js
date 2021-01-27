@@ -112,7 +112,7 @@ export class DslFile {
 }
 
 abstract class TypeBase<P extends ProtoMessage | ProtoEnum | ProtoOneof> {
-  constructor(protected readonly proto: P, readonly file: DslFile) {}
+  constructor(protected readonly proto: P, protected readonly file: DslFile) {}
 
   get typeName(): string {
     return gqlTypeName(this.proto);
@@ -128,6 +128,21 @@ abstract class TypeBase<P extends ProtoMessage | ProtoEnum | ProtoOneof> {
 
   get importModules(): { alias: string; module: string }[] {
     return modulesWithUniqueImportAlias(["nexus"]);
+  }
+
+  get filename(): string {
+    switch (this.options.fileLayout) {
+      case "proto_file":
+        return this.file.filename;
+      case "graphql_type": {
+        return path.join(path.dirname(this.file.filename), `${this.typeName}.nexus.ts`);
+      }
+      /* istanbul ignore next */
+      default: {
+        const _exhaustiveCheck: never = this.options.fileLayout;
+        throw "unreachable";
+      }
+    }
   }
 
   protected get options(): GenerationParams {
@@ -284,11 +299,9 @@ export class ObjectField<
     const type: ObjectType | InterfaceType | SquashedOneofUnionType | EnumType | ScalarType = this.type;
 
     if (type instanceof ScalarType) return null;
-    if (this.parent.file.filename === type.file.filename) return null;
+    if (this.parent.filename === type.filename) return null;
 
-    const [from, to] = [this.parent.file, type.file].map((f) =>
-      path.isAbsolute(f.filename) ? `.${path.sep}${f.filename}` : f.filename
-    );
+    const [from, to] = [this.parent.filename, type.filename].map((f) => (path.isAbsolute(f) ? `.${path.sep}${f}` : f));
     return path.relative(path.dirname(from), to).replace(/\.ts$/, "");
   }
 
@@ -405,11 +418,9 @@ export class InputObjectField<T extends ScalarType | EnumType | InputObjectType>
     const type: InputObjectType | EnumType | ScalarType = this.type;
 
     if (type instanceof ScalarType) return null;
-    if (this.parent.file.filename === type.file.filename) return null;
+    if (this.parent.filename === type.filename) return null;
 
-    const [from, to] = [this.parent.file, type.file].map((f) =>
-      path.isAbsolute(f.filename) ? `.${path.sep}${f.filename}` : f.filename
-    );
+    const [from, to] = [this.parent.filename, type.filename].map((f) => (path.isAbsolute(f) ? `.${path.sep}${f}` : f));
     return path.relative(path.dirname(from), to).replace(/\.ts$/, "");
   }
 }

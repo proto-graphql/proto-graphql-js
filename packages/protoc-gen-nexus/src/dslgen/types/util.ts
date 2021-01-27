@@ -13,9 +13,11 @@ import * as extensions from "../../__generated__/extensions/graphql/schema_pb";
 import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
 import { ExtensionFieldInfo } from "google-protobuf";
 
+export const fileLayouts = ["proto_file", "graphql_type"] as const;
 export type GenerationParams = {
   importPrefix: string | null;
   useProtobufjs: boolean;
+  fileLayout: typeof fileLayouts[number];
 };
 
 export type FullName = [FullName, string] | string;

@@ -9,15 +9,39 @@ import {
 } from "./dslgen";
 import { ProtoFile, ProtoRegistry } from "./protogen";
 
-export function printSource(
+export function generateFiles(
   registry: ProtoRegistry,
   file: ProtoFile,
   opts: GenerationParams
-): { filename: string; content: string } {
+): { filename: string; content: string }[] {
   const dslFile = new DslFile(file, opts);
   const types = collectTypesFromFile(dslFile, registry);
 
-  const ast: ts.Statement[] = [
+  switch (opts.fileLayout) {
+    case "proto_file": {
+      return [
+        {
+          filename: dslFile.filename,
+          content: printSource(types, file),
+        },
+      ];
+    }
+    case "graphql_type": {
+      return types.map((t) => ({
+        filename: t.filename,
+        content: printSource([t], file),
+      }));
+    }
+    /* istanbul ignore next */
+    default: {
+      const _exhaustiveCheck: never = opts.fileLayout;
+      throw "unreachable";
+    }
+  }
+}
+
+function printSource(types: ReturnType<typeof collectTypesFromFile>, file: ProtoFile): string {
+  const ast = [
     // `import * as nexus from "nexus";`
     // `import * as proto_nexus from "proto-nexus";`
     // `import * as _$hello$hello_pb from "./hello/hello_pb";`
@@ -53,8 +77,5 @@ export function printSource(
     result,
   ].join("\n");
 
-  return {
-    filename: dslFile.filename,
-    content,
-  };
+  return content;
 }

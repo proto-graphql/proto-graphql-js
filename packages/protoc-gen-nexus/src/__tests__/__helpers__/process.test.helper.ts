@@ -10,7 +10,11 @@ import { generateSchema, NexusExtendTypeDef, NexusGraphQLSchema } from "nexus/di
 const generationTargets = ["native protobuf", "protobufjs"] as const;
 type GenerationTarget = typeof generationTargets[number];
 
-async function generateDSLs(name: string, target: GenerationTarget, opts: { withPrefix?: boolean } = {}) {
+export async function generateDSLs(
+  name: string,
+  target: GenerationTarget,
+  opts: { withPrefix?: boolean; perGraphQLType?: boolean } = {}
+) {
   const params = [];
   switch (target) {
     case "protobufjs":
@@ -24,6 +28,9 @@ async function generateDSLs(name: string, target: GenerationTarget, opts: { with
       const _exhaustiveCheck: never = target;
       throw "unreachable";
     }
+  }
+  if (opts.perGraphQLType) {
+    params.push("file_layout=graphql_type");
   }
   return await processCodeGeneration(name, params.join(","));
 }
@@ -85,7 +92,7 @@ export function testSchemaGeneration(
   });
 }
 
-function snapshotGeneratedFiles(resp: CodeGeneratorResponse, files: string[]) {
+export function snapshotGeneratedFiles(resp: CodeGeneratorResponse, files: string[]) {
   expect(Object.keys(resp.getFileList())).toHaveLength(files.length);
 
   const fileByName = getFileMap(resp);
