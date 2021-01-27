@@ -18,7 +18,7 @@ export type GenerationParams = {
   useProtobufjs: boolean;
 };
 
-export type FullName = [FullName | string, string];
+export type FullName = [FullName, string] | string;
 
 /**
  * @example js_out
@@ -32,7 +32,7 @@ export type FullName = [FullName | string, string];
  * ```
  */
 export function createProtoFullName(t: ProtoMessage | ProtoEnum, o: GenerationParams): FullName {
-  let left: FullName[0];
+  let left: FullName;
   if (t.parent.kind === "File") {
     if (o.useProtobufjs) {
       const pkgs = t.parent.package.split(".");
