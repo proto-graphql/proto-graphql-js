@@ -1,4 +1,5 @@
 import ts from "typescript";
+import path from "path";
 import assert from "assert";
 import {
   CommentSet,
@@ -27,6 +28,7 @@ import {
   GenerationParams,
   FullName,
   modulesWithUniqueImportAlias,
+  uniqueImportAlias,
 } from "./util";
 import * as extensions from "../../__generated__/extensions/graphql/schema_pb";
 import { camelCase, constantCase } from "change-case";
@@ -128,6 +130,21 @@ abstract class TypeBase<P extends ProtoMessage | ProtoEnum | ProtoOneof> {
     return modulesWithUniqueImportAlias(["nexus"]);
   }
 
+  get filename(): string {
+    switch (this.options.fileLayout) {
+      case "proto_file":
+        return this.file.filename;
+      case "graphql_type": {
+        return path.join(path.dirname(this.file.filename), `${this.typeName}.nexus.ts`);
+      }
+      /* istanbul ignore next */
+      default: {
+        const _exhaustiveCheck: never = this.options.fileLayout;
+        throw "unreachable";
+      }
+    }
+  }
+
   protected get options(): GenerationParams {
     return this.file.options;
   }
@@ -170,7 +187,7 @@ export class ObjectType extends TypeBase<ProtoMessage> {
         .filter((f) => f.containingOneof == null)
         .filter((f) => !isInputOnlyField(f))
         .filter((f) => !isIgnoredField(f))
-        .map((f) => new ObjectField(getObjectFieldType(f, this.options), f, this.options)),
+        .map((f) => new ObjectField(getObjectFieldType(f, this.options), this, f, this.options)),
       ...this.proto.oneofs
         .filter((f) => !isInputOnlyField(f))
         .filter((f) => !isIgnoredField(f))
@@ -218,7 +235,12 @@ abstract class FieldBase<P extends ProtoField | ProtoOneof> {
 export class ObjectField<
   T extends ObjectType | InterfaceType | SquashedOneofUnionType | EnumType | ScalarType
 > extends FieldBase<ProtoField> {
-  constructor(readonly type: T, proto: ProtoField, opts: GenerationParams) {
+  constructor(
+    readonly type: T,
+    private readonly parent: ObjectType | OneofUnionType,
+    proto: ProtoField,
+    opts: GenerationParams
+  ) {
     super(proto, opts);
   }
 
@@ -248,6 +270,9 @@ export class ObjectField<
     if (this.type instanceof EnumType && this.type.unspecifiedValue != null) {
       modules.push(this.type.protoImportPath);
     }
+    if (this.typeImportPath) {
+      modules.push(this.typeImportPath);
+    }
     return modulesWithUniqueImportAlias(modules);
   }
 
@@ -260,6 +285,24 @@ export class ObjectField<
     if (this.type instanceof ScalarType && this.type.isPrimitive()) return false;
 
     return true;
+  }
+
+  get typeFullName(): FullName | null {
+    if (this.type instanceof ScalarType) return null;
+    if (!this.typeImportPath) {
+      return this.type.typeName;
+    }
+    return [uniqueImportAlias(this.typeImportPath), this.type.typeName];
+  }
+
+  private get typeImportPath(): string | null {
+    const type: ObjectType | InterfaceType | SquashedOneofUnionType | EnumType | ScalarType = this.type;
+
+    if (type instanceof ScalarType) return null;
+    if (this.parent.filename === type.filename) return null;
+
+    const [from, to] = [this.parent.filename, type.filename].map((f) => (path.isAbsolute(f) ? `.${path.sep}${f}` : f));
+    return path.relative(path.dirname(from), to).replace(/\.ts$/, "");
   }
 
   public getProtoFieldAccessExpr(parentExpr: ts.Expression): ts.Expression {
@@ -309,6 +352,10 @@ export class ObjectOneofField extends FieldBase<ProtoOneof> {
   get importModules(): { alias: string; module: string }[] {
     return this.type.fields.flatMap((f) => f.importModules);
   }
+
+  get typeFullName(): FullName | null {
+    return this.type.typeName;
+  }
 }
 
 export class InputObjectType extends TypeBase<ProtoMessage> {
@@ -324,13 +371,18 @@ export class InputObjectType extends TypeBase<ProtoMessage> {
       ...this.proto.fields
         .filter((f) => !isOutputOnlyField(f))
         .filter((f) => !isIgnoredField(f))
-        .map((f) => new InputObjectField(getInputObjectFieldType(f, this.options), f, this.options)),
+        .map((f) => new InputObjectField(getInputObjectFieldType(f, this.options), this, f, this.options)),
     ];
   }
 }
 
 export class InputObjectField<T extends ScalarType | EnumType | InputObjectType> {
-  constructor(readonly type: T, private readonly proto: ProtoField, private readonly opts: GenerationParams) {}
+  constructor(
+    readonly type: T,
+    private readonly parent: InputObjectType,
+    private readonly proto: ProtoField,
+    private readonly opts: GenerationParams
+  ) {}
 
   get name(): string {
     return this.proto.descriptor.getOptions()?.getExtension(extensions.field)?.getName() || this.proto.jsonName;
@@ -353,6 +405,24 @@ export class InputObjectField<T extends ScalarType | EnumType | InputObjectType>
     if (isRequiredField(this.proto)) return false;
     return this.type instanceof ScalarType ? !this.type.isPrimitive() : true;
   }
+
+  get typeFullName(): FullName | null {
+    if (this.type instanceof ScalarType) return null;
+    if (!this.typeImportPath) {
+      return this.type.typeName;
+    }
+    return [uniqueImportAlias(this.typeImportPath), this.type.typeName];
+  }
+
+  private get typeImportPath(): string | null {
+    const type: InputObjectType | EnumType | ScalarType = this.type;
+
+    if (type instanceof ScalarType) return null;
+    if (this.parent.filename === type.filename) return null;
+
+    const [from, to] = [this.parent.filename, type.filename].map((f) => (path.isAbsolute(f) ? `.${path.sep}${f}` : f));
+    return path.relative(path.dirname(from), to).replace(/\.ts$/, "");
+  }
 }
 
 export class InterfaceType extends ObjectType {}
@@ -366,7 +436,7 @@ export class OneofUnionType extends TypeBase<ProtoOneof> {
         const type = getObjectFieldType(f, this.options);
         // FIXME: raise user-friendly error
         assert(type instanceof ObjectType);
-        return new ObjectField(type, f, this.options);
+        return new ObjectField(type, this, f, this.options);
       });
   }
 

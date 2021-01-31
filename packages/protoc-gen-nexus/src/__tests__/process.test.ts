@@ -1,5 +1,9 @@
 import { parseParams } from "../process";
-import { itGeneratesNexusDSLsToMatchSnapshtos } from "./__helpers__/process.test.helper";
+import {
+  itGeneratesNexusDSLsToMatchSnapshtos,
+  generateDSLs,
+  snapshotGeneratedFiles,
+} from "./__helpers__/process.test.helper";
 
 describe("parseParams", () => {
   it("reutrns true if value is empty", () => {
@@ -18,6 +22,10 @@ describe("parseParams", () => {
     expect(parseParams("import_prefix=@foobar/baz").importPrefix).toBe("@foobar/baz");
   });
 
+  it("parses fileLayout", () => {
+    expect(parseParams("file_layout=graphql_type").fileLayout).toBe("graphql_type");
+  });
+
   it("throws an erorr when useProtobufjs is string", () => {
     expect(() => {
       parseParams("use_protobufjs=foobar");
@@ -30,11 +38,27 @@ describe("parseParams", () => {
     }).toThrow();
   });
 
+  it("throws an erorr when invalid fileLayout", () => {
+    expect(() => {
+      parseParams("file_layout=foobar");
+    }).toThrow();
+  });
+
   it("throws an erorr when received unknown params", () => {
     expect(() => {
       parseParams("foobar=qux");
     }).toThrow();
   });
+});
+
+it("generates nexus DSLs with graphql_type file layout", async () => {
+  const resp = await generateDSLs("hello", "protobufjs", { perGraphQLType: true });
+  snapshotGeneratedFiles(resp, [
+    "hello/Hello.nexus.ts",
+    "hello/Primitives.nexus.ts",
+    "hello/HelloInput.nexus.ts",
+    "hello/PrimitivesInput.nexus.ts",
+  ]);
 });
 
 describe("simple proto file", () => {
