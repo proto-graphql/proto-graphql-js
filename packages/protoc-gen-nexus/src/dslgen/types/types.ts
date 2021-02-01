@@ -302,7 +302,8 @@ export class ObjectField<
     if (this.parent.filename === type.filename) return null;
 
     const [from, to] = [this.parent.filename, type.filename].map((f) => (path.isAbsolute(f) ? `.${path.sep}${f}` : f));
-    return path.relative(path.dirname(from), to).replace(/\.ts$/, "");
+    const result = path.relative(path.dirname(from), to).replace(/\.ts$/, "");
+    return result.match(/^[\.\/]/) ? result : `./${result}`;
   }
 
   public getProtoFieldAccessExpr(parentExpr: ts.Expression): ts.Expression {
@@ -374,6 +375,13 @@ export class InputObjectType extends TypeBase<ProtoMessage> {
         .map((f) => new InputObjectField(getInputObjectFieldType(f, this.options), this, f, this.options)),
     ];
   }
+
+  /**
+   * @override
+   */
+  get importModules(): { alias: string; module: string }[] {
+    return [...super.importModules, ...this.fields.flatMap((f) => f.importModules)];
+  }
 }
 
 export class InputObjectField<T extends ScalarType | EnumType | InputObjectType> {
@@ -406,6 +414,14 @@ export class InputObjectField<T extends ScalarType | EnumType | InputObjectType>
     return this.type instanceof ScalarType ? !this.type.isPrimitive() : true;
   }
 
+  get importModules(): { alias: string; module: string }[] {
+    const modules = [];
+    if (this.typeImportPath) {
+      modules.push(this.typeImportPath);
+    }
+    return modulesWithUniqueImportAlias(modules);
+  }
+
   get typeFullName(): FullName | null {
     if (this.type instanceof ScalarType) return null;
     if (!this.typeImportPath) {
@@ -421,7 +437,8 @@ export class InputObjectField<T extends ScalarType | EnumType | InputObjectType>
     if (this.parent.filename === type.filename) return null;
 
     const [from, to] = [this.parent.filename, type.filename].map((f) => (path.isAbsolute(f) ? `.${path.sep}${f}` : f));
-    return path.relative(path.dirname(from), to).replace(/\.ts$/, "");
+    const result = path.relative(path.dirname(from), to).replace(/\.ts$/, "");
+    return result.match(/^[\.\/]/) ? result : `./${result}`;
   }
 }
 
