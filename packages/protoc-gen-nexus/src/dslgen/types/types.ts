@@ -461,6 +461,13 @@ export class OneofUnionType extends TypeBase<ProtoOneof> {
   get parentProtoTypeFullName(): FullName {
     return createProtoFullName(this.proto.parent, this.options);
   }
+
+  /**
+   * @override
+   */
+  get importModules(): { alias: string; module: string }[] {
+    return [...super.importModules, ...this.fields.flatMap((f) => f.importModules)];
+  }
 }
 
 export class SquashedOneofUnionType extends TypeBase<ProtoMessage> {
@@ -477,6 +484,13 @@ export class SquashedOneofUnionType extends TypeBase<ProtoMessage> {
   // FIXME: remove
   get parentProtoTypeFullName(): FullName {
     return this.oneofUnionType.parentProtoTypeFullName;
+  }
+
+  /**
+   * @override
+   */
+  get importModules(): { alias: string; module: string }[] {
+    return [...super.importModules, ...this.fields.flatMap((f) => f.importModules)];
   }
 }
 

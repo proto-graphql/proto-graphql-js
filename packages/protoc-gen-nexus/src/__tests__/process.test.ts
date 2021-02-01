@@ -51,18 +51,18 @@ describe("parseParams", () => {
   });
 });
 
-it("generates nexus DSLs with graphql_type file layout", async () => {
-  const resp = await generateDSLs("hello", "protobufjs", { perGraphQLType: true });
-  snapshotGeneratedFiles(resp, [
-    "hello/Hello.nexus.ts",
-    "hello/Primitives.nexus.ts",
-    "hello/HelloInput.nexus.ts",
-    "hello/PrimitivesInput.nexus.ts",
-  ]);
-});
-
 describe("simple proto file", () => {
   itGeneratesNexusDSLsToMatchSnapshtos("hello", ["hello/hello_pb_nexus.ts"]);
+
+  it("generates nexus DSLs with graphql_type file layout", async () => {
+    const resp = await generateDSLs("hello", "protobufjs", { perGraphQLType: true });
+    snapshotGeneratedFiles(resp, [
+      "hello/Hello.nexus.ts",
+      "hello/Primitives.nexus.ts",
+      "hello/HelloInput.nexus.ts",
+      "hello/PrimitivesInput.nexus.ts",
+    ]);
+  });
 });
 
 describe("well-known protobuf types", () => {
@@ -71,6 +71,16 @@ describe("well-known protobuf types", () => {
 
 describe("protobuf enums", () => {
   itGeneratesNexusDSLsToMatchSnapshtos("enums", ["enums/enums_pb_nexus.ts"]);
+
+  it("generates nexus DSLs with graphql_type file layout", async () => {
+    const resp = await generateDSLs("enums", "protobufjs", { perGraphQLType: true });
+    snapshotGeneratedFiles(resp, [
+      "enums/MessageWithEnums.nexus.ts",
+      "enums/MyEnum.nexus.ts",
+      "enums/MyEnumWithoutUnspecified.nexus.ts",
+      "enums/MessageWithEnumsInput.nexus.ts",
+    ]);
+  });
 });
 
 describe("nested protobuf types", () => {
@@ -82,10 +92,45 @@ describe("protobuf custom options", () => {
     "extensions/extensions_pb_nexus.ts",
     "extensions/ignored_pb_nexus.ts",
   ]);
+
+  it("generates nexus DSLs with graphql_type file layout", async () => {
+    const resp = await generateDSLs("extensions", "protobufjs", { perGraphQLType: true });
+    snapshotGeneratedFiles(resp, [
+      "extensions/TestPrefixPrefixedMessage.nexus.ts",
+      "extensions/TestPrefixPrefixedMessageInnerMessage.nexus.ts",
+      "extensions/TestPrefixPrefixedMessageInnerMessage2.nexus.ts",
+      "extensions/TestPrefixPrefixedMessageSquashedMessage.nexus.ts",
+      "extensions/TestPrefixPrefixedMessagePartialIgnoreOneof.nexus.ts",
+      "extensions/TestPrefixPrefixedEnum.nexus.ts",
+      "extensions/TestPrefixIgnoredMessageNotIgnored.nexus.ts",
+      "extensions/TestPrefixInterfaceMessage.nexus.ts",
+      "extensions/TestPrefixInterfaceMessageType.nexus.ts",
+      "extensions/TestPrefixPrefixedMessageInput.nexus.ts",
+      "extensions/TestPrefixPrefixedMessageInnerMessageInput.nexus.ts",
+      "extensions/TestPrefixPrefixedMessageInnerMessage2Input.nexus.ts",
+      "extensions/TestPrefixPrefixedMessageSquashedMessageInput.nexus.ts",
+      "extensions/TestPrefixIgnoredMessageNotIgnoredInput.nexus.ts",
+      "extensions/TestPrefixInterfaceMessageInput.nexus.ts",
+    ]);
+  });
 });
 
 describe("protobuf oneof", () => {
   itGeneratesNexusDSLsToMatchSnapshtos("oneof", ["oneof/oneof_pb_nexus.ts"]);
+
+  it("generates nexus DSLs with graphql_type file layout", async () => {
+    const resp = await generateDSLs("oneof", "protobufjs", { perGraphQLType: true });
+    snapshotGeneratedFiles(resp, [
+      "oneof/OneofParent.nexus.ts",
+      "oneof/OneofParentRequiredOneofMembers.nexus.ts",
+      "oneof/OneofParentOptionalOneofMembers.nexus.ts",
+      "oneof/OneofMemberMessage1.nexus.ts",
+      "oneof/OneofMemberMessage2.nexus.ts",
+      "oneof/OneofParentInput.nexus.ts",
+      "oneof/OneofMemberMessage1Input.nexus.ts",
+      "oneof/OneofMemberMessage2Input.nexus.ts",
+    ]);
+  });
 });
 
 describe("multipkgs", () => {
