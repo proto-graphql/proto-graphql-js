@@ -361,7 +361,7 @@ export class ObjectOneofField extends FieldBase<ProtoOneof> {
       modules.push(this.typeImportPath);
     }
 
-    return [...modulesWithUniqueImportAlias(modules), ...this.type.fields.flatMap((f) => f.importModules)];
+    return modulesWithUniqueImportAlias(modules);
   }
 
   get typeFullName(): FullName {
