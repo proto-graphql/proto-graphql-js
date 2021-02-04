@@ -191,7 +191,7 @@ export class ObjectType extends TypeBase<ProtoMessage> {
       ...this.proto.oneofs
         .filter((f) => !isInputOnlyField(f))
         .filter((f) => !isIgnoredField(f))
-        .map((o) => new ObjectOneofField(new OneofUnionType(o, this.file), o, this.options)),
+        .map((o) => new ObjectOneofField(new OneofUnionType(o, this.file), this, o, this.options)),
     ];
   }
 }
@@ -322,7 +322,12 @@ export class ObjectField<
 }
 
 export class ObjectOneofField extends FieldBase<ProtoOneof> {
-  constructor(readonly type: OneofUnionType, proto: ProtoOneof, opts: GenerationParams) {
+  constructor(
+    readonly type: OneofUnionType,
+    private readonly parent: ObjectType,
+    proto: ProtoOneof,
+    opts: GenerationParams
+  ) {
     super(proto, opts);
   }
 
@@ -351,11 +356,29 @@ export class ObjectOneofField extends FieldBase<ProtoOneof> {
    * @override
    */
   get importModules(): { alias: string; module: string }[] {
-    return this.type.fields.flatMap((f) => f.importModules);
+    const modules = [];
+    if (this.typeImportPath) {
+      modules.push(this.typeImportPath);
+    }
+
+    return [...modulesWithUniqueImportAlias(modules), ...this.type.fields.flatMap((f) => f.importModules)];
   }
 
-  get typeFullName(): FullName | null {
-    return this.type.typeName;
+  get typeFullName(): FullName {
+    if (!this.typeImportPath) {
+      return this.type.typeName;
+    }
+    return [uniqueImportAlias(this.typeImportPath), this.type.typeName];
+  }
+
+  private get typeImportPath(): string | null {
+    if (this.parent.filename === this.type.filename) return null;
+
+    const [from, to] = [this.parent.filename, this.type.filename].map((f) =>
+      path.isAbsolute(f) ? `.${path.sep}${f}` : f
+    );
+    const result = path.relative(path.dirname(from), to).replace(/\.ts$/, "");
+    return result.match(/^[\.\/]/) ? result : `./${result}`;
   }
 }
 
