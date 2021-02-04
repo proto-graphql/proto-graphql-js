@@ -1513,6 +1513,7 @@ import * as nexus from \\"nexus\\";
 import * as _$TestPrefixIgnoredMessageNotIgnored_nexus from \\"./TestPrefixIgnoredMessageNotIgnored.nexus\\";
 import * as _$TestPrefixPrefixedEnum_nexus from \\"./TestPrefixPrefixedEnum.nexus\\";
 import * as _$TestPrefixPrefixedMessageInnerMessage_nexus from \\"./TestPrefixPrefixedMessageInnerMessage.nexus\\";
+import * as _$TestPrefixPrefixedMessagePartialIgnoreOneof_nexus from \\"./TestPrefixPrefixedMessagePartialIgnoreOneof.nexus\\";
 import * as _$TestPrefixPrefixedMessageSquashedMessage_nexus from \\"./TestPrefixPrefixedMessageSquashedMessage.nexus\\";
 import * as _$testapis$extensions from \\"./testapis/extensions\\";
 export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessage = _$testapis$extensions.testapis.extensions.PrefixedMessage;
@@ -1599,7 +1600,7 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
             }
         });
         t.field(\\"partialIgnoreOneof\\", {
-            type: nexus.nullable(TestPrefixPrefixedMessagePartialIgnoreOneof),
+            type: nexus.nullable(_$TestPrefixPrefixedMessagePartialIgnoreOneof_nexus.TestPrefixPrefixedMessagePartialIgnoreOneof),
             resolve(root) {
                 if (root.oneofNotIgnoredField) {
                     return root.oneofNotIgnoredField;
@@ -3155,6 +3156,8 @@ exports[`protobuf oneof generates nexus DSLs with graphql_type file layout: oneo
 import * as nexus from \\"nexus\\";
 import * as _$OneofMemberMessage1_nexus from \\"./OneofMemberMessage1.nexus\\";
 import * as _$OneofMemberMessage2_nexus from \\"./OneofMemberMessage2.nexus\\";
+import * as _$OneofParentOptionalOneofMembers_nexus from \\"./OneofParentOptionalOneofMembers.nexus\\";
+import * as _$OneofParentRequiredOneofMembers_nexus from \\"./OneofParentRequiredOneofMembers.nexus\\";
 import * as _$testapis$oneof from \\"./testapis/oneof\\";
 export type _$testapis$oneof$testapis$oneof$OneofParent = _$testapis$oneof.testapis.oneof.OneofParent;
 export const OneofParent = nexus.objectType({
@@ -3171,7 +3174,7 @@ export const OneofParent = nexus.objectType({
             }
         });
         t.field(\\"requiredOneofMembers\\", {
-            type: nexus.nonNull(OneofParentRequiredOneofMembers),
+            type: nexus.nonNull(_$OneofParentRequiredOneofMembers_nexus.OneofParentRequiredOneofMembers),
             description: \\"Required. disallow not_set.\\",
             resolve(root) {
                 if (root.requiredMessage1) {
@@ -3184,7 +3187,7 @@ export const OneofParent = nexus.objectType({
             }
         });
         t.field(\\"optionalOneofMembers\\", {
-            type: nexus.nullable(OneofParentOptionalOneofMembers),
+            type: nexus.nullable(_$OneofParentOptionalOneofMembers_nexus.OneofParentOptionalOneofMembers),
             resolve(root) {
                 if (root.optoinalMessage1) {
                     return root.optoinalMessage1;
