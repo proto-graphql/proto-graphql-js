@@ -1512,7 +1512,6 @@ exports[`protobuf custom options generates nexus DSLs with graphql_type file lay
 import * as nexus from \\"nexus\\";
 import * as _$TestPrefixIgnoredMessageNotIgnored_nexus from \\"./TestPrefixIgnoredMessageNotIgnored.nexus\\";
 import * as _$TestPrefixPrefixedEnum_nexus from \\"./TestPrefixPrefixedEnum.nexus\\";
-import * as _$TestPrefixPrefixedMessageInnerMessage_nexus from \\"./TestPrefixPrefixedMessageInnerMessage.nexus\\";
 import * as _$TestPrefixPrefixedMessagePartialIgnoreOneof_nexus from \\"./TestPrefixPrefixedMessagePartialIgnoreOneof.nexus\\";
 import * as _$TestPrefixPrefixedMessageSquashedMessage_nexus from \\"./TestPrefixPrefixedMessageSquashedMessage.nexus\\";
 import * as _$testapis$extensions from \\"./testapis/extensions\\";
@@ -3154,8 +3153,6 @@ exports[`protobuf oneof generates nexus DSLs with graphql_type file layout: oneo
 // source: testapis/oneof/oneof.proto
 
 import * as nexus from \\"nexus\\";
-import * as _$OneofMemberMessage1_nexus from \\"./OneofMemberMessage1.nexus\\";
-import * as _$OneofMemberMessage2_nexus from \\"./OneofMemberMessage2.nexus\\";
 import * as _$OneofParentOptionalOneofMembers_nexus from \\"./OneofParentOptionalOneofMembers.nexus\\";
 import * as _$OneofParentRequiredOneofMembers_nexus from \\"./OneofParentRequiredOneofMembers.nexus\\";
 import * as _$testapis$oneof from \\"./testapis/oneof\\";
