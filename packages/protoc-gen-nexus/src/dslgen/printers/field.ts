@@ -42,7 +42,9 @@ export function createFieldDefinitionStmt(
  */
 function createFieldOptionExpr(field: ObjectField<any> | ObjectOneofField | InputObjectField<any>): ts.Expression {
   let typeExpr: ts.Expression = createNexusCallExpr(field.isNullable() ? "nullable" : "nonNull", [
-    field.typeFullName ? createFullNameExpr(field.typeFullName) : ts.factory.createStringLiteral(field.type.typeName),
+    field.shouldReferenceTypeWithString() || !field.typeFullName
+      ? ts.factory.createStringLiteral(field.type.typeName)
+      : createFullNameExpr(field.typeFullName),
   ]);
   if (field.isList()) {
     typeExpr = createNexusCallExpr("list", [typeExpr]);
