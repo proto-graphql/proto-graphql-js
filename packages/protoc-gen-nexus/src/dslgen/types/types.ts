@@ -228,6 +228,11 @@ abstract class FieldBase<P extends ProtoField | ProtoOneof> {
     return this.proto.descriptor.getOptions()?.getExtension(extensions.field)?.getSkipResolver() ?? false;
   }
 
+  public shouldReferenceTypeWithString(): boolean {
+    return this.opts.fileLayout === "proto_file" || this.typeFullName == null;
+  }
+
+  abstract get typeFullName(): FullName | null;
   abstract get importModules(): { alias: string; module: string }[];
   abstract shouldNullCheck(): boolean;
 }
@@ -407,34 +412,32 @@ export class InputObjectType extends TypeBase<ProtoMessage> {
   }
 }
 
-export class InputObjectField<T extends ScalarType | EnumType | InputObjectType> {
+export class InputObjectField<T extends ScalarType | EnumType | InputObjectType> extends FieldBase<ProtoField> {
   constructor(
     readonly type: T,
     private readonly parent: InputObjectType,
-    private readonly proto: ProtoField,
-    private readonly opts: GenerationParams
-  ) {}
+    readonly proto: ProtoField,
+    readonly opts: GenerationParams
+  ) {
+    super(proto, opts);
+  }
 
   get name(): string {
     return this.proto.descriptor.getOptions()?.getExtension(extensions.field)?.getName() || this.proto.jsonName;
   }
 
-  get description(): string | null {
-    return descriptionFromProto(this.proto);
+  /**
+   * @override
+   */
+  get protoJsName(): string {
+    throw "unreachable";
   }
 
-  get deprecationReason(): string | null {
-    return getDeprecationReason(this.proto);
-  }
-
-  public isList(): boolean {
-    const proto: ProtoField | ProtoOneof = this.proto;
-    return proto.kind === "Field" && proto.list;
-  }
-
-  public isNullable(): boolean {
-    if (isRequiredField(this.proto)) return false;
-    return this.type instanceof ScalarType ? !this.type.isPrimitive() : true;
+  /**
+   * @override
+   */
+  public shouldNullCheck(): boolean {
+    throw "unreachable";
   }
 
   get importModules(): { alias: string; module: string }[] {

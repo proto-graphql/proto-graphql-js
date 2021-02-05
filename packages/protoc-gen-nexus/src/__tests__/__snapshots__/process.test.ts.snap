@@ -23,7 +23,7 @@ export const DeprecatedMessage = nexus.objectType({
             }
         });
         t.field(\\"enum\\", {
-            type: nexus.nullable(NotDeprecatedEnum),
+            type: nexus.nullable(\\"NotDeprecatedEnum\\"),
             deprecation: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\",
             resolve(root) {
                 const value = root.getEnum();
@@ -54,7 +54,7 @@ export const NotDeprecatedMessage = nexus.objectType({
             }
         });
         t.field(\\"enum\\", {
-            type: nexus.nullable(DeprecatedEnum),
+            type: nexus.nullable(\\"DeprecatedEnum\\"),
             deprecation: \\"testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.\\",
             resolve(root) {
                 const value = root.getEnum();
@@ -68,7 +68,7 @@ export const NotDeprecatedMessage = nexus.objectType({
             }
         });
         t.field(\\"notDeprecatedOneof\\", {
-            type: nexus.nullable(NotDeprecatedMessageNotDeprecatedOneof),
+            type: nexus.nullable(\\"NotDeprecatedMessageNotDeprecatedOneof\\"),
             resolve(root) {
                 switch (root.getNotDeprecatedOneofCase()) {
                     case _$testapis$deprecation$deprecation_pb.NotDeprecatedMessage.NotDeprecatedOneofCase.NOT_DEPRECATED_ONEOF_NOT_SET: {
@@ -87,7 +87,7 @@ export const NotDeprecatedMessage = nexus.objectType({
             }
         });
         t.field(\\"deprecatedOneof\\", {
-            type: nexus.nullable(NotDeprecatedMessageDeprecatedOneof),
+            type: nexus.nullable(\\"NotDeprecatedMessageDeprecatedOneof\\"),
             deprecation: \\"testapis.deprecation.NotDeprecatedMessage.deprecated_oneof is mark as deprecated in a *.proto file.\\",
             resolve(root) {
                 switch (root.getDeprecatedOneofCase()) {
@@ -169,7 +169,7 @@ export const DeprecatedMessageInput = nexus.inputObjectType({
             deprecation: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\"
         });
         t.field(\\"enum\\", {
-            type: nexus.nullable(NotDeprecatedEnum),
+            type: nexus.nullable(\\"NotDeprecatedEnum\\"),
             deprecation: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\"
         });
     }
@@ -182,22 +182,22 @@ export const NotDeprecatedMessageInput = nexus.inputObjectType({
             deprecation: \\"testapis.deprecation.NotDeprecatedMessage.body is mark as deprecated in a *.proto file.\\"
         });
         t.field(\\"enum\\", {
-            type: nexus.nullable(DeprecatedEnum),
+            type: nexus.nullable(\\"DeprecatedEnum\\"),
             deprecation: \\"testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.\\"
         });
         t.field(\\"msg1\\", {
-            type: nexus.nullable(NotDeprecatedMessageInnerMessage1Input),
+            type: nexus.nullable(\\"NotDeprecatedMessageInnerMessage1Input\\"),
             deprecation: \\"testapis.deprecation.NotDeprecatedMessage.msg1 is mark as deprecated in a *.proto file.\\"
         });
         t.field(\\"msg2\\", {
-            type: nexus.nullable(NotDeprecatedMessageInnerMessage2Input)
+            type: nexus.nullable(\\"NotDeprecatedMessageInnerMessage2Input\\")
         });
         t.field(\\"msg3\\", {
-            type: nexus.nullable(NotDeprecatedMessageInnerMessage1Input),
+            type: nexus.nullable(\\"NotDeprecatedMessageInnerMessage1Input\\"),
             deprecation: \\"testapis.deprecation.NotDeprecatedMessage.msg3 is mark as deprecated in a *.proto file.\\"
         });
         t.field(\\"msg4\\", {
-            type: nexus.nullable(NotDeprecatedMessageInnerMessage2Input),
+            type: nexus.nullable(\\"NotDeprecatedMessageInnerMessage2Input\\"),
             deprecation: \\"testapis.deprecation.NotDeprecatedMessage.msg4 is mark as deprecated in a *.proto file.\\"
         });
     }
@@ -291,7 +291,7 @@ export const DeprecatedFileMessage = nexus.objectType({
             }
         });
         t.field(\\"enum\\", {
-            type: nexus.nullable(DeprecatedFileEnum),
+            type: nexus.nullable(\\"DeprecatedFileEnum\\"),
             deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\",
             resolve(root) {
                 const value = root.getEnum();
@@ -335,7 +335,7 @@ export const DeprecatedFileMessageInput = nexus.inputObjectType({
             deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\"
         });
         t.field(\\"enum\\", {
-            type: nexus.nullable(DeprecatedFileEnum),
+            type: nexus.nullable(\\"DeprecatedFileEnum\\"),
             deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\"
         });
     }
@@ -393,7 +393,7 @@ export const DeprecatedMessage = nexus.objectType({
             }
         });
         t.field(\\"enum\\", {
-            type: nexus.nullable(NotDeprecatedEnum),
+            type: nexus.nullable(\\"NotDeprecatedEnum\\"),
             deprecation: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\",
             resolve(root) {
                 const value = root.enum;
@@ -427,7 +427,7 @@ export const NotDeprecatedMessage = nexus.objectType({
             }
         });
         t.field(\\"enum\\", {
-            type: nexus.nullable(DeprecatedEnum),
+            type: nexus.nullable(\\"DeprecatedEnum\\"),
             deprecation: \\"testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.\\",
             resolve(root) {
                 const value = root.enum;
@@ -441,7 +441,7 @@ export const NotDeprecatedMessage = nexus.objectType({
             }
         });
         t.field(\\"notDeprecatedOneof\\", {
-            type: nexus.nullable(NotDeprecatedMessageNotDeprecatedOneof),
+            type: nexus.nullable(\\"NotDeprecatedMessageNotDeprecatedOneof\\"),
             resolve(root) {
                 if (root.msg1) {
                     return root.msg1;
@@ -453,7 +453,7 @@ export const NotDeprecatedMessage = nexus.objectType({
             }
         });
         t.field(\\"deprecatedOneof\\", {
-            type: nexus.nullable(NotDeprecatedMessageDeprecatedOneof),
+            type: nexus.nullable(\\"NotDeprecatedMessageDeprecatedOneof\\"),
             deprecation: \\"testapis.deprecation.NotDeprecatedMessage.deprecated_oneof is mark as deprecated in a *.proto file.\\",
             resolve(root) {
                 if (root.msg3) {
@@ -537,7 +537,7 @@ export const DeprecatedMessageInput = nexus.inputObjectType({
             deprecation: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\"
         });
         t.field(\\"enum\\", {
-            type: nexus.nullable(NotDeprecatedEnum),
+            type: nexus.nullable(\\"NotDeprecatedEnum\\"),
             deprecation: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\"
         });
     }
@@ -550,22 +550,22 @@ export const NotDeprecatedMessageInput = nexus.inputObjectType({
             deprecation: \\"testapis.deprecation.NotDeprecatedMessage.body is mark as deprecated in a *.proto file.\\"
         });
         t.field(\\"enum\\", {
-            type: nexus.nullable(DeprecatedEnum),
+            type: nexus.nullable(\\"DeprecatedEnum\\"),
             deprecation: \\"testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.\\"
         });
         t.field(\\"msg1\\", {
-            type: nexus.nullable(NotDeprecatedMessageInnerMessage1Input),
+            type: nexus.nullable(\\"NotDeprecatedMessageInnerMessage1Input\\"),
             deprecation: \\"testapis.deprecation.NotDeprecatedMessage.msg1 is mark as deprecated in a *.proto file.\\"
         });
         t.field(\\"msg2\\", {
-            type: nexus.nullable(NotDeprecatedMessageInnerMessage2Input)
+            type: nexus.nullable(\\"NotDeprecatedMessageInnerMessage2Input\\")
         });
         t.field(\\"msg3\\", {
-            type: nexus.nullable(NotDeprecatedMessageInnerMessage1Input),
+            type: nexus.nullable(\\"NotDeprecatedMessageInnerMessage1Input\\"),
             deprecation: \\"testapis.deprecation.NotDeprecatedMessage.msg3 is mark as deprecated in a *.proto file.\\"
         });
         t.field(\\"msg4\\", {
-            type: nexus.nullable(NotDeprecatedMessageInnerMessage2Input),
+            type: nexus.nullable(\\"NotDeprecatedMessageInnerMessage2Input\\"),
             deprecation: \\"testapis.deprecation.NotDeprecatedMessage.msg4 is mark as deprecated in a *.proto file.\\"
         });
     }
@@ -662,7 +662,7 @@ export const DeprecatedFileMessage = nexus.objectType({
             }
         });
         t.field(\\"enum\\", {
-            type: nexus.nullable(DeprecatedFileEnum),
+            type: nexus.nullable(\\"DeprecatedFileEnum\\"),
             deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\",
             resolve(root) {
                 const value = root.enum;
@@ -709,7 +709,7 @@ export const DeprecatedFileMessageInput = nexus.inputObjectType({
             deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\"
         });
         t.field(\\"enum\\", {
-            type: nexus.nullable(DeprecatedFileEnum),
+            type: nexus.nullable(\\"DeprecatedFileEnum\\"),
             deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\"
         });
     }
@@ -753,7 +753,7 @@ export const FieldBehaviorComentsMessage = nexus.objectType({
     name: \\"FieldBehaviorComentsMessage\\",
     definition(t) {
         t.field(\\"requiredField\\", {
-            type: nexus.nonNull(FieldBehaviorComentsMessagePost),
+            type: nexus.nonNull(\\"FieldBehaviorComentsMessagePost\\"),
             description: \\"Required.\\",
             resolve(root) {
                 const value = root.getRequiredField();
@@ -764,7 +764,7 @@ export const FieldBehaviorComentsMessage = nexus.objectType({
             }
         });
         t.field(\\"requiredOutputOnlyField\\", {
-            type: nexus.nonNull(FieldBehaviorComentsMessagePost),
+            type: nexus.nonNull(\\"FieldBehaviorComentsMessagePost\\"),
             description: \\"Required. Output only.\\",
             resolve(root) {
                 const value = root.getRequiredOutputOnlyField();
@@ -775,7 +775,7 @@ export const FieldBehaviorComentsMessage = nexus.objectType({
             }
         });
         t.field(\\"outputOnlyRequiredField\\", {
-            type: nexus.nonNull(FieldBehaviorComentsMessagePost),
+            type: nexus.nonNull(\\"FieldBehaviorComentsMessagePost\\"),
             description: \\"Output only. Required.\\",
             resolve(root) {
                 const value = root.getOutputOnlyRequiredField();
@@ -786,7 +786,7 @@ export const FieldBehaviorComentsMessage = nexus.objectType({
             }
         });
         t.field(\\"outputOnlyField\\", {
-            type: nexus.nullable(FieldBehaviorComentsMessagePost),
+            type: nexus.nullable(\\"FieldBehaviorComentsMessagePost\\"),
             description: \\"Output only.\\",
             resolve(root) {
                 const value = root.getOutputOnlyField();
@@ -822,19 +822,19 @@ export const FieldBehaviorComentsMessageInput = nexus.inputObjectType({
     name: \\"FieldBehaviorComentsMessageInput\\",
     definition(t) {
         t.field(\\"requiredField\\", {
-            type: nexus.nonNull(FieldBehaviorComentsMessagePostInput),
+            type: nexus.nonNull(\\"FieldBehaviorComentsMessagePostInput\\"),
             description: \\"Required.\\"
         });
         t.field(\\"requiredInputOnlyField\\", {
-            type: nexus.nonNull(FieldBehaviorComentsMessagePostInput),
+            type: nexus.nonNull(\\"FieldBehaviorComentsMessagePostInput\\"),
             description: \\"Required. Input only.\\"
         });
         t.field(\\"inputOnlyRequiredField\\", {
-            type: nexus.nonNull(FieldBehaviorComentsMessagePostInput),
+            type: nexus.nonNull(\\"FieldBehaviorComentsMessagePostInput\\"),
             description: \\"Input only. Required.\\"
         });
         t.field(\\"inputOnlyField\\", {
-            type: nexus.nullable(FieldBehaviorComentsMessagePostInput),
+            type: nexus.nullable(\\"FieldBehaviorComentsMessagePostInput\\"),
             description: \\"Input only.\\"
         });
     }
@@ -862,7 +862,7 @@ export const FieldBehaviorComentsMessage = nexus.objectType({
     name: \\"FieldBehaviorComentsMessage\\",
     definition(t) {
         t.field(\\"requiredField\\", {
-            type: nexus.nonNull(FieldBehaviorComentsMessagePost),
+            type: nexus.nonNull(\\"FieldBehaviorComentsMessagePost\\"),
             description: \\"Required.\\",
             resolve(root) {
                 const value = root.requiredField;
@@ -873,7 +873,7 @@ export const FieldBehaviorComentsMessage = nexus.objectType({
             }
         });
         t.field(\\"requiredOutputOnlyField\\", {
-            type: nexus.nonNull(FieldBehaviorComentsMessagePost),
+            type: nexus.nonNull(\\"FieldBehaviorComentsMessagePost\\"),
             description: \\"Required. Output only.\\",
             resolve(root) {
                 const value = root.requiredOutputOnlyField;
@@ -884,7 +884,7 @@ export const FieldBehaviorComentsMessage = nexus.objectType({
             }
         });
         t.field(\\"outputOnlyRequiredField\\", {
-            type: nexus.nonNull(FieldBehaviorComentsMessagePost),
+            type: nexus.nonNull(\\"FieldBehaviorComentsMessagePost\\"),
             description: \\"Output only. Required.\\",
             resolve(root) {
                 const value = root.outputOnlyRequiredField;
@@ -895,7 +895,7 @@ export const FieldBehaviorComentsMessage = nexus.objectType({
             }
         });
         t.field(\\"outputOnlyField\\", {
-            type: nexus.nullable(FieldBehaviorComentsMessagePost),
+            type: nexus.nullable(\\"FieldBehaviorComentsMessagePost\\"),
             description: \\"Output only.\\",
             resolve(root) {
                 const value = root.outputOnlyField;
@@ -934,19 +934,19 @@ export const FieldBehaviorComentsMessageInput = nexus.inputObjectType({
     name: \\"FieldBehaviorComentsMessageInput\\",
     definition(t) {
         t.field(\\"requiredField\\", {
-            type: nexus.nonNull(FieldBehaviorComentsMessagePostInput),
+            type: nexus.nonNull(\\"FieldBehaviorComentsMessagePostInput\\"),
             description: \\"Required.\\"
         });
         t.field(\\"requiredInputOnlyField\\", {
-            type: nexus.nonNull(FieldBehaviorComentsMessagePostInput),
+            type: nexus.nonNull(\\"FieldBehaviorComentsMessagePostInput\\"),
             description: \\"Required. Input only.\\"
         });
         t.field(\\"inputOnlyRequiredField\\", {
-            type: nexus.nonNull(FieldBehaviorComentsMessagePostInput),
+            type: nexus.nonNull(\\"FieldBehaviorComentsMessagePostInput\\"),
             description: \\"Input only. Required.\\"
         });
         t.field(\\"inputOnlyField\\", {
-            type: nexus.nullable(FieldBehaviorComentsMessagePostInput),
+            type: nexus.nullable(\\"FieldBehaviorComentsMessagePostInput\\"),
             description: \\"Input only.\\"
         });
     }
@@ -1022,7 +1022,7 @@ export const MessageWithSubpkg = nexus.objectType({
     name: \\"MessageWithSubpkg\\",
     definition(t) {
         t.field(\\"message\\", {
-            type: nexus.nullable(__$subpkg1$types_pb_nexus.SubpkgMessage),
+            type: nexus.nullable(\\"SubpkgMessage\\"),
             resolve(root) {
                 const value = root.getMessage();
                 if (value == null) {
@@ -1032,7 +1032,7 @@ export const MessageWithSubpkg = nexus.objectType({
             }
         });
         t.field(\\"enum\\", {
-            type: nexus.nullable(__$subpkg1$types_pb_nexus.SubpkgEnum),
+            type: nexus.nullable(\\"SubpkgEnum\\"),
             resolve(root) {
                 const value = root.getEnum();
                 if (value == null) {
@@ -1054,10 +1054,10 @@ export const MessageWithSubpkgInput = nexus.inputObjectType({
     name: \\"MessageWithSubpkgInput\\",
     definition(t) {
         t.field(\\"message\\", {
-            type: nexus.nullable(__$subpkg1$types_pb_nexus.SubpkgMessageInput)
+            type: nexus.nullable(\\"SubpkgMessageInput\\")
         });
         t.field(\\"enum\\", {
-            type: nexus.nullable(__$subpkg1$types_pb_nexus.SubpkgEnum)
+            type: nexus.nullable(\\"SubpkgEnum\\")
         });
     }
 });
@@ -1127,7 +1127,7 @@ export const MessageWithSubpkg = nexus.objectType({
     name: \\"MessageWithSubpkg\\",
     definition(t) {
         t.field(\\"message\\", {
-            type: nexus.nullable(__$subpkg1$types_pb_nexus.SubpkgMessage),
+            type: nexus.nullable(\\"SubpkgMessage\\"),
             resolve(root) {
                 const value = root.message;
                 if (value == null) {
@@ -1137,7 +1137,7 @@ export const MessageWithSubpkg = nexus.objectType({
             }
         });
         t.field(\\"enum\\", {
-            type: nexus.nullable(__$subpkg1$types_pb_nexus.SubpkgEnum),
+            type: nexus.nullable(\\"SubpkgEnum\\"),
             resolve(root) {
                 const value = root.enum;
                 if (value == null) {
@@ -1159,10 +1159,10 @@ export const MessageWithSubpkgInput = nexus.inputObjectType({
     name: \\"MessageWithSubpkgInput\\",
     definition(t) {
         t.field(\\"message\\", {
-            type: nexus.nullable(__$subpkg1$types_pb_nexus.SubpkgMessageInput)
+            type: nexus.nullable(\\"SubpkgMessageInput\\")
         });
         t.field(\\"enum\\", {
-            type: nexus.nullable(__$subpkg1$types_pb_nexus.SubpkgEnum)
+            type: nexus.nullable(\\"SubpkgEnum\\")
         });
     }
 });
@@ -1188,7 +1188,7 @@ export const ParentMessage = nexus.objectType({
             }
         });
         t.field(\\"nested\\", {
-            type: nexus.nullable(ParentMessageNestedMessage),
+            type: nexus.nullable(\\"ParentMessageNestedMessage\\"),
             resolve(root) {
                 const value = root.getNested();
                 if (value == null) {
@@ -1198,7 +1198,7 @@ export const ParentMessage = nexus.objectType({
             }
         });
         t.field(\\"nestedEnum\\", {
-            type: nexus.nullable(ParentMessageNestedEnum),
+            type: nexus.nullable(\\"ParentMessageNestedEnum\\"),
             resolve(root) {
                 const value = root.getNestedEnum();
                 if (value == null) {
@@ -1239,10 +1239,10 @@ export const ParentMessageInput = nexus.inputObjectType({
             type: nexus.nonNull(\\"String\\")
         });
         t.field(\\"nested\\", {
-            type: nexus.nullable(ParentMessageNestedMessageInput)
+            type: nexus.nullable(\\"ParentMessageNestedMessageInput\\")
         });
         t.field(\\"nestedEnum\\", {
-            type: nexus.nullable(ParentMessageNestedEnum)
+            type: nexus.nullable(\\"ParentMessageNestedEnum\\")
         });
     }
 });
@@ -1292,7 +1292,7 @@ export const ParentMessage = nexus.objectType({
             }
         });
         t.field(\\"nested\\", {
-            type: nexus.nullable(ParentMessageNestedMessage),
+            type: nexus.nullable(\\"ParentMessageNestedMessage\\"),
             resolve(root) {
                 const value = root.nested;
                 if (value == null) {
@@ -1302,7 +1302,7 @@ export const ParentMessage = nexus.objectType({
             }
         });
         t.field(\\"nestedEnum\\", {
-            type: nexus.nullable(ParentMessageNestedEnum),
+            type: nexus.nullable(\\"ParentMessageNestedEnum\\"),
             resolve(root) {
                 const value = root.nestedEnum;
                 if (value == null) {
@@ -1346,10 +1346,10 @@ export const ParentMessageInput = nexus.inputObjectType({
             type: nexus.nonNull(\\"String\\")
         });
         t.field(\\"nested\\", {
-            type: nexus.nullable(ParentMessageNestedMessageInput)
+            type: nexus.nullable(\\"ParentMessageNestedMessageInput\\")
         });
         t.field(\\"nestedEnum\\", {
-            type: nexus.nullable(ParentMessageNestedEnum)
+            type: nexus.nullable(\\"ParentMessageNestedEnum\\")
         });
     }
 });
@@ -1873,7 +1873,7 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
             }
         });
         t.field(\\"prefixedEnum\\", {
-            type: nexus.nullable(TestPrefixPrefixedEnum),
+            type: nexus.nullable(\\"TestPrefixPrefixedEnum\\"),
             resolve(root) {
                 const value = root.getPrefixedEnum();
                 if (value == null) {
@@ -1889,7 +1889,7 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
             }
         });
         t.field(\\"notIgnoredMessage\\", {
-            type: nexus.nullable(TestPrefixIgnoredMessageNotIgnored),
+            type: nexus.nullable(\\"TestPrefixIgnoredMessageNotIgnored\\"),
             resolve(root) {
                 const value = root.getNotIgnoredMessage();
                 if (value == null) {
@@ -1899,7 +1899,7 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
             }
         });
         t.field(\\"squashedMessage\\", {
-            type: nexus.nullable(TestPrefixPrefixedMessageSquashedMessage),
+            type: nexus.nullable(\\"TestPrefixPrefixedMessageSquashedMessage\\"),
             resolve(root) {
                 const value = root.getSquashedMessage();
                 if (value == null) {
@@ -1935,7 +1935,7 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
             }
         });
         t.field(\\"squashedMessages\\", {
-            type: nexus.list(nexus.nullable(TestPrefixPrefixedMessageSquashedMessage)),
+            type: nexus.list(nexus.nullable(\\"TestPrefixPrefixedMessageSquashedMessage\\")),
             resolve(root) {
                 const value = root.getSquashedMessagesList();
                 return value.map(item => {
@@ -1957,7 +1957,7 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
             }
         });
         t.field(\\"partialIgnoreOneof\\", {
-            type: nexus.nullable(TestPrefixPrefixedMessagePartialIgnoreOneof),
+            type: nexus.nullable(\\"TestPrefixPrefixedMessagePartialIgnoreOneof\\"),
             resolve(root) {
                 switch (root.getPartialIgnoreOneofCase()) {
                     case _$testapis$extensions$extensions_pb.PrefixedMessage.PartialIgnoreOneofCase.PARTIAL_IGNORE_ONEOF_NOT_SET: {
@@ -2047,25 +2047,25 @@ export const TestPrefixPrefixedMessageInput = nexus.inputObjectType({
             type: nexus.nonNull(\\"String\\")
         });
         t.field(\\"prefixedEnum\\", {
-            type: nexus.nullable(TestPrefixPrefixedEnum)
+            type: nexus.nullable(\\"TestPrefixPrefixedEnum\\")
         });
         t.field(\\"notIgnoredMessage\\", {
-            type: nexus.nullable(TestPrefixIgnoredMessageNotIgnoredInput)
+            type: nexus.nullable(\\"TestPrefixIgnoredMessageNotIgnoredInput\\")
         });
         t.field(\\"squashedMessage\\", {
-            type: nexus.nullable(TestPrefixPrefixedMessageSquashedMessageInput)
+            type: nexus.nullable(\\"TestPrefixPrefixedMessageSquashedMessageInput\\")
         });
         t.field(\\"thisFieldWasRenamed\\", {
             type: nexus.nonNull(\\"String\\")
         });
         t.field(\\"oneofNotIgnoredField\\", {
-            type: nexus.nullable(TestPrefixPrefixedMessageInnerMessageInput)
+            type: nexus.nullable(\\"TestPrefixPrefixedMessageInnerMessageInput\\")
         });
         t.field(\\"skipResolver\\", {
             type: nexus.nonNull(\\"String\\")
         });
         t.field(\\"squashedMessages\\", {
-            type: nexus.list(nexus.nullable(TestPrefixPrefixedMessageSquashedMessageInput))
+            type: nexus.list(nexus.nullable(\\"TestPrefixPrefixedMessageSquashedMessageInput\\"))
         });
     }
 });
@@ -2103,10 +2103,10 @@ export const TestPrefixPrefixedMessageSquashedMessageInput = nexus.inputObjectTy
     name: \\"TestPrefixPrefixedMessageSquashedMessageInput\\",
     definition(t) {
         t.field(\\"oneofField\\", {
-            type: nexus.nullable(TestPrefixPrefixedMessageInnerMessageInput)
+            type: nexus.nullable(\\"TestPrefixPrefixedMessageInnerMessageInput\\")
         });
         t.field(\\"oneofField2\\", {
-            type: nexus.nullable(TestPrefixPrefixedMessageInnerMessage2Input)
+            type: nexus.nullable(\\"TestPrefixPrefixedMessageInnerMessage2Input\\")
         });
     }
 });
@@ -2215,7 +2215,7 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
             }
         });
         t.field(\\"prefixedEnum\\", {
-            type: nexus.nullable(TestPrefixPrefixedEnum),
+            type: nexus.nullable(\\"TestPrefixPrefixedEnum\\"),
             resolve(root) {
                 const value = root.prefixedEnum;
                 if (value == null) {
@@ -2231,7 +2231,7 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
             }
         });
         t.field(\\"notIgnoredMessage\\", {
-            type: nexus.nullable(TestPrefixIgnoredMessageNotIgnored),
+            type: nexus.nullable(\\"TestPrefixIgnoredMessageNotIgnored\\"),
             resolve(root) {
                 const value = root.notIgnoredMessage;
                 if (value == null) {
@@ -2241,7 +2241,7 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
             }
         });
         t.field(\\"squashedMessage\\", {
-            type: nexus.nullable(TestPrefixPrefixedMessageSquashedMessage),
+            type: nexus.nullable(\\"TestPrefixPrefixedMessageSquashedMessage\\"),
             resolve(root) {
                 const value = root.squashedMessage;
                 if (value == null) {
@@ -2273,7 +2273,7 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
             }
         });
         t.field(\\"squashedMessages\\", {
-            type: nexus.list(nexus.nullable(TestPrefixPrefixedMessageSquashedMessage)),
+            type: nexus.list(nexus.nullable(\\"TestPrefixPrefixedMessageSquashedMessage\\")),
             resolve(root) {
                 const value = root.squashedMessages;
                 if (value == null) {
@@ -2291,7 +2291,7 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
             }
         });
         t.field(\\"partialIgnoreOneof\\", {
-            type: nexus.nullable(TestPrefixPrefixedMessagePartialIgnoreOneof),
+            type: nexus.nullable(\\"TestPrefixPrefixedMessagePartialIgnoreOneof\\"),
             resolve(root) {
                 if (root.oneofNotIgnoredField) {
                     return root.oneofNotIgnoredField;
@@ -2389,25 +2389,25 @@ export const TestPrefixPrefixedMessageInput = nexus.inputObjectType({
             type: nexus.nonNull(\\"String\\")
         });
         t.field(\\"prefixedEnum\\", {
-            type: nexus.nullable(TestPrefixPrefixedEnum)
+            type: nexus.nullable(\\"TestPrefixPrefixedEnum\\")
         });
         t.field(\\"notIgnoredMessage\\", {
-            type: nexus.nullable(TestPrefixIgnoredMessageNotIgnoredInput)
+            type: nexus.nullable(\\"TestPrefixIgnoredMessageNotIgnoredInput\\")
         });
         t.field(\\"squashedMessage\\", {
-            type: nexus.nullable(TestPrefixPrefixedMessageSquashedMessageInput)
+            type: nexus.nullable(\\"TestPrefixPrefixedMessageSquashedMessageInput\\")
         });
         t.field(\\"thisFieldWasRenamed\\", {
             type: nexus.nonNull(\\"String\\")
         });
         t.field(\\"oneofNotIgnoredField\\", {
-            type: nexus.nullable(TestPrefixPrefixedMessageInnerMessageInput)
+            type: nexus.nullable(\\"TestPrefixPrefixedMessageInnerMessageInput\\")
         });
         t.field(\\"skipResolver\\", {
             type: nexus.nonNull(\\"String\\")
         });
         t.field(\\"squashedMessages\\", {
-            type: nexus.list(nexus.nullable(TestPrefixPrefixedMessageSquashedMessageInput))
+            type: nexus.list(nexus.nullable(\\"TestPrefixPrefixedMessageSquashedMessageInput\\"))
         });
     }
 });
@@ -2445,10 +2445,10 @@ export const TestPrefixPrefixedMessageSquashedMessageInput = nexus.inputObjectTy
     name: \\"TestPrefixPrefixedMessageSquashedMessageInput\\",
     definition(t) {
         t.field(\\"oneofField\\", {
-            type: nexus.nullable(TestPrefixPrefixedMessageInnerMessageInput)
+            type: nexus.nullable(\\"TestPrefixPrefixedMessageInnerMessageInput\\")
         });
         t.field(\\"oneofField2\\", {
-            type: nexus.nullable(TestPrefixPrefixedMessageInnerMessage2Input)
+            type: nexus.nullable(\\"TestPrefixPrefixedMessageInnerMessage2Input\\")
         });
     }
 });
@@ -2758,7 +2758,7 @@ export const MessageWithEnums = nexus.objectType({
     name: \\"MessageWithEnums\\",
     definition(t) {
         t.field(\\"requiredMyEnum\\", {
-            type: nexus.nonNull(MyEnum),
+            type: nexus.nonNull(\\"MyEnum\\"),
             description: \\"Required.\\",
             resolve(root) {
                 const value = root.getRequiredMyEnum();
@@ -2772,7 +2772,7 @@ export const MessageWithEnums = nexus.objectType({
             }
         });
         t.field(\\"optionalMyEnum\\", {
-            type: nexus.nullable(MyEnum),
+            type: nexus.nullable(\\"MyEnum\\"),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.getOptionalMyEnum();
@@ -2786,7 +2786,7 @@ export const MessageWithEnums = nexus.objectType({
             }
         });
         t.field(\\"requiredMyEnumWithoutUnspecified\\", {
-            type: nexus.nonNull(MyEnumWithoutUnspecified),
+            type: nexus.nonNull(\\"MyEnumWithoutUnspecified\\"),
             description: \\"Required.\\",
             resolve(root) {
                 const value = root.getRequiredMyEnumWithoutUnspecified();
@@ -2797,7 +2797,7 @@ export const MessageWithEnums = nexus.objectType({
             }
         });
         t.field(\\"optionalMyEnumWithoutUnspecified\\", {
-            type: nexus.nullable(MyEnumWithoutUnspecified),
+            type: nexus.nullable(\\"MyEnumWithoutUnspecified\\"),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.getOptionalMyEnumWithoutUnspecified();
@@ -2808,7 +2808,7 @@ export const MessageWithEnums = nexus.objectType({
             }
         });
         t.field(\\"requiredMyEnums\\", {
-            type: nexus.list(nexus.nonNull(MyEnum)),
+            type: nexus.list(nexus.nonNull(\\"MyEnum\\")),
             description: \\"Required.\\",
             resolve(root) {
                 const value = root.getRequiredMyEnumsList();
@@ -2821,7 +2821,7 @@ export const MessageWithEnums = nexus.objectType({
             }
         });
         t.field(\\"optionalMyEnums\\", {
-            type: nexus.list(nexus.nullable(MyEnum)),
+            type: nexus.list(nexus.nullable(\\"MyEnum\\")),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.getOptionalMyEnumsList();
@@ -2834,7 +2834,7 @@ export const MessageWithEnums = nexus.objectType({
             }
         });
         t.field(\\"requiredMyEnumWithoutUnspecifieds\\", {
-            type: nexus.list(nexus.nonNull(MyEnumWithoutUnspecified)),
+            type: nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\")),
             description: \\"Required.\\",
             resolve(root) {
                 const value = root.getRequiredMyEnumWithoutUnspecifiedsList();
@@ -2842,7 +2842,7 @@ export const MessageWithEnums = nexus.objectType({
             }
         });
         t.field(\\"optionalMyEnumWithoutUnspecifieds\\", {
-            type: nexus.list(nexus.nullable(MyEnumWithoutUnspecified)),
+            type: nexus.list(nexus.nullable(\\"MyEnumWithoutUnspecified\\")),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.getOptionalMyEnumWithoutUnspecifiedsList();
@@ -2859,35 +2859,35 @@ export const MessageWithEnumsInput = nexus.inputObjectType({
     name: \\"MessageWithEnumsInput\\",
     definition(t) {
         t.field(\\"requiredMyEnum\\", {
-            type: nexus.nonNull(MyEnum),
+            type: nexus.nonNull(\\"MyEnum\\"),
             description: \\"Required.\\"
         });
         t.field(\\"optionalMyEnum\\", {
-            type: nexus.nullable(MyEnum),
+            type: nexus.nullable(\\"MyEnum\\"),
             description: \\"Optional.\\"
         });
         t.field(\\"requiredMyEnumWithoutUnspecified\\", {
-            type: nexus.nonNull(MyEnumWithoutUnspecified),
+            type: nexus.nonNull(\\"MyEnumWithoutUnspecified\\"),
             description: \\"Required.\\"
         });
         t.field(\\"optionalMyEnumWithoutUnspecified\\", {
-            type: nexus.nullable(MyEnumWithoutUnspecified),
+            type: nexus.nullable(\\"MyEnumWithoutUnspecified\\"),
             description: \\"Optional.\\"
         });
         t.field(\\"requiredMyEnums\\", {
-            type: nexus.list(nexus.nonNull(MyEnum)),
+            type: nexus.list(nexus.nonNull(\\"MyEnum\\")),
             description: \\"Required.\\"
         });
         t.field(\\"optionalMyEnums\\", {
-            type: nexus.list(nexus.nullable(MyEnum)),
+            type: nexus.list(nexus.nullable(\\"MyEnum\\")),
             description: \\"Optional.\\"
         });
         t.field(\\"requiredMyEnumWithoutUnspecifieds\\", {
-            type: nexus.list(nexus.nonNull(MyEnumWithoutUnspecified)),
+            type: nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\")),
             description: \\"Required.\\"
         });
         t.field(\\"optionalMyEnumWithoutUnspecifieds\\", {
-            type: nexus.list(nexus.nullable(MyEnumWithoutUnspecified)),
+            type: nexus.list(nexus.nullable(\\"MyEnumWithoutUnspecified\\")),
             description: \\"Optional.\\"
         });
     }
@@ -2941,7 +2941,7 @@ export const MessageWithEnums = nexus.objectType({
     name: \\"MessageWithEnums\\",
     definition(t) {
         t.field(\\"requiredMyEnum\\", {
-            type: nexus.nonNull(MyEnum),
+            type: nexus.nonNull(\\"MyEnum\\"),
             description: \\"Required.\\",
             resolve(root) {
                 const value = root.requiredMyEnum;
@@ -2955,7 +2955,7 @@ export const MessageWithEnums = nexus.objectType({
             }
         });
         t.field(\\"optionalMyEnum\\", {
-            type: nexus.nullable(MyEnum),
+            type: nexus.nullable(\\"MyEnum\\"),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.optionalMyEnum;
@@ -2969,7 +2969,7 @@ export const MessageWithEnums = nexus.objectType({
             }
         });
         t.field(\\"requiredMyEnumWithoutUnspecified\\", {
-            type: nexus.nonNull(MyEnumWithoutUnspecified),
+            type: nexus.nonNull(\\"MyEnumWithoutUnspecified\\"),
             description: \\"Required.\\",
             resolve(root) {
                 const value = root.requiredMyEnumWithoutUnspecified;
@@ -2980,7 +2980,7 @@ export const MessageWithEnums = nexus.objectType({
             }
         });
         t.field(\\"optionalMyEnumWithoutUnspecified\\", {
-            type: nexus.nullable(MyEnumWithoutUnspecified),
+            type: nexus.nullable(\\"MyEnumWithoutUnspecified\\"),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.optionalMyEnumWithoutUnspecified;
@@ -2991,7 +2991,7 @@ export const MessageWithEnums = nexus.objectType({
             }
         });
         t.field(\\"requiredMyEnums\\", {
-            type: nexus.list(nexus.nonNull(MyEnum)),
+            type: nexus.list(nexus.nonNull(\\"MyEnum\\")),
             description: \\"Required.\\",
             resolve(root) {
                 const value = root.requiredMyEnums;
@@ -3007,7 +3007,7 @@ export const MessageWithEnums = nexus.objectType({
             }
         });
         t.field(\\"optionalMyEnums\\", {
-            type: nexus.list(nexus.nullable(MyEnum)),
+            type: nexus.list(nexus.nullable(\\"MyEnum\\")),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.optionalMyEnums;
@@ -3023,7 +3023,7 @@ export const MessageWithEnums = nexus.objectType({
             }
         });
         t.field(\\"requiredMyEnumWithoutUnspecifieds\\", {
-            type: nexus.list(nexus.nonNull(MyEnumWithoutUnspecified)),
+            type: nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\")),
             description: \\"Required.\\",
             resolve(root) {
                 const value = root.requiredMyEnumWithoutUnspecifieds;
@@ -3034,7 +3034,7 @@ export const MessageWithEnums = nexus.objectType({
             }
         });
         t.field(\\"optionalMyEnumWithoutUnspecifieds\\", {
-            type: nexus.list(nexus.nullable(MyEnumWithoutUnspecified)),
+            type: nexus.list(nexus.nullable(\\"MyEnumWithoutUnspecified\\")),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.optionalMyEnumWithoutUnspecifieds;
@@ -3054,35 +3054,35 @@ export const MessageWithEnumsInput = nexus.inputObjectType({
     name: \\"MessageWithEnumsInput\\",
     definition(t) {
         t.field(\\"requiredMyEnum\\", {
-            type: nexus.nonNull(MyEnum),
+            type: nexus.nonNull(\\"MyEnum\\"),
             description: \\"Required.\\"
         });
         t.field(\\"optionalMyEnum\\", {
-            type: nexus.nullable(MyEnum),
+            type: nexus.nullable(\\"MyEnum\\"),
             description: \\"Optional.\\"
         });
         t.field(\\"requiredMyEnumWithoutUnspecified\\", {
-            type: nexus.nonNull(MyEnumWithoutUnspecified),
+            type: nexus.nonNull(\\"MyEnumWithoutUnspecified\\"),
             description: \\"Required.\\"
         });
         t.field(\\"optionalMyEnumWithoutUnspecified\\", {
-            type: nexus.nullable(MyEnumWithoutUnspecified),
+            type: nexus.nullable(\\"MyEnumWithoutUnspecified\\"),
             description: \\"Optional.\\"
         });
         t.field(\\"requiredMyEnums\\", {
-            type: nexus.list(nexus.nonNull(MyEnum)),
+            type: nexus.list(nexus.nonNull(\\"MyEnum\\")),
             description: \\"Required.\\"
         });
         t.field(\\"optionalMyEnums\\", {
-            type: nexus.list(nexus.nullable(MyEnum)),
+            type: nexus.list(nexus.nullable(\\"MyEnum\\")),
             description: \\"Optional.\\"
         });
         t.field(\\"requiredMyEnumWithoutUnspecifieds\\", {
-            type: nexus.list(nexus.nonNull(MyEnumWithoutUnspecified)),
+            type: nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\")),
             description: \\"Required.\\"
         });
         t.field(\\"optionalMyEnumWithoutUnspecifieds\\", {
-            type: nexus.list(nexus.nullable(MyEnumWithoutUnspecified)),
+            type: nexus.list(nexus.nullable(\\"MyEnumWithoutUnspecified\\")),
             description: \\"Optional.\\"
         });
     }
@@ -3354,7 +3354,7 @@ export const OneofParent = nexus.objectType({
             }
         });
         t.field(\\"requiredOneofMembers\\", {
-            type: nexus.nonNull(OneofParentRequiredOneofMembers),
+            type: nexus.nonNull(\\"OneofParentRequiredOneofMembers\\"),
             description: \\"Required. disallow not_set.\\",
             resolve(root) {
                 switch (root.getRequiredOneofMembersCase()) {
@@ -3374,7 +3374,7 @@ export const OneofParent = nexus.objectType({
             }
         });
         t.field(\\"optionalOneofMembers\\", {
-            type: nexus.nullable(OneofParentOptionalOneofMembers),
+            type: nexus.nullable(\\"OneofParentOptionalOneofMembers\\"),
             resolve(root) {
                 switch (root.getOptionalOneofMembersCase()) {
                     case _$testapis$oneof$oneof_pb.OneofParent.OptionalOneofMembersCase.OPTIONAL_ONEOF_MEMBERS_NOT_SET: {
@@ -3437,16 +3437,16 @@ export const OneofParentInput = nexus.inputObjectType({
             type: nexus.nonNull(\\"String\\")
         });
         t.field(\\"requiredMessage1\\", {
-            type: nexus.nullable(OneofMemberMessage1Input)
+            type: nexus.nullable(\\"OneofMemberMessage1Input\\")
         });
         t.field(\\"requiredMessage2\\", {
-            type: nexus.nullable(OneofMemberMessage2Input)
+            type: nexus.nullable(\\"OneofMemberMessage2Input\\")
         });
         t.field(\\"optoinalMessage1\\", {
-            type: nexus.nullable(OneofMemberMessage1Input)
+            type: nexus.nullable(\\"OneofMemberMessage1Input\\")
         });
         t.field(\\"optoinalMessage2\\", {
-            type: nexus.nullable(OneofMemberMessage2Input)
+            type: nexus.nullable(\\"OneofMemberMessage2Input\\")
         });
     }
 });
@@ -3505,7 +3505,7 @@ export const OneofParent = nexus.objectType({
             }
         });
         t.field(\\"requiredOneofMembers\\", {
-            type: nexus.nonNull(OneofParentRequiredOneofMembers),
+            type: nexus.nonNull(\\"OneofParentRequiredOneofMembers\\"),
             description: \\"Required. disallow not_set.\\",
             resolve(root) {
                 if (root.requiredMessage1) {
@@ -3518,7 +3518,7 @@ export const OneofParent = nexus.objectType({
             }
         });
         t.field(\\"optionalOneofMembers\\", {
-            type: nexus.nullable(OneofParentOptionalOneofMembers),
+            type: nexus.nullable(\\"OneofParentOptionalOneofMembers\\"),
             resolve(root) {
                 if (root.optoinalMessage1) {
                     return root.optoinalMessage1;
@@ -3580,16 +3580,16 @@ export const OneofParentInput = nexus.inputObjectType({
             type: nexus.nonNull(\\"String\\")
         });
         t.field(\\"requiredMessage1\\", {
-            type: nexus.nullable(OneofMemberMessage1Input)
+            type: nexus.nullable(\\"OneofMemberMessage1Input\\")
         });
         t.field(\\"requiredMessage2\\", {
-            type: nexus.nullable(OneofMemberMessage2Input)
+            type: nexus.nullable(\\"OneofMemberMessage2Input\\")
         });
         t.field(\\"optoinalMessage1\\", {
-            type: nexus.nullable(OneofMemberMessage1Input)
+            type: nexus.nullable(\\"OneofMemberMessage1Input\\")
         });
         t.field(\\"optoinalMessage2\\", {
-            type: nexus.nullable(OneofMemberMessage2Input)
+            type: nexus.nullable(\\"OneofMemberMessage2Input\\")
         });
     }
 });
@@ -4137,7 +4137,7 @@ export const Hello = nexus.objectType({
     name: \\"Hello\\",
     definition(t) {
         t.field(\\"requiredPrimitives\\", {
-            type: nexus.nonNull(Primitives),
+            type: nexus.nonNull(\\"Primitives\\"),
             description: \\"Required.\\",
             resolve(root) {
                 const value = root.getRequiredPrimitives();
@@ -4148,7 +4148,7 @@ export const Hello = nexus.objectType({
             }
         });
         t.field(\\"optionalPrimitives\\", {
-            type: nexus.nullable(Primitives),
+            type: nexus.nullable(\\"Primitives\\"),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.getOptionalPrimitives();
@@ -4159,7 +4159,7 @@ export const Hello = nexus.objectType({
             }
         });
         t.field(\\"requiredPrimitivesList\\", {
-            type: nexus.list(nexus.nonNull(Primitives)),
+            type: nexus.list(nexus.nonNull(\\"Primitives\\")),
             description: \\"Required.\\",
             resolve(root) {
                 const value = root.getRequiredPrimitivesListList();
@@ -4167,7 +4167,7 @@ export const Hello = nexus.objectType({
             }
         });
         t.field(\\"optionalPrimitivesList\\", {
-            type: nexus.nullable(Primitives),
+            type: nexus.nullable(\\"Primitives\\"),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.getOptionalPrimitivesList();
@@ -4402,19 +4402,19 @@ export const HelloInput = nexus.inputObjectType({
     name: \\"HelloInput\\",
     definition(t) {
         t.field(\\"requiredPrimitives\\", {
-            type: nexus.nonNull(PrimitivesInput),
+            type: nexus.nonNull(\\"PrimitivesInput\\"),
             description: \\"Required.\\"
         });
         t.field(\\"optionalPrimitives\\", {
-            type: nexus.nullable(PrimitivesInput),
+            type: nexus.nullable(\\"PrimitivesInput\\"),
             description: \\"Optional.\\"
         });
         t.field(\\"requiredPrimitivesList\\", {
-            type: nexus.list(nexus.nonNull(PrimitivesInput)),
+            type: nexus.list(nexus.nonNull(\\"PrimitivesInput\\")),
             description: \\"Required.\\"
         });
         t.field(\\"optionalPrimitivesList\\", {
-            type: nexus.nullable(PrimitivesInput),
+            type: nexus.nullable(\\"PrimitivesInput\\"),
             description: \\"Optional.\\"
         });
     }
@@ -4523,7 +4523,7 @@ export const Hello = nexus.objectType({
     name: \\"Hello\\",
     definition(t) {
         t.field(\\"requiredPrimitives\\", {
-            type: nexus.nonNull(Primitives),
+            type: nexus.nonNull(\\"Primitives\\"),
             description: \\"Required.\\",
             resolve(root) {
                 const value = root.requiredPrimitives;
@@ -4534,7 +4534,7 @@ export const Hello = nexus.objectType({
             }
         });
         t.field(\\"optionalPrimitives\\", {
-            type: nexus.nullable(Primitives),
+            type: nexus.nullable(\\"Primitives\\"),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.optionalPrimitives;
@@ -4545,7 +4545,7 @@ export const Hello = nexus.objectType({
             }
         });
         t.field(\\"requiredPrimitivesList\\", {
-            type: nexus.list(nexus.nonNull(Primitives)),
+            type: nexus.list(nexus.nonNull(\\"Primitives\\")),
             description: \\"Required.\\",
             resolve(root) {
                 const value = root.requiredPrimitivesList;
@@ -4556,7 +4556,7 @@ export const Hello = nexus.objectType({
             }
         });
         t.field(\\"optionalPrimitivesList\\", {
-            type: nexus.nullable(Primitives),
+            type: nexus.nullable(\\"Primitives\\"),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.optionalPrimitivesList;
@@ -4875,19 +4875,19 @@ export const HelloInput = nexus.inputObjectType({
     name: \\"HelloInput\\",
     definition(t) {
         t.field(\\"requiredPrimitives\\", {
-            type: nexus.nonNull(PrimitivesInput),
+            type: nexus.nonNull(\\"PrimitivesInput\\"),
             description: \\"Required.\\"
         });
         t.field(\\"optionalPrimitives\\", {
-            type: nexus.nullable(PrimitivesInput),
+            type: nexus.nullable(\\"PrimitivesInput\\"),
             description: \\"Optional.\\"
         });
         t.field(\\"requiredPrimitivesList\\", {
-            type: nexus.list(nexus.nonNull(PrimitivesInput)),
+            type: nexus.list(nexus.nonNull(\\"PrimitivesInput\\")),
             description: \\"Required.\\"
         });
         t.field(\\"optionalPrimitivesList\\", {
-            type: nexus.nullable(PrimitivesInput),
+            type: nexus.nullable(\\"PrimitivesInput\\"),
             description: \\"Optional.\\"
         });
     }
