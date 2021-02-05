@@ -480,6 +480,10 @@ export class OneofUnionType extends TypeBase<ProtoOneof> {
       });
   }
 
+  get oneofName(): string {
+    return this.proto.name;
+  }
+
   // FIXME: remove
   get parentProtoTypeFullName(): FullName {
     return createProtoFullName(this.proto.parent, this.options);
@@ -498,6 +502,10 @@ export class SquashedOneofUnionType extends TypeBase<ProtoMessage> {
   constructor(proto: ProtoMessage, file: DslFile) {
     super(proto, file);
     this.oneofUnionType = new OneofUnionType(proto.oneofs[0], file);
+  }
+
+  get oneofName(): string {
+    return this.oneofUnionType.oneofName;
   }
 
   get fields(): ObjectField<ObjectType>[] {
