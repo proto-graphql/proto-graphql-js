@@ -1598,6 +1598,24 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
                 throw new Error(\\"not implemented\\");
             }
         });
+        t.field(\\"squashedMessages\\", {
+            type: nexus.list(nexus.nullable(_$TestPrefixPrefixedMessageSquashedMessage_nexus.TestPrefixPrefixedMessageSquashedMessage)),
+            resolve(root) {
+                const value = root.squashedMessages;
+                if (value == null) {
+                    return null;
+                }
+                return value.map(item => {
+                    if (item.oneofField) {
+                        return item.oneofField;
+                    }
+                    if (item.oneofField_2) {
+                        return item.oneofField_2;
+                    }
+                    return null;
+                });
+            }
+        });
         t.field(\\"partialIgnoreOneof\\", {
             type: nexus.nullable(_$TestPrefixPrefixedMessagePartialIgnoreOneof_nexus.TestPrefixPrefixedMessagePartialIgnoreOneof),
             resolve(root) {
@@ -1765,6 +1783,9 @@ export const TestPrefixPrefixedMessageInput = nexus.inputObjectType({
         t.field(\\"skipResolver\\", {
             type: nexus.nonNull(\\"String\\")
         });
+        t.field(\\"squashedMessages\\", {
+            type: nexus.list(nexus.nullable(_$TestPrefixPrefixedMessageSquashedMessageInput_nexus.TestPrefixPrefixedMessageSquashedMessageInput))
+        });
     }
 });
 "
@@ -1913,6 +1934,28 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
                 throw new Error(\\"not implemented\\");
             }
         });
+        t.field(\\"squashedMessages\\", {
+            type: nexus.list(nexus.nullable(TestPrefixPrefixedMessageSquashedMessage)),
+            resolve(root) {
+                const value = root.getSquashedMessagesList();
+                return value.map(item => {
+                    switch (item.getSquashedMessageCase()) {
+                        case _$testapis$extensions$extensions_pb.PrefixedMessage.SquashedMessage.SquashedMessageCase.SQUASHED_MESSAGE_NOT_SET: {
+                            return null;
+                        }
+                        case _$testapis$extensions$extensions_pb.PrefixedMessage.SquashedMessage.SquashedMessageCase.ONEOF_FIELD: {
+                            return item.getOneofField()!;
+                        }
+                        case _$testapis$extensions$extensions_pb.PrefixedMessage.SquashedMessage.SquashedMessageCase.ONEOF_FIELD_2: {
+                            return item.getOneofField2()!;
+                        }
+                        default: {
+                            throw \\"unreachable\\";
+                        }
+                    }
+                });
+            }
+        });
         t.field(\\"partialIgnoreOneof\\", {
             type: nexus.nullable(TestPrefixPrefixedMessagePartialIgnoreOneof),
             resolve(root) {
@@ -2020,6 +2063,9 @@ export const TestPrefixPrefixedMessageInput = nexus.inputObjectType({
         });
         t.field(\\"skipResolver\\", {
             type: nexus.nonNull(\\"String\\")
+        });
+        t.field(\\"squashedMessages\\", {
+            type: nexus.list(nexus.nullable(TestPrefixPrefixedMessageSquashedMessageInput))
         });
     }
 });
@@ -2226,6 +2272,24 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
                 throw new Error(\\"not implemented\\");
             }
         });
+        t.field(\\"squashedMessages\\", {
+            type: nexus.list(nexus.nullable(TestPrefixPrefixedMessageSquashedMessage)),
+            resolve(root) {
+                const value = root.squashedMessages;
+                if (value == null) {
+                    return null;
+                }
+                return value.map(item => {
+                    if (item.oneofField) {
+                        return item.oneofField;
+                    }
+                    if (item.oneofField_2) {
+                        return item.oneofField_2;
+                    }
+                    return null;
+                });
+            }
+        });
         t.field(\\"partialIgnoreOneof\\", {
             type: nexus.nullable(TestPrefixPrefixedMessagePartialIgnoreOneof),
             resolve(root) {
@@ -2341,6 +2405,9 @@ export const TestPrefixPrefixedMessageInput = nexus.inputObjectType({
         });
         t.field(\\"skipResolver\\", {
             type: nexus.nonNull(\\"String\\")
+        });
+        t.field(\\"squashedMessages\\", {
+            type: nexus.list(nexus.nullable(TestPrefixPrefixedMessageSquashedMessageInput))
         });
     }
 });
