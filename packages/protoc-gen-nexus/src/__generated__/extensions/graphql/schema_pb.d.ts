@@ -46,6 +46,9 @@ export class GraphqlObjectTypeOptions extends jspb.Message {
   getInterface(): boolean;
   setInterface(value: boolean): void;
 
+  getName(): string;
+  setName(value: string): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GraphqlObjectTypeOptions.AsObject;
   static toObject(includeInstance: boolean, msg: GraphqlObjectTypeOptions): GraphqlObjectTypeOptions.AsObject;
@@ -61,6 +64,7 @@ export namespace GraphqlObjectTypeOptions {
     ignore: boolean,
     squashUnion: boolean,
     pb_interface: boolean,
+    name: string,
   }
 }
 

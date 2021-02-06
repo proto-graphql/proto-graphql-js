@@ -408,7 +408,8 @@ proto.graphql.GraphqlObjectTypeOptions.toObject = function(includeInstance, msg)
   var f, obj = {
     ignore: jspb.Message.getBooleanFieldWithDefault(msg, 1, false),
     squashUnion: jspb.Message.getBooleanFieldWithDefault(msg, 2, false),
-    pb_interface: jspb.Message.getBooleanFieldWithDefault(msg, 3, false)
+    pb_interface: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
+    name: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
   if (includeInstance) {
@@ -457,6 +458,10 @@ proto.graphql.GraphqlObjectTypeOptions.deserializeBinaryFromReader = function(ms
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setInterface(value);
       break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setName(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -504,6 +509,13 @@ proto.graphql.GraphqlObjectTypeOptions.serializeBinaryToWriter = function(messag
   if (f) {
     writer.writeBool(
       3,
+      f
+    );
+  }
+  f = message.getName();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
       f
     );
   }
@@ -561,6 +573,24 @@ proto.graphql.GraphqlObjectTypeOptions.prototype.getInterface = function() {
  */
 proto.graphql.GraphqlObjectTypeOptions.prototype.setInterface = function(value) {
   return jspb.Message.setProto3BooleanField(this, 3, value);
+};
+
+
+/**
+ * optional string name = 4;
+ * @return {string}
+ */
+proto.graphql.GraphqlObjectTypeOptions.prototype.getName = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.graphql.GraphqlObjectTypeOptions} returns this
+ */
+proto.graphql.GraphqlObjectTypeOptions.prototype.setName = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 

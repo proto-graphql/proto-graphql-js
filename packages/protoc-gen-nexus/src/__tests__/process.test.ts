@@ -105,12 +105,14 @@ describe("protobuf custom options", () => {
       "extensions/TestPrefixIgnoredMessageNotIgnored.nexus.ts",
       "extensions/TestPrefixInterfaceMessage.nexus.ts",
       "extensions/TestPrefixInterfaceMessageType.nexus.ts",
+      "extensions/TestPrefixRenamedMessage.nexus.ts",
       "extensions/TestPrefixPrefixedMessageInput.nexus.ts",
       "extensions/TestPrefixPrefixedMessageInnerMessageInput.nexus.ts",
       "extensions/TestPrefixPrefixedMessageInnerMessage2Input.nexus.ts",
       "extensions/TestPrefixPrefixedMessageSquashedMessageInput.nexus.ts",
       "extensions/TestPrefixIgnoredMessageNotIgnoredInput.nexus.ts",
       "extensions/TestPrefixInterfaceMessageInput.nexus.ts",
+      "extensions/TestPrefixRenamedMessageInput.nexus.ts",
     ]);
   });
 });

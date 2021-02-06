@@ -76,6 +76,8 @@ message PrefixedMessage {
   string skip_resolver = 15 [(graphql.field).skip_resolver = true];
 
   repeated SquashedMessage squashed_messages = 16;
+
+  MessageWillRename renamed_message = 17;
 }
 
 enum PrefixedEnum {
@@ -83,6 +85,12 @@ enum PrefixedEnum {
   PREFIXED_FOO = 1;
   PREFIXED_BAR = 2;
   PREFIXED_IGNORED = 3 [(graphql.enum_value).ignore = true];
+}
+
+message MessageWillRename {
+  option (graphql.object_type).name = "RenamedMessage";
+
+  string body = 1;
 }
 
 message IgnoredMessage {

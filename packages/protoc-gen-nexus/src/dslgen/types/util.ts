@@ -87,7 +87,11 @@ function nameWithParent(typ: ProtoMessage | ProtoOneof | ProtoEnum): string {
   let t: ProtoMessage | ProtoOneof | ProtoEnum | ProtoFile = typ;
   for (;;) {
     if (t.kind === "File") break;
-    name = `${t.kind === "Oneof" ? pascalCase(t.name) : t.name}${name}`;
+    let override: string | undefined;
+    if (t.kind === "Message") {
+      override = t.descriptor.getOptions()?.getExtension(extensions.objectType)?.getName();
+    }
+    name = `${t.kind === "Oneof" ? pascalCase(t.name) : override || t.name}${name}`;
     t = t.parent;
   }
   const prefix = t.descriptor.getOptions()?.getExtension(extensions.schema)?.getTypePrefix();
