@@ -34,7 +34,7 @@ import * as extensions from "../../__generated__/extensions/graphql/schema_pb";
 import { camelCase, constantCase } from "change-case";
 import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
 
-import { getUnwrapFunc, UnwrapFunc } from "./unwrap";
+import { getUnwrapFunc, getWrapFunc, UnwrapFunc, WrapFunc } from "./unwrap";
 
 type GqlScalarType = "Int" | "Float" | "String" | "Boolean" | "ID" | "DateTime";
 export type GqlType =
@@ -112,7 +112,7 @@ export class DslFile {
 }
 
 abstract class TypeBase<P extends ProtoMessage | ProtoEnum | ProtoOneof> {
-  constructor(protected readonly proto: P, protected readonly file: DslFile) {}
+  constructor(protected readonly proto: P, readonly file: DslFile) {}
 
   get typeName(): string {
     return gqlTypeName(this.proto);
@@ -395,7 +395,11 @@ export class InputObjectType extends TypeBase<ProtoMessage> {
     return gqlTypeName(this.proto, { input: true });
   }
 
-  get fields(): InputObjectField<any>[] {
+  get protoTypeFullName(): FullName {
+    return createProtoFullName(this.proto, this.options);
+  }
+
+  get fields(): InputObjectField<ScalarType | EnumType | InputObjectType>[] {
     return [
       ...this.proto.fields
         .filter((f) => !isOutputOnlyField(f))
@@ -415,7 +419,7 @@ export class InputObjectType extends TypeBase<ProtoMessage> {
 export class InputObjectField<T extends ScalarType | EnumType | InputObjectType> extends FieldBase<ProtoField> {
   constructor(
     readonly type: T,
-    private readonly parent: InputObjectType,
+    readonly parent: InputObjectType,
     readonly proto: ProtoField,
     readonly opts: GenerationParams
   ) {
@@ -430,7 +434,8 @@ export class InputObjectField<T extends ScalarType | EnumType | InputObjectType>
    * @override
    */
   get protoJsName(): string {
-    throw "unreachable";
+    if (this.opts.useProtobufjs) return camelCase(this.proto.name);
+    return this.proto.jsonName;
   }
 
   /**
@@ -438,6 +443,14 @@ export class InputObjectField<T extends ScalarType | EnumType | InputObjectType>
    */
   public shouldNullCheck(): boolean {
     throw "unreachable";
+  }
+
+  get protoSetterType(): "method" | "property" {
+    return this.opts.useProtobufjs ? "property" : "method";
+  }
+
+  get protoSetterNameForGoogleProtobuf(): string {
+    return this.proto.googleProtobufSetterName;
   }
 
   get importModules(): { alias: string; module: string }[] {
@@ -448,12 +461,43 @@ export class InputObjectField<T extends ScalarType | EnumType | InputObjectType>
     return modulesWithUniqueImportAlias(modules);
   }
 
-  get typeFullName(): FullName | null {
-    if (this.type instanceof ScalarType) return null;
-    if (!this.typeImportPath) {
-      return this.type.typeName;
+  get typeFullName(): T extends ScalarType ? FullName | null : FullName {
+    if (this.type instanceof ScalarType) {
+      if (!this.opts.useProtobufjs) return null as any;
+
+      const fn = this.type.protoTypeFullName;
+      if (!fn) return null as any;
+
+      let file: string;
+      {
+        const parentType = this.parent.protoTypeFullName;
+        let parent = parentType[0];
+        for (;;) {
+          if (typeof parent[0] === "string") {
+            file = parent[0];
+            break;
+          }
+          parent = parent[0];
+        }
+      }
+
+      {
+        let parent = fn[0];
+        for (;;) {
+          if (Array.isArray(parent) && typeof parent[0] === "string") {
+            parent.splice(0, 1, file);
+            break;
+          }
+          parent = parent[0];
+        }
+      }
+
+      return fn as any;
     }
-    return [uniqueImportAlias(this.typeImportPath), this.type.typeName];
+    if (!this.typeImportPath) {
+      return (this.type.typeName as FullName) as any;
+    }
+    return ([uniqueImportAlias(this.typeImportPath), this.type.typeName] as FullName) as any;
   }
 
   private get typeImportPath(): string | null {
@@ -593,6 +637,13 @@ export class ScalarType {
     return this.proto.type == null;
   }
 
+  get protoTypeFullName(): FullName | null {
+    if (this.proto.type) {
+      return createProtoFullName(this.proto.type, this.opts);
+    }
+    return null;
+  }
+
   public shouldToString(): boolean {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const pbtype = this.proto.descriptor.getType()!;
@@ -615,6 +666,10 @@ export class ScalarType {
       default:
         return false;
     }
+  }
+
+  get wrapFunc(): WrapFunc | null {
+    return getWrapFunc(this.proto, this.opts);
   }
 
   get unwrapFunc(): UnwrapFunc | null {

@@ -346,13 +346,22 @@ export class ProtoFieldImpl implements ProtoField {
   }
 
   @memo()
+  get googleProtobufSetterName(): string {
+    return `set${this.googleProtobufAccessorNameBase}`;
+  }
+
+  @memo()
   get googleProtobufGetterName(): string {
+    return `get${this.googleProtobufAccessorNameBase}`;
+  }
+
+  private get googleProtobufAccessorNameBase(): string {
     const name = this.jsonName;
     let suffix = "";
     if (this.list) {
       suffix += "List";
     }
-    return `get${name.charAt(0).toUpperCase()}${name.slice(1)}${suffix}`;
+    return `${name.charAt(0).toUpperCase()}${name.slice(1)}${suffix}`;
   }
 }
 
