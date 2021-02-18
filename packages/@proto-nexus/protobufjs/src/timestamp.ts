@@ -1,8 +1,9 @@
 import { common } from "protobufjs";
+import { UnwrapFunc, Partial, Nullable } from "./utilityTypes";
 
-type Nullable<T> = { [K in keyof T]?: T[K] | null | undefined };
-
-export function timestampToDate(input: Nullable<common.ITimestamp> | undefined | null): Date | null {
+export const timestampToDate: UnwrapFunc<Partial<common.ITimestamp>, Date> = (
+  input: Nullable<Partial<common.ITimestamp>>
+) => {
   if (input == null) return null;
 
   let seconds: number;
@@ -13,5 +14,5 @@ export function timestampToDate(input: Nullable<common.ITimestamp> | undefined |
     seconds = input.seconds.high * (1 << 32) + input.seconds.low;
   }
 
-  return new Date(seconds * 1000 + (input.nanos ?? 0) / 1e6);
-}
+  return new Date(seconds * 1000 + (input.nanos ?? 0) / 1e6) as any;
+};

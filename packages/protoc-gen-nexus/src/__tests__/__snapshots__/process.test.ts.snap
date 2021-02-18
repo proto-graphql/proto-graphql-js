@@ -1600,12 +1600,9 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
             }
         });
         t.field(\\"squashedMessages\\", {
-            type: nexus.list(nexus.nullable(_$TestPrefixPrefixedMessageSquashedMessage_nexus.TestPrefixPrefixedMessageSquashedMessage)),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(_$TestPrefixPrefixedMessageSquashedMessage_nexus.TestPrefixPrefixedMessageSquashedMessage))),
             resolve(root) {
                 const value = root.squashedMessages;
-                if (value == null) {
-                    return null;
-                }
                 return value.map(item => {
                     if (item.oneofField) {
                         return item.oneofField;
@@ -1613,7 +1610,7 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
                     if (item.oneofField_2) {
                         return item.oneofField_2;
                     }
-                    return null;
+                    throw \\"unreachable\\";
                 });
             }
         });
@@ -1796,7 +1793,7 @@ export const TestPrefixPrefixedMessageInput = nexus.inputObjectType({
             type: nexus.nonNull(\\"String\\")
         });
         t.field(\\"squashedMessages\\", {
-            type: nexus.list(nexus.nullable(_$TestPrefixPrefixedMessageSquashedMessageInput_nexus.TestPrefixPrefixedMessageSquashedMessageInput))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(_$TestPrefixPrefixedMessageSquashedMessageInput_nexus.TestPrefixPrefixedMessageSquashedMessageInput)))
         });
         t.field(\\"renamedMessage\\", {
             type: nexus.nullable(_$TestPrefixRenamedMessageInput_nexus.TestPrefixRenamedMessageInput)
@@ -1996,13 +1993,13 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
             }
         });
         t.field(\\"squashedMessages\\", {
-            type: nexus.list(nexus.nullable(\\"TestPrefixPrefixedMessageSquashedMessage\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"TestPrefixPrefixedMessageSquashedMessage\\"))),
             resolve(root) {
                 const value = root.getSquashedMessagesList();
                 return value.map(item => {
                     switch (item.getSquashedMessageCase()) {
                         case _$testapis$extensions$extensions_pb.PrefixedMessage.SquashedMessage.SquashedMessageCase.SQUASHED_MESSAGE_NOT_SET: {
-                            return null;
+                            throw \\"unreachable\\";
                         }
                         case _$testapis$extensions$extensions_pb.PrefixedMessage.SquashedMessage.SquashedMessageCase.ONEOF_FIELD: {
                             return item.getOneofField()!;
@@ -2152,7 +2149,7 @@ export const TestPrefixPrefixedMessageInput = nexus.inputObjectType({
             type: nexus.nonNull(\\"String\\")
         });
         t.field(\\"squashedMessages\\", {
-            type: nexus.list(nexus.nullable(\\"TestPrefixPrefixedMessageSquashedMessageInput\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"TestPrefixPrefixedMessageSquashedMessageInput\\")))
         });
         t.field(\\"renamedMessage\\", {
             type: nexus.nullable(\\"TestPrefixRenamedMessageInput\\")
@@ -2372,12 +2369,9 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
             }
         });
         t.field(\\"squashedMessages\\", {
-            type: nexus.list(nexus.nullable(\\"TestPrefixPrefixedMessageSquashedMessage\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"TestPrefixPrefixedMessageSquashedMessage\\"))),
             resolve(root) {
                 const value = root.squashedMessages;
-                if (value == null) {
-                    return null;
-                }
                 return value.map(item => {
                     if (item.oneofField) {
                         return item.oneofField;
@@ -2385,7 +2379,7 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
                     if (item.oneofField_2) {
                         return item.oneofField_2;
                     }
-                    return null;
+                    throw \\"unreachable\\";
                 });
             }
         });
@@ -2535,7 +2529,7 @@ export const TestPrefixPrefixedMessageInput = nexus.inputObjectType({
             type: nexus.nonNull(\\"String\\")
         });
         t.field(\\"squashedMessages\\", {
-            type: nexus.list(nexus.nullable(\\"TestPrefixPrefixedMessageSquashedMessageInput\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"TestPrefixPrefixedMessageSquashedMessageInput\\")))
         });
         t.field(\\"renamedMessage\\", {
             type: nexus.nullable(\\"TestPrefixRenamedMessageInput\\")
@@ -2726,13 +2720,10 @@ export const MessageWithEnums = nexus.objectType({
             }
         });
         t.field(\\"requiredMyEnums\\", {
-            type: nexus.list(nexus.nonNull(_$MyEnum_nexus.MyEnum)),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(_$MyEnum_nexus.MyEnum))),
             description: \\"Required.\\",
             resolve(root) {
                 const value = root.requiredMyEnums;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value.map(item => {
                     if (item === _$testapis$enums.testapi.enums.MyEnum.MY_ENUM_UNSPECIFIED) {
                         throw new Error(\\"requiredMyEnums is required field. But got unspecified.\\");
@@ -2742,40 +2733,31 @@ export const MessageWithEnums = nexus.objectType({
             }
         });
         t.field(\\"optionalMyEnums\\", {
-            type: nexus.list(nexus.nullable(_$MyEnum_nexus.MyEnum)),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(_$MyEnum_nexus.MyEnum))),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.optionalMyEnums;
-                if (value == null) {
-                    return null;
-                }
                 return value.map(item => {
                     if (item === _$testapis$enums.testapi.enums.MyEnum.MY_ENUM_UNSPECIFIED) {
-                        return null;
+                        throw new Error(\\"optionalMyEnums is required field. But got unspecified.\\");
                     }
                     return item;
                 });
             }
         });
         t.field(\\"requiredMyEnumWithoutUnspecifieds\\", {
-            type: nexus.list(nexus.nonNull(_$MyEnumWithoutUnspecified_nexus.MyEnumWithoutUnspecified)),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(_$MyEnumWithoutUnspecified_nexus.MyEnumWithoutUnspecified))),
             description: \\"Required.\\",
             resolve(root) {
                 const value = root.requiredMyEnumWithoutUnspecifieds;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value;
             }
         });
         t.field(\\"optionalMyEnumWithoutUnspecifieds\\", {
-            type: nexus.list(nexus.nullable(_$MyEnumWithoutUnspecified_nexus.MyEnumWithoutUnspecified)),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(_$MyEnumWithoutUnspecified_nexus.MyEnumWithoutUnspecified))),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.optionalMyEnumWithoutUnspecifieds;
-                if (value == null) {
-                    return null;
-                }
                 return value;
             }
         });
@@ -2815,19 +2797,19 @@ export const MessageWithEnumsInput = nexus.inputObjectType({
             description: \\"Optional.\\"
         });
         t.field(\\"requiredMyEnums\\", {
-            type: nexus.list(nexus.nonNull(_$MyEnum_nexus.MyEnum)),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(_$MyEnum_nexus.MyEnum))),
             description: \\"Required.\\"
         });
         t.field(\\"optionalMyEnums\\", {
-            type: nexus.list(nexus.nullable(_$MyEnum_nexus.MyEnum)),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(_$MyEnum_nexus.MyEnum))),
             description: \\"Optional.\\"
         });
         t.field(\\"requiredMyEnumWithoutUnspecifieds\\", {
-            type: nexus.list(nexus.nonNull(_$MyEnumWithoutUnspecified_nexus.MyEnumWithoutUnspecified)),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(_$MyEnumWithoutUnspecified_nexus.MyEnumWithoutUnspecified))),
             description: \\"Required.\\"
         });
         t.field(\\"optionalMyEnumWithoutUnspecifieds\\", {
-            type: nexus.list(nexus.nullable(_$MyEnumWithoutUnspecified_nexus.MyEnumWithoutUnspecified)),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(_$MyEnumWithoutUnspecified_nexus.MyEnumWithoutUnspecified))),
             description: \\"Optional.\\"
         });
     }
@@ -2947,7 +2929,7 @@ export const MessageWithEnums = nexus.objectType({
             }
         });
         t.field(\\"requiredMyEnums\\", {
-            type: nexus.list(nexus.nonNull(\\"MyEnum\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnum\\"))),
             description: \\"Required.\\",
             resolve(root) {
                 const value = root.getRequiredMyEnumsList();
@@ -2960,20 +2942,20 @@ export const MessageWithEnums = nexus.objectType({
             }
         });
         t.field(\\"optionalMyEnums\\", {
-            type: nexus.list(nexus.nullable(\\"MyEnum\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnum\\"))),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.getOptionalMyEnumsList();
                 return value.map(item => {
                     if (item === _$testapis$enums$enums_pb.MyEnum.MY_ENUM_UNSPECIFIED) {
-                        return null;
+                        throw new Error(\\"optionalMyEnums is required field. But got unspecified.\\");
                     }
                     return item;
                 });
             }
         });
         t.field(\\"requiredMyEnumWithoutUnspecifieds\\", {
-            type: nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\"))),
             description: \\"Required.\\",
             resolve(root) {
                 const value = root.getRequiredMyEnumWithoutUnspecifiedsList();
@@ -2981,7 +2963,7 @@ export const MessageWithEnums = nexus.objectType({
             }
         });
         t.field(\\"optionalMyEnumWithoutUnspecifieds\\", {
-            type: nexus.list(nexus.nullable(\\"MyEnumWithoutUnspecified\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\"))),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.getOptionalMyEnumWithoutUnspecifiedsList();
@@ -3014,19 +2996,19 @@ export const MessageWithEnumsInput = nexus.inputObjectType({
             description: \\"Optional.\\"
         });
         t.field(\\"requiredMyEnums\\", {
-            type: nexus.list(nexus.nonNull(\\"MyEnum\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnum\\"))),
             description: \\"Required.\\"
         });
         t.field(\\"optionalMyEnums\\", {
-            type: nexus.list(nexus.nullable(\\"MyEnum\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnum\\"))),
             description: \\"Optional.\\"
         });
         t.field(\\"requiredMyEnumWithoutUnspecifieds\\", {
-            type: nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\"))),
             description: \\"Required.\\"
         });
         t.field(\\"optionalMyEnumWithoutUnspecifieds\\", {
-            type: nexus.list(nexus.nullable(\\"MyEnumWithoutUnspecified\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\"))),
             description: \\"Optional.\\"
         });
     }
@@ -3130,13 +3112,10 @@ export const MessageWithEnums = nexus.objectType({
             }
         });
         t.field(\\"requiredMyEnums\\", {
-            type: nexus.list(nexus.nonNull(\\"MyEnum\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnum\\"))),
             description: \\"Required.\\",
             resolve(root) {
                 const value = root.requiredMyEnums;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value.map(item => {
                     if (item === _$testapis$enums.testapi.enums.MyEnum.MY_ENUM_UNSPECIFIED) {
                         throw new Error(\\"requiredMyEnums is required field. But got unspecified.\\");
@@ -3146,40 +3125,31 @@ export const MessageWithEnums = nexus.objectType({
             }
         });
         t.field(\\"optionalMyEnums\\", {
-            type: nexus.list(nexus.nullable(\\"MyEnum\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnum\\"))),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.optionalMyEnums;
-                if (value == null) {
-                    return null;
-                }
                 return value.map(item => {
                     if (item === _$testapis$enums.testapi.enums.MyEnum.MY_ENUM_UNSPECIFIED) {
-                        return null;
+                        throw new Error(\\"optionalMyEnums is required field. But got unspecified.\\");
                     }
                     return item;
                 });
             }
         });
         t.field(\\"requiredMyEnumWithoutUnspecifieds\\", {
-            type: nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\"))),
             description: \\"Required.\\",
             resolve(root) {
                 const value = root.requiredMyEnumWithoutUnspecifieds;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value;
             }
         });
         t.field(\\"optionalMyEnumWithoutUnspecifieds\\", {
-            type: nexus.list(nexus.nullable(\\"MyEnumWithoutUnspecified\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\"))),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.optionalMyEnumWithoutUnspecifieds;
-                if (value == null) {
-                    return null;
-                }
                 return value;
             }
         });
@@ -3209,19 +3179,19 @@ export const MessageWithEnumsInput = nexus.inputObjectType({
             description: \\"Optional.\\"
         });
         t.field(\\"requiredMyEnums\\", {
-            type: nexus.list(nexus.nonNull(\\"MyEnum\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnum\\"))),
             description: \\"Required.\\"
         });
         t.field(\\"optionalMyEnums\\", {
-            type: nexus.list(nexus.nullable(\\"MyEnum\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnum\\"))),
             description: \\"Optional.\\"
         });
         t.field(\\"requiredMyEnumWithoutUnspecifieds\\", {
-            type: nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\"))),
             description: \\"Required.\\"
         });
         t.field(\\"optionalMyEnumWithoutUnspecifieds\\", {
-            type: nexus.list(nexus.nullable(\\"MyEnumWithoutUnspecified\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\"))),
             description: \\"Optional.\\"
         });
     }
@@ -3798,13 +3768,10 @@ export const Hello = nexus.objectType({
             }
         });
         t.field(\\"requiredPrimitivesList\\", {
-            type: nexus.list(nexus.nonNull(_$Primitives_nexus.Primitives)),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(_$Primitives_nexus.Primitives))),
             description: \\"Required.\\",
             resolve(root) {
                 const value = root.requiredPrimitivesList;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value;
             }
         });
@@ -3846,7 +3813,7 @@ export const HelloInput = nexus.inputObjectType({
             description: \\"Optional.\\"
         });
         t.field(\\"requiredPrimitivesList\\", {
-            type: nexus.list(nexus.nonNull(_$PrimitivesInput_nexus.PrimitivesInput)),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(_$PrimitivesInput_nexus.PrimitivesInput))),
             description: \\"Required.\\"
         });
         t.field(\\"optionalPrimitivesList\\", {
@@ -4009,152 +3976,110 @@ export const Primitives = nexus.objectType({
             }
         });
         t.field(\\"requiredDoubleValues\\", {
-            type: nexus.list(nexus.nonNull(\\"Float\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\"))),
             resolve(root) {
                 const value = root.requiredDoubleValues;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value;
             }
         });
         t.field(\\"requiredFloatValues\\", {
-            type: nexus.list(nexus.nonNull(\\"Float\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\"))),
             resolve(root) {
                 const value = root.requiredFloatValues;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value;
             }
         });
         t.field(\\"requiredInt32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\"))),
             resolve(root) {
                 const value = root.requiredInt32Values;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value;
             }
         });
         t.field(\\"requiredInt64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.requiredInt64Values;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value.map(item => {
                     return item.toString();
                 });
             }
         });
         t.field(\\"requiredUint32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\"))),
             resolve(root) {
                 const value = root.requiredUint32Values;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value;
             }
         });
         t.field(\\"requiredUint64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.requiredUint64Values;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value.map(item => {
                     return item.toString();
                 });
             }
         });
         t.field(\\"requiredSint32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\"))),
             resolve(root) {
                 const value = root.requiredSint32Values;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value;
             }
         });
         t.field(\\"requiredSint64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.requiredSint64Values;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value.map(item => {
                     return item.toString();
                 });
             }
         });
         t.field(\\"requiredFixed32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\"))),
             resolve(root) {
                 const value = root.requiredFixed32Values;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value;
             }
         });
         t.field(\\"requiredFixed64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.requiredFixed64Values;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value.map(item => {
                     return item.toString();
                 });
             }
         });
         t.field(\\"requiredSfixed32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\"))),
             resolve(root) {
                 const value = root.requiredSfixed32Values;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value;
             }
         });
         t.field(\\"requiredSfixed64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.requiredSfixed64Values;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value.map(item => {
                     return item.toString();
                 });
             }
         });
         t.field(\\"requiredBoolValues\\", {
-            type: nexus.list(nexus.nonNull(\\"Boolean\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Boolean\\"))),
             resolve(root) {
                 const value = root.requiredBoolValues;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value;
             }
         });
         t.field(\\"requiredStringValues\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.requiredStringValues;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value;
             }
         });
@@ -4218,46 +4143,46 @@ export const PrimitivesInput = nexus.inputObjectType({
             type: nexus.nonNull(\\"String\\")
         });
         t.field(\\"requiredDoubleValues\\", {
-            type: nexus.list(nexus.nonNull(\\"Float\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
         });
         t.field(\\"requiredFloatValues\\", {
-            type: nexus.list(nexus.nonNull(\\"Float\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
         });
         t.field(\\"requiredInt32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"requiredInt64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"requiredUint32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"requiredUint64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"requiredSint32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"requiredSint64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"requiredFixed32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"requiredFixed64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"requiredSfixed32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"requiredSfixed64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"requiredBoolValues\\", {
-            type: nexus.list(nexus.nonNull(\\"Boolean\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Boolean\\")))
         });
         t.field(\\"requiredStringValues\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
         });
     }
 });
@@ -4298,7 +4223,7 @@ export const Hello = nexus.objectType({
             }
         });
         t.field(\\"requiredPrimitivesList\\", {
-            type: nexus.list(nexus.nonNull(\\"Primitives\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Primitives\\"))),
             description: \\"Required.\\",
             resolve(root) {
                 const value = root.getRequiredPrimitivesListList();
@@ -4424,28 +4349,28 @@ export const Primitives = nexus.objectType({
             }
         });
         t.field(\\"requiredDoubleValues\\", {
-            type: nexus.list(nexus.nonNull(\\"Float\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\"))),
             resolve(root) {
                 const value = root.getRequiredDoubleValuesList();
                 return value;
             }
         });
         t.field(\\"requiredFloatValues\\", {
-            type: nexus.list(nexus.nonNull(\\"Float\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\"))),
             resolve(root) {
                 const value = root.getRequiredFloatValuesList();
                 return value;
             }
         });
         t.field(\\"requiredInt32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\"))),
             resolve(root) {
                 const value = root.getRequiredInt32ValuesList();
                 return value;
             }
         });
         t.field(\\"requiredInt64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.getRequiredInt64ValuesList();
                 return value.map(item => {
@@ -4454,14 +4379,14 @@ export const Primitives = nexus.objectType({
             }
         });
         t.field(\\"requiredUint32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\"))),
             resolve(root) {
                 const value = root.getRequiredUint32ValuesList();
                 return value;
             }
         });
         t.field(\\"requiredUint64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.getRequiredUint64ValuesList();
                 return value.map(item => {
@@ -4470,14 +4395,14 @@ export const Primitives = nexus.objectType({
             }
         });
         t.field(\\"requiredSint32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\"))),
             resolve(root) {
                 const value = root.getRequiredSint32ValuesList();
                 return value;
             }
         });
         t.field(\\"requiredSint64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.getRequiredSint64ValuesList();
                 return value.map(item => {
@@ -4486,14 +4411,14 @@ export const Primitives = nexus.objectType({
             }
         });
         t.field(\\"requiredFixed32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\"))),
             resolve(root) {
                 const value = root.getRequiredFixed32ValuesList();
                 return value;
             }
         });
         t.field(\\"requiredFixed64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.getRequiredFixed64ValuesList();
                 return value.map(item => {
@@ -4502,14 +4427,14 @@ export const Primitives = nexus.objectType({
             }
         });
         t.field(\\"requiredSfixed32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\"))),
             resolve(root) {
                 const value = root.getRequiredSfixed32ValuesList();
                 return value;
             }
         });
         t.field(\\"requiredSfixed64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.getRequiredSfixed64ValuesList();
                 return value.map(item => {
@@ -4518,14 +4443,14 @@ export const Primitives = nexus.objectType({
             }
         });
         t.field(\\"requiredBoolValues\\", {
-            type: nexus.list(nexus.nonNull(\\"Boolean\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Boolean\\"))),
             resolve(root) {
                 const value = root.getRequiredBoolValuesList();
                 return value;
             }
         });
         t.field(\\"requiredStringValues\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.getRequiredStringValuesList();
                 return value;
@@ -4549,7 +4474,7 @@ export const HelloInput = nexus.inputObjectType({
             description: \\"Optional.\\"
         });
         t.field(\\"requiredPrimitivesList\\", {
-            type: nexus.list(nexus.nonNull(\\"PrimitivesInput\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"PrimitivesInput\\"))),
             description: \\"Required.\\"
         });
         t.field(\\"optionalPrimitivesList\\", {
@@ -4604,46 +4529,46 @@ export const PrimitivesInput = nexus.inputObjectType({
             type: nexus.nonNull(\\"String\\")
         });
         t.field(\\"requiredDoubleValues\\", {
-            type: nexus.list(nexus.nonNull(\\"Float\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
         });
         t.field(\\"requiredFloatValues\\", {
-            type: nexus.list(nexus.nonNull(\\"Float\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
         });
         t.field(\\"requiredInt32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"requiredInt64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"requiredUint32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"requiredUint64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"requiredSint32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"requiredSint64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"requiredFixed32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"requiredFixed64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"requiredSfixed32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"requiredSfixed64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"requiredBoolValues\\", {
-            type: nexus.list(nexus.nonNull(\\"Boolean\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Boolean\\")))
         });
         t.field(\\"requiredStringValues\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
         });
     }
 });
@@ -4684,13 +4609,10 @@ export const Hello = nexus.objectType({
             }
         });
         t.field(\\"requiredPrimitivesList\\", {
-            type: nexus.list(nexus.nonNull(\\"Primitives\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Primitives\\"))),
             description: \\"Required.\\",
             resolve(root) {
                 const value = root.requiredPrimitivesList;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value;
             }
         });
@@ -4855,152 +4777,110 @@ export const Primitives = nexus.objectType({
             }
         });
         t.field(\\"requiredDoubleValues\\", {
-            type: nexus.list(nexus.nonNull(\\"Float\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\"))),
             resolve(root) {
                 const value = root.requiredDoubleValues;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value;
             }
         });
         t.field(\\"requiredFloatValues\\", {
-            type: nexus.list(nexus.nonNull(\\"Float\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\"))),
             resolve(root) {
                 const value = root.requiredFloatValues;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value;
             }
         });
         t.field(\\"requiredInt32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\"))),
             resolve(root) {
                 const value = root.requiredInt32Values;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value;
             }
         });
         t.field(\\"requiredInt64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.requiredInt64Values;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value.map(item => {
                     return item.toString();
                 });
             }
         });
         t.field(\\"requiredUint32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\"))),
             resolve(root) {
                 const value = root.requiredUint32Values;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value;
             }
         });
         t.field(\\"requiredUint64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.requiredUint64Values;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value.map(item => {
                     return item.toString();
                 });
             }
         });
         t.field(\\"requiredSint32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\"))),
             resolve(root) {
                 const value = root.requiredSint32Values;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value;
             }
         });
         t.field(\\"requiredSint64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.requiredSint64Values;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value.map(item => {
                     return item.toString();
                 });
             }
         });
         t.field(\\"requiredFixed32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\"))),
             resolve(root) {
                 const value = root.requiredFixed32Values;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value;
             }
         });
         t.field(\\"requiredFixed64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.requiredFixed64Values;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value.map(item => {
                     return item.toString();
                 });
             }
         });
         t.field(\\"requiredSfixed32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\"))),
             resolve(root) {
                 const value = root.requiredSfixed32Values;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value;
             }
         });
         t.field(\\"requiredSfixed64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.requiredSfixed64Values;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value.map(item => {
                     return item.toString();
                 });
             }
         });
         t.field(\\"requiredBoolValues\\", {
-            type: nexus.list(nexus.nonNull(\\"Boolean\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Boolean\\"))),
             resolve(root) {
                 const value = root.requiredBoolValues;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value;
             }
         });
         t.field(\\"requiredStringValues\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.requiredStringValues;
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
                 return value;
             }
         });
@@ -5022,7 +4902,7 @@ export const HelloInput = nexus.inputObjectType({
             description: \\"Optional.\\"
         });
         t.field(\\"requiredPrimitivesList\\", {
-            type: nexus.list(nexus.nonNull(\\"PrimitivesInput\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"PrimitivesInput\\"))),
             description: \\"Required.\\"
         });
         t.field(\\"optionalPrimitivesList\\", {
@@ -5077,46 +4957,46 @@ export const PrimitivesInput = nexus.inputObjectType({
             type: nexus.nonNull(\\"String\\")
         });
         t.field(\\"requiredDoubleValues\\", {
-            type: nexus.list(nexus.nonNull(\\"Float\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
         });
         t.field(\\"requiredFloatValues\\", {
-            type: nexus.list(nexus.nonNull(\\"Float\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
         });
         t.field(\\"requiredInt32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"requiredInt64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"requiredUint32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"requiredUint64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"requiredSint32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"requiredSint64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"requiredFixed32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"requiredFixed64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"requiredSfixed32Values\\", {
-            type: nexus.list(nexus.nonNull(\\"Int\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"requiredSfixed64Values\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"requiredBoolValues\\", {
-            type: nexus.list(nexus.nonNull(\\"Boolean\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Boolean\\")))
         });
         t.field(\\"requiredStringValues\\", {
-            type: nexus.list(nexus.nonNull(\\"String\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
         });
     }
 });
@@ -5225,7 +5105,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"timestamps\\", {
-            type: nexus.list(nexus.nullable(\\"DateTime\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"DateTime\\"))),
             resolve(root) {
                 const value = root.getTimestampsList();
                 return value.map(item => {
@@ -5234,7 +5114,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"int32Values\\", {
-            type: nexus.list(nexus.nullable(\\"Int\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\"))),
             resolve(root) {
                 const value = root.getInt32ValuesList();
                 return value.map(item => {
@@ -5243,7 +5123,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"int64Values\\", {
-            type: nexus.list(nexus.nullable(\\"String\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.getInt64ValuesList();
                 return value.map(item => {
@@ -5252,7 +5132,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"uint32Values\\", {
-            type: nexus.list(nexus.nullable(\\"Int\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\"))),
             resolve(root) {
                 const value = root.getUint32ValuesList();
                 return value.map(item => {
@@ -5261,7 +5141,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"uint64Values\\", {
-            type: nexus.list(nexus.nullable(\\"String\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.getUint64ValuesList();
                 return value.map(item => {
@@ -5270,7 +5150,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"floatValues\\", {
-            type: nexus.list(nexus.nullable(\\"Float\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\"))),
             resolve(root) {
                 const value = root.getFloatValuesList();
                 return value.map(item => {
@@ -5279,7 +5159,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"doubleValues\\", {
-            type: nexus.list(nexus.nullable(\\"Float\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\"))),
             resolve(root) {
                 const value = root.getDoubleValuesList();
                 return value.map(item => {
@@ -5288,7 +5168,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"boolValues\\", {
-            type: nexus.list(nexus.nullable(\\"Boolean\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Boolean\\"))),
             resolve(root) {
                 const value = root.getBoolValuesList();
                 return value.map(item => {
@@ -5297,7 +5177,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"stringValues\\", {
-            type: nexus.list(nexus.nullable(\\"String\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.getStringValuesList();
                 return value.map(item => {
@@ -5342,31 +5222,31 @@ export const MessageInput = nexus.inputObjectType({
             type: nexus.nullable(\\"String\\")
         });
         t.field(\\"timestamps\\", {
-            type: nexus.list(nexus.nullable(\\"DateTime\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"DateTime\\")))
         });
         t.field(\\"int32Values\\", {
-            type: nexus.list(nexus.nullable(\\"Int\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"int64Values\\", {
-            type: nexus.list(nexus.nullable(\\"String\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"uint32Values\\", {
-            type: nexus.list(nexus.nullable(\\"Int\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"uint64Values\\", {
-            type: nexus.list(nexus.nullable(\\"String\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"floatValues\\", {
-            type: nexus.list(nexus.nullable(\\"Float\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
         });
         t.field(\\"doubleValues\\", {
-            type: nexus.list(nexus.nullable(\\"Float\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
         });
         t.field(\\"boolValues\\", {
-            type: nexus.list(nexus.nullable(\\"Boolean\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Boolean\\")))
         });
         t.field(\\"stringValues\\", {
-            type: nexus.list(nexus.nullable(\\"String\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
         });
     }
 });
@@ -5475,108 +5355,81 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"timestamps\\", {
-            type: nexus.list(nexus.nullable(\\"DateTime\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"DateTime\\"))),
             resolve(root) {
                 const value = root.timestamps;
-                if (value == null) {
-                    return null;
-                }
                 return value.map(item => {
                     return $$proto_nexus$protobufjs.timestampToDate(item);
                 });
             }
         });
         t.field(\\"int32Values\\", {
-            type: nexus.list(nexus.nullable(\\"Int\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\"))),
             resolve(root) {
                 const value = root.int32Values;
-                if (value == null) {
-                    return null;
-                }
                 return value.map(item => {
                     return $$proto_nexus$protobufjs.unwrapInt32Value(item);
                 });
             }
         });
         t.field(\\"int64Values\\", {
-            type: nexus.list(nexus.nullable(\\"String\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.int64Values;
-                if (value == null) {
-                    return null;
-                }
                 return value.map(item => {
                     return $$proto_nexus$protobufjs.unwrapInt64Value(item)?.toString() ?? null;
                 });
             }
         });
         t.field(\\"uint32Values\\", {
-            type: nexus.list(nexus.nullable(\\"Int\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\"))),
             resolve(root) {
                 const value = root.uint32Values;
-                if (value == null) {
-                    return null;
-                }
                 return value.map(item => {
                     return $$proto_nexus$protobufjs.unwrapUInt32Value(item);
                 });
             }
         });
         t.field(\\"uint64Values\\", {
-            type: nexus.list(nexus.nullable(\\"String\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.uint64Values;
-                if (value == null) {
-                    return null;
-                }
                 return value.map(item => {
                     return $$proto_nexus$protobufjs.unwrapUInt64Value(item)?.toString() ?? null;
                 });
             }
         });
         t.field(\\"floatValues\\", {
-            type: nexus.list(nexus.nullable(\\"Float\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\"))),
             resolve(root) {
                 const value = root.floatValues;
-                if (value == null) {
-                    return null;
-                }
                 return value.map(item => {
                     return $$proto_nexus$protobufjs.unwrapFloatValue(item);
                 });
             }
         });
         t.field(\\"doubleValues\\", {
-            type: nexus.list(nexus.nullable(\\"Float\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\"))),
             resolve(root) {
                 const value = root.doubleValues;
-                if (value == null) {
-                    return null;
-                }
                 return value.map(item => {
                     return $$proto_nexus$protobufjs.unwrapDoubleValue(item);
                 });
             }
         });
         t.field(\\"boolValues\\", {
-            type: nexus.list(nexus.nullable(\\"Boolean\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Boolean\\"))),
             resolve(root) {
                 const value = root.boolValues;
-                if (value == null) {
-                    return null;
-                }
                 return value.map(item => {
                     return $$proto_nexus$protobufjs.unwrapBoolValue(item);
                 });
             }
         });
         t.field(\\"stringValues\\", {
-            type: nexus.list(nexus.nullable(\\"String\\")),
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.stringValues;
-                if (value == null) {
-                    return null;
-                }
                 return value.map(item => {
                     return $$proto_nexus$protobufjs.unwrapStringValue(item);
                 });
@@ -5619,31 +5472,31 @@ export const MessageInput = nexus.inputObjectType({
             type: nexus.nullable(\\"String\\")
         });
         t.field(\\"timestamps\\", {
-            type: nexus.list(nexus.nullable(\\"DateTime\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"DateTime\\")))
         });
         t.field(\\"int32Values\\", {
-            type: nexus.list(nexus.nullable(\\"Int\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"int64Values\\", {
-            type: nexus.list(nexus.nullable(\\"String\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"uint32Values\\", {
-            type: nexus.list(nexus.nullable(\\"Int\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"uint64Values\\", {
-            type: nexus.list(nexus.nullable(\\"String\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"floatValues\\", {
-            type: nexus.list(nexus.nullable(\\"Float\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
         });
         t.field(\\"doubleValues\\", {
-            type: nexus.list(nexus.nullable(\\"Float\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
         });
         t.field(\\"boolValues\\", {
-            type: nexus.list(nexus.nullable(\\"Boolean\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Boolean\\")))
         });
         t.field(\\"stringValues\\", {
-            type: nexus.list(nexus.nullable(\\"String\\"))
+            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
         });
     }
 });

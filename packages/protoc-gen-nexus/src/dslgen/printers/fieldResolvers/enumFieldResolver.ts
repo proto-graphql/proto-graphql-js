@@ -20,13 +20,14 @@ import { createMapExpr } from "./utils";
  * ```
  */
 export function createEnumFieldResolverStmts(valueExpr: ts.Expression, field: ObjectField<EnumType>): ts.Statement[] {
-  let whenNullStmt: ts.Statement = field.isNullable()
-    ? ts.factory.createReturnStatement(ts.factory.createToken(ts.SyntaxKind.NullKeyword))
-    : ts.factory.createThrowStatement(
-        ts.factory.createNewExpression(ts.factory.createIdentifier("Error"), undefined, [
-          ts.factory.createStringLiteral(`${field.name} is required field. But got unspecified.`),
-        ])
-      );
+  let whenNullStmt: ts.Statement =
+    field.isNullable() && !field.isList()
+      ? ts.factory.createReturnStatement(ts.factory.createToken(ts.SyntaxKind.NullKeyword))
+      : ts.factory.createThrowStatement(
+          ts.factory.createNewExpression(ts.factory.createIdentifier("Error"), undefined, [
+            ts.factory.createStringLiteral(`${field.name} is required field. But got unspecified.`),
+          ])
+        );
   whenNullStmt = ts.factory.createBlock(
     [whenNullStmt],
     true // multiline

@@ -9,7 +9,7 @@ export function craeteOneofUnionFieldResolverStmts(
   field: ObjectField<SquashedOneofUnionType> | ObjectOneofField
 ): ts.Statement[] {
   const createStmts = (itemExpr: ts.Expression) => {
-    const nullable = field.isNullable();
+    const nullable = field.isNullable() && !field.isList();
     if (field.isProtobufjs()) {
       return createOneofUnionFieldResolverMapStmtsForProtobufjs(itemExpr, field.type, { nullable });
     }

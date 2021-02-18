@@ -16,7 +16,7 @@ type Hello {
   requiredPrimitives: Primitives!
 
   \\"\\"\\"Required.\\"\\"\\"
-  requiredPrimitivesList: [Primitives!]
+  requiredPrimitivesList: [Primitives!]!
 }
 
 input HelloInput {
@@ -30,69 +30,69 @@ input HelloInput {
   requiredPrimitives: PrimitivesInput!
 
   \\"\\"\\"Required.\\"\\"\\"
-  requiredPrimitivesList: [PrimitivesInput!]
+  requiredPrimitivesList: [PrimitivesInput!]!
 }
 
 type Primitives {
   requiredBoolValue: Boolean!
-  requiredBoolValues: [Boolean!]
+  requiredBoolValues: [Boolean!]!
   requiredDoubleValue: Float!
-  requiredDoubleValues: [Float!]
+  requiredDoubleValues: [Float!]!
   requiredFixed32Value: Int!
-  requiredFixed32Values: [Int!]
+  requiredFixed32Values: [Int!]!
   requiredFixed64Value: String!
-  requiredFixed64Values: [String!]
+  requiredFixed64Values: [String!]!
   requiredFloatValue: Float!
-  requiredFloatValues: [Float!]
+  requiredFloatValues: [Float!]!
   requiredInt32Value: Int!
-  requiredInt32Values: [Int!]
+  requiredInt32Values: [Int!]!
   requiredInt64Value: String!
-  requiredInt64Values: [String!]
+  requiredInt64Values: [String!]!
   requiredSfixed32Value: Int!
-  requiredSfixed32Values: [Int!]
+  requiredSfixed32Values: [Int!]!
   requiredSfixed64Value: String!
-  requiredSfixed64Values: [String!]
+  requiredSfixed64Values: [String!]!
   requiredSint32Value: Int!
-  requiredSint32Values: [Int!]
+  requiredSint32Values: [Int!]!
   requiredSint64Value: String!
-  requiredSint64Values: [String!]
+  requiredSint64Values: [String!]!
   requiredStringValue: String!
-  requiredStringValues: [String!]
+  requiredStringValues: [String!]!
   requiredUint32Value: Int!
-  requiredUint32Values: [Int!]
+  requiredUint32Values: [Int!]!
   requiredUint64Value: String!
-  requiredUint64Values: [String!]
+  requiredUint64Values: [String!]!
 }
 
 input PrimitivesInput {
   requiredBoolValue: Boolean!
-  requiredBoolValues: [Boolean!]
+  requiredBoolValues: [Boolean!]!
   requiredDoubleValue: Float!
-  requiredDoubleValues: [Float!]
+  requiredDoubleValues: [Float!]!
   requiredFixed32Value: Int!
-  requiredFixed32Values: [Int!]
+  requiredFixed32Values: [Int!]!
   requiredFixed64Value: String!
-  requiredFixed64Values: [String!]
+  requiredFixed64Values: [String!]!
   requiredFloatValue: Float!
-  requiredFloatValues: [Float!]
+  requiredFloatValues: [Float!]!
   requiredInt32Value: Int!
-  requiredInt32Values: [Int!]
+  requiredInt32Values: [Int!]!
   requiredInt64Value: String!
-  requiredInt64Values: [String!]
+  requiredInt64Values: [String!]!
   requiredSfixed32Value: Int!
-  requiredSfixed32Values: [Int!]
+  requiredSfixed32Values: [Int!]!
   requiredSfixed64Value: String!
-  requiredSfixed64Values: [String!]
+  requiredSfixed64Values: [String!]!
   requiredSint32Value: Int!
-  requiredSint32Values: [Int!]
+  requiredSint32Values: [Int!]!
   requiredSint64Value: String!
-  requiredSint64Values: [String!]
+  requiredSint64Values: [String!]!
   requiredStringValue: String!
-  requiredStringValues: [String!]
+  requiredStringValues: [String!]!
   requiredUint32Value: Int!
-  requiredUint32Values: [Int!]
+  requiredUint32Values: [Int!]!
   requiredUint64Value: String!
-  requiredUint64Values: [String!]
+  requiredUint64Values: [String!]!
 }
 
 type Query {
@@ -145,7 +145,7 @@ type Hello {
   requiredPrimitives: Primitives!
 
   \\"\\"\\"Required.\\"\\"\\"
-  requiredPrimitivesList: [Primitives!]
+  requiredPrimitivesList: [Primitives!]!
 }
 
 input HelloInput {
@@ -159,69 +159,69 @@ input HelloInput {
   requiredPrimitives: PrimitivesInput!
 
   \\"\\"\\"Required.\\"\\"\\"
-  requiredPrimitivesList: [PrimitivesInput!]
+  requiredPrimitivesList: [PrimitivesInput!]!
 }
 
 type Primitives {
   requiredBoolValue: Boolean!
-  requiredBoolValues: [Boolean!]
+  requiredBoolValues: [Boolean!]!
   requiredDoubleValue: Float!
-  requiredDoubleValues: [Float!]
+  requiredDoubleValues: [Float!]!
   requiredFixed32Value: Int!
-  requiredFixed32Values: [Int!]
+  requiredFixed32Values: [Int!]!
   requiredFixed64Value: String!
-  requiredFixed64Values: [String!]
+  requiredFixed64Values: [String!]!
   requiredFloatValue: Float!
-  requiredFloatValues: [Float!]
+  requiredFloatValues: [Float!]!
   requiredInt32Value: Int!
-  requiredInt32Values: [Int!]
+  requiredInt32Values: [Int!]!
   requiredInt64Value: String!
-  requiredInt64Values: [String!]
+  requiredInt64Values: [String!]!
   requiredSfixed32Value: Int!
-  requiredSfixed32Values: [Int!]
+  requiredSfixed32Values: [Int!]!
   requiredSfixed64Value: String!
-  requiredSfixed64Values: [String!]
+  requiredSfixed64Values: [String!]!
   requiredSint32Value: Int!
-  requiredSint32Values: [Int!]
+  requiredSint32Values: [Int!]!
   requiredSint64Value: String!
-  requiredSint64Values: [String!]
+  requiredSint64Values: [String!]!
   requiredStringValue: String!
-  requiredStringValues: [String!]
+  requiredStringValues: [String!]!
   requiredUint32Value: Int!
-  requiredUint32Values: [Int!]
+  requiredUint32Values: [Int!]!
   requiredUint64Value: String!
-  requiredUint64Values: [String!]
+  requiredUint64Values: [String!]!
 }
 
 input PrimitivesInput {
   requiredBoolValue: Boolean!
-  requiredBoolValues: [Boolean!]
+  requiredBoolValues: [Boolean!]!
   requiredDoubleValue: Float!
-  requiredDoubleValues: [Float!]
+  requiredDoubleValues: [Float!]!
   requiredFixed32Value: Int!
-  requiredFixed32Values: [Int!]
+  requiredFixed32Values: [Int!]!
   requiredFixed64Value: String!
-  requiredFixed64Values: [String!]
+  requiredFixed64Values: [String!]!
   requiredFloatValue: Float!
-  requiredFloatValues: [Float!]
+  requiredFloatValues: [Float!]!
   requiredInt32Value: Int!
-  requiredInt32Values: [Int!]
+  requiredInt32Values: [Int!]!
   requiredInt64Value: String!
-  requiredInt64Values: [String!]
+  requiredInt64Values: [String!]!
   requiredSfixed32Value: Int!
-  requiredSfixed32Values: [Int!]
+  requiredSfixed32Values: [Int!]!
   requiredSfixed64Value: String!
-  requiredSfixed64Values: [String!]
+  requiredSfixed64Values: [String!]!
   requiredSint32Value: Int!
-  requiredSint32Values: [Int!]
+  requiredSint32Values: [Int!]!
   requiredSint64Value: String!
-  requiredSint64Values: [String!]
+  requiredSint64Values: [String!]!
   requiredStringValue: String!
-  requiredStringValues: [String!]
+  requiredStringValues: [String!]!
   requiredUint32Value: Int!
-  requiredUint32Values: [Int!]
+  requiredUint32Values: [Int!]!
   requiredUint64Value: String!
-  requiredUint64Values: [String!]
+  requiredUint64Values: [String!]!
 }
 
 type Query {
