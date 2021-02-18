@@ -285,8 +285,8 @@ export class ObjectField<
    * @override
    */
   public shouldNullCheck(): boolean {
-    if (this.opts.useProtobufjs) return true;
     if (this.proto.list) return false;
+    if (this.opts.useProtobufjs) return true;
     if (this.type instanceof ScalarType && this.type.isPrimitive()) return false;
 
     return true;

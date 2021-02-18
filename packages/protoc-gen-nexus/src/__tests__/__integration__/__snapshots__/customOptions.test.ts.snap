@@ -46,7 +46,7 @@ type TestPrefixPrefixedMessage {
   renamedMessage: TestPrefixRenamedMessage
   skipResolver: String!
   squashedMessage: TestPrefixPrefixedMessageSquashedMessage
-  squashedMessages: [TestPrefixPrefixedMessageSquashedMessage]
+  squashedMessages: [TestPrefixPrefixedMessageSquashedMessage!]!
   thisFieldWasRenamed: String!
 }
 
@@ -78,7 +78,7 @@ input TestPrefixPrefixedMessageInput {
   renamedMessage: TestPrefixRenamedMessageInput
   skipResolver: String!
   squashedMessage: TestPrefixPrefixedMessageSquashedMessageInput
-  squashedMessages: [TestPrefixPrefixedMessageSquashedMessageInput]
+  squashedMessages: [TestPrefixPrefixedMessageSquashedMessageInput!]!
   thisFieldWasRenamed: String!
 }
 
@@ -159,7 +159,7 @@ type TestPrefixPrefixedMessage {
   renamedMessage: TestPrefixRenamedMessage
   skipResolver: String!
   squashedMessage: TestPrefixPrefixedMessageSquashedMessage
-  squashedMessages: [TestPrefixPrefixedMessageSquashedMessage]
+  squashedMessages: [TestPrefixPrefixedMessageSquashedMessage!]!
   thisFieldWasRenamed: String!
 }
 
@@ -192,7 +192,7 @@ input TestPrefixPrefixedMessageInput {
   renamedMessage: TestPrefixRenamedMessageInput
   skipResolver: String!
   squashedMessage: TestPrefixPrefixedMessageSquashedMessageInput
-  squashedMessages: [TestPrefixPrefixedMessageSquashedMessageInput]
+  squashedMessages: [TestPrefixPrefixedMessageSquashedMessageInput!]!
   thisFieldWasRenamed: String!
 }
 
@@ -261,7 +261,7 @@ type TestPrefixPrefixedMessage {
   renamedMessage: TestPrefixRenamedMessage
   skipResolver: String!
   squashedMessage: TestPrefixPrefixedMessageSquashedMessage
-  squashedMessages: [TestPrefixPrefixedMessageSquashedMessage]
+  squashedMessages: [TestPrefixPrefixedMessageSquashedMessage!]!
   thisFieldWasRenamed: String!
 }
 
@@ -294,7 +294,7 @@ input TestPrefixPrefixedMessageInput {
   renamedMessage: TestPrefixRenamedMessageInput
   skipResolver: String!
   squashedMessage: TestPrefixPrefixedMessageSquashedMessageInput
-  squashedMessages: [TestPrefixPrefixedMessageSquashedMessageInput]
+  squashedMessages: [TestPrefixPrefixedMessageSquashedMessageInput!]!
   thisFieldWasRenamed: String!
 }
 
