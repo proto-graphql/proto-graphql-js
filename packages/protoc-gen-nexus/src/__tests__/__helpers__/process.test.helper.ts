@@ -1,11 +1,11 @@
 import { promises as fs } from "fs";
+import { execSync } from "child_process";
 import { join, dirname } from "path";
 import { glob } from "glob";
 import * as ts from "typescript";
 import { FileDescriptorSet } from "google-protobuf/google/protobuf/descriptor_pb";
 import { processRequest } from "../../process";
 import { CodeGeneratorRequest, CodeGeneratorResponse } from "google-protobuf/google/protobuf/compiler/plugin_pb";
-import { generateSchema, NexusExtendTypeDef, NexusGraphQLSchema } from "nexus/dist/core";
 
 const generationTargets = ["native protobuf", "protobufjs"] as const;
 type GenerationTarget = typeof generationTargets[number];
@@ -48,8 +48,14 @@ export function testSchemaGeneration(
   name: string | string[],
   target: GenerationTarget,
   opts: {
-    types?: Record<string, any>;
-    schemaTests?: [name: string, types: Record<string, any>, test: (schema: NexusGraphQLSchema) => Promise<void>][];
+    extraSchema?: string;
+    schemaTests?: [
+      name: string,
+      params: {
+        extraSchema: string;
+        testQuery: string;
+      }
+    ][];
   } = {}
 ) {
   describe(`schema generation with ${target}`, () => {
@@ -63,7 +69,7 @@ export function testSchemaGeneration(
     });
 
     it("can make GraphQL schema from generated DSLs", async () => {
-      await withGeneratedSchema(files, opts?.types ?? {}, async (dir) => {
+      await withGeneratedSchema(files, [opts.extraSchema].filter(Boolean), async (dir) => {
         try {
           await validateGeneratedFiles(dir);
           const gqlSchema = await fs.readFile(join(dir, "schema.graphql"), "utf-8");
@@ -77,11 +83,10 @@ export function testSchemaGeneration(
     });
 
     if (opts.schemaTests && opts.schemaTests.length > 0) {
-      it.each(opts.schemaTests)("%s", async (_name, types, f) => {
+      it.each(opts.schemaTests)("%s", async (_name, { extraSchema, testQuery }) => {
         try {
-          await withGeneratedSchema(files, { ...(opts.types ?? {}), ...types }, async (_dir, schema) => {
-            await f(schema);
-          });
+          const resp = await execQuery(files, [opts.extraSchema, extraSchema].filter(Boolean), testQuery);
+          expect(JSON.parse(resp)).toMatchSnapshot();
         } catch (e) {
           // eslint-disable-next-line no-console
           console.error(e);
@@ -139,49 +144,37 @@ function getFileMap(resp: CodeGeneratorResponse): Record<string, string> {
   return resp.getFileList().reduce((m, f) => ({ ...m, [f.getName()!]: f.getContent()! }), {} as Record<string, string>);
 }
 
-async function withGeneratedResults(files: CodeGeneratorResponse.File[], cb: (dir: string) => Promise<void>) {
+async function withGeneratedResults<T>(
+  files: CodeGeneratorResponse.File[],
+  cb: (dir: string) => Promise<T>
+): Promise<T> {
   const suffix = Math.random().toString(36).substring(7);
   const dir = join(__dirname, "__generated__", suffix);
-  await fs
-    .mkdir(dir, { recursive: true })
-    .then(() =>
-      Promise.all(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        [...new Set(files.map((f) => join(dir, dirname(f.getName()!))))].map((p) => fs.mkdir(p, { recursive: true }))
-      ).then(() => dir)
-    )
-    .then((dir) =>
+  try {
+    await fs.mkdir(dir, { recursive: true });
+    await Promise.all(
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      Promise.all(files.map((f) => fs.writeFile(join(dir, f.getName()!), f.getContent()!, "utf-8"))).then(() => dir)
-    )
-    .then(cb)
-    .finally(() => fs.rm(dir, { recursive: true, force: true, maxRetries: 3 }));
+      [...new Set(files.map((f) => join(dir, dirname(f.getName()!))))].map((p) => fs.mkdir(p, { recursive: true }))
+    );
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    await Promise.all(files.map((f) => fs.writeFile(join(dir, f.getName()!), f.getContent()!, "utf-8")));
+    return await cb(dir);
+  } finally {
+    await fs.rm(dir, { recursive: true, force: true, maxRetries: 3 });
+  }
 }
 
 async function withGeneratedSchema(
   files: CodeGeneratorResponse.File[],
-  queries: Record<string, NexusExtendTypeDef<"Query">>,
-  cb: (dir: string, schema: NexusGraphQLSchema) => Promise<void>
+  extraSchemata: string[],
+  cb: (dir: string) => Promise<void>
 ) {
   await withGeneratedResults(files, async (dir) => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const paths = files.map((f) => join(dir, f.getName()!));
     try {
-      const types = paths.reduce((o, p) => ({ ...o, ...require(p) }), {} as any);
-      const schema = await generateSchema({
-        types: { ...types, ...queries },
-        outputs: {
-          schema: join(dir, "schema.graphql"),
-          typegen: join(dir, "typings.ts"),
-        },
-        shouldGenerateArtifacts: true,
-        features: {
-          abstractTypeStrategies: {
-            isTypeOf: true,
-          },
-        },
-      });
-      await cb(dir, schema);
+      await createSchemaTs(dir, files, extraSchemata);
+      execSync(`yarn ts-node --transpile-only ${dir}/schema.ts`, { cwd: dir });
+      await cb(dir);
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e);
@@ -209,3 +202,59 @@ async function validateGeneratedFiles(dir: string) {
   const diagMsgs = ts.getPreEmitDiagnostics(prog).map((d) => d.messageText);
   expect(diagMsgs).toHaveLength(0);
 }
+
+const createSchemaTs = async (dir: string, files: CodeGeneratorResponse.File[], extraSchemata: string[]) => {
+  const pathAliasPairs = files.map((f, i) => [f.getName()!, `types_${i}`]);
+
+  const content = `import { makeSchema } from "nexus";
+import * as path from "path";
+
+${pathAliasPairs.map(([p, a]) => `import * as ${a} from "./${p.replace(/\.[^/.]+$/, "")}";`).join("\n")}
+
+${extraSchemata.map((_, idx) => `import * as extra_${idx} from "./extraSchema_${idx}";`).join("\n")}
+
+const schema = makeSchema({
+  types: [${[...pathAliasPairs.map(([_, a]) => a), ...extraSchemata.map((_, idx) => `extra_${idx}`)].join(", ")}],
+  outputs: {
+    schema: path.join(__dirname, "schema.graphql"),
+    typegen: path.join(__dirname, "typings.ts"),
+  },
+  shouldGenerateArtifacts: true,
+  features: {
+    abstractTypeStrategies: {
+      isTypeOf: true,
+    },
+  },
+});
+
+export { schema };
+`;
+
+  await Promise.all(
+    extraSchemata.map((content, idx) => fs.writeFile(join(dir, `extraSchema_${idx}.ts`), content, "utf-8"))
+  );
+  await fs.writeFile(join(dir, "schema.ts"), content, "utf-8");
+};
+
+const execQuery = async (files: CodeGeneratorResponse.File[], extraSchemata: string[], query: string) => {
+  const execQueryTs = `
+import { stdout } from "process";
+import { graphql } from "graphql";
+import { schema } from "./schema";
+
+graphql(
+  schema,
+  \`
+  ${query}
+  \`
+).then(resp => stdout.write(JSON.stringify(resp)));
+`;
+
+  return await withGeneratedResults(files, async (dir) => {
+    await createSchemaTs(dir, files, extraSchemata);
+    await fs.writeFile(join(dir, "execQuery.ts"), execQueryTs, "utf-8");
+
+    const resp = execSync(`yarn --silent ts-node --transpile-only ${dir}/execQuery.ts`, { cwd: dir });
+    return resp.toString("utf-8");
+  });
+};
