@@ -144,7 +144,7 @@ Object {
       "int32Value": 2,
       "int64Value": "4",
       "stringValue": "foobar",
-      "timestamp": 2020-12-28T06:42:05.453Z,
+      "timestamp": "2020-12-28T06:42:05.453Z",
       "uint32Value": 5,
       "uint64Value": "6",
     },
