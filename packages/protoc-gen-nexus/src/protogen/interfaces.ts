@@ -152,6 +152,10 @@ export interface ProtoField extends ProtoBase<"Field"> {
    * @example `getMessageTypeList`
    */
   readonly googleProtobufGetterName: string;
+  /**
+   * @example `getMessageTypeList`
+   */
+  readonly googleProtobufSetterName: string;
 }
 
 export interface ProtoEnum extends ProtoBase<"Enum"> {
