@@ -1,6 +1,6 @@
 {
   "name": "@proto-nexus/protobufjs",
-  "version": "0.5.0-alpha.0",
+  "version": "0.5.0-alpha.10",
   "description": "Generate DSL for GraphQL Nexus from Protocol Buffers IDL",
   "keywords": [
     "graphql",
