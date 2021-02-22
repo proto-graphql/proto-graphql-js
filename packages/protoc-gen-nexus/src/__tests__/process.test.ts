@@ -52,15 +52,15 @@ describe("parseParams", () => {
 });
 
 describe("simple proto file", () => {
-  itGeneratesNexusDSLsToMatchSnapshtos("hello", ["hello/hello_pb_nexus.ts"]);
+  itGeneratesNexusDSLsToMatchSnapshtos("primitives", ["primitives/primitives_pb_nexus.ts"]);
 
   it("generates nexus DSLs with graphql_type file layout", async () => {
-    const resp = await generateDSLs("hello", "protobufjs", { perGraphQLType: true });
+    const resp = await generateDSLs("primitives", "protobufjs", { perGraphQLType: true });
     snapshotGeneratedFiles(resp, [
-      "hello/Hello.nexus.ts",
-      "hello/Primitives.nexus.ts",
-      "hello/HelloInput.nexus.ts",
-      "hello/PrimitivesInput.nexus.ts",
+      "primitives/Message.nexus.ts",
+      "primitives/Primitives.nexus.ts",
+      "primitives/MessageInput.nexus.ts",
+      "primitives/PrimitivesInput.nexus.ts",
     ]);
   });
 });

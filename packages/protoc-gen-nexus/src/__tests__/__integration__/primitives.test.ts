@@ -1,19 +1,19 @@
 import { testSchemaGeneration } from "../__helpers__/process.test.helper";
 
-testSchemaGeneration("hello", "protobufjs", {
+testSchemaGeneration("primitives", "protobufjs", {
   schemaTests: [
     [
       "tests query",
       {
         extraSchema: `
           import { queryField } from "nexus";
-          import * as pbjs from "@testapis/node/lib/testapis/hello";
+          import * as pbjs from "@testapis/node/lib/testapis/primitives";
 
           export const testQuery =  queryField("test", {
-            type: "Hello",
+            type: "Message",
             resolve() {
-              return new pbjs.testapis.hello.Hello({
-                requiredPrimitives: new pbjs.testapis.hello.Primitives({
+              return new pbjs.testapis.primitives.Message({
+                requiredPrimitives: new pbjs.testapis.primitives.Primitives({
                   requiredDoubleValue: 2.4,
                   requiredFloatValue: 3.5,
                   requiredInt32Value: 2,
@@ -73,17 +73,17 @@ testSchemaGeneration("hello", "protobufjs", {
   ],
 });
 
-testSchemaGeneration("hello", "native protobuf", {
+testSchemaGeneration("primitives", "native protobuf", {
   schemaTests: [
     [
       "tests query",
       {
         extraSchema: `
           import { queryField } from "nexus";
-          import * as pbnative from "@testapis/node-native/lib/testapis/hello/hello_pb";
+          import * as pbnative from "@testapis/node-native/lib/testapis/primitives/primitives_pb";
 
           export const testQuery =  queryField("test", {
-            type: "Hello",
+            type: "Message",
             resolve() {
               const rp = new pbnative.Primitives();
               rp.setRequiredDoubleValue(2.4);
@@ -100,9 +100,9 @@ testSchemaGeneration("hello", "native protobuf", {
               rp.setRequiredSfixed64Value(12);
               rp.setRequiredBoolValue(true);
               rp.setRequiredStringValue("foobar");
-              const hello = new pbnative.Hello();
-              hello.setRequiredPrimitives(rp);
-              return hello;
+              const primitives = new pbnative.Message();
+              primitives.setRequiredPrimitives(rp);
+              return primitives;
             },
           });
         `,

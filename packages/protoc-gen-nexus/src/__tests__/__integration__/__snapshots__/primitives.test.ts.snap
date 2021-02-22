@@ -5,12 +5,12 @@ exports[`schema generation with native protobuf can make GraphQL schema from gen
 ### Do not make changes to this file directly
 
 
-type Hello {
+type Message {
   \\"\\"\\"Optional.\\"\\"\\"
   optionalPrimitives: Primitives
 
   \\"\\"\\"Optional.\\"\\"\\"
-  optionalPrimitivesList: Primitives
+  optionalPrimitivesList: [Primitives!]!
 
   \\"\\"\\"Required.\\"\\"\\"
   requiredPrimitives: Primitives!
@@ -19,12 +19,12 @@ type Hello {
   requiredPrimitivesList: [Primitives!]!
 }
 
-input HelloInput {
+input MessageInput {
   \\"\\"\\"Optional.\\"\\"\\"
   optionalPrimitives: PrimitivesInput
 
   \\"\\"\\"Optional.\\"\\"\\"
-  optionalPrimitivesList: PrimitivesInput
+  optionalPrimitivesList: [PrimitivesInput!]!
 
   \\"\\"\\"Required.\\"\\"\\"
   requiredPrimitives: PrimitivesInput!
@@ -106,7 +106,7 @@ Object {
   "data": Object {
     "test": Object {
       "optionalPrimitives": null,
-      "optionalPrimitivesList": null,
+      "optionalPrimitivesList": Array [],
       "requiredPrimitives": Object {
         "requiredBoolValue": true,
         "requiredDoubleValue": 2.4,
@@ -134,12 +134,12 @@ exports[`schema generation with protobufjs can make GraphQL schema from generate
 ### Do not make changes to this file directly
 
 
-type Hello {
+type Message {
   \\"\\"\\"Optional.\\"\\"\\"
   optionalPrimitives: Primitives
 
   \\"\\"\\"Optional.\\"\\"\\"
-  optionalPrimitivesList: Primitives
+  optionalPrimitivesList: [Primitives!]!
 
   \\"\\"\\"Required.\\"\\"\\"
   requiredPrimitives: Primitives!
@@ -148,12 +148,12 @@ type Hello {
   requiredPrimitivesList: [Primitives!]!
 }
 
-input HelloInput {
+input MessageInput {
   \\"\\"\\"Optional.\\"\\"\\"
   optionalPrimitives: PrimitivesInput
 
   \\"\\"\\"Optional.\\"\\"\\"
-  optionalPrimitivesList: PrimitivesInput
+  optionalPrimitivesList: [PrimitivesInput!]!
 
   \\"\\"\\"Required.\\"\\"\\"
   requiredPrimitives: PrimitivesInput!
@@ -235,7 +235,7 @@ Object {
   "data": Object {
     "test": Object {
       "optionalPrimitives": null,
-      "optionalPrimitivesList": null,
+      "optionalPrimitivesList": Array [],
       "requiredPrimitives": Object {
         "requiredBoolValue": true,
         "requiredDoubleValue": 2.4,
