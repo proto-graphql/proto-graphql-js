@@ -150,3 +150,7 @@ describe("deprecation", () => {
 describe("field_behavior", () => {
   itGeneratesNexusDSLsToMatchSnapshtos("field_behavior", ["field_behavior/comments_pb_nexus.ts"]);
 });
+
+describe("empty types", () => {
+  itGeneratesNexusDSLsToMatchSnapshtos("empty_types", ["empty_types/empty_pb_nexus.ts"]);
+});

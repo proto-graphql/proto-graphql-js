@@ -1,0 +1,6 @@
+syntax = "proto3";
+
+package testapis.empty_types;
+
+message EmptyMessage {
+}

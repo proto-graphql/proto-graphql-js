@@ -28,6 +28,41 @@ export function createFieldDefinitionStmt(
     )
   );
 }
+
+export function createNoopFieldDefinitionStmt(opts: { input: boolean }): ts.Statement {
+  return ts.factory.createExpressionStatement(
+    ts.factory.createCallExpression(
+      ts.factory.createPropertyAccessExpression(ts.factory.createIdentifier("t"), ts.factory.createIdentifier("field")),
+      undefined,
+      [
+        ts.factory.createStringLiteral("_"),
+        ts.factory.createObjectLiteralExpression(
+          [
+            ts.factory.createPropertyAssignment("type", ts.factory.createStringLiteral("Boolean")),
+            ts.factory.createPropertyAssignment("description", ts.factory.createStringLiteral("noop field")),
+            opts.input
+              ? null
+              : ts.factory.createMethodDeclaration(
+                  undefined,
+                  undefined,
+                  undefined,
+                  "resolve",
+                  undefined,
+                  undefined,
+                  [],
+                  undefined,
+                  ts.factory.createBlock([
+                    ts.factory.createReturnStatement(ts.factory.createToken(ts.SyntaxKind.TrueKeyword)),
+                  ])
+                ),
+          ].filter(onlyNonNull()),
+          true
+        ),
+      ]
+    )
+  );
+}
+
 /**
  * @example
  * ```ts
