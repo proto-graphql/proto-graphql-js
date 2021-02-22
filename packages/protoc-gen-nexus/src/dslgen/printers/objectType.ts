@@ -6,7 +6,7 @@ import {
   createNexusCallExpr,
   onlyNonNull,
 } from "./util";
-import { createFieldDefinitionStmt } from "./field";
+import { createFieldDefinitionStmt, createNoopFieldDefinitionStmt } from "./field";
 import { ObjectType, InterfaceType } from "../types";
 
 /**
@@ -56,7 +56,9 @@ function createObjectTypeDefinitionMethodDecl(objType: ObjectType): ts.MethodDec
     [ts.factory.createParameterDeclaration(undefined, undefined, undefined, "t", undefined, undefined, undefined)],
     undefined,
     ts.factory.createBlock(
-      objType.fields.map((f) => createFieldDefinitionStmt(f)),
+      objType.fields.length > 0
+        ? objType.fields.map((f) => createFieldDefinitionStmt(f))
+        : [createNoopFieldDefinitionStmt({ input: false })],
       true
     )
   );

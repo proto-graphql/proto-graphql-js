@@ -7,7 +7,7 @@ import {
   createQualifiedName,
   onlyNonNull,
 } from "./util";
-import { createFieldDefinitionStmt } from "./field";
+import { createFieldDefinitionStmt, createNoopFieldDefinitionStmt } from "./field";
 import { EnumType, InputObjectField, InputObjectType, ScalarType } from "../types";
 
 /**
@@ -71,7 +71,9 @@ function createInputObjectTypeDefinitionMethodDecl(type: InputObjectType): ts.Me
     [ts.factory.createParameterDeclaration(undefined, undefined, undefined, "t", undefined, undefined, undefined)],
     undefined,
     ts.factory.createBlock(
-      type.fields.map((f) => createFieldDefinitionStmt(f)),
+      type.fields.length > 0
+        ? type.fields.map((f) => createFieldDefinitionStmt(f))
+        : [createNoopFieldDefinitionStmt({ input: true })],
       true
     )
   );
