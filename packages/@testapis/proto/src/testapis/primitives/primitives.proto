@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package testapis.hello;
+package testapis.primitives;
 
-message Hello {
+message Message {
   // Required.
   Primitives required_primitives = 1;
   // Optional.
@@ -10,7 +10,7 @@ message Hello {
   // Required.
   repeated Primitives required_primitives_list = 3;
   // Optional.
-  Primitives optional_primitives_list = 4;
+  repeated Primitives optional_primitives_list = 4;
 }
 
 message Primitives {
