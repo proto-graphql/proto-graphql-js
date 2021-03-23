@@ -75,7 +75,9 @@ export function createNoopFieldDefinitionStmt(opts: { input: boolean }): ts.Stat
  * }
  * ```
  */
-function createFieldOptionExpr(field: ObjectField<any> | ObjectOneofField | InputObjectField<any>): ts.Expression {
+export function createFieldOptionExpr(
+  field: ObjectField<any> | ObjectOneofField | InputObjectField<any>
+): ts.Expression {
   let typeExpr: ts.Expression =
     field.shouldReferenceTypeWithString() || !field.typeFullName
       ? ts.factory.createStringLiteral(field.type.typeName)
