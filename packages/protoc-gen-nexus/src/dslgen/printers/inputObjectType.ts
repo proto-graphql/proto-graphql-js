@@ -7,7 +7,7 @@ import {
   createQualifiedName,
   onlyNonNull,
 } from "./util";
-import { createFieldDefinitionStmt, createNoopFieldDefinitionStmt } from "./field";
+import { createFieldDefinitionStmt, createNoopFieldDefinitionStmt, createFieldOptionExpr } from "./field";
 import { EnumType, InputObjectField, InputObjectType, ScalarType } from "../types";
 
 /**
@@ -44,7 +44,24 @@ export function createInputObjectTypeDslStmt(type: InputObjectType): ts.Statemen
           ),
         ]),
         ts.factory.createObjectLiteralExpression(
-          [ts.factory.createPropertyAssignment("toProto", createToProtoFunc(type))],
+          [
+            ts.factory.createPropertyAssignment("toProto", createToProtoFunc(type)),
+            ts.factory.createPropertyAssignment(
+              "_protoNexus",
+              ts.factory.createObjectLiteralExpression(
+                [
+                  ts.factory.createPropertyAssignment(
+                    "fields",
+                    ts.factory.createObjectLiteralExpression(
+                      type.fields.map((f) => ts.factory.createPropertyAssignment(f.name, createFieldOptionExpr(f))),
+                      true
+                    )
+                  ),
+                ],
+                true
+              )
+            ),
+          ],
           true
         ),
       ]

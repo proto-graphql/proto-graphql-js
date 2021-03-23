@@ -12,6 +12,7 @@ Protobuf-First GraphQL Schemas with [GraphQL Nexus](https://nexusjs.org/)
 | [protoc-gen-nexus](./packages/protoc-gen-nexus) | `protoc` plugin for generating Nexus type definitions | [![npm version](https://badge.fury.io/js/protoc-gen-nexus.svg)](https://badge.fury.io/js/protoc-gen-nexus) |
 | [@proto-nexus/google-protobuf](./packages/@proto-nexus/google-protobuf) | Runtime library | [![npm version](https://badge.fury.io/js/%40proto-nexus%2Fgoogle-protobuf.svg)](https://badge.fury.io/js/%40proto-nexus%2Fgoogle-protobuf) |
 | [@proto-nexus/protobufjs](./packages/@proto-nexus/protobufjs) | Runtime library | [![npm version](https://badge.fury.io/js/%40proto-nexus%2Fprotobufjs.svg)](https://badge.fury.io/js/%40proto-nexus%2Fprotobufjs) |
+| [@proto-nexus/proto-fields-plugin](./packages/@proto-nexus/proto-fields-plugin) | Nexus plugin for building subset types from proto-nexus's artifacts | [![npm version](https://badge.fury.io/js/%40proto-nexus%2Fproto-fields-plugin.svg)](https://badge.fury.io/js/%40proto-nexus%2Fproto-fields-plugin) |
 
 ## Installation
 

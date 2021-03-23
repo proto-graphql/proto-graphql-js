@@ -181,6 +181,18 @@ export const DeprecatedMessageInput = Object.assign(nexus.inputObjectType({
             output.setEnum(input.enum);
         }
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\"),
+                deprecation: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\"
+            },
+            enum: {
+                type: nexus.nullable(\\"NotDeprecatedEnum\\"),
+                deprecation: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\"
+            }
+        }
     }
 });
 export const NotDeprecatedMessageInput = Object.assign(nexus.inputObjectType({
@@ -230,6 +242,33 @@ export const NotDeprecatedMessageInput = Object.assign(nexus.inputObjectType({
             output.setMsg4(NotDeprecatedMessageInnerMessage2Input.toProto(input.msg4));
         }
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\"),
+                deprecation: \\"testapis.deprecation.NotDeprecatedMessage.body is mark as deprecated in a *.proto file.\\"
+            },
+            enum: {
+                type: nexus.nullable(\\"DeprecatedEnum\\"),
+                deprecation: \\"testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.\\"
+            },
+            msg1: {
+                type: nexus.nullable(\\"NotDeprecatedMessageInnerMessage1Input\\"),
+                deprecation: \\"testapis.deprecation.NotDeprecatedMessage.msg1 is mark as deprecated in a *.proto file.\\"
+            },
+            msg2: {
+                type: nexus.nullable(\\"NotDeprecatedMessageInnerMessage2Input\\")
+            },
+            msg3: {
+                type: nexus.nullable(\\"NotDeprecatedMessageInnerMessage1Input\\"),
+                deprecation: \\"testapis.deprecation.NotDeprecatedMessage.msg3 is mark as deprecated in a *.proto file.\\"
+            },
+            msg4: {
+                type: nexus.nullable(\\"NotDeprecatedMessageInnerMessage2Input\\"),
+                deprecation: \\"testapis.deprecation.NotDeprecatedMessage.msg4 is mark as deprecated in a *.proto file.\\"
+            }
+        }
     }
 });
 export const DeprecatedMessageInnerMessageInput = Object.assign(nexus.inputObjectType({
@@ -245,6 +284,14 @@ export const DeprecatedMessageInnerMessageInput = Object.assign(nexus.inputObjec
         const output = new _$testapis$deprecation$deprecation_pb.DeprecatedMessage.InnerMessage();
         output.setBody(input.body);
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\"),
+                deprecation: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\"
+            }
+        }
     }
 });
 export const NotDeprecatedMessageInnerMessage1Input = Object.assign(nexus.inputObjectType({
@@ -259,6 +306,13 @@ export const NotDeprecatedMessageInnerMessage1Input = Object.assign(nexus.inputO
         const output = new _$testapis$deprecation$deprecation_pb.NotDeprecatedMessage.InnerMessage1();
         output.setBody(input.body);
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 export const NotDeprecatedMessageInnerMessage2Input = Object.assign(nexus.inputObjectType({
@@ -273,6 +327,13 @@ export const NotDeprecatedMessageInnerMessage2Input = Object.assign(nexus.inputO
         const output = new _$testapis$deprecation$deprecation_pb.NotDeprecatedMessage.InnerMessage2();
         output.setBody(input.body);
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 export const NotDeprecatedMessageNotDeprecatedOneof = nexus.unionType({
@@ -395,6 +456,18 @@ export const DeprecatedFileMessageInput = Object.assign(nexus.inputObjectType({
             output.setEnum(input.enum);
         }
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\"),
+                deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\"
+            },
+            enum: {
+                type: nexus.nullable(\\"DeprecatedFileEnum\\"),
+                deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\"
+            }
+        }
     }
 });
 export const DeprecatedFileMessageInnerMessageInput = Object.assign(nexus.inputObjectType({
@@ -410,6 +483,14 @@ export const DeprecatedFileMessageInnerMessageInput = Object.assign(nexus.inputO
         const output = new _$testapis$deprecation$file_deprecation_pb.DeprecatedFileMessage.InnerMessage();
         output.setBody(input.body);
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\"),
+                deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\"
+            }
+        }
     }
 });
 export const DeprecatedFileEnum = nexus.enumType({
@@ -612,6 +693,18 @@ export const DeprecatedMessageInput = Object.assign(nexus.inputObjectType({
             output.enum = input.enum;
         }
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\"),
+                deprecation: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\"
+            },
+            enum: {
+                type: nexus.nullable(\\"NotDeprecatedEnum\\"),
+                deprecation: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\"
+            }
+        }
     }
 });
 export const NotDeprecatedMessageInput = Object.assign(nexus.inputObjectType({
@@ -661,6 +754,33 @@ export const NotDeprecatedMessageInput = Object.assign(nexus.inputObjectType({
             output.msg4 = NotDeprecatedMessageInnerMessage2Input.toProto(input.msg4);
         }
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\"),
+                deprecation: \\"testapis.deprecation.NotDeprecatedMessage.body is mark as deprecated in a *.proto file.\\"
+            },
+            enum: {
+                type: nexus.nullable(\\"DeprecatedEnum\\"),
+                deprecation: \\"testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.\\"
+            },
+            msg1: {
+                type: nexus.nullable(\\"NotDeprecatedMessageInnerMessage1Input\\"),
+                deprecation: \\"testapis.deprecation.NotDeprecatedMessage.msg1 is mark as deprecated in a *.proto file.\\"
+            },
+            msg2: {
+                type: nexus.nullable(\\"NotDeprecatedMessageInnerMessage2Input\\")
+            },
+            msg3: {
+                type: nexus.nullable(\\"NotDeprecatedMessageInnerMessage1Input\\"),
+                deprecation: \\"testapis.deprecation.NotDeprecatedMessage.msg3 is mark as deprecated in a *.proto file.\\"
+            },
+            msg4: {
+                type: nexus.nullable(\\"NotDeprecatedMessageInnerMessage2Input\\"),
+                deprecation: \\"testapis.deprecation.NotDeprecatedMessage.msg4 is mark as deprecated in a *.proto file.\\"
+            }
+        }
     }
 });
 export const DeprecatedMessageInnerMessageInput = Object.assign(nexus.inputObjectType({
@@ -676,6 +796,14 @@ export const DeprecatedMessageInnerMessageInput = Object.assign(nexus.inputObjec
         const output = new _$testapis$deprecation.testapis.deprecation.DeprecatedMessage.InnerMessage();
         output.body = input.body;
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\"),
+                deprecation: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\"
+            }
+        }
     }
 });
 export const NotDeprecatedMessageInnerMessage1Input = Object.assign(nexus.inputObjectType({
@@ -690,6 +818,13 @@ export const NotDeprecatedMessageInnerMessage1Input = Object.assign(nexus.inputO
         const output = new _$testapis$deprecation.testapis.deprecation.NotDeprecatedMessage.InnerMessage1();
         output.body = input.body;
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 export const NotDeprecatedMessageInnerMessage2Input = Object.assign(nexus.inputObjectType({
@@ -704,6 +839,13 @@ export const NotDeprecatedMessageInnerMessage2Input = Object.assign(nexus.inputO
         const output = new _$testapis$deprecation.testapis.deprecation.NotDeprecatedMessage.InnerMessage2();
         output.body = input.body;
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 export const NotDeprecatedMessageNotDeprecatedOneof = nexus.unionType({
@@ -832,6 +974,18 @@ export const DeprecatedFileMessageInput = Object.assign(nexus.inputObjectType({
             output.enum = input.enum;
         }
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\"),
+                deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\"
+            },
+            enum: {
+                type: nexus.nullable(\\"DeprecatedFileEnum\\"),
+                deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\"
+            }
+        }
     }
 });
 export const DeprecatedFileMessageInnerMessageInput = Object.assign(nexus.inputObjectType({
@@ -847,6 +1001,14 @@ export const DeprecatedFileMessageInnerMessageInput = Object.assign(nexus.inputO
         const output = new _$testapis$deprecation.testapis.deprecation.DeprecatedFileMessage.InnerMessage();
         output.body = input.body;
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\"),
+                deprecation: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\"
+            }
+        }
     }
 });
 export const DeprecatedFileEnum = nexus.enumType({
@@ -900,6 +1062,9 @@ export const EmptyMessageInput = Object.assign(nexus.inputObjectType({
     toProto: (input: NexusGen[\\"inputTypes\\"][\\"EmptyMessageInput\\"]): _$testapis$empty_types$empty_pb.EmptyMessage => {
         const output = new _$testapis$empty_types$empty_pb.EmptyMessage();
         return output;
+    },
+    _protoNexus: {
+        fields: {}
     }
 });
 "
@@ -938,6 +1103,9 @@ export const EmptyMessageInput = Object.assign(nexus.inputObjectType({
     toProto: (input: NexusGen[\\"inputTypes\\"][\\"EmptyMessageInput\\"]): _$testapis$empty_types.testapis.empty_types.EmptyMessage => {
         const output = new _$testapis$empty_types.testapis.empty_types.EmptyMessage();
         return output;
+    },
+    _protoNexus: {
+        fields: {}
     }
 });
 "
@@ -1050,6 +1218,26 @@ export const FieldBehaviorComentsMessageInput = Object.assign(nexus.inputObjectT
             output.setInputOnlyField(FieldBehaviorComentsMessagePostInput.toProto(input.inputOnlyField));
         }
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            requiredField: {
+                type: nexus.nonNull(\\"FieldBehaviorComentsMessagePostInput\\"),
+                description: \\"Required.\\"
+            },
+            requiredInputOnlyField: {
+                type: nexus.nonNull(\\"FieldBehaviorComentsMessagePostInput\\"),
+                description: \\"Required. Input only.\\"
+            },
+            inputOnlyRequiredField: {
+                type: nexus.nonNull(\\"FieldBehaviorComentsMessagePostInput\\"),
+                description: \\"Input only. Required.\\"
+            },
+            inputOnlyField: {
+                type: nexus.nullable(\\"FieldBehaviorComentsMessagePostInput\\"),
+                description: \\"Input only.\\"
+            }
+        }
     }
 });
 export const FieldBehaviorComentsMessagePostInput = Object.assign(nexus.inputObjectType({
@@ -1064,6 +1252,13 @@ export const FieldBehaviorComentsMessagePostInput = Object.assign(nexus.inputObj
         const output = new _$testapis$field_behavior$comments_pb.FieldBehaviorComentsMessage.Post();
         output.setBody(input.body);
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 "
@@ -1179,6 +1374,26 @@ export const FieldBehaviorComentsMessageInput = Object.assign(nexus.inputObjectT
             output.inputOnlyField = FieldBehaviorComentsMessagePostInput.toProto(input.inputOnlyField);
         }
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            requiredField: {
+                type: nexus.nonNull(\\"FieldBehaviorComentsMessagePostInput\\"),
+                description: \\"Required.\\"
+            },
+            requiredInputOnlyField: {
+                type: nexus.nonNull(\\"FieldBehaviorComentsMessagePostInput\\"),
+                description: \\"Required. Input only.\\"
+            },
+            inputOnlyRequiredField: {
+                type: nexus.nonNull(\\"FieldBehaviorComentsMessagePostInput\\"),
+                description: \\"Input only. Required.\\"
+            },
+            inputOnlyField: {
+                type: nexus.nullable(\\"FieldBehaviorComentsMessagePostInput\\"),
+                description: \\"Input only.\\"
+            }
+        }
     }
 });
 export const FieldBehaviorComentsMessagePostInput = Object.assign(nexus.inputObjectType({
@@ -1193,6 +1408,13 @@ export const FieldBehaviorComentsMessagePostInput = Object.assign(nexus.inputObj
         const output = new _$testapis$field_behavior.testapis.deprecation.FieldBehaviorComentsMessage.Post();
         output.body = input.body;
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 "
@@ -1233,6 +1455,13 @@ export const SubpkgMessageInput = Object.assign(nexus.inputObjectType({
         const output = new _$testapis$multipkgs$subpkg1$types_pb.SubpkgMessage();
         output.setBody(input.body);
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 export const SubpkgEnum = nexus.enumType({
@@ -1312,6 +1541,16 @@ export const MessageWithSubpkgInput = Object.assign(nexus.inputObjectType({
             output.setEnum(input.enum);
         }
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            message: {
+                type: nexus.nullable(\\"SubpkgMessageInput\\")
+            },
+            enum: {
+                type: nexus.nullable(\\"SubpkgEnum\\")
+            }
+        }
     }
 });
 "
@@ -1355,6 +1594,13 @@ export const SubpkgMessageInput = Object.assign(nexus.inputObjectType({
         const output = new _$testapis$multipkgs$subpkg1.testapis.multipkgs.subpkg1.SubpkgMessage();
         output.body = input.body;
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 export const SubpkgEnum = nexus.enumType({
@@ -1434,6 +1680,16 @@ export const MessageWithSubpkgInput = Object.assign(nexus.inputObjectType({
             output.enum = input.enum;
         }
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            message: {
+                type: nexus.nullable(\\"SubpkgMessageInput\\")
+            },
+            enum: {
+                type: nexus.nullable(\\"SubpkgEnum\\")
+            }
+        }
     }
 });
 "
@@ -1526,6 +1782,19 @@ export const ParentMessageInput = Object.assign(nexus.inputObjectType({
             output.setNestedEnum(input.nestedEnum);
         }
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            nested: {
+                type: nexus.nullable(\\"ParentMessageNestedMessageInput\\")
+            },
+            nestedEnum: {
+                type: nexus.nullable(\\"ParentMessageNestedEnum\\")
+            }
+        }
     }
 });
 export const ParentMessageNestedMessageInput = Object.assign(nexus.inputObjectType({
@@ -1540,6 +1809,13 @@ export const ParentMessageNestedMessageInput = Object.assign(nexus.inputObjectTy
         const output = new _$testapis$nested$nested_pb.ParentMessage.NestedMessage();
         output.setNestedBody(input.nestedBody);
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            nestedBody: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 export const ParentMessageNestedEnum = nexus.enumType({
@@ -1651,6 +1927,19 @@ export const ParentMessageInput = Object.assign(nexus.inputObjectType({
             output.nestedEnum = input.nestedEnum;
         }
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            nested: {
+                type: nexus.nullable(\\"ParentMessageNestedMessageInput\\")
+            },
+            nestedEnum: {
+                type: nexus.nullable(\\"ParentMessageNestedEnum\\")
+            }
+        }
     }
 });
 export const ParentMessageNestedMessageInput = Object.assign(nexus.inputObjectType({
@@ -1665,6 +1954,13 @@ export const ParentMessageNestedMessageInput = Object.assign(nexus.inputObjectTy
         const output = new _$testapis$nested.testapis.nested.ParentMessage.NestedMessage();
         output.nestedBody = input.nestedBody;
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            nestedBody: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 export const ParentMessageNestedEnum = nexus.enumType({
@@ -1729,6 +2025,13 @@ export const TestPrefixIgnoredMessageNotIgnoredInput = Object.assign(nexus.input
         const output = new _$testapis$extensions.testapis.extensions.IgnoredMessage.NotIgnored();
         output.body = input.body;
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 "
@@ -1776,6 +2079,13 @@ export const TestPrefixInterfaceMessageInput = Object.assign(nexus.inputObjectTy
         const output = new _$testapis$extensions.testapis.extensions.InterfaceMessage();
         output.id = parseInt(input.id);
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            id: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 "
@@ -2059,6 +2369,16 @@ export const TestPrefixPrefixedMessageInnerMessage2Input = Object.assign(nexus.i
         output.id = parseInt(input.id);
         output.body = input.body;
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            id: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 "
@@ -2085,6 +2405,16 @@ export const TestPrefixPrefixedMessageInnerMessageInput = Object.assign(nexus.in
         output.id = parseInt(input.id);
         output.body = input.body;
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            id: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 "
@@ -2154,6 +2484,37 @@ export const TestPrefixPrefixedMessageInput = Object.assign(nexus.inputObjectTyp
             output.renamedMessage = _$TestPrefixRenamedMessageInput_nexus.TestPrefixRenamedMessageInput.toProto(input.renamedMessage);
         }
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            prefixedEnum: {
+                type: nexus.nullable(_$TestPrefixPrefixedEnum_nexus.TestPrefixPrefixedEnum)
+            },
+            notIgnoredMessage: {
+                type: nexus.nullable(_$TestPrefixIgnoredMessageNotIgnoredInput_nexus.TestPrefixIgnoredMessageNotIgnoredInput)
+            },
+            squashedMessage: {
+                type: nexus.nullable(_$TestPrefixPrefixedMessageSquashedMessageInput_nexus.TestPrefixPrefixedMessageSquashedMessageInput)
+            },
+            thisFieldWasRenamed: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            oneofNotIgnoredField: {
+                type: nexus.nullable(_$TestPrefixPrefixedMessageInnerMessageInput_nexus.TestPrefixPrefixedMessageInnerMessageInput)
+            },
+            skipResolver: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            squashedMessages: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(_$TestPrefixPrefixedMessageSquashedMessageInput_nexus.TestPrefixPrefixedMessageSquashedMessageInput)))
+            },
+            renamedMessage: {
+                type: nexus.nullable(_$TestPrefixRenamedMessageInput_nexus.TestPrefixRenamedMessageInput)
+            }
+        }
     }
 });
 "
@@ -2217,6 +2578,16 @@ export const TestPrefixPrefixedMessageSquashedMessageInput = Object.assign(nexus
             output.oneofField_2 = _$TestPrefixPrefixedMessageInnerMessage2Input_nexus.TestPrefixPrefixedMessageInnerMessage2Input.toProto(input.oneofField2);
         }
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            oneofField: {
+                type: nexus.nullable(_$TestPrefixPrefixedMessageInnerMessageInput_nexus.TestPrefixPrefixedMessageInnerMessageInput)
+            },
+            oneofField2: {
+                type: nexus.nullable(_$TestPrefixPrefixedMessageInnerMessage2Input_nexus.TestPrefixPrefixedMessageInnerMessage2Input)
+            }
+        }
     }
 });
 "
@@ -2268,6 +2639,13 @@ export const TestPrefixRenamedMessageInput = Object.assign(nexus.inputObjectType
         const output = new _$testapis$extensions.testapis.extensions.MessageWillRename();
         output.body = input.body;
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 "
@@ -2551,6 +2929,37 @@ export const TestPrefixPrefixedMessageInput = Object.assign(nexus.inputObjectTyp
             output.setRenamedMessage(TestPrefixRenamedMessageInput.toProto(input.renamedMessage));
         }
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            prefixedEnum: {
+                type: nexus.nullable(\\"TestPrefixPrefixedEnum\\")
+            },
+            notIgnoredMessage: {
+                type: nexus.nullable(\\"TestPrefixIgnoredMessageNotIgnoredInput\\")
+            },
+            squashedMessage: {
+                type: nexus.nullable(\\"TestPrefixPrefixedMessageSquashedMessageInput\\")
+            },
+            thisFieldWasRenamed: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            oneofNotIgnoredField: {
+                type: nexus.nullable(\\"TestPrefixPrefixedMessageInnerMessageInput\\")
+            },
+            skipResolver: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            squashedMessages: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"TestPrefixPrefixedMessageSquashedMessageInput\\")))
+            },
+            renamedMessage: {
+                type: nexus.nullable(\\"TestPrefixRenamedMessageInput\\")
+            }
+        }
     }
 });
 export const TestPrefixRenamedMessageInput = Object.assign(nexus.inputObjectType({
@@ -2565,6 +2974,13 @@ export const TestPrefixRenamedMessageInput = Object.assign(nexus.inputObjectType
         const output = new _$testapis$extensions$extensions_pb.MessageWillRename();
         output.setBody(input.body);
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 export const TestPrefixInterfaceMessageInput = Object.assign(nexus.inputObjectType({
@@ -2579,6 +2995,13 @@ export const TestPrefixInterfaceMessageInput = Object.assign(nexus.inputObjectTy
         const output = new _$testapis$extensions$extensions_pb.InterfaceMessage();
         output.setId(parseInt(input.id));
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            id: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 export const TestPrefixPrefixedMessageInnerMessageInput = Object.assign(nexus.inputObjectType({
@@ -2597,6 +3020,16 @@ export const TestPrefixPrefixedMessageInnerMessageInput = Object.assign(nexus.in
         output.setId(parseInt(input.id));
         output.setBody(input.body);
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            id: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 export const TestPrefixPrefixedMessageInnerMessage2Input = Object.assign(nexus.inputObjectType({
@@ -2615,6 +3048,16 @@ export const TestPrefixPrefixedMessageInnerMessage2Input = Object.assign(nexus.i
         output.setId(parseInt(input.id));
         output.setBody(input.body);
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            id: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 export const TestPrefixPrefixedMessageSquashedMessageInput = Object.assign(nexus.inputObjectType({
@@ -2637,6 +3080,16 @@ export const TestPrefixPrefixedMessageSquashedMessageInput = Object.assign(nexus
             output.setOneofField2(TestPrefixPrefixedMessageInnerMessage2Input.toProto(input.oneofField2));
         }
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            oneofField: {
+                type: nexus.nullable(\\"TestPrefixPrefixedMessageInnerMessageInput\\")
+            },
+            oneofField2: {
+                type: nexus.nullable(\\"TestPrefixPrefixedMessageInnerMessage2Input\\")
+            }
+        }
     }
 });
 export const TestPrefixIgnoredMessageNotIgnoredInput = Object.assign(nexus.inputObjectType({
@@ -2651,6 +3104,13 @@ export const TestPrefixIgnoredMessageNotIgnoredInput = Object.assign(nexus.input
         const output = new _$testapis$extensions$extensions_pb.IgnoredMessage.NotIgnored();
         output.setBody(input.body);
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 export const TestPrefixInterfaceMessage = nexus.interfaceType({
@@ -2998,6 +3458,37 @@ export const TestPrefixPrefixedMessageInput = Object.assign(nexus.inputObjectTyp
             output.renamedMessage = TestPrefixRenamedMessageInput.toProto(input.renamedMessage);
         }
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            prefixedEnum: {
+                type: nexus.nullable(\\"TestPrefixPrefixedEnum\\")
+            },
+            notIgnoredMessage: {
+                type: nexus.nullable(\\"TestPrefixIgnoredMessageNotIgnoredInput\\")
+            },
+            squashedMessage: {
+                type: nexus.nullable(\\"TestPrefixPrefixedMessageSquashedMessageInput\\")
+            },
+            thisFieldWasRenamed: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            oneofNotIgnoredField: {
+                type: nexus.nullable(\\"TestPrefixPrefixedMessageInnerMessageInput\\")
+            },
+            skipResolver: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            squashedMessages: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"TestPrefixPrefixedMessageSquashedMessageInput\\")))
+            },
+            renamedMessage: {
+                type: nexus.nullable(\\"TestPrefixRenamedMessageInput\\")
+            }
+        }
     }
 });
 export const TestPrefixRenamedMessageInput = Object.assign(nexus.inputObjectType({
@@ -3012,6 +3503,13 @@ export const TestPrefixRenamedMessageInput = Object.assign(nexus.inputObjectType
         const output = new _$testapis$extensions.testapis.extensions.MessageWillRename();
         output.body = input.body;
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 export const TestPrefixInterfaceMessageInput = Object.assign(nexus.inputObjectType({
@@ -3026,6 +3524,13 @@ export const TestPrefixInterfaceMessageInput = Object.assign(nexus.inputObjectTy
         const output = new _$testapis$extensions.testapis.extensions.InterfaceMessage();
         output.id = parseInt(input.id);
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            id: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 export const TestPrefixPrefixedMessageInnerMessageInput = Object.assign(nexus.inputObjectType({
@@ -3044,6 +3549,16 @@ export const TestPrefixPrefixedMessageInnerMessageInput = Object.assign(nexus.in
         output.id = parseInt(input.id);
         output.body = input.body;
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            id: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 export const TestPrefixPrefixedMessageInnerMessage2Input = Object.assign(nexus.inputObjectType({
@@ -3062,6 +3577,16 @@ export const TestPrefixPrefixedMessageInnerMessage2Input = Object.assign(nexus.i
         output.id = parseInt(input.id);
         output.body = input.body;
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            id: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 export const TestPrefixPrefixedMessageSquashedMessageInput = Object.assign(nexus.inputObjectType({
@@ -3084,6 +3609,16 @@ export const TestPrefixPrefixedMessageSquashedMessageInput = Object.assign(nexus
             output.oneofField_2 = TestPrefixPrefixedMessageInnerMessage2Input.toProto(input.oneofField2);
         }
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            oneofField: {
+                type: nexus.nullable(\\"TestPrefixPrefixedMessageInnerMessageInput\\")
+            },
+            oneofField2: {
+                type: nexus.nullable(\\"TestPrefixPrefixedMessageInnerMessage2Input\\")
+            }
+        }
     }
 });
 export const TestPrefixIgnoredMessageNotIgnoredInput = Object.assign(nexus.inputObjectType({
@@ -3098,6 +3633,13 @@ export const TestPrefixIgnoredMessageNotIgnoredInput = Object.assign(nexus.input
         const output = new _$testapis$extensions.testapis.extensions.IgnoredMessage.NotIgnored();
         output.body = input.body;
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 export const TestPrefixInterfaceMessage = nexus.interfaceType({
@@ -3336,6 +3878,42 @@ export const MessageWithEnumsInput = Object.assign(nexus.inputObjectType({
         output.requiredMyEnumWithoutUnspecifieds = input.requiredMyEnumWithoutUnspecifieds.map(v => v);
         output.optionalMyEnumWithoutUnspecifieds = input.optionalMyEnumWithoutUnspecifieds.map(v => v);
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            requiredMyEnum: {
+                type: nexus.nonNull(_$MyEnum_nexus.MyEnum),
+                description: \\"Required.\\"
+            },
+            optionalMyEnum: {
+                type: nexus.nullable(_$MyEnum_nexus.MyEnum),
+                description: \\"Optional.\\"
+            },
+            requiredMyEnumWithoutUnspecified: {
+                type: nexus.nonNull(_$MyEnumWithoutUnspecified_nexus.MyEnumWithoutUnspecified),
+                description: \\"Required.\\"
+            },
+            optionalMyEnumWithoutUnspecified: {
+                type: nexus.nullable(_$MyEnumWithoutUnspecified_nexus.MyEnumWithoutUnspecified),
+                description: \\"Optional.\\"
+            },
+            requiredMyEnums: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(_$MyEnum_nexus.MyEnum))),
+                description: \\"Required.\\"
+            },
+            optionalMyEnums: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(_$MyEnum_nexus.MyEnum))),
+                description: \\"Optional.\\"
+            },
+            requiredMyEnumWithoutUnspecifieds: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(_$MyEnumWithoutUnspecified_nexus.MyEnumWithoutUnspecified))),
+                description: \\"Required.\\"
+            },
+            optionalMyEnumWithoutUnspecifieds: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(_$MyEnumWithoutUnspecified_nexus.MyEnumWithoutUnspecified))),
+                description: \\"Optional.\\"
+            }
+        }
     }
 });
 "
@@ -3552,6 +4130,42 @@ export const MessageWithEnumsInput = Object.assign(nexus.inputObjectType({
         output.setRequiredMyEnumWithoutUnspecifiedsList(input.requiredMyEnumWithoutUnspecifieds.map(v => v));
         output.setOptionalMyEnumWithoutUnspecifiedsList(input.optionalMyEnumWithoutUnspecifieds.map(v => v));
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            requiredMyEnum: {
+                type: nexus.nonNull(\\"MyEnum\\"),
+                description: \\"Required.\\"
+            },
+            optionalMyEnum: {
+                type: nexus.nullable(\\"MyEnum\\"),
+                description: \\"Optional.\\"
+            },
+            requiredMyEnumWithoutUnspecified: {
+                type: nexus.nonNull(\\"MyEnumWithoutUnspecified\\"),
+                description: \\"Required.\\"
+            },
+            optionalMyEnumWithoutUnspecified: {
+                type: nexus.nullable(\\"MyEnumWithoutUnspecified\\"),
+                description: \\"Optional.\\"
+            },
+            requiredMyEnums: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnum\\"))),
+                description: \\"Required.\\"
+            },
+            optionalMyEnums: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnum\\"))),
+                description: \\"Optional.\\"
+            },
+            requiredMyEnumWithoutUnspecifieds: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\"))),
+                description: \\"Required.\\"
+            },
+            optionalMyEnumWithoutUnspecifieds: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\"))),
+                description: \\"Optional.\\"
+            }
+        }
     }
 });
 export const MyEnum = nexus.enumType({
@@ -3752,6 +4366,42 @@ export const MessageWithEnumsInput = Object.assign(nexus.inputObjectType({
         output.requiredMyEnumWithoutUnspecifieds = input.requiredMyEnumWithoutUnspecifieds.map(v => v);
         output.optionalMyEnumWithoutUnspecifieds = input.optionalMyEnumWithoutUnspecifieds.map(v => v);
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            requiredMyEnum: {
+                type: nexus.nonNull(\\"MyEnum\\"),
+                description: \\"Required.\\"
+            },
+            optionalMyEnum: {
+                type: nexus.nullable(\\"MyEnum\\"),
+                description: \\"Optional.\\"
+            },
+            requiredMyEnumWithoutUnspecified: {
+                type: nexus.nonNull(\\"MyEnumWithoutUnspecified\\"),
+                description: \\"Required.\\"
+            },
+            optionalMyEnumWithoutUnspecified: {
+                type: nexus.nullable(\\"MyEnumWithoutUnspecified\\"),
+                description: \\"Optional.\\"
+            },
+            requiredMyEnums: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnum\\"))),
+                description: \\"Required.\\"
+            },
+            optionalMyEnums: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnum\\"))),
+                description: \\"Optional.\\"
+            },
+            requiredMyEnumWithoutUnspecifieds: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\"))),
+                description: \\"Required.\\"
+            },
+            optionalMyEnumWithoutUnspecifieds: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\"))),
+                description: \\"Optional.\\"
+            }
+        }
     }
 });
 export const MyEnum = nexus.enumType({
@@ -3838,6 +4488,13 @@ export const OneofMemberMessage1Input = Object.assign(nexus.inputObjectType({
         const output = new _$testapis$oneof.testapis.oneof.OneofMemberMessage1();
         output.body = input.body;
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 "
@@ -3889,6 +4546,13 @@ export const OneofMemberMessage2Input = Object.assign(nexus.inputObjectType({
         const output = new _$testapis$oneof.testapis.oneof.OneofMemberMessage2();
         output.imageUrl = input.imageUrl;
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            imageUrl: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 "
@@ -3993,6 +4657,25 @@ export const OneofParentInput = Object.assign(nexus.inputObjectType({
             output.optoinalMessage2 = _$OneofMemberMessage2Input_nexus.OneofMemberMessage2Input.toProto(input.optoinalMessage2);
         }
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            normalField: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            requiredMessage1: {
+                type: nexus.nullable(_$OneofMemberMessage1Input_nexus.OneofMemberMessage1Input)
+            },
+            requiredMessage2: {
+                type: nexus.nullable(_$OneofMemberMessage2Input_nexus.OneofMemberMessage2Input)
+            },
+            optoinalMessage1: {
+                type: nexus.nullable(_$OneofMemberMessage1Input_nexus.OneofMemberMessage1Input)
+            },
+            optoinalMessage2: {
+                type: nexus.nullable(_$OneofMemberMessage2Input_nexus.OneofMemberMessage2Input)
+            }
+        }
     }
 });
 "
@@ -4163,6 +4846,25 @@ export const OneofParentInput = Object.assign(nexus.inputObjectType({
             output.setOptoinalMessage2(OneofMemberMessage2Input.toProto(input.optoinalMessage2));
         }
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            normalField: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            requiredMessage1: {
+                type: nexus.nullable(\\"OneofMemberMessage1Input\\")
+            },
+            requiredMessage2: {
+                type: nexus.nullable(\\"OneofMemberMessage2Input\\")
+            },
+            optoinalMessage1: {
+                type: nexus.nullable(\\"OneofMemberMessage1Input\\")
+            },
+            optoinalMessage2: {
+                type: nexus.nullable(\\"OneofMemberMessage2Input\\")
+            }
+        }
     }
 });
 export const OneofMemberMessage1Input = Object.assign(nexus.inputObjectType({
@@ -4177,6 +4879,13 @@ export const OneofMemberMessage1Input = Object.assign(nexus.inputObjectType({
         const output = new _$testapis$oneof$oneof_pb.OneofMemberMessage1();
         output.setBody(input.body);
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 export const OneofMemberMessage2Input = Object.assign(nexus.inputObjectType({
@@ -4191,6 +4900,13 @@ export const OneofMemberMessage2Input = Object.assign(nexus.inputObjectType({
         const output = new _$testapis$oneof$oneof_pb.OneofMemberMessage2();
         output.setImageUrl(input.imageUrl);
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            imageUrl: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 export const OneofParentRequiredOneofMembers = nexus.unionType({
@@ -4336,6 +5052,25 @@ export const OneofParentInput = Object.assign(nexus.inputObjectType({
             output.optoinalMessage2 = OneofMemberMessage2Input.toProto(input.optoinalMessage2);
         }
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            normalField: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            requiredMessage1: {
+                type: nexus.nullable(\\"OneofMemberMessage1Input\\")
+            },
+            requiredMessage2: {
+                type: nexus.nullable(\\"OneofMemberMessage2Input\\")
+            },
+            optoinalMessage1: {
+                type: nexus.nullable(\\"OneofMemberMessage1Input\\")
+            },
+            optoinalMessage2: {
+                type: nexus.nullable(\\"OneofMemberMessage2Input\\")
+            }
+        }
     }
 });
 export const OneofMemberMessage1Input = Object.assign(nexus.inputObjectType({
@@ -4350,6 +5085,13 @@ export const OneofMemberMessage1Input = Object.assign(nexus.inputObjectType({
         const output = new _$testapis$oneof.testapis.oneof.OneofMemberMessage1();
         output.body = input.body;
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            body: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 export const OneofMemberMessage2Input = Object.assign(nexus.inputObjectType({
@@ -4364,6 +5106,13 @@ export const OneofMemberMessage2Input = Object.assign(nexus.inputObjectType({
         const output = new _$testapis$oneof.testapis.oneof.OneofMemberMessage2();
         output.imageUrl = input.imageUrl;
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            imageUrl: {
+                type: nexus.nonNull(\\"String\\")
+            }
+        }
     }
 });
 export const OneofParentRequiredOneofMembers = nexus.unionType({
@@ -4476,6 +5225,26 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
         output.requiredPrimitivesList = input.requiredPrimitivesList.map(v => _$PrimitivesInput_nexus.PrimitivesInput.toProto(v));
         output.optionalPrimitivesList = input.optionalPrimitivesList.map(v => _$PrimitivesInput_nexus.PrimitivesInput.toProto(v));
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            requiredPrimitives: {
+                type: nexus.nonNull(_$PrimitivesInput_nexus.PrimitivesInput),
+                description: \\"Required.\\"
+            },
+            optionalPrimitives: {
+                type: nexus.nullable(_$PrimitivesInput_nexus.PrimitivesInput),
+                description: \\"Optional.\\"
+            },
+            requiredPrimitivesList: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(_$PrimitivesInput_nexus.PrimitivesInput))),
+                description: \\"Required.\\"
+            },
+            optionalPrimitivesList: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(_$PrimitivesInput_nexus.PrimitivesInput))),
+                description: \\"Optional.\\"
+            }
+        }
     }
 });
 "
@@ -4873,6 +5642,94 @@ export const PrimitivesInput = Object.assign(nexus.inputObjectType({
         output.requiredBoolValues = input.requiredBoolValues.map(v => v);
         output.requiredStringValues = input.requiredStringValues.map(v => v);
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            requiredDoubleValue: {
+                type: nexus.nonNull(\\"Float\\")
+            },
+            requiredFloatValue: {
+                type: nexus.nonNull(\\"Float\\")
+            },
+            requiredInt32Value: {
+                type: nexus.nonNull(\\"Int\\")
+            },
+            requiredInt64Value: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            requiredUint32Value: {
+                type: nexus.nonNull(\\"Int\\")
+            },
+            requiredUint64Value: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            requiredSint32Value: {
+                type: nexus.nonNull(\\"Int\\")
+            },
+            requiredSint64Value: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            requiredFixed32Value: {
+                type: nexus.nonNull(\\"Int\\")
+            },
+            requiredFixed64Value: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            requiredSfixed32Value: {
+                type: nexus.nonNull(\\"Int\\")
+            },
+            requiredSfixed64Value: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            requiredBoolValue: {
+                type: nexus.nonNull(\\"Boolean\\")
+            },
+            requiredStringValue: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            requiredDoubleValues: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
+            },
+            requiredFloatValues: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
+            },
+            requiredInt32Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            },
+            requiredInt64Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            },
+            requiredUint32Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            },
+            requiredUint64Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            },
+            requiredSint32Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            },
+            requiredSint64Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            },
+            requiredFixed32Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            },
+            requiredFixed64Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            },
+            requiredSfixed32Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            },
+            requiredSfixed64Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            },
+            requiredBoolValues: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Boolean\\")))
+            },
+            requiredStringValues: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            }
+        }
     }
 });
 "
@@ -5178,6 +6035,26 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
         output.setRequiredPrimitivesListList(input.requiredPrimitivesList.map(v => PrimitivesInput.toProto(v)));
         output.setOptionalPrimitivesListList(input.optionalPrimitivesList.map(v => PrimitivesInput.toProto(v)));
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            requiredPrimitives: {
+                type: nexus.nonNull(\\"PrimitivesInput\\"),
+                description: \\"Required.\\"
+            },
+            optionalPrimitives: {
+                type: nexus.nullable(\\"PrimitivesInput\\"),
+                description: \\"Optional.\\"
+            },
+            requiredPrimitivesList: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"PrimitivesInput\\"))),
+                description: \\"Required.\\"
+            },
+            optionalPrimitivesList: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"PrimitivesInput\\"))),
+                description: \\"Optional.\\"
+            }
+        }
     }
 });
 export const PrimitivesInput = Object.assign(nexus.inputObjectType({
@@ -5300,6 +6177,94 @@ export const PrimitivesInput = Object.assign(nexus.inputObjectType({
         output.setRequiredBoolValuesList(input.requiredBoolValues.map(v => v));
         output.setRequiredStringValuesList(input.requiredStringValues.map(v => v));
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            requiredDoubleValue: {
+                type: nexus.nonNull(\\"Float\\")
+            },
+            requiredFloatValue: {
+                type: nexus.nonNull(\\"Float\\")
+            },
+            requiredInt32Value: {
+                type: nexus.nonNull(\\"Int\\")
+            },
+            requiredInt64Value: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            requiredUint32Value: {
+                type: nexus.nonNull(\\"Int\\")
+            },
+            requiredUint64Value: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            requiredSint32Value: {
+                type: nexus.nonNull(\\"Int\\")
+            },
+            requiredSint64Value: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            requiredFixed32Value: {
+                type: nexus.nonNull(\\"Int\\")
+            },
+            requiredFixed64Value: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            requiredSfixed32Value: {
+                type: nexus.nonNull(\\"Int\\")
+            },
+            requiredSfixed64Value: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            requiredBoolValue: {
+                type: nexus.nonNull(\\"Boolean\\")
+            },
+            requiredStringValue: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            requiredDoubleValues: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
+            },
+            requiredFloatValues: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
+            },
+            requiredInt32Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            },
+            requiredInt64Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            },
+            requiredUint32Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            },
+            requiredUint64Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            },
+            requiredSint32Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            },
+            requiredSint64Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            },
+            requiredFixed32Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            },
+            requiredFixed64Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            },
+            requiredSfixed32Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            },
+            requiredSfixed64Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            },
+            requiredBoolValues: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Boolean\\")))
+            },
+            requiredStringValues: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            }
+        }
     }
 });
 "
@@ -5647,6 +6612,26 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
         output.requiredPrimitivesList = input.requiredPrimitivesList.map(v => PrimitivesInput.toProto(v));
         output.optionalPrimitivesList = input.optionalPrimitivesList.map(v => PrimitivesInput.toProto(v));
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            requiredPrimitives: {
+                type: nexus.nonNull(\\"PrimitivesInput\\"),
+                description: \\"Required.\\"
+            },
+            optionalPrimitives: {
+                type: nexus.nullable(\\"PrimitivesInput\\"),
+                description: \\"Optional.\\"
+            },
+            requiredPrimitivesList: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"PrimitivesInput\\"))),
+                description: \\"Required.\\"
+            },
+            optionalPrimitivesList: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"PrimitivesInput\\"))),
+                description: \\"Optional.\\"
+            }
+        }
     }
 });
 export const PrimitivesInput = Object.assign(nexus.inputObjectType({
@@ -5769,6 +6754,94 @@ export const PrimitivesInput = Object.assign(nexus.inputObjectType({
         output.requiredBoolValues = input.requiredBoolValues.map(v => v);
         output.requiredStringValues = input.requiredStringValues.map(v => v);
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            requiredDoubleValue: {
+                type: nexus.nonNull(\\"Float\\")
+            },
+            requiredFloatValue: {
+                type: nexus.nonNull(\\"Float\\")
+            },
+            requiredInt32Value: {
+                type: nexus.nonNull(\\"Int\\")
+            },
+            requiredInt64Value: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            requiredUint32Value: {
+                type: nexus.nonNull(\\"Int\\")
+            },
+            requiredUint64Value: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            requiredSint32Value: {
+                type: nexus.nonNull(\\"Int\\")
+            },
+            requiredSint64Value: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            requiredFixed32Value: {
+                type: nexus.nonNull(\\"Int\\")
+            },
+            requiredFixed64Value: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            requiredSfixed32Value: {
+                type: nexus.nonNull(\\"Int\\")
+            },
+            requiredSfixed64Value: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            requiredBoolValue: {
+                type: nexus.nonNull(\\"Boolean\\")
+            },
+            requiredStringValue: {
+                type: nexus.nonNull(\\"String\\")
+            },
+            requiredDoubleValues: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
+            },
+            requiredFloatValues: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
+            },
+            requiredInt32Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            },
+            requiredInt64Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            },
+            requiredUint32Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            },
+            requiredUint64Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            },
+            requiredSint32Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            },
+            requiredSint64Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            },
+            requiredFixed32Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            },
+            requiredFixed64Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            },
+            requiredSfixed32Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            },
+            requiredSfixed64Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            },
+            requiredBoolValues: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Boolean\\")))
+            },
+            requiredStringValues: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            }
+        }
     }
 });
 "
@@ -6060,6 +7133,64 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
         output.setBoolValuesList(input.boolValues.map(v => $$proto_nexus$google_protobuf.wrapBoolValue(v)));
         output.setStringValuesList(input.stringValues.map(v => $$proto_nexus$google_protobuf.wrapStringValue(v)));
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            timestamp: {
+                type: nexus.nullable(\\"DateTime\\")
+            },
+            int32Value: {
+                type: nexus.nullable(\\"Int\\")
+            },
+            int64Value: {
+                type: nexus.nullable(\\"String\\")
+            },
+            uint32Value: {
+                type: nexus.nullable(\\"Int\\")
+            },
+            uint64Value: {
+                type: nexus.nullable(\\"String\\")
+            },
+            floatValue: {
+                type: nexus.nullable(\\"Float\\")
+            },
+            doubleValue: {
+                type: nexus.nullable(\\"Float\\")
+            },
+            boolValue: {
+                type: nexus.nullable(\\"Boolean\\")
+            },
+            stringValue: {
+                type: nexus.nullable(\\"String\\")
+            },
+            timestamps: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"DateTime\\")))
+            },
+            int32Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            },
+            int64Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            },
+            uint32Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            },
+            uint64Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            },
+            floatValues: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
+            },
+            doubleValues: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
+            },
+            boolValues: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Boolean\\")))
+            },
+            stringValues: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            }
+        }
     }
 });
 "
@@ -6351,6 +7482,64 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
         output.boolValues = input.boolValues.map(v => new _$testapis$wktypes.google.protobuf.BoolValue($$proto_nexus$protobufjs.wrapBoolValue(v)));
         output.stringValues = input.stringValues.map(v => new _$testapis$wktypes.google.protobuf.StringValue($$proto_nexus$protobufjs.wrapStringValue(v)));
         return output;
+    },
+    _protoNexus: {
+        fields: {
+            timestamp: {
+                type: nexus.nullable(\\"DateTime\\")
+            },
+            int32Value: {
+                type: nexus.nullable(\\"Int\\")
+            },
+            int64Value: {
+                type: nexus.nullable(\\"String\\")
+            },
+            uint32Value: {
+                type: nexus.nullable(\\"Int\\")
+            },
+            uint64Value: {
+                type: nexus.nullable(\\"String\\")
+            },
+            floatValue: {
+                type: nexus.nullable(\\"Float\\")
+            },
+            doubleValue: {
+                type: nexus.nullable(\\"Float\\")
+            },
+            boolValue: {
+                type: nexus.nullable(\\"Boolean\\")
+            },
+            stringValue: {
+                type: nexus.nullable(\\"String\\")
+            },
+            timestamps: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"DateTime\\")))
+            },
+            int32Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            },
+            int64Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            },
+            uint32Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            },
+            uint64Values: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            },
+            floatValues: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
+            },
+            doubleValues: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
+            },
+            boolValues: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Boolean\\")))
+            },
+            stringValues: {
+                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            }
+        }
     }
 });
 "
