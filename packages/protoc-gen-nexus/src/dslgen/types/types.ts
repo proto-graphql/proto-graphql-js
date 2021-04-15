@@ -275,6 +275,9 @@ export class ObjectField<
     if (this.type instanceof EnumType && this.type.unspecifiedValue != null) {
       modules.push(this.type.protoImportPath);
     }
+    if (this.type instanceof SquashedOneofUnionType && !this.opts.useProtobufjs) {
+      modules.push(this.type.protoImportPath);
+    }
     if (this.typeImportPath) {
       modules.push(this.typeImportPath);
     }
@@ -531,6 +534,10 @@ export class OneofUnionType extends TypeBase<ProtoOneof> {
     return this.proto.name;
   }
 
+  get protoImportPath(): string {
+    return protoImportPath(this.proto.parent, this.options);
+  }
+
   // FIXME: remove
   get parentProtoTypeFullName(): FullName {
     return createProtoFullName(this.proto.parent, this.options);
@@ -557,6 +564,10 @@ export class SquashedOneofUnionType extends TypeBase<ProtoMessage> {
 
   get fields(): ObjectField<ObjectType>[] {
     return this.oneofUnionType.fields;
+  }
+
+  get protoImportPath(): string {
+    return this.oneofUnionType.protoImportPath;
   }
 
   // FIXME: remove

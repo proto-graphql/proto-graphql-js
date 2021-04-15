@@ -69,23 +69,31 @@ export function testSchemaGeneration(
     });
 
     it("can make GraphQL schema from generated DSLs", async () => {
-      await withGeneratedSchema(files, [opts.extraSchema].filter(Boolean), async (dir) => {
-        try {
-          await validateGeneratedFiles(dir);
-          const gqlSchema = await fs.readFile(join(dir, "schema.graphql"), "utf-8");
-          expect(gqlSchema).toMatchSnapshot("schema.graphql");
-        } catch (e) {
-          // eslint-disable-next-line no-console
-          console.error(e);
-          throw e;
+      await withGeneratedSchema(
+        files,
+        [opts.extraSchema].filter((v): v is string => v != null),
+        async (dir) => {
+          try {
+            await validateGeneratedFiles(dir);
+            const gqlSchema = await fs.readFile(join(dir, "schema.graphql"), "utf-8");
+            expect(gqlSchema).toMatchSnapshot("schema.graphql");
+          } catch (e) {
+            // eslint-disable-next-line no-console
+            console.error(e);
+            throw e;
+          }
         }
-      });
+      );
     });
 
     if (opts.schemaTests && opts.schemaTests.length > 0) {
       it.each(opts.schemaTests)("%s", async (_name, { extraSchema, testQuery }) => {
         try {
-          const resp = await execQuery(files, [opts.extraSchema, extraSchema].filter(Boolean), testQuery);
+          const resp = await execQuery(
+            files,
+            [opts.extraSchema, extraSchema].filter((v): v is string => v != null),
+            testQuery
+          );
           expect(JSON.parse(resp)).toMatchSnapshot();
         } catch (e) {
           // eslint-disable-next-line no-console
