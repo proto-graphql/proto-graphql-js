@@ -21,7 +21,7 @@
     "graphql": "^15.4.0",
     "graphql-scalars": "^1.6.1",
     "jest": "^27.0.4",
-    "lerna": "^3.22.1",
+    "lerna": "^4.0.0",
     "nexus": "1.0.0",
     "protobufjs": "^6.10.2",
     "rimraf": "^3.0.2",
