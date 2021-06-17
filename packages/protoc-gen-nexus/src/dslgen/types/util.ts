@@ -1,6 +1,9 @@
-import path from "path";
 import { pascalCase } from "change-case";
+import { ExtensionFieldInfo } from "google-protobuf";
+import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
+import path from "path";
 import {
+  CommentSet,
   ProtoEnum,
   ProtoEnumValue,
   ProtoField,
@@ -10,8 +13,6 @@ import {
   ProtoRegistry,
 } from "../../protogen";
 import * as extensions from "../../__generated__/extensions/graphql/schema_pb";
-import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
-import { ExtensionFieldInfo } from "google-protobuf";
 
 export const fileLayouts = ["proto_file", "graphql_type"] as const;
 export type GenerationParams = {
@@ -231,4 +232,8 @@ function extractBehaviorComments(field: ProtoField | ProtoOneof): typeof behavio
     .slice(0, 2)
     .map((c) => c.replace(/\.\s*$/, ""))
     .filter((c): c is typeof behaviorComments[number] => behaviorComments.includes(c as any));
+}
+
+export function descriptionFromProto(proto: { comments: CommentSet }): string | null {
+  return proto.comments.leadingComments.trim() || null;
 }
