@@ -9,12 +9,7 @@ import { ScalarType } from "./ScalarType";
 import { FullName, GenerationParams, modulesWithUniqueImportAlias, uniqueImportAlias } from "./util";
 
 export class InputObjectField<T extends ScalarType | EnumType | InputObjectType> extends FieldBase<ProtoField> {
-  constructor(
-    readonly type: T,
-    readonly parent: InputObjectType,
-    readonly proto: ProtoField,
-    readonly opts: GenerationParams
-  ) {
+  constructor(readonly type: T, readonly parent: InputObjectType, proto: ProtoField, opts: GenerationParams) {
     super(proto, opts);
   }
 

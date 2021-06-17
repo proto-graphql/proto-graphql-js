@@ -33,7 +33,7 @@ export class SquashedOneofUnionType extends TypeBase<ProtoMessage> {
   /**
    * @override
    */
-  get importModules(): { alias: string; module: string }[] {
+  override get importModules(): { alias: string; module: string }[] {
     return [...super.importModules, ...this.fields.flatMap((f) => f.importModules)];
   }
 }
