@@ -10,6 +10,7 @@
     {
       "matchPaths": ["package.json"],
       "enabled": true,
+      "labels": ["dependencies"],
       "rangeStrategy": "auto",
       "postUpdateOptions": ["yarnDedupeHighest"]
     }
