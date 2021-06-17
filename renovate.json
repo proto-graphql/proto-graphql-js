@@ -1,5 +1,17 @@
 {
   "extends": [
     "config:base"
+  ],
+  "packageRules": [
+    {
+      "matchPaths": ["**"],
+      "enabled": false
+    },
+    {
+      "matchPaths": ["package.json"],
+      "enabled": true,
+      "rangeStrategy": "auto",
+      "postUpdateOptions": ["yarnDedupeHighest"]
+    }
   ]
 }
