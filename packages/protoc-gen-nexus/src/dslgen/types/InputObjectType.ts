@@ -10,7 +10,7 @@ export class InputObjectType extends TypeBase<ProtoMessage> {
   /**
    * @override
    */
-  get typeName(): string {
+  override get typeName(): string {
     return gqlTypeName(this.proto, { input: true });
   }
 
@@ -30,7 +30,7 @@ export class InputObjectType extends TypeBase<ProtoMessage> {
   /**
    * @override
    */
-  get importModules(): { alias: string; module: string }[] {
+  override get importModules(): { alias: string; module: string }[] {
     return [...super.importModules, ...this.fields.flatMap((f) => f.importModules)];
   }
 }

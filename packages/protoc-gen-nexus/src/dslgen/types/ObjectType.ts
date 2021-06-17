@@ -18,14 +18,14 @@ export class ObjectType extends TypeBase<ProtoMessage> {
   /**
    * @override
    */
-  get exportTypes(): { name: string; type: FullName }[] {
+  override get exportTypes(): { name: string; type: FullName }[] {
     return [...super.exportTypes, { name: this.sourceTypeExportAlias, type: this.protoTypeFullName }];
   }
 
   /**
    * @override
    */
-  get importModules(): { alias: string; module: string }[] {
+  override get importModules(): { alias: string; module: string }[] {
     return [
       ...super.importModules,
       ...modulesWithUniqueImportAlias([this.protoImportPath]),
