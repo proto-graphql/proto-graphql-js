@@ -10,7 +10,7 @@ type Message {
   optionalPrimitives: Primitives
 
   \\"\\"\\"Optional.\\"\\"\\"
-  optionalPrimitivesList: [Primitives!]!
+  optionalPrimitivesList: [Primitives!]
 
   \\"\\"\\"Required.\\"\\"\\"
   requiredPrimitives: Primitives!
@@ -24,7 +24,7 @@ input MessageInput {
   optionalPrimitives: PrimitivesInput
 
   \\"\\"\\"Optional.\\"\\"\\"
-  optionalPrimitivesList: [PrimitivesInput!]!
+  optionalPrimitivesList: [PrimitivesInput!]
 
   \\"\\"\\"Required.\\"\\"\\"
   requiredPrimitives: PrimitivesInput!
@@ -139,7 +139,7 @@ type Message {
   optionalPrimitives: Primitives
 
   \\"\\"\\"Optional.\\"\\"\\"
-  optionalPrimitivesList: [Primitives!]!
+  optionalPrimitivesList: [Primitives!]
 
   \\"\\"\\"Required.\\"\\"\\"
   requiredPrimitives: Primitives!
@@ -153,7 +153,7 @@ input MessageInput {
   optionalPrimitives: PrimitivesInput
 
   \\"\\"\\"Optional.\\"\\"\\"
-  optionalPrimitivesList: [PrimitivesInput!]!
+  optionalPrimitivesList: [PrimitivesInput!]
 
   \\"\\"\\"Required.\\"\\"\\"
   requiredPrimitives: PrimitivesInput!

@@ -86,10 +86,8 @@ export function createFieldOptionExpr(
   if (field.isList()) {
     typeExpr = createNexusCallExpr("nonNull", [typeExpr]);
     typeExpr = createNexusCallExpr("list", [typeExpr]);
-    typeExpr = createNexusCallExpr("nonNull", [typeExpr]);
-  } else {
-    typeExpr = createNexusCallExpr(field.isNullable() ? "nullable" : "nonNull", [typeExpr]);
   }
+  typeExpr = createNexusCallExpr(field.isNullable() ? "nullable" : "nonNull", [typeExpr]);
 
   return ts.factory.createObjectLiteralExpression(
     [
