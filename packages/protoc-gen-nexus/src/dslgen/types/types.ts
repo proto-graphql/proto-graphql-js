@@ -54,7 +54,7 @@ function buildInputObjectTypes(msgs: ProtoMessage[], file: DslFile, registry: Pr
     .filter((m) => !isIgnoredType(m))
     .filter(exceptRequestOrResponse(registry))
     .map((m) => new InputObjectType(m, file))
-    .flatMap((t) => (file.options.partialInputs && t.fields.length > 0 ? [t, t.toPartialInput()] : t));
+    .flatMap((t) => (file.options.partialInputs ? [t, t.toPartialInput()] : t));
 }
 
 function buildInterfaceType(msgs: ProtoMessage[], file: DslFile, registry: ProtoRegistry): InterfaceType[] {
