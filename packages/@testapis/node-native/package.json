@@ -1,6 +1,6 @@
 {
   "name": "@testapis/node-native",
-  "version": "0.5.0-alpha.12",
+  "version": "0.5.0-alpha.13",
   "description": "Generated codes with protocolbuffers/protobuf's js_out",
   "private": true,
   "dependencies": {
