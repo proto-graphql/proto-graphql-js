@@ -12,44 +12,44 @@ scalar DateTime
 
 type Message {
   boolValue: Boolean
-  boolValues: [Boolean!]!
+  boolValues: [Boolean!]
   doubleValue: Float
-  doubleValues: [Float!]!
+  doubleValues: [Float!]
   floatValue: Float
-  floatValues: [Float!]!
+  floatValues: [Float!]
   int32Value: Int
-  int32Values: [Int!]!
+  int32Values: [Int!]
   int64Value: String
-  int64Values: [String!]!
+  int64Values: [String!]
   stringValue: String
-  stringValues: [String!]!
+  stringValues: [String!]
   timestamp: DateTime
-  timestamps: [DateTime!]!
+  timestamps: [DateTime!]
   uint32Value: Int
-  uint32Values: [Int!]!
+  uint32Values: [Int!]
   uint64Value: String
-  uint64Values: [String!]!
+  uint64Values: [String!]
 }
 
 input MessageInput {
   boolValue: Boolean
-  boolValues: [Boolean!]!
+  boolValues: [Boolean!]
   doubleValue: Float
-  doubleValues: [Float!]!
+  doubleValues: [Float!]
   floatValue: Float
-  floatValues: [Float!]!
+  floatValues: [Float!]
   int32Value: Int
-  int32Values: [Int!]!
+  int32Values: [Int!]
   int64Value: String
-  int64Values: [String!]!
+  int64Values: [String!]
   stringValue: String
-  stringValues: [String!]!
+  stringValues: [String!]
   timestamp: DateTime
-  timestamps: [DateTime!]!
+  timestamps: [DateTime!]
   uint32Value: Int
-  uint32Values: [Int!]!
+  uint32Values: [Int!]
   uint64Value: String
-  uint64Values: [String!]!
+  uint64Values: [String!]
 }
 
 type Query {
@@ -70,44 +70,44 @@ scalar DateTime
 
 type Message {
   boolValue: Boolean
-  boolValues: [Boolean!]!
+  boolValues: [Boolean!]
   doubleValue: Float
-  doubleValues: [Float!]!
+  doubleValues: [Float!]
   floatValue: Float
-  floatValues: [Float!]!
+  floatValues: [Float!]
   int32Value: Int
-  int32Values: [Int!]!
+  int32Values: [Int!]
   int64Value: String
-  int64Values: [String!]!
+  int64Values: [String!]
   stringValue: String
-  stringValues: [String!]!
+  stringValues: [String!]
   timestamp: DateTime
-  timestamps: [DateTime!]!
+  timestamps: [DateTime!]
   uint32Value: Int
-  uint32Values: [Int!]!
+  uint32Values: [Int!]
   uint64Value: String
-  uint64Values: [String!]!
+  uint64Values: [String!]
 }
 
 input MessageInput {
   boolValue: Boolean
-  boolValues: [Boolean!]!
+  boolValues: [Boolean!]
   doubleValue: Float
-  doubleValues: [Float!]!
+  doubleValues: [Float!]
   floatValue: Float
-  floatValues: [Float!]!
+  floatValues: [Float!]
   int32Value: Int
-  int32Values: [Int!]!
+  int32Values: [Int!]
   int64Value: String
-  int64Values: [String!]!
+  int64Values: [String!]
   stringValue: String
-  stringValues: [String!]!
+  stringValues: [String!]
   timestamp: DateTime
-  timestamps: [DateTime!]!
+  timestamps: [DateTime!]
   uint32Value: Int
-  uint32Values: [Int!]!
+  uint32Values: [Int!]
   uint64Value: String
-  uint64Values: [String!]!
+  uint64Values: [String!]
 }
 
 type Query {

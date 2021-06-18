@@ -2228,7 +2228,7 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
             }
         });
         t.field(\\"squashedMessages\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(_$TestPrefixPrefixedMessageSquashedMessage_nexus.TestPrefixPrefixedMessageSquashedMessage))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(_$TestPrefixPrefixedMessageSquashedMessage_nexus.TestPrefixPrefixedMessageSquashedMessage))),
             resolve(root) {
                 const value = root.squashedMessages;
                 return value.map(item => {
@@ -2455,7 +2455,7 @@ export const TestPrefixPrefixedMessageInput = Object.assign(nexus.inputObjectTyp
             type: nexus.nonNull(\\"String\\")
         });
         t.field(\\"squashedMessages\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(_$TestPrefixPrefixedMessageSquashedMessageInput_nexus.TestPrefixPrefixedMessageSquashedMessageInput)))
+            type: nexus.nullable(nexus.list(nexus.nonNull(_$TestPrefixPrefixedMessageSquashedMessageInput_nexus.TestPrefixPrefixedMessageSquashedMessageInput)))
         });
         t.field(\\"renamedMessage\\", {
             type: nexus.nullable(_$TestPrefixRenamedMessageInput_nexus.TestPrefixRenamedMessageInput)
@@ -2479,7 +2479,9 @@ export const TestPrefixPrefixedMessageInput = Object.assign(nexus.inputObjectTyp
             output.oneofNotIgnoredField = _$TestPrefixPrefixedMessageInnerMessageInput_nexus.TestPrefixPrefixedMessageInnerMessageInput.toProto(input.oneofNotIgnoredField);
         }
         output.skipResolver = input.skipResolver;
-        output.squashedMessages = input.squashedMessages.map(v => _$TestPrefixPrefixedMessageSquashedMessageInput_nexus.TestPrefixPrefixedMessageSquashedMessageInput.toProto(v));
+        if (input.squashedMessages != null) {
+            output.squashedMessages = input.squashedMessages.map(v => _$TestPrefixPrefixedMessageSquashedMessageInput_nexus.TestPrefixPrefixedMessageSquashedMessageInput.toProto(v));
+        }
         if (input.renamedMessage != null) {
             output.renamedMessage = _$TestPrefixRenamedMessageInput_nexus.TestPrefixRenamedMessageInput.toProto(input.renamedMessage);
         }
@@ -2509,7 +2511,7 @@ export const TestPrefixPrefixedMessageInput = Object.assign(nexus.inputObjectTyp
                 type: nexus.nonNull(\\"String\\")
             },
             squashedMessages: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(_$TestPrefixPrefixedMessageSquashedMessageInput_nexus.TestPrefixPrefixedMessageSquashedMessageInput)))
+                type: nexus.nullable(nexus.list(nexus.nonNull(_$TestPrefixPrefixedMessageSquashedMessageInput_nexus.TestPrefixPrefixedMessageSquashedMessageInput)))
             },
             renamedMessage: {
                 type: nexus.nullable(_$TestPrefixRenamedMessageInput_nexus.TestPrefixRenamedMessageInput)
@@ -2744,7 +2746,7 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
             }
         });
         t.field(\\"squashedMessages\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"TestPrefixPrefixedMessageSquashedMessage\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"TestPrefixPrefixedMessageSquashedMessage\\"))),
             resolve(root) {
                 const value = root.getSquashedMessagesList();
                 return value.map(item => {
@@ -2900,7 +2902,7 @@ export const TestPrefixPrefixedMessageInput = Object.assign(nexus.inputObjectTyp
             type: nexus.nonNull(\\"String\\")
         });
         t.field(\\"squashedMessages\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"TestPrefixPrefixedMessageSquashedMessageInput\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"TestPrefixPrefixedMessageSquashedMessageInput\\")))
         });
         t.field(\\"renamedMessage\\", {
             type: nexus.nullable(\\"TestPrefixRenamedMessageInput\\")
@@ -2924,7 +2926,9 @@ export const TestPrefixPrefixedMessageInput = Object.assign(nexus.inputObjectTyp
             output.setOneofNotIgnoredField(TestPrefixPrefixedMessageInnerMessageInput.toProto(input.oneofNotIgnoredField));
         }
         output.setSkipResolver(input.skipResolver);
-        output.setSquashedMessagesList(input.squashedMessages.map(v => TestPrefixPrefixedMessageSquashedMessageInput.toProto(v)));
+        if (input.squashedMessages != null) {
+            output.setSquashedMessagesList(input.squashedMessages.map(v => TestPrefixPrefixedMessageSquashedMessageInput.toProto(v)));
+        }
         if (input.renamedMessage != null) {
             output.setRenamedMessage(TestPrefixRenamedMessageInput.toProto(input.renamedMessage));
         }
@@ -2954,7 +2958,7 @@ export const TestPrefixPrefixedMessageInput = Object.assign(nexus.inputObjectTyp
                 type: nexus.nonNull(\\"String\\")
             },
             squashedMessages: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"TestPrefixPrefixedMessageSquashedMessageInput\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"TestPrefixPrefixedMessageSquashedMessageInput\\")))
             },
             renamedMessage: {
                 type: nexus.nullable(\\"TestPrefixRenamedMessageInput\\")
@@ -3269,7 +3273,7 @@ export const TestPrefixPrefixedMessage = nexus.objectType({
             }
         });
         t.field(\\"squashedMessages\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"TestPrefixPrefixedMessageSquashedMessage\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"TestPrefixPrefixedMessageSquashedMessage\\"))),
             resolve(root) {
                 const value = root.squashedMessages;
                 return value.map(item => {
@@ -3429,7 +3433,7 @@ export const TestPrefixPrefixedMessageInput = Object.assign(nexus.inputObjectTyp
             type: nexus.nonNull(\\"String\\")
         });
         t.field(\\"squashedMessages\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"TestPrefixPrefixedMessageSquashedMessageInput\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"TestPrefixPrefixedMessageSquashedMessageInput\\")))
         });
         t.field(\\"renamedMessage\\", {
             type: nexus.nullable(\\"TestPrefixRenamedMessageInput\\")
@@ -3453,7 +3457,9 @@ export const TestPrefixPrefixedMessageInput = Object.assign(nexus.inputObjectTyp
             output.oneofNotIgnoredField = TestPrefixPrefixedMessageInnerMessageInput.toProto(input.oneofNotIgnoredField);
         }
         output.skipResolver = input.skipResolver;
-        output.squashedMessages = input.squashedMessages.map(v => TestPrefixPrefixedMessageSquashedMessageInput.toProto(v));
+        if (input.squashedMessages != null) {
+            output.squashedMessages = input.squashedMessages.map(v => TestPrefixPrefixedMessageSquashedMessageInput.toProto(v));
+        }
         if (input.renamedMessage != null) {
             output.renamedMessage = TestPrefixRenamedMessageInput.toProto(input.renamedMessage);
         }
@@ -3483,7 +3489,7 @@ export const TestPrefixPrefixedMessageInput = Object.assign(nexus.inputObjectTyp
                 type: nexus.nonNull(\\"String\\")
             },
             squashedMessages: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"TestPrefixPrefixedMessageSquashedMessageInput\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"TestPrefixPrefixedMessageSquashedMessageInput\\")))
             },
             renamedMessage: {
                 type: nexus.nullable(\\"TestPrefixRenamedMessageInput\\")
@@ -3782,7 +3788,7 @@ export const MessageWithEnums = nexus.objectType({
             }
         });
         t.field(\\"optionalMyEnums\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(_$MyEnum_nexus.MyEnum))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(_$MyEnum_nexus.MyEnum))),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.optionalMyEnums;
@@ -3803,7 +3809,7 @@ export const MessageWithEnums = nexus.objectType({
             }
         });
         t.field(\\"optionalMyEnumWithoutUnspecifieds\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(_$MyEnumWithoutUnspecified_nexus.MyEnumWithoutUnspecified))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(_$MyEnumWithoutUnspecified_nexus.MyEnumWithoutUnspecified))),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.optionalMyEnumWithoutUnspecifieds;
@@ -3850,7 +3856,7 @@ export const MessageWithEnumsInput = Object.assign(nexus.inputObjectType({
             description: \\"Required.\\"
         });
         t.field(\\"optionalMyEnums\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(_$MyEnum_nexus.MyEnum))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(_$MyEnum_nexus.MyEnum))),
             description: \\"Optional.\\"
         });
         t.field(\\"requiredMyEnumWithoutUnspecifieds\\", {
@@ -3858,7 +3864,7 @@ export const MessageWithEnumsInput = Object.assign(nexus.inputObjectType({
             description: \\"Required.\\"
         });
         t.field(\\"optionalMyEnumWithoutUnspecifieds\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(_$MyEnumWithoutUnspecified_nexus.MyEnumWithoutUnspecified))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(_$MyEnumWithoutUnspecified_nexus.MyEnumWithoutUnspecified))),
             description: \\"Optional.\\"
         });
     }
@@ -3874,9 +3880,13 @@ export const MessageWithEnumsInput = Object.assign(nexus.inputObjectType({
             output.optionalMyEnumWithoutUnspecified = input.optionalMyEnumWithoutUnspecified;
         }
         output.requiredMyEnums = input.requiredMyEnums.map(v => v);
-        output.optionalMyEnums = input.optionalMyEnums.map(v => v);
+        if (input.optionalMyEnums != null) {
+            output.optionalMyEnums = input.optionalMyEnums.map(v => v);
+        }
         output.requiredMyEnumWithoutUnspecifieds = input.requiredMyEnumWithoutUnspecifieds.map(v => v);
-        output.optionalMyEnumWithoutUnspecifieds = input.optionalMyEnumWithoutUnspecifieds.map(v => v);
+        if (input.optionalMyEnumWithoutUnspecifieds != null) {
+            output.optionalMyEnumWithoutUnspecifieds = input.optionalMyEnumWithoutUnspecifieds.map(v => v);
+        }
         return output;
     },
     _protoNexus: {
@@ -3902,7 +3912,7 @@ export const MessageWithEnumsInput = Object.assign(nexus.inputObjectType({
                 description: \\"Required.\\"
             },
             optionalMyEnums: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(_$MyEnum_nexus.MyEnum))),
+                type: nexus.nullable(nexus.list(nexus.nonNull(_$MyEnum_nexus.MyEnum))),
                 description: \\"Optional.\\"
             },
             requiredMyEnumWithoutUnspecifieds: {
@@ -3910,7 +3920,7 @@ export const MessageWithEnumsInput = Object.assign(nexus.inputObjectType({
                 description: \\"Required.\\"
             },
             optionalMyEnumWithoutUnspecifieds: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(_$MyEnumWithoutUnspecified_nexus.MyEnumWithoutUnspecified))),
+                type: nexus.nullable(nexus.list(nexus.nonNull(_$MyEnumWithoutUnspecified_nexus.MyEnumWithoutUnspecified))),
                 description: \\"Optional.\\"
             }
         }
@@ -4044,7 +4054,7 @@ export const MessageWithEnums = nexus.objectType({
             }
         });
         t.field(\\"optionalMyEnums\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnum\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"MyEnum\\"))),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.getOptionalMyEnumsList();
@@ -4065,7 +4075,7 @@ export const MessageWithEnums = nexus.objectType({
             }
         });
         t.field(\\"optionalMyEnumWithoutUnspecifieds\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\"))),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.getOptionalMyEnumWithoutUnspecifiedsList();
@@ -4102,7 +4112,7 @@ export const MessageWithEnumsInput = Object.assign(nexus.inputObjectType({
             description: \\"Required.\\"
         });
         t.field(\\"optionalMyEnums\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnum\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"MyEnum\\"))),
             description: \\"Optional.\\"
         });
         t.field(\\"requiredMyEnumWithoutUnspecifieds\\", {
@@ -4110,7 +4120,7 @@ export const MessageWithEnumsInput = Object.assign(nexus.inputObjectType({
             description: \\"Required.\\"
         });
         t.field(\\"optionalMyEnumWithoutUnspecifieds\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\"))),
             description: \\"Optional.\\"
         });
     }
@@ -4126,9 +4136,13 @@ export const MessageWithEnumsInput = Object.assign(nexus.inputObjectType({
             output.setOptionalMyEnumWithoutUnspecified(input.optionalMyEnumWithoutUnspecified);
         }
         output.setRequiredMyEnumsList(input.requiredMyEnums.map(v => v));
-        output.setOptionalMyEnumsList(input.optionalMyEnums.map(v => v));
+        if (input.optionalMyEnums != null) {
+            output.setOptionalMyEnumsList(input.optionalMyEnums.map(v => v));
+        }
         output.setRequiredMyEnumWithoutUnspecifiedsList(input.requiredMyEnumWithoutUnspecifieds.map(v => v));
-        output.setOptionalMyEnumWithoutUnspecifiedsList(input.optionalMyEnumWithoutUnspecifieds.map(v => v));
+        if (input.optionalMyEnumWithoutUnspecifieds != null) {
+            output.setOptionalMyEnumWithoutUnspecifiedsList(input.optionalMyEnumWithoutUnspecifieds.map(v => v));
+        }
         return output;
     },
     _protoNexus: {
@@ -4154,7 +4168,7 @@ export const MessageWithEnumsInput = Object.assign(nexus.inputObjectType({
                 description: \\"Required.\\"
             },
             optionalMyEnums: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnum\\"))),
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"MyEnum\\"))),
                 description: \\"Optional.\\"
             },
             requiredMyEnumWithoutUnspecifieds: {
@@ -4162,7 +4176,7 @@ export const MessageWithEnumsInput = Object.assign(nexus.inputObjectType({
                 description: \\"Required.\\"
             },
             optionalMyEnumWithoutUnspecifieds: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\"))),
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\"))),
                 description: \\"Optional.\\"
             }
         }
@@ -4280,7 +4294,7 @@ export const MessageWithEnums = nexus.objectType({
             }
         });
         t.field(\\"optionalMyEnums\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnum\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"MyEnum\\"))),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.optionalMyEnums;
@@ -4301,7 +4315,7 @@ export const MessageWithEnums = nexus.objectType({
             }
         });
         t.field(\\"optionalMyEnumWithoutUnspecifieds\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\"))),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.optionalMyEnumWithoutUnspecifieds;
@@ -4338,7 +4352,7 @@ export const MessageWithEnumsInput = Object.assign(nexus.inputObjectType({
             description: \\"Required.\\"
         });
         t.field(\\"optionalMyEnums\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnum\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"MyEnum\\"))),
             description: \\"Optional.\\"
         });
         t.field(\\"requiredMyEnumWithoutUnspecifieds\\", {
@@ -4346,7 +4360,7 @@ export const MessageWithEnumsInput = Object.assign(nexus.inputObjectType({
             description: \\"Required.\\"
         });
         t.field(\\"optionalMyEnumWithoutUnspecifieds\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\"))),
             description: \\"Optional.\\"
         });
     }
@@ -4362,9 +4376,13 @@ export const MessageWithEnumsInput = Object.assign(nexus.inputObjectType({
             output.optionalMyEnumWithoutUnspecified = input.optionalMyEnumWithoutUnspecified;
         }
         output.requiredMyEnums = input.requiredMyEnums.map(v => v);
-        output.optionalMyEnums = input.optionalMyEnums.map(v => v);
+        if (input.optionalMyEnums != null) {
+            output.optionalMyEnums = input.optionalMyEnums.map(v => v);
+        }
         output.requiredMyEnumWithoutUnspecifieds = input.requiredMyEnumWithoutUnspecifieds.map(v => v);
-        output.optionalMyEnumWithoutUnspecifieds = input.optionalMyEnumWithoutUnspecifieds.map(v => v);
+        if (input.optionalMyEnumWithoutUnspecifieds != null) {
+            output.optionalMyEnumWithoutUnspecifieds = input.optionalMyEnumWithoutUnspecifieds.map(v => v);
+        }
         return output;
     },
     _protoNexus: {
@@ -4390,7 +4408,7 @@ export const MessageWithEnumsInput = Object.assign(nexus.inputObjectType({
                 description: \\"Required.\\"
             },
             optionalMyEnums: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnum\\"))),
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"MyEnum\\"))),
                 description: \\"Optional.\\"
             },
             requiredMyEnumWithoutUnspecifieds: {
@@ -4398,7 +4416,7 @@ export const MessageWithEnumsInput = Object.assign(nexus.inputObjectType({
                 description: \\"Required.\\"
             },
             optionalMyEnumWithoutUnspecifieds: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\"))),
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"MyEnumWithoutUnspecified\\"))),
                 description: \\"Optional.\\"
             }
         }
@@ -5173,7 +5191,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"optionalPrimitivesList\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(_$Primitives_nexus.Primitives))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(_$Primitives_nexus.Primitives))),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.optionalPrimitivesList;
@@ -5211,7 +5229,7 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
             description: \\"Required.\\"
         });
         t.field(\\"optionalPrimitivesList\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(_$PrimitivesInput_nexus.PrimitivesInput))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(_$PrimitivesInput_nexus.PrimitivesInput))),
             description: \\"Optional.\\"
         });
     }
@@ -5223,7 +5241,9 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
             output.optionalPrimitives = _$PrimitivesInput_nexus.PrimitivesInput.toProto(input.optionalPrimitives);
         }
         output.requiredPrimitivesList = input.requiredPrimitivesList.map(v => _$PrimitivesInput_nexus.PrimitivesInput.toProto(v));
-        output.optionalPrimitivesList = input.optionalPrimitivesList.map(v => _$PrimitivesInput_nexus.PrimitivesInput.toProto(v));
+        if (input.optionalPrimitivesList != null) {
+            output.optionalPrimitivesList = input.optionalPrimitivesList.map(v => _$PrimitivesInput_nexus.PrimitivesInput.toProto(v));
+        }
         return output;
     },
     _protoNexus: {
@@ -5241,7 +5261,7 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
                 description: \\"Required.\\"
             },
             optionalPrimitivesList: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(_$PrimitivesInput_nexus.PrimitivesInput))),
+                type: nexus.nullable(nexus.list(nexus.nonNull(_$PrimitivesInput_nexus.PrimitivesInput))),
                 description: \\"Optional.\\"
             }
         }
@@ -5777,7 +5797,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"optionalPrimitivesList\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Primitives\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Primitives\\"))),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.optionalPrimitivesList;
@@ -6063,7 +6083,7 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
             description: \\"Required.\\"
         });
         t.field(\\"optionalPrimitivesList\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"PrimitivesInput\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"PrimitivesInput\\"))),
             description: \\"Optional.\\"
         });
     }
@@ -6075,7 +6095,9 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
             output.optionalPrimitives = PrimitivesInput.toProto(input.optionalPrimitives);
         }
         output.requiredPrimitivesList = input.requiredPrimitivesList.map(v => PrimitivesInput.toProto(v));
-        output.optionalPrimitivesList = input.optionalPrimitivesList.map(v => PrimitivesInput.toProto(v));
+        if (input.optionalPrimitivesList != null) {
+            output.optionalPrimitivesList = input.optionalPrimitivesList.map(v => PrimitivesInput.toProto(v));
+        }
         return output;
     },
     _protoNexus: {
@@ -6093,7 +6115,7 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
                 description: \\"Required.\\"
             },
             optionalPrimitivesList: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"PrimitivesInput\\"))),
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"PrimitivesInput\\"))),
                 description: \\"Optional.\\"
             }
         }
@@ -6111,11 +6133,11 @@ export const MessagePartialInput = Object.assign(nexus.inputObjectType({
             description: \\"Optional.\\"
         });
         t.field(\\"requiredPrimitivesList\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"PrimitivesPartialInput\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"PrimitivesPartialInput\\"))),
             description: \\"Required.\\"
         });
         t.field(\\"optionalPrimitivesList\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"PrimitivesPartialInput\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"PrimitivesPartialInput\\"))),
             description: \\"Optional.\\"
         });
     }
@@ -6128,8 +6150,12 @@ export const MessagePartialInput = Object.assign(nexus.inputObjectType({
         if (input.optionalPrimitives != null) {
             output.optionalPrimitives = PrimitivesPartialInput.toProto(input.optionalPrimitives);
         }
-        output.requiredPrimitivesList = input.requiredPrimitivesList.map(v => PrimitivesPartialInput.toProto(v));
-        output.optionalPrimitivesList = input.optionalPrimitivesList.map(v => PrimitivesPartialInput.toProto(v));
+        if (input.requiredPrimitivesList != null) {
+            output.requiredPrimitivesList = input.requiredPrimitivesList.map(v => PrimitivesPartialInput.toProto(v));
+        }
+        if (input.optionalPrimitivesList != null) {
+            output.optionalPrimitivesList = input.optionalPrimitivesList.map(v => PrimitivesPartialInput.toProto(v));
+        }
         return output;
     },
     _protoNexus: {
@@ -6143,11 +6169,11 @@ export const MessagePartialInput = Object.assign(nexus.inputObjectType({
                 description: \\"Optional.\\"
             },
             requiredPrimitivesList: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"PrimitivesPartialInput\\"))),
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"PrimitivesPartialInput\\"))),
                 description: \\"Required.\\"
             },
             optionalPrimitivesList: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"PrimitivesPartialInput\\"))),
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"PrimitivesPartialInput\\"))),
                 description: \\"Optional.\\"
             }
         }
@@ -6409,46 +6435,46 @@ export const PrimitivesPartialInput = Object.assign(nexus.inputObjectType({
             type: nexus.nullable(\\"String\\")
         });
         t.field(\\"requiredDoubleValues\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Float\\")))
         });
         t.field(\\"requiredFloatValues\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Float\\")))
         });
         t.field(\\"requiredInt32Values\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"requiredInt64Values\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"requiredUint32Values\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"requiredUint64Values\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"requiredSint32Values\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"requiredSint64Values\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"requiredFixed32Values\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"requiredFixed64Values\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"requiredSfixed32Values\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"requiredSfixed64Values\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"requiredBoolValues\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Boolean\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Boolean\\")))
         });
         t.field(\\"requiredStringValues\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\")))
         });
     }
 }), {
@@ -6496,20 +6522,48 @@ export const PrimitivesPartialInput = Object.assign(nexus.inputObjectType({
         if (input.requiredStringValue != null) {
             output.requiredStringValue = input.requiredStringValue;
         }
-        output.requiredDoubleValues = input.requiredDoubleValues.map(v => v);
-        output.requiredFloatValues = input.requiredFloatValues.map(v => v);
-        output.requiredInt32Values = input.requiredInt32Values.map(v => v);
-        output.requiredInt64Values = input.requiredInt64Values.map(v => parseInt(v));
-        output.requiredUint32Values = input.requiredUint32Values.map(v => v);
-        output.requiredUint64Values = input.requiredUint64Values.map(v => parseInt(v));
-        output.requiredSint32Values = input.requiredSint32Values.map(v => v);
-        output.requiredSint64Values = input.requiredSint64Values.map(v => parseInt(v));
-        output.requiredFixed32Values = input.requiredFixed32Values.map(v => v);
-        output.requiredFixed64Values = input.requiredFixed64Values.map(v => parseInt(v));
-        output.requiredSfixed32Values = input.requiredSfixed32Values.map(v => v);
-        output.requiredSfixed64Values = input.requiredSfixed64Values.map(v => parseInt(v));
-        output.requiredBoolValues = input.requiredBoolValues.map(v => v);
-        output.requiredStringValues = input.requiredStringValues.map(v => v);
+        if (input.requiredDoubleValues != null) {
+            output.requiredDoubleValues = input.requiredDoubleValues.map(v => v);
+        }
+        if (input.requiredFloatValues != null) {
+            output.requiredFloatValues = input.requiredFloatValues.map(v => v);
+        }
+        if (input.requiredInt32Values != null) {
+            output.requiredInt32Values = input.requiredInt32Values.map(v => v);
+        }
+        if (input.requiredInt64Values != null) {
+            output.requiredInt64Values = input.requiredInt64Values.map(v => parseInt(v));
+        }
+        if (input.requiredUint32Values != null) {
+            output.requiredUint32Values = input.requiredUint32Values.map(v => v);
+        }
+        if (input.requiredUint64Values != null) {
+            output.requiredUint64Values = input.requiredUint64Values.map(v => parseInt(v));
+        }
+        if (input.requiredSint32Values != null) {
+            output.requiredSint32Values = input.requiredSint32Values.map(v => v);
+        }
+        if (input.requiredSint64Values != null) {
+            output.requiredSint64Values = input.requiredSint64Values.map(v => parseInt(v));
+        }
+        if (input.requiredFixed32Values != null) {
+            output.requiredFixed32Values = input.requiredFixed32Values.map(v => v);
+        }
+        if (input.requiredFixed64Values != null) {
+            output.requiredFixed64Values = input.requiredFixed64Values.map(v => parseInt(v));
+        }
+        if (input.requiredSfixed32Values != null) {
+            output.requiredSfixed32Values = input.requiredSfixed32Values.map(v => v);
+        }
+        if (input.requiredSfixed64Values != null) {
+            output.requiredSfixed64Values = input.requiredSfixed64Values.map(v => parseInt(v));
+        }
+        if (input.requiredBoolValues != null) {
+            output.requiredBoolValues = input.requiredBoolValues.map(v => v);
+        }
+        if (input.requiredStringValues != null) {
+            output.requiredStringValues = input.requiredStringValues.map(v => v);
+        }
         return output;
     },
     _protoNexus: {
@@ -6557,46 +6611,46 @@ export const PrimitivesPartialInput = Object.assign(nexus.inputObjectType({
                 type: nexus.nullable(\\"String\\")
             },
             requiredDoubleValues: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"Float\\")))
             },
             requiredFloatValues: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"Float\\")))
             },
             requiredInt32Values: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"Int\\")))
             },
             requiredInt64Values: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\")))
             },
             requiredUint32Values: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"Int\\")))
             },
             requiredUint64Values: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\")))
             },
             requiredSint32Values: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"Int\\")))
             },
             requiredSint64Values: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\")))
             },
             requiredFixed32Values: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"Int\\")))
             },
             requiredFixed64Values: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\")))
             },
             requiredSfixed32Values: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"Int\\")))
             },
             requiredSfixed64Values: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\")))
             },
             requiredBoolValues: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Boolean\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"Boolean\\")))
             },
             requiredStringValues: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\")))
             }
         }
     }
@@ -6646,7 +6700,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"optionalPrimitivesList\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Primitives\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Primitives\\"))),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.getOptionalPrimitivesListList();
@@ -6890,7 +6944,7 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
             description: \\"Required.\\"
         });
         t.field(\\"optionalPrimitivesList\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"PrimitivesInput\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"PrimitivesInput\\"))),
             description: \\"Optional.\\"
         });
     }
@@ -6902,7 +6956,9 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
             output.setOptionalPrimitives(PrimitivesInput.toProto(input.optionalPrimitives));
         }
         output.setRequiredPrimitivesListList(input.requiredPrimitivesList.map(v => PrimitivesInput.toProto(v)));
-        output.setOptionalPrimitivesListList(input.optionalPrimitivesList.map(v => PrimitivesInput.toProto(v)));
+        if (input.optionalPrimitivesList != null) {
+            output.setOptionalPrimitivesListList(input.optionalPrimitivesList.map(v => PrimitivesInput.toProto(v)));
+        }
         return output;
     },
     _protoNexus: {
@@ -6920,7 +6976,7 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
                 description: \\"Required.\\"
             },
             optionalPrimitivesList: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"PrimitivesInput\\"))),
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"PrimitivesInput\\"))),
                 description: \\"Optional.\\"
             }
         }
@@ -7181,7 +7237,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"optionalPrimitivesList\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Primitives\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Primitives\\"))),
             description: \\"Optional.\\",
             resolve(root) {
                 const value = root.optionalPrimitivesList;
@@ -7467,7 +7523,7 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
             description: \\"Required.\\"
         });
         t.field(\\"optionalPrimitivesList\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"PrimitivesInput\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"PrimitivesInput\\"))),
             description: \\"Optional.\\"
         });
     }
@@ -7479,7 +7535,9 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
             output.optionalPrimitives = PrimitivesInput.toProto(input.optionalPrimitives);
         }
         output.requiredPrimitivesList = input.requiredPrimitivesList.map(v => PrimitivesInput.toProto(v));
-        output.optionalPrimitivesList = input.optionalPrimitivesList.map(v => PrimitivesInput.toProto(v));
+        if (input.optionalPrimitivesList != null) {
+            output.optionalPrimitivesList = input.optionalPrimitivesList.map(v => PrimitivesInput.toProto(v));
+        }
         return output;
     },
     _protoNexus: {
@@ -7497,7 +7555,7 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
                 description: \\"Required.\\"
             },
             optionalPrimitivesList: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"PrimitivesInput\\"))),
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"PrimitivesInput\\"))),
                 description: \\"Optional.\\"
             }
         }
@@ -7818,7 +7876,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"timestamps\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"DateTime\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"DateTime\\"))),
             resolve(root) {
                 const value = root.getTimestampsList();
                 return value.map(item => {
@@ -7827,7 +7885,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"int32Values\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Int\\"))),
             resolve(root) {
                 const value = root.getInt32ValuesList();
                 return value.map(item => {
@@ -7836,7 +7894,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"int64Values\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.getInt64ValuesList();
                 return value.map(item => {
@@ -7845,7 +7903,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"uint32Values\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Int\\"))),
             resolve(root) {
                 const value = root.getUint32ValuesList();
                 return value.map(item => {
@@ -7854,7 +7912,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"uint64Values\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.getUint64ValuesList();
                 return value.map(item => {
@@ -7863,7 +7921,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"floatValues\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Float\\"))),
             resolve(root) {
                 const value = root.getFloatValuesList();
                 return value.map(item => {
@@ -7872,7 +7930,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"doubleValues\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Float\\"))),
             resolve(root) {
                 const value = root.getDoubleValuesList();
                 return value.map(item => {
@@ -7881,7 +7939,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"boolValues\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Boolean\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Boolean\\"))),
             resolve(root) {
                 const value = root.getBoolValuesList();
                 return value.map(item => {
@@ -7890,7 +7948,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"stringValues\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.getStringValuesList();
                 return value.map(item => {
@@ -7935,31 +7993,31 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
             type: nexus.nullable(\\"String\\")
         });
         t.field(\\"timestamps\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"DateTime\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"DateTime\\")))
         });
         t.field(\\"int32Values\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"int64Values\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"uint32Values\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"uint64Values\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"floatValues\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Float\\")))
         });
         t.field(\\"doubleValues\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Float\\")))
         });
         t.field(\\"boolValues\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Boolean\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Boolean\\")))
         });
         t.field(\\"stringValues\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\")))
         });
     }
 }), {
@@ -7992,15 +8050,33 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
         if (input.stringValue != null) {
             output.setStringValue($$proto_nexus$google_protobuf.wrapStringValue(input.stringValue));
         }
-        output.setTimestampsList(input.timestamps.map(v => $$proto_nexus$google_protobuf.timestampFromDate(v)));
-        output.setInt32ValuesList(input.int32Values.map(v => $$proto_nexus$google_protobuf.wrapInt32Value(v)));
-        output.setInt64ValuesList(input.int64Values.map(v => $$proto_nexus$google_protobuf.wrapInt64Value(parseInt(v))));
-        output.setUint32ValuesList(input.uint32Values.map(v => $$proto_nexus$google_protobuf.wrapUInt32Value(v)));
-        output.setUint64ValuesList(input.uint64Values.map(v => $$proto_nexus$google_protobuf.wrapUInt64Value(parseInt(v))));
-        output.setFloatValuesList(input.floatValues.map(v => $$proto_nexus$google_protobuf.wrapFloatValue(v)));
-        output.setDoubleValuesList(input.doubleValues.map(v => $$proto_nexus$google_protobuf.wrapDoubleValue(v)));
-        output.setBoolValuesList(input.boolValues.map(v => $$proto_nexus$google_protobuf.wrapBoolValue(v)));
-        output.setStringValuesList(input.stringValues.map(v => $$proto_nexus$google_protobuf.wrapStringValue(v)));
+        if (input.timestamps != null) {
+            output.setTimestampsList(input.timestamps.map(v => $$proto_nexus$google_protobuf.timestampFromDate(v)));
+        }
+        if (input.int32Values != null) {
+            output.setInt32ValuesList(input.int32Values.map(v => $$proto_nexus$google_protobuf.wrapInt32Value(v)));
+        }
+        if (input.int64Values != null) {
+            output.setInt64ValuesList(input.int64Values.map(v => $$proto_nexus$google_protobuf.wrapInt64Value(parseInt(v))));
+        }
+        if (input.uint32Values != null) {
+            output.setUint32ValuesList(input.uint32Values.map(v => $$proto_nexus$google_protobuf.wrapUInt32Value(v)));
+        }
+        if (input.uint64Values != null) {
+            output.setUint64ValuesList(input.uint64Values.map(v => $$proto_nexus$google_protobuf.wrapUInt64Value(parseInt(v))));
+        }
+        if (input.floatValues != null) {
+            output.setFloatValuesList(input.floatValues.map(v => $$proto_nexus$google_protobuf.wrapFloatValue(v)));
+        }
+        if (input.doubleValues != null) {
+            output.setDoubleValuesList(input.doubleValues.map(v => $$proto_nexus$google_protobuf.wrapDoubleValue(v)));
+        }
+        if (input.boolValues != null) {
+            output.setBoolValuesList(input.boolValues.map(v => $$proto_nexus$google_protobuf.wrapBoolValue(v)));
+        }
+        if (input.stringValues != null) {
+            output.setStringValuesList(input.stringValues.map(v => $$proto_nexus$google_protobuf.wrapStringValue(v)));
+        }
         return output;
     },
     _protoNexus: {
@@ -8033,31 +8109,31 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
                 type: nexus.nullable(\\"String\\")
             },
             timestamps: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"DateTime\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"DateTime\\")))
             },
             int32Values: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"Int\\")))
             },
             int64Values: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\")))
             },
             uint32Values: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"Int\\")))
             },
             uint64Values: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\")))
             },
             floatValues: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"Float\\")))
             },
             doubleValues: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"Float\\")))
             },
             boolValues: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Boolean\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"Boolean\\")))
             },
             stringValues: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\")))
             }
         }
     }
@@ -8167,7 +8243,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"timestamps\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"DateTime\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"DateTime\\"))),
             resolve(root) {
                 const value = root.timestamps;
                 return value.map(item => {
@@ -8176,7 +8252,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"int32Values\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Int\\"))),
             resolve(root) {
                 const value = root.int32Values;
                 return value.map(item => {
@@ -8185,7 +8261,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"int64Values\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.int64Values;
                 return value.map(item => {
@@ -8194,7 +8270,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"uint32Values\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Int\\"))),
             resolve(root) {
                 const value = root.uint32Values;
                 return value.map(item => {
@@ -8203,7 +8279,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"uint64Values\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.uint64Values;
                 return value.map(item => {
@@ -8212,7 +8288,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"floatValues\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Float\\"))),
             resolve(root) {
                 const value = root.floatValues;
                 return value.map(item => {
@@ -8221,7 +8297,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"doubleValues\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Float\\"))),
             resolve(root) {
                 const value = root.doubleValues;
                 return value.map(item => {
@@ -8230,7 +8306,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"boolValues\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Boolean\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Boolean\\"))),
             resolve(root) {
                 const value = root.boolValues;
                 return value.map(item => {
@@ -8239,7 +8315,7 @@ export const Message = nexus.objectType({
             }
         });
         t.field(\\"stringValues\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\"))),
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\"))),
             resolve(root) {
                 const value = root.stringValues;
                 return value.map(item => {
@@ -8284,31 +8360,31 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
             type: nexus.nullable(\\"String\\")
         });
         t.field(\\"timestamps\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"DateTime\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"DateTime\\")))
         });
         t.field(\\"int32Values\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"int64Values\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"uint32Values\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Int\\")))
         });
         t.field(\\"uint64Values\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\")))
         });
         t.field(\\"floatValues\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Float\\")))
         });
         t.field(\\"doubleValues\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Float\\")))
         });
         t.field(\\"boolValues\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Boolean\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"Boolean\\")))
         });
         t.field(\\"stringValues\\", {
-            type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+            type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\")))
         });
     }
 }), {
@@ -8341,15 +8417,33 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
         if (input.stringValue != null) {
             output.stringValue = new _$testapis$wktypes.google.protobuf.StringValue($$proto_nexus$protobufjs.wrapStringValue(input.stringValue));
         }
-        output.timestamps = input.timestamps.map(v => new _$testapis$wktypes.google.protobuf.Timestamp($$proto_nexus$protobufjs.timestampFromDate(v)));
-        output.int32Values = input.int32Values.map(v => new _$testapis$wktypes.google.protobuf.Int32Value($$proto_nexus$protobufjs.wrapInt32Value(v)));
-        output.int64Values = input.int64Values.map(v => new _$testapis$wktypes.google.protobuf.Int64Value($$proto_nexus$protobufjs.wrapInt64Value(parseInt(v))));
-        output.uint32Values = input.uint32Values.map(v => new _$testapis$wktypes.google.protobuf.UInt32Value($$proto_nexus$protobufjs.wrapUInt32Value(v)));
-        output.uint64Values = input.uint64Values.map(v => new _$testapis$wktypes.google.protobuf.UInt64Value($$proto_nexus$protobufjs.wrapUInt64Value(parseInt(v))));
-        output.floatValues = input.floatValues.map(v => new _$testapis$wktypes.google.protobuf.FloatValue($$proto_nexus$protobufjs.wrapFloatValue(v)));
-        output.doubleValues = input.doubleValues.map(v => new _$testapis$wktypes.google.protobuf.DoubleValue($$proto_nexus$protobufjs.wrapDoubleValue(v)));
-        output.boolValues = input.boolValues.map(v => new _$testapis$wktypes.google.protobuf.BoolValue($$proto_nexus$protobufjs.wrapBoolValue(v)));
-        output.stringValues = input.stringValues.map(v => new _$testapis$wktypes.google.protobuf.StringValue($$proto_nexus$protobufjs.wrapStringValue(v)));
+        if (input.timestamps != null) {
+            output.timestamps = input.timestamps.map(v => new _$testapis$wktypes.google.protobuf.Timestamp($$proto_nexus$protobufjs.timestampFromDate(v)));
+        }
+        if (input.int32Values != null) {
+            output.int32Values = input.int32Values.map(v => new _$testapis$wktypes.google.protobuf.Int32Value($$proto_nexus$protobufjs.wrapInt32Value(v)));
+        }
+        if (input.int64Values != null) {
+            output.int64Values = input.int64Values.map(v => new _$testapis$wktypes.google.protobuf.Int64Value($$proto_nexus$protobufjs.wrapInt64Value(parseInt(v))));
+        }
+        if (input.uint32Values != null) {
+            output.uint32Values = input.uint32Values.map(v => new _$testapis$wktypes.google.protobuf.UInt32Value($$proto_nexus$protobufjs.wrapUInt32Value(v)));
+        }
+        if (input.uint64Values != null) {
+            output.uint64Values = input.uint64Values.map(v => new _$testapis$wktypes.google.protobuf.UInt64Value($$proto_nexus$protobufjs.wrapUInt64Value(parseInt(v))));
+        }
+        if (input.floatValues != null) {
+            output.floatValues = input.floatValues.map(v => new _$testapis$wktypes.google.protobuf.FloatValue($$proto_nexus$protobufjs.wrapFloatValue(v)));
+        }
+        if (input.doubleValues != null) {
+            output.doubleValues = input.doubleValues.map(v => new _$testapis$wktypes.google.protobuf.DoubleValue($$proto_nexus$protobufjs.wrapDoubleValue(v)));
+        }
+        if (input.boolValues != null) {
+            output.boolValues = input.boolValues.map(v => new _$testapis$wktypes.google.protobuf.BoolValue($$proto_nexus$protobufjs.wrapBoolValue(v)));
+        }
+        if (input.stringValues != null) {
+            output.stringValues = input.stringValues.map(v => new _$testapis$wktypes.google.protobuf.StringValue($$proto_nexus$protobufjs.wrapStringValue(v)));
+        }
         return output;
     },
     _protoNexus: {
@@ -8382,31 +8476,31 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
                 type: nexus.nullable(\\"String\\")
             },
             timestamps: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"DateTime\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"DateTime\\")))
             },
             int32Values: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"Int\\")))
             },
             int64Values: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\")))
             },
             uint32Values: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Int\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"Int\\")))
             },
             uint64Values: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\")))
             },
             floatValues: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"Float\\")))
             },
             doubleValues: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Float\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"Float\\")))
             },
             boolValues: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"Boolean\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"Boolean\\")))
             },
             stringValues: {
-                type: nexus.nonNull(nexus.list(nexus.nonNull(\\"String\\")))
+                type: nexus.nullable(nexus.list(nexus.nonNull(\\"String\\")))
             }
         }
     }

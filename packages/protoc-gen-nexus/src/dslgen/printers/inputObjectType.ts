@@ -242,7 +242,7 @@ function createToProtoFuncBodyStmts(type: InputObjectType): ts.Statement[] {
         throw "unreachable";
       }
     }
-    if (!field.isList() && field.isNullable()) {
+    if (field.isNullable()) {
       stmt = ts.factory.createIfStatement(
         ts.factory.createBinaryExpression(
           ts.factory.createPropertyAccessExpression(inputExpr, field.name),
