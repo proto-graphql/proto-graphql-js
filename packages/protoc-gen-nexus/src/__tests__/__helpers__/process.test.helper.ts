@@ -13,7 +13,7 @@ type GenerationTarget = typeof generationTargets[number];
 export async function generateDSLs(
   name: string,
   target: GenerationTarget,
-  opts: { withPrefix?: boolean; perGraphQLType?: boolean } = {}
+  opts: { withPrefix?: boolean; perGraphQLType?: boolean; partialInputs?: boolean } = {}
 ) {
   const params = [];
   switch (target) {
@@ -31,6 +31,9 @@ export async function generateDSLs(
   }
   if (opts.perGraphQLType) {
     params.push("file_layout=graphql_type");
+  }
+  if (opts.partialInputs) {
+    params.push("partial_inputs");
   }
   return await processCodeGeneration(name, params.join(","));
 }

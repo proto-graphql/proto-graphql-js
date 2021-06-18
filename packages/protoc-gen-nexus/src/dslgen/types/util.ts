@@ -18,6 +18,7 @@ export const fileLayouts = ["proto_file", "graphql_type"] as const;
 export type GenerationParams = {
   importPrefix: string | null;
   useProtobufjs: boolean;
+  partialInputs: boolean;
   fileLayout: typeof fileLayouts[number];
 };
 
@@ -77,10 +78,8 @@ export function uniqueImportAlias(path: string) {
     .replace(/-/g, "_");
 }
 
-export function gqlTypeName(typ: ProtoMessage | ProtoOneof | ProtoEnum, opts?: { input?: boolean }): string {
-  const name = nameWithParent(typ);
-  const suffix = typ.kind === "Message" && opts?.input ? "Input" : "";
-  return name + suffix;
+export function gqlTypeName(typ: ProtoMessage | ProtoOneof | ProtoEnum): string {
+  return nameWithParent(typ);
 }
 
 function nameWithParent(typ: ProtoMessage | ProtoOneof | ProtoEnum): string {

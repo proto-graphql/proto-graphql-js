@@ -63,6 +63,11 @@ describe("simple proto file", () => {
       "primitives/PrimitivesInput.nexus.ts",
     ]);
   });
+
+  it("generates nexus DSLs with partial inputs", async () => {
+    const resp = await generateDSLs("primitives", "protobufjs", { partialInputs: true });
+    snapshotGeneratedFiles(resp, ["primitives/primitives_pb_nexus.ts"]);
+  });
 });
 
 describe("well-known protobuf types", () => {
