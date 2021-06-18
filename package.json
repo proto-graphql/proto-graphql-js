@@ -19,7 +19,7 @@
     "frolint": "2.7.1",
     "google-protobuf": "3.14.0",
     "graphql": "15.4.0",
-    "graphql-scalars": "1.6.1",
+    "graphql-scalars": "1.10.0",
     "jest": "27.0.4",
     "lerna": "4.0.0",
     "nexus": "1.0.0",
