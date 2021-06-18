@@ -35,6 +35,7 @@ export const processRequest = (req: CodeGeneratorRequest): CodeGeneratorResponse
 export const parseParams = (input: string | undefined): GenerationParams => {
   const params: GenerationParams = {
     useProtobufjs: false,
+    partialInputs: false,
     importPrefix: null,
     fileLayout: "proto_file",
   };
@@ -63,6 +64,9 @@ export const parseParams = (input: string | undefined): GenerationParams => {
         break;
       case "import_prefix":
         params.importPrefix = toString(k, v);
+        break;
+      case "partial_inputs":
+        params.partialInputs = toBool(k, v);
         break;
       case "file_layout": {
         const s = toString(k, v);

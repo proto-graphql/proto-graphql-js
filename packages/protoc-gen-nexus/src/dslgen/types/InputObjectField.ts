@@ -97,4 +97,17 @@ export class InputObjectField<T extends ScalarType | EnumType | InputObjectType>
     const result = path.relative(path.dirname(from), to).replace(/\.ts$/, "");
     return result.match(/^[\.\/]/) ? result : `./${result}`;
   }
+
+  public toPartialInput(): PartialInputObjectField<T> {
+    if (this.type instanceof InputObjectType) {
+      return new PartialInputObjectField(this.type.toPartialInput() as any, this.parent, this.proto, this.opts);
+    }
+    return new PartialInputObjectField(this.type, this.parent, this.proto, this.opts);
+  }
+}
+
+class PartialInputObjectField<T extends ScalarType | EnumType | InputObjectType> extends InputObjectField<T> {
+  public override isNullable() {
+    return true;
+  }
 }

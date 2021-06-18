@@ -3,15 +3,15 @@ import { EnumType } from "./EnumType";
 import { InputObjectField } from "./InputObjectField";
 import { ScalarType } from "./ScalarType";
 import { TypeBase } from "./TypeBase";
-import { createProtoFullName, FullName, gqlTypeName, isIgnoredField, isOutputOnlyField } from "./util";
 import { getInputObjectFieldType } from "./types";
+import { createProtoFullName, FullName, gqlTypeName, isIgnoredField, isOutputOnlyField } from "./util";
 
 export class InputObjectType extends TypeBase<ProtoMessage> {
   /**
    * @override
    */
   override get typeName(): string {
-    return gqlTypeName(this.proto, { input: true });
+    return `${gqlTypeName(this.proto)}Input`;
   }
 
   get protoTypeFullName(): FullName {
@@ -32,5 +32,19 @@ export class InputObjectType extends TypeBase<ProtoMessage> {
    */
   override get importModules(): { alias: string; module: string }[] {
     return [...super.importModules, ...this.fields.flatMap((f) => f.importModules)];
+  }
+
+  public toPartialInput(): InputObjectType {
+    return new PartialInputObjectType(this.proto, this.file);
+  }
+}
+
+class PartialInputObjectType extends InputObjectType {
+  override get typeName(): string {
+    return `${gqlTypeName(this.proto)}PartialInput`;
+  }
+
+  override get fields() {
+    return super.fields.map((f) => f.toPartialInput());
   }
 }
