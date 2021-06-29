@@ -7,14 +7,12 @@ testSchemaGeneration("extensions", "protobufjs", {
     export const innerImplementsInterface = extendType({
       type: "TestPrefixPrefixedMessageInnerMessage",
       definition(t) {
-        // @ts-expect-error FIXME: \`t\` does not have \`implements\` method
         t.implements("TestPrefixInterfaceMessage");
       },
     });
     export const inner2ImplementsInterface = extendType({
       type: "TestPrefixPrefixedMessageInnerMessage2",
       definition(t) {
-        // @ts-expect-error FIXME: \`t\` does not have \`implements\` method
         t.implements("TestPrefixInterfaceMessage");
       },
     });
