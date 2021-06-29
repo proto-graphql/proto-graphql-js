@@ -1,6 +1,6 @@
 {
   "name": "@testapis/node-native",
-  "version": "0.5.0-alpha.13",
+  "version": "0.5.0-alpha.15",
   "description": "Generated codes with protocolbuffers/protobuf's js_out",
   "private": true,
   "dependencies": {
@@ -8,6 +8,6 @@
     "google-protobuf": "3.14.0"
   },
   "devDependencies": {
-    "@testapis/proto": "^0.5.0-alpha.12"
+    "@testapis/proto": "^0.5.0-alpha.15"
   }
 }
