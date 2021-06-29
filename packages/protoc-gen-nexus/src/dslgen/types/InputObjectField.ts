@@ -98,9 +98,14 @@ export class InputObjectField<T extends ScalarType | EnumType | InputObjectType>
     return result.match(/^[\.\/]/) ? result : `./${result}`;
   }
 
-  public toPartialInput(): PartialInputObjectField<T> {
+  public toPartialInput(): InputObjectField<T> | PartialInputObjectField<T> {
     if (this.type instanceof InputObjectType) {
-      return new PartialInputObjectField(this.type.toPartialInput() as any, this.parent, this.proto, this.opts);
+      return new PartialInputObjectField(
+        (this.type.hasPartialInput() ? this.type.toPartialInput() : this.type) as any,
+        this.parent,
+        this.proto,
+        this.opts
+      );
     }
     return new PartialInputObjectField(this.type, this.parent, this.proto, this.opts);
   }
