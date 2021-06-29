@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package testapis.extensions.no_partial;
+
+import "graphql/schema.proto";
+
+message ParentMessage {
+  // Required.
+  PartialableInputMessage partialable_input_message = 1;
+  // Required.
+  NoPartialInputMessage no_partial_input_message = 2;
+}
+
+message PartialableInputMessage {
+  // Required.
+  uint64 id = 1;
+  // Required.
+  string body = 2;
+}
+
+message NoPartialInputMessage {
+  option (graphql.input_type).no_partial = true;
+  // Required.
+  uint64 id = 1;
+  // Required.
+  string body = 2;
+}
