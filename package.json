@@ -20,7 +20,7 @@
     "google-protobuf": "3.14.0",
     "graphql": "15.4.0",
     "graphql-scalars": "1.10.0",
-    "jest": "27.0.4",
+    "jest": "27.0.6",
     "lerna": "4.0.0",
     "nexus": "1.0.0",
     "protobufjs": "6.10.2",
