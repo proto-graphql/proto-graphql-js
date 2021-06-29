@@ -1,3 +1,4 @@
+import * as extensions from "../../__generated__/extensions/graphql/schema_pb";
 import { ProtoMessage } from "../../protogen";
 import { EnumType } from "./EnumType";
 import { InputObjectField } from "./InputObjectField";
@@ -34,7 +35,15 @@ export class InputObjectType extends TypeBase<ProtoMessage> {
     return [...super.importModules, ...this.fields.flatMap((f) => f.importModules)];
   }
 
+  public hasPartialInput(): boolean {
+    const noPartial = this.proto.descriptor.getOptions()?.getExtension(extensions.inputType)?.getNoPartial() ?? false;
+    return !noPartial;
+  }
+
   public toPartialInput(): InputObjectType {
+    if (!this.hasPartialInput()) {
+      throw new Error(`${this.typeName} does not support partial input`);
+    }
     return new PartialInputObjectType(this.proto, this.file);
   }
 }
