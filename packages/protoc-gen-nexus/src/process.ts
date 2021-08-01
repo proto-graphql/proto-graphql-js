@@ -38,6 +38,17 @@ export const parseParams = (input: string | undefined): GenerationParams => {
     partialInputs: false,
     importPrefix: null,
     fileLayout: "proto_file",
+    typeMappings: {
+      "google.protobuf.Int32Value": "Int",
+      "google.protobuf.Int64Value": "String",
+      "google.protobuf.UInt32Value": "Int",
+      "google.protobuf.UInt64Value": "String",
+      "google.protobuf.FloatValue": "Float",
+      "google.protobuf.DoubleValue": "Float",
+      "google.protobuf.BoolValue": "Boolean",
+      "google.protobuf.StringValue": "String",
+      "google.protobuf.Timestamp": "DateTime",
+    },
   };
 
   if (!input) return params;

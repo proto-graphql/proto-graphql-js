@@ -3,6 +3,7 @@ import {
   createDescriptionPropertyAssignment,
   createDslExportConstStmt,
   createFullNameExpr,
+  createGqlToProto,
   createNexusCallExpr,
   createQualifiedName,
   onlyNonNull,
@@ -266,16 +267,8 @@ function createScalarToProtoExpr(inputExpr: ts.Expression, field: InputObjectFie
     // FIXME: avoid parseInt
     outputExpr = ts.factory.createCallExpression(ts.factory.createIdentifier("parseInt"), undefined, [outputExpr]);
   }
-  if (field.type.wrapFunc) {
-    outputExpr = ts.factory.createCallExpression(ts.factory.createIdentifier(field.type.wrapFunc.name), undefined, [
-      outputExpr,
-    ]);
-    if (!field.type.isPrimitive()) {
-      const fullName = field.typeFullName;
-      if (fullName) {
-        outputExpr = ts.factory.createNewExpression(createFullNameExpr(fullName), undefined, [outputExpr]);
-      }
-    }
+  if (!field.type.isPrimitive()) {
+    outputExpr = ts.factory.createCallExpression(createGqlToProto(field.type), undefined, [outputExpr]);
   }
 
   return outputExpr;

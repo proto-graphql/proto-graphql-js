@@ -86,6 +86,7 @@ When `makeSchema`, `abstractTypeStrategies` must have `isTypeOf: true`.
 
 ```typescript
 import { makeSchema } from "nexus";
+import "@proto-nexus/google-protobuf";  //  should import runtime library
 import * as allTypes from "./schema/types";
 
 export const schema = makeSchema({

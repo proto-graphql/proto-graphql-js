@@ -11,7 +11,9 @@ import {
   SquashedOneofUnionType,
   FullName,
   ObjectOneofField,
+  ScalarType,
 } from "../types";
+import { uniqueImportAlias } from "../types/util";
 
 /**
  * @example
@@ -135,4 +137,23 @@ export function onlyUnique<T, V>(f?: (t: T) => V): (t: T) => boolean {
     set.add(key);
     return true;
   };
+}
+
+export function createProtoToGqlFunc(type: ScalarType): ts.Expression {
+  return ts.factory.createPropertyAccessExpression(createTransformerExpr(type), "protoToGql");
+}
+
+export function createGqlToProto(type: ScalarType): ts.Expression {
+  return ts.factory.createPropertyAccessExpression(createTransformerExpr(type), "gqlToProto");
+}
+
+function createTransformerExpr(type: ScalarType): ts.Expression {
+  return ts.factory.createCallExpression(
+    ts.factory.createPropertyAccessExpression(
+      ts.factory.createIdentifier(uniqueImportAlias("proto-nexus")),
+      "getTransformer"
+    ),
+    undefined,
+    [ts.factory.createStringLiteral(fullNameString(type.protoFullName!))]
+  );
 }

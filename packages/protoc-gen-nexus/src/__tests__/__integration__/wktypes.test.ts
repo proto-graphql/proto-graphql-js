@@ -4,6 +4,7 @@ testSchemaGeneration("wktypes", "protobufjs", {
   extraSchema: `
     import { asNexusMethod } from "nexus";
     import { DateTimeResolver } from "graphql-scalars";
+    import "@proto-nexus/protobufjs";
     export const dateTime = asNexusMethod(DateTimeResolver, "dateTime")
   `,
   schemaTests: [
@@ -95,6 +96,7 @@ testSchemaGeneration("wktypes", "native protobuf", {
   extraSchema: `
     import { asNexusMethod } from "nexus";
     import { DateTimeResolver } from "graphql-scalars";
+    import "@proto-nexus/google-protobuf";
     export const dateTime = asNexusMethod(DateTimeResolver, "dateTime")
   `,
 });

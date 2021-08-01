@@ -1,12 +1,13 @@
 import ts from "typescript";
 import { ObjectField, ScalarType } from "../../types";
+import { createProtoToGqlFunc } from "../util";
 import { createMapExpr } from "./utils";
 
 export function createScalarFieldResolverStmts(
   valueExpr: ts.Expression,
   field: ObjectField<ScalarType>
 ): ts.Statement[] {
-  if (field.isList() && (field.type.shouldToString() || field.type.unwrapFunc)) {
+  if (field.isList() && (field.type.shouldToString() || !field.type.isPrimitive())) {
     return [
       ts.factory.createReturnStatement(
         createMapExpr(valueExpr, (itemExpr) => [
@@ -21,10 +22,8 @@ export function createScalarFieldResolverStmts(
 
 function createValueConversionExpr(valueExpr: ts.Expression, field: ObjectField<ScalarType>): ts.Expression {
   let resolverRet = valueExpr;
-  if (field.type.unwrapFunc !== null) {
-    resolverRet = ts.factory.createCallExpression(ts.factory.createIdentifier(field.type.unwrapFunc.name), undefined, [
-      resolverRet,
-    ]);
+  if (!field.type.isPrimitive()) {
+    resolverRet = ts.factory.createCallExpression(createProtoToGqlFunc(field.type), undefined, [resolverRet]);
   }
   if (field.type.shouldToString()) {
     if (field.type.isPrimitive()) {

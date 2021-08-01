@@ -90,7 +90,7 @@ export class InputObjectField<T extends ScalarType | EnumType | InputObjectType>
   private get typeImportPath(): string | null {
     const type: InputObjectType | EnumType | ScalarType = this.type;
 
-    if (type instanceof ScalarType) return null;
+    if (type instanceof ScalarType) return type.importPath;
     if (this.parent.filename === type.filename) return null;
 
     const [from, to] = [this.parent.filename, type.filename].map((f) => (path.isAbsolute(f) ? `.${path.sep}${f}` : f));
