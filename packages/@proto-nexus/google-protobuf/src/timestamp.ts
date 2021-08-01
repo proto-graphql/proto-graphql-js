@@ -9,13 +9,9 @@ declare global {
 
 registerTransformer("google.protobuf.Timestamp", {
   protoToGql(v) {
-    if (v == null) return null;
-
     return new Date(v.getSeconds() * 1000 + v.getNanos() / 1e6) as any;
   },
   gqlToProto(v) {
-    if (v == null) return null;
-
     const ms = v.getTime();
     return new Timestamp().setSeconds(ms / 1000).setNanos(ms * 1e6) as any;
   },

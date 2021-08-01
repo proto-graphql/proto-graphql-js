@@ -9,8 +9,6 @@ declare global {
 
 registerTransformer("google.protobuf.Timestamp", {
   protoToGql(v) {
-    if (v == null) return null;
-
     let seconds: number;
 
     if (typeof v.seconds === "number" || v.seconds == null) {
@@ -22,8 +20,6 @@ registerTransformer("google.protobuf.Timestamp", {
     return new Date(seconds * 1000 + (v.nanos ?? 0) / 1e6) as any;
   },
   gqlToProto(v) {
-    if (v == null) return null;
-
     const ms = v.getTime();
 
     return {

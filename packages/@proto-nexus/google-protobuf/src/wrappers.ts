@@ -16,88 +16,72 @@ declare global {
 
 registerTransformer("google.protobuf.Int32Value", {
   protoToGql(v) {
-    if (v == null) return null;
     return v.getValue();
   },
   gqlToProto(v) {
-    if (v == null) return null;
     return new wrappersPb.Int32Value().setValue(v);
   },
 });
 
 registerTransformer("google.protobuf.Int64Value", {
   protoToGql(v) {
-    if (v == null) return null;
     return v.getValue().toString();
   },
   gqlToProto(v) {
-    if (v == null) return null;
     return new wrappersPb.Int64Value().setValue(parseInt(v));
   },
 });
 
 registerTransformer("google.protobuf.UInt32Value", {
   protoToGql(v) {
-    if (v == null) return null;
     return v.getValue();
   },
   gqlToProto(v) {
-    if (v == null) return null;
     return new wrappersPb.UInt32Value().setValue(v);
   },
 });
 
 registerTransformer("google.protobuf.UInt64Value", {
   protoToGql(v) {
-    if (v == null) return null;
     return v.getValue().toString();
   },
   gqlToProto(v) {
-    if (v == null) return null;
     return new wrappersPb.UInt64Value().setValue(parseInt(v));
   },
 });
 
 registerTransformer("google.protobuf.FloatValue", {
   protoToGql(v) {
-    if (v == null) return null;
     return v.getValue();
   },
   gqlToProto(v) {
-    if (v == null) return null;
     return new wrappersPb.FloatValue().setValue(v);
   },
 });
 
 registerTransformer("google.protobuf.DoubleValue", {
   protoToGql(v) {
-    if (v == null) return null;
     return v.getValue();
   },
   gqlToProto(v) {
-    if (v == null) return null;
     return new wrappersPb.DoubleValue().setValue(v);
   },
 });
 
 registerTransformer("google.protobuf.BoolValue", {
   protoToGql(v) {
-    if (v == null) return null;
     return v.getValue();
   },
   gqlToProto(v) {
-    if (v == null) return null;
     return new wrappersPb.BoolValue().setValue(v);
   },
 });
 
 registerTransformer("google.protobuf.StringValue", {
   protoToGql(v) {
-    if (v == null) return null;
     return v.getValue();
   },
   gqlToProto(v) {
-    if (v == null) return null;
     return new wrappersPb.StringValue().setValue(v);
   },
 });

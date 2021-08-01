@@ -16,80 +16,80 @@ declare global {
 
 registerTransformer("google.protobuf.Int32Value", {
   protoToGql(v) {
-    return v?.value ?? null;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return v.value!;
   },
   gqlToProto(v) {
-    if (v == null) return null;
     return { value: v };
   },
 });
 
 registerTransformer("google.protobuf.Int64Value", {
   protoToGql(v) {
-    return v?.value?.toString() ?? null;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return v.value!.toString();
   },
   gqlToProto(v) {
-    if (v == null) return null;
     return { value: parseInt(v) };
   },
 });
 
 registerTransformer("google.protobuf.UInt32Value", {
   protoToGql(v) {
-    return v?.value ?? null;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return v.value!;
   },
   gqlToProto(v) {
-    if (v == null) return null;
     return { value: v };
   },
 });
 
 registerTransformer("google.protobuf.UInt64Value", {
   protoToGql(v) {
-    return v?.value?.toString() ?? null;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return v.value!.toString();
   },
   gqlToProto(v) {
-    if (v == null) return null;
     return { value: parseInt(v) };
   },
 });
 
 registerTransformer("google.protobuf.FloatValue", {
   protoToGql(v) {
-    return v?.value ?? null;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return v.value!;
   },
   gqlToProto(v) {
-    if (v == null) return null;
     return { value: v };
   },
 });
 
 registerTransformer("google.protobuf.DoubleValue", {
   protoToGql(v) {
-    return v?.value ?? null;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return v.value!;
   },
   gqlToProto(v) {
-    if (v == null) return null;
     return { value: v };
   },
 });
 
 registerTransformer("google.protobuf.BoolValue", {
   protoToGql(v) {
-    return v?.value ?? null;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return v.value!;
   },
   gqlToProto(v) {
-    if (v == null) return null;
     return { value: v };
   },
 });
 
 registerTransformer("google.protobuf.StringValue", {
   protoToGql(v) {
-    return v?.value ?? null;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return v.value!;
   },
   gqlToProto(v) {
-    if (v == null) return null;
     return { value: v };
   },
 });
