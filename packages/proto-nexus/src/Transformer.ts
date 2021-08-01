@@ -1,11 +1,23 @@
 /* eslint-disable no-undef */
 
-type TransformFunc<In, Out> = (input: In | null | undefined) => Out | null;
+type TransformFunc<In, Out> = (input: In) => Out;
 
 export interface Transformer<ProtoType, GqlType> {
   protoToGql: TransformFunc<ProtoType, GqlType>;
   gqlToProto: TransformFunc<GqlType, ProtoType>;
 }
+
+interface WrappedTransformFunc<In, Out> {
+  (input: In): Out;
+  (input: null | undefined): null;
+}
+
+type TransformerWrapper<T extends Transformer<any, any>> = T extends Transformer<infer ProtoType, infer GqlType>
+  ? {
+      protoToGql: WrappedTransformFunc<ProtoType, GqlType>;
+      gqlToProto: WrappedTransformFunc<GqlType, ProtoType>;
+    }
+  : never;
 
 export const transformers: Record<string, Transformer<any, any>> = {};
 
@@ -27,10 +39,17 @@ export function registerTransformer<ProtoTypeFullName extends keyof ProtoNexusTr
 
 export function getTransformer<ProtoTypeFullName extends keyof ProtoNexusTransformers>(
   protoTypeFullName: ProtoTypeFullName
-): ProtoNexusTransformers[ProtoTypeFullName] {
+): TransformerWrapper<ProtoNexusTransformers[ProtoTypeFullName]> {
   const t = transformers[protoTypeFullName];
   if (t == null) {
     throw new Error(`Transformer for ${protoTypeFullName} is not registered`);
   }
-  return t as any;
+  return {
+    protoToGql(v: any) {
+      return v == null ? null : t.protoToGql(v);
+    },
+    gqlToProto(v: any) {
+      return v == null ? null : t.gqlToProto(v);
+    },
+  } as any;
 }

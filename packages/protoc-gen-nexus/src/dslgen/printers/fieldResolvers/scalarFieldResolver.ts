@@ -11,9 +11,7 @@ export function createScalarFieldResolverStmts(
     return [
       ts.factory.createReturnStatement(
         createMapExpr(valueExpr, (itemExpr) => [
-          ts.factory.createReturnStatement(
-            ts.factory.createNonNullExpression(createValueConversionExpr(itemExpr, field))
-          ),
+          ts.factory.createReturnStatement(createValueConversionExpr(itemExpr, field)),
         ])
       ),
     ];

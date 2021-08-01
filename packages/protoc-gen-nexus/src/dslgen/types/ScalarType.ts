@@ -54,4 +54,16 @@ export class ScalarType {
         return false;
     }
   }
+
+  public hasProtobufjsLong(): boolean {
+    if (!this.proto.type) return false;
+    switch (this.proto.type.fullName.toString()) {
+      case "google.protobuf.Int64Value":
+      case "google.protobuf.UInt64Value":
+      case "google.protobuf.Timestamp":
+        return true;
+      default:
+        return false;
+    }
+  }
 }
