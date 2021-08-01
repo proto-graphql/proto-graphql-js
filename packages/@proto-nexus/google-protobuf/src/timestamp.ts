@@ -1,7 +1,13 @@
 import { Timestamp } from "google-protobuf/google/protobuf/timestamp_pb";
-import { registerTransformer } from "proto-nexus";
+import { registerTransformer, Transformer } from "proto-nexus";
 
-registerTransformer<Timestamp, Date>("google.protobuf.Timestamp", {
+declare global {
+  interface ProtoNexusTransformers {
+    "google.protobuf.Timestamp": Transformer<Timestamp, Date>;
+  }
+}
+
+registerTransformer("google.protobuf.Timestamp", {
   protoToGql(v) {
     if (v == null) return null;
 

@@ -269,6 +269,18 @@ function createScalarToProtoExpr(inputExpr: ts.Expression, field: InputObjectFie
   }
   if (!field.type.isPrimitive()) {
     outputExpr = ts.factory.createCallExpression(createGqlToProto(field.type), undefined, [outputExpr]);
+
+    if (!field.isProtobufjs()) {
+      outputExpr = ts.factory.createNonNullExpression(outputExpr);
+    } else {
+      const fullName = field.typeFullName;
+      if (fullName) {
+        // FIXME: avoid `as any`
+        outputExpr = ts.factory.createNewExpression(createFullNameExpr(fullName), undefined, [
+          ts.factory.createAsExpression(outputExpr, ts.factory.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword)),
+        ]);
+      }
+    }
   }
 
   return outputExpr;

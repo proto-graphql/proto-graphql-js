@@ -1,7 +1,13 @@
-import { registerTransformer } from "proto-nexus";
+import { registerTransformer, Transformer } from "proto-nexus";
 import { common } from "protobufjs";
 
-registerTransformer<common.ITimestamp, Date>("google.protobuf.Timestamp", {
+declare global {
+  interface ProtoNexusTransformers {
+    "google.protobuf.Timestamp": Transformer<common.ITimestamp, Date>;
+  }
+}
+
+registerTransformer("google.protobuf.Timestamp", {
   protoToGql(v) {
     if (v == null) return null;
 

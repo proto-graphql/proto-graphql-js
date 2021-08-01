@@ -1,7 +1,20 @@
-import { registerTransformer } from "proto-nexus";
+import { registerTransformer, Transformer } from "proto-nexus";
 import { common } from "protobufjs";
 
-registerTransformer<common.IInt32Value, number>("google.protobuf.Int32Value", {
+declare global {
+  interface ProtoNexusTransformers {
+    "google.protobuf.Int32Value": Transformer<common.IInt32Value, number>;
+    "google.protobuf.Int64Value": Transformer<common.IInt64Value, string>;
+    "google.protobuf.UInt32Value": Transformer<common.IUInt32Value, number>;
+    "google.protobuf.UInt64Value": Transformer<common.IUInt64Value, string>;
+    "google.protobuf.FloatValue": Transformer<common.IFloatValue, number>;
+    "google.protobuf.DoubleValue": Transformer<common.IDoubleValue, number>;
+    "google.protobuf.BoolValue": Transformer<common.IBoolValue, boolean>;
+    "google.protobuf.StringValue": Transformer<common.IStringValue, string>;
+  }
+}
+
+registerTransformer("google.protobuf.Int32Value", {
   protoToGql(v) {
     return v?.value ?? null;
   },
@@ -11,7 +24,7 @@ registerTransformer<common.IInt32Value, number>("google.protobuf.Int32Value", {
   },
 });
 
-registerTransformer<common.IInt32Value, string>("google.protobuf.Int64Value", {
+registerTransformer("google.protobuf.Int64Value", {
   protoToGql(v) {
     return v?.value?.toString() ?? null;
   },
@@ -21,7 +34,7 @@ registerTransformer<common.IInt32Value, string>("google.protobuf.Int64Value", {
   },
 });
 
-registerTransformer<common.IUInt32Value, number>("google.protobuf.UInt32Value", {
+registerTransformer("google.protobuf.UInt32Value", {
   protoToGql(v) {
     return v?.value ?? null;
   },
@@ -31,7 +44,7 @@ registerTransformer<common.IUInt32Value, number>("google.protobuf.UInt32Value", 
   },
 });
 
-registerTransformer<common.IUInt32Value, string>("google.protobuf.UInt64Value", {
+registerTransformer("google.protobuf.UInt64Value", {
   protoToGql(v) {
     return v?.value?.toString() ?? null;
   },
@@ -41,7 +54,7 @@ registerTransformer<common.IUInt32Value, string>("google.protobuf.UInt64Value", 
   },
 });
 
-registerTransformer<common.IFloatValue, number>("google.protobuf.FloatValue", {
+registerTransformer("google.protobuf.FloatValue", {
   protoToGql(v) {
     return v?.value ?? null;
   },
@@ -51,7 +64,7 @@ registerTransformer<common.IFloatValue, number>("google.protobuf.FloatValue", {
   },
 });
 
-registerTransformer<common.IDoubleValue, number>("google.protobuf.DoubleValue", {
+registerTransformer("google.protobuf.DoubleValue", {
   protoToGql(v) {
     return v?.value ?? null;
   },
@@ -61,7 +74,7 @@ registerTransformer<common.IDoubleValue, number>("google.protobuf.DoubleValue", 
   },
 });
 
-registerTransformer<common.IBoolValue, boolean>("google.protobuf.BoolValue", {
+registerTransformer("google.protobuf.BoolValue", {
   protoToGql(v) {
     return v?.value ?? null;
   },
@@ -71,7 +84,7 @@ registerTransformer<common.IBoolValue, boolean>("google.protobuf.BoolValue", {
   },
 });
 
-registerTransformer<common.IStringValue, string>("google.protobuf.StringValue", {
+registerTransformer("google.protobuf.StringValue", {
   protoToGql(v) {
     return v?.value ?? null;
   },

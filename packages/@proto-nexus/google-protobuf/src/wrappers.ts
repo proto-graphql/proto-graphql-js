@@ -1,7 +1,20 @@
 import * as wrappersPb from "google-protobuf/google/protobuf/wrappers_pb";
-import { registerTransformer } from "proto-nexus";
+import { registerTransformer, Transformer } from "proto-nexus";
 
-registerTransformer<wrappersPb.Int32Value, number>("google.protobuf.Int32Value", {
+declare global {
+  interface ProtoNexusTransformers {
+    "google.protobuf.Int32Value": Transformer<wrappersPb.Int32Value, number>;
+    "google.protobuf.Int64Value": Transformer<wrappersPb.Int64Value, string>;
+    "google.protobuf.UInt32Value": Transformer<wrappersPb.UInt32Value, number>;
+    "google.protobuf.UInt64Value": Transformer<wrappersPb.UInt64Value, string>;
+    "google.protobuf.FloatValue": Transformer<wrappersPb.FloatValue, number>;
+    "google.protobuf.DoubleValue": Transformer<wrappersPb.DoubleValue, number>;
+    "google.protobuf.BoolValue": Transformer<wrappersPb.BoolValue, boolean>;
+    "google.protobuf.StringValue": Transformer<wrappersPb.StringValue, string>;
+  }
+}
+
+registerTransformer("google.protobuf.Int32Value", {
   protoToGql(v) {
     if (v == null) return null;
     return v.getValue();
@@ -12,7 +25,7 @@ registerTransformer<wrappersPb.Int32Value, number>("google.protobuf.Int32Value",
   },
 });
 
-registerTransformer<wrappersPb.Int64Value, string>("google.protobuf.Int64Value", {
+registerTransformer("google.protobuf.Int64Value", {
   protoToGql(v) {
     if (v == null) return null;
     return v.getValue().toString();
@@ -23,7 +36,7 @@ registerTransformer<wrappersPb.Int64Value, string>("google.protobuf.Int64Value",
   },
 });
 
-registerTransformer<wrappersPb.UInt32Value, number>("google.protobuf.UInt32Value", {
+registerTransformer("google.protobuf.UInt32Value", {
   protoToGql(v) {
     if (v == null) return null;
     return v.getValue();
@@ -34,7 +47,7 @@ registerTransformer<wrappersPb.UInt32Value, number>("google.protobuf.UInt32Value
   },
 });
 
-registerTransformer<wrappersPb.UInt64Value, string>("google.protobuf.UInt64Value", {
+registerTransformer("google.protobuf.UInt64Value", {
   protoToGql(v) {
     if (v == null) return null;
     return v.getValue().toString();
@@ -45,7 +58,7 @@ registerTransformer<wrappersPb.UInt64Value, string>("google.protobuf.UInt64Value
   },
 });
 
-registerTransformer<wrappersPb.FloatValue, number>("google.protobuf.FloatValue", {
+registerTransformer("google.protobuf.FloatValue", {
   protoToGql(v) {
     if (v == null) return null;
     return v.getValue();
@@ -56,7 +69,7 @@ registerTransformer<wrappersPb.FloatValue, number>("google.protobuf.FloatValue",
   },
 });
 
-registerTransformer<wrappersPb.DoubleValue, number>("google.protobuf.DoubleValue", {
+registerTransformer("google.protobuf.DoubleValue", {
   protoToGql(v) {
     if (v == null) return null;
     return v.getValue();
@@ -67,7 +80,7 @@ registerTransformer<wrappersPb.DoubleValue, number>("google.protobuf.DoubleValue
   },
 });
 
-registerTransformer<wrappersPb.BoolValue, boolean>("google.protobuf.BoolValue", {
+registerTransformer("google.protobuf.BoolValue", {
   protoToGql(v) {
     if (v == null) return null;
     return v.getValue();
@@ -78,7 +91,7 @@ registerTransformer<wrappersPb.BoolValue, boolean>("google.protobuf.BoolValue", 
   },
 });
 
-registerTransformer<wrappersPb.StringValue, string>("google.protobuf.StringValue", {
+registerTransformer("google.protobuf.StringValue", {
   protoToGql(v) {
     if (v == null) return null;
     return v.getValue();
