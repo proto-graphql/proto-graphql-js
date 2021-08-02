@@ -5446,7 +5446,7 @@ export const Primitives = nexus.objectType({
             resolve(root) {
                 const value = root.requiredInt64Values;
                 return value.map(item => {
-                    return item.toString()!;
+                    return item.toString();
                 });
             }
         });
@@ -5462,7 +5462,7 @@ export const Primitives = nexus.objectType({
             resolve(root) {
                 const value = root.requiredUint64Values;
                 return value.map(item => {
-                    return item.toString()!;
+                    return item.toString();
                 });
             }
         });
@@ -5478,7 +5478,7 @@ export const Primitives = nexus.objectType({
             resolve(root) {
                 const value = root.requiredSint64Values;
                 return value.map(item => {
-                    return item.toString()!;
+                    return item.toString();
                 });
             }
         });
@@ -5494,7 +5494,7 @@ export const Primitives = nexus.objectType({
             resolve(root) {
                 const value = root.requiredFixed64Values;
                 return value.map(item => {
-                    return item.toString()!;
+                    return item.toString();
                 });
             }
         });
@@ -5510,7 +5510,7 @@ export const Primitives = nexus.objectType({
             resolve(root) {
                 const value = root.requiredSfixed64Values;
                 return value.map(item => {
-                    return item.toString()!;
+                    return item.toString();
                 });
             }
         });
@@ -5979,7 +5979,7 @@ export const Primitives = nexus.objectType({
             resolve(root) {
                 const value = root.requiredInt64Values;
                 return value.map(item => {
-                    return item.toString()!;
+                    return item.toString();
                 });
             }
         });
@@ -5995,7 +5995,7 @@ export const Primitives = nexus.objectType({
             resolve(root) {
                 const value = root.requiredUint64Values;
                 return value.map(item => {
-                    return item.toString()!;
+                    return item.toString();
                 });
             }
         });
@@ -6011,7 +6011,7 @@ export const Primitives = nexus.objectType({
             resolve(root) {
                 const value = root.requiredSint64Values;
                 return value.map(item => {
-                    return item.toString()!;
+                    return item.toString();
                 });
             }
         });
@@ -6027,7 +6027,7 @@ export const Primitives = nexus.objectType({
             resolve(root) {
                 const value = root.requiredFixed64Values;
                 return value.map(item => {
-                    return item.toString()!;
+                    return item.toString();
                 });
             }
         });
@@ -6043,7 +6043,7 @@ export const Primitives = nexus.objectType({
             resolve(root) {
                 const value = root.requiredSfixed64Values;
                 return value.map(item => {
-                    return item.toString()!;
+                    return item.toString();
                 });
             }
         });
@@ -6840,7 +6840,7 @@ export const Primitives = nexus.objectType({
             resolve(root) {
                 const value = root.getRequiredInt64ValuesList();
                 return value.map(item => {
-                    return item.toString()!;
+                    return item.toString();
                 });
             }
         });
@@ -6856,7 +6856,7 @@ export const Primitives = nexus.objectType({
             resolve(root) {
                 const value = root.getRequiredUint64ValuesList();
                 return value.map(item => {
-                    return item.toString()!;
+                    return item.toString();
                 });
             }
         });
@@ -6872,7 +6872,7 @@ export const Primitives = nexus.objectType({
             resolve(root) {
                 const value = root.getRequiredSint64ValuesList();
                 return value.map(item => {
-                    return item.toString()!;
+                    return item.toString();
                 });
             }
         });
@@ -6888,7 +6888,7 @@ export const Primitives = nexus.objectType({
             resolve(root) {
                 const value = root.getRequiredFixed64ValuesList();
                 return value.map(item => {
-                    return item.toString()!;
+                    return item.toString();
                 });
             }
         });
@@ -6904,7 +6904,7 @@ export const Primitives = nexus.objectType({
             resolve(root) {
                 const value = root.getRequiredSfixed64ValuesList();
                 return value.map(item => {
-                    return item.toString()!;
+                    return item.toString();
                 });
             }
         });
@@ -7419,7 +7419,7 @@ export const Primitives = nexus.objectType({
             resolve(root) {
                 const value = root.requiredInt64Values;
                 return value.map(item => {
-                    return item.toString()!;
+                    return item.toString();
                 });
             }
         });
@@ -7435,7 +7435,7 @@ export const Primitives = nexus.objectType({
             resolve(root) {
                 const value = root.requiredUint64Values;
                 return value.map(item => {
-                    return item.toString()!;
+                    return item.toString();
                 });
             }
         });
@@ -7451,7 +7451,7 @@ export const Primitives = nexus.objectType({
             resolve(root) {
                 const value = root.requiredSint64Values;
                 return value.map(item => {
-                    return item.toString()!;
+                    return item.toString();
                 });
             }
         });
@@ -7467,7 +7467,7 @@ export const Primitives = nexus.objectType({
             resolve(root) {
                 const value = root.requiredFixed64Values;
                 return value.map(item => {
-                    return item.toString()!;
+                    return item.toString();
                 });
             }
         });
@@ -7483,7 +7483,7 @@ export const Primitives = nexus.objectType({
             resolve(root) {
                 const value = root.requiredSfixed64Values;
                 return value.map(item => {
-                    return item.toString()!;
+                    return item.toString();
                 });
             }
         });
@@ -7880,7 +7880,7 @@ export const Message = nexus.objectType({
             resolve(root) {
                 const value = root.getTimestampsList();
                 return value.map(item => {
-                    return proto_nexus.getTransformer(\\"google.protobuf.Timestamp\\").protoToGql(item)!;
+                    return proto_nexus.getTransformer(\\"google.protobuf.Timestamp\\").protoToGql(item);
                 });
             }
         });
@@ -7889,7 +7889,7 @@ export const Message = nexus.objectType({
             resolve(root) {
                 const value = root.getInt32ValuesList();
                 return value.map(item => {
-                    return proto_nexus.getTransformer(\\"google.protobuf.Int32Value\\").protoToGql(item)!;
+                    return proto_nexus.getTransformer(\\"google.protobuf.Int32Value\\").protoToGql(item);
                 });
             }
         });
@@ -7898,7 +7898,7 @@ export const Message = nexus.objectType({
             resolve(root) {
                 const value = root.getInt64ValuesList();
                 return value.map(item => {
-                    return proto_nexus.getTransformer(\\"google.protobuf.Int64Value\\").protoToGql(item)!;
+                    return proto_nexus.getTransformer(\\"google.protobuf.Int64Value\\").protoToGql(item);
                 });
             }
         });
@@ -7907,7 +7907,7 @@ export const Message = nexus.objectType({
             resolve(root) {
                 const value = root.getUint32ValuesList();
                 return value.map(item => {
-                    return proto_nexus.getTransformer(\\"google.protobuf.UInt32Value\\").protoToGql(item)!;
+                    return proto_nexus.getTransformer(\\"google.protobuf.UInt32Value\\").protoToGql(item);
                 });
             }
         });
@@ -7916,7 +7916,7 @@ export const Message = nexus.objectType({
             resolve(root) {
                 const value = root.getUint64ValuesList();
                 return value.map(item => {
-                    return proto_nexus.getTransformer(\\"google.protobuf.UInt64Value\\").protoToGql(item)!;
+                    return proto_nexus.getTransformer(\\"google.protobuf.UInt64Value\\").protoToGql(item);
                 });
             }
         });
@@ -7925,7 +7925,7 @@ export const Message = nexus.objectType({
             resolve(root) {
                 const value = root.getFloatValuesList();
                 return value.map(item => {
-                    return proto_nexus.getTransformer(\\"google.protobuf.FloatValue\\").protoToGql(item)!;
+                    return proto_nexus.getTransformer(\\"google.protobuf.FloatValue\\").protoToGql(item);
                 });
             }
         });
@@ -7934,7 +7934,7 @@ export const Message = nexus.objectType({
             resolve(root) {
                 const value = root.getDoubleValuesList();
                 return value.map(item => {
-                    return proto_nexus.getTransformer(\\"google.protobuf.DoubleValue\\").protoToGql(item)!;
+                    return proto_nexus.getTransformer(\\"google.protobuf.DoubleValue\\").protoToGql(item);
                 });
             }
         });
@@ -7943,7 +7943,7 @@ export const Message = nexus.objectType({
             resolve(root) {
                 const value = root.getBoolValuesList();
                 return value.map(item => {
-                    return proto_nexus.getTransformer(\\"google.protobuf.BoolValue\\").protoToGql(item)!;
+                    return proto_nexus.getTransformer(\\"google.protobuf.BoolValue\\").protoToGql(item);
                 });
             }
         });
@@ -7952,7 +7952,7 @@ export const Message = nexus.objectType({
             resolve(root) {
                 const value = root.getStringValuesList();
                 return value.map(item => {
-                    return proto_nexus.getTransformer(\\"google.protobuf.StringValue\\").protoToGql(item)!;
+                    return proto_nexus.getTransformer(\\"google.protobuf.StringValue\\").protoToGql(item);
                 });
             }
         });
@@ -8024,58 +8024,58 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
     toProto: (input: NexusGen[\\"inputTypes\\"][\\"MessageInput\\"]): _$testapis$wktypes$well_known_types_pb.Message => {
         const output = new _$testapis$wktypes$well_known_types_pb.Message();
         if (input.timestamp != null) {
-            output.setTimestamp(proto_nexus.getTransformer(\\"google.protobuf.Timestamp\\").gqlToProto(input.timestamp)!);
+            output.setTimestamp(proto_nexus.getTransformer(\\"google.protobuf.Timestamp\\").gqlToProto(input.timestamp));
         }
         if (input.int32Value != null) {
-            output.setInt32Value(proto_nexus.getTransformer(\\"google.protobuf.Int32Value\\").gqlToProto(input.int32Value)!);
+            output.setInt32Value(proto_nexus.getTransformer(\\"google.protobuf.Int32Value\\").gqlToProto(input.int32Value));
         }
         if (input.int64Value != null) {
-            output.setInt64Value(proto_nexus.getTransformer(\\"google.protobuf.Int64Value\\").gqlToProto(input.int64Value)!);
+            output.setInt64Value(proto_nexus.getTransformer(\\"google.protobuf.Int64Value\\").gqlToProto(input.int64Value));
         }
         if (input.uint32Value != null) {
-            output.setUint32Value(proto_nexus.getTransformer(\\"google.protobuf.UInt32Value\\").gqlToProto(input.uint32Value)!);
+            output.setUint32Value(proto_nexus.getTransformer(\\"google.protobuf.UInt32Value\\").gqlToProto(input.uint32Value));
         }
         if (input.uint64Value != null) {
-            output.setUint64Value(proto_nexus.getTransformer(\\"google.protobuf.UInt64Value\\").gqlToProto(input.uint64Value)!);
+            output.setUint64Value(proto_nexus.getTransformer(\\"google.protobuf.UInt64Value\\").gqlToProto(input.uint64Value));
         }
         if (input.floatValue != null) {
-            output.setFloatValue(proto_nexus.getTransformer(\\"google.protobuf.FloatValue\\").gqlToProto(input.floatValue)!);
+            output.setFloatValue(proto_nexus.getTransformer(\\"google.protobuf.FloatValue\\").gqlToProto(input.floatValue));
         }
         if (input.doubleValue != null) {
-            output.setDoubleValue(proto_nexus.getTransformer(\\"google.protobuf.DoubleValue\\").gqlToProto(input.doubleValue)!);
+            output.setDoubleValue(proto_nexus.getTransformer(\\"google.protobuf.DoubleValue\\").gqlToProto(input.doubleValue));
         }
         if (input.boolValue != null) {
-            output.setBoolValue(proto_nexus.getTransformer(\\"google.protobuf.BoolValue\\").gqlToProto(input.boolValue)!);
+            output.setBoolValue(proto_nexus.getTransformer(\\"google.protobuf.BoolValue\\").gqlToProto(input.boolValue));
         }
         if (input.stringValue != null) {
-            output.setStringValue(proto_nexus.getTransformer(\\"google.protobuf.StringValue\\").gqlToProto(input.stringValue)!);
+            output.setStringValue(proto_nexus.getTransformer(\\"google.protobuf.StringValue\\").gqlToProto(input.stringValue));
         }
         if (input.timestamps != null) {
-            output.setTimestampsList(input.timestamps.map(v => proto_nexus.getTransformer(\\"google.protobuf.Timestamp\\").gqlToProto(v)!));
+            output.setTimestampsList(input.timestamps.map(v => proto_nexus.getTransformer(\\"google.protobuf.Timestamp\\").gqlToProto(v)));
         }
         if (input.int32Values != null) {
-            output.setInt32ValuesList(input.int32Values.map(v => proto_nexus.getTransformer(\\"google.protobuf.Int32Value\\").gqlToProto(v)!));
+            output.setInt32ValuesList(input.int32Values.map(v => proto_nexus.getTransformer(\\"google.protobuf.Int32Value\\").gqlToProto(v)));
         }
         if (input.int64Values != null) {
-            output.setInt64ValuesList(input.int64Values.map(v => proto_nexus.getTransformer(\\"google.protobuf.Int64Value\\").gqlToProto(v)!));
+            output.setInt64ValuesList(input.int64Values.map(v => proto_nexus.getTransformer(\\"google.protobuf.Int64Value\\").gqlToProto(v)));
         }
         if (input.uint32Values != null) {
-            output.setUint32ValuesList(input.uint32Values.map(v => proto_nexus.getTransformer(\\"google.protobuf.UInt32Value\\").gqlToProto(v)!));
+            output.setUint32ValuesList(input.uint32Values.map(v => proto_nexus.getTransformer(\\"google.protobuf.UInt32Value\\").gqlToProto(v)));
         }
         if (input.uint64Values != null) {
-            output.setUint64ValuesList(input.uint64Values.map(v => proto_nexus.getTransformer(\\"google.protobuf.UInt64Value\\").gqlToProto(v)!));
+            output.setUint64ValuesList(input.uint64Values.map(v => proto_nexus.getTransformer(\\"google.protobuf.UInt64Value\\").gqlToProto(v)));
         }
         if (input.floatValues != null) {
-            output.setFloatValuesList(input.floatValues.map(v => proto_nexus.getTransformer(\\"google.protobuf.FloatValue\\").gqlToProto(v)!));
+            output.setFloatValuesList(input.floatValues.map(v => proto_nexus.getTransformer(\\"google.protobuf.FloatValue\\").gqlToProto(v)));
         }
         if (input.doubleValues != null) {
-            output.setDoubleValuesList(input.doubleValues.map(v => proto_nexus.getTransformer(\\"google.protobuf.DoubleValue\\").gqlToProto(v)!));
+            output.setDoubleValuesList(input.doubleValues.map(v => proto_nexus.getTransformer(\\"google.protobuf.DoubleValue\\").gqlToProto(v)));
         }
         if (input.boolValues != null) {
-            output.setBoolValuesList(input.boolValues.map(v => proto_nexus.getTransformer(\\"google.protobuf.BoolValue\\").gqlToProto(v)!));
+            output.setBoolValuesList(input.boolValues.map(v => proto_nexus.getTransformer(\\"google.protobuf.BoolValue\\").gqlToProto(v)));
         }
         if (input.stringValues != null) {
-            output.setStringValuesList(input.stringValues.map(v => proto_nexus.getTransformer(\\"google.protobuf.StringValue\\").gqlToProto(v)!));
+            output.setStringValuesList(input.stringValues.map(v => proto_nexus.getTransformer(\\"google.protobuf.StringValue\\").gqlToProto(v)));
         }
         return output;
     },
@@ -8247,7 +8247,7 @@ export const Message = nexus.objectType({
             resolve(root) {
                 const value = root.timestamps;
                 return value.map(item => {
-                    return proto_nexus.getTransformer(\\"google.protobuf.Timestamp\\").protoToGql(item)!;
+                    return proto_nexus.getTransformer(\\"google.protobuf.Timestamp\\").protoToGql(item);
                 });
             }
         });
@@ -8256,7 +8256,7 @@ export const Message = nexus.objectType({
             resolve(root) {
                 const value = root.int32Values;
                 return value.map(item => {
-                    return proto_nexus.getTransformer(\\"google.protobuf.Int32Value\\").protoToGql(item)!;
+                    return proto_nexus.getTransformer(\\"google.protobuf.Int32Value\\").protoToGql(item);
                 });
             }
         });
@@ -8265,7 +8265,7 @@ export const Message = nexus.objectType({
             resolve(root) {
                 const value = root.int64Values;
                 return value.map(item => {
-                    return proto_nexus.getTransformer(\\"google.protobuf.Int64Value\\").protoToGql(item)!;
+                    return proto_nexus.getTransformer(\\"google.protobuf.Int64Value\\").protoToGql(item);
                 });
             }
         });
@@ -8274,7 +8274,7 @@ export const Message = nexus.objectType({
             resolve(root) {
                 const value = root.uint32Values;
                 return value.map(item => {
-                    return proto_nexus.getTransformer(\\"google.protobuf.UInt32Value\\").protoToGql(item)!;
+                    return proto_nexus.getTransformer(\\"google.protobuf.UInt32Value\\").protoToGql(item);
                 });
             }
         });
@@ -8283,7 +8283,7 @@ export const Message = nexus.objectType({
             resolve(root) {
                 const value = root.uint64Values;
                 return value.map(item => {
-                    return proto_nexus.getTransformer(\\"google.protobuf.UInt64Value\\").protoToGql(item)!;
+                    return proto_nexus.getTransformer(\\"google.protobuf.UInt64Value\\").protoToGql(item);
                 });
             }
         });
@@ -8292,7 +8292,7 @@ export const Message = nexus.objectType({
             resolve(root) {
                 const value = root.floatValues;
                 return value.map(item => {
-                    return proto_nexus.getTransformer(\\"google.protobuf.FloatValue\\").protoToGql(item)!;
+                    return proto_nexus.getTransformer(\\"google.protobuf.FloatValue\\").protoToGql(item);
                 });
             }
         });
@@ -8301,7 +8301,7 @@ export const Message = nexus.objectType({
             resolve(root) {
                 const value = root.doubleValues;
                 return value.map(item => {
-                    return proto_nexus.getTransformer(\\"google.protobuf.DoubleValue\\").protoToGql(item)!;
+                    return proto_nexus.getTransformer(\\"google.protobuf.DoubleValue\\").protoToGql(item);
                 });
             }
         });
@@ -8310,7 +8310,7 @@ export const Message = nexus.objectType({
             resolve(root) {
                 const value = root.boolValues;
                 return value.map(item => {
-                    return proto_nexus.getTransformer(\\"google.protobuf.BoolValue\\").protoToGql(item)!;
+                    return proto_nexus.getTransformer(\\"google.protobuf.BoolValue\\").protoToGql(item);
                 });
             }
         });
@@ -8319,7 +8319,7 @@ export const Message = nexus.objectType({
             resolve(root) {
                 const value = root.stringValues;
                 return value.map(item => {
-                    return proto_nexus.getTransformer(\\"google.protobuf.StringValue\\").protoToGql(item)!;
+                    return proto_nexus.getTransformer(\\"google.protobuf.StringValue\\").protoToGql(item);
                 });
             }
         });
@@ -8394,55 +8394,55 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
             output.timestamp = new _$testapis$wktypes.google.protobuf.Timestamp(proto_nexus.getTransformer(\\"google.protobuf.Timestamp\\").gqlToProto(input.timestamp) as any);
         }
         if (input.int32Value != null) {
-            output.int32Value = new _$testapis$wktypes.google.protobuf.Int32Value(proto_nexus.getTransformer(\\"google.protobuf.Int32Value\\").gqlToProto(input.int32Value) as any);
+            output.int32Value = new _$testapis$wktypes.google.protobuf.Int32Value(proto_nexus.getTransformer(\\"google.protobuf.Int32Value\\").gqlToProto(input.int32Value));
         }
         if (input.int64Value != null) {
             output.int64Value = new _$testapis$wktypes.google.protobuf.Int64Value(proto_nexus.getTransformer(\\"google.protobuf.Int64Value\\").gqlToProto(input.int64Value) as any);
         }
         if (input.uint32Value != null) {
-            output.uint32Value = new _$testapis$wktypes.google.protobuf.UInt32Value(proto_nexus.getTransformer(\\"google.protobuf.UInt32Value\\").gqlToProto(input.uint32Value) as any);
+            output.uint32Value = new _$testapis$wktypes.google.protobuf.UInt32Value(proto_nexus.getTransformer(\\"google.protobuf.UInt32Value\\").gqlToProto(input.uint32Value));
         }
         if (input.uint64Value != null) {
             output.uint64Value = new _$testapis$wktypes.google.protobuf.UInt64Value(proto_nexus.getTransformer(\\"google.protobuf.UInt64Value\\").gqlToProto(input.uint64Value) as any);
         }
         if (input.floatValue != null) {
-            output.floatValue = new _$testapis$wktypes.google.protobuf.FloatValue(proto_nexus.getTransformer(\\"google.protobuf.FloatValue\\").gqlToProto(input.floatValue) as any);
+            output.floatValue = new _$testapis$wktypes.google.protobuf.FloatValue(proto_nexus.getTransformer(\\"google.protobuf.FloatValue\\").gqlToProto(input.floatValue));
         }
         if (input.doubleValue != null) {
-            output.doubleValue = new _$testapis$wktypes.google.protobuf.DoubleValue(proto_nexus.getTransformer(\\"google.protobuf.DoubleValue\\").gqlToProto(input.doubleValue) as any);
+            output.doubleValue = new _$testapis$wktypes.google.protobuf.DoubleValue(proto_nexus.getTransformer(\\"google.protobuf.DoubleValue\\").gqlToProto(input.doubleValue));
         }
         if (input.boolValue != null) {
-            output.boolValue = new _$testapis$wktypes.google.protobuf.BoolValue(proto_nexus.getTransformer(\\"google.protobuf.BoolValue\\").gqlToProto(input.boolValue) as any);
+            output.boolValue = new _$testapis$wktypes.google.protobuf.BoolValue(proto_nexus.getTransformer(\\"google.protobuf.BoolValue\\").gqlToProto(input.boolValue));
         }
         if (input.stringValue != null) {
-            output.stringValue = new _$testapis$wktypes.google.protobuf.StringValue(proto_nexus.getTransformer(\\"google.protobuf.StringValue\\").gqlToProto(input.stringValue) as any);
+            output.stringValue = new _$testapis$wktypes.google.protobuf.StringValue(proto_nexus.getTransformer(\\"google.protobuf.StringValue\\").gqlToProto(input.stringValue));
         }
         if (input.timestamps != null) {
             output.timestamps = input.timestamps.map(v => new _$testapis$wktypes.google.protobuf.Timestamp(proto_nexus.getTransformer(\\"google.protobuf.Timestamp\\").gqlToProto(v) as any));
         }
         if (input.int32Values != null) {
-            output.int32Values = input.int32Values.map(v => new _$testapis$wktypes.google.protobuf.Int32Value(proto_nexus.getTransformer(\\"google.protobuf.Int32Value\\").gqlToProto(v) as any));
+            output.int32Values = input.int32Values.map(v => new _$testapis$wktypes.google.protobuf.Int32Value(proto_nexus.getTransformer(\\"google.protobuf.Int32Value\\").gqlToProto(v)));
         }
         if (input.int64Values != null) {
             output.int64Values = input.int64Values.map(v => new _$testapis$wktypes.google.protobuf.Int64Value(proto_nexus.getTransformer(\\"google.protobuf.Int64Value\\").gqlToProto(v) as any));
         }
         if (input.uint32Values != null) {
-            output.uint32Values = input.uint32Values.map(v => new _$testapis$wktypes.google.protobuf.UInt32Value(proto_nexus.getTransformer(\\"google.protobuf.UInt32Value\\").gqlToProto(v) as any));
+            output.uint32Values = input.uint32Values.map(v => new _$testapis$wktypes.google.protobuf.UInt32Value(proto_nexus.getTransformer(\\"google.protobuf.UInt32Value\\").gqlToProto(v)));
         }
         if (input.uint64Values != null) {
             output.uint64Values = input.uint64Values.map(v => new _$testapis$wktypes.google.protobuf.UInt64Value(proto_nexus.getTransformer(\\"google.protobuf.UInt64Value\\").gqlToProto(v) as any));
         }
         if (input.floatValues != null) {
-            output.floatValues = input.floatValues.map(v => new _$testapis$wktypes.google.protobuf.FloatValue(proto_nexus.getTransformer(\\"google.protobuf.FloatValue\\").gqlToProto(v) as any));
+            output.floatValues = input.floatValues.map(v => new _$testapis$wktypes.google.protobuf.FloatValue(proto_nexus.getTransformer(\\"google.protobuf.FloatValue\\").gqlToProto(v)));
         }
         if (input.doubleValues != null) {
-            output.doubleValues = input.doubleValues.map(v => new _$testapis$wktypes.google.protobuf.DoubleValue(proto_nexus.getTransformer(\\"google.protobuf.DoubleValue\\").gqlToProto(v) as any));
+            output.doubleValues = input.doubleValues.map(v => new _$testapis$wktypes.google.protobuf.DoubleValue(proto_nexus.getTransformer(\\"google.protobuf.DoubleValue\\").gqlToProto(v)));
         }
         if (input.boolValues != null) {
-            output.boolValues = input.boolValues.map(v => new _$testapis$wktypes.google.protobuf.BoolValue(proto_nexus.getTransformer(\\"google.protobuf.BoolValue\\").gqlToProto(v) as any));
+            output.boolValues = input.boolValues.map(v => new _$testapis$wktypes.google.protobuf.BoolValue(proto_nexus.getTransformer(\\"google.protobuf.BoolValue\\").gqlToProto(v)));
         }
         if (input.stringValues != null) {
-            output.stringValues = input.stringValues.map(v => new _$testapis$wktypes.google.protobuf.StringValue(proto_nexus.getTransformer(\\"google.protobuf.StringValue\\").gqlToProto(v) as any));
+            output.stringValues = input.stringValues.map(v => new _$testapis$wktypes.google.protobuf.StringValue(proto_nexus.getTransformer(\\"google.protobuf.StringValue\\").gqlToProto(v)));
         }
         return output;
     },
