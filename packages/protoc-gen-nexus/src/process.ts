@@ -38,6 +38,17 @@ export const parseParams = (input: string | undefined): GenerationParams => {
     partialInputs: false,
     importPrefix: null,
     fileLayout: "proto_file",
+    typeMappings: {
+      "google.protobuf.Int32Value": "Int",
+      "google.protobuf.Int64Value": "String",
+      "google.protobuf.UInt32Value": "Int",
+      "google.protobuf.UInt64Value": "String",
+      "google.protobuf.FloatValue": "Float",
+      "google.protobuf.DoubleValue": "Float",
+      "google.protobuf.BoolValue": "Boolean",
+      "google.protobuf.StringValue": "String",
+      "google.protobuf.Timestamp": "DateTime",
+    },
   };
 
   if (!input) return params;
@@ -57,7 +68,8 @@ export const parseParams = (input: string | undefined): GenerationParams => {
   }
 
   for (const kv of input.split(",")) {
-    const [k, v] = kv.split("=", 2);
+    const idx = kv.indexOf("=");
+    const [k, v] = idx === -1 ? [kv, ""] : [kv.slice(0, idx), kv.slice(idx + 1)];
     switch (k) {
       case "use_protobufjs":
         params.useProtobufjs = toBool(k, v);
@@ -74,6 +86,12 @@ export const parseParams = (input: string | undefined): GenerationParams => {
           throw new Error(`file_layout should be ${fileLayouts.map((s) => `"${s}"`).join(", ")}`);
         }
         params.fileLayout = s;
+        break;
+      }
+      case "custom_type": {
+        const idx = v.indexOf("=");
+        const [protoType, gqlType] = idx === -1 ? [v, ""] : [v.slice(0, idx), v.slice(idx + 1)];
+        params.typeMappings[protoType] = gqlType;
         break;
       }
       default:

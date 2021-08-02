@@ -20,6 +20,7 @@ export type GenerationParams = {
   useProtobufjs: boolean;
   partialInputs: boolean;
   fileLayout: typeof fileLayouts[number];
+  typeMappings: Record<string, string>;
 };
 
 export type FullName = [FullName, string] | string;
@@ -174,6 +175,10 @@ export function isInterface(m: ProtoMessage): boolean {
 
 export function isSquashedUnion(m: ProtoMessage): boolean {
   return m.descriptor.getOptions()?.getExtension(extensions.objectType)?.getSquashUnion() ?? false;
+}
+
+export function isScalar(m: ProtoMessage, opts: GenerationParams): boolean {
+  return m.fullName.toString() in opts.typeMappings;
 }
 
 export function isRequiredField(field: ProtoField | ProtoOneof): boolean {

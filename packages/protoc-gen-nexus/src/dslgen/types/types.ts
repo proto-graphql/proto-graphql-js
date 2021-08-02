@@ -15,6 +15,7 @@ import {
   isIgnoredField,
   isIgnoredType,
   isInterface,
+  isScalar,
   isSquashedUnion,
 } from "./util";
 
@@ -89,7 +90,7 @@ export function getObjectFieldType(
   proto: ProtoField,
   opts: GenerationParams
 ): ScalarType | EnumType | ObjectType | InterfaceType | SquashedOneofUnionType {
-  return detectType<ObjectType | InterfaceType | SquashedOneofUnionType>(proto, opts, (msg, file) => {
+  return detectType<ObjectType | InterfaceType | SquashedOneofUnionType | ScalarType>(proto, opts, (msg, file) => {
     if (isInterface(msg)) return new InterfaceType(msg, file);
     if (isSquashedUnion(msg)) return new SquashedOneofUnionType(msg, file);
     return new ObjectType(msg, file);
@@ -105,7 +106,7 @@ export function getInputObjectFieldType(
   });
 }
 
-function detectType<T extends ObjectType | InterfaceType | SquashedOneofUnionType | InputObjectType>(
+function detectType<T extends ObjectType | InterfaceType | SquashedOneofUnionType | InputObjectType | ScalarType>(
   proto: ProtoField,
   opts: GenerationParams,
   f: (msg: ProtoMessage, file: DslFile) => T
@@ -147,38 +148,15 @@ function detectType<T extends ObjectType | InterfaceType | SquashedOneofUnionTyp
     case FieldDescriptorProto.Type.TYPE_ENUM:
       assert(proto.type && proto.type.kind === "Enum");
       return new EnumType(proto.type, new DslFile(proto.type.file, opts));
-    case FieldDescriptorProto.Type.TYPE_MESSAGE:
+    case FieldDescriptorProto.Type.TYPE_MESSAGE: {
       assert(proto.type && proto.type.kind === "Message");
-      switch (proto.type.fullName.toString()) {
-        case "google.protobuf.Any":
-          throw "not supported";
-        case "google.protobuf.BoolValue":
-          return new ScalarType(proto, "Boolean", opts);
-        case "google.protobuf.BytesValue":
-          throw "not supported";
-        case "google.protobuf.DoubleValue":
-        case "google.protobuf.FloatValue":
-          return new ScalarType(proto, "Float", opts);
-        case "google.protobuf.Duration":
-          throw "not supported";
-        case "google.protobuf.Int32Value":
-          return new ScalarType(proto, "Int", opts);
-        case "google.protobuf.Int64Value":
-          return new ScalarType(proto, "String", opts);
-        case "google.protobuf.UInt32Value":
-          return new ScalarType(proto, "Int", opts);
-        case "google.protobuf.UInt64Value":
-          return new ScalarType(proto, "String", opts);
-        case "google.protobuf.StringValue":
-          return new ScalarType(proto, "String", opts);
-        case "google.protobuf.Timestamp":
-          return new ScalarType(proto, "DateTime", opts);
-        default: {
-          const msg = proto.type;
-          const file = new DslFile(msg.file, opts);
-          return f(msg, file);
-        }
+      const msg = proto.type;
+      if (isScalar(msg, opts)) {
+        return new ScalarType(proto, opts.typeMappings[msg.fullName.toString()] as any, opts);
       }
+      const file = new DslFile(msg.file, opts);
+      return f(msg, file);
+    }
     /* istanbul ignore next */
     default:
       const _exhaustiveCheck: never = pbtype; // eslint-disable-line

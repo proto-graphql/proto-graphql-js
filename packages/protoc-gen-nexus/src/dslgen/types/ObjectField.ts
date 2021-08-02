@@ -45,9 +45,6 @@ export class ObjectField<
    */
   get importModules(): { alias: string; module: string }[] {
     const modules = [];
-    if (this.type instanceof ScalarType && this.type.unwrapFunc != null) {
-      modules.push(...this.type.unwrapFunc.imports);
-    }
     if (this.type instanceof EnumType && this.type.unspecifiedValue != null) {
       modules.push(this.type.protoImportPath);
     }
@@ -82,7 +79,7 @@ export class ObjectField<
   private get typeImportPath(): string | null {
     const type: ObjectType | InterfaceType | SquashedOneofUnionType | EnumType | ScalarType = this.type;
 
-    if (type instanceof ScalarType) return null;
+    if (type instanceof ScalarType) return type.importPath;
     if (this.parent.filename === type.filename) return null;
 
     const [from, to] = [this.parent.filename, type.filename].map((f) => (path.isAbsolute(f) ? `.${path.sep}${f}` : f));

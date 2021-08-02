@@ -119,7 +119,7 @@ export function snapshotGeneratedFiles(resp: CodeGeneratorResponse, files: strin
   }
 }
 
-async function processCodeGeneration(name: string, param?: string): Promise<CodeGeneratorResponse> {
+export async function processCodeGeneration(name: string, param?: string): Promise<CodeGeneratorResponse> {
   const req = await buildCodeGeneratorRequest(name);
   if (param) {
     req.setParameter(param);
