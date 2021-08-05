@@ -59,15 +59,15 @@ input MessageWithEnumsInput {
 
 enum MyEnum {
   \\"\\"\\"This is Bar.\\"\\"\\"
-  MY_ENUM_BAR
-  MY_ENUM_BAZ
-  MY_ENUM_FOO
+  BAR
+  BAZ
+  FOO
 }
 
 enum MyEnumWithoutUnspecified {
-  MY_ENUM_WITHOUT_UNSPECIFIED_BAR
-  MY_ENUM_WITHOUT_UNSPECIFIED_BAZ
-  MY_ENUM_WITHOUT_UNSPECIFIED_FOO
+  BAR
+  BAZ
+  FOO
 }
 
 type Query {
@@ -135,15 +135,15 @@ input MessageWithEnumsInput {
 
 enum MyEnum {
   \\"\\"\\"This is Bar.\\"\\"\\"
-  MY_ENUM_BAR
-  MY_ENUM_BAZ
-  MY_ENUM_FOO
+  BAR
+  BAZ
+  FOO
 }
 
 enum MyEnumWithoutUnspecified {
-  MY_ENUM_WITHOUT_UNSPECIFIED_BAR
-  MY_ENUM_WITHOUT_UNSPECIFIED_BAZ
-  MY_ENUM_WITHOUT_UNSPECIFIED_FOO
+  BAR
+  BAZ
+  FOO
 }
 
 type Query {
@@ -157,9 +157,9 @@ Object {
   "data": Object {
     "test": Object {
       "optionalMyEnum": null,
-      "optionalMyEnumWithoutUnspecified": "MY_ENUM_WITHOUT_UNSPECIFIED_FOO",
-      "requiredMyEnum": "MY_ENUM_BAR",
-      "requiredMyEnumWithoutUnspecified": "MY_ENUM_WITHOUT_UNSPECIFIED_FOO",
+      "optionalMyEnumWithoutUnspecified": "FOO",
+      "requiredMyEnum": "BAR",
+      "requiredMyEnumWithoutUnspecified": "FOO",
     },
   },
 }

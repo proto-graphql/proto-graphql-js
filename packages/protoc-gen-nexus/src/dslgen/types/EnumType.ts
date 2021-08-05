@@ -33,7 +33,8 @@ export class EnumTypeValue {
   constructor(private readonly proto: ProtoEnumValue, private readonly opts: GenerationParams) {}
 
   get name(): string {
-    return this.proto.name;
+    const prefix = constantCase(this.proto.parent.name);
+    return this.proto.name.replace(new RegExp(`^${prefix}_`), "");
   }
 
   get description(): string | null {

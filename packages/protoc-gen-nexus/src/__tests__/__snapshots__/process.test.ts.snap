@@ -3938,16 +3938,16 @@ export const MyEnum = nexus.enumType({
     name: \\"MyEnum\\",
     members: [
         {
-            name: \\"MY_ENUM_FOO\\",
+            name: \\"FOO\\",
             value: 1
         },
         {
-            name: \\"MY_ENUM_BAR\\",
+            name: \\"BAR\\",
             description: \\"This is Bar.\\",
             value: 2
         },
         {
-            name: \\"MY_ENUM_BAZ\\",
+            name: \\"BAZ\\",
             value: 3
         }
     ]
@@ -3964,15 +3964,15 @@ export const MyEnumWithoutUnspecified = nexus.enumType({
     name: \\"MyEnumWithoutUnspecified\\",
     members: [
         {
-            name: \\"MY_ENUM_WITHOUT_UNSPECIFIED_FOO\\",
+            name: \\"FOO\\",
             value: 0
         },
         {
-            name: \\"MY_ENUM_WITHOUT_UNSPECIFIED_BAR\\",
+            name: \\"BAR\\",
             value: 1
         },
         {
-            name: \\"MY_ENUM_WITHOUT_UNSPECIFIED_BAZ\\",
+            name: \\"BAZ\\",
             value: 2
         }
     ]
@@ -4186,16 +4186,16 @@ export const MyEnum = nexus.enumType({
     name: \\"MyEnum\\",
     members: [
         {
-            name: \\"MY_ENUM_FOO\\",
+            name: \\"FOO\\",
             value: 1
         },
         {
-            name: \\"MY_ENUM_BAR\\",
+            name: \\"BAR\\",
             description: \\"This is Bar.\\",
             value: 2
         },
         {
-            name: \\"MY_ENUM_BAZ\\",
+            name: \\"BAZ\\",
             value: 3
         }
     ]
@@ -4204,15 +4204,15 @@ export const MyEnumWithoutUnspecified = nexus.enumType({
     name: \\"MyEnumWithoutUnspecified\\",
     members: [
         {
-            name: \\"MY_ENUM_WITHOUT_UNSPECIFIED_FOO\\",
+            name: \\"FOO\\",
             value: 0
         },
         {
-            name: \\"MY_ENUM_WITHOUT_UNSPECIFIED_BAR\\",
+            name: \\"BAR\\",
             value: 1
         },
         {
-            name: \\"MY_ENUM_WITHOUT_UNSPECIFIED_BAZ\\",
+            name: \\"BAZ\\",
             value: 2
         }
     ]
@@ -4426,16 +4426,16 @@ export const MyEnum = nexus.enumType({
     name: \\"MyEnum\\",
     members: [
         {
-            name: \\"MY_ENUM_FOO\\",
+            name: \\"FOO\\",
             value: 1
         },
         {
-            name: \\"MY_ENUM_BAR\\",
+            name: \\"BAR\\",
             description: \\"This is Bar.\\",
             value: 2
         },
         {
-            name: \\"MY_ENUM_BAZ\\",
+            name: \\"BAZ\\",
             value: 3
         }
     ]
@@ -4444,15 +4444,15 @@ export const MyEnumWithoutUnspecified = nexus.enumType({
     name: \\"MyEnumWithoutUnspecified\\",
     members: [
         {
-            name: \\"MY_ENUM_WITHOUT_UNSPECIFIED_FOO\\",
+            name: \\"FOO\\",
             value: 0
         },
         {
-            name: \\"MY_ENUM_WITHOUT_UNSPECIFIED_BAR\\",
+            name: \\"BAR\\",
             value: 1
         },
         {
-            name: \\"MY_ENUM_WITHOUT_UNSPECIFIED_BAZ\\",
+            name: \\"BAZ\\",
             value: 2
         }
     ]
