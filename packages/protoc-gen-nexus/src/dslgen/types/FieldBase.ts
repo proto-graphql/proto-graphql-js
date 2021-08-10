@@ -1,6 +1,6 @@
 import { ProtoField, ProtoOneof } from "../../protogen";
 import * as extensions from "../../__generated__/extensions/graphql/schema_pb";
-import { descriptionFromProto, FullName, GenerationParams, getDeprecationReason, isRequiredField } from "./util";
+import { descriptionFromProto, FullName, GenerationParams, getDeprecationReason } from "./util";
 
 export abstract class FieldBase<P extends ProtoField | ProtoOneof> {
   constructor(protected readonly proto: P, protected readonly opts: GenerationParams) {}
@@ -18,7 +18,7 @@ export abstract class FieldBase<P extends ProtoField | ProtoOneof> {
   }
 
   public isNullable(): boolean {
-    return !isRequiredField(this.proto);
+    throw "unimplemented";
   }
 
   get deprecationReason(): string | null {

@@ -23,6 +23,7 @@ goog.exportSymbol('proto.graphql.GraphqlInputTypeOptions', null, global);
 goog.exportSymbol('proto.graphql.GraphqlObjectTypeOptions', null, global);
 goog.exportSymbol('proto.graphql.GraphqlOneofOptions', null, global);
 goog.exportSymbol('proto.graphql.GraphqlSchemaOptions', null, global);
+goog.exportSymbol('proto.graphql.Nullability', null, global);
 goog.exportSymbol('proto.graphql.enumType', null, global);
 goog.exportSymbol('proto.graphql.enumValue', null, global);
 goog.exportSymbol('proto.graphql.field', null, global);
@@ -781,7 +782,10 @@ proto.graphql.GraphqlFieldOptions.toObject = function(includeInstance, msg) {
   var f, obj = {
     ignore: jspb.Message.getBooleanFieldWithDefault(msg, 1, false),
     name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    skipResolver: jspb.Message.getBooleanFieldWithDefault(msg, 3, false)
+    skipResolver: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
+    outputNullability: jspb.Message.getFieldWithDefault(msg, 11, 0),
+    inputNullability: jspb.Message.getFieldWithDefault(msg, 12, 0),
+    partialInputNullability: jspb.Message.getFieldWithDefault(msg, 13, 0)
   };
 
   if (includeInstance) {
@@ -830,6 +834,18 @@ proto.graphql.GraphqlFieldOptions.deserializeBinaryFromReader = function(msg, re
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setSkipResolver(value);
       break;
+    case 11:
+      var value = /** @type {!proto.graphql.Nullability} */ (reader.readEnum());
+      msg.setOutputNullability(value);
+      break;
+    case 12:
+      var value = /** @type {!proto.graphql.Nullability} */ (reader.readEnum());
+      msg.setInputNullability(value);
+      break;
+    case 13:
+      var value = /** @type {!proto.graphql.Nullability} */ (reader.readEnum());
+      msg.setPartialInputNullability(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -877,6 +893,27 @@ proto.graphql.GraphqlFieldOptions.serializeBinaryToWriter = function(message, wr
   if (f) {
     writer.writeBool(
       3,
+      f
+    );
+  }
+  f = message.getOutputNullability();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      11,
+      f
+    );
+  }
+  f = message.getInputNullability();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      12,
+      f
+    );
+  }
+  f = message.getPartialInputNullability();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      13,
       f
     );
   }
@@ -934,6 +971,60 @@ proto.graphql.GraphqlFieldOptions.prototype.getSkipResolver = function() {
  */
 proto.graphql.GraphqlFieldOptions.prototype.setSkipResolver = function(value) {
   return jspb.Message.setProto3BooleanField(this, 3, value);
+};
+
+
+/**
+ * optional Nullability output_nullability = 11;
+ * @return {!proto.graphql.Nullability}
+ */
+proto.graphql.GraphqlFieldOptions.prototype.getOutputNullability = function() {
+  return /** @type {!proto.graphql.Nullability} */ (jspb.Message.getFieldWithDefault(this, 11, 0));
+};
+
+
+/**
+ * @param {!proto.graphql.Nullability} value
+ * @return {!proto.graphql.GraphqlFieldOptions} returns this
+ */
+proto.graphql.GraphqlFieldOptions.prototype.setOutputNullability = function(value) {
+  return jspb.Message.setProto3EnumField(this, 11, value);
+};
+
+
+/**
+ * optional Nullability input_nullability = 12;
+ * @return {!proto.graphql.Nullability}
+ */
+proto.graphql.GraphqlFieldOptions.prototype.getInputNullability = function() {
+  return /** @type {!proto.graphql.Nullability} */ (jspb.Message.getFieldWithDefault(this, 12, 0));
+};
+
+
+/**
+ * @param {!proto.graphql.Nullability} value
+ * @return {!proto.graphql.GraphqlFieldOptions} returns this
+ */
+proto.graphql.GraphqlFieldOptions.prototype.setInputNullability = function(value) {
+  return jspb.Message.setProto3EnumField(this, 12, value);
+};
+
+
+/**
+ * optional Nullability partial_input_nullability = 13;
+ * @return {!proto.graphql.Nullability}
+ */
+proto.graphql.GraphqlFieldOptions.prototype.getPartialInputNullability = function() {
+  return /** @type {!proto.graphql.Nullability} */ (jspb.Message.getFieldWithDefault(this, 13, 0));
+};
+
+
+/**
+ * @param {!proto.graphql.Nullability} value
+ * @return {!proto.graphql.GraphqlFieldOptions} returns this
+ */
+proto.graphql.GraphqlFieldOptions.prototype.setPartialInputNullability = function(value) {
+  return jspb.Message.setProto3EnumField(this, 13, value);
 };
 
 
@@ -1326,6 +1417,15 @@ proto.graphql.GraphqlEnumValueOptions.prototype.setIgnore = function(value) {
   return jspb.Message.setProto3BooleanField(this, 1, value);
 };
 
+
+/**
+ * @enum {number}
+ */
+proto.graphql.Nullability = {
+  NULLABILITY_UNSPECIFIED: 0,
+  NULLABLE: 1,
+  NON_NULL: 2
+};
 
 
 /**

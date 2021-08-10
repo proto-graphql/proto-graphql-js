@@ -6,7 +6,7 @@ import { EnumType } from "./EnumType";
 import { FieldBase } from "./FieldBase";
 import { InputObjectType } from "./InputObjectType";
 import { ScalarType } from "./ScalarType";
-import { FullName, GenerationParams, modulesWithUniqueImportAlias, uniqueImportAlias } from "./util";
+import { FullName, GenerationParams, isRequiredField, modulesWithUniqueImportAlias, uniqueImportAlias } from "./util";
 
 export class InputObjectField<T extends ScalarType | EnumType | InputObjectType> extends FieldBase<ProtoField> {
   constructor(readonly type: T, readonly parent: InputObjectType, proto: ProtoField, opts: GenerationParams) {
@@ -23,6 +23,13 @@ export class InputObjectField<T extends ScalarType | EnumType | InputObjectType>
   get protoJsName(): string {
     if (this.opts.useProtobufjs) return camelCase(this.proto.name);
     return this.proto.jsonName;
+  }
+
+  /**
+   * @override
+   */
+  public override isNullable() {
+    return !isRequiredField(this.proto, "input");
   }
 
   /**
@@ -112,7 +119,10 @@ export class InputObjectField<T extends ScalarType | EnumType | InputObjectType>
 }
 
 class PartialInputObjectField<T extends ScalarType | EnumType | InputObjectType> extends InputObjectField<T> {
+  /**
+   * @override
+   */
   public override isNullable() {
-    return true;
+    return !isRequiredField(this.proto, "partial_input");
   }
 }

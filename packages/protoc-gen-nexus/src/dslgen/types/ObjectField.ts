@@ -11,7 +11,7 @@ import { ObjectType } from "./ObjectType";
 import { OneofUnionType } from "./OneofUnionType";
 import { ScalarType } from "./ScalarType";
 import { SquashedOneofUnionType } from "./SquashedOneofUnionType";
-import { FullName, GenerationParams, modulesWithUniqueImportAlias, uniqueImportAlias } from "./util";
+import { FullName, GenerationParams, isRequiredField, modulesWithUniqueImportAlias, uniqueImportAlias } from "./util";
 
 export class ObjectField<
   T extends ObjectType | InterfaceType | SquashedOneofUnionType | EnumType | ScalarType
@@ -38,6 +38,13 @@ export class ObjectField<
   get protoJsName(): string {
     if (this.opts.useProtobufjs) return camelCase(this.proto.name);
     return this.proto.jsonName;
+  }
+
+  /**
+   * @override
+   */
+  public override isNullable() {
+    return !isRequiredField(this.proto, "output");
   }
 
   /**
