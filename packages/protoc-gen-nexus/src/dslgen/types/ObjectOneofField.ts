@@ -1,7 +1,7 @@
 import { camelCase } from "change-case";
 import path from "path";
 import { ProtoOneof } from "../../protogen";
-import { FullName, GenerationParams, modulesWithUniqueImportAlias, uniqueImportAlias } from "./util";
+import { FullName, GenerationParams, isRequiredField, modulesWithUniqueImportAlias, uniqueImportAlias } from "./util";
 import { FieldBase } from "./FieldBase";
 import { ObjectType } from "./ObjectType";
 import { OneofUnionType } from "./OneofUnionType";
@@ -21,6 +21,13 @@ export class ObjectOneofField extends FieldBase<ProtoOneof> {
    */
   get name(): string {
     return camelCase(this.proto.name);
+  }
+
+  /**
+   * @override
+   */
+  public override isNullable() {
+    return !isRequiredField(this.proto, "output");
   }
 
   /**

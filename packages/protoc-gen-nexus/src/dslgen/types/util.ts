@@ -181,7 +181,53 @@ export function isScalar(m: ProtoMessage, opts: GenerationParams): boolean {
   return m.fullName.toString() in opts.typeMappings;
 }
 
-export function isRequiredField(field: ProtoField | ProtoOneof): boolean {
+export function isRequiredField(
+  field: ProtoField | ProtoOneof,
+  fieldType: "output" | "input" | "partial_input"
+): boolean {
+  if (field.kind === "Field") {
+    let nullability: extensions.NullabilityMap[keyof extensions.NullabilityMap] | null = null;
+    const ext = field.descriptor.getOptions()?.getExtension(extensions.field);
+    if (ext != null) {
+      switch (fieldType) {
+        case "output": {
+          nullability = ext.getOutputNullability();
+          break;
+        }
+        case "input": {
+          nullability = ext.getInputNullability();
+          break;
+        }
+        case "partial_input": {
+          nullability = ext.getPartialInputNullability();
+          break;
+        }
+        default: {
+          const _exhaustiveCheck: never = fieldType;
+          throw "unreachable";
+        }
+      }
+    }
+    switch (nullability) {
+      case null:
+      case extensions.Nullability.NULLABILITY_UNSPECIFIED:
+        // no-op
+        break;
+      case extensions.Nullability.NON_NULL:
+        return true;
+      case extensions.Nullability.NULLABLE:
+        return false;
+      default: {
+        const _exhaustiveCheck: never = nullability;
+        throw "unreachable";
+      }
+    }
+  }
+  if (fieldType === "partial_input") return false;
+  return hasRequiredLabel(field);
+}
+
+function hasRequiredLabel(field: ProtoField | ProtoOneof): boolean {
   if (
     field.kind === "Field" &&
     (field.descriptor.getLabel() === FieldDescriptorProto.Label.LABEL_REQUIRED ||

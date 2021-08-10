@@ -98,6 +98,15 @@ export class GraphqlFieldOptions extends jspb.Message {
   getSkipResolver(): boolean;
   setSkipResolver(value: boolean): void;
 
+  getOutputNullability(): NullabilityMap[keyof NullabilityMap];
+  setOutputNullability(value: NullabilityMap[keyof NullabilityMap]): void;
+
+  getInputNullability(): NullabilityMap[keyof NullabilityMap];
+  setInputNullability(value: NullabilityMap[keyof NullabilityMap]): void;
+
+  getPartialInputNullability(): NullabilityMap[keyof NullabilityMap];
+  setPartialInputNullability(value: NullabilityMap[keyof NullabilityMap]): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GraphqlFieldOptions.AsObject;
   static toObject(includeInstance: boolean, msg: GraphqlFieldOptions): GraphqlFieldOptions.AsObject;
@@ -113,6 +122,9 @@ export namespace GraphqlFieldOptions {
     ignore: boolean,
     name: string,
     skipResolver: boolean,
+    outputNullability: NullabilityMap[keyof NullabilityMap],
+    inputNullability: NullabilityMap[keyof NullabilityMap],
+    partialInputNullability: NullabilityMap[keyof NullabilityMap],
   }
 }
 
@@ -189,4 +201,12 @@ export namespace GraphqlEnumValueOptions {
   export const enumType: jspb.ExtensionFieldInfo<GraphqlEnumOptions>;
 
   export const enumValue: jspb.ExtensionFieldInfo<GraphqlEnumValueOptions>;
+
+export interface NullabilityMap {
+  NULLABILITY_UNSPECIFIED: 0;
+  NULLABLE: 1;
+  NON_NULL: 2;
+}
+
+export const Nullability: NullabilityMap;
 
