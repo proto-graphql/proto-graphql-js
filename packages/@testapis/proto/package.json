@@ -1,6 +1,6 @@
 {
   "name": "@testapis/proto",
-  "version": "0.5.0-alpha.16",
+  "version": "0.5.0-alpha.18",
   "description": "Generated codes from protobuf IDL",
   "private": true
 }
