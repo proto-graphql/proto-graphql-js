@@ -60,10 +60,10 @@
   "changelog": {
     "repo": "proto-graphql/proto-nexus",
     "labels": {
-      ":warning: code generation - breaking changes": "[Code Generation] ⚠️ Breaking Changes",
-      ":genie_woman: code generation - feature": "[Code Generation] New Features",
-      ":vulcan_salute: code generation - enhancement": "[Code Generation] Enhancements",
-      ":bug: bug": "Bug Fixes",
+      "code generation - breaking changes :warning:": "⚠️ Breaking Changes - Code Generation",
+      "code generation - feature :genie_woman:": "Features - Code Generation",
+      "code generation - enhancement :vulcan_salute:": "Enhancements - Code Generation",
+      "bug :bug:": "Bug Fixes",
       "dependencies": "Dependencies"
     }
   },
