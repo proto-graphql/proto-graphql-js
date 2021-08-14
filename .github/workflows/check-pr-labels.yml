@@ -16,3 +16,4 @@ jobs:
         github-token: '${{ secrets.GITHUB_TOKEN }}'
         valid-labels: 'bug :bug:, build :building_construction:, code generation - breaking changes :warning:, code generation - enhancement :vulcan_salute:, code generation - feature :genie_woman:, dependencies, devDependencies, documentation :writing_hand:, tests :microscope:, refactoring :art:'
         pull-request-number: '${{ github.event.pull_request.number }}'
+        disable-reviews: true  # use status
