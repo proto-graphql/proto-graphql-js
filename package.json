@@ -22,6 +22,7 @@
     "graphql-scalars": "1.10.0",
     "jest": "27.0.6",
     "lerna": "4.0.0",
+    "lerna-changelog": "^2.1.0",
     "nexus": "1.1.0",
     "protobufjs": "6.10.2",
     "rimraf": "3.0.2",
