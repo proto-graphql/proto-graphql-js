@@ -1,7 +1,5 @@
 {
-  "extends": [
-    "config:base"
-  ],
+  "extends": ["config:base"],
   "packageRules": [
     {
       "matchPaths": ["**"],
@@ -10,9 +8,16 @@
     {
       "matchPaths": ["package.json"],
       "enabled": true,
-      "labels": ["dependencies"],
       "rangeStrategy": "auto",
       "postUpdateOptions": ["yarnDedupeHighest"]
+    },
+    {
+      "matchDepTypes": ["dependencies", "peerDependencies"],
+      "labels": ["dependencies"]
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "labels": ["devDependencies"]
     }
   ]
 }
