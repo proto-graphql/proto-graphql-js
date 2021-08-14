@@ -143,7 +143,7 @@
 
 ## v0.5.0-alpha.6 (2021-02-04)
 
-#### Enhancements - Code Generation
+#### Improvements - Code Generation
 * `protoc-gen-nexus`
   * [#98](https://github.com/proto-graphql/proto-nexus/pull/98) fix: stop generating unused imports ([@izumin5210](https://github.com/izumin5210))
 
@@ -273,7 +273,7 @@
   * [#76](https://github.com/proto-graphql/proto-nexus/pull/76) support interface ([@izumin5210](https://github.com/izumin5210))
   * [#71](https://github.com/proto-graphql/proto-nexus/pull/71) consider graphql.field.ignore option for oneof members ([@izumin5210](https://github.com/izumin5210))
 
-#### Enhancements - Code Generation
+#### Improvements - Code Generation
 * `protoc-gen-nexus`
   * [#75](https://github.com/proto-graphql/proto-nexus/pull/75) simplify nexus import ([@izumin5210](https://github.com/izumin5210))
   * [#69](https://github.com/proto-graphql/proto-nexus/pull/69) omit empty descriptions ([@izumin5210](https://github.com/izumin5210))
@@ -293,7 +293,7 @@
   * [#64](https://github.com/proto-graphql/proto-nexus/pull/64) support `graphql.field.name` option ([@izumin5210](https://github.com/izumin5210))
   * [#60](https://github.com/proto-graphql/proto-nexus/pull/60) support `graphql.object_type.squash_union` option ([@izumin5210](https://github.com/izumin5210))
 
-#### Enhancements - Code Generation
+#### Improvements - Code Generation
 * `protoc-gen-nexus`
   * [#62](https://github.com/proto-graphql/proto-nexus/pull/62) reduce non-null assertion from generated code ([@izumin5210](https://github.com/izumin5210))
 
