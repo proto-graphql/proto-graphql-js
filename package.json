@@ -24,7 +24,7 @@
     "lerna": "4.0.0",
     "lerna-changelog": "2.1.0",
     "nexus": "1.1.0",
-    "protobufjs": "6.10.2",
+    "protobufjs": "6.11.2",
     "rimraf": "3.0.2",
     "ts-jest": "27.0.4",
     "ts-node": "10.1.0",
