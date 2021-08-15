@@ -1,5 +1,5 @@
 import * as wrappersPb from "google-protobuf/google/protobuf/wrappers_pb";
-import { registerTransformer, Transformer } from "proto-nexus";
+import { registerTransformer, Transformer, stringToNumber } from "proto-nexus";
 
 declare global {
   interface ProtoNexusTransformers {
@@ -28,7 +28,7 @@ registerTransformer("google.protobuf.Int64Value", {
     return v.getValue().toString();
   },
   gqlToProto(v) {
-    return new wrappersPb.Int64Value().setValue(parseInt(v));
+    return new wrappersPb.Int64Value().setValue(stringToNumber(v));
   },
 });
 
@@ -46,7 +46,7 @@ registerTransformer("google.protobuf.UInt64Value", {
     return v.getValue().toString();
   },
   gqlToProto(v) {
-    return new wrappersPb.UInt64Value().setValue(parseInt(v));
+    return new wrappersPb.UInt64Value().setValue(stringToNumber(v));
   },
 });
 

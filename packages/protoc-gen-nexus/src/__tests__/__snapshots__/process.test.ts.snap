@@ -2042,6 +2042,7 @@ exports[`protobuf custom options generates nexus DSLs with graphql_type file lay
 // source: testapis/extensions/extensions.proto
 
 import * as nexus from \\"nexus\\";
+import * as proto_nexus from \\"proto-nexus\\";
 import * as _$testapis$extensions from \\"./testapis/extensions\\";
 export type _$testapis$extensions$testapis$extensions$TestPrefixInterfaceMessage = _$testapis$extensions.testapis.extensions.InterfaceMessage;
 export const TestPrefixInterfaceMessage = nexus.interfaceType({
@@ -2067,6 +2068,7 @@ exports[`protobuf custom options generates nexus DSLs with graphql_type file lay
 // source: testapis/extensions/extensions.proto
 
 import * as nexus from \\"nexus\\";
+import * as proto_nexus from \\"proto-nexus\\";
 export const TestPrefixInterfaceMessageInput = Object.assign(nexus.inputObjectType({
     name: \\"TestPrefixInterfaceMessageInput\\",
     definition(t) {
@@ -2077,7 +2079,7 @@ export const TestPrefixInterfaceMessageInput = Object.assign(nexus.inputObjectTy
 }), {
     toProto: (input: NexusGen[\\"inputTypes\\"][\\"TestPrefixInterfaceMessageInput\\"]): _$testapis$extensions.testapis.extensions.InterfaceMessage => {
         const output = new _$testapis$extensions.testapis.extensions.InterfaceMessage();
-        output.id = parseInt(input.id);
+        output.id = proto_nexus.stringToNumber(input.id);
         return output;
     },
     _protoNexus: {
@@ -2138,6 +2140,7 @@ exports[`protobuf custom options generates nexus DSLs with graphql_type file lay
 // source: testapis/extensions/extensions.proto
 
 import * as nexus from \\"nexus\\";
+import * as proto_nexus from \\"proto-nexus\\";
 import * as _$TestPrefixIgnoredMessageNotIgnored_nexus from \\"./TestPrefixIgnoredMessageNotIgnored.nexus\\";
 import * as _$TestPrefixPrefixedEnum_nexus from \\"./TestPrefixPrefixedEnum.nexus\\";
 import * as _$TestPrefixPrefixedMessagePartialIgnoreOneof_nexus from \\"./TestPrefixPrefixedMessagePartialIgnoreOneof.nexus\\";
@@ -2275,6 +2278,7 @@ exports[`protobuf custom options generates nexus DSLs with graphql_type file lay
 // source: testapis/extensions/extensions.proto
 
 import * as nexus from \\"nexus\\";
+import * as proto_nexus from \\"proto-nexus\\";
 import * as _$testapis$extensions from \\"./testapis/extensions\\";
 export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageInnerMessage = _$testapis$extensions.testapis.extensions.PrefixedMessage.InnerMessage;
 export const TestPrefixPrefixedMessageInnerMessage = nexus.objectType({
@@ -2314,6 +2318,7 @@ exports[`protobuf custom options generates nexus DSLs with graphql_type file lay
 // source: testapis/extensions/extensions.proto
 
 import * as nexus from \\"nexus\\";
+import * as proto_nexus from \\"proto-nexus\\";
 import * as _$testapis$extensions from \\"./testapis/extensions\\";
 export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessageInnerMessage2 = _$testapis$extensions.testapis.extensions.PrefixedMessage.InnerMessage2;
 export const TestPrefixPrefixedMessageInnerMessage2 = nexus.objectType({
@@ -2353,6 +2358,7 @@ exports[`protobuf custom options generates nexus DSLs with graphql_type file lay
 // source: testapis/extensions/extensions.proto
 
 import * as nexus from \\"nexus\\";
+import * as proto_nexus from \\"proto-nexus\\";
 export const TestPrefixPrefixedMessageInnerMessage2Input = Object.assign(nexus.inputObjectType({
     name: \\"TestPrefixPrefixedMessageInnerMessage2Input\\",
     definition(t) {
@@ -2366,7 +2372,7 @@ export const TestPrefixPrefixedMessageInnerMessage2Input = Object.assign(nexus.i
 }), {
     toProto: (input: NexusGen[\\"inputTypes\\"][\\"TestPrefixPrefixedMessageInnerMessage2Input\\"]): _$testapis$extensions.testapis.extensions.PrefixedMessage.InnerMessage2 => {
         const output = new _$testapis$extensions.testapis.extensions.PrefixedMessage.InnerMessage2();
-        output.id = parseInt(input.id);
+        output.id = proto_nexus.stringToNumber(input.id);
         output.body = input.body;
         return output;
     },
@@ -2389,6 +2395,7 @@ exports[`protobuf custom options generates nexus DSLs with graphql_type file lay
 // source: testapis/extensions/extensions.proto
 
 import * as nexus from \\"nexus\\";
+import * as proto_nexus from \\"proto-nexus\\";
 export const TestPrefixPrefixedMessageInnerMessageInput = Object.assign(nexus.inputObjectType({
     name: \\"TestPrefixPrefixedMessageInnerMessageInput\\",
     definition(t) {
@@ -2402,7 +2409,7 @@ export const TestPrefixPrefixedMessageInnerMessageInput = Object.assign(nexus.in
 }), {
     toProto: (input: NexusGen[\\"inputTypes\\"][\\"TestPrefixPrefixedMessageInnerMessageInput\\"]): _$testapis$extensions.testapis.extensions.PrefixedMessage.InnerMessage => {
         const output = new _$testapis$extensions.testapis.extensions.PrefixedMessage.InnerMessage();
-        output.id = parseInt(input.id);
+        output.id = proto_nexus.stringToNumber(input.id);
         output.body = input.body;
         return output;
     },
@@ -2658,6 +2665,7 @@ exports[`protobuf custom options with native protobuf generates nexus DSLs: exte
 // source: testapis/extensions/extensions.proto
 
 import * as nexus from \\"nexus\\";
+import * as proto_nexus from \\"proto-nexus\\";
 import * as _$testapis$extensions$extensions_pb from \\"./testapis/extensions/extensions_pb\\";
 export type _$testapis$extensions$extensions_pb$TestPrefixPrefixedMessage = _$testapis$extensions$extensions_pb.PrefixedMessage;
 export type _$testapis$extensions$extensions_pb$TestPrefixRenamedMessage = _$testapis$extensions$extensions_pb.MessageWillRename;
@@ -2997,7 +3005,7 @@ export const TestPrefixInterfaceMessageInput = Object.assign(nexus.inputObjectTy
 }), {
     toProto: (input: NexusGen[\\"inputTypes\\"][\\"TestPrefixInterfaceMessageInput\\"]): _$testapis$extensions$extensions_pb.InterfaceMessage => {
         const output = new _$testapis$extensions$extensions_pb.InterfaceMessage();
-        output.setId(parseInt(input.id));
+        output.setId(proto_nexus.stringToNumber(input.id));
         return output;
     },
     _protoNexus: {
@@ -3021,7 +3029,7 @@ export const TestPrefixPrefixedMessageInnerMessageInput = Object.assign(nexus.in
 }), {
     toProto: (input: NexusGen[\\"inputTypes\\"][\\"TestPrefixPrefixedMessageInnerMessageInput\\"]): _$testapis$extensions$extensions_pb.PrefixedMessage.InnerMessage => {
         const output = new _$testapis$extensions$extensions_pb.PrefixedMessage.InnerMessage();
-        output.setId(parseInt(input.id));
+        output.setId(proto_nexus.stringToNumber(input.id));
         output.setBody(input.body);
         return output;
     },
@@ -3049,7 +3057,7 @@ export const TestPrefixPrefixedMessageInnerMessage2Input = Object.assign(nexus.i
 }), {
     toProto: (input: NexusGen[\\"inputTypes\\"][\\"TestPrefixPrefixedMessageInnerMessage2Input\\"]): _$testapis$extensions$extensions_pb.PrefixedMessage.InnerMessage2 => {
         const output = new _$testapis$extensions$extensions_pb.PrefixedMessage.InnerMessage2();
-        output.setId(parseInt(input.id));
+        output.setId(proto_nexus.stringToNumber(input.id));
         output.setBody(input.body);
         return output;
     },
@@ -3183,6 +3191,7 @@ exports[`protobuf custom options with protobufjs generates nexus DSLs: extension
 // source: testapis/extensions/extensions.proto
 
 import * as nexus from \\"nexus\\";
+import * as proto_nexus from \\"proto-nexus\\";
 import * as _$testapis$extensions from \\"./testapis/extensions\\";
 export type _$testapis$extensions$testapis$extensions$TestPrefixPrefixedMessage = _$testapis$extensions.testapis.extensions.PrefixedMessage;
 export type _$testapis$extensions$testapis$extensions$TestPrefixRenamedMessage = _$testapis$extensions.testapis.extensions.MessageWillRename;
@@ -3528,7 +3537,7 @@ export const TestPrefixInterfaceMessageInput = Object.assign(nexus.inputObjectTy
 }), {
     toProto: (input: NexusGen[\\"inputTypes\\"][\\"TestPrefixInterfaceMessageInput\\"]): _$testapis$extensions.testapis.extensions.InterfaceMessage => {
         const output = new _$testapis$extensions.testapis.extensions.InterfaceMessage();
-        output.id = parseInt(input.id);
+        output.id = proto_nexus.stringToNumber(input.id);
         return output;
     },
     _protoNexus: {
@@ -3552,7 +3561,7 @@ export const TestPrefixPrefixedMessageInnerMessageInput = Object.assign(nexus.in
 }), {
     toProto: (input: NexusGen[\\"inputTypes\\"][\\"TestPrefixPrefixedMessageInnerMessageInput\\"]): _$testapis$extensions.testapis.extensions.PrefixedMessage.InnerMessage => {
         const output = new _$testapis$extensions.testapis.extensions.PrefixedMessage.InnerMessage();
-        output.id = parseInt(input.id);
+        output.id = proto_nexus.stringToNumber(input.id);
         output.body = input.body;
         return output;
     },
@@ -3580,7 +3589,7 @@ export const TestPrefixPrefixedMessageInnerMessage2Input = Object.assign(nexus.i
 }), {
     toProto: (input: NexusGen[\\"inputTypes\\"][\\"TestPrefixPrefixedMessageInnerMessage2Input\\"]): _$testapis$extensions.testapis.extensions.PrefixedMessage.InnerMessage2 => {
         const output = new _$testapis$extensions.testapis.extensions.PrefixedMessage.InnerMessage2();
-        output.id = parseInt(input.id);
+        output.id = proto_nexus.stringToNumber(input.id);
         output.body = input.body;
         return output;
     },
@@ -5275,6 +5284,7 @@ exports[`simple proto file generates nexus DSLs with graphql_type file layout: p
 // source: testapis/primitives/primitives.proto
 
 import * as nexus from \\"nexus\\";
+import * as proto_nexus from \\"proto-nexus\\";
 import * as _$testapis$primitives from \\"./testapis/primitives\\";
 export type _$testapis$primitives$testapis$primitives$Primitives = _$testapis$primitives.testapis.primitives.Primitives;
 export const Primitives = nexus.objectType({
@@ -5542,6 +5552,7 @@ exports[`simple proto file generates nexus DSLs with graphql_type file layout: p
 // source: testapis/primitives/primitives.proto
 
 import * as nexus from \\"nexus\\";
+import * as proto_nexus from \\"proto-nexus\\";
 export const PrimitivesInput = Object.assign(nexus.inputObjectType({
     name: \\"PrimitivesInput\\",
     definition(t) {
@@ -5636,29 +5647,29 @@ export const PrimitivesInput = Object.assign(nexus.inputObjectType({
         output.requiredDoubleValue = input.requiredDoubleValue;
         output.requiredFloatValue = input.requiredFloatValue;
         output.requiredInt32Value = input.requiredInt32Value;
-        output.requiredInt64Value = parseInt(input.requiredInt64Value);
+        output.requiredInt64Value = proto_nexus.stringToNumber(input.requiredInt64Value);
         output.requiredUint32Value = input.requiredUint32Value;
-        output.requiredUint64Value = parseInt(input.requiredUint64Value);
+        output.requiredUint64Value = proto_nexus.stringToNumber(input.requiredUint64Value);
         output.requiredSint32Value = input.requiredSint32Value;
-        output.requiredSint64Value = parseInt(input.requiredSint64Value);
+        output.requiredSint64Value = proto_nexus.stringToNumber(input.requiredSint64Value);
         output.requiredFixed32Value = input.requiredFixed32Value;
-        output.requiredFixed64Value = parseInt(input.requiredFixed64Value);
+        output.requiredFixed64Value = proto_nexus.stringToNumber(input.requiredFixed64Value);
         output.requiredSfixed32Value = input.requiredSfixed32Value;
-        output.requiredSfixed64Value = parseInt(input.requiredSfixed64Value);
+        output.requiredSfixed64Value = proto_nexus.stringToNumber(input.requiredSfixed64Value);
         output.requiredBoolValue = input.requiredBoolValue;
         output.requiredStringValue = input.requiredStringValue;
         output.requiredDoubleValues = input.requiredDoubleValues.map(v => v);
         output.requiredFloatValues = input.requiredFloatValues.map(v => v);
         output.requiredInt32Values = input.requiredInt32Values.map(v => v);
-        output.requiredInt64Values = input.requiredInt64Values.map(v => parseInt(v));
+        output.requiredInt64Values = input.requiredInt64Values.map(v => proto_nexus.stringToNumber(v));
         output.requiredUint32Values = input.requiredUint32Values.map(v => v);
-        output.requiredUint64Values = input.requiredUint64Values.map(v => parseInt(v));
+        output.requiredUint64Values = input.requiredUint64Values.map(v => proto_nexus.stringToNumber(v));
         output.requiredSint32Values = input.requiredSint32Values.map(v => v);
-        output.requiredSint64Values = input.requiredSint64Values.map(v => parseInt(v));
+        output.requiredSint64Values = input.requiredSint64Values.map(v => proto_nexus.stringToNumber(v));
         output.requiredFixed32Values = input.requiredFixed32Values.map(v => v);
-        output.requiredFixed64Values = input.requiredFixed64Values.map(v => parseInt(v));
+        output.requiredFixed64Values = input.requiredFixed64Values.map(v => proto_nexus.stringToNumber(v));
         output.requiredSfixed32Values = input.requiredSfixed32Values.map(v => v);
-        output.requiredSfixed64Values = input.requiredSfixed64Values.map(v => parseInt(v));
+        output.requiredSfixed64Values = input.requiredSfixed64Values.map(v => proto_nexus.stringToNumber(v));
         output.requiredBoolValues = input.requiredBoolValues.map(v => v);
         output.requiredStringValues = input.requiredStringValues.map(v => v);
         return output;
@@ -5760,6 +5771,7 @@ exports[`simple proto file generates nexus DSLs with partial inputs: primitives/
 // source: testapis/primitives/primitives.proto
 
 import * as nexus from \\"nexus\\";
+import * as proto_nexus from \\"proto-nexus\\";
 import * as _$testapis$primitives from \\"./testapis/primitives\\";
 export type _$testapis$primitives$testapis$primitives$Message = _$testapis$primitives.testapis.primitives.Message;
 export type _$testapis$primitives$testapis$primitives$Primitives = _$testapis$primitives.testapis.primitives.Primitives;
@@ -6273,29 +6285,29 @@ export const PrimitivesInput = Object.assign(nexus.inputObjectType({
         output.requiredDoubleValue = input.requiredDoubleValue;
         output.requiredFloatValue = input.requiredFloatValue;
         output.requiredInt32Value = input.requiredInt32Value;
-        output.requiredInt64Value = parseInt(input.requiredInt64Value);
+        output.requiredInt64Value = proto_nexus.stringToNumber(input.requiredInt64Value);
         output.requiredUint32Value = input.requiredUint32Value;
-        output.requiredUint64Value = parseInt(input.requiredUint64Value);
+        output.requiredUint64Value = proto_nexus.stringToNumber(input.requiredUint64Value);
         output.requiredSint32Value = input.requiredSint32Value;
-        output.requiredSint64Value = parseInt(input.requiredSint64Value);
+        output.requiredSint64Value = proto_nexus.stringToNumber(input.requiredSint64Value);
         output.requiredFixed32Value = input.requiredFixed32Value;
-        output.requiredFixed64Value = parseInt(input.requiredFixed64Value);
+        output.requiredFixed64Value = proto_nexus.stringToNumber(input.requiredFixed64Value);
         output.requiredSfixed32Value = input.requiredSfixed32Value;
-        output.requiredSfixed64Value = parseInt(input.requiredSfixed64Value);
+        output.requiredSfixed64Value = proto_nexus.stringToNumber(input.requiredSfixed64Value);
         output.requiredBoolValue = input.requiredBoolValue;
         output.requiredStringValue = input.requiredStringValue;
         output.requiredDoubleValues = input.requiredDoubleValues.map(v => v);
         output.requiredFloatValues = input.requiredFloatValues.map(v => v);
         output.requiredInt32Values = input.requiredInt32Values.map(v => v);
-        output.requiredInt64Values = input.requiredInt64Values.map(v => parseInt(v));
+        output.requiredInt64Values = input.requiredInt64Values.map(v => proto_nexus.stringToNumber(v));
         output.requiredUint32Values = input.requiredUint32Values.map(v => v);
-        output.requiredUint64Values = input.requiredUint64Values.map(v => parseInt(v));
+        output.requiredUint64Values = input.requiredUint64Values.map(v => proto_nexus.stringToNumber(v));
         output.requiredSint32Values = input.requiredSint32Values.map(v => v);
-        output.requiredSint64Values = input.requiredSint64Values.map(v => parseInt(v));
+        output.requiredSint64Values = input.requiredSint64Values.map(v => proto_nexus.stringToNumber(v));
         output.requiredFixed32Values = input.requiredFixed32Values.map(v => v);
-        output.requiredFixed64Values = input.requiredFixed64Values.map(v => parseInt(v));
+        output.requiredFixed64Values = input.requiredFixed64Values.map(v => proto_nexus.stringToNumber(v));
         output.requiredSfixed32Values = input.requiredSfixed32Values.map(v => v);
-        output.requiredSfixed64Values = input.requiredSfixed64Values.map(v => parseInt(v));
+        output.requiredSfixed64Values = input.requiredSfixed64Values.map(v => proto_nexus.stringToNumber(v));
         output.requiredBoolValues = input.requiredBoolValues.map(v => v);
         output.requiredStringValues = input.requiredStringValues.map(v => v);
         return output;
@@ -6490,31 +6502,31 @@ export const PrimitivesPartialInput = Object.assign(nexus.inputObjectType({
             output.requiredInt32Value = input.requiredInt32Value;
         }
         if (input.requiredInt64Value != null) {
-            output.requiredInt64Value = parseInt(input.requiredInt64Value);
+            output.requiredInt64Value = proto_nexus.stringToNumber(input.requiredInt64Value);
         }
         if (input.requiredUint32Value != null) {
             output.requiredUint32Value = input.requiredUint32Value;
         }
         if (input.requiredUint64Value != null) {
-            output.requiredUint64Value = parseInt(input.requiredUint64Value);
+            output.requiredUint64Value = proto_nexus.stringToNumber(input.requiredUint64Value);
         }
         if (input.requiredSint32Value != null) {
             output.requiredSint32Value = input.requiredSint32Value;
         }
         if (input.requiredSint64Value != null) {
-            output.requiredSint64Value = parseInt(input.requiredSint64Value);
+            output.requiredSint64Value = proto_nexus.stringToNumber(input.requiredSint64Value);
         }
         if (input.requiredFixed32Value != null) {
             output.requiredFixed32Value = input.requiredFixed32Value;
         }
         if (input.requiredFixed64Value != null) {
-            output.requiredFixed64Value = parseInt(input.requiredFixed64Value);
+            output.requiredFixed64Value = proto_nexus.stringToNumber(input.requiredFixed64Value);
         }
         if (input.requiredSfixed32Value != null) {
             output.requiredSfixed32Value = input.requiredSfixed32Value;
         }
         if (input.requiredSfixed64Value != null) {
-            output.requiredSfixed64Value = parseInt(input.requiredSfixed64Value);
+            output.requiredSfixed64Value = proto_nexus.stringToNumber(input.requiredSfixed64Value);
         }
         if (input.requiredBoolValue != null) {
             output.requiredBoolValue = input.requiredBoolValue;
@@ -6532,31 +6544,31 @@ export const PrimitivesPartialInput = Object.assign(nexus.inputObjectType({
             output.requiredInt32Values = input.requiredInt32Values.map(v => v);
         }
         if (input.requiredInt64Values != null) {
-            output.requiredInt64Values = input.requiredInt64Values.map(v => parseInt(v));
+            output.requiredInt64Values = input.requiredInt64Values.map(v => proto_nexus.stringToNumber(v));
         }
         if (input.requiredUint32Values != null) {
             output.requiredUint32Values = input.requiredUint32Values.map(v => v);
         }
         if (input.requiredUint64Values != null) {
-            output.requiredUint64Values = input.requiredUint64Values.map(v => parseInt(v));
+            output.requiredUint64Values = input.requiredUint64Values.map(v => proto_nexus.stringToNumber(v));
         }
         if (input.requiredSint32Values != null) {
             output.requiredSint32Values = input.requiredSint32Values.map(v => v);
         }
         if (input.requiredSint64Values != null) {
-            output.requiredSint64Values = input.requiredSint64Values.map(v => parseInt(v));
+            output.requiredSint64Values = input.requiredSint64Values.map(v => proto_nexus.stringToNumber(v));
         }
         if (input.requiredFixed32Values != null) {
             output.requiredFixed32Values = input.requiredFixed32Values.map(v => v);
         }
         if (input.requiredFixed64Values != null) {
-            output.requiredFixed64Values = input.requiredFixed64Values.map(v => parseInt(v));
+            output.requiredFixed64Values = input.requiredFixed64Values.map(v => proto_nexus.stringToNumber(v));
         }
         if (input.requiredSfixed32Values != null) {
             output.requiredSfixed32Values = input.requiredSfixed32Values.map(v => v);
         }
         if (input.requiredSfixed64Values != null) {
-            output.requiredSfixed64Values = input.requiredSfixed64Values.map(v => parseInt(v));
+            output.requiredSfixed64Values = input.requiredSfixed64Values.map(v => proto_nexus.stringToNumber(v));
         }
         if (input.requiredBoolValues != null) {
             output.requiredBoolValues = input.requiredBoolValues.map(v => v);
@@ -6663,6 +6675,7 @@ exports[`simple proto file with native protobuf generates nexus DSLs: primitives
 // source: testapis/primitives/primitives.proto
 
 import * as nexus from \\"nexus\\";
+import * as proto_nexus from \\"proto-nexus\\";
 import * as _$testapis$primitives$primitives_pb from \\"./testapis/primitives/primitives_pb\\";
 export type _$testapis$primitives$primitives_pb$Message = _$testapis$primitives$primitives_pb.Message;
 export type _$testapis$primitives$primitives_pb$Primitives = _$testapis$primitives$primitives_pb.Primitives;
@@ -7076,29 +7089,29 @@ export const PrimitivesInput = Object.assign(nexus.inputObjectType({
         output.setRequiredDoubleValue(input.requiredDoubleValue);
         output.setRequiredFloatValue(input.requiredFloatValue);
         output.setRequiredInt32Value(input.requiredInt32Value);
-        output.setRequiredInt64Value(parseInt(input.requiredInt64Value));
+        output.setRequiredInt64Value(proto_nexus.stringToNumber(input.requiredInt64Value));
         output.setRequiredUint32Value(input.requiredUint32Value);
-        output.setRequiredUint64Value(parseInt(input.requiredUint64Value));
+        output.setRequiredUint64Value(proto_nexus.stringToNumber(input.requiredUint64Value));
         output.setRequiredSint32Value(input.requiredSint32Value);
-        output.setRequiredSint64Value(parseInt(input.requiredSint64Value));
+        output.setRequiredSint64Value(proto_nexus.stringToNumber(input.requiredSint64Value));
         output.setRequiredFixed32Value(input.requiredFixed32Value);
-        output.setRequiredFixed64Value(parseInt(input.requiredFixed64Value));
+        output.setRequiredFixed64Value(proto_nexus.stringToNumber(input.requiredFixed64Value));
         output.setRequiredSfixed32Value(input.requiredSfixed32Value);
-        output.setRequiredSfixed64Value(parseInt(input.requiredSfixed64Value));
+        output.setRequiredSfixed64Value(proto_nexus.stringToNumber(input.requiredSfixed64Value));
         output.setRequiredBoolValue(input.requiredBoolValue);
         output.setRequiredStringValue(input.requiredStringValue);
         output.setRequiredDoubleValuesList(input.requiredDoubleValues.map(v => v));
         output.setRequiredFloatValuesList(input.requiredFloatValues.map(v => v));
         output.setRequiredInt32ValuesList(input.requiredInt32Values.map(v => v));
-        output.setRequiredInt64ValuesList(input.requiredInt64Values.map(v => parseInt(v)));
+        output.setRequiredInt64ValuesList(input.requiredInt64Values.map(v => proto_nexus.stringToNumber(v)));
         output.setRequiredUint32ValuesList(input.requiredUint32Values.map(v => v));
-        output.setRequiredUint64ValuesList(input.requiredUint64Values.map(v => parseInt(v)));
+        output.setRequiredUint64ValuesList(input.requiredUint64Values.map(v => proto_nexus.stringToNumber(v)));
         output.setRequiredSint32ValuesList(input.requiredSint32Values.map(v => v));
-        output.setRequiredSint64ValuesList(input.requiredSint64Values.map(v => parseInt(v)));
+        output.setRequiredSint64ValuesList(input.requiredSint64Values.map(v => proto_nexus.stringToNumber(v)));
         output.setRequiredFixed32ValuesList(input.requiredFixed32Values.map(v => v));
-        output.setRequiredFixed64ValuesList(input.requiredFixed64Values.map(v => parseInt(v)));
+        output.setRequiredFixed64ValuesList(input.requiredFixed64Values.map(v => proto_nexus.stringToNumber(v)));
         output.setRequiredSfixed32ValuesList(input.requiredSfixed32Values.map(v => v));
-        output.setRequiredSfixed64ValuesList(input.requiredSfixed64Values.map(v => parseInt(v)));
+        output.setRequiredSfixed64ValuesList(input.requiredSfixed64Values.map(v => proto_nexus.stringToNumber(v)));
         output.setRequiredBoolValuesList(input.requiredBoolValues.map(v => v));
         output.setRequiredStringValuesList(input.requiredStringValues.map(v => v));
         return output;
@@ -7200,6 +7213,7 @@ exports[`simple proto file with protobufjs generates nexus DSLs: primitives/prim
 // source: testapis/primitives/primitives.proto
 
 import * as nexus from \\"nexus\\";
+import * as proto_nexus from \\"proto-nexus\\";
 import * as _$testapis$primitives from \\"./testapis/primitives\\";
 export type _$testapis$primitives$testapis$primitives$Message = _$testapis$primitives.testapis.primitives.Message;
 export type _$testapis$primitives$testapis$primitives$Primitives = _$testapis$primitives.testapis.primitives.Primitives;
@@ -7655,29 +7669,29 @@ export const PrimitivesInput = Object.assign(nexus.inputObjectType({
         output.requiredDoubleValue = input.requiredDoubleValue;
         output.requiredFloatValue = input.requiredFloatValue;
         output.requiredInt32Value = input.requiredInt32Value;
-        output.requiredInt64Value = parseInt(input.requiredInt64Value);
+        output.requiredInt64Value = proto_nexus.stringToNumber(input.requiredInt64Value);
         output.requiredUint32Value = input.requiredUint32Value;
-        output.requiredUint64Value = parseInt(input.requiredUint64Value);
+        output.requiredUint64Value = proto_nexus.stringToNumber(input.requiredUint64Value);
         output.requiredSint32Value = input.requiredSint32Value;
-        output.requiredSint64Value = parseInt(input.requiredSint64Value);
+        output.requiredSint64Value = proto_nexus.stringToNumber(input.requiredSint64Value);
         output.requiredFixed32Value = input.requiredFixed32Value;
-        output.requiredFixed64Value = parseInt(input.requiredFixed64Value);
+        output.requiredFixed64Value = proto_nexus.stringToNumber(input.requiredFixed64Value);
         output.requiredSfixed32Value = input.requiredSfixed32Value;
-        output.requiredSfixed64Value = parseInt(input.requiredSfixed64Value);
+        output.requiredSfixed64Value = proto_nexus.stringToNumber(input.requiredSfixed64Value);
         output.requiredBoolValue = input.requiredBoolValue;
         output.requiredStringValue = input.requiredStringValue;
         output.requiredDoubleValues = input.requiredDoubleValues.map(v => v);
         output.requiredFloatValues = input.requiredFloatValues.map(v => v);
         output.requiredInt32Values = input.requiredInt32Values.map(v => v);
-        output.requiredInt64Values = input.requiredInt64Values.map(v => parseInt(v));
+        output.requiredInt64Values = input.requiredInt64Values.map(v => proto_nexus.stringToNumber(v));
         output.requiredUint32Values = input.requiredUint32Values.map(v => v);
-        output.requiredUint64Values = input.requiredUint64Values.map(v => parseInt(v));
+        output.requiredUint64Values = input.requiredUint64Values.map(v => proto_nexus.stringToNumber(v));
         output.requiredSint32Values = input.requiredSint32Values.map(v => v);
-        output.requiredSint64Values = input.requiredSint64Values.map(v => parseInt(v));
+        output.requiredSint64Values = input.requiredSint64Values.map(v => proto_nexus.stringToNumber(v));
         output.requiredFixed32Values = input.requiredFixed32Values.map(v => v);
-        output.requiredFixed64Values = input.requiredFixed64Values.map(v => parseInt(v));
+        output.requiredFixed64Values = input.requiredFixed64Values.map(v => proto_nexus.stringToNumber(v));
         output.requiredSfixed32Values = input.requiredSfixed32Values.map(v => v);
-        output.requiredSfixed64Values = input.requiredSfixed64Values.map(v => parseInt(v));
+        output.requiredSfixed64Values = input.requiredSfixed64Values.map(v => proto_nexus.stringToNumber(v));
         output.requiredBoolValues = input.requiredBoolValues.map(v => v);
         output.requiredStringValues = input.requiredStringValues.map(v => v);
         return output;

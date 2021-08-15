@@ -35,6 +35,26 @@ export function createNexusProp(name: string): ts.Expression {
   return ts.factory.createPropertyAccessExpression(ts.factory.createIdentifier("nexus"), name);
 }
 
+/**
+ * @example
+ * ```
+ * proto_nexus.Transformer
+ * ```
+ */
+export function createProtoNexusProp(name: string): ts.Expression {
+  return ts.factory.createPropertyAccessExpression(ts.factory.createIdentifier(uniqueImportAlias("proto-nexus")), name);
+}
+
+/**
+ * @example
+ * ```
+ * proto_nexus.stringToNumber(...)
+ * ```
+ */
+export function createProtoNexusCallExpr(name: string, args: readonly ts.Expression[]): ts.Expression {
+  return ts.factory.createCallExpression(createProtoNexusProp(name), undefined, args);
+}
+
 export function createDescriptionPropertyAssignment(
   gql:
     | ObjectType
@@ -148,12 +168,7 @@ export function createGqlToProto(type: ScalarType): ts.Expression {
 }
 
 function createTransformerExpr(type: ScalarType): ts.Expression {
-  return ts.factory.createCallExpression(
-    ts.factory.createPropertyAccessExpression(
-      ts.factory.createIdentifier(uniqueImportAlias("proto-nexus")),
-      "getTransformer"
-    ),
-    undefined,
-    [ts.factory.createStringLiteral(fullNameString(type.protoFullName!))]
-  );
+  return createProtoNexusCallExpr("getTransformer", [
+    ts.factory.createStringLiteral(fullNameString(type.protoFullName!)),
+  ]);
 }

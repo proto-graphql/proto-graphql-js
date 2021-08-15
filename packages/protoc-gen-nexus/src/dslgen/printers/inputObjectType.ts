@@ -5,6 +5,7 @@ import {
   createFullNameExpr,
   createGqlToProto,
   createNexusCallExpr,
+  createProtoNexusCallExpr,
   createQualifiedName,
   onlyNonNull,
 } from "./util";
@@ -264,8 +265,7 @@ function createToProtoFuncBodyStmts(type: InputObjectType): ts.Statement[] {
 function createScalarToProtoExpr(inputExpr: ts.Expression, field: InputObjectField<ScalarType>): ts.Expression {
   let outputExpr = inputExpr;
   if (field.type.shouldToString()) {
-    // FIXME: avoid parseInt
-    outputExpr = ts.factory.createCallExpression(ts.factory.createIdentifier("parseInt"), undefined, [outputExpr]);
+    outputExpr = createProtoNexusCallExpr("stringToNumber", [outputExpr]);
   }
   if (!field.type.isPrimitive()) {
     outputExpr = ts.factory.createCallExpression(createGqlToProto(field.type), undefined, [outputExpr]);
