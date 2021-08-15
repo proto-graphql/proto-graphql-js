@@ -20,7 +20,7 @@ export class ScalarType {
   }
 
   get importPath(): string | null {
-    if (this.proto.type) {
+    if (this.proto.type || this.shouldToString()) {
       return "proto-nexus";
     }
     return null;

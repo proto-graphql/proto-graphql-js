@@ -1,4 +1,4 @@
-import { registerTransformer, Transformer } from "proto-nexus";
+import { registerTransformer, Transformer, stringToNumber } from "proto-nexus";
 import { common } from "protobufjs";
 
 declare global {
@@ -30,7 +30,7 @@ registerTransformer("google.protobuf.Int64Value", {
     return v.value!.toString();
   },
   gqlToProto(v) {
-    return { value: parseInt(v) };
+    return { value: stringToNumber(v) };
   },
 });
 
@@ -50,7 +50,7 @@ registerTransformer("google.protobuf.UInt64Value", {
     return v.value!.toString();
   },
   gqlToProto(v) {
-    return { value: parseInt(v) };
+    return { value: stringToNumber(v) };
   },
 });
 

@@ -5,6 +5,7 @@ exports[`field_nullability generates nexus DSLs with partial inputs: extensions/
 // source: testapis/extensions/field_nullability/nullability.proto
 
 import * as nexus from \\"nexus\\";
+import * as proto_nexus from \\"proto-nexus\\";
 import * as _$testapis$extensions$field_nullability$nullability_pb from \\"./testapis/extensions/field_nullability/nullability_pb\\";
 export type _$testapis$extensions$field_nullability$nullability_pb$Message = _$testapis$extensions$field_nullability$nullability_pb.Message;
 export const Message = nexus.objectType({
@@ -66,7 +67,7 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
     toProto: (input: NexusGen[\\"inputTypes\\"][\\"MessageInput\\"]): _$testapis$extensions$field_nullability$nullability_pb.Message => {
         const output = new _$testapis$extensions$field_nullability$nullability_pb.Message();
         if (input.userId != null) {
-            output.setUserId(parseInt(input.userId));
+            output.setUserId(proto_nexus.stringToNumber(input.userId));
         }
         output.setBody(input.body);
         if (input.status != null) {
@@ -110,7 +111,7 @@ export const MessagePartialInput = Object.assign(nexus.inputObjectType({
 }), {
     toProto: (input: NexusGen[\\"inputTypes\\"][\\"MessagePartialInput\\"]): _$testapis$extensions$field_nullability$nullability_pb.Message => {
         const output = new _$testapis$extensions$field_nullability$nullability_pb.Message();
-        output.setUserId(parseInt(input.userId));
+        output.setUserId(proto_nexus.stringToNumber(input.userId));
         if (input.body != null) {
             output.setBody(input.body);
         }
@@ -157,6 +158,7 @@ exports[`no_partial generates nexus DSLs with partial inputs: extensions/no_part
 // source: testapis/extensions/no_partial/no_partial.proto
 
 import * as nexus from \\"nexus\\";
+import * as proto_nexus from \\"proto-nexus\\";
 import * as _$testapis$extensions$no_partial$no_partial_pb from \\"./testapis/extensions/no_partial/no_partial_pb\\";
 export type _$testapis$extensions$no_partial$no_partial_pb$ParentMessage = _$testapis$extensions$no_partial$no_partial_pb.ParentMessage;
 export type _$testapis$extensions$no_partial$no_partial_pb$PartialableInputMessage = _$testapis$extensions$no_partial$no_partial_pb.PartialableInputMessage;
@@ -325,7 +327,7 @@ export const PartialableInputMessageInput = Object.assign(nexus.inputObjectType(
 }), {
     toProto: (input: NexusGen[\\"inputTypes\\"][\\"PartialableInputMessageInput\\"]): _$testapis$extensions$no_partial$no_partial_pb.PartialableInputMessage => {
         const output = new _$testapis$extensions$no_partial$no_partial_pb.PartialableInputMessage();
-        output.setId(parseInt(input.id));
+        output.setId(proto_nexus.stringToNumber(input.id));
         output.setBody(input.body);
         return output;
     },
@@ -358,7 +360,7 @@ export const PartialableInputMessagePartialInput = Object.assign(nexus.inputObje
     toProto: (input: NexusGen[\\"inputTypes\\"][\\"PartialableInputMessagePartialInput\\"]): _$testapis$extensions$no_partial$no_partial_pb.PartialableInputMessage => {
         const output = new _$testapis$extensions$no_partial$no_partial_pb.PartialableInputMessage();
         if (input.id != null) {
-            output.setId(parseInt(input.id));
+            output.setId(proto_nexus.stringToNumber(input.id));
         }
         if (input.body != null) {
             output.setBody(input.body);
@@ -393,7 +395,7 @@ export const NoPartialInputMessageInput = Object.assign(nexus.inputObjectType({
 }), {
     toProto: (input: NexusGen[\\"inputTypes\\"][\\"NoPartialInputMessageInput\\"]): _$testapis$extensions$no_partial$no_partial_pb.NoPartialInputMessage => {
         const output = new _$testapis$extensions$no_partial$no_partial_pb.NoPartialInputMessage();
-        output.setId(parseInt(input.id));
+        output.setId(proto_nexus.stringToNumber(input.id));
         output.setBody(input.body);
         return output;
     },
