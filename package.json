@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@types/google-protobuf": "3.7.4",
-    "@types/jest": "27.0.1",
+    "@types/jest": "27.0.2",
     "frolint": "2.8.2",
     "google-protobuf": "3.14.0",
     "graphql": "15.4.0",
