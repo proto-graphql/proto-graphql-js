@@ -4,7 +4,7 @@ import { FullName, GenerationParams, gqlTypeName, modulesWithUniqueImportAlias, 
 import { DslFile } from "./DslFile";
 
 export abstract class TypeBase<P extends ProtoMessage | ProtoEnum | ProtoOneof> {
-  constructor(protected readonly proto: P, readonly file: DslFile) {}
+  constructor(readonly proto: P, readonly file: DslFile) {}
 
   get typeName(): string {
     return gqlTypeName(this.proto);

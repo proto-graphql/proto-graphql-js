@@ -30,6 +30,7 @@ export function createObjectTypeDslStmt(objType: ObjectType): ts.Statement {
           createObjectTypeDefinitionMethodDecl(objType),
           isInterface ? null : createIsTypeOfMethodDecl(objType),
           isInterface ? null : ts.factory.createPropertyAssignment("sourceType", sourceTypeExpr(objType)),
+          ts.factory.createPropertyAssignment("extensions", createExtensionsObjectLiteralExpr(objType)),
         ].filter(onlyNonNull()),
         true
       ),
@@ -120,5 +121,39 @@ function createIsTypeOfMethodDecl(objType: ObjectType): ts.MethodDeclaration {
       ],
       true
     )
+  );
+}
+
+/**
+ * @example
+ * ```ts
+ * {
+ *   protobufMessage: {
+ *     fullName: "...",
+ *     name: "...",
+ *     package: "...",
+ *   },
+ * }
+ * ```
+ */
+function createExtensionsObjectLiteralExpr(objType: ObjectType): ts.Expression {
+  return ts.factory.createObjectLiteralExpression(
+    [
+      ts.factory.createPropertyAssignment(
+        "protobufMessage",
+        ts.factory.createObjectLiteralExpression(
+          [
+            ts.factory.createPropertyAssignment(
+              "fullName",
+              ts.factory.createStringLiteral(objType.proto.fullName.toString())
+            ),
+            ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(objType.proto.name)),
+            ts.factory.createPropertyAssignment("package", ts.factory.createStringLiteral(objType.proto.file.package)),
+          ],
+          true
+        )
+      ),
+    ],
+    true
   );
 }

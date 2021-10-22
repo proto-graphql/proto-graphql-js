@@ -15,20 +15,44 @@ export const Message = nexus.objectType({
             resolve(root) {
                 const value = root.getBody();
                 return value;
+            },
+            extensions: {
+                protobufField: {
+                    name: \\"body\\"
+                }
             }
         });
     },
     isTypeOf(data: unknown) {
         return data instanceof _$testapis$edgecases$import_squashed_union$pkg1$types_pb.Message;
     },
-    sourceType: { module: __filename, export: \\"_$testapis$edgecases$import_squashed_union$pkg1$types_pb$Message\\" }
+    sourceType: { module: __filename, export: \\"_$testapis$edgecases$import_squashed_union$pkg1$types_pb$Message\\" },
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.edgecases.import_squashed_union.pkg1.Message\\",
+            name: \\"Message\\",
+            package: \\"testapis.edgecases.import_squashed_union.pkg1\\"
+        }
+    }
 });
 export const MessageInput = Object.assign(nexus.inputObjectType({
     name: \\"MessageInput\\",
     definition(t) {
         t.field(\\"body\\", {
-            type: nexus.nonNull(\\"String\\")
+            type: nexus.nonNull(\\"String\\"),
+            extensions: {
+                protobufField: {
+                    name: \\"body\\"
+                }
+            }
         });
+    },
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.edgecases.import_squashed_union.pkg1.Message\\",
+            name: \\"Message\\",
+            package: \\"testapis.edgecases.import_squashed_union.pkg1\\"
+        }
     }
 }), {
     toProto: (input: NexusGen[\\"inputTypes\\"][\\"MessageInput\\"]): _$testapis$edgecases$import_squashed_union$pkg1$types_pb.Message => {
@@ -39,7 +63,12 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
     _protoNexus: {
         fields: {
             body: {
-                type: nexus.nonNull(\\"String\\")
+                type: nexus.nonNull(\\"String\\"),
+                extensions: {
+                    protobufField: {
+                        name: \\"body\\"
+                    }
+                }
             }
         }
     }
@@ -48,8 +77,20 @@ export const SquashedOneofInput = Object.assign(nexus.inputObjectType({
     name: \\"SquashedOneofInput\\",
     definition(t) {
         t.field(\\"msg\\", {
-            type: nexus.nullable(\\"MessageInput\\")
+            type: nexus.nullable(\\"MessageInput\\"),
+            extensions: {
+                protobufField: {
+                    name: \\"msg\\"
+                }
+            }
         });
+    },
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.edgecases.import_squashed_union.pkg1.SquashedOneof\\",
+            name: \\"SquashedOneof\\",
+            package: \\"testapis.edgecases.import_squashed_union.pkg1\\"
+        }
     }
 }), {
     toProto: (input: NexusGen[\\"inputTypes\\"][\\"SquashedOneofInput\\"]): _$testapis$edgecases$import_squashed_union$pkg1$types_pb.SquashedOneof => {
@@ -62,7 +103,12 @@ export const SquashedOneofInput = Object.assign(nexus.inputObjectType({
     _protoNexus: {
         fields: {
             msg: {
-                type: nexus.nullable(\\"MessageInput\\")
+                type: nexus.nullable(\\"MessageInput\\"),
+                extensions: {
+                    protobufField: {
+                        name: \\"msg\\"
+                    }
+                }
             }
         }
     }
@@ -71,6 +117,13 @@ export const SquashedOneof = nexus.unionType({
     name: \\"SquashedOneof\\",
     definition(t) {
         t.members(Message);
+    },
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.edgecases.import_squashed_union.pkg1.SquashedOneof\\",
+            name: \\"SquashedOneof\\",
+            package: \\"testapis.edgecases.import_squashed_union.pkg1\\"
+        }
     }
 });
 "
@@ -106,20 +159,44 @@ export const Message = nexus.objectType({
                         throw \\"unreachable\\";
                     }
                 }
+            },
+            extensions: {
+                protobufField: {
+                    name: \\"msg\\"
+                }
             }
         });
     },
     isTypeOf(data: unknown) {
         return data instanceof _$testapis$edgecases$import_squashed_union$pkg2$types_pb.Message;
     },
-    sourceType: { module: __filename, export: \\"_$testapis$edgecases$import_squashed_union$pkg2$types_pb$Message\\" }
+    sourceType: { module: __filename, export: \\"_$testapis$edgecases$import_squashed_union$pkg2$types_pb$Message\\" },
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.edgecases.import_squashed_union.pkg2.Message\\",
+            name: \\"Message\\",
+            package: \\"testapis.edgecases.import_squashed_union.pkg2\\"
+        }
+    }
 });
 export const MessageInput = Object.assign(nexus.inputObjectType({
     name: \\"MessageInput\\",
     definition(t) {
         t.field(\\"msg\\", {
-            type: nexus.nullable(\\"SquashedOneofInput\\")
+            type: nexus.nullable(\\"SquashedOneofInput\\"),
+            extensions: {
+                protobufField: {
+                    name: \\"msg\\"
+                }
+            }
         });
+    },
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.edgecases.import_squashed_union.pkg2.Message\\",
+            name: \\"Message\\",
+            package: \\"testapis.edgecases.import_squashed_union.pkg2\\"
+        }
     }
 }), {
     toProto: (input: NexusGen[\\"inputTypes\\"][\\"MessageInput\\"]): _$testapis$edgecases$import_squashed_union$pkg2$types_pb.Message => {
@@ -132,7 +209,12 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
     _protoNexus: {
         fields: {
             msg: {
-                type: nexus.nullable(\\"SquashedOneofInput\\")
+                type: nexus.nullable(\\"SquashedOneofInput\\"),
+                extensions: {
+                    protobufField: {
+                        name: \\"msg\\"
+                    }
+                }
             }
         }
     }
@@ -158,20 +240,44 @@ export const Message = nexus.objectType({
                     throw new Error(\\"Cannot return null for non-nullable field\\");
                 }
                 return value;
+            },
+            extensions: {
+                protobufField: {
+                    name: \\"body\\"
+                }
             }
         });
     },
     isTypeOf(data: unknown) {
         return data instanceof _$testapis$edgecases$import_squashed_union$pkg1.testapis.edgecases.import_squashed_union.pkg1.Message;
     },
-    sourceType: { module: __filename, export: \\"_$testapis$edgecases$import_squashed_union$pkg1$testapis$edgecases$import_squashed_union$pkg1$Message\\" }
+    sourceType: { module: __filename, export: \\"_$testapis$edgecases$import_squashed_union$pkg1$testapis$edgecases$import_squashed_union$pkg1$Message\\" },
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.edgecases.import_squashed_union.pkg1.Message\\",
+            name: \\"Message\\",
+            package: \\"testapis.edgecases.import_squashed_union.pkg1\\"
+        }
+    }
 });
 export const MessageInput = Object.assign(nexus.inputObjectType({
     name: \\"MessageInput\\",
     definition(t) {
         t.field(\\"body\\", {
-            type: nexus.nonNull(\\"String\\")
+            type: nexus.nonNull(\\"String\\"),
+            extensions: {
+                protobufField: {
+                    name: \\"body\\"
+                }
+            }
         });
+    },
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.edgecases.import_squashed_union.pkg1.Message\\",
+            name: \\"Message\\",
+            package: \\"testapis.edgecases.import_squashed_union.pkg1\\"
+        }
     }
 }), {
     toProto: (input: NexusGen[\\"inputTypes\\"][\\"MessageInput\\"]): _$testapis$edgecases$import_squashed_union$pkg1.testapis.edgecases.import_squashed_union.pkg1.Message => {
@@ -182,7 +288,12 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
     _protoNexus: {
         fields: {
             body: {
-                type: nexus.nonNull(\\"String\\")
+                type: nexus.nonNull(\\"String\\"),
+                extensions: {
+                    protobufField: {
+                        name: \\"body\\"
+                    }
+                }
             }
         }
     }
@@ -191,8 +302,20 @@ export const SquashedOneofInput = Object.assign(nexus.inputObjectType({
     name: \\"SquashedOneofInput\\",
     definition(t) {
         t.field(\\"msg\\", {
-            type: nexus.nullable(\\"MessageInput\\")
+            type: nexus.nullable(\\"MessageInput\\"),
+            extensions: {
+                protobufField: {
+                    name: \\"msg\\"
+                }
+            }
         });
+    },
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.edgecases.import_squashed_union.pkg1.SquashedOneof\\",
+            name: \\"SquashedOneof\\",
+            package: \\"testapis.edgecases.import_squashed_union.pkg1\\"
+        }
     }
 }), {
     toProto: (input: NexusGen[\\"inputTypes\\"][\\"SquashedOneofInput\\"]): _$testapis$edgecases$import_squashed_union$pkg1.testapis.edgecases.import_squashed_union.pkg1.SquashedOneof => {
@@ -205,7 +328,12 @@ export const SquashedOneofInput = Object.assign(nexus.inputObjectType({
     _protoNexus: {
         fields: {
             msg: {
-                type: nexus.nullable(\\"MessageInput\\")
+                type: nexus.nullable(\\"MessageInput\\"),
+                extensions: {
+                    protobufField: {
+                        name: \\"msg\\"
+                    }
+                }
             }
         }
     }
@@ -214,6 +342,13 @@ export const SquashedOneof = nexus.unionType({
     name: \\"SquashedOneof\\",
     definition(t) {
         t.members(Message);
+    },
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.edgecases.import_squashed_union.pkg1.SquashedOneof\\",
+            name: \\"SquashedOneof\\",
+            package: \\"testapis.edgecases.import_squashed_union.pkg1\\"
+        }
     }
 });
 "
@@ -241,20 +376,44 @@ export const Message = nexus.objectType({
                     return value.msg;
                 }
                 return null;
+            },
+            extensions: {
+                protobufField: {
+                    name: \\"msg\\"
+                }
             }
         });
     },
     isTypeOf(data: unknown) {
         return data instanceof _$testapis$edgecases$import_squashed_union$pkg2.testapis.edgecases.import_squashed_union.pkg2.Message;
     },
-    sourceType: { module: __filename, export: \\"_$testapis$edgecases$import_squashed_union$pkg2$testapis$edgecases$import_squashed_union$pkg2$Message\\" }
+    sourceType: { module: __filename, export: \\"_$testapis$edgecases$import_squashed_union$pkg2$testapis$edgecases$import_squashed_union$pkg2$Message\\" },
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.edgecases.import_squashed_union.pkg2.Message\\",
+            name: \\"Message\\",
+            package: \\"testapis.edgecases.import_squashed_union.pkg2\\"
+        }
+    }
 });
 export const MessageInput = Object.assign(nexus.inputObjectType({
     name: \\"MessageInput\\",
     definition(t) {
         t.field(\\"msg\\", {
-            type: nexus.nullable(\\"SquashedOneofInput\\")
+            type: nexus.nullable(\\"SquashedOneofInput\\"),
+            extensions: {
+                protobufField: {
+                    name: \\"msg\\"
+                }
+            }
         });
+    },
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.edgecases.import_squashed_union.pkg2.Message\\",
+            name: \\"Message\\",
+            package: \\"testapis.edgecases.import_squashed_union.pkg2\\"
+        }
     }
 }), {
     toProto: (input: NexusGen[\\"inputTypes\\"][\\"MessageInput\\"]): _$testapis$edgecases$import_squashed_union$pkg2.testapis.edgecases.import_squashed_union.pkg2.Message => {
@@ -267,7 +426,12 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
     _protoNexus: {
         fields: {
             msg: {
-                type: nexus.nullable(\\"SquashedOneofInput\\")
+                type: nexus.nullable(\\"SquashedOneofInput\\"),
+                extensions: {
+                    protobufField: {
+                        name: \\"msg\\"
+                    }
+                }
             }
         }
     }

@@ -95,7 +95,35 @@ export function createFieldOptionExpr(
       createDescriptionPropertyAssignment(field),
       createDeprecationPropertyAssignment(field),
       field instanceof InputObjectField ? null : createFieldResolverDecl(field),
+      ts.factory.createPropertyAssignment("extensions", createExtensionsObjectLiteralExpr(field)),
     ].filter(onlyNonNull()),
+    true
+  );
+}
+
+/**
+ * @example
+ * ```ts
+ * {
+ *   protobufField: {
+ *     name: "...",
+ *   },
+ * }
+ * ```
+ */
+function createExtensionsObjectLiteralExpr(
+  field: ObjectField<any> | ObjectOneofField | InputObjectField<any>
+): ts.Expression {
+  return ts.factory.createObjectLiteralExpression(
+    [
+      ts.factory.createPropertyAssignment(
+        "protobufField",
+        ts.factory.createObjectLiteralExpression(
+          [ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(field.proto.name))],
+          true
+        )
+      ),
+    ],
     true
   );
 }
