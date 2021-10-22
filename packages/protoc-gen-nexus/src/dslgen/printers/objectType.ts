@@ -4,6 +4,7 @@ import {
   createDslExportConstStmt,
   createFullNameExpr,
   createNexusCallExpr,
+  createProtoNexusType,
   onlyNonNull,
 } from "./util";
 import { createFieldDefinitionStmt, createNoopFieldDefinitionStmt } from "./field";
@@ -127,17 +128,17 @@ function createIsTypeOfMethodDecl(objType: ObjectType): ts.MethodDeclaration {
 /**
  * @example
  * ```ts
- * {
+ * ({
  *   protobufMessage: {
  *     fullName: "...",
  *     name: "...",
  *     package: "...",
  *   },
- * }
+ * } as ProtobufMessageExtensions)
  * ```
  */
 function createExtensionsObjectLiteralExpr(objType: ObjectType): ts.Expression {
-  return ts.factory.createObjectLiteralExpression(
+  const objExpr = ts.factory.createObjectLiteralExpression(
     [
       ts.factory.createPropertyAssignment(
         "protobufMessage",
@@ -151,6 +152,20 @@ function createExtensionsObjectLiteralExpr(objType: ObjectType): ts.Expression {
             ts.factory.createPropertyAssignment("package", ts.factory.createStringLiteral(objType.proto.file.package)),
           ],
           true
+        )
+      ),
+    ],
+    true
+  );
+
+  return ts.factory.createObjectLiteralExpression(
+    [
+      ts.factory.createSpreadAssignment(
+        ts.factory.createParenthesizedExpression(
+          ts.factory.createAsExpression(
+            objExpr,
+            ts.factory.createTypeReferenceNode(createProtoNexusType("ProtobufMessageExtensions"))
+          )
         )
       ),
     ],

@@ -5,6 +5,7 @@ import {
   createDslExportConstStmt,
   createFullNameExpr,
   createNexusCallExpr,
+  createProtoNexusType,
   onlyNonNull,
 } from "./util";
 
@@ -84,7 +85,7 @@ function createOneofUnionTypeDefinitionMethodDecl(type: OneofUnionType | Squashe
  */
 function createExtensionsObjectLiteralExpr(type: OneofUnionType | SquashedOneofUnionType): ts.Expression {
   if (type instanceof SquashedOneofUnionType) {
-    return ts.factory.createObjectLiteralExpression(
+    const objExpr = ts.factory.createObjectLiteralExpression(
       [
         ts.factory.createPropertyAssignment(
           "protobufMessage",
@@ -103,9 +104,23 @@ function createExtensionsObjectLiteralExpr(type: OneofUnionType | SquashedOneofU
       ],
       true
     );
+
+    return ts.factory.createObjectLiteralExpression(
+      [
+        ts.factory.createSpreadAssignment(
+          ts.factory.createParenthesizedExpression(
+            ts.factory.createAsExpression(
+              objExpr,
+              ts.factory.createTypeReferenceNode(createProtoNexusType("ProtobufMessageExtensions"))
+            )
+          )
+        ),
+      ],
+      true
+    );
   }
 
-  return ts.factory.createObjectLiteralExpression(
+  const objExpr = ts.factory.createObjectLiteralExpression(
     [
       ts.factory.createPropertyAssignment(
         "protobufOneof",
@@ -123,6 +138,20 @@ function createExtensionsObjectLiteralExpr(type: OneofUnionType | SquashedOneofU
             ),
           ],
           true
+        )
+      ),
+    ],
+    true
+  );
+
+  return ts.factory.createObjectLiteralExpression(
+    [
+      ts.factory.createSpreadAssignment(
+        ts.factory.createParenthesizedExpression(
+          ts.factory.createAsExpression(
+            objExpr,
+            ts.factory.createTypeReferenceNode(createProtoNexusType("ProtobufOneofExtensions"))
+          )
         )
       ),
     ],

@@ -48,6 +48,16 @@ export function createProtoNexusProp(name: string): ts.Expression {
 /**
  * @example
  * ```
+ * proto_nexus.Transformer
+ * ```
+ */
+export function createProtoNexusType(name: string): ts.QualifiedName {
+  return ts.factory.createQualifiedName(ts.factory.createIdentifier(uniqueImportAlias("proto-nexus")), name);
+}
+
+/**
+ * @example
+ * ```
  * proto_nexus.stringToNumber(...)
  * ```
  */

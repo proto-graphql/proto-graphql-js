@@ -5,6 +5,7 @@ exports[`custom types generates nexus DSLs: custom_types/date_pb_nexus.ts 1`] = 
 // source: testapis/custom_types/date.proto
 
 import * as nexus from \\"nexus\\";
+import * as proto_nexus from \\"proto-nexus\\";
 import * as _$testapis$custom_types$date_pb from \\"./testapis/custom_types/date_pb\\";
 export type _$testapis$custom_types$date_pb$Date = _$testapis$custom_types$date_pb.Date;
 export const Date = nexus.objectType({
@@ -17,9 +18,11 @@ export const Date = nexus.objectType({
                 return value;
             },
             extensions: {
-                protobufField: {
-                    name: \\"year\\"
-                }
+                ...({
+                    protobufField: {
+                        name: \\"year\\"
+                    }
+                } as proto_nexus.ProtobufFieldExtensions)
             }
         });
         t.field(\\"month\\", {
@@ -29,9 +32,11 @@ export const Date = nexus.objectType({
                 return value;
             },
             extensions: {
-                protobufField: {
-                    name: \\"month\\"
-                }
+                ...({
+                    protobufField: {
+                        name: \\"month\\"
+                    }
+                } as proto_nexus.ProtobufFieldExtensions)
             }
         });
         t.field(\\"day\\", {
@@ -41,9 +46,11 @@ export const Date = nexus.objectType({
                 return value;
             },
             extensions: {
-                protobufField: {
-                    name: \\"day\\"
-                }
+                ...({
+                    protobufField: {
+                        name: \\"day\\"
+                    }
+                } as proto_nexus.ProtobufFieldExtensions)
             }
         });
     },
@@ -52,11 +59,13 @@ export const Date = nexus.objectType({
     },
     sourceType: { module: __filename, export: \\"_$testapis$custom_types$date_pb$Date\\" },
     extensions: {
-        protobufMessage: {
-            fullName: \\"testapis.custom_types.Date\\",
-            name: \\"Date\\",
-            package: \\"testapis.custom_types\\"
-        }
+        ...({
+            protobufMessage: {
+                fullName: \\"testapis.custom_types.Date\\",
+                name: \\"Date\\",
+                package: \\"testapis.custom_types\\"
+            }
+        } as proto_nexus.ProtobufMessageExtensions)
     }
 });
 export const DateInput = Object.assign(nexus.inputObjectType({
@@ -65,25 +74,31 @@ export const DateInput = Object.assign(nexus.inputObjectType({
         t.field(\\"year\\", {
             type: nexus.nonNull(\\"Int\\"),
             extensions: {
-                protobufField: {
-                    name: \\"year\\"
-                }
+                ...({
+                    protobufField: {
+                        name: \\"year\\"
+                    }
+                } as proto_nexus.ProtobufFieldExtensions)
             }
         });
         t.field(\\"month\\", {
             type: nexus.nonNull(\\"Int\\"),
             extensions: {
-                protobufField: {
-                    name: \\"month\\"
-                }
+                ...({
+                    protobufField: {
+                        name: \\"month\\"
+                    }
+                } as proto_nexus.ProtobufFieldExtensions)
             }
         });
         t.field(\\"day\\", {
             type: nexus.nonNull(\\"Int\\"),
             extensions: {
-                protobufField: {
-                    name: \\"day\\"
-                }
+                ...({
+                    protobufField: {
+                        name: \\"day\\"
+                    }
+                } as proto_nexus.ProtobufFieldExtensions)
             }
         });
     },
@@ -107,25 +122,31 @@ export const DateInput = Object.assign(nexus.inputObjectType({
             year: {
                 type: nexus.nonNull(\\"Int\\"),
                 extensions: {
-                    protobufField: {
-                        name: \\"year\\"
-                    }
+                    ...({
+                        protobufField: {
+                            name: \\"year\\"
+                        }
+                    } as proto_nexus.ProtobufFieldExtensions)
                 }
             },
             month: {
                 type: nexus.nonNull(\\"Int\\"),
                 extensions: {
-                    protobufField: {
-                        name: \\"month\\"
-                    }
+                    ...({
+                        protobufField: {
+                            name: \\"month\\"
+                        }
+                    } as proto_nexus.ProtobufFieldExtensions)
                 }
             },
             day: {
                 type: nexus.nonNull(\\"Int\\"),
                 extensions: {
-                    protobufField: {
-                        name: \\"day\\"
-                    }
+                    ...({
+                        protobufField: {
+                            name: \\"day\\"
+                        }
+                    } as proto_nexus.ProtobufFieldExtensions)
                 }
             }
         }
@@ -153,9 +174,11 @@ export const Post = nexus.objectType({
                 return value;
             },
             extensions: {
-                protobufField: {
-                    name: \\"title\\"
-                }
+                ...({
+                    protobufField: {
+                        name: \\"title\\"
+                    }
+                } as proto_nexus.ProtobufFieldExtensions)
             }
         });
         t.field(\\"publishedDate\\", {
@@ -169,9 +192,11 @@ export const Post = nexus.objectType({
                 return proto_nexus.getTransformer(\\"testapis.custom_types.Date\\").protoToGql(value);
             },
             extensions: {
-                protobufField: {
-                    name: \\"published_date\\"
-                }
+                ...({
+                    protobufField: {
+                        name: \\"published_date\\"
+                    }
+                } as proto_nexus.ProtobufFieldExtensions)
             }
         });
     },
@@ -180,11 +205,13 @@ export const Post = nexus.objectType({
     },
     sourceType: { module: __filename, export: \\"_$testapis$custom_types$post_pb$Post\\" },
     extensions: {
-        protobufMessage: {
-            fullName: \\"testapis.custom_types.Post\\",
-            name: \\"Post\\",
-            package: \\"testapis.custom_types\\"
-        }
+        ...({
+            protobufMessage: {
+                fullName: \\"testapis.custom_types.Post\\",
+                name: \\"Post\\",
+                package: \\"testapis.custom_types\\"
+            }
+        } as proto_nexus.ProtobufMessageExtensions)
     }
 });
 export const PostInput = Object.assign(nexus.inputObjectType({
@@ -194,18 +221,22 @@ export const PostInput = Object.assign(nexus.inputObjectType({
             type: nexus.nonNull(\\"String\\"),
             description: \\"Required.\\",
             extensions: {
-                protobufField: {
-                    name: \\"title\\"
-                }
+                ...({
+                    protobufField: {
+                        name: \\"title\\"
+                    }
+                } as proto_nexus.ProtobufFieldExtensions)
             }
         });
         t.field(\\"publishedDate\\", {
             type: nexus.nullable(\\"Date\\"),
             description: \\"Optional.\\",
             extensions: {
-                protobufField: {
-                    name: \\"published_date\\"
-                }
+                ...({
+                    protobufField: {
+                        name: \\"published_date\\"
+                    }
+                } as proto_nexus.ProtobufFieldExtensions)
             }
         });
     },
@@ -231,18 +262,22 @@ export const PostInput = Object.assign(nexus.inputObjectType({
                 type: nexus.nonNull(\\"String\\"),
                 description: \\"Required.\\",
                 extensions: {
-                    protobufField: {
-                        name: \\"title\\"
-                    }
+                    ...({
+                        protobufField: {
+                            name: \\"title\\"
+                        }
+                    } as proto_nexus.ProtobufFieldExtensions)
                 }
             },
             publishedDate: {
                 type: nexus.nullable(\\"Date\\"),
                 description: \\"Optional.\\",
                 extensions: {
-                    protobufField: {
-                        name: \\"published_date\\"
-                    }
+                    ...({
+                        protobufField: {
+                            name: \\"published_date\\"
+                        }
+                    } as proto_nexus.ProtobufFieldExtensions)
                 }
             }
         }

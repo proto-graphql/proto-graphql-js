@@ -19,7 +19,7 @@ export abstract class TypeBase<P extends ProtoMessage | ProtoEnum | ProtoOneof> 
   }
 
   get importModules(): { alias: string; module: string }[] {
-    return modulesWithUniqueImportAlias(["nexus"]);
+    return modulesWithUniqueImportAlias(["nexus", "proto-nexus"]);
   }
 
   get filename(): string {

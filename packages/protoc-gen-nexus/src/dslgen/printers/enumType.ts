@@ -5,6 +5,7 @@ import {
   createDescriptionPropertyAssignment,
   createDslExportConstStmt,
   createNexusCallExpr,
+  createProtoNexusType,
   onlyNonNull,
 } from "./util";
 
@@ -56,17 +57,17 @@ function createEnumValueExpr(ev: EnumTypeValue): ts.Expression {
 /**
  * @example
  * ```ts
- * {
+ * {{
  *   protobufEnum: {
  *     name: "...",
  *     fullName: "...",
  *     package: "...",
  *   },
- * }
+ * } as ProtobufEnumExtensions)
  * ```
  */
 function createExtensionsObjectLiteralExpr(type: EnumType): ts.Expression {
-  return ts.factory.createObjectLiteralExpression(
+  const objExpr = ts.factory.createObjectLiteralExpression(
     [
       ts.factory.createPropertyAssignment(
         "protobufEnum",
@@ -85,26 +86,54 @@ function createExtensionsObjectLiteralExpr(type: EnumType): ts.Expression {
     ],
     true
   );
+
+  return ts.factory.createObjectLiteralExpression(
+    [
+      ts.factory.createSpreadAssignment(
+        ts.factory.createParenthesizedExpression(
+          ts.factory.createAsExpression(
+            objExpr,
+            ts.factory.createTypeReferenceNode(createProtoNexusType("ProtobufEnumExtensions"))
+          )
+        )
+      ),
+    ],
+    true
+  );
 }
 
 /**
  * @example
  * ```ts
- * {
+ * ({
  *   protobufEnumValue: {
  *     name: "...",
  *   },
- * }
+ * } as ProtobufEnumValueExtensions)
  * ```
  */
 function createExtensionsObjectLiteralExprForEnumValue(ev: EnumTypeValue): ts.Expression {
-  return ts.factory.createObjectLiteralExpression(
+  const objExpr = ts.factory.createObjectLiteralExpression(
     [
       ts.factory.createPropertyAssignment(
         "protobufEnumValue",
         ts.factory.createObjectLiteralExpression(
           [ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(ev.proto.name))],
           true
+        )
+      ),
+    ],
+    true
+  );
+
+  return ts.factory.createObjectLiteralExpression(
+    [
+      ts.factory.createSpreadAssignment(
+        ts.factory.createParenthesizedExpression(
+          ts.factory.createAsExpression(
+            objExpr,
+            ts.factory.createTypeReferenceNode(createProtoNexusType("ProtobufEnumValueExtensions"))
+          )
         )
       ),
     ],

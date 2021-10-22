@@ -1,4 +1,5 @@
 export * from "./Transformer";
+export * from "./extensions";
 
 export const stringToNumber = (v: string): number => {
   const num = parseInt(v, 10);
