@@ -1,4 +1,21 @@
 
+## v0.5.0-alpha.19 (2021-10-22)
+
+#### Features - Code Generation
+* `proto-nexus`, `protoc-gen-nexus`
+  * [#169](https://github.com/proto-graphql/proto-nexus/pull/169) Generate proto metadata as extensions ([@izumin5210](https://github.com/izumin5210))
+
+#### Improvements - Code Generation
+* `@proto-nexus/google-protobuf`, `@proto-nexus/protobufjs`, `proto-nexus`, `protoc-gen-nexus`
+  * [#155](https://github.com/proto-graphql/proto-nexus/pull/155) Validate parseInt results for 64bit number fields ([@izumin5210](https://github.com/izumin5210))
+
+#### Dependencies
+* [#161](https://github.com/proto-graphql/proto-nexus/pull/161) build(deps): bump tar from 4.4.15 to 4.4.19 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#164](https://github.com/proto-graphql/proto-nexus/pull/164) build(deps): bump tmpl from 1.0.4 to 1.0.5 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 1
+- Masayuki Izumi ([@izumin5210](https://github.com/izumin5210))
+
 ## v0.5.0-alpha.18 (2021-08-10)
 
 #### Features - Code Generation
