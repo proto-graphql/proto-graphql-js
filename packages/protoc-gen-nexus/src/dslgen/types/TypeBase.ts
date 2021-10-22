@@ -4,7 +4,7 @@ import { FullName, GenerationParams, gqlTypeName, modulesWithUniqueImportAlias, 
 import { DslFile } from "./DslFile";
 
 export abstract class TypeBase<P extends ProtoMessage | ProtoEnum | ProtoOneof> {
-  constructor(protected readonly proto: P, readonly file: DslFile) {}
+  constructor(readonly proto: P, readonly file: DslFile) {}
 
   get typeName(): string {
     return gqlTypeName(this.proto);
@@ -19,7 +19,7 @@ export abstract class TypeBase<P extends ProtoMessage | ProtoEnum | ProtoOneof> 
   }
 
   get importModules(): { alias: string; module: string }[] {
-    return modulesWithUniqueImportAlias(["nexus"]);
+    return modulesWithUniqueImportAlias(["nexus", "proto-nexus"]);
   }
 
   get filename(): string {

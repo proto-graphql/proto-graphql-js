@@ -4,6 +4,7 @@ import {
   createDescriptionPropertyAssignment,
   createFullNameExpr,
   createNexusCallExpr,
+  createProtoNexusType,
   onlyNonNull,
 } from "./util";
 import { createFieldResolverDecl } from "./fieldResolvers";
@@ -95,7 +96,49 @@ export function createFieldOptionExpr(
       createDescriptionPropertyAssignment(field),
       createDeprecationPropertyAssignment(field),
       field instanceof InputObjectField ? null : createFieldResolverDecl(field),
+      ts.factory.createPropertyAssignment("extensions", createExtensionsObjectLiteralExpr(field)),
     ].filter(onlyNonNull()),
+    true
+  );
+}
+
+/**
+ * @example
+ * ```ts
+ * ({
+ *   protobufField: {
+ *     name: "...",
+ *   },
+ * } as ProtobufFieldExtensions)
+ * ```
+ */
+function createExtensionsObjectLiteralExpr(
+  field: ObjectField<any> | ObjectOneofField | InputObjectField<any>
+): ts.Expression {
+  const objExpr = ts.factory.createObjectLiteralExpression(
+    [
+      ts.factory.createPropertyAssignment(
+        "protobufField",
+        ts.factory.createObjectLiteralExpression(
+          [ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(field.proto.name))],
+          true
+        )
+      ),
+    ],
+    true
+  );
+
+  return ts.factory.createObjectLiteralExpression(
+    [
+      ts.factory.createSpreadAssignment(
+        ts.factory.createParenthesizedExpression(
+          ts.factory.createAsExpression(
+            objExpr,
+            ts.factory.createTypeReferenceNode(createProtoNexusType("ProtobufFieldExtensions"))
+          )
+        )
+      ),
+    ],
     true
   );
 }

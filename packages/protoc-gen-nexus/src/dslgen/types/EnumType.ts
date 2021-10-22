@@ -30,7 +30,7 @@ export class EnumType extends TypeBase<ProtoEnum> {
 }
 
 export class EnumTypeValue {
-  constructor(private readonly proto: ProtoEnumValue, private readonly opts: GenerationParams) {}
+  constructor(readonly proto: ProtoEnumValue, private readonly opts: GenerationParams) {}
 
   get name(): string {
     const prefix = constantCase(this.proto.parent.name);

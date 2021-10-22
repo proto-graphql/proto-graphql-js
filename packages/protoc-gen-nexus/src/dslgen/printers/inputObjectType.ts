@@ -41,6 +41,7 @@ export function createInputObjectTypeDslStmt(type: InputObjectType): ts.Statemen
               ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(type.typeName)),
               createDescriptionPropertyAssignment(type),
               createInputObjectTypeDefinitionMethodDecl(type),
+              ts.factory.createPropertyAssignment("extensions", createExtensionsObjectLiteralExpr(type)),
             ].filter(onlyNonNull()),
             true
           ),
@@ -295,5 +296,39 @@ function createInputObjectToProtoExpr(
     ts.factory.createPropertyAccessExpression(createFullNameExpr(field.typeFullName), "toProto"),
     undefined,
     [inputExpr]
+  );
+}
+
+/**
+ * @example
+ * ```ts
+ * {
+ *   protobufMessage: {
+ *     fullName: "...",
+ *     name: "...",
+ *     package: "...",
+ *   },
+ * }
+ * ```
+ */
+function createExtensionsObjectLiteralExpr(type: InputObjectType): ts.Expression {
+  return ts.factory.createObjectLiteralExpression(
+    [
+      ts.factory.createPropertyAssignment(
+        "protobufMessage",
+        ts.factory.createObjectLiteralExpression(
+          [
+            ts.factory.createPropertyAssignment(
+              "fullName",
+              ts.factory.createStringLiteral(type.proto.fullName.toString())
+            ),
+            ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(type.proto.name)),
+            ts.factory.createPropertyAssignment("package", ts.factory.createStringLiteral(type.proto.file.package)),
+          ],
+          true
+        )
+      ),
+    ],
+    true
   );
 }
