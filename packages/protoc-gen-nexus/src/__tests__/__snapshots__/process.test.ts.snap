@@ -645,7 +645,17 @@ export const NotDeprecatedMessageNotDeprecatedOneof = nexus.unionType({
                 fullName: \\"testapis.deprecation.NotDeprecatedMessage.not_deprecated_oneof\\",
                 name: \\"not_deprecated_oneof\\",
                 messageName: \\"NotDeprecatedMessage\\",
-                package: \\"testapis.deprecation\\"
+                package: \\"testapis.deprecation\\",
+                fields: [
+                    {
+                        name: \\"msg1\\",
+                        type: \\"testapis.deprecation.NotDeprecatedMessage.InnerMessage1\\"
+                    },
+                    {
+                        name: \\"msg2\\",
+                        type: \\"testapis.deprecation.NotDeprecatedMessage.InnerMessage2\\"
+                    }
+                ]
             }
         } as proto_nexus.ProtobufOneofExtensions)
     }
@@ -661,7 +671,17 @@ export const NotDeprecatedMessageDeprecatedOneof = nexus.unionType({
                 fullName: \\"testapis.deprecation.NotDeprecatedMessage.deprecated_oneof\\",
                 name: \\"deprecated_oneof\\",
                 messageName: \\"NotDeprecatedMessage\\",
-                package: \\"testapis.deprecation\\"
+                package: \\"testapis.deprecation\\",
+                fields: [
+                    {
+                        name: \\"msg3\\",
+                        type: \\"testapis.deprecation.NotDeprecatedMessage.InnerMessage1\\"
+                    },
+                    {
+                        name: \\"msg4\\",
+                        type: \\"testapis.deprecation.NotDeprecatedMessage.InnerMessage2\\"
+                    }
+                ]
             }
         } as proto_nexus.ProtobufOneofExtensions)
     }
@@ -1640,7 +1660,17 @@ export const NotDeprecatedMessageNotDeprecatedOneof = nexus.unionType({
                 fullName: \\"testapis.deprecation.NotDeprecatedMessage.not_deprecated_oneof\\",
                 name: \\"not_deprecated_oneof\\",
                 messageName: \\"NotDeprecatedMessage\\",
-                package: \\"testapis.deprecation\\"
+                package: \\"testapis.deprecation\\",
+                fields: [
+                    {
+                        name: \\"msg1\\",
+                        type: \\"testapis.deprecation.NotDeprecatedMessage.InnerMessage1\\"
+                    },
+                    {
+                        name: \\"msg2\\",
+                        type: \\"testapis.deprecation.NotDeprecatedMessage.InnerMessage2\\"
+                    }
+                ]
             }
         } as proto_nexus.ProtobufOneofExtensions)
     }
@@ -1656,7 +1686,17 @@ export const NotDeprecatedMessageDeprecatedOneof = nexus.unionType({
                 fullName: \\"testapis.deprecation.NotDeprecatedMessage.deprecated_oneof\\",
                 name: \\"deprecated_oneof\\",
                 messageName: \\"NotDeprecatedMessage\\",
-                package: \\"testapis.deprecation\\"
+                package: \\"testapis.deprecation\\",
+                fields: [
+                    {
+                        name: \\"msg3\\",
+                        type: \\"testapis.deprecation.NotDeprecatedMessage.InnerMessage1\\"
+                    },
+                    {
+                        name: \\"msg4\\",
+                        type: \\"testapis.deprecation.NotDeprecatedMessage.InnerMessage2\\"
+                    }
+                ]
             }
         } as proto_nexus.ProtobufOneofExtensions)
     }
@@ -4796,7 +4836,17 @@ export const TestPrefixPrefixedMessagePartialIgnoreOneof = nexus.unionType({
                 fullName: \\"testapis.extensions.PrefixedMessage.partial_ignore_oneof\\",
                 name: \\"partial_ignore_oneof\\",
                 messageName: \\"PrefixedMessage\\",
-                package: \\"testapis.extensions\\"
+                package: \\"testapis.extensions\\",
+                fields: [
+                    {
+                        name: \\"oneof_not_ignored_field\\",
+                        type: \\"testapis.extensions.PrefixedMessage.InnerMessage\\"
+                    },
+                    {
+                        name: \\"oneof_ignored_field\\",
+                        type: \\"testapis.extensions.PrefixedMessage.InnerMessage2\\"
+                    }
+                ]
             }
         } as proto_nexus.ProtobufOneofExtensions)
     }
@@ -4822,7 +4872,17 @@ export const TestPrefixPrefixedMessageSquashedMessage = nexus.unionType({
             protobufMessage: {
                 fullName: \\"testapis.extensions.PrefixedMessage.SquashedMessage\\",
                 name: \\"SquashedMessage\\",
-                package: \\"testapis.extensions\\"
+                package: \\"testapis.extensions\\",
+                fields: [
+                    {
+                        name: \\"oneof_field\\",
+                        type: \\"testapis.extensions.PrefixedMessage.InnerMessage\\"
+                    },
+                    {
+                        name: \\"oneof_field_2\\",
+                        type: \\"testapis.extensions.PrefixedMessage.InnerMessage2\\"
+                    }
+                ]
             }
         } as proto_nexus.ProtobufMessageExtensions)
     }
@@ -5966,7 +6026,17 @@ export const TestPrefixPrefixedMessageSquashedMessage = nexus.unionType({
             protobufMessage: {
                 fullName: \\"testapis.extensions.PrefixedMessage.SquashedMessage\\",
                 name: \\"SquashedMessage\\",
-                package: \\"testapis.extensions\\"
+                package: \\"testapis.extensions\\",
+                fields: [
+                    {
+                        name: \\"oneof_field\\",
+                        type: \\"testapis.extensions.PrefixedMessage.InnerMessage\\"
+                    },
+                    {
+                        name: \\"oneof_field_2\\",
+                        type: \\"testapis.extensions.PrefixedMessage.InnerMessage2\\"
+                    }
+                ]
             }
         } as proto_nexus.ProtobufMessageExtensions)
     }
@@ -5982,7 +6052,17 @@ export const TestPrefixPrefixedMessagePartialIgnoreOneof = nexus.unionType({
                 fullName: \\"testapis.extensions.PrefixedMessage.partial_ignore_oneof\\",
                 name: \\"partial_ignore_oneof\\",
                 messageName: \\"PrefixedMessage\\",
-                package: \\"testapis.extensions\\"
+                package: \\"testapis.extensions\\",
+                fields: [
+                    {
+                        name: \\"oneof_not_ignored_field\\",
+                        type: \\"testapis.extensions.PrefixedMessage.InnerMessage\\"
+                    },
+                    {
+                        name: \\"oneof_ignored_field\\",
+                        type: \\"testapis.extensions.PrefixedMessage.InnerMessage2\\"
+                    }
+                ]
             }
         } as proto_nexus.ProtobufOneofExtensions)
     }
@@ -7040,7 +7120,17 @@ export const TestPrefixPrefixedMessageSquashedMessage = nexus.unionType({
             protobufMessage: {
                 fullName: \\"testapis.extensions.PrefixedMessage.SquashedMessage\\",
                 name: \\"SquashedMessage\\",
-                package: \\"testapis.extensions\\"
+                package: \\"testapis.extensions\\",
+                fields: [
+                    {
+                        name: \\"oneof_field\\",
+                        type: \\"testapis.extensions.PrefixedMessage.InnerMessage\\"
+                    },
+                    {
+                        name: \\"oneof_field_2\\",
+                        type: \\"testapis.extensions.PrefixedMessage.InnerMessage2\\"
+                    }
+                ]
             }
         } as proto_nexus.ProtobufMessageExtensions)
     }
@@ -7056,7 +7146,17 @@ export const TestPrefixPrefixedMessagePartialIgnoreOneof = nexus.unionType({
                 fullName: \\"testapis.extensions.PrefixedMessage.partial_ignore_oneof\\",
                 name: \\"partial_ignore_oneof\\",
                 messageName: \\"PrefixedMessage\\",
-                package: \\"testapis.extensions\\"
+                package: \\"testapis.extensions\\",
+                fields: [
+                    {
+                        name: \\"oneof_not_ignored_field\\",
+                        type: \\"testapis.extensions.PrefixedMessage.InnerMessage\\"
+                    },
+                    {
+                        name: \\"oneof_ignored_field\\",
+                        type: \\"testapis.extensions.PrefixedMessage.InnerMessage2\\"
+                    }
+                ]
             }
         } as proto_nexus.ProtobufOneofExtensions)
     }
@@ -9075,7 +9175,17 @@ export const OneofParentOptionalOneofMembers = nexus.unionType({
                 fullName: \\"testapis.oneof.OneofParent.optional_oneof_members\\",
                 name: \\"optional_oneof_members\\",
                 messageName: \\"OneofParent\\",
-                package: \\"testapis.oneof\\"
+                package: \\"testapis.oneof\\",
+                fields: [
+                    {
+                        name: \\"optoinal_message1\\",
+                        type: \\"testapis.oneof.OneofMemberMessage1\\"
+                    },
+                    {
+                        name: \\"optoinal_message2\\",
+                        type: \\"testapis.oneof.OneofMemberMessage2\\"
+                    }
+                ]
             }
         } as proto_nexus.ProtobufOneofExtensions)
     }
@@ -9103,7 +9213,17 @@ export const OneofParentRequiredOneofMembers = nexus.unionType({
                 fullName: \\"testapis.oneof.OneofParent.required_oneof_members\\",
                 name: \\"required_oneof_members\\",
                 messageName: \\"OneofParent\\",
-                package: \\"testapis.oneof\\"
+                package: \\"testapis.oneof\\",
+                fields: [
+                    {
+                        name: \\"required_message1\\",
+                        type: \\"testapis.oneof.OneofMemberMessage1\\"
+                    },
+                    {
+                        name: \\"required_message2\\",
+                        type: \\"testapis.oneof.OneofMemberMessage2\\"
+                    }
+                ]
             }
         } as proto_nexus.ProtobufOneofExtensions)
     }
@@ -9500,7 +9620,17 @@ export const OneofParentRequiredOneofMembers = nexus.unionType({
                 fullName: \\"testapis.oneof.OneofParent.required_oneof_members\\",
                 name: \\"required_oneof_members\\",
                 messageName: \\"OneofParent\\",
-                package: \\"testapis.oneof\\"
+                package: \\"testapis.oneof\\",
+                fields: [
+                    {
+                        name: \\"required_message1\\",
+                        type: \\"testapis.oneof.OneofMemberMessage1\\"
+                    },
+                    {
+                        name: \\"required_message2\\",
+                        type: \\"testapis.oneof.OneofMemberMessage2\\"
+                    }
+                ]
             }
         } as proto_nexus.ProtobufOneofExtensions)
     }
@@ -9516,7 +9646,17 @@ export const OneofParentOptionalOneofMembers = nexus.unionType({
                 fullName: \\"testapis.oneof.OneofParent.optional_oneof_members\\",
                 name: \\"optional_oneof_members\\",
                 messageName: \\"OneofParent\\",
-                package: \\"testapis.oneof\\"
+                package: \\"testapis.oneof\\",
+                fields: [
+                    {
+                        name: \\"optoinal_message1\\",
+                        type: \\"testapis.oneof.OneofMemberMessage1\\"
+                    },
+                    {
+                        name: \\"optoinal_message2\\",
+                        type: \\"testapis.oneof.OneofMemberMessage2\\"
+                    }
+                ]
             }
         } as proto_nexus.ProtobufOneofExtensions)
     }
@@ -9908,7 +10048,17 @@ export const OneofParentRequiredOneofMembers = nexus.unionType({
                 fullName: \\"testapis.oneof.OneofParent.required_oneof_members\\",
                 name: \\"required_oneof_members\\",
                 messageName: \\"OneofParent\\",
-                package: \\"testapis.oneof\\"
+                package: \\"testapis.oneof\\",
+                fields: [
+                    {
+                        name: \\"required_message1\\",
+                        type: \\"testapis.oneof.OneofMemberMessage1\\"
+                    },
+                    {
+                        name: \\"required_message2\\",
+                        type: \\"testapis.oneof.OneofMemberMessage2\\"
+                    }
+                ]
             }
         } as proto_nexus.ProtobufOneofExtensions)
     }
@@ -9924,7 +10074,17 @@ export const OneofParentOptionalOneofMembers = nexus.unionType({
                 fullName: \\"testapis.oneof.OneofParent.optional_oneof_members\\",
                 name: \\"optional_oneof_members\\",
                 messageName: \\"OneofParent\\",
-                package: \\"testapis.oneof\\"
+                package: \\"testapis.oneof\\",
+                fields: [
+                    {
+                        name: \\"optoinal_message1\\",
+                        type: \\"testapis.oneof.OneofMemberMessage1\\"
+                    },
+                    {
+                        name: \\"optoinal_message2\\",
+                        type: \\"testapis.oneof.OneofMemberMessage2\\"
+                    }
+                ]
             }
         } as proto_nexus.ProtobufOneofExtensions)
     }

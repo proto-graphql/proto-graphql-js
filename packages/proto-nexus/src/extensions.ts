@@ -80,5 +80,18 @@ export type ProtobufOneofExtensions = {
      * `"foo"`
      */
     package: string;
+
+    fields: {
+      /**
+       * @example
+       * `"foo"`
+       */
+      name: string;
+      /**
+       * @example
+       * `"foo.bar.Baz"`
+       */
+      type: string;
+    };
   };
 };

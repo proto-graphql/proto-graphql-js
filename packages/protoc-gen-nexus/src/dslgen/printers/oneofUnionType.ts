@@ -97,6 +97,28 @@ function createExtensionsObjectLiteralExpr(type: OneofUnionType | SquashedOneofU
               ),
               ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(type.proto.name)),
               ts.factory.createPropertyAssignment("package", ts.factory.createStringLiteral(type.proto.file.package)),
+              ts.factory.createPropertyAssignment(
+                "fields",
+                ts.factory.createArrayLiteralExpression(
+                  type.proto.oneofs[0].fields.map((f) =>
+                    ts.factory.createObjectLiteralExpression(
+                      [
+                        ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(f.name)),
+                        ...(f.type
+                          ? [
+                              ts.factory.createPropertyAssignment(
+                                "type",
+                                ts.factory.createStringLiteral(f.type.fullName.toString())
+                              ),
+                            ]
+                          : []),
+                      ],
+                      true
+                    )
+                  ),
+                  true
+                )
+              ),
             ],
             true
           )
@@ -104,7 +126,6 @@ function createExtensionsObjectLiteralExpr(type: OneofUnionType | SquashedOneofU
       ],
       true
     );
-
     return ts.factory.createObjectLiteralExpression(
       [
         ts.factory.createSpreadAssignment(
@@ -135,6 +156,28 @@ function createExtensionsObjectLiteralExpr(type: OneofUnionType | SquashedOneofU
             ts.factory.createPropertyAssignment(
               "package",
               ts.factory.createStringLiteral(type.proto.parent.file.package)
+            ),
+            ts.factory.createPropertyAssignment(
+              "fields",
+              ts.factory.createArrayLiteralExpression(
+                type.proto.fields.map((f) =>
+                  ts.factory.createObjectLiteralExpression(
+                    [
+                      ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(f.name)),
+                      ...(f.type
+                        ? [
+                            ts.factory.createPropertyAssignment(
+                              "type",
+                              ts.factory.createStringLiteral(f.type.fullName.toString())
+                            ),
+                          ]
+                        : []),
+                    ],
+                    true
+                  )
+                ),
+                true
+              )
             ),
           ],
           true
