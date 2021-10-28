@@ -136,7 +136,13 @@ export const SquashedOneof = nexus.unionType({
             protobufMessage: {
                 fullName: \\"testapis.edgecases.import_squashed_union.pkg1.SquashedOneof\\",
                 name: \\"SquashedOneof\\",
-                package: \\"testapis.edgecases.import_squashed_union.pkg1\\"
+                package: \\"testapis.edgecases.import_squashed_union.pkg1\\",
+                fields: [
+                    {
+                        name: \\"msg\\",
+                        type: \\"testapis.edgecases.import_squashed_union.pkg1.Message\\"
+                    }
+                ]
             }
         } as proto_nexus.ProtobufMessageExtensions)
     }
@@ -385,7 +391,13 @@ export const SquashedOneof = nexus.unionType({
             protobufMessage: {
                 fullName: \\"testapis.edgecases.import_squashed_union.pkg1.SquashedOneof\\",
                 name: \\"SquashedOneof\\",
-                package: \\"testapis.edgecases.import_squashed_union.pkg1\\"
+                package: \\"testapis.edgecases.import_squashed_union.pkg1\\",
+                fields: [
+                    {
+                        name: \\"msg\\",
+                        type: \\"testapis.edgecases.import_squashed_union.pkg1.Message\\"
+                    }
+                ]
             }
         } as proto_nexus.ProtobufMessageExtensions)
     }
