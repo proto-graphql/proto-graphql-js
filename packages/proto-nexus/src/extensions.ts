@@ -92,6 +92,6 @@ export type ProtobufOneofExtensions = {
        * `"foo.bar.Baz"`
        */
       type: string;
-    };
+    }[];
   };
 };
