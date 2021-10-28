@@ -1,4 +1,13 @@
 
+## v0.5.0-alpha.20 (2021-10-28)
+
+#### Improvements - Code Generation
+* `proto-nexus`, `protoc-gen-nexus`
+  * [#172](https://github.com/proto-graphql/proto-nexus/pull/172) Add protobuf oneof metadata to extension ([@izumin5210](https://github.com/izumin5210))
+
+#### Committers: 1
+- Masayuki Izumi ([@izumin5210](https://github.com/izumin5210))
+
 ## v0.5.0-alpha.19 (2021-10-22)
 
 #### Features - Code Generation
