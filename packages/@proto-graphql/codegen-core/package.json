@@ -39,7 +39,6 @@
     "prebuild": "../../../scripts/compile-extensions-proto",
     "prepublish": "yarn clean && yarn build",
     "test": "jest --passWithNoTests",
-    "test:coverage": "jest --coverage --passWithNoTests",
-    "test:integration": "TEST_TARGET=integration jest"
+    "test:coverage": "jest --coverage --passWithNoTests"
   }
 }

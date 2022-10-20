@@ -35,7 +35,6 @@
     "clean": "rimraf lib/ module/ && tsc --build . --clean && tsc --build tsconfig.module.json --clean",
     "prepublish": "yarn clean && yarn build",
     "test": "jest --passWithNoTests",
-    "test:coverage": "jest --coverage --passWithNoTests",
-    "test:integration": "TEST_TARGET=integration jest"
+    "test:coverage": "jest --coverage --passWithNoTests"
   }
 }
