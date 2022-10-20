@@ -3,7 +3,7 @@ import assert from "assert";
 import { camelCase } from "change-case";
 import path from "path";
 import ts from "typescript";
-import * as extensions from "../../__generated__/extensions/graphql/schema_pb";
+import * as extensions from "../__generated__/extensions/graphql/schema_pb";
 import { EnumType } from "./EnumType";
 import { FieldBase } from "./FieldBase";
 import { InterfaceType } from "./InterfaceType";

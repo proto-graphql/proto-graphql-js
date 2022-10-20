@@ -1,19 +1,19 @@
-import ts from "typescript";
 import {
   EnumType,
   EnumTypeValue,
+  FullName,
   InputObjectField,
   InputObjectType,
   InterfaceType,
   ObjectField,
+  ObjectOneofField,
   ObjectType,
   OneofUnionType,
-  SquashedOneofUnionType,
-  FullName,
-  ObjectOneofField,
   ScalarType,
-} from "../types";
-import { uniqueImportAlias } from "../types/util";
+  SquashedOneofUnionType,
+  uniqueImportAlias,
+} from "@proto-graphql/codegen-core";
+import ts from "typescript";
 
 /**
  * @example

@@ -1,6 +1,6 @@
+import { EnumType, EnumTypeValue, ObjectField } from "@proto-graphql/codegen-core";
 import ts from "typescript";
 import { createFullNameExpr, onlyNonNull } from "../util";
-import { ObjectField, EnumType, EnumTypeValue } from "../../types";
 import { createMapExpr } from "./utils";
 
 /**
