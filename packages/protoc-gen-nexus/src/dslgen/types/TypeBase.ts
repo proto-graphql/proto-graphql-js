@@ -1,7 +1,7 @@
+import { ProtoEnum, ProtoMessage, ProtoOneof } from "@proto-graphql/proto-descriptors";
 import path from "path";
-import { ProtoEnum, ProtoMessage, ProtoOneof } from "../../protogen";
-import { FullName, GenerationParams, gqlTypeName, modulesWithUniqueImportAlias, descriptionFromProto } from "./util";
 import { DslFile } from "./DslFile";
+import { descriptionFromProto, FullName, GenerationParams, gqlTypeName, modulesWithUniqueImportAlias } from "./util";
 
 export abstract class TypeBase<P extends ProtoMessage | ProtoEnum | ProtoOneof> {
   constructor(readonly proto: P, readonly file: DslFile) {}

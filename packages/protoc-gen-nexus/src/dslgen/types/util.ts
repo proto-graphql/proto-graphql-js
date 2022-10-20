@@ -1,7 +1,3 @@
-import { pascalCase } from "change-case";
-import { ExtensionFieldInfo } from "google-protobuf";
-import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
-import path from "path";
 import {
   CommentSet,
   ProtoEnum,
@@ -11,7 +7,11 @@ import {
   ProtoMessage,
   ProtoOneof,
   ProtoRegistry,
-} from "../../protogen";
+} from "@proto-graphql/proto-descriptors";
+import { pascalCase } from "change-case";
+import { ExtensionFieldInfo } from "google-protobuf";
+import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
+import path from "path";
 import * as extensions from "../../__generated__/extensions/graphql/schema_pb";
 
 export const fileLayouts = ["proto_file", "graphql_type"] as const;

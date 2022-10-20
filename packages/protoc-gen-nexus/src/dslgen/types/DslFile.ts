@@ -1,4 +1,4 @@
-import { ProtoFile } from "../../protogen";
+import { ProtoFile } from "@proto-graphql/proto-descriptors";
 import { GenerationParams } from "./util";
 
 export class DslFile {

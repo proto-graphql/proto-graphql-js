@@ -1,6 +1,6 @@
+import { ProtoField } from "@proto-graphql/proto-descriptors";
 import { camelCase } from "change-case";
 import path from "path";
-import { ProtoField } from "../../protogen";
 import * as extensions from "../../__generated__/extensions/graphql/schema_pb";
 import { EnumType } from "./EnumType";
 import { FieldBase } from "./FieldBase";

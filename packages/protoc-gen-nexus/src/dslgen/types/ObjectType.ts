@@ -1,8 +1,9 @@
-import { ProtoMessage } from "../../protogen";
+import { ProtoMessage } from "@proto-graphql/proto-descriptors";
 import { ObjectField } from "./ObjectField";
 import { ObjectOneofField } from "./ObjectOneofField";
 import { OneofUnionType } from "./OneofUnionType";
 import { TypeBase } from "./TypeBase";
+import { getObjectFieldType } from "./types";
 import {
   createProtoFullName,
   FullName,
@@ -12,7 +13,6 @@ import {
   protoExportAlias,
   protoImportPath,
 } from "./util";
-import { getObjectFieldType } from "./types";
 
 export class ObjectType extends TypeBase<ProtoMessage> {
   /**

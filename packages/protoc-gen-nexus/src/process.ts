@@ -1,8 +1,8 @@
+import { ProtoRegistry } from "@proto-graphql/proto-descriptors";
 import { CodeGeneratorRequest, CodeGeneratorResponse } from "google-protobuf/google/protobuf/compiler/plugin_pb";
 import { GenerationParams } from "./dslgen";
 import { fileLayouts } from "./dslgen/types/util";
 import { generateFiles } from "./printer";
-import { ProtoRegistry } from "./protogen";
 
 export const processRequest = (req: CodeGeneratorRequest): CodeGeneratorResponse => {
   const resp = new CodeGeneratorResponse();

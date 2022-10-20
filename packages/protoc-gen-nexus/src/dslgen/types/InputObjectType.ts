@@ -1,5 +1,5 @@
+import { ProtoMessage } from "@proto-graphql/proto-descriptors";
 import * as extensions from "../../__generated__/extensions/graphql/schema_pb";
-import { ProtoMessage } from "../../protogen";
 import { EnumType } from "./EnumType";
 import { InputObjectField } from "./InputObjectField";
 import { ScalarType } from "./ScalarType";

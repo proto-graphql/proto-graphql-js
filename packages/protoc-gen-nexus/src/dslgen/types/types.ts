@@ -1,6 +1,6 @@
+import { ProtoEnum, ProtoField, ProtoMessage, ProtoRegistry } from "@proto-graphql/proto-descriptors";
 import assert from "assert";
 import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
-import { ProtoEnum, ProtoField, ProtoMessage, ProtoRegistry } from "../../protogen";
 import { DslFile } from "./DslFile";
 import { EnumType } from "./EnumType";
 import { InputObjectType } from "./InputObjectType";

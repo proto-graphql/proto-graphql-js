@@ -1,13 +1,13 @@
+import { ProtoFile, ProtoRegistry } from "@proto-graphql/proto-descriptors";
 import ts from "typescript";
 import {
   collectTypesFromFile,
-  DslFile,
   createImportDecls,
   createReExportStmts,
   createTypeDslStmts,
+  DslFile,
   GenerationParams,
 } from "./dslgen";
-import { ProtoFile, ProtoRegistry } from "./protogen";
 
 export function generateFiles(
   registry: ProtoRegistry,
