@@ -23,16 +23,12 @@ import {
  */
 export function createInputObjectTypeDslStmts(type: InputObjectType): ts.Statement[] {
   return [
+    createInputObjectTypeShapeDecl(type),
     createDslExportConstStmt(
       type.typeName,
       ts.factory.createCallExpression(
         createBuilderPropExpr("inputRef"),
-        [
-          ts.factory.createTypeReferenceNode(ts.factory.createIdentifier("Omit"), [
-            ts.factory.createTypeReferenceNode(createQualifiedName(type.protoTypeFullName)),
-            ts.factory.createLiteralTypeNode(ts.factory.createStringLiteral("$type")),
-          ]),
-        ],
+        [ts.factory.createTypeReferenceNode(createInputObjectTypeShapeIdent(type))],
         [ts.factory.createStringLiteral(type.typeName)]
       )
     ),
@@ -79,4 +75,52 @@ function createInputObjectTypeFieldsMethodExpr(type: InputObjectType): ts.Expres
       )
     )
   );
+}
+
+/**
+ * @example
+ * ```ts
+ * {
+ *   message?: _$hello$hello_pb$Hello["message"] | null,
+ *   // ...
+ * }
+ * ```
+ */
+function createInputObjectTypeShapeDecl(type: InputObjectType): ts.DeclarationStatement {
+  return ts.factory.createTypeAliasDeclaration(
+    undefined,
+    [ts.factory.createToken(ts.SyntaxKind.ExportKeyword)],
+    createInputObjectTypeShapeIdent(type),
+    undefined,
+    ts.factory.createTypeLiteralNode(
+      type.fields.map((field) => {
+        let typeNode: ts.TypeNode = ts.factory.createIndexedAccessTypeNode(
+          ts.factory.createTypeReferenceNode(createQualifiedName(type.protoTypeFullName)),
+          ts.factory.createLiteralTypeNode(ts.factory.createStringLiteral(field.protoJsName))
+        );
+        if (field.type instanceof InputObjectType) {
+          typeNode = ts.factory.createTypeReferenceNode(createInputObjectTypeShapeIdent(field.type));
+          if (field.isList()) {
+            typeNode = ts.factory.createTypeReferenceNode("Array", [typeNode]);
+          }
+        }
+        if (field.isNullable()) {
+          typeNode = ts.factory.createUnionTypeNode([
+            typeNode,
+            ts.factory.createLiteralTypeNode(ts.factory.createToken(ts.SyntaxKind.NullKeyword)),
+          ]);
+        }
+        return ts.factory.createPropertySignature(
+          undefined,
+          field.name,
+          field.isNullable() ? ts.factory.createToken(ts.SyntaxKind.QuestionToken) : undefined,
+          typeNode
+        );
+      })
+    )
+  );
+}
+
+function createInputObjectTypeShapeIdent(type: InputObjectType): ts.Identifier {
+  return ts.factory.createIdentifier(`${type.typeName}_Shape`);
 }

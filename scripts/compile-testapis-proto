@@ -61,7 +61,7 @@ execProtoc() {
 
     protocw \
       --plugin=protoc-gen-ts_proto=`yarn bin protoc-gen-ts_proto` \
-      --ts_proto_out="$TESTAPIS_ROOT/ts-proto/src" --ts_proto_opt=enumsAsLiterals=true,outputTypeRegistry=true,esModuleInterop=true \
+      --ts_proto_out="$TESTAPIS_ROOT/ts-proto/src" --ts_proto_opt=enumsAsLiterals=true,forceLong=string,unrecognizedEnum=false,outputTypeRegistry=true,esModuleInterop=true \
       ${protoDir}/*.proto
   done
 }

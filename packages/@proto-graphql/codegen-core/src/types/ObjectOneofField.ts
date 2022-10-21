@@ -11,7 +11,7 @@ export class ObjectOneofField extends FieldBase<ProtoOneof> {
     readonly type: OneofUnionType,
     private readonly parent: ObjectType,
     proto: ProtoOneof,
-    opts: GenerationParams
+    opts: GenerationParams & { dsl: "nexus" | "pothos" }
   ) {
     super(proto, opts);
   }

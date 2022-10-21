@@ -30,10 +30,10 @@
     "change-case": "^4.1.2"
   },
   "devDependencies": {
+    "@pothos/core": "^3.22.7",
     "@proto-nexus/google-protobuf": "^0.5.0-alpha.20",
     "@proto-nexus/protobufjs": "^0.5.0-alpha.20",
-    "@testapis/node": "^0.5.0-alpha.18",
-    "@testapis/node-native": "^0.5.0-alpha.20",
+    "@testapis/ts-proto": "^0.5.0-alpha.18",
     "@types/glob": "7.2.0",
     "glob": "8.0.1"
   },

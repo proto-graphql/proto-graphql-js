@@ -32,12 +32,17 @@ export type FullName = [FullName, string] | string;
 /**
  * @example js_out
  * ```
- * ["_$hello$hello_pb", "User"]
+ * [["_$hello$hello_pb", "User"], "Role"]
  * ```
  *
  * @example protobufjs
  * ```
- * [["_$hello", "hello"], "User"]
+ * [[["_$hello", "hello"], "User"], "Role"]
+ * ```
+ *
+ * @example ts-proto
+ * ```
+ * [[["_$hello", "hello"], "User_Role"]
  * ```
  */
 export function createProtoFullName(t: ProtoMessage | ProtoEnum, o: GenerationParams): FullName {
@@ -52,6 +57,9 @@ export function createProtoFullName(t: ProtoMessage | ProtoEnum, o: GenerationPa
   } else {
     left = createProtoFullName(t.parent, o);
   }
+  if (o.useTsProto && t.parent.kind !== "File") {
+    return [left[0], `${left[1]}_${t.name}`];
+  }
   return [left, t.name];
 }
 
@@ -65,7 +73,11 @@ export function protoExportAlias(t: ProtoMessage, o: GenerationParams): string {
 }
 
 export function protoImportPath(t: ProtoMessage | ProtoEnum, o: GenerationParams) {
-  const importPath = o.useProtobufjs ? path.dirname(t.file.name) : t.file.googleProtobufImportPath;
+  const importPath = o.useProtobufjs
+    ? path.dirname(t.file.name)
+    : o.useTsProto
+    ? t.file.name.slice(0, -1 * path.extname(t.file.name).length)
+    : t.file.googleProtobufImportPath;
   return `${o.importPrefix ? `${o.importPrefix}/` : "./"}${importPath}`;
 }
 

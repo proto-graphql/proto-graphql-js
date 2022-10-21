@@ -1401,6 +1401,11 @@
   dependencies:
     "@octokit/openapi-types" "^7.3.2"
 
+"@pothos/core@^3.22.7":
+  version "3.22.7"
+  resolved "https://registry.yarnpkg.com/@pothos/core/-/core-3.22.7.tgz#080ae31f6c435e32674f1fb4190ab6fb8e3f8c02"
+  integrity sha512-/b1Al46+76vMW0NBC0zpKVRrc2w7xNpq/UWA7j30LQVFFsNhJqRGzXX4xUT+7tJdKIUodH3GzUuXpGjM6rvE6g==
+
 "@protobufjs/aspromise@^1.1.1", "@protobufjs/aspromise@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@protobufjs/aspromise/-/aspromise-1.1.2.tgz#9b8b0cc663d669a7d8f6f5d0893a14d348f30fbf"

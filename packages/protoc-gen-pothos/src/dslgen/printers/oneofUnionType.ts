@@ -11,7 +11,6 @@ import {
  * @example
  * ```ts
  * export cosnt Oneof = builder.unionType("Oneof", {
- *   name: "Oneof",
  *   types: [...],
  *   // ...
  * })
@@ -21,14 +20,14 @@ export function createOneofUnionTypeDslStmt(type: OneofUnionType | SquashedOneof
   return createDslExportConstStmt(
     type.typeName,
     createBuilderCallExpr("unionType", [
+      ts.factory.createStringLiteral(type.typeName),
       ts.factory.createObjectLiteralExpression(
         [
-          ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(type.typeName)),
           createDescriptionPropertyAssignment(type),
           ts.factory.createPropertyAssignment(
             "types",
             ts.factory.createArrayLiteralExpression(
-              type.fields.map((f) => ts.factory.createStringLiteral(f.type.typeName)),
+              type.fields.map((f) => ts.factory.createIdentifier(f.type.typeName)),
               true
             )
           ),

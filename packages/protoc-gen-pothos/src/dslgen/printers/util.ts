@@ -56,7 +56,7 @@ export function createDeprecationPropertyAssignment(
   const reason = gql.deprecationReason;
   if (!reason) return null;
 
-  return ts.factory.createPropertyAssignment("deprecation", ts.factory.createStringLiteral(reason));
+  return ts.factory.createPropertyAssignment("deprecationReason", ts.factory.createStringLiteral(reason));
 }
 
 export function fullNameString(fn: FullName): string {

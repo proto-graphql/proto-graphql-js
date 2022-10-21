@@ -26,11 +26,14 @@ export function createEnumTypeDslStmt(type: EnumType): ts.Statement {
           createDescriptionPropertyAssignment(type),
           ts.factory.createPropertyAssignment(
             "values",
-            ts.factory.createObjectLiteralExpression(
-              type.values
-                .filter((v) => !v.isIgnored() && !v.isUnespecified())
-                .map((ev) => ts.factory.createPropertyAssignment(ev.name, createEnumValueExpr(ev))),
-              true // multiline
+            ts.factory.createAsExpression(
+              ts.factory.createObjectLiteralExpression(
+                type.values
+                  .filter((v) => !v.isIgnored() && !v.isUnespecified())
+                  .map((ev) => ts.factory.createPropertyAssignment(ev.name, createEnumValueExpr(ev))),
+                true // multiline
+              ),
+              ts.factory.createTypeReferenceNode("const")
             )
           ),
         ].filter(onlyNonNull()),

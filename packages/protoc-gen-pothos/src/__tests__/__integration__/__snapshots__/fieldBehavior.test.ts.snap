@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`schema generation with ts-proto query 1`] = `
+Object {
+  "data": Object {
+    "test": Object {
+      "outputOnlyField": null,
+      "requiredField": Object {
+        "body": "hello",
+      },
+    },
+  },
+}
+`;
+
+exports[`schema generation with ts-proto query: schema.graphql 1`] = `
+"type FieldBehaviorComentsMessage {
+  \\"\\"\\"Output only.\\"\\"\\"
+  outputOnlyField: FieldBehaviorComentsMessagePost
+
+  \\"\\"\\"Output only. Required.\\"\\"\\"
+  outputOnlyRequiredField: FieldBehaviorComentsMessagePost!
+
+  \\"\\"\\"Required.\\"\\"\\"
+  requiredField: FieldBehaviorComentsMessagePost!
+
+  \\"\\"\\"Required. Output only.\\"\\"\\"
+  requiredOutputOnlyField: FieldBehaviorComentsMessagePost!
+}
+
+input FieldBehaviorComentsMessageInput {
+  \\"\\"\\"Input only.\\"\\"\\"
+  inputOnlyField: FieldBehaviorComentsMessagePostInput
+
+  \\"\\"\\"Input only. Required.\\"\\"\\"
+  inputOnlyRequiredField: FieldBehaviorComentsMessagePostInput!
+
+  \\"\\"\\"Required.\\"\\"\\"
+  requiredField: FieldBehaviorComentsMessagePostInput!
+
+  \\"\\"\\"Required. Input only.\\"\\"\\"
+  requiredInputOnlyField: FieldBehaviorComentsMessagePostInput!
+}
+
+type FieldBehaviorComentsMessagePost {
+  body: String!
+}
+
+input FieldBehaviorComentsMessagePostInput {
+  body: String!
+}
+
+type Query {
+  test: FieldBehaviorComentsMessage!
+}
+"
+`;

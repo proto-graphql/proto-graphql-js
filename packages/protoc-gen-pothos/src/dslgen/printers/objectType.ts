@@ -26,13 +26,24 @@ export function createObjectTypeDslStmts(objType: ObjectType): ts.Statement[] {
     createDslExportConstStmt(
       objType.typeName,
       ts.factory.createCallExpression(
-        createBuilderPropExpr("objectRef"),
-        [ts.factory.createTypeReferenceNode(createQualifiedName(objType.protoTypeFullName))],
+        createBuilderPropExpr(isInterface ? "interfaceRef" : "objectRef"),
+        [
+          isInterface
+            ? ts.factory.createTypeReferenceNode("Pick", [
+                ts.factory.createTypeReferenceNode(createQualifiedName(objType.protoTypeFullName)),
+                ts.factory.createUnionTypeNode(
+                  objType.fields.map((f) =>
+                    ts.factory.createLiteralTypeNode(ts.factory.createStringLiteral(f.protoJsName))
+                  )
+                ),
+              ])
+            : ts.factory.createTypeReferenceNode(createQualifiedName(objType.protoTypeFullName)),
+        ],
         [ts.factory.createStringLiteral(objType.typeName)]
       )
     ),
     ts.factory.createExpressionStatement(
-      createBuilderCallExpr("objectType", [
+      createBuilderCallExpr(isInterface ? "interfaceType" : "objectType", [
         ts.factory.createIdentifier(objType.typeName),
         ts.factory.createObjectLiteralExpression(
           [

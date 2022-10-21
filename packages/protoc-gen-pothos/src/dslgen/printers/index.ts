@@ -17,8 +17,7 @@ export function createImportDecls(
 ): ts.ImportDeclaration[] {
   return types
     .flatMap((t) => t.importModules)
-    .sort()
-    .filter(onlyUnique((m) => m.module))
+    .filter(onlyUnique((m) => JSON.stringify([m.alias, m.module])))
     .sort(({ module: a }, { module: b }) => {
       const pat = /^\.+\//;
       const [aIsRel, bIsRel] = [a.match(pat), b.match(pat)];
