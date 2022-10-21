@@ -8,7 +8,7 @@ describe("simple proto file", () => {
   itGeneratesDSLsToMatchSnapshtos("primitives", ["primitives/primitives_pb_nexus.ts"]);
 
   it("generates pothos DSLs with graphql_type file layout", async () => {
-    const resp = await generateDSLs("primitives", "protobufjs", { perGraphQLType: true });
+    const resp = await generateDSLs("primitives", "ts-proto", { perGraphQLType: true });
     snapshotGeneratedFiles(resp, [
       "primitives/Message.nexus.ts",
       "primitives/Primitives.nexus.ts",
@@ -18,7 +18,7 @@ describe("simple proto file", () => {
   });
 
   it("generates pothos DSLs with partial inputs", async () => {
-    const resp = await generateDSLs("primitives", "protobufjs", { partialInputs: true });
+    const resp = await generateDSLs("primitives", "ts-proto", { partialInputs: true });
     snapshotGeneratedFiles(resp, ["primitives/primitives_pb_nexus.ts"]);
   });
 });
@@ -31,7 +31,7 @@ describe("protobuf enums", () => {
   itGeneratesDSLsToMatchSnapshtos("enums", ["enums/enums_pb_nexus.ts"]);
 
   it("generates pothos DSLs with graphql_type file layout", async () => {
-    const resp = await generateDSLs("enums", "protobufjs", { perGraphQLType: true });
+    const resp = await generateDSLs("enums", "ts-proto", { perGraphQLType: true });
     snapshotGeneratedFiles(resp, [
       "enums/MessageWithEnums.nexus.ts",
       "enums/MyEnum.nexus.ts",
@@ -52,7 +52,7 @@ describe("protobuf custom options", () => {
   ]);
 
   it("generates pothos DSLs with graphql_type file layout", async () => {
-    const resp = await generateDSLs("extensions", "protobufjs", { perGraphQLType: true });
+    const resp = await generateDSLs("extensions", "ts-proto", { perGraphQLType: true });
     snapshotGeneratedFiles(resp, [
       "extensions/TestPrefixPrefixedMessage.nexus.ts",
       "extensions/TestPrefixPrefixedMessageInnerMessage.nexus.ts",
@@ -79,7 +79,7 @@ describe("protobuf oneof", () => {
   itGeneratesDSLsToMatchSnapshtos("oneof", ["oneof/oneof_pb_nexus.ts"]);
 
   it("generates pothos DSLs with graphql_type file layout", async () => {
-    const resp = await generateDSLs("oneof", "protobufjs", { perGraphQLType: true });
+    const resp = await generateDSLs("oneof", "ts-proto", { perGraphQLType: true });
     snapshotGeneratedFiles(resp, [
       "oneof/OneofParent.nexus.ts",
       "oneof/OneofParentRequiredOneofMembers.nexus.ts",

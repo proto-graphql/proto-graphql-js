@@ -3,6 +3,7 @@ import { fileLayouts, GenerationParams } from "@proto-graphql/codegen-core";
 export const parseParams = (input: string | undefined): GenerationParams => {
   const params: GenerationParams = {
     useProtobufjs: false,
+    useTsProto: false,
     partialInputs: false,
     importPrefix: null,
     fileLayout: "proto_file",

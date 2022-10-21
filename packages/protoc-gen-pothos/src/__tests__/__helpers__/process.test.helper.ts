@@ -7,7 +7,7 @@ import { FileDescriptorSet } from "google-protobuf/google/protobuf/descriptor_pb
 import { processRequest } from "../../process";
 import { CodeGeneratorRequest, CodeGeneratorResponse } from "google-protobuf/google/protobuf/compiler/plugin_pb";
 
-const generationTargets = ["native protobuf", "protobufjs"] as const;
+const generationTargets = ["ts-proto"] as const;
 type GenerationTarget = typeof generationTargets[number];
 
 export async function generateDSLs(
@@ -17,12 +17,8 @@ export async function generateDSLs(
 ) {
   const params = [];
   switch (target) {
-    case "protobufjs":
-      if (opts.withPrefix) params.push("import_prefix=@testapis/node/lib");
-      params.push("use_protobufjs");
-      break;
-    case "native protobuf":
-      if (opts.withPrefix) params.push("import_prefix=@testapis/node-native/lib");
+    case "ts-proto":
+      if (opts.withPrefix) params.push("import_prefix=@testapis/ts-proto/lib");
       break;
     default: {
       const _exhaustiveCheck: never = target;

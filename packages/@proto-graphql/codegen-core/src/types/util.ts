@@ -17,7 +17,10 @@ import * as extensions from "../__generated__/extensions/graphql/schema_pb";
 export const fileLayouts = ["proto_file", "graphql_type"] as const;
 export type GenerationParams = {
   importPrefix: string | null;
+  /** support only protoc-gen-nexus */
   useProtobufjs: boolean;
+  /** support only protoc-gen-pothos */
+  useTsProto: boolean;
   partialInputs: boolean;
   fileLayout: typeof fileLayouts[number];
   typeMappings: Record<string, string>;
