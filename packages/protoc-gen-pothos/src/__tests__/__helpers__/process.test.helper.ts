@@ -38,9 +38,9 @@ export async function generateDSLs(
   return await processCodeGeneration(name, params.join(","));
 }
 
-export function itGeneratesNexusDSLsToMatchSnapshtos(name: string, expectedGeneratedFiles: string[]) {
+export function itGeneratesDSLsToMatchSnapshtos(name: string, expectedGeneratedFiles: string[]) {
   describe.each(generationTargets)("with %s", (target) => {
-    it("generates nexus DSLs", async () => {
+    it("generates pothos DSLs", async () => {
       const resp = await generateDSLs(name, target);
       snapshotGeneratedFiles(resp, expectedGeneratedFiles);
     });
