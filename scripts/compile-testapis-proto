@@ -68,7 +68,7 @@ _main() {
   clean
   init
   execProtoc
-  yarn workspace @testapis/ts-proto build
+  yarn workspace @testapis/ts-proto build:testapis
 }
 
 _main
