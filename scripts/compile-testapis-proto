@@ -56,6 +56,11 @@ execProtoc() {
       --out "$nodeOutDir/index.js" \
       ${protoDir}/*.proto
     yarn pbts --out "$nodeOutDir/index.d.ts" "$nodeOutDir/index.js"
+
+    protocw \
+      --plugin=protoc-gen-ts_proto=`yarn bin protoc-gen-ts_proto` \
+      --ts_proto_out="$TESTAPIS_ROOT/ts-proto/src" --ts_proto_opt=enumsAsLiterals=true,outputTypeRegistry=true,esModuleInterop=true \
+      ${protoDir}/*.proto
   done
 }
 
@@ -63,6 +68,7 @@ _main() {
   clean
   init
   execProtoc
+  yarn workspace @testapis/ts-proto build
 }
 
 _main
