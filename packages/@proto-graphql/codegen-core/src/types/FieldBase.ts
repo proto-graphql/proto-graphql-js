@@ -1,5 +1,5 @@
-import { ProtoField, ProtoOneof } from "../../protogen";
-import * as extensions from "../../__generated__/extensions/graphql/schema_pb";
+import { ProtoField, ProtoOneof } from "@proto-graphql/proto-descriptors";
+import * as extensions from "../__generated__/extensions/graphql/schema_pb";
 import { descriptionFromProto, FullName, GenerationParams, getDeprecationReason } from "./util";
 
 export abstract class FieldBase<P extends ProtoField | ProtoOneof> {

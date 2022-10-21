@@ -1,10 +1,10 @@
+import { ProtoOneof } from "@proto-graphql/proto-descriptors";
 import assert from "assert";
-import { ProtoOneof } from "../../protogen";
-import { createProtoFullName, FullName, isIgnoredField, isInputOnlyField, protoImportPath } from "./util";
-import { TypeBase } from "./TypeBase";
 import { ObjectField } from "./ObjectField";
 import { ObjectType } from "./ObjectType";
+import { TypeBase } from "./TypeBase";
 import { getObjectFieldType } from "./types";
+import { createProtoFullName, FullName, isIgnoredField, isInputOnlyField, protoImportPath } from "./util";
 
 export class OneofUnionType extends TypeBase<ProtoOneof> {
   get fields(): ObjectField<ObjectType>[] {

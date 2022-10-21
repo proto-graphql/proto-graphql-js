@@ -1,10 +1,10 @@
+import { ProtoOneof } from "@proto-graphql/proto-descriptors";
 import { camelCase } from "change-case";
 import path from "path";
-import { ProtoOneof } from "../../protogen";
-import { FullName, GenerationParams, isRequiredField, modulesWithUniqueImportAlias, uniqueImportAlias } from "./util";
 import { FieldBase } from "./FieldBase";
 import { ObjectType } from "./ObjectType";
 import { OneofUnionType } from "./OneofUnionType";
+import { FullName, GenerationParams, isRequiredField, modulesWithUniqueImportAlias, uniqueImportAlias } from "./util";
 
 export class ObjectOneofField extends FieldBase<ProtoOneof> {
   constructor(

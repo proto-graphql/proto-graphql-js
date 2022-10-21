@@ -1,5 +1,5 @@
 import ts from "typescript";
-import { EnumType, EnumTypeValue } from "../types";
+import { EnumType, EnumTypeValue } from "@proto-graphql/codegen-core";
 import {
   createDeprecationPropertyAssignment,
   createDescriptionPropertyAssignment,

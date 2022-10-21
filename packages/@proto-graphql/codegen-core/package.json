@@ -1,7 +1,7 @@
 {
-  "name": "protoc-gen-nexus",
+  "name": "@proto-graphql/codegen-core",
   "version": "0.5.0-alpha.20",
-  "description": "Generate DSL for GraphQL Nexus from Protocol Buffers IDL",
+  "description": "",
   "keywords": [
     "graphql",
     "grpc",
@@ -9,9 +9,6 @@
     "protobuf",
     "typescript"
   ],
-  "bin": {
-    "protoc-gen-nexus": "./bin/protoc-gen-nexus"
-  },
   "repository": "git@github.com:proto-graphql/proto-nexus.git",
   "author": "izumin5210 <m@izum.in>",
   "license": "MIT",
@@ -23,36 +20,25 @@
     "node": ">= 14.0.0"
   },
   "dependencies": {
-    "@proto-graphql/codegen-core": "^0.5.0-alpha.20",
     "@proto-graphql/proto-descriptors": "^0.5.0-alpha.20",
-    "@proto-graphql/protoc-plugin-helpers": "^0.5.0-alpha.20",
-    "@types/change-case": "^2.3.1",
     "change-case": "^4.1.2"
   },
-  "devDependencies": {
-    "@proto-nexus/google-protobuf": "^0.5.0-alpha.20",
-    "@proto-nexus/protobufjs": "^0.5.0-alpha.20",
-    "@testapis/node": "^0.5.0-alpha.18",
-    "@testapis/node-native": "^0.5.0-alpha.20",
-    "@types/glob": "7.2.0",
-    "glob": "8.0.1"
-  },
   "peerDependencies": {
-    "graphql": "^15.4.0",
-    "nexus": "1.1.0"
+    "google-protobuf": "^3.12.2"
+  },
+  "devDependencies": {
+    "@types/change-case": "^2.3.1"
   },
   "files": [
-    "bin/",
-    "include/",
     "lib/",
     "module/"
   ],
   "scripts": {
     "build": "tsc --build . && tsc --build tsconfig.module.json",
     "clean": "rimraf lib/ module/ && tsc --build . --clean && tsc --build tsconfig.module.json --clean",
+    "prebuild": "../../../scripts/compile-extensions-proto",
     "prepublish": "yarn clean && yarn build",
-    "test": "jest",
-    "test:coverage": "jest --coverage",
-    "test:integration": "TEST_TARGET=integration jest"
+    "test": "jest --passWithNoTests",
+    "test:coverage": "jest --coverage --passWithNoTests"
   }
 }

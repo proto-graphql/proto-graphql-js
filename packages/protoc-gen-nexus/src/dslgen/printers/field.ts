@@ -1,4 +1,6 @@
+import { InputObjectField, ObjectField, ObjectOneofField } from "@proto-graphql/codegen-core";
 import ts from "typescript";
+import { createFieldResolverDecl } from "./fieldResolvers";
 import {
   createDeprecationPropertyAssignment,
   createDescriptionPropertyAssignment,
@@ -7,8 +9,6 @@ import {
   createProtoNexusType,
   onlyNonNull,
 } from "./util";
-import { createFieldResolverDecl } from "./fieldResolvers";
-import { InputObjectField, ObjectField, ObjectOneofField } from "../types";
 
 /**
  * @example

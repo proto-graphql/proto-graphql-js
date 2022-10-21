@@ -1,5 +1,5 @@
+import { ProtoField } from "@proto-graphql/proto-descriptors";
 import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
-import { ProtoField } from "../../protogen";
 import { createProtoFullName, FullName, GenerationParams } from "./util";
 
 export type GqlScalarType = "Int" | "Float" | "String" | "Boolean" | "ID" | "DateTime";

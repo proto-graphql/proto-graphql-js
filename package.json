@@ -2,6 +2,7 @@
   "private": true,
   "workspaces": [
     "packages/*",
+    "packages/@proto-graphql/*",
     "packages/@proto-nexus/*",
     "packages/@testapis/*"
   ],

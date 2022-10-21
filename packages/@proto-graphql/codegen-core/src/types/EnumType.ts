@@ -1,15 +1,15 @@
+import { ProtoEnum, ProtoEnumValue } from "@proto-graphql/proto-descriptors";
 import { constantCase } from "change-case";
-import { ProtoEnum, ProtoEnumValue } from "../../protogen";
+import { TypeBase } from "./TypeBase";
 import {
   createProtoFullName,
+  descriptionFromProto,
   FullName,
   GenerationParams,
   getDeprecationReason,
   isIgnoredField,
   protoImportPath,
-  descriptionFromProto,
 } from "./util";
-import { TypeBase } from "./TypeBase";
 
 export class EnumType extends TypeBase<ProtoEnum> {
   get protoImportPath(): string {

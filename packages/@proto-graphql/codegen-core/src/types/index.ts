@@ -1,4 +1,5 @@
 export * from "./types";
+export { fileLayouts, uniqueImportAlias } from "./util";
 export type { FullName, GenerationParams } from "./util";
 export * from "./DslFile";
 export * from "./ObjectType";

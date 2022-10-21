@@ -1,4 +1,4 @@
-import { ProtoMessage } from "../../protogen";
+import { ProtoMessage } from "@proto-graphql/proto-descriptors";
 import { DslFile } from "./DslFile";
 import { ObjectField } from "./ObjectField";
 import { ObjectType } from "./ObjectType";
