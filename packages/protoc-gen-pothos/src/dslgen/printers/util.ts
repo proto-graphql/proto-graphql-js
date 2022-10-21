@@ -92,12 +92,14 @@ export function createQualifiedName(fn: FullName): ts.Identifier | ts.QualifiedN
  * import * as foo$bar$baz from "foo/bar/baz";
  * ```
  */
-export function createImportAllWithAliastDecl({
+export function createImportDecl({
   alias,
   module,
+  type,
 }: {
   alias: string;
   module: string;
+  type: "namespace" | "named";
 }): ts.ImportDeclaration {
   return ts.factory.createImportDeclaration(
     undefined,
@@ -105,7 +107,13 @@ export function createImportAllWithAliastDecl({
     ts.factory.createImportClause(
       false,
       undefined,
-      ts.factory.createNamespaceImport(ts.factory.createIdentifier(alias))
+      type === "namespace"
+        ? ts.factory.createNamespaceImport(ts.factory.createIdentifier(alias))
+        : type === "named"
+        ? ts.factory.createNamedImports([
+            ts.factory.createImportSpecifier(false, undefined, ts.factory.createIdentifier(alias)),
+          ])
+        : undefined
     ),
     ts.factory.createStringLiteral(module)
   );

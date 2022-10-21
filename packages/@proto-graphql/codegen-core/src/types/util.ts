@@ -21,6 +21,7 @@ export type GenerationParams = {
   useProtobufjs: boolean;
   /** support only protoc-gen-pothos */
   useTsProto: boolean;
+  pothosBuilderPath: string;
   partialInputs: boolean;
   fileLayout: typeof fileLayouts[number];
   typeMappings: Record<string, string>;
@@ -68,8 +69,10 @@ export function protoImportPath(t: ProtoMessage | ProtoEnum, o: GenerationParams
   return `${o.importPrefix ? `${o.importPrefix}/` : "./"}${importPath}`;
 }
 
-export function modulesWithUniqueImportAlias(modules: string[]): { alias: string; module: string }[] {
-  return modules.map((m) => ({ module: m, alias: uniqueImportAlias(m) }));
+export function modulesWithUniqueImportAlias(
+  modules: string[]
+): { alias: string; module: string; type: "namespace" | "named" }[] {
+  return modules.map((m) => ({ module: m, alias: uniqueImportAlias(m), type: "namespace" }));
 }
 
 export function uniqueImportAlias(path: string) {

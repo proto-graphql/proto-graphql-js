@@ -10,7 +10,7 @@ import { createEnumTypeDslStmt } from "./enumType";
 import { createInputObjectTypeDslStmts } from "./inputObjectType";
 import { createObjectTypeDslStmts } from "./objectType";
 import { createOneofUnionTypeDslStmt } from "./oneofUnionType";
-import { createImportAllWithAliastDecl, createQualifiedName, fullNameString, onlyNonNull, onlyUnique } from "./util";
+import { createImportDecl, createQualifiedName, fullNameString, onlyNonNull, onlyUnique } from "./util";
 
 export function createImportDecls(
   types: (ObjectType | InputObjectType | EnumType | OneofUnionType | SquashedOneofUnionType)[]
@@ -28,7 +28,7 @@ export function createImportDecls(
       if (a > b) return 1;
       return 0;
     })
-    .map((m) => createImportAllWithAliastDecl(m));
+    .map((m) => createImportDecl(m));
 }
 
 export function createReExportStmts(

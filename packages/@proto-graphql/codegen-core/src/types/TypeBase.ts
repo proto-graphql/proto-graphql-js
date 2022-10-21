@@ -18,12 +18,18 @@ export abstract class TypeBase<P extends ProtoMessage | ProtoEnum | ProtoOneof> 
     return [];
   }
 
-  get importModules(): { alias: string; module: string }[] {
+  get importModules(): { alias: string; module: string; type: "namespace" | "named" }[] {
     switch (this.options.dsl) {
       case "nexus":
         return modulesWithUniqueImportAlias(["nexus", "proto-nexus"]);
       case "pothos":
-        return modulesWithUniqueImportAlias([]);
+        return [
+          {
+            alias: "builder",
+            module: path.relative(path.dirname(this.filename), this.options.pothosBuilderPath),
+            type: "named",
+          },
+        ];
       default: {
         const _exhaustiveCheck: never = this.options.dsl;
         return [];

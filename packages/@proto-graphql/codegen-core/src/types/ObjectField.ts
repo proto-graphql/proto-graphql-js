@@ -50,7 +50,7 @@ export class ObjectField<
   /**
    * @override
    */
-  get importModules(): { alias: string; module: string }[] {
+  get importModules(): { alias: string; module: string; type: "namespace" | "named" }[] {
     const modules = [];
     if (this.type instanceof EnumType && this.type.unspecifiedValue != null) {
       modules.push(this.type.protoImportPath);

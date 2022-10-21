@@ -4,6 +4,7 @@ export const parseParams = (input: string | undefined): GenerationParams => {
   const params: GenerationParams = {
     useProtobufjs: false,
     useTsProto: false,
+    pothosBuilderPath: "./builder",
     partialInputs: false,
     importPrefix: null,
     fileLayout: "proto_file",

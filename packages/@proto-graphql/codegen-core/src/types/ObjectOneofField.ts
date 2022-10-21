@@ -47,7 +47,7 @@ export class ObjectOneofField extends FieldBase<ProtoOneof> {
   /**
    * @override
    */
-  get importModules(): { alias: string; module: string }[] {
+  get importModules(): { alias: string; module: string; type: "namespace" | "named" }[] {
     const modules = [];
     if (this.typeImportPath) {
       modules.push(this.typeImportPath);
