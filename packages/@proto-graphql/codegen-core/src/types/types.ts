@@ -88,7 +88,7 @@ function buildEnumTypes(enums: ProtoEnum[], file: DslFile): EnumType[] {
 
 export function getObjectFieldType(
   proto: ProtoField,
-  opts: GenerationParams
+  opts: GenerationParams & { dsl: "nexus" | "pothos" }
 ): ScalarType | EnumType | ObjectType | InterfaceType | SquashedOneofUnionType {
   return detectType<ObjectType | InterfaceType | SquashedOneofUnionType | ScalarType>(proto, opts, (msg, file) => {
     if (isInterface(msg)) return new InterfaceType(msg, file);
@@ -99,7 +99,7 @@ export function getObjectFieldType(
 
 export function getInputObjectFieldType(
   proto: ProtoField,
-  opts: GenerationParams
+  opts: GenerationParams & { dsl: "nexus" | "pothos" }
 ): ScalarType | EnumType | InputObjectType {
   return detectType<InputObjectType>(proto, opts, (msg, file) => {
     return new InputObjectType(msg, file);
@@ -108,7 +108,7 @@ export function getInputObjectFieldType(
 
 function detectType<T extends ObjectType | InterfaceType | SquashedOneofUnionType | InputObjectType | ScalarType>(
   proto: ProtoField,
-  opts: GenerationParams,
+  opts: GenerationParams & { dsl: "nexus" | "pothos" },
   f: (msg: ProtoMessage, file: DslFile) => T
 ): ScalarType | EnumType | T {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

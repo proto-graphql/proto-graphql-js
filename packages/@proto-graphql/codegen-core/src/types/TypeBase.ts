@@ -1,7 +1,7 @@
 import { ProtoEnum, ProtoMessage, ProtoOneof } from "@proto-graphql/proto-descriptors";
 import path from "path";
 import { DslFile } from "./DslFile";
-import { descriptionFromProto, FullName, GenerationParams, gqlTypeName, modulesWithUniqueImportAlias } from "./util";
+import { descriptionFromProto, FullName, gqlTypeName, modulesWithUniqueImportAlias } from "./util";
 
 export abstract class TypeBase<P extends ProtoMessage | ProtoEnum | ProtoOneof> {
   constructor(readonly proto: P, readonly file: DslFile) {}
@@ -19,7 +19,16 @@ export abstract class TypeBase<P extends ProtoMessage | ProtoEnum | ProtoOneof> 
   }
 
   get importModules(): { alias: string; module: string }[] {
-    return modulesWithUniqueImportAlias(["nexus", "proto-nexus"]);
+    switch (this.options.dsl) {
+      case "nexus":
+        return modulesWithUniqueImportAlias(["nexus", "proto-nexus"]);
+      case "pothos":
+        return modulesWithUniqueImportAlias([]);
+      default: {
+        const _exhaustiveCheck: never = this.options.dsl;
+        return [];
+      }
+    }
   }
 
   get filename(): string {
@@ -37,7 +46,7 @@ export abstract class TypeBase<P extends ProtoMessage | ProtoEnum | ProtoOneof> 
     }
   }
 
-  protected get options(): GenerationParams {
+  protected get options() {
     return this.file.options;
   }
 }
