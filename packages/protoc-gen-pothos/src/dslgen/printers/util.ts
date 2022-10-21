@@ -9,9 +9,7 @@ import {
   ObjectOneofField,
   ObjectType,
   OneofUnionType,
-  ScalarType,
   SquashedOneofUnionType,
-  uniqueImportAlias,
 } from "@proto-graphql/codegen-core";
 import ts from "typescript";
 
@@ -28,61 +26,11 @@ export function createBuilderCallExpr(name: string, args: readonly ts.Expression
 /**
  * @example
  * ```
- * nexus.objectType(...)
- * ```
- */
-export function createNexusCallExpr(name: string, args: readonly ts.Expression[]): ts.Expression {
-  return ts.factory.createCallExpression(createNexusProp(name), undefined, args);
-}
-
-/**
- * @example
- * ```
  * builder.objectRef
  * ```
  */
 export function createBuilderPropExpr(name: string): ts.Expression {
   return ts.factory.createPropertyAccessExpression(ts.factory.createIdentifier("builder"), name);
-}
-
-/**
- * @example
- * ```
- * nexus.objectType
- * ```
- */
-export function createNexusProp(name: string): ts.Expression {
-  return ts.factory.createPropertyAccessExpression(ts.factory.createIdentifier("nexus"), name);
-}
-
-/**
- * @example
- * ```
- * proto_nexus.Transformer
- * ```
- */
-export function createProtoNexusProp(name: string): ts.Expression {
-  return ts.factory.createPropertyAccessExpression(ts.factory.createIdentifier(uniqueImportAlias("proto-nexus")), name);
-}
-
-/**
- * @example
- * ```
- * proto_nexus.Transformer
- * ```
- */
-export function createProtoNexusType(name: string): ts.QualifiedName {
-  return ts.factory.createQualifiedName(ts.factory.createIdentifier(uniqueImportAlias("proto-nexus")), name);
-}
-
-/**
- * @example
- * ```
- * proto_nexus.stringToNumber(...)
- * ```
- */
-export function createProtoNexusCallExpr(name: string, args: readonly ts.Expression[]): ts.Expression {
-  return ts.factory.createCallExpression(createProtoNexusProp(name), undefined, args);
 }
 
 export function createDescriptionPropertyAssignment(
@@ -187,18 +135,4 @@ export function onlyUnique<T, V>(f?: (t: T) => V): (t: T) => boolean {
     set.add(key);
     return true;
   };
-}
-
-export function createProtoToGqlFunc(type: ScalarType): ts.Expression {
-  return ts.factory.createPropertyAccessExpression(createTransformerExpr(type), "protoToGql");
-}
-
-export function createGqlToProto(type: ScalarType): ts.Expression {
-  return ts.factory.createPropertyAccessExpression(createTransformerExpr(type), "gqlToProto");
-}
-
-function createTransformerExpr(type: ScalarType): ts.Expression {
-  return createProtoNexusCallExpr("getTransformer", [
-    ts.factory.createStringLiteral(fullNameString(type.protoFullName!)),
-  ]);
 }
