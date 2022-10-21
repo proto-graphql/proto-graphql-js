@@ -12,11 +12,13 @@ LIBRARY_PATH=./proto-graphql
 clean() {
   rm -rf $TESTAPIS_ROOT/node-native/lib
   rm -rf $TESTAPIS_ROOT/node/lib
+  rm -rf $TESTAPIS_ROOT/ts-proto/{src,lib}
 }
 
 init() {
   mkdir -p $TESTAPIS_ROOT/node-native/lib
   mkdir -p $TESTAPIS_ROOT/node/lib
+  mkdir -p $TESTAPIS_ROOT/ts-proto/{src,lib}
 }
 
 protocw() {
