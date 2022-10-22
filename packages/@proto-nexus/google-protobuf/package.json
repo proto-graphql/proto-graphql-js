@@ -1,6 +1,6 @@
 {
   "name": "@proto-nexus/google-protobuf",
-  "version": "0.5.0-alpha.20",
+  "version": "0.5.0",
   "description": "Generate DSL for GraphQL Nexus from Protocol Buffers IDL",
   "keywords": [
     "graphql",
@@ -9,7 +9,7 @@
     "protobuf",
     "typescript"
   ],
-  "repository": "git@github.com:proto-graphql/proto-nexus.git",
+  "repository": "git@github.com:proto-graphql/proto-graphql-js.git",
   "author": "izumin5210 <m@izum.in>",
   "license": "MIT",
   "main": "./lib/index.js",
@@ -28,7 +28,7 @@
     "module/"
   ],
   "dependencies": {
-    "proto-nexus": "^0.5.0-alpha.20"
+    "proto-nexus": "^0.5.0"
   },
   "peerDependencies": {
     "@types/google-protobuf": "^3.7.2",
