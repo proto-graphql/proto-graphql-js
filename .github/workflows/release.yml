@@ -7,13 +7,19 @@ on:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
+permissions: {}
+
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
+        with:
+          submodules: true
 
       - name: Setup Node.js 12.x
         uses: actions/setup-node@v2
