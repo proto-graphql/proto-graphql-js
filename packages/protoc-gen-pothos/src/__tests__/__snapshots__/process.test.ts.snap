@@ -256,17 +256,6 @@ export const DeprecatedEnum = builder.enumType(\\"DeprecatedEnum\\", {
         }
     } as const
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -363,17 +352,6 @@ export const DeprecatedFileEnum = builder.enumType(\\"DeprecatedFileEnum\\", {
         }
     } as const
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -411,17 +389,6 @@ EmptyMessageInput.implement({
         })
     })
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -529,17 +496,6 @@ FieldBehaviorComentsMessagePostInput.implement({
         })
     })
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -586,17 +542,6 @@ export const SubpkgEnum = builder.enumType(\\"SubpkgEnum\\", {
         }
     } as const
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -654,17 +599,6 @@ MessageWithSubpkgInput.implement({
         })
     })
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -762,17 +696,6 @@ export const ParentMessageNestedEnum = builder.enumType(\\"ParentMessageNestedEn
         }
     } as const
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -797,17 +720,6 @@ builder.objectType(TestPrefixIgnoredMessageNotIgnored, {
         }).$type === \\"testapis.extensions.IgnoredMessage.NotIgnored\\";
     }
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -828,17 +740,6 @@ TestPrefixIgnoredMessageNotIgnoredInput.implement({
         })
     })
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -858,17 +759,6 @@ builder.interfaceType(TestPrefixInterfaceMessage, {
         })
     })
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -889,17 +779,6 @@ TestPrefixInterfaceMessageInput.implement({
         })
     })
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -918,17 +797,6 @@ export const TestPrefixInterfaceMessageType = builder.enumType(\\"TestPrefixInte
         }
     } as const
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -947,17 +815,6 @@ export const TestPrefixPrefixedEnum = builder.enumType(\\"TestPrefixPrefixedEnum
         }
     } as const
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -1050,17 +907,6 @@ builder.objectType(TestPrefixPrefixedMessage, {
         }).$type === \\"testapis.extensions.PrefixedMessage\\";
     }
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -1089,17 +935,6 @@ builder.objectType(TestPrefixPrefixedMessageInnerMessage, {
         }).$type === \\"testapis.extensions.PrefixedMessage.InnerMessage\\";
     }
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -1128,17 +963,6 @@ builder.objectType(TestPrefixPrefixedMessageInnerMessage2, {
         }).$type === \\"testapis.extensions.PrefixedMessage.InnerMessage2\\";
     }
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -1164,17 +988,6 @@ TestPrefixPrefixedMessageInnerMessage2Input.implement({
         })
     })
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -1200,17 +1013,6 @@ TestPrefixPrefixedMessageInnerMessageInput.implement({
         })
     })
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -1276,17 +1078,6 @@ TestPrefixPrefixedMessageInput.implement({
         })
     })
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -1301,17 +1092,6 @@ export const TestPrefixPrefixedMessagePartialIgnoreOneof = builder.unionType(\\"
         TestPrefixPrefixedMessageInnerMessage
     ]
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -1328,17 +1108,6 @@ export const TestPrefixPrefixedMessageSquashedMessage = builder.unionType(\\"Tes
         TestPrefixPrefixedMessageInnerMessage2
     ]
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -1366,17 +1135,6 @@ TestPrefixPrefixedMessageSquashedMessageInput.implement({
         })
     })
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -1401,17 +1159,6 @@ builder.objectType(TestPrefixRenamedMessage, {
         }).$type === \\"testapis.extensions.MessageWillRename\\";
     }
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -1432,17 +1179,6 @@ TestPrefixRenamedMessageInput.implement({
         })
     })
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -1778,17 +1514,6 @@ export const TestPrefixInterfaceMessageType = builder.enumType(\\"TestPrefixInte
         }
     } as const
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -1797,17 +1522,6 @@ exports[`protobuf custom options with ts-proto generates pothos DSLs: extensions
 // source: testapis/extensions/ignored.proto
 
 export {};
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -1910,17 +1624,6 @@ builder.objectType(MessageWithEnums, {
         }).$type === \\"testapi.enums.MessageWithEnums\\";
     }
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -1986,17 +1689,6 @@ MessageWithEnumsInput.implement({
         })
     })
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -2019,17 +1711,6 @@ export const MyEnum = builder.enumType(\\"MyEnum\\", {
         }
     } as const
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -2051,17 +1732,6 @@ export const MyEnumWithoutUnspecified = builder.enumType(\\"MyEnumWithoutUnspeci
         }
     } as const
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -2244,17 +1914,6 @@ export const MyEnumWithoutUnspecified = builder.enumType(\\"MyEnumWithoutUnspeci
         }
     } as const
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -2279,17 +1938,6 @@ builder.objectType(OneofMemberMessage1, {
         }).$type === \\"testapis.oneof.OneofMemberMessage1\\";
     }
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -2310,17 +1958,6 @@ OneofMemberMessage1Input.implement({
         })
     })
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -2345,17 +1982,6 @@ builder.objectType(OneofMemberMessage2, {
         }).$type === \\"testapis.oneof.OneofMemberMessage2\\";
     }
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -2376,17 +2002,6 @@ OneofMemberMessage2Input.implement({
         })
     })
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -2433,17 +2048,6 @@ builder.objectType(OneofParent, {
         }).$type === \\"testapis.oneof.OneofParent\\";
     }
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -2486,17 +2090,6 @@ OneofParentInput.implement({
         })
     })
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -2513,17 +2106,6 @@ export const OneofParentOptionalOneofMembers = builder.unionType(\\"OneofParentO
         OneofMemberMessage2
     ]
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -2541,17 +2123,6 @@ export const OneofParentRequiredOneofMembers = builder.unionType(\\"OneofParentR
         OneofMemberMessage2
     ]
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -2695,17 +2266,6 @@ export const OneofParentOptionalOneofMembers = builder.unionType(\\"OneofParentO
         OneofMemberMessage2
     ]
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -2753,17 +2313,6 @@ builder.objectType(Message, {
         }).$type === \\"testapis.primitives.Message\\";
     }
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -2804,17 +2353,6 @@ MessageInput.implement({
         })
     })
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -2947,17 +2485,6 @@ builder.objectType(Primitives, {
         }).$type === \\"testapis.primitives.Primitives\\";
     }
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -3113,17 +2640,6 @@ PrimitivesInput.implement({
         })
     })
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -3649,17 +3165,6 @@ PrimitivesPartialInput.implement({
         })
     })
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -4007,17 +3512,6 @@ PrimitivesInput.implement({
         })
     })
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -4207,16 +3701,5 @@ MessageInput.implement({
         })
     })
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;

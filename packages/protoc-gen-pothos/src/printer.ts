@@ -66,28 +66,7 @@ function printSource(types: ReturnType<typeof collectTypesFromFile>, file: Proto
     `// source: ${file.descriptor.getName()}`,
     "",
     result,
-    `
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, "$type">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
-`,
   ].join("\n");
 
   return content;
 }
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, unknown>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, "$type">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;

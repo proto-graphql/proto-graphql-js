@@ -51,17 +51,6 @@ DateInput.implement({
         })
     })
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
 
@@ -111,16 +100,5 @@ PostInput.implement({
         })
     })
 });
-
-
-type _RemoveTypeRecursively<T> = (
-  T extends Array<infer U>
-    ? Array<_RemoveTypeRecursively<U>>
-    : T extends Record<string, any>
-    ? Omit<{ [K in keyof T]: _RemoveTypeRecursively<T[K]> }, \\"$type\\">
-    : T
-) extends infer P
-  ? { [K in keyof P]: P[K] }
-  : never;
 "
 `;
