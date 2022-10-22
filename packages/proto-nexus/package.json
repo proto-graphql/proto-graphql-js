@@ -1,6 +1,6 @@
 {
   "name": "proto-nexus",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Generate DSL for GraphQL Nexus from Protocol Buffers IDL",
   "keywords": [
     "graphql",
