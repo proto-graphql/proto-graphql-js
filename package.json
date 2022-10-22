@@ -61,7 +61,7 @@
   },
   "prettier": "prettier-config-wantedly",
   "changelog": {
-    "repo": "proto-graphql/proto-nexus",
+    "repo": "proto-graphql/proto-graphql-js",
     "labels": {
       "codegen - breaking changes :warning:": "⚠️ Breaking Changes - Code Generation",
       "codegen - feature :genie_woman:": "Features - Code Generation",

@@ -1,6 +1,6 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@2.2.0/schema.json",
-  "changelog": ["@changesets/changelog-github", { "repo": "proto-graphql/proto-nexus" }],
+  "changelog": ["@changesets/changelog-github", { "repo": "proto-graphql/proto-graphql-js" }],
   "commit": true,
   "fixed": [],
   "linked": [],
