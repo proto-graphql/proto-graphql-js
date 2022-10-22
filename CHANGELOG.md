@@ -1,4 +1,17 @@
 
+## v0.5.0 (2022-10-22)
+
+#### Bug Fixes
+* `@proto-nexus/google-protobuf`
+  * [#183](https://github.com/proto-graphql/proto-nexus/pull/183) Fixing the process of converting to timestamp ([@takizuka](https://github.com/takizuka))
+
+#### Dependencies
+* `@testapis/node-native`
+  * [#175](https://github.com/proto-graphql/proto-nexus/pull/175) fix(deps): update dependency google-protobuf to v3.20.1 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+- takizuka ([@takizuka](https://github.com/takizuka))
+
 ## v0.5.0-alpha.20 (2021-10-28)
 
 #### Improvements - Code Generation
