@@ -7,11 +7,11 @@ testSchemaGeneration(["edgecases/import_squashed_union/pkg1", "edgecases/import_
       {
         extraSchema: `
           import { builder } from "./builder";
-          import { Message as MessageRef } from "./testapis/edgecases/import_squashed_union/pkg2/types.pb.pothos";
+          import { Message$Ref } from "./testapis/edgecases/import_squashed_union/pkg2/types.pb.pothos";
           import { Message } from "@testapis/ts-proto/lib/testapis/edgecases/import_squashed_union/pkg2/types";
 
           builder.queryField("test", (t) => t.field({
-            type: MessageRef,
+            type: Message$Ref,
             resolve() {
               return Message.fromPartial({
                 msg: {

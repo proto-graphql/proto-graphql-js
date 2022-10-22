@@ -18,7 +18,7 @@ import {
  */
 export function createOneofUnionTypeDslStmt(type: OneofUnionType | SquashedOneofUnionType): ts.Statement {
   return createDslExportConstStmt(
-    type.typeName,
+    type.pothosRefObjectName,
     createBuilderCallExpr("unionType", [
       ts.factory.createStringLiteral(type.typeName),
       ts.factory.createObjectLiteralExpression(
@@ -27,7 +27,7 @@ export function createOneofUnionTypeDslStmt(type: OneofUnionType | SquashedOneof
           ts.factory.createPropertyAssignment(
             "types",
             ts.factory.createArrayLiteralExpression(
-              type.fields.map((f) => ts.factory.createIdentifier(f.type.typeName)),
+              type.fields.map((f) => ts.factory.createIdentifier(f.type.pothosRefObjectName)),
               true
             )
           ),

@@ -24,7 +24,7 @@ export function createObjectTypeDslStmts(objType: ObjectType): ts.Statement[] {
   const isInterface = objType instanceof InterfaceType;
   return [
     createDslExportConstStmt(
-      objType.typeName,
+      objType.pothosRefObjectName,
       ts.factory.createCallExpression(
         createBuilderPropExpr(isInterface ? "interfaceRef" : "objectRef"),
         [
@@ -44,7 +44,7 @@ export function createObjectTypeDslStmts(objType: ObjectType): ts.Statement[] {
     ),
     ts.factory.createExpressionStatement(
       createBuilderCallExpr(isInterface ? "interfaceType" : "objectType", [
-        ts.factory.createIdentifier(objType.typeName),
+        ts.factory.createIdentifier(objType.pothosRefObjectName),
         ts.factory.createObjectLiteralExpression(
           [
             ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(objType.typeName)),

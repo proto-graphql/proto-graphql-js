@@ -7,11 +7,11 @@ testSchemaGeneration("nested", "ts-proto", {
       {
         extraSchema: `
           import { builder } from "./builder";
-          import { ParentMessage as ParentMessageRef } from "./testapis/nested/nested.pb.pothos";
+          import { ParentMessage$Ref } from "./testapis/nested/nested.pb.pothos";
           import { ParentMessage, ParentMessage_NestedEnum } from "@testapis/ts-proto/lib/testapis/nested/nested";
 
           builder.queryField("test", (t) => t.field({
-            type: ParentMessageRef,
+            type: ParentMessage$Ref,
             resolve() {
               return ParentMessage.fromPartial({
                 body: "hello",

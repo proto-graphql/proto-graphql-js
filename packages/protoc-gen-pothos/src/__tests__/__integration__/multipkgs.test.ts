@@ -7,12 +7,12 @@ testSchemaGeneration(["multipkgs/subpkg1", "multipkgs/subpkg2"], "ts-proto", {
       {
         extraSchema: `
           import { builder } from "./builder";
-          import { MessageWithSubpkg as MessageWithSubpkgRef } from "./testapis/multipkgs/subpkg2/types.pb.pothos";
+          import { MessageWithSubpkg$Ref } from "./testapis/multipkgs/subpkg2/types.pb.pothos";
           import { SubpkgEnum } from "@testapis/ts-proto/lib/testapis/multipkgs/subpkg1/types";
           import { MessageWithSubpkg } from "@testapis/ts-proto/lib/testapis/multipkgs/subpkg2/types";
 
           builder.queryField("test", (t) => t.field({
-            type: MessageWithSubpkgRef,
+            type: MessageWithSubpkg$Ref,
             resolve() {
               return MessageWithSubpkg.fromPartial({
                 message: {

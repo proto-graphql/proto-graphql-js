@@ -19,11 +19,11 @@ testSchemaGeneration("wktypes", "ts-proto", {
       {
         extraSchema: `
           import { builder } from "./builder";
-          import { Message as MessageRef } from "./testapis/wktypes/well_known_types.pb.pothos";
+          import { Message$Ref } from "./testapis/wktypes/well_known_types.pb.pothos";
           import { Message } from "@testapis/ts-proto/lib/testapis/wktypes/well_known_types";
 
           builder.queryField("test", (f) => f.field({
-            type: MessageRef,
+            type: Message$Ref,
             resolve() {
               return Message.fromPartial({
                 timestamp: new Date(1609137725453),
@@ -64,11 +64,11 @@ testSchemaGeneration("wktypes", "ts-proto", {
       {
         extraSchema: `
           import { builder } from "./builder";
-          import { Message as MessageRef } from "./testapis/wktypes/well_known_types.pb.pothos";
+          import { Message$Ref } from "./testapis/wktypes/well_known_types.pb.pothos";
           import { Message } from "@testapis/ts-proto/lib/testapis/wktypes/well_known_types";
 
           builder.queryField("test", (f) => f.field({
-            type: MessageRef,
+            type: Message$Ref,
             resolve() {
               return Message.fromPartial({});
             },

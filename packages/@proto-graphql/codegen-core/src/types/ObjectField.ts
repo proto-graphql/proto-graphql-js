@@ -69,7 +69,7 @@ export class ObjectField<
     ) {
       const file = path.relative(path.dirname(this.parent.filename), this.type.filename);
       const module = file.slice(0, -path.extname(file).length);
-      modules.push({ alias: this.type.typeName, module, type: "named" as const });
+      modules.push({ alias: this.type.pothosRefObjectName, module, type: "named" as const });
     }
     return [...modulesWithUniqueImportAlias(modulePaths), ...modules];
   }

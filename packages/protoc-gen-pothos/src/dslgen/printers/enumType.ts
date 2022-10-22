@@ -18,7 +18,7 @@ import {
  */
 export function createEnumTypeDslStmt(type: EnumType): ts.Statement {
   return createDslExportConstStmt(
-    type.typeName,
+    type.pothosRefObjectName,
     createBuilderCallExpr("enumType", [
       ts.factory.createStringLiteral(type.typeName),
       ts.factory.createObjectLiteralExpression(

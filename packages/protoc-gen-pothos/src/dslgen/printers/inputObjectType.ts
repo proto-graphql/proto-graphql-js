@@ -25,7 +25,7 @@ export function createInputObjectTypeDslStmts(type: InputObjectType): ts.Stateme
   return [
     createInputObjectTypeShapeDecl(type),
     createDslExportConstStmt(
-      type.typeName,
+      type.pothosRefObjectName,
       ts.factory.createCallExpression(
         createBuilderPropExpr("inputRef"),
         [ts.factory.createTypeReferenceNode(createInputObjectTypeShapeIdent(type))],
@@ -34,7 +34,7 @@ export function createInputObjectTypeDslStmts(type: InputObjectType): ts.Stateme
     ),
     ts.factory.createExpressionStatement(
       ts.factory.createCallExpression(
-        ts.factory.createPropertyAccessExpression(ts.factory.createIdentifier(type.typeName), "implement"),
+        ts.factory.createPropertyAccessExpression(ts.factory.createIdentifier(type.pothosRefObjectName), "implement"),
         undefined,
         [
           ts.factory.createObjectLiteralExpression(
@@ -122,5 +122,5 @@ function createInputObjectTypeShapeDecl(type: InputObjectType): ts.DeclarationSt
 }
 
 function createInputObjectTypeShapeIdent(type: InputObjectType): ts.Identifier {
-  return ts.factory.createIdentifier(`${type.typeName}_Shape`);
+  return ts.factory.createIdentifier(`${type.typeName}$Shape`);
 }

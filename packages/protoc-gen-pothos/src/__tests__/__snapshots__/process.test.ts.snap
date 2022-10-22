@@ -6,8 +6,8 @@ exports[`deprecation with ts-proto generates pothos DSLs: deprecation/deprecatio
 
 import { builder } from \\"../../builder\\";
 import * as _$testapis$deprecation$deprecation from \\"./testapis/deprecation/deprecation\\";
-export const DeprecatedMessage = builder.objectRef<_$testapis$deprecation$deprecation.DeprecatedMessage>(\\"DeprecatedMessage\\");
-builder.objectType(DeprecatedMessage, {
+export const DeprecatedMessage$Ref = builder.objectRef<_$testapis$deprecation$deprecation.DeprecatedMessage>(\\"DeprecatedMessage\\");
+builder.objectType(DeprecatedMessage$Ref, {
     name: \\"DeprecatedMessage\\",
     fields: t => ({
         body: t.expose(\\"body\\", {
@@ -16,7 +16,7 @@ builder.objectType(DeprecatedMessage, {
             deprecationReason: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\"
         }),
         enum: t.field({
-            type: NotDeprecatedEnum,
+            type: NotDeprecatedEnum$Ref,
             nullable: true,
             deprecationReason: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\",
             resolve: source => {
@@ -33,8 +33,8 @@ builder.objectType(DeprecatedMessage, {
         }).$type === \\"testapis.deprecation.DeprecatedMessage\\";
     }
 });
-export const NotDeprecatedMessage = builder.objectRef<_$testapis$deprecation$deprecation.NotDeprecatedMessage>(\\"NotDeprecatedMessage\\");
-builder.objectType(NotDeprecatedMessage, {
+export const NotDeprecatedMessage$Ref = builder.objectRef<_$testapis$deprecation$deprecation.NotDeprecatedMessage>(\\"NotDeprecatedMessage\\");
+builder.objectType(NotDeprecatedMessage$Ref, {
     name: \\"NotDeprecatedMessage\\",
     fields: t => ({
         body: t.expose(\\"body\\", {
@@ -43,7 +43,7 @@ builder.objectType(NotDeprecatedMessage, {
             deprecationReason: \\"testapis.deprecation.NotDeprecatedMessage.body is mark as deprecated in a *.proto file.\\"
         }),
         enum: t.field({
-            type: DeprecatedEnum,
+            type: DeprecatedEnum$Ref,
             nullable: true,
             deprecationReason: \\"testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.\\",
             resolve: source => {
@@ -54,7 +54,7 @@ builder.objectType(NotDeprecatedMessage, {
             }
         }),
         notDeprecatedOneof: t.field({
-            type: NotDeprecatedMessageNotDeprecatedOneof,
+            type: NotDeprecatedMessageNotDeprecatedOneof$Ref,
             nullable: true,
             resolve: source => {
                 const value = source.msg1 ?? source.msg2;
@@ -62,7 +62,7 @@ builder.objectType(NotDeprecatedMessage, {
             }
         }),
         deprecatedOneof: t.field({
-            type: NotDeprecatedMessageDeprecatedOneof,
+            type: NotDeprecatedMessageDeprecatedOneof$Ref,
             nullable: true,
             deprecationReason: \\"testapis.deprecation.NotDeprecatedMessage.deprecated_oneof is mark as deprecated in a *.proto file.\\",
             resolve: source => {
@@ -77,8 +77,8 @@ builder.objectType(NotDeprecatedMessage, {
         }).$type === \\"testapis.deprecation.NotDeprecatedMessage\\";
     }
 });
-export const DeprecatedMessageInnerMessage = builder.objectRef<_$testapis$deprecation$deprecation.DeprecatedMessage_InnerMessage>(\\"DeprecatedMessageInnerMessage\\");
-builder.objectType(DeprecatedMessageInnerMessage, {
+export const DeprecatedMessageInnerMessage$Ref = builder.objectRef<_$testapis$deprecation$deprecation.DeprecatedMessage_InnerMessage>(\\"DeprecatedMessageInnerMessage\\");
+builder.objectType(DeprecatedMessageInnerMessage$Ref, {
     name: \\"DeprecatedMessageInnerMessage\\",
     fields: t => ({
         body: t.expose(\\"body\\", {
@@ -93,8 +93,8 @@ builder.objectType(DeprecatedMessageInnerMessage, {
         }).$type === \\"testapis.deprecation.DeprecatedMessage.InnerMessage\\";
     }
 });
-export const NotDeprecatedMessageInnerMessage1 = builder.objectRef<_$testapis$deprecation$deprecation.NotDeprecatedMessage_InnerMessage1>(\\"NotDeprecatedMessageInnerMessage1\\");
-builder.objectType(NotDeprecatedMessageInnerMessage1, {
+export const NotDeprecatedMessageInnerMessage1$Ref = builder.objectRef<_$testapis$deprecation$deprecation.NotDeprecatedMessage_InnerMessage1>(\\"NotDeprecatedMessageInnerMessage1\\");
+builder.objectType(NotDeprecatedMessageInnerMessage1$Ref, {
     name: \\"NotDeprecatedMessageInnerMessage1\\",
     fields: t => ({
         body: t.expose(\\"body\\", {
@@ -108,8 +108,8 @@ builder.objectType(NotDeprecatedMessageInnerMessage1, {
         }).$type === \\"testapis.deprecation.NotDeprecatedMessage.InnerMessage1\\";
     }
 });
-export const NotDeprecatedMessageInnerMessage2 = builder.objectRef<_$testapis$deprecation$deprecation.NotDeprecatedMessage_InnerMessage2>(\\"NotDeprecatedMessageInnerMessage2\\");
-builder.objectType(NotDeprecatedMessageInnerMessage2, {
+export const NotDeprecatedMessageInnerMessage2$Ref = builder.objectRef<_$testapis$deprecation$deprecation.NotDeprecatedMessage_InnerMessage2>(\\"NotDeprecatedMessageInnerMessage2\\");
+builder.objectType(NotDeprecatedMessageInnerMessage2$Ref, {
     name: \\"NotDeprecatedMessageInnerMessage2\\",
     fields: t => ({
         body: t.expose(\\"body\\", {
@@ -123,12 +123,12 @@ builder.objectType(NotDeprecatedMessageInnerMessage2, {
         }).$type === \\"testapis.deprecation.NotDeprecatedMessage.InnerMessage2\\";
     }
 });
-export type DeprecatedMessageInput_Shape = {
+export type DeprecatedMessageInput$Shape = {
     body: _$testapis$deprecation$deprecation.DeprecatedMessage[\\"body\\"];
     enum?: _$testapis$deprecation$deprecation.DeprecatedMessage[\\"enum\\"] | null;
 };
-export const DeprecatedMessageInput = builder.inputRef<DeprecatedMessageInput_Shape>(\\"DeprecatedMessageInput\\");
-DeprecatedMessageInput.implement({
+export const DeprecatedMessageInput$Ref = builder.inputRef<DeprecatedMessageInput$Shape>(\\"DeprecatedMessageInput\\");
+DeprecatedMessageInput$Ref.implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -136,22 +136,22 @@ DeprecatedMessageInput.implement({
             deprecationReason: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\"
         }),
         enum: t.field({
-            type: NotDeprecatedEnum,
+            type: NotDeprecatedEnum$Ref,
             required: false,
             deprecationReason: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\"
         })
     })
 });
-export type NotDeprecatedMessageInput_Shape = {
+export type NotDeprecatedMessageInput$Shape = {
     body: _$testapis$deprecation$deprecation.NotDeprecatedMessage[\\"body\\"];
     enum?: _$testapis$deprecation$deprecation.NotDeprecatedMessage[\\"enum\\"] | null;
-    msg1?: NotDeprecatedMessageInnerMessage1Input_Shape | null;
-    msg2?: NotDeprecatedMessageInnerMessage2Input_Shape | null;
-    msg3?: NotDeprecatedMessageInnerMessage1Input_Shape | null;
-    msg4?: NotDeprecatedMessageInnerMessage2Input_Shape | null;
+    msg1?: NotDeprecatedMessageInnerMessage1Input$Shape | null;
+    msg2?: NotDeprecatedMessageInnerMessage2Input$Shape | null;
+    msg3?: NotDeprecatedMessageInnerMessage1Input$Shape | null;
+    msg4?: NotDeprecatedMessageInnerMessage2Input$Shape | null;
 };
-export const NotDeprecatedMessageInput = builder.inputRef<NotDeprecatedMessageInput_Shape>(\\"NotDeprecatedMessageInput\\");
-NotDeprecatedMessageInput.implement({
+export const NotDeprecatedMessageInput$Ref = builder.inputRef<NotDeprecatedMessageInput$Shape>(\\"NotDeprecatedMessageInput\\");
+NotDeprecatedMessageInput$Ref.implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -159,36 +159,36 @@ NotDeprecatedMessageInput.implement({
             deprecationReason: \\"testapis.deprecation.NotDeprecatedMessage.body is mark as deprecated in a *.proto file.\\"
         }),
         enum: t.field({
-            type: DeprecatedEnum,
+            type: DeprecatedEnum$Ref,
             required: false,
             deprecationReason: \\"testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.\\"
         }),
         msg1: t.field({
-            type: NotDeprecatedMessageInnerMessage1Input,
+            type: NotDeprecatedMessageInnerMessage1Input$Ref,
             required: false,
             deprecationReason: \\"testapis.deprecation.NotDeprecatedMessage.msg1 is mark as deprecated in a *.proto file.\\"
         }),
         msg2: t.field({
-            type: NotDeprecatedMessageInnerMessage2Input,
+            type: NotDeprecatedMessageInnerMessage2Input$Ref,
             required: false
         }),
         msg3: t.field({
-            type: NotDeprecatedMessageInnerMessage1Input,
+            type: NotDeprecatedMessageInnerMessage1Input$Ref,
             required: false,
             deprecationReason: \\"testapis.deprecation.NotDeprecatedMessage.msg3 is mark as deprecated in a *.proto file.\\"
         }),
         msg4: t.field({
-            type: NotDeprecatedMessageInnerMessage2Input,
+            type: NotDeprecatedMessageInnerMessage2Input$Ref,
             required: false,
             deprecationReason: \\"testapis.deprecation.NotDeprecatedMessage.msg4 is mark as deprecated in a *.proto file.\\"
         })
     })
 });
-export type DeprecatedMessageInnerMessageInput_Shape = {
+export type DeprecatedMessageInnerMessageInput$Shape = {
     body: _$testapis$deprecation$deprecation.DeprecatedMessage_InnerMessage[\\"body\\"];
 };
-export const DeprecatedMessageInnerMessageInput = builder.inputRef<DeprecatedMessageInnerMessageInput_Shape>(\\"DeprecatedMessageInnerMessageInput\\");
-DeprecatedMessageInnerMessageInput.implement({
+export const DeprecatedMessageInnerMessageInput$Ref = builder.inputRef<DeprecatedMessageInnerMessageInput$Shape>(\\"DeprecatedMessageInnerMessageInput\\");
+DeprecatedMessageInnerMessageInput$Ref.implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -197,11 +197,11 @@ DeprecatedMessageInnerMessageInput.implement({
         })
     })
 });
-export type NotDeprecatedMessageInnerMessage1Input_Shape = {
+export type NotDeprecatedMessageInnerMessage1Input$Shape = {
     body: _$testapis$deprecation$deprecation.NotDeprecatedMessage_InnerMessage1[\\"body\\"];
 };
-export const NotDeprecatedMessageInnerMessage1Input = builder.inputRef<NotDeprecatedMessageInnerMessage1Input_Shape>(\\"NotDeprecatedMessageInnerMessage1Input\\");
-NotDeprecatedMessageInnerMessage1Input.implement({
+export const NotDeprecatedMessageInnerMessage1Input$Ref = builder.inputRef<NotDeprecatedMessageInnerMessage1Input$Shape>(\\"NotDeprecatedMessageInnerMessage1Input\\");
+NotDeprecatedMessageInnerMessage1Input$Ref.implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -209,11 +209,11 @@ NotDeprecatedMessageInnerMessage1Input.implement({
         })
     })
 });
-export type NotDeprecatedMessageInnerMessage2Input_Shape = {
+export type NotDeprecatedMessageInnerMessage2Input$Shape = {
     body: _$testapis$deprecation$deprecation.NotDeprecatedMessage_InnerMessage2[\\"body\\"];
 };
-export const NotDeprecatedMessageInnerMessage2Input = builder.inputRef<NotDeprecatedMessageInnerMessage2Input_Shape>(\\"NotDeprecatedMessageInnerMessage2Input\\");
-NotDeprecatedMessageInnerMessage2Input.implement({
+export const NotDeprecatedMessageInnerMessage2Input$Ref = builder.inputRef<NotDeprecatedMessageInnerMessage2Input$Shape>(\\"NotDeprecatedMessageInnerMessage2Input\\");
+NotDeprecatedMessageInnerMessage2Input$Ref.implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -221,19 +221,19 @@ NotDeprecatedMessageInnerMessage2Input.implement({
         })
     })
 });
-export const NotDeprecatedMessageNotDeprecatedOneof = builder.unionType(\\"NotDeprecatedMessageNotDeprecatedOneof\\", {
+export const NotDeprecatedMessageNotDeprecatedOneof$Ref = builder.unionType(\\"NotDeprecatedMessageNotDeprecatedOneof\\", {
     types: [
-        NotDeprecatedMessageInnerMessage1,
-        NotDeprecatedMessageInnerMessage2
+        NotDeprecatedMessageInnerMessage1$Ref,
+        NotDeprecatedMessageInnerMessage2$Ref
     ]
 });
-export const NotDeprecatedMessageDeprecatedOneof = builder.unionType(\\"NotDeprecatedMessageDeprecatedOneof\\", {
+export const NotDeprecatedMessageDeprecatedOneof$Ref = builder.unionType(\\"NotDeprecatedMessageDeprecatedOneof\\", {
     types: [
-        NotDeprecatedMessageInnerMessage1,
-        NotDeprecatedMessageInnerMessage2
+        NotDeprecatedMessageInnerMessage1$Ref,
+        NotDeprecatedMessageInnerMessage2$Ref
     ]
 });
-export const NotDeprecatedEnum = builder.enumType(\\"NotDeprecatedEnum\\", {
+export const NotDeprecatedEnum$Ref = builder.enumType(\\"NotDeprecatedEnum\\", {
     values: {
         NOT_DEPRECATED_FOO: {
             value: 1
@@ -244,7 +244,7 @@ export const NotDeprecatedEnum = builder.enumType(\\"NotDeprecatedEnum\\", {
         }
     } as const
 });
-export const DeprecatedEnum = builder.enumType(\\"DeprecatedEnum\\", {
+export const DeprecatedEnum$Ref = builder.enumType(\\"DeprecatedEnum\\", {
     values: {
         DEPRECATED_BAZ: {
             deprecationReason: \\"testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.\\",
@@ -265,8 +265,8 @@ exports[`deprecation with ts-proto generates pothos DSLs: deprecation/file_depre
 
 import { builder } from \\"../../builder\\";
 import * as _$testapis$deprecation$file_deprecation from \\"./testapis/deprecation/file_deprecation\\";
-export const DeprecatedFileMessage = builder.objectRef<_$testapis$deprecation$file_deprecation.DeprecatedFileMessage>(\\"DeprecatedFileMessage\\");
-builder.objectType(DeprecatedFileMessage, {
+export const DeprecatedFileMessage$Ref = builder.objectRef<_$testapis$deprecation$file_deprecation.DeprecatedFileMessage>(\\"DeprecatedFileMessage\\");
+builder.objectType(DeprecatedFileMessage$Ref, {
     name: \\"DeprecatedFileMessage\\",
     fields: t => ({
         body: t.expose(\\"body\\", {
@@ -275,7 +275,7 @@ builder.objectType(DeprecatedFileMessage, {
             deprecationReason: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\"
         }),
         enum: t.field({
-            type: DeprecatedFileEnum,
+            type: DeprecatedFileEnum$Ref,
             nullable: true,
             deprecationReason: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\",
             resolve: source => {
@@ -292,8 +292,8 @@ builder.objectType(DeprecatedFileMessage, {
         }).$type === \\"testapis.deprecation.DeprecatedFileMessage\\";
     }
 });
-export const DeprecatedFileMessageInnerMessage = builder.objectRef<_$testapis$deprecation$file_deprecation.DeprecatedFileMessage_InnerMessage>(\\"DeprecatedFileMessageInnerMessage\\");
-builder.objectType(DeprecatedFileMessageInnerMessage, {
+export const DeprecatedFileMessageInnerMessage$Ref = builder.objectRef<_$testapis$deprecation$file_deprecation.DeprecatedFileMessage_InnerMessage>(\\"DeprecatedFileMessageInnerMessage\\");
+builder.objectType(DeprecatedFileMessageInnerMessage$Ref, {
     name: \\"DeprecatedFileMessageInnerMessage\\",
     fields: t => ({
         body: t.expose(\\"body\\", {
@@ -308,12 +308,12 @@ builder.objectType(DeprecatedFileMessageInnerMessage, {
         }).$type === \\"testapis.deprecation.DeprecatedFileMessage.InnerMessage\\";
     }
 });
-export type DeprecatedFileMessageInput_Shape = {
+export type DeprecatedFileMessageInput$Shape = {
     body: _$testapis$deprecation$file_deprecation.DeprecatedFileMessage[\\"body\\"];
     enum?: _$testapis$deprecation$file_deprecation.DeprecatedFileMessage[\\"enum\\"] | null;
 };
-export const DeprecatedFileMessageInput = builder.inputRef<DeprecatedFileMessageInput_Shape>(\\"DeprecatedFileMessageInput\\");
-DeprecatedFileMessageInput.implement({
+export const DeprecatedFileMessageInput$Ref = builder.inputRef<DeprecatedFileMessageInput$Shape>(\\"DeprecatedFileMessageInput\\");
+DeprecatedFileMessageInput$Ref.implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -321,17 +321,17 @@ DeprecatedFileMessageInput.implement({
             deprecationReason: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\"
         }),
         enum: t.field({
-            type: DeprecatedFileEnum,
+            type: DeprecatedFileEnum$Ref,
             required: false,
             deprecationReason: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\"
         })
     })
 });
-export type DeprecatedFileMessageInnerMessageInput_Shape = {
+export type DeprecatedFileMessageInnerMessageInput$Shape = {
     body: _$testapis$deprecation$file_deprecation.DeprecatedFileMessage_InnerMessage[\\"body\\"];
 };
-export const DeprecatedFileMessageInnerMessageInput = builder.inputRef<DeprecatedFileMessageInnerMessageInput_Shape>(\\"DeprecatedFileMessageInnerMessageInput\\");
-DeprecatedFileMessageInnerMessageInput.implement({
+export const DeprecatedFileMessageInnerMessageInput$Ref = builder.inputRef<DeprecatedFileMessageInnerMessageInput$Shape>(\\"DeprecatedFileMessageInnerMessageInput\\");
+DeprecatedFileMessageInnerMessageInput$Ref.implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -340,7 +340,7 @@ DeprecatedFileMessageInnerMessageInput.implement({
         })
     })
 });
-export const DeprecatedFileEnum = builder.enumType(\\"DeprecatedFileEnum\\", {
+export const DeprecatedFileEnum$Ref = builder.enumType(\\"DeprecatedFileEnum\\", {
     values: {
         DEPRECATED_FILE_FOO: {
             deprecationReason: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\",
@@ -361,8 +361,8 @@ exports[`empty types with ts-proto generates pothos DSLs: empty_types/empty.pb.p
 
 import { builder } from \\"../../builder\\";
 import * as _$testapis$empty_types$empty from \\"./testapis/empty_types/empty\\";
-export const EmptyMessage = builder.objectRef<_$testapis$empty_types$empty.EmptyMessage>(\\"EmptyMessage\\");
-builder.objectType(EmptyMessage, {
+export const EmptyMessage$Ref = builder.objectRef<_$testapis$empty_types$empty.EmptyMessage>(\\"EmptyMessage\\");
+builder.objectType(EmptyMessage$Ref, {
     name: \\"EmptyMessage\\",
     fields: t => ({
         _: t.field({
@@ -378,9 +378,9 @@ builder.objectType(EmptyMessage, {
         }).$type === \\"testapis.empty_types.EmptyMessage\\";
     }
 });
-export type EmptyMessageInput_Shape = {};
-export const EmptyMessageInput = builder.inputRef<EmptyMessageInput_Shape>(\\"EmptyMessageInput\\");
-EmptyMessageInput.implement({
+export type EmptyMessageInput$Shape = {};
+export const EmptyMessageInput$Ref = builder.inputRef<EmptyMessageInput$Shape>(\\"EmptyMessageInput\\");
+EmptyMessageInput$Ref.implement({
     fields: t => ({
         _: t.field({
             type: \\"Boolean\\",
@@ -398,12 +398,12 @@ exports[`field_behavior with ts-proto generates pothos DSLs: field_behavior/comm
 
 import { builder } from \\"../../builder\\";
 import * as _$testapis$field_behavior$comments from \\"./testapis/field_behavior/comments\\";
-export const FieldBehaviorComentsMessage = builder.objectRef<_$testapis$field_behavior$comments.FieldBehaviorComentsMessage>(\\"FieldBehaviorComentsMessage\\");
-builder.objectType(FieldBehaviorComentsMessage, {
+export const FieldBehaviorComentsMessage$Ref = builder.objectRef<_$testapis$field_behavior$comments.FieldBehaviorComentsMessage>(\\"FieldBehaviorComentsMessage\\");
+builder.objectType(FieldBehaviorComentsMessage$Ref, {
     name: \\"FieldBehaviorComentsMessage\\",
     fields: t => ({
         requiredField: t.field({
-            type: FieldBehaviorComentsMessagePost,
+            type: FieldBehaviorComentsMessagePost$Ref,
             nullable: false,
             description: \\"Required.\\",
             resolve: source => {
@@ -411,7 +411,7 @@ builder.objectType(FieldBehaviorComentsMessage, {
             }
         }),
         requiredOutputOnlyField: t.field({
-            type: FieldBehaviorComentsMessagePost,
+            type: FieldBehaviorComentsMessagePost$Ref,
             nullable: false,
             description: \\"Required. Output only.\\",
             resolve: source => {
@@ -419,7 +419,7 @@ builder.objectType(FieldBehaviorComentsMessage, {
             }
         }),
         outputOnlyRequiredField: t.field({
-            type: FieldBehaviorComentsMessagePost,
+            type: FieldBehaviorComentsMessagePost$Ref,
             nullable: false,
             description: \\"Output only. Required.\\",
             resolve: source => {
@@ -427,7 +427,7 @@ builder.objectType(FieldBehaviorComentsMessage, {
             }
         }),
         outputOnlyField: t.expose(\\"outputOnlyField\\", {
-            type: FieldBehaviorComentsMessagePost,
+            type: FieldBehaviorComentsMessagePost$Ref,
             nullable: true,
             description: \\"Output only.\\"
         })
@@ -438,8 +438,8 @@ builder.objectType(FieldBehaviorComentsMessage, {
         }).$type === \\"testapis.deprecation.FieldBehaviorComentsMessage\\";
     }
 });
-export const FieldBehaviorComentsMessagePost = builder.objectRef<_$testapis$field_behavior$comments.FieldBehaviorComentsMessage_Post>(\\"FieldBehaviorComentsMessagePost\\");
-builder.objectType(FieldBehaviorComentsMessagePost, {
+export const FieldBehaviorComentsMessagePost$Ref = builder.objectRef<_$testapis$field_behavior$comments.FieldBehaviorComentsMessage_Post>(\\"FieldBehaviorComentsMessagePost\\");
+builder.objectType(FieldBehaviorComentsMessagePost$Ref, {
     name: \\"FieldBehaviorComentsMessagePost\\",
     fields: t => ({
         body: t.expose(\\"body\\", {
@@ -453,42 +453,42 @@ builder.objectType(FieldBehaviorComentsMessagePost, {
         }).$type === \\"testapis.deprecation.FieldBehaviorComentsMessage.Post\\";
     }
 });
-export type FieldBehaviorComentsMessageInput_Shape = {
-    requiredField: FieldBehaviorComentsMessagePostInput_Shape;
-    requiredInputOnlyField: FieldBehaviorComentsMessagePostInput_Shape;
-    inputOnlyRequiredField: FieldBehaviorComentsMessagePostInput_Shape;
-    inputOnlyField?: FieldBehaviorComentsMessagePostInput_Shape | null;
+export type FieldBehaviorComentsMessageInput$Shape = {
+    requiredField: FieldBehaviorComentsMessagePostInput$Shape;
+    requiredInputOnlyField: FieldBehaviorComentsMessagePostInput$Shape;
+    inputOnlyRequiredField: FieldBehaviorComentsMessagePostInput$Shape;
+    inputOnlyField?: FieldBehaviorComentsMessagePostInput$Shape | null;
 };
-export const FieldBehaviorComentsMessageInput = builder.inputRef<FieldBehaviorComentsMessageInput_Shape>(\\"FieldBehaviorComentsMessageInput\\");
-FieldBehaviorComentsMessageInput.implement({
+export const FieldBehaviorComentsMessageInput$Ref = builder.inputRef<FieldBehaviorComentsMessageInput$Shape>(\\"FieldBehaviorComentsMessageInput\\");
+FieldBehaviorComentsMessageInput$Ref.implement({
     fields: t => ({
         requiredField: t.field({
-            type: FieldBehaviorComentsMessagePostInput,
+            type: FieldBehaviorComentsMessagePostInput$Ref,
             required: true,
             description: \\"Required.\\"
         }),
         requiredInputOnlyField: t.field({
-            type: FieldBehaviorComentsMessagePostInput,
+            type: FieldBehaviorComentsMessagePostInput$Ref,
             required: true,
             description: \\"Required. Input only.\\"
         }),
         inputOnlyRequiredField: t.field({
-            type: FieldBehaviorComentsMessagePostInput,
+            type: FieldBehaviorComentsMessagePostInput$Ref,
             required: true,
             description: \\"Input only. Required.\\"
         }),
         inputOnlyField: t.field({
-            type: FieldBehaviorComentsMessagePostInput,
+            type: FieldBehaviorComentsMessagePostInput$Ref,
             required: false,
             description: \\"Input only.\\"
         })
     })
 });
-export type FieldBehaviorComentsMessagePostInput_Shape = {
+export type FieldBehaviorComentsMessagePostInput$Shape = {
     body: _$testapis$field_behavior$comments.FieldBehaviorComentsMessage_Post[\\"body\\"];
 };
-export const FieldBehaviorComentsMessagePostInput = builder.inputRef<FieldBehaviorComentsMessagePostInput_Shape>(\\"FieldBehaviorComentsMessagePostInput\\");
-FieldBehaviorComentsMessagePostInput.implement({
+export const FieldBehaviorComentsMessagePostInput$Ref = builder.inputRef<FieldBehaviorComentsMessagePostInput$Shape>(\\"FieldBehaviorComentsMessagePostInput\\");
+FieldBehaviorComentsMessagePostInput$Ref.implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -505,8 +505,8 @@ exports[`multipkgs with ts-proto generates pothos DSLs: multipkgs/subpkg1/types.
 
 import { builder } from \\"../../../builder\\";
 import * as _$testapis$multipkgs$subpkg1$types from \\"./testapis/multipkgs/subpkg1/types\\";
-export const SubpkgMessage = builder.objectRef<_$testapis$multipkgs$subpkg1$types.SubpkgMessage>(\\"SubpkgMessage\\");
-builder.objectType(SubpkgMessage, {
+export const SubpkgMessage$Ref = builder.objectRef<_$testapis$multipkgs$subpkg1$types.SubpkgMessage>(\\"SubpkgMessage\\");
+builder.objectType(SubpkgMessage$Ref, {
     name: \\"SubpkgMessage\\",
     fields: t => ({
         body: t.expose(\\"body\\", {
@@ -520,11 +520,11 @@ builder.objectType(SubpkgMessage, {
         }).$type === \\"testapis.multipkgs.subpkg1.SubpkgMessage\\";
     }
 });
-export type SubpkgMessageInput_Shape = {
+export type SubpkgMessageInput$Shape = {
     body: _$testapis$multipkgs$subpkg1$types.SubpkgMessage[\\"body\\"];
 };
-export const SubpkgMessageInput = builder.inputRef<SubpkgMessageInput_Shape>(\\"SubpkgMessageInput\\");
-SubpkgMessageInput.implement({
+export const SubpkgMessageInput$Ref = builder.inputRef<SubpkgMessageInput$Shape>(\\"SubpkgMessageInput\\");
+SubpkgMessageInput$Ref.implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -532,7 +532,7 @@ SubpkgMessageInput.implement({
         })
     })
 });
-export const SubpkgEnum = builder.enumType(\\"SubpkgEnum\\", {
+export const SubpkgEnum$Ref = builder.enumType(\\"SubpkgEnum\\", {
     values: {
         FOO: {
             value: 1
@@ -551,22 +551,22 @@ exports[`multipkgs with ts-proto generates pothos DSLs: multipkgs/subpkg2/types.
 
 import { builder } from \\"../../../builder\\";
 import * as __$subpkg1$types_pb_pothos from \\"../subpkg1/types.pb.pothos\\";
-import { SubpkgMessage } from \\"../subpkg1/types.pb.pothos\\";
-import { SubpkgEnum } from \\"../subpkg1/types.pb.pothos\\";
-import { SubpkgMessageInput } from \\"../subpkg1/types.pb.pothos\\";
-import { SubpkgMessageInput_Shape } from \\"../subpkg1/types.pb.pothos\\";
+import { SubpkgMessage$Ref } from \\"../subpkg1/types.pb.pothos\\";
+import { SubpkgEnum$Ref } from \\"../subpkg1/types.pb.pothos\\";
+import { SubpkgMessageInput$Ref } from \\"../subpkg1/types.pb.pothos\\";
+import { SubpkgMessageInput$Shape } from \\"../subpkg1/types.pb.pothos\\";
 import * as _$testapis$multipkgs$subpkg1$types from \\"./testapis/multipkgs/subpkg1/types\\";
 import * as _$testapis$multipkgs$subpkg2$types from \\"./testapis/multipkgs/subpkg2/types\\";
-export const MessageWithSubpkg = builder.objectRef<_$testapis$multipkgs$subpkg2$types.MessageWithSubpkg>(\\"MessageWithSubpkg\\");
-builder.objectType(MessageWithSubpkg, {
+export const MessageWithSubpkg$Ref = builder.objectRef<_$testapis$multipkgs$subpkg2$types.MessageWithSubpkg>(\\"MessageWithSubpkg\\");
+builder.objectType(MessageWithSubpkg$Ref, {
     name: \\"MessageWithSubpkg\\",
     fields: t => ({
         message: t.expose(\\"message\\", {
-            type: SubpkgMessage,
+            type: SubpkgMessage$Ref,
             nullable: true
         }),
         enum: t.field({
-            type: SubpkgEnum,
+            type: SubpkgEnum$Ref,
             nullable: true,
             resolve: source => {
                 if (source.enum === _$testapis$multipkgs$subpkg1$types.SubpkgEnum.SUBPKG_ENUM_UNSPECIFIED) {
@@ -582,19 +582,19 @@ builder.objectType(MessageWithSubpkg, {
         }).$type === \\"testapis.multipkgs.subpkg1.MessageWithSubpkg\\";
     }
 });
-export type MessageWithSubpkgInput_Shape = {
-    message?: SubpkgMessageInput_Shape | null;
+export type MessageWithSubpkgInput$Shape = {
+    message?: SubpkgMessageInput$Shape | null;
     enum?: _$testapis$multipkgs$subpkg2$types.MessageWithSubpkg[\\"enum\\"] | null;
 };
-export const MessageWithSubpkgInput = builder.inputRef<MessageWithSubpkgInput_Shape>(\\"MessageWithSubpkgInput\\");
-MessageWithSubpkgInput.implement({
+export const MessageWithSubpkgInput$Ref = builder.inputRef<MessageWithSubpkgInput$Shape>(\\"MessageWithSubpkgInput\\");
+MessageWithSubpkgInput$Ref.implement({
     fields: t => ({
         message: t.field({
-            type: SubpkgMessageInput,
+            type: SubpkgMessageInput$Ref,
             required: false
         }),
         enum: t.field({
-            type: SubpkgEnum,
+            type: SubpkgEnum$Ref,
             required: false
         })
     })
@@ -608,8 +608,8 @@ exports[`nested protobuf types with ts-proto generates pothos DSLs: nested/neste
 
 import { builder } from \\"../../builder\\";
 import * as _$testapis$nested$nested from \\"./testapis/nested/nested\\";
-export const ParentMessage = builder.objectRef<_$testapis$nested$nested.ParentMessage>(\\"ParentMessage\\");
-builder.objectType(ParentMessage, {
+export const ParentMessage$Ref = builder.objectRef<_$testapis$nested$nested.ParentMessage>(\\"ParentMessage\\");
+builder.objectType(ParentMessage$Ref, {
     name: \\"ParentMessage\\",
     fields: t => ({
         body: t.expose(\\"body\\", {
@@ -617,11 +617,11 @@ builder.objectType(ParentMessage, {
             nullable: false
         }),
         nested: t.expose(\\"nested\\", {
-            type: ParentMessageNestedMessage,
+            type: ParentMessageNestedMessage$Ref,
             nullable: true
         }),
         nestedEnum: t.field({
-            type: ParentMessageNestedEnum,
+            type: ParentMessageNestedEnum$Ref,
             nullable: true,
             resolve: source => {
                 if (source.nestedEnum === _$testapis$nested$nested.ParentMessage_NestedEnum.NESTED_ENUM_UNSPECIFIED) {
@@ -637,8 +637,8 @@ builder.objectType(ParentMessage, {
         }).$type === \\"testapis.nested.ParentMessage\\";
     }
 });
-export const ParentMessageNestedMessage = builder.objectRef<_$testapis$nested$nested.ParentMessage_NestedMessage>(\\"ParentMessageNestedMessage\\");
-builder.objectType(ParentMessageNestedMessage, {
+export const ParentMessageNestedMessage$Ref = builder.objectRef<_$testapis$nested$nested.ParentMessage_NestedMessage>(\\"ParentMessageNestedMessage\\");
+builder.objectType(ParentMessageNestedMessage$Ref, {
     name: \\"ParentMessageNestedMessage\\",
     fields: t => ({
         nestedBody: t.expose(\\"nestedBody\\", {
@@ -652,33 +652,33 @@ builder.objectType(ParentMessageNestedMessage, {
         }).$type === \\"testapis.nested.ParentMessage.NestedMessage\\";
     }
 });
-export type ParentMessageInput_Shape = {
+export type ParentMessageInput$Shape = {
     body: _$testapis$nested$nested.ParentMessage[\\"body\\"];
-    nested?: ParentMessageNestedMessageInput_Shape | null;
+    nested?: ParentMessageNestedMessageInput$Shape | null;
     nestedEnum?: _$testapis$nested$nested.ParentMessage[\\"nestedEnum\\"] | null;
 };
-export const ParentMessageInput = builder.inputRef<ParentMessageInput_Shape>(\\"ParentMessageInput\\");
-ParentMessageInput.implement({
+export const ParentMessageInput$Ref = builder.inputRef<ParentMessageInput$Shape>(\\"ParentMessageInput\\");
+ParentMessageInput$Ref.implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
             required: true
         }),
         nested: t.field({
-            type: ParentMessageNestedMessageInput,
+            type: ParentMessageNestedMessageInput$Ref,
             required: false
         }),
         nestedEnum: t.field({
-            type: ParentMessageNestedEnum,
+            type: ParentMessageNestedEnum$Ref,
             required: false
         })
     })
 });
-export type ParentMessageNestedMessageInput_Shape = {
+export type ParentMessageNestedMessageInput$Shape = {
     nestedBody: _$testapis$nested$nested.ParentMessage_NestedMessage[\\"nestedBody\\"];
 };
-export const ParentMessageNestedMessageInput = builder.inputRef<ParentMessageNestedMessageInput_Shape>(\\"ParentMessageNestedMessageInput\\");
-ParentMessageNestedMessageInput.implement({
+export const ParentMessageNestedMessageInput$Ref = builder.inputRef<ParentMessageNestedMessageInput$Shape>(\\"ParentMessageNestedMessageInput\\");
+ParentMessageNestedMessageInput$Ref.implement({
     fields: t => ({
         nestedBody: t.field({
             type: \\"String\\",
@@ -686,7 +686,7 @@ ParentMessageNestedMessageInput.implement({
         })
     })
 });
-export const ParentMessageNestedEnum = builder.enumType(\\"ParentMessageNestedEnum\\", {
+export const ParentMessageNestedEnum$Ref = builder.enumType(\\"ParentMessageNestedEnum\\", {
     values: {
         FOO: {
             value: 1
@@ -705,8 +705,8 @@ exports[`protobuf custom options generates pothos DSLs with graphql_type file la
 
 import { builder } from \\"../../builder\\";
 import * as _$testapis$extensions$extensions from \\"./testapis/extensions/extensions\\";
-export const TestPrefixIgnoredMessageNotIgnored = builder.objectRef<_$testapis$extensions$extensions.IgnoredMessage_NotIgnored>(\\"TestPrefixIgnoredMessageNotIgnored\\");
-builder.objectType(TestPrefixIgnoredMessageNotIgnored, {
+export const TestPrefixIgnoredMessageNotIgnored$Ref = builder.objectRef<_$testapis$extensions$extensions.IgnoredMessage_NotIgnored>(\\"TestPrefixIgnoredMessageNotIgnored\\");
+builder.objectType(TestPrefixIgnoredMessageNotIgnored$Ref, {
     name: \\"TestPrefixIgnoredMessageNotIgnored\\",
     fields: t => ({
         body: t.expose(\\"body\\", {
@@ -728,11 +728,11 @@ exports[`protobuf custom options generates pothos DSLs with graphql_type file la
 // source: testapis/extensions/extensions.proto
 
 import { builder } from \\"../../builder\\";
-export type TestPrefixIgnoredMessageNotIgnoredInput_Shape = {
+export type TestPrefixIgnoredMessageNotIgnoredInput$Shape = {
     body: _$testapis$extensions$extensions.IgnoredMessage_NotIgnored[\\"body\\"];
 };
-export const TestPrefixIgnoredMessageNotIgnoredInput = builder.inputRef<TestPrefixIgnoredMessageNotIgnoredInput_Shape>(\\"TestPrefixIgnoredMessageNotIgnoredInput\\");
-TestPrefixIgnoredMessageNotIgnoredInput.implement({
+export const TestPrefixIgnoredMessageNotIgnoredInput$Ref = builder.inputRef<TestPrefixIgnoredMessageNotIgnoredInput$Shape>(\\"TestPrefixIgnoredMessageNotIgnoredInput\\");
+TestPrefixIgnoredMessageNotIgnoredInput$Ref.implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -749,8 +749,8 @@ exports[`protobuf custom options generates pothos DSLs with graphql_type file la
 
 import { builder } from \\"../../builder\\";
 import * as _$testapis$extensions$extensions from \\"./testapis/extensions/extensions\\";
-export const TestPrefixInterfaceMessage = builder.interfaceRef<Pick<_$testapis$extensions$extensions.InterfaceMessage, \\"id\\">>(\\"TestPrefixInterfaceMessage\\");
-builder.interfaceType(TestPrefixInterfaceMessage, {
+export const TestPrefixInterfaceMessage$Ref = builder.interfaceRef<Pick<_$testapis$extensions$extensions.InterfaceMessage, \\"id\\">>(\\"TestPrefixInterfaceMessage\\");
+builder.interfaceType(TestPrefixInterfaceMessage$Ref, {
     name: \\"TestPrefixInterfaceMessage\\",
     fields: t => ({
         id: t.expose(\\"id\\", {
@@ -767,11 +767,11 @@ exports[`protobuf custom options generates pothos DSLs with graphql_type file la
 // source: testapis/extensions/extensions.proto
 
 import { builder } from \\"../../builder\\";
-export type TestPrefixInterfaceMessageInput_Shape = {
+export type TestPrefixInterfaceMessageInput$Shape = {
     id: _$testapis$extensions$extensions.InterfaceMessage[\\"id\\"];
 };
-export const TestPrefixInterfaceMessageInput = builder.inputRef<TestPrefixInterfaceMessageInput_Shape>(\\"TestPrefixInterfaceMessageInput\\");
-TestPrefixInterfaceMessageInput.implement({
+export const TestPrefixInterfaceMessageInput$Ref = builder.inputRef<TestPrefixInterfaceMessageInput$Shape>(\\"TestPrefixInterfaceMessageInput\\");
+TestPrefixInterfaceMessageInput$Ref.implement({
     fields: t => ({
         id: t.field({
             type: \\"String\\",
@@ -787,7 +787,7 @@ exports[`protobuf custom options generates pothos DSLs with graphql_type file la
 // source: testapis/extensions/extensions.proto
 
 import { builder } from \\"../../builder\\";
-export const TestPrefixInterfaceMessageType = builder.enumType(\\"TestPrefixInterfaceMessageType\\", {
+export const TestPrefixInterfaceMessageType$Ref = builder.enumType(\\"TestPrefixInterfaceMessageType\\", {
     values: {
         INNER: {
             value: 1
@@ -805,7 +805,7 @@ exports[`protobuf custom options generates pothos DSLs with graphql_type file la
 // source: testapis/extensions/extensions.proto
 
 import { builder } from \\"../../builder\\";
-export const TestPrefixPrefixedEnum = builder.enumType(\\"TestPrefixPrefixedEnum\\", {
+export const TestPrefixPrefixedEnum$Ref = builder.enumType(\\"TestPrefixPrefixedEnum\\", {
     values: {
         PREFIXED_FOO: {
             value: 1
@@ -829,8 +829,8 @@ import * as _$TestPrefixPrefixedMessagePartialIgnoreOneof_pothos from \\"./TestP
 import * as _$TestPrefixPrefixedMessageSquashedMessage_pothos from \\"./TestPrefixPrefixedMessageSquashedMessage.pothos\\";
 import * as _$TestPrefixRenamedMessage_pothos from \\"./TestPrefixRenamedMessage.pothos\\";
 import * as _$testapis$extensions$extensions from \\"./testapis/extensions/extensions\\";
-export const TestPrefixPrefixedMessage = builder.objectRef<_$testapis$extensions$extensions.PrefixedMessage>(\\"TestPrefixPrefixedMessage\\");
-builder.objectType(TestPrefixPrefixedMessage, {
+export const TestPrefixPrefixedMessage$Ref = builder.objectRef<_$testapis$extensions$extensions.PrefixedMessage>(\\"TestPrefixPrefixedMessage\\");
+builder.objectType(TestPrefixPrefixedMessage$Ref, {
     name: \\"TestPrefixPrefixedMessage\\",
     fields: t => ({
         id: t.expose(\\"id\\", {
@@ -843,7 +843,7 @@ builder.objectType(TestPrefixPrefixedMessage, {
             nullable: false
         }),
         prefixedEnum: t.field({
-            type: TestPrefixPrefixedEnum,
+            type: TestPrefixPrefixedEnum$Ref,
             nullable: true,
             resolve: source => {
                 if (source.prefixedEnum === _$testapis$extensions$extensions.PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
@@ -856,11 +856,11 @@ builder.objectType(TestPrefixPrefixedMessage, {
             }
         }),
         notIgnoredMessage: t.expose(\\"notIgnoredMessage\\", {
-            type: TestPrefixIgnoredMessageNotIgnored,
+            type: TestPrefixIgnoredMessageNotIgnored$Ref,
             nullable: true
         }),
         squashedMessage: t.field({
-            type: TestPrefixPrefixedMessageSquashedMessage,
+            type: TestPrefixPrefixedMessageSquashedMessage$Ref,
             nullable: true,
             resolve: source => {
                 const value = source.squashedMessage?.oneofField ?? source.squashedMessage?.oneofField2;
@@ -876,7 +876,7 @@ builder.objectType(TestPrefixPrefixedMessage, {
             nullable: false
         }),
         squashedMessages: t.field({
-            type: [TestPrefixPrefixedMessageSquashedMessage],
+            type: [TestPrefixPrefixedMessageSquashedMessage$Ref],
             nullable: { list: true, items: false },
             resolve: source => {
                 return source.squashedMessages.map(item => {
@@ -889,11 +889,11 @@ builder.objectType(TestPrefixPrefixedMessage, {
             }
         }),
         renamedMessage: t.expose(\\"renamedMessage\\", {
-            type: TestPrefixRenamedMessage,
+            type: TestPrefixRenamedMessage$Ref,
             nullable: true
         }),
         partialIgnoreOneof: t.field({
-            type: TestPrefixPrefixedMessagePartialIgnoreOneof,
+            type: TestPrefixPrefixedMessagePartialIgnoreOneof$Ref,
             nullable: true,
             resolve: source => {
                 const value = source.oneofNotIgnoredField;
@@ -916,8 +916,8 @@ exports[`protobuf custom options generates pothos DSLs with graphql_type file la
 
 import { builder } from \\"../../builder\\";
 import * as _$testapis$extensions$extensions from \\"./testapis/extensions/extensions\\";
-export const TestPrefixPrefixedMessageInnerMessage = builder.objectRef<_$testapis$extensions$extensions.PrefixedMessage_InnerMessage>(\\"TestPrefixPrefixedMessageInnerMessage\\");
-builder.objectType(TestPrefixPrefixedMessageInnerMessage, {
+export const TestPrefixPrefixedMessageInnerMessage$Ref = builder.objectRef<_$testapis$extensions$extensions.PrefixedMessage_InnerMessage>(\\"TestPrefixPrefixedMessageInnerMessage\\");
+builder.objectType(TestPrefixPrefixedMessageInnerMessage$Ref, {
     name: \\"TestPrefixPrefixedMessageInnerMessage\\",
     fields: t => ({
         id: t.expose(\\"id\\", {
@@ -944,8 +944,8 @@ exports[`protobuf custom options generates pothos DSLs with graphql_type file la
 
 import { builder } from \\"../../builder\\";
 import * as _$testapis$extensions$extensions from \\"./testapis/extensions/extensions\\";
-export const TestPrefixPrefixedMessageInnerMessage2 = builder.objectRef<_$testapis$extensions$extensions.PrefixedMessage_InnerMessage2>(\\"TestPrefixPrefixedMessageInnerMessage2\\");
-builder.objectType(TestPrefixPrefixedMessageInnerMessage2, {
+export const TestPrefixPrefixedMessageInnerMessage2$Ref = builder.objectRef<_$testapis$extensions$extensions.PrefixedMessage_InnerMessage2>(\\"TestPrefixPrefixedMessageInnerMessage2\\");
+builder.objectType(TestPrefixPrefixedMessageInnerMessage2$Ref, {
     name: \\"TestPrefixPrefixedMessageInnerMessage2\\",
     fields: t => ({
         id: t.expose(\\"id\\", {
@@ -971,12 +971,12 @@ exports[`protobuf custom options generates pothos DSLs with graphql_type file la
 // source: testapis/extensions/extensions.proto
 
 import { builder } from \\"../../builder\\";
-export type TestPrefixPrefixedMessageInnerMessage2Input_Shape = {
+export type TestPrefixPrefixedMessageInnerMessage2Input$Shape = {
     id: _$testapis$extensions$extensions.PrefixedMessage_InnerMessage2[\\"id\\"];
     body: _$testapis$extensions$extensions.PrefixedMessage_InnerMessage2[\\"body\\"];
 };
-export const TestPrefixPrefixedMessageInnerMessage2Input = builder.inputRef<TestPrefixPrefixedMessageInnerMessage2Input_Shape>(\\"TestPrefixPrefixedMessageInnerMessage2Input\\");
-TestPrefixPrefixedMessageInnerMessage2Input.implement({
+export const TestPrefixPrefixedMessageInnerMessage2Input$Ref = builder.inputRef<TestPrefixPrefixedMessageInnerMessage2Input$Shape>(\\"TestPrefixPrefixedMessageInnerMessage2Input\\");
+TestPrefixPrefixedMessageInnerMessage2Input$Ref.implement({
     fields: t => ({
         id: t.field({
             type: \\"String\\",
@@ -996,12 +996,12 @@ exports[`protobuf custom options generates pothos DSLs with graphql_type file la
 // source: testapis/extensions/extensions.proto
 
 import { builder } from \\"../../builder\\";
-export type TestPrefixPrefixedMessageInnerMessageInput_Shape = {
+export type TestPrefixPrefixedMessageInnerMessageInput$Shape = {
     id: _$testapis$extensions$extensions.PrefixedMessage_InnerMessage[\\"id\\"];
     body: _$testapis$extensions$extensions.PrefixedMessage_InnerMessage[\\"body\\"];
 };
-export const TestPrefixPrefixedMessageInnerMessageInput = builder.inputRef<TestPrefixPrefixedMessageInnerMessageInput_Shape>(\\"TestPrefixPrefixedMessageInnerMessageInput\\");
-TestPrefixPrefixedMessageInnerMessageInput.implement({
+export const TestPrefixPrefixedMessageInnerMessageInput$Ref = builder.inputRef<TestPrefixPrefixedMessageInnerMessageInput$Shape>(\\"TestPrefixPrefixedMessageInnerMessageInput\\");
+TestPrefixPrefixedMessageInnerMessageInput$Ref.implement({
     fields: t => ({
         id: t.field({
             type: \\"String\\",
@@ -1026,34 +1026,34 @@ import * as _$TestPrefixPrefixedEnum_pothos from \\"./TestPrefixPrefixedEnum.pot
 import * as _$TestPrefixPrefixedMessageInnerMessageInput_pothos from \\"./TestPrefixPrefixedMessageInnerMessageInput.pothos\\";
 import * as _$TestPrefixPrefixedMessageSquashedMessageInput_pothos from \\"./TestPrefixPrefixedMessageSquashedMessageInput.pothos\\";
 import * as _$TestPrefixRenamedMessageInput_pothos from \\"./TestPrefixRenamedMessageInput.pothos\\";
-export type TestPrefixPrefixedMessageInput_Shape = {
+export type TestPrefixPrefixedMessageInput$Shape = {
     body: _$testapis$extensions$extensions.PrefixedMessage[\\"body\\"];
     prefixedEnum?: _$testapis$extensions$extensions.PrefixedMessage[\\"prefixedEnum\\"] | null;
-    notIgnoredMessage?: TestPrefixIgnoredMessageNotIgnoredInput_Shape | null;
-    squashedMessage?: TestPrefixPrefixedMessageSquashedMessageInput_Shape | null;
+    notIgnoredMessage?: TestPrefixIgnoredMessageNotIgnoredInput$Shape | null;
+    squashedMessage?: TestPrefixPrefixedMessageSquashedMessageInput$Shape | null;
     thisFieldWasRenamed: _$testapis$extensions$extensions.PrefixedMessage[\\"thisFieldWillBeRenamed\\"];
-    oneofNotIgnoredField?: TestPrefixPrefixedMessageInnerMessageInput_Shape | null;
+    oneofNotIgnoredField?: TestPrefixPrefixedMessageInnerMessageInput$Shape | null;
     skipResolver: _$testapis$extensions$extensions.PrefixedMessage[\\"skipResolver\\"];
-    squashedMessages?: Array<TestPrefixPrefixedMessageSquashedMessageInput_Shape> | null;
-    renamedMessage?: TestPrefixRenamedMessageInput_Shape | null;
+    squashedMessages?: Array<TestPrefixPrefixedMessageSquashedMessageInput$Shape> | null;
+    renamedMessage?: TestPrefixRenamedMessageInput$Shape | null;
 };
-export const TestPrefixPrefixedMessageInput = builder.inputRef<TestPrefixPrefixedMessageInput_Shape>(\\"TestPrefixPrefixedMessageInput\\");
-TestPrefixPrefixedMessageInput.implement({
+export const TestPrefixPrefixedMessageInput$Ref = builder.inputRef<TestPrefixPrefixedMessageInput$Shape>(\\"TestPrefixPrefixedMessageInput\\");
+TestPrefixPrefixedMessageInput$Ref.implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
             required: true
         }),
         prefixedEnum: t.field({
-            type: TestPrefixPrefixedEnum,
+            type: TestPrefixPrefixedEnum$Ref,
             required: false
         }),
         notIgnoredMessage: t.field({
-            type: TestPrefixIgnoredMessageNotIgnoredInput,
+            type: TestPrefixIgnoredMessageNotIgnoredInput$Ref,
             required: false
         }),
         squashedMessage: t.field({
-            type: TestPrefixPrefixedMessageSquashedMessageInput,
+            type: TestPrefixPrefixedMessageSquashedMessageInput$Ref,
             required: false
         }),
         thisFieldWasRenamed: t.field({
@@ -1061,7 +1061,7 @@ TestPrefixPrefixedMessageInput.implement({
             required: true
         }),
         oneofNotIgnoredField: t.field({
-            type: TestPrefixPrefixedMessageInnerMessageInput,
+            type: TestPrefixPrefixedMessageInnerMessageInput$Ref,
             required: false
         }),
         skipResolver: t.field({
@@ -1069,11 +1069,11 @@ TestPrefixPrefixedMessageInput.implement({
             required: true
         }),
         squashedMessages: t.field({
-            type: [TestPrefixPrefixedMessageSquashedMessageInput],
+            type: [TestPrefixPrefixedMessageSquashedMessageInput$Ref],
             required: { list: false, items: true }
         }),
         renamedMessage: t.field({
-            type: TestPrefixRenamedMessageInput,
+            type: TestPrefixRenamedMessageInput$Ref,
             required: false
         })
     })
@@ -1087,9 +1087,9 @@ exports[`protobuf custom options generates pothos DSLs with graphql_type file la
 
 import { builder } from \\"../../builder\\";
 import * as _$TestPrefixPrefixedMessageInnerMessage_pothos from \\"./TestPrefixPrefixedMessageInnerMessage.pothos\\";
-export const TestPrefixPrefixedMessagePartialIgnoreOneof = builder.unionType(\\"TestPrefixPrefixedMessagePartialIgnoreOneof\\", {
+export const TestPrefixPrefixedMessagePartialIgnoreOneof$Ref = builder.unionType(\\"TestPrefixPrefixedMessagePartialIgnoreOneof\\", {
     types: [
-        TestPrefixPrefixedMessageInnerMessage
+        TestPrefixPrefixedMessageInnerMessage$Ref
     ]
 });
 "
@@ -1102,10 +1102,10 @@ exports[`protobuf custom options generates pothos DSLs with graphql_type file la
 import { builder } from \\"../../builder\\";
 import * as _$TestPrefixPrefixedMessageInnerMessage_pothos from \\"./TestPrefixPrefixedMessageInnerMessage.pothos\\";
 import * as _$TestPrefixPrefixedMessageInnerMessage2_pothos from \\"./TestPrefixPrefixedMessageInnerMessage2.pothos\\";
-export const TestPrefixPrefixedMessageSquashedMessage = builder.unionType(\\"TestPrefixPrefixedMessageSquashedMessage\\", {
+export const TestPrefixPrefixedMessageSquashedMessage$Ref = builder.unionType(\\"TestPrefixPrefixedMessageSquashedMessage\\", {
     types: [
-        TestPrefixPrefixedMessageInnerMessage,
-        TestPrefixPrefixedMessageInnerMessage2
+        TestPrefixPrefixedMessageInnerMessage$Ref,
+        TestPrefixPrefixedMessageInnerMessage2$Ref
     ]
 });
 "
@@ -1118,19 +1118,19 @@ exports[`protobuf custom options generates pothos DSLs with graphql_type file la
 import { builder } from \\"../../builder\\";
 import * as _$TestPrefixPrefixedMessageInnerMessage2Input_pothos from \\"./TestPrefixPrefixedMessageInnerMessage2Input.pothos\\";
 import * as _$TestPrefixPrefixedMessageInnerMessageInput_pothos from \\"./TestPrefixPrefixedMessageInnerMessageInput.pothos\\";
-export type TestPrefixPrefixedMessageSquashedMessageInput_Shape = {
-    oneofField?: TestPrefixPrefixedMessageInnerMessageInput_Shape | null;
-    oneofField2?: TestPrefixPrefixedMessageInnerMessage2Input_Shape | null;
+export type TestPrefixPrefixedMessageSquashedMessageInput$Shape = {
+    oneofField?: TestPrefixPrefixedMessageInnerMessageInput$Shape | null;
+    oneofField2?: TestPrefixPrefixedMessageInnerMessage2Input$Shape | null;
 };
-export const TestPrefixPrefixedMessageSquashedMessageInput = builder.inputRef<TestPrefixPrefixedMessageSquashedMessageInput_Shape>(\\"TestPrefixPrefixedMessageSquashedMessageInput\\");
-TestPrefixPrefixedMessageSquashedMessageInput.implement({
+export const TestPrefixPrefixedMessageSquashedMessageInput$Ref = builder.inputRef<TestPrefixPrefixedMessageSquashedMessageInput$Shape>(\\"TestPrefixPrefixedMessageSquashedMessageInput\\");
+TestPrefixPrefixedMessageSquashedMessageInput$Ref.implement({
     fields: t => ({
         oneofField: t.field({
-            type: TestPrefixPrefixedMessageInnerMessageInput,
+            type: TestPrefixPrefixedMessageInnerMessageInput$Ref,
             required: false
         }),
         oneofField2: t.field({
-            type: TestPrefixPrefixedMessageInnerMessage2Input,
+            type: TestPrefixPrefixedMessageInnerMessage2Input$Ref,
             required: false
         })
     })
@@ -1144,8 +1144,8 @@ exports[`protobuf custom options generates pothos DSLs with graphql_type file la
 
 import { builder } from \\"../../builder\\";
 import * as _$testapis$extensions$extensions from \\"./testapis/extensions/extensions\\";
-export const TestPrefixRenamedMessage = builder.objectRef<_$testapis$extensions$extensions.MessageWillRename>(\\"TestPrefixRenamedMessage\\");
-builder.objectType(TestPrefixRenamedMessage, {
+export const TestPrefixRenamedMessage$Ref = builder.objectRef<_$testapis$extensions$extensions.MessageWillRename>(\\"TestPrefixRenamedMessage\\");
+builder.objectType(TestPrefixRenamedMessage$Ref, {
     name: \\"TestPrefixRenamedMessage\\",
     fields: t => ({
         body: t.expose(\\"body\\", {
@@ -1167,11 +1167,11 @@ exports[`protobuf custom options generates pothos DSLs with graphql_type file la
 // source: testapis/extensions/extensions.proto
 
 import { builder } from \\"../../builder\\";
-export type TestPrefixRenamedMessageInput_Shape = {
+export type TestPrefixRenamedMessageInput$Shape = {
     body: _$testapis$extensions$extensions.MessageWillRename[\\"body\\"];
 };
-export const TestPrefixRenamedMessageInput = builder.inputRef<TestPrefixRenamedMessageInput_Shape>(\\"TestPrefixRenamedMessageInput\\");
-TestPrefixRenamedMessageInput.implement({
+export const TestPrefixRenamedMessageInput$Ref = builder.inputRef<TestPrefixRenamedMessageInput$Shape>(\\"TestPrefixRenamedMessageInput\\");
+TestPrefixRenamedMessageInput$Ref.implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -1188,8 +1188,8 @@ exports[`protobuf custom options with ts-proto generates pothos DSLs: extensions
 
 import { builder } from \\"../../builder\\";
 import * as _$testapis$extensions$extensions from \\"./testapis/extensions/extensions\\";
-export const TestPrefixPrefixedMessage = builder.objectRef<_$testapis$extensions$extensions.PrefixedMessage>(\\"TestPrefixPrefixedMessage\\");
-builder.objectType(TestPrefixPrefixedMessage, {
+export const TestPrefixPrefixedMessage$Ref = builder.objectRef<_$testapis$extensions$extensions.PrefixedMessage>(\\"TestPrefixPrefixedMessage\\");
+builder.objectType(TestPrefixPrefixedMessage$Ref, {
     name: \\"TestPrefixPrefixedMessage\\",
     fields: t => ({
         id: t.expose(\\"id\\", {
@@ -1202,7 +1202,7 @@ builder.objectType(TestPrefixPrefixedMessage, {
             nullable: false
         }),
         prefixedEnum: t.field({
-            type: TestPrefixPrefixedEnum,
+            type: TestPrefixPrefixedEnum$Ref,
             nullable: true,
             resolve: source => {
                 if (source.prefixedEnum === _$testapis$extensions$extensions.PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
@@ -1215,11 +1215,11 @@ builder.objectType(TestPrefixPrefixedMessage, {
             }
         }),
         notIgnoredMessage: t.expose(\\"notIgnoredMessage\\", {
-            type: TestPrefixIgnoredMessageNotIgnored,
+            type: TestPrefixIgnoredMessageNotIgnored$Ref,
             nullable: true
         }),
         squashedMessage: t.field({
-            type: TestPrefixPrefixedMessageSquashedMessage,
+            type: TestPrefixPrefixedMessageSquashedMessage$Ref,
             nullable: true,
             resolve: source => {
                 const value = source.squashedMessage?.oneofField ?? source.squashedMessage?.oneofField2;
@@ -1235,7 +1235,7 @@ builder.objectType(TestPrefixPrefixedMessage, {
             nullable: false
         }),
         squashedMessages: t.field({
-            type: [TestPrefixPrefixedMessageSquashedMessage],
+            type: [TestPrefixPrefixedMessageSquashedMessage$Ref],
             nullable: { list: true, items: false },
             resolve: source => {
                 return source.squashedMessages.map(item => {
@@ -1248,11 +1248,11 @@ builder.objectType(TestPrefixPrefixedMessage, {
             }
         }),
         renamedMessage: t.expose(\\"renamedMessage\\", {
-            type: TestPrefixRenamedMessage,
+            type: TestPrefixRenamedMessage$Ref,
             nullable: true
         }),
         partialIgnoreOneof: t.field({
-            type: TestPrefixPrefixedMessagePartialIgnoreOneof,
+            type: TestPrefixPrefixedMessagePartialIgnoreOneof$Ref,
             nullable: true,
             resolve: source => {
                 const value = source.oneofNotIgnoredField;
@@ -1266,8 +1266,8 @@ builder.objectType(TestPrefixPrefixedMessage, {
         }).$type === \\"testapis.extensions.PrefixedMessage\\";
     }
 });
-export const TestPrefixRenamedMessage = builder.objectRef<_$testapis$extensions$extensions.MessageWillRename>(\\"TestPrefixRenamedMessage\\");
-builder.objectType(TestPrefixRenamedMessage, {
+export const TestPrefixRenamedMessage$Ref = builder.objectRef<_$testapis$extensions$extensions.MessageWillRename>(\\"TestPrefixRenamedMessage\\");
+builder.objectType(TestPrefixRenamedMessage$Ref, {
     name: \\"TestPrefixRenamedMessage\\",
     fields: t => ({
         body: t.expose(\\"body\\", {
@@ -1281,8 +1281,8 @@ builder.objectType(TestPrefixRenamedMessage, {
         }).$type === \\"testapis.extensions.MessageWillRename\\";
     }
 });
-export const TestPrefixPrefixedMessageInnerMessage = builder.objectRef<_$testapis$extensions$extensions.PrefixedMessage_InnerMessage>(\\"TestPrefixPrefixedMessageInnerMessage\\");
-builder.objectType(TestPrefixPrefixedMessageInnerMessage, {
+export const TestPrefixPrefixedMessageInnerMessage$Ref = builder.objectRef<_$testapis$extensions$extensions.PrefixedMessage_InnerMessage>(\\"TestPrefixPrefixedMessageInnerMessage\\");
+builder.objectType(TestPrefixPrefixedMessageInnerMessage$Ref, {
     name: \\"TestPrefixPrefixedMessageInnerMessage\\",
     fields: t => ({
         id: t.expose(\\"id\\", {
@@ -1300,8 +1300,8 @@ builder.objectType(TestPrefixPrefixedMessageInnerMessage, {
         }).$type === \\"testapis.extensions.PrefixedMessage.InnerMessage\\";
     }
 });
-export const TestPrefixPrefixedMessageInnerMessage2 = builder.objectRef<_$testapis$extensions$extensions.PrefixedMessage_InnerMessage2>(\\"TestPrefixPrefixedMessageInnerMessage2\\");
-builder.objectType(TestPrefixPrefixedMessageInnerMessage2, {
+export const TestPrefixPrefixedMessageInnerMessage2$Ref = builder.objectRef<_$testapis$extensions$extensions.PrefixedMessage_InnerMessage2>(\\"TestPrefixPrefixedMessageInnerMessage2\\");
+builder.objectType(TestPrefixPrefixedMessageInnerMessage2$Ref, {
     name: \\"TestPrefixPrefixedMessageInnerMessage2\\",
     fields: t => ({
         id: t.expose(\\"id\\", {
@@ -1319,8 +1319,8 @@ builder.objectType(TestPrefixPrefixedMessageInnerMessage2, {
         }).$type === \\"testapis.extensions.PrefixedMessage.InnerMessage2\\";
     }
 });
-export const TestPrefixIgnoredMessageNotIgnored = builder.objectRef<_$testapis$extensions$extensions.IgnoredMessage_NotIgnored>(\\"TestPrefixIgnoredMessageNotIgnored\\");
-builder.objectType(TestPrefixIgnoredMessageNotIgnored, {
+export const TestPrefixIgnoredMessageNotIgnored$Ref = builder.objectRef<_$testapis$extensions$extensions.IgnoredMessage_NotIgnored>(\\"TestPrefixIgnoredMessageNotIgnored\\");
+builder.objectType(TestPrefixIgnoredMessageNotIgnored$Ref, {
     name: \\"TestPrefixIgnoredMessageNotIgnored\\",
     fields: t => ({
         body: t.expose(\\"body\\", {
@@ -1334,34 +1334,34 @@ builder.objectType(TestPrefixIgnoredMessageNotIgnored, {
         }).$type === \\"testapis.extensions.IgnoredMessage.NotIgnored\\";
     }
 });
-export type TestPrefixPrefixedMessageInput_Shape = {
+export type TestPrefixPrefixedMessageInput$Shape = {
     body: _$testapis$extensions$extensions.PrefixedMessage[\\"body\\"];
     prefixedEnum?: _$testapis$extensions$extensions.PrefixedMessage[\\"prefixedEnum\\"] | null;
-    notIgnoredMessage?: TestPrefixIgnoredMessageNotIgnoredInput_Shape | null;
-    squashedMessage?: TestPrefixPrefixedMessageSquashedMessageInput_Shape | null;
+    notIgnoredMessage?: TestPrefixIgnoredMessageNotIgnoredInput$Shape | null;
+    squashedMessage?: TestPrefixPrefixedMessageSquashedMessageInput$Shape | null;
     thisFieldWasRenamed: _$testapis$extensions$extensions.PrefixedMessage[\\"thisFieldWillBeRenamed\\"];
-    oneofNotIgnoredField?: TestPrefixPrefixedMessageInnerMessageInput_Shape | null;
+    oneofNotIgnoredField?: TestPrefixPrefixedMessageInnerMessageInput$Shape | null;
     skipResolver: _$testapis$extensions$extensions.PrefixedMessage[\\"skipResolver\\"];
-    squashedMessages?: Array<TestPrefixPrefixedMessageSquashedMessageInput_Shape> | null;
-    renamedMessage?: TestPrefixRenamedMessageInput_Shape | null;
+    squashedMessages?: Array<TestPrefixPrefixedMessageSquashedMessageInput$Shape> | null;
+    renamedMessage?: TestPrefixRenamedMessageInput$Shape | null;
 };
-export const TestPrefixPrefixedMessageInput = builder.inputRef<TestPrefixPrefixedMessageInput_Shape>(\\"TestPrefixPrefixedMessageInput\\");
-TestPrefixPrefixedMessageInput.implement({
+export const TestPrefixPrefixedMessageInput$Ref = builder.inputRef<TestPrefixPrefixedMessageInput$Shape>(\\"TestPrefixPrefixedMessageInput\\");
+TestPrefixPrefixedMessageInput$Ref.implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
             required: true
         }),
         prefixedEnum: t.field({
-            type: TestPrefixPrefixedEnum,
+            type: TestPrefixPrefixedEnum$Ref,
             required: false
         }),
         notIgnoredMessage: t.field({
-            type: TestPrefixIgnoredMessageNotIgnoredInput,
+            type: TestPrefixIgnoredMessageNotIgnoredInput$Ref,
             required: false
         }),
         squashedMessage: t.field({
-            type: TestPrefixPrefixedMessageSquashedMessageInput,
+            type: TestPrefixPrefixedMessageSquashedMessageInput$Ref,
             required: false
         }),
         thisFieldWasRenamed: t.field({
@@ -1369,7 +1369,7 @@ TestPrefixPrefixedMessageInput.implement({
             required: true
         }),
         oneofNotIgnoredField: t.field({
-            type: TestPrefixPrefixedMessageInnerMessageInput,
+            type: TestPrefixPrefixedMessageInnerMessageInput$Ref,
             required: false
         }),
         skipResolver: t.field({
@@ -1377,20 +1377,20 @@ TestPrefixPrefixedMessageInput.implement({
             required: true
         }),
         squashedMessages: t.field({
-            type: [TestPrefixPrefixedMessageSquashedMessageInput],
+            type: [TestPrefixPrefixedMessageSquashedMessageInput$Ref],
             required: { list: false, items: true }
         }),
         renamedMessage: t.field({
-            type: TestPrefixRenamedMessageInput,
+            type: TestPrefixRenamedMessageInput$Ref,
             required: false
         })
     })
 });
-export type TestPrefixRenamedMessageInput_Shape = {
+export type TestPrefixRenamedMessageInput$Shape = {
     body: _$testapis$extensions$extensions.MessageWillRename[\\"body\\"];
 };
-export const TestPrefixRenamedMessageInput = builder.inputRef<TestPrefixRenamedMessageInput_Shape>(\\"TestPrefixRenamedMessageInput\\");
-TestPrefixRenamedMessageInput.implement({
+export const TestPrefixRenamedMessageInput$Ref = builder.inputRef<TestPrefixRenamedMessageInput$Shape>(\\"TestPrefixRenamedMessageInput\\");
+TestPrefixRenamedMessageInput$Ref.implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -1398,11 +1398,11 @@ TestPrefixRenamedMessageInput.implement({
         })
     })
 });
-export type TestPrefixInterfaceMessageInput_Shape = {
+export type TestPrefixInterfaceMessageInput$Shape = {
     id: _$testapis$extensions$extensions.InterfaceMessage[\\"id\\"];
 };
-export const TestPrefixInterfaceMessageInput = builder.inputRef<TestPrefixInterfaceMessageInput_Shape>(\\"TestPrefixInterfaceMessageInput\\");
-TestPrefixInterfaceMessageInput.implement({
+export const TestPrefixInterfaceMessageInput$Ref = builder.inputRef<TestPrefixInterfaceMessageInput$Shape>(\\"TestPrefixInterfaceMessageInput\\");
+TestPrefixInterfaceMessageInput$Ref.implement({
     fields: t => ({
         id: t.field({
             type: \\"String\\",
@@ -1410,12 +1410,12 @@ TestPrefixInterfaceMessageInput.implement({
         })
     })
 });
-export type TestPrefixPrefixedMessageInnerMessageInput_Shape = {
+export type TestPrefixPrefixedMessageInnerMessageInput$Shape = {
     id: _$testapis$extensions$extensions.PrefixedMessage_InnerMessage[\\"id\\"];
     body: _$testapis$extensions$extensions.PrefixedMessage_InnerMessage[\\"body\\"];
 };
-export const TestPrefixPrefixedMessageInnerMessageInput = builder.inputRef<TestPrefixPrefixedMessageInnerMessageInput_Shape>(\\"TestPrefixPrefixedMessageInnerMessageInput\\");
-TestPrefixPrefixedMessageInnerMessageInput.implement({
+export const TestPrefixPrefixedMessageInnerMessageInput$Ref = builder.inputRef<TestPrefixPrefixedMessageInnerMessageInput$Shape>(\\"TestPrefixPrefixedMessageInnerMessageInput\\");
+TestPrefixPrefixedMessageInnerMessageInput$Ref.implement({
     fields: t => ({
         id: t.field({
             type: \\"String\\",
@@ -1427,12 +1427,12 @@ TestPrefixPrefixedMessageInnerMessageInput.implement({
         })
     })
 });
-export type TestPrefixPrefixedMessageInnerMessage2Input_Shape = {
+export type TestPrefixPrefixedMessageInnerMessage2Input$Shape = {
     id: _$testapis$extensions$extensions.PrefixedMessage_InnerMessage2[\\"id\\"];
     body: _$testapis$extensions$extensions.PrefixedMessage_InnerMessage2[\\"body\\"];
 };
-export const TestPrefixPrefixedMessageInnerMessage2Input = builder.inputRef<TestPrefixPrefixedMessageInnerMessage2Input_Shape>(\\"TestPrefixPrefixedMessageInnerMessage2Input\\");
-TestPrefixPrefixedMessageInnerMessage2Input.implement({
+export const TestPrefixPrefixedMessageInnerMessage2Input$Ref = builder.inputRef<TestPrefixPrefixedMessageInnerMessage2Input$Shape>(\\"TestPrefixPrefixedMessageInnerMessage2Input\\");
+TestPrefixPrefixedMessageInnerMessage2Input$Ref.implement({
     fields: t => ({
         id: t.field({
             type: \\"String\\",
@@ -1444,28 +1444,28 @@ TestPrefixPrefixedMessageInnerMessage2Input.implement({
         })
     })
 });
-export type TestPrefixPrefixedMessageSquashedMessageInput_Shape = {
-    oneofField?: TestPrefixPrefixedMessageInnerMessageInput_Shape | null;
-    oneofField2?: TestPrefixPrefixedMessageInnerMessage2Input_Shape | null;
+export type TestPrefixPrefixedMessageSquashedMessageInput$Shape = {
+    oneofField?: TestPrefixPrefixedMessageInnerMessageInput$Shape | null;
+    oneofField2?: TestPrefixPrefixedMessageInnerMessage2Input$Shape | null;
 };
-export const TestPrefixPrefixedMessageSquashedMessageInput = builder.inputRef<TestPrefixPrefixedMessageSquashedMessageInput_Shape>(\\"TestPrefixPrefixedMessageSquashedMessageInput\\");
-TestPrefixPrefixedMessageSquashedMessageInput.implement({
+export const TestPrefixPrefixedMessageSquashedMessageInput$Ref = builder.inputRef<TestPrefixPrefixedMessageSquashedMessageInput$Shape>(\\"TestPrefixPrefixedMessageSquashedMessageInput\\");
+TestPrefixPrefixedMessageSquashedMessageInput$Ref.implement({
     fields: t => ({
         oneofField: t.field({
-            type: TestPrefixPrefixedMessageInnerMessageInput,
+            type: TestPrefixPrefixedMessageInnerMessageInput$Ref,
             required: false
         }),
         oneofField2: t.field({
-            type: TestPrefixPrefixedMessageInnerMessage2Input,
+            type: TestPrefixPrefixedMessageInnerMessage2Input$Ref,
             required: false
         })
     })
 });
-export type TestPrefixIgnoredMessageNotIgnoredInput_Shape = {
+export type TestPrefixIgnoredMessageNotIgnoredInput$Shape = {
     body: _$testapis$extensions$extensions.IgnoredMessage_NotIgnored[\\"body\\"];
 };
-export const TestPrefixIgnoredMessageNotIgnoredInput = builder.inputRef<TestPrefixIgnoredMessageNotIgnoredInput_Shape>(\\"TestPrefixIgnoredMessageNotIgnoredInput\\");
-TestPrefixIgnoredMessageNotIgnoredInput.implement({
+export const TestPrefixIgnoredMessageNotIgnoredInput$Ref = builder.inputRef<TestPrefixIgnoredMessageNotIgnoredInput$Shape>(\\"TestPrefixIgnoredMessageNotIgnoredInput\\");
+TestPrefixIgnoredMessageNotIgnoredInput$Ref.implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -1473,8 +1473,8 @@ TestPrefixIgnoredMessageNotIgnoredInput.implement({
         })
     })
 });
-export const TestPrefixInterfaceMessage = builder.interfaceRef<Pick<_$testapis$extensions$extensions.InterfaceMessage, \\"id\\">>(\\"TestPrefixInterfaceMessage\\");
-builder.interfaceType(TestPrefixInterfaceMessage, {
+export const TestPrefixInterfaceMessage$Ref = builder.interfaceRef<Pick<_$testapis$extensions$extensions.InterfaceMessage, \\"id\\">>(\\"TestPrefixInterfaceMessage\\");
+builder.interfaceType(TestPrefixInterfaceMessage$Ref, {
     name: \\"TestPrefixInterfaceMessage\\",
     fields: t => ({
         id: t.expose(\\"id\\", {
@@ -1483,18 +1483,18 @@ builder.interfaceType(TestPrefixInterfaceMessage, {
         })
     })
 });
-export const TestPrefixPrefixedMessageSquashedMessage = builder.unionType(\\"TestPrefixPrefixedMessageSquashedMessage\\", {
+export const TestPrefixPrefixedMessageSquashedMessage$Ref = builder.unionType(\\"TestPrefixPrefixedMessageSquashedMessage\\", {
     types: [
-        TestPrefixPrefixedMessageInnerMessage,
-        TestPrefixPrefixedMessageInnerMessage2
+        TestPrefixPrefixedMessageInnerMessage$Ref,
+        TestPrefixPrefixedMessageInnerMessage2$Ref
     ]
 });
-export const TestPrefixPrefixedMessagePartialIgnoreOneof = builder.unionType(\\"TestPrefixPrefixedMessagePartialIgnoreOneof\\", {
+export const TestPrefixPrefixedMessagePartialIgnoreOneof$Ref = builder.unionType(\\"TestPrefixPrefixedMessagePartialIgnoreOneof\\", {
     types: [
-        TestPrefixPrefixedMessageInnerMessage
+        TestPrefixPrefixedMessageInnerMessage$Ref
     ]
 });
-export const TestPrefixPrefixedEnum = builder.enumType(\\"TestPrefixPrefixedEnum\\", {
+export const TestPrefixPrefixedEnum$Ref = builder.enumType(\\"TestPrefixPrefixedEnum\\", {
     values: {
         PREFIXED_FOO: {
             value: 1
@@ -1504,7 +1504,7 @@ export const TestPrefixPrefixedEnum = builder.enumType(\\"TestPrefixPrefixedEnum
         }
     } as const
 });
-export const TestPrefixInterfaceMessageType = builder.enumType(\\"TestPrefixInterfaceMessageType\\", {
+export const TestPrefixInterfaceMessageType$Ref = builder.enumType(\\"TestPrefixInterfaceMessageType\\", {
     values: {
         INNER: {
             value: 1
@@ -1533,12 +1533,12 @@ import { builder } from \\"../../builder\\";
 import * as _$MyEnum_pothos from \\"./MyEnum.pothos\\";
 import * as _$MyEnumWithoutUnspecified_pothos from \\"./MyEnumWithoutUnspecified.pothos\\";
 import * as _$testapis$enums$enums from \\"./testapis/enums/enums\\";
-export const MessageWithEnums = builder.objectRef<_$testapis$enums$enums.MessageWithEnums>(\\"MessageWithEnums\\");
-builder.objectType(MessageWithEnums, {
+export const MessageWithEnums$Ref = builder.objectRef<_$testapis$enums$enums.MessageWithEnums>(\\"MessageWithEnums\\");
+builder.objectType(MessageWithEnums$Ref, {
     name: \\"MessageWithEnums\\",
     fields: t => ({
         requiredMyEnum: t.field({
-            type: MyEnum,
+            type: MyEnum$Ref,
             nullable: false,
             description: \\"Required.\\",
             resolve: source => {
@@ -1549,7 +1549,7 @@ builder.objectType(MessageWithEnums, {
             }
         }),
         optionalMyEnum: t.field({
-            type: MyEnum,
+            type: MyEnum$Ref,
             nullable: true,
             description: \\"Optional.\\",
             resolve: source => {
@@ -1560,7 +1560,7 @@ builder.objectType(MessageWithEnums, {
             }
         }),
         requiredMyEnumWithoutUnspecified: t.field({
-            type: MyEnumWithoutUnspecified,
+            type: MyEnumWithoutUnspecified$Ref,
             nullable: false,
             description: \\"Required.\\",
             resolve: source => {
@@ -1568,7 +1568,7 @@ builder.objectType(MessageWithEnums, {
             }
         }),
         optionalMyEnumWithoutUnspecified: t.field({
-            type: MyEnumWithoutUnspecified,
+            type: MyEnumWithoutUnspecified$Ref,
             nullable: true,
             description: \\"Optional.\\",
             resolve: source => {
@@ -1576,7 +1576,7 @@ builder.objectType(MessageWithEnums, {
             }
         }),
         requiredMyEnums: t.field({
-            type: [MyEnum],
+            type: [MyEnum$Ref],
             nullable: { list: false, items: false },
             description: \\"Required.\\",
             resolve: source => {
@@ -1589,7 +1589,7 @@ builder.objectType(MessageWithEnums, {
             }
         }),
         optionalMyEnums: t.field({
-            type: [MyEnum],
+            type: [MyEnum$Ref],
             nullable: { list: true, items: false },
             description: \\"Optional.\\",
             resolve: source => {
@@ -1602,7 +1602,7 @@ builder.objectType(MessageWithEnums, {
             }
         }),
         requiredMyEnumWithoutUnspecifieds: t.field({
-            type: [MyEnumWithoutUnspecified],
+            type: [MyEnumWithoutUnspecified$Ref],
             nullable: { list: false, items: false },
             description: \\"Required.\\",
             resolve: source => {
@@ -1610,7 +1610,7 @@ builder.objectType(MessageWithEnums, {
             }
         }),
         optionalMyEnumWithoutUnspecifieds: t.field({
-            type: [MyEnumWithoutUnspecified],
+            type: [MyEnumWithoutUnspecified$Ref],
             nullable: { list: true, items: false },
             description: \\"Optional.\\",
             resolve: source => {
@@ -1634,7 +1634,7 @@ exports[`protobuf enums generates pothos DSLs with graphql_type file layout: enu
 import { builder } from \\"../../builder\\";
 import * as _$MyEnum_pothos from \\"./MyEnum.pothos\\";
 import * as _$MyEnumWithoutUnspecified_pothos from \\"./MyEnumWithoutUnspecified.pothos\\";
-export type MessageWithEnumsInput_Shape = {
+export type MessageWithEnumsInput$Shape = {
     requiredMyEnum: _$testapis$enums$enums.MessageWithEnums[\\"requiredMyEnum\\"];
     optionalMyEnum?: _$testapis$enums$enums.MessageWithEnums[\\"optionalMyEnum\\"] | null;
     requiredMyEnumWithoutUnspecified: _$testapis$enums$enums.MessageWithEnums[\\"requiredMyEnumWithoutUnspecified\\"];
@@ -1644,46 +1644,46 @@ export type MessageWithEnumsInput_Shape = {
     requiredMyEnumWithoutUnspecifieds: _$testapis$enums$enums.MessageWithEnums[\\"requiredMyEnumWithoutUnspecifieds\\"];
     optionalMyEnumWithoutUnspecifieds?: _$testapis$enums$enums.MessageWithEnums[\\"optionalMyEnumWithoutUnspecifieds\\"] | null;
 };
-export const MessageWithEnumsInput = builder.inputRef<MessageWithEnumsInput_Shape>(\\"MessageWithEnumsInput\\");
-MessageWithEnumsInput.implement({
+export const MessageWithEnumsInput$Ref = builder.inputRef<MessageWithEnumsInput$Shape>(\\"MessageWithEnumsInput\\");
+MessageWithEnumsInput$Ref.implement({
     fields: t => ({
         requiredMyEnum: t.field({
-            type: MyEnum,
+            type: MyEnum$Ref,
             required: true,
             description: \\"Required.\\"
         }),
         optionalMyEnum: t.field({
-            type: MyEnum,
+            type: MyEnum$Ref,
             required: false,
             description: \\"Optional.\\"
         }),
         requiredMyEnumWithoutUnspecified: t.field({
-            type: MyEnumWithoutUnspecified,
+            type: MyEnumWithoutUnspecified$Ref,
             required: true,
             description: \\"Required.\\"
         }),
         optionalMyEnumWithoutUnspecified: t.field({
-            type: MyEnumWithoutUnspecified,
+            type: MyEnumWithoutUnspecified$Ref,
             required: false,
             description: \\"Optional.\\"
         }),
         requiredMyEnums: t.field({
-            type: [MyEnum],
+            type: [MyEnum$Ref],
             required: { list: true, items: true },
             description: \\"Required.\\"
         }),
         optionalMyEnums: t.field({
-            type: [MyEnum],
+            type: [MyEnum$Ref],
             required: { list: false, items: true },
             description: \\"Optional.\\"
         }),
         requiredMyEnumWithoutUnspecifieds: t.field({
-            type: [MyEnumWithoutUnspecified],
+            type: [MyEnumWithoutUnspecified$Ref],
             required: { list: true, items: true },
             description: \\"Required.\\"
         }),
         optionalMyEnumWithoutUnspecifieds: t.field({
-            type: [MyEnumWithoutUnspecified],
+            type: [MyEnumWithoutUnspecified$Ref],
             required: { list: false, items: true },
             description: \\"Optional.\\"
         })
@@ -1697,7 +1697,7 @@ exports[`protobuf enums generates pothos DSLs with graphql_type file layout: enu
 // source: testapis/enums/enums.proto
 
 import { builder } from \\"../../builder\\";
-export const MyEnum = builder.enumType(\\"MyEnum\\", {
+export const MyEnum$Ref = builder.enumType(\\"MyEnum\\", {
     values: {
         FOO: {
             value: 1
@@ -1719,7 +1719,7 @@ exports[`protobuf enums generates pothos DSLs with graphql_type file layout: enu
 // source: testapis/enums/enums.proto
 
 import { builder } from \\"../../builder\\";
-export const MyEnumWithoutUnspecified = builder.enumType(\\"MyEnumWithoutUnspecified\\", {
+export const MyEnumWithoutUnspecified$Ref = builder.enumType(\\"MyEnumWithoutUnspecified\\", {
     values: {
         FOO: {
             value: 0
@@ -1741,12 +1741,12 @@ exports[`protobuf enums with ts-proto generates pothos DSLs: enums/enums.pb.poth
 
 import { builder } from \\"../../builder\\";
 import * as _$testapis$enums$enums from \\"./testapis/enums/enums\\";
-export const MessageWithEnums = builder.objectRef<_$testapis$enums$enums.MessageWithEnums>(\\"MessageWithEnums\\");
-builder.objectType(MessageWithEnums, {
+export const MessageWithEnums$Ref = builder.objectRef<_$testapis$enums$enums.MessageWithEnums>(\\"MessageWithEnums\\");
+builder.objectType(MessageWithEnums$Ref, {
     name: \\"MessageWithEnums\\",
     fields: t => ({
         requiredMyEnum: t.field({
-            type: MyEnum,
+            type: MyEnum$Ref,
             nullable: false,
             description: \\"Required.\\",
             resolve: source => {
@@ -1757,7 +1757,7 @@ builder.objectType(MessageWithEnums, {
             }
         }),
         optionalMyEnum: t.field({
-            type: MyEnum,
+            type: MyEnum$Ref,
             nullable: true,
             description: \\"Optional.\\",
             resolve: source => {
@@ -1768,7 +1768,7 @@ builder.objectType(MessageWithEnums, {
             }
         }),
         requiredMyEnumWithoutUnspecified: t.field({
-            type: MyEnumWithoutUnspecified,
+            type: MyEnumWithoutUnspecified$Ref,
             nullable: false,
             description: \\"Required.\\",
             resolve: source => {
@@ -1776,7 +1776,7 @@ builder.objectType(MessageWithEnums, {
             }
         }),
         optionalMyEnumWithoutUnspecified: t.field({
-            type: MyEnumWithoutUnspecified,
+            type: MyEnumWithoutUnspecified$Ref,
             nullable: true,
             description: \\"Optional.\\",
             resolve: source => {
@@ -1784,7 +1784,7 @@ builder.objectType(MessageWithEnums, {
             }
         }),
         requiredMyEnums: t.field({
-            type: [MyEnum],
+            type: [MyEnum$Ref],
             nullable: { list: false, items: false },
             description: \\"Required.\\",
             resolve: source => {
@@ -1797,7 +1797,7 @@ builder.objectType(MessageWithEnums, {
             }
         }),
         optionalMyEnums: t.field({
-            type: [MyEnum],
+            type: [MyEnum$Ref],
             nullable: { list: true, items: false },
             description: \\"Optional.\\",
             resolve: source => {
@@ -1810,7 +1810,7 @@ builder.objectType(MessageWithEnums, {
             }
         }),
         requiredMyEnumWithoutUnspecifieds: t.field({
-            type: [MyEnumWithoutUnspecified],
+            type: [MyEnumWithoutUnspecified$Ref],
             nullable: { list: false, items: false },
             description: \\"Required.\\",
             resolve: source => {
@@ -1818,7 +1818,7 @@ builder.objectType(MessageWithEnums, {
             }
         }),
         optionalMyEnumWithoutUnspecifieds: t.field({
-            type: [MyEnumWithoutUnspecified],
+            type: [MyEnumWithoutUnspecified$Ref],
             nullable: { list: true, items: false },
             description: \\"Optional.\\",
             resolve: source => {
@@ -1832,7 +1832,7 @@ builder.objectType(MessageWithEnums, {
         }).$type === \\"testapi.enums.MessageWithEnums\\";
     }
 });
-export type MessageWithEnumsInput_Shape = {
+export type MessageWithEnumsInput$Shape = {
     requiredMyEnum: _$testapis$enums$enums.MessageWithEnums[\\"requiredMyEnum\\"];
     optionalMyEnum?: _$testapis$enums$enums.MessageWithEnums[\\"optionalMyEnum\\"] | null;
     requiredMyEnumWithoutUnspecified: _$testapis$enums$enums.MessageWithEnums[\\"requiredMyEnumWithoutUnspecified\\"];
@@ -1842,52 +1842,52 @@ export type MessageWithEnumsInput_Shape = {
     requiredMyEnumWithoutUnspecifieds: _$testapis$enums$enums.MessageWithEnums[\\"requiredMyEnumWithoutUnspecifieds\\"];
     optionalMyEnumWithoutUnspecifieds?: _$testapis$enums$enums.MessageWithEnums[\\"optionalMyEnumWithoutUnspecifieds\\"] | null;
 };
-export const MessageWithEnumsInput = builder.inputRef<MessageWithEnumsInput_Shape>(\\"MessageWithEnumsInput\\");
-MessageWithEnumsInput.implement({
+export const MessageWithEnumsInput$Ref = builder.inputRef<MessageWithEnumsInput$Shape>(\\"MessageWithEnumsInput\\");
+MessageWithEnumsInput$Ref.implement({
     fields: t => ({
         requiredMyEnum: t.field({
-            type: MyEnum,
+            type: MyEnum$Ref,
             required: true,
             description: \\"Required.\\"
         }),
         optionalMyEnum: t.field({
-            type: MyEnum,
+            type: MyEnum$Ref,
             required: false,
             description: \\"Optional.\\"
         }),
         requiredMyEnumWithoutUnspecified: t.field({
-            type: MyEnumWithoutUnspecified,
+            type: MyEnumWithoutUnspecified$Ref,
             required: true,
             description: \\"Required.\\"
         }),
         optionalMyEnumWithoutUnspecified: t.field({
-            type: MyEnumWithoutUnspecified,
+            type: MyEnumWithoutUnspecified$Ref,
             required: false,
             description: \\"Optional.\\"
         }),
         requiredMyEnums: t.field({
-            type: [MyEnum],
+            type: [MyEnum$Ref],
             required: { list: true, items: true },
             description: \\"Required.\\"
         }),
         optionalMyEnums: t.field({
-            type: [MyEnum],
+            type: [MyEnum$Ref],
             required: { list: false, items: true },
             description: \\"Optional.\\"
         }),
         requiredMyEnumWithoutUnspecifieds: t.field({
-            type: [MyEnumWithoutUnspecified],
+            type: [MyEnumWithoutUnspecified$Ref],
             required: { list: true, items: true },
             description: \\"Required.\\"
         }),
         optionalMyEnumWithoutUnspecifieds: t.field({
-            type: [MyEnumWithoutUnspecified],
+            type: [MyEnumWithoutUnspecified$Ref],
             required: { list: false, items: true },
             description: \\"Optional.\\"
         })
     })
 });
-export const MyEnum = builder.enumType(\\"MyEnum\\", {
+export const MyEnum$Ref = builder.enumType(\\"MyEnum\\", {
     values: {
         FOO: {
             value: 1
@@ -1901,7 +1901,7 @@ export const MyEnum = builder.enumType(\\"MyEnum\\", {
         }
     } as const
 });
-export const MyEnumWithoutUnspecified = builder.enumType(\\"MyEnumWithoutUnspecified\\", {
+export const MyEnumWithoutUnspecified$Ref = builder.enumType(\\"MyEnumWithoutUnspecified\\", {
     values: {
         FOO: {
             value: 0
@@ -1923,8 +1923,8 @@ exports[`protobuf oneof generates pothos DSLs with graphql_type file layout: one
 
 import { builder } from \\"../../builder\\";
 import * as _$testapis$oneof$oneof from \\"./testapis/oneof/oneof\\";
-export const OneofMemberMessage1 = builder.objectRef<_$testapis$oneof$oneof.OneofMemberMessage1>(\\"OneofMemberMessage1\\");
-builder.objectType(OneofMemberMessage1, {
+export const OneofMemberMessage1$Ref = builder.objectRef<_$testapis$oneof$oneof.OneofMemberMessage1>(\\"OneofMemberMessage1\\");
+builder.objectType(OneofMemberMessage1$Ref, {
     name: \\"OneofMemberMessage1\\",
     fields: t => ({
         body: t.expose(\\"body\\", {
@@ -1946,11 +1946,11 @@ exports[`protobuf oneof generates pothos DSLs with graphql_type file layout: one
 // source: testapis/oneof/oneof.proto
 
 import { builder } from \\"../../builder\\";
-export type OneofMemberMessage1Input_Shape = {
+export type OneofMemberMessage1Input$Shape = {
     body: _$testapis$oneof$oneof.OneofMemberMessage1[\\"body\\"];
 };
-export const OneofMemberMessage1Input = builder.inputRef<OneofMemberMessage1Input_Shape>(\\"OneofMemberMessage1Input\\");
-OneofMemberMessage1Input.implement({
+export const OneofMemberMessage1Input$Ref = builder.inputRef<OneofMemberMessage1Input$Shape>(\\"OneofMemberMessage1Input\\");
+OneofMemberMessage1Input$Ref.implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -1967,8 +1967,8 @@ exports[`protobuf oneof generates pothos DSLs with graphql_type file layout: one
 
 import { builder } from \\"../../builder\\";
 import * as _$testapis$oneof$oneof from \\"./testapis/oneof/oneof\\";
-export const OneofMemberMessage2 = builder.objectRef<_$testapis$oneof$oneof.OneofMemberMessage2>(\\"OneofMemberMessage2\\");
-builder.objectType(OneofMemberMessage2, {
+export const OneofMemberMessage2$Ref = builder.objectRef<_$testapis$oneof$oneof.OneofMemberMessage2>(\\"OneofMemberMessage2\\");
+builder.objectType(OneofMemberMessage2$Ref, {
     name: \\"OneofMemberMessage2\\",
     fields: t => ({
         imageUrl: t.expose(\\"imageUrl\\", {
@@ -1990,11 +1990,11 @@ exports[`protobuf oneof generates pothos DSLs with graphql_type file layout: one
 // source: testapis/oneof/oneof.proto
 
 import { builder } from \\"../../builder\\";
-export type OneofMemberMessage2Input_Shape = {
+export type OneofMemberMessage2Input$Shape = {
     imageUrl: _$testapis$oneof$oneof.OneofMemberMessage2[\\"imageUrl\\"];
 };
-export const OneofMemberMessage2Input = builder.inputRef<OneofMemberMessage2Input_Shape>(\\"OneofMemberMessage2Input\\");
-OneofMemberMessage2Input.implement({
+export const OneofMemberMessage2Input$Ref = builder.inputRef<OneofMemberMessage2Input$Shape>(\\"OneofMemberMessage2Input\\");
+OneofMemberMessage2Input$Ref.implement({
     fields: t => ({
         imageUrl: t.field({
             type: \\"String\\",
@@ -2013,8 +2013,8 @@ import { builder } from \\"../../builder\\";
 import * as _$OneofParentOptionalOneofMembers_pothos from \\"./OneofParentOptionalOneofMembers.pothos\\";
 import * as _$OneofParentRequiredOneofMembers_pothos from \\"./OneofParentRequiredOneofMembers.pothos\\";
 import * as _$testapis$oneof$oneof from \\"./testapis/oneof/oneof\\";
-export const OneofParent = builder.objectRef<_$testapis$oneof$oneof.OneofParent>(\\"OneofParent\\");
-builder.objectType(OneofParent, {
+export const OneofParent$Ref = builder.objectRef<_$testapis$oneof$oneof.OneofParent>(\\"OneofParent\\");
+builder.objectType(OneofParent$Ref, {
     name: \\"OneofParent\\",
     fields: t => ({
         normalField: t.expose(\\"normalField\\", {
@@ -2022,7 +2022,7 @@ builder.objectType(OneofParent, {
             nullable: false
         }),
         requiredOneofMembers: t.field({
-            type: OneofParentRequiredOneofMembers,
+            type: OneofParentRequiredOneofMembers$Ref,
             nullable: false,
             description: \\"Required. disallow not_set.\\",
             resolve: source => {
@@ -2034,7 +2034,7 @@ builder.objectType(OneofParent, {
             }
         }),
         optionalOneofMembers: t.field({
-            type: OneofParentOptionalOneofMembers,
+            type: OneofParentOptionalOneofMembers$Ref,
             nullable: true,
             resolve: source => {
                 const value = source.optoinalMessage1 ?? source.optoinalMessage2;
@@ -2058,34 +2058,34 @@ exports[`protobuf oneof generates pothos DSLs with graphql_type file layout: one
 import { builder } from \\"../../builder\\";
 import * as _$OneofMemberMessage1Input_pothos from \\"./OneofMemberMessage1Input.pothos\\";
 import * as _$OneofMemberMessage2Input_pothos from \\"./OneofMemberMessage2Input.pothos\\";
-export type OneofParentInput_Shape = {
+export type OneofParentInput$Shape = {
     normalField: _$testapis$oneof$oneof.OneofParent[\\"normalField\\"];
-    requiredMessage1?: OneofMemberMessage1Input_Shape | null;
-    requiredMessage2?: OneofMemberMessage2Input_Shape | null;
-    optoinalMessage1?: OneofMemberMessage1Input_Shape | null;
-    optoinalMessage2?: OneofMemberMessage2Input_Shape | null;
+    requiredMessage1?: OneofMemberMessage1Input$Shape | null;
+    requiredMessage2?: OneofMemberMessage2Input$Shape | null;
+    optoinalMessage1?: OneofMemberMessage1Input$Shape | null;
+    optoinalMessage2?: OneofMemberMessage2Input$Shape | null;
 };
-export const OneofParentInput = builder.inputRef<OneofParentInput_Shape>(\\"OneofParentInput\\");
-OneofParentInput.implement({
+export const OneofParentInput$Ref = builder.inputRef<OneofParentInput$Shape>(\\"OneofParentInput\\");
+OneofParentInput$Ref.implement({
     fields: t => ({
         normalField: t.field({
             type: \\"String\\",
             required: true
         }),
         requiredMessage1: t.field({
-            type: OneofMemberMessage1Input,
+            type: OneofMemberMessage1Input$Ref,
             required: false
         }),
         requiredMessage2: t.field({
-            type: OneofMemberMessage2Input,
+            type: OneofMemberMessage2Input$Ref,
             required: false
         }),
         optoinalMessage1: t.field({
-            type: OneofMemberMessage1Input,
+            type: OneofMemberMessage1Input$Ref,
             required: false
         }),
         optoinalMessage2: t.field({
-            type: OneofMemberMessage2Input,
+            type: OneofMemberMessage2Input$Ref,
             required: false
         })
     })
@@ -2100,10 +2100,10 @@ exports[`protobuf oneof generates pothos DSLs with graphql_type file layout: one
 import { builder } from \\"../../builder\\";
 import * as _$OneofMemberMessage1_pothos from \\"./OneofMemberMessage1.pothos\\";
 import * as _$OneofMemberMessage2_pothos from \\"./OneofMemberMessage2.pothos\\";
-export const OneofParentOptionalOneofMembers = builder.unionType(\\"OneofParentOptionalOneofMembers\\", {
+export const OneofParentOptionalOneofMembers$Ref = builder.unionType(\\"OneofParentOptionalOneofMembers\\", {
     types: [
-        OneofMemberMessage1,
-        OneofMemberMessage2
+        OneofMemberMessage1$Ref,
+        OneofMemberMessage2$Ref
     ]
 });
 "
@@ -2116,11 +2116,11 @@ exports[`protobuf oneof generates pothos DSLs with graphql_type file layout: one
 import { builder } from \\"../../builder\\";
 import * as _$OneofMemberMessage1_pothos from \\"./OneofMemberMessage1.pothos\\";
 import * as _$OneofMemberMessage2_pothos from \\"./OneofMemberMessage2.pothos\\";
-export const OneofParentRequiredOneofMembers = builder.unionType(\\"OneofParentRequiredOneofMembers\\", {
+export const OneofParentRequiredOneofMembers$Ref = builder.unionType(\\"OneofParentRequiredOneofMembers\\", {
     description: \\"Required. disallow not_set.\\",
     types: [
-        OneofMemberMessage1,
-        OneofMemberMessage2
+        OneofMemberMessage1$Ref,
+        OneofMemberMessage2$Ref
     ]
 });
 "
@@ -2132,8 +2132,8 @@ exports[`protobuf oneof with ts-proto generates pothos DSLs: oneof/oneof.pb.poth
 
 import { builder } from \\"../../builder\\";
 import * as _$testapis$oneof$oneof from \\"./testapis/oneof/oneof\\";
-export const OneofParent = builder.objectRef<_$testapis$oneof$oneof.OneofParent>(\\"OneofParent\\");
-builder.objectType(OneofParent, {
+export const OneofParent$Ref = builder.objectRef<_$testapis$oneof$oneof.OneofParent>(\\"OneofParent\\");
+builder.objectType(OneofParent$Ref, {
     name: \\"OneofParent\\",
     fields: t => ({
         normalField: t.expose(\\"normalField\\", {
@@ -2141,7 +2141,7 @@ builder.objectType(OneofParent, {
             nullable: false
         }),
         requiredOneofMembers: t.field({
-            type: OneofParentRequiredOneofMembers,
+            type: OneofParentRequiredOneofMembers$Ref,
             nullable: false,
             description: \\"Required. disallow not_set.\\",
             resolve: source => {
@@ -2153,7 +2153,7 @@ builder.objectType(OneofParent, {
             }
         }),
         optionalOneofMembers: t.field({
-            type: OneofParentOptionalOneofMembers,
+            type: OneofParentOptionalOneofMembers$Ref,
             nullable: true,
             resolve: source => {
                 const value = source.optoinalMessage1 ?? source.optoinalMessage2;
@@ -2167,8 +2167,8 @@ builder.objectType(OneofParent, {
         }).$type === \\"testapis.oneof.OneofParent\\";
     }
 });
-export const OneofMemberMessage1 = builder.objectRef<_$testapis$oneof$oneof.OneofMemberMessage1>(\\"OneofMemberMessage1\\");
-builder.objectType(OneofMemberMessage1, {
+export const OneofMemberMessage1$Ref = builder.objectRef<_$testapis$oneof$oneof.OneofMemberMessage1>(\\"OneofMemberMessage1\\");
+builder.objectType(OneofMemberMessage1$Ref, {
     name: \\"OneofMemberMessage1\\",
     fields: t => ({
         body: t.expose(\\"body\\", {
@@ -2182,8 +2182,8 @@ builder.objectType(OneofMemberMessage1, {
         }).$type === \\"testapis.oneof.OneofMemberMessage1\\";
     }
 });
-export const OneofMemberMessage2 = builder.objectRef<_$testapis$oneof$oneof.OneofMemberMessage2>(\\"OneofMemberMessage2\\");
-builder.objectType(OneofMemberMessage2, {
+export const OneofMemberMessage2$Ref = builder.objectRef<_$testapis$oneof$oneof.OneofMemberMessage2>(\\"OneofMemberMessage2\\");
+builder.objectType(OneofMemberMessage2$Ref, {
     name: \\"OneofMemberMessage2\\",
     fields: t => ({
         imageUrl: t.expose(\\"imageUrl\\", {
@@ -2197,43 +2197,43 @@ builder.objectType(OneofMemberMessage2, {
         }).$type === \\"testapis.oneof.OneofMemberMessage2\\";
     }
 });
-export type OneofParentInput_Shape = {
+export type OneofParentInput$Shape = {
     normalField: _$testapis$oneof$oneof.OneofParent[\\"normalField\\"];
-    requiredMessage1?: OneofMemberMessage1Input_Shape | null;
-    requiredMessage2?: OneofMemberMessage2Input_Shape | null;
-    optoinalMessage1?: OneofMemberMessage1Input_Shape | null;
-    optoinalMessage2?: OneofMemberMessage2Input_Shape | null;
+    requiredMessage1?: OneofMemberMessage1Input$Shape | null;
+    requiredMessage2?: OneofMemberMessage2Input$Shape | null;
+    optoinalMessage1?: OneofMemberMessage1Input$Shape | null;
+    optoinalMessage2?: OneofMemberMessage2Input$Shape | null;
 };
-export const OneofParentInput = builder.inputRef<OneofParentInput_Shape>(\\"OneofParentInput\\");
-OneofParentInput.implement({
+export const OneofParentInput$Ref = builder.inputRef<OneofParentInput$Shape>(\\"OneofParentInput\\");
+OneofParentInput$Ref.implement({
     fields: t => ({
         normalField: t.field({
             type: \\"String\\",
             required: true
         }),
         requiredMessage1: t.field({
-            type: OneofMemberMessage1Input,
+            type: OneofMemberMessage1Input$Ref,
             required: false
         }),
         requiredMessage2: t.field({
-            type: OneofMemberMessage2Input,
+            type: OneofMemberMessage2Input$Ref,
             required: false
         }),
         optoinalMessage1: t.field({
-            type: OneofMemberMessage1Input,
+            type: OneofMemberMessage1Input$Ref,
             required: false
         }),
         optoinalMessage2: t.field({
-            type: OneofMemberMessage2Input,
+            type: OneofMemberMessage2Input$Ref,
             required: false
         })
     })
 });
-export type OneofMemberMessage1Input_Shape = {
+export type OneofMemberMessage1Input$Shape = {
     body: _$testapis$oneof$oneof.OneofMemberMessage1[\\"body\\"];
 };
-export const OneofMemberMessage1Input = builder.inputRef<OneofMemberMessage1Input_Shape>(\\"OneofMemberMessage1Input\\");
-OneofMemberMessage1Input.implement({
+export const OneofMemberMessage1Input$Ref = builder.inputRef<OneofMemberMessage1Input$Shape>(\\"OneofMemberMessage1Input\\");
+OneofMemberMessage1Input$Ref.implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -2241,11 +2241,11 @@ OneofMemberMessage1Input.implement({
         })
     })
 });
-export type OneofMemberMessage2Input_Shape = {
+export type OneofMemberMessage2Input$Shape = {
     imageUrl: _$testapis$oneof$oneof.OneofMemberMessage2[\\"imageUrl\\"];
 };
-export const OneofMemberMessage2Input = builder.inputRef<OneofMemberMessage2Input_Shape>(\\"OneofMemberMessage2Input\\");
-OneofMemberMessage2Input.implement({
+export const OneofMemberMessage2Input$Ref = builder.inputRef<OneofMemberMessage2Input$Shape>(\\"OneofMemberMessage2Input\\");
+OneofMemberMessage2Input$Ref.implement({
     fields: t => ({
         imageUrl: t.field({
             type: \\"String\\",
@@ -2253,17 +2253,17 @@ OneofMemberMessage2Input.implement({
         })
     })
 });
-export const OneofParentRequiredOneofMembers = builder.unionType(\\"OneofParentRequiredOneofMembers\\", {
+export const OneofParentRequiredOneofMembers$Ref = builder.unionType(\\"OneofParentRequiredOneofMembers\\", {
     description: \\"Required. disallow not_set.\\",
     types: [
-        OneofMemberMessage1,
-        OneofMemberMessage2
+        OneofMemberMessage1$Ref,
+        OneofMemberMessage2$Ref
     ]
 });
-export const OneofParentOptionalOneofMembers = builder.unionType(\\"OneofParentOptionalOneofMembers\\", {
+export const OneofParentOptionalOneofMembers$Ref = builder.unionType(\\"OneofParentOptionalOneofMembers\\", {
     types: [
-        OneofMemberMessage1,
-        OneofMemberMessage2
+        OneofMemberMessage1$Ref,
+        OneofMemberMessage2$Ref
     ]
 });
 "
@@ -2276,12 +2276,12 @@ exports[`simple proto file generates pothos DSLs with graphql_type file layout: 
 import { builder } from \\"../../builder\\";
 import * as _$Primitives_pothos from \\"./Primitives.pothos\\";
 import * as _$testapis$primitives$primitives from \\"./testapis/primitives/primitives\\";
-export const Message = builder.objectRef<_$testapis$primitives$primitives.Message>(\\"Message\\");
-builder.objectType(Message, {
+export const Message$Ref = builder.objectRef<_$testapis$primitives$primitives.Message>(\\"Message\\");
+builder.objectType(Message$Ref, {
     name: \\"Message\\",
     fields: t => ({
         requiredPrimitives: t.field({
-            type: Primitives,
+            type: Primitives$Ref,
             nullable: false,
             description: \\"Required.\\",
             resolve: source => {
@@ -2289,12 +2289,12 @@ builder.objectType(Message, {
             }
         }),
         optionalPrimitives: t.expose(\\"optionalPrimitives\\", {
-            type: Primitives,
+            type: Primitives$Ref,
             nullable: true,
             description: \\"Optional.\\"
         }),
         requiredPrimitivesList: t.field({
-            type: [Primitives],
+            type: [Primitives$Ref],
             nullable: { list: false, items: false },
             description: \\"Required.\\",
             resolve: source => {
@@ -2302,7 +2302,7 @@ builder.objectType(Message, {
             }
         }),
         optionalPrimitivesList: t.expose(\\"optionalPrimitivesList\\", {
-            type: [Primitives],
+            type: [Primitives$Ref],
             nullable: { list: true, items: false },
             description: \\"Optional.\\"
         })
@@ -2322,32 +2322,32 @@ exports[`simple proto file generates pothos DSLs with graphql_type file layout: 
 
 import { builder } from \\"../../builder\\";
 import * as _$PrimitivesInput_pothos from \\"./PrimitivesInput.pothos\\";
-export type MessageInput_Shape = {
-    requiredPrimitives: PrimitivesInput_Shape;
-    optionalPrimitives?: PrimitivesInput_Shape | null;
-    requiredPrimitivesList: Array<PrimitivesInput_Shape>;
-    optionalPrimitivesList?: Array<PrimitivesInput_Shape> | null;
+export type MessageInput$Shape = {
+    requiredPrimitives: PrimitivesInput$Shape;
+    optionalPrimitives?: PrimitivesInput$Shape | null;
+    requiredPrimitivesList: Array<PrimitivesInput$Shape>;
+    optionalPrimitivesList?: Array<PrimitivesInput$Shape> | null;
 };
-export const MessageInput = builder.inputRef<MessageInput_Shape>(\\"MessageInput\\");
-MessageInput.implement({
+export const MessageInput$Ref = builder.inputRef<MessageInput$Shape>(\\"MessageInput\\");
+MessageInput$Ref.implement({
     fields: t => ({
         requiredPrimitives: t.field({
-            type: PrimitivesInput,
+            type: PrimitivesInput$Ref,
             required: true,
             description: \\"Required.\\"
         }),
         optionalPrimitives: t.field({
-            type: PrimitivesInput,
+            type: PrimitivesInput$Ref,
             required: false,
             description: \\"Optional.\\"
         }),
         requiredPrimitivesList: t.field({
-            type: [PrimitivesInput],
+            type: [PrimitivesInput$Ref],
             required: { list: true, items: true },
             description: \\"Required.\\"
         }),
         optionalPrimitivesList: t.field({
-            type: [PrimitivesInput],
+            type: [PrimitivesInput$Ref],
             required: { list: false, items: true },
             description: \\"Optional.\\"
         })
@@ -2362,8 +2362,8 @@ exports[`simple proto file generates pothos DSLs with graphql_type file layout: 
 
 import { builder } from \\"../../builder\\";
 import * as _$testapis$primitives$primitives from \\"./testapis/primitives/primitives\\";
-export const Primitives = builder.objectRef<_$testapis$primitives$primitives.Primitives>(\\"Primitives\\");
-builder.objectType(Primitives, {
+export const Primitives$Ref = builder.objectRef<_$testapis$primitives$primitives.Primitives>(\\"Primitives\\");
+builder.objectType(Primitives$Ref, {
     name: \\"Primitives\\",
     fields: t => ({
         requiredDoubleValue: t.expose(\\"requiredDoubleValue\\", {
@@ -2493,7 +2493,7 @@ exports[`simple proto file generates pothos DSLs with graphql_type file layout: 
 // source: testapis/primitives/primitives.proto
 
 import { builder } from \\"../../builder\\";
-export type PrimitivesInput_Shape = {
+export type PrimitivesInput$Shape = {
     requiredDoubleValue: _$testapis$primitives$primitives.Primitives[\\"requiredDoubleValue\\"];
     requiredFloatValue: _$testapis$primitives$primitives.Primitives[\\"requiredFloatValue\\"];
     requiredInt32Value: _$testapis$primitives$primitives.Primitives[\\"requiredInt32Value\\"];
@@ -2523,8 +2523,8 @@ export type PrimitivesInput_Shape = {
     requiredBoolValues: _$testapis$primitives$primitives.Primitives[\\"requiredBoolValues\\"];
     requiredStringValues: _$testapis$primitives$primitives.Primitives[\\"requiredStringValues\\"];
 };
-export const PrimitivesInput = builder.inputRef<PrimitivesInput_Shape>(\\"PrimitivesInput\\");
-PrimitivesInput.implement({
+export const PrimitivesInput$Ref = builder.inputRef<PrimitivesInput$Shape>(\\"PrimitivesInput\\");
+PrimitivesInput$Ref.implement({
     fields: t => ({
         requiredDoubleValue: t.field({
             type: \\"Float\\",
@@ -2649,12 +2649,12 @@ exports[`simple proto file generates pothos DSLs with partial inputs: primitives
 
 import { builder } from \\"../../builder\\";
 import * as _$testapis$primitives$primitives from \\"./testapis/primitives/primitives\\";
-export const Message = builder.objectRef<_$testapis$primitives$primitives.Message>(\\"Message\\");
-builder.objectType(Message, {
+export const Message$Ref = builder.objectRef<_$testapis$primitives$primitives.Message>(\\"Message\\");
+builder.objectType(Message$Ref, {
     name: \\"Message\\",
     fields: t => ({
         requiredPrimitives: t.field({
-            type: Primitives,
+            type: Primitives$Ref,
             nullable: false,
             description: \\"Required.\\",
             resolve: source => {
@@ -2662,12 +2662,12 @@ builder.objectType(Message, {
             }
         }),
         optionalPrimitives: t.expose(\\"optionalPrimitives\\", {
-            type: Primitives,
+            type: Primitives$Ref,
             nullable: true,
             description: \\"Optional.\\"
         }),
         requiredPrimitivesList: t.field({
-            type: [Primitives],
+            type: [Primitives$Ref],
             nullable: { list: false, items: false },
             description: \\"Required.\\",
             resolve: source => {
@@ -2675,7 +2675,7 @@ builder.objectType(Message, {
             }
         }),
         optionalPrimitivesList: t.expose(\\"optionalPrimitivesList\\", {
-            type: [Primitives],
+            type: [Primitives$Ref],
             nullable: { list: true, items: false },
             description: \\"Optional.\\"
         })
@@ -2686,8 +2686,8 @@ builder.objectType(Message, {
         }).$type === \\"testapis.primitives.Message\\";
     }
 });
-export const Primitives = builder.objectRef<_$testapis$primitives$primitives.Primitives>(\\"Primitives\\");
-builder.objectType(Primitives, {
+export const Primitives$Ref = builder.objectRef<_$testapis$primitives$primitives.Primitives>(\\"Primitives\\");
+builder.objectType(Primitives$Ref, {
     name: \\"Primitives\\",
     fields: t => ({
         requiredDoubleValue: t.expose(\\"requiredDoubleValue\\", {
@@ -2809,69 +2809,69 @@ builder.objectType(Primitives, {
         }).$type === \\"testapis.primitives.Primitives\\";
     }
 });
-export type MessageInput_Shape = {
-    requiredPrimitives: PrimitivesInput_Shape;
-    optionalPrimitives?: PrimitivesInput_Shape | null;
-    requiredPrimitivesList: Array<PrimitivesInput_Shape>;
-    optionalPrimitivesList?: Array<PrimitivesInput_Shape> | null;
+export type MessageInput$Shape = {
+    requiredPrimitives: PrimitivesInput$Shape;
+    optionalPrimitives?: PrimitivesInput$Shape | null;
+    requiredPrimitivesList: Array<PrimitivesInput$Shape>;
+    optionalPrimitivesList?: Array<PrimitivesInput$Shape> | null;
 };
-export const MessageInput = builder.inputRef<MessageInput_Shape>(\\"MessageInput\\");
-MessageInput.implement({
+export const MessageInput$Ref = builder.inputRef<MessageInput$Shape>(\\"MessageInput\\");
+MessageInput$Ref.implement({
     fields: t => ({
         requiredPrimitives: t.field({
-            type: PrimitivesInput,
+            type: PrimitivesInput$Ref,
             required: true,
             description: \\"Required.\\"
         }),
         optionalPrimitives: t.field({
-            type: PrimitivesInput,
+            type: PrimitivesInput$Ref,
             required: false,
             description: \\"Optional.\\"
         }),
         requiredPrimitivesList: t.field({
-            type: [PrimitivesInput],
+            type: [PrimitivesInput$Ref],
             required: { list: true, items: true },
             description: \\"Required.\\"
         }),
         optionalPrimitivesList: t.field({
-            type: [PrimitivesInput],
+            type: [PrimitivesInput$Ref],
             required: { list: false, items: true },
             description: \\"Optional.\\"
         })
     })
 });
-export type MessagePartialInput_Shape = {
-    requiredPrimitives?: PrimitivesPartialInput_Shape | null;
-    optionalPrimitives?: PrimitivesPartialInput_Shape | null;
-    requiredPrimitivesList?: Array<PrimitivesPartialInput_Shape> | null;
-    optionalPrimitivesList?: Array<PrimitivesPartialInput_Shape> | null;
+export type MessagePartialInput$Shape = {
+    requiredPrimitives?: PrimitivesPartialInput$Shape | null;
+    optionalPrimitives?: PrimitivesPartialInput$Shape | null;
+    requiredPrimitivesList?: Array<PrimitivesPartialInput$Shape> | null;
+    optionalPrimitivesList?: Array<PrimitivesPartialInput$Shape> | null;
 };
-export const MessagePartialInput = builder.inputRef<MessagePartialInput_Shape>(\\"MessagePartialInput\\");
-MessagePartialInput.implement({
+export const MessagePartialInput$Ref = builder.inputRef<MessagePartialInput$Shape>(\\"MessagePartialInput\\");
+MessagePartialInput$Ref.implement({
     fields: t => ({
         requiredPrimitives: t.field({
-            type: PrimitivesPartialInput,
+            type: PrimitivesPartialInput$Ref,
             required: false,
             description: \\"Required.\\"
         }),
         optionalPrimitives: t.field({
-            type: PrimitivesPartialInput,
+            type: PrimitivesPartialInput$Ref,
             required: false,
             description: \\"Optional.\\"
         }),
         requiredPrimitivesList: t.field({
-            type: [PrimitivesPartialInput],
+            type: [PrimitivesPartialInput$Ref],
             required: { list: false, items: true },
             description: \\"Required.\\"
         }),
         optionalPrimitivesList: t.field({
-            type: [PrimitivesPartialInput],
+            type: [PrimitivesPartialInput$Ref],
             required: { list: false, items: true },
             description: \\"Optional.\\"
         })
     })
 });
-export type PrimitivesInput_Shape = {
+export type PrimitivesInput$Shape = {
     requiredDoubleValue: _$testapis$primitives$primitives.Primitives[\\"requiredDoubleValue\\"];
     requiredFloatValue: _$testapis$primitives$primitives.Primitives[\\"requiredFloatValue\\"];
     requiredInt32Value: _$testapis$primitives$primitives.Primitives[\\"requiredInt32Value\\"];
@@ -2901,8 +2901,8 @@ export type PrimitivesInput_Shape = {
     requiredBoolValues: _$testapis$primitives$primitives.Primitives[\\"requiredBoolValues\\"];
     requiredStringValues: _$testapis$primitives$primitives.Primitives[\\"requiredStringValues\\"];
 };
-export const PrimitivesInput = builder.inputRef<PrimitivesInput_Shape>(\\"PrimitivesInput\\");
-PrimitivesInput.implement({
+export const PrimitivesInput$Ref = builder.inputRef<PrimitivesInput$Shape>(\\"PrimitivesInput\\");
+PrimitivesInput$Ref.implement({
     fields: t => ({
         requiredDoubleValue: t.field({
             type: \\"Float\\",
@@ -3018,7 +3018,7 @@ PrimitivesInput.implement({
         })
     })
 });
-export type PrimitivesPartialInput_Shape = {
+export type PrimitivesPartialInput$Shape = {
     requiredDoubleValue?: _$testapis$primitives$primitives.Primitives[\\"requiredDoubleValue\\"] | null;
     requiredFloatValue?: _$testapis$primitives$primitives.Primitives[\\"requiredFloatValue\\"] | null;
     requiredInt32Value?: _$testapis$primitives$primitives.Primitives[\\"requiredInt32Value\\"] | null;
@@ -3048,8 +3048,8 @@ export type PrimitivesPartialInput_Shape = {
     requiredBoolValues?: _$testapis$primitives$primitives.Primitives[\\"requiredBoolValues\\"] | null;
     requiredStringValues?: _$testapis$primitives$primitives.Primitives[\\"requiredStringValues\\"] | null;
 };
-export const PrimitivesPartialInput = builder.inputRef<PrimitivesPartialInput_Shape>(\\"PrimitivesPartialInput\\");
-PrimitivesPartialInput.implement({
+export const PrimitivesPartialInput$Ref = builder.inputRef<PrimitivesPartialInput$Shape>(\\"PrimitivesPartialInput\\");
+PrimitivesPartialInput$Ref.implement({
     fields: t => ({
         requiredDoubleValue: t.field({
             type: \\"Float\\",
@@ -3174,12 +3174,12 @@ exports[`simple proto file with ts-proto generates pothos DSLs: primitives/primi
 
 import { builder } from \\"../../builder\\";
 import * as _$testapis$primitives$primitives from \\"./testapis/primitives/primitives\\";
-export const Message = builder.objectRef<_$testapis$primitives$primitives.Message>(\\"Message\\");
-builder.objectType(Message, {
+export const Message$Ref = builder.objectRef<_$testapis$primitives$primitives.Message>(\\"Message\\");
+builder.objectType(Message$Ref, {
     name: \\"Message\\",
     fields: t => ({
         requiredPrimitives: t.field({
-            type: Primitives,
+            type: Primitives$Ref,
             nullable: false,
             description: \\"Required.\\",
             resolve: source => {
@@ -3187,12 +3187,12 @@ builder.objectType(Message, {
             }
         }),
         optionalPrimitives: t.expose(\\"optionalPrimitives\\", {
-            type: Primitives,
+            type: Primitives$Ref,
             nullable: true,
             description: \\"Optional.\\"
         }),
         requiredPrimitivesList: t.field({
-            type: [Primitives],
+            type: [Primitives$Ref],
             nullable: { list: false, items: false },
             description: \\"Required.\\",
             resolve: source => {
@@ -3200,7 +3200,7 @@ builder.objectType(Message, {
             }
         }),
         optionalPrimitivesList: t.expose(\\"optionalPrimitivesList\\", {
-            type: [Primitives],
+            type: [Primitives$Ref],
             nullable: { list: true, items: false },
             description: \\"Optional.\\"
         })
@@ -3211,8 +3211,8 @@ builder.objectType(Message, {
         }).$type === \\"testapis.primitives.Message\\";
     }
 });
-export const Primitives = builder.objectRef<_$testapis$primitives$primitives.Primitives>(\\"Primitives\\");
-builder.objectType(Primitives, {
+export const Primitives$Ref = builder.objectRef<_$testapis$primitives$primitives.Primitives>(\\"Primitives\\");
+builder.objectType(Primitives$Ref, {
     name: \\"Primitives\\",
     fields: t => ({
         requiredDoubleValue: t.expose(\\"requiredDoubleValue\\", {
@@ -3334,38 +3334,38 @@ builder.objectType(Primitives, {
         }).$type === \\"testapis.primitives.Primitives\\";
     }
 });
-export type MessageInput_Shape = {
-    requiredPrimitives: PrimitivesInput_Shape;
-    optionalPrimitives?: PrimitivesInput_Shape | null;
-    requiredPrimitivesList: Array<PrimitivesInput_Shape>;
-    optionalPrimitivesList?: Array<PrimitivesInput_Shape> | null;
+export type MessageInput$Shape = {
+    requiredPrimitives: PrimitivesInput$Shape;
+    optionalPrimitives?: PrimitivesInput$Shape | null;
+    requiredPrimitivesList: Array<PrimitivesInput$Shape>;
+    optionalPrimitivesList?: Array<PrimitivesInput$Shape> | null;
 };
-export const MessageInput = builder.inputRef<MessageInput_Shape>(\\"MessageInput\\");
-MessageInput.implement({
+export const MessageInput$Ref = builder.inputRef<MessageInput$Shape>(\\"MessageInput\\");
+MessageInput$Ref.implement({
     fields: t => ({
         requiredPrimitives: t.field({
-            type: PrimitivesInput,
+            type: PrimitivesInput$Ref,
             required: true,
             description: \\"Required.\\"
         }),
         optionalPrimitives: t.field({
-            type: PrimitivesInput,
+            type: PrimitivesInput$Ref,
             required: false,
             description: \\"Optional.\\"
         }),
         requiredPrimitivesList: t.field({
-            type: [PrimitivesInput],
+            type: [PrimitivesInput$Ref],
             required: { list: true, items: true },
             description: \\"Required.\\"
         }),
         optionalPrimitivesList: t.field({
-            type: [PrimitivesInput],
+            type: [PrimitivesInput$Ref],
             required: { list: false, items: true },
             description: \\"Optional.\\"
         })
     })
 });
-export type PrimitivesInput_Shape = {
+export type PrimitivesInput$Shape = {
     requiredDoubleValue: _$testapis$primitives$primitives.Primitives[\\"requiredDoubleValue\\"];
     requiredFloatValue: _$testapis$primitives$primitives.Primitives[\\"requiredFloatValue\\"];
     requiredInt32Value: _$testapis$primitives$primitives.Primitives[\\"requiredInt32Value\\"];
@@ -3395,8 +3395,8 @@ export type PrimitivesInput_Shape = {
     requiredBoolValues: _$testapis$primitives$primitives.Primitives[\\"requiredBoolValues\\"];
     requiredStringValues: _$testapis$primitives$primitives.Primitives[\\"requiredStringValues\\"];
 };
-export const PrimitivesInput = builder.inputRef<PrimitivesInput_Shape>(\\"PrimitivesInput\\");
-PrimitivesInput.implement({
+export const PrimitivesInput$Ref = builder.inputRef<PrimitivesInput$Shape>(\\"PrimitivesInput\\");
+PrimitivesInput$Ref.implement({
     fields: t => ({
         requiredDoubleValue: t.field({
             type: \\"Float\\",
@@ -3521,8 +3521,8 @@ exports[`well-known protobuf types with ts-proto generates pothos DSLs: wktypes/
 
 import { builder } from \\"../../builder\\";
 import * as _$testapis$wktypes$well_known_types from \\"./testapis/wktypes/well_known_types\\";
-export const Message = builder.objectRef<_$testapis$wktypes$well_known_types.Message>(\\"Message\\");
-builder.objectType(Message, {
+export const Message$Ref = builder.objectRef<_$testapis$wktypes$well_known_types.Message>(\\"Message\\");
+builder.objectType(Message$Ref, {
     name: \\"Message\\",
     fields: t => ({
         timestamp: t.expose(\\"timestamp\\", {
@@ -3604,7 +3604,7 @@ builder.objectType(Message, {
         }).$type === \\"testapis.wktypes.Message\\";
     }
 });
-export type MessageInput_Shape = {
+export type MessageInput$Shape = {
     timestamp?: _$testapis$wktypes$well_known_types.Message[\\"timestamp\\"] | null;
     int32Value?: _$testapis$wktypes$well_known_types.Message[\\"int32Value\\"] | null;
     int64Value?: _$testapis$wktypes$well_known_types.Message[\\"int64Value\\"] | null;
@@ -3624,8 +3624,8 @@ export type MessageInput_Shape = {
     boolValues?: _$testapis$wktypes$well_known_types.Message[\\"boolValues\\"] | null;
     stringValues?: _$testapis$wktypes$well_known_types.Message[\\"stringValues\\"] | null;
 };
-export const MessageInput = builder.inputRef<MessageInput_Shape>(\\"MessageInput\\");
-MessageInput.implement({
+export const MessageInput$Ref = builder.inputRef<MessageInput$Shape>(\\"MessageInput\\");
+MessageInput$Ref.implement({
     fields: t => ({
         timestamp: t.field({
             type: \\"DateTime\\",

@@ -6,8 +6,8 @@ exports[`import squashed union with ts-proto generates pothos DSLs: edgecases/im
 
 import { builder } from \\"../../../../builder\\";
 import * as _$testapis$edgecases$import_squashed_union$pkg1$types from \\"./testapis/edgecases/import_squashed_union/pkg1/types\\";
-export const OneofMessage1 = builder.objectRef<_$testapis$edgecases$import_squashed_union$pkg1$types.OneofMessage1>(\\"OneofMessage1\\");
-builder.objectType(OneofMessage1, {
+export const OneofMessage1$Ref = builder.objectRef<_$testapis$edgecases$import_squashed_union$pkg1$types.OneofMessage1>(\\"OneofMessage1\\");
+builder.objectType(OneofMessage1$Ref, {
     name: \\"OneofMessage1\\",
     fields: t => ({
         body: t.expose(\\"body\\", {
@@ -21,11 +21,11 @@ builder.objectType(OneofMessage1, {
         }).$type === \\"testapis.edgecases.import_squashed_union.pkg1.OneofMessage1\\";
     }
 });
-export type OneofMessage1Input_Shape = {
+export type OneofMessage1Input$Shape = {
     body: _$testapis$edgecases$import_squashed_union$pkg1$types.OneofMessage1[\\"body\\"];
 };
-export const OneofMessage1Input = builder.inputRef<OneofMessage1Input_Shape>(\\"OneofMessage1Input\\");
-OneofMessage1Input.implement({
+export const OneofMessage1Input$Ref = builder.inputRef<OneofMessage1Input$Shape>(\\"OneofMessage1Input\\");
+OneofMessage1Input$Ref.implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -33,21 +33,21 @@ OneofMessage1Input.implement({
         })
     })
 });
-export type SquashedOneofInput_Shape = {
-    msg1?: OneofMessage1Input_Shape | null;
+export type SquashedOneofInput$Shape = {
+    msg1?: OneofMessage1Input$Shape | null;
 };
-export const SquashedOneofInput = builder.inputRef<SquashedOneofInput_Shape>(\\"SquashedOneofInput\\");
-SquashedOneofInput.implement({
+export const SquashedOneofInput$Ref = builder.inputRef<SquashedOneofInput$Shape>(\\"SquashedOneofInput\\");
+SquashedOneofInput$Ref.implement({
     fields: t => ({
         msg1: t.field({
-            type: OneofMessage1Input,
+            type: OneofMessage1Input$Ref,
             required: false
         })
     })
 });
-export const SquashedOneof = builder.unionType(\\"SquashedOneof\\", {
+export const SquashedOneof$Ref = builder.unionType(\\"SquashedOneof\\", {
     types: [
-        OneofMessage1
+        OneofMessage1$Ref
     ]
 });
 "
@@ -59,17 +59,17 @@ exports[`import squashed union with ts-proto generates pothos DSLs: edgecases/im
 
 import { builder } from \\"../../../../builder\\";
 import * as __$pkg1$types_pb_pothos from \\"../pkg1/types.pb.pothos\\";
-import { SquashedOneof } from \\"../pkg1/types.pb.pothos\\";
-import { SquashedOneofInput } from \\"../pkg1/types.pb.pothos\\";
-import { SquashedOneofInput_Shape } from \\"../pkg1/types.pb.pothos\\";
+import { SquashedOneof$Ref } from \\"../pkg1/types.pb.pothos\\";
+import { SquashedOneofInput$Ref } from \\"../pkg1/types.pb.pothos\\";
+import { SquashedOneofInput$Shape } from \\"../pkg1/types.pb.pothos\\";
 import * as _$testapis$edgecases$import_squashed_union$pkg1$types from \\"./testapis/edgecases/import_squashed_union/pkg1/types\\";
 import * as _$testapis$edgecases$import_squashed_union$pkg2$types from \\"./testapis/edgecases/import_squashed_union/pkg2/types\\";
-export const Message = builder.objectRef<_$testapis$edgecases$import_squashed_union$pkg2$types.Message>(\\"Message\\");
-builder.objectType(Message, {
+export const Message$Ref = builder.objectRef<_$testapis$edgecases$import_squashed_union$pkg2$types.Message>(\\"Message\\");
+builder.objectType(Message$Ref, {
     name: \\"Message\\",
     fields: t => ({
         msg: t.field({
-            type: SquashedOneof,
+            type: SquashedOneof$Ref,
             nullable: true,
             resolve: source => {
                 const value = source.msg?.msg1;
@@ -83,14 +83,14 @@ builder.objectType(Message, {
         }).$type === \\"testapis.edgecases.import_squashed_union.pkg2.Message\\";
     }
 });
-export type MessageInput_Shape = {
-    msg?: SquashedOneofInput_Shape | null;
+export type MessageInput$Shape = {
+    msg?: SquashedOneofInput$Shape | null;
 };
-export const MessageInput = builder.inputRef<MessageInput_Shape>(\\"MessageInput\\");
-MessageInput.implement({
+export const MessageInput$Ref = builder.inputRef<MessageInput$Shape>(\\"MessageInput\\");
+MessageInput$Ref.implement({
     fields: t => ({
         msg: t.field({
-            type: SquashedOneofInput,
+            type: SquashedOneofInput$Ref,
             required: false
         })
     })

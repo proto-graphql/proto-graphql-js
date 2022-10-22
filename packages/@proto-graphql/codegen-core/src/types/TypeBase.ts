@@ -6,6 +6,11 @@ import { descriptionFromProto, FullName, gqlTypeName, modulesWithUniqueImportAli
 export abstract class TypeBase<P extends ProtoMessage | ProtoEnum | ProtoOneof> {
   constructor(readonly proto: P, readonly file: DslFile) {}
 
+  get pothosRefObjectName(): string {
+    if (this.file.options.dsl !== "pothos") throw new Error("unsupported");
+    return `${this.typeName}$Ref`;
+  }
+
   get typeName(): string {
     return gqlTypeName(this.proto);
   }

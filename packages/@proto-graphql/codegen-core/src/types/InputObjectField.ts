@@ -65,9 +65,9 @@ export class InputObjectField<T extends ScalarType | EnumType | InputObjectType>
     ) {
       const file = path.relative(path.dirname(this.parent.filename), this.type.filename);
       const module = file.slice(0, -path.extname(file).length);
-      modules.push({ alias: this.type.typeName, module, type: "named" as const });
+      modules.push({ alias: this.type.pothosRefObjectName, module, type: "named" as const });
       if (this.type instanceof InputObjectType) {
-        modules.push({ alias: `${this.type.typeName}_Shape`, module, type: "named" as const });
+        modules.push({ alias: `${this.type.typeName}$Shape`, module, type: "named" as const });
       }
     }
     return [...modules, ...modulesWithUniqueImportAlias(modulePaths)];

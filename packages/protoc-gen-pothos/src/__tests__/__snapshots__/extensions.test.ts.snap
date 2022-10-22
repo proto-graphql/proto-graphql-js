@@ -6,8 +6,8 @@ exports[`field_nullability generates pothos DSLs with partial inputs: extensions
 
 import { builder } from \\"../../../builder\\";
 import * as _$testapis$extensions$field_nullability$nullability from \\"./testapis/extensions/field_nullability/nullability\\";
-export const Message = builder.objectRef<_$testapis$extensions$field_nullability$nullability.Message>(\\"Message\\");
-builder.objectType(Message, {
+export const Message$Ref = builder.objectRef<_$testapis$extensions$field_nullability$nullability.Message>(\\"Message\\");
+builder.objectType(Message$Ref, {
     name: \\"Message\\",
     fields: t => ({
         userId: t.expose(\\"userId\\", {
@@ -21,7 +21,7 @@ builder.objectType(Message, {
             description: \\"Required.\\"
         }),
         status: t.field({
-            type: MessageStatus,
+            type: MessageStatus$Ref,
             nullable: true,
             description: \\"Required.\\",
             resolve: source => {
@@ -38,13 +38,13 @@ builder.objectType(Message, {
         }).$type === \\"testapis.extensions.field_nullability.Message\\";
     }
 });
-export type MessageInput_Shape = {
+export type MessageInput$Shape = {
     userId?: _$testapis$extensions$field_nullability$nullability.Message[\\"userId\\"] | null;
     body: _$testapis$extensions$field_nullability$nullability.Message[\\"body\\"];
     status?: _$testapis$extensions$field_nullability$nullability.Message[\\"status\\"] | null;
 };
-export const MessageInput = builder.inputRef<MessageInput_Shape>(\\"MessageInput\\");
-MessageInput.implement({
+export const MessageInput$Ref = builder.inputRef<MessageInput$Shape>(\\"MessageInput\\");
+MessageInput$Ref.implement({
     fields: t => ({
         userId: t.field({
             type: \\"String\\",
@@ -57,19 +57,19 @@ MessageInput.implement({
             description: \\"Required.\\"
         }),
         status: t.field({
-            type: MessageStatus,
+            type: MessageStatus$Ref,
             required: false,
             description: \\"Required.\\"
         })
     })
 });
-export type MessagePartialInput_Shape = {
+export type MessagePartialInput$Shape = {
     userId: _$testapis$extensions$field_nullability$nullability.Message[\\"userId\\"];
     body?: _$testapis$extensions$field_nullability$nullability.Message[\\"body\\"] | null;
     status?: _$testapis$extensions$field_nullability$nullability.Message[\\"status\\"] | null;
 };
-export const MessagePartialInput = builder.inputRef<MessagePartialInput_Shape>(\\"MessagePartialInput\\");
-MessagePartialInput.implement({
+export const MessagePartialInput$Ref = builder.inputRef<MessagePartialInput$Shape>(\\"MessagePartialInput\\");
+MessagePartialInput$Ref.implement({
     fields: t => ({
         userId: t.field({
             type: \\"String\\",
@@ -82,13 +82,13 @@ MessagePartialInput.implement({
             description: \\"Required.\\"
         }),
         status: t.field({
-            type: MessageStatus,
+            type: MessageStatus$Ref,
             required: false,
             description: \\"Required.\\"
         })
     })
 });
-export const MessageStatus = builder.enumType(\\"MessageStatus\\", {
+export const MessageStatus$Ref = builder.enumType(\\"MessageStatus\\", {
     values: {
         DRAFT: {
             value: 1
@@ -107,12 +107,12 @@ exports[`no_partial generates pothos DSLs with partial inputs: extensions/no_par
 
 import { builder } from \\"../../../builder\\";
 import * as _$testapis$extensions$no_partial$no_partial from \\"./testapis/extensions/no_partial/no_partial\\";
-export const ParentMessage = builder.objectRef<_$testapis$extensions$no_partial$no_partial.ParentMessage>(\\"ParentMessage\\");
-builder.objectType(ParentMessage, {
+export const ParentMessage$Ref = builder.objectRef<_$testapis$extensions$no_partial$no_partial.ParentMessage>(\\"ParentMessage\\");
+builder.objectType(ParentMessage$Ref, {
     name: \\"ParentMessage\\",
     fields: t => ({
         partialableInputMessage: t.field({
-            type: PartialableInputMessage,
+            type: PartialableInputMessage$Ref,
             nullable: false,
             description: \\"Required.\\",
             resolve: source => {
@@ -120,7 +120,7 @@ builder.objectType(ParentMessage, {
             }
         }),
         noPartialInputMessage: t.field({
-            type: NoPartialInputMessage,
+            type: NoPartialInputMessage$Ref,
             nullable: false,
             description: \\"Required.\\",
             resolve: source => {
@@ -134,8 +134,8 @@ builder.objectType(ParentMessage, {
         }).$type === \\"testapis.extensions.no_partial.ParentMessage\\";
     }
 });
-export const PartialableInputMessage = builder.objectRef<_$testapis$extensions$no_partial$no_partial.PartialableInputMessage>(\\"PartialableInputMessage\\");
-builder.objectType(PartialableInputMessage, {
+export const PartialableInputMessage$Ref = builder.objectRef<_$testapis$extensions$no_partial$no_partial.PartialableInputMessage>(\\"PartialableInputMessage\\");
+builder.objectType(PartialableInputMessage$Ref, {
     name: \\"PartialableInputMessage\\",
     fields: t => ({
         id: t.expose(\\"id\\", {
@@ -155,8 +155,8 @@ builder.objectType(PartialableInputMessage, {
         }).$type === \\"testapis.extensions.no_partial.PartialableInputMessage\\";
     }
 });
-export const NoPartialInputMessage = builder.objectRef<_$testapis$extensions$no_partial$no_partial.NoPartialInputMessage>(\\"NoPartialInputMessage\\");
-builder.objectType(NoPartialInputMessage, {
+export const NoPartialInputMessage$Ref = builder.objectRef<_$testapis$extensions$no_partial$no_partial.NoPartialInputMessage>(\\"NoPartialInputMessage\\");
+builder.objectType(NoPartialInputMessage$Ref, {
     name: \\"NoPartialInputMessage\\",
     fields: t => ({
         id: t.expose(\\"id\\", {
@@ -176,50 +176,50 @@ builder.objectType(NoPartialInputMessage, {
         }).$type === \\"testapis.extensions.no_partial.NoPartialInputMessage\\";
     }
 });
-export type ParentMessageInput_Shape = {
-    partialableInputMessage: PartialableInputMessageInput_Shape;
-    noPartialInputMessage: NoPartialInputMessageInput_Shape;
+export type ParentMessageInput$Shape = {
+    partialableInputMessage: PartialableInputMessageInput$Shape;
+    noPartialInputMessage: NoPartialInputMessageInput$Shape;
 };
-export const ParentMessageInput = builder.inputRef<ParentMessageInput_Shape>(\\"ParentMessageInput\\");
-ParentMessageInput.implement({
+export const ParentMessageInput$Ref = builder.inputRef<ParentMessageInput$Shape>(\\"ParentMessageInput\\");
+ParentMessageInput$Ref.implement({
     fields: t => ({
         partialableInputMessage: t.field({
-            type: PartialableInputMessageInput,
+            type: PartialableInputMessageInput$Ref,
             required: true,
             description: \\"Required.\\"
         }),
         noPartialInputMessage: t.field({
-            type: NoPartialInputMessageInput,
+            type: NoPartialInputMessageInput$Ref,
             required: true,
             description: \\"Required.\\"
         })
     })
 });
-export type ParentMessagePartialInput_Shape = {
-    partialableInputMessage?: PartialableInputMessagePartialInput_Shape | null;
-    noPartialInputMessage?: NoPartialInputMessageInput_Shape | null;
+export type ParentMessagePartialInput$Shape = {
+    partialableInputMessage?: PartialableInputMessagePartialInput$Shape | null;
+    noPartialInputMessage?: NoPartialInputMessageInput$Shape | null;
 };
-export const ParentMessagePartialInput = builder.inputRef<ParentMessagePartialInput_Shape>(\\"ParentMessagePartialInput\\");
-ParentMessagePartialInput.implement({
+export const ParentMessagePartialInput$Ref = builder.inputRef<ParentMessagePartialInput$Shape>(\\"ParentMessagePartialInput\\");
+ParentMessagePartialInput$Ref.implement({
     fields: t => ({
         partialableInputMessage: t.field({
-            type: PartialableInputMessagePartialInput,
+            type: PartialableInputMessagePartialInput$Ref,
             required: false,
             description: \\"Required.\\"
         }),
         noPartialInputMessage: t.field({
-            type: NoPartialInputMessageInput,
+            type: NoPartialInputMessageInput$Ref,
             required: false,
             description: \\"Required.\\"
         })
     })
 });
-export type PartialableInputMessageInput_Shape = {
+export type PartialableInputMessageInput$Shape = {
     id: _$testapis$extensions$no_partial$no_partial.PartialableInputMessage[\\"id\\"];
     body: _$testapis$extensions$no_partial$no_partial.PartialableInputMessage[\\"body\\"];
 };
-export const PartialableInputMessageInput = builder.inputRef<PartialableInputMessageInput_Shape>(\\"PartialableInputMessageInput\\");
-PartialableInputMessageInput.implement({
+export const PartialableInputMessageInput$Ref = builder.inputRef<PartialableInputMessageInput$Shape>(\\"PartialableInputMessageInput\\");
+PartialableInputMessageInput$Ref.implement({
     fields: t => ({
         id: t.field({
             type: \\"String\\",
@@ -233,12 +233,12 @@ PartialableInputMessageInput.implement({
         })
     })
 });
-export type PartialableInputMessagePartialInput_Shape = {
+export type PartialableInputMessagePartialInput$Shape = {
     id?: _$testapis$extensions$no_partial$no_partial.PartialableInputMessage[\\"id\\"] | null;
     body?: _$testapis$extensions$no_partial$no_partial.PartialableInputMessage[\\"body\\"] | null;
 };
-export const PartialableInputMessagePartialInput = builder.inputRef<PartialableInputMessagePartialInput_Shape>(\\"PartialableInputMessagePartialInput\\");
-PartialableInputMessagePartialInput.implement({
+export const PartialableInputMessagePartialInput$Ref = builder.inputRef<PartialableInputMessagePartialInput$Shape>(\\"PartialableInputMessagePartialInput\\");
+PartialableInputMessagePartialInput$Ref.implement({
     fields: t => ({
         id: t.field({
             type: \\"String\\",
@@ -252,12 +252,12 @@ PartialableInputMessagePartialInput.implement({
         })
     })
 });
-export type NoPartialInputMessageInput_Shape = {
+export type NoPartialInputMessageInput$Shape = {
     id: _$testapis$extensions$no_partial$no_partial.NoPartialInputMessage[\\"id\\"];
     body: _$testapis$extensions$no_partial$no_partial.NoPartialInputMessage[\\"body\\"];
 };
-export const NoPartialInputMessageInput = builder.inputRef<NoPartialInputMessageInput_Shape>(\\"NoPartialInputMessageInput\\");
-NoPartialInputMessageInput.implement({
+export const NoPartialInputMessageInput$Ref = builder.inputRef<NoPartialInputMessageInput$Shape>(\\"NoPartialInputMessageInput\\");
+NoPartialInputMessageInput$Ref.implement({
     fields: t => ({
         id: t.field({
             type: \\"String\\",

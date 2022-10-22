@@ -7,13 +7,13 @@ testSchemaGeneration("deprecation", "ts-proto", {
       {
         extraSchema: `
           import { builder } from "./builder";
-          import { DeprecatedMessage as DeprecatedMessageRef } from "./testapis/deprecation/deprecation.pb.pothos";
-          import { DeprecatedFileMessage as DeprecatedFileMessageRef } from "./testapis/deprecation/file_deprecation.pb.pothos";
+          import { DeprecatedMessage$Ref } from "./testapis/deprecation/deprecation.pb.pothos";
+          import { DeprecatedFileMessage$Ref } from "./testapis/deprecation/file_deprecation.pb.pothos";
           import { DeprecatedMessage } from "@testapis/ts-proto/lib/testapis/deprecation/deprecation";
           import { DeprecatedFileMessage } from "@testapis/ts-proto/lib/testapis/deprecation/file_deprecation";
 
           builder.queryField("test1", (t) => t.field({
-            type: DeprecatedMessageRef,
+            type: DeprecatedMessage$Ref,
             resolve() {
               return DeprecatedMessage.fromPartial({
                 body: "hello",
@@ -22,7 +22,7 @@ testSchemaGeneration("deprecation", "ts-proto", {
           }));
 
           builder.queryField("test2", (t) => t.field({
-            type: DeprecatedFileMessageRef,
+            type: DeprecatedFileMessage$Ref,
             resolve() {
               return DeprecatedFileMessage.fromPartial({
                 body: "world",

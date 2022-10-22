@@ -7,11 +7,11 @@ testSchemaGeneration("enums", "ts-proto", {
       {
         extraSchema: `
           import { builder } from "./builder";
-          import { MessageWithEnums as MessageWithEnumsRef } from "./testapis/enums/enums.pb.pothos";
+          import { MessageWithEnums$Ref } from "./testapis/enums/enums.pb.pothos";
           import { MessageWithEnums, MyEnum, MyEnumWithoutUnspecified } from "@testapis/ts-proto/lib/testapis/enums/enums";
 
           builder.queryField("test", (f) => f.field({
-            type: MessageWithEnumsRef,
+            type: MessageWithEnums$Ref,
             resolve() {
               return MessageWithEnums.fromPartial({
                 requiredMyEnum: MyEnum.MY_ENUM_BAR,

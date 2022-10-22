@@ -7,11 +7,11 @@ testSchemaGeneration("field_behavior", "ts-proto", {
       {
         extraSchema: `
           import { builder } from "./builder";
-          import { FieldBehaviorComentsMessage as FieldBehaviorComentsMessageRef } from "./testapis/field_behavior/comments.pb.pothos";
+          import { FieldBehaviorComentsMessage$Ref } from "./testapis/field_behavior/comments.pb.pothos";
           import { FieldBehaviorComentsMessage } from "@testapis/ts-proto/lib/testapis/field_behavior/comments";
 
           builder.queryField("test", (t) => t.field({
-            type: FieldBehaviorComentsMessageRef,
+            type: FieldBehaviorComentsMessage$Ref,
             resolve() {
               return FieldBehaviorComentsMessage.fromPartial({
                 requiredField: { body: "hello" },

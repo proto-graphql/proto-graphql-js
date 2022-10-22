@@ -7,11 +7,11 @@ testSchemaGeneration("oneof", "ts-proto", {
       {
         extraSchema: `
           import { builder } from "./builder";
-          import { OneofParent as OneofParentRef } from "./testapis/oneof/oneof.pb.pothos";
+          import { OneofParent$Ref } from "./testapis/oneof/oneof.pb.pothos";
           import { OneofParent } from "@testapis/ts-proto/lib/testapis/oneof/oneof";
 
           builder.queryField("test", (t) => t.field({
-            type: OneofParentRef,
+            type: OneofParent$Ref,
             resolve() {
               return OneofParent.fromPartial({
                 requiredMessage1: {

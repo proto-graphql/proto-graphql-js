@@ -7,11 +7,11 @@ testSchemaGeneration("primitives", "ts-proto", {
       {
         extraSchema: `
           import { builder } from "./builder";
-          import { Message as MessageRef } from "./testapis/primitives/primitives.pb.pothos";
+          import { Message$Ref } from "./testapis/primitives/primitives.pb.pothos";
           import { Message } from "@testapis/ts-proto/lib/testapis/primitives/primitives";
 
           builder.queryField("test", (t) => t.field({
-            type: MessageRef,
+            type: Message$Ref,
             resolve() {
               return Message.fromPartial({
                 requiredPrimitives: {

@@ -39,7 +39,7 @@ export function createFieldDefinitionExpr(
   let typeExpr: ts.Expression =
     field.type instanceof ScalarType
       ? ts.factory.createStringLiteral(field.type.typeName)
-      : ts.factory.createIdentifier(field.type.typeName);
+      : ts.factory.createIdentifier(field.type.pothosRefObjectName);
 
   const isInput = field instanceof InputObjectField;
   const nullableToken = ts.factory.createToken(

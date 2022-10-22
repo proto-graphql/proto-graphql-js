@@ -8,10 +8,10 @@ testSchemaGeneration("extensions", "ts-proto", {
         extraSchema: `
           import { builder } from "./builder";
           import { PrefixedMessage } from "@testapis/ts-proto/lib/testapis/extensions/extensions";
-          import { TestPrefixPrefixedMessage as TestPrefixPrefixedMessageRef } from "./testapis/extensions/extensions.pb.pothos";
+          import { TestPrefixPrefixedMessage$Ref } from "./testapis/extensions/extensions.pb.pothos";
 
           builder.queryField("test", (t) => t.field({
-            type: TestPrefixPrefixedMessageRef,
+            type: TestPrefixPrefixedMessage$Ref,
             resolve() {
               return  PrefixedMessage.fromPartial({
                 squashedMessage: {
@@ -50,18 +50,18 @@ testSchemaGeneration("extensions", "ts-proto", {
       {
         extraSchema: `
           import { builder } from "./builder";
-          import { TestPrefixInterfaceMessage as TestPrefixInterfaceMessageRef } from "./testapis/extensions/extensions.pb.pothos";
+          import { TestPrefixInterfaceMessage$Ref } from "./testapis/extensions/extensions.pb.pothos";
 
-          const ImplObjectRef = builder.objectRef<{ id: string, body: string, $type: "ImplObject" }>("ImplObject");
-          builder.objectType(ImplObjectRef, {
-            interfaces: [TestPrefixInterfaceMessageRef],
+          const ImplObject$Ref = builder.objectRef<{ id: string, body: string, $type: "ImplObject" }>("ImplObject");
+          builder.objectType(ImplObject$Ref, {
+            interfaces: [TestPrefixInterfaceMessage$Ref],
             fields: (t) => ({
               body: t.exposeString("body"),
             }),
             isTypeOf: (value: any) => value.$type === "ImplObject"
           });
           builder.queryField("test", (t) => t.field({
-            type: ImplObjectRef,
+            type: ImplObject$Ref,
             resolve() {
               return {
                 $type: "ImplObject" as const,
@@ -94,9 +94,9 @@ testSchemaGeneration("extensions", "ts-proto", {
         extraSchema: `
           import { builder } from "./builder";
           import { PrefixedMessage } from "@testapis/ts-proto/lib/testapis/extensions/extensions";
-          import { TestPrefixPrefixedMessage as TestPrefixPrefixedMessageRef, TestPrefixPrefixedMessageInnerMessage as TestPrefixPrefixedMessageInnerMessageRef } from "./testapis/extensions/extensions.pb.pothos";
+          import { TestPrefixPrefixedMessage$Ref, TestPrefixPrefixedMessageInnerMessage$Ref } from "./testapis/extensions/extensions.pb.pothos";
 
-          builder.objectField(TestPrefixPrefixedMessageInnerMessageRef, "skipResolver", (t) =>
+          builder.objectField(TestPrefixPrefixedMessageInnerMessage$Ref, "skipResolver", (t) =>
             t.field({
               type: "String",
               nullable: false,
@@ -107,7 +107,7 @@ testSchemaGeneration("extensions", "ts-proto", {
           );
 
           builder.queryField("test", (t) => t.field({
-            type: TestPrefixPrefixedMessageRef,
+            type: TestPrefixPrefixedMessage$Ref,
             resolve() {
               return PrefixedMessage.fromPartial({
                 squashedMessage: {

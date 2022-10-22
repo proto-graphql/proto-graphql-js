@@ -7,11 +7,11 @@ testSchemaGeneration("empty_types", "ts-proto", {
       {
         extraSchema: `
           import { builder } from "./builder";
-          import { EmptyMessage as EmptyMessageRef } from "./testapis/empty_types/empty.pb.pothos";
+          import { EmptyMessage$Ref } from "./testapis/empty_types/empty.pb.pothos";
           import { EmptyMessage } from "@testapis/ts-proto/lib/testapis/empty_types/empty";
 
           builder.queryField("test", (t) => t.field({
-            type: EmptyMessageRef,
+            type: EmptyMessage$Ref,
             resolve() {
               return EmptyMessage.fromPartial({});
             },
