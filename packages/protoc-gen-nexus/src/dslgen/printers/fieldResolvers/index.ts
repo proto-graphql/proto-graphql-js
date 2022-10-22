@@ -1,10 +1,16 @@
+import {
+  EnumType,
+  ObjectField,
+  ObjectOneofField,
+  ScalarType,
+  SquashedOneofUnionType,
+} from "@proto-graphql/codegen-core";
 import ts from "typescript";
+import { onlyNonNull } from "../util";
 import { createEnumFieldResolverStmts } from "./enumFieldResolver";
 import { createObjectFieldResolverStmts } from "./objectFieldResolver";
 import { craeteOneofUnionFieldResolverStmts } from "./oneoUnionfFieldResolver";
 import { createScalarFieldResolverStmts } from "./scalarFieldResolver";
-import { onlyNonNull } from "../util";
-import { EnumType, ObjectField, ObjectOneofField, ScalarType, SquashedOneofUnionType } from "../../types";
 
 export function createFieldResolverDecl(field: ObjectField<any> | ObjectOneofField): ts.MethodDeclaration {
   return createMethodDeclWithValueExpr(field, (valueExpr) => {

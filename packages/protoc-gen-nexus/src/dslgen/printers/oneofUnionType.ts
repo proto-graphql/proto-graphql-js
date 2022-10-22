@@ -1,5 +1,5 @@
+import { OneofUnionType, SquashedOneofUnionType } from "@proto-graphql/codegen-core";
 import ts from "typescript";
-import { OneofUnionType, SquashedOneofUnionType } from "../types";
 import {
   createDescriptionPropertyAssignment,
   createDslExportConstStmt,

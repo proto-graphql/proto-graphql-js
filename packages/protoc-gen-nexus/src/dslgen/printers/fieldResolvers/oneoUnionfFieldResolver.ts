@@ -1,7 +1,7 @@
 import ts from "typescript";
 import { pascalCase, constantCase } from "change-case";
 import { createFullNameExpr } from "../util";
-import { ObjectField, ObjectOneofField, OneofUnionType, SquashedOneofUnionType } from "../../types";
+import { ObjectField, ObjectOneofField, OneofUnionType, SquashedOneofUnionType } from "@proto-graphql/codegen-core";
 import { createMapExpr } from "./utils";
 
 export function craeteOneofUnionFieldResolverStmts(

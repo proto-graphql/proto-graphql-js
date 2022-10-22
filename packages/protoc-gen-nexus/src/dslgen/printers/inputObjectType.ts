@@ -1,4 +1,6 @@
+import { EnumType, InputObjectField, InputObjectType, ScalarType } from "@proto-graphql/codegen-core";
 import ts from "typescript";
+import { createFieldDefinitionStmt, createFieldOptionExpr, createNoopFieldDefinitionStmt } from "./field";
 import {
   createDescriptionPropertyAssignment,
   createDslExportConstStmt,
@@ -9,8 +11,6 @@ import {
   createQualifiedName,
   onlyNonNull,
 } from "./util";
-import { createFieldDefinitionStmt, createNoopFieldDefinitionStmt, createFieldOptionExpr } from "./field";
-import { EnumType, InputObjectField, InputObjectType, ScalarType } from "../types";
 
 /**
  * @example

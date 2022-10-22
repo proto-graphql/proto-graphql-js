@@ -1,4 +1,6 @@
+import { InterfaceType, ObjectType } from "@proto-graphql/codegen-core";
 import ts from "typescript";
+import { createFieldDefinitionStmt, createNoopFieldDefinitionStmt } from "./field";
 import {
   createDescriptionPropertyAssignment,
   createDslExportConstStmt,
@@ -7,8 +9,6 @@ import {
   createProtoNexusType,
   onlyNonNull,
 } from "./util";
-import { createFieldDefinitionStmt, createNoopFieldDefinitionStmt } from "./field";
-import { ObjectType, InterfaceType } from "../types";
 
 /**
  * @example

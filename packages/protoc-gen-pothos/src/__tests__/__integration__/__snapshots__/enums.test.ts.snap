@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`schema generation with ts-proto query 1`] = `
+Object {
+  "data": Object {
+    "test": Object {
+      "optionalMyEnum": null,
+      "optionalMyEnumWithoutUnspecified": "FOO",
+      "requiredMyEnum": "BAR",
+      "requiredMyEnumWithoutUnspecified": "FOO",
+    },
+  },
+}
+`;
+
+exports[`schema generation with ts-proto query: schema.graphql 1`] = `
+"type MessageWithEnums {
+  \\"\\"\\"Optional.\\"\\"\\"
+  optionalMyEnum: MyEnum
+
+  \\"\\"\\"Optional.\\"\\"\\"
+  optionalMyEnums: [MyEnum!]
+
+  \\"\\"\\"Optional.\\"\\"\\"
+  optionalMyEnumWithoutUnspecified: MyEnumWithoutUnspecified
+
+  \\"\\"\\"Optional.\\"\\"\\"
+  optionalMyEnumWithoutUnspecifieds: [MyEnumWithoutUnspecified!]
+
+  \\"\\"\\"Required.\\"\\"\\"
+  requiredMyEnum: MyEnum!
+
+  \\"\\"\\"Required.\\"\\"\\"
+  requiredMyEnums: [MyEnum!]!
+
+  \\"\\"\\"Required.\\"\\"\\"
+  requiredMyEnumWithoutUnspecified: MyEnumWithoutUnspecified!
+
+  \\"\\"\\"Required.\\"\\"\\"
+  requiredMyEnumWithoutUnspecifieds: [MyEnumWithoutUnspecified!]!
+}
+
+input MessageWithEnumsInput {
+  \\"\\"\\"Optional.\\"\\"\\"
+  optionalMyEnum: MyEnum
+
+  \\"\\"\\"Optional.\\"\\"\\"
+  optionalMyEnums: [MyEnum!]
+
+  \\"\\"\\"Optional.\\"\\"\\"
+  optionalMyEnumWithoutUnspecified: MyEnumWithoutUnspecified
+
+  \\"\\"\\"Optional.\\"\\"\\"
+  optionalMyEnumWithoutUnspecifieds: [MyEnumWithoutUnspecified!]
+
+  \\"\\"\\"Required.\\"\\"\\"
+  requiredMyEnum: MyEnum!
+
+  \\"\\"\\"Required.\\"\\"\\"
+  requiredMyEnums: [MyEnum!]!
+
+  \\"\\"\\"Required.\\"\\"\\"
+  requiredMyEnumWithoutUnspecified: MyEnumWithoutUnspecified!
+
+  \\"\\"\\"Required.\\"\\"\\"
+  requiredMyEnumWithoutUnspecifieds: [MyEnumWithoutUnspecified!]!
+}
+
+enum MyEnum {
+  \\"\\"\\"This is Bar.\\"\\"\\"
+  BAR
+  BAZ
+  FOO
+}
+
+enum MyEnumWithoutUnspecified {
+  BAR
+  BAZ
+  FOO
+}
+
+type Query {
+  test: MessageWithEnums!
+}
+"
+`;

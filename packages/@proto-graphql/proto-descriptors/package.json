@@ -1,0 +1,36 @@
+{
+  "name": "@proto-graphql/proto-descriptors",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [
+    "graphql",
+    "grpc",
+    "nexus",
+    "protobuf",
+    "typescript"
+  ],
+  "repository": "git@github.com:proto-graphql/proto-graphql-js.git",
+  "author": "izumin5210 <m@izum.in>",
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "module": "./module/index.js",
+  "types": "./lib/index.d.ts",
+  "private": false,
+  "engines": {
+    "node": ">= 14.0.0"
+  },
+  "peerDependencies": {
+    "google-protobuf": "^3.12.2"
+  },
+  "files": [
+    "lib/",
+    "module/"
+  ],
+  "scripts": {
+    "build": "tsc --build . && tsc --build tsconfig.module.json",
+    "clean": "rimraf lib/ module/ && tsc --build . --clean && tsc --build tsconfig.module.json --clean",
+    "prepublish": "yarn clean && yarn build",
+    "test": "jest --passWithNoTests",
+    "test:coverage": "jest --coverage --passWithNoTests"
+  }
+}

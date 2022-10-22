@@ -1,8 +1,14 @@
+import {
+  EnumType,
+  InputObjectType,
+  ObjectType,
+  OneofUnionType,
+  SquashedOneofUnionType,
+} from "@proto-graphql/codegen-core";
 import ts from "typescript";
-import { EnumType, InputObjectType, ObjectType, OneofUnionType, SquashedOneofUnionType } from "../types";
-import { createObjectTypeDslStmt } from "./objectType";
-import { createInputObjectTypeDslStmt } from "./inputObjectType";
 import { createEnumTypeDslStmt } from "./enumType";
+import { createInputObjectTypeDslStmt } from "./inputObjectType";
+import { createObjectTypeDslStmt } from "./objectType";
 import { createOneofUnionTypeDslStmt } from "./oneofUnionType";
 import { createImportAllWithAliastDecl, createQualifiedName, fullNameString, onlyNonNull, onlyUnique } from "./util";
 

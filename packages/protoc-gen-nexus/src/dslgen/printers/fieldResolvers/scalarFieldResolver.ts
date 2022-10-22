@@ -1,5 +1,5 @@
+import { ObjectField, ScalarType } from "@proto-graphql/codegen-core";
 import ts from "typescript";
-import { ObjectField, ScalarType } from "../../types";
 import { createProtoToGqlFunc } from "../util";
 import { createMapExpr } from "./utils";
 

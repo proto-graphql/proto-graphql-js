@@ -1,20 +1,14 @@
+import { ProtoFile, ProtoRegistry } from "@proto-graphql/proto-descriptors";
 import ts from "typescript";
-import {
-  collectTypesFromFile,
-  DslFile,
-  createImportDecls,
-  createReExportStmts,
-  createTypeDslStmts,
-  GenerationParams,
-} from "./dslgen";
-import { ProtoFile, ProtoRegistry } from "./protogen";
+import { collectTypesFromFile, DslFile, GenerationParams } from "@proto-graphql/codegen-core";
+import { createImportDecls, createReExportStmts, createTypeDslStmts } from "./dslgen";
 
 export function generateFiles(
   registry: ProtoRegistry,
   file: ProtoFile,
   opts: GenerationParams
 ): { filename: string; content: string }[] {
-  const dslFile = new DslFile(file, opts);
+  const dslFile = new DslFile(file, { ...opts, dsl: "nexus" });
   const types = collectTypesFromFile(dslFile, registry);
 
   switch (opts.fileLayout) {
