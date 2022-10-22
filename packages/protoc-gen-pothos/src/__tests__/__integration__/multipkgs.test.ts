@@ -7,7 +7,7 @@ testSchemaGeneration(["multipkgs/subpkg1", "multipkgs/subpkg2"], "ts-proto", {
       {
         extraSchema: `
           import { builder } from "./builder";
-          import { MessageWithSubpkg as MessageWithSubpkgRef } from "./testapis/multipkgs/subpkg2/types_pb_nexus";
+          import { MessageWithSubpkg as MessageWithSubpkgRef } from "./testapis/multipkgs/subpkg2/types.pb.pothos";
           import { SubpkgEnum } from "@testapis/ts-proto/lib/testapis/multipkgs/subpkg1/types";
           import { MessageWithSubpkg } from "@testapis/ts-proto/lib/testapis/multipkgs/subpkg2/types";
 

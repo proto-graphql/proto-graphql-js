@@ -7,7 +7,7 @@ testSchemaGeneration("enums", "ts-proto", {
       {
         extraSchema: `
           import { builder } from "./builder";
-          import { MessageWithEnums as MessageWithEnumsRef } from "./testapis/enums/enums_pb_nexus";
+          import { MessageWithEnums as MessageWithEnumsRef } from "./testapis/enums/enums.pb.pothos";
           import { MessageWithEnums, MyEnum, MyEnumWithoutUnspecified } from "@testapis/ts-proto/lib/testapis/enums/enums";
 
           builder.queryField("test", (f) => f.field({

@@ -7,8 +7,8 @@ testSchemaGeneration("deprecation", "ts-proto", {
       {
         extraSchema: `
           import { builder } from "./builder";
-          import { DeprecatedMessage as DeprecatedMessageRef } from "./testapis/deprecation/deprecation_pb_nexus";
-          import { DeprecatedFileMessage as DeprecatedFileMessageRef } from "./testapis/deprecation/file_deprecation_pb_nexus";
+          import { DeprecatedMessage as DeprecatedMessageRef } from "./testapis/deprecation/deprecation.pb.pothos";
+          import { DeprecatedFileMessage as DeprecatedFileMessageRef } from "./testapis/deprecation/file_deprecation.pb.pothos";
           import { DeprecatedMessage } from "@testapis/ts-proto/lib/testapis/deprecation/deprecation";
           import { DeprecatedFileMessage } from "@testapis/ts-proto/lib/testapis/deprecation/file_deprecation";
 

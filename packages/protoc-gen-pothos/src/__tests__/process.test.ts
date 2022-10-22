@@ -5,110 +5,110 @@ import {
 } from "./__helpers__/process.test.helper";
 
 describe("simple proto file", () => {
-  itGeneratesDSLsToMatchSnapshtos("primitives", ["primitives/primitives_pb_nexus.ts"]);
+  itGeneratesDSLsToMatchSnapshtos("primitives", ["primitives/primitives.pb.pothos.ts"]);
 
   it("generates pothos DSLs with graphql_type file layout", async () => {
     const resp = await generateDSLs("primitives", "ts-proto", { perGraphQLType: true });
     snapshotGeneratedFiles(resp, [
-      "primitives/Message.nexus.ts",
-      "primitives/Primitives.nexus.ts",
-      "primitives/MessageInput.nexus.ts",
-      "primitives/PrimitivesInput.nexus.ts",
+      "primitives/Message.pothos.ts",
+      "primitives/Primitives.pothos.ts",
+      "primitives/MessageInput.pothos.ts",
+      "primitives/PrimitivesInput.pothos.ts",
     ]);
   });
 
   it("generates pothos DSLs with partial inputs", async () => {
     const resp = await generateDSLs("primitives", "ts-proto", { partialInputs: true });
-    snapshotGeneratedFiles(resp, ["primitives/primitives_pb_nexus.ts"]);
+    snapshotGeneratedFiles(resp, ["primitives/primitives.pb.pothos.ts"]);
   });
 });
 
 describe("well-known protobuf types", () => {
-  itGeneratesDSLsToMatchSnapshtos("wktypes", ["wktypes/well_known_types_pb_nexus.ts"]);
+  itGeneratesDSLsToMatchSnapshtos("wktypes", ["wktypes/well_known_types.pb.pothos.ts"]);
 });
 
 describe("protobuf enums", () => {
-  itGeneratesDSLsToMatchSnapshtos("enums", ["enums/enums_pb_nexus.ts"]);
+  itGeneratesDSLsToMatchSnapshtos("enums", ["enums/enums.pb.pothos.ts"]);
 
   it("generates pothos DSLs with graphql_type file layout", async () => {
     const resp = await generateDSLs("enums", "ts-proto", { perGraphQLType: true });
     snapshotGeneratedFiles(resp, [
-      "enums/MessageWithEnums.nexus.ts",
-      "enums/MyEnum.nexus.ts",
-      "enums/MyEnumWithoutUnspecified.nexus.ts",
-      "enums/MessageWithEnumsInput.nexus.ts",
+      "enums/MessageWithEnums.pothos.ts",
+      "enums/MyEnum.pothos.ts",
+      "enums/MyEnumWithoutUnspecified.pothos.ts",
+      "enums/MessageWithEnumsInput.pothos.ts",
     ]);
   });
 });
 
 describe("nested protobuf types", () => {
-  itGeneratesDSLsToMatchSnapshtos("nested", ["nested/nested_pb_nexus.ts"]);
+  itGeneratesDSLsToMatchSnapshtos("nested", ["nested/nested.pb.pothos.ts"]);
 });
 
 describe("protobuf custom options", () => {
   itGeneratesDSLsToMatchSnapshtos("extensions", [
-    "extensions/extensions_pb_nexus.ts",
-    "extensions/ignored_pb_nexus.ts",
+    "extensions/extensions.pb.pothos.ts",
+    "extensions/ignored.pb.pothos.ts",
   ]);
 
   it("generates pothos DSLs with graphql_type file layout", async () => {
     const resp = await generateDSLs("extensions", "ts-proto", { perGraphQLType: true });
     snapshotGeneratedFiles(resp, [
-      "extensions/TestPrefixPrefixedMessage.nexus.ts",
-      "extensions/TestPrefixPrefixedMessageInnerMessage.nexus.ts",
-      "extensions/TestPrefixPrefixedMessageInnerMessage2.nexus.ts",
-      "extensions/TestPrefixPrefixedMessageSquashedMessage.nexus.ts",
-      "extensions/TestPrefixPrefixedMessagePartialIgnoreOneof.nexus.ts",
-      "extensions/TestPrefixPrefixedEnum.nexus.ts",
-      "extensions/TestPrefixIgnoredMessageNotIgnored.nexus.ts",
-      "extensions/TestPrefixInterfaceMessage.nexus.ts",
-      "extensions/TestPrefixInterfaceMessageType.nexus.ts",
-      "extensions/TestPrefixRenamedMessage.nexus.ts",
-      "extensions/TestPrefixPrefixedMessageInput.nexus.ts",
-      "extensions/TestPrefixPrefixedMessageInnerMessageInput.nexus.ts",
-      "extensions/TestPrefixPrefixedMessageInnerMessage2Input.nexus.ts",
-      "extensions/TestPrefixPrefixedMessageSquashedMessageInput.nexus.ts",
-      "extensions/TestPrefixIgnoredMessageNotIgnoredInput.nexus.ts",
-      "extensions/TestPrefixInterfaceMessageInput.nexus.ts",
-      "extensions/TestPrefixRenamedMessageInput.nexus.ts",
+      "extensions/TestPrefixPrefixedMessage.pothos.ts",
+      "extensions/TestPrefixPrefixedMessageInnerMessage.pothos.ts",
+      "extensions/TestPrefixPrefixedMessageInnerMessage2.pothos.ts",
+      "extensions/TestPrefixPrefixedMessageSquashedMessage.pothos.ts",
+      "extensions/TestPrefixPrefixedMessagePartialIgnoreOneof.pothos.ts",
+      "extensions/TestPrefixPrefixedEnum.pothos.ts",
+      "extensions/TestPrefixIgnoredMessageNotIgnored.pothos.ts",
+      "extensions/TestPrefixInterfaceMessage.pothos.ts",
+      "extensions/TestPrefixInterfaceMessageType.pothos.ts",
+      "extensions/TestPrefixRenamedMessage.pothos.ts",
+      "extensions/TestPrefixPrefixedMessageInput.pothos.ts",
+      "extensions/TestPrefixPrefixedMessageInnerMessageInput.pothos.ts",
+      "extensions/TestPrefixPrefixedMessageInnerMessage2Input.pothos.ts",
+      "extensions/TestPrefixPrefixedMessageSquashedMessageInput.pothos.ts",
+      "extensions/TestPrefixIgnoredMessageNotIgnoredInput.pothos.ts",
+      "extensions/TestPrefixInterfaceMessageInput.pothos.ts",
+      "extensions/TestPrefixRenamedMessageInput.pothos.ts",
     ]);
   });
 });
 
 describe("protobuf oneof", () => {
-  itGeneratesDSLsToMatchSnapshtos("oneof", ["oneof/oneof_pb_nexus.ts"]);
+  itGeneratesDSLsToMatchSnapshtos("oneof", ["oneof/oneof.pb.pothos.ts"]);
 
   it("generates pothos DSLs with graphql_type file layout", async () => {
     const resp = await generateDSLs("oneof", "ts-proto", { perGraphQLType: true });
     snapshotGeneratedFiles(resp, [
-      "oneof/OneofParent.nexus.ts",
-      "oneof/OneofParentRequiredOneofMembers.nexus.ts",
-      "oneof/OneofParentOptionalOneofMembers.nexus.ts",
-      "oneof/OneofMemberMessage1.nexus.ts",
-      "oneof/OneofMemberMessage2.nexus.ts",
-      "oneof/OneofParentInput.nexus.ts",
-      "oneof/OneofMemberMessage1Input.nexus.ts",
-      "oneof/OneofMemberMessage2Input.nexus.ts",
+      "oneof/OneofParent.pothos.ts",
+      "oneof/OneofParentRequiredOneofMembers.pothos.ts",
+      "oneof/OneofParentOptionalOneofMembers.pothos.ts",
+      "oneof/OneofMemberMessage1.pothos.ts",
+      "oneof/OneofMemberMessage2.pothos.ts",
+      "oneof/OneofParentInput.pothos.ts",
+      "oneof/OneofMemberMessage1Input.pothos.ts",
+      "oneof/OneofMemberMessage2Input.pothos.ts",
     ]);
   });
 });
 
 describe("multipkgs", () => {
-  itGeneratesDSLsToMatchSnapshtos("multipkgs/subpkg1", ["multipkgs/subpkg1/types_pb_nexus.ts"]);
-  itGeneratesDSLsToMatchSnapshtos("multipkgs/subpkg2", ["multipkgs/subpkg2/types_pb_nexus.ts"]);
+  itGeneratesDSLsToMatchSnapshtos("multipkgs/subpkg1", ["multipkgs/subpkg1/types.pb.pothos.ts"]);
+  itGeneratesDSLsToMatchSnapshtos("multipkgs/subpkg2", ["multipkgs/subpkg2/types.pb.pothos.ts"]);
 });
 
 describe("deprecation", () => {
   itGeneratesDSLsToMatchSnapshtos("deprecation", [
-    "deprecation/deprecation_pb_nexus.ts",
-    "deprecation/file_deprecation_pb_nexus.ts",
+    "deprecation/deprecation.pb.pothos.ts",
+    "deprecation/file_deprecation.pb.pothos.ts",
   ]);
 });
 
 describe("field_behavior", () => {
-  itGeneratesDSLsToMatchSnapshtos("field_behavior", ["field_behavior/comments_pb_nexus.ts"]);
+  itGeneratesDSLsToMatchSnapshtos("field_behavior", ["field_behavior/comments.pb.pothos.ts"]);
 });
 
 describe("empty types", () => {
-  itGeneratesDSLsToMatchSnapshtos("empty_types", ["empty_types/empty_pb_nexus.ts"]);
+  itGeneratesDSLsToMatchSnapshtos("empty_types", ["empty_types/empty.pb.pothos.ts"]);
 });

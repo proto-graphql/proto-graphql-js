@@ -42,7 +42,7 @@ export abstract class TypeBase<P extends ProtoMessage | ProtoEnum | ProtoOneof> 
       case "proto_file":
         return this.file.filename;
       case "graphql_type": {
-        return path.join(path.dirname(this.file.filename), `${this.typeName}.nexus.ts`);
+        return path.join(path.dirname(this.file.filename), `${this.typeName}${this.file.extname}`);
       }
       /* istanbul ignore next */
       default: {

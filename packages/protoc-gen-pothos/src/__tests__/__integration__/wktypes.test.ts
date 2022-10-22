@@ -19,7 +19,7 @@ testSchemaGeneration("wktypes", "ts-proto", {
       {
         extraSchema: `
           import { builder } from "./builder";
-          import { Message as MessageRef } from "./testapis/wktypes/well_known_types_pb_nexus";
+          import { Message as MessageRef } from "./testapis/wktypes/well_known_types.pb.pothos";
           import { Message } from "@testapis/ts-proto/lib/testapis/wktypes/well_known_types";
 
           builder.queryField("test", (f) => f.field({
@@ -64,7 +64,7 @@ testSchemaGeneration("wktypes", "ts-proto", {
       {
         extraSchema: `
           import { builder } from "./builder";
-          import { Message as MessageRef } from "./testapis/wktypes/well_known_types_pb_nexus";
+          import { Message as MessageRef } from "./testapis/wktypes/well_known_types.pb.pothos";
           import { Message } from "@testapis/ts-proto/lib/testapis/wktypes/well_known_types";
 
           builder.queryField("test", (f) => f.field({

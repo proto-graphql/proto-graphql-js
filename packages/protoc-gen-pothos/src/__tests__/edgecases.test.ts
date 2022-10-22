@@ -2,9 +2,9 @@ import { itGeneratesDSLsToMatchSnapshtos } from "./__helpers__/process.test.help
 
 describe("import squashed union", () => {
   itGeneratesDSLsToMatchSnapshtos("edgecases/import_squashed_union/pkg1", [
-    "edgecases/import_squashed_union/pkg1/types_pb_nexus.ts",
+    "edgecases/import_squashed_union/pkg1/types.pb.pothos.ts",
   ]);
   itGeneratesDSLsToMatchSnapshtos("edgecases/import_squashed_union/pkg2", [
-    "edgecases/import_squashed_union/pkg2/types_pb_nexus.ts",
+    "edgecases/import_squashed_union/pkg2/types.pb.pothos.ts",
   ]);
 });

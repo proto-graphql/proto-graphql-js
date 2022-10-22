@@ -8,7 +8,7 @@ testSchemaGeneration("extensions", "ts-proto", {
         extraSchema: `
           import { builder } from "./builder";
           import { PrefixedMessage } from "@testapis/ts-proto/lib/testapis/extensions/extensions";
-          import { TestPrefixPrefixedMessage as TestPrefixPrefixedMessageRef } from "./testapis/extensions/extensions_pb_nexus";
+          import { TestPrefixPrefixedMessage as TestPrefixPrefixedMessageRef } from "./testapis/extensions/extensions.pb.pothos";
 
           builder.queryField("test", (t) => t.field({
             type: TestPrefixPrefixedMessageRef,
@@ -50,7 +50,7 @@ testSchemaGeneration("extensions", "ts-proto", {
       {
         extraSchema: `
           import { builder } from "./builder";
-          import { TestPrefixInterfaceMessage as TestPrefixInterfaceMessageRef } from "./testapis/extensions/extensions_pb_nexus";
+          import { TestPrefixInterfaceMessage as TestPrefixInterfaceMessageRef } from "./testapis/extensions/extensions.pb.pothos";
 
           const ImplObjectRef = builder.objectRef<{ id: string, body: string, $type: "ImplObject" }>("ImplObject");
           builder.objectType(ImplObjectRef, {
@@ -94,7 +94,7 @@ testSchemaGeneration("extensions", "ts-proto", {
         extraSchema: `
           import { builder } from "./builder";
           import { PrefixedMessage } from "@testapis/ts-proto/lib/testapis/extensions/extensions";
-          import { TestPrefixPrefixedMessage as TestPrefixPrefixedMessageRef, TestPrefixPrefixedMessageInnerMessage as TestPrefixPrefixedMessageInnerMessageRef } from "./testapis/extensions/extensions_pb_nexus";
+          import { TestPrefixPrefixedMessage as TestPrefixPrefixedMessageRef, TestPrefixPrefixedMessageInnerMessage as TestPrefixPrefixedMessageInnerMessageRef } from "./testapis/extensions/extensions.pb.pothos";
 
           builder.objectField(TestPrefixPrefixedMessageInnerMessageRef, "skipResolver", (t) =>
             t.field({
