@@ -2,4 +2,4 @@
 
 Build GraphQL schema from Protobuf and [Pothos GraphQL](https://pothos-graphql.dev/).
 
-- repository: https://github.com/proto-graphql/proto-nexus
+- repository: https://github.com/proto-graphql/proto-graphql-js

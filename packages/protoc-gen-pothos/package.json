@@ -12,7 +12,7 @@
   "bin": {
     "protoc-gen-pothos": "./bin/protoc-gen-pothos"
   },
-  "repository": "git@github.com:proto-graphql/proto-nexus.git",
+  "repository": "git@github.com:proto-graphql/proto-graphql-js.git",
   "author": "izumin5210 <m@izum.in>",
   "license": "MIT",
   "main": "./lib/index.js",
