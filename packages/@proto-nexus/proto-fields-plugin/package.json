@@ -34,7 +34,6 @@
     "build": "tsc --build . && tsc --build tsconfig.module.json",
     "clean": "rimraf lib/ module/ && tsc --build . --clean && tsc --build tsconfig.module.json --clean",
     "lint": "frolint --branch main --bail",
-    "prepublish": "yarn clean && yarn build",
     "pretest": "ts-node --transpile-only ./src/__tests__/__helpers__/testSchema.ts",
     "test": "jest"
   }
