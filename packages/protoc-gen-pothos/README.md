@@ -1,5 +1,5 @@
-# protoc-gen-nexus
+# protoc-gen-pothos
 
-Build GraphQL schema from Protobuf and Nexus.
+Build GraphQL schema from Protobuf and [Pothos GraphQL](https://pothos-graphql.dev/).
 
 - repository: https://github.com/proto-graphql/proto-nexus
