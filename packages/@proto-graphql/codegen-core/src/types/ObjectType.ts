@@ -25,7 +25,7 @@ export class ObjectType extends TypeBase<ProtoMessage> {
   /**
    * @override
    */
-  override get importModules(): { alias: string; module: string }[] {
+  override get importModules(): { alias: string; module: string; type: "namespace" | "named" }[] {
     return [
       ...super.importModules,
       ...modulesWithUniqueImportAlias([this.protoImportPath]),

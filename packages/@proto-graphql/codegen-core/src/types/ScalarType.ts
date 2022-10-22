@@ -8,7 +8,7 @@ export class ScalarType {
   constructor(
     private readonly proto: ProtoField,
     private readonly type: GqlScalarType,
-    private readonly opts: GenerationParams
+    private readonly opts: GenerationParams & { dsl: "nexus" | "pothos" }
   ) {}
 
   get typeName(): string {
@@ -20,7 +20,7 @@ export class ScalarType {
   }
 
   get importPath(): string | null {
-    if (this.proto.type || this.shouldToString()) {
+    if (this.opts.dsl === "nexus" && (this.proto.type || this.shouldToString())) {
       return "proto-nexus";
     }
     return null;

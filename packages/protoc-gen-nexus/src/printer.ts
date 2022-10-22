@@ -8,7 +8,7 @@ export function generateFiles(
   file: ProtoFile,
   opts: GenerationParams
 ): { filename: string; content: string }[] {
-  const dslFile = new DslFile(file, opts);
+  const dslFile = new DslFile(file, { ...opts, dsl: "nexus" });
   const types = collectTypesFromFile(dslFile, registry);
 
   switch (opts.fileLayout) {

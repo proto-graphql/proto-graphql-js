@@ -20,7 +20,7 @@ export class ObjectField<
     readonly type: T,
     private readonly parent: ObjectType | OneofUnionType,
     proto: ProtoField,
-    opts: GenerationParams
+    opts: GenerationParams & { dsl: "nexus" | "pothos" }
   ) {
     super(proto, opts);
   }
@@ -50,18 +50,28 @@ export class ObjectField<
   /**
    * @override
    */
-  get importModules(): { alias: string; module: string }[] {
+  get importModules(): { alias: string; module: string; type: "namespace" | "named" }[] {
+    const modulePaths = [];
     const modules = [];
     if (this.type instanceof EnumType && this.type.unspecifiedValue != null) {
-      modules.push(this.type.protoImportPath);
+      modulePaths.push(this.type.protoImportPath);
     }
     if (this.type instanceof SquashedOneofUnionType && !this.opts.useProtobufjs) {
-      modules.push(this.type.protoImportPath);
+      modulePaths.push(this.type.protoImportPath);
     }
     if (this.typeImportPath) {
-      modules.push(this.typeImportPath);
+      modulePaths.push(this.typeImportPath);
     }
-    return modulesWithUniqueImportAlias(modules);
+    if (
+      this.opts.dsl === "pothos" &&
+      !(this.type instanceof ScalarType) &&
+      this.type.proto.file.name !== this.parent.proto.file.name
+    ) {
+      const file = path.relative(path.dirname(this.parent.filename), this.type.filename);
+      const module = file.slice(0, -path.extname(file).length);
+      modules.push({ alias: this.type.pothosRefObjectName, module, type: "named" as const });
+    }
+    return [...modulesWithUniqueImportAlias(modulePaths), ...modules];
   }
 
   /**

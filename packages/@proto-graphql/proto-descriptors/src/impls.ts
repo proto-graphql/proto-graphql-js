@@ -269,6 +269,11 @@ export class ProtoOneofImpl implements ProtoOneof {
   }
 
   @memo()
+  get file(): ProtoFile {
+    return this.parent.file;
+  }
+
+  @memo()
   get fields(): ProtoField[] {
     return this.parent.fields.filter(
       (f) => f.descriptor.hasOneofIndex() && f.descriptor.getOneofIndex() === this.index

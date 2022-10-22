@@ -121,6 +121,7 @@ export interface ProtoOneof extends ProtoBase<"Oneof"> {
    */
   readonly fullName: FullName;
   readonly index: number;
+  readonly file: ProtoFile;
   readonly parent: ProtoMessage;
   readonly fields: ProtoField[];
   readonly comments: CommentSet;

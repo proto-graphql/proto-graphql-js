@@ -4,7 +4,7 @@ package testapis.edgecases.import_squashed_union.pkg1;
 
 import "graphql/schema.proto";
 
-message Message {
+message OneofMessage1 {
   string body = 1;
 }
 
@@ -12,6 +12,6 @@ message SquashedOneof {
   option (graphql.object_type).squash_union = true;
 
   oneof message {
-    Message msg = 1;
+    OneofMessage1 msg1 = 1;
   }
 }

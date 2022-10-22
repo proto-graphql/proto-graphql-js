@@ -9,7 +9,12 @@ import { ScalarType } from "./ScalarType";
 import { FullName, GenerationParams, isRequiredField, modulesWithUniqueImportAlias, uniqueImportAlias } from "./util";
 
 export class InputObjectField<T extends ScalarType | EnumType | InputObjectType> extends FieldBase<ProtoField> {
-  constructor(readonly type: T, readonly parent: InputObjectType, proto: ProtoField, opts: GenerationParams) {
+  constructor(
+    readonly type: T,
+    readonly parent: InputObjectType,
+    proto: ProtoField,
+    opts: GenerationParams & { dsl: "nexus" | "pothos" }
+  ) {
     super(proto, opts);
   }
 
@@ -47,12 +52,25 @@ export class InputObjectField<T extends ScalarType | EnumType | InputObjectType>
     return this.proto.googleProtobufSetterName;
   }
 
-  get importModules(): { alias: string; module: string }[] {
+  get importModules(): { alias: string; module: string; type: "namespace" | "named" }[] {
+    const modulePaths = [];
     const modules = [];
     if (this.typeImportPath) {
-      modules.push(this.typeImportPath);
+      modulePaths.push(this.typeImportPath);
     }
-    return modulesWithUniqueImportAlias(modules);
+    if (
+      this.opts.dsl === "pothos" &&
+      !(this.type instanceof ScalarType) &&
+      this.type.proto.file.name !== this.parent.proto.file.name
+    ) {
+      const file = path.relative(path.dirname(this.parent.filename), this.type.filename);
+      const module = file.slice(0, -path.extname(file).length);
+      modules.push({ alias: this.type.pothosRefObjectName, module, type: "named" as const });
+      if (this.type instanceof InputObjectType) {
+        modules.push({ alias: `${this.type.typeName}$Shape`, module, type: "named" as const });
+      }
+    }
+    return [...modules, ...modulesWithUniqueImportAlias(modulePaths)];
   }
 
   get typeFullName(): T extends ScalarType ? FullName | null : FullName {
