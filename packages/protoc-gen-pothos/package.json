@@ -26,17 +26,13 @@
     "@proto-graphql/codegen-core": "^0.1.0",
     "@proto-graphql/proto-descriptors": "^0.1.0",
     "@proto-graphql/protoc-plugin-helpers": "^0.1.0",
-    "@types/change-case": "^2.3.1",
-    "change-case": "^4.1.2"
+    "google-protobuf": "^3.20.1"
   },
   "devDependencies": {
     "@pothos/core": "^3.22.7",
     "@testapis/ts-proto": "^0.5.1",
-    "@types/glob": "7.2.0",
-    "glob": "8.0.1"
-  },
-  "peerDependencies": {
-    "graphql": "^15.4.0"
+    "@types/glob": "^8.0.0",
+    "glob": "^8.0.1"
   },
   "files": [
     "bin/",
