@@ -1,5 +1,11 @@
 # @proto-graphql/codegen-core
 
+## 0.1.1
+
+### Patch Changes
+
+- [#212](https://github.com/proto-graphql/proto-graphql-js/pull/212) [`ba647eb`](https://github.com/proto-graphql/proto-graphql-js/commit/ba647eb584850fee9c632a76cc1c028ce8ccd725) Thanks [@izumin5210](https://github.com/izumin5210)! - refactor dependencies
+
 ## 0.1.0
 
 ### Minor Changes
