@@ -36,7 +36,7 @@
     "@testapis/node-native": "^0.5.1",
     "@types/glob": "^8.0.0",
     "glob": "^8.0.1",
-    "nexus": "^1.0.0"
+    "nexus": "1.3.0"
   },
   "files": [
     "bin/",
