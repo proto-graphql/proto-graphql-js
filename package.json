@@ -70,5 +70,6 @@
       "dependencies": "Dependencies"
     }
   },
-  "name": "proto-nexus"
+  "name": "proto-graphql",
+  "packageManager": "yarn@3.2.4"
 }
