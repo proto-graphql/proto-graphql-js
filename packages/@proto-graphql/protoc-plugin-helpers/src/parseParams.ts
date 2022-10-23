@@ -64,6 +64,10 @@ export const parseParams = (input: string | undefined): GenerationParams => {
         params.typeMappings[protoType] = gqlType;
         break;
       }
+      case "pothos_builder_path": {
+        params.pothosBuilderPath = toString(k, v);
+        break;
+      }
       default:
         throw new Error(`unknown param: ${kv}`);
     }
