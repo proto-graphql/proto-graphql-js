@@ -15,7 +15,6 @@
   "main": "./lib/index.js",
   "module": "./module/index.js",
   "types": "./lib/index.d.ts",
-  "private": false,
   "engines": {
     "node": ">= 14.0.0"
   },
