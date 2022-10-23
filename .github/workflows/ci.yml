@@ -16,7 +16,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 14.x
-    - run: yarn --frozen-lockfile
+    - run: yarn --immutable
     - run: yarn lint:ci
     - run: yarn build
     - run: yarn test
@@ -40,5 +40,5 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 14.x
-    - run: yarn --frozen-lockfile
+    - run: yarn --immutable
     - run: yarn test:integration
