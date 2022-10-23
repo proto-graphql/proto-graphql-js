@@ -4,7 +4,8 @@
     "packages/*",
     "packages/@proto-graphql/*",
     "packages/@proto-nexus/*",
-    "packages/@testapis/*"
+    "packages/@testapis/*",
+    "packages/e2e/*"
   ],
   "scripts": {
     "build": "turbo run build",
@@ -12,6 +13,7 @@
     "lint:ci": "frolint --branch origin/main --bail",
     "test": "turbo run test",
     "test:integration": "yarn generate:testapis && turbo run test:integration",
+    "test:e2e": "turbo run test:e2e",
     "release": "yarn build && changeset publish"
   },
   "devDependencies": {

@@ -48,7 +48,7 @@ execProtoc() {
       --ts_out="$TESTAPIS_ROOT/node-native/lib" \
       ${protoDir}/*.proto
 
-    nodeOutDir="${protoDir/"/proto/src/"/"/node/lib/"}"
+    nodeOutDir="${protoDir/\/proto\/src\///node/lib/}"
     mkdir -p $nodeOutDir
     yarn pbjs \
       --target static-module \
@@ -70,7 +70,6 @@ _main() {
   clean
   init
   execProtoc
-  yarn workspace @testapis/ts-proto build:testapis
 }
 
 _main
