@@ -30,6 +30,9 @@
   "peerDependencies": {
     "nexus": "^1.0.0"
   },
+  "devDependencies": {
+    "nexus": "^1.0.0"
+  },
   "scripts": {
     "build": "tsc --build . && tsc --build tsconfig.module.json",
     "clean": "rimraf lib/ module/ && tsc --build . --clean && tsc --build tsconfig.module.json --clean",
