@@ -1,5 +1,14 @@
 # protoc-gen-nexus
 
+## 0.5.3
+
+### Patch Changes
+
+- [#217](https://github.com/proto-graphql/proto-graphql-js/pull/217) [`5e2e85b`](https://github.com/proto-graphql/proto-graphql-js/commit/5e2e85baf6e0e21960104d3db30a4e21e04e1627) Thanks [@izumin5210](https://github.com/izumin5210)! - add `eslint-disable` directive to generated files
+
+- Updated dependencies [[`c1246c3`](https://github.com/proto-graphql/proto-graphql-js/commit/c1246c3a349f11e3b2bbfd6198c1a06b37270ece)]:
+  - @proto-graphql/codegen-core@0.1.2
+
 ## 0.5.2
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @proto-graphql/codegen-core
 
+## 0.1.2
+
+### Patch Changes
+
+- [#218](https://github.com/proto-graphql/proto-graphql-js/pull/218) [`c1246c3`](https://github.com/proto-graphql/proto-graphql-js/commit/c1246c3a349f11e3b2bbfd6198c1a06b37270ece) Thanks [@izumin5210](https://github.com/izumin5210)! - fix non-null custom scalar field resolver
+
 ## 0.1.1
 
 ### Patch Changes
