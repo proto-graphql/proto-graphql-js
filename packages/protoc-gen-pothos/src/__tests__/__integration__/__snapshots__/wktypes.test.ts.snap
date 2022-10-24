@@ -35,6 +35,9 @@ type Message {
   int32Values: [Int!]
   int64Value: String
   int64Values: [String!]
+
+  \\"\\"\\"Required.\\"\\"\\"
+  requiredTimestamp: DateTime!
   stringValue: String
   stringValues: [String!]
   timestamp: DateTime
@@ -56,6 +59,9 @@ input MessageInput {
   int32Values: [Int!]
   int64Value: String
   int64Values: [String!]
+
+  \\"\\"\\"Required.\\"\\"\\"
+  requiredTimestamp: DateTime!
   stringValue: String
   stringValues: [String!]
   timestamp: DateTime
@@ -107,6 +113,9 @@ type Message {
   int32Values: [Int!]
   int64Value: String
   int64Values: [String!]
+
+  \\"\\"\\"Required.\\"\\"\\"
+  requiredTimestamp: DateTime!
   stringValue: String
   stringValues: [String!]
   timestamp: DateTime
@@ -128,6 +137,9 @@ input MessageInput {
   int32Values: [Int!]
   int64Value: String
   int64Values: [String!]
+
+  \\"\\"\\"Required.\\"\\"\\"
+  requiredTimestamp: DateTime!
   stringValue: String
   stringValues: [String!]
   timestamp: DateTime

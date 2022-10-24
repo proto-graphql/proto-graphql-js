@@ -68,7 +68,10 @@ export function createFieldDefinitionExpr(
 
   let createResolveStmts: ((valueExpr: ts.Expression) => ts.Statement[]) | undefined;
   if (!isInput) {
-    if (field.type instanceof ObjectType && !field.isNullable()) {
+    const nullableInProto =
+      field.type instanceof ObjectType ||
+      (field.type instanceof ScalarType && !field.type.isPrimitive() && !field.type.isWrapperType());
+    if (nullableInProto && !field.isNullable()) {
       createResolveStmts = (sourceExpr) =>
         createNonNullResolverStmts(ts.factory.createPropertyAccessExpression(sourceExpr, field.protoJsName));
     }
