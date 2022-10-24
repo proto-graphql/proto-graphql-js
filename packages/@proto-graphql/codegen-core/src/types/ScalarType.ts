@@ -19,6 +19,10 @@ export class ScalarType {
     return this.proto.type == null;
   }
 
+  public isWrapperType(): boolean {
+    return this.proto.type != null && this.proto.type.file.name === "google/protobuf/wrappers.proto";
+  }
+
   get importPath(): string | null {
     if (this.opts.dsl === "nexus" && (this.proto.type || this.shouldToString())) {
       return "proto-nexus";

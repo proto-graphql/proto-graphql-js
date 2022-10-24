@@ -16428,6 +16428,24 @@ export const Message = nexus.objectType({
                 } as proto_nexus.ProtobufFieldExtensions)
             }
         });
+        t.field(\\"requiredTimestamp\\", {
+            type: nexus.nonNull(\\"DateTime\\"),
+            description: \\"Required.\\",
+            resolve(root) {
+                const value = root.getRequiredTimestamp();
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return proto_nexus.getTransformer(\\"google.protobuf.Timestamp\\").protoToGql(value);
+            },
+            extensions: {
+                ...({
+                    protobufField: {
+                        name: \\"required_timestamp\\"
+                    }
+                } as proto_nexus.ProtobufFieldExtensions)
+            }
+        });
     },
     isTypeOf(data: unknown) {
         return data instanceof _$testapis$wktypes$well_known_types_pb.Message;
@@ -16626,6 +16644,17 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
                 } as proto_nexus.ProtobufFieldExtensions)
             }
         });
+        t.field(\\"requiredTimestamp\\", {
+            type: nexus.nonNull(\\"DateTime\\"),
+            description: \\"Required.\\",
+            extensions: {
+                ...({
+                    protobufField: {
+                        name: \\"required_timestamp\\"
+                    }
+                } as proto_nexus.ProtobufFieldExtensions)
+            }
+        });
     },
     extensions: {
         protobufMessage: {
@@ -16691,6 +16720,7 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
         if (input.stringValues != null) {
             output.setStringValuesList(input.stringValues.map(v => proto_nexus.getTransformer(\\"google.protobuf.StringValue\\").gqlToProto(v)));
         }
+        output.setRequiredTimestamp(proto_nexus.getTransformer(\\"google.protobuf.Timestamp\\").gqlToProto(input.requiredTimestamp));
         return output;
     },
     _protoNexus: {
@@ -16871,6 +16901,17 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
                     ...({
                         protobufField: {
                             name: \\"string_values\\"
+                        }
+                    } as proto_nexus.ProtobufFieldExtensions)
+                }
+            },
+            requiredTimestamp: {
+                type: nexus.nonNull(\\"DateTime\\"),
+                description: \\"Required.\\",
+                extensions: {
+                    ...({
+                        protobufField: {
+                            name: \\"required_timestamp\\"
                         }
                     } as proto_nexus.ProtobufFieldExtensions)
                 }
@@ -17191,6 +17232,24 @@ export const Message = nexus.objectType({
                 } as proto_nexus.ProtobufFieldExtensions)
             }
         });
+        t.field(\\"requiredTimestamp\\", {
+            type: nexus.nonNull(\\"DateTime\\"),
+            description: \\"Required.\\",
+            resolve(root) {
+                const value = root.requiredTimestamp;
+                if (value == null) {
+                    throw new Error(\\"Cannot return null for non-nullable field\\");
+                }
+                return proto_nexus.getTransformer(\\"google.protobuf.Timestamp\\").protoToGql(value);
+            },
+            extensions: {
+                ...({
+                    protobufField: {
+                        name: \\"required_timestamp\\"
+                    }
+                } as proto_nexus.ProtobufFieldExtensions)
+            }
+        });
     },
     isTypeOf(data: unknown) {
         return data instanceof _$testapis$wktypes.testapis.wktypes.Message;
@@ -17389,6 +17448,17 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
                 } as proto_nexus.ProtobufFieldExtensions)
             }
         });
+        t.field(\\"requiredTimestamp\\", {
+            type: nexus.nonNull(\\"DateTime\\"),
+            description: \\"Required.\\",
+            extensions: {
+                ...({
+                    protobufField: {
+                        name: \\"required_timestamp\\"
+                    }
+                } as proto_nexus.ProtobufFieldExtensions)
+            }
+        });
     },
     extensions: {
         protobufMessage: {
@@ -17454,6 +17524,7 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
         if (input.stringValues != null) {
             output.stringValues = input.stringValues.map(v => new _$testapis$wktypes.google.protobuf.StringValue(proto_nexus.getTransformer(\\"google.protobuf.StringValue\\").gqlToProto(v)));
         }
+        output.requiredTimestamp = new _$testapis$wktypes.google.protobuf.Timestamp(proto_nexus.getTransformer(\\"google.protobuf.Timestamp\\").gqlToProto(input.requiredTimestamp) as any);
         return output;
     },
     _protoNexus: {
@@ -17634,6 +17705,17 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
                     ...({
                         protobufField: {
                             name: \\"string_values\\"
+                        }
+                    } as proto_nexus.ProtobufFieldExtensions)
+                }
+            },
+            requiredTimestamp: {
+                type: nexus.nonNull(\\"DateTime\\"),
+                description: \\"Required.\\",
+                extensions: {
+                    ...({
+                        protobufField: {
+                            name: \\"required_timestamp\\"
                         }
                     } as proto_nexus.ProtobufFieldExtensions)
                 }

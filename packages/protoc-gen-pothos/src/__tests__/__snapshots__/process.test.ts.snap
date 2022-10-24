@@ -3690,6 +3690,14 @@ builder.objectType(Message$Ref, {
         stringValues: t.expose(\\"stringValues\\", {
             type: [\\"String\\"],
             nullable: { list: true, items: false }
+        }),
+        requiredTimestamp: t.field({
+            type: \\"DateTime\\",
+            nullable: false,
+            description: \\"Required.\\",
+            resolve: source => {
+                return source.requiredTimestamp!;
+            }
         })
     }),
     isTypeOf: source => {
@@ -3717,6 +3725,7 @@ export type MessageInput$Shape = {
     doubleValues?: _$testapis$wktypes$well_known_types.Message[\\"doubleValues\\"] | null;
     boolValues?: _$testapis$wktypes$well_known_types.Message[\\"boolValues\\"] | null;
     stringValues?: _$testapis$wktypes$well_known_types.Message[\\"stringValues\\"] | null;
+    requiredTimestamp: _$testapis$wktypes$well_known_types.Message[\\"requiredTimestamp\\"];
 };
 export const MessageInput$Ref = builder.inputRef<MessageInput$Shape>(\\"MessageInput\\");
 MessageInput$Ref.implement({
@@ -3792,6 +3801,11 @@ MessageInput$Ref.implement({
         stringValues: t.field({
             type: [\\"String\\"],
             required: { list: false, items: true }
+        }),
+        requiredTimestamp: t.field({
+            type: \\"DateTime\\",
+            required: true,
+            description: \\"Required.\\"
         })
     })
 });
