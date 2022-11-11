@@ -22,7 +22,7 @@
     "frolint": "2.8.2",
     "google-protobuf": "3.20.1",
     "graphql": "15.4.0",
-    "graphql-scalars": "1.17.0",
+    "graphql-scalars": "1.20.1",
     "jest": "27.5.1",
     "protobufjs": "6.11.2",
     "rimraf": "3.0.2",
