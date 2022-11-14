@@ -31,6 +31,8 @@
   "devDependencies": {
     "@pothos/core": "^3.22.7",
     "@testapis/ts-proto": "^0.5.1",
+    "@testapis/ts-proto-with-forcelong-long": "^0.5.1",
+    "@testapis/ts-proto-with-forcelong-number": "^0.5.1",
     "@types/glob": "^8.0.0",
     "glob": "^8.0.1"
   },
