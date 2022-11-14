@@ -158,8 +158,9 @@ function detectType<T extends ObjectType | InterfaceType | SquashedOneofUnionTyp
       return f(msg, file);
     }
     /* istanbul ignore next */
-    default: // eslint-disable-line
+    default: {
       const _exhaustiveCheck: never = pbtype;
       throw "unreachable";
+    }
   }
 }
