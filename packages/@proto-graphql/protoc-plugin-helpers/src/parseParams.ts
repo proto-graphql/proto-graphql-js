@@ -1,4 +1,5 @@
 import { fileLayouts, GenerationParams } from "@proto-graphql/codegen-core";
+import { LongNumberMapping } from "@proto-graphql/codegen-core";
 
 export const parseParams = (input: string | undefined): GenerationParams => {
   const params: GenerationParams = {
@@ -8,17 +9,8 @@ export const parseParams = (input: string | undefined): GenerationParams => {
     partialInputs: false,
     importPrefix: null,
     fileLayout: "proto_file",
-    typeMappings: {
-      "google.protobuf.Int32Value": "Int",
-      "google.protobuf.Int64Value": "String",
-      "google.protobuf.UInt32Value": "Int",
-      "google.protobuf.UInt64Value": "String",
-      "google.protobuf.FloatValue": "Float",
-      "google.protobuf.DoubleValue": "Float",
-      "google.protobuf.BoolValue": "Boolean",
-      "google.protobuf.StringValue": "String",
-      "google.protobuf.Timestamp": "DateTime",
-    },
+    typeMappings: wktypeMappings({ longNumber: "String" }),
+    longNumber: "String",
   };
 
   if (!input) return params;
@@ -68,6 +60,11 @@ export const parseParams = (input: string | undefined): GenerationParams => {
         params.pothosBuilderPath = toString(k, v);
         break;
       }
+      case "long_number": {
+        params.longNumber = toString(k, v);
+        params.typeMappings = { ...params.typeMappings, ...wktypeMappings({ longNumber: params.longNumber }) };
+        break;
+      }
       default:
         throw new Error(`unknown param: ${kv}`);
     }
@@ -75,3 +72,17 @@ export const parseParams = (input: string | undefined): GenerationParams => {
 
   return params;
 };
+
+function wktypeMappings({ longNumber }: { longNumber: LongNumberMapping }) {
+  return {
+    "google.protobuf.Int32Value": "Int",
+    "google.protobuf.Int64Value": longNumber,
+    "google.protobuf.UInt32Value": "Int",
+    "google.protobuf.UInt64Value": longNumber,
+    "google.protobuf.FloatValue": "Float",
+    "google.protobuf.DoubleValue": "Float",
+    "google.protobuf.BoolValue": "Boolean",
+    "google.protobuf.StringValue": "String",
+    "google.protobuf.Timestamp": "DateTime",
+  };
+}
