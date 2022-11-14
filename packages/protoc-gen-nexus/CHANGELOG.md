@@ -1,5 +1,13 @@
 # protoc-gen-nexus
 
+## 0.5.4
+
+### Patch Changes
+
+- Updated dependencies [[`6c25f40`](https://github.com/proto-graphql/proto-graphql-js/commit/6c25f4035f1b788a63bf005dbc52ca5d0bd5f2a2)]:
+  - @proto-graphql/codegen-core@0.2.0
+  - @proto-graphql/protoc-plugin-helpers@0.2.0
+
 ## 0.5.3
 
 ### Patch Changes
