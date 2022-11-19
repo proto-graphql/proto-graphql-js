@@ -23,6 +23,9 @@ it("generates GraphQL schema SDL", async () => {
       int32Values: [Int!]
       int64Value: String
       int64Values: [String!]
+
+      \\"\\"\\"Required.\\"\\"\\"
+      requiredTimestamp: DateTime!
       stringValue: String
       stringValues: [String!]
       timestamp: DateTime
@@ -44,6 +47,9 @@ it("generates GraphQL schema SDL", async () => {
       int32Values: [Int!]
       int64Value: String
       int64Values: [String!]
+
+      \\"\\"\\"Required.\\"\\"\\"
+      requiredTimestamp: DateTime!
       stringValue: String
       stringValues: [String!]
       timestamp: DateTime

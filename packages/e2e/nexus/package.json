@@ -14,6 +14,7 @@
     "gen:pb-nexus": "buf generate ../../@testapis/proto/src",
     "gen:gql-schema": "ts-node --transpile-only -e \"require('glob').sync('./**/schema.ts').forEach(require)\"",
     "test:typecheck": "ls -1 e2e/**/tsconfig.json | xargs -I {} yarn tsc --noEmit -p {}",
-    "test:e2e": "yarn clean && yarn gen:pb-nexus && yarn gen:gql-schema && jest"
+    "pretest:e2e": "yarn clean && yarn gen:pb-nexus && yarn gen:gql-schema",
+    "test:e2e": "jest"
   }
 }
