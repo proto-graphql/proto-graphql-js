@@ -120,13 +120,13 @@ function detectType<T extends ObjectType | InterfaceType | SquashedOneofUnionTyp
     case FieldDescriptorProto.Type.TYPE_FLOAT:
       return new ScalarType(proto, "Float", opts);
     case FieldDescriptorProto.Type.TYPE_INT64:
-      return new ScalarType(proto, "String", opts);
+      return new ScalarType(proto, opts.longNumber, opts);
     case FieldDescriptorProto.Type.TYPE_UINT64:
-      return new ScalarType(proto, "String", opts);
+      return new ScalarType(proto, opts.longNumber, opts);
     case FieldDescriptorProto.Type.TYPE_INT32:
       return new ScalarType(proto, "Int", opts);
     case FieldDescriptorProto.Type.TYPE_FIXED64:
-      return new ScalarType(proto, "String", opts);
+      return new ScalarType(proto, opts.longNumber, opts);
     case FieldDescriptorProto.Type.TYPE_FIXED32:
       return new ScalarType(proto, "Int", opts);
     case FieldDescriptorProto.Type.TYPE_UINT32:
@@ -134,11 +134,11 @@ function detectType<T extends ObjectType | InterfaceType | SquashedOneofUnionTyp
     case FieldDescriptorProto.Type.TYPE_SFIXED32:
       return new ScalarType(proto, "Int", opts);
     case FieldDescriptorProto.Type.TYPE_SFIXED64:
-      return new ScalarType(proto, "String", opts);
+      return new ScalarType(proto, opts.longNumber, opts);
     case FieldDescriptorProto.Type.TYPE_SINT32:
       return new ScalarType(proto, "Int", opts);
     case FieldDescriptorProto.Type.TYPE_SINT64:
-      return new ScalarType(proto, "String", opts);
+      return new ScalarType(proto, opts.longNumber, opts);
     case FieldDescriptorProto.Type.TYPE_BOOL:
       return new ScalarType(proto, "Boolean", opts);
     case FieldDescriptorProto.Type.TYPE_GROUP:
@@ -158,8 +158,9 @@ function detectType<T extends ObjectType | InterfaceType | SquashedOneofUnionTyp
       return f(msg, file);
     }
     /* istanbul ignore next */
-    default:
-      const _exhaustiveCheck: never = pbtype; // eslint-disable-line
+    default: {
+      const _exhaustiveCheck: never = pbtype;
       throw "unreachable";
+    }
   }
 }

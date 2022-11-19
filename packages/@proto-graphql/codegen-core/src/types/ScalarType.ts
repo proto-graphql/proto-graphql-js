@@ -2,7 +2,8 @@ import { ProtoField } from "@proto-graphql/proto-descriptors";
 import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
 import { createProtoFullName, FullName, GenerationParams } from "./util";
 
-export type GqlScalarType = "Int" | "Float" | "String" | "Boolean" | "ID" | "DateTime";
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type GqlScalarType = "Int" | "Float" | "String" | "Boolean" | "ID" | "DateTime" | (string & {});
 
 export class ScalarType {
   constructor(
@@ -17,6 +18,10 @@ export class ScalarType {
 
   public isPrimitive(): boolean {
     return this.proto.type == null;
+  }
+
+  public isWrapperType(): boolean {
+    return this.proto.type != null && this.proto.type.file.name === "google/protobuf/wrappers.proto";
   }
 
   get importPath(): string | null {

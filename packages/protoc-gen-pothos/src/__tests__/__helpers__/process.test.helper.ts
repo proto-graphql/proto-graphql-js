@@ -6,19 +6,23 @@ import * as ts from "typescript";
 import { FileDescriptorSet } from "google-protobuf/google/protobuf/descriptor_pb";
 import { processRequest } from "../../process";
 import { CodeGeneratorRequest, CodeGeneratorResponse } from "google-protobuf/google/protobuf/compiler/plugin_pb";
+import { GenerationParams } from "@proto-graphql/codegen-core";
+import { LongNumberMapping } from "@proto-graphql/codegen-core/lib/types/util";
 
-const generationTargets = ["ts-proto"] as const;
+const generationTargets = ["ts-proto", "ts-proto-with-forcelong-long", "ts-proto-with-forcelong-number"] as const;
 type GenerationTarget = typeof generationTargets[number];
 
 export async function generateDSLs(
   name: string,
   target: GenerationTarget,
-  opts: { withPrefix?: boolean; perGraphQLType?: boolean; partialInputs?: boolean } = {}
+  opts: { withPrefix?: boolean; perGraphQLType?: boolean; partialInputs?: boolean; longNumber?: LongNumberMapping } = {}
 ) {
   const params = [];
   switch (target) {
     case "ts-proto":
-      if (opts.withPrefix) params.push("import_prefix=@testapis/ts-proto/lib");
+    case "ts-proto-with-forcelong-long":
+    case "ts-proto-with-forcelong-number":
+      if (opts.withPrefix) params.push(`import_prefix=@testapis/${target}/lib`);
       break;
     default: {
       const _exhaustiveCheck: never = target;
@@ -30,6 +34,9 @@ export async function generateDSLs(
   }
   if (opts.partialInputs) {
     params.push("partial_inputs");
+  }
+  if (opts.longNumber) {
+    params.push(`long_number=${opts.longNumber}`);
   }
   return await processCodeGeneration(name, params.join(","));
 }
@@ -47,6 +54,7 @@ export function testSchemaGeneration(
   name: string | string[],
   target: GenerationTarget,
   opts: {
+    genParams?: Partial<Pick<GenerationParams, "longNumber">>;
     builderTs?: string;
     extraSchema?: string;
     schemaTests?: [
@@ -64,7 +72,7 @@ export function testSchemaGeneration(
       files = [];
 
       for (const n of Array.isArray(name) ? name : [name]) {
-        files.push(...(await generateDSLs(n, target, { withPrefix: true })).getFileList());
+        files.push(...(await generateDSLs(n, target, { withPrefix: true, ...opts.genParams })).getFileList());
       }
     });
 

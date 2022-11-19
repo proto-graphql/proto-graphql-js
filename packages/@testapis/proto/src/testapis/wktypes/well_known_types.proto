@@ -25,4 +25,7 @@ message Message {
   repeated google.protobuf.DoubleValue double_values = 107;
   repeated google.protobuf.BoolValue bool_values = 108;
   repeated google.protobuf.StringValue string_values = 109;
+
+  // Required.
+  google.protobuf.Timestamp required_timestamp = 201;
 }
