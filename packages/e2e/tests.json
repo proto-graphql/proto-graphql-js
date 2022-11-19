@@ -1,5 +1,17 @@
 {
   "tests": [
+    { "target": "nexus", "proto": { "package": "deprecation", "lib": "google-protobuf" } },
+    { "target": "nexus", "proto": { "package": "deprecation", "lib": "protobufjs" } },
+    { "target": "nexus", "proto": { "package": "empty_types", "lib": "google-protobuf" } },
+    { "target": "nexus", "proto": { "package": "empty_types", "lib": "protobufjs" } },
+    { "target": "nexus", "proto": { "package": "enums", "lib": "google-protobuf" } },
+    { "target": "nexus", "proto": { "package": "enums", "lib": "protobufjs" } },
+    { "target": "nexus", "proto": { "package": "extensions", "lib": "google-protobuf" } },
+    { "target": "nexus", "proto": { "package": "extensions", "lib": "protobufjs" } },
+    { "target": "nexus", "proto": { "package": "field_behavior", "lib": "google-protobuf" } },
+    { "target": "nexus", "proto": { "package": "field_behavior", "lib": "protobufjs" } },
+    { "target": "nexus", "proto": { "package": "multipkgs", "lib": "google-protobuf" } },
+    { "target": "nexus", "proto": { "package": "multipkgs", "lib": "protobufjs" } },
     { "target": "nexus", "proto": { "package": "nested", "lib": "google-protobuf" } },
     { "target": "nexus", "proto": { "package": "nested", "lib": "protobufjs" } },
     { "target": "nexus", "proto": { "package": "oneof", "lib": "google-protobuf" } },

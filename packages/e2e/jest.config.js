@@ -4,7 +4,7 @@ const path = require("path");
 module.exports = {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   projects: require("glob")
-    .sync("./e2e/*/tsconfig.json")
+    .sync("./tests/*/tsconfig.json")
     .map((tsconfigPath) => {
       return {
         preset: "ts-jest",
