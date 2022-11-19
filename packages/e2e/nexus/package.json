@@ -10,11 +10,9 @@
     "protoc-gen-nexus": "^0.5.1"
   },
   "scripts": {
-    "clean": "rimraf **/__generated__",
-    "gen:pb-nexus": "buf generate ../../@testapis/proto/src",
-    "gen:gql-schema": "ts-node --transpile-only -e \"require('glob').sync('./**/schema.ts').forEach(require)\"",
-    "test:typecheck": "ls -1 e2e/**/tsconfig.json | xargs -I {} yarn tsc --noEmit -p {}",
-    "pretest:e2e": "yarn clean && yarn gen:pb-nexus && yarn gen:gql-schema",
-    "test:e2e": "jest"
+    "test:setup": "./setupTests.js",
+    "test:typecheck": "tsc -b tsconfig.json",
+    "test:jest": "jest",
+    "test:e2e": "yarn test:setup && yarn test:typecheck && yarn test:e2e"
   }
 }
