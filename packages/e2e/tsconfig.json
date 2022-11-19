@@ -9,6 +9,12 @@
       "path": "tests/nexus--deprecation--protobufjs"
     },
     {
+      "path": "tests/nexus--edgecases-import_squashed_union--google-protobuf"
+    },
+    {
+      "path": "tests/nexus--edgecases-import_squashed_union--protobufjs"
+    },
+    {
       "path": "tests/nexus--empty_types--google-protobuf"
     },
     {

@@ -2,6 +2,8 @@
   "tests": [
     { "target": "nexus", "proto": { "package": "deprecation", "lib": "google-protobuf" } },
     { "target": "nexus", "proto": { "package": "deprecation", "lib": "protobufjs" } },
+    { "target": "nexus", "proto": { "package": "edgecases/import_squashed_union", "lib": "google-protobuf" } },
+    { "target": "nexus", "proto": { "package": "edgecases/import_squashed_union", "lib": "protobufjs" } },
     { "target": "nexus", "proto": { "package": "empty_types", "lib": "google-protobuf" } },
     { "target": "nexus", "proto": { "package": "empty_types", "lib": "protobufjs" } },
     { "target": "nexus", "proto": { "package": "enums", "lib": "google-protobuf" } },

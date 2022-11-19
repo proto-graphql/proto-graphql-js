@@ -34,8 +34,13 @@ async function setupTest(opts) {
         include: [
           ".",
           relative(path, "./src"),
-          relative(path, join(testsDir, "__generated__", opts.target, opts.proto.lib, "testapis", opts.proto.package)),
-        ],
+          relative(
+            path,
+            [testsDir, "__generated__", opts.target, opts.proto.lib, "testapis", ...opts.proto.package.split("/")].join(
+              "/"
+            )
+          ),
+        ].map((p) => `${p}/**/*`),
       },
       undefined,
       2
