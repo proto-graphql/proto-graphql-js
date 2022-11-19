@@ -1,7 +1,5 @@
 import { Message } from "@testapis/ts-proto/lib/testapis/wktypes/well_known_types";
-import { mkdirSync, writeFileSync } from "fs";
-import { printSchema } from "graphql";
-import { join } from "path";
+import { printGraphqlSchema } from "../../src/printGraphqlSchema";
 import { Message$Ref } from "../__generated__/pothos/ts-proto/testapis/wktypes/well_known_types.pb.pothos";
 import { builder } from "./builder";
 
@@ -35,5 +33,4 @@ builder.queryField("valuesAreBlank", (f) =>
 
 export const schema = builder.toSchema();
 
-mkdirSync(join(__dirname, "__generated__"), { recursive: true });
-writeFileSync(join(__dirname, "__generated__", "schema.graphql"), printSchema(schema), "utf-8");
+printGraphqlSchema({ schema, rootDir: __dirname });

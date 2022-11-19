@@ -69,6 +69,18 @@
       "path": "tests/nexus--wktypes--protobufjs"
     },
     {
+      "path": "tests/pothos--nested--ts-proto"
+    },
+    {
+      "path": "tests/pothos--oneof--ts-proto"
+    },
+    {
+      "path": "tests/pothos--primitives--ts-proto"
+    },
+    {
+      "path": "tests/pothos--primitives--ts-proto-with-forcelong-number"
+    },
+    {
       "path": "tests/pothos--wktypes--ts-proto"
     },
     {

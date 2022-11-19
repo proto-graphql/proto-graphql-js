@@ -1,0 +1,40 @@
+type OneofMemberMessage1 {
+  body: String!
+}
+
+input OneofMemberMessage1Input {
+  body: String!
+}
+
+type OneofMemberMessage2 {
+  imageUrl: String!
+}
+
+input OneofMemberMessage2Input {
+  imageUrl: String!
+}
+
+type OneofParent {
+  normalField: String!
+  optionalOneofMembers: OneofParentOptionalOneofMembers
+
+  """Required. disallow not_set."""
+  requiredOneofMembers: OneofParentRequiredOneofMembers!
+}
+
+input OneofParentInput {
+  normalField: String!
+  optoinalMessage1: OneofMemberMessage1Input
+  optoinalMessage2: OneofMemberMessage2Input
+  requiredMessage1: OneofMemberMessage1Input
+  requiredMessage2: OneofMemberMessage2Input
+}
+
+union OneofParentOptionalOneofMembers = OneofMemberMessage1 | OneofMemberMessage2
+
+"""Required. disallow not_set."""
+union OneofParentRequiredOneofMembers = OneofMemberMessage1 | OneofMemberMessage2
+
+type Query {
+  test: OneofParent!
+}
