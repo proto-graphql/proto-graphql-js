@@ -10,9 +10,10 @@
     "protoc-gen-nexus": "^0.5.1"
   },
   "scripts": {
-    "test:setup": "./setupTests.js",
+    "test:setup": "./setupTests.mjs",
     "test:typecheck": "tsc -b tsconfig.json",
     "test:jest": "jest",
-    "test:e2e": "yarn test:setup && yarn test:typecheck && yarn test:e2e"
+    "test:schema": "git diff --exit-code e2e/**/schema.graphql",
+    "test:e2e": "yarn test:setup && yarn test:typecheck && yarn test:e2e && yarn test:schema"
   }
 }
