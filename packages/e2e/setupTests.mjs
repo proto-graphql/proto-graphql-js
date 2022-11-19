@@ -14,7 +14,7 @@ const testsDir = "tests";
  * @param {{ target: "nexus" | "pothos", proto: { package: String, lib: String } } opts
  */
 function getTestPath(opts) {
-  return `${testsDir}/${[opts.target, opts.proto.package, opts.proto.lib].join("-")}`;
+  return `${testsDir}/${[opts.target, opts.proto.package.replace("/", "-"), opts.proto.lib].join("--")}`;
 }
 
 /**
