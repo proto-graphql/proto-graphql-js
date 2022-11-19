@@ -31,7 +31,9 @@ export abstract class TypeBase<P extends ProtoMessage | ProtoEnum | ProtoOneof> 
         return [
           {
             alias: "builder",
-            module: path.relative(path.dirname(this.filename), this.options.pothosBuilderPath),
+            module: this.options.pothosBuilderPath.startsWith(".")
+              ? path.relative(path.dirname(this.filename), this.options.pothosBuilderPath)
+              : this.options.pothosBuilderPath,
             type: "named",
           },
         ];
