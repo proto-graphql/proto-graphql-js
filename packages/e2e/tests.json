@@ -1,0 +1,12 @@
+{
+  "tests": [
+    { "target": "nexus", "proto": { "package": "nested", "lib": "google-protobuf" } },
+    { "target": "nexus", "proto": { "package": "nested", "lib": "protobufjs" } },
+    { "target": "nexus", "proto": { "package": "oneof", "lib": "google-protobuf" } },
+    { "target": "nexus", "proto": { "package": "oneof", "lib": "protobufjs" } },
+    { "target": "nexus", "proto": { "package": "primitives", "lib": "google-protobuf" } },
+    { "target": "nexus", "proto": { "package": "primitives", "lib": "protobufjs" } },
+    { "target": "nexus", "proto": { "package": "wktypes", "lib": "google-protobuf" } },
+    { "target": "nexus", "proto": { "package": "wktypes", "lib": "protobufjs" } }
+  ]
+}
