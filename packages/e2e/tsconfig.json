@@ -67,6 +67,12 @@
     },
     {
       "path": "tests/nexus--wktypes--protobufjs"
+    },
+    {
+      "path": "tests/pothos--wktypes--ts-proto"
+    },
+    {
+      "path": "tests/pothos--wktypes--ts-proto-with-forcelong-number"
     }
   ]
 }

@@ -23,32 +23,33 @@ function getTestPath(opts) {
 async function setupTest(opts) {
   const path = getTestPath(opts);
   const genDir = join(path, "__generated__");
+  const tsconfigPath = join(path, "tsconfig.json");
+  const schemaPath = join(path, "schema.ts");
+
   await rm(genDir, { recursive: true, force: true });
   await mkdir(genDir, { recursive: true });
 
-  await writeFile(
-    join(path, "tsconfig.json"),
-    `${header}\n${JSON.stringify(
-      {
-        extends: "../../tsconfig.base.json",
-        include: [
-          ".",
-          relative(path, "./src"),
-          relative(
-            path,
-            [testsDir, "__generated__", opts.target, opts.proto.lib, "testapis", ...opts.proto.package.split("/")].join(
-              "/"
-            )
-          ),
-        ].map((p) => `${p}/**/*`),
+  const tsconfig = {
+    extends: "../../tsconfig.base.json",
+    compilerOptions: {
+      baseUrl: ".",
+      paths: {
+        "@/*": ["./*"],
       },
-      undefined,
-      2
-    )}`,
-    "utf-8"
-  );
+    },
+    include: [
+      ".",
+      relative(path, "./src"),
+      relative(
+        path,
+        [testsDir, "__generated__", opts.target, opts.proto.lib, "testapis", ...opts.proto.package.split("/")].join("/")
+      ),
+    ].map((p) => `${p}/**/*`),
+  };
 
-  await exec(`yarn ts-node --transpile-only --project ${join(path, "tsconfig.json")} ${join(path, "schema.ts")}`);
+  await writeFile(tsconfigPath, `${header}\n${JSON.stringify(tsconfig, undefined, 2)}`, "utf-8");
+
+  await exec(`yarn ts-node --transpile-only --require tsconfig-paths/register --project ${tsconfigPath} ${schemaPath}`);
 }
 
 async function setupTests() {

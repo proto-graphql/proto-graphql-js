@@ -7,5 +7,5 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["./**/*", "../../src/**/*", "../__generated__/nexus/google-protobuf/testapis/wktypes/**/*"]
+  "include": ["./**/*", "../../src/**/*", "../__generated__/pothos/ts-proto/testapis/wktypes/**/*"]
 }

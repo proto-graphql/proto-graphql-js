@@ -10,6 +10,9 @@ module.exports = {
         preset: "ts-jest",
         testEnvironment: "node",
         rootDir: path.dirname(tsconfigPath),
+        moduleNameMapper: {
+          "^@/(.*)$": "<rootDir>/$1",
+        },
       };
     }),
   globals: {
