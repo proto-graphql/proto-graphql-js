@@ -5,7 +5,7 @@
     "packages/@proto-graphql/*",
     "packages/@proto-nexus/*",
     "packages/@testapis/*",
-    "packages/e2e/*"
+    "e2e"
   ],
   "scripts": {
     "build": "turbo run build",

@@ -73,7 +73,7 @@ async function setupTests() {
 
 async function setupProtoNexus() {
   await rm(join(testsDir, "__generated__"), { recursive: true, force: true });
-  await exec(`buf generate ${join("..", "@testapis", "proto", "src")}`);
+  await exec(`buf generate ${join("..", "packages", "@testapis", "proto", "src")}`);
 }
 
 async function main() {
