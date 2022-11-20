@@ -114,10 +114,10 @@ export const NotDeprecatedMessage = nexus.objectType({
                     case _$testapis$deprecation$deprecation_pb.NotDeprecatedMessage.NotDeprecatedOneofCase.NOT_DEPRECATED_ONEOF_NOT_SET: {
                         return null;
                     }
-                    case _$testapis$deprecation$deprecation_pb.NotDeprecatedMessage.NotDeprecatedOneofCase.MSG_1: {
+                    case _$testapis$deprecation$deprecation_pb.NotDeprecatedMessage.NotDeprecatedOneofCase.MSG1: {
                         return root.getMsg1()!;
                     }
-                    case _$testapis$deprecation$deprecation_pb.NotDeprecatedMessage.NotDeprecatedOneofCase.MSG_2: {
+                    case _$testapis$deprecation$deprecation_pb.NotDeprecatedMessage.NotDeprecatedOneofCase.MSG2: {
                         return root.getMsg2()!;
                     }
                     default: {
@@ -141,10 +141,10 @@ export const NotDeprecatedMessage = nexus.objectType({
                     case _$testapis$deprecation$deprecation_pb.NotDeprecatedMessage.DeprecatedOneofCase.DEPRECATED_ONEOF_NOT_SET: {
                         return null;
                     }
-                    case _$testapis$deprecation$deprecation_pb.NotDeprecatedMessage.DeprecatedOneofCase.MSG_3: {
+                    case _$testapis$deprecation$deprecation_pb.NotDeprecatedMessage.DeprecatedOneofCase.MSG3: {
                         return root.getMsg3()!;
                     }
-                    case _$testapis$deprecation$deprecation_pb.NotDeprecatedMessage.DeprecatedOneofCase.MSG_4: {
+                    case _$testapis$deprecation$deprecation_pb.NotDeprecatedMessage.DeprecatedOneofCase.MSG4: {
                         return root.getMsg4()!;
                     }
                     default: {
@@ -9366,10 +9366,10 @@ export const OneofParent = nexus.objectType({
                     case _$testapis$oneof$oneof_pb.OneofParent.RequiredOneofMembersCase.REQUIRED_ONEOF_MEMBERS_NOT_SET: {
                         throw \\"unreachable\\";
                     }
-                    case _$testapis$oneof$oneof_pb.OneofParent.RequiredOneofMembersCase.REQUIRED_MESSAGE_1: {
+                    case _$testapis$oneof$oneof_pb.OneofParent.RequiredOneofMembersCase.REQUIRED_MESSAGE1: {
                         return root.getRequiredMessage1()!;
                     }
-                    case _$testapis$oneof$oneof_pb.OneofParent.RequiredOneofMembersCase.REQUIRED_MESSAGE_2: {
+                    case _$testapis$oneof$oneof_pb.OneofParent.RequiredOneofMembersCase.REQUIRED_MESSAGE2: {
                         return root.getRequiredMessage2()!;
                     }
                     default: {
@@ -9392,10 +9392,10 @@ export const OneofParent = nexus.objectType({
                     case _$testapis$oneof$oneof_pb.OneofParent.OptionalOneofMembersCase.OPTIONAL_ONEOF_MEMBERS_NOT_SET: {
                         return null;
                     }
-                    case _$testapis$oneof$oneof_pb.OneofParent.OptionalOneofMembersCase.OPTOINAL_MESSAGE_1: {
+                    case _$testapis$oneof$oneof_pb.OneofParent.OptionalOneofMembersCase.OPTOINAL_MESSAGE1: {
                         return root.getOptoinalMessage1()!;
                     }
-                    case _$testapis$oneof$oneof_pb.OneofParent.OptionalOneofMembersCase.OPTOINAL_MESSAGE_2: {
+                    case _$testapis$oneof$oneof_pb.OneofParent.OptionalOneofMembersCase.OPTOINAL_MESSAGE2: {
                         return root.getOptoinalMessage2()!;
                     }
                     default: {

@@ -178,7 +178,7 @@ export const Message = nexus.objectType({
                     case _$testapis$edgecases$import_squashed_union$pkg1$types_pb.SquashedOneof.MessageCase.MESSAGE_NOT_SET: {
                         return null;
                     }
-                    case _$testapis$edgecases$import_squashed_union$pkg1$types_pb.SquashedOneof.MessageCase.MSG_1: {
+                    case _$testapis$edgecases$import_squashed_union$pkg1$types_pb.SquashedOneof.MessageCase.MSG1: {
                         return value.getMsg1()!;
                     }
                     default: {
