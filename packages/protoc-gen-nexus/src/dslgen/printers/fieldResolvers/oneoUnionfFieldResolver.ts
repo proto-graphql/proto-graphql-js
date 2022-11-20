@@ -80,9 +80,7 @@ function createOneofUnionFieldResolverMapStmtsForGoogleProtobuf(
                 createFullNameExpr(type.parentProtoTypeFullName),
                 `${pascalCase(oneofName)}Case`
               ),
-              constantCase(f.name, {
-                splitRegexp: /([a-z])([A-Z0-9])/g,
-              })
+              constantCase(f.proto.name)
             ),
             [
               ts.factory.createBlock(
