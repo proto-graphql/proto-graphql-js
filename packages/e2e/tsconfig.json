@@ -69,6 +69,27 @@
       "path": "tests/nexus--wktypes--protobufjs"
     },
     {
+      "path": "tests/pothos--deprecation--ts-proto"
+    },
+    {
+      "path": "tests/pothos--edgecases-import_squashed_union--ts-proto"
+    },
+    {
+      "path": "tests/pothos--empty_types--ts-proto"
+    },
+    {
+      "path": "tests/pothos--enums--ts-proto"
+    },
+    {
+      "path": "tests/pothos--extensions--ts-proto"
+    },
+    {
+      "path": "tests/pothos--field_behavior--ts-proto"
+    },
+    {
+      "path": "tests/pothos--multipkgs--ts-proto"
+    },
+    {
       "path": "tests/pothos--nested--ts-proto"
     },
     {
