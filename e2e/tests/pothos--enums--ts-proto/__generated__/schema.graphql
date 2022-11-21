@@ -1,0 +1,68 @@
+type MessageWithEnums {
+  """Optional."""
+  optionalMyEnum: MyEnum
+
+  """Optional."""
+  optionalMyEnums: [MyEnum!]
+
+  """Optional."""
+  optionalMyEnumWithoutUnspecified: MyEnumWithoutUnspecified
+
+  """Optional."""
+  optionalMyEnumWithoutUnspecifieds: [MyEnumWithoutUnspecified!]
+
+  """Required."""
+  requiredMyEnum: MyEnum!
+
+  """Required."""
+  requiredMyEnums: [MyEnum!]!
+
+  """Required."""
+  requiredMyEnumWithoutUnspecified: MyEnumWithoutUnspecified!
+
+  """Required."""
+  requiredMyEnumWithoutUnspecifieds: [MyEnumWithoutUnspecified!]!
+}
+
+input MessageWithEnumsInput {
+  """Optional."""
+  optionalMyEnum: MyEnum
+
+  """Optional."""
+  optionalMyEnums: [MyEnum!]
+
+  """Optional."""
+  optionalMyEnumWithoutUnspecified: MyEnumWithoutUnspecified
+
+  """Optional."""
+  optionalMyEnumWithoutUnspecifieds: [MyEnumWithoutUnspecified!]
+
+  """Required."""
+  requiredMyEnum: MyEnum!
+
+  """Required."""
+  requiredMyEnums: [MyEnum!]!
+
+  """Required."""
+  requiredMyEnumWithoutUnspecified: MyEnumWithoutUnspecified!
+
+  """Required."""
+  requiredMyEnumWithoutUnspecifieds: [MyEnumWithoutUnspecified!]!
+}
+
+enum MyEnum {
+  """This is Bar."""
+  BAR
+  BAZ
+  FOO
+}
+
+enum MyEnumWithoutUnspecified {
+  BAR
+  BAZ
+  FOO
+}
+
+type Query {
+  test: MessageWithEnums!
+}

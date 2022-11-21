@@ -1,0 +1,22 @@
+{
+  "name": "@proto-graphql/e2e",
+  "version": "0.0.1",
+  "description": "E2E tests",
+  "private": true,
+  "devDependencies": {
+    "@testapis/node": "^0.5.0",
+    "@testapis/node-native": "^0.5.1",
+    "@testapis/ts-proto": "^0.5.1",
+    "@testapis/ts-proto-with-forcelong-number": "^0.6.0",
+    "protoc-gen-nexus": "^0.5.1",
+    "protoc-gen-pothos": "^0.2.0",
+    "tsconfig-paths": "^4.1.0"
+  },
+  "scripts": {
+    "test:setup": "./setupTests.mjs",
+    "test:typecheck": "tsc -b tsconfig.json",
+    "test:jest": "jest",
+    "test:schema": "git diff --exit-code tests/**/schema.graphql",
+    "test:e2e": "yarn test:setup && yarn test:typecheck && yarn test:jest && yarn test:schema"
+  }
+}

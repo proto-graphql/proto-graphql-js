@@ -1,0 +1,26 @@
+version: v1
+plugins:
+  - name: nexus
+    path: ../packages/protoc-gen-nexus/bin/protoc-gen-nexus
+    out: tests/__generated__/nexus/protobufjs
+    opt:
+      - use_protobufjs
+      - import_prefix=@testapis/node/lib/
+  - name: nexus
+    path: ../packages/protoc-gen-nexus/bin/protoc-gen-nexus
+    out: tests/__generated__/nexus/google-protobuf
+    opt:
+      - import_prefix=@testapis/node-native/lib/
+  - name: pothos
+    path: ../packages/protoc-gen-pothos/bin/protoc-gen-pothos
+    out: tests/__generated__/pothos/ts-proto
+    opt:
+      - import_prefix=@testapis/ts-proto/lib/
+      - pothos_builder_path=@/builder
+  - name: pothos
+    path: ../packages/protoc-gen-pothos/bin/protoc-gen-pothos
+    out: tests/__generated__/pothos/ts-proto-with-forcelong-number
+    opt:
+      - import_prefix=@testapis/ts-proto-with-forcelong-number/lib/
+      - pothos_builder_path=@/builder
+      - long_number=Int

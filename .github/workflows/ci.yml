@@ -28,7 +28,7 @@ jobs:
         base-path: packages/protoc-gen-nexus
 
 
-  test-integration:
+  test-e2e:
 
     runs-on: ubuntu-latest
 
@@ -40,5 +40,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 14.x
+    - uses: bufbuild/buf-setup-action@v1
     - run: yarn --frozen-lockfile
-    - run: yarn test:integration
+    - run: yarn test:e2e

@@ -1,0 +1,13 @@
+type EmptyMessage {
+  """noop field"""
+  _: Boolean
+}
+
+input EmptyMessageInput {
+  """noop field"""
+  _: Boolean
+}
+
+type Query {
+  test: EmptyMessage!
+}

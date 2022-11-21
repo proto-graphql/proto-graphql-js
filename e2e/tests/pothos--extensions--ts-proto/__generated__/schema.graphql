@@ -1,0 +1,101 @@
+type ImplObject implements TestPrefixInterfaceMessage {
+  body: String!
+  id: String!
+}
+
+type Query {
+  testInterface: ImplObject!
+  testSkipResolver: TestPrefixPrefixedMessage!
+  testSquashedUnion: TestPrefixPrefixedMessage!
+}
+
+type TestPrefixIgnoredMessageNotIgnored {
+  body: String!
+}
+
+input TestPrefixIgnoredMessageNotIgnoredInput {
+  body: String!
+}
+
+interface TestPrefixInterfaceMessage {
+  id: String!
+}
+
+input TestPrefixInterfaceMessageInput {
+  id: String!
+}
+
+enum TestPrefixInterfaceMessageType {
+  INNER
+  INNER2
+}
+
+enum TestPrefixPrefixedEnum {
+  PREFIXED_BAR
+  PREFIXED_FOO
+}
+
+type TestPrefixPrefixedMessage {
+  body: String!
+
+  """Output only."""
+  id: String!
+  notIgnoredMessage: TestPrefixIgnoredMessageNotIgnored
+  partialIgnoreOneof: TestPrefixPrefixedMessagePartialIgnoreOneof
+  prefixedEnum: TestPrefixPrefixedEnum
+  renamedMessage: TestPrefixRenamedMessage
+  skipResolver: String!
+  squashedMessage: TestPrefixPrefixedMessageSquashedMessage
+  squashedMessages: [TestPrefixPrefixedMessageSquashedMessage!]
+  thisFieldWasRenamed: String!
+}
+
+type TestPrefixPrefixedMessageInnerMessage {
+  body: String!
+  id: String!
+  skipResolver: String!
+}
+
+type TestPrefixPrefixedMessageInnerMessage2 {
+  body: String!
+  id: String!
+}
+
+input TestPrefixPrefixedMessageInnerMessage2Input {
+  body: String!
+  id: String!
+}
+
+input TestPrefixPrefixedMessageInnerMessageInput {
+  body: String!
+  id: String!
+}
+
+input TestPrefixPrefixedMessageInput {
+  body: String!
+  notIgnoredMessage: TestPrefixIgnoredMessageNotIgnoredInput
+  oneofNotIgnoredField: TestPrefixPrefixedMessageInnerMessageInput
+  prefixedEnum: TestPrefixPrefixedEnum
+  renamedMessage: TestPrefixRenamedMessageInput
+  skipResolver: String!
+  squashedMessage: TestPrefixPrefixedMessageSquashedMessageInput
+  squashedMessages: [TestPrefixPrefixedMessageSquashedMessageInput!]
+  thisFieldWasRenamed: String!
+}
+
+union TestPrefixPrefixedMessagePartialIgnoreOneof = TestPrefixPrefixedMessageInnerMessage
+
+union TestPrefixPrefixedMessageSquashedMessage = TestPrefixPrefixedMessageInnerMessage | TestPrefixPrefixedMessageInnerMessage2
+
+input TestPrefixPrefixedMessageSquashedMessageInput {
+  oneofField: TestPrefixPrefixedMessageInnerMessageInput
+  oneofField2: TestPrefixPrefixedMessageInnerMessage2Input
+}
+
+type TestPrefixRenamedMessage {
+  body: String!
+}
+
+input TestPrefixRenamedMessageInput {
+  body: String!
+}
