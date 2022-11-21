@@ -10,11 +10,4 @@ const base = {
   },
 };
 
-if (process.env.TEST_TARGET === "integration") {
-  base.testRegex = "__integration__/.*\\.test\\.ts$";
-  base.testTimeout = 30000;
-} else {
-  base.testPathIgnorePatterns.push("__integration__/");
-}
-
 module.exports = base;

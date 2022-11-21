@@ -47,7 +47,6 @@
   "scripts": {
     "build": "tsc --build . && tsc --build tsconfig.module.json",
     "clean": "rimraf lib/ module/ && tsc --build . --clean && tsc --build tsconfig.module.json --clean",
-    "test": "jest --coverage",
-    "test:integration": "TEST_TARGET=integration jest"
+    "test": "jest --coverage"
   }
 }
