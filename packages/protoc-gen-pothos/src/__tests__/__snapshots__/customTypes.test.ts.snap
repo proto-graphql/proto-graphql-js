@@ -14,21 +14,43 @@ builder.objectType(Date$Ref, {
     fields: t => ({
         year: t.expose(\\"year\\", {
             type: \\"Int\\",
-            nullable: false
+            nullable: false,
+            extensions: {
+                protobufField: {
+                    name: \\"year\\"
+                }
+            }
         }),
         month: t.expose(\\"month\\", {
             type: \\"Int\\",
-            nullable: false
+            nullable: false,
+            extensions: {
+                protobufField: {
+                    name: \\"month\\"
+                }
+            }
         }),
         day: t.expose(\\"day\\", {
             type: \\"Int\\",
-            nullable: false
+            nullable: false,
+            extensions: {
+                protobufField: {
+                    name: \\"day\\"
+                }
+            }
         })
     }),
     isTypeOf: source => {
         return (source as _$testapis$custom_types$date.Date | {
             $type: string & {};
         }).$type === \\"testapis.custom_types.Date\\";
+    },
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.custom_types.Date\\",
+            name: \\"Date\\",
+            package: \\"testapis.custom_types\\"
+        }
     }
 });
 export type DateInput$Shape = {
@@ -41,17 +63,39 @@ DateInput$Ref.implement({
     fields: t => ({
         year: t.field({
             type: \\"Int\\",
-            required: true
+            required: true,
+            extensions: {
+                protobufField: {
+                    name: \\"year\\"
+                }
+            }
         }),
         month: t.field({
             type: \\"Int\\",
-            required: true
+            required: true,
+            extensions: {
+                protobufField: {
+                    name: \\"month\\"
+                }
+            }
         }),
         day: t.field({
             type: \\"Int\\",
-            required: true
+            required: true,
+            extensions: {
+                protobufField: {
+                    name: \\"day\\"
+                }
+            }
         })
-    })
+    }),
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.custom_types.Date\\",
+            name: \\"Date\\",
+            package: \\"testapis.custom_types\\"
+        }
+    }
 });
 "
 `;
@@ -71,18 +115,35 @@ builder.objectType(Post$Ref, {
         title: t.expose(\\"title\\", {
             type: \\"String\\",
             nullable: false,
-            description: \\"Required.\\"
+            description: \\"Required.\\",
+            extensions: {
+                protobufField: {
+                    name: \\"title\\"
+                }
+            }
         }),
         publishedDate: t.expose(\\"publishedDate\\", {
             type: \\"Date\\",
             nullable: true,
-            description: \\"Optional.\\"
+            description: \\"Optional.\\",
+            extensions: {
+                protobufField: {
+                    name: \\"published_date\\"
+                }
+            }
         })
     }),
     isTypeOf: source => {
         return (source as _$testapis$custom_types$post.Post | {
             $type: string & {};
         }).$type === \\"testapis.custom_types.Post\\";
+    },
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.custom_types.Post\\",
+            name: \\"Post\\",
+            package: \\"testapis.custom_types\\"
+        }
     }
 });
 export type PostInput$Shape = {
@@ -95,14 +156,31 @@ PostInput$Ref.implement({
         title: t.field({
             type: \\"String\\",
             required: true,
-            description: \\"Required.\\"
+            description: \\"Required.\\",
+            extensions: {
+                protobufField: {
+                    name: \\"title\\"
+                }
+            }
         }),
         publishedDate: t.field({
             type: \\"Date\\",
             required: false,
-            description: \\"Optional.\\"
+            description: \\"Optional.\\",
+            extensions: {
+                protobufField: {
+                    name: \\"published_date\\"
+                }
+            }
         })
-    })
+    }),
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.custom_types.Post\\",
+            name: \\"Post\\",
+            package: \\"testapis.custom_types\\"
+        }
+    }
 });
 "
 `;
