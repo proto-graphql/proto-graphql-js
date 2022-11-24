@@ -1,5 +1,18 @@
 # protoc-gen-pothos
 
+## 0.2.1
+
+### Patch Changes
+
+- [#231](https://github.com/proto-graphql/proto-graphql-js/pull/231) [`2ff07a6`](https://github.com/proto-graphql/proto-graphql-js/commit/2ff07a64212a62010330803d05c2f8f7f37f29b4) Thanks [@izumin5210](https://github.com/izumin5210)! - add oroginal protobuf type info to extensions
+
+- [#228](https://github.com/proto-graphql/proto-graphql-js/pull/228) [`c7db053`](https://github.com/proto-graphql/proto-graphql-js/commit/c7db0531f3790dbf61d740440eda841459cb3f6b) Thanks [@izumin5210](https://github.com/izumin5210)! - Support PothosShemaBuilder in external modules
+
+- [#216](https://github.com/proto-graphql/proto-graphql-js/pull/216) [`831f8e7`](https://github.com/proto-graphql/proto-graphql-js/commit/831f8e70ff45d3503413441f568c2c901ae6f552) Thanks [@izumin5210](https://github.com/izumin5210)! - new E2E testing
+
+- Updated dependencies [[`c7db053`](https://github.com/proto-graphql/proto-graphql-js/commit/c7db0531f3790dbf61d740440eda841459cb3f6b)]:
+  - @proto-graphql/codegen-core@0.2.1
+
 ## 0.2.0
 
 ### Minor Changes
