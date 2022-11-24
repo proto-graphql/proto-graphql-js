@@ -14,13 +14,25 @@ builder.objectType(OneofMessage1$Ref, {
     fields: t => ({
         body: t.expose(\\"body\\", {
             type: \\"String\\",
-            nullable: false
+            nullable: false,
+            extensions: {
+                protobufField: {
+                    name: \\"body\\"
+                }
+            }
         })
     }),
     isTypeOf: source => {
         return (source as _$testapis$edgecases$import_squashed_union$pkg1$types.OneofMessage1 | {
             $type: string & {};
         }).$type === \\"testapis.edgecases.import_squashed_union.pkg1.OneofMessage1\\";
+    },
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.edgecases.import_squashed_union.pkg1.OneofMessage1\\",
+            name: \\"OneofMessage1\\",
+            package: \\"testapis.edgecases.import_squashed_union.pkg1\\"
+        }
     }
 });
 export type OneofMessage1Input$Shape = {
@@ -31,9 +43,21 @@ OneofMessage1Input$Ref.implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
-            required: true
+            required: true,
+            extensions: {
+                protobufField: {
+                    name: \\"body\\"
+                }
+            }
         })
-    })
+    }),
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.edgecases.import_squashed_union.pkg1.OneofMessage1\\",
+            name: \\"OneofMessage1\\",
+            package: \\"testapis.edgecases.import_squashed_union.pkg1\\"
+        }
+    }
 });
 export type SquashedOneofInput$Shape = {
     msg1?: OneofMessage1Input$Shape | null;
@@ -43,14 +67,39 @@ SquashedOneofInput$Ref.implement({
     fields: t => ({
         msg1: t.field({
             type: OneofMessage1Input$Ref,
-            required: false
+            required: false,
+            extensions: {
+                protobufField: {
+                    name: \\"msg1\\"
+                }
+            }
         })
-    })
+    }),
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.edgecases.import_squashed_union.pkg1.SquashedOneof\\",
+            name: \\"SquashedOneof\\",
+            package: \\"testapis.edgecases.import_squashed_union.pkg1\\"
+        }
+    }
 });
 export const SquashedOneof$Ref = builder.unionType(\\"SquashedOneof\\", {
     types: [
         OneofMessage1$Ref
-    ]
+    ],
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.edgecases.import_squashed_union.pkg1.SquashedOneof\\",
+            name: \\"SquashedOneof\\",
+            package: \\"testapis.edgecases.import_squashed_union.pkg1\\",
+            fields: [
+                {
+                    name: \\"msg1\\",
+                    type: \\"testapis.edgecases.import_squashed_union.pkg1.OneofMessage1\\"
+                }
+            ]
+        }
+    }
 });
 "
 `;
@@ -78,6 +127,11 @@ builder.objectType(Message$Ref, {
             resolve: source => {
                 const value = source.msg?.msg1;
                 return value;
+            },
+            extensions: {
+                protobufField: {
+                    name: \\"msg\\"
+                }
             }
         })
     }),
@@ -85,6 +139,13 @@ builder.objectType(Message$Ref, {
         return (source as _$testapis$edgecases$import_squashed_union$pkg2$types.Message | {
             $type: string & {};
         }).$type === \\"testapis.edgecases.import_squashed_union.pkg2.Message\\";
+    },
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.edgecases.import_squashed_union.pkg2.Message\\",
+            name: \\"Message\\",
+            package: \\"testapis.edgecases.import_squashed_union.pkg2\\"
+        }
     }
 });
 export type MessageInput$Shape = {
@@ -95,9 +156,21 @@ MessageInput$Ref.implement({
     fields: t => ({
         msg: t.field({
             type: SquashedOneofInput$Ref,
-            required: false
+            required: false,
+            extensions: {
+                protobufField: {
+                    name: \\"msg\\"
+                }
+            }
         })
-    })
+    }),
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.edgecases.import_squashed_union.pkg2.Message\\",
+            name: \\"Message\\",
+            package: \\"testapis.edgecases.import_squashed_union.pkg2\\"
+        }
+    }
 });
 "
 `;

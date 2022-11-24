@@ -15,12 +15,22 @@ builder.objectType(Message$Ref, {
         userId: t.expose(\\"userId\\", {
             type: \\"String\\",
             nullable: false,
-            description: \\"Required.\\"
+            description: \\"Required.\\",
+            extensions: {
+                protobufField: {
+                    name: \\"user_id\\"
+                }
+            }
         }),
         body: t.expose(\\"body\\", {
             type: \\"String\\",
             nullable: false,
-            description: \\"Required.\\"
+            description: \\"Required.\\",
+            extensions: {
+                protobufField: {
+                    name: \\"body\\"
+                }
+            }
         }),
         status: t.field({
             type: MessageStatus$Ref,
@@ -31,6 +41,11 @@ builder.objectType(Message$Ref, {
                     return null;
                 }
                 return source.status;
+            },
+            extensions: {
+                protobufField: {
+                    name: \\"status\\"
+                }
             }
         })
     }),
@@ -38,6 +53,13 @@ builder.objectType(Message$Ref, {
         return (source as _$testapis$extensions$field_nullability$nullability.Message | {
             $type: string & {};
         }).$type === \\"testapis.extensions.field_nullability.Message\\";
+    },
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.extensions.field_nullability.Message\\",
+            name: \\"Message\\",
+            package: \\"testapis.extensions.field_nullability\\"
+        }
     }
 });
 export type MessageInput$Shape = {
@@ -51,19 +73,41 @@ MessageInput$Ref.implement({
         userId: t.field({
             type: \\"String\\",
             required: false,
-            description: \\"Required.\\"
+            description: \\"Required.\\",
+            extensions: {
+                protobufField: {
+                    name: \\"user_id\\"
+                }
+            }
         }),
         body: t.field({
             type: \\"String\\",
             required: true,
-            description: \\"Required.\\"
+            description: \\"Required.\\",
+            extensions: {
+                protobufField: {
+                    name: \\"body\\"
+                }
+            }
         }),
         status: t.field({
             type: MessageStatus$Ref,
             required: false,
-            description: \\"Required.\\"
+            description: \\"Required.\\",
+            extensions: {
+                protobufField: {
+                    name: \\"status\\"
+                }
+            }
         })
-    })
+    }),
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.extensions.field_nullability.Message\\",
+            name: \\"Message\\",
+            package: \\"testapis.extensions.field_nullability\\"
+        }
+    }
 });
 export type MessagePartialInput$Shape = {
     userId: _$testapis$extensions$field_nullability$nullability.Message[\\"userId\\"];
@@ -76,29 +120,68 @@ MessagePartialInput$Ref.implement({
         userId: t.field({
             type: \\"String\\",
             required: true,
-            description: \\"Required.\\"
+            description: \\"Required.\\",
+            extensions: {
+                protobufField: {
+                    name: \\"user_id\\"
+                }
+            }
         }),
         body: t.field({
             type: \\"String\\",
             required: false,
-            description: \\"Required.\\"
+            description: \\"Required.\\",
+            extensions: {
+                protobufField: {
+                    name: \\"body\\"
+                }
+            }
         }),
         status: t.field({
             type: MessageStatus$Ref,
             required: false,
-            description: \\"Required.\\"
+            description: \\"Required.\\",
+            extensions: {
+                protobufField: {
+                    name: \\"status\\"
+                }
+            }
         })
-    })
+    }),
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.extensions.field_nullability.Message\\",
+            name: \\"Message\\",
+            package: \\"testapis.extensions.field_nullability\\"
+        }
+    }
 });
 export const MessageStatus$Ref = builder.enumType(\\"MessageStatus\\", {
     values: {
         DRAFT: {
-            value: 1
+            value: 1,
+            extensions: {
+                protobufEnumValue: {
+                    name: \\"DRAFT\\"
+                }
+            }
         },
         PUBLISHED: {
-            value: 2
+            value: 2,
+            extensions: {
+                protobufEnumValue: {
+                    name: \\"PUBLISHED\\"
+                }
+            }
         }
-    } as const
+    } as const,
+    extensions: {
+        protobufEnum: {
+            name: \\"Status\\",
+            fullName: \\"testapis.extensions.field_nullability.Message.Status\\",
+            package: \\"testapis.extensions.field_nullability\\"
+        }
+    }
 });
 "
 `;
@@ -121,6 +204,11 @@ builder.objectType(ParentMessage$Ref, {
             description: \\"Required.\\",
             resolve: source => {
                 return source.partialableInputMessage!;
+            },
+            extensions: {
+                protobufField: {
+                    name: \\"partialable_input_message\\"
+                }
             }
         }),
         noPartialInputMessage: t.field({
@@ -129,6 +217,11 @@ builder.objectType(ParentMessage$Ref, {
             description: \\"Required.\\",
             resolve: source => {
                 return source.noPartialInputMessage!;
+            },
+            extensions: {
+                protobufField: {
+                    name: \\"no_partial_input_message\\"
+                }
             }
         })
     }),
@@ -136,6 +229,13 @@ builder.objectType(ParentMessage$Ref, {
         return (source as _$testapis$extensions$no_partial$no_partial.ParentMessage | {
             $type: string & {};
         }).$type === \\"testapis.extensions.no_partial.ParentMessage\\";
+    },
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.extensions.no_partial.ParentMessage\\",
+            name: \\"ParentMessage\\",
+            package: \\"testapis.extensions.no_partial\\"
+        }
     }
 });
 export const PartialableInputMessage$Ref = builder.objectRef<_$testapis$extensions$no_partial$no_partial.PartialableInputMessage>(\\"PartialableInputMessage\\");
@@ -145,18 +245,35 @@ builder.objectType(PartialableInputMessage$Ref, {
         id: t.expose(\\"id\\", {
             type: \\"String\\",
             nullable: false,
-            description: \\"Required.\\"
+            description: \\"Required.\\",
+            extensions: {
+                protobufField: {
+                    name: \\"id\\"
+                }
+            }
         }),
         body: t.expose(\\"body\\", {
             type: \\"String\\",
             nullable: false,
-            description: \\"Required.\\"
+            description: \\"Required.\\",
+            extensions: {
+                protobufField: {
+                    name: \\"body\\"
+                }
+            }
         })
     }),
     isTypeOf: source => {
         return (source as _$testapis$extensions$no_partial$no_partial.PartialableInputMessage | {
             $type: string & {};
         }).$type === \\"testapis.extensions.no_partial.PartialableInputMessage\\";
+    },
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.extensions.no_partial.PartialableInputMessage\\",
+            name: \\"PartialableInputMessage\\",
+            package: \\"testapis.extensions.no_partial\\"
+        }
     }
 });
 export const NoPartialInputMessage$Ref = builder.objectRef<_$testapis$extensions$no_partial$no_partial.NoPartialInputMessage>(\\"NoPartialInputMessage\\");
@@ -166,18 +283,35 @@ builder.objectType(NoPartialInputMessage$Ref, {
         id: t.expose(\\"id\\", {
             type: \\"String\\",
             nullable: false,
-            description: \\"Required.\\"
+            description: \\"Required.\\",
+            extensions: {
+                protobufField: {
+                    name: \\"id\\"
+                }
+            }
         }),
         body: t.expose(\\"body\\", {
             type: \\"String\\",
             nullable: false,
-            description: \\"Required.\\"
+            description: \\"Required.\\",
+            extensions: {
+                protobufField: {
+                    name: \\"body\\"
+                }
+            }
         })
     }),
     isTypeOf: source => {
         return (source as _$testapis$extensions$no_partial$no_partial.NoPartialInputMessage | {
             $type: string & {};
         }).$type === \\"testapis.extensions.no_partial.NoPartialInputMessage\\";
+    },
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.extensions.no_partial.NoPartialInputMessage\\",
+            name: \\"NoPartialInputMessage\\",
+            package: \\"testapis.extensions.no_partial\\"
+        }
     }
 });
 export type ParentMessageInput$Shape = {
@@ -190,14 +324,31 @@ ParentMessageInput$Ref.implement({
         partialableInputMessage: t.field({
             type: PartialableInputMessageInput$Ref,
             required: true,
-            description: \\"Required.\\"
+            description: \\"Required.\\",
+            extensions: {
+                protobufField: {
+                    name: \\"partialable_input_message\\"
+                }
+            }
         }),
         noPartialInputMessage: t.field({
             type: NoPartialInputMessageInput$Ref,
             required: true,
-            description: \\"Required.\\"
+            description: \\"Required.\\",
+            extensions: {
+                protobufField: {
+                    name: \\"no_partial_input_message\\"
+                }
+            }
         })
-    })
+    }),
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.extensions.no_partial.ParentMessage\\",
+            name: \\"ParentMessage\\",
+            package: \\"testapis.extensions.no_partial\\"
+        }
+    }
 });
 export type ParentMessagePartialInput$Shape = {
     partialableInputMessage?: PartialableInputMessagePartialInput$Shape | null;
@@ -209,14 +360,31 @@ ParentMessagePartialInput$Ref.implement({
         partialableInputMessage: t.field({
             type: PartialableInputMessagePartialInput$Ref,
             required: false,
-            description: \\"Required.\\"
+            description: \\"Required.\\",
+            extensions: {
+                protobufField: {
+                    name: \\"partialable_input_message\\"
+                }
+            }
         }),
         noPartialInputMessage: t.field({
             type: NoPartialInputMessageInput$Ref,
             required: false,
-            description: \\"Required.\\"
+            description: \\"Required.\\",
+            extensions: {
+                protobufField: {
+                    name: \\"no_partial_input_message\\"
+                }
+            }
         })
-    })
+    }),
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.extensions.no_partial.ParentMessage\\",
+            name: \\"ParentMessage\\",
+            package: \\"testapis.extensions.no_partial\\"
+        }
+    }
 });
 export type PartialableInputMessageInput$Shape = {
     id: _$testapis$extensions$no_partial$no_partial.PartialableInputMessage[\\"id\\"];
@@ -228,14 +396,31 @@ PartialableInputMessageInput$Ref.implement({
         id: t.field({
             type: \\"String\\",
             required: true,
-            description: \\"Required.\\"
+            description: \\"Required.\\",
+            extensions: {
+                protobufField: {
+                    name: \\"id\\"
+                }
+            }
         }),
         body: t.field({
             type: \\"String\\",
             required: true,
-            description: \\"Required.\\"
+            description: \\"Required.\\",
+            extensions: {
+                protobufField: {
+                    name: \\"body\\"
+                }
+            }
         })
-    })
+    }),
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.extensions.no_partial.PartialableInputMessage\\",
+            name: \\"PartialableInputMessage\\",
+            package: \\"testapis.extensions.no_partial\\"
+        }
+    }
 });
 export type PartialableInputMessagePartialInput$Shape = {
     id?: _$testapis$extensions$no_partial$no_partial.PartialableInputMessage[\\"id\\"] | null;
@@ -247,14 +432,31 @@ PartialableInputMessagePartialInput$Ref.implement({
         id: t.field({
             type: \\"String\\",
             required: false,
-            description: \\"Required.\\"
+            description: \\"Required.\\",
+            extensions: {
+                protobufField: {
+                    name: \\"id\\"
+                }
+            }
         }),
         body: t.field({
             type: \\"String\\",
             required: false,
-            description: \\"Required.\\"
+            description: \\"Required.\\",
+            extensions: {
+                protobufField: {
+                    name: \\"body\\"
+                }
+            }
         })
-    })
+    }),
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.extensions.no_partial.PartialableInputMessage\\",
+            name: \\"PartialableInputMessage\\",
+            package: \\"testapis.extensions.no_partial\\"
+        }
+    }
 });
 export type NoPartialInputMessageInput$Shape = {
     id: _$testapis$extensions$no_partial$no_partial.NoPartialInputMessage[\\"id\\"];
@@ -266,14 +468,31 @@ NoPartialInputMessageInput$Ref.implement({
         id: t.field({
             type: \\"String\\",
             required: true,
-            description: \\"Required.\\"
+            description: \\"Required.\\",
+            extensions: {
+                protobufField: {
+                    name: \\"id\\"
+                }
+            }
         }),
         body: t.field({
             type: \\"String\\",
             required: true,
-            description: \\"Required.\\"
+            description: \\"Required.\\",
+            extensions: {
+                protobufField: {
+                    name: \\"body\\"
+                }
+            }
         })
-    })
+    }),
+    extensions: {
+        protobufMessage: {
+            fullName: \\"testapis.extensions.no_partial.NoPartialInputMessage\\",
+            name: \\"NoPartialInputMessage\\",
+            package: \\"testapis.extensions.no_partial\\"
+        }
+    }
 });
 "
 `;

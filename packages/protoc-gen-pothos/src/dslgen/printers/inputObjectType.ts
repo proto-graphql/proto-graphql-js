@@ -41,7 +41,7 @@ export function createInputObjectTypeDslStmts(type: InputObjectType): ts.Stateme
             [
               createDescriptionPropertyAssignment(type),
               ts.factory.createPropertyAssignment("fields", createInputObjectTypeFieldsMethodExpr(type)),
-              // ts.factory.createPropertyAssignment("extensions", createExtensionsObjectLiteralExpr(type)),
+              ts.factory.createPropertyAssignment("extensions", createExtensionsObjectLiteralExpr(type)),
             ].filter(onlyNonNull()),
             true
           ),
@@ -123,4 +123,38 @@ function createInputObjectTypeShapeDecl(type: InputObjectType): ts.DeclarationSt
 
 function createInputObjectTypeShapeIdent(type: InputObjectType): ts.Identifier {
   return ts.factory.createIdentifier(`${type.typeName}$Shape`);
+}
+
+/**
+ * @example
+ * ```ts
+ * {
+ *   protobufMessage: {
+ *     fullName: "...",
+ *     name: "...",
+ *     package: "...",
+ *   },
+ * }
+ * ```
+ */
+function createExtensionsObjectLiteralExpr(type: InputObjectType): ts.Expression {
+  return ts.factory.createObjectLiteralExpression(
+    [
+      ts.factory.createPropertyAssignment(
+        "protobufMessage",
+        ts.factory.createObjectLiteralExpression(
+          [
+            ts.factory.createPropertyAssignment(
+              "fullName",
+              ts.factory.createStringLiteral(type.proto.fullName.toString())
+            ),
+            ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(type.proto.name)),
+            ts.factory.createPropertyAssignment("package", ts.factory.createStringLiteral(type.proto.file.package)),
+          ],
+          true
+        )
+      ),
+    ],
+    true
+  );
 }

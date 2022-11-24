@@ -96,6 +96,7 @@ export function createFieldDefinitionExpr(
       createDeprecationPropertyAssignment(field),
       // defaultValueExpr && ts.factory.createPropertyAssignment("defaultValue", defaultValueExpr),
       createResolveStmts && ts.factory.createPropertyAssignment("resolve", createResolverExpr(createResolveStmts)),
+      ts.factory.createPropertyAssignment("extensions", createExtensionsObjectLiteralExpr(field)),
     ].filter(onlyNonNull()),
     true
   );
@@ -167,5 +168,32 @@ function createResolverExpr(createStmts: (sourceExpr: ts.Expression) => ts.State
     undefined,
     ts.factory.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
     ts.factory.createBlock(createStmts(ts.factory.createIdentifier("source")), true)
+  );
+}
+
+/**
+ * @example
+ * ```ts
+ * ({
+ *   protobufField: {
+ *     name: "...",
+ *   },
+ * } as ProtobufFieldExtensions)
+ * ```
+ */
+function createExtensionsObjectLiteralExpr(
+  field: ObjectField<any> | ObjectOneofField | InputObjectField<any>
+): ts.Expression {
+  return ts.factory.createObjectLiteralExpression(
+    [
+      ts.factory.createPropertyAssignment(
+        "protobufField",
+        ts.factory.createObjectLiteralExpression(
+          [ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(field.proto.name))],
+          true
+        )
+      ),
+    ],
+    true
   );
 }
