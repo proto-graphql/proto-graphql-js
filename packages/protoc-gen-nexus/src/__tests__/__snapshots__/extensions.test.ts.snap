@@ -23,7 +23,8 @@ export const Message = nexus.objectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"user_id\\"
+                        name: \\"user_id\\",
+                        typeFullName: \\"uint64\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -38,7 +39,8 @@ export const Message = nexus.objectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"body\\"
+                        name: \\"body\\",
+                        typeFullName: \\"string\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -59,7 +61,8 @@ export const Message = nexus.objectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"status\\"
+                        name: \\"status\\",
+                        typeFullName: \\"testapis.extensions.field_nullability.Message.Status\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -88,7 +91,8 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"user_id\\"
+                        name: \\"user_id\\",
+                        typeFullName: \\"uint64\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -99,7 +103,8 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"body\\"
+                        name: \\"body\\",
+                        typeFullName: \\"string\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -110,7 +115,8 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"status\\"
+                        name: \\"status\\",
+                        typeFullName: \\"testapis.extensions.field_nullability.Message.Status\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -143,7 +149,8 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
                 extensions: {
                     ...({
                         protobufField: {
-                            name: \\"user_id\\"
+                            name: \\"user_id\\",
+                            typeFullName: \\"uint64\\"
                         }
                     } as proto_nexus.ProtobufFieldExtensions)
                 }
@@ -154,7 +161,8 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
                 extensions: {
                     ...({
                         protobufField: {
-                            name: \\"body\\"
+                            name: \\"body\\",
+                            typeFullName: \\"string\\"
                         }
                     } as proto_nexus.ProtobufFieldExtensions)
                 }
@@ -165,7 +173,8 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
                 extensions: {
                     ...({
                         protobufField: {
-                            name: \\"status\\"
+                            name: \\"status\\",
+                            typeFullName: \\"testapis.extensions.field_nullability.Message.Status\\"
                         }
                     } as proto_nexus.ProtobufFieldExtensions)
                 }
@@ -182,7 +191,8 @@ export const MessagePartialInput = Object.assign(nexus.inputObjectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"user_id\\"
+                        name: \\"user_id\\",
+                        typeFullName: \\"uint64\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -193,7 +203,8 @@ export const MessagePartialInput = Object.assign(nexus.inputObjectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"body\\"
+                        name: \\"body\\",
+                        typeFullName: \\"string\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -204,7 +215,8 @@ export const MessagePartialInput = Object.assign(nexus.inputObjectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"status\\"
+                        name: \\"status\\",
+                        typeFullName: \\"testapis.extensions.field_nullability.Message.Status\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -237,7 +249,8 @@ export const MessagePartialInput = Object.assign(nexus.inputObjectType({
                 extensions: {
                     ...({
                         protobufField: {
-                            name: \\"user_id\\"
+                            name: \\"user_id\\",
+                            typeFullName: \\"uint64\\"
                         }
                     } as proto_nexus.ProtobufFieldExtensions)
                 }
@@ -248,7 +261,8 @@ export const MessagePartialInput = Object.assign(nexus.inputObjectType({
                 extensions: {
                     ...({
                         protobufField: {
-                            name: \\"body\\"
+                            name: \\"body\\",
+                            typeFullName: \\"string\\"
                         }
                     } as proto_nexus.ProtobufFieldExtensions)
                 }
@@ -259,7 +273,8 @@ export const MessagePartialInput = Object.assign(nexus.inputObjectType({
                 extensions: {
                     ...({
                         protobufField: {
-                            name: \\"status\\"
+                            name: \\"status\\",
+                            typeFullName: \\"testapis.extensions.field_nullability.Message.Status\\"
                         }
                     } as proto_nexus.ProtobufFieldExtensions)
                 }
@@ -334,7 +349,8 @@ export const ParentMessage = nexus.objectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"partialable_input_message\\"
+                        name: \\"partialable_input_message\\",
+                        typeFullName: \\"testapis.extensions.no_partial.PartialableInputMessage\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -352,7 +368,8 @@ export const ParentMessage = nexus.objectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"no_partial_input_message\\"
+                        name: \\"no_partial_input_message\\",
+                        typeFullName: \\"testapis.extensions.no_partial.NoPartialInputMessage\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -385,7 +402,8 @@ export const PartialableInputMessage = nexus.objectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"id\\"
+                        name: \\"id\\",
+                        typeFullName: \\"uint64\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -400,7 +418,8 @@ export const PartialableInputMessage = nexus.objectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"body\\"
+                        name: \\"body\\",
+                        typeFullName: \\"string\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -433,7 +452,8 @@ export const NoPartialInputMessage = nexus.objectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"id\\"
+                        name: \\"id\\",
+                        typeFullName: \\"uint64\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -448,7 +468,8 @@ export const NoPartialInputMessage = nexus.objectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"body\\"
+                        name: \\"body\\",
+                        typeFullName: \\"string\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -477,7 +498,8 @@ export const ParentMessageInput = Object.assign(nexus.inputObjectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"partialable_input_message\\"
+                        name: \\"partialable_input_message\\",
+                        typeFullName: \\"testapis.extensions.no_partial.PartialableInputMessage\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -488,7 +510,8 @@ export const ParentMessageInput = Object.assign(nexus.inputObjectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"no_partial_input_message\\"
+                        name: \\"no_partial_input_message\\",
+                        typeFullName: \\"testapis.extensions.no_partial.NoPartialInputMessage\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -516,7 +539,8 @@ export const ParentMessageInput = Object.assign(nexus.inputObjectType({
                 extensions: {
                     ...({
                         protobufField: {
-                            name: \\"partialable_input_message\\"
+                            name: \\"partialable_input_message\\",
+                            typeFullName: \\"testapis.extensions.no_partial.PartialableInputMessage\\"
                         }
                     } as proto_nexus.ProtobufFieldExtensions)
                 }
@@ -527,7 +551,8 @@ export const ParentMessageInput = Object.assign(nexus.inputObjectType({
                 extensions: {
                     ...({
                         protobufField: {
-                            name: \\"no_partial_input_message\\"
+                            name: \\"no_partial_input_message\\",
+                            typeFullName: \\"testapis.extensions.no_partial.NoPartialInputMessage\\"
                         }
                     } as proto_nexus.ProtobufFieldExtensions)
                 }
@@ -544,7 +569,8 @@ export const ParentMessagePartialInput = Object.assign(nexus.inputObjectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"partialable_input_message\\"
+                        name: \\"partialable_input_message\\",
+                        typeFullName: \\"testapis.extensions.no_partial.PartialableInputMessage\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -555,7 +581,8 @@ export const ParentMessagePartialInput = Object.assign(nexus.inputObjectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"no_partial_input_message\\"
+                        name: \\"no_partial_input_message\\",
+                        typeFullName: \\"testapis.extensions.no_partial.NoPartialInputMessage\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -587,7 +614,8 @@ export const ParentMessagePartialInput = Object.assign(nexus.inputObjectType({
                 extensions: {
                     ...({
                         protobufField: {
-                            name: \\"partialable_input_message\\"
+                            name: \\"partialable_input_message\\",
+                            typeFullName: \\"testapis.extensions.no_partial.PartialableInputMessage\\"
                         }
                     } as proto_nexus.ProtobufFieldExtensions)
                 }
@@ -598,7 +626,8 @@ export const ParentMessagePartialInput = Object.assign(nexus.inputObjectType({
                 extensions: {
                     ...({
                         protobufField: {
-                            name: \\"no_partial_input_message\\"
+                            name: \\"no_partial_input_message\\",
+                            typeFullName: \\"testapis.extensions.no_partial.NoPartialInputMessage\\"
                         }
                     } as proto_nexus.ProtobufFieldExtensions)
                 }
@@ -615,7 +644,8 @@ export const PartialableInputMessageInput = Object.assign(nexus.inputObjectType(
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"id\\"
+                        name: \\"id\\",
+                        typeFullName: \\"uint64\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -626,7 +656,8 @@ export const PartialableInputMessageInput = Object.assign(nexus.inputObjectType(
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"body\\"
+                        name: \\"body\\",
+                        typeFullName: \\"string\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -654,7 +685,8 @@ export const PartialableInputMessageInput = Object.assign(nexus.inputObjectType(
                 extensions: {
                     ...({
                         protobufField: {
-                            name: \\"id\\"
+                            name: \\"id\\",
+                            typeFullName: \\"uint64\\"
                         }
                     } as proto_nexus.ProtobufFieldExtensions)
                 }
@@ -665,7 +697,8 @@ export const PartialableInputMessageInput = Object.assign(nexus.inputObjectType(
                 extensions: {
                     ...({
                         protobufField: {
-                            name: \\"body\\"
+                            name: \\"body\\",
+                            typeFullName: \\"string\\"
                         }
                     } as proto_nexus.ProtobufFieldExtensions)
                 }
@@ -682,7 +715,8 @@ export const PartialableInputMessagePartialInput = Object.assign(nexus.inputObje
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"id\\"
+                        name: \\"id\\",
+                        typeFullName: \\"uint64\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -693,7 +727,8 @@ export const PartialableInputMessagePartialInput = Object.assign(nexus.inputObje
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"body\\"
+                        name: \\"body\\",
+                        typeFullName: \\"string\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -725,7 +760,8 @@ export const PartialableInputMessagePartialInput = Object.assign(nexus.inputObje
                 extensions: {
                     ...({
                         protobufField: {
-                            name: \\"id\\"
+                            name: \\"id\\",
+                            typeFullName: \\"uint64\\"
                         }
                     } as proto_nexus.ProtobufFieldExtensions)
                 }
@@ -736,7 +772,8 @@ export const PartialableInputMessagePartialInput = Object.assign(nexus.inputObje
                 extensions: {
                     ...({
                         protobufField: {
-                            name: \\"body\\"
+                            name: \\"body\\",
+                            typeFullName: \\"string\\"
                         }
                     } as proto_nexus.ProtobufFieldExtensions)
                 }
@@ -753,7 +790,8 @@ export const NoPartialInputMessageInput = Object.assign(nexus.inputObjectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"id\\"
+                        name: \\"id\\",
+                        typeFullName: \\"uint64\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -764,7 +802,8 @@ export const NoPartialInputMessageInput = Object.assign(nexus.inputObjectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"body\\"
+                        name: \\"body\\",
+                        typeFullName: \\"string\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -792,7 +831,8 @@ export const NoPartialInputMessageInput = Object.assign(nexus.inputObjectType({
                 extensions: {
                     ...({
                         protobufField: {
-                            name: \\"id\\"
+                            name: \\"id\\",
+                            typeFullName: \\"uint64\\"
                         }
                     } as proto_nexus.ProtobufFieldExtensions)
                 }
@@ -803,7 +843,8 @@ export const NoPartialInputMessageInput = Object.assign(nexus.inputObjectType({
                 extensions: {
                     ...({
                         protobufField: {
-                            name: \\"body\\"
+                            name: \\"body\\",
+                            typeFullName: \\"string\\"
                         }
                     } as proto_nexus.ProtobufFieldExtensions)
                 }

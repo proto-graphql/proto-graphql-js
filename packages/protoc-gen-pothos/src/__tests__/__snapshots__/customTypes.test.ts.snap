@@ -17,7 +17,8 @@ builder.objectType(Date$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"year\\"
+                    name: \\"year\\",
+                    typeFullName: \\"uint32\\"
                 }
             }
         }),
@@ -26,7 +27,8 @@ builder.objectType(Date$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"month\\"
+                    name: \\"month\\",
+                    typeFullName: \\"uint32\\"
                 }
             }
         }),
@@ -35,7 +37,8 @@ builder.objectType(Date$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"day\\"
+                    name: \\"day\\",
+                    typeFullName: \\"uint32\\"
                 }
             }
         })
@@ -66,7 +69,8 @@ DateInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"year\\"
+                    name: \\"year\\",
+                    typeFullName: \\"uint32\\"
                 }
             }
         }),
@@ -75,7 +79,8 @@ DateInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"month\\"
+                    name: \\"month\\",
+                    typeFullName: \\"uint32\\"
                 }
             }
         }),
@@ -84,7 +89,8 @@ DateInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"day\\"
+                    name: \\"day\\",
+                    typeFullName: \\"uint32\\"
                 }
             }
         })
@@ -118,7 +124,8 @@ builder.objectType(Post$Ref, {
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"title\\"
+                    name: \\"title\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -128,7 +135,8 @@ builder.objectType(Post$Ref, {
             description: \\"Optional.\\",
             extensions: {
                 protobufField: {
-                    name: \\"published_date\\"
+                    name: \\"published_date\\",
+                    typeFullName: \\"testapis.custom_types.Date\\"
                 }
             }
         })
@@ -159,7 +167,8 @@ PostInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"title\\"
+                    name: \\"title\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -169,7 +178,8 @@ PostInput$Ref.implement({
             description: \\"Optional.\\",
             extensions: {
                 protobufField: {
-                    name: \\"published_date\\"
+                    name: \\"published_date\\",
+                    typeFullName: \\"testapis.custom_types.Date\\"
                 }
             }
         })

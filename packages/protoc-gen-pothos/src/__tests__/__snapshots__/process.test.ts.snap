@@ -18,7 +18,8 @@ builder.objectType(DeprecatedMessage$Ref, {
             deprecationReason: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\",
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -34,7 +35,8 @@ builder.objectType(DeprecatedMessage$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"enum\\"
+                    name: \\"enum\\",
+                    typeFullName: \\"testapis.deprecation.NotDeprecatedEnum\\"
                 }
             }
         })
@@ -62,7 +64,8 @@ builder.objectType(NotDeprecatedMessage$Ref, {
             deprecationReason: \\"testapis.deprecation.NotDeprecatedMessage.body is mark as deprecated in a *.proto file.\\",
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -78,7 +81,8 @@ builder.objectType(NotDeprecatedMessage$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"enum\\"
+                    name: \\"enum\\",
+                    typeFullName: \\"testapis.deprecation.DeprecatedEnum\\"
                 }
             }
         }),
@@ -133,7 +137,8 @@ builder.objectType(DeprecatedMessageInnerMessage$Ref, {
             deprecationReason: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\",
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -160,7 +165,8 @@ builder.objectType(NotDeprecatedMessageInnerMessage1$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -187,7 +193,8 @@ builder.objectType(NotDeprecatedMessageInnerMessage2$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -218,7 +225,8 @@ DeprecatedMessageInput$Ref.implement({
             deprecationReason: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\",
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -228,7 +236,8 @@ DeprecatedMessageInput$Ref.implement({
             deprecationReason: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\",
             extensions: {
                 protobufField: {
-                    name: \\"enum\\"
+                    name: \\"enum\\",
+                    typeFullName: \\"testapis.deprecation.NotDeprecatedEnum\\"
                 }
             }
         })
@@ -258,7 +267,8 @@ NotDeprecatedMessageInput$Ref.implement({
             deprecationReason: \\"testapis.deprecation.NotDeprecatedMessage.body is mark as deprecated in a *.proto file.\\",
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -268,7 +278,8 @@ NotDeprecatedMessageInput$Ref.implement({
             deprecationReason: \\"testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.\\",
             extensions: {
                 protobufField: {
-                    name: \\"enum\\"
+                    name: \\"enum\\",
+                    typeFullName: \\"testapis.deprecation.DeprecatedEnum\\"
                 }
             }
         }),
@@ -278,7 +289,8 @@ NotDeprecatedMessageInput$Ref.implement({
             deprecationReason: \\"testapis.deprecation.NotDeprecatedMessage.msg1 is mark as deprecated in a *.proto file.\\",
             extensions: {
                 protobufField: {
-                    name: \\"msg1\\"
+                    name: \\"msg1\\",
+                    typeFullName: \\"testapis.deprecation.NotDeprecatedMessage.InnerMessage1\\"
                 }
             }
         }),
@@ -287,7 +299,8 @@ NotDeprecatedMessageInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"msg2\\"
+                    name: \\"msg2\\",
+                    typeFullName: \\"testapis.deprecation.NotDeprecatedMessage.InnerMessage2\\"
                 }
             }
         }),
@@ -297,7 +310,8 @@ NotDeprecatedMessageInput$Ref.implement({
             deprecationReason: \\"testapis.deprecation.NotDeprecatedMessage.msg3 is mark as deprecated in a *.proto file.\\",
             extensions: {
                 protobufField: {
-                    name: \\"msg3\\"
+                    name: \\"msg3\\",
+                    typeFullName: \\"testapis.deprecation.NotDeprecatedMessage.InnerMessage1\\"
                 }
             }
         }),
@@ -307,7 +321,8 @@ NotDeprecatedMessageInput$Ref.implement({
             deprecationReason: \\"testapis.deprecation.NotDeprecatedMessage.msg4 is mark as deprecated in a *.proto file.\\",
             extensions: {
                 protobufField: {
-                    name: \\"msg4\\"
+                    name: \\"msg4\\",
+                    typeFullName: \\"testapis.deprecation.NotDeprecatedMessage.InnerMessage2\\"
                 }
             }
         })
@@ -332,7 +347,8 @@ DeprecatedMessageInnerMessageInput$Ref.implement({
             deprecationReason: \\"testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.\\",
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -356,7 +372,8 @@ NotDeprecatedMessageInnerMessage1Input$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -380,7 +397,8 @@ NotDeprecatedMessageInnerMessage2Input$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -519,7 +537,8 @@ builder.objectType(DeprecatedFileMessage$Ref, {
             deprecationReason: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\",
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -535,7 +554,8 @@ builder.objectType(DeprecatedFileMessage$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"enum\\"
+                    name: \\"enum\\",
+                    typeFullName: \\"testapis.deprecation.DeprecatedFileEnum\\"
                 }
             }
         })
@@ -563,7 +583,8 @@ builder.objectType(DeprecatedFileMessageInnerMessage$Ref, {
             deprecationReason: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\",
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -594,7 +615,8 @@ DeprecatedFileMessageInput$Ref.implement({
             deprecationReason: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\",
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -604,7 +626,8 @@ DeprecatedFileMessageInput$Ref.implement({
             deprecationReason: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\",
             extensions: {
                 protobufField: {
-                    name: \\"enum\\"
+                    name: \\"enum\\",
+                    typeFullName: \\"testapis.deprecation.DeprecatedFileEnum\\"
                 }
             }
         })
@@ -629,7 +652,8 @@ DeprecatedFileMessageInnerMessageInput$Ref.implement({
             deprecationReason: \\"testapis/deprecation/file_deprecation.proto is mark as deprecated.\\",
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -748,7 +772,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"required_field\\"
+                    name: \\"required_field\\",
+                    typeFullName: \\"testapis.deprecation.FieldBehaviorComentsMessage.Post\\"
                 }
             }
         }),
@@ -761,7 +786,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"required_output_only_field\\"
+                    name: \\"required_output_only_field\\",
+                    typeFullName: \\"testapis.deprecation.FieldBehaviorComentsMessage.Post\\"
                 }
             }
         }),
@@ -774,7 +800,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"output_only_required_field\\"
+                    name: \\"output_only_required_field\\",
+                    typeFullName: \\"testapis.deprecation.FieldBehaviorComentsMessage.Post\\"
                 }
             }
         }),
@@ -784,7 +811,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
             description: \\"Output only.\\",
             extensions: {
                 protobufField: {
-                    name: \\"output_only_field\\"
+                    name: \\"output_only_field\\",
+                    typeFullName: \\"testapis.deprecation.FieldBehaviorComentsMessage.Post\\"
                 }
             }
         })
@@ -811,7 +839,8 @@ builder.objectType(FieldBehaviorComentsMessagePost$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -844,7 +873,8 @@ FieldBehaviorComentsMessageInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"required_field\\"
+                    name: \\"required_field\\",
+                    typeFullName: \\"testapis.deprecation.FieldBehaviorComentsMessage.Post\\"
                 }
             }
         }),
@@ -854,7 +884,8 @@ FieldBehaviorComentsMessageInput$Ref.implement({
             description: \\"Required. Input only.\\",
             extensions: {
                 protobufField: {
-                    name: \\"required_input_only_field\\"
+                    name: \\"required_input_only_field\\",
+                    typeFullName: \\"testapis.deprecation.FieldBehaviorComentsMessage.Post\\"
                 }
             }
         }),
@@ -864,7 +895,8 @@ FieldBehaviorComentsMessageInput$Ref.implement({
             description: \\"Input only. Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"input_only_required_field\\"
+                    name: \\"input_only_required_field\\",
+                    typeFullName: \\"testapis.deprecation.FieldBehaviorComentsMessage.Post\\"
                 }
             }
         }),
@@ -874,7 +906,8 @@ FieldBehaviorComentsMessageInput$Ref.implement({
             description: \\"Input only.\\",
             extensions: {
                 protobufField: {
-                    name: \\"input_only_field\\"
+                    name: \\"input_only_field\\",
+                    typeFullName: \\"testapis.deprecation.FieldBehaviorComentsMessage.Post\\"
                 }
             }
         })
@@ -898,7 +931,8 @@ FieldBehaviorComentsMessagePostInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -931,7 +965,8 @@ builder.objectType(SubpkgMessage$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -960,7 +995,8 @@ SubpkgMessageInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -1026,7 +1062,8 @@ builder.objectType(MessageWithSubpkg$Ref, {
             nullable: true,
             extensions: {
                 protobufField: {
-                    name: \\"message\\"
+                    name: \\"message\\",
+                    typeFullName: \\"testapis.multipkgs.subpkg1.SubpkgMessage\\"
                 }
             }
         }),
@@ -1041,7 +1078,8 @@ builder.objectType(MessageWithSubpkg$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"enum\\"
+                    name: \\"enum\\",
+                    typeFullName: \\"testapis.multipkgs.subpkg1.SubpkgEnum\\"
                 }
             }
         })
@@ -1071,7 +1109,8 @@ MessageWithSubpkgInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"message\\"
+                    name: \\"message\\",
+                    typeFullName: \\"testapis.multipkgs.subpkg1.SubpkgMessage\\"
                 }
             }
         }),
@@ -1080,7 +1119,8 @@ MessageWithSubpkgInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"enum\\"
+                    name: \\"enum\\",
+                    typeFullName: \\"testapis.multipkgs.subpkg1.SubpkgEnum\\"
                 }
             }
         })
@@ -1113,7 +1153,8 @@ builder.objectType(ParentMessage$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -1122,7 +1163,8 @@ builder.objectType(ParentMessage$Ref, {
             nullable: true,
             extensions: {
                 protobufField: {
-                    name: \\"nested\\"
+                    name: \\"nested\\",
+                    typeFullName: \\"testapis.nested.ParentMessage.NestedMessage\\"
                 }
             }
         }),
@@ -1137,7 +1179,8 @@ builder.objectType(ParentMessage$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"nested_enum\\"
+                    name: \\"nested_enum\\",
+                    typeFullName: \\"testapis.nested.ParentMessage.NestedEnum\\"
                 }
             }
         })
@@ -1164,7 +1207,8 @@ builder.objectType(ParentMessageNestedMessage$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"nested_body\\"
+                    name: \\"nested_body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -1195,7 +1239,8 @@ ParentMessageInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -1204,7 +1249,8 @@ ParentMessageInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"nested\\"
+                    name: \\"nested\\",
+                    typeFullName: \\"testapis.nested.ParentMessage.NestedMessage\\"
                 }
             }
         }),
@@ -1213,7 +1259,8 @@ ParentMessageInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"nested_enum\\"
+                    name: \\"nested_enum\\",
+                    typeFullName: \\"testapis.nested.ParentMessage.NestedEnum\\"
                 }
             }
         })
@@ -1237,7 +1284,8 @@ ParentMessageNestedMessageInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"nested_body\\"
+                    name: \\"nested_body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -1297,7 +1345,8 @@ builder.objectType(TestPrefixIgnoredMessageNotIgnored$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -1336,7 +1385,8 @@ TestPrefixIgnoredMessageNotIgnoredInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -1369,7 +1419,8 @@ builder.interfaceType(TestPrefixInterfaceMessage$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"id\\"
+                    name: \\"id\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         })
@@ -1403,7 +1454,8 @@ TestPrefixInterfaceMessageInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"id\\"
+                    name: \\"id\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         })
@@ -1516,7 +1568,8 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
             description: \\"Output only.\\",
             extensions: {
                 protobufField: {
-                    name: \\"id\\"
+                    name: \\"id\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -1525,7 +1578,8 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -1543,7 +1597,8 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"prefixed_enum\\"
+                    name: \\"prefixed_enum\\",
+                    typeFullName: \\"testapis.extensions.PrefixedEnum\\"
                 }
             }
         }),
@@ -1552,7 +1607,8 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
             nullable: true,
             extensions: {
                 protobufField: {
-                    name: \\"not_ignored_message\\"
+                    name: \\"not_ignored_message\\",
+                    typeFullName: \\"testapis.extensions.IgnoredMessage.NotIgnored\\"
                 }
             }
         }),
@@ -1565,7 +1621,8 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"squashed_message\\"
+                    name: \\"squashed_message\\",
+                    typeFullName: \\"testapis.extensions.PrefixedMessage.SquashedMessage\\"
                 }
             }
         }),
@@ -1574,7 +1631,8 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"this_field_will_be_renamed\\"
+                    name: \\"this_field_will_be_renamed\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -1583,7 +1641,8 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"skip_resolver\\"
+                    name: \\"skip_resolver\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -1601,7 +1660,8 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"squashed_messages\\"
+                    name: \\"squashed_messages\\",
+                    typeFullName: \\"testapis.extensions.PrefixedMessage.SquashedMessage\\"
                 }
             }
         }),
@@ -1610,7 +1670,8 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
             nullable: true,
             extensions: {
                 protobufField: {
-                    name: \\"renamed_message\\"
+                    name: \\"renamed_message\\",
+                    typeFullName: \\"testapis.extensions.MessageWillRename\\"
                 }
             }
         }),
@@ -1661,7 +1722,8 @@ builder.objectType(TestPrefixPrefixedMessageInnerMessage$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"id\\"
+                    name: \\"id\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -1670,7 +1732,8 @@ builder.objectType(TestPrefixPrefixedMessageInnerMessage$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -1708,7 +1771,8 @@ builder.objectType(TestPrefixPrefixedMessageInnerMessage2$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"id\\"
+                    name: \\"id\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -1717,7 +1781,8 @@ builder.objectType(TestPrefixPrefixedMessageInnerMessage2$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -1757,7 +1822,8 @@ TestPrefixPrefixedMessageInnerMessage2Input$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"id\\"
+                    name: \\"id\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -1766,7 +1832,8 @@ TestPrefixPrefixedMessageInnerMessage2Input$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -1801,7 +1868,8 @@ TestPrefixPrefixedMessageInnerMessageInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"id\\"
+                    name: \\"id\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -1810,7 +1878,8 @@ TestPrefixPrefixedMessageInnerMessageInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -1857,7 +1926,8 @@ TestPrefixPrefixedMessageInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -1866,7 +1936,8 @@ TestPrefixPrefixedMessageInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"prefixed_enum\\"
+                    name: \\"prefixed_enum\\",
+                    typeFullName: \\"testapis.extensions.PrefixedEnum\\"
                 }
             }
         }),
@@ -1875,7 +1946,8 @@ TestPrefixPrefixedMessageInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"not_ignored_message\\"
+                    name: \\"not_ignored_message\\",
+                    typeFullName: \\"testapis.extensions.IgnoredMessage.NotIgnored\\"
                 }
             }
         }),
@@ -1884,7 +1956,8 @@ TestPrefixPrefixedMessageInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"squashed_message\\"
+                    name: \\"squashed_message\\",
+                    typeFullName: \\"testapis.extensions.PrefixedMessage.SquashedMessage\\"
                 }
             }
         }),
@@ -1893,7 +1966,8 @@ TestPrefixPrefixedMessageInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"this_field_will_be_renamed\\"
+                    name: \\"this_field_will_be_renamed\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -1902,7 +1976,8 @@ TestPrefixPrefixedMessageInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"oneof_not_ignored_field\\"
+                    name: \\"oneof_not_ignored_field\\",
+                    typeFullName: \\"testapis.extensions.PrefixedMessage.InnerMessage\\"
                 }
             }
         }),
@@ -1911,7 +1986,8 @@ TestPrefixPrefixedMessageInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"skip_resolver\\"
+                    name: \\"skip_resolver\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -1920,7 +1996,8 @@ TestPrefixPrefixedMessageInput$Ref.implement({
             required: { list: false, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"squashed_messages\\"
+                    name: \\"squashed_messages\\",
+                    typeFullName: \\"testapis.extensions.PrefixedMessage.SquashedMessage\\"
                 }
             }
         }),
@@ -1929,7 +2006,8 @@ TestPrefixPrefixedMessageInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"renamed_message\\"
+                    name: \\"renamed_message\\",
+                    typeFullName: \\"testapis.extensions.MessageWillRename\\"
                 }
             }
         })
@@ -2035,7 +2113,8 @@ TestPrefixPrefixedMessageSquashedMessageInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"oneof_field\\"
+                    name: \\"oneof_field\\",
+                    typeFullName: \\"testapis.extensions.PrefixedMessage.InnerMessage\\"
                 }
             }
         }),
@@ -2044,7 +2123,8 @@ TestPrefixPrefixedMessageSquashedMessageInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"oneof_field_2\\"
+                    name: \\"oneof_field_2\\",
+                    typeFullName: \\"testapis.extensions.PrefixedMessage.InnerMessage2\\"
                 }
             }
         })
@@ -2077,7 +2157,8 @@ builder.objectType(TestPrefixRenamedMessage$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -2116,7 +2197,8 @@ TestPrefixRenamedMessageInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -2150,7 +2232,8 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
             description: \\"Output only.\\",
             extensions: {
                 protobufField: {
-                    name: \\"id\\"
+                    name: \\"id\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -2159,7 +2242,8 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -2177,7 +2261,8 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"prefixed_enum\\"
+                    name: \\"prefixed_enum\\",
+                    typeFullName: \\"testapis.extensions.PrefixedEnum\\"
                 }
             }
         }),
@@ -2186,7 +2271,8 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
             nullable: true,
             extensions: {
                 protobufField: {
-                    name: \\"not_ignored_message\\"
+                    name: \\"not_ignored_message\\",
+                    typeFullName: \\"testapis.extensions.IgnoredMessage.NotIgnored\\"
                 }
             }
         }),
@@ -2199,7 +2285,8 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"squashed_message\\"
+                    name: \\"squashed_message\\",
+                    typeFullName: \\"testapis.extensions.PrefixedMessage.SquashedMessage\\"
                 }
             }
         }),
@@ -2208,7 +2295,8 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"this_field_will_be_renamed\\"
+                    name: \\"this_field_will_be_renamed\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -2217,7 +2305,8 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"skip_resolver\\"
+                    name: \\"skip_resolver\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -2235,7 +2324,8 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"squashed_messages\\"
+                    name: \\"squashed_messages\\",
+                    typeFullName: \\"testapis.extensions.PrefixedMessage.SquashedMessage\\"
                 }
             }
         }),
@@ -2244,7 +2334,8 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
             nullable: true,
             extensions: {
                 protobufField: {
-                    name: \\"renamed_message\\"
+                    name: \\"renamed_message\\",
+                    typeFullName: \\"testapis.extensions.MessageWillRename\\"
                 }
             }
         }),
@@ -2284,7 +2375,8 @@ builder.objectType(TestPrefixRenamedMessage$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -2311,7 +2403,8 @@ builder.objectType(TestPrefixPrefixedMessageInnerMessage$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"id\\"
+                    name: \\"id\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -2320,7 +2413,8 @@ builder.objectType(TestPrefixPrefixedMessageInnerMessage$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -2347,7 +2441,8 @@ builder.objectType(TestPrefixPrefixedMessageInnerMessage2$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"id\\"
+                    name: \\"id\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -2356,7 +2451,8 @@ builder.objectType(TestPrefixPrefixedMessageInnerMessage2$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -2383,7 +2479,8 @@ builder.objectType(TestPrefixIgnoredMessageNotIgnored$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -2420,7 +2517,8 @@ TestPrefixPrefixedMessageInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -2429,7 +2527,8 @@ TestPrefixPrefixedMessageInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"prefixed_enum\\"
+                    name: \\"prefixed_enum\\",
+                    typeFullName: \\"testapis.extensions.PrefixedEnum\\"
                 }
             }
         }),
@@ -2438,7 +2537,8 @@ TestPrefixPrefixedMessageInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"not_ignored_message\\"
+                    name: \\"not_ignored_message\\",
+                    typeFullName: \\"testapis.extensions.IgnoredMessage.NotIgnored\\"
                 }
             }
         }),
@@ -2447,7 +2547,8 @@ TestPrefixPrefixedMessageInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"squashed_message\\"
+                    name: \\"squashed_message\\",
+                    typeFullName: \\"testapis.extensions.PrefixedMessage.SquashedMessage\\"
                 }
             }
         }),
@@ -2456,7 +2557,8 @@ TestPrefixPrefixedMessageInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"this_field_will_be_renamed\\"
+                    name: \\"this_field_will_be_renamed\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -2465,7 +2567,8 @@ TestPrefixPrefixedMessageInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"oneof_not_ignored_field\\"
+                    name: \\"oneof_not_ignored_field\\",
+                    typeFullName: \\"testapis.extensions.PrefixedMessage.InnerMessage\\"
                 }
             }
         }),
@@ -2474,7 +2577,8 @@ TestPrefixPrefixedMessageInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"skip_resolver\\"
+                    name: \\"skip_resolver\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -2483,7 +2587,8 @@ TestPrefixPrefixedMessageInput$Ref.implement({
             required: { list: false, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"squashed_messages\\"
+                    name: \\"squashed_messages\\",
+                    typeFullName: \\"testapis.extensions.PrefixedMessage.SquashedMessage\\"
                 }
             }
         }),
@@ -2492,7 +2597,8 @@ TestPrefixPrefixedMessageInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"renamed_message\\"
+                    name: \\"renamed_message\\",
+                    typeFullName: \\"testapis.extensions.MessageWillRename\\"
                 }
             }
         })
@@ -2516,7 +2622,8 @@ TestPrefixRenamedMessageInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -2540,7 +2647,8 @@ TestPrefixInterfaceMessageInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"id\\"
+                    name: \\"id\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         })
@@ -2565,7 +2673,8 @@ TestPrefixPrefixedMessageInnerMessageInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"id\\"
+                    name: \\"id\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -2574,7 +2683,8 @@ TestPrefixPrefixedMessageInnerMessageInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -2599,7 +2709,8 @@ TestPrefixPrefixedMessageInnerMessage2Input$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"id\\"
+                    name: \\"id\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -2608,7 +2719,8 @@ TestPrefixPrefixedMessageInnerMessage2Input$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -2633,7 +2745,8 @@ TestPrefixPrefixedMessageSquashedMessageInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"oneof_field\\"
+                    name: \\"oneof_field\\",
+                    typeFullName: \\"testapis.extensions.PrefixedMessage.InnerMessage\\"
                 }
             }
         }),
@@ -2642,7 +2755,8 @@ TestPrefixPrefixedMessageSquashedMessageInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"oneof_field_2\\"
+                    name: \\"oneof_field_2\\",
+                    typeFullName: \\"testapis.extensions.PrefixedMessage.InnerMessage2\\"
                 }
             }
         })
@@ -2666,7 +2780,8 @@ TestPrefixIgnoredMessageNotIgnoredInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -2688,7 +2803,8 @@ builder.interfaceType(TestPrefixInterfaceMessage$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"id\\"
+                    name: \\"id\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         })
@@ -2840,7 +2956,8 @@ builder.objectType(MessageWithEnums$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"required_my_enum\\"
+                    name: \\"required_my_enum\\",
+                    typeFullName: \\"testapi.enums.MyEnum\\"
                 }
             }
         }),
@@ -2856,7 +2973,8 @@ builder.objectType(MessageWithEnums$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"optional_my_enum\\"
+                    name: \\"optional_my_enum\\",
+                    typeFullName: \\"testapi.enums.MyEnum\\"
                 }
             }
         }),
@@ -2869,7 +2987,8 @@ builder.objectType(MessageWithEnums$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"required_my_enum_without_unspecified\\"
+                    name: \\"required_my_enum_without_unspecified\\",
+                    typeFullName: \\"testapi.enums.MyEnumWithoutUnspecified\\"
                 }
             }
         }),
@@ -2882,7 +3001,8 @@ builder.objectType(MessageWithEnums$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"optional_my_enum_without_unspecified\\"
+                    name: \\"optional_my_enum_without_unspecified\\",
+                    typeFullName: \\"testapi.enums.MyEnumWithoutUnspecified\\"
                 }
             }
         }),
@@ -2900,7 +3020,8 @@ builder.objectType(MessageWithEnums$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"required_my_enums\\"
+                    name: \\"required_my_enums\\",
+                    typeFullName: \\"testapi.enums.MyEnum\\"
                 }
             }
         }),
@@ -2918,7 +3039,8 @@ builder.objectType(MessageWithEnums$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"optional_my_enums\\"
+                    name: \\"optional_my_enums\\",
+                    typeFullName: \\"testapi.enums.MyEnum\\"
                 }
             }
         }),
@@ -2931,7 +3053,8 @@ builder.objectType(MessageWithEnums$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"required_my_enum_without_unspecifieds\\"
+                    name: \\"required_my_enum_without_unspecifieds\\",
+                    typeFullName: \\"testapi.enums.MyEnumWithoutUnspecified\\"
                 }
             }
         }),
@@ -2944,7 +3067,8 @@ builder.objectType(MessageWithEnums$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"optional_my_enum_without_unspecifieds\\"
+                    name: \\"optional_my_enum_without_unspecifieds\\",
+                    typeFullName: \\"testapi.enums.MyEnumWithoutUnspecified\\"
                 }
             }
         })
@@ -2993,7 +3117,8 @@ MessageWithEnumsInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"required_my_enum\\"
+                    name: \\"required_my_enum\\",
+                    typeFullName: \\"testapi.enums.MyEnum\\"
                 }
             }
         }),
@@ -3003,7 +3128,8 @@ MessageWithEnumsInput$Ref.implement({
             description: \\"Optional.\\",
             extensions: {
                 protobufField: {
-                    name: \\"optional_my_enum\\"
+                    name: \\"optional_my_enum\\",
+                    typeFullName: \\"testapi.enums.MyEnum\\"
                 }
             }
         }),
@@ -3013,7 +3139,8 @@ MessageWithEnumsInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"required_my_enum_without_unspecified\\"
+                    name: \\"required_my_enum_without_unspecified\\",
+                    typeFullName: \\"testapi.enums.MyEnumWithoutUnspecified\\"
                 }
             }
         }),
@@ -3023,7 +3150,8 @@ MessageWithEnumsInput$Ref.implement({
             description: \\"Optional.\\",
             extensions: {
                 protobufField: {
-                    name: \\"optional_my_enum_without_unspecified\\"
+                    name: \\"optional_my_enum_without_unspecified\\",
+                    typeFullName: \\"testapi.enums.MyEnumWithoutUnspecified\\"
                 }
             }
         }),
@@ -3033,7 +3161,8 @@ MessageWithEnumsInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"required_my_enums\\"
+                    name: \\"required_my_enums\\",
+                    typeFullName: \\"testapi.enums.MyEnum\\"
                 }
             }
         }),
@@ -3043,7 +3172,8 @@ MessageWithEnumsInput$Ref.implement({
             description: \\"Optional.\\",
             extensions: {
                 protobufField: {
-                    name: \\"optional_my_enums\\"
+                    name: \\"optional_my_enums\\",
+                    typeFullName: \\"testapi.enums.MyEnum\\"
                 }
             }
         }),
@@ -3053,7 +3183,8 @@ MessageWithEnumsInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"required_my_enum_without_unspecifieds\\"
+                    name: \\"required_my_enum_without_unspecifieds\\",
+                    typeFullName: \\"testapi.enums.MyEnumWithoutUnspecified\\"
                 }
             }
         }),
@@ -3063,7 +3194,8 @@ MessageWithEnumsInput$Ref.implement({
             description: \\"Optional.\\",
             extensions: {
                 protobufField: {
-                    name: \\"optional_my_enum_without_unspecifieds\\"
+                    name: \\"optional_my_enum_without_unspecifieds\\",
+                    typeFullName: \\"testapi.enums.MyEnumWithoutUnspecified\\"
                 }
             }
         })
@@ -3194,7 +3326,8 @@ builder.objectType(MessageWithEnums$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"required_my_enum\\"
+                    name: \\"required_my_enum\\",
+                    typeFullName: \\"testapi.enums.MyEnum\\"
                 }
             }
         }),
@@ -3210,7 +3343,8 @@ builder.objectType(MessageWithEnums$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"optional_my_enum\\"
+                    name: \\"optional_my_enum\\",
+                    typeFullName: \\"testapi.enums.MyEnum\\"
                 }
             }
         }),
@@ -3223,7 +3357,8 @@ builder.objectType(MessageWithEnums$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"required_my_enum_without_unspecified\\"
+                    name: \\"required_my_enum_without_unspecified\\",
+                    typeFullName: \\"testapi.enums.MyEnumWithoutUnspecified\\"
                 }
             }
         }),
@@ -3236,7 +3371,8 @@ builder.objectType(MessageWithEnums$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"optional_my_enum_without_unspecified\\"
+                    name: \\"optional_my_enum_without_unspecified\\",
+                    typeFullName: \\"testapi.enums.MyEnumWithoutUnspecified\\"
                 }
             }
         }),
@@ -3254,7 +3390,8 @@ builder.objectType(MessageWithEnums$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"required_my_enums\\"
+                    name: \\"required_my_enums\\",
+                    typeFullName: \\"testapi.enums.MyEnum\\"
                 }
             }
         }),
@@ -3272,7 +3409,8 @@ builder.objectType(MessageWithEnums$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"optional_my_enums\\"
+                    name: \\"optional_my_enums\\",
+                    typeFullName: \\"testapi.enums.MyEnum\\"
                 }
             }
         }),
@@ -3285,7 +3423,8 @@ builder.objectType(MessageWithEnums$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"required_my_enum_without_unspecifieds\\"
+                    name: \\"required_my_enum_without_unspecifieds\\",
+                    typeFullName: \\"testapi.enums.MyEnumWithoutUnspecified\\"
                 }
             }
         }),
@@ -3298,7 +3437,8 @@ builder.objectType(MessageWithEnums$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"optional_my_enum_without_unspecifieds\\"
+                    name: \\"optional_my_enum_without_unspecifieds\\",
+                    typeFullName: \\"testapi.enums.MyEnumWithoutUnspecified\\"
                 }
             }
         })
@@ -3335,7 +3475,8 @@ MessageWithEnumsInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"required_my_enum\\"
+                    name: \\"required_my_enum\\",
+                    typeFullName: \\"testapi.enums.MyEnum\\"
                 }
             }
         }),
@@ -3345,7 +3486,8 @@ MessageWithEnumsInput$Ref.implement({
             description: \\"Optional.\\",
             extensions: {
                 protobufField: {
-                    name: \\"optional_my_enum\\"
+                    name: \\"optional_my_enum\\",
+                    typeFullName: \\"testapi.enums.MyEnum\\"
                 }
             }
         }),
@@ -3355,7 +3497,8 @@ MessageWithEnumsInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"required_my_enum_without_unspecified\\"
+                    name: \\"required_my_enum_without_unspecified\\",
+                    typeFullName: \\"testapi.enums.MyEnumWithoutUnspecified\\"
                 }
             }
         }),
@@ -3365,7 +3508,8 @@ MessageWithEnumsInput$Ref.implement({
             description: \\"Optional.\\",
             extensions: {
                 protobufField: {
-                    name: \\"optional_my_enum_without_unspecified\\"
+                    name: \\"optional_my_enum_without_unspecified\\",
+                    typeFullName: \\"testapi.enums.MyEnumWithoutUnspecified\\"
                 }
             }
         }),
@@ -3375,7 +3519,8 @@ MessageWithEnumsInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"required_my_enums\\"
+                    name: \\"required_my_enums\\",
+                    typeFullName: \\"testapi.enums.MyEnum\\"
                 }
             }
         }),
@@ -3385,7 +3530,8 @@ MessageWithEnumsInput$Ref.implement({
             description: \\"Optional.\\",
             extensions: {
                 protobufField: {
-                    name: \\"optional_my_enums\\"
+                    name: \\"optional_my_enums\\",
+                    typeFullName: \\"testapi.enums.MyEnum\\"
                 }
             }
         }),
@@ -3395,7 +3541,8 @@ MessageWithEnumsInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"required_my_enum_without_unspecifieds\\"
+                    name: \\"required_my_enum_without_unspecifieds\\",
+                    typeFullName: \\"testapi.enums.MyEnumWithoutUnspecified\\"
                 }
             }
         }),
@@ -3405,7 +3552,8 @@ MessageWithEnumsInput$Ref.implement({
             description: \\"Optional.\\",
             extensions: {
                 protobufField: {
-                    name: \\"optional_my_enum_without_unspecifieds\\"
+                    name: \\"optional_my_enum_without_unspecifieds\\",
+                    typeFullName: \\"testapi.enums.MyEnumWithoutUnspecified\\"
                 }
             }
         })
@@ -3509,7 +3657,8 @@ builder.objectType(OneofMemberMessage1$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -3548,7 +3697,8 @@ OneofMemberMessage1Input$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -3581,7 +3731,8 @@ builder.objectType(OneofMemberMessage2$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"image_url\\"
+                    name: \\"image_url\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -3620,7 +3771,8 @@ OneofMemberMessage2Input$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"image_url\\"
+                    name: \\"image_url\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -3655,7 +3807,8 @@ builder.objectType(OneofParent$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"normal_field\\"
+                    name: \\"normal_field\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -3730,7 +3883,8 @@ OneofParentInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"normal_field\\"
+                    name: \\"normal_field\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -3739,7 +3893,8 @@ OneofParentInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_message1\\"
+                    name: \\"required_message1\\",
+                    typeFullName: \\"testapis.oneof.OneofMemberMessage1\\"
                 }
             }
         }),
@@ -3748,7 +3903,8 @@ OneofParentInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_message2\\"
+                    name: \\"required_message2\\",
+                    typeFullName: \\"testapis.oneof.OneofMemberMessage2\\"
                 }
             }
         }),
@@ -3757,7 +3913,8 @@ OneofParentInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"optoinal_message1\\"
+                    name: \\"optoinal_message1\\",
+                    typeFullName: \\"testapis.oneof.OneofMemberMessage1\\"
                 }
             }
         }),
@@ -3766,7 +3923,8 @@ OneofParentInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"optoinal_message2\\"
+                    name: \\"optoinal_message2\\",
+                    typeFullName: \\"testapis.oneof.OneofMemberMessage2\\"
                 }
             }
         })
@@ -3872,7 +4030,8 @@ builder.objectType(OneofParent$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"normal_field\\"
+                    name: \\"normal_field\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -3929,7 +4088,8 @@ builder.objectType(OneofMemberMessage1$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -3956,7 +4116,8 @@ builder.objectType(OneofMemberMessage2$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"image_url\\"
+                    name: \\"image_url\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -3989,7 +4150,8 @@ OneofParentInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"normal_field\\"
+                    name: \\"normal_field\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -3998,7 +4160,8 @@ OneofParentInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_message1\\"
+                    name: \\"required_message1\\",
+                    typeFullName: \\"testapis.oneof.OneofMemberMessage1\\"
                 }
             }
         }),
@@ -4007,7 +4170,8 @@ OneofParentInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_message2\\"
+                    name: \\"required_message2\\",
+                    typeFullName: \\"testapis.oneof.OneofMemberMessage2\\"
                 }
             }
         }),
@@ -4016,7 +4180,8 @@ OneofParentInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"optoinal_message1\\"
+                    name: \\"optoinal_message1\\",
+                    typeFullName: \\"testapis.oneof.OneofMemberMessage1\\"
                 }
             }
         }),
@@ -4025,7 +4190,8 @@ OneofParentInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"optoinal_message2\\"
+                    name: \\"optoinal_message2\\",
+                    typeFullName: \\"testapis.oneof.OneofMemberMessage2\\"
                 }
             }
         })
@@ -4049,7 +4215,8 @@ OneofMemberMessage1Input$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -4073,7 +4240,8 @@ OneofMemberMessage2Input$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"image_url\\"
+                    name: \\"image_url\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -4160,7 +4328,8 @@ builder.objectType(Message$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"required_primitives\\"
+                    name: \\"required_primitives\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         }),
@@ -4170,7 +4339,8 @@ builder.objectType(Message$Ref, {
             description: \\"Optional.\\",
             extensions: {
                 protobufField: {
-                    name: \\"optional_primitives\\"
+                    name: \\"optional_primitives\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         }),
@@ -4183,7 +4353,8 @@ builder.objectType(Message$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"required_primitives_list\\"
+                    name: \\"required_primitives_list\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         }),
@@ -4193,7 +4364,8 @@ builder.objectType(Message$Ref, {
             description: \\"Optional.\\",
             extensions: {
                 protobufField: {
-                    name: \\"optional_primitives_list\\"
+                    name: \\"optional_primitives_list\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         })
@@ -4237,7 +4409,8 @@ MessageInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"required_primitives\\"
+                    name: \\"required_primitives\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         }),
@@ -4247,7 +4420,8 @@ MessageInput$Ref.implement({
             description: \\"Optional.\\",
             extensions: {
                 protobufField: {
-                    name: \\"optional_primitives\\"
+                    name: \\"optional_primitives\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         }),
@@ -4257,7 +4431,8 @@ MessageInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"required_primitives_list\\"
+                    name: \\"required_primitives_list\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         }),
@@ -4267,7 +4442,8 @@ MessageInput$Ref.implement({
             description: \\"Optional.\\",
             extensions: {
                 protobufField: {
-                    name: \\"optional_primitives_list\\"
+                    name: \\"optional_primitives_list\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         })
@@ -4300,7 +4476,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_double_value\\"
+                    name: \\"required_double_value\\",
+                    typeFullName: \\"double\\"
                 }
             }
         }),
@@ -4309,7 +4486,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_float_value\\"
+                    name: \\"required_float_value\\",
+                    typeFullName: \\"float\\"
                 }
             }
         }),
@@ -4318,7 +4496,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_int32_value\\"
+                    name: \\"required_int32_value\\",
+                    typeFullName: \\"int32\\"
                 }
             }
         }),
@@ -4327,7 +4506,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_int64_value\\"
+                    name: \\"required_int64_value\\",
+                    typeFullName: \\"int64\\"
                 }
             }
         }),
@@ -4336,7 +4516,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_uint32_value\\"
+                    name: \\"required_uint32_value\\",
+                    typeFullName: \\"uint32\\"
                 }
             }
         }),
@@ -4345,7 +4526,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_uint64_value\\"
+                    name: \\"required_uint64_value\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -4354,7 +4536,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_sint32_value\\"
+                    name: \\"required_sint32_value\\",
+                    typeFullName: \\"sint32\\"
                 }
             }
         }),
@@ -4363,7 +4546,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_sint64_value\\"
+                    name: \\"required_sint64_value\\",
+                    typeFullName: \\"sint64\\"
                 }
             }
         }),
@@ -4372,7 +4556,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed32_value\\"
+                    name: \\"required_fixed32_value\\",
+                    typeFullName: \\"fixed32\\"
                 }
             }
         }),
@@ -4381,7 +4566,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed64_value\\"
+                    name: \\"required_fixed64_value\\",
+                    typeFullName: \\"fixed64\\"
                 }
             }
         }),
@@ -4390,7 +4576,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed32_value\\"
+                    name: \\"required_sfixed32_value\\",
+                    typeFullName: \\"sfixed32\\"
                 }
             }
         }),
@@ -4399,7 +4586,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed64_value\\"
+                    name: \\"required_sfixed64_value\\",
+                    typeFullName: \\"sfixed64\\"
                 }
             }
         }),
@@ -4408,7 +4596,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_bool_value\\"
+                    name: \\"required_bool_value\\",
+                    typeFullName: \\"bool\\"
                 }
             }
         }),
@@ -4417,7 +4606,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_string_value\\"
+                    name: \\"required_string_value\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -4426,7 +4616,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_double_values\\"
+                    name: \\"required_double_values\\",
+                    typeFullName: \\"double\\"
                 }
             }
         }),
@@ -4435,7 +4626,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_float_values\\"
+                    name: \\"required_float_values\\",
+                    typeFullName: \\"float\\"
                 }
             }
         }),
@@ -4444,7 +4636,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_int32_values\\"
+                    name: \\"required_int32_values\\",
+                    typeFullName: \\"int32\\"
                 }
             }
         }),
@@ -4453,7 +4646,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_int64_values\\"
+                    name: \\"required_int64_values\\",
+                    typeFullName: \\"int64\\"
                 }
             }
         }),
@@ -4462,7 +4656,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_uint32_values\\"
+                    name: \\"required_uint32_values\\",
+                    typeFullName: \\"uint32\\"
                 }
             }
         }),
@@ -4471,7 +4666,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_uint64_values\\"
+                    name: \\"required_uint64_values\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -4480,7 +4676,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_sint32_values\\"
+                    name: \\"required_sint32_values\\",
+                    typeFullName: \\"sint32\\"
                 }
             }
         }),
@@ -4489,7 +4686,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_sint64_values\\"
+                    name: \\"required_sint64_values\\",
+                    typeFullName: \\"sint64\\"
                 }
             }
         }),
@@ -4498,7 +4696,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed32_values\\"
+                    name: \\"required_fixed32_values\\",
+                    typeFullName: \\"fixed32\\"
                 }
             }
         }),
@@ -4507,7 +4706,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed64_values\\"
+                    name: \\"required_fixed64_values\\",
+                    typeFullName: \\"fixed64\\"
                 }
             }
         }),
@@ -4516,7 +4716,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed32_values\\"
+                    name: \\"required_sfixed32_values\\",
+                    typeFullName: \\"sfixed32\\"
                 }
             }
         }),
@@ -4525,7 +4726,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed64_values\\"
+                    name: \\"required_sfixed64_values\\",
+                    typeFullName: \\"sfixed64\\"
                 }
             }
         }),
@@ -4534,7 +4736,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_bool_values\\"
+                    name: \\"required_bool_values\\",
+                    typeFullName: \\"bool\\"
                 }
             }
         }),
@@ -4543,7 +4746,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_string_values\\"
+                    name: \\"required_string_values\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -4609,7 +4813,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_double_value\\"
+                    name: \\"required_double_value\\",
+                    typeFullName: \\"double\\"
                 }
             }
         }),
@@ -4618,7 +4823,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_float_value\\"
+                    name: \\"required_float_value\\",
+                    typeFullName: \\"float\\"
                 }
             }
         }),
@@ -4627,7 +4833,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_int32_value\\"
+                    name: \\"required_int32_value\\",
+                    typeFullName: \\"int32\\"
                 }
             }
         }),
@@ -4636,7 +4843,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_int64_value\\"
+                    name: \\"required_int64_value\\",
+                    typeFullName: \\"int64\\"
                 }
             }
         }),
@@ -4645,7 +4853,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_uint32_value\\"
+                    name: \\"required_uint32_value\\",
+                    typeFullName: \\"uint32\\"
                 }
             }
         }),
@@ -4654,7 +4863,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_uint64_value\\"
+                    name: \\"required_uint64_value\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -4663,7 +4873,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_sint32_value\\"
+                    name: \\"required_sint32_value\\",
+                    typeFullName: \\"sint32\\"
                 }
             }
         }),
@@ -4672,7 +4883,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_sint64_value\\"
+                    name: \\"required_sint64_value\\",
+                    typeFullName: \\"sint64\\"
                 }
             }
         }),
@@ -4681,7 +4893,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed32_value\\"
+                    name: \\"required_fixed32_value\\",
+                    typeFullName: \\"fixed32\\"
                 }
             }
         }),
@@ -4690,7 +4903,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed64_value\\"
+                    name: \\"required_fixed64_value\\",
+                    typeFullName: \\"fixed64\\"
                 }
             }
         }),
@@ -4699,7 +4913,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed32_value\\"
+                    name: \\"required_sfixed32_value\\",
+                    typeFullName: \\"sfixed32\\"
                 }
             }
         }),
@@ -4708,7 +4923,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed64_value\\"
+                    name: \\"required_sfixed64_value\\",
+                    typeFullName: \\"sfixed64\\"
                 }
             }
         }),
@@ -4717,7 +4933,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_bool_value\\"
+                    name: \\"required_bool_value\\",
+                    typeFullName: \\"bool\\"
                 }
             }
         }),
@@ -4726,7 +4943,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_string_value\\"
+                    name: \\"required_string_value\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -4735,7 +4953,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_double_values\\"
+                    name: \\"required_double_values\\",
+                    typeFullName: \\"double\\"
                 }
             }
         }),
@@ -4744,7 +4963,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_float_values\\"
+                    name: \\"required_float_values\\",
+                    typeFullName: \\"float\\"
                 }
             }
         }),
@@ -4753,7 +4973,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_int32_values\\"
+                    name: \\"required_int32_values\\",
+                    typeFullName: \\"int32\\"
                 }
             }
         }),
@@ -4762,7 +4983,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_int64_values\\"
+                    name: \\"required_int64_values\\",
+                    typeFullName: \\"int64\\"
                 }
             }
         }),
@@ -4771,7 +4993,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_uint32_values\\"
+                    name: \\"required_uint32_values\\",
+                    typeFullName: \\"uint32\\"
                 }
             }
         }),
@@ -4780,7 +5003,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_uint64_values\\"
+                    name: \\"required_uint64_values\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -4789,7 +5013,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_sint32_values\\"
+                    name: \\"required_sint32_values\\",
+                    typeFullName: \\"sint32\\"
                 }
             }
         }),
@@ -4798,7 +5023,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_sint64_values\\"
+                    name: \\"required_sint64_values\\",
+                    typeFullName: \\"sint64\\"
                 }
             }
         }),
@@ -4807,7 +5033,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed32_values\\"
+                    name: \\"required_fixed32_values\\",
+                    typeFullName: \\"fixed32\\"
                 }
             }
         }),
@@ -4816,7 +5043,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed64_values\\"
+                    name: \\"required_fixed64_values\\",
+                    typeFullName: \\"fixed64\\"
                 }
             }
         }),
@@ -4825,7 +5053,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed32_values\\"
+                    name: \\"required_sfixed32_values\\",
+                    typeFullName: \\"sfixed32\\"
                 }
             }
         }),
@@ -4834,7 +5063,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed64_values\\"
+                    name: \\"required_sfixed64_values\\",
+                    typeFullName: \\"sfixed64\\"
                 }
             }
         }),
@@ -4843,7 +5073,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_bool_values\\"
+                    name: \\"required_bool_values\\",
+                    typeFullName: \\"bool\\"
                 }
             }
         }),
@@ -4852,7 +5083,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_string_values\\"
+                    name: \\"required_string_values\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -4889,7 +5121,8 @@ builder.objectType(Message$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"required_primitives\\"
+                    name: \\"required_primitives\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         }),
@@ -4899,7 +5132,8 @@ builder.objectType(Message$Ref, {
             description: \\"Optional.\\",
             extensions: {
                 protobufField: {
-                    name: \\"optional_primitives\\"
+                    name: \\"optional_primitives\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         }),
@@ -4912,7 +5146,8 @@ builder.objectType(Message$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"required_primitives_list\\"
+                    name: \\"required_primitives_list\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         }),
@@ -4922,7 +5157,8 @@ builder.objectType(Message$Ref, {
             description: \\"Optional.\\",
             extensions: {
                 protobufField: {
-                    name: \\"optional_primitives_list\\"
+                    name: \\"optional_primitives_list\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         })
@@ -4949,7 +5185,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_double_value\\"
+                    name: \\"required_double_value\\",
+                    typeFullName: \\"double\\"
                 }
             }
         }),
@@ -4958,7 +5195,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_float_value\\"
+                    name: \\"required_float_value\\",
+                    typeFullName: \\"float\\"
                 }
             }
         }),
@@ -4967,7 +5205,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_int32_value\\"
+                    name: \\"required_int32_value\\",
+                    typeFullName: \\"int32\\"
                 }
             }
         }),
@@ -4976,7 +5215,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_int64_value\\"
+                    name: \\"required_int64_value\\",
+                    typeFullName: \\"int64\\"
                 }
             }
         }),
@@ -4985,7 +5225,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_uint32_value\\"
+                    name: \\"required_uint32_value\\",
+                    typeFullName: \\"uint32\\"
                 }
             }
         }),
@@ -4994,7 +5235,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_uint64_value\\"
+                    name: \\"required_uint64_value\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -5003,7 +5245,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_sint32_value\\"
+                    name: \\"required_sint32_value\\",
+                    typeFullName: \\"sint32\\"
                 }
             }
         }),
@@ -5012,7 +5255,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_sint64_value\\"
+                    name: \\"required_sint64_value\\",
+                    typeFullName: \\"sint64\\"
                 }
             }
         }),
@@ -5021,7 +5265,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed32_value\\"
+                    name: \\"required_fixed32_value\\",
+                    typeFullName: \\"fixed32\\"
                 }
             }
         }),
@@ -5030,7 +5275,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed64_value\\"
+                    name: \\"required_fixed64_value\\",
+                    typeFullName: \\"fixed64\\"
                 }
             }
         }),
@@ -5039,7 +5285,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed32_value\\"
+                    name: \\"required_sfixed32_value\\",
+                    typeFullName: \\"sfixed32\\"
                 }
             }
         }),
@@ -5048,7 +5295,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed64_value\\"
+                    name: \\"required_sfixed64_value\\",
+                    typeFullName: \\"sfixed64\\"
                 }
             }
         }),
@@ -5057,7 +5305,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_bool_value\\"
+                    name: \\"required_bool_value\\",
+                    typeFullName: \\"bool\\"
                 }
             }
         }),
@@ -5066,7 +5315,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_string_value\\"
+                    name: \\"required_string_value\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -5075,7 +5325,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_double_values\\"
+                    name: \\"required_double_values\\",
+                    typeFullName: \\"double\\"
                 }
             }
         }),
@@ -5084,7 +5335,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_float_values\\"
+                    name: \\"required_float_values\\",
+                    typeFullName: \\"float\\"
                 }
             }
         }),
@@ -5093,7 +5345,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_int32_values\\"
+                    name: \\"required_int32_values\\",
+                    typeFullName: \\"int32\\"
                 }
             }
         }),
@@ -5102,7 +5355,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_int64_values\\"
+                    name: \\"required_int64_values\\",
+                    typeFullName: \\"int64\\"
                 }
             }
         }),
@@ -5111,7 +5365,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_uint32_values\\"
+                    name: \\"required_uint32_values\\",
+                    typeFullName: \\"uint32\\"
                 }
             }
         }),
@@ -5120,7 +5375,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_uint64_values\\"
+                    name: \\"required_uint64_values\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -5129,7 +5385,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_sint32_values\\"
+                    name: \\"required_sint32_values\\",
+                    typeFullName: \\"sint32\\"
                 }
             }
         }),
@@ -5138,7 +5395,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_sint64_values\\"
+                    name: \\"required_sint64_values\\",
+                    typeFullName: \\"sint64\\"
                 }
             }
         }),
@@ -5147,7 +5405,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed32_values\\"
+                    name: \\"required_fixed32_values\\",
+                    typeFullName: \\"fixed32\\"
                 }
             }
         }),
@@ -5156,7 +5415,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed64_values\\"
+                    name: \\"required_fixed64_values\\",
+                    typeFullName: \\"fixed64\\"
                 }
             }
         }),
@@ -5165,7 +5425,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed32_values\\"
+                    name: \\"required_sfixed32_values\\",
+                    typeFullName: \\"sfixed32\\"
                 }
             }
         }),
@@ -5174,7 +5435,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed64_values\\"
+                    name: \\"required_sfixed64_values\\",
+                    typeFullName: \\"sfixed64\\"
                 }
             }
         }),
@@ -5183,7 +5445,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_bool_values\\"
+                    name: \\"required_bool_values\\",
+                    typeFullName: \\"bool\\"
                 }
             }
         }),
@@ -5192,7 +5455,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_string_values\\"
+                    name: \\"required_string_values\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -5225,7 +5489,8 @@ MessageInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"required_primitives\\"
+                    name: \\"required_primitives\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         }),
@@ -5235,7 +5500,8 @@ MessageInput$Ref.implement({
             description: \\"Optional.\\",
             extensions: {
                 protobufField: {
-                    name: \\"optional_primitives\\"
+                    name: \\"optional_primitives\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         }),
@@ -5245,7 +5511,8 @@ MessageInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"required_primitives_list\\"
+                    name: \\"required_primitives_list\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         }),
@@ -5255,7 +5522,8 @@ MessageInput$Ref.implement({
             description: \\"Optional.\\",
             extensions: {
                 protobufField: {
-                    name: \\"optional_primitives_list\\"
+                    name: \\"optional_primitives_list\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         })
@@ -5283,7 +5551,8 @@ MessagePartialInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"required_primitives\\"
+                    name: \\"required_primitives\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         }),
@@ -5293,7 +5562,8 @@ MessagePartialInput$Ref.implement({
             description: \\"Optional.\\",
             extensions: {
                 protobufField: {
-                    name: \\"optional_primitives\\"
+                    name: \\"optional_primitives\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         }),
@@ -5303,7 +5573,8 @@ MessagePartialInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"required_primitives_list\\"
+                    name: \\"required_primitives_list\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         }),
@@ -5313,7 +5584,8 @@ MessagePartialInput$Ref.implement({
             description: \\"Optional.\\",
             extensions: {
                 protobufField: {
-                    name: \\"optional_primitives_list\\"
+                    name: \\"optional_primitives_list\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         })
@@ -5364,7 +5636,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_double_value\\"
+                    name: \\"required_double_value\\",
+                    typeFullName: \\"double\\"
                 }
             }
         }),
@@ -5373,7 +5646,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_float_value\\"
+                    name: \\"required_float_value\\",
+                    typeFullName: \\"float\\"
                 }
             }
         }),
@@ -5382,7 +5656,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_int32_value\\"
+                    name: \\"required_int32_value\\",
+                    typeFullName: \\"int32\\"
                 }
             }
         }),
@@ -5391,7 +5666,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_int64_value\\"
+                    name: \\"required_int64_value\\",
+                    typeFullName: \\"int64\\"
                 }
             }
         }),
@@ -5400,7 +5676,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_uint32_value\\"
+                    name: \\"required_uint32_value\\",
+                    typeFullName: \\"uint32\\"
                 }
             }
         }),
@@ -5409,7 +5686,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_uint64_value\\"
+                    name: \\"required_uint64_value\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -5418,7 +5696,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_sint32_value\\"
+                    name: \\"required_sint32_value\\",
+                    typeFullName: \\"sint32\\"
                 }
             }
         }),
@@ -5427,7 +5706,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_sint64_value\\"
+                    name: \\"required_sint64_value\\",
+                    typeFullName: \\"sint64\\"
                 }
             }
         }),
@@ -5436,7 +5716,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed32_value\\"
+                    name: \\"required_fixed32_value\\",
+                    typeFullName: \\"fixed32\\"
                 }
             }
         }),
@@ -5445,7 +5726,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed64_value\\"
+                    name: \\"required_fixed64_value\\",
+                    typeFullName: \\"fixed64\\"
                 }
             }
         }),
@@ -5454,7 +5736,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed32_value\\"
+                    name: \\"required_sfixed32_value\\",
+                    typeFullName: \\"sfixed32\\"
                 }
             }
         }),
@@ -5463,7 +5746,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed64_value\\"
+                    name: \\"required_sfixed64_value\\",
+                    typeFullName: \\"sfixed64\\"
                 }
             }
         }),
@@ -5472,7 +5756,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_bool_value\\"
+                    name: \\"required_bool_value\\",
+                    typeFullName: \\"bool\\"
                 }
             }
         }),
@@ -5481,7 +5766,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_string_value\\"
+                    name: \\"required_string_value\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -5490,7 +5776,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_double_values\\"
+                    name: \\"required_double_values\\",
+                    typeFullName: \\"double\\"
                 }
             }
         }),
@@ -5499,7 +5786,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_float_values\\"
+                    name: \\"required_float_values\\",
+                    typeFullName: \\"float\\"
                 }
             }
         }),
@@ -5508,7 +5796,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_int32_values\\"
+                    name: \\"required_int32_values\\",
+                    typeFullName: \\"int32\\"
                 }
             }
         }),
@@ -5517,7 +5806,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_int64_values\\"
+                    name: \\"required_int64_values\\",
+                    typeFullName: \\"int64\\"
                 }
             }
         }),
@@ -5526,7 +5816,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_uint32_values\\"
+                    name: \\"required_uint32_values\\",
+                    typeFullName: \\"uint32\\"
                 }
             }
         }),
@@ -5535,7 +5826,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_uint64_values\\"
+                    name: \\"required_uint64_values\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -5544,7 +5836,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_sint32_values\\"
+                    name: \\"required_sint32_values\\",
+                    typeFullName: \\"sint32\\"
                 }
             }
         }),
@@ -5553,7 +5846,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_sint64_values\\"
+                    name: \\"required_sint64_values\\",
+                    typeFullName: \\"sint64\\"
                 }
             }
         }),
@@ -5562,7 +5856,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed32_values\\"
+                    name: \\"required_fixed32_values\\",
+                    typeFullName: \\"fixed32\\"
                 }
             }
         }),
@@ -5571,7 +5866,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed64_values\\"
+                    name: \\"required_fixed64_values\\",
+                    typeFullName: \\"fixed64\\"
                 }
             }
         }),
@@ -5580,7 +5876,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed32_values\\"
+                    name: \\"required_sfixed32_values\\",
+                    typeFullName: \\"sfixed32\\"
                 }
             }
         }),
@@ -5589,7 +5886,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed64_values\\"
+                    name: \\"required_sfixed64_values\\",
+                    typeFullName: \\"sfixed64\\"
                 }
             }
         }),
@@ -5598,7 +5896,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_bool_values\\"
+                    name: \\"required_bool_values\\",
+                    typeFullName: \\"bool\\"
                 }
             }
         }),
@@ -5607,7 +5906,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_string_values\\"
+                    name: \\"required_string_values\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -5658,7 +5958,8 @@ PrimitivesPartialInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_double_value\\"
+                    name: \\"required_double_value\\",
+                    typeFullName: \\"double\\"
                 }
             }
         }),
@@ -5667,7 +5968,8 @@ PrimitivesPartialInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_float_value\\"
+                    name: \\"required_float_value\\",
+                    typeFullName: \\"float\\"
                 }
             }
         }),
@@ -5676,7 +5978,8 @@ PrimitivesPartialInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_int32_value\\"
+                    name: \\"required_int32_value\\",
+                    typeFullName: \\"int32\\"
                 }
             }
         }),
@@ -5685,7 +5988,8 @@ PrimitivesPartialInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_int64_value\\"
+                    name: \\"required_int64_value\\",
+                    typeFullName: \\"int64\\"
                 }
             }
         }),
@@ -5694,7 +5998,8 @@ PrimitivesPartialInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_uint32_value\\"
+                    name: \\"required_uint32_value\\",
+                    typeFullName: \\"uint32\\"
                 }
             }
         }),
@@ -5703,7 +6008,8 @@ PrimitivesPartialInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_uint64_value\\"
+                    name: \\"required_uint64_value\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -5712,7 +6018,8 @@ PrimitivesPartialInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_sint32_value\\"
+                    name: \\"required_sint32_value\\",
+                    typeFullName: \\"sint32\\"
                 }
             }
         }),
@@ -5721,7 +6028,8 @@ PrimitivesPartialInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_sint64_value\\"
+                    name: \\"required_sint64_value\\",
+                    typeFullName: \\"sint64\\"
                 }
             }
         }),
@@ -5730,7 +6038,8 @@ PrimitivesPartialInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed32_value\\"
+                    name: \\"required_fixed32_value\\",
+                    typeFullName: \\"fixed32\\"
                 }
             }
         }),
@@ -5739,7 +6048,8 @@ PrimitivesPartialInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed64_value\\"
+                    name: \\"required_fixed64_value\\",
+                    typeFullName: \\"fixed64\\"
                 }
             }
         }),
@@ -5748,7 +6058,8 @@ PrimitivesPartialInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed32_value\\"
+                    name: \\"required_sfixed32_value\\",
+                    typeFullName: \\"sfixed32\\"
                 }
             }
         }),
@@ -5757,7 +6068,8 @@ PrimitivesPartialInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed64_value\\"
+                    name: \\"required_sfixed64_value\\",
+                    typeFullName: \\"sfixed64\\"
                 }
             }
         }),
@@ -5766,7 +6078,8 @@ PrimitivesPartialInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_bool_value\\"
+                    name: \\"required_bool_value\\",
+                    typeFullName: \\"bool\\"
                 }
             }
         }),
@@ -5775,7 +6088,8 @@ PrimitivesPartialInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_string_value\\"
+                    name: \\"required_string_value\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -5784,7 +6098,8 @@ PrimitivesPartialInput$Ref.implement({
             required: { list: false, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_double_values\\"
+                    name: \\"required_double_values\\",
+                    typeFullName: \\"double\\"
                 }
             }
         }),
@@ -5793,7 +6108,8 @@ PrimitivesPartialInput$Ref.implement({
             required: { list: false, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_float_values\\"
+                    name: \\"required_float_values\\",
+                    typeFullName: \\"float\\"
                 }
             }
         }),
@@ -5802,7 +6118,8 @@ PrimitivesPartialInput$Ref.implement({
             required: { list: false, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_int32_values\\"
+                    name: \\"required_int32_values\\",
+                    typeFullName: \\"int32\\"
                 }
             }
         }),
@@ -5811,7 +6128,8 @@ PrimitivesPartialInput$Ref.implement({
             required: { list: false, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_int64_values\\"
+                    name: \\"required_int64_values\\",
+                    typeFullName: \\"int64\\"
                 }
             }
         }),
@@ -5820,7 +6138,8 @@ PrimitivesPartialInput$Ref.implement({
             required: { list: false, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_uint32_values\\"
+                    name: \\"required_uint32_values\\",
+                    typeFullName: \\"uint32\\"
                 }
             }
         }),
@@ -5829,7 +6148,8 @@ PrimitivesPartialInput$Ref.implement({
             required: { list: false, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_uint64_values\\"
+                    name: \\"required_uint64_values\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -5838,7 +6158,8 @@ PrimitivesPartialInput$Ref.implement({
             required: { list: false, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_sint32_values\\"
+                    name: \\"required_sint32_values\\",
+                    typeFullName: \\"sint32\\"
                 }
             }
         }),
@@ -5847,7 +6168,8 @@ PrimitivesPartialInput$Ref.implement({
             required: { list: false, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_sint64_values\\"
+                    name: \\"required_sint64_values\\",
+                    typeFullName: \\"sint64\\"
                 }
             }
         }),
@@ -5856,7 +6178,8 @@ PrimitivesPartialInput$Ref.implement({
             required: { list: false, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed32_values\\"
+                    name: \\"required_fixed32_values\\",
+                    typeFullName: \\"fixed32\\"
                 }
             }
         }),
@@ -5865,7 +6188,8 @@ PrimitivesPartialInput$Ref.implement({
             required: { list: false, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed64_values\\"
+                    name: \\"required_fixed64_values\\",
+                    typeFullName: \\"fixed64\\"
                 }
             }
         }),
@@ -5874,7 +6198,8 @@ PrimitivesPartialInput$Ref.implement({
             required: { list: false, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed32_values\\"
+                    name: \\"required_sfixed32_values\\",
+                    typeFullName: \\"sfixed32\\"
                 }
             }
         }),
@@ -5883,7 +6208,8 @@ PrimitivesPartialInput$Ref.implement({
             required: { list: false, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed64_values\\"
+                    name: \\"required_sfixed64_values\\",
+                    typeFullName: \\"sfixed64\\"
                 }
             }
         }),
@@ -5892,7 +6218,8 @@ PrimitivesPartialInput$Ref.implement({
             required: { list: false, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_bool_values\\"
+                    name: \\"required_bool_values\\",
+                    typeFullName: \\"bool\\"
                 }
             }
         }),
@@ -5901,7 +6228,8 @@ PrimitivesPartialInput$Ref.implement({
             required: { list: false, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_string_values\\"
+                    name: \\"required_string_values\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -5938,7 +6266,8 @@ builder.objectType(Message$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"required_primitives\\"
+                    name: \\"required_primitives\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         }),
@@ -5948,7 +6277,8 @@ builder.objectType(Message$Ref, {
             description: \\"Optional.\\",
             extensions: {
                 protobufField: {
-                    name: \\"optional_primitives\\"
+                    name: \\"optional_primitives\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         }),
@@ -5961,7 +6291,8 @@ builder.objectType(Message$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"required_primitives_list\\"
+                    name: \\"required_primitives_list\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         }),
@@ -5971,7 +6302,8 @@ builder.objectType(Message$Ref, {
             description: \\"Optional.\\",
             extensions: {
                 protobufField: {
-                    name: \\"optional_primitives_list\\"
+                    name: \\"optional_primitives_list\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         })
@@ -5998,7 +6330,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_double_value\\"
+                    name: \\"required_double_value\\",
+                    typeFullName: \\"double\\"
                 }
             }
         }),
@@ -6007,7 +6340,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_float_value\\"
+                    name: \\"required_float_value\\",
+                    typeFullName: \\"float\\"
                 }
             }
         }),
@@ -6016,7 +6350,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_int32_value\\"
+                    name: \\"required_int32_value\\",
+                    typeFullName: \\"int32\\"
                 }
             }
         }),
@@ -6025,7 +6360,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_int64_value\\"
+                    name: \\"required_int64_value\\",
+                    typeFullName: \\"int64\\"
                 }
             }
         }),
@@ -6034,7 +6370,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_uint32_value\\"
+                    name: \\"required_uint32_value\\",
+                    typeFullName: \\"uint32\\"
                 }
             }
         }),
@@ -6043,7 +6380,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_uint64_value\\"
+                    name: \\"required_uint64_value\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -6052,7 +6390,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_sint32_value\\"
+                    name: \\"required_sint32_value\\",
+                    typeFullName: \\"sint32\\"
                 }
             }
         }),
@@ -6061,7 +6400,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_sint64_value\\"
+                    name: \\"required_sint64_value\\",
+                    typeFullName: \\"sint64\\"
                 }
             }
         }),
@@ -6070,7 +6410,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed32_value\\"
+                    name: \\"required_fixed32_value\\",
+                    typeFullName: \\"fixed32\\"
                 }
             }
         }),
@@ -6079,7 +6420,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed64_value\\"
+                    name: \\"required_fixed64_value\\",
+                    typeFullName: \\"fixed64\\"
                 }
             }
         }),
@@ -6088,7 +6430,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed32_value\\"
+                    name: \\"required_sfixed32_value\\",
+                    typeFullName: \\"sfixed32\\"
                 }
             }
         }),
@@ -6097,7 +6440,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed64_value\\"
+                    name: \\"required_sfixed64_value\\",
+                    typeFullName: \\"sfixed64\\"
                 }
             }
         }),
@@ -6106,7 +6450,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_bool_value\\"
+                    name: \\"required_bool_value\\",
+                    typeFullName: \\"bool\\"
                 }
             }
         }),
@@ -6115,7 +6460,8 @@ builder.objectType(Primitives$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"required_string_value\\"
+                    name: \\"required_string_value\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -6124,7 +6470,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_double_values\\"
+                    name: \\"required_double_values\\",
+                    typeFullName: \\"double\\"
                 }
             }
         }),
@@ -6133,7 +6480,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_float_values\\"
+                    name: \\"required_float_values\\",
+                    typeFullName: \\"float\\"
                 }
             }
         }),
@@ -6142,7 +6490,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_int32_values\\"
+                    name: \\"required_int32_values\\",
+                    typeFullName: \\"int32\\"
                 }
             }
         }),
@@ -6151,7 +6500,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_int64_values\\"
+                    name: \\"required_int64_values\\",
+                    typeFullName: \\"int64\\"
                 }
             }
         }),
@@ -6160,7 +6510,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_uint32_values\\"
+                    name: \\"required_uint32_values\\",
+                    typeFullName: \\"uint32\\"
                 }
             }
         }),
@@ -6169,7 +6520,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_uint64_values\\"
+                    name: \\"required_uint64_values\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -6178,7 +6530,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_sint32_values\\"
+                    name: \\"required_sint32_values\\",
+                    typeFullName: \\"sint32\\"
                 }
             }
         }),
@@ -6187,7 +6540,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_sint64_values\\"
+                    name: \\"required_sint64_values\\",
+                    typeFullName: \\"sint64\\"
                 }
             }
         }),
@@ -6196,7 +6550,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed32_values\\"
+                    name: \\"required_fixed32_values\\",
+                    typeFullName: \\"fixed32\\"
                 }
             }
         }),
@@ -6205,7 +6560,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed64_values\\"
+                    name: \\"required_fixed64_values\\",
+                    typeFullName: \\"fixed64\\"
                 }
             }
         }),
@@ -6214,7 +6570,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed32_values\\"
+                    name: \\"required_sfixed32_values\\",
+                    typeFullName: \\"sfixed32\\"
                 }
             }
         }),
@@ -6223,7 +6580,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed64_values\\"
+                    name: \\"required_sfixed64_values\\",
+                    typeFullName: \\"sfixed64\\"
                 }
             }
         }),
@@ -6232,7 +6590,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_bool_values\\"
+                    name: \\"required_bool_values\\",
+                    typeFullName: \\"bool\\"
                 }
             }
         }),
@@ -6241,7 +6600,8 @@ builder.objectType(Primitives$Ref, {
             nullable: { list: false, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"required_string_values\\"
+                    name: \\"required_string_values\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -6274,7 +6634,8 @@ MessageInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"required_primitives\\"
+                    name: \\"required_primitives\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         }),
@@ -6284,7 +6645,8 @@ MessageInput$Ref.implement({
             description: \\"Optional.\\",
             extensions: {
                 protobufField: {
-                    name: \\"optional_primitives\\"
+                    name: \\"optional_primitives\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         }),
@@ -6294,7 +6656,8 @@ MessageInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"required_primitives_list\\"
+                    name: \\"required_primitives_list\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         }),
@@ -6304,7 +6667,8 @@ MessageInput$Ref.implement({
             description: \\"Optional.\\",
             extensions: {
                 protobufField: {
-                    name: \\"optional_primitives_list\\"
+                    name: \\"optional_primitives_list\\",
+                    typeFullName: \\"testapis.primitives.Primitives\\"
                 }
             }
         })
@@ -6355,7 +6719,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_double_value\\"
+                    name: \\"required_double_value\\",
+                    typeFullName: \\"double\\"
                 }
             }
         }),
@@ -6364,7 +6729,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_float_value\\"
+                    name: \\"required_float_value\\",
+                    typeFullName: \\"float\\"
                 }
             }
         }),
@@ -6373,7 +6739,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_int32_value\\"
+                    name: \\"required_int32_value\\",
+                    typeFullName: \\"int32\\"
                 }
             }
         }),
@@ -6382,7 +6749,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_int64_value\\"
+                    name: \\"required_int64_value\\",
+                    typeFullName: \\"int64\\"
                 }
             }
         }),
@@ -6391,7 +6759,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_uint32_value\\"
+                    name: \\"required_uint32_value\\",
+                    typeFullName: \\"uint32\\"
                 }
             }
         }),
@@ -6400,7 +6769,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_uint64_value\\"
+                    name: \\"required_uint64_value\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -6409,7 +6779,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_sint32_value\\"
+                    name: \\"required_sint32_value\\",
+                    typeFullName: \\"sint32\\"
                 }
             }
         }),
@@ -6418,7 +6789,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_sint64_value\\"
+                    name: \\"required_sint64_value\\",
+                    typeFullName: \\"sint64\\"
                 }
             }
         }),
@@ -6427,7 +6799,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed32_value\\"
+                    name: \\"required_fixed32_value\\",
+                    typeFullName: \\"fixed32\\"
                 }
             }
         }),
@@ -6436,7 +6809,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed64_value\\"
+                    name: \\"required_fixed64_value\\",
+                    typeFullName: \\"fixed64\\"
                 }
             }
         }),
@@ -6445,7 +6819,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed32_value\\"
+                    name: \\"required_sfixed32_value\\",
+                    typeFullName: \\"sfixed32\\"
                 }
             }
         }),
@@ -6454,7 +6829,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed64_value\\"
+                    name: \\"required_sfixed64_value\\",
+                    typeFullName: \\"sfixed64\\"
                 }
             }
         }),
@@ -6463,7 +6839,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_bool_value\\"
+                    name: \\"required_bool_value\\",
+                    typeFullName: \\"bool\\"
                 }
             }
         }),
@@ -6472,7 +6849,8 @@ PrimitivesInput$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"required_string_value\\"
+                    name: \\"required_string_value\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -6481,7 +6859,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_double_values\\"
+                    name: \\"required_double_values\\",
+                    typeFullName: \\"double\\"
                 }
             }
         }),
@@ -6490,7 +6869,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_float_values\\"
+                    name: \\"required_float_values\\",
+                    typeFullName: \\"float\\"
                 }
             }
         }),
@@ -6499,7 +6879,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_int32_values\\"
+                    name: \\"required_int32_values\\",
+                    typeFullName: \\"int32\\"
                 }
             }
         }),
@@ -6508,7 +6889,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_int64_values\\"
+                    name: \\"required_int64_values\\",
+                    typeFullName: \\"int64\\"
                 }
             }
         }),
@@ -6517,7 +6899,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_uint32_values\\"
+                    name: \\"required_uint32_values\\",
+                    typeFullName: \\"uint32\\"
                 }
             }
         }),
@@ -6526,7 +6909,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_uint64_values\\"
+                    name: \\"required_uint64_values\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -6535,7 +6919,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_sint32_values\\"
+                    name: \\"required_sint32_values\\",
+                    typeFullName: \\"sint32\\"
                 }
             }
         }),
@@ -6544,7 +6929,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_sint64_values\\"
+                    name: \\"required_sint64_values\\",
+                    typeFullName: \\"sint64\\"
                 }
             }
         }),
@@ -6553,7 +6939,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed32_values\\"
+                    name: \\"required_fixed32_values\\",
+                    typeFullName: \\"fixed32\\"
                 }
             }
         }),
@@ -6562,7 +6949,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_fixed64_values\\"
+                    name: \\"required_fixed64_values\\",
+                    typeFullName: \\"fixed64\\"
                 }
             }
         }),
@@ -6571,7 +6959,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed32_values\\"
+                    name: \\"required_sfixed32_values\\",
+                    typeFullName: \\"sfixed32\\"
                 }
             }
         }),
@@ -6580,7 +6969,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_sfixed64_values\\"
+                    name: \\"required_sfixed64_values\\",
+                    typeFullName: \\"sfixed64\\"
                 }
             }
         }),
@@ -6589,7 +6979,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_bool_values\\"
+                    name: \\"required_bool_values\\",
+                    typeFullName: \\"bool\\"
                 }
             }
         }),
@@ -6598,7 +6989,8 @@ PrimitivesInput$Ref.implement({
             required: { list: true, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"required_string_values\\"
+                    name: \\"required_string_values\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -6631,7 +7023,8 @@ builder.objectType(Message$Ref, {
             nullable: true,
             extensions: {
                 protobufField: {
-                    name: \\"timestamp\\"
+                    name: \\"timestamp\\",
+                    typeFullName: \\"google.protobuf.Timestamp\\"
                 }
             }
         }),
@@ -6640,7 +7033,8 @@ builder.objectType(Message$Ref, {
             nullable: true,
             extensions: {
                 protobufField: {
-                    name: \\"int32_value\\"
+                    name: \\"int32_value\\",
+                    typeFullName: \\"google.protobuf.Int32Value\\"
                 }
             }
         }),
@@ -6649,7 +7043,8 @@ builder.objectType(Message$Ref, {
             nullable: true,
             extensions: {
                 protobufField: {
-                    name: \\"int64_value\\"
+                    name: \\"int64_value\\",
+                    typeFullName: \\"google.protobuf.Int64Value\\"
                 }
             }
         }),
@@ -6658,7 +7053,8 @@ builder.objectType(Message$Ref, {
             nullable: true,
             extensions: {
                 protobufField: {
-                    name: \\"uint32_value\\"
+                    name: \\"uint32_value\\",
+                    typeFullName: \\"google.protobuf.UInt32Value\\"
                 }
             }
         }),
@@ -6667,7 +7063,8 @@ builder.objectType(Message$Ref, {
             nullable: true,
             extensions: {
                 protobufField: {
-                    name: \\"uint64_value\\"
+                    name: \\"uint64_value\\",
+                    typeFullName: \\"google.protobuf.UInt64Value\\"
                 }
             }
         }),
@@ -6676,7 +7073,8 @@ builder.objectType(Message$Ref, {
             nullable: true,
             extensions: {
                 protobufField: {
-                    name: \\"float_value\\"
+                    name: \\"float_value\\",
+                    typeFullName: \\"google.protobuf.FloatValue\\"
                 }
             }
         }),
@@ -6685,7 +7083,8 @@ builder.objectType(Message$Ref, {
             nullable: true,
             extensions: {
                 protobufField: {
-                    name: \\"double_value\\"
+                    name: \\"double_value\\",
+                    typeFullName: \\"google.protobuf.DoubleValue\\"
                 }
             }
         }),
@@ -6694,7 +7093,8 @@ builder.objectType(Message$Ref, {
             nullable: true,
             extensions: {
                 protobufField: {
-                    name: \\"bool_value\\"
+                    name: \\"bool_value\\",
+                    typeFullName: \\"google.protobuf.BoolValue\\"
                 }
             }
         }),
@@ -6703,7 +7103,8 @@ builder.objectType(Message$Ref, {
             nullable: true,
             extensions: {
                 protobufField: {
-                    name: \\"string_value\\"
+                    name: \\"string_value\\",
+                    typeFullName: \\"google.protobuf.StringValue\\"
                 }
             }
         }),
@@ -6712,7 +7113,8 @@ builder.objectType(Message$Ref, {
             nullable: { list: true, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"timestamps\\"
+                    name: \\"timestamps\\",
+                    typeFullName: \\"google.protobuf.Timestamp\\"
                 }
             }
         }),
@@ -6721,7 +7123,8 @@ builder.objectType(Message$Ref, {
             nullable: { list: true, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"int32_values\\"
+                    name: \\"int32_values\\",
+                    typeFullName: \\"google.protobuf.Int32Value\\"
                 }
             }
         }),
@@ -6730,7 +7133,8 @@ builder.objectType(Message$Ref, {
             nullable: { list: true, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"int64_values\\"
+                    name: \\"int64_values\\",
+                    typeFullName: \\"google.protobuf.Int64Value\\"
                 }
             }
         }),
@@ -6739,7 +7143,8 @@ builder.objectType(Message$Ref, {
             nullable: { list: true, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"uint32_values\\"
+                    name: \\"uint32_values\\",
+                    typeFullName: \\"google.protobuf.UInt32Value\\"
                 }
             }
         }),
@@ -6748,7 +7153,8 @@ builder.objectType(Message$Ref, {
             nullable: { list: true, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"uint64_values\\"
+                    name: \\"uint64_values\\",
+                    typeFullName: \\"google.protobuf.UInt64Value\\"
                 }
             }
         }),
@@ -6757,7 +7163,8 @@ builder.objectType(Message$Ref, {
             nullable: { list: true, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"float_values\\"
+                    name: \\"float_values\\",
+                    typeFullName: \\"google.protobuf.FloatValue\\"
                 }
             }
         }),
@@ -6766,7 +7173,8 @@ builder.objectType(Message$Ref, {
             nullable: { list: true, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"double_values\\"
+                    name: \\"double_values\\",
+                    typeFullName: \\"google.protobuf.DoubleValue\\"
                 }
             }
         }),
@@ -6775,7 +7183,8 @@ builder.objectType(Message$Ref, {
             nullable: { list: true, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"bool_values\\"
+                    name: \\"bool_values\\",
+                    typeFullName: \\"google.protobuf.BoolValue\\"
                 }
             }
         }),
@@ -6784,7 +7193,8 @@ builder.objectType(Message$Ref, {
             nullable: { list: true, items: false },
             extensions: {
                 protobufField: {
-                    name: \\"string_values\\"
+                    name: \\"string_values\\",
+                    typeFullName: \\"google.protobuf.StringValue\\"
                 }
             }
         }),
@@ -6797,7 +7207,8 @@ builder.objectType(Message$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"required_timestamp\\"
+                    name: \\"required_timestamp\\",
+                    typeFullName: \\"google.protobuf.Timestamp\\"
                 }
             }
         })
@@ -6844,7 +7255,8 @@ MessageInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"timestamp\\"
+                    name: \\"timestamp\\",
+                    typeFullName: \\"google.protobuf.Timestamp\\"
                 }
             }
         }),
@@ -6853,7 +7265,8 @@ MessageInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"int32_value\\"
+                    name: \\"int32_value\\",
+                    typeFullName: \\"google.protobuf.Int32Value\\"
                 }
             }
         }),
@@ -6862,7 +7275,8 @@ MessageInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"int64_value\\"
+                    name: \\"int64_value\\",
+                    typeFullName: \\"google.protobuf.Int64Value\\"
                 }
             }
         }),
@@ -6871,7 +7285,8 @@ MessageInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"uint32_value\\"
+                    name: \\"uint32_value\\",
+                    typeFullName: \\"google.protobuf.UInt32Value\\"
                 }
             }
         }),
@@ -6880,7 +7295,8 @@ MessageInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"uint64_value\\"
+                    name: \\"uint64_value\\",
+                    typeFullName: \\"google.protobuf.UInt64Value\\"
                 }
             }
         }),
@@ -6889,7 +7305,8 @@ MessageInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"float_value\\"
+                    name: \\"float_value\\",
+                    typeFullName: \\"google.protobuf.FloatValue\\"
                 }
             }
         }),
@@ -6898,7 +7315,8 @@ MessageInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"double_value\\"
+                    name: \\"double_value\\",
+                    typeFullName: \\"google.protobuf.DoubleValue\\"
                 }
             }
         }),
@@ -6907,7 +7325,8 @@ MessageInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"bool_value\\"
+                    name: \\"bool_value\\",
+                    typeFullName: \\"google.protobuf.BoolValue\\"
                 }
             }
         }),
@@ -6916,7 +7335,8 @@ MessageInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"string_value\\"
+                    name: \\"string_value\\",
+                    typeFullName: \\"google.protobuf.StringValue\\"
                 }
             }
         }),
@@ -6925,7 +7345,8 @@ MessageInput$Ref.implement({
             required: { list: false, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"timestamps\\"
+                    name: \\"timestamps\\",
+                    typeFullName: \\"google.protobuf.Timestamp\\"
                 }
             }
         }),
@@ -6934,7 +7355,8 @@ MessageInput$Ref.implement({
             required: { list: false, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"int32_values\\"
+                    name: \\"int32_values\\",
+                    typeFullName: \\"google.protobuf.Int32Value\\"
                 }
             }
         }),
@@ -6943,7 +7365,8 @@ MessageInput$Ref.implement({
             required: { list: false, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"int64_values\\"
+                    name: \\"int64_values\\",
+                    typeFullName: \\"google.protobuf.Int64Value\\"
                 }
             }
         }),
@@ -6952,7 +7375,8 @@ MessageInput$Ref.implement({
             required: { list: false, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"uint32_values\\"
+                    name: \\"uint32_values\\",
+                    typeFullName: \\"google.protobuf.UInt32Value\\"
                 }
             }
         }),
@@ -6961,7 +7385,8 @@ MessageInput$Ref.implement({
             required: { list: false, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"uint64_values\\"
+                    name: \\"uint64_values\\",
+                    typeFullName: \\"google.protobuf.UInt64Value\\"
                 }
             }
         }),
@@ -6970,7 +7395,8 @@ MessageInput$Ref.implement({
             required: { list: false, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"float_values\\"
+                    name: \\"float_values\\",
+                    typeFullName: \\"google.protobuf.FloatValue\\"
                 }
             }
         }),
@@ -6979,7 +7405,8 @@ MessageInput$Ref.implement({
             required: { list: false, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"double_values\\"
+                    name: \\"double_values\\",
+                    typeFullName: \\"google.protobuf.DoubleValue\\"
                 }
             }
         }),
@@ -6988,7 +7415,8 @@ MessageInput$Ref.implement({
             required: { list: false, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"bool_values\\"
+                    name: \\"bool_values\\",
+                    typeFullName: \\"google.protobuf.BoolValue\\"
                 }
             }
         }),
@@ -6997,7 +7425,8 @@ MessageInput$Ref.implement({
             required: { list: false, items: true },
             extensions: {
                 protobufField: {
-                    name: \\"string_values\\"
+                    name: \\"string_values\\",
+                    typeFullName: \\"google.protobuf.StringValue\\"
                 }
             }
         }),
@@ -7007,7 +7436,8 @@ MessageInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"required_timestamp\\"
+                    name: \\"required_timestamp\\",
+                    typeFullName: \\"google.protobuf.Timestamp\\"
                 }
             }
         })

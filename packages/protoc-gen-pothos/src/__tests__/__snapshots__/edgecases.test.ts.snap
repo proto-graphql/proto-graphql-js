@@ -17,7 +17,8 @@ builder.objectType(OneofMessage1$Ref, {
             nullable: false,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -46,7 +47,8 @@ OneofMessage1Input$Ref.implement({
             required: true,
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -70,7 +72,8 @@ SquashedOneofInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"msg1\\"
+                    name: \\"msg1\\",
+                    typeFullName: \\"testapis.edgecases.import_squashed_union.pkg1.OneofMessage1\\"
                 }
             }
         })
@@ -130,7 +133,8 @@ builder.objectType(Message$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"msg\\"
+                    name: \\"msg\\",
+                    typeFullName: \\"testapis.edgecases.import_squashed_union.pkg1.SquashedOneof\\"
                 }
             }
         })
@@ -159,7 +163,8 @@ MessageInput$Ref.implement({
             required: false,
             extensions: {
                 protobufField: {
-                    name: \\"msg\\"
+                    name: \\"msg\\",
+                    typeFullName: \\"testapis.edgecases.import_squashed_union.pkg1.SquashedOneof\\"
                 }
             }
         })
