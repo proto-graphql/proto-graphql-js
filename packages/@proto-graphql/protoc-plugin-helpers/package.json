@@ -1,6 +1,6 @@
 {
   "name": "@proto-graphql/protoc-plugin-helpers",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "",
   "keywords": [
     "graphql",
@@ -20,8 +20,8 @@
     "node": ">= 14.0.0"
   },
   "dependencies": {
-    "@proto-graphql/codegen-core": "^0.2.0",
-    "@proto-graphql/proto-descriptors": "^0.1.0"
+    "@proto-graphql/codegen-core": "^0.2.2",
+    "@proto-graphql/proto-descriptors": "^0.2.0"
   },
   "peerDependencies": {
     "google-protobuf": "^3.12.2"

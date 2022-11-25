@@ -1,6 +1,6 @@
 {
   "name": "@proto-graphql/codegen-core",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "",
   "keywords": [
     "graphql",
@@ -20,7 +20,7 @@
     "node": ">= 14.0.0"
   },
   "dependencies": {
-    "@proto-graphql/proto-descriptors": "^0.1.0",
+    "@proto-graphql/proto-descriptors": "^0.2.0",
     "change-case": "^4.1.2"
   },
   "peerDependencies": {

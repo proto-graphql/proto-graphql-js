@@ -1,5 +1,11 @@
 # @testapis/proto
 
+## 0.5.3
+
+### Patch Changes
+
+- [#234](https://github.com/proto-graphql/proto-graphql-js/pull/234) [`a2a3e60`](https://github.com/proto-graphql/proto-graphql-js/commit/a2a3e60789f75c31c600333afd830a02ac0cccf8) Thanks [@izumin5210](https://github.com/izumin5210)! - support `ProtoScalar` in `ProtoField.type`
+
 ## 0.5.2
 
 ### Patch Changes
