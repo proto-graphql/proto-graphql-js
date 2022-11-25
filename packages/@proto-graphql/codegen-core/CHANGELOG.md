@@ -1,5 +1,14 @@
 # @proto-graphql/codegen-core
 
+## 0.2.2
+
+### Patch Changes
+
+- [#234](https://github.com/proto-graphql/proto-graphql-js/pull/234) [`a2a3e60`](https://github.com/proto-graphql/proto-graphql-js/commit/a2a3e60789f75c31c600333afd830a02ac0cccf8) Thanks [@izumin5210](https://github.com/izumin5210)! - support `ProtoScalar` in `ProtoField.type`
+
+- Updated dependencies [[`a2a3e60`](https://github.com/proto-graphql/proto-graphql-js/commit/a2a3e60789f75c31c600333afd830a02ac0cccf8)]:
+  - @proto-graphql/proto-descriptors@0.2.0
+
 ## 0.2.1
 
 ### Patch Changes

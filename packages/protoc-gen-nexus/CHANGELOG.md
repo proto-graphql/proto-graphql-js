@@ -1,5 +1,18 @@
 # protoc-gen-nexus
 
+## 0.5.6
+
+### Patch Changes
+
+- [#234](https://github.com/proto-graphql/proto-graphql-js/pull/234) [`a2a3e60`](https://github.com/proto-graphql/proto-graphql-js/commit/a2a3e60789f75c31c600333afd830a02ac0cccf8) Thanks [@izumin5210](https://github.com/izumin5210)! - support `ProtoScalar` in `ProtoField.type`
+
+- [#236](https://github.com/proto-graphql/proto-graphql-js/pull/236) [`3410d43`](https://github.com/proto-graphql/proto-graphql-js/commit/3410d43a7d29d04e1ed52576ac8a28e9b43cb452) Thanks [@izumin5210](https://github.com/izumin5210)! - add `typeFullName` to extensions in GraphQLField
+
+- Updated dependencies [[`a2a3e60`](https://github.com/proto-graphql/proto-graphql-js/commit/a2a3e60789f75c31c600333afd830a02ac0cccf8)]:
+  - @proto-graphql/codegen-core@0.2.2
+  - @proto-graphql/proto-descriptors@0.2.0
+  - @proto-graphql/protoc-plugin-helpers@0.2.1
+
 ## 0.5.5
 
 ### Patch Changes
