@@ -1,4 +1,3 @@
-import * as path from "path";
 import {
   DescriptorProto,
   EnumDescriptorProto,
@@ -9,7 +8,14 @@ import {
   OneofDescriptorProto,
   ServiceDescriptorProto,
 } from "google-protobuf/google/protobuf/descriptor_pb";
-import { FullNameImpl, getCommentSetByDescriptors, isDeprecated, memo } from "./common";
+import * as path from "path";
+import {
+  FullNameImpl,
+  getCommentSetByDescriptors,
+  isDeprecated,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  memo,
+} from "./common";
 import {
   CommentSet,
   FullName,
@@ -20,8 +26,10 @@ import {
   ProtoMessage,
   ProtoMethod,
   ProtoOneof,
+  ProtoScalar,
   ProtoService,
 } from "./interfaces";
+import { getScalarTypeFromDescriptor } from "./scalars";
 
 export class ProtoRegistry {
   public fileByName: Record<string, ProtoFile>;
@@ -322,7 +330,9 @@ export class ProtoFieldImpl implements ProtoField {
   }
 
   @memo()
-  get type(): ProtoMessage | ProtoEnum | null {
+  get type(): ProtoMessage | ProtoEnum | ProtoScalar | null {
+    const scalarType = getScalarTypeFromDescriptor(this.descriptor);
+    if (scalarType !== undefined) return { kind: "Scalar", type: scalarType };
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     return this.registry.findTypeByFullName(this.descriptor.getTypeName()!.replace(/^\./, ""));
   }

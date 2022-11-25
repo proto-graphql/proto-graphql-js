@@ -17,11 +17,15 @@ export class ScalarType {
   }
 
   public isPrimitive(): boolean {
-    return this.proto.type == null;
+    return this.proto.type == null || this.proto.type.kind === "Scalar";
   }
 
   public isWrapperType(): boolean {
-    return this.proto.type != null && this.proto.type.file.name === "google/protobuf/wrappers.proto";
+    return (
+      this.proto.type != null &&
+      this.proto.type.kind !== "Scalar" &&
+      this.proto.type.file.name === "google/protobuf/wrappers.proto"
+    );
   }
 
   get importPath(): string | null {
@@ -32,14 +36,14 @@ export class ScalarType {
   }
 
   get protoFullName(): string | null {
-    if (this.proto.type) {
+    if (this.proto.type && this.proto.type.kind !== "Scalar") {
       return this.proto.type.fullName.toString();
     }
     return null;
   }
 
   get protoTypeFullName(): FullName | null {
-    if (this.proto.type) {
+    if (this.proto.type && this.proto.type.kind !== "Scalar") {
       return createProtoFullName(this.proto.type, this.opts);
     }
     return null;
@@ -62,6 +66,7 @@ export class ScalarType {
 
   public hasProtobufjsLong(): boolean {
     if (!this.proto.type) return false;
+    if (this.proto.type.kind === "Scalar") return false;
     switch (this.proto.type.fullName.toString()) {
       case "google.protobuf.Int64Value":
       case "google.protobuf.UInt64Value":

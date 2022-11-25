@@ -8,6 +8,7 @@ import {
   OneofDescriptorProto,
   ServiceDescriptorProto,
 } from "google-protobuf/google/protobuf/descriptor_pb";
+import { ProtoScalar, ProtoScalarType } from "./scalars";
 
 export interface FullName {
   parent: FullName | null;
@@ -29,6 +30,8 @@ const descriptorByKind = {
   EnumValue: EnumValueDescriptorProto,
 };
 export type Descriptor<K extends ProtoKind> = InstanceType<typeof descriptorByKind[K]>;
+
+export type { ProtoScalar, ProtoScalarType };
 
 export interface ProtoBase<K extends ProtoKind> {
   readonly kind: K;
@@ -144,7 +147,7 @@ export interface ProtoField extends ProtoBase<"Field"> {
   readonly index: number;
   readonly number: number;
   readonly parent: ProtoMessage;
-  readonly type: ProtoMessage | ProtoEnum | null;
+  readonly type: ProtoMessage | ProtoEnum | ProtoScalar | null;
   readonly containingOneof: ProtoOneof | null;
   readonly list: boolean;
   readonly comments: CommentSet;

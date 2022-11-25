@@ -104,7 +104,7 @@ function createExtensionsObjectLiteralExpr(type: OneofUnionType | SquashedOneofU
                     ts.factory.createObjectLiteralExpression(
                       [
                         ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(f.name)),
-                        ...(f.type
+                        ...(f.type && f.type.kind !== "Scalar"
                           ? [
                               ts.factory.createPropertyAssignment(
                                 "type",
@@ -164,7 +164,7 @@ function createExtensionsObjectLiteralExpr(type: OneofUnionType | SquashedOneofU
                   ts.factory.createObjectLiteralExpression(
                     [
                       ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(f.name)),
-                      ...(f.type
+                      ...(f.type && f.type.kind !== "Scalar"
                         ? [
                             ts.factory.createPropertyAssignment(
                               "type",
