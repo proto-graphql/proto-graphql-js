@@ -115,12 +115,25 @@ export function createFieldOptionExpr(
 function createExtensionsObjectLiteralExpr(
   field: ObjectField<any> | ObjectOneofField | InputObjectField<any>
 ): ts.Expression {
+  let typeName: string | undefined;
+  if ((field instanceof ObjectField || field instanceof InputObjectField) && field.proto.type !== null) {
+    if (field.proto.type.kind === "Scalar") {
+      typeName = field.proto.type.type;
+    } else {
+      typeName = field.proto.type.fullName.toString();
+    }
+  }
   const objExpr = ts.factory.createObjectLiteralExpression(
     [
       ts.factory.createPropertyAssignment(
         "protobufField",
         ts.factory.createObjectLiteralExpression(
-          [ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(field.proto.name))],
+          [
+            ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(field.proto.name)),
+            typeName
+              ? ts.factory.createPropertyAssignment("typeFullName", ts.factory.createStringLiteral(typeName))
+              : undefined,
+          ].filter(onlyNonNull()),
           true
         )
       ),

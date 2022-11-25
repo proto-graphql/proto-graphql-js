@@ -22,7 +22,8 @@ export const OneofMessage1 = nexus.objectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"body\\"
+                        name: \\"body\\",
+                        typeFullName: \\"string\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -50,7 +51,8 @@ export const OneofMessage1Input = Object.assign(nexus.inputObjectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"body\\"
+                        name: \\"body\\",
+                        typeFullName: \\"string\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -76,7 +78,8 @@ export const OneofMessage1Input = Object.assign(nexus.inputObjectType({
                 extensions: {
                     ...({
                         protobufField: {
-                            name: \\"body\\"
+                            name: \\"body\\",
+                            typeFullName: \\"string\\"
                         }
                     } as proto_nexus.ProtobufFieldExtensions)
                 }
@@ -92,7 +95,8 @@ export const SquashedOneofInput = Object.assign(nexus.inputObjectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"msg1\\"
+                        name: \\"msg1\\",
+                        typeFullName: \\"testapis.edgecases.import_squashed_union.pkg1.OneofMessage1\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -120,7 +124,8 @@ export const SquashedOneofInput = Object.assign(nexus.inputObjectType({
                 extensions: {
                     ...({
                         protobufField: {
-                            name: \\"msg1\\"
+                            name: \\"msg1\\",
+                            typeFullName: \\"testapis.edgecases.import_squashed_union.pkg1.OneofMessage1\\"
                         }
                     } as proto_nexus.ProtobufFieldExtensions)
                 }
@@ -189,7 +194,8 @@ export const Message = nexus.objectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"msg\\"
+                        name: \\"msg\\",
+                        typeFullName: \\"testapis.edgecases.import_squashed_union.pkg1.SquashedOneof\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -217,7 +223,8 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"msg\\"
+                        name: \\"msg\\",
+                        typeFullName: \\"testapis.edgecases.import_squashed_union.pkg1.SquashedOneof\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -245,7 +252,8 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
                 extensions: {
                     ...({
                         protobufField: {
-                            name: \\"msg\\"
+                            name: \\"msg\\",
+                            typeFullName: \\"testapis.edgecases.import_squashed_union.pkg1.SquashedOneof\\"
                         }
                     } as proto_nexus.ProtobufFieldExtensions)
                 }
@@ -281,7 +289,8 @@ export const OneofMessage1 = nexus.objectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"body\\"
+                        name: \\"body\\",
+                        typeFullName: \\"string\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -309,7 +318,8 @@ export const OneofMessage1Input = Object.assign(nexus.inputObjectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"body\\"
+                        name: \\"body\\",
+                        typeFullName: \\"string\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -335,7 +345,8 @@ export const OneofMessage1Input = Object.assign(nexus.inputObjectType({
                 extensions: {
                     ...({
                         protobufField: {
-                            name: \\"body\\"
+                            name: \\"body\\",
+                            typeFullName: \\"string\\"
                         }
                     } as proto_nexus.ProtobufFieldExtensions)
                 }
@@ -351,7 +362,8 @@ export const SquashedOneofInput = Object.assign(nexus.inputObjectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"msg1\\"
+                        name: \\"msg1\\",
+                        typeFullName: \\"testapis.edgecases.import_squashed_union.pkg1.OneofMessage1\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -379,7 +391,8 @@ export const SquashedOneofInput = Object.assign(nexus.inputObjectType({
                 extensions: {
                     ...({
                         protobufField: {
-                            name: \\"msg1\\"
+                            name: \\"msg1\\",
+                            typeFullName: \\"testapis.edgecases.import_squashed_union.pkg1.OneofMessage1\\"
                         }
                     } as proto_nexus.ProtobufFieldExtensions)
                 }
@@ -440,7 +453,8 @@ export const Message = nexus.objectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"msg\\"
+                        name: \\"msg\\",
+                        typeFullName: \\"testapis.edgecases.import_squashed_union.pkg1.SquashedOneof\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -468,7 +482,8 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
             extensions: {
                 ...({
                     protobufField: {
-                        name: \\"msg\\"
+                        name: \\"msg\\",
+                        typeFullName: \\"testapis.edgecases.import_squashed_union.pkg1.SquashedOneof\\"
                     }
                 } as proto_nexus.ProtobufFieldExtensions)
             }
@@ -496,7 +511,8 @@ export const MessageInput = Object.assign(nexus.inputObjectType({
                 extensions: {
                     ...({
                         protobufField: {
-                            name: \\"msg\\"
+                            name: \\"msg\\",
+                            typeFullName: \\"testapis.edgecases.import_squashed_union.pkg1.SquashedOneof\\"
                         }
                     } as proto_nexus.ProtobufFieldExtensions)
                 }

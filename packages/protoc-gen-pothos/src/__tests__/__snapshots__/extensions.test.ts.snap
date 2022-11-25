@@ -18,7 +18,8 @@ builder.objectType(Message$Ref, {
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"user_id\\"
+                    name: \\"user_id\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -28,7 +29,8 @@ builder.objectType(Message$Ref, {
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -44,7 +46,8 @@ builder.objectType(Message$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"status\\"
+                    name: \\"status\\",
+                    typeFullName: \\"testapis.extensions.field_nullability.Message.Status\\"
                 }
             }
         })
@@ -76,7 +79,8 @@ MessageInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"user_id\\"
+                    name: \\"user_id\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -86,7 +90,8 @@ MessageInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -96,7 +101,8 @@ MessageInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"status\\"
+                    name: \\"status\\",
+                    typeFullName: \\"testapis.extensions.field_nullability.Message.Status\\"
                 }
             }
         })
@@ -123,7 +129,8 @@ MessagePartialInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"user_id\\"
+                    name: \\"user_id\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -133,7 +140,8 @@ MessagePartialInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         }),
@@ -143,7 +151,8 @@ MessagePartialInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"status\\"
+                    name: \\"status\\",
+                    typeFullName: \\"testapis.extensions.field_nullability.Message.Status\\"
                 }
             }
         })
@@ -207,7 +216,8 @@ builder.objectType(ParentMessage$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"partialable_input_message\\"
+                    name: \\"partialable_input_message\\",
+                    typeFullName: \\"testapis.extensions.no_partial.PartialableInputMessage\\"
                 }
             }
         }),
@@ -220,7 +230,8 @@ builder.objectType(ParentMessage$Ref, {
             },
             extensions: {
                 protobufField: {
-                    name: \\"no_partial_input_message\\"
+                    name: \\"no_partial_input_message\\",
+                    typeFullName: \\"testapis.extensions.no_partial.NoPartialInputMessage\\"
                 }
             }
         })
@@ -248,7 +259,8 @@ builder.objectType(PartialableInputMessage$Ref, {
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"id\\"
+                    name: \\"id\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -258,7 +270,8 @@ builder.objectType(PartialableInputMessage$Ref, {
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -286,7 +299,8 @@ builder.objectType(NoPartialInputMessage$Ref, {
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"id\\"
+                    name: \\"id\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -296,7 +310,8 @@ builder.objectType(NoPartialInputMessage$Ref, {
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -327,7 +342,8 @@ ParentMessageInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"partialable_input_message\\"
+                    name: \\"partialable_input_message\\",
+                    typeFullName: \\"testapis.extensions.no_partial.PartialableInputMessage\\"
                 }
             }
         }),
@@ -337,7 +353,8 @@ ParentMessageInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"no_partial_input_message\\"
+                    name: \\"no_partial_input_message\\",
+                    typeFullName: \\"testapis.extensions.no_partial.NoPartialInputMessage\\"
                 }
             }
         })
@@ -363,7 +380,8 @@ ParentMessagePartialInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"partialable_input_message\\"
+                    name: \\"partialable_input_message\\",
+                    typeFullName: \\"testapis.extensions.no_partial.PartialableInputMessage\\"
                 }
             }
         }),
@@ -373,7 +391,8 @@ ParentMessagePartialInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"no_partial_input_message\\"
+                    name: \\"no_partial_input_message\\",
+                    typeFullName: \\"testapis.extensions.no_partial.NoPartialInputMessage\\"
                 }
             }
         })
@@ -399,7 +418,8 @@ PartialableInputMessageInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"id\\"
+                    name: \\"id\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -409,7 +429,8 @@ PartialableInputMessageInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -435,7 +456,8 @@ PartialableInputMessagePartialInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"id\\"
+                    name: \\"id\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -445,7 +467,8 @@ PartialableInputMessagePartialInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
@@ -471,7 +494,8 @@ NoPartialInputMessageInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"id\\"
+                    name: \\"id\\",
+                    typeFullName: \\"uint64\\"
                 }
             }
         }),
@@ -481,7 +505,8 @@ NoPartialInputMessageInput$Ref.implement({
             description: \\"Required.\\",
             extensions: {
                 protobufField: {
-                    name: \\"body\\"
+                    name: \\"body\\",
+                    typeFullName: \\"string\\"
                 }
             }
         })
