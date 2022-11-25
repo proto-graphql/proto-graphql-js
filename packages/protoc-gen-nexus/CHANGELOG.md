@@ -1,5 +1,16 @@
 # protoc-gen-nexus
 
+## 0.5.5
+
+### Patch Changes
+
+- [#230](https://github.com/proto-graphql/proto-graphql-js/pull/230) [`66fe96f`](https://github.com/proto-graphql/proto-graphql-js/commit/66fe96f45b39ac36fac9b68de48222522626fc78) Thanks [@izumin5210](https://github.com/izumin5210)! - Fix references in switch-case conditional expressions in oneof field resolver
+
+- [#216](https://github.com/proto-graphql/proto-graphql-js/pull/216) [`831f8e7`](https://github.com/proto-graphql/proto-graphql-js/commit/831f8e70ff45d3503413441f568c2c901ae6f552) Thanks [@izumin5210](https://github.com/izumin5210)! - new E2E testing
+
+- Updated dependencies [[`c7db053`](https://github.com/proto-graphql/proto-graphql-js/commit/c7db0531f3790dbf61d740440eda841459cb3f6b)]:
+  - @proto-graphql/codegen-core@0.2.1
+
 ## 0.5.4
 
 ### Patch Changes

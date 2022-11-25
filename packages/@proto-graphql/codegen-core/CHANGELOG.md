@@ -1,5 +1,11 @@
 # @proto-graphql/codegen-core
 
+## 0.2.1
+
+### Patch Changes
+
+- [#228](https://github.com/proto-graphql/proto-graphql-js/pull/228) [`c7db053`](https://github.com/proto-graphql/proto-graphql-js/commit/c7db0531f3790dbf61d740440eda841459cb3f6b) Thanks [@izumin5210](https://github.com/izumin5210)! - Support PothosShemaBuilder in external modules
+
 ## 0.2.0
 
 ### Minor Changes

@@ -1,6 +1,6 @@
 {
   "name": "@proto-graphql/e2e",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "E2E tests",
   "private": true,
   "devDependencies": {
@@ -8,8 +8,8 @@
     "@testapis/node-native": "^0.5.1",
     "@testapis/ts-proto": "^0.5.1",
     "@testapis/ts-proto-with-forcelong-number": "^0.6.0",
-    "protoc-gen-nexus": "^0.5.1",
-    "protoc-gen-pothos": "^0.2.0",
+    "protoc-gen-nexus": "^0.5.5",
+    "protoc-gen-pothos": "^0.2.1",
     "tsconfig-paths": "^4.1.0"
   },
   "scripts": {
