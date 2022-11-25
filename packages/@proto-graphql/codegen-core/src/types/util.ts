@@ -153,7 +153,7 @@ function getDeprecationReasonType(
   proto: ProtoFile | ProtoMessage | ProtoOneof | ProtoField | ProtoEnum | ProtoEnumValue
 ): ProtoFile | ProtoMessage | ProtoOneof | ProtoField | ProtoEnum | ProtoEnumValue | null {
   if (proto.deprecated) return proto;
-  if (proto.kind === "Field" && proto.type !== null) {
+  if (proto.kind === "Field" && proto.type !== null && proto.type.kind !== "Scalar") {
     const r = getDeprecationReasonType(proto.type);
     if (r !== null) return r;
   }

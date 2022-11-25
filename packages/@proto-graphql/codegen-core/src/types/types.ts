@@ -1,6 +1,5 @@
 import { ProtoEnum, ProtoField, ProtoMessage, ProtoRegistry } from "@proto-graphql/proto-descriptors";
 import assert from "assert";
-import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
 import { DslFile } from "./DslFile";
 import { EnumType } from "./EnumType";
 import { InputObjectType } from "./InputObjectType";
@@ -111,44 +110,13 @@ function detectType<T extends ObjectType | InterfaceType | SquashedOneofUnionTyp
   opts: GenerationParams & { dsl: "nexus" | "pothos" },
   f: (msg: ProtoMessage, file: DslFile) => T
 ): ScalarType | EnumType | T {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const pbtype = proto.descriptor.getType()!;
-  switch (pbtype) {
-    case FieldDescriptorProto.Type.TYPE_STRING:
-      return new ScalarType(proto, "String", opts);
-    case FieldDescriptorProto.Type.TYPE_DOUBLE:
-    case FieldDescriptorProto.Type.TYPE_FLOAT:
-      return new ScalarType(proto, "Float", opts);
-    case FieldDescriptorProto.Type.TYPE_INT64:
-      return new ScalarType(proto, opts.longNumber, opts);
-    case FieldDescriptorProto.Type.TYPE_UINT64:
-      return new ScalarType(proto, opts.longNumber, opts);
-    case FieldDescriptorProto.Type.TYPE_INT32:
-      return new ScalarType(proto, "Int", opts);
-    case FieldDescriptorProto.Type.TYPE_FIXED64:
-      return new ScalarType(proto, opts.longNumber, opts);
-    case FieldDescriptorProto.Type.TYPE_FIXED32:
-      return new ScalarType(proto, "Int", opts);
-    case FieldDescriptorProto.Type.TYPE_UINT32:
-      return new ScalarType(proto, "Int", opts);
-    case FieldDescriptorProto.Type.TYPE_SFIXED32:
-      return new ScalarType(proto, "Int", opts);
-    case FieldDescriptorProto.Type.TYPE_SFIXED64:
-      return new ScalarType(proto, opts.longNumber, opts);
-    case FieldDescriptorProto.Type.TYPE_SINT32:
-      return new ScalarType(proto, "Int", opts);
-    case FieldDescriptorProto.Type.TYPE_SINT64:
-      return new ScalarType(proto, opts.longNumber, opts);
-    case FieldDescriptorProto.Type.TYPE_BOOL:
-      return new ScalarType(proto, "Boolean", opts);
-    case FieldDescriptorProto.Type.TYPE_GROUP:
-      throw "not supported";
-    case FieldDescriptorProto.Type.TYPE_BYTES:
-      throw "not supported";
-    case FieldDescriptorProto.Type.TYPE_ENUM:
-      assert(proto.type && proto.type.kind === "Enum");
-      return new EnumType(proto.type, new DslFile(proto.type.file, opts));
-    case FieldDescriptorProto.Type.TYPE_MESSAGE: {
+  if (proto.type === null) {
+    throw new Error(
+      `unsupported field type in proto(name: ${proto.fullName.toString()}, type: ${proto.descriptor.getType()})`
+    );
+  }
+  switch (proto.type.kind) {
+    case "Message": {
       assert(proto.type && proto.type.kind === "Message");
       const msg = proto.type;
       if (isScalar(msg, opts)) {
@@ -157,9 +125,51 @@ function detectType<T extends ObjectType | InterfaceType | SquashedOneofUnionTyp
       const file = new DslFile(msg.file, opts);
       return f(msg, file);
     }
+    case "Enum": {
+      assert(proto.type && proto.type.kind === "Enum");
+      return new EnumType(proto.type, new DslFile(proto.type.file, opts));
+    }
+    case "Scalar": {
+      switch (proto.type.type) {
+        case "string":
+          return new ScalarType(proto, "String", opts);
+        case "double":
+        case "float":
+          return new ScalarType(proto, "Float", opts);
+        case "int64":
+          return new ScalarType(proto, opts.longNumber, opts);
+        case "uint64":
+          return new ScalarType(proto, opts.longNumber, opts);
+        case "int32":
+          return new ScalarType(proto, "Int", opts);
+        case "fixed64":
+          return new ScalarType(proto, opts.longNumber, opts);
+        case "fixed32":
+          return new ScalarType(proto, "Int", opts);
+        case "uint32":
+          return new ScalarType(proto, "Int", opts);
+        case "sfixed32":
+          return new ScalarType(proto, "Int", opts);
+        case "sfixed64":
+          return new ScalarType(proto, opts.longNumber, opts);
+        case "sint32":
+          return new ScalarType(proto, "Int", opts);
+        case "sint64":
+          return new ScalarType(proto, opts.longNumber, opts);
+        case "bool":
+          return new ScalarType(proto, "Boolean", opts);
+        case "bytes":
+          throw "not supported";
+        /* istanbul ignore next */
+        default: {
+          const _exhaustiveCheck: never = proto.type.type;
+          throw "unreachable";
+        }
+      }
+    }
     /* istanbul ignore next */
     default: {
-      const _exhaustiveCheck: never = pbtype;
+      const _exhaustiveCheck: never = proto.type;
       throw "unreachable";
     }
   }

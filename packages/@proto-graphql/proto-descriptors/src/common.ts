@@ -2,13 +2,13 @@ import { SourceCodeInfo } from "google-protobuf/google/protobuf/descriptor_pb";
 import {
   CommentSet,
   FullName,
-  ProtoFile,
-  ProtoMessage,
-  ProtoOneof,
-  ProtoField,
   ProtoEnum,
   ProtoEnumValue,
+  ProtoField,
+  ProtoFile,
+  ProtoMessage,
   ProtoMethod,
+  ProtoOneof,
   ProtoService,
 } from "./interfaces";
 
