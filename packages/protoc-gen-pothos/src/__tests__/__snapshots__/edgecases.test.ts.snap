@@ -6,6 +6,7 @@ exports[`import squashed union with ts-proto generates pothos DSLs: edgecases/im
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../../../builder\\";
 import * as _$testapis$edgecases$import_squashed_union$pkg1$types from \\"./testapis/edgecases/import_squashed_union/pkg1/types\\";
 export const OneofMessage1$Ref = builder.objectRef<_$testapis$edgecases$import_squashed_union$pkg1$types.OneofMessage1>(\\"OneofMessage1\\");
@@ -39,8 +40,7 @@ builder.objectType(OneofMessage1$Ref, {
 export type OneofMessage1Input$Shape = {
     body: _$testapis$edgecases$import_squashed_union$pkg1$types.OneofMessage1[\\"body\\"];
 };
-export const OneofMessage1Input$Ref = builder.inputRef<OneofMessage1Input$Shape>(\\"OneofMessage1Input\\");
-OneofMessage1Input$Ref.implement({
+export const OneofMessage1Input$Ref: $$pothos$core.InputObjectRef<OneofMessage1Input$Shape> = builder.inputRef<OneofMessage1Input$Shape>(\\"OneofMessage1Input\\").implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -64,8 +64,7 @@ OneofMessage1Input$Ref.implement({
 export type SquashedOneofInput$Shape = {
     msg1?: OneofMessage1Input$Shape | null;
 };
-export const SquashedOneofInput$Ref = builder.inputRef<SquashedOneofInput$Shape>(\\"SquashedOneofInput\\");
-SquashedOneofInput$Ref.implement({
+export const SquashedOneofInput$Ref: $$pothos$core.InputObjectRef<SquashedOneofInput$Shape> = builder.inputRef<SquashedOneofInput$Shape>(\\"SquashedOneofInput\\").implement({
     fields: t => ({
         msg1: t.field({
             type: OneofMessage1Input$Ref,
@@ -113,6 +112,7 @@ exports[`import squashed union with ts-proto generates pothos DSLs: edgecases/im
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../../../builder\\";
 import * as __$pkg1$types_pb_pothos from \\"../pkg1/types.pb.pothos\\";
 import { SquashedOneof$Ref } from \\"../pkg1/types.pb.pothos\\";
@@ -155,8 +155,7 @@ builder.objectType(Message$Ref, {
 export type MessageInput$Shape = {
     msg?: SquashedOneofInput$Shape | null;
 };
-export const MessageInput$Ref = builder.inputRef<MessageInput$Shape>(\\"MessageInput\\");
-MessageInput$Ref.implement({
+export const MessageInput$Ref: $$pothos$core.InputObjectRef<MessageInput$Shape> = builder.inputRef<MessageInput$Shape>(\\"MessageInput\\").implement({
     fields: t => ({
         msg: t.field({
             type: SquashedOneofInput$Ref,

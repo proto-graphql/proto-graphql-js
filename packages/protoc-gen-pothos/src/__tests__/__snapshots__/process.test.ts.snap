@@ -6,6 +6,7 @@ exports[`deprecation with ts-proto generates pothos DSLs: deprecation/deprecatio
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../builder\\";
 import * as _$testapis$deprecation$deprecation from \\"./testapis/deprecation/deprecation\\";
 export const DeprecatedMessage$Ref = builder.objectRef<_$testapis$deprecation$deprecation.DeprecatedMessage>(\\"DeprecatedMessage\\");
@@ -216,8 +217,7 @@ export type DeprecatedMessageInput$Shape = {
     body: _$testapis$deprecation$deprecation.DeprecatedMessage[\\"body\\"];
     enum?: _$testapis$deprecation$deprecation.DeprecatedMessage[\\"enum\\"] | null;
 };
-export const DeprecatedMessageInput$Ref = builder.inputRef<DeprecatedMessageInput$Shape>(\\"DeprecatedMessageInput\\");
-DeprecatedMessageInput$Ref.implement({
+export const DeprecatedMessageInput$Ref: $$pothos$core.InputObjectRef<DeprecatedMessageInput$Shape> = builder.inputRef<DeprecatedMessageInput$Shape>(\\"DeprecatedMessageInput\\").implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -258,8 +258,7 @@ export type NotDeprecatedMessageInput$Shape = {
     msg3?: NotDeprecatedMessageInnerMessage1Input$Shape | null;
     msg4?: NotDeprecatedMessageInnerMessage2Input$Shape | null;
 };
-export const NotDeprecatedMessageInput$Ref = builder.inputRef<NotDeprecatedMessageInput$Shape>(\\"NotDeprecatedMessageInput\\");
-NotDeprecatedMessageInput$Ref.implement({
+export const NotDeprecatedMessageInput$Ref: $$pothos$core.InputObjectRef<NotDeprecatedMessageInput$Shape> = builder.inputRef<NotDeprecatedMessageInput$Shape>(\\"NotDeprecatedMessageInput\\").implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -338,8 +337,7 @@ NotDeprecatedMessageInput$Ref.implement({
 export type DeprecatedMessageInnerMessageInput$Shape = {
     body: _$testapis$deprecation$deprecation.DeprecatedMessage_InnerMessage[\\"body\\"];
 };
-export const DeprecatedMessageInnerMessageInput$Ref = builder.inputRef<DeprecatedMessageInnerMessageInput$Shape>(\\"DeprecatedMessageInnerMessageInput\\");
-DeprecatedMessageInnerMessageInput$Ref.implement({
+export const DeprecatedMessageInnerMessageInput$Ref: $$pothos$core.InputObjectRef<DeprecatedMessageInnerMessageInput$Shape> = builder.inputRef<DeprecatedMessageInnerMessageInput$Shape>(\\"DeprecatedMessageInnerMessageInput\\").implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -364,8 +362,7 @@ DeprecatedMessageInnerMessageInput$Ref.implement({
 export type NotDeprecatedMessageInnerMessage1Input$Shape = {
     body: _$testapis$deprecation$deprecation.NotDeprecatedMessage_InnerMessage1[\\"body\\"];
 };
-export const NotDeprecatedMessageInnerMessage1Input$Ref = builder.inputRef<NotDeprecatedMessageInnerMessage1Input$Shape>(\\"NotDeprecatedMessageInnerMessage1Input\\");
-NotDeprecatedMessageInnerMessage1Input$Ref.implement({
+export const NotDeprecatedMessageInnerMessage1Input$Ref: $$pothos$core.InputObjectRef<NotDeprecatedMessageInnerMessage1Input$Shape> = builder.inputRef<NotDeprecatedMessageInnerMessage1Input$Shape>(\\"NotDeprecatedMessageInnerMessage1Input\\").implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -389,8 +386,7 @@ NotDeprecatedMessageInnerMessage1Input$Ref.implement({
 export type NotDeprecatedMessageInnerMessage2Input$Shape = {
     body: _$testapis$deprecation$deprecation.NotDeprecatedMessage_InnerMessage2[\\"body\\"];
 };
-export const NotDeprecatedMessageInnerMessage2Input$Ref = builder.inputRef<NotDeprecatedMessageInnerMessage2Input$Shape>(\\"NotDeprecatedMessageInnerMessage2Input\\");
-NotDeprecatedMessageInnerMessage2Input$Ref.implement({
+export const NotDeprecatedMessageInnerMessage2Input$Ref: $$pothos$core.InputObjectRef<NotDeprecatedMessageInnerMessage2Input$Shape> = builder.inputRef<NotDeprecatedMessageInnerMessage2Input$Shape>(\\"NotDeprecatedMessageInnerMessage2Input\\").implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -525,6 +521,7 @@ exports[`deprecation with ts-proto generates pothos DSLs: deprecation/file_depre
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../builder\\";
 import * as _$testapis$deprecation$file_deprecation from \\"./testapis/deprecation/file_deprecation\\";
 export const DeprecatedFileMessage$Ref = builder.objectRef<_$testapis$deprecation$file_deprecation.DeprecatedFileMessage>(\\"DeprecatedFileMessage\\");
@@ -606,8 +603,7 @@ export type DeprecatedFileMessageInput$Shape = {
     body: _$testapis$deprecation$file_deprecation.DeprecatedFileMessage[\\"body\\"];
     enum?: _$testapis$deprecation$file_deprecation.DeprecatedFileMessage[\\"enum\\"] | null;
 };
-export const DeprecatedFileMessageInput$Ref = builder.inputRef<DeprecatedFileMessageInput$Shape>(\\"DeprecatedFileMessageInput\\");
-DeprecatedFileMessageInput$Ref.implement({
+export const DeprecatedFileMessageInput$Ref: $$pothos$core.InputObjectRef<DeprecatedFileMessageInput$Shape> = builder.inputRef<DeprecatedFileMessageInput$Shape>(\\"DeprecatedFileMessageInput\\").implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -643,8 +639,7 @@ DeprecatedFileMessageInput$Ref.implement({
 export type DeprecatedFileMessageInnerMessageInput$Shape = {
     body: _$testapis$deprecation$file_deprecation.DeprecatedFileMessage_InnerMessage[\\"body\\"];
 };
-export const DeprecatedFileMessageInnerMessageInput$Ref = builder.inputRef<DeprecatedFileMessageInnerMessageInput$Shape>(\\"DeprecatedFileMessageInnerMessageInput\\");
-DeprecatedFileMessageInnerMessageInput$Ref.implement({
+export const DeprecatedFileMessageInnerMessageInput$Ref: $$pothos$core.InputObjectRef<DeprecatedFileMessageInnerMessageInput$Shape> = builder.inputRef<DeprecatedFileMessageInnerMessageInput$Shape>(\\"DeprecatedFileMessageInnerMessageInput\\").implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -704,6 +699,7 @@ exports[`empty types with ts-proto generates pothos DSLs: empty_types/empty.pb.p
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../builder\\";
 import * as _$testapis$empty_types$empty from \\"./testapis/empty_types/empty\\";
 export const EmptyMessage$Ref = builder.objectRef<_$testapis$empty_types$empty.EmptyMessage>(\\"EmptyMessage\\");
@@ -731,8 +727,7 @@ builder.objectType(EmptyMessage$Ref, {
     }
 });
 export type EmptyMessageInput$Shape = {};
-export const EmptyMessageInput$Ref = builder.inputRef<EmptyMessageInput$Shape>(\\"EmptyMessageInput\\");
-EmptyMessageInput$Ref.implement({
+export const EmptyMessageInput$Ref: $$pothos$core.InputObjectRef<EmptyMessageInput$Shape> = builder.inputRef<EmptyMessageInput$Shape>(\\"EmptyMessageInput\\").implement({
     fields: t => ({
         _: t.field({
             type: \\"Boolean\\",
@@ -757,6 +752,7 @@ exports[`field_behavior with ts-proto generates pothos DSLs: field_behavior/comm
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../builder\\";
 import * as _$testapis$field_behavior$comments from \\"./testapis/field_behavior/comments\\";
 export const FieldBehaviorComentsMessage$Ref = builder.objectRef<_$testapis$field_behavior$comments.FieldBehaviorComentsMessage>(\\"FieldBehaviorComentsMessage\\");
@@ -864,8 +860,7 @@ export type FieldBehaviorComentsMessageInput$Shape = {
     inputOnlyRequiredField: FieldBehaviorComentsMessagePostInput$Shape;
     inputOnlyField?: FieldBehaviorComentsMessagePostInput$Shape | null;
 };
-export const FieldBehaviorComentsMessageInput$Ref = builder.inputRef<FieldBehaviorComentsMessageInput$Shape>(\\"FieldBehaviorComentsMessageInput\\");
-FieldBehaviorComentsMessageInput$Ref.implement({
+export const FieldBehaviorComentsMessageInput$Ref: $$pothos$core.InputObjectRef<FieldBehaviorComentsMessageInput$Shape> = builder.inputRef<FieldBehaviorComentsMessageInput$Shape>(\\"FieldBehaviorComentsMessageInput\\").implement({
     fields: t => ({
         requiredField: t.field({
             type: FieldBehaviorComentsMessagePostInput$Ref,
@@ -923,8 +918,7 @@ FieldBehaviorComentsMessageInput$Ref.implement({
 export type FieldBehaviorComentsMessagePostInput$Shape = {
     body: _$testapis$field_behavior$comments.FieldBehaviorComentsMessage_Post[\\"body\\"];
 };
-export const FieldBehaviorComentsMessagePostInput$Ref = builder.inputRef<FieldBehaviorComentsMessagePostInput$Shape>(\\"FieldBehaviorComentsMessagePostInput\\");
-FieldBehaviorComentsMessagePostInput$Ref.implement({
+export const FieldBehaviorComentsMessagePostInput$Ref: $$pothos$core.InputObjectRef<FieldBehaviorComentsMessagePostInput$Shape> = builder.inputRef<FieldBehaviorComentsMessagePostInput$Shape>(\\"FieldBehaviorComentsMessagePostInput\\").implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -954,6 +948,7 @@ exports[`multipkgs with ts-proto generates pothos DSLs: multipkgs/subpkg1/types.
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../../builder\\";
 import * as _$testapis$multipkgs$subpkg1$types from \\"./testapis/multipkgs/subpkg1/types\\";
 export const SubpkgMessage$Ref = builder.objectRef<_$testapis$multipkgs$subpkg1$types.SubpkgMessage>(\\"SubpkgMessage\\");
@@ -987,8 +982,7 @@ builder.objectType(SubpkgMessage$Ref, {
 export type SubpkgMessageInput$Shape = {
     body: _$testapis$multipkgs$subpkg1$types.SubpkgMessage[\\"body\\"];
 };
-export const SubpkgMessageInput$Ref = builder.inputRef<SubpkgMessageInput$Shape>(\\"SubpkgMessageInput\\");
-SubpkgMessageInput$Ref.implement({
+export const SubpkgMessageInput$Ref: $$pothos$core.InputObjectRef<SubpkgMessageInput$Shape> = builder.inputRef<SubpkgMessageInput$Shape>(\\"SubpkgMessageInput\\").implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -1045,6 +1039,7 @@ exports[`multipkgs with ts-proto generates pothos DSLs: multipkgs/subpkg2/types.
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../../builder\\";
 import * as __$subpkg1$types_pb_pothos from \\"../subpkg1/types.pb.pothos\\";
 import { SubpkgMessage$Ref } from \\"../subpkg1/types.pb.pothos\\";
@@ -1101,8 +1096,7 @@ export type MessageWithSubpkgInput$Shape = {
     message?: SubpkgMessageInput$Shape | null;
     enum?: _$testapis$multipkgs$subpkg2$types.MessageWithSubpkg[\\"enum\\"] | null;
 };
-export const MessageWithSubpkgInput$Ref = builder.inputRef<MessageWithSubpkgInput$Shape>(\\"MessageWithSubpkgInput\\");
-MessageWithSubpkgInput$Ref.implement({
+export const MessageWithSubpkgInput$Ref: $$pothos$core.InputObjectRef<MessageWithSubpkgInput$Shape> = builder.inputRef<MessageWithSubpkgInput$Shape>(\\"MessageWithSubpkgInput\\").implement({
     fields: t => ({
         message: t.field({
             type: SubpkgMessageInput$Ref,
@@ -1142,6 +1136,7 @@ exports[`nested protobuf types with ts-proto generates pothos DSLs: nested/neste
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../builder\\";
 import * as _$testapis$nested$nested from \\"./testapis/nested/nested\\";
 export const ParentMessage$Ref = builder.objectRef<_$testapis$nested$nested.ParentMessage>(\\"ParentMessage\\");
@@ -1231,8 +1226,7 @@ export type ParentMessageInput$Shape = {
     nested?: ParentMessageNestedMessageInput$Shape | null;
     nestedEnum?: _$testapis$nested$nested.ParentMessage[\\"nestedEnum\\"] | null;
 };
-export const ParentMessageInput$Ref = builder.inputRef<ParentMessageInput$Shape>(\\"ParentMessageInput\\");
-ParentMessageInput$Ref.implement({
+export const ParentMessageInput$Ref: $$pothos$core.InputObjectRef<ParentMessageInput$Shape> = builder.inputRef<ParentMessageInput$Shape>(\\"ParentMessageInput\\").implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -1276,8 +1270,7 @@ ParentMessageInput$Ref.implement({
 export type ParentMessageNestedMessageInput$Shape = {
     nestedBody: _$testapis$nested$nested.ParentMessage_NestedMessage[\\"nestedBody\\"];
 };
-export const ParentMessageNestedMessageInput$Ref = builder.inputRef<ParentMessageNestedMessageInput$Shape>(\\"ParentMessageNestedMessageInput\\");
-ParentMessageNestedMessageInput$Ref.implement({
+export const ParentMessageNestedMessageInput$Ref: $$pothos$core.InputObjectRef<ParentMessageNestedMessageInput$Shape> = builder.inputRef<ParentMessageNestedMessageInput$Shape>(\\"ParentMessageNestedMessageInput\\").implement({
     fields: t => ({
         nestedBody: t.field({
             type: \\"String\\",
@@ -1373,12 +1366,12 @@ exports[`protobuf custom options generates pothos DSLs with graphql_type file la
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../builder\\";
 export type TestPrefixIgnoredMessageNotIgnoredInput$Shape = {
     body: _$testapis$extensions$extensions.IgnoredMessage_NotIgnored[\\"body\\"];
 };
-export const TestPrefixIgnoredMessageNotIgnoredInput$Ref = builder.inputRef<TestPrefixIgnoredMessageNotIgnoredInput$Shape>(\\"TestPrefixIgnoredMessageNotIgnoredInput\\");
-TestPrefixIgnoredMessageNotIgnoredInput$Ref.implement({
+export const TestPrefixIgnoredMessageNotIgnoredInput$Ref: $$pothos$core.InputObjectRef<TestPrefixIgnoredMessageNotIgnoredInput$Shape> = builder.inputRef<TestPrefixIgnoredMessageNotIgnoredInput$Shape>(\\"TestPrefixIgnoredMessageNotIgnoredInput\\").implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -1442,12 +1435,12 @@ exports[`protobuf custom options generates pothos DSLs with graphql_type file la
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../builder\\";
 export type TestPrefixInterfaceMessageInput$Shape = {
     id: _$testapis$extensions$extensions.InterfaceMessage[\\"id\\"];
 };
-export const TestPrefixInterfaceMessageInput$Ref = builder.inputRef<TestPrefixInterfaceMessageInput$Shape>(\\"TestPrefixInterfaceMessageInput\\");
-TestPrefixInterfaceMessageInput$Ref.implement({
+export const TestPrefixInterfaceMessageInput$Ref: $$pothos$core.InputObjectRef<TestPrefixInterfaceMessageInput$Shape> = builder.inputRef<TestPrefixInterfaceMessageInput$Shape>(\\"TestPrefixInterfaceMessageInput\\").implement({
     fields: t => ({
         id: t.field({
             type: \\"String\\",
@@ -1809,13 +1802,13 @@ exports[`protobuf custom options generates pothos DSLs with graphql_type file la
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../builder\\";
 export type TestPrefixPrefixedMessageInnerMessage2Input$Shape = {
     id: _$testapis$extensions$extensions.PrefixedMessage_InnerMessage2[\\"id\\"];
     body: _$testapis$extensions$extensions.PrefixedMessage_InnerMessage2[\\"body\\"];
 };
-export const TestPrefixPrefixedMessageInnerMessage2Input$Ref = builder.inputRef<TestPrefixPrefixedMessageInnerMessage2Input$Shape>(\\"TestPrefixPrefixedMessageInnerMessage2Input\\");
-TestPrefixPrefixedMessageInnerMessage2Input$Ref.implement({
+export const TestPrefixPrefixedMessageInnerMessage2Input$Ref: $$pothos$core.InputObjectRef<TestPrefixPrefixedMessageInnerMessage2Input$Shape> = builder.inputRef<TestPrefixPrefixedMessageInnerMessage2Input$Shape>(\\"TestPrefixPrefixedMessageInnerMessage2Input\\").implement({
     fields: t => ({
         id: t.field({
             type: \\"String\\",
@@ -1855,13 +1848,13 @@ exports[`protobuf custom options generates pothos DSLs with graphql_type file la
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../builder\\";
 export type TestPrefixPrefixedMessageInnerMessageInput$Shape = {
     id: _$testapis$extensions$extensions.PrefixedMessage_InnerMessage[\\"id\\"];
     body: _$testapis$extensions$extensions.PrefixedMessage_InnerMessage[\\"body\\"];
 };
-export const TestPrefixPrefixedMessageInnerMessageInput$Ref = builder.inputRef<TestPrefixPrefixedMessageInnerMessageInput$Shape>(\\"TestPrefixPrefixedMessageInnerMessageInput\\");
-TestPrefixPrefixedMessageInnerMessageInput$Ref.implement({
+export const TestPrefixPrefixedMessageInnerMessageInput$Ref: $$pothos$core.InputObjectRef<TestPrefixPrefixedMessageInnerMessageInput$Shape> = builder.inputRef<TestPrefixPrefixedMessageInnerMessageInput$Shape>(\\"TestPrefixPrefixedMessageInnerMessageInput\\").implement({
     fields: t => ({
         id: t.field({
             type: \\"String\\",
@@ -1901,6 +1894,7 @@ exports[`protobuf custom options generates pothos DSLs with graphql_type file la
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../builder\\";
 import * as _$TestPrefixIgnoredMessageNotIgnoredInput_pothos from \\"./TestPrefixIgnoredMessageNotIgnoredInput.pothos\\";
 import * as _$TestPrefixPrefixedEnum_pothos from \\"./TestPrefixPrefixedEnum.pothos\\";
@@ -1918,8 +1912,7 @@ export type TestPrefixPrefixedMessageInput$Shape = {
     squashedMessages?: Array<TestPrefixPrefixedMessageSquashedMessageInput$Shape> | null;
     renamedMessage?: TestPrefixRenamedMessageInput$Shape | null;
 };
-export const TestPrefixPrefixedMessageInput$Ref = builder.inputRef<TestPrefixPrefixedMessageInput$Shape>(\\"TestPrefixPrefixedMessageInput\\");
-TestPrefixPrefixedMessageInput$Ref.implement({
+export const TestPrefixPrefixedMessageInput$Ref: $$pothos$core.InputObjectRef<TestPrefixPrefixedMessageInput$Shape> = builder.inputRef<TestPrefixPrefixedMessageInput$Shape>(\\"TestPrefixPrefixedMessageInput\\").implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -2098,6 +2091,7 @@ exports[`protobuf custom options generates pothos DSLs with graphql_type file la
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../builder\\";
 import * as _$TestPrefixPrefixedMessageInnerMessage2Input_pothos from \\"./TestPrefixPrefixedMessageInnerMessage2Input.pothos\\";
 import * as _$TestPrefixPrefixedMessageInnerMessageInput_pothos from \\"./TestPrefixPrefixedMessageInnerMessageInput.pothos\\";
@@ -2105,8 +2099,7 @@ export type TestPrefixPrefixedMessageSquashedMessageInput$Shape = {
     oneofField?: TestPrefixPrefixedMessageInnerMessageInput$Shape | null;
     oneofField2?: TestPrefixPrefixedMessageInnerMessage2Input$Shape | null;
 };
-export const TestPrefixPrefixedMessageSquashedMessageInput$Ref = builder.inputRef<TestPrefixPrefixedMessageSquashedMessageInput$Shape>(\\"TestPrefixPrefixedMessageSquashedMessageInput\\");
-TestPrefixPrefixedMessageSquashedMessageInput$Ref.implement({
+export const TestPrefixPrefixedMessageSquashedMessageInput$Ref: $$pothos$core.InputObjectRef<TestPrefixPrefixedMessageSquashedMessageInput$Shape> = builder.inputRef<TestPrefixPrefixedMessageSquashedMessageInput$Shape>(\\"TestPrefixPrefixedMessageSquashedMessageInput\\").implement({
     fields: t => ({
         oneofField: t.field({
             type: TestPrefixPrefixedMessageInnerMessageInput$Ref,
@@ -2185,12 +2178,12 @@ exports[`protobuf custom options generates pothos DSLs with graphql_type file la
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../builder\\";
 export type TestPrefixRenamedMessageInput$Shape = {
     body: _$testapis$extensions$extensions.MessageWillRename[\\"body\\"];
 };
-export const TestPrefixRenamedMessageInput$Ref = builder.inputRef<TestPrefixRenamedMessageInput$Shape>(\\"TestPrefixRenamedMessageInput\\");
-TestPrefixRenamedMessageInput$Ref.implement({
+export const TestPrefixRenamedMessageInput$Ref: $$pothos$core.InputObjectRef<TestPrefixRenamedMessageInput$Shape> = builder.inputRef<TestPrefixRenamedMessageInput$Shape>(\\"TestPrefixRenamedMessageInput\\").implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -2220,6 +2213,7 @@ exports[`protobuf custom options with ts-proto generates pothos DSLs: extensions
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../builder\\";
 import * as _$testapis$extensions$extensions from \\"./testapis/extensions/extensions\\";
 export const TestPrefixPrefixedMessage$Ref = builder.objectRef<_$testapis$extensions$extensions.PrefixedMessage>(\\"TestPrefixPrefixedMessage\\");
@@ -2509,8 +2503,7 @@ export type TestPrefixPrefixedMessageInput$Shape = {
     squashedMessages?: Array<TestPrefixPrefixedMessageSquashedMessageInput$Shape> | null;
     renamedMessage?: TestPrefixRenamedMessageInput$Shape | null;
 };
-export const TestPrefixPrefixedMessageInput$Ref = builder.inputRef<TestPrefixPrefixedMessageInput$Shape>(\\"TestPrefixPrefixedMessageInput\\");
-TestPrefixPrefixedMessageInput$Ref.implement({
+export const TestPrefixPrefixedMessageInput$Ref: $$pothos$core.InputObjectRef<TestPrefixPrefixedMessageInput$Shape> = builder.inputRef<TestPrefixPrefixedMessageInput$Shape>(\\"TestPrefixPrefixedMessageInput\\").implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -2614,8 +2607,7 @@ TestPrefixPrefixedMessageInput$Ref.implement({
 export type TestPrefixRenamedMessageInput$Shape = {
     body: _$testapis$extensions$extensions.MessageWillRename[\\"body\\"];
 };
-export const TestPrefixRenamedMessageInput$Ref = builder.inputRef<TestPrefixRenamedMessageInput$Shape>(\\"TestPrefixRenamedMessageInput\\");
-TestPrefixRenamedMessageInput$Ref.implement({
+export const TestPrefixRenamedMessageInput$Ref: $$pothos$core.InputObjectRef<TestPrefixRenamedMessageInput$Shape> = builder.inputRef<TestPrefixRenamedMessageInput$Shape>(\\"TestPrefixRenamedMessageInput\\").implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -2639,8 +2631,7 @@ TestPrefixRenamedMessageInput$Ref.implement({
 export type TestPrefixInterfaceMessageInput$Shape = {
     id: _$testapis$extensions$extensions.InterfaceMessage[\\"id\\"];
 };
-export const TestPrefixInterfaceMessageInput$Ref = builder.inputRef<TestPrefixInterfaceMessageInput$Shape>(\\"TestPrefixInterfaceMessageInput\\");
-TestPrefixInterfaceMessageInput$Ref.implement({
+export const TestPrefixInterfaceMessageInput$Ref: $$pothos$core.InputObjectRef<TestPrefixInterfaceMessageInput$Shape> = builder.inputRef<TestPrefixInterfaceMessageInput$Shape>(\\"TestPrefixInterfaceMessageInput\\").implement({
     fields: t => ({
         id: t.field({
             type: \\"String\\",
@@ -2665,8 +2656,7 @@ export type TestPrefixPrefixedMessageInnerMessageInput$Shape = {
     id: _$testapis$extensions$extensions.PrefixedMessage_InnerMessage[\\"id\\"];
     body: _$testapis$extensions$extensions.PrefixedMessage_InnerMessage[\\"body\\"];
 };
-export const TestPrefixPrefixedMessageInnerMessageInput$Ref = builder.inputRef<TestPrefixPrefixedMessageInnerMessageInput$Shape>(\\"TestPrefixPrefixedMessageInnerMessageInput\\");
-TestPrefixPrefixedMessageInnerMessageInput$Ref.implement({
+export const TestPrefixPrefixedMessageInnerMessageInput$Ref: $$pothos$core.InputObjectRef<TestPrefixPrefixedMessageInnerMessageInput$Shape> = builder.inputRef<TestPrefixPrefixedMessageInnerMessageInput$Shape>(\\"TestPrefixPrefixedMessageInnerMessageInput\\").implement({
     fields: t => ({
         id: t.field({
             type: \\"String\\",
@@ -2701,8 +2691,7 @@ export type TestPrefixPrefixedMessageInnerMessage2Input$Shape = {
     id: _$testapis$extensions$extensions.PrefixedMessage_InnerMessage2[\\"id\\"];
     body: _$testapis$extensions$extensions.PrefixedMessage_InnerMessage2[\\"body\\"];
 };
-export const TestPrefixPrefixedMessageInnerMessage2Input$Ref = builder.inputRef<TestPrefixPrefixedMessageInnerMessage2Input$Shape>(\\"TestPrefixPrefixedMessageInnerMessage2Input\\");
-TestPrefixPrefixedMessageInnerMessage2Input$Ref.implement({
+export const TestPrefixPrefixedMessageInnerMessage2Input$Ref: $$pothos$core.InputObjectRef<TestPrefixPrefixedMessageInnerMessage2Input$Shape> = builder.inputRef<TestPrefixPrefixedMessageInnerMessage2Input$Shape>(\\"TestPrefixPrefixedMessageInnerMessage2Input\\").implement({
     fields: t => ({
         id: t.field({
             type: \\"String\\",
@@ -2737,8 +2726,7 @@ export type TestPrefixPrefixedMessageSquashedMessageInput$Shape = {
     oneofField?: TestPrefixPrefixedMessageInnerMessageInput$Shape | null;
     oneofField2?: TestPrefixPrefixedMessageInnerMessage2Input$Shape | null;
 };
-export const TestPrefixPrefixedMessageSquashedMessageInput$Ref = builder.inputRef<TestPrefixPrefixedMessageSquashedMessageInput$Shape>(\\"TestPrefixPrefixedMessageSquashedMessageInput\\");
-TestPrefixPrefixedMessageSquashedMessageInput$Ref.implement({
+export const TestPrefixPrefixedMessageSquashedMessageInput$Ref: $$pothos$core.InputObjectRef<TestPrefixPrefixedMessageSquashedMessageInput$Shape> = builder.inputRef<TestPrefixPrefixedMessageSquashedMessageInput$Shape>(\\"TestPrefixPrefixedMessageSquashedMessageInput\\").implement({
     fields: t => ({
         oneofField: t.field({
             type: TestPrefixPrefixedMessageInnerMessageInput$Ref,
@@ -2772,8 +2760,7 @@ TestPrefixPrefixedMessageSquashedMessageInput$Ref.implement({
 export type TestPrefixIgnoredMessageNotIgnoredInput$Shape = {
     body: _$testapis$extensions$extensions.IgnoredMessage_NotIgnored[\\"body\\"];
 };
-export const TestPrefixIgnoredMessageNotIgnoredInput$Ref = builder.inputRef<TestPrefixIgnoredMessageNotIgnoredInput$Shape>(\\"TestPrefixIgnoredMessageNotIgnoredInput\\");
-TestPrefixIgnoredMessageNotIgnoredInput$Ref.implement({
+export const TestPrefixIgnoredMessageNotIgnoredInput$Ref: $$pothos$core.InputObjectRef<TestPrefixIgnoredMessageNotIgnoredInput$Shape> = builder.inputRef<TestPrefixIgnoredMessageNotIgnoredInput$Shape>(\\"TestPrefixIgnoredMessageNotIgnoredInput\\").implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -3095,6 +3082,7 @@ exports[`protobuf enums generates pothos DSLs with graphql_type file layout: enu
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../builder\\";
 import * as _$MyEnum_pothos from \\"./MyEnum.pothos\\";
 import * as _$MyEnumWithoutUnspecified_pothos from \\"./MyEnumWithoutUnspecified.pothos\\";
@@ -3108,8 +3096,7 @@ export type MessageWithEnumsInput$Shape = {
     requiredMyEnumWithoutUnspecifieds: _$testapis$enums$enums.MessageWithEnums[\\"requiredMyEnumWithoutUnspecifieds\\"];
     optionalMyEnumWithoutUnspecifieds?: _$testapis$enums$enums.MessageWithEnums[\\"optionalMyEnumWithoutUnspecifieds\\"] | null;
 };
-export const MessageWithEnumsInput$Ref = builder.inputRef<MessageWithEnumsInput$Shape>(\\"MessageWithEnumsInput\\");
-MessageWithEnumsInput$Ref.implement({
+export const MessageWithEnumsInput$Ref: $$pothos$core.InputObjectRef<MessageWithEnumsInput$Shape> = builder.inputRef<MessageWithEnumsInput$Shape>(\\"MessageWithEnumsInput\\").implement({
     fields: t => ({
         requiredMyEnum: t.field({
             type: MyEnum$Ref,
@@ -3308,6 +3295,7 @@ exports[`protobuf enums with ts-proto generates pothos DSLs: enums/enums.pb.poth
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../builder\\";
 import * as _$testapis$enums$enums from \\"./testapis/enums/enums\\";
 export const MessageWithEnums$Ref = builder.objectRef<_$testapis$enums$enums.MessageWithEnums>(\\"MessageWithEnums\\");
@@ -3466,8 +3454,7 @@ export type MessageWithEnumsInput$Shape = {
     requiredMyEnumWithoutUnspecifieds: _$testapis$enums$enums.MessageWithEnums[\\"requiredMyEnumWithoutUnspecifieds\\"];
     optionalMyEnumWithoutUnspecifieds?: _$testapis$enums$enums.MessageWithEnums[\\"optionalMyEnumWithoutUnspecifieds\\"] | null;
 };
-export const MessageWithEnumsInput$Ref = builder.inputRef<MessageWithEnumsInput$Shape>(\\"MessageWithEnumsInput\\");
-MessageWithEnumsInput$Ref.implement({
+export const MessageWithEnumsInput$Ref: $$pothos$core.InputObjectRef<MessageWithEnumsInput$Shape> = builder.inputRef<MessageWithEnumsInput$Shape>(\\"MessageWithEnumsInput\\").implement({
     fields: t => ({
         requiredMyEnum: t.field({
             type: MyEnum$Ref,
@@ -3685,12 +3672,12 @@ exports[`protobuf oneof generates pothos DSLs with graphql_type file layout: one
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../builder\\";
 export type OneofMemberMessage1Input$Shape = {
     body: _$testapis$oneof$oneof.OneofMemberMessage1[\\"body\\"];
 };
-export const OneofMemberMessage1Input$Ref = builder.inputRef<OneofMemberMessage1Input$Shape>(\\"OneofMemberMessage1Input\\");
-OneofMemberMessage1Input$Ref.implement({
+export const OneofMemberMessage1Input$Ref: $$pothos$core.InputObjectRef<OneofMemberMessage1Input$Shape> = builder.inputRef<OneofMemberMessage1Input$Shape>(\\"OneofMemberMessage1Input\\").implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -3759,12 +3746,12 @@ exports[`protobuf oneof generates pothos DSLs with graphql_type file layout: one
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../builder\\";
 export type OneofMemberMessage2Input$Shape = {
     imageUrl: _$testapis$oneof$oneof.OneofMemberMessage2[\\"imageUrl\\"];
 };
-export const OneofMemberMessage2Input$Ref = builder.inputRef<OneofMemberMessage2Input$Shape>(\\"OneofMemberMessage2Input\\");
-OneofMemberMessage2Input$Ref.implement({
+export const OneofMemberMessage2Input$Ref: $$pothos$core.InputObjectRef<OneofMemberMessage2Input$Shape> = builder.inputRef<OneofMemberMessage2Input$Shape>(\\"OneofMemberMessage2Input\\").implement({
     fields: t => ({
         imageUrl: t.field({
             type: \\"String\\",
@@ -3865,6 +3852,7 @@ exports[`protobuf oneof generates pothos DSLs with graphql_type file layout: one
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../builder\\";
 import * as _$OneofMemberMessage1Input_pothos from \\"./OneofMemberMessage1Input.pothos\\";
 import * as _$OneofMemberMessage2Input_pothos from \\"./OneofMemberMessage2Input.pothos\\";
@@ -3875,8 +3863,7 @@ export type OneofParentInput$Shape = {
     optoinalMessage1?: OneofMemberMessage1Input$Shape | null;
     optoinalMessage2?: OneofMemberMessage2Input$Shape | null;
 };
-export const OneofParentInput$Ref = builder.inputRef<OneofParentInput$Shape>(\\"OneofParentInput\\");
-OneofParentInput$Ref.implement({
+export const OneofParentInput$Ref: $$pothos$core.InputObjectRef<OneofParentInput$Shape> = builder.inputRef<OneofParentInput$Shape>(\\"OneofParentInput\\").implement({
     fields: t => ({
         normalField: t.field({
             type: \\"String\\",
@@ -4019,6 +4006,7 @@ exports[`protobuf oneof with ts-proto generates pothos DSLs: oneof/oneof.pb.poth
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../builder\\";
 import * as _$testapis$oneof$oneof from \\"./testapis/oneof/oneof\\";
 export const OneofParent$Ref = builder.objectRef<_$testapis$oneof$oneof.OneofParent>(\\"OneofParent\\");
@@ -4142,8 +4130,7 @@ export type OneofParentInput$Shape = {
     optoinalMessage1?: OneofMemberMessage1Input$Shape | null;
     optoinalMessage2?: OneofMemberMessage2Input$Shape | null;
 };
-export const OneofParentInput$Ref = builder.inputRef<OneofParentInput$Shape>(\\"OneofParentInput\\");
-OneofParentInput$Ref.implement({
+export const OneofParentInput$Ref: $$pothos$core.InputObjectRef<OneofParentInput$Shape> = builder.inputRef<OneofParentInput$Shape>(\\"OneofParentInput\\").implement({
     fields: t => ({
         normalField: t.field({
             type: \\"String\\",
@@ -4207,8 +4194,7 @@ OneofParentInput$Ref.implement({
 export type OneofMemberMessage1Input$Shape = {
     body: _$testapis$oneof$oneof.OneofMemberMessage1[\\"body\\"];
 };
-export const OneofMemberMessage1Input$Ref = builder.inputRef<OneofMemberMessage1Input$Shape>(\\"OneofMemberMessage1Input\\");
-OneofMemberMessage1Input$Ref.implement({
+export const OneofMemberMessage1Input$Ref: $$pothos$core.InputObjectRef<OneofMemberMessage1Input$Shape> = builder.inputRef<OneofMemberMessage1Input$Shape>(\\"OneofMemberMessage1Input\\").implement({
     fields: t => ({
         body: t.field({
             type: \\"String\\",
@@ -4232,8 +4218,7 @@ OneofMemberMessage1Input$Ref.implement({
 export type OneofMemberMessage2Input$Shape = {
     imageUrl: _$testapis$oneof$oneof.OneofMemberMessage2[\\"imageUrl\\"];
 };
-export const OneofMemberMessage2Input$Ref = builder.inputRef<OneofMemberMessage2Input$Shape>(\\"OneofMemberMessage2Input\\");
-OneofMemberMessage2Input$Ref.implement({
+export const OneofMemberMessage2Input$Ref: $$pothos$core.InputObjectRef<OneofMemberMessage2Input$Shape> = builder.inputRef<OneofMemberMessage2Input$Shape>(\\"OneofMemberMessage2Input\\").implement({
     fields: t => ({
         imageUrl: t.field({
             type: \\"String\\",
@@ -4392,6 +4377,7 @@ exports[`simple proto file generates pothos DSLs with graphql_type file layout: 
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../builder\\";
 import * as _$PrimitivesInput_pothos from \\"./PrimitivesInput.pothos\\";
 export type MessageInput$Shape = {
@@ -4400,8 +4386,7 @@ export type MessageInput$Shape = {
     requiredPrimitivesList: Array<PrimitivesInput$Shape>;
     optionalPrimitivesList?: Array<PrimitivesInput$Shape> | null;
 };
-export const MessageInput$Ref = builder.inputRef<MessageInput$Shape>(\\"MessageInput\\");
-MessageInput$Ref.implement({
+export const MessageInput$Ref: $$pothos$core.InputObjectRef<MessageInput$Shape> = builder.inputRef<MessageInput$Shape>(\\"MessageInput\\").implement({
     fields: t => ({
         requiredPrimitives: t.field({
             type: PrimitivesInput$Ref,
@@ -4774,6 +4759,7 @@ exports[`simple proto file generates pothos DSLs with graphql_type file layout: 
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../builder\\";
 export type PrimitivesInput$Shape = {
     requiredDoubleValue: _$testapis$primitives$primitives.Primitives[\\"requiredDoubleValue\\"];
@@ -4805,8 +4791,7 @@ export type PrimitivesInput$Shape = {
     requiredBoolValues: _$testapis$primitives$primitives.Primitives[\\"requiredBoolValues\\"];
     requiredStringValues: _$testapis$primitives$primitives.Primitives[\\"requiredStringValues\\"];
 };
-export const PrimitivesInput$Ref = builder.inputRef<PrimitivesInput$Shape>(\\"PrimitivesInput\\");
-PrimitivesInput$Ref.implement({
+export const PrimitivesInput$Ref: $$pothos$core.InputObjectRef<PrimitivesInput$Shape> = builder.inputRef<PrimitivesInput$Shape>(\\"PrimitivesInput\\").implement({
     fields: t => ({
         requiredDoubleValue: t.field({
             type: \\"Float\\",
@@ -5106,6 +5091,7 @@ exports[`simple proto file generates pothos DSLs with partial inputs: primitives
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../builder\\";
 import * as _$testapis$primitives$primitives from \\"./testapis/primitives/primitives\\";
 export const Message$Ref = builder.objectRef<_$testapis$primitives$primitives.Message>(\\"Message\\");
@@ -5480,8 +5466,7 @@ export type MessageInput$Shape = {
     requiredPrimitivesList: Array<PrimitivesInput$Shape>;
     optionalPrimitivesList?: Array<PrimitivesInput$Shape> | null;
 };
-export const MessageInput$Ref = builder.inputRef<MessageInput$Shape>(\\"MessageInput\\");
-MessageInput$Ref.implement({
+export const MessageInput$Ref: $$pothos$core.InputObjectRef<MessageInput$Shape> = builder.inputRef<MessageInput$Shape>(\\"MessageInput\\").implement({
     fields: t => ({
         requiredPrimitives: t.field({
             type: PrimitivesInput$Ref,
@@ -5542,8 +5527,7 @@ export type MessagePartialInput$Shape = {
     requiredPrimitivesList?: Array<PrimitivesPartialInput$Shape> | null;
     optionalPrimitivesList?: Array<PrimitivesPartialInput$Shape> | null;
 };
-export const MessagePartialInput$Ref = builder.inputRef<MessagePartialInput$Shape>(\\"MessagePartialInput\\");
-MessagePartialInput$Ref.implement({
+export const MessagePartialInput$Ref: $$pothos$core.InputObjectRef<MessagePartialInput$Shape> = builder.inputRef<MessagePartialInput$Shape>(\\"MessagePartialInput\\").implement({
     fields: t => ({
         requiredPrimitives: t.field({
             type: PrimitivesPartialInput$Ref,
@@ -5628,8 +5612,7 @@ export type PrimitivesInput$Shape = {
     requiredBoolValues: _$testapis$primitives$primitives.Primitives[\\"requiredBoolValues\\"];
     requiredStringValues: _$testapis$primitives$primitives.Primitives[\\"requiredStringValues\\"];
 };
-export const PrimitivesInput$Ref = builder.inputRef<PrimitivesInput$Shape>(\\"PrimitivesInput\\");
-PrimitivesInput$Ref.implement({
+export const PrimitivesInput$Ref: $$pothos$core.InputObjectRef<PrimitivesInput$Shape> = builder.inputRef<PrimitivesInput$Shape>(\\"PrimitivesInput\\").implement({
     fields: t => ({
         requiredDoubleValue: t.field({
             type: \\"Float\\",
@@ -5950,8 +5933,7 @@ export type PrimitivesPartialInput$Shape = {
     requiredBoolValues?: _$testapis$primitives$primitives.Primitives[\\"requiredBoolValues\\"] | null;
     requiredStringValues?: _$testapis$primitives$primitives.Primitives[\\"requiredStringValues\\"] | null;
 };
-export const PrimitivesPartialInput$Ref = builder.inputRef<PrimitivesPartialInput$Shape>(\\"PrimitivesPartialInput\\");
-PrimitivesPartialInput$Ref.implement({
+export const PrimitivesPartialInput$Ref: $$pothos$core.InputObjectRef<PrimitivesPartialInput$Shape> = builder.inputRef<PrimitivesPartialInput$Shape>(\\"PrimitivesPartialInput\\").implement({
     fields: t => ({
         requiredDoubleValue: t.field({
             type: \\"Float\\",
@@ -6251,6 +6233,7 @@ exports[`simple proto file with ts-proto generates pothos DSLs: primitives/primi
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../builder\\";
 import * as _$testapis$primitives$primitives from \\"./testapis/primitives/primitives\\";
 export const Message$Ref = builder.objectRef<_$testapis$primitives$primitives.Message>(\\"Message\\");
@@ -6625,8 +6608,7 @@ export type MessageInput$Shape = {
     requiredPrimitivesList: Array<PrimitivesInput$Shape>;
     optionalPrimitivesList?: Array<PrimitivesInput$Shape> | null;
 };
-export const MessageInput$Ref = builder.inputRef<MessageInput$Shape>(\\"MessageInput\\");
-MessageInput$Ref.implement({
+export const MessageInput$Ref: $$pothos$core.InputObjectRef<MessageInput$Shape> = builder.inputRef<MessageInput$Shape>(\\"MessageInput\\").implement({
     fields: t => ({
         requiredPrimitives: t.field({
             type: PrimitivesInput$Ref,
@@ -6711,8 +6693,7 @@ export type PrimitivesInput$Shape = {
     requiredBoolValues: _$testapis$primitives$primitives.Primitives[\\"requiredBoolValues\\"];
     requiredStringValues: _$testapis$primitives$primitives.Primitives[\\"requiredStringValues\\"];
 };
-export const PrimitivesInput$Ref = builder.inputRef<PrimitivesInput$Shape>(\\"PrimitivesInput\\");
-PrimitivesInput$Ref.implement({
+export const PrimitivesInput$Ref: $$pothos$core.InputObjectRef<PrimitivesInput$Shape> = builder.inputRef<PrimitivesInput$Shape>(\\"PrimitivesInput\\").implement({
     fields: t => ({
         requiredDoubleValue: t.field({
             type: \\"Float\\",
@@ -7012,6 +6993,7 @@ exports[`well-known protobuf types with ts-proto generates pothos DSLs: wktypes/
 
 /* eslint-disable */
 
+import * as $$pothos$core from \\"@pothos/core\\";
 import { builder } from \\"../../builder\\";
 import * as _$testapis$wktypes$well_known_types from \\"./testapis/wktypes/well_known_types\\";
 export const Message$Ref = builder.objectRef<_$testapis$wktypes$well_known_types.Message>(\\"Message\\");
@@ -7247,8 +7229,7 @@ export type MessageInput$Shape = {
     stringValues?: _$testapis$wktypes$well_known_types.Message[\\"stringValues\\"] | null;
     requiredTimestamp: _$testapis$wktypes$well_known_types.Message[\\"requiredTimestamp\\"];
 };
-export const MessageInput$Ref = builder.inputRef<MessageInput$Shape>(\\"MessageInput\\");
-MessageInput$Ref.implement({
+export const MessageInput$Ref: $$pothos$core.InputObjectRef<MessageInput$Shape> = builder.inputRef<MessageInput$Shape>(\\"MessageInput\\").implement({
     fields: t => ({
         timestamp: t.field({
             type: \\"DateTime\\",

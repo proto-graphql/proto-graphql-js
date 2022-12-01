@@ -119,11 +119,11 @@ export function createImportDecl({
   );
 }
 
-export function createDslExportConstStmt(name: string, exp: ts.Expression): ts.Statement {
+export function createDslExportConstStmt(name: string, exp: ts.Expression, typeNode?: ts.TypeNode): ts.Statement {
   return ts.factory.createVariableStatement(
     [ts.factory.createToken(ts.SyntaxKind.ExportKeyword)],
     ts.factory.createVariableDeclarationList(
-      [ts.factory.createVariableDeclaration(name, undefined, undefined, exp)],
+      [ts.factory.createVariableDeclaration(name, undefined, typeNode, exp)],
       ts.NodeFlags.Const
     )
   );
