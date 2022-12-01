@@ -1,5 +1,11 @@
 # @proto-graphql/codegen-core
 
+## 0.2.3
+
+### Patch Changes
+
+- [#237](https://github.com/proto-graphql/proto-graphql-js/pull/237) [`b9945c8`](https://github.com/proto-graphql/proto-graphql-js/commit/b9945c827e737bda8b85621966a90a2e7e5cdf41) Thanks [@izumin5210](https://github.com/izumin5210)! - tweak input type definition for avoiding type error
+
 ## 0.2.2
 
 ### Patch Changes
