@@ -1,4 +1,4 @@
-import { InputObjectType } from "@proto-graphql/codegen-core";
+import { InputObjectType, uniqueImportAlias } from "@proto-graphql/codegen-core";
 import ts from "typescript";
 import { createFieldDefinitionExpr, createNoopFieldDefinitionExpr } from "./field";
 import {
@@ -12,8 +12,7 @@ import {
 /**
  * @example
  * ```ts
- * export const HelloInput = builder.inputRef<Omit<_$hello$hello_pb.Hello, "$type">>("HelloInput");
- * HelloInput.implement({
+ * export const HelloInput$Ref: pothos.InputObjectRef<Hello$SHape> = builder.inputRef("HelloInput").implement({
  *   description: "...",
  *   fields: (t) => ({
  *     // ...
@@ -26,15 +25,16 @@ export function createInputObjectTypeDslStmts(type: InputObjectType): ts.Stateme
     createInputObjectTypeShapeDecl(type),
     createDslExportConstStmt(
       type.pothosRefObjectName,
+      // builder.inputRef<Hello$Shale>("HelloInput").implement({ ... })
       ts.factory.createCallExpression(
-        createBuilderPropExpr("inputRef"),
-        [ts.factory.createTypeReferenceNode(createInputObjectTypeShapeIdent(type))],
-        [ts.factory.createStringLiteral(type.typeName)]
-      )
-    ),
-    ts.factory.createExpressionStatement(
-      ts.factory.createCallExpression(
-        ts.factory.createPropertyAccessExpression(ts.factory.createIdentifier(type.pothosRefObjectName), "implement"),
+        ts.factory.createPropertyAccessExpression(
+          ts.factory.createCallExpression(
+            createBuilderPropExpr("inputRef"),
+            [ts.factory.createTypeReferenceNode(createInputObjectTypeShapeIdent(type))],
+            [ts.factory.createStringLiteral(type.typeName)]
+          ),
+          "implement"
+        ),
         undefined,
         [
           ts.factory.createObjectLiteralExpression(
@@ -46,6 +46,14 @@ export function createInputObjectTypeDslStmts(type: InputObjectType): ts.Stateme
             true
           ),
         ]
+      ),
+      // $$pothos$core.InputObjectRef<Hello$Shape>
+      ts.factory.createTypeReferenceNode(
+        ts.factory.createQualifiedName(
+          ts.factory.createIdentifier(uniqueImportAlias("@pothos/core")),
+          "InputObjectRef"
+        ),
+        [ts.factory.createTypeReferenceNode(createInputObjectTypeShapeIdent(type))]
       )
     ),
   ];
@@ -80,7 +88,7 @@ function createInputObjectTypeFieldsMethodExpr(type: InputObjectType): ts.Expres
 /**
  * @example
  * ```ts
- * {
+ * export type Hello$Shape = {
  *   message?: _$hello$hello_pb$Hello["message"] | null,
  *   // ...
  * }

@@ -5,7 +5,14 @@ import { InputObjectField } from "./InputObjectField";
 import { ScalarType } from "./ScalarType";
 import { TypeBase } from "./TypeBase";
 import { getInputObjectFieldType } from "./types";
-import { createProtoFullName, FullName, gqlTypeName, isIgnoredField, isOutputOnlyField } from "./util";
+import {
+  createProtoFullName,
+  FullName,
+  gqlTypeName,
+  isIgnoredField,
+  isOutputOnlyField,
+  modulesWithUniqueImportAlias,
+} from "./util";
 
 export class InputObjectType extends TypeBase<ProtoMessage> {
   /**
@@ -32,7 +39,11 @@ export class InputObjectType extends TypeBase<ProtoMessage> {
    * @override
    */
   override get importModules(): { alias: string; module: string; type: "namespace" | "named" }[] {
-    return [...super.importModules, ...this.fields.flatMap((f) => f.importModules)];
+    const modules = [...super.importModules, ...this.fields.flatMap((f) => f.importModules)];
+    if (this.options.dsl === "pothos") {
+      modules.push(...modulesWithUniqueImportAlias(["@pothos/core"]));
+    }
+    return modules;
   }
 
   public hasPartialInput(): boolean {
