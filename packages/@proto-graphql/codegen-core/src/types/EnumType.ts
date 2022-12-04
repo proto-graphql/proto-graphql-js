@@ -8,12 +8,12 @@ import {
   GenerationParams,
   getDeprecationReason,
   isIgnoredField,
-  protoImportPath,
+  protoImportPathOld,
 } from "./util";
 
 export class EnumType extends TypeBase<ProtoEnum> {
   get protoImportPath(): string {
-    return protoImportPath(this.proto, this.options);
+    return protoImportPathOld(this.proto, this.options);
   }
 
   get unspecifiedValue(): EnumTypeValue | null {

@@ -11,7 +11,7 @@ import {
   isInputOnlyField,
   modulesWithUniqueImportAlias,
   protoExportAlias,
-  protoImportPath,
+  protoImportPathOld,
 } from "./util";
 
 export class ObjectType extends TypeBase<ProtoMessage> {
@@ -34,7 +34,7 @@ export class ObjectType extends TypeBase<ProtoMessage> {
   }
 
   get protoImportPath(): string {
-    return protoImportPath(this.proto, this.options);
+    return protoImportPathOld(this.proto, this.options);
   }
 
   get sourceTypeExportAlias(): string {

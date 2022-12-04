@@ -18,7 +18,7 @@ export class ObjectField<
 > extends FieldBase<ProtoField> {
   constructor(
     readonly type: T,
-    private readonly parent: ObjectType | OneofUnionType,
+    readonly parent: ObjectType | OneofUnionType,
     proto: ProtoField,
     opts: GenerationParams & { dsl: "nexus" | "pothos" }
   ) {

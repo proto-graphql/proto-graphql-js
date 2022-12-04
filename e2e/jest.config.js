@@ -11,7 +11,7 @@ module.exports = {
         testEnvironment: "node",
         rootDir: path.dirname(tsconfigPath),
         moduleNameMapper: {
-          "^@/(.*)$": "<rootDir>/$1",
+          "^@testapp/(.*)$": "<rootDir>/$1",
         },
       };
     }),

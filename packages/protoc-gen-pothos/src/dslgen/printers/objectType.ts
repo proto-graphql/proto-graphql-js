@@ -1,176 +1,59 @@
 import { InterfaceType, ObjectType } from "@proto-graphql/codegen-core";
-import ts from "typescript";
-import { createFieldDefinitionExpr, createNoopFieldDefinitionExpr } from "./field";
-import {
-  createBuilderCallExpr,
-  createBuilderPropExpr,
-  createDescriptionPropertyAssignment,
-  createDslExportConstStmt,
-  createQualifiedName,
-  onlyNonNull,
-} from "./util";
+import { Code, code, joinCode, literalOf } from "ts-poet";
+import { createFieldRefCode, createNoopFieldRefCode } from "./field";
+import { compact, pothosBuilder, PothosPrinterOptions, pothosRef, protoType } from "./util";
 
 /**
  * @example
  * ```ts
- * export const Hello = builder.objectRef<_$hello$hello_pb.Hello>("Hello")
- * builder.objectType(Hello, {
+ * export const Hello$Ref = builder.objectRef<_$hello$hello_pb.Hello>("Hello")
+ * builder.objectType(Hello$Ref, {
  *   name: "Hello",
  *   // ...
  * })
  * ```
  */
-export function createObjectTypeDslStmts(objType: ObjectType): ts.Statement[] {
-  const isInterface = objType instanceof InterfaceType;
-  return [
-    createDslExportConstStmt(
-      objType.pothosRefObjectName,
-      ts.factory.createCallExpression(
-        createBuilderPropExpr(isInterface ? "interfaceRef" : "objectRef"),
-        [
-          isInterface
-            ? ts.factory.createTypeReferenceNode("Pick", [
-                ts.factory.createTypeReferenceNode(createQualifiedName(objType.protoTypeFullName)),
-                ts.factory.createUnionTypeNode(
-                  objType.fields.map((f) =>
-                    ts.factory.createLiteralTypeNode(ts.factory.createStringLiteral(f.protoJsName))
-                  )
-                ),
-              ])
-            : ts.factory.createTypeReferenceNode(createQualifiedName(objType.protoTypeFullName)),
-        ],
-        [ts.factory.createStringLiteral(objType.typeName)]
-      )
-    ),
-    ts.factory.createExpressionStatement(
-      createBuilderCallExpr(isInterface ? "interfaceType" : "objectType", [
-        ts.factory.createIdentifier(objType.pothosRefObjectName),
-        ts.factory.createObjectLiteralExpression(
-          [
-            ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(objType.typeName)),
-            createDescriptionPropertyAssignment(objType),
-            ts.factory.createPropertyAssignment("fields", createObjectTypeFieldsFuncExpr(objType)),
-            isInterface ? null : ts.factory.createPropertyAssignment("isTypeOf", createIsTypeOfMethodExpr(objType)),
-            ts.factory.createPropertyAssignment("extensions", createExtensionsObjectLiteralExpr(objType)),
-          ].filter(onlyNonNull()),
-          true
-        ),
-      ])
-    ),
-  ];
-}
+export function createObjectTypeCode(type: ObjectType, opts: PothosPrinterOptions): Code {
+  const isInterface = type instanceof InterfaceType;
+  const typeOpts = {
+    name: type.typeName,
+    fields: code`t => ({${
+      type.fields.length > 0
+        ? joinCode(type.fields.map((f) => code`${f.name}: ${createFieldRefCode(f, opts)},`))
+        : code`_: ${createNoopFieldRefCode({ input: false })}`
+    }})`,
+    description: type.description,
+    isTypeOf: isInterface
+      ? undefined
+      : code`
+        (source) => {
+          return (source as ${protoType(type.proto, opts)} | { $type: string & {} }).$type
+            === ${literalOf(type.proto.fullName.toString())};
+        }
+      `,
+    extensions: {
+      protobufMessage: {
+        fullName: type.proto.fullName.toString(),
+        name: type.proto.name,
+        package: type.proto.file.package,
+      },
+    },
+  };
+  const buildRefFunc = code`${pothosBuilder(type, opts)}.${isInterface ? "interface" : "object"}Ref`;
+  const buildTypeFunc = code`${pothosBuilder(type, opts)}.${isInterface ? "interface" : "object"}Type`;
+  const refFuncTypeArg = isInterface
+    ? code`
+        Pick<
+          ${protoType(type.proto, opts)},
+          ${joinCode(
+            type.fields.map((f) => code`${literalOf(f.protoJsName)}`),
+            { on: "|" }
+          )}
+        >`
+    : protoType(type.proto, opts);
 
-/**
- * @example
- * ```ts
- * fields: (t) => ({
- *   // ...
- * })
- * ```
- */
-function createObjectTypeFieldsFuncExpr(objType: ObjectType): ts.Expression {
-  return ts.factory.createArrowFunction(
-    undefined,
-    undefined,
-    [ts.factory.createParameterDeclaration(undefined, undefined, undefined, "t", undefined, undefined, undefined)],
-    undefined,
-    ts.factory.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
-    ts.factory.createParenthesizedExpression(
-      ts.factory.createObjectLiteralExpression(
-        objType.fields.length > 0
-          ? objType.fields.map((f) => ts.factory.createPropertyAssignment(f.name, createFieldDefinitionExpr(f)))
-          : [ts.factory.createPropertyAssignment("_", createNoopFieldDefinitionExpr({ input: false }))],
-        true
-      )
-    )
-  );
-}
-
-/**
- * @example
- * ```ts
- * isTypeOf(data) {
- *   return data instanceof _$hello$hello_pb.Hello;
- *
- * (source) =>
- *   // eslint-disable-next-line @typescript-eslint/ban-types
- *   (source as _$hello$hello_pb.Hello | { $type: string & {} }).$type === "hello.Hello",
- * }
- * ```
- */
-function createIsTypeOfMethodExpr(objType: ObjectType): ts.Expression {
-  return ts.factory.createArrowFunction(
-    undefined,
-    undefined,
-    [ts.factory.createParameterDeclaration(undefined, undefined, undefined, "source", undefined, undefined, undefined)],
-    undefined,
-    ts.factory.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
-    ts.factory.createBlock(
-      [
-        ts.factory.createReturnStatement(
-          ts.factory.createBinaryExpression(
-            ts.factory.createPropertyAccessExpression(
-              ts.factory.createParenthesizedExpression(
-                ts.factory.createAsExpression(
-                  ts.factory.createIdentifier("source"),
-                  ts.factory.createUnionTypeNode([
-                    ts.factory.createTypeReferenceNode(createQualifiedName(objType.protoTypeFullName)),
-                    ts.factory.createTypeLiteralNode([
-                      ts.factory.createPropertySignature(
-                        undefined,
-                        "$type",
-                        undefined,
-                        ts.factory.createIntersectionTypeNode([
-                          ts.factory.createToken(ts.SyntaxKind.StringKeyword),
-                          ts.factory.createTypeLiteralNode([]),
-                        ])
-                      ),
-                    ]),
-                  ])
-                )
-              ),
-              "$type"
-            ),
-            ts.SyntaxKind.EqualsEqualsEqualsToken,
-            ts.factory.createStringLiteral(objType.proto.fullName.toString())
-          )
-        ),
-      ],
-      true
-    )
-  );
-}
-
-/**
- * @example
- * ```ts
- * {
- *   protobufMessage: {
- *     fullName: "...",
- *     name: "...",
- *     package: "...",
- *   },
- * }
- * ```
- */
-function createExtensionsObjectLiteralExpr(objType: ObjectType): ts.Expression {
-  return ts.factory.createObjectLiteralExpression(
-    [
-      ts.factory.createPropertyAssignment(
-        "protobufMessage",
-        ts.factory.createObjectLiteralExpression(
-          [
-            ts.factory.createPropertyAssignment(
-              "fullName",
-              ts.factory.createStringLiteral(objType.proto.fullName.toString())
-            ),
-            ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(objType.proto.name)),
-            ts.factory.createPropertyAssignment("package", ts.factory.createStringLiteral(objType.proto.file.package)),
-          ],
-          true
-        )
-      ),
-    ],
-    true
-  );
+  return code`
+    export const ${pothosRef(type)} = ${buildRefFunc}<${refFuncTypeArg}>(${literalOf(type.typeName)});
+    ${buildTypeFunc}(${pothosRef(type)}, ${literalOf(compact(typeOpts))});
+  `;
 }

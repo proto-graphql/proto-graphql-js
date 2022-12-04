@@ -4,7 +4,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@testapp/*": ["./*"]
     }
   },
   "include": ["./**/*", "../../src/**/*", "../__generated__/nexus/google-protobuf/testapis/empty_types/**/*"]

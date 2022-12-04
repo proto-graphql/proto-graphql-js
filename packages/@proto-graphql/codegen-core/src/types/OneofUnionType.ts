@@ -4,7 +4,7 @@ import { ObjectField } from "./ObjectField";
 import { ObjectType } from "./ObjectType";
 import { TypeBase } from "./TypeBase";
 import { getObjectFieldType } from "./types";
-import { createProtoFullName, FullName, isIgnoredField, isInputOnlyField, protoImportPath } from "./util";
+import { createProtoFullName, FullName, isIgnoredField, isInputOnlyField, protoImportPathOld } from "./util";
 
 export class OneofUnionType extends TypeBase<ProtoOneof> {
   get fields(): ObjectField<ObjectType>[] {
@@ -24,7 +24,7 @@ export class OneofUnionType extends TypeBase<ProtoOneof> {
   }
 
   get protoImportPath(): string {
-    return protoImportPath(this.proto.parent, this.options);
+    return protoImportPathOld(this.proto.parent, this.options);
   }
 
   // FIXME: remove

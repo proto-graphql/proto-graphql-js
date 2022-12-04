@@ -34,7 +34,7 @@ async function setupTest(opts) {
     compilerOptions: {
       baseUrl: ".",
       paths: {
-        "@/*": ["./*"],
+        "@testapp/*": ["./*"],
       },
     },
     include: [
