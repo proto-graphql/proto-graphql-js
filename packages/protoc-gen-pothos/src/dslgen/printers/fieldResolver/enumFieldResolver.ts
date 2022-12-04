@@ -1,6 +1,5 @@
-import { EnumType, ObjectField, PrinterOptions } from "@proto-graphql/codegen-core";
+import { EnumType, ObjectField, PrinterOptions, protoType } from "@proto-graphql/codegen-core";
 import { Code, code } from "ts-poet";
-import { protoType } from "../util";
 
 /**
  * @example nullable

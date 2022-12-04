@@ -1,7 +1,7 @@
-import { InterfaceType, ObjectType } from "@proto-graphql/codegen-core";
+import { compact, InterfaceType, ObjectType, protobufGraphQLExtensions, protoType } from "@proto-graphql/codegen-core";
 import { Code, code, joinCode, literalOf } from "ts-poet";
 import { createFieldRefCode, createNoopFieldRefCode } from "./field";
-import { compact, pothosBuilder, PothosPrinterOptions, pothosRef, protoType } from "./util";
+import { pothosBuilder, PothosPrinterOptions, pothosRef } from "./util";
 
 /**
  * @example
@@ -31,13 +31,7 @@ export function createObjectTypeCode(type: ObjectType, opts: PothosPrinterOption
             === ${literalOf(type.proto.fullName.toString())};
         }
       `,
-    extensions: {
-      protobufMessage: {
-        fullName: type.proto.fullName.toString(),
-        name: type.proto.name,
-        package: type.proto.file.package,
-      },
-    },
+    extensions: protobufGraphQLExtensions(type),
   };
   const buildRefFunc = code`${pothosBuilder(type, opts)}.${isInterface ? "interface" : "object"}Ref`;
   const buildTypeFunc = code`${pothosBuilder(type, opts)}.${isInterface ? "interface" : "object"}Type`;

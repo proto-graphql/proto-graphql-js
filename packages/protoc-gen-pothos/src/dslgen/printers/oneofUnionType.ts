@@ -1,6 +1,11 @@
-import { OneofUnionType, SquashedOneofUnionType } from "@proto-graphql/codegen-core";
+import {
+  compact,
+  OneofUnionType,
+  protobufGraphQLExtensions,
+  SquashedOneofUnionType,
+} from "@proto-graphql/codegen-core";
 import { code, Code, literalOf } from "ts-poet";
-import { compact, pothosBuilder, PothosPrinterOptions, pothosRef, protoFieldTypeFullName } from "./util";
+import { pothosBuilder, PothosPrinterOptions, pothosRef } from "./util";
 
 /**
  * @example
@@ -18,18 +23,7 @@ export function createOneofUnionTypeCode(
   const typeOpts = {
     types: type.fields.map((f) => pothosRef(f.type)),
     description: type.description,
-    extensions: {
-      protobufOneof: {
-        fullName: type.proto.fullName.toString(),
-        name: type.proto.name,
-        messageName: type.proto.kind === "Oneof" ? type.proto.parent.name : undefined,
-        package: (type.proto.kind === "Message" ? type.proto : type.proto.parent).file.package,
-        fields: type.fields.map((f) => ({
-          name: f.proto.name,
-          type: protoFieldTypeFullName(f),
-        })),
-      },
-    },
+    extensions: protobufGraphQLExtensions(type),
   };
   return code`
     export const ${pothosRef(type)} =

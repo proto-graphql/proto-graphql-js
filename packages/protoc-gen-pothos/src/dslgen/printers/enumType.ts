@@ -1,6 +1,6 @@
-import { EnumType } from "@proto-graphql/codegen-core";
+import { compact, EnumType, protobufGraphQLExtensions } from "@proto-graphql/codegen-core";
 import { code, Code, joinCode, literalOf } from "ts-poet";
-import { compact, pothosBuilder, PothosPrinterOptions, pothosRef } from "./util";
+import { pothosBuilder, PothosPrinterOptions, pothosRef } from "./util";
 
 /**
  * @example
@@ -35,13 +35,7 @@ export function createEnumTypeCode(type: EnumType, opts: PothosPrinterOptions): 
             )},`
         )
     )}} as const`,
-    extensions: {
-      protobufEnum: {
-        name: type.proto.name,
-        fullName: type.proto.fullName.toString(),
-        package: type.proto.file.package,
-      },
-    },
+    extensions: protobufGraphQLExtensions(type),
   };
   return code`
     export const ${pothosRef(type)} =

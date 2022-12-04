@@ -1,7 +1,7 @@
-import { InputObjectType } from "@proto-graphql/codegen-core";
+import { compact, InputObjectType, protobufGraphQLExtensions, protoType } from "@proto-graphql/codegen-core";
 import { Code, code, imp, joinCode, literalOf } from "ts-poet";
 import { createFieldRefCode, createNoopFieldRefCode } from "./field";
-import { compact, fieldTypeShape, pothosBuilder, PothosPrinterOptions, pothosRef, protoType, shapeType } from "./util";
+import { fieldTypeShape, pothosBuilder, PothosPrinterOptions, pothosRef, shapeType } from "./util";
 
 /**
  * @example
@@ -47,13 +47,7 @@ export function createInputObjectTypeCode(type: InputObjectType, opts: PothosPri
                 ? type.fields.map((f) => code`${f.name}: ${createFieldRefCode(f, opts)},`)
                 : code`_: ${createNoopFieldRefCode({ input: true })}`
             }})`,
-            extensions: {
-              protobufMessage: {
-                fullName: type.proto.fullName.toString(),
-                name: type.proto.name,
-                package: type.proto.file.package,
-              },
-            },
+            extensions: protobufGraphQLExtensions(type),
           })
         )}
       );

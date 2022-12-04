@@ -1,9 +1,11 @@
 import {
+  compact,
   EnumType,
   InputObjectField,
   ObjectField,
   ObjectOneofField,
   ObjectType,
+  protobufGraphQLExtensions,
   ScalarType,
   SquashedOneofUnionType,
 } from "@proto-graphql/codegen-core";
@@ -11,7 +13,7 @@ import { code, Code, literalOf } from "ts-poet";
 import { createEnumResolverCode } from "./fieldResolver/enumFieldResolver";
 import { createNonNullResolverCode } from "./fieldResolver/nonNullResolver";
 import { createOneofUnionResolverCode } from "./fieldResolver/oneofUnionResolver";
-import { compact, fieldTypeRef, PothosPrinterOptions, protoFieldTypeFullName } from "./util";
+import { fieldTypeRef, PothosPrinterOptions } from "./util";
 
 /**
  * @example
@@ -70,9 +72,7 @@ export function createFieldRefCode(
     description: field.description,
     deprecationReason: field.deprecationReason,
     resolve: resolverCode ? code`${sourceExpr} => {${resolverCode}}` : null,
-    extensions: {
-      protobufField: { name: field.proto.name, typeFullName: protoFieldTypeFullName(field) },
-    },
+    extensions: protobufGraphQLExtensions(field),
   };
 
   const shouldUseFieldFunc = isInput || resolverCode != null;
