@@ -144,19 +144,3 @@ export function protoFieldTypeFullName(
   }
   return undefined;
 }
-
-export function onlyNonNull<T>(): (t: T) => t is NonNullable<T> {
-  return (t): t is NonNullable<T> => t != null;
-}
-
-export function onlyUnique<T, V>(f?: (t: T) => V): (t: T) => boolean {
-  const set = new Set<T | V>();
-  return (t) => {
-    const key = f ? f(t) : t;
-
-    if (set.has(key)) return false;
-
-    set.add(key);
-    return true;
-  };
-}
