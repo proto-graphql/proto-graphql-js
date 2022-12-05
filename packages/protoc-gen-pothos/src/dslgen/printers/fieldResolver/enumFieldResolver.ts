@@ -1,6 +1,5 @@
-import { EnumType, EnumTypeValue, ObjectField } from "@proto-graphql/codegen-core";
-import ts from "typescript";
-import { createFullNameExpr, onlyNonNull } from "../util";
+import { EnumType, ObjectField, PrinterOptions, protoType } from "@proto-graphql/codegen-core";
+import { Code, code } from "ts-poet";
 
 /**
  * @example nullable
@@ -18,96 +17,46 @@ import { createFullNameExpr, onlyNonNull } from "../util";
  * return root.myEnum
  * ```
  */
-export function createEnumResolverStmts(valueExpr: ts.Expression, field: ObjectField<EnumType>): ts.Statement[] {
-  let whenNullStmt: ts.Statement =
-    field.isNullable() && !field.isList()
-      ? ts.factory.createReturnStatement(ts.factory.createToken(ts.SyntaxKind.NullKeyword))
-      : ts.factory.createThrowStatement(
-          ts.factory.createNewExpression(ts.factory.createIdentifier("Error"), undefined, [
-            ts.factory.createStringLiteral(`${field.name} is required field. But got unspecified.`),
-          ])
-        );
-  whenNullStmt = ts.factory.createBlock(
-    [whenNullStmt],
-    true // multiline
-  );
+export function createEnumResolverCode(valueExpr: Code, field: ObjectField<EnumType>, opts: PrinterOptions): Code {
+  const createBlockStmtCodes = (valueExpr: Code): Code[] => {
+    const chunks: Code[] = [];
+
+    if (field.type.unspecifiedValue != null) {
+      const escapeCode =
+        field.isNullable() && !field.isList()
+          ? code`return null;`
+          : code`throw new Error("${field.name} is required field. But got unspecified.");`;
+      chunks.push(code`
+        if (${valueExpr} === ${protoType(field.type.proto, opts)}.${field.type.unspecifiedValue.proto.name}) {
+          ${escapeCode}
+        }
+      `);
+    }
+    for (const ev of field.type.valuesWithIgnored) {
+      if (!ev.isIgnored()) continue;
+      chunks.push(code`
+      if (${valueExpr} === ${protoType(field.type.proto, opts)}.${ev.proto.name}) {
+        throw new Error("${ev.name} is ignored in GraphQL schema");
+      }
+    `);
+    }
+
+    return chunks;
+  };
 
   if (field.isList()) {
-    const guardStmts = createGuardStmts(
-      ts.factory.createIdentifier("item"),
-      whenNullStmt,
-      field.type.unspecifiedValue,
-      field.type.valuesWithIgnored
-    );
-    if (guardStmts.length === 0) {
-      return [ts.factory.createReturnStatement(valueExpr)];
+    const stmts = createBlockStmtCodes(code`item`);
+    if (stmts.length === 0) {
+      return code`return ${valueExpr}`;
     }
-    return [
-      ts.factory.createReturnStatement(
-        createMapExpr(valueExpr, (itemExpr) => [...guardStmts, ts.factory.createReturnStatement(itemExpr)])
-      ),
-    ];
+    return code`return ${valueExpr}.map(item => {
+      ${stmts}
+      return item;
+    })`;
   }
 
-  return [
-    ...createGuardStmts(valueExpr, whenNullStmt, field.type.unspecifiedValue, field.type.valuesWithIgnored),
-    ts.factory.createReturnStatement(valueExpr),
-  ];
-}
-
-function createGuardStmts(
-  valueExpr: ts.Expression,
-  thenStmt: ts.Statement,
-  unspecifiedValue: EnumTypeValue | null,
-  ignoredValues: EnumTypeValue[]
-): ts.Statement[] {
-  return [
-    unspecifiedValue
-      ? ts.factory.createIfStatement(
-          ts.factory.createBinaryExpression(
-            valueExpr,
-            ts.SyntaxKind.EqualsEqualsEqualsToken,
-            createFullNameExpr(unspecifiedValue.fullName)
-          ),
-          thenStmt
-        )
-      : null,
-    ...ignoredValues.map((ev) =>
-      ev.isIgnored()
-        ? ts.factory.createIfStatement(
-            ts.factory.createBinaryExpression(
-              valueExpr,
-              ts.SyntaxKind.EqualsEqualsEqualsToken,
-              createFullNameExpr(ev.fullName)
-            ),
-            ts.factory.createBlock(
-              [
-                ts.factory.createThrowStatement(
-                  ts.factory.createNewExpression(ts.factory.createIdentifier("Error"), undefined, [
-                    ts.factory.createStringLiteral(`${ev.name} is ignored in GraphQL schema`),
-                  ])
-                ),
-              ],
-              true // multiline
-            )
-          )
-        : null
-    ),
-  ].filter(onlyNonNull());
-}
-
-function createMapExpr(listExpr: ts.Expression, blockFn: (valueExpr: ts.Expression) => ts.Statement[]): ts.Expression {
-  return ts.factory.createCallExpression(ts.factory.createPropertyAccessExpression(listExpr, "map"), undefined, [
-    ts.factory.createArrowFunction(
-      undefined,
-      undefined,
-      [ts.factory.createParameterDeclaration(undefined, undefined, undefined, "item", undefined, undefined, undefined)],
-      undefined,
-      ts.factory.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
-      ts.factory.createBlock(
-        blockFn(ts.factory.createIdentifier("item")),
-        true // multiline
-      )
-    ),
-  ]);
+  return code`
+    ${createBlockStmtCodes(valueExpr)}
+    return ${valueExpr};
+  `;
 }

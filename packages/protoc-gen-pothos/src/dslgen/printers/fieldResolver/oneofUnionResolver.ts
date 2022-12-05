@@ -1,6 +1,5 @@
 import { ObjectField, ObjectOneofField, SquashedOneofUnionType } from "@proto-graphql/codegen-core";
-import ts from "typescript";
-import { onlyNonNull } from "../util";
+import { Code, code, joinCode } from "ts-poet";
 
 /**
  * @example nullable
@@ -12,104 +11,34 @@ import { onlyNonNull } from "../util";
  * return value
  * ```
  */
-export function createOneofUnionResolverStmts(
-  sourceExpr: ts.Expression,
+export function createOneofUnionResolverCode(
+  sourceExpr: Code,
   field: ObjectOneofField | ObjectField<SquashedOneofUnionType>
-): ts.Statement[] {
-  const createResolverStmts = (
-    sourceExpr: ts.Expression,
-    field: ObjectOneofField | ObjectField<SquashedOneofUnionType>,
-    { nullable }: { nullable: boolean }
-  ) => {
+): Code {
+  const createBlockStmtCode = (sourceExpr: Code, { nullable }: { nullable: boolean }): Code => {
     const createFieldExpr = (memberField: ObjectField<any>) => {
       if (field instanceof ObjectOneofField) {
-        return ts.factory.createPropertyAccessExpression(sourceExpr, memberField.protoJsName);
+        return code`${sourceExpr}.${memberField.protoJsName}`;
       }
-      return ts.factory.createPropertyAccessChain(
-        sourceExpr,
-        ts.factory.createToken(ts.SyntaxKind.QuestionDotToken),
-        memberField.protoJsName
-      );
+      return code`${sourceExpr}?.${memberField.protoJsName}`;
     };
-    const valueExpr = ts.factory.createIdentifier("value");
 
-    return [
-      ts.factory.createVariableStatement(
-        undefined,
-        ts.factory.createVariableDeclarationList(
-          [
-            ts.factory.createVariableDeclaration(
-              "value",
-              undefined,
-              undefined,
-              // obj.field1 ?? obj.field2 ?? obj.field3 ?? ...
-              field.type.fields.reduceRight<ts.Expression>((expr, field) => {
-                if (expr == null) {
-                  return createFieldExpr(field);
-                }
-                return ts.factory.createBinaryExpression(
-                  createFieldExpr(field),
-                  ts.factory.createToken(ts.SyntaxKind.QuestionQuestionToken),
-                  expr
-                );
-              }, null as any)
-            ),
-          ],
-          ts.NodeFlags.Const
-        )
-      ),
-      nullable
-        ? undefined
-        : ts.factory.createIfStatement(
-            ts.factory.createBinaryExpression(
-              valueExpr,
-              ts.SyntaxKind.EqualsEqualsToken,
-              ts.factory.createToken(ts.SyntaxKind.NullKeyword)
-            ),
-            ts.factory.createBlock(
-              [
-                ts.factory.createThrowStatement(
-                  ts.factory.createNewExpression(ts.factory.createIdentifier("Error"), undefined, [
-                    ts.factory.createStringLiteral(`${field.name} should not be null`),
-                  ])
-                ),
-              ],
-              true
-            )
-          ),
-      ts.factory.createReturnStatement(valueExpr),
-    ].filter(onlyNonNull());
+    return code`
+      const value = ${joinCode(field.type.fields.map(createFieldExpr), { on: "??" })};
+      if (value == null) {
+        ${nullable ? "return null" : `throw new Error("${field.name} should not be null")`};
+      }
+      return value;
+    `;
   };
 
-  if (!(field instanceof ObjectField && field.isList())) {
-    return createResolverStmts(sourceExpr, field, { nullable: field.isNullable() });
+  if (field instanceof ObjectField && field.isList()) {
+    return code`
+      return ${sourceExpr}.map(item => {
+        ${createBlockStmtCode(code`item`, { nullable: false })}
+      })
+    `;
   }
 
-  return [
-    ts.factory.createReturnStatement(
-      ts.factory.createCallExpression(ts.factory.createPropertyAccessExpression(sourceExpr, "map"), undefined, [
-        ts.factory.createArrowFunction(
-          undefined,
-          undefined,
-          [
-            ts.factory.createParameterDeclaration(
-              undefined,
-              undefined,
-              undefined,
-              "item",
-              undefined,
-              undefined,
-              undefined
-            ),
-          ],
-          undefined,
-          ts.factory.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
-          ts.factory.createBlock(
-            createResolverStmts(ts.factory.createIdentifier("item"), field, { nullable: false }),
-            true
-          )
-        ),
-      ])
-    ),
-  ];
+  return createBlockStmtCode(sourceExpr, { nullable: field.isNullable() });
 }

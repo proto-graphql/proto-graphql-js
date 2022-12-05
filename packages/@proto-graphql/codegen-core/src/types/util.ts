@@ -40,6 +40,22 @@ export type GenerationParams = {
   longNumber: LongNumberMapping;
 };
 
+type PrinterDSLOptions =
+  | { dsl: "nexus" }
+  | {
+      dsl: "pothos";
+      pothos: { builderPath: string };
+    };
+
+type PrinterProtobufOptions = { protobuf: "google-protobuf" } | { protobuf: "protobufjs" } | { protobuf: "ts-proto" };
+
+type PrinterCommonOptions = {
+  importPrefix: string | null;
+  fileLayout: typeof fileLayouts[number];
+};
+
+export type PrinterOptions = PrinterCommonOptions & PrinterDSLOptions & PrinterProtobufOptions;
+
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type LongNumberMapping = "String" | "Int" | (string & {});
 
@@ -66,9 +82,9 @@ export function createProtoFullName(t: ProtoMessage | ProtoEnum, o: GenerationPa
   if (t.parent.kind === "File") {
     if (o.useProtobufjs) {
       const pkgs = t.parent.package.split(".");
-      left = pkgs.reduce<typeof left>((n, pkg) => [n, pkg], uniqueImportAlias(protoImportPath(t, o)));
+      left = pkgs.reduce<typeof left>((n, pkg) => [n, pkg], uniqueImportAlias(protoImportPathOld(t, o)));
     } else {
-      left = uniqueImportAlias(protoImportPath(t, o));
+      left = uniqueImportAlias(protoImportPathOld(t, o));
     }
   } else {
     left = createProtoFullName(t.parent, o);
@@ -80,7 +96,7 @@ export function createProtoFullName(t: ProtoMessage | ProtoEnum, o: GenerationPa
 }
 
 export function protoExportAlias(t: ProtoMessage, o: GenerationParams): string {
-  const chunks = [protoImportPath(t, o)];
+  const chunks = [protoImportPathOld(t, o)];
   if (o.useProtobufjs) {
     chunks.push(...t.file.package.split("."));
   }
@@ -88,13 +104,25 @@ export function protoExportAlias(t: ProtoMessage, o: GenerationParams): string {
   return uniqueImportAlias(chunks.join("/"));
 }
 
-export function protoImportPath(t: ProtoMessage | ProtoEnum, o: GenerationParams) {
+export function protoImportPath(t: ProtoMessage | ProtoEnum, o: Pick<PrinterOptions, "protobuf" | "importPrefix">) {
+  return protoImportPathOld(t, {
+    useProtobufjs: o.protobuf === "protobufjs",
+    useTsProto: o.protobuf === "ts-proto",
+    importPrefix: o.importPrefix,
+  });
+}
+
+// eslint-disable-next-line camelcase
+export function protoImportPathOld(
+  t: ProtoMessage | ProtoEnum,
+  o: Pick<GenerationParams, "useProtobufjs" | "useTsProto" | "importPrefix">
+) {
   const importPath = o.useProtobufjs
     ? path.dirname(t.file.name)
     : o.useTsProto
     ? t.file.name.slice(0, -1 * path.extname(t.file.name).length)
     : t.file.googleProtobufImportPath;
-  return `${o.importPrefix ? `${o.importPrefix}/` : "./"}${importPath}`;
+  return `${o.importPrefix ? `${o.importPrefix}/` : "./"}${importPath}`.replace(/(?<!:)\/\//, "/");
 }
 
 export function modulesWithUniqueImportAlias(

@@ -1,5 +1,7 @@
-import ts from "typescript";
+import { code, Code } from "ts-poet";
 
-export function createNonNullResolverStmts(valueExpr: ts.Expression): ts.Statement[] {
-  return [ts.factory.createReturnStatement(ts.factory.createNonNullExpression(valueExpr))];
+export function createNonNullResolverCode(valueExpr: Code): Code {
+  return code`
+    return ${valueExpr}!;
+  `;
 }

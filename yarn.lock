@@ -4936,6 +4936,13 @@ ts-poet@^6.1.0:
   dependencies:
     dprint-node "^1.0.7"
 
+ts-poet@^6.3.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/ts-poet/-/ts-poet-6.3.0.tgz#954f2a6923ccaa2d4cdf55979f2e991d440e30a3"
+  integrity sha512-RjS37SnXMa9En8xvQf//+rvNNNCB7x2TKP/ZfsiQFidtfN3A6FYgPDESe4r7YA3F663XO2ozx+2buQItGOLMxg==
+  dependencies:
+    dprint-node "^1.0.7"
+
 ts-proto-descriptors@1.7.1:
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/ts-proto-descriptors/-/ts-proto-descriptors-1.7.1.tgz#685d00305b06adfa929fd5a016a419382cd64c50"
