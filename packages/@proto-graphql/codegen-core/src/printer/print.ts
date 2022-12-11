@@ -11,7 +11,7 @@ export function printCodes(codes: Code[], programName: string, file: ProtoFile):
     `,
     dprintOptions: {
       lineWidth: 80,
-      indentWidth: 4,
+      indentWidth: 2,
       useTabs: false,
       semiColons: "always",
       quoteStyle: "alwaysDouble",
