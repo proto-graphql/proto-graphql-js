@@ -28,7 +28,7 @@ export function createInputObjectTypeCode(type: InputObjectType, opts: PothosPri
             typeNode = code`${fieldTypeShape(f, opts)}`;
             if (f.isList()) typeNode = code`Array<${typeNode}>`;
           } else {
-            typeNode = code`${protoType(type.proto, opts)}[${literalOf(f.protoJsName)}]`;
+            typeNode = code`${protoType(type.proto, opts)}[${literalOf(f.proto.jsonName)}]`;
           }
           return f.isNullable() ? code`${f.name}?: ${typeNode} | null,` : code`${f.name}: ${typeNode},`;
         })

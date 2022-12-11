@@ -11,7 +11,6 @@ import {
 import { pascalCase } from "change-case";
 import { ExtensionFieldInfo } from "google-protobuf";
 import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
-import path from "path";
 import * as extensions from "../__generated__/extensions/graphql/schema_pb";
 
 export const fileLayouts = ["proto_file", "graphql_type"] as const;
@@ -58,88 +57,6 @@ export type PrinterOptions = PrinterCommonOptions & PrinterDSLOptions & PrinterP
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type LongNumberMapping = "String" | "Int" | (string & {});
-
-export type FullName = [FullName, string] | string;
-
-/**
- * @example js_out
- * ```
- * [["_$hello$hello_pb", "User"], "Role"]
- * ```
- *
- * @example protobufjs
- * ```
- * [[["_$hello", "hello"], "User"], "Role"]
- * ```
- *
- * @example ts-proto
- * ```
- * [[["_$hello", "hello"], "User_Role"]
- * ```
- */
-export function createProtoFullName(t: ProtoMessage | ProtoEnum, o: GenerationParams): FullName {
-  let left: FullName;
-  if (t.parent.kind === "File") {
-    if (o.useProtobufjs) {
-      const pkgs = t.parent.package.split(".");
-      left = pkgs.reduce<typeof left>((n, pkg) => [n, pkg], uniqueImportAlias(protoImportPathOld(t, o)));
-    } else {
-      left = uniqueImportAlias(protoImportPathOld(t, o));
-    }
-  } else {
-    left = createProtoFullName(t.parent, o);
-  }
-  if (o.useTsProto && t.parent.kind !== "File") {
-    return [left[0], `${left[1]}_${t.name}`];
-  }
-  return [left, t.name];
-}
-
-export function protoExportAlias(t: ProtoMessage, o: GenerationParams): string {
-  const chunks = [protoImportPathOld(t, o)];
-  if (o.useProtobufjs) {
-    chunks.push(...t.file.package.split("."));
-  }
-  chunks.push(nameWithParent(t));
-  return uniqueImportAlias(chunks.join("/"));
-}
-
-export function protoImportPath(t: ProtoMessage | ProtoEnum, o: Pick<PrinterOptions, "protobuf" | "importPrefix">) {
-  return protoImportPathOld(t, {
-    useProtobufjs: o.protobuf === "protobufjs",
-    useTsProto: o.protobuf === "ts-proto",
-    importPrefix: o.importPrefix,
-  });
-}
-
-// eslint-disable-next-line camelcase
-export function protoImportPathOld(
-  t: ProtoMessage | ProtoEnum,
-  o: Pick<GenerationParams, "useProtobufjs" | "useTsProto" | "importPrefix">
-) {
-  const importPath = o.useProtobufjs
-    ? path.dirname(t.file.name)
-    : o.useTsProto
-    ? t.file.name.slice(0, -1 * path.extname(t.file.name).length)
-    : t.file.googleProtobufImportPath;
-  return `${o.importPrefix ? `${o.importPrefix}/` : "./"}${importPath}`.replace(/(?<!:)\/\//, "/");
-}
-
-export function modulesWithUniqueImportAlias(
-  modules: string[]
-): { alias: string; module: string; type: "namespace" | "named" }[] {
-  return modules.map((m) => ({ module: m, alias: uniqueImportAlias(m), type: "namespace" }));
-}
-
-export function uniqueImportAlias(path: string) {
-  return path
-    .replace(/@/g, "$$$$")
-    .replace(/\.\.\//g, "__$$")
-    .replace(/\.\//g, "_$$")
-    .replace(/\//g, "$$")
-    .replace(/\./g, "_")
-    .replace(/-/g, "_");
-}
 
 export function gqlTypeName(typ: ProtoMessage | ProtoOneof | ProtoEnum): string {
   return nameWithParent(typ);

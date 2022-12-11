@@ -1,21 +1,9 @@
 import { ProtoEnum, ProtoEnumValue } from "@proto-graphql/proto-descriptors";
 import { constantCase } from "change-case";
 import { TypeBase } from "./TypeBase";
-import {
-  createProtoFullName,
-  descriptionFromProto,
-  FullName,
-  GenerationParams,
-  getDeprecationReason,
-  isIgnoredField,
-  protoImportPathOld,
-} from "./util";
+import { descriptionFromProto, GenerationParams, getDeprecationReason, isIgnoredField } from "./util";
 
 export class EnumType extends TypeBase<ProtoEnum> {
-  get protoImportPath(): string {
-    return protoImportPathOld(this.proto, this.options);
-  }
-
   get unspecifiedValue(): EnumTypeValue | null {
     return this.valuesWithIgnored.find((v) => v.isUnespecified()) ?? null;
   }
@@ -47,10 +35,6 @@ export class EnumTypeValue {
 
   public isIgnored(): boolean {
     return isIgnoredField(this.proto);
-  }
-
-  get fullName(): FullName {
-    return [createProtoFullName(this.proto.parent, this.opts), this.proto.name];
   }
 
   public isUnespecified(): boolean {

@@ -1,4 +1,4 @@
-import { collectTypesFromFile, DslFile, GenerationParams, printCodes } from "@proto-graphql/codegen-core";
+import { collectTypesFromFile, DslFile, filename, GenerationParams, printCodes } from "@proto-graphql/codegen-core";
 import { ProtoFile, ProtoRegistry } from "@proto-graphql/proto-descriptors";
 import { Code } from "ts-poet";
 import { createTypeDslCodes } from "./dslgen";
@@ -33,7 +33,7 @@ export function generateFiles(
     }
     case "graphql_type": {
       return types.map((t) => ({
-        filename: t.filename,
+        filename: filename(t, opts),
         content: printCodes(createCodes([t], opts), "protoc-gen-pothos", file),
       }));
     }

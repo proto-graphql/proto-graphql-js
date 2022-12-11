@@ -1,6 +1,6 @@
 export * from "./types";
-export { fileLayouts, uniqueImportAlias, protoImportPath } from "./util";
-export type { FullName, GenerationParams, LongNumberMapping, PrinterOptions } from "./util";
+export { fileLayouts } from "./util";
+export type { GenerationParams, LongNumberMapping, PrinterOptions } from "./util";
 export * from "./DslFile";
 export * from "./ObjectType";
 export * from "./ObjectField";

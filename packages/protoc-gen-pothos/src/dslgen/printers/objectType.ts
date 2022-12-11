@@ -1,4 +1,5 @@
 import { compact, InterfaceType, ObjectType, protobufGraphQLExtensions, protoType } from "@proto-graphql/codegen-core";
+import { ProtoField } from "@proto-graphql/proto-descriptors";
 import { Code, code, joinCode, literalOf } from "ts-poet";
 import { createFieldRefCode, createNoopFieldRefCode } from "./field";
 import { pothosBuilder, PothosPrinterOptions, pothosRef } from "./util";
@@ -40,7 +41,7 @@ export function createObjectTypeCode(type: ObjectType, opts: PothosPrinterOption
         Pick<
           ${protoType(type.proto, opts)},
           ${joinCode(
-            type.fields.map((f) => code`${literalOf(f.protoJsName)}`),
+            type.fields.map((f) => code`${literalOf((f.proto as ProtoField).jsonName)}`),
             { on: "|" }
           )}
         >`

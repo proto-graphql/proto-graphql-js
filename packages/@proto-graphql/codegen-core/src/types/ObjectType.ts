@@ -4,47 +4,9 @@ import { ObjectOneofField } from "./ObjectOneofField";
 import { OneofUnionType } from "./OneofUnionType";
 import { TypeBase } from "./TypeBase";
 import { getObjectFieldType } from "./types";
-import {
-  createProtoFullName,
-  FullName,
-  isIgnoredField,
-  isInputOnlyField,
-  modulesWithUniqueImportAlias,
-  protoExportAlias,
-  protoImportPathOld,
-} from "./util";
+import { isIgnoredField, isInputOnlyField } from "./util";
 
 export class ObjectType extends TypeBase<ProtoMessage> {
-  /**
-   * @override
-   */
-  override get exportTypes(): { name: string; type: FullName }[] {
-    return [...super.exportTypes, { name: this.sourceTypeExportAlias, type: this.protoTypeFullName }];
-  }
-
-  /**
-   * @override
-   */
-  override get importModules(): { alias: string; module: string; type: "namespace" | "named" }[] {
-    return [
-      ...super.importModules,
-      ...modulesWithUniqueImportAlias([this.protoImportPath]),
-      ...this.fields.flatMap((f) => f.importModules),
-    ];
-  }
-
-  get protoImportPath(): string {
-    return protoImportPathOld(this.proto, this.options);
-  }
-
-  get sourceTypeExportAlias(): string {
-    return protoExportAlias(this.proto, this.options);
-  }
-
-  get protoTypeFullName(): FullName {
-    return createProtoFullName(this.proto, this.options);
-  }
-
   get fields(): (ObjectField<any> | ObjectOneofField)[] {
     return [
       ...this.proto.fields

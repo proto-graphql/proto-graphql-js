@@ -1,5 +1,6 @@
 import {
   compact,
+  createGetFieldValueCode,
   EnumType,
   InputObjectField,
   ObjectField,
@@ -9,6 +10,7 @@ import {
   ScalarType,
   SquashedOneofUnionType,
 } from "@proto-graphql/codegen-core";
+import { ProtoField } from "@proto-graphql/proto-descriptors";
 import { code, Code, literalOf } from "ts-poet";
 import { createEnumResolverCode } from "./fieldResolver/enumFieldResolver";
 import { createNonNullResolverCode } from "./fieldResolver/nonNullResolver";
@@ -45,21 +47,22 @@ export function createFieldRefCode(
   const sourceExpr = code`source`;
   let resolverCode: Code | undefined;
   if (!isInput) {
-    const valueExpr = code`${sourceExpr}.${field.protoJsName}`;
-    const nullableInProto =
-      field.type instanceof ObjectType ||
-      (field.type instanceof ScalarType && !field.type.isPrimitive() && !field.type.isWrapperType());
-    if (nullableInProto && !field.isNullable()) {
-      resolverCode = createNonNullResolverCode(valueExpr);
-    }
-    if (field.type instanceof EnumType && field instanceof ObjectField) {
-      resolverCode = createEnumResolverCode(valueExpr, field, opts);
-    }
     if (field instanceof ObjectOneofField) {
       resolverCode = createOneofUnionResolverCode(sourceExpr, field);
-    }
-    if (field.type instanceof SquashedOneofUnionType && field instanceof ObjectField) {
-      resolverCode = createOneofUnionResolverCode(valueExpr, field);
+    } else {
+      const valueExpr = createGetFieldValueCode(sourceExpr, field.proto, opts);
+      const nullableInProto =
+        field.type instanceof ObjectType ||
+        (field.type instanceof ScalarType && !field.type.isPrimitive() && !field.type.isWrapperType());
+      if (nullableInProto && !field.isNullable()) {
+        resolverCode = createNonNullResolverCode(valueExpr);
+      }
+      if (field.type instanceof EnumType && field instanceof ObjectField) {
+        resolverCode = createEnumResolverCode(valueExpr, field, opts);
+      }
+      if (field.type instanceof SquashedOneofUnionType && field instanceof ObjectField) {
+        resolverCode = createOneofUnionResolverCode(valueExpr, field);
+      }
     }
   }
 
@@ -78,7 +81,7 @@ export function createFieldRefCode(
   const shouldUseFieldFunc = isInput || resolverCode != null;
   return shouldUseFieldFunc
     ? code`t.field(${literalOf(compact(fieldOpts))})`
-    : code`t.expose(${literalOf(field.protoJsName)}, ${literalOf(compact(fieldOpts))})`;
+    : code`t.expose(${literalOf((field.proto as ProtoField).jsonName)}, ${literalOf(compact(fieldOpts))})`;
 }
 
 /**

@@ -1,9 +1,10 @@
-import { ProtoEnum, ProtoField, ProtoMessage, ProtoScalarType } from "@proto-graphql/proto-descriptors";
+import { ProtoEnum, ProtoField, ProtoMessage, ProtoScalar, ProtoScalarType } from "@proto-graphql/proto-descriptors";
 import { camelCase } from "change-case";
 import * as path from "path";
 import { code, Code, imp } from "ts-poet";
 import {
   EnumType,
+  GenerationParams,
   InputObjectField,
   InputObjectType,
   InterfaceType,
@@ -12,7 +13,6 @@ import {
   ObjectType,
   OneofUnionType,
   PrinterOptions,
-  protoImportPath,
   SquashedOneofUnionType,
 } from "../types";
 
@@ -171,6 +171,35 @@ export function isProtobufLong(proto: ProtoField): boolean {
   }
 }
 
-export function isWellKnownType(proto: ProtoField["type"]): proto is ProtoMessage {
+export function isProtobufPrimitiveType(proto: ProtoField["type"]): proto is ProtoScalar {
+  return proto.kind === "Scalar";
+}
+
+export function isProtobufWrapperType(proto: ProtoField["type"]): proto is ProtoMessage {
+  return proto.kind === "Message" && proto.file.name === "google/protobuf/wrappers.proto";
+}
+
+export function isProtobufWellKnownType(proto: ProtoField["type"]): proto is ProtoMessage {
   return proto.kind === "Message" && proto.file.name.startsWith("google/protobuf/");
+}
+
+function protoImportPath(t: ProtoMessage | ProtoEnum, o: Pick<PrinterOptions, "protobuf" | "importPrefix">) {
+  return protoImportPathOld(t, {
+    useProtobufjs: o.protobuf === "protobufjs",
+    useTsProto: o.protobuf === "ts-proto",
+    importPrefix: o.importPrefix,
+  });
+}
+
+// eslint-disable-next-line camelcase
+function protoImportPathOld(
+  t: ProtoMessage | ProtoEnum,
+  o: Pick<GenerationParams, "useProtobufjs" | "useTsProto" | "importPrefix">
+) {
+  const importPath = o.useProtobufjs
+    ? path.dirname(t.file.name)
+    : o.useTsProto
+    ? t.file.name.slice(0, -1 * path.extname(t.file.name).length)
+    : t.file.googleProtobufImportPath;
+  return `${o.importPrefix ? `${o.importPrefix}/` : "./"}${importPath}`.replace(/(?<!:)\/\//, "/");
 }

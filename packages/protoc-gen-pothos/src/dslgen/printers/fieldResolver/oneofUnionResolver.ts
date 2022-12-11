@@ -18,9 +18,9 @@ export function createOneofUnionResolverCode(
   const createBlockStmtCode = (sourceExpr: Code, { nullable }: { nullable: boolean }): Code => {
     const createFieldExpr = (memberField: ObjectField<any>) => {
       if (field instanceof ObjectOneofField) {
-        return code`${sourceExpr}.${memberField.protoJsName}`;
+        return code`${sourceExpr}.${memberField.proto.jsonName}`;
       }
-      return code`${sourceExpr}?.${memberField.protoJsName}`;
+      return code`${sourceExpr}?.${memberField.proto.jsonName}`;
     };
 
     return code`
