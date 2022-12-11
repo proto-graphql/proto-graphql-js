@@ -1,6 +1,7 @@
 import {
   EnumType,
   filename,
+  generatedGraphQLTypeImportPath,
   InputObjectField,
   InputObjectType,
   InterfaceType,
@@ -43,7 +44,7 @@ export function fieldTypeRef(
     | ObjectOneofField,
   opts: PothosPrinterOptions
 ): Code {
-  const importPath = pbPothosImportPath(field, opts);
+  const importPath = generatedGraphQLTypeImportPath(field, opts);
   if (importPath == null) return pothosRef(field.type);
 
   const imported = imp(`IMPORTED_PLACEHOLDER@${importPath}`);
@@ -52,30 +53,12 @@ export function fieldTypeRef(
 }
 
 export function fieldTypeShape(field: InputObjectField<InputObjectType>, opts: PothosPrinterOptions): Code {
-  const importPath = pbPothosImportPath(field, opts);
+  const importPath = generatedGraphQLTypeImportPath(field, opts);
   if (importPath == null) return shapeType(field.type);
 
   const imported = imp(`IMPORTED_PLACEHOLDER@${importPath}`);
   imported.symbol = shapeTypeName(field.type); // NOTE: Workaround for ts-poet not recognizing "$" as an identifier
   return code`${imported}`;
-}
-
-function pbPothosImportPath(
-  field:
-    | ObjectField<ObjectType | EnumType | InterfaceType | SquashedOneofUnionType>
-    | InputObjectField<InputObjectType | EnumType>
-    | ObjectOneofField,
-  opts: PothosPrinterOptions
-): string | null {
-  if (field instanceof ObjectOneofField) return null;
-  const [fromPath, toPath] = [filename(field.parent, opts), filename(field.type, opts)].map((f) =>
-    path.isAbsolute(f) ? `.${path.sep}${f}` : f
-  );
-
-  if (fromPath === toPath) return null;
-
-  const importPath = path.relative(path.dirname(fromPath), toPath).replace(/\.ts$/, "");
-  return importPath.match(/^[\.\/]/) ? importPath : `./${importPath}`;
 }
 
 export function pothosBuilder(

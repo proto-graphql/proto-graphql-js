@@ -6,317 +6,250 @@ exports[`field_nullability generates nexus DSLs with partial inputs: extensions/
 
 /* eslint-disable */
 
-import * as nexus from \\"nexus\\";
-import * as proto_nexus from \\"proto-nexus\\";
-import * as _$testapis$extensions$field_nullability$nullability_pb from \\"./testapis/extensions/field_nullability/nullability_pb\\";
-export type _$testapis$extensions$field_nullability$nullability_pb$Message = _$testapis$extensions$field_nullability$nullability_pb.Message;
-export const Message = nexus.objectType({
-    name: \\"Message\\",
-    definition(t) {
-        t.field(\\"userId\\", {
-            type: nexus.nonNull(\\"String\\"),
-            description: \\"Required.\\",
-            resolve(root) {
-                const value = root.getUserId();
-                return value.toString();
-            },
-            extensions: {
-                ...({
-                    protobufField: {
-                        name: \\"user_id\\",
-                        typeFullName: \\"uint64\\"
-                    }
-                } as proto_nexus.ProtobufFieldExtensions)
-            }
-        });
-        t.field(\\"body\\", {
-            type: nexus.nonNull(\\"String\\"),
-            description: \\"Required.\\",
-            resolve(root) {
-                const value = root.getBody();
-                return value;
-            },
-            extensions: {
-                ...({
-                    protobufField: {
-                        name: \\"body\\",
-                        typeFullName: \\"string\\"
-                    }
-                } as proto_nexus.ProtobufFieldExtensions)
-            }
-        });
-        t.field(\\"status\\", {
-            type: nexus.nullable(\\"MessageStatus\\"),
-            description: \\"Required.\\",
-            resolve(root) {
-                const value = root.getStatus();
-                if (value == null) {
-                    return null;
-                }
-                if (value === _$testapis$extensions$field_nullability$nullability_pb.Message.Status.STATUS_UNSPECIFIED) {
-                    return null;
-                }
-                return value;
-            },
-            extensions: {
-                ...({
-                    protobufField: {
-                        name: \\"status\\",
-                        typeFullName: \\"testapis.extensions.field_nullability.Message.Status\\"
-                    }
-                } as proto_nexus.ProtobufFieldExtensions)
-            }
-        });
-    },
-    isTypeOf(data: unknown) {
-        return data instanceof _$testapis$extensions$field_nullability$nullability_pb.Message;
-    },
-    sourceType: { module: __filename, export: \\"_$testapis$extensions$field_nullability$nullability_pb$Message\\" },
-    extensions: {
-        ...({
-            protobufMessage: {
-                fullName: \\"testapis.extensions.field_nullability.Message\\",
-                name: \\"Message\\",
-                package: \\"testapis.extensions.field_nullability\\"
-            }
-        } as proto_nexus.ProtobufMessageExtensions)
-    }
-});
-export const MessageInput = Object.assign(nexus.inputObjectType({
-    name: \\"MessageInput\\",
-    definition(t) {
-        t.field(\\"userId\\", {
-            type: nexus.nullable(\\"String\\"),
-            description: \\"Required.\\",
-            extensions: {
-                ...({
-                    protobufField: {
-                        name: \\"user_id\\",
-                        typeFullName: \\"uint64\\"
-                    }
-                } as proto_nexus.ProtobufFieldExtensions)
-            }
-        });
-        t.field(\\"body\\", {
-            type: nexus.nonNull(\\"String\\"),
-            description: \\"Required.\\",
-            extensions: {
-                ...({
-                    protobufField: {
-                        name: \\"body\\",
-                        typeFullName: \\"string\\"
-                    }
-                } as proto_nexus.ProtobufFieldExtensions)
-            }
-        });
-        t.field(\\"status\\", {
-            type: nexus.nullable(\\"MessageStatus\\"),
-            description: \\"Required.\\",
-            extensions: {
-                ...({
-                    protobufField: {
-                        name: \\"status\\",
-                        typeFullName: \\"testapis.extensions.field_nullability.Message.Status\\"
-                    }
-                } as proto_nexus.ProtobufFieldExtensions)
-            }
-        });
-    },
-    extensions: {
-        protobufMessage: {
-            fullName: \\"testapis.extensions.field_nullability.Message\\",
-            name: \\"Message\\",
-            package: \\"testapis.extensions.field_nullability\\"
+import {
+  enumType,
+  inputObjectType,
+  nonNull,
+  nullable,
+  objectType,
+} from \\"nexus\\";
+import { stringToNumber } from \\"proto-nexus\\";
+import { Message as Message1 } from \\"./testapis/extensions/field_nullability/nullability_pb\\";
+
+export type testapis$extensions$field_nullability$Message = Message1;
+export const Message = objectType({
+  name: \\"Message\\",
+  definition: (t) => {
+    t.field(\\"userId\\", {
+      type: nonNull(\\"String\\"),
+      description: \\"Required.\\",
+      resolve: (source) => {
+        const value = source.getUserId();
+        return value.toString();
+      },
+      extensions: {
+        protobufField: { name: \\"user_id\\", typeFullName: \\"uint64\\" },
+      },
+    });
+    t.field(\\"body\\", {
+      type: nonNull(\\"String\\"),
+      description: \\"Required.\\",
+      resolve: (source) => {
+        const value = source.getBody();
+        return value;
+      },
+      extensions: { protobufField: { name: \\"body\\", typeFullName: \\"string\\" } },
+    });
+    t.field(\\"status\\", {
+      type: nullable(\\"MessageStatus\\"),
+      description: \\"Required.\\",
+      resolve: (source) => {
+        const value = source.getStatus();
+        if (value == null) {
+          return null;
         }
-    }
-}), {
-    toProto: (input: NexusGen[\\"inputTypes\\"][\\"MessageInput\\"]): _$testapis$extensions$field_nullability$nullability_pb.Message => {
-        const output = new _$testapis$extensions$field_nullability$nullability_pb.Message();
-        if (input.userId != null) {
-            output.setUserId(proto_nexus.stringToNumber(input.userId));
+        if (value === Message1.Status.STATUS_UNSPECIFIED) {
+          return null;
         }
-        output.setBody(input.body);
-        if (input.status != null) {
-            output.setStatus(input.status);
-        }
-        return output;
-    },
-    _protoNexus: {
-        fields: {
-            userId: {
-                type: nexus.nullable(\\"String\\"),
-                description: \\"Required.\\",
-                extensions: {
-                    ...({
-                        protobufField: {
-                            name: \\"user_id\\",
-                            typeFullName: \\"uint64\\"
-                        }
-                    } as proto_nexus.ProtobufFieldExtensions)
-                }
-            },
-            body: {
-                type: nexus.nonNull(\\"String\\"),
-                description: \\"Required.\\",
-                extensions: {
-                    ...({
-                        protobufField: {
-                            name: \\"body\\",
-                            typeFullName: \\"string\\"
-                        }
-                    } as proto_nexus.ProtobufFieldExtensions)
-                }
-            },
-            status: {
-                type: nexus.nullable(\\"MessageStatus\\"),
-                description: \\"Required.\\",
-                extensions: {
-                    ...({
-                        protobufField: {
-                            name: \\"status\\",
-                            typeFullName: \\"testapis.extensions.field_nullability.Message.Status\\"
-                        }
-                    } as proto_nexus.ProtobufFieldExtensions)
-                }
-            }
-        }
-    }
-});
-export const MessagePartialInput = Object.assign(nexus.inputObjectType({
-    name: \\"MessagePartialInput\\",
-    definition(t) {
-        t.field(\\"userId\\", {
-            type: nexus.nonNull(\\"String\\"),
-            description: \\"Required.\\",
-            extensions: {
-                ...({
-                    protobufField: {
-                        name: \\"user_id\\",
-                        typeFullName: \\"uint64\\"
-                    }
-                } as proto_nexus.ProtobufFieldExtensions)
-            }
-        });
-        t.field(\\"body\\", {
-            type: nexus.nullable(\\"String\\"),
-            description: \\"Required.\\",
-            extensions: {
-                ...({
-                    protobufField: {
-                        name: \\"body\\",
-                        typeFullName: \\"string\\"
-                    }
-                } as proto_nexus.ProtobufFieldExtensions)
-            }
-        });
-        t.field(\\"status\\", {
-            type: nexus.nullable(\\"MessageStatus\\"),
-            description: \\"Required.\\",
-            extensions: {
-                ...({
-                    protobufField: {
-                        name: \\"status\\",
-                        typeFullName: \\"testapis.extensions.field_nullability.Message.Status\\"
-                    }
-                } as proto_nexus.ProtobufFieldExtensions)
-            }
-        });
-    },
-    extensions: {
-        protobufMessage: {
-            fullName: \\"testapis.extensions.field_nullability.Message\\",
-            name: \\"Message\\",
-            package: \\"testapis.extensions.field_nullability\\"
-        }
-    }
-}), {
-    toProto: (input: NexusGen[\\"inputTypes\\"][\\"MessagePartialInput\\"]): _$testapis$extensions$field_nullability$nullability_pb.Message => {
-        const output = new _$testapis$extensions$field_nullability$nullability_pb.Message();
-        output.setUserId(proto_nexus.stringToNumber(input.userId));
-        if (input.body != null) {
-            output.setBody(input.body);
-        }
-        if (input.status != null) {
-            output.setStatus(input.status);
-        }
-        return output;
-    },
-    _protoNexus: {
-        fields: {
-            userId: {
-                type: nexus.nonNull(\\"String\\"),
-                description: \\"Required.\\",
-                extensions: {
-                    ...({
-                        protobufField: {
-                            name: \\"user_id\\",
-                            typeFullName: \\"uint64\\"
-                        }
-                    } as proto_nexus.ProtobufFieldExtensions)
-                }
-            },
-            body: {
-                type: nexus.nullable(\\"String\\"),
-                description: \\"Required.\\",
-                extensions: {
-                    ...({
-                        protobufField: {
-                            name: \\"body\\",
-                            typeFullName: \\"string\\"
-                        }
-                    } as proto_nexus.ProtobufFieldExtensions)
-                }
-            },
-            status: {
-                type: nexus.nullable(\\"MessageStatus\\"),
-                description: \\"Required.\\",
-                extensions: {
-                    ...({
-                        protobufField: {
-                            name: \\"status\\",
-                            typeFullName: \\"testapis.extensions.field_nullability.Message.Status\\"
-                        }
-                    } as proto_nexus.ProtobufFieldExtensions)
-                }
-            }
-        }
-    }
-});
-export const MessageStatus = nexus.enumType({
-    name: \\"MessageStatus\\",
-    members: [
-        {
-            name: \\"DRAFT\\",
-            value: 1,
-            extensions: {
-                ...({
-                    protobufEnumValue: {
-                        name: \\"DRAFT\\"
-                    }
-                } as proto_nexus.ProtobufEnumValueExtensions)
-            }
+        return value;
+      },
+      extensions: {
+        protobufField: {
+          name: \\"status\\",
+          typeFullName: \\"testapis.extensions.field_nullability.Message.Status\\",
         },
-        {
-            name: \\"PUBLISHED\\",
-            value: 2,
-            extensions: {
-                ...({
-                    protobufEnumValue: {
-                        name: \\"PUBLISHED\\"
-                    }
-                } as proto_nexus.ProtobufEnumValueExtensions)
-            }
-        }
-    ],
+      },
+    });
+  },
+  isTypeOf: (data: unknown) => {
+    return data instanceof Message1;
+  },
+  sourceType: {
+    module: __filename,
+    export: \\"testapis$extensions$field_nullability$Message\\",
+  },
+  extensions: {
+    protobufMessage: {
+      fullName: \\"testapis.extensions.field_nullability.Message\\",
+      name: \\"Message\\",
+      package: \\"testapis.extensions.field_nullability\\",
+    },
+  },
+});
+
+export const MessageInput = Object.assign(
+  inputObjectType({
+    name: \\"MessageInput\\",
+    definition: (t) => {
+      t.field(\\"userId\\", {
+        type: nullable(\\"String\\"),
+        description: \\"Required.\\",
+        extensions: {
+          protobufField: { name: \\"user_id\\", typeFullName: \\"uint64\\" },
+        },
+      });
+      t.field(\\"body\\", {
+        type: nonNull(\\"String\\"),
+        description: \\"Required.\\",
+        extensions: { protobufField: { name: \\"body\\", typeFullName: \\"string\\" } },
+      });
+      t.field(\\"status\\", {
+        type: nullable(\\"MessageStatus\\"),
+        description: \\"Required.\\",
+        extensions: {
+          protobufField: {
+            name: \\"status\\",
+            typeFullName:
+              \\"testapis.extensions.field_nullability.Message.Status\\",
+          },
+        },
+      });
+    },
     extensions: {
-        ...({
-            protobufEnum: {
-                name: \\"Status\\",
-                fullName: \\"testapis.extensions.field_nullability.Message.Status\\",
-                package: \\"testapis.extensions.field_nullability\\"
-            }
-        } as proto_nexus.ProtobufEnumExtensions)
-    }
+      protobufMessage: {
+        fullName: \\"testapis.extensions.field_nullability.Message\\",
+        name: \\"Message\\",
+        package: \\"testapis.extensions.field_nullability\\",
+      },
+    },
+  }),
+  {
+    toProto: (input: NexusGen[\\"inputTypes\\"][\\"MessageInput\\"]): Message1 => {
+      const output = new Message1();
+      if (input.userId != null) {
+        output.setUserId(stringToNumber(input.userId));
+      }
+      output.setBody(input.body);
+      if (input.status != null) {
+        output.setStatus(input.status);
+      }
+      return output;
+    },
+    _protoNexus: {
+      fields: {
+        userId: {
+          type: nullable(\\"String\\"),
+          extensions: {
+            protobufField: { name: \\"user_id\\", typeFullName: \\"uint64\\" },
+          },
+        },
+        body: {
+          type: nonNull(\\"String\\"),
+          extensions: {
+            protobufField: { name: \\"body\\", typeFullName: \\"string\\" },
+          },
+        },
+        status: {
+          type: nullable(\\"MessageStatus\\"),
+          extensions: {
+            protobufField: {
+              name: \\"status\\",
+              typeFullName:
+                \\"testapis.extensions.field_nullability.Message.Status\\",
+            },
+          },
+        },
+      },
+    },
+  },
+);
+
+export const MessagePartialInput = Object.assign(
+  inputObjectType({
+    name: \\"MessagePartialInput\\",
+    definition: (t) => {
+      t.field(\\"userId\\", {
+        type: nonNull(\\"String\\"),
+        description: \\"Required.\\",
+        extensions: {
+          protobufField: { name: \\"user_id\\", typeFullName: \\"uint64\\" },
+        },
+      });
+      t.field(\\"body\\", {
+        type: nullable(\\"String\\"),
+        description: \\"Required.\\",
+        extensions: { protobufField: { name: \\"body\\", typeFullName: \\"string\\" } },
+      });
+      t.field(\\"status\\", {
+        type: nullable(\\"MessageStatus\\"),
+        description: \\"Required.\\",
+        extensions: {
+          protobufField: {
+            name: \\"status\\",
+            typeFullName:
+              \\"testapis.extensions.field_nullability.Message.Status\\",
+          },
+        },
+      });
+    },
+    extensions: {
+      protobufMessage: {
+        fullName: \\"testapis.extensions.field_nullability.Message\\",
+        name: \\"Message\\",
+        package: \\"testapis.extensions.field_nullability\\",
+      },
+    },
+  }),
+  {
+    toProto: (
+      input: NexusGen[\\"inputTypes\\"][\\"MessagePartialInput\\"],
+    ): Message1 => {
+      const output = new Message1();
+      output.setUserId(stringToNumber(input.userId));
+      if (input.body != null) {
+        output.setBody(input.body);
+      }
+      if (input.status != null) {
+        output.setStatus(input.status);
+      }
+      return output;
+    },
+    _protoNexus: {
+      fields: {
+        userId: {
+          type: nonNull(\\"String\\"),
+          extensions: {
+            protobufField: { name: \\"user_id\\", typeFullName: \\"uint64\\" },
+          },
+        },
+        body: {
+          type: nullable(\\"String\\"),
+          extensions: {
+            protobufField: { name: \\"body\\", typeFullName: \\"string\\" },
+          },
+        },
+        status: {
+          type: nullable(\\"MessageStatus\\"),
+          extensions: {
+            protobufField: {
+              name: \\"status\\",
+              typeFullName:
+                \\"testapis.extensions.field_nullability.Message.Status\\",
+            },
+          },
+        },
+      },
+    },
+  },
+);
+export const MessageStatus = enumType({
+  name: \\"MessageStatus\\",
+  members: [{
+    name: \\"DRAFT\\",
+    value: 1,
+    extensions: { protobufEnumValue: { name: \\"DRAFT\\" } },
+  }, {
+    name: \\"PUBLISHED\\",
+    value: 2,
+    extensions: { protobufEnumValue: { name: \\"PUBLISHED\\" } },
+  }],
+  extensions: {
+    protobufEnum: {
+      name: \\"Status\\",
+      fullName: \\"testapis.extensions.field_nullability.Message.Status\\",
+      package: \\"testapis.extensions.field_nullability\\",
+    },
+  },
 });
 "
 `;
@@ -327,530 +260,455 @@ exports[`no_partial generates nexus DSLs with partial inputs: extensions/no_part
 
 /* eslint-disable */
 
-import * as nexus from \\"nexus\\";
-import * as proto_nexus from \\"proto-nexus\\";
-import * as _$testapis$extensions$no_partial$no_partial_pb from \\"./testapis/extensions/no_partial/no_partial_pb\\";
-export type _$testapis$extensions$no_partial$no_partial_pb$ParentMessage = _$testapis$extensions$no_partial$no_partial_pb.ParentMessage;
-export type _$testapis$extensions$no_partial$no_partial_pb$PartialableInputMessage = _$testapis$extensions$no_partial$no_partial_pb.PartialableInputMessage;
-export type _$testapis$extensions$no_partial$no_partial_pb$NoPartialInputMessage = _$testapis$extensions$no_partial$no_partial_pb.NoPartialInputMessage;
-export const ParentMessage = nexus.objectType({
-    name: \\"ParentMessage\\",
-    definition(t) {
-        t.field(\\"partialableInputMessage\\", {
-            type: nexus.nonNull(\\"PartialableInputMessage\\"),
-            description: \\"Required.\\",
-            resolve(root) {
-                const value = root.getPartialableInputMessage();
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
-                return value;
-            },
-            extensions: {
-                ...({
-                    protobufField: {
-                        name: \\"partialable_input_message\\",
-                        typeFullName: \\"testapis.extensions.no_partial.PartialableInputMessage\\"
-                    }
-                } as proto_nexus.ProtobufFieldExtensions)
-            }
-        });
-        t.field(\\"noPartialInputMessage\\", {
-            type: nexus.nonNull(\\"NoPartialInputMessage\\"),
-            description: \\"Required.\\",
-            resolve(root) {
-                const value = root.getNoPartialInputMessage();
-                if (value == null) {
-                    throw new Error(\\"Cannot return null for non-nullable field\\");
-                }
-                return value;
-            },
-            extensions: {
-                ...({
-                    protobufField: {
-                        name: \\"no_partial_input_message\\",
-                        typeFullName: \\"testapis.extensions.no_partial.NoPartialInputMessage\\"
-                    }
-                } as proto_nexus.ProtobufFieldExtensions)
-            }
-        });
+import { inputObjectType, nonNull, nullable, objectType } from \\"nexus\\";
+import { stringToNumber } from \\"proto-nexus\\";
+import {
+  NoPartialInputMessage as NoPartialInputMessage3,
+  ParentMessage as ParentMessage1,
+  PartialableInputMessage as PartialableInputMessage2,
+} from \\"./testapis/extensions/no_partial/no_partial_pb\\";
+
+export type testapis$extensions$no_partial$ParentMessage = ParentMessage1;
+export const ParentMessage = objectType({
+  name: \\"ParentMessage\\",
+  definition: (t) => {
+    t.field(\\"partialableInputMessage\\", {
+      type: nonNull(\\"PartialableInputMessage\\"),
+      description: \\"Required.\\",
+      resolve: (source) => {
+        const value = source.getPartialableInputMessage();
+        if (value == null) {
+          throw new Error(\\"Cannot return null for non-nullable field\\");
+        }
+        return value;
+      },
+      extensions: {
+        protobufField: {
+          name: \\"partialable_input_message\\",
+          typeFullName:
+            \\"testapis.extensions.no_partial.PartialableInputMessage\\",
+        },
+      },
+    });
+    t.field(\\"noPartialInputMessage\\", {
+      type: nonNull(\\"NoPartialInputMessage\\"),
+      description: \\"Required.\\",
+      resolve: (source) => {
+        const value = source.getNoPartialInputMessage();
+        if (value == null) {
+          throw new Error(\\"Cannot return null for non-nullable field\\");
+        }
+        return value;
+      },
+      extensions: {
+        protobufField: {
+          name: \\"no_partial_input_message\\",
+          typeFullName: \\"testapis.extensions.no_partial.NoPartialInputMessage\\",
+        },
+      },
+    });
+  },
+  isTypeOf: (data: unknown) => {
+    return data instanceof ParentMessage1;
+  },
+  sourceType: {
+    module: __filename,
+    export: \\"testapis$extensions$no_partial$ParentMessage\\",
+  },
+  extensions: {
+    protobufMessage: {
+      fullName: \\"testapis.extensions.no_partial.ParentMessage\\",
+      name: \\"ParentMessage\\",
+      package: \\"testapis.extensions.no_partial\\",
     },
-    isTypeOf(data: unknown) {
-        return data instanceof _$testapis$extensions$no_partial$no_partial_pb.ParentMessage;
-    },
-    sourceType: { module: __filename, export: \\"_$testapis$extensions$no_partial$no_partial_pb$ParentMessage\\" },
-    extensions: {
-        ...({
-            protobufMessage: {
-                fullName: \\"testapis.extensions.no_partial.ParentMessage\\",
-                name: \\"ParentMessage\\",
-                package: \\"testapis.extensions.no_partial\\"
-            }
-        } as proto_nexus.ProtobufMessageExtensions)
-    }
+  },
 });
-export const PartialableInputMessage = nexus.objectType({
-    name: \\"PartialableInputMessage\\",
-    definition(t) {
-        t.field(\\"id\\", {
-            type: nexus.nonNull(\\"String\\"),
-            description: \\"Required.\\",
-            resolve(root) {
-                const value = root.getId();
-                return value.toString();
-            },
-            extensions: {
-                ...({
-                    protobufField: {
-                        name: \\"id\\",
-                        typeFullName: \\"uint64\\"
-                    }
-                } as proto_nexus.ProtobufFieldExtensions)
-            }
-        });
-        t.field(\\"body\\", {
-            type: nexus.nonNull(\\"String\\"),
-            description: \\"Required.\\",
-            resolve(root) {
-                const value = root.getBody();
-                return value;
-            },
-            extensions: {
-                ...({
-                    protobufField: {
-                        name: \\"body\\",
-                        typeFullName: \\"string\\"
-                    }
-                } as proto_nexus.ProtobufFieldExtensions)
-            }
-        });
+
+export type testapis$extensions$no_partial$PartialableInputMessage =
+  PartialableInputMessage2;
+export const PartialableInputMessage = objectType({
+  name: \\"PartialableInputMessage\\",
+  definition: (t) => {
+    t.field(\\"id\\", {
+      type: nonNull(\\"String\\"),
+      description: \\"Required.\\",
+      resolve: (source) => {
+        const value = source.getId();
+        return value.toString();
+      },
+      extensions: { protobufField: { name: \\"id\\", typeFullName: \\"uint64\\" } },
+    });
+    t.field(\\"body\\", {
+      type: nonNull(\\"String\\"),
+      description: \\"Required.\\",
+      resolve: (source) => {
+        const value = source.getBody();
+        return value;
+      },
+      extensions: { protobufField: { name: \\"body\\", typeFullName: \\"string\\" } },
+    });
+  },
+  isTypeOf: (data: unknown) => {
+    return data instanceof PartialableInputMessage2;
+  },
+  sourceType: {
+    module: __filename,
+    export: \\"testapis$extensions$no_partial$PartialableInputMessage\\",
+  },
+  extensions: {
+    protobufMessage: {
+      fullName: \\"testapis.extensions.no_partial.PartialableInputMessage\\",
+      name: \\"PartialableInputMessage\\",
+      package: \\"testapis.extensions.no_partial\\",
     },
-    isTypeOf(data: unknown) {
-        return data instanceof _$testapis$extensions$no_partial$no_partial_pb.PartialableInputMessage;
-    },
-    sourceType: { module: __filename, export: \\"_$testapis$extensions$no_partial$no_partial_pb$PartialableInputMessage\\" },
-    extensions: {
-        ...({
-            protobufMessage: {
-                fullName: \\"testapis.extensions.no_partial.PartialableInputMessage\\",
-                name: \\"PartialableInputMessage\\",
-                package: \\"testapis.extensions.no_partial\\"
-            }
-        } as proto_nexus.ProtobufMessageExtensions)
-    }
+  },
 });
-export const NoPartialInputMessage = nexus.objectType({
-    name: \\"NoPartialInputMessage\\",
-    definition(t) {
-        t.field(\\"id\\", {
-            type: nexus.nonNull(\\"String\\"),
-            description: \\"Required.\\",
-            resolve(root) {
-                const value = root.getId();
-                return value.toString();
-            },
-            extensions: {
-                ...({
-                    protobufField: {
-                        name: \\"id\\",
-                        typeFullName: \\"uint64\\"
-                    }
-                } as proto_nexus.ProtobufFieldExtensions)
-            }
-        });
-        t.field(\\"body\\", {
-            type: nexus.nonNull(\\"String\\"),
-            description: \\"Required.\\",
-            resolve(root) {
-                const value = root.getBody();
-                return value;
-            },
-            extensions: {
-                ...({
-                    protobufField: {
-                        name: \\"body\\",
-                        typeFullName: \\"string\\"
-                    }
-                } as proto_nexus.ProtobufFieldExtensions)
-            }
-        });
+
+export type testapis$extensions$no_partial$NoPartialInputMessage =
+  NoPartialInputMessage3;
+export const NoPartialInputMessage = objectType({
+  name: \\"NoPartialInputMessage\\",
+  definition: (t) => {
+    t.field(\\"id\\", {
+      type: nonNull(\\"String\\"),
+      description: \\"Required.\\",
+      resolve: (source) => {
+        const value = source.getId();
+        return value.toString();
+      },
+      extensions: { protobufField: { name: \\"id\\", typeFullName: \\"uint64\\" } },
+    });
+    t.field(\\"body\\", {
+      type: nonNull(\\"String\\"),
+      description: \\"Required.\\",
+      resolve: (source) => {
+        const value = source.getBody();
+        return value;
+      },
+      extensions: { protobufField: { name: \\"body\\", typeFullName: \\"string\\" } },
+    });
+  },
+  isTypeOf: (data: unknown) => {
+    return data instanceof NoPartialInputMessage3;
+  },
+  sourceType: {
+    module: __filename,
+    export: \\"testapis$extensions$no_partial$NoPartialInputMessage\\",
+  },
+  extensions: {
+    protobufMessage: {
+      fullName: \\"testapis.extensions.no_partial.NoPartialInputMessage\\",
+      name: \\"NoPartialInputMessage\\",
+      package: \\"testapis.extensions.no_partial\\",
     },
-    isTypeOf(data: unknown) {
-        return data instanceof _$testapis$extensions$no_partial$no_partial_pb.NoPartialInputMessage;
-    },
-    sourceType: { module: __filename, export: \\"_$testapis$extensions$no_partial$no_partial_pb$NoPartialInputMessage\\" },
-    extensions: {
-        ...({
-            protobufMessage: {
-                fullName: \\"testapis.extensions.no_partial.NoPartialInputMessage\\",
-                name: \\"NoPartialInputMessage\\",
-                package: \\"testapis.extensions.no_partial\\"
-            }
-        } as proto_nexus.ProtobufMessageExtensions)
-    }
+  },
 });
-export const ParentMessageInput = Object.assign(nexus.inputObjectType({
+
+export const ParentMessageInput = Object.assign(
+  inputObjectType({
     name: \\"ParentMessageInput\\",
-    definition(t) {
-        t.field(\\"partialableInputMessage\\", {
-            type: nexus.nonNull(\\"PartialableInputMessageInput\\"),
-            description: \\"Required.\\",
-            extensions: {
-                ...({
-                    protobufField: {
-                        name: \\"partialable_input_message\\",
-                        typeFullName: \\"testapis.extensions.no_partial.PartialableInputMessage\\"
-                    }
-                } as proto_nexus.ProtobufFieldExtensions)
-            }
-        });
-        t.field(\\"noPartialInputMessage\\", {
-            type: nexus.nonNull(\\"NoPartialInputMessageInput\\"),
-            description: \\"Required.\\",
-            extensions: {
-                ...({
-                    protobufField: {
-                        name: \\"no_partial_input_message\\",
-                        typeFullName: \\"testapis.extensions.no_partial.NoPartialInputMessage\\"
-                    }
-                } as proto_nexus.ProtobufFieldExtensions)
-            }
-        });
+    definition: (t) => {
+      t.field(\\"partialableInputMessage\\", {
+        type: nonNull(\\"PartialableInputMessageInput\\"),
+        description: \\"Required.\\",
+        extensions: {
+          protobufField: {
+            name: \\"partialable_input_message\\",
+            typeFullName:
+              \\"testapis.extensions.no_partial.PartialableInputMessage\\",
+          },
+        },
+      });
+      t.field(\\"noPartialInputMessage\\", {
+        type: nonNull(\\"NoPartialInputMessageInput\\"),
+        description: \\"Required.\\",
+        extensions: {
+          protobufField: {
+            name: \\"no_partial_input_message\\",
+            typeFullName:
+              \\"testapis.extensions.no_partial.NoPartialInputMessage\\",
+          },
+        },
+      });
     },
     extensions: {
-        protobufMessage: {
-            fullName: \\"testapis.extensions.no_partial.ParentMessage\\",
-            name: \\"ParentMessage\\",
-            package: \\"testapis.extensions.no_partial\\"
-        }
-    }
-}), {
-    toProto: (input: NexusGen[\\"inputTypes\\"][\\"ParentMessageInput\\"]): _$testapis$extensions$no_partial$no_partial_pb.ParentMessage => {
-        const output = new _$testapis$extensions$no_partial$no_partial_pb.ParentMessage();
-        output.setPartialableInputMessage(PartialableInputMessageInput.toProto(input.partialableInputMessage));
-        output.setNoPartialInputMessage(NoPartialInputMessageInput.toProto(input.noPartialInputMessage));
-        return output;
+      protobufMessage: {
+        fullName: \\"testapis.extensions.no_partial.ParentMessage\\",
+        name: \\"ParentMessage\\",
+        package: \\"testapis.extensions.no_partial\\",
+      },
+    },
+  }),
+  {
+    toProto: (
+      input: NexusGen[\\"inputTypes\\"][\\"ParentMessageInput\\"],
+    ): ParentMessage1 => {
+      const output = new ParentMessage1();
+      output.setPartialableInputMessage(
+        PartialableInputMessageInput.toProto(input.partialableInputMessage),
+      );
+      output.setNoPartialInputMessage(
+        NoPartialInputMessageInput.toProto(input.noPartialInputMessage),
+      );
+      return output;
     },
     _protoNexus: {
-        fields: {
-            partialableInputMessage: {
-                type: nexus.nonNull(\\"PartialableInputMessageInput\\"),
-                description: \\"Required.\\",
-                extensions: {
-                    ...({
-                        protobufField: {
-                            name: \\"partialable_input_message\\",
-                            typeFullName: \\"testapis.extensions.no_partial.PartialableInputMessage\\"
-                        }
-                    } as proto_nexus.ProtobufFieldExtensions)
-                }
+      fields: {
+        partialableInputMessage: {
+          type: nonNull(\\"PartialableInputMessageInput\\"),
+          extensions: {
+            protobufField: {
+              name: \\"partialable_input_message\\",
+              typeFullName:
+                \\"testapis.extensions.no_partial.PartialableInputMessage\\",
             },
-            noPartialInputMessage: {
-                type: nexus.nonNull(\\"NoPartialInputMessageInput\\"),
-                description: \\"Required.\\",
-                extensions: {
-                    ...({
-                        protobufField: {
-                            name: \\"no_partial_input_message\\",
-                            typeFullName: \\"testapis.extensions.no_partial.NoPartialInputMessage\\"
-                        }
-                    } as proto_nexus.ProtobufFieldExtensions)
-                }
-            }
-        }
-    }
-});
-export const ParentMessagePartialInput = Object.assign(nexus.inputObjectType({
+          },
+        },
+        noPartialInputMessage: {
+          type: nonNull(\\"NoPartialInputMessageInput\\"),
+          extensions: {
+            protobufField: {
+              name: \\"no_partial_input_message\\",
+              typeFullName:
+                \\"testapis.extensions.no_partial.NoPartialInputMessage\\",
+            },
+          },
+        },
+      },
+    },
+  },
+);
+
+export const ParentMessagePartialInput = Object.assign(
+  inputObjectType({
     name: \\"ParentMessagePartialInput\\",
-    definition(t) {
-        t.field(\\"partialableInputMessage\\", {
-            type: nexus.nullable(\\"PartialableInputMessagePartialInput\\"),
-            description: \\"Required.\\",
-            extensions: {
-                ...({
-                    protobufField: {
-                        name: \\"partialable_input_message\\",
-                        typeFullName: \\"testapis.extensions.no_partial.PartialableInputMessage\\"
-                    }
-                } as proto_nexus.ProtobufFieldExtensions)
-            }
-        });
-        t.field(\\"noPartialInputMessage\\", {
-            type: nexus.nullable(\\"NoPartialInputMessageInput\\"),
-            description: \\"Required.\\",
-            extensions: {
-                ...({
-                    protobufField: {
-                        name: \\"no_partial_input_message\\",
-                        typeFullName: \\"testapis.extensions.no_partial.NoPartialInputMessage\\"
-                    }
-                } as proto_nexus.ProtobufFieldExtensions)
-            }
-        });
+    definition: (t) => {
+      t.field(\\"partialableInputMessage\\", {
+        type: nullable(\\"PartialableInputMessagePartialInput\\"),
+        description: \\"Required.\\",
+        extensions: {
+          protobufField: {
+            name: \\"partialable_input_message\\",
+            typeFullName:
+              \\"testapis.extensions.no_partial.PartialableInputMessage\\",
+          },
+        },
+      });
+      t.field(\\"noPartialInputMessage\\", {
+        type: nullable(\\"NoPartialInputMessageInput\\"),
+        description: \\"Required.\\",
+        extensions: {
+          protobufField: {
+            name: \\"no_partial_input_message\\",
+            typeFullName:
+              \\"testapis.extensions.no_partial.NoPartialInputMessage\\",
+          },
+        },
+      });
     },
     extensions: {
-        protobufMessage: {
-            fullName: \\"testapis.extensions.no_partial.ParentMessage\\",
-            name: \\"ParentMessage\\",
-            package: \\"testapis.extensions.no_partial\\"
-        }
-    }
-}), {
-    toProto: (input: NexusGen[\\"inputTypes\\"][\\"ParentMessagePartialInput\\"]): _$testapis$extensions$no_partial$no_partial_pb.ParentMessage => {
-        const output = new _$testapis$extensions$no_partial$no_partial_pb.ParentMessage();
-        if (input.partialableInputMessage != null) {
-            output.setPartialableInputMessage(PartialableInputMessagePartialInput.toProto(input.partialableInputMessage));
-        }
-        if (input.noPartialInputMessage != null) {
-            output.setNoPartialInputMessage(NoPartialInputMessageInput.toProto(input.noPartialInputMessage));
-        }
-        return output;
+      protobufMessage: {
+        fullName: \\"testapis.extensions.no_partial.ParentMessage\\",
+        name: \\"ParentMessage\\",
+        package: \\"testapis.extensions.no_partial\\",
+      },
+    },
+  }),
+  {
+    toProto: (
+      input: NexusGen[\\"inputTypes\\"][\\"ParentMessagePartialInput\\"],
+    ): ParentMessage1 => {
+      const output = new ParentMessage1();
+      if (input.partialableInputMessage != null) {
+        output.setPartialableInputMessage(
+          PartialableInputMessagePartialInput.toProto(
+            input.partialableInputMessage,
+          ),
+        );
+      }
+      if (input.noPartialInputMessage != null) {
+        output.setNoPartialInputMessage(
+          NoPartialInputMessageInput.toProto(input.noPartialInputMessage),
+        );
+      }
+      return output;
     },
     _protoNexus: {
-        fields: {
-            partialableInputMessage: {
-                type: nexus.nullable(\\"PartialableInputMessagePartialInput\\"),
-                description: \\"Required.\\",
-                extensions: {
-                    ...({
-                        protobufField: {
-                            name: \\"partialable_input_message\\",
-                            typeFullName: \\"testapis.extensions.no_partial.PartialableInputMessage\\"
-                        }
-                    } as proto_nexus.ProtobufFieldExtensions)
-                }
+      fields: {
+        partialableInputMessage: {
+          type: nullable(\\"PartialableInputMessagePartialInput\\"),
+          extensions: {
+            protobufField: {
+              name: \\"partialable_input_message\\",
+              typeFullName:
+                \\"testapis.extensions.no_partial.PartialableInputMessage\\",
             },
-            noPartialInputMessage: {
-                type: nexus.nullable(\\"NoPartialInputMessageInput\\"),
-                description: \\"Required.\\",
-                extensions: {
-                    ...({
-                        protobufField: {
-                            name: \\"no_partial_input_message\\",
-                            typeFullName: \\"testapis.extensions.no_partial.NoPartialInputMessage\\"
-                        }
-                    } as proto_nexus.ProtobufFieldExtensions)
-                }
-            }
-        }
-    }
-});
-export const PartialableInputMessageInput = Object.assign(nexus.inputObjectType({
+          },
+        },
+        noPartialInputMessage: {
+          type: nullable(\\"NoPartialInputMessageInput\\"),
+          extensions: {
+            protobufField: {
+              name: \\"no_partial_input_message\\",
+              typeFullName:
+                \\"testapis.extensions.no_partial.NoPartialInputMessage\\",
+            },
+          },
+        },
+      },
+    },
+  },
+);
+
+export const PartialableInputMessageInput = Object.assign(
+  inputObjectType({
     name: \\"PartialableInputMessageInput\\",
-    definition(t) {
-        t.field(\\"id\\", {
-            type: nexus.nonNull(\\"String\\"),
-            description: \\"Required.\\",
-            extensions: {
-                ...({
-                    protobufField: {
-                        name: \\"id\\",
-                        typeFullName: \\"uint64\\"
-                    }
-                } as proto_nexus.ProtobufFieldExtensions)
-            }
-        });
-        t.field(\\"body\\", {
-            type: nexus.nonNull(\\"String\\"),
-            description: \\"Required.\\",
-            extensions: {
-                ...({
-                    protobufField: {
-                        name: \\"body\\",
-                        typeFullName: \\"string\\"
-                    }
-                } as proto_nexus.ProtobufFieldExtensions)
-            }
-        });
+    definition: (t) => {
+      t.field(\\"id\\", {
+        type: nonNull(\\"String\\"),
+        description: \\"Required.\\",
+        extensions: { protobufField: { name: \\"id\\", typeFullName: \\"uint64\\" } },
+      });
+      t.field(\\"body\\", {
+        type: nonNull(\\"String\\"),
+        description: \\"Required.\\",
+        extensions: { protobufField: { name: \\"body\\", typeFullName: \\"string\\" } },
+      });
     },
     extensions: {
-        protobufMessage: {
-            fullName: \\"testapis.extensions.no_partial.PartialableInputMessage\\",
-            name: \\"PartialableInputMessage\\",
-            package: \\"testapis.extensions.no_partial\\"
-        }
-    }
-}), {
-    toProto: (input: NexusGen[\\"inputTypes\\"][\\"PartialableInputMessageInput\\"]): _$testapis$extensions$no_partial$no_partial_pb.PartialableInputMessage => {
-        const output = new _$testapis$extensions$no_partial$no_partial_pb.PartialableInputMessage();
-        output.setId(proto_nexus.stringToNumber(input.id));
-        output.setBody(input.body);
-        return output;
+      protobufMessage: {
+        fullName: \\"testapis.extensions.no_partial.PartialableInputMessage\\",
+        name: \\"PartialableInputMessage\\",
+        package: \\"testapis.extensions.no_partial\\",
+      },
+    },
+  }),
+  {
+    toProto: (
+      input: NexusGen[\\"inputTypes\\"][\\"PartialableInputMessageInput\\"],
+    ): PartialableInputMessage2 => {
+      const output = new PartialableInputMessage2();
+      output.setId(stringToNumber(input.id));
+      output.setBody(input.body);
+      return output;
     },
     _protoNexus: {
-        fields: {
-            id: {
-                type: nexus.nonNull(\\"String\\"),
-                description: \\"Required.\\",
-                extensions: {
-                    ...({
-                        protobufField: {
-                            name: \\"id\\",
-                            typeFullName: \\"uint64\\"
-                        }
-                    } as proto_nexus.ProtobufFieldExtensions)
-                }
-            },
-            body: {
-                type: nexus.nonNull(\\"String\\"),
-                description: \\"Required.\\",
-                extensions: {
-                    ...({
-                        protobufField: {
-                            name: \\"body\\",
-                            typeFullName: \\"string\\"
-                        }
-                    } as proto_nexus.ProtobufFieldExtensions)
-                }
-            }
-        }
-    }
-});
-export const PartialableInputMessagePartialInput = Object.assign(nexus.inputObjectType({
+      fields: {
+        id: {
+          type: nonNull(\\"String\\"),
+          extensions: { protobufField: { name: \\"id\\", typeFullName: \\"uint64\\" } },
+        },
+        body: {
+          type: nonNull(\\"String\\"),
+          extensions: {
+            protobufField: { name: \\"body\\", typeFullName: \\"string\\" },
+          },
+        },
+      },
+    },
+  },
+);
+
+export const PartialableInputMessagePartialInput = Object.assign(
+  inputObjectType({
     name: \\"PartialableInputMessagePartialInput\\",
-    definition(t) {
-        t.field(\\"id\\", {
-            type: nexus.nullable(\\"String\\"),
-            description: \\"Required.\\",
-            extensions: {
-                ...({
-                    protobufField: {
-                        name: \\"id\\",
-                        typeFullName: \\"uint64\\"
-                    }
-                } as proto_nexus.ProtobufFieldExtensions)
-            }
-        });
-        t.field(\\"body\\", {
-            type: nexus.nullable(\\"String\\"),
-            description: \\"Required.\\",
-            extensions: {
-                ...({
-                    protobufField: {
-                        name: \\"body\\",
-                        typeFullName: \\"string\\"
-                    }
-                } as proto_nexus.ProtobufFieldExtensions)
-            }
-        });
+    definition: (t) => {
+      t.field(\\"id\\", {
+        type: nullable(\\"String\\"),
+        description: \\"Required.\\",
+        extensions: { protobufField: { name: \\"id\\", typeFullName: \\"uint64\\" } },
+      });
+      t.field(\\"body\\", {
+        type: nullable(\\"String\\"),
+        description: \\"Required.\\",
+        extensions: { protobufField: { name: \\"body\\", typeFullName: \\"string\\" } },
+      });
     },
     extensions: {
-        protobufMessage: {
-            fullName: \\"testapis.extensions.no_partial.PartialableInputMessage\\",
-            name: \\"PartialableInputMessage\\",
-            package: \\"testapis.extensions.no_partial\\"
-        }
-    }
-}), {
-    toProto: (input: NexusGen[\\"inputTypes\\"][\\"PartialableInputMessagePartialInput\\"]): _$testapis$extensions$no_partial$no_partial_pb.PartialableInputMessage => {
-        const output = new _$testapis$extensions$no_partial$no_partial_pb.PartialableInputMessage();
-        if (input.id != null) {
-            output.setId(proto_nexus.stringToNumber(input.id));
-        }
-        if (input.body != null) {
-            output.setBody(input.body);
-        }
-        return output;
+      protobufMessage: {
+        fullName: \\"testapis.extensions.no_partial.PartialableInputMessage\\",
+        name: \\"PartialableInputMessage\\",
+        package: \\"testapis.extensions.no_partial\\",
+      },
     },
-    _protoNexus: {
-        fields: {
-            id: {
-                type: nexus.nullable(\\"String\\"),
-                description: \\"Required.\\",
-                extensions: {
-                    ...({
-                        protobufField: {
-                            name: \\"id\\",
-                            typeFullName: \\"uint64\\"
-                        }
-                    } as proto_nexus.ProtobufFieldExtensions)
-                }
-            },
-            body: {
-                type: nexus.nullable(\\"String\\"),
-                description: \\"Required.\\",
-                extensions: {
-                    ...({
-                        protobufField: {
-                            name: \\"body\\",
-                            typeFullName: \\"string\\"
-                        }
-                    } as proto_nexus.ProtobufFieldExtensions)
-                }
-            }
-        }
-    }
-});
-export const NoPartialInputMessageInput = Object.assign(nexus.inputObjectType({
-    name: \\"NoPartialInputMessageInput\\",
-    definition(t) {
-        t.field(\\"id\\", {
-            type: nexus.nonNull(\\"String\\"),
-            description: \\"Required.\\",
-            extensions: {
-                ...({
-                    protobufField: {
-                        name: \\"id\\",
-                        typeFullName: \\"uint64\\"
-                    }
-                } as proto_nexus.ProtobufFieldExtensions)
-            }
-        });
-        t.field(\\"body\\", {
-            type: nexus.nonNull(\\"String\\"),
-            description: \\"Required.\\",
-            extensions: {
-                ...({
-                    protobufField: {
-                        name: \\"body\\",
-                        typeFullName: \\"string\\"
-                    }
-                } as proto_nexus.ProtobufFieldExtensions)
-            }
-        });
-    },
-    extensions: {
-        protobufMessage: {
-            fullName: \\"testapis.extensions.no_partial.NoPartialInputMessage\\",
-            name: \\"NoPartialInputMessage\\",
-            package: \\"testapis.extensions.no_partial\\"
-        }
-    }
-}), {
-    toProto: (input: NexusGen[\\"inputTypes\\"][\\"NoPartialInputMessageInput\\"]): _$testapis$extensions$no_partial$no_partial_pb.NoPartialInputMessage => {
-        const output = new _$testapis$extensions$no_partial$no_partial_pb.NoPartialInputMessage();
-        output.setId(proto_nexus.stringToNumber(input.id));
+  }),
+  {
+    toProto: (
+      input: NexusGen[\\"inputTypes\\"][\\"PartialableInputMessagePartialInput\\"],
+    ): PartialableInputMessage2 => {
+      const output = new PartialableInputMessage2();
+      if (input.id != null) {
+        output.setId(stringToNumber(input.id));
+      }
+      if (input.body != null) {
         output.setBody(input.body);
-        return output;
+      }
+      return output;
     },
     _protoNexus: {
-        fields: {
-            id: {
-                type: nexus.nonNull(\\"String\\"),
-                description: \\"Required.\\",
-                extensions: {
-                    ...({
-                        protobufField: {
-                            name: \\"id\\",
-                            typeFullName: \\"uint64\\"
-                        }
-                    } as proto_nexus.ProtobufFieldExtensions)
-                }
-            },
-            body: {
-                type: nexus.nonNull(\\"String\\"),
-                description: \\"Required.\\",
-                extensions: {
-                    ...({
-                        protobufField: {
-                            name: \\"body\\",
-                            typeFullName: \\"string\\"
-                        }
-                    } as proto_nexus.ProtobufFieldExtensions)
-                }
-            }
-        }
-    }
-});
+      fields: {
+        id: {
+          type: nullable(\\"String\\"),
+          extensions: { protobufField: { name: \\"id\\", typeFullName: \\"uint64\\" } },
+        },
+        body: {
+          type: nullable(\\"String\\"),
+          extensions: {
+            protobufField: { name: \\"body\\", typeFullName: \\"string\\" },
+          },
+        },
+      },
+    },
+  },
+);
+
+export const NoPartialInputMessageInput = Object.assign(
+  inputObjectType({
+    name: \\"NoPartialInputMessageInput\\",
+    definition: (t) => {
+      t.field(\\"id\\", {
+        type: nonNull(\\"String\\"),
+        description: \\"Required.\\",
+        extensions: { protobufField: { name: \\"id\\", typeFullName: \\"uint64\\" } },
+      });
+      t.field(\\"body\\", {
+        type: nonNull(\\"String\\"),
+        description: \\"Required.\\",
+        extensions: { protobufField: { name: \\"body\\", typeFullName: \\"string\\" } },
+      });
+    },
+    extensions: {
+      protobufMessage: {
+        fullName: \\"testapis.extensions.no_partial.NoPartialInputMessage\\",
+        name: \\"NoPartialInputMessage\\",
+        package: \\"testapis.extensions.no_partial\\",
+      },
+    },
+  }),
+  {
+    toProto: (
+      input: NexusGen[\\"inputTypes\\"][\\"NoPartialInputMessageInput\\"],
+    ): NoPartialInputMessage3 => {
+      const output = new NoPartialInputMessage3();
+      output.setId(stringToNumber(input.id));
+      output.setBody(input.body);
+      return output;
+    },
+    _protoNexus: {
+      fields: {
+        id: {
+          type: nonNull(\\"String\\"),
+          extensions: { protobufField: { name: \\"id\\", typeFullName: \\"uint64\\" } },
+        },
+        body: {
+          type: nonNull(\\"String\\"),
+          extensions: {
+            protobufField: { name: \\"body\\", typeFullName: \\"string\\" },
+          },
+        },
+      },
+    },
+  },
+);
 "
 `;

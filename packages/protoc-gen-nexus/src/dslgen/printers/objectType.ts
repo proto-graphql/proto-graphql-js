@@ -1,14 +1,7 @@
-import { InterfaceType, ObjectType } from "@proto-graphql/codegen-core";
-import ts from "typescript";
-import { createFieldDefinitionStmt, createNoopFieldDefinitionStmt } from "./field";
-import {
-  createDescriptionPropertyAssignment,
-  createDslExportConstStmt,
-  createFullNameExpr,
-  createNexusCallExpr,
-  createProtoNexusType,
-  onlyNonNull,
-} from "./util";
+import { compact, InterfaceType, ObjectType, protobufGraphQLExtensions, protoType } from "@proto-graphql/codegen-core";
+import { code, Code, joinCode, literalOf } from "ts-poet";
+import { createFieldDefinitionCode, createNoopFieldDefinitionCode } from "./field";
+import { impNexus, NexusPrinterOptions, nexusTypeDef } from "./util";
 
 /**
  * @example
@@ -19,156 +12,37 @@ import {
  * })
  * ```
  */
-export function createObjectTypeDslStmt(objType: ObjectType): ts.Statement {
-  const isInterface = objType instanceof InterfaceType;
-  return createDslExportConstStmt(
-    objType.typeName,
-    createNexusCallExpr(isInterface ? "interfaceType" : "objectType", [
-      ts.factory.createObjectLiteralExpression(
-        [
-          ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(objType.typeName)),
-          createDescriptionPropertyAssignment(objType),
-          createObjectTypeDefinitionMethodDecl(objType),
-          isInterface ? null : createIsTypeOfMethodDecl(objType),
-          isInterface ? null : ts.factory.createPropertyAssignment("sourceType", sourceTypeExpr(objType)),
-          ts.factory.createPropertyAssignment("extensions", createExtensionsObjectLiteralExpr(objType)),
-        ].filter(onlyNonNull()),
-        true
-      ),
-    ])
-  );
-}
-
-/**
- * @example
- * ```ts
- * definition(t) {
- *   // ...
- * }
- * ```
- */
-function createObjectTypeDefinitionMethodDecl(objType: ObjectType): ts.MethodDeclaration {
-  return ts.factory.createMethodDeclaration(
-    undefined,
-    undefined,
-    undefined,
-    "definition",
-    undefined,
-    undefined,
-    [ts.factory.createParameterDeclaration(undefined, undefined, undefined, "t", undefined, undefined, undefined)],
-    undefined,
-    ts.factory.createBlock(
-      objType.fields.length > 0
-        ? objType.fields.map((f) => createFieldDefinitionStmt(f))
-        : [createNoopFieldDefinitionStmt({ input: false })],
-      true
-    )
-  );
-}
-
-/**
- * @example
- * ```ts
- * {
- *   module: __filename,
- *   export: "_$hello$hello_pb$User"
- * }
- * ```
- */
-function sourceTypeExpr(objType: ObjectType): ts.Expression {
-  return ts.factory.createObjectLiteralExpression([
-    ts.factory.createPropertyAssignment("module", ts.factory.createIdentifier("__filename")),
-    ts.factory.createPropertyAssignment("export", ts.factory.createStringLiteral(objType.sourceTypeExportAlias)),
-  ]);
-}
-
-/**
- * @example
- * ```ts
- * isTypeOf(data) {
- *   return data instanceof _$hello$hello_pb.Hello;
- * }
- * ```
- */
-function createIsTypeOfMethodDecl(objType: ObjectType): ts.MethodDeclaration {
-  return ts.factory.createMethodDeclaration(
-    undefined,
-    undefined,
-    undefined,
-    "isTypeOf",
-    undefined,
-    undefined,
-    [
-      ts.factory.createParameterDeclaration(
-        undefined,
-        undefined,
-        undefined,
-        "data",
-        undefined,
-        ts.factory.createKeywordTypeNode(ts.SyntaxKind.UnknownKeyword),
-        undefined
-      ),
-    ],
-    undefined,
-    ts.factory.createBlock(
-      [
-        ts.factory.createReturnStatement(
-          ts.factory.createBinaryExpression(
-            ts.factory.createIdentifier("data"),
-            ts.SyntaxKind.InstanceOfKeyword,
-            createFullNameExpr(objType.protoTypeFullName)
-          )
-        ),
-      ],
-      true
-    )
-  );
-}
-
-/**
- * @example
- * ```ts
- * ({
- *   protobufMessage: {
- *     fullName: "...",
- *     name: "...",
- *     package: "...",
- *   },
- * } as ProtobufMessageExtensions)
- * ```
- */
-function createExtensionsObjectLiteralExpr(objType: ObjectType): ts.Expression {
-  const objExpr = ts.factory.createObjectLiteralExpression(
-    [
-      ts.factory.createPropertyAssignment(
-        "protobufMessage",
-        ts.factory.createObjectLiteralExpression(
-          [
-            ts.factory.createPropertyAssignment(
-              "fullName",
-              ts.factory.createStringLiteral(objType.proto.fullName.toString())
-            ),
-            ts.factory.createPropertyAssignment("name", ts.factory.createStringLiteral(objType.proto.name)),
-            ts.factory.createPropertyAssignment("package", ts.factory.createStringLiteral(objType.proto.file.package)),
-          ],
-          true
-        )
-      ),
-    ],
-    true
-  );
-
-  return ts.factory.createObjectLiteralExpression(
-    [
-      ts.factory.createSpreadAssignment(
-        ts.factory.createParenthesizedExpression(
-          ts.factory.createAsExpression(
-            objExpr,
-            ts.factory.createTypeReferenceNode(createProtoNexusType("ProtobufMessageExtensions"))
-          )
-        )
-      ),
-    ],
-    true
-  );
+export function createObjectTypeCode(type: ObjectType, opts: NexusPrinterOptions): Code {
+  const isInterface = type instanceof InterfaceType;
+  const reExportedPbTypeName = type.proto.fullName.toString().replace(/\./g, "$");
+  const typeOpts = {
+    name: type.typeName,
+    description: type.description,
+    definition: code`(t) => {
+      ${
+        type.fields.length > 0
+          ? joinCode(type.fields.map((f) => createFieldDefinitionCode(f, opts)))
+          : createNoopFieldDefinitionCode({ input: false })
+      }
+    }`,
+    isTypeOf: isInterface
+      ? null
+      : code`
+        (data: unknown) => {
+          return data instanceof ${protoType(type.proto, opts)}
+        }
+      `,
+    sourceType: isInterface
+      ? null
+      : {
+          module: code`__filename`,
+          export: reExportedPbTypeName,
+        },
+    extensions: protobufGraphQLExtensions(type),
+  };
+  return code`
+    export type ${reExportedPbTypeName} = ${protoType(type.proto, opts)};
+    export const ${nexusTypeDef(type)} =
+      ${impNexus(isInterface ? "interfaceType" : "objectType")}(${literalOf(compact(typeOpts))});
+  `;
 }

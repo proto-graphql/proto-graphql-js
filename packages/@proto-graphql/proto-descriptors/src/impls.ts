@@ -330,11 +330,13 @@ export class ProtoFieldImpl implements ProtoField {
   }
 
   @memo()
-  get type(): ProtoMessage | ProtoEnum | ProtoScalar | null {
+  get type(): ProtoMessage | ProtoEnum | ProtoScalar {
     const scalarType = getScalarTypeFromDescriptor(this.descriptor);
     if (scalarType !== undefined) return { kind: "Scalar", type: scalarType };
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return this.registry.findTypeByFullName(this.descriptor.getTypeName()!.replace(/^\./, ""));
+    const foundType = this.registry.findTypeByFullName(this.descriptor.getTypeName()!.replace(/^\./, ""));
+    if (foundType === null) throw new Error(`Not found type for ${this.fullName.toString()}`);
+    return foundType;
   }
 
   @memo()
