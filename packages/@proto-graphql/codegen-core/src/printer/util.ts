@@ -207,6 +207,11 @@ function protoImportPath(t: ProtoMessage | ProtoEnum, o: Pick<PrinterOptions, "p
       ? path.dirname(t.file.name)
       : o.protobuf === "ts-proto"
       ? t.file.name.slice(0, -1 * path.extname(t.file.name).length)
-      : t.file.googleProtobufImportPath;
+      : googleProtobufImportPath(t.file);
   return `${o.importPrefix ? `${o.importPrefix}/` : "./"}${importPath}`.replace(/(?<!:)\/\//, "/");
+}
+
+function googleProtobufImportPath(file: ProtoFile): string {
+  const { dir, name } = path.parse(file.name);
+  return `${dir}/${name}_pb`;
 }
