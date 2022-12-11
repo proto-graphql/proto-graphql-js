@@ -5,6 +5,8 @@ import {
   InputObjectField,
   InputObjectType,
   InterfaceType,
+  isProtobufLong,
+  isWellKnownType,
   ObjectField,
   ObjectOneofField,
   ObjectType,
@@ -15,7 +17,7 @@ import {
 } from "@proto-graphql/codegen-core";
 import { constantCase, pascalCase } from "change-case";
 import { code, Code, joinCode, literalOf } from "ts-poet";
-import { fieldType, impNexus, impProtoNexus, isProtobufLong, isWellKnownType, NexusPrinterOptions } from "./util";
+import { fieldType, impNexus, impProtoNexus, NexusPrinterOptions } from "./util";
 
 /**
  * @

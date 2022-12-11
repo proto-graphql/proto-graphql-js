@@ -1,4 +1,4 @@
-import { ProtoEnum, ProtoField, ProtoMessage } from "@proto-graphql/proto-descriptors";
+import { ProtoEnum, ProtoField, ProtoMessage, ProtoScalarType } from "@proto-graphql/proto-descriptors";
 import { camelCase } from "change-case";
 import * as path from "path";
 import { code, Code, imp } from "ts-poet";
@@ -146,4 +146,31 @@ function googleProtobufFieldAccessor(type: "get" | "set", proto: ProtoField) {
 
 function upperCaseFirst(s: string): string {
   return `${s.charAt(0).toUpperCase()}${s.slice(1)}`;
+}
+
+const longScalarPrimitiveTypes: ReadonlySet<ProtoScalarType> = new Set([
+  "int64",
+  "uint64",
+  "fixed64",
+  "sfixed64",
+  "sint64",
+]);
+const longScalarWrapperTypes: ReadonlySet<string> = new Set([
+  "google.protobuf.Int64Value",
+  "google.protobuf.UInt64Value",
+]);
+
+export function isProtobufLong(proto: ProtoField): boolean {
+  switch (proto.type.kind) {
+    case "Scalar":
+      return longScalarPrimitiveTypes.has(proto.type.type);
+    case "Message":
+      return longScalarWrapperTypes.has(proto.type.fullName.toString());
+    default:
+      return false;
+  }
+}
+
+export function isWellKnownType(proto: ProtoField["type"]): proto is ProtoMessage {
+  return proto.kind === "Message" && proto.file.name.startsWith("google/protobuf/");
 }
