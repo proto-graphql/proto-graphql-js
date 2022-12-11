@@ -20,7 +20,7 @@ export class InputObjectType extends TypeBase<ProtoMessage> {
       ...this.proto.fields
         .filter((f) => !isOutputOnlyField(f))
         .filter((f) => !isIgnoredField(f))
-        .map((f) => new InputObjectField(getInputObjectFieldType(f, this.options), this, f, this.options)),
+        .map((f) => new InputObjectField(getInputObjectFieldType(f, this.options), this, f)),
     ];
   }
 
@@ -33,7 +33,7 @@ export class InputObjectType extends TypeBase<ProtoMessage> {
     if (!this.hasPartialInput()) {
       throw new Error(`${this.typeName} does not support partial input`);
     }
-    return new PartialInputObjectType(this.proto, this.file);
+    return new PartialInputObjectType(this.proto, this.options);
   }
 }
 

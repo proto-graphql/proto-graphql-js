@@ -63,7 +63,7 @@ export function fieldTypeShape(field: InputObjectField<InputObjectType>, opts: P
 
 export function pothosBuilder(
   type: ObjectType | InputObjectType | EnumType | OneofUnionType | SquashedOneofUnionType,
-  opts: Pick<PothosPrinterOptions, "pothos" | "fileLayout">
+  opts: Pick<PothosPrinterOptions, "pothos" | "fileLayout" | "filenameSuffix">
 ): Code {
   const importPath = opts.pothos.builderPath.startsWith(".")
     ? path.relative(path.dirname(filename(type, opts)), opts.pothos.builderPath)

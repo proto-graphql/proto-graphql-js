@@ -4,16 +4,11 @@ import { EnumType } from "./EnumType";
 import { FieldBase } from "./FieldBase";
 import { InputObjectType } from "./InputObjectType";
 import { ScalarType } from "./ScalarType";
-import { GenerationParams, isRequiredField } from "./util";
+import { isRequiredField } from "./util";
 
 export class InputObjectField<T extends ScalarType | EnumType | InputObjectType> extends FieldBase<ProtoField> {
-  constructor(
-    readonly type: T,
-    readonly parent: InputObjectType,
-    proto: ProtoField,
-    opts: GenerationParams & { dsl: "nexus" | "pothos" }
-  ) {
-    super(proto, opts);
+  constructor(readonly type: T, readonly parent: InputObjectType, proto: ProtoField) {
+    super(proto);
   }
 
   get name(): string {
@@ -32,11 +27,10 @@ export class InputObjectField<T extends ScalarType | EnumType | InputObjectType>
       return new PartialInputObjectField(
         (this.type.hasPartialInput() ? this.type.toPartialInput() : this.type) as any,
         this.parent,
-        this.proto,
-        this.opts
+        this.proto
       );
     }
-    return new PartialInputObjectField(this.type, this.parent, this.proto, this.opts);
+    return new PartialInputObjectField(this.type, this.parent, this.proto);
   }
 }
 

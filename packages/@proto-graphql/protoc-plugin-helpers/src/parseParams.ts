@@ -1,16 +1,26 @@
-import { fileLayouts, GenerationParams } from "@proto-graphql/codegen-core";
-import { LongNumberMapping } from "@proto-graphql/codegen-core";
+import { fileLayouts, LongNumberMapping, PrinterOptions, TypeOptions } from "@proto-graphql/codegen-core";
 
-export const parseParams = (input: string | undefined): GenerationParams => {
-  const params: GenerationParams = {
-    useProtobufjs: false,
-    useTsProto: false,
-    pothosBuilderPath: "./builder",
-    partialInputs: false,
-    importPrefix: null,
-    fileLayout: "proto_file",
-    typeMappings: wktypeMappings({ longNumber: "String" }),
-    longNumber: "String",
+export function parseParams<DSL extends PrinterOptions["dsl"]>(
+  input: string | undefined,
+  dsl: DSL
+): {
+  type: TypeOptions;
+  printer: Extract<PrinterOptions, { dsl: DSL }>;
+} {
+  const params = {
+    type: {
+      partialInputs: false,
+      typeMappings: wktypeMappings({ longNumber: "String" }),
+      longNumber: "String",
+    } as TypeOptions,
+    printer: {
+      dsl,
+      protobuf: "google-protobuf",
+      importPrefix: null,
+      fileLayout: "proto_file",
+      filenameSuffix: dsl === "nexus" ? "_pb_nexus.ts" : ".pb.pothos.ts",
+      pothos: { builderPath: "./builder" },
+    } as Extract<PrinterOptions, { dsl: DSL }>,
   };
 
   if (!input) return params;
@@ -34,35 +44,38 @@ export const parseParams = (input: string | undefined): GenerationParams => {
     const [k, v] = idx === -1 ? [kv, ""] : [kv.slice(0, idx), kv.slice(idx + 1)];
     switch (k) {
       case "use_protobufjs":
-        params.useProtobufjs = toBool(k, v);
+        if (toBool(k, v)) params.printer.protobuf = "protobufjs";
         break;
       case "import_prefix":
-        params.importPrefix = toString(k, v);
+        params.printer.importPrefix = toString(k, v);
         break;
       case "partial_inputs":
-        params.partialInputs = toBool(k, v);
+        params.type.partialInputs = toBool(k, v);
         break;
       case "file_layout": {
         const s = toString(k, v);
         if (!checkEnum(s, fileLayouts)) {
           throw new Error(`file_layout should be ${fileLayouts.map((s) => `"${s}"`).join(", ")}`);
         }
-        params.fileLayout = s;
+        params.printer.fileLayout = s;
         break;
       }
       case "custom_type": {
         const idx = v.indexOf("=");
         const [protoType, gqlType] = idx === -1 ? [v, ""] : [v.slice(0, idx), v.slice(idx + 1)];
-        params.typeMappings[protoType] = gqlType;
+        params.type.typeMappings[protoType] = gqlType;
         break;
       }
       case "pothos_builder_path": {
-        params.pothosBuilderPath = toString(k, v);
+        (params.printer as Extract<PrinterOptions, { dsl: "pothos" }>).pothos.builderPath = toString(k, v);
         break;
       }
       case "long_number": {
-        params.longNumber = toString(k, v);
-        params.typeMappings = { ...params.typeMappings, ...wktypeMappings({ longNumber: params.longNumber }) };
+        params.type.longNumber = toString(k, v);
+        params.type.typeMappings = {
+          ...params.type.typeMappings,
+          ...wktypeMappings({ longNumber: params.type.longNumber }),
+        };
         break;
       }
       default:
@@ -71,7 +84,7 @@ export const parseParams = (input: string | undefined): GenerationParams => {
   }
 
   return params;
-};
+}
 
 function wktypeMappings({ longNumber }: { longNumber: LongNumberMapping }) {
   return {

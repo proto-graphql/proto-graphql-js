@@ -7,18 +7,13 @@ import { ObjectType } from "./ObjectType";
 import { OneofUnionType } from "./OneofUnionType";
 import { ScalarType } from "./ScalarType";
 import { SquashedOneofUnionType } from "./SquashedOneofUnionType";
-import { GenerationParams, isRequiredField } from "./util";
+import { isRequiredField } from "./util";
 
 export class ObjectField<
   T extends ObjectType | InterfaceType | SquashedOneofUnionType | EnumType | ScalarType
 > extends FieldBase<ProtoField> {
-  constructor(
-    readonly type: T,
-    readonly parent: ObjectType | OneofUnionType,
-    proto: ProtoField,
-    opts: GenerationParams & { dsl: "nexus" | "pothos" }
-  ) {
-    super(proto, opts);
+  constructor(readonly type: T, readonly parent: ObjectType | OneofUnionType, proto: ProtoField) {
+    super(proto);
   }
 
   /**

@@ -15,7 +15,7 @@ export class OneofUnionType extends TypeBase<ProtoOneof> {
         const type = getObjectFieldType(f, this.options);
         // FIXME: raise user-friendly error
         assert(type instanceof ObjectType);
-        return new ObjectField(type, this, f, this.options);
+        return new ObjectField(type, this, f);
       });
   }
 }

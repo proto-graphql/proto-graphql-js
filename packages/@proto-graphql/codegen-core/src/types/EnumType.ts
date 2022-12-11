@@ -1,7 +1,7 @@
 import { ProtoEnum, ProtoEnumValue } from "@proto-graphql/proto-descriptors";
 import { constantCase } from "change-case";
 import { TypeBase } from "./TypeBase";
-import { descriptionFromProto, GenerationParams, getDeprecationReason, isIgnoredField } from "./util";
+import { descriptionFromProto, getDeprecationReason, isIgnoredField } from "./util";
 
 export class EnumType extends TypeBase<ProtoEnum> {
   get unspecifiedValue(): EnumTypeValue | null {
@@ -13,12 +13,12 @@ export class EnumType extends TypeBase<ProtoEnum> {
   }
 
   get valuesWithIgnored(): EnumTypeValue[] {
-    return this.proto.values.map((v) => new EnumTypeValue(v, this.options));
+    return this.proto.values.map((v) => new EnumTypeValue(v));
   }
 }
 
 export class EnumTypeValue {
-  constructor(readonly proto: ProtoEnumValue, private readonly opts: GenerationParams) {}
+  constructor(readonly proto: ProtoEnumValue) {}
 
   get name(): string {
     const prefix = constantCase(this.proto.parent.name);

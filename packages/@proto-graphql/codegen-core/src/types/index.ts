@@ -1,7 +1,5 @@
 export * from "./types";
-export { fileLayouts } from "./util";
-export type { GenerationParams, LongNumberMapping, PrinterOptions } from "./util";
-export * from "./DslFile";
+export * from "./options";
 export * from "./ObjectType";
 export * from "./ObjectField";
 export * from "./ObjectOneofField";

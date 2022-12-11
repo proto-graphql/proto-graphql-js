@@ -1,9 +1,9 @@
 import { ProtoField, ProtoOneof } from "@proto-graphql/proto-descriptors";
 import * as extensions from "../__generated__/extensions/graphql/schema_pb";
-import { descriptionFromProto, GenerationParams, getDeprecationReason } from "./util";
+import { descriptionFromProto, getDeprecationReason } from "./util";
 
 export abstract class FieldBase<P extends ProtoField | ProtoOneof> {
-  constructor(readonly proto: P, protected readonly opts: GenerationParams & { dsl: "nexus" | "pothos" }) {}
+  constructor(readonly proto: P) {}
 
   abstract get name(): string;
   public abstract isNullable(): boolean;

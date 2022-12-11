@@ -12,51 +12,7 @@ import { pascalCase } from "change-case";
 import { ExtensionFieldInfo } from "google-protobuf";
 import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
 import * as extensions from "../__generated__/extensions/graphql/schema_pb";
-
-export const fileLayouts = ["proto_file", "graphql_type"] as const;
-export type GenerationParams = {
-  importPrefix: string | null;
-  /** support only protoc-gen-nexus */
-  useProtobufjs: boolean;
-  /** support only protoc-gen-pothos */
-  useTsProto: boolean;
-  pothosBuilderPath: string;
-  partialInputs: boolean;
-  fileLayout: typeof fileLayouts[number];
-  typeMappings: Record<string, string>;
-  /**
-   * Which type to map Protobuf's 64-bit integer type to on GraphQL(default: "String").
-   * Only Int, String or custom scalars is supported.
-   *
-   * @remarks
-   * Support only protoc-gen-pothos.
-   *
-   * @remarks
-   * If you use ts-proto:
-   * - when `longNumber="String"`, you should specify `forceLong=string` for ts-proto
-   * - when `longNumber="Int"`, you should specify `forceLong=number` for ts-proto
-   */
-  longNumber: LongNumberMapping;
-};
-
-type PrinterDSLOptions =
-  | { dsl: "nexus" }
-  | {
-      dsl: "pothos";
-      pothos: { builderPath: string };
-    };
-
-type PrinterProtobufOptions = { protobuf: "google-protobuf" } | { protobuf: "protobufjs" } | { protobuf: "ts-proto" };
-
-type PrinterCommonOptions = {
-  importPrefix: string | null;
-  fileLayout: typeof fileLayouts[number];
-};
-
-export type PrinterOptions = PrinterCommonOptions & PrinterDSLOptions & PrinterProtobufOptions;
-
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type LongNumberMapping = "String" | "Int" | (string & {});
+import { TypeOptions } from "./options";
 
 export function gqlTypeName(typ: ProtoMessage | ProtoOneof | ProtoEnum): string {
   return nameWithParent(typ);
@@ -156,7 +112,7 @@ export function isSquashedUnion(m: ProtoMessage): boolean {
   return m.descriptor.getOptions()?.getExtension(extensions.objectType)?.getSquashUnion() ?? false;
 }
 
-export function isScalar(m: ProtoMessage, opts: GenerationParams): boolean {
+export function isScalar(m: ProtoMessage, opts: TypeOptions): boolean {
   return m.fullName.toString() in opts.typeMappings;
 }
 
