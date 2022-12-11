@@ -24,13 +24,13 @@ import { PrinterOptions } from "./options";
 
 export function filename(
   type: ObjectType | InputObjectType | EnumType | OneofUnionType | SquashedOneofUnionType | InterfaceType,
-  opts: Pick<PrinterOptions, "fileLayout" | "filenameSuffix">
+  opts: Pick<PrinterOptions, "dsl" | "fileLayout" | "filenameSuffix">
 ): string {
   switch (opts.fileLayout) {
     case "proto_file":
       return filenameFromProtoFile(type.proto.file, opts);
     case "graphql_type": {
-      return path.join(path.dirname(type.proto.file.name), `${type.typeName}${opts.filenameSuffix}`);
+      return path.join(path.dirname(type.proto.file.name), `${type.typeName}.${opts.dsl}.ts`);
     }
     /* istanbul ignore next */
     default: {

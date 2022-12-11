@@ -1,4 +1,4 @@
-import { LongNumberMapping } from "@proto-graphql/codegen-core/lib/types/util";
+import { LongNumberMapping } from "@proto-graphql/codegen-core";
 import { promises as fs } from "fs";
 import { CodeGeneratorRequest, CodeGeneratorResponse } from "google-protobuf/google/protobuf/compiler/plugin_pb";
 import { FileDescriptorSet } from "google-protobuf/google/protobuf/descriptor_pb";
