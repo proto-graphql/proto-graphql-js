@@ -5,12 +5,43 @@ import {
   OneofUnionType,
   SquashedOneofUnionType,
 } from "@proto-graphql/codegen-core";
+import { Code } from "ts-poet";
 import ts from "typescript";
-import { createEnumTypeDslStmt } from "./enumType";
-import { createInputObjectTypeDslStmt } from "./inputObjectType";
-import { createObjectTypeDslStmt } from "./objectType";
-import { createOneofUnionTypeDslStmt } from "./oneofUnionType";
-import { createImportAllWithAliastDecl, createQualifiedName, fullNameString, onlyNonNull, onlyUnique } from "./util";
+import { createEnumTypeCode, createEnumTypeDslStmt } from "./enumType";
+import { createInputObjectTypeCode, createInputObjectTypeDslStmt } from "./inputObjectType";
+import { createObjectTypeCode, createObjectTypeDslStmt } from "./objectType";
+import { createOneofUnionTypeCode, createOneofUnionTypeDslStmt } from "./oneofUnionType";
+import {
+  createImportAllWithAliastDecl,
+  createQualifiedName,
+  fullNameString,
+  NexusPrinterOptions,
+  onlyNonNull,
+  onlyUnique,
+} from "./util";
+
+export function createTypeDslCodes(
+  types: (ObjectType | InputObjectType | EnumType | OneofUnionType | SquashedOneofUnionType)[],
+  opts: NexusPrinterOptions
+): Code[] {
+  return types.flatMap((type) => {
+    if (type instanceof ObjectType) {
+      return createObjectTypeCode(type, opts);
+    }
+    if (type instanceof InputObjectType) {
+      return createInputObjectTypeCode(type, opts);
+    }
+    if (type instanceof EnumType) {
+      return createEnumTypeCode(type);
+    }
+    if (type instanceof OneofUnionType || type instanceof SquashedOneofUnionType) {
+      return createOneofUnionTypeCode(type, opts);
+    }
+
+    const _exhaustiveCheck: never = type;
+    throw "unreachable";
+  });
+}
 
 export function createImportDecls(
   types: (ObjectType | InputObjectType | EnumType | OneofUnionType | SquashedOneofUnionType)[]

@@ -147,7 +147,7 @@ export interface ProtoField extends ProtoBase<"Field"> {
   readonly index: number;
   readonly number: number;
   readonly parent: ProtoMessage;
-  readonly type: ProtoMessage | ProtoEnum | ProtoScalar | null;
+  readonly type: ProtoMessage | ProtoEnum | ProtoScalar;
   readonly containingOneof: ProtoOneof | null;
   readonly list: boolean;
   readonly comments: CommentSet;
