@@ -4,4 +4,4 @@
 "protoc-gen-pothos": minor
 ---
 
-rewrite printer with ts-poet
+rewrite protoc-gen-pothos printer with ts-poet
