@@ -1,6 +1,6 @@
 {
   "name": "protoc-gen-pothos",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "Generate DSL for Pothos GraphQL from Protocol Buffers IDL",
   "keywords": [
     "graphql",
@@ -23,9 +23,9 @@
     "node": ">= 14.0.0"
   },
   "dependencies": {
-    "@proto-graphql/codegen-core": "^0.2.3",
-    "@proto-graphql/proto-descriptors": "^0.2.0",
-    "@proto-graphql/protoc-plugin-helpers": "^0.2.1",
+    "@proto-graphql/codegen-core": "^0.3.0",
+    "@proto-graphql/proto-descriptors": "^0.3.0",
+    "@proto-graphql/protoc-plugin-helpers": "^0.2.2",
     "google-protobuf": "^3.20.1",
     "ts-poet": "^6.3.0"
   },
