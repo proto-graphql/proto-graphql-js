@@ -1,0 +1,19 @@
+type ChildMessage {
+  body: String!
+}
+
+input ChildMessageInput {
+  body: String!
+}
+
+type ParentMessage {
+  child: ChildMessage
+}
+
+input ParentMessageInput {
+  child: ChildMessageInput
+}
+
+type Query {
+  test: ParentMessage!
+}

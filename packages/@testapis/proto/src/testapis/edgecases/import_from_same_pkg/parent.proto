@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package testapis.edgecases.import_from_same_pkg;
+
+import "testapis/edgecases/import_from_same_pkg/child.proto";
+
+message ParentMessage {
+  testapis.edgecases.import_from_same_pkg.ChildMessage child = 1;
+}

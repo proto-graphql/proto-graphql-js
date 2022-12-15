@@ -1,4 +1,4 @@
-import { itGeneratesDSLsToMatchSnapshtos } from "./__helpers__/process.test.helper";
+import { itGeneratesDSLsToMatchSnapshtos } from "../__helpers__/process.test.helper";
 
 describe("import squashed union", () => {
   itGeneratesDSLsToMatchSnapshtos("edgecases/import_squashed_union/pkg1", [

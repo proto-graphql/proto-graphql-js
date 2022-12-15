@@ -9,6 +9,12 @@
       "path": "tests/nexus--deprecation--protobufjs"
     },
     {
+      "path": "tests/nexus--edgecases-import_from_same_pkg--google-protobuf"
+    },
+    {
+      "path": "tests/nexus--edgecases-import_from_same_pkg--protobufjs"
+    },
+    {
       "path": "tests/nexus--edgecases-import_squashed_union--google-protobuf"
     },
     {
@@ -70,6 +76,9 @@
     },
     {
       "path": "tests/pothos--deprecation--ts-proto"
+    },
+    {
+      "path": "tests/pothos--edgecases-import_from_same_pkg--ts-proto"
     },
     {
       "path": "tests/pothos--edgecases-import_squashed_union--ts-proto"

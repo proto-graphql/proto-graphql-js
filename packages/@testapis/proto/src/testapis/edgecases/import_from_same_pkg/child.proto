@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package testapis.edgecases.import_from_same_pkg;
+
+message ChildMessage {
+  string body = 1;
+}
