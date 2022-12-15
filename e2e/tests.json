@@ -2,6 +2,8 @@
   "tests": [
     { "target": "nexus", "proto": { "package": "deprecation", "lib": "google-protobuf" } },
     { "target": "nexus", "proto": { "package": "deprecation", "lib": "protobufjs" } },
+    { "target": "nexus", "proto": { "package": "edgecases/import_from_same_pkg", "lib": "google-protobuf" } },
+    { "target": "nexus", "proto": { "package": "edgecases/import_from_same_pkg", "lib": "protobufjs" } },
     { "target": "nexus", "proto": { "package": "edgecases/import_squashed_union", "lib": "google-protobuf" } },
     { "target": "nexus", "proto": { "package": "edgecases/import_squashed_union", "lib": "protobufjs" } },
     { "target": "nexus", "proto": { "package": "empty_types", "lib": "google-protobuf" } },
@@ -23,6 +25,7 @@
     { "target": "nexus", "proto": { "package": "wktypes", "lib": "google-protobuf" } },
     { "target": "nexus", "proto": { "package": "wktypes", "lib": "protobufjs" } },
     { "target": "pothos", "proto": { "package": "deprecation", "lib": "ts-proto" } },
+    { "target": "pothos", "proto": { "package": "edgecases/import_from_same_pkg", "lib": "ts-proto" } },
     { "target": "pothos", "proto": { "package": "edgecases/import_squashed_union", "lib": "ts-proto" } },
     { "target": "pothos", "proto": { "package": "empty_types", "lib": "ts-proto" } },
     { "target": "pothos", "proto": { "package": "enums", "lib": "ts-proto" } },
