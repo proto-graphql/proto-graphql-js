@@ -1,4 +1,11 @@
-import { ProtoEnum, ProtoField, ProtoMessage, ProtoScalarType } from "@proto-graphql/proto-descriptors";
+import {
+  ProtoEnum,
+  ProtoField,
+  ProtoFile,
+  ProtoMessage,
+  ProtoScalar,
+  ProtoScalarType,
+} from "@proto-graphql/proto-descriptors";
 import { camelCase } from "change-case";
 import * as path from "path";
 import { code, Code, imp } from "ts-poet";
@@ -11,24 +18,35 @@ import {
   ObjectOneofField,
   ObjectType,
   OneofUnionType,
-  PrinterOptions,
-  protoImportPath,
   SquashedOneofUnionType,
 } from "../types";
+import { PrinterOptions } from "./options";
 
 export function filename(
   type: ObjectType | InputObjectType | EnumType | OneofUnionType | SquashedOneofUnionType | InterfaceType,
-  opts: Pick<PrinterOptions, "fileLayout">
+  opts: Pick<PrinterOptions, "dsl" | "fileLayout" | "filenameSuffix">
 ): string {
   switch (opts.fileLayout) {
     case "proto_file":
-      return type.file.filename;
+      return filenameFromProtoFile(type.proto.file, opts);
     case "graphql_type": {
-      return path.join(path.dirname(type.file.filename), `${type.typeName}${type.file.extname}`);
+      return path.join(path.dirname(type.proto.file.name), `${type.typeName}.${opts.dsl}.ts`);
     }
     /* istanbul ignore next */
     default: {
       const _exhaustiveCheck: never = opts.fileLayout;
+      throw "unreachable";
+    }
+  }
+}
+
+export function filenameFromProtoFile(file: ProtoFile, opts: Pick<PrinterOptions, "fileLayout" | "filenameSuffix">) {
+  switch (opts.fileLayout) {
+    case "proto_file":
+      return file.name.replace(/\.proto$/, opts.filenameSuffix);
+    /* istanbul ignore next */
+    default: {
+      const _exhaustiveCheck: "graphql_type" = opts.fileLayout;
       throw "unreachable";
     }
   }
@@ -171,6 +189,29 @@ export function isProtobufLong(proto: ProtoField): boolean {
   }
 }
 
-export function isWellKnownType(proto: ProtoField["type"]): proto is ProtoMessage {
+export function isProtobufPrimitiveType(proto: ProtoField["type"]): proto is ProtoScalar {
+  return proto.kind === "Scalar";
+}
+
+export function isProtobufWrapperType(proto: ProtoField["type"]): proto is ProtoMessage {
+  return proto.kind === "Message" && proto.file.name === "google/protobuf/wrappers.proto";
+}
+
+export function isProtobufWellKnownType(proto: ProtoField["type"]): proto is ProtoMessage {
   return proto.kind === "Message" && proto.file.name.startsWith("google/protobuf/");
+}
+
+function protoImportPath(t: ProtoMessage | ProtoEnum, o: Pick<PrinterOptions, "protobuf" | "importPrefix">) {
+  const importPath =
+    o.protobuf === "protobufjs"
+      ? path.dirname(t.file.name)
+      : o.protobuf === "ts-proto"
+      ? t.file.name.slice(0, -1 * path.extname(t.file.name).length)
+      : googleProtobufImportPath(t.file);
+  return `${o.importPrefix ? `${o.importPrefix}/` : "./"}${importPath}`.replace(/(?<!:)\/\//, "/");
+}
+
+function googleProtobufImportPath(file: ProtoFile): string {
+  const { dir, name } = path.parse(file.name);
+  return `${dir}/${name}_pb`;
 }

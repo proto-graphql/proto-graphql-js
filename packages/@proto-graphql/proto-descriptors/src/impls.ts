@@ -8,7 +8,6 @@ import {
   OneofDescriptorProto,
   ServiceDescriptorProto,
 } from "google-protobuf/google/protobuf/descriptor_pb";
-import * as path from "path";
 import {
   FullNameImpl,
   getCommentSetByDescriptors,
@@ -90,12 +89,6 @@ export class ProtoFileImpl implements ProtoFile {
 
   get services(): ProtoService[] {
     return this.descriptor.getServiceList().map((d, i) => new ProtoServiceImpl(d, this, i, this.registry));
-  }
-
-  @memo()
-  get googleProtobufImportPath(): string {
-    const { dir, name } = path.parse(this.name);
-    return `${dir}/${name}_pb`;
   }
 
   @memo()
@@ -360,25 +353,6 @@ export class ProtoFieldImpl implements ProtoField {
   @memo()
   get deprecated(): boolean {
     return isDeprecated(this);
-  }
-
-  @memo()
-  get googleProtobufSetterName(): string {
-    return `set${this.googleProtobufAccessorNameBase}`;
-  }
-
-  @memo()
-  get googleProtobufGetterName(): string {
-    return `get${this.googleProtobufAccessorNameBase}`;
-  }
-
-  private get googleProtobufAccessorNameBase(): string {
-    const name = this.jsonName;
-    let suffix = "";
-    if (this.list) {
-      suffix += "List";
-    }
-    return `${name.charAt(0).toUpperCase()}${name.slice(1)}${suffix}`;
   }
 }
 

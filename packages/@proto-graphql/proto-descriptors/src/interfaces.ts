@@ -54,10 +54,6 @@ export interface ProtoFile extends ProtoBase<"File"> {
   readonly messages: ProtoMessage[];
   readonly enums: ProtoEnum[];
   readonly services: ProtoService[];
-  /**
-   * @example `google/protobuf/wrappers_pb`
-   */
-  readonly googleProtobufImportPath: string;
   readonly deprecated: boolean;
   collectTypesRecursively(): [ProtoMessage[], ProtoEnum[]];
 }
@@ -152,14 +148,6 @@ export interface ProtoField extends ProtoBase<"Field"> {
   readonly list: boolean;
   readonly comments: CommentSet;
   readonly deprecated: boolean;
-  /**
-   * @example `getMessageTypeList`
-   */
-  readonly googleProtobufGetterName: string;
-  /**
-   * @example `getMessageTypeList`
-   */
-  readonly googleProtobufSetterName: string;
 }
 
 export interface ProtoEnum extends ProtoBase<"Enum"> {

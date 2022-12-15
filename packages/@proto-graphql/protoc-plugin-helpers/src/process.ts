@@ -1,16 +1,21 @@
-import { GenerationParams } from "@proto-graphql/codegen-core";
+import { PrinterOptions, TypeOptions } from "@proto-graphql/codegen-core";
 import { ProtoFile, ProtoRegistry } from "@proto-graphql/proto-descriptors";
 import { CodeGeneratorRequest, CodeGeneratorResponse } from "google-protobuf/google/protobuf/compiler/plugin_pb";
 import { parseParams } from "./parseParams";
 
-export function createProcessor({
+export function createProcessor<DSL extends PrinterOptions["dsl"]>({
   generateFiles,
+  dsl,
 }: {
   generateFiles: (
     registry: ProtoRegistry,
     file: ProtoFile,
-    opts: GenerationParams
+    opts: {
+      type: TypeOptions;
+      printer: Extract<PrinterOptions, { dsl: DSL }>;
+    }
   ) => { filename: string; content: string }[];
+  dsl: DSL;
 }): (req: CodeGeneratorRequest) => CodeGeneratorResponse {
   return function processRequest(req: CodeGeneratorRequest) {
     const resp = new CodeGeneratorResponse();
@@ -21,7 +26,7 @@ export function createProcessor({
       registry.addFile(fd);
     }
 
-    const params = parseParams(req.getParameter());
+    const params = parseParams(req.getParameter(), dsl);
 
     for (const fn of req.getFileToGenerateList()) {
       const file = registry.findFile(fn);

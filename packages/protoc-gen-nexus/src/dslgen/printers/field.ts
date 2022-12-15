@@ -6,7 +6,7 @@ import {
   InputObjectType,
   InterfaceType,
   isProtobufLong,
-  isWellKnownType,
+  isProtobufWellKnownType,
   ObjectField,
   ObjectOneofField,
   ObjectType,
@@ -201,7 +201,7 @@ function createResolverCode(
     }
   }
 
-  if (isWellKnownType(field.proto.type)) {
+  if (isProtobufWellKnownType(field.proto.type)) {
     const transformer = code`${impProtoNexus("getTransformer")}("${field.proto.type.fullName.toString()}")`;
     chunks.push(code`return ${transformer}.protoToGql(value);`);
   } else if (isProtobufLong(field.proto)) {

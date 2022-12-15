@@ -5,14 +5,7 @@ import { InputObjectField } from "./InputObjectField";
 import { ScalarType } from "./ScalarType";
 import { TypeBase } from "./TypeBase";
 import { getInputObjectFieldType } from "./types";
-import {
-  createProtoFullName,
-  FullName,
-  gqlTypeName,
-  isIgnoredField,
-  isOutputOnlyField,
-  modulesWithUniqueImportAlias,
-} from "./util";
+import { gqlTypeName, isIgnoredField, isOutputOnlyField } from "./util";
 
 export class InputObjectType extends TypeBase<ProtoMessage> {
   /**
@@ -22,28 +15,13 @@ export class InputObjectType extends TypeBase<ProtoMessage> {
     return `${gqlTypeName(this.proto)}Input`;
   }
 
-  get protoTypeFullName(): FullName {
-    return createProtoFullName(this.proto, this.options);
-  }
-
   get fields(): InputObjectField<ScalarType | EnumType | InputObjectType>[] {
     return [
       ...this.proto.fields
         .filter((f) => !isOutputOnlyField(f))
         .filter((f) => !isIgnoredField(f))
-        .map((f) => new InputObjectField(getInputObjectFieldType(f, this.options), this, f, this.options)),
+        .map((f) => new InputObjectField(getInputObjectFieldType(f, this.options), this, f)),
     ];
-  }
-
-  /**
-   * @override
-   */
-  override get importModules(): { alias: string; module: string; type: "namespace" | "named" }[] {
-    const modules = [...super.importModules, ...this.fields.flatMap((f) => f.importModules)];
-    if (this.options.dsl === "pothos") {
-      modules.push(...modulesWithUniqueImportAlias(["@pothos/core"]));
-    }
-    return modules;
   }
 
   public hasPartialInput(): boolean {
@@ -55,7 +33,7 @@ export class InputObjectType extends TypeBase<ProtoMessage> {
     if (!this.hasPartialInput()) {
       throw new Error(`${this.typeName} does not support partial input`);
     }
-    return new PartialInputObjectType(this.proto, this.file);
+    return new PartialInputObjectType(this.proto, this.options);
   }
 }
 

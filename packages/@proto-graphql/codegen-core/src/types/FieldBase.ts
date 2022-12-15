@@ -1,12 +1,12 @@
 import { ProtoField, ProtoOneof } from "@proto-graphql/proto-descriptors";
 import * as extensions from "../__generated__/extensions/graphql/schema_pb";
-import { descriptionFromProto, FullName, GenerationParams, getDeprecationReason } from "./util";
+import { descriptionFromProto, getDeprecationReason } from "./util";
 
 export abstract class FieldBase<P extends ProtoField | ProtoOneof> {
-  constructor(readonly proto: P, protected readonly opts: GenerationParams & { dsl: "nexus" | "pothos" }) {}
+  constructor(readonly proto: P) {}
 
   abstract get name(): string;
-  abstract get protoJsName(): string;
+  public abstract isNullable(): boolean;
 
   get description(): string | null {
     return descriptionFromProto(this.proto);
@@ -17,28 +17,11 @@ export abstract class FieldBase<P extends ProtoField | ProtoOneof> {
     return proto.kind === "Field" && proto.list;
   }
 
-  public isNullable(): boolean {
-    throw "unimplemented";
-  }
-
   get deprecationReason(): string | null {
     return getDeprecationReason(this.proto);
-  }
-
-  // FIXME: remove
-  public isProtobufjs(): boolean {
-    return this.opts.useProtobufjs;
   }
 
   public isResolverSkipped(): boolean {
     return this.proto.descriptor.getOptions()?.getExtension(extensions.field)?.getSkipResolver() ?? false;
   }
-
-  public shouldReferenceTypeWithString(): boolean {
-    return this.opts.fileLayout === "proto_file" || this.typeFullName == null;
-  }
-
-  abstract get typeFullName(): FullName | null;
-  abstract get importModules(): { alias: string; module: string }[];
-  abstract shouldNullCheck(): boolean;
 }
