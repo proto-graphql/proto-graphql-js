@@ -7,6 +7,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: Use Node.js 14.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+    - run: yarn --frozen-lockfile
+    - run: yarn test
+    - name: Coveralls
+      uses: coverallsapp/github-action@v1.1.2
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path-to-lcov: packages/protoc-gen-nexus/coverage/lcov.info
+        base-path: packages/protoc-gen-nexus
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
       with:
         fetch-depth: 0
         submodules: true
@@ -16,14 +33,9 @@ jobs:
         node-version: 14.x
     - run: yarn --frozen-lockfile
     - run: yarn lint
-    - run: yarn build
-    - run: yarn test
-    - name: Coveralls
-      uses: coverallsapp/github-action@v1.1.2
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: packages/protoc-gen-nexus/coverage/lcov.info
-        base-path: packages/protoc-gen-nexus
+    - run: yarn format
+    - name: check generated code is up to date
+      run: git diff --exit-code
 
   test-e2e:
     runs-on: ubuntu-latest
