@@ -1,12 +1,7 @@
 {
   "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
-    "declaration": true,
-    "declarationMap": true,
-    "outDir": "./lib",
-    "rootDir": "./src",
-    "allowJs": true
+    "rootDir": "."
   },
-  "include": ["./src"],
-  "exclude": ["**/*.test.*"]
+  "include": ["./src", "jest.config.js"]
 }
