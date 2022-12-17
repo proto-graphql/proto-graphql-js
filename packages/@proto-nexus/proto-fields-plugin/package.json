@@ -31,7 +31,8 @@
     "nexus": "^1.0.0"
   },
   "devDependencies": {
-    "nexus": "^1.0.0"
+    "graphql": "^16.6.0",
+    "nexus": "^1.3.0"
   },
   "scripts": {
     "build": "tsc --build tsconfig.cjs.json && tsc --build tsconfig.module.json",
