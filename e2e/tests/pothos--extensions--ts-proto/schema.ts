@@ -23,7 +23,11 @@ builder.queryField("testSquashedUnion", (t) =>
   })
 );
 
-const ImplObject$Ref = builder.objectRef<{ id: string; body: string; $type: "ImplObject" }>("ImplObject");
+const ImplObject$Ref = builder.objectRef<{
+  id: string;
+  body: string;
+  $type: "ImplObject";
+}>("ImplObject");
 builder.objectType(ImplObject$Ref, {
   interfaces: [TestPrefixInterfaceMessage$Ref],
   fields: (t) => ({
@@ -44,14 +48,17 @@ builder.queryField("testInterface", (t) =>
   })
 );
 
-builder.objectField(TestPrefixPrefixedMessageInnerMessage$Ref, "skipResolver", (t) =>
-  t.field({
-    type: "String",
-    nullable: false,
-    resolve() {
-      return "implemented";
-    },
-  })
+builder.objectField(
+  TestPrefixPrefixedMessageInnerMessage$Ref,
+  "skipResolver",
+  (t) =>
+    t.field({
+      type: "String",
+      nullable: false,
+      resolve() {
+        return "implemented";
+      },
+    })
 );
 builder.queryField("testSkipResolver", (t) =>
   t.field({

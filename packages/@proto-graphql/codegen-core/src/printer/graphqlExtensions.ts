@@ -41,13 +41,20 @@ export function protobufGraphQLExtensions(
       },
     };
   }
-  if (type instanceof OneofUnionType || type instanceof SquashedOneofUnionType) {
+  if (
+    type instanceof OneofUnionType ||
+    type instanceof SquashedOneofUnionType
+  ) {
     return {
       protobufOneof: compact({
         fullName: type.proto.fullName.toString(),
         name: type.proto.name,
-        messageName: type.proto.kind === "Oneof" ? type.proto.parent.name : undefined,
-        package: (type.proto.kind === "Message" ? type.proto : type.proto.parent).file.package,
+        messageName:
+          type.proto.kind === "Oneof" ? type.proto.parent.name : undefined,
+        package: (type.proto.kind === "Message"
+          ? type.proto
+          : type.proto.parent
+        ).file.package,
         fields: type.fields.map((f) => ({
           name: f.proto.name,
           type: protoFieldTypeFullName(f),
@@ -55,9 +62,16 @@ export function protobufGraphQLExtensions(
       }),
     };
   }
-  if (type instanceof ObjectField || type instanceof ObjectOneofField || type instanceof InputObjectField) {
+  if (
+    type instanceof ObjectField ||
+    type instanceof ObjectOneofField ||
+    type instanceof InputObjectField
+  ) {
     return {
-      protobufField: compact({ name: type.proto.name, typeFullName: protoFieldTypeFullName(type) }),
+      protobufField: compact({
+        name: type.proto.name,
+        typeFullName: protoFieldTypeFullName(type),
+      }),
     };
   }
   if (type instanceof EnumTypeValue) {
@@ -76,7 +90,10 @@ export function protobufGraphQLExtensions(
 function protoFieldTypeFullName(
   field: ObjectField<any> | ObjectOneofField | InputObjectField<any>
 ): string | undefined {
-  if ((field instanceof ObjectField || field instanceof InputObjectField) && field.proto.type !== null) {
+  if (
+    (field instanceof ObjectField || field instanceof InputObjectField) &&
+    field.proto.type !== null
+  ) {
     if (field.proto.type.kind === "Scalar") {
       return field.proto.type.type;
     }

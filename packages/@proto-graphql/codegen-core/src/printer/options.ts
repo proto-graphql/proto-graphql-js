@@ -8,7 +8,10 @@ type PrinterDSLOptions =
       pothos: { builderPath: string };
     };
 
-type PrinterProtobufOptions = { protobuf: "google-protobuf" } | { protobuf: "protobufjs" } | { protobuf: "ts-proto" };
+type PrinterProtobufOptions =
+  | { protobuf: "google-protobuf" }
+  | { protobuf: "protobufjs" }
+  | { protobuf: "ts-proto" };
 
 export type PrinterCommonOptions = {
   importPrefix: string | null;
@@ -16,4 +19,6 @@ export type PrinterCommonOptions = {
   filenameSuffix: string;
 };
 
-export type PrinterOptions = PrinterCommonOptions & PrinterDSLOptions & PrinterProtobufOptions;
+export type PrinterOptions = PrinterCommonOptions &
+  PrinterDSLOptions &
+  PrinterProtobufOptions;

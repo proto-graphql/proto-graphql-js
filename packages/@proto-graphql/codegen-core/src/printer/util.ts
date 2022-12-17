@@ -23,14 +23,23 @@ import {
 import { PrinterOptions } from "./options";
 
 export function filename(
-  type: ObjectType | InputObjectType | EnumType | OneofUnionType | SquashedOneofUnionType | InterfaceType,
+  type:
+    | ObjectType
+    | InputObjectType
+    | EnumType
+    | OneofUnionType
+    | SquashedOneofUnionType
+    | InterfaceType,
   opts: Pick<PrinterOptions, "dsl" | "fileLayout" | "filenameSuffix">
 ): string {
   switch (opts.fileLayout) {
     case "proto_file":
       return filenameFromProtoFile(type.proto.file, opts);
     case "graphql_type": {
-      return path.join(path.dirname(type.proto.file.name), `${type.typeName}.${opts.dsl}.ts`);
+      return path.join(
+        path.dirname(type.proto.file.name),
+        `${type.typeName}.${opts.dsl}.ts`
+      );
     }
     /* istanbul ignore next */
     default: {
@@ -40,7 +49,10 @@ export function filename(
   }
 }
 
-export function filenameFromProtoFile(file: ProtoFile, opts: Pick<PrinterOptions, "fileLayout" | "filenameSuffix">) {
+export function filenameFromProtoFile(
+  file: ProtoFile,
+  opts: Pick<PrinterOptions, "fileLayout" | "filenameSuffix">
+) {
   switch (opts.fileLayout) {
     case "proto_file":
       return file.name.replace(/\.proto$/, opts.filenameSuffix);
@@ -54,19 +66,24 @@ export function filenameFromProtoFile(file: ProtoFile, opts: Pick<PrinterOptions
 
 export function generatedGraphQLTypeImportPath(
   field:
-    | ObjectField<ObjectType | EnumType | InterfaceType | SquashedOneofUnionType>
+    | ObjectField<
+        ObjectType | EnumType | InterfaceType | SquashedOneofUnionType
+      >
     | InputObjectField<InputObjectType | EnumType>
     | ObjectOneofField,
   opts: PrinterOptions
 ): string | null {
   if (field instanceof ObjectOneofField) return null;
-  const [fromPath, toPath] = [filename(field.parent, opts), filename(field.type, opts)].map((f) =>
-    path.isAbsolute(f) ? `.${path.sep}${f}` : f
-  );
+  const [fromPath, toPath] = [
+    filename(field.parent, opts),
+    filename(field.type, opts),
+  ].map((f) => (path.isAbsolute(f) ? `.${path.sep}${f}` : f));
 
   if (fromPath === toPath) return null;
 
-  const importPath = path.relative(path.dirname(fromPath), toPath).replace(/\.ts$/, "");
+  const importPath = path
+    .relative(path.dirname(fromPath), toPath)
+    .replace(/\.ts$/, "");
   return importPath.match(/^[\.\/]/) ? importPath : `./${importPath}`;
 }
 
@@ -79,14 +96,19 @@ export function compact(v: any): any {
   return compactObj(v);
 }
 
-function compactObj<In extends Out, Out extends Record<string, unknown>>(obj: In): Out {
+function compactObj<In extends Out, Out extends Record<string, unknown>>(
+  obj: In
+): Out {
   return Object.keys(obj).reduce((newObj, key) => {
     const v = obj[key];
     return v == null ? newObj : { ...newObj, [key]: compact(v) };
   }, {} as Out);
 }
 
-export function protoType(origProto: ProtoMessage | ProtoEnum | ProtoField, opts: PrinterOptions): Code {
+export function protoType(
+  origProto: ProtoMessage | ProtoEnum | ProtoField,
+  opts: PrinterOptions
+): Code {
   const origProtoType = origProto.kind === "Field" ? origProto.type : origProto;
   if (origProtoType.kind === "Scalar") {
     throw new Error("cannot import protobuf primitive types");
@@ -106,11 +128,18 @@ export function protoType(origProto: ProtoMessage | ProtoEnum | ProtoField, opts
     }
     case "protobufjs": {
       chunks.unshift(...proto.file.package.split("."));
-      const importPath = protoImportPath(origProto.kind === "Field" ? origProto.parent : origProto, opts);
-      return code`${imp(`${chunks[0]}@${importPath}`)}.${chunks.slice(1).join(".")}`;
+      const importPath = protoImportPath(
+        origProto.kind === "Field" ? origProto.parent : origProto,
+        opts
+      );
+      return code`${imp(`${chunks[0]}@${importPath}`)}.${chunks
+        .slice(1)
+        .join(".")}`;
     }
     case "ts-proto": {
-      return code`${imp(`${chunks.join("_")}@${protoImportPath(proto, opts)}`)}`;
+      return code`${imp(
+        `${chunks.join("_")}@${protoImportPath(proto, opts)}`
+      )}`;
     }
     /* istanbul ignore next */
     default: {
@@ -120,7 +149,11 @@ export function protoType(origProto: ProtoMessage | ProtoEnum | ProtoField, opts
   }
 }
 
-export function createGetFieldValueCode(parent: Code, proto: ProtoField, opts: PrinterOptions): Code {
+export function createGetFieldValueCode(
+  parent: Code,
+  proto: ProtoField,
+  opts: PrinterOptions
+): Code {
   switch (opts.protobuf) {
     case "google-protobuf": {
       return code`${parent}.${googleProtobufFieldAccessor("get", proto)}()`;
@@ -139,10 +172,18 @@ export function createGetFieldValueCode(parent: Code, proto: ProtoField, opts: P
   }
 }
 
-export function createSetFieldValueCode(parent: Code, value: Code, proto: ProtoField, opts: PrinterOptions): Code {
+export function createSetFieldValueCode(
+  parent: Code,
+  value: Code,
+  proto: ProtoField,
+  opts: PrinterOptions
+): Code {
   switch (opts.protobuf) {
     case "google-protobuf": {
-      return code`${parent}.${googleProtobufFieldAccessor("set", proto)}(${value})`;
+      return code`${parent}.${googleProtobufFieldAccessor(
+        "set",
+        proto
+      )}(${value})`;
     }
     case "protobufjs": {
       return code`${parent}.${camelCase(proto.name)} = ${value}`;
@@ -189,26 +230,43 @@ export function isProtobufLong(proto: ProtoField): boolean {
   }
 }
 
-export function isProtobufPrimitiveType(proto: ProtoField["type"]): proto is ProtoScalar {
+export function isProtobufPrimitiveType(
+  proto: ProtoField["type"]
+): proto is ProtoScalar {
   return proto.kind === "Scalar";
 }
 
-export function isProtobufWrapperType(proto: ProtoField["type"]): proto is ProtoMessage {
-  return proto.kind === "Message" && proto.file.name === "google/protobuf/wrappers.proto";
+export function isProtobufWrapperType(
+  proto: ProtoField["type"]
+): proto is ProtoMessage {
+  return (
+    proto.kind === "Message" &&
+    proto.file.name === "google/protobuf/wrappers.proto"
+  );
 }
 
-export function isProtobufWellKnownType(proto: ProtoField["type"]): proto is ProtoMessage {
-  return proto.kind === "Message" && proto.file.name.startsWith("google/protobuf/");
+export function isProtobufWellKnownType(
+  proto: ProtoField["type"]
+): proto is ProtoMessage {
+  return (
+    proto.kind === "Message" && proto.file.name.startsWith("google/protobuf/")
+  );
 }
 
-function protoImportPath(t: ProtoMessage | ProtoEnum, o: Pick<PrinterOptions, "protobuf" | "importPrefix">) {
+function protoImportPath(
+  t: ProtoMessage | ProtoEnum,
+  o: Pick<PrinterOptions, "protobuf" | "importPrefix">
+) {
   const importPath =
     o.protobuf === "protobufjs"
       ? path.dirname(t.file.name)
       : o.protobuf === "ts-proto"
       ? t.file.name.slice(0, -1 * path.extname(t.file.name).length)
       : googleProtobufImportPath(t.file);
-  return `${o.importPrefix ? `${o.importPrefix}/` : "./"}${importPath}`.replace(/(?<!:)\/\//, "/");
+  return `${o.importPrefix ? `${o.importPrefix}/` : "./"}${importPath}`.replace(
+    /(?<!:)\/\//,
+    "/"
+  );
 }
 
 function googleProtobufImportPath(file: ProtoFile): string {

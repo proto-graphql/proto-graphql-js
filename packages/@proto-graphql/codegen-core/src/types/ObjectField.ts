@@ -10,9 +10,18 @@ import { SquashedOneofUnionType } from "./SquashedOneofUnionType";
 import { isRequiredField } from "./util";
 
 export class ObjectField<
-  T extends ObjectType | InterfaceType | SquashedOneofUnionType | EnumType | ScalarType
+  T extends
+    | ObjectType
+    | InterfaceType
+    | SquashedOneofUnionType
+    | EnumType
+    | ScalarType
 > extends FieldBase<ProtoField> {
-  constructor(readonly type: T, readonly parent: ObjectType | OneofUnionType, proto: ProtoField) {
+  constructor(
+    readonly type: T,
+    readonly parent: ObjectType | OneofUnionType,
+    proto: ProtoField
+  ) {
     super(proto);
   }
 
@@ -20,7 +29,12 @@ export class ObjectField<
    * @override
    */
   get name(): string {
-    return this.proto.descriptor.getOptions()?.getExtension(extensions.field)?.getName() || this.proto.jsonName;
+    return (
+      this.proto.descriptor
+        .getOptions()
+        ?.getExtension(extensions.field)
+        ?.getName() || this.proto.jsonName
+    );
   }
 
   /**

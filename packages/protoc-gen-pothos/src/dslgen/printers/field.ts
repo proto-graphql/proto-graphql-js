@@ -42,7 +42,10 @@ export function createFieldRefCode(
   opts: PothosPrinterOptions
 ): Code {
   const isInput = field instanceof InputObjectField;
-  const baseType = field.type instanceof ScalarType ? literalOf(field.type.typeName) : fieldTypeRef(field, opts);
+  const baseType =
+    field.type instanceof ScalarType
+      ? literalOf(field.type.typeName)
+      : fieldTypeRef(field, opts);
 
   const sourceExpr = code`source`;
   let resolverCode: Code | undefined;
@@ -53,14 +56,19 @@ export function createFieldRefCode(
       const valueExpr = createGetFieldValueCode(sourceExpr, field.proto, opts);
       const nullableInProto =
         field.type instanceof ObjectType ||
-        (field.type instanceof ScalarType && !field.type.isPrimitive() && !field.type.isWrapperType());
+        (field.type instanceof ScalarType &&
+          !field.type.isPrimitive() &&
+          !field.type.isWrapperType());
       if (nullableInProto && !field.isNullable()) {
         resolverCode = createNonNullResolverCode(valueExpr);
       }
       if (field.type instanceof EnumType && field instanceof ObjectField) {
         resolverCode = createEnumResolverCode(valueExpr, field, opts);
       }
-      if (field.type instanceof SquashedOneofUnionType && field instanceof ObjectField) {
+      if (
+        field.type instanceof SquashedOneofUnionType &&
+        field instanceof ObjectField
+      ) {
         resolverCode = createOneofUnionResolverCode(valueExpr, field);
       }
     }
@@ -81,7 +89,9 @@ export function createFieldRefCode(
   const shouldUseFieldFunc = isInput || resolverCode != null;
   return shouldUseFieldFunc
     ? code`t.field(${literalOf(compact(fieldOpts))})`
-    : code`t.expose(${literalOf((field.proto as ProtoField).jsonName)}, ${literalOf(compact(fieldOpts))})`;
+    : code`t.expose(${literalOf(
+        (field.proto as ProtoField).jsonName
+      )}, ${literalOf(compact(fieldOpts))})`;
 }
 
 /**

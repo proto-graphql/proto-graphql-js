@@ -24,14 +24,21 @@ export function impProtoNexus(name: string): Import {
 }
 
 export function nexusTypeDef(
-  type: ObjectType | InputObjectType | EnumType | OneofUnionType | SquashedOneofUnionType
+  type:
+    | ObjectType
+    | InputObjectType
+    | EnumType
+    | OneofUnionType
+    | SquashedOneofUnionType
 ): Code {
   return code`${def(type.typeName)}`;
 }
 
 export function fieldType(
   field:
-    | ObjectField<ObjectType | EnumType | InterfaceType | SquashedOneofUnionType>
+    | ObjectField<
+        ObjectType | EnumType | InterfaceType | SquashedOneofUnionType
+      >
     | InputObjectField<InputObjectType | EnumType>
     | ObjectOneofField,
   opts: NexusPrinterOptions

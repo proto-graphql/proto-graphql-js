@@ -20,12 +20,23 @@ export class InputObjectType extends TypeBase<ProtoMessage> {
       ...this.proto.fields
         .filter((f) => !isOutputOnlyField(f))
         .filter((f) => !isIgnoredField(f))
-        .map((f) => new InputObjectField(getInputObjectFieldType(f, this.options), this, f)),
+        .map(
+          (f) =>
+            new InputObjectField(
+              getInputObjectFieldType(f, this.options),
+              this,
+              f
+            )
+        ),
     ];
   }
 
   public hasPartialInput(): boolean {
-    const noPartial = this.proto.descriptor.getOptions()?.getExtension(extensions.inputType)?.getNoPartial() ?? false;
+    const noPartial =
+      this.proto.descriptor
+        .getOptions()
+        ?.getExtension(extensions.inputType)
+        ?.getNoPartial() ?? false;
     return !noPartial;
   }
 

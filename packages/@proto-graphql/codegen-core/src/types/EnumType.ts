@@ -1,7 +1,11 @@
 import { ProtoEnum, ProtoEnumValue } from "@proto-graphql/proto-descriptors";
 import { constantCase } from "change-case";
 import { TypeBase } from "./TypeBase";
-import { descriptionFromProto, getDeprecationReason, isIgnoredField } from "./util";
+import {
+  descriptionFromProto,
+  getDeprecationReason,
+  isIgnoredField,
+} from "./util";
 
 export class EnumType extends TypeBase<ProtoEnum> {
   get unspecifiedValue(): EnumTypeValue | null {
@@ -9,7 +13,9 @@ export class EnumType extends TypeBase<ProtoEnum> {
   }
 
   get values(): EnumTypeValue[] {
-    return this.valuesWithIgnored.filter((v) => !v.isIgnored()).filter((v) => !v.isUnespecified());
+    return this.valuesWithIgnored
+      .filter((v) => !v.isIgnored())
+      .filter((v) => !v.isUnespecified());
   }
 
   get valuesWithIgnored(): EnumTypeValue[] {
@@ -38,7 +44,10 @@ export class EnumTypeValue {
   }
 
   public isUnespecified(): boolean {
-    return this.proto.index === 0 && this.proto.name === `${constantCase(this.proto.parent.name)}_UNSPECIFIED`;
+    return (
+      this.proto.index === 0 &&
+      this.proto.name === `${constantCase(this.proto.parent.name)}_UNSPECIFIED`
+    );
   }
 
   get number(): number {

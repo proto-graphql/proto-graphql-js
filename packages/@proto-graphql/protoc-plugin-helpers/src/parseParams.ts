@@ -1,4 +1,9 @@
-import { fileLayouts, LongNumberMapping, PrinterOptions, TypeOptions } from "@proto-graphql/codegen-core";
+import {
+  fileLayouts,
+  LongNumberMapping,
+  PrinterOptions,
+  TypeOptions,
+} from "@proto-graphql/codegen-core";
 
 export function parseParams<DSL extends PrinterOptions["dsl"]>(
   input: string | undefined,
@@ -35,13 +40,17 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
     return v;
   };
 
-  function checkEnum<T extends string>(v: string, whitelist: ReadonlyArray<T>): v is T {
+  function checkEnum<T extends string>(
+    v: string,
+    whitelist: ReadonlyArray<T>
+  ): v is T {
     return whitelist.includes(v as any);
   }
 
   for (const kv of input.split(",")) {
     const idx = kv.indexOf("=");
-    const [k, v] = idx === -1 ? [kv, ""] : [kv.slice(0, idx), kv.slice(idx + 1)];
+    const [k, v] =
+      idx === -1 ? [kv, ""] : [kv.slice(0, idx), kv.slice(idx + 1)];
     switch (k) {
       case "use_protobufjs":
         if (toBool(k, v)) params.printer.protobuf = "protobufjs";
@@ -55,19 +64,26 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
       case "file_layout": {
         const s = toString(k, v);
         if (!checkEnum(s, fileLayouts)) {
-          throw new Error(`file_layout should be ${fileLayouts.map((s) => `"${s}"`).join(", ")}`);
+          throw new Error(
+            `file_layout should be ${fileLayouts
+              .map((s) => `"${s}"`)
+              .join(", ")}`
+          );
         }
         params.printer.fileLayout = s;
         break;
       }
       case "custom_type": {
         const idx = v.indexOf("=");
-        const [protoType, gqlType] = idx === -1 ? [v, ""] : [v.slice(0, idx), v.slice(idx + 1)];
+        const [protoType, gqlType] =
+          idx === -1 ? [v, ""] : [v.slice(0, idx), v.slice(idx + 1)];
         params.type.typeMappings[protoType] = gqlType;
         break;
       }
       case "pothos_builder_path": {
-        (params.printer as Extract<PrinterOptions, { dsl: "pothos" }>).pothos.builderPath = toString(k, v);
+        (
+          params.printer as Extract<PrinterOptions, { dsl: "pothos" }>
+        ).pothos.builderPath = toString(k, v);
         break;
       }
       case "long_number": {

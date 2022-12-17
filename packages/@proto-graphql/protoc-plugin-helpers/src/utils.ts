@@ -1,4 +1,7 @@
-import { CodeGeneratorRequest, CodeGeneratorResponse } from "google-protobuf/google/protobuf/compiler/plugin_pb";
+import {
+  CodeGeneratorRequest,
+  CodeGeneratorResponse,
+} from "google-protobuf/google/protobuf/compiler/plugin_pb";
 
 // https://github.com/improbable-eng/ts-protoc-gen/blob/0.12.0/src/util.ts#L59-L77
 function withAllStdIn(callback: (buffer: Buffer) => void): void {
@@ -21,7 +24,9 @@ function withAllStdIn(callback: (buffer: Buffer) => void): void {
   });
 }
 
-export function withCodeGeneratorRequest(f: (req: CodeGeneratorRequest) => CodeGeneratorResponse): void {
+export function withCodeGeneratorRequest(
+  f: (req: CodeGeneratorRequest) => CodeGeneratorResponse
+): void {
   withAllStdIn((inputBuf) => {
     const typedInputBuf = new Uint8Array(inputBuf.length);
     typedInputBuf.set(inputBuf);

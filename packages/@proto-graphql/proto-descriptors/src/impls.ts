@@ -43,7 +43,9 @@ export class ProtoRegistry {
     return this.fileByName[name] ?? null;
   }
 
-  public findTypeByFullName(fn: FullName | string): ProtoMessage | ProtoEnum | null {
+  public findTypeByFullName(
+    fn: FullName | string
+  ): ProtoMessage | ProtoEnum | null {
     return this.typeByFullName[fn.toString()] ?? null;
   }
 
@@ -62,7 +64,10 @@ export class ProtoRegistry {
 export class ProtoFileImpl implements ProtoFile {
   public readonly kind = "File";
 
-  constructor(readonly descriptor: FileDescriptorProto, private readonly registry: ProtoRegistry) {}
+  constructor(
+    readonly descriptor: FileDescriptorProto,
+    private readonly registry: ProtoRegistry
+  ) {}
 
   get name(): string {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -75,7 +80,9 @@ export class ProtoFileImpl implements ProtoFile {
   }
 
   get messages(): ProtoMessage[] {
-    return this.descriptor.getMessageTypeList().map((d, i) => new ProtoMessageImpl(d, this, i, this.registry));
+    return this.descriptor
+      .getMessageTypeList()
+      .map((d, i) => new ProtoMessageImpl(d, this, i, this.registry));
   }
 
   get package(): string {
@@ -84,11 +91,15 @@ export class ProtoFileImpl implements ProtoFile {
   }
 
   get enums(): ProtoEnum[] {
-    return this.descriptor.getEnumTypeList().map((d, i) => new ProtoEnumImpl(d, this, i));
+    return this.descriptor
+      .getEnumTypeList()
+      .map((d, i) => new ProtoEnumImpl(d, this, i));
   }
 
   get services(): ProtoService[] {
-    return this.descriptor.getServiceList().map((d, i) => new ProtoServiceImpl(d, this, i, this.registry));
+    return this.descriptor
+      .getServiceList()
+      .map((d, i) => new ProtoServiceImpl(d, this, i, this.registry));
   }
 
   @memo()
@@ -98,18 +109,24 @@ export class ProtoFileImpl implements ProtoFile {
 
   public collectTypesRecursively(): [ProtoMessage[], ProtoEnum[]] {
     const [msgs, enums] = [this.messages, this.enums];
-    const [childMsgs, childEnums] = this.collectTypesRecursivelyFromMessage(this.messages);
+    const [childMsgs, childEnums] = this.collectTypesRecursivelyFromMessage(
+      this.messages
+    );
     msgs.push(...childMsgs);
     enums.push(...childEnums);
     return [msgs, enums];
   }
 
-  private collectTypesRecursivelyFromMessage(inputs: ProtoMessage[]): [ProtoMessage[], ProtoEnum[]] {
+  private collectTypesRecursivelyFromMessage(
+    inputs: ProtoMessage[]
+  ): [ProtoMessage[], ProtoEnum[]] {
     const msgs: ProtoMessage[] = [];
     const enums: ProtoEnum[] = [];
 
     for (const input of inputs) {
-      const [childMsgs, childEnums] = this.collectTypesRecursivelyFromMessage(input.messages);
+      const [childMsgs, childEnums] = this.collectTypesRecursivelyFromMessage(
+        input.messages
+      );
       msgs.push(...input.messages, ...childMsgs);
       enums.push(...input.enums, ...childEnums);
     }
@@ -145,7 +162,9 @@ export class ProtoServiceImpl implements ProtoService {
 
   @memo()
   get methods(): ProtoMethod[] {
-    return this.descriptor.getMethodList().map((m, i) => new ProtoMethodImpl(m, this, i, this.registry));
+    return this.descriptor
+      .getMethodList()
+      .map((m, i) => new ProtoMethodImpl(m, this, i, this.registry));
   }
 
   @memo()
@@ -179,7 +198,8 @@ export class ProtoMethodImpl implements ProtoMethod {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const fullName = this.descriptor.getInputType()!.replace(/^./, "");
     const msg = this.registry.findTypeByFullName(fullName);
-    if (msg == null || msg.kind !== "Message") throw new Error(`${fullName} is not found`);
+    if (msg == null || msg.kind !== "Message")
+      throw new Error(`${fullName} is not found`);
     return msg;
   }
 
@@ -188,7 +208,8 @@ export class ProtoMethodImpl implements ProtoMethod {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const fullName = this.descriptor.getOutputType()!.replace(/^./, "");
     const msg = this.registry.findTypeByFullName(fullName);
-    if (msg == null || msg.kind !== "Message") throw new Error(`${fullName} is not found`);
+    if (msg == null || msg.kind !== "Message")
+      throw new Error(`${fullName} is not found`);
     return msg;
   }
 
@@ -225,22 +246,30 @@ export class ProtoMessageImpl implements ProtoMessage {
 
   @memo()
   get fields(): ProtoField[] {
-    return this.descriptor.getFieldList().map((d, i) => new ProtoFieldImpl(d, this, i, this.registry));
+    return this.descriptor
+      .getFieldList()
+      .map((d, i) => new ProtoFieldImpl(d, this, i, this.registry));
   }
 
   @memo()
   get oneofs(): ProtoOneof[] {
-    return this.descriptor.getOneofDeclList().map((d, i) => new ProtoOneofImpl(d, this, i));
+    return this.descriptor
+      .getOneofDeclList()
+      .map((d, i) => new ProtoOneofImpl(d, this, i));
   }
 
   @memo()
   get messages(): ProtoMessage[] {
-    return this.descriptor.getNestedTypeList().map((d, i) => new ProtoMessageImpl(d, this, i, this.registry));
+    return this.descriptor
+      .getNestedTypeList()
+      .map((d, i) => new ProtoMessageImpl(d, this, i, this.registry));
   }
 
   @memo()
   get enums(): ProtoEnum[] {
-    return this.descriptor.getEnumTypeList().map((d, i) => new ProtoEnumImpl(d, this, i));
+    return this.descriptor
+      .getEnumTypeList()
+      .map((d, i) => new ProtoEnumImpl(d, this, i));
   }
 
   @memo()
@@ -257,7 +286,11 @@ export class ProtoMessageImpl implements ProtoMessage {
 export class ProtoOneofImpl implements ProtoOneof {
   public readonly kind = "Oneof";
 
-  constructor(readonly descriptor: OneofDescriptorProto, readonly parent: ProtoMessage, readonly index: number) {}
+  constructor(
+    readonly descriptor: OneofDescriptorProto,
+    readonly parent: ProtoMessage,
+    readonly index: number
+  ) {}
 
   get name(): string {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -277,7 +310,9 @@ export class ProtoOneofImpl implements ProtoOneof {
   @memo()
   get fields(): ProtoField[] {
     return this.parent.fields.filter(
-      (f) => f.descriptor.hasOneofIndex() && f.descriptor.getOneofIndex() === this.index
+      (f) =>
+        f.descriptor.hasOneofIndex() &&
+        f.descriptor.getOneofIndex() === this.index
     );
   }
 
@@ -327,8 +362,11 @@ export class ProtoFieldImpl implements ProtoField {
     const scalarType = getScalarTypeFromDescriptor(this.descriptor);
     if (scalarType !== undefined) return { kind: "Scalar", type: scalarType };
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const foundType = this.registry.findTypeByFullName(this.descriptor.getTypeName()!.replace(/^\./, ""));
-    if (foundType === null) throw new Error(`Not found type for ${this.fullName.toString()}`);
+    const foundType = this.registry.findTypeByFullName(
+      this.descriptor.getTypeName()!.replace(/^\./, "")
+    );
+    if (foundType === null)
+      throw new Error(`Not found type for ${this.fullName.toString()}`);
     return foundType;
   }
 
@@ -342,7 +380,9 @@ export class ProtoFieldImpl implements ProtoField {
 
   @memo()
   get list(): boolean {
-    return this.descriptor.getLabel() === FieldDescriptorProto.Label.LABEL_REPEATED;
+    return (
+      this.descriptor.getLabel() === FieldDescriptorProto.Label.LABEL_REPEATED
+    );
   }
 
   @memo()
@@ -382,7 +422,9 @@ export class ProtoEnumImpl implements ProtoEnum {
 
   @memo()
   get values(): ProtoEnumValue[] {
-    return this.descriptor.getValueList().map((d, i) => new ProtoEnumValueImpl(d, this, i));
+    return this.descriptor
+      .getValueList()
+      .map((d, i) => new ProtoEnumValueImpl(d, this, i));
   }
 
   @memo()
@@ -399,7 +441,11 @@ export class ProtoEnumImpl implements ProtoEnum {
 export class ProtoEnumValueImpl implements ProtoEnumValue {
   public readonly kind = "EnumValue";
 
-  constructor(readonly descriptor: EnumValueDescriptorProto, readonly parent: ProtoEnum, readonly index: number) {}
+  constructor(
+    readonly descriptor: EnumValueDescriptorProto,
+    readonly parent: ProtoEnum,
+    readonly index: number
+  ) {}
 
   get name(): string {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

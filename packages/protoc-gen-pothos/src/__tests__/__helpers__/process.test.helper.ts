@@ -1,17 +1,29 @@
 import { LongNumberMapping } from "@proto-graphql/codegen-core";
 import { promises as fs } from "fs";
-import { CodeGeneratorRequest, CodeGeneratorResponse } from "google-protobuf/google/protobuf/compiler/plugin_pb";
+import {
+  CodeGeneratorRequest,
+  CodeGeneratorResponse,
+} from "google-protobuf/google/protobuf/compiler/plugin_pb";
 import { FileDescriptorSet } from "google-protobuf/google/protobuf/descriptor_pb";
 import { join } from "path";
 import { processRequest } from "../../process";
 
-const generationTargets = ["ts-proto", "ts-proto-with-forcelong-long", "ts-proto-with-forcelong-number"] as const;
+const generationTargets = [
+  "ts-proto",
+  "ts-proto-with-forcelong-long",
+  "ts-proto-with-forcelong-number",
+] as const;
 type GenerationTarget = typeof generationTargets[number];
 
 export async function generateDSLs(
   name: string,
   target: GenerationTarget,
-  opts: { withPrefix?: boolean; perGraphQLType?: boolean; partialInputs?: boolean; longNumber?: LongNumberMapping } = {}
+  opts: {
+    withPrefix?: boolean;
+    perGraphQLType?: boolean;
+    partialInputs?: boolean;
+    longNumber?: LongNumberMapping;
+  } = {}
 ) {
   const params = [];
   switch (target) {
@@ -37,7 +49,10 @@ export async function generateDSLs(
   return await processCodeGeneration(name, params.join(","));
 }
 
-export function itGeneratesDSLsToMatchSnapshtos(name: string, expectedGeneratedFiles: string[]) {
+export function itGeneratesDSLsToMatchSnapshtos(
+  name: string,
+  expectedGeneratedFiles: string[]
+) {
   describe.each(["ts-proto"] as const)("with %s", (target) => {
     it("generates pothos DSLs", async () => {
       const resp = await generateDSLs(name, target);
@@ -46,7 +61,10 @@ export function itGeneratesDSLsToMatchSnapshtos(name: string, expectedGeneratedF
   });
 }
 
-export function snapshotGeneratedFiles(resp: CodeGeneratorResponse, files: string[]) {
+export function snapshotGeneratedFiles(
+  resp: CodeGeneratorResponse,
+  files: string[]
+) {
   expect(Object.keys(resp.getFileList())).toHaveLength(files.length);
 
   const fileByName = getFileMap(resp);
@@ -57,7 +75,10 @@ export function snapshotGeneratedFiles(resp: CodeGeneratorResponse, files: strin
   }
 }
 
-export async function processCodeGeneration(name: string, param?: string): Promise<CodeGeneratorResponse> {
+export async function processCodeGeneration(
+  name: string,
+  param?: string
+): Promise<CodeGeneratorResponse> {
   const req = await buildCodeGeneratorRequest(name);
   if (param) {
     req.setParameter(param);
@@ -65,14 +86,30 @@ export async function processCodeGeneration(name: string, param?: string): Promi
   return processRequest(req);
 }
 
-async function getFixtureFileDescriptorSet(name: string): Promise<FileDescriptorSet> {
+async function getFixtureFileDescriptorSet(
+  name: string
+): Promise<FileDescriptorSet> {
   const buf = await fs.readFile(
-    join(__dirname, "..", "..", "..", "..", "@testapis", "proto", "src", "testapis", name, "descriptor_set.pb")
+    join(
+      __dirname,
+      "..",
+      "..",
+      "..",
+      "..",
+      "@testapis",
+      "proto",
+      "src",
+      "testapis",
+      name,
+      "descriptor_set.pb"
+    )
   );
   return FileDescriptorSet.deserializeBinary(buf);
 }
 
-async function buildCodeGeneratorRequest(name: string): Promise<CodeGeneratorRequest> {
+async function buildCodeGeneratorRequest(
+  name: string
+): Promise<CodeGeneratorRequest> {
   const descSet = await getFixtureFileDescriptorSet(name);
   const req = new CodeGeneratorRequest();
 
@@ -90,5 +127,10 @@ async function buildCodeGeneratorRequest(name: string): Promise<CodeGeneratorReq
 
 function getFileMap(resp: CodeGeneratorResponse): Record<string, string> {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  return resp.getFileList().reduce((m, f) => ({ ...m, [f.getName()!]: f.getContent()! }), {} as Record<string, string>);
+  return resp
+    .getFileList()
+    .reduce(
+      (m, f) => ({ ...m, [f.getName()!]: f.getContent()! }),
+      {} as Record<string, string>
+    );
 }

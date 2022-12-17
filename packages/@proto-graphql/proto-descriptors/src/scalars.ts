@@ -4,10 +4,13 @@ type FieldDescriptorScalarType = Exclude<
   // eslint-disable-next-line no-undef
   FieldDescriptorProto.Type,
   // eslint-disable-next-line no-undef
-  FieldDescriptorProto.Type.TYPE_MESSAGE | FieldDescriptorProto.Type.TYPE_ENUM | FieldDescriptorProto.Type.TYPE_GROUP
+  | FieldDescriptorProto.Type.TYPE_MESSAGE
+  | FieldDescriptorProto.Type.TYPE_ENUM
+  | FieldDescriptorProto.Type.TYPE_GROUP
 >;
 
-export type ProtoScalarType = typeof protoScalarByFieldDescriptorType[FieldDescriptorScalarType];
+export type ProtoScalarType =
+  typeof protoScalarByFieldDescriptorType[FieldDescriptorScalarType];
 export type ProtoScalar = {
   kind: "Scalar";
   type: ProtoScalarType;
@@ -32,9 +35,14 @@ const protoScalarByFieldDescriptorType = {
   // eslint-disable-next-line no-undef
 } as const satisfies Record<FieldDescriptorScalarType, string>;
 
-export function getScalarTypeFromDescriptor(desc: FieldDescriptorProto): ProtoScalarType | undefined {
+export function getScalarTypeFromDescriptor(
+  desc: FieldDescriptorProto
+): ProtoScalarType | undefined {
   const t = desc.getType();
   if (t === undefined) return undefined;
 
-  return protoScalarByFieldDescriptorType[t as FieldDescriptorScalarType] ?? undefined;
+  return (
+    protoScalarByFieldDescriptorType[t as FieldDescriptorScalarType] ??
+    undefined
+  );
 }

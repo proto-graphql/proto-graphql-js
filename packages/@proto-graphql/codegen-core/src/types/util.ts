@@ -14,7 +14,9 @@ import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor
 import * as extensions from "../__generated__/extensions/graphql/schema_pb";
 import { TypeOptions } from "./options";
 
-export function gqlTypeName(typ: ProtoMessage | ProtoOneof | ProtoEnum): string {
+export function gqlTypeName(
+  typ: ProtoMessage | ProtoOneof | ProtoEnum
+): string {
   return nameWithParent(typ);
 }
 
@@ -25,12 +27,20 @@ function nameWithParent(typ: ProtoMessage | ProtoOneof | ProtoEnum): string {
     if (t.kind === "File") break;
     let override: string | undefined;
     if (t.kind === "Message") {
-      override = t.descriptor.getOptions()?.getExtension(extensions.objectType)?.getName();
+      override = t.descriptor
+        .getOptions()
+        ?.getExtension(extensions.objectType)
+        ?.getName();
     }
-    name = `${t.kind === "Oneof" ? pascalCase(t.name) : override || t.name}${name}`;
+    name = `${
+      t.kind === "Oneof" ? pascalCase(t.name) : override || t.name
+    }${name}`;
     t = t.parent;
   }
-  const prefix = t.descriptor.getOptions()?.getExtension(extensions.schema)?.getTypePrefix();
+  const prefix = t.descriptor
+    .getOptions()
+    ?.getExtension(extensions.schema)
+    ?.getTypePrefix();
   if (prefix) {
     name = `${prefix}${name}`;
   }
@@ -38,7 +48,13 @@ function nameWithParent(typ: ProtoMessage | ProtoOneof | ProtoEnum): string {
 }
 
 export function getDeprecationReason(
-  proto: ProtoFile | ProtoMessage | ProtoOneof | ProtoField | ProtoEnum | ProtoEnumValue
+  proto:
+    | ProtoFile
+    | ProtoMessage
+    | ProtoOneof
+    | ProtoField
+    | ProtoEnum
+    | ProtoEnumValue
 ): string | null {
   const reason = getDeprecationReasonType(proto);
   if (!reason) return null;
@@ -51,10 +67,27 @@ export function getDeprecationReason(
 }
 
 function getDeprecationReasonType(
-  proto: ProtoFile | ProtoMessage | ProtoOneof | ProtoField | ProtoEnum | ProtoEnumValue
-): ProtoFile | ProtoMessage | ProtoOneof | ProtoField | ProtoEnum | ProtoEnumValue | null {
+  proto:
+    | ProtoFile
+    | ProtoMessage
+    | ProtoOneof
+    | ProtoField
+    | ProtoEnum
+    | ProtoEnumValue
+):
+  | ProtoFile
+  | ProtoMessage
+  | ProtoOneof
+  | ProtoField
+  | ProtoEnum
+  | ProtoEnumValue
+  | null {
   if (proto.deprecated) return proto;
-  if (proto.kind === "Field" && proto.type !== null && proto.type.kind !== "Scalar") {
+  if (
+    proto.kind === "Field" &&
+    proto.type !== null &&
+    proto.type.kind !== "Scalar"
+  ) {
     const r = getDeprecationReasonType(proto.type);
     if (r !== null) return r;
   }
@@ -62,7 +95,9 @@ function getDeprecationReasonType(
   return null;
 }
 
-export function exceptRequestOrResponse(reg: ProtoRegistry): (m: ProtoMessage) => boolean {
+export function exceptRequestOrResponse(
+  reg: ProtoRegistry
+): (m: ProtoMessage) => boolean {
   const reqSet = new Set();
   const respSet = new Set();
   for (const f of Object.values(reg.fileByName)) {
@@ -81,8 +116,10 @@ export function exceptRequestOrResponse(reg: ProtoRegistry): (m: ProtoMessage) =
   return (m) => {
     const ext = m.file.descriptor.getOptions()?.getExtension(extensions.schema);
 
-    if (ext?.getIgnoreRequests() && reqSet.has(m.fullName.toString())) return false;
-    if (ext?.getIgnoreResponses() && respSet.has(m.fullName.toString())) return false;
+    if (ext?.getIgnoreRequests() && reqSet.has(m.fullName.toString()))
+      return false;
+    if (ext?.getIgnoreResponses() && respSet.has(m.fullName.toString()))
+      return false;
 
     return true;
   };
@@ -90,7 +127,12 @@ export function exceptRequestOrResponse(reg: ProtoRegistry): (m: ProtoMessage) =
 
 export function isIgnoredType(type: ProtoMessage | ProtoEnum): boolean {
   let ext: ExtensionFieldInfo<{ getIgnore(): boolean }>;
-  if (type.file.descriptor.getOptions()?.getExtension(extensions.schema)?.getIgnore()) {
+  if (
+    type.file.descriptor
+      .getOptions()
+      ?.getExtension(extensions.schema)
+      ?.getIgnore()
+  ) {
     return true;
   }
   if (type.kind === "Message") {
@@ -105,11 +147,21 @@ export function isIgnoredType(type: ProtoMessage | ProtoEnum): boolean {
 }
 
 export function isInterface(m: ProtoMessage): boolean {
-  return m.descriptor.getOptions()?.getExtension(extensions.objectType)?.getInterface() ?? false;
+  return (
+    m.descriptor
+      .getOptions()
+      ?.getExtension(extensions.objectType)
+      ?.getInterface() ?? false
+  );
 }
 
 export function isSquashedUnion(m: ProtoMessage): boolean {
-  return m.descriptor.getOptions()?.getExtension(extensions.objectType)?.getSquashUnion() ?? false;
+  return (
+    m.descriptor
+      .getOptions()
+      ?.getExtension(extensions.objectType)
+      ?.getSquashUnion() ?? false
+  );
 }
 
 export function isScalar(m: ProtoMessage, opts: TypeOptions): boolean {
@@ -121,7 +173,9 @@ export function isRequiredField(
   fieldType: "output" | "input" | "partial_input"
 ): boolean {
   if (field.kind === "Field") {
-    let nullability: extensions.NullabilityMap[keyof extensions.NullabilityMap] | null = null;
+    let nullability:
+      | extensions.NullabilityMap[keyof extensions.NullabilityMap]
+      | null = null;
     const ext = field.descriptor.getOptions()?.getExtension(extensions.field);
     if (ext != null) {
       switch (fieldType) {
@@ -165,7 +219,8 @@ export function isRequiredField(
 function hasRequiredLabel(field: ProtoField | ProtoOneof): boolean {
   if (
     field.kind === "Field" &&
-    (field.descriptor.getLabel() === FieldDescriptorProto.Label.LABEL_REQUIRED ||
+    (field.descriptor.getLabel() ===
+      FieldDescriptorProto.Label.LABEL_REQUIRED ||
       (field.descriptor.getType() !== FieldDescriptorProto.Type.TYPE_MESSAGE &&
         field.descriptor.getType() !== FieldDescriptorProto.Type.TYPE_ENUM))
   ) {
@@ -184,10 +239,16 @@ export function isInputOnlyField(field: ProtoField | ProtoOneof): boolean {
   return cs.includes("Input only");
 }
 
-export function isIgnoredField(field: ProtoField | ProtoEnumValue | ProtoOneof): boolean {
+export function isIgnoredField(
+  field: ProtoField | ProtoEnumValue | ProtoOneof
+): boolean {
   let ext: ExtensionFieldInfo<{ getIgnore(): boolean }>;
   if (field.kind === "Field") {
-    if (field.type && (field.type.kind === "Message" || field.type.kind === "Enum") && isIgnoredType(field.type)) {
+    if (
+      field.type &&
+      (field.type.kind === "Message" || field.type.kind === "Enum") &&
+      isIgnoredType(field.type)
+    ) {
       return true;
     }
     const oneof = field.containingOneof;
@@ -211,14 +272,20 @@ export function isIgnoredField(field: ProtoField | ProtoEnumValue | ProtoOneof):
 
 const behaviorComments = ["Required", "Input only", "Output only"] as const;
 
-function extractBehaviorComments(field: ProtoField | ProtoOneof): typeof behaviorComments[number][] {
+function extractBehaviorComments(
+  field: ProtoField | ProtoOneof
+): typeof behaviorComments[number][] {
   return (field.comments.leadingComments.trim() ?? "")
     .split(/\.\s+/, 3)
     .slice(0, 2)
     .map((c) => c.replace(/\.\s*$/, ""))
-    .filter((c): c is typeof behaviorComments[number] => behaviorComments.includes(c as any));
+    .filter((c): c is typeof behaviorComments[number] =>
+      behaviorComments.includes(c as any)
+    );
 }
 
-export function descriptionFromProto(proto: { comments: CommentSet }): string | null {
+export function descriptionFromProto(proto: {
+  comments: CommentSet;
+}): string | null {
   return proto.comments.leadingComments.trim() || null;
 }

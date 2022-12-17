@@ -31,5 +31,7 @@ export function createOneofUnionTypeCode(
     }`,
     extensions: protobufGraphQLExtensions(type),
   };
-  return code`export const ${nexusTypeDef(type)} = ${impNexus("unionType")}(${literalOf(compact(typeOpts))});`;
+  return code`export const ${nexusTypeDef(type)} = ${impNexus(
+    "unionType"
+  )}(${literalOf(compact(typeOpts))});`;
 }

@@ -35,4 +35,7 @@ const test2Query = queryField("test2", {
 
 const dateTime = asNexusMethod(DateTimeResolver, "dateTime");
 
-export const schema = makeTestSchema({ rootDir: __dirname, types: [dateTime, types1, test1Query, test2Query] });
+export const schema = makeTestSchema({
+  rootDir: __dirname,
+  types: [dateTime, types1, test1Query, test2Query],
+});

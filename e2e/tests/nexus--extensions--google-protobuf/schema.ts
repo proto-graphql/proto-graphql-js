@@ -18,4 +18,7 @@ const testQuery = queryField("test", {
     return msg;
   },
 });
-export const schema = makeTestSchema({ rootDir: __dirname, types: [types1, types2, types3, types4, testQuery] });
+export const schema = makeTestSchema({
+  rootDir: __dirname,
+  types: [types1, types2, types3, types4, testQuery],
+});

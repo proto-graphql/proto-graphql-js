@@ -22,6 +22,11 @@ export abstract class FieldBase<P extends ProtoField | ProtoOneof> {
   }
 
   public isResolverSkipped(): boolean {
-    return this.proto.descriptor.getOptions()?.getExtension(extensions.field)?.getSkipResolver() ?? false;
+    return (
+      this.proto.descriptor
+        .getOptions()
+        ?.getExtension(extensions.field)
+        ?.getSkipResolver() ?? false
+    );
   }
 }

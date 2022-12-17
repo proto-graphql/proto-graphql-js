@@ -5,8 +5,13 @@ import { schema } from "./__helpers__/testSchema";
 it("creates subset types", () => {
   const type = schema.getType("TestSubsetInput") as GraphQLInputObjectType;
   const fields = type.getFields();
-  expect(Object.values(fields).map((f) => ({ name: f.name, description: f.description, type: f.type })))
-    .toMatchInlineSnapshot(`
+  expect(
+    Object.values(fields).map((f) => ({
+      name: f.name,
+      description: f.description,
+      type: f.type,
+    }))
+  ).toMatchInlineSnapshot(`
     Array [
       Object {
         "description": "Test string field",

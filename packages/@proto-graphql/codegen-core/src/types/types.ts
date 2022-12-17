@@ -1,4 +1,10 @@
-import { ProtoEnum, ProtoField, ProtoFile, ProtoMessage, ProtoRegistry } from "@proto-graphql/proto-descriptors";
+import {
+  ProtoEnum,
+  ProtoField,
+  ProtoFile,
+  ProtoMessage,
+  ProtoRegistry,
+} from "@proto-graphql/proto-descriptors";
 import assert from "assert";
 import { EnumType } from "./EnumType";
 import { InputObjectType } from "./InputObjectType";
@@ -8,7 +14,14 @@ import { OneofUnionType } from "./OneofUnionType";
 import { TypeOptions } from "./options";
 import { ScalarType } from "./ScalarType";
 import { SquashedOneofUnionType } from "./SquashedOneofUnionType";
-import { exceptRequestOrResponse, isIgnoredField, isIgnoredType, isInterface, isScalar, isSquashedUnion } from "./util";
+import {
+  exceptRequestOrResponse,
+  isIgnoredField,
+  isIgnoredType,
+  isInterface,
+  isScalar,
+  isSquashedUnion,
+} from "./util";
 
 export type GlType =
   | ScalarType
@@ -19,7 +32,11 @@ export type GlType =
   | EnumType
   | InputObjectType;
 
-export function collectTypesFromFile(file: ProtoFile, options: TypeOptions, registry: ProtoRegistry) {
+export function collectTypesFromFile(
+  file: ProtoFile,
+  options: TypeOptions,
+  registry: ProtoRegistry
+) {
   const [msgs, enums] = file.collectTypesRecursively();
 
   return [
@@ -32,7 +49,11 @@ export function collectTypesFromFile(file: ProtoFile, options: TypeOptions, regi
   ];
 }
 
-function buildObjectTypes(msgs: ProtoMessage[], options: TypeOptions, registry: ProtoRegistry): ObjectType[] {
+function buildObjectTypes(
+  msgs: ProtoMessage[],
+  options: TypeOptions,
+  registry: ProtoRegistry
+): ObjectType[] {
   return msgs
     .filter((m) => !isIgnoredType(m))
     .filter((m) => !isSquashedUnion(m))
@@ -41,15 +62,25 @@ function buildObjectTypes(msgs: ProtoMessage[], options: TypeOptions, registry: 
     .map((m) => new ObjectType(m, options));
 }
 
-function buildInputObjectTypes(msgs: ProtoMessage[], options: TypeOptions, registry: ProtoRegistry): InputObjectType[] {
+function buildInputObjectTypes(
+  msgs: ProtoMessage[],
+  options: TypeOptions,
+  registry: ProtoRegistry
+): InputObjectType[] {
   return msgs
     .filter((m) => !isIgnoredType(m))
     .filter(exceptRequestOrResponse(registry))
     .map((m) => new InputObjectType(m, options))
-    .flatMap((t) => (options.partialInputs && t.hasPartialInput() ? [t, t.toPartialInput()] : t));
+    .flatMap((t) =>
+      options.partialInputs && t.hasPartialInput() ? [t, t.toPartialInput()] : t
+    );
 }
 
-function buildInterfaceType(msgs: ProtoMessage[], options: TypeOptions, registry: ProtoRegistry): InterfaceType[] {
+function buildInterfaceType(
+  msgs: ProtoMessage[],
+  options: TypeOptions,
+  registry: ProtoRegistry
+): InterfaceType[] {
   return msgs
     .filter((m) => !isIgnoredType(m))
     .filter((m) => !isSquashedUnion(m))
@@ -58,14 +89,20 @@ function buildInterfaceType(msgs: ProtoMessage[], options: TypeOptions, registry
     .map((m) => new InterfaceType(m, options));
 }
 
-function buildSquashedOneofUnionTypes(msgs: ProtoMessage[], options: TypeOptions): SquashedOneofUnionType[] {
+function buildSquashedOneofUnionTypes(
+  msgs: ProtoMessage[],
+  options: TypeOptions
+): SquashedOneofUnionType[] {
   return msgs
     .filter((m) => !isIgnoredType(m))
     .filter((m) => isSquashedUnion(m))
     .map((m) => new SquashedOneofUnionType(m, options));
 }
 
-function buildOneofUnionTypes(msgs: ProtoMessage[], options: TypeOptions): OneofUnionType[] {
+function buildOneofUnionTypes(
+  msgs: ProtoMessage[],
+  options: TypeOptions
+): OneofUnionType[] {
   return msgs
     .filter((m) => !isSquashedUnion(m))
     .flatMap((m) => m.oneofs)
@@ -74,14 +111,18 @@ function buildOneofUnionTypes(msgs: ProtoMessage[], options: TypeOptions): Oneof
 }
 
 function buildEnumTypes(enums: ProtoEnum[], options: TypeOptions): EnumType[] {
-  return enums.filter((e) => !isIgnoredType(e)).map((e) => new EnumType(e, options));
+  return enums
+    .filter((e) => !isIgnoredType(e))
+    .map((e) => new EnumType(e, options));
 }
 
 export function getObjectFieldType(
   proto: ProtoField,
   options: TypeOptions
 ): ScalarType | EnumType | ObjectType | InterfaceType | SquashedOneofUnionType {
-  return detectType<ObjectType | InterfaceType | SquashedOneofUnionType | ScalarType>(proto, options, (msg, file) => {
+  return detectType<
+    ObjectType | InterfaceType | SquashedOneofUnionType | ScalarType
+  >(proto, options, (msg, file) => {
     if (isInterface(msg)) return new InterfaceType(msg, file);
     if (isSquashedUnion(msg)) return new SquashedOneofUnionType(msg, file);
     return new ObjectType(msg, file);
@@ -97,7 +138,14 @@ export function getInputObjectFieldType(
   });
 }
 
-function detectType<T extends ObjectType | InterfaceType | SquashedOneofUnionType | InputObjectType | ScalarType>(
+function detectType<
+  T extends
+    | ObjectType
+    | InterfaceType
+    | SquashedOneofUnionType
+    | InputObjectType
+    | ScalarType
+>(
   proto: ProtoField,
   options: TypeOptions,
   f: (msg: ProtoMessage, options: TypeOptions) => T
@@ -112,7 +160,10 @@ function detectType<T extends ObjectType | InterfaceType | SquashedOneofUnionTyp
       assert(proto.type && proto.type.kind === "Message");
       const msg = proto.type;
       if (isScalar(msg, options)) {
-        return new ScalarType(proto, options.typeMappings[msg.fullName.toString()] as any);
+        return new ScalarType(
+          proto,
+          options.typeMappings[msg.fullName.toString()] as any
+        );
       }
       return f(msg, options);
     }

@@ -6,7 +6,11 @@ import { OneofUnionType } from "./OneofUnionType";
 import { isRequiredField } from "./util";
 
 export class ObjectOneofField extends FieldBase<ProtoOneof> {
-  constructor(readonly type: OneofUnionType, private readonly parent: ObjectType, proto: ProtoOneof) {
+  constructor(
+    readonly type: OneofUnionType,
+    private readonly parent: ObjectType,
+    proto: ProtoOneof
+  ) {
     super(proto);
   }
 

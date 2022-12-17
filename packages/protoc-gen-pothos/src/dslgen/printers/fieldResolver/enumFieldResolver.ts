@@ -1,4 +1,9 @@
-import { EnumType, ObjectField, PrinterOptions, protoType } from "@proto-graphql/codegen-core";
+import {
+  EnumType,
+  ObjectField,
+  PrinterOptions,
+  protoType,
+} from "@proto-graphql/codegen-core";
 import { Code, code } from "ts-poet";
 
 /**
@@ -17,7 +22,11 @@ import { Code, code } from "ts-poet";
  * return root.myEnum
  * ```
  */
-export function createEnumResolverCode(valueExpr: Code, field: ObjectField<EnumType>, opts: PrinterOptions): Code {
+export function createEnumResolverCode(
+  valueExpr: Code,
+  field: ObjectField<EnumType>,
+  opts: PrinterOptions
+): Code {
   const createBlockStmtCodes = (valueExpr: Code): Code[] => {
     const chunks: Code[] = [];
 
@@ -27,7 +36,9 @@ export function createEnumResolverCode(valueExpr: Code, field: ObjectField<EnumT
           ? code`return null;`
           : code`throw new Error("${field.name} is required field. But got unspecified.");`;
       chunks.push(code`
-        if (${valueExpr} === ${protoType(field.type.proto, opts)}.${field.type.unspecifiedValue.proto.name}) {
+        if (${valueExpr} === ${protoType(field.type.proto, opts)}.${
+        field.type.unspecifiedValue.proto.name
+      }) {
           ${escapeCode}
         }
       `);
@@ -35,7 +46,9 @@ export function createEnumResolverCode(valueExpr: Code, field: ObjectField<EnumT
     for (const ev of field.type.valuesWithIgnored) {
       if (!ev.isIgnored()) continue;
       chunks.push(code`
-      if (${valueExpr} === ${protoType(field.type.proto, opts)}.${ev.proto.name}) {
+      if (${valueExpr} === ${protoType(field.type.proto, opts)}.${
+        ev.proto.name
+      }) {
         throw new Error("${ev.name} is ignored in GraphQL schema");
       }
     `);

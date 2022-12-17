@@ -13,7 +13,13 @@ import { createOneofUnionTypeCode } from "./oneofUnionType";
 import { PothosPrinterOptions } from "./util";
 
 export function createTypeDslCodes(
-  types: (ObjectType | InputObjectType | EnumType | OneofUnionType | SquashedOneofUnionType)[],
+  types: (
+    | ObjectType
+    | InputObjectType
+    | EnumType
+    | OneofUnionType
+    | SquashedOneofUnionType
+  )[],
   opts: PothosPrinterOptions
 ): Code[] {
   return types.flatMap((type) => {
@@ -26,7 +32,10 @@ export function createTypeDslCodes(
     if (type instanceof EnumType) {
       return [createEnumTypeCode(type, opts)];
     }
-    if (type instanceof OneofUnionType || type instanceof SquashedOneofUnionType) {
+    if (
+      type instanceof OneofUnionType ||
+      type instanceof SquashedOneofUnionType
+    ) {
       return [createOneofUnionTypeCode(type, opts)];
     }
 

@@ -27,6 +27,8 @@ export function createOneofUnionTypeCode(
   };
   return code`
     export const ${pothosRef(type)} =
-      ${pothosBuilder(type, opts)}.unionType(${literalOf(type.typeName)}, ${literalOf(compact(typeOpts))});
+      ${pothosBuilder(type, opts)}.unionType(${literalOf(
+    type.typeName
+  )}, ${literalOf(compact(typeOpts))});
   `;
 }

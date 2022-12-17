@@ -12,11 +12,13 @@ const testSquashedUnionQuery = queryField("testSquashedUnion", {
   type: nonNull("TestPrefixPrefixedMessage"),
   resolve() {
     return new pbjs.testapis.extensions.PrefixedMessage({
-      squashedMessage: new pbjs.testapis.extensions.PrefixedMessage.SquashedMessage({
-        oneofField_2: new pbjs.testapis.extensions.PrefixedMessage.InnerMessage2({
-          body: "field 2",
+      squashedMessage:
+        new pbjs.testapis.extensions.PrefixedMessage.SquashedMessage({
+          oneofField_2:
+            new pbjs.testapis.extensions.PrefixedMessage.InnerMessage2({
+              body: "field 2",
+            }),
         }),
-      }),
     });
   },
 });
@@ -39,15 +41,22 @@ const addInterfaceMessageToPrefixedMessage = extendType({
     t.field("interfaceMessage", {
       type: nonNull("TestPrefixInterfaceMessage"),
       resolve(root) {
-        if (root.interfaceMessage == null) throw new Error("interfaceMessage is required");
+        if (root.interfaceMessage == null)
+          throw new Error("interfaceMessage is required");
 
-        if (root.interfaceMessage.type === pbjs.testapis.extensions.InterfaceMessage.Type.INNER) {
+        if (
+          root.interfaceMessage.type ===
+          pbjs.testapis.extensions.InterfaceMessage.Type.INNER
+        ) {
           return new pbjs.testapis.extensions.PrefixedMessage.InnerMessage({
             id: root.interfaceMessage.id,
             body: "inner message",
           });
         }
-        if (root.interfaceMessage.type === pbjs.testapis.extensions.InterfaceMessage.Type.INNER2) {
+        if (
+          root.interfaceMessage.type ===
+          pbjs.testapis.extensions.InterfaceMessage.Type.INNER2
+        ) {
           return new pbjs.testapis.extensions.PrefixedMessage.InnerMessage2({
             id: root.interfaceMessage.id,
             body: "inner message2",
@@ -85,9 +94,12 @@ const testSkipResolverQuery = queryField("testSkipResolver", {
   type: nonNull("TestPrefixPrefixedMessage"),
   resolve() {
     return new pbjs.testapis.extensions.PrefixedMessage({
-      squashedMessage: new pbjs.testapis.extensions.PrefixedMessage.SquashedMessage({
-        oneofField: new pbjs.testapis.extensions.PrefixedMessage.InnerMessage({}),
-      }),
+      squashedMessage:
+        new pbjs.testapis.extensions.PrefixedMessage.SquashedMessage({
+          oneofField: new pbjs.testapis.extensions.PrefixedMessage.InnerMessage(
+            {}
+          ),
+        }),
     });
   },
 });
