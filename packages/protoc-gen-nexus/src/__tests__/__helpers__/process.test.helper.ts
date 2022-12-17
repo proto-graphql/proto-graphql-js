@@ -12,7 +12,6 @@ import * as ts from "typescript";
 
 import { processRequest } from "../../process";
 
-
 const generationTargets = ["native protobuf", "protobufjs"] as const;
 type GenerationTarget = typeof generationTargets[number];
 
@@ -197,7 +196,6 @@ async function buildCodeGeneratorRequest(
 }
 
 function getFileMap(resp: CodeGeneratorResponse): Record<string, string> {
-   
   return resp
     .getFileList()
     .reduce(
@@ -220,7 +218,7 @@ async function withGeneratedResults<T>(
         (p) => fs.mkdir(p, { recursive: true })
       )
     );
-     
+
     await Promise.all(
       files.map((f) =>
         fs.writeFile(join(dir, f.getName()!), f.getContent()!, "utf-8")
@@ -238,7 +236,6 @@ async function withGeneratedSchema(
   cb: (dir: string) => Promise<void>
 ) {
   await withGeneratedResults(files, async (dir) => {
-     
     try {
       await createSchemaTs(dir, files, extraSchemata);
       execSync(`yarn ts-node --transpile-only ${dir}/schema.ts`, { cwd: dir });

@@ -1,9 +1,7 @@
 import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
 
 type FieldDescriptorScalarType = Exclude<
-   
   FieldDescriptorProto.Type,
-   
   | FieldDescriptorProto.Type.TYPE_MESSAGE
   | FieldDescriptorProto.Type.TYPE_ENUM
   | FieldDescriptorProto.Type.TYPE_GROUP
@@ -32,7 +30,6 @@ const protoScalarByFieldDescriptorType = {
   [FieldDescriptorProto.Type.TYPE_BOOL]: "bool",
   [FieldDescriptorProto.Type.TYPE_STRING]: "string",
   [FieldDescriptorProto.Type.TYPE_BYTES]: "bytes",
-   
 } as const satisfies Record<FieldDescriptorScalarType, string>;
 
 export function getScalarTypeFromDescriptor(

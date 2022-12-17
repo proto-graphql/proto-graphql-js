@@ -1,5 +1,3 @@
- 
-
 type TransformFunc<In, Out> = (input: In) => Out;
 
 export interface Transformer<ProtoType, GqlType> {

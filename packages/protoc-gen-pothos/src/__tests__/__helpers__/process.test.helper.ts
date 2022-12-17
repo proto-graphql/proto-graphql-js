@@ -8,7 +8,6 @@ import {
 } from "google-protobuf/google/protobuf/compiler/plugin_pb";
 import { FileDescriptorSet } from "google-protobuf/google/protobuf/descriptor_pb";
 
-
 import { processRequest } from "../../process";
 
 const generationTargets = [
@@ -129,7 +128,6 @@ async function buildCodeGeneratorRequest(
 }
 
 function getFileMap(resp: CodeGeneratorResponse): Record<string, string> {
-   
   return resp
     .getFileList()
     .reduce(

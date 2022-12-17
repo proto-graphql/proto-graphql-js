@@ -13,7 +13,6 @@ import {
   FullNameImpl,
   getCommentSetByDescriptors,
   isDeprecated,
-   
   memo,
 } from "./common";
 import {
@@ -362,7 +361,7 @@ export class ProtoFieldImpl implements ProtoField {
   get type(): ProtoMessage | ProtoEnum | ProtoScalar {
     const scalarType = getScalarTypeFromDescriptor(this.descriptor);
     if (scalarType !== undefined) return { kind: "Scalar", type: scalarType };
-     
+
     const foundType = this.registry.findTypeByFullName(
       this.descriptor.getTypeName()!.replace(/^\./, "")
     );
