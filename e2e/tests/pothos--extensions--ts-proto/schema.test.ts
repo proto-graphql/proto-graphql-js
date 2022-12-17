@@ -3,9 +3,9 @@ import { graphql } from "graphql";
 import { schema } from "./schema";
 
 it("processes a query with squashed union successfully", async () => {
-  const resp = await graphql(
+  const resp = await graphql({
     schema,
-    /* GraphQL */ `
+    source: /* GraphQL */ `
       query Test {
         testSquashedUnion {
           squashedMessage {
@@ -24,8 +24,8 @@ it("processes a query with squashed union successfully", async () => {
       fragment Inner2 on TestPrefixPrefixedMessageInnerMessage2 {
         body
       }
-    `
-  );
+    `,
+  });
   expect(resp).toMatchInlineSnapshot(`
     {
       "data": {
@@ -40,9 +40,9 @@ it("processes a query with squashed union successfully", async () => {
 });
 
 it("processes a query with interface successfully", async () => {
-  const resp = await graphql(
+  const resp = await graphql({
     schema,
-    /* GraphQL */ `
+    source: /* GraphQL */ `
       query Test {
         testInterface {
           ... on ImplObject {
@@ -51,8 +51,8 @@ it("processes a query with interface successfully", async () => {
           }
         }
       }
-    `
-  );
+    `,
+  });
   expect(resp).toMatchInlineSnapshot(`
     {
       "data": {
@@ -66,9 +66,9 @@ it("processes a query with interface successfully", async () => {
 });
 
 it("processes a query with skipResolver successfully", async () => {
-  const resp = await graphql(
+  const resp = await graphql({
     schema,
-    /* GraphQL */ `
+    source: /* GraphQL */ `
       query Test {
         testSkipResolver {
           squashedMessage {
@@ -81,8 +81,8 @@ it("processes a query with skipResolver successfully", async () => {
       fragment Inner on TestPrefixPrefixedMessageInnerMessage {
         skipResolver
       }
-    `
-  );
+    `,
+  });
   expect(resp).toMatchInlineSnapshot(`
     {
       "data": {

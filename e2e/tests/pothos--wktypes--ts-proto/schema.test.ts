@@ -3,9 +3,9 @@ import { graphql } from "graphql";
 import { schema } from "./schema";
 
 it("processes a query successfully", async () => {
-  const resp = await graphql(
+  const resp = await graphql({
     schema,
-    /* GraphQL */ `
+    source: /* GraphQL */ `
       query Test {
         valuesArePresent {
           ...Message
@@ -22,8 +22,8 @@ it("processes a query successfully", async () => {
         boolValue
         stringValue
       }
-    `
-  );
+    `,
+  });
   expect(resp).toMatchInlineSnapshot(`
     {
       "data": {
@@ -44,9 +44,9 @@ it("processes a query successfully", async () => {
 });
 
 it("processes a query successfully when values are blank", async () => {
-  const resp = await graphql(
+  const resp = await graphql({
     schema,
-    /* GraphQL */ `
+    source: /* GraphQL */ `
       query Test {
         valuesAreBlank {
           ...Message
@@ -63,8 +63,8 @@ it("processes a query successfully when values are blank", async () => {
         boolValue
         stringValue
       }
-    `
-  );
+    `,
+  });
   expect(resp).toMatchInlineSnapshot(`
     {
       "data": {

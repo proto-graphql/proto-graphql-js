@@ -3,9 +3,9 @@ import { graphql } from "graphql";
 import { schema } from "./schema";
 
 it("processes a query with squashed union successfully", async () => {
-  const resp = await graphql(
+  const resp = await graphql({
     schema,
-    /* GraphQL */ `
+    source: /* GraphQL */ `
       query Test {
         test {
           squashedMessage {
@@ -24,8 +24,8 @@ it("processes a query with squashed union successfully", async () => {
       fragment Inner2 on TestPrefixPrefixedMessageInnerMessage2 {
         body
       }
-    `
-  );
+    `,
+  });
   expect(resp).toMatchInlineSnapshot(`
     {
       "data": {
