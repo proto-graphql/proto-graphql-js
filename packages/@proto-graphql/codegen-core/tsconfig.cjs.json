@@ -5,7 +5,8 @@
     "declarationMap": true,
     "rootDir": "./src",
     "outDir": "./lib",
+    "allowJs": true,
     "noEmit": false
   },
-  "exclude": ["**/*.test.*", "**/__tests__/**"]
+  "exclude": ["**/*.test.*", "**/__tests__/**", "jest.config.js"]
 }
