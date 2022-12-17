@@ -1,12 +1,13 @@
+import * as pbjs from "@testapis/node/lib/testapis/extensions";
 import { extendType, nonNull, queryField } from "nexus";
+
 import { makeTestSchema } from "../../src/makeTestSchema";
+import * as types1 from "../__generated__/nexus/protobufjs/testapis/extensions/extensions_pb_nexus";
 import * as types2 from "../__generated__/nexus/protobufjs/testapis/extensions/field_nullability/nullability_pb_nexus";
 import * as types3 from "../__generated__/nexus/protobufjs/testapis/extensions/ignored_pb_nexus";
 import * as types4 from "../__generated__/nexus/protobufjs/testapis/extensions/no_partial/no_partial_pb_nexus";
-import * as pbjs from "@testapis/node/lib/testapis/extensions";
 
 // should import at last
-import * as types1 from "../__generated__/nexus/protobufjs/testapis/extensions/extensions_pb_nexus";
 
 const testSquashedUnionQuery = queryField("testSquashedUnion", {
   type: nonNull("TestPrefixPrefixedMessage"),

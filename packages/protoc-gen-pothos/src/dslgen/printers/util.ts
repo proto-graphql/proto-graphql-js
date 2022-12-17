@@ -1,3 +1,5 @@
+import * as path from "path";
+
 import {
   EnumType,
   filename,
@@ -12,7 +14,6 @@ import {
   PrinterOptions,
   SquashedOneofUnionType,
 } from "@proto-graphql/codegen-core";
-import * as path from "path";
 import { code, Code, imp } from "ts-poet";
 
 export type PothosPrinterOptions = Extract<PrinterOptions, { dsl: "pothos" }>;

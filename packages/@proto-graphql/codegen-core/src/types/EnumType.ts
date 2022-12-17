@@ -1,5 +1,6 @@
 import { ProtoEnum, ProtoEnumValue } from "@proto-graphql/proto-descriptors";
 import { constantCase } from "change-case";
+
 import { TypeBase } from "./TypeBase";
 import {
   descriptionFromProto,

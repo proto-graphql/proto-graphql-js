@@ -8,11 +8,12 @@ import {
   OneofDescriptorProto,
   ServiceDescriptorProto,
 } from "google-protobuf/google/protobuf/descriptor_pb";
+
 import {
   FullNameImpl,
   getCommentSetByDescriptors,
   isDeprecated,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   
   memo,
 } from "./common";
 import {
@@ -361,7 +362,7 @@ export class ProtoFieldImpl implements ProtoField {
   get type(): ProtoMessage | ProtoEnum | ProtoScalar {
     const scalarType = getScalarTypeFromDescriptor(this.descriptor);
     if (scalarType !== undefined) return { kind: "Scalar", type: scalarType };
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+     
     const foundType = this.registry.findTypeByFullName(
       this.descriptor.getTypeName()!.replace(/^\./, "")
     );

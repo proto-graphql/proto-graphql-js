@@ -1,3 +1,5 @@
+import assert from "assert";
+
 import {
   ProtoEnum,
   ProtoField,
@@ -5,15 +7,15 @@ import {
   ProtoMessage,
   ProtoRegistry,
 } from "@proto-graphql/proto-descriptors";
-import assert from "assert";
+
 import { EnumType } from "./EnumType";
 import { InputObjectType } from "./InputObjectType";
 import { InterfaceType } from "./InterfaceType";
 import { ObjectType } from "./ObjectType";
 import { OneofUnionType } from "./OneofUnionType";
-import { TypeOptions } from "./options";
 import { ScalarType } from "./ScalarType";
 import { SquashedOneofUnionType } from "./SquashedOneofUnionType";
+import { TypeOptions } from "./options";
 import {
   exceptRequestOrResponse,
   isIgnoredField,

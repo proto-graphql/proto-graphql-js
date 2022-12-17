@@ -1,5 +1,6 @@
 import { FieldBehaviorComentsMessage } from "@testapis/node-native/lib/testapis/field_behavior/comments_pb";
 import { queryField } from "nexus";
+
 import { makeTestSchema } from "../../src/makeTestSchema";
 import * as types1 from "../__generated__/nexus/google-protobuf/testapis/field_behavior/comments_pb_nexus";
 

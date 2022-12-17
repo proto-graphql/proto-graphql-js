@@ -3,6 +3,7 @@ import {
   ProtoMessage,
   ProtoOneof,
 } from "@proto-graphql/proto-descriptors";
+
 import { TypeOptions } from "./options";
 import { descriptionFromProto, gqlTypeName } from "./util";
 

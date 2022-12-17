@@ -11,6 +11,7 @@ import {
 import { pascalCase } from "change-case";
 import { ExtensionFieldInfo } from "google-protobuf";
 import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
+
 import * as extensions from "../__generated__/extensions/graphql/schema_pb";
 import { TypeOptions } from "./options";
 

@@ -1,6 +1,6 @@
 import { ProtoField } from "@proto-graphql/proto-descriptors";
 
-// eslint-disable-next-line @typescript-eslint/ban-types
+ 
 export type GqlScalarType =
   | "Int"
   | "Float"

@@ -17,6 +17,7 @@ import {
 } from "@proto-graphql/codegen-core";
 import { constantCase, pascalCase } from "change-case";
 import { code, Code, joinCode, literalOf } from "ts-poet";
+
 import {
   fieldType,
   impNexus,

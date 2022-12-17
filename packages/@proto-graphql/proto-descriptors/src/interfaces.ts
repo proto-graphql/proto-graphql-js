@@ -8,6 +8,7 @@ import {
   OneofDescriptorProto,
   ServiceDescriptorProto,
 } from "google-protobuf/google/protobuf/descriptor_pb";
+
 import { ProtoScalar, ProtoScalarType } from "./scalars";
 
 export interface FullName {

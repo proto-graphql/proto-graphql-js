@@ -1,4 +1,5 @@
 import { ParentMessage } from "@testapis/ts-proto/lib/testapis/edgecases/import_from_same_pkg/parent";
+
 import { printGraphqlSchema } from "../../src/printGraphqlSchema";
 import { ParentMessage$Ref } from "../__generated__/pothos/ts-proto/testapis/edgecases/import_from_same_pkg/parent.pb.pothos";
 import { builder } from "./builder";

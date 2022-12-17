@@ -7,6 +7,7 @@ import {
 } from "@proto-graphql/codegen-core";
 import { ProtoField } from "@proto-graphql/proto-descriptors";
 import { Code, code, joinCode, literalOf } from "ts-poet";
+
 import { createFieldRefCode, createNoopFieldRefCode } from "./field";
 import { pothosBuilder, PothosPrinterOptions, pothosRef } from "./util";
 

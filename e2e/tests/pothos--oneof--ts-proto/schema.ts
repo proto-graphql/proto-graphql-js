@@ -1,4 +1,5 @@
 import { OneofParent } from "@testapis/ts-proto/lib/testapis/oneof/oneof";
+
 import { printGraphqlSchema } from "../../src/printGraphqlSchema";
 import { OneofParent$Ref } from "../__generated__/pothos/ts-proto/testapis/oneof/oneof.pb.pothos";
 import { builder } from "./builder";

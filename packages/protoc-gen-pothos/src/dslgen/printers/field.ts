@@ -12,6 +12,7 @@ import {
 } from "@proto-graphql/codegen-core";
 import { ProtoField } from "@proto-graphql/proto-descriptors";
 import { code, Code, literalOf } from "ts-poet";
+
 import { createEnumResolverCode } from "./fieldResolver/enumFieldResolver";
 import { createNonNullResolverCode } from "./fieldResolver/nonNullResolver";
 import { createOneofUnionResolverCode } from "./fieldResolver/oneofUnionResolver";

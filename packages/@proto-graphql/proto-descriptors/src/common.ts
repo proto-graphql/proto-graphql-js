@@ -1,4 +1,5 @@
 import { SourceCodeInfo } from "google-protobuf/google/protobuf/descriptor_pb";
+
 import {
   CommentSet,
   FullName,

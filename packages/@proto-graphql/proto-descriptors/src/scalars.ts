@@ -1,9 +1,9 @@
 import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
 
 type FieldDescriptorScalarType = Exclude<
-  // eslint-disable-next-line no-undef
+   
   FieldDescriptorProto.Type,
-  // eslint-disable-next-line no-undef
+   
   | FieldDescriptorProto.Type.TYPE_MESSAGE
   | FieldDescriptorProto.Type.TYPE_ENUM
   | FieldDescriptorProto.Type.TYPE_GROUP
@@ -32,7 +32,7 @@ const protoScalarByFieldDescriptorType = {
   [FieldDescriptorProto.Type.TYPE_BOOL]: "bool",
   [FieldDescriptorProto.Type.TYPE_STRING]: "string",
   [FieldDescriptorProto.Type.TYPE_BYTES]: "bytes",
-  // eslint-disable-next-line no-undef
+   
 } as const satisfies Record<FieldDescriptorScalarType, string>;
 
 export function getScalarTypeFromDescriptor(

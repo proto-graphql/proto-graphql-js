@@ -5,6 +5,7 @@ import {
   SquashedOneofUnionType,
 } from "@proto-graphql/codegen-core";
 import { code, Code, joinCode, literalOf } from "ts-poet";
+
 import { fieldType, impNexus, NexusPrinterOptions, nexusTypeDef } from "./util";
 
 /**

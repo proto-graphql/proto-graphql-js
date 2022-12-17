@@ -1,5 +1,6 @@
-import { makeSchema } from "nexus";
 import * as path from "path";
+
+import { makeSchema } from "nexus";
 
 export function makeTestSchema({
   rootDir,

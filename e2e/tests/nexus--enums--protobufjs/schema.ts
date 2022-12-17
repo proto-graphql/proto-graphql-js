@@ -1,5 +1,6 @@
 import * as pbjs from "@testapis/node/lib/testapis/enums";
 import { queryField } from "nexus";
+
 import { makeTestSchema } from "../../src/makeTestSchema";
 import * as types1 from "../__generated__/nexus/protobufjs/testapis/enums/enums_pb_nexus";
 

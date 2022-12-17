@@ -1,5 +1,6 @@
 import * as pbjs from "@testapis/node/lib/testapis/multipkgs/subpkg2";
 import { queryField } from "nexus";
+
 import { makeTestSchema } from "../../src/makeTestSchema";
 import * as types1 from "../__generated__/nexus/protobufjs/testapis/multipkgs/subpkg1/types_pb_nexus";
 import * as types2 from "../__generated__/nexus/protobufjs/testapis/multipkgs/subpkg2/types_pb_nexus";

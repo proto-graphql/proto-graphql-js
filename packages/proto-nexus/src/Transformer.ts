@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+ 
 
 type TransformFunc<In, Out> = (input: In) => Out;
 

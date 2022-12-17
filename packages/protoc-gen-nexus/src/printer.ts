@@ -7,6 +7,7 @@ import {
 } from "@proto-graphql/codegen-core";
 import { ProtoFile, ProtoRegistry } from "@proto-graphql/proto-descriptors";
 import { Code } from "ts-poet";
+
 import { createTypeDslCodes } from "./dslgen";
 import { NexusPrinterOptions } from "./dslgen/printers/util";
 

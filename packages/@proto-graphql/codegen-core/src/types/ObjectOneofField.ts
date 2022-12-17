@@ -1,5 +1,6 @@
 import { ProtoOneof } from "@proto-graphql/proto-descriptors";
 import { camelCase } from "change-case";
+
 import { FieldBase } from "./FieldBase";
 import { ObjectType } from "./ObjectType";
 import { OneofUnionType } from "./OneofUnionType";

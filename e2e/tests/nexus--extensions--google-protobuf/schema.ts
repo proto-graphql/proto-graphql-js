@@ -1,5 +1,6 @@
 import { PrefixedMessage } from "@testapis/node-native/lib/testapis/extensions/extensions_pb";
 import { queryField, nonNull } from "nexus";
+
 import { makeTestSchema } from "../../src/makeTestSchema";
 import * as types1 from "../__generated__/nexus/google-protobuf/testapis/extensions/extensions_pb_nexus";
 import * as types2 from "../__generated__/nexus/google-protobuf/testapis/extensions/field_nullability/nullability_pb_nexus";

@@ -1,4 +1,5 @@
 import { ProtoField } from "@proto-graphql/proto-descriptors";
+
 import * as extensions from "../__generated__/extensions/graphql/schema_pb";
 import { EnumType } from "./EnumType";
 import { FieldBase } from "./FieldBase";

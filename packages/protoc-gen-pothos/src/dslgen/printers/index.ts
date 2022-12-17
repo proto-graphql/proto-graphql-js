@@ -6,6 +6,7 @@ import {
   SquashedOneofUnionType,
 } from "@proto-graphql/codegen-core";
 import { Code } from "ts-poet";
+
 import { createEnumTypeCode } from "./enumType";
 import { createInputObjectTypeCode } from "./inputObjectType";
 import { createObjectTypeCode } from "./objectType";

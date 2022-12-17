@@ -1,14 +1,17 @@
-import { promises as fs } from "fs";
 import { execSync } from "child_process";
+import { promises as fs } from "fs";
 import { join, dirname } from "path";
+
 import { glob } from "glob";
-import * as ts from "typescript";
-import { FileDescriptorSet } from "google-protobuf/google/protobuf/descriptor_pb";
-import { processRequest } from "../../process";
 import {
   CodeGeneratorRequest,
   CodeGeneratorResponse,
 } from "google-protobuf/google/protobuf/compiler/plugin_pb";
+import { FileDescriptorSet } from "google-protobuf/google/protobuf/descriptor_pb";
+import * as ts from "typescript";
+
+import { processRequest } from "../../process";
+
 
 const generationTargets = ["native protobuf", "protobufjs"] as const;
 type GenerationTarget = typeof generationTargets[number];
@@ -194,7 +197,7 @@ async function buildCodeGeneratorRequest(
 }
 
 function getFileMap(resp: CodeGeneratorResponse): Record<string, string> {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+   
   return resp
     .getFileList()
     .reduce(
@@ -217,7 +220,7 @@ async function withGeneratedResults<T>(
         (p) => fs.mkdir(p, { recursive: true })
       )
     );
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+     
     await Promise.all(
       files.map((f) =>
         fs.writeFile(join(dir, f.getName()!), f.getContent()!, "utf-8")
@@ -235,7 +238,7 @@ async function withGeneratedSchema(
   cb: (dir: string) => Promise<void>
 ) {
   await withGeneratedResults(files, async (dir) => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+     
     try {
       await createSchemaTs(dir, files, extraSchemata);
       execSync(`yarn ts-node --transpile-only ${dir}/schema.ts`, { cwd: dir });

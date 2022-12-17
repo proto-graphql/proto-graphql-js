@@ -1,5 +1,7 @@
-import { ProtoOneof } from "@proto-graphql/proto-descriptors";
 import assert from "assert";
+
+import { ProtoOneof } from "@proto-graphql/proto-descriptors";
+
 import { ObjectField } from "./ObjectField";
 import { ObjectType } from "./ObjectType";
 import { TypeBase } from "./TypeBase";

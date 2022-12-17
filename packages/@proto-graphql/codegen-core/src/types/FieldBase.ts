@@ -1,4 +1,5 @@
 import { ProtoField, ProtoOneof } from "@proto-graphql/proto-descriptors";
+
 import * as extensions from "../__generated__/extensions/graphql/schema_pb";
 import { descriptionFromProto, getDeprecationReason } from "./util";
 

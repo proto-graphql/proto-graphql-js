@@ -1,4 +1,5 @@
 import { ProtoMessage } from "@proto-graphql/proto-descriptors";
+
 import { ObjectField } from "./ObjectField";
 import { ObjectOneofField } from "./ObjectOneofField";
 import { OneofUnionType } from "./OneofUnionType";

@@ -1,6 +1,7 @@
 import { mkdirSync, writeFileSync } from "fs";
-import { GraphQLSchema, printSchema } from "graphql";
 import { join } from "path";
+
+import { GraphQLSchema, printSchema } from "graphql";
 
 export function printGraphqlSchema({
   rootDir,

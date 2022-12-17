@@ -4,6 +4,7 @@ import {
   CodeGeneratorRequest,
   CodeGeneratorResponse,
 } from "google-protobuf/google/protobuf/compiler/plugin_pb";
+
 import { parseParams } from "./parseParams";
 
 export function createProcessor<DSL extends PrinterOptions["dsl"]>({

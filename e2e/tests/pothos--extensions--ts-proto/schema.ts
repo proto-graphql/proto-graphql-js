@@ -1,5 +1,6 @@
-// eslint-disable-next-line camelcase
+ 
 import { PrefixedMessage } from "@testapis/ts-proto/lib/testapis/extensions/extensions";
+
 import { printGraphqlSchema } from "../../src/printGraphqlSchema";
 import {
   TestPrefixInterfaceMessage$Ref,

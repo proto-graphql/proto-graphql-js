@@ -1,3 +1,5 @@
+import * as path from "path";
+
 import {
   ProtoEnum,
   ProtoField,
@@ -7,8 +9,8 @@ import {
   ProtoScalarType,
 } from "@proto-graphql/proto-descriptors";
 import { camelCase } from "change-case";
-import * as path from "path";
 import { code, Code, imp } from "ts-poet";
+
 import {
   EnumType,
   InputObjectField,

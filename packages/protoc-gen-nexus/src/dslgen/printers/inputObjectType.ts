@@ -10,6 +10,7 @@ import {
   ScalarType,
 } from "@proto-graphql/codegen-core";
 import { Code, code, joinCode, literalOf } from "ts-poet";
+
 import {
   createFieldDefinitionCode,
   createNoopFieldDefinitionCode,

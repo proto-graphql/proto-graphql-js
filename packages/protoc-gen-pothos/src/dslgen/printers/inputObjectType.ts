@@ -5,6 +5,7 @@ import {
   protoType,
 } from "@proto-graphql/codegen-core";
 import { Code, code, imp, joinCode, literalOf } from "ts-poet";
+
 import { createFieldRefCode, createNoopFieldRefCode } from "./field";
 import {
   fieldTypeShape,

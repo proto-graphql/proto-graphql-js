@@ -5,6 +5,7 @@ import {
   SquashedOneofUnionType,
 } from "@proto-graphql/codegen-core";
 import { code, Code, literalOf } from "ts-poet";
+
 import { pothosBuilder, PothosPrinterOptions, pothosRef } from "./util";
 
 /**

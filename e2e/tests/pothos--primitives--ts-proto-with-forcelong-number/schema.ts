@@ -1,4 +1,5 @@
 import { Message } from "@testapis/ts-proto-with-forcelong-number/lib/testapis/primitives/primitives";
+
 import { printGraphqlSchema } from "../../src/printGraphqlSchema";
 import { Message$Ref } from "../__generated__/pothos/ts-proto-with-forcelong-number/testapis/primitives/primitives.pb.pothos";
 import { builder } from "./builder";
