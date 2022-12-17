@@ -6,51 +6,51 @@ exports[`import squashed union with ts-proto generates pothos DSLs: edgecases/im
 
 /* eslint-disable */
 
-import { InputObjectRef } from \\"@pothos/core\\";
-import { builder } from \\"../../../../builder\\";
-import { OneofMessage1 } from \\"./testapis/edgecases/import_squashed_union/pkg1/types\\";
+import { InputObjectRef } from "@pothos/core";
+import { builder } from "../../../../builder";
+import { OneofMessage1 } from "./testapis/edgecases/import_squashed_union/pkg1/types";
 
 export const OneofMessage1$Ref = builder.objectRef<OneofMessage1>(
-  \\"OneofMessage1\\",
+  "OneofMessage1",
 );
 builder.objectType(OneofMessage1$Ref, {
-  name: \\"OneofMessage1\\",
+  name: "OneofMessage1",
   fields: (t) => ({
-    body: t.expose(\\"body\\", {
-      type: \\"String\\",
+    body: t.expose("body", {
+      type: "String",
       nullable: false,
-      extensions: { protobufField: { name: \\"body\\", typeFullName: \\"string\\" } },
+      extensions: { protobufField: { name: "body", typeFullName: "string" } },
     }),
   }),
   isTypeOf: (source) => {
     return (source as OneofMessage1 | { $type: string & {}; }).$type ===
-      \\"testapis.edgecases.import_squashed_union.pkg1.OneofMessage1\\";
+      "testapis.edgecases.import_squashed_union.pkg1.OneofMessage1";
   },
   extensions: {
     protobufMessage: {
-      fullName: \\"testapis.edgecases.import_squashed_union.pkg1.OneofMessage1\\",
-      name: \\"OneofMessage1\\",
-      package: \\"testapis.edgecases.import_squashed_union.pkg1\\",
+      fullName: "testapis.edgecases.import_squashed_union.pkg1.OneofMessage1",
+      name: "OneofMessage1",
+      package: "testapis.edgecases.import_squashed_union.pkg1",
     },
   },
 });
 
-export type OneofMessage1Input$Shape = { body: OneofMessage1[\\"body\\"]; };
+export type OneofMessage1Input$Shape = { body: OneofMessage1["body"]; };
 
 export const OneofMessage1Input$Ref: InputObjectRef<OneofMessage1Input$Shape> =
-  builder.inputRef<OneofMessage1Input$Shape>(\\"OneofMessage1Input\\").implement({
+  builder.inputRef<OneofMessage1Input$Shape>("OneofMessage1Input").implement({
     fields: (t) => ({
       body: t.field({
-        type: \\"String\\",
+        type: "String",
         required: true,
-        extensions: { protobufField: { name: \\"body\\", typeFullName: \\"string\\" } },
+        extensions: { protobufField: { name: "body", typeFullName: "string" } },
       }),
     }),
     extensions: {
       protobufMessage: {
-        fullName: \\"testapis.edgecases.import_squashed_union.pkg1.OneofMessage1\\",
-        name: \\"OneofMessage1\\",
-        package: \\"testapis.edgecases.import_squashed_union.pkg1\\",
+        fullName: "testapis.edgecases.import_squashed_union.pkg1.OneofMessage1",
+        name: "OneofMessage1",
+        package: "testapis.edgecases.import_squashed_union.pkg1",
       },
     },
   });
@@ -60,39 +60,39 @@ export type SquashedOneofInput$Shape = {
 };
 
 export const SquashedOneofInput$Ref: InputObjectRef<SquashedOneofInput$Shape> =
-  builder.inputRef<SquashedOneofInput$Shape>(\\"SquashedOneofInput\\").implement({
+  builder.inputRef<SquashedOneofInput$Shape>("SquashedOneofInput").implement({
     fields: (t) => ({
       msg1: t.field({
         type: OneofMessage1Input$Ref,
         required: false,
         extensions: {
           protobufField: {
-            name: \\"msg1\\",
+            name: "msg1",
             typeFullName:
-              \\"testapis.edgecases.import_squashed_union.pkg1.OneofMessage1\\",
+              "testapis.edgecases.import_squashed_union.pkg1.OneofMessage1",
           },
         },
       }),
     }),
     extensions: {
       protobufMessage: {
-        fullName: \\"testapis.edgecases.import_squashed_union.pkg1.SquashedOneof\\",
-        name: \\"SquashedOneof\\",
-        package: \\"testapis.edgecases.import_squashed_union.pkg1\\",
+        fullName: "testapis.edgecases.import_squashed_union.pkg1.SquashedOneof",
+        name: "SquashedOneof",
+        package: "testapis.edgecases.import_squashed_union.pkg1",
       },
     },
   });
 
-export const SquashedOneof$Ref = builder.unionType(\\"SquashedOneof\\", {
+export const SquashedOneof$Ref = builder.unionType("SquashedOneof", {
   types: [OneofMessage1$Ref],
   extensions: {
     protobufOneof: {
-      fullName: \\"testapis.edgecases.import_squashed_union.pkg1.SquashedOneof\\",
-      name: \\"SquashedOneof\\",
-      package: \\"testapis.edgecases.import_squashed_union.pkg1\\",
+      fullName: "testapis.edgecases.import_squashed_union.pkg1.SquashedOneof",
+      name: "SquashedOneof",
+      package: "testapis.edgecases.import_squashed_union.pkg1",
       fields: [{
-        name: \\"msg1\\",
-        type: \\"testapis.edgecases.import_squashed_union.pkg1.OneofMessage1\\",
+        name: "msg1",
+        type: "testapis.edgecases.import_squashed_union.pkg1.OneofMessage1",
       }],
     },
   },
@@ -106,18 +106,18 @@ exports[`import squashed union with ts-proto generates pothos DSLs: edgecases/im
 
 /* eslint-disable */
 
-import { InputObjectRef } from \\"@pothos/core\\";
-import { builder } from \\"../../../../builder\\";
+import { InputObjectRef } from "@pothos/core";
+import { builder } from "../../../../builder";
 import {
   SquashedOneof$Ref,
   SquashedOneofInput$Ref,
   SquashedOneofInput$Shape,
-} from \\"../pkg1/types.pb.pothos\\";
-import { Message } from \\"./testapis/edgecases/import_squashed_union/pkg2/types\\";
+} from "../pkg1/types.pb.pothos";
+import { Message } from "./testapis/edgecases/import_squashed_union/pkg2/types";
 
-export const Message$Ref = builder.objectRef<Message>(\\"Message\\");
+export const Message$Ref = builder.objectRef<Message>("Message");
 builder.objectType(Message$Ref, {
-  name: \\"Message\\",
+  name: "Message",
   fields: (t) => ({
     msg: t.field({
       type: SquashedOneof$Ref,
@@ -131,22 +131,22 @@ builder.objectType(Message$Ref, {
       },
       extensions: {
         protobufField: {
-          name: \\"msg\\",
+          name: "msg",
           typeFullName:
-            \\"testapis.edgecases.import_squashed_union.pkg1.SquashedOneof\\",
+            "testapis.edgecases.import_squashed_union.pkg1.SquashedOneof",
         },
       },
     }),
   }),
   isTypeOf: (source) => {
     return (source as Message | { $type: string & {}; }).$type ===
-      \\"testapis.edgecases.import_squashed_union.pkg2.Message\\";
+      "testapis.edgecases.import_squashed_union.pkg2.Message";
   },
   extensions: {
     protobufMessage: {
-      fullName: \\"testapis.edgecases.import_squashed_union.pkg2.Message\\",
-      name: \\"Message\\",
-      package: \\"testapis.edgecases.import_squashed_union.pkg2\\",
+      fullName: "testapis.edgecases.import_squashed_union.pkg2.Message",
+      name: "Message",
+      package: "testapis.edgecases.import_squashed_union.pkg2",
     },
   },
 });
@@ -154,25 +154,25 @@ builder.objectType(Message$Ref, {
 export type MessageInput$Shape = { msg?: SquashedOneofInput$Shape | null; };
 
 export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
-  .inputRef<MessageInput$Shape>(\\"MessageInput\\").implement({
+  .inputRef<MessageInput$Shape>("MessageInput").implement({
     fields: (t) => ({
       msg: t.field({
         type: SquashedOneofInput$Ref,
         required: false,
         extensions: {
           protobufField: {
-            name: \\"msg\\",
+            name: "msg",
             typeFullName:
-              \\"testapis.edgecases.import_squashed_union.pkg1.SquashedOneof\\",
+              "testapis.edgecases.import_squashed_union.pkg1.SquashedOneof",
           },
         },
       }),
     }),
     extensions: {
       protobufMessage: {
-        fullName: \\"testapis.edgecases.import_squashed_union.pkg2.Message\\",
-        name: \\"Message\\",
-        package: \\"testapis.edgecases.import_squashed_union.pkg2\\",
+        fullName: "testapis.edgecases.import_squashed_union.pkg2.Message",
+        name: "Message",
+        package: "testapis.edgecases.import_squashed_union.pkg2",
       },
     },
   });

@@ -19,10 +19,10 @@ it("processes a query successfully", async () => {
     `
   );
   expect(resp).toMatchInlineSnapshot(`
-    Object {
-      "data": Object {
-        "test": Object {
-          "msg": Object {
+    {
+      "data": {
+        "test": {
+          "msg": {
             "__typename": "OneofMessage1",
             "body": "hello",
           },

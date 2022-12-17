@@ -19,11 +19,11 @@ it("processes a query successfully", async () => {
     `
   );
   expect(resp).toMatchInlineSnapshot(`
-    Object {
-      "data": Object {
-        "test": Object {
+    {
+      "data": {
+        "test": {
           "outputOnlyField": null,
-          "requiredField": Object {
+          "requiredField": {
             "body": "hello",
           },
         },

@@ -17,11 +17,11 @@ it("processes a query successfully", async () => {
     `
   );
   expect(resp).toMatchInlineSnapshot(`
-    Object {
-      "data": Object {
-        "test": Object {
+    {
+      "data": {
+        "test": {
           "enum": "BAR",
-          "message": Object {
+          "message": {
             "body": "hello",
           },
         },

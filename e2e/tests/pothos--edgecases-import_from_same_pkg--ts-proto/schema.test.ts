@@ -16,10 +16,10 @@ it("processes a query successfully", async () => {
     `
   );
   expect(resp).toMatchInlineSnapshot(`
-    Object {
-      "data": Object {
-        "test": Object {
-          "child": Object {
+    {
+      "data": {
+        "test": {
+          "child": {
             "body": "hello",
           },
         },

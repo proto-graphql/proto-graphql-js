@@ -6,21 +6,21 @@ exports[`import type form the same package with native protobuf generates nexus 
 
 /* eslint-disable */
 
-import { inputObjectType, nonNull, objectType } from \\"nexus\\";
-import { ChildMessage as ChildMessage1 } from \\"./testapis/edgecases/import_from_same_pkg/child_pb\\";
+import { inputObjectType, nonNull, objectType } from "nexus";
+import { ChildMessage as ChildMessage1 } from "./testapis/edgecases/import_from_same_pkg/child_pb";
 
 export type testapis$edgecases$import_from_same_pkg$ChildMessage =
   ChildMessage1;
 export const ChildMessage = objectType({
-  name: \\"ChildMessage\\",
+  name: "ChildMessage",
   definition: (t) => {
-    t.field(\\"body\\", {
-      type: nonNull(\\"String\\"),
+    t.field("body", {
+      type: nonNull("String"),
       resolve: (source) => {
         const value = source.getBody();
         return value;
       },
-      extensions: { protobufField: { name: \\"body\\", typeFullName: \\"string\\" } },
+      extensions: { protobufField: { name: "body", typeFullName: "string" } },
     });
   },
   isTypeOf: (data: unknown) => {
@@ -28,37 +28,37 @@ export const ChildMessage = objectType({
   },
   sourceType: {
     module: __filename,
-    export: \\"testapis$edgecases$import_from_same_pkg$ChildMessage\\",
+    export: "testapis$edgecases$import_from_same_pkg$ChildMessage",
   },
   extensions: {
     protobufMessage: {
-      fullName: \\"testapis.edgecases.import_from_same_pkg.ChildMessage\\",
-      name: \\"ChildMessage\\",
-      package: \\"testapis.edgecases.import_from_same_pkg\\",
+      fullName: "testapis.edgecases.import_from_same_pkg.ChildMessage",
+      name: "ChildMessage",
+      package: "testapis.edgecases.import_from_same_pkg",
     },
   },
 });
 
 export const ChildMessageInput = Object.assign(
   inputObjectType({
-    name: \\"ChildMessageInput\\",
+    name: "ChildMessageInput",
     definition: (t) => {
-      t.field(\\"body\\", {
-        type: nonNull(\\"String\\"),
-        extensions: { protobufField: { name: \\"body\\", typeFullName: \\"string\\" } },
+      t.field("body", {
+        type: nonNull("String"),
+        extensions: { protobufField: { name: "body", typeFullName: "string" } },
       });
     },
     extensions: {
       protobufMessage: {
-        fullName: \\"testapis.edgecases.import_from_same_pkg.ChildMessage\\",
-        name: \\"ChildMessage\\",
-        package: \\"testapis.edgecases.import_from_same_pkg\\",
+        fullName: "testapis.edgecases.import_from_same_pkg.ChildMessage",
+        name: "ChildMessage",
+        package: "testapis.edgecases.import_from_same_pkg",
       },
     },
   }),
   {
     toProto: (
-      input: NexusGen[\\"inputTypes\\"][\\"ChildMessageInput\\"],
+      input: NexusGen["inputTypes"]["ChildMessageInput"],
     ): ChildMessage1 => {
       const output = new ChildMessage1();
       output.setBody(input.body);
@@ -67,9 +67,9 @@ export const ChildMessageInput = Object.assign(
     _protoNexus: {
       fields: {
         body: {
-          type: nonNull(\\"String\\"),
+          type: nonNull("String"),
           extensions: {
-            protobufField: { name: \\"body\\", typeFullName: \\"string\\" },
+            protobufField: { name: "body", typeFullName: "string" },
           },
         },
       },
@@ -85,17 +85,17 @@ exports[`import type form the same package with native protobuf generates nexus 
 
 /* eslint-disable */
 
-import { inputObjectType, nullable, objectType } from \\"nexus\\";
-import { ChildMessageInput } from \\"./child_pb_nexus\\";
-import { ParentMessage as ParentMessage1 } from \\"./testapis/edgecases/import_from_same_pkg/parent_pb\\";
+import { inputObjectType, nullable, objectType } from "nexus";
+import { ChildMessageInput } from "./child_pb_nexus";
+import { ParentMessage as ParentMessage1 } from "./testapis/edgecases/import_from_same_pkg/parent_pb";
 
 export type testapis$edgecases$import_from_same_pkg$ParentMessage =
   ParentMessage1;
 export const ParentMessage = objectType({
-  name: \\"ParentMessage\\",
+  name: "ParentMessage",
   definition: (t) => {
-    t.field(\\"child\\", {
-      type: nullable(\\"ChildMessage\\"),
+    t.field("child", {
+      type: nullable("ChildMessage"),
       resolve: (source) => {
         const value = source.getChild();
         if (value == null) {
@@ -105,8 +105,8 @@ export const ParentMessage = objectType({
       },
       extensions: {
         protobufField: {
-          name: \\"child\\",
-          typeFullName: \\"testapis.edgecases.import_from_same_pkg.ChildMessage\\",
+          name: "child",
+          typeFullName: "testapis.edgecases.import_from_same_pkg.ChildMessage",
         },
       },
     });
@@ -116,43 +116,43 @@ export const ParentMessage = objectType({
   },
   sourceType: {
     module: __filename,
-    export: \\"testapis$edgecases$import_from_same_pkg$ParentMessage\\",
+    export: "testapis$edgecases$import_from_same_pkg$ParentMessage",
   },
   extensions: {
     protobufMessage: {
-      fullName: \\"testapis.edgecases.import_from_same_pkg.ParentMessage\\",
-      name: \\"ParentMessage\\",
-      package: \\"testapis.edgecases.import_from_same_pkg\\",
+      fullName: "testapis.edgecases.import_from_same_pkg.ParentMessage",
+      name: "ParentMessage",
+      package: "testapis.edgecases.import_from_same_pkg",
     },
   },
 });
 
 export const ParentMessageInput = Object.assign(
   inputObjectType({
-    name: \\"ParentMessageInput\\",
+    name: "ParentMessageInput",
     definition: (t) => {
-      t.field(\\"child\\", {
-        type: nullable(\\"ChildMessageInput\\"),
+      t.field("child", {
+        type: nullable("ChildMessageInput"),
         extensions: {
           protobufField: {
-            name: \\"child\\",
+            name: "child",
             typeFullName:
-              \\"testapis.edgecases.import_from_same_pkg.ChildMessage\\",
+              "testapis.edgecases.import_from_same_pkg.ChildMessage",
           },
         },
       });
     },
     extensions: {
       protobufMessage: {
-        fullName: \\"testapis.edgecases.import_from_same_pkg.ParentMessage\\",
-        name: \\"ParentMessage\\",
-        package: \\"testapis.edgecases.import_from_same_pkg\\",
+        fullName: "testapis.edgecases.import_from_same_pkg.ParentMessage",
+        name: "ParentMessage",
+        package: "testapis.edgecases.import_from_same_pkg",
       },
     },
   }),
   {
     toProto: (
-      input: NexusGen[\\"inputTypes\\"][\\"ParentMessageInput\\"],
+      input: NexusGen["inputTypes"]["ParentMessageInput"],
     ): ParentMessage1 => {
       const output = new ParentMessage1();
       if (input.child != null) {
@@ -163,12 +163,12 @@ export const ParentMessageInput = Object.assign(
     _protoNexus: {
       fields: {
         child: {
-          type: nullable(\\"ChildMessageInput\\"),
+          type: nullable("ChildMessageInput"),
           extensions: {
             protobufField: {
-              name: \\"child\\",
+              name: "child",
               typeFullName:
-                \\"testapis.edgecases.import_from_same_pkg.ChildMessage\\",
+                "testapis.edgecases.import_from_same_pkg.ChildMessage",
             },
           },
         },
@@ -185,24 +185,24 @@ exports[`import type form the same package with protobufjs generates nexus DSLs:
 
 /* eslint-disable */
 
-import { inputObjectType, nonNull, objectType } from \\"nexus\\";
-import { testapis } from \\"./testapis/edgecases/import_from_same_pkg\\";
+import { inputObjectType, nonNull, objectType } from "nexus";
+import { testapis } from "./testapis/edgecases/import_from_same_pkg";
 
 export type testapis$edgecases$import_from_same_pkg$ChildMessage =
   testapis.edgecases.import_from_same_pkg.ChildMessage;
 export const ChildMessage = objectType({
-  name: \\"ChildMessage\\",
+  name: "ChildMessage",
   definition: (t) => {
-    t.field(\\"body\\", {
-      type: nonNull(\\"String\\"),
+    t.field("body", {
+      type: nonNull("String"),
       resolve: (source) => {
         const value = source.body;
         if (value == null) {
-          throw new Error(\\"Cannot return null for non-nullable field\\");
+          throw new Error("Cannot return null for non-nullable field");
         }
         return value;
       },
-      extensions: { protobufField: { name: \\"body\\", typeFullName: \\"string\\" } },
+      extensions: { protobufField: { name: "body", typeFullName: "string" } },
     });
   },
   isTypeOf: (data: unknown) => {
@@ -210,37 +210,37 @@ export const ChildMessage = objectType({
   },
   sourceType: {
     module: __filename,
-    export: \\"testapis$edgecases$import_from_same_pkg$ChildMessage\\",
+    export: "testapis$edgecases$import_from_same_pkg$ChildMessage",
   },
   extensions: {
     protobufMessage: {
-      fullName: \\"testapis.edgecases.import_from_same_pkg.ChildMessage\\",
-      name: \\"ChildMessage\\",
-      package: \\"testapis.edgecases.import_from_same_pkg\\",
+      fullName: "testapis.edgecases.import_from_same_pkg.ChildMessage",
+      name: "ChildMessage",
+      package: "testapis.edgecases.import_from_same_pkg",
     },
   },
 });
 
 export const ChildMessageInput = Object.assign(
   inputObjectType({
-    name: \\"ChildMessageInput\\",
+    name: "ChildMessageInput",
     definition: (t) => {
-      t.field(\\"body\\", {
-        type: nonNull(\\"String\\"),
-        extensions: { protobufField: { name: \\"body\\", typeFullName: \\"string\\" } },
+      t.field("body", {
+        type: nonNull("String"),
+        extensions: { protobufField: { name: "body", typeFullName: "string" } },
       });
     },
     extensions: {
       protobufMessage: {
-        fullName: \\"testapis.edgecases.import_from_same_pkg.ChildMessage\\",
-        name: \\"ChildMessage\\",
-        package: \\"testapis.edgecases.import_from_same_pkg\\",
+        fullName: "testapis.edgecases.import_from_same_pkg.ChildMessage",
+        name: "ChildMessage",
+        package: "testapis.edgecases.import_from_same_pkg",
       },
     },
   }),
   {
     toProto: (
-      input: NexusGen[\\"inputTypes\\"][\\"ChildMessageInput\\"],
+      input: NexusGen["inputTypes"]["ChildMessageInput"],
     ): testapis.edgecases.import_from_same_pkg.ChildMessage => {
       const output = new testapis.edgecases.import_from_same_pkg.ChildMessage();
       output.body = input.body;
@@ -249,9 +249,9 @@ export const ChildMessageInput = Object.assign(
     _protoNexus: {
       fields: {
         body: {
-          type: nonNull(\\"String\\"),
+          type: nonNull("String"),
           extensions: {
-            protobufField: { name: \\"body\\", typeFullName: \\"string\\" },
+            protobufField: { name: "body", typeFullName: "string" },
           },
         },
       },
@@ -267,17 +267,17 @@ exports[`import type form the same package with protobufjs generates nexus DSLs:
 
 /* eslint-disable */
 
-import { inputObjectType, nullable, objectType } from \\"nexus\\";
-import { ChildMessageInput } from \\"./child_pb_nexus\\";
-import { testapis } from \\"./testapis/edgecases/import_from_same_pkg\\";
+import { inputObjectType, nullable, objectType } from "nexus";
+import { ChildMessageInput } from "./child_pb_nexus";
+import { testapis } from "./testapis/edgecases/import_from_same_pkg";
 
 export type testapis$edgecases$import_from_same_pkg$ParentMessage =
   testapis.edgecases.import_from_same_pkg.ParentMessage;
 export const ParentMessage = objectType({
-  name: \\"ParentMessage\\",
+  name: "ParentMessage",
   definition: (t) => {
-    t.field(\\"child\\", {
-      type: nullable(\\"ChildMessage\\"),
+    t.field("child", {
+      type: nullable("ChildMessage"),
       resolve: (source) => {
         const value = source.child;
         if (value == null) {
@@ -287,8 +287,8 @@ export const ParentMessage = objectType({
       },
       extensions: {
         protobufField: {
-          name: \\"child\\",
-          typeFullName: \\"testapis.edgecases.import_from_same_pkg.ChildMessage\\",
+          name: "child",
+          typeFullName: "testapis.edgecases.import_from_same_pkg.ChildMessage",
         },
       },
     });
@@ -299,43 +299,43 @@ export const ParentMessage = objectType({
   },
   sourceType: {
     module: __filename,
-    export: \\"testapis$edgecases$import_from_same_pkg$ParentMessage\\",
+    export: "testapis$edgecases$import_from_same_pkg$ParentMessage",
   },
   extensions: {
     protobufMessage: {
-      fullName: \\"testapis.edgecases.import_from_same_pkg.ParentMessage\\",
-      name: \\"ParentMessage\\",
-      package: \\"testapis.edgecases.import_from_same_pkg\\",
+      fullName: "testapis.edgecases.import_from_same_pkg.ParentMessage",
+      name: "ParentMessage",
+      package: "testapis.edgecases.import_from_same_pkg",
     },
   },
 });
 
 export const ParentMessageInput = Object.assign(
   inputObjectType({
-    name: \\"ParentMessageInput\\",
+    name: "ParentMessageInput",
     definition: (t) => {
-      t.field(\\"child\\", {
-        type: nullable(\\"ChildMessageInput\\"),
+      t.field("child", {
+        type: nullable("ChildMessageInput"),
         extensions: {
           protobufField: {
-            name: \\"child\\",
+            name: "child",
             typeFullName:
-              \\"testapis.edgecases.import_from_same_pkg.ChildMessage\\",
+              "testapis.edgecases.import_from_same_pkg.ChildMessage",
           },
         },
       });
     },
     extensions: {
       protobufMessage: {
-        fullName: \\"testapis.edgecases.import_from_same_pkg.ParentMessage\\",
-        name: \\"ParentMessage\\",
-        package: \\"testapis.edgecases.import_from_same_pkg\\",
+        fullName: "testapis.edgecases.import_from_same_pkg.ParentMessage",
+        name: "ParentMessage",
+        package: "testapis.edgecases.import_from_same_pkg",
       },
     },
   }),
   {
     toProto: (
-      input: NexusGen[\\"inputTypes\\"][\\"ParentMessageInput\\"],
+      input: NexusGen["inputTypes"]["ParentMessageInput"],
     ): testapis.edgecases.import_from_same_pkg.ParentMessage => {
       const output = new testapis.edgecases.import_from_same_pkg
         .ParentMessage();
@@ -347,12 +347,12 @@ export const ParentMessageInput = Object.assign(
     _protoNexus: {
       fields: {
         child: {
-          type: nullable(\\"ChildMessageInput\\"),
+          type: nullable("ChildMessageInput"),
           extensions: {
             protobufField: {
-              name: \\"child\\",
+              name: "child",
               typeFullName:
-                \\"testapis.edgecases.import_from_same_pkg.ChildMessage\\",
+                "testapis.edgecases.import_from_same_pkg.ChildMessage",
             },
           },
         },
