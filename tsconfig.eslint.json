@@ -5,6 +5,7 @@
   },
   "include": [
     ".eslintrc.js",
+    ".lintstagedrc.cjs",
     ".prettierrc.js",
     "jest.config.js",
   ]

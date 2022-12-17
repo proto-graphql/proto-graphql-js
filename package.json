@@ -14,6 +14,8 @@
     "lint": "eslint . --fix",
     "test": "turbo run test",
     "test:e2e": "yarn generate:testapis && turbo run test:e2e",
+    "prepare": "husky install",
+    "pre-commit": "lint-staged",
     "release": "yarn build && changeset publish"
   },
   "devDependencies": {
