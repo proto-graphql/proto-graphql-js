@@ -41,12 +41,12 @@ it("processes a query successfully", async () => {
     `
   );
   expect(resp).toMatchInlineSnapshot(`
-    Object {
-      "data": Object {
-        "test": Object {
+    {
+      "data": {
+        "test": {
           "optionalPrimitives": null,
-          "optionalPrimitivesList": Array [],
-          "requiredPrimitives": Object {
+          "optionalPrimitivesList": [],
+          "requiredPrimitives": {
             "requiredBoolValue": true,
             "requiredDoubleValue": 2.4,
             "requiredFixed32Value": 9,
@@ -62,7 +62,7 @@ it("processes a query successfully", async () => {
             "requiredUint32Value": 5,
             "requiredUint64Value": 6,
           },
-          "requiredPrimitivesList": Array [],
+          "requiredPrimitivesList": [],
         },
       },
     }

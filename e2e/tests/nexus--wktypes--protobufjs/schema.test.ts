@@ -25,9 +25,9 @@ it("processes a query successfully", async () => {
     `
   );
   expect(resp).toMatchInlineSnapshot(`
-    Object {
-      "data": Object {
-        "test1": Object {
+    {
+      "data": {
+        "test1": {
           "boolValue": true,
           "doubleValue": 2.4,
           "floatValue": 3.5,
@@ -66,9 +66,9 @@ it("processes a query successfully when returns message fields are null", async 
     `
   );
   expect(resp).toMatchInlineSnapshot(`
-    Object {
-      "data": Object {
-        "test2": Object {
+    {
+      "data": {
+        "test2": {
           "boolValue": null,
           "doubleValue": null,
           "floatValue": null,

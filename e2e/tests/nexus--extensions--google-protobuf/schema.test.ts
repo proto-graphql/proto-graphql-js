@@ -27,10 +27,10 @@ it("processes a query with squashed union successfully", async () => {
     `
   );
   expect(resp).toMatchInlineSnapshot(`
-    Object {
-      "data": Object {
-        "test": Object {
-          "squashedMessage": Object {
+    {
+      "data": {
+        "test": {
+          "squashedMessage": {
             "body": "field 2",
           },
         },

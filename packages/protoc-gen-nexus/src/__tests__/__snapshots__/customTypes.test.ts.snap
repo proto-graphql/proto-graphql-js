@@ -6,80 +6,80 @@ exports[`custom types generates nexus DSLs: custom_types/date_pb_nexus.ts 1`] = 
 
 /* eslint-disable */
 
-import { inputObjectType, nonNull, objectType } from \\"nexus\\";
-import { Date as Date1 } from \\"./testapis/custom_types/date_pb\\";
+import { inputObjectType, nonNull, objectType } from "nexus";
+import { Date as Date1 } from "./testapis/custom_types/date_pb";
 
 export type testapis$custom_types$Date = Date1;
 export const Date = objectType({
-  name: \\"Date\\",
+  name: "Date",
   definition: (t) => {
-    t.field(\\"year\\", {
-      type: nonNull(\\"Int\\"),
+    t.field("year", {
+      type: nonNull("Int"),
       resolve: (source) => {
         const value = source.getYear();
         return value;
       },
-      extensions: { protobufField: { name: \\"year\\", typeFullName: \\"uint32\\" } },
+      extensions: { protobufField: { name: "year", typeFullName: "uint32" } },
     });
-    t.field(\\"month\\", {
-      type: nonNull(\\"Int\\"),
+    t.field("month", {
+      type: nonNull("Int"),
       resolve: (source) => {
         const value = source.getMonth();
         return value;
       },
-      extensions: { protobufField: { name: \\"month\\", typeFullName: \\"uint32\\" } },
+      extensions: { protobufField: { name: "month", typeFullName: "uint32" } },
     });
-    t.field(\\"day\\", {
-      type: nonNull(\\"Int\\"),
+    t.field("day", {
+      type: nonNull("Int"),
       resolve: (source) => {
         const value = source.getDay();
         return value;
       },
-      extensions: { protobufField: { name: \\"day\\", typeFullName: \\"uint32\\" } },
+      extensions: { protobufField: { name: "day", typeFullName: "uint32" } },
     });
   },
   isTypeOf: (data: unknown) => {
     return data instanceof Date1;
   },
-  sourceType: { module: __filename, export: \\"testapis$custom_types$Date\\" },
+  sourceType: { module: __filename, export: "testapis$custom_types$Date" },
   extensions: {
     protobufMessage: {
-      fullName: \\"testapis.custom_types.Date\\",
-      name: \\"Date\\",
-      package: \\"testapis.custom_types\\",
+      fullName: "testapis.custom_types.Date",
+      name: "Date",
+      package: "testapis.custom_types",
     },
   },
 });
 
 export const DateInput = Object.assign(
   inputObjectType({
-    name: \\"DateInput\\",
+    name: "DateInput",
     definition: (t) => {
-      t.field(\\"year\\", {
-        type: nonNull(\\"Int\\"),
-        extensions: { protobufField: { name: \\"year\\", typeFullName: \\"uint32\\" } },
+      t.field("year", {
+        type: nonNull("Int"),
+        extensions: { protobufField: { name: "year", typeFullName: "uint32" } },
       });
-      t.field(\\"month\\", {
-        type: nonNull(\\"Int\\"),
+      t.field("month", {
+        type: nonNull("Int"),
         extensions: {
-          protobufField: { name: \\"month\\", typeFullName: \\"uint32\\" },
+          protobufField: { name: "month", typeFullName: "uint32" },
         },
       });
-      t.field(\\"day\\", {
-        type: nonNull(\\"Int\\"),
-        extensions: { protobufField: { name: \\"day\\", typeFullName: \\"uint32\\" } },
+      t.field("day", {
+        type: nonNull("Int"),
+        extensions: { protobufField: { name: "day", typeFullName: "uint32" } },
       });
     },
     extensions: {
       protobufMessage: {
-        fullName: \\"testapis.custom_types.Date\\",
-        name: \\"Date\\",
-        package: \\"testapis.custom_types\\",
+        fullName: "testapis.custom_types.Date",
+        name: "Date",
+        package: "testapis.custom_types",
       },
     },
   }),
   {
-    toProto: (input: NexusGen[\\"inputTypes\\"][\\"DateInput\\"]): Date1 => {
+    toProto: (input: NexusGen["inputTypes"]["DateInput"]): Date1 => {
       const output = new Date1();
       output.setYear(input.year);
       output.setMonth(input.month);
@@ -89,21 +89,21 @@ export const DateInput = Object.assign(
     _protoNexus: {
       fields: {
         year: {
-          type: nonNull(\\"Int\\"),
+          type: nonNull("Int"),
           extensions: {
-            protobufField: { name: \\"year\\", typeFullName: \\"uint32\\" },
+            protobufField: { name: "year", typeFullName: "uint32" },
           },
         },
         month: {
-          type: nonNull(\\"Int\\"),
+          type: nonNull("Int"),
           extensions: {
-            protobufField: { name: \\"month\\", typeFullName: \\"uint32\\" },
+            protobufField: { name: "month", typeFullName: "uint32" },
           },
         },
         day: {
-          type: nonNull(\\"Int\\"),
+          type: nonNull("Int"),
           extensions: {
-            protobufField: { name: \\"day\\", typeFullName: \\"uint32\\" },
+            protobufField: { name: "day", typeFullName: "uint32" },
           },
         },
       },
@@ -119,25 +119,25 @@ exports[`custom types generates nexus DSLs: custom_types/post_pb_nexus.ts 1`] = 
 
 /* eslint-disable */
 
-import { inputObjectType, nonNull, nullable, objectType } from \\"nexus\\";
-import { Post as Post1 } from \\"./testapis/custom_types/post_pb\\";
+import { inputObjectType, nonNull, nullable, objectType } from "nexus";
+import { Post as Post1 } from "./testapis/custom_types/post_pb";
 
 export type testapis$custom_types$Post = Post1;
 export const Post = objectType({
-  name: \\"Post\\",
+  name: "Post",
   definition: (t) => {
-    t.field(\\"title\\", {
-      type: nonNull(\\"String\\"),
-      description: \\"Required.\\",
+    t.field("title", {
+      type: nonNull("String"),
+      description: "Required.",
       resolve: (source) => {
         const value = source.getTitle();
         return value;
       },
-      extensions: { protobufField: { name: \\"title\\", typeFullName: \\"string\\" } },
+      extensions: { protobufField: { name: "title", typeFullName: "string" } },
     });
-    t.field(\\"publishedDate\\", {
-      type: nullable(\\"Date\\"),
-      description: \\"Optional.\\",
+    t.field("publishedDate", {
+      type: nullable("Date"),
+      description: "Optional.",
       resolve: (source) => {
         const value = source.getPublishedDate();
         if (value == null) {
@@ -147,8 +147,8 @@ export const Post = objectType({
       },
       extensions: {
         protobufField: {
-          name: \\"published_date\\",
-          typeFullName: \\"testapis.custom_types.Date\\",
+          name: "published_date",
+          typeFullName: "testapis.custom_types.Date",
         },
       },
     });
@@ -156,48 +156,48 @@ export const Post = objectType({
   isTypeOf: (data: unknown) => {
     return data instanceof Post1;
   },
-  sourceType: { module: __filename, export: \\"testapis$custom_types$Post\\" },
+  sourceType: { module: __filename, export: "testapis$custom_types$Post" },
   extensions: {
     protobufMessage: {
-      fullName: \\"testapis.custom_types.Post\\",
-      name: \\"Post\\",
-      package: \\"testapis.custom_types\\",
+      fullName: "testapis.custom_types.Post",
+      name: "Post",
+      package: "testapis.custom_types",
     },
   },
 });
 
 export const PostInput = Object.assign(
   inputObjectType({
-    name: \\"PostInput\\",
+    name: "PostInput",
     definition: (t) => {
-      t.field(\\"title\\", {
-        type: nonNull(\\"String\\"),
-        description: \\"Required.\\",
+      t.field("title", {
+        type: nonNull("String"),
+        description: "Required.",
         extensions: {
-          protobufField: { name: \\"title\\", typeFullName: \\"string\\" },
+          protobufField: { name: "title", typeFullName: "string" },
         },
       });
-      t.field(\\"publishedDate\\", {
-        type: nullable(\\"Date\\"),
-        description: \\"Optional.\\",
+      t.field("publishedDate", {
+        type: nullable("Date"),
+        description: "Optional.",
         extensions: {
           protobufField: {
-            name: \\"published_date\\",
-            typeFullName: \\"testapis.custom_types.Date\\",
+            name: "published_date",
+            typeFullName: "testapis.custom_types.Date",
           },
         },
       });
     },
     extensions: {
       protobufMessage: {
-        fullName: \\"testapis.custom_types.Post\\",
-        name: \\"Post\\",
-        package: \\"testapis.custom_types\\",
+        fullName: "testapis.custom_types.Post",
+        name: "Post",
+        package: "testapis.custom_types",
       },
     },
   }),
   {
-    toProto: (input: NexusGen[\\"inputTypes\\"][\\"PostInput\\"]): Post1 => {
+    toProto: (input: NexusGen["inputTypes"]["PostInput"]): Post1 => {
       const output = new Post1();
       output.setTitle(input.title);
       if (input.publishedDate != null) {
@@ -208,17 +208,17 @@ export const PostInput = Object.assign(
     _protoNexus: {
       fields: {
         title: {
-          type: nonNull(\\"String\\"),
+          type: nonNull("String"),
           extensions: {
-            protobufField: { name: \\"title\\", typeFullName: \\"string\\" },
+            protobufField: { name: "title", typeFullName: "string" },
           },
         },
         publishedDate: {
-          type: nullable(\\"Date\\"),
+          type: nullable("Date"),
           extensions: {
             protobufField: {
-              name: \\"published_date\\",
-              typeFullName: \\"testapis.custom_types.Date\\",
+              name: "published_date",
+              typeFullName: "testapis.custom_types.Date",
             },
           },
         },

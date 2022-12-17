@@ -12,13 +12,13 @@ it("creates subset types", () => {
       type: f.type,
     }))
   ).toMatchInlineSnapshot(`
-    Array [
-      Object {
+    [
+      {
         "description": "Test string field",
         "name": "foo",
         "type": "String!",
       },
-      Object {
+      {
         "description": "Test boolean field",
         "name": "baz",
         "type": "Boolean!",

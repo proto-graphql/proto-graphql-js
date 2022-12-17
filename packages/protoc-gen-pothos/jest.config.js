@@ -7,11 +7,6 @@ const base = {
     "<rootDir>/src/__generated__/extensions/",
     "<rootDir>/src/__tests__/",
   ],
-  globals: {
-    "ts-jest": {
-      tsconfig: "tsconfig.test.json",
-    },
-  },
 };
 
 module.exports = base;

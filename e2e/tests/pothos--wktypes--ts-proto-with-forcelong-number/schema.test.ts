@@ -25,9 +25,9 @@ it("processes a query successfully", async () => {
     `
   );
   expect(resp).toMatchInlineSnapshot(`
-    Object {
-      "data": Object {
-        "test": Object {
+    {
+      "data": {
+        "test": {
           "boolValue": true,
           "doubleValue": 2.4,
           "floatValue": 3.5,

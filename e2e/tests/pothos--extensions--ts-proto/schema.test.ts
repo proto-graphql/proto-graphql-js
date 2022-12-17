@@ -27,10 +27,10 @@ it("processes a query with squashed union successfully", async () => {
     `
   );
   expect(resp).toMatchInlineSnapshot(`
-    Object {
-      "data": Object {
-        "testSquashedUnion": Object {
-          "squashedMessage": Object {
+    {
+      "data": {
+        "testSquashedUnion": {
+          "squashedMessage": {
             "body": "field 2",
           },
         },
@@ -54,9 +54,9 @@ it("processes a query with interface successfully", async () => {
     `
   );
   expect(resp).toMatchInlineSnapshot(`
-    Object {
-      "data": Object {
-        "testInterface": Object {
+    {
+      "data": {
+        "testInterface": {
           "body": "hello",
           "id": "123",
         },
@@ -84,10 +84,10 @@ it("processes a query with skipResolver successfully", async () => {
     `
   );
   expect(resp).toMatchInlineSnapshot(`
-    Object {
-      "data": Object {
-        "testSkipResolver": Object {
-          "squashedMessage": Object {
+    {
+      "data": {
+        "testSkipResolver": {
+          "squashedMessage": {
             "skipResolver": "implemented",
           },
         },
