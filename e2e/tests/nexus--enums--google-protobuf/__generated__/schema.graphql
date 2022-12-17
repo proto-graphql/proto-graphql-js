@@ -7,25 +7,25 @@ type MessageWithEnums {
   optionalMyEnum: MyEnum
 
   """Optional."""
+  optionalMyEnums: [MyEnum!]
+
+  """Optional."""
   optionalMyEnumWithoutUnspecified: MyEnumWithoutUnspecified
 
   """Optional."""
   optionalMyEnumWithoutUnspecifieds: [MyEnumWithoutUnspecified!]
 
-  """Optional."""
-  optionalMyEnums: [MyEnum!]
-
   """Required."""
   requiredMyEnum: MyEnum!
+
+  """Required."""
+  requiredMyEnums: [MyEnum!]!
 
   """Required."""
   requiredMyEnumWithoutUnspecified: MyEnumWithoutUnspecified!
 
   """Required."""
   requiredMyEnumWithoutUnspecifieds: [MyEnumWithoutUnspecified!]!
-
-  """Required."""
-  requiredMyEnums: [MyEnum!]!
 }
 
 input MessageWithEnumsInput {
@@ -33,25 +33,25 @@ input MessageWithEnumsInput {
   optionalMyEnum: MyEnum
 
   """Optional."""
+  optionalMyEnums: [MyEnum!]
+
+  """Optional."""
   optionalMyEnumWithoutUnspecified: MyEnumWithoutUnspecified
 
   """Optional."""
   optionalMyEnumWithoutUnspecifieds: [MyEnumWithoutUnspecified!]
 
-  """Optional."""
-  optionalMyEnums: [MyEnum!]
-
   """Required."""
   requiredMyEnum: MyEnum!
+
+  """Required."""
+  requiredMyEnums: [MyEnum!]!
 
   """Required."""
   requiredMyEnumWithoutUnspecified: MyEnumWithoutUnspecified!
 
   """Required."""
   requiredMyEnumWithoutUnspecifieds: [MyEnumWithoutUnspecified!]!
-
-  """Required."""
-  requiredMyEnums: [MyEnum!]!
 }
 
 enum MyEnum {
