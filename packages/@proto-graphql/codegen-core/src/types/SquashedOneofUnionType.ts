@@ -1,9 +1,10 @@
 import { ProtoMessage } from "@proto-graphql/proto-descriptors";
+
 import { ObjectField } from "./ObjectField";
 import { ObjectType } from "./ObjectType";
 import { OneofUnionType } from "./OneofUnionType";
-import { TypeOptions } from "./options";
 import { TypeBase } from "./TypeBase";
+import { TypeOptions } from "./options";
 
 export class SquashedOneofUnionType extends TypeBase<ProtoMessage> {
   private readonly oneofUnionType: OneofUnionType;

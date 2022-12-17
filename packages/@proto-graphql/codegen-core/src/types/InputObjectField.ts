@@ -1,4 +1,5 @@
 import { ProtoField } from "@proto-graphql/proto-descriptors";
+
 import * as extensions from "../__generated__/extensions/graphql/schema_pb";
 import { EnumType } from "./EnumType";
 import { FieldBase } from "./FieldBase";
@@ -6,13 +7,24 @@ import { InputObjectType } from "./InputObjectType";
 import { ScalarType } from "./ScalarType";
 import { isRequiredField } from "./util";
 
-export class InputObjectField<T extends ScalarType | EnumType | InputObjectType> extends FieldBase<ProtoField> {
-  constructor(readonly type: T, readonly parent: InputObjectType, proto: ProtoField) {
+export class InputObjectField<
+  T extends ScalarType | EnumType | InputObjectType
+> extends FieldBase<ProtoField> {
+  constructor(
+    readonly type: T,
+    readonly parent: InputObjectType,
+    proto: ProtoField
+  ) {
     super(proto);
   }
 
   get name(): string {
-    return this.proto.descriptor.getOptions()?.getExtension(extensions.field)?.getName() || this.proto.jsonName;
+    return (
+      this.proto.descriptor
+        .getOptions()
+        ?.getExtension(extensions.field)
+        ?.getName() || this.proto.jsonName
+    );
   }
 
   /**
@@ -25,7 +37,9 @@ export class InputObjectField<T extends ScalarType | EnumType | InputObjectType>
   public toPartialInput(): InputObjectField<T> | PartialInputObjectField<T> {
     if (this.type instanceof InputObjectType) {
       return new PartialInputObjectField(
-        (this.type.hasPartialInput() ? this.type.toPartialInput() : this.type) as any,
+        (this.type.hasPartialInput()
+          ? this.type.toPartialInput()
+          : this.type) as any,
         this.parent,
         this.proto
       );
@@ -34,7 +48,9 @@ export class InputObjectField<T extends ScalarType | EnumType | InputObjectType>
   }
 }
 
-class PartialInputObjectField<T extends ScalarType | EnumType | InputObjectType> extends InputObjectField<T> {
+class PartialInputObjectField<
+  T extends ScalarType | EnumType | InputObjectType
+> extends InputObjectField<T> {
   /**
    * @override
    */

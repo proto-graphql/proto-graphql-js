@@ -17,7 +17,13 @@ import {
 } from "@proto-graphql/codegen-core";
 import { constantCase, pascalCase } from "change-case";
 import { code, Code, joinCode, literalOf } from "ts-poet";
-import { fieldType, impNexus, impProtoNexus, NexusPrinterOptions } from "./util";
+
+import {
+  fieldType,
+  impNexus,
+  impProtoNexus,
+  NexusPrinterOptions,
+} from "./util";
 
 /**
  * @
@@ -38,7 +44,9 @@ export function createFieldDefinitionCode(
     resolve: createResolverCode(field, opts),
     extensions: protobufGraphQLExtensions(field),
   };
-  return code`t.field(${literalOf(field.name)}, ${literalOf(compact(fieldOpts))});`;
+  return code`t.field(${literalOf(field.name)}, ${literalOf(
+    compact(fieldOpts)
+  )});`;
 }
 
 export function createNoopFieldDefinitionCode(opts: { input: boolean }): Code {
@@ -69,7 +77,9 @@ export function createTypeCode(
     typeCode = code`${impNexus("nonNull")}(${typeCode})`;
     typeCode = code`${impNexus("list")}(${typeCode})`;
   }
-  return code`${impNexus(field.isNullable() ? "nullable" : "nonNull")}(${typeCode})`;
+  return code`${impNexus(
+    field.isNullable() ? "nullable" : "nonNull"
+  )}(${typeCode})`;
 }
 
 /**
@@ -82,21 +92,35 @@ export function createTypeCode(
  */
 function createResolverCode(
   field:
-    | ObjectField<ObjectType | InterfaceType | SquashedOneofUnionType | EnumType | ScalarType>
+    | ObjectField<
+        | ObjectType
+        | InterfaceType
+        | SquashedOneofUnionType
+        | EnumType
+        | ScalarType
+      >
     | ObjectOneofField
     | InputObjectField<InputObjectType | EnumType | ScalarType>,
   opts: NexusPrinterOptions
 ): Code | null {
   if (field instanceof InputObjectField) return null;
-  if (field instanceof ObjectOneofField || field.type instanceof SquashedOneofUnionType) {
-    const oneofFields = (field instanceof ObjectOneofField ? field.type : (field.type as SquashedOneofUnionType))
-      .fields;
+  if (
+    field instanceof ObjectOneofField ||
+    field.type instanceof SquashedOneofUnionType
+  ) {
+    const oneofFields = (
+      field instanceof ObjectOneofField
+        ? field.type
+        : (field.type as SquashedOneofUnionType)
+    ).fields;
 
     const fieldNames = oneofFields.map((f) => f.proto.name);
     const whenNullCode =
       field.isNullable() && !field.isList()
         ? code`return null;`
-        : code`throw new Error("One of the following fields must be non-null: ${fieldNames.join(", ")}");`;
+        : code`throw new Error("One of the following fields must be non-null: ${fieldNames.join(
+            ", "
+          )}");`;
 
     const chunks = [];
     if (field.type instanceof SquashedOneofUnionType && !field.isList()) {
@@ -107,8 +131,10 @@ function createResolverCode(
     switch (opts.protobuf) {
       case "google-protobuf": {
         const oneofName = pascalCase(
-          (field instanceof ObjectOneofField ? field.proto : (field.type as SquashedOneofUnionType).proto.oneofs[0])
-            .name
+          (field instanceof ObjectOneofField
+            ? field.proto
+            : (field.type as SquashedOneofUnionType).proto.oneofs[0]
+          ).name
         );
         const oneofParent =
           field instanceof ObjectOneofField
@@ -118,8 +144,14 @@ function createResolverCode(
           switch (value.get${oneofName}Case()) {
             ${oneofFields.map(
               (f) => code`
-                case ${oneofParent}.${oneofName}Case.${constantCase(f.proto.name)}: {
-                  return ${createGetFieldValueCode(code`value`, f.proto, opts)}!;
+                case ${oneofParent}.${oneofName}Case.${constantCase(
+                f.proto.name
+              )}: {
+                  return ${createGetFieldValueCode(
+                    code`value`,
+                    f.proto,
+                    opts
+                  )}!;
                 }
               `
             )}
@@ -131,7 +163,11 @@ function createResolverCode(
       case "protobufjs": {
         chunks.push(
           ...oneofFields.map((f) => {
-            const valueCode = createGetFieldValueCode(code`value`, f.proto, opts);
+            const valueCode = createGetFieldValueCode(
+              code`value`,
+              f.proto,
+              opts
+            );
             return code`
               if (${valueCode} != null) {
                 return ${valueCode};
@@ -145,11 +181,15 @@ function createResolverCode(
       /* istanbul ignore next */
       default: {
         const _exhaustiveCheck: "ts-proto" = opts.protobuf;
-        throw new Error(`unsupported protobuf implementation: ${opts.protobuf}`);
+        throw new Error(
+          `unsupported protobuf implementation: ${opts.protobuf}`
+        );
       }
     }
     const fieldValueCode =
-      field instanceof ObjectOneofField ? code`source` : createGetFieldValueCode(code`source`, field.proto, opts);
+      field instanceof ObjectOneofField
+        ? code`source`
+        : createGetFieldValueCode(code`source`, field.proto, opts);
     if (field.isList()) {
       chunks.unshift(code`return ${fieldValueCode}.map((value) => {`);
       chunks.push(code`});`);
@@ -164,12 +204,17 @@ function createResolverCode(
   if (
     !field.isList() &&
     (opts.protobuf === "protobufjs" ||
-      (opts.protobuf === "google-protobuf" && !(field.type instanceof ScalarType && field.type.isPrimitive())) ||
+      (opts.protobuf === "google-protobuf" &&
+        !(field.type instanceof ScalarType && field.type.isPrimitive())) ||
       field.type instanceof EnumType)
   ) {
     chunks.push(code`
       if (value == null) {
-        ${field.isNullable() ? "return null;" : 'throw new Error("Cannot return null for non-nullable field");'}
+        ${
+          field.isNullable()
+            ? "return null;"
+            : 'throw new Error("Cannot return null for non-nullable field");'
+        }
       }
     `);
   }
@@ -177,7 +222,9 @@ function createResolverCode(
   if (field.type instanceof EnumType) {
     if (field.type.unspecifiedValue != null) {
       chunks.push(code`
-        if (value === ${protoType(field.type.proto, opts)}.${field.type.unspecifiedValue.proto.name}) {
+        if (value === ${protoType(field.type.proto, opts)}.${
+        field.type.unspecifiedValue.proto.name
+      }) {
           ${
             field.isNullable() && !field.isList()
               ? "return null;"
@@ -202,7 +249,9 @@ function createResolverCode(
   }
 
   if (isProtobufWellKnownType(field.proto.type)) {
-    const transformer = code`${impProtoNexus("getTransformer")}("${field.proto.type.fullName.toString()}")`;
+    const transformer = code`${impProtoNexus(
+      "getTransformer"
+    )}("${field.proto.type.fullName.toString()}")`;
     chunks.push(code`return ${transformer}.protoToGql(value);`);
   } else if (isProtobufLong(field.proto)) {
     chunks.push(code`return value.toString();`);
@@ -211,7 +260,11 @@ function createResolverCode(
   }
 
   if (field instanceof ObjectField) {
-    const fieldValueCode = createGetFieldValueCode(code`source`, field.proto, opts);
+    const fieldValueCode = createGetFieldValueCode(
+      code`source`,
+      field.proto,
+      opts
+    );
     if (field.isList()) {
       chunks.unshift(code`return ${fieldValueCode}.map((value) => {`);
       chunks.push(code`});`);

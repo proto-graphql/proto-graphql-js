@@ -1,11 +1,16 @@
-import { promises as fs } from "fs";
 import { execSync } from "child_process";
+import { promises as fs } from "fs";
 import { join, dirname } from "path";
+
 import { glob } from "glob";
-import * as ts from "typescript";
+import {
+  CodeGeneratorRequest,
+  CodeGeneratorResponse,
+} from "google-protobuf/google/protobuf/compiler/plugin_pb";
 import { FileDescriptorSet } from "google-protobuf/google/protobuf/descriptor_pb";
+import * as ts from "typescript";
+
 import { processRequest } from "../../process";
-import { CodeGeneratorRequest, CodeGeneratorResponse } from "google-protobuf/google/protobuf/compiler/plugin_pb";
 
 const generationTargets = ["native protobuf", "protobufjs"] as const;
 type GenerationTarget = typeof generationTargets[number];
@@ -13,7 +18,11 @@ type GenerationTarget = typeof generationTargets[number];
 export async function generateDSLs(
   name: string,
   target: GenerationTarget,
-  opts: { withPrefix?: boolean; perGraphQLType?: boolean; partialInputs?: boolean } = {}
+  opts: {
+    withPrefix?: boolean;
+    perGraphQLType?: boolean;
+    partialInputs?: boolean;
+  } = {}
 ) {
   const params = [];
   switch (target) {
@@ -22,7 +31,8 @@ export async function generateDSLs(
       params.push("use_protobufjs");
       break;
     case "native protobuf":
-      if (opts.withPrefix) params.push("import_prefix=@testapis/node-native/lib");
+      if (opts.withPrefix)
+        params.push("import_prefix=@testapis/node-native/lib");
       break;
     default: {
       const _exhaustiveCheck: never = target;
@@ -38,7 +48,10 @@ export async function generateDSLs(
   return await processCodeGeneration(name, params.join(","));
 }
 
-export function itGeneratesNexusDSLsToMatchSnapshtos(name: string, expectedGeneratedFiles: string[]) {
+export function itGeneratesNexusDSLsToMatchSnapshtos(
+  name: string,
+  expectedGeneratedFiles: string[]
+) {
   describe.each(generationTargets)("with %s", (target) => {
     it("generates nexus DSLs", async () => {
       const resp = await generateDSLs(name, target);
@@ -67,7 +80,9 @@ export function testSchemaGeneration(
       files = [];
 
       for (const n of Array.isArray(name) ? name : [name]) {
-        files.push(...(await generateDSLs(n, target, { withPrefix: true })).getFileList());
+        files.push(
+          ...(await generateDSLs(n, target, { withPrefix: true })).getFileList()
+        );
       }
     });
 
@@ -78,7 +93,10 @@ export function testSchemaGeneration(
         async (dir) => {
           try {
             await validateGeneratedFiles(dir);
-            const gqlSchema = await fs.readFile(join(dir, "schema.graphql"), "utf-8");
+            const gqlSchema = await fs.readFile(
+              join(dir, "schema.graphql"),
+              "utf-8"
+            );
             expect(gqlSchema).toMatchSnapshot("schema.graphql");
           } catch (e) {
             // eslint-disable-next-line no-console
@@ -90,25 +108,33 @@ export function testSchemaGeneration(
     });
 
     if (opts.schemaTests && opts.schemaTests.length > 0) {
-      it.each(opts.schemaTests)("%s", async (_name, { extraSchema, testQuery }) => {
-        try {
-          const resp = await execQuery(
-            files,
-            [opts.extraSchema, extraSchema].filter((v): v is string => v != null),
-            testQuery
-          );
-          expect(JSON.parse(resp)).toMatchSnapshot();
-        } catch (e) {
-          // eslint-disable-next-line no-console
-          console.error(e);
-          throw e;
+      it.each(opts.schemaTests)(
+        "%s",
+        async (_name, { extraSchema, testQuery }) => {
+          try {
+            const resp = await execQuery(
+              files,
+              [opts.extraSchema, extraSchema].filter(
+                (v): v is string => v != null
+              ),
+              testQuery
+            );
+            expect(JSON.parse(resp)).toMatchSnapshot();
+          } catch (e) {
+            // eslint-disable-next-line no-console
+            console.error(e);
+            throw e;
+          }
         }
-      });
+      );
     }
   });
 }
 
-export function snapshotGeneratedFiles(resp: CodeGeneratorResponse, files: string[]) {
+export function snapshotGeneratedFiles(
+  resp: CodeGeneratorResponse,
+  files: string[]
+) {
   expect(Object.keys(resp.getFileList())).toHaveLength(files.length);
 
   const fileByName = getFileMap(resp);
@@ -119,7 +145,10 @@ export function snapshotGeneratedFiles(resp: CodeGeneratorResponse, files: strin
   }
 }
 
-export async function processCodeGeneration(name: string, param?: string): Promise<CodeGeneratorResponse> {
+export async function processCodeGeneration(
+  name: string,
+  param?: string
+): Promise<CodeGeneratorResponse> {
   const req = await buildCodeGeneratorRequest(name);
   if (param) {
     req.setParameter(param);
@@ -127,14 +156,30 @@ export async function processCodeGeneration(name: string, param?: string): Promi
   return processRequest(req);
 }
 
-async function getFixtureFileDescriptorSet(name: string): Promise<FileDescriptorSet> {
+async function getFixtureFileDescriptorSet(
+  name: string
+): Promise<FileDescriptorSet> {
   const buf = await fs.readFile(
-    join(__dirname, "..", "..", "..", "..", "@testapis", "proto", "src", "testapis", name, "descriptor_set.pb")
+    join(
+      __dirname,
+      "..",
+      "..",
+      "..",
+      "..",
+      "@testapis",
+      "proto",
+      "src",
+      "testapis",
+      name,
+      "descriptor_set.pb"
+    )
   );
   return FileDescriptorSet.deserializeBinary(buf);
 }
 
-async function buildCodeGeneratorRequest(name: string): Promise<CodeGeneratorRequest> {
+async function buildCodeGeneratorRequest(
+  name: string
+): Promise<CodeGeneratorRequest> {
   const descSet = await getFixtureFileDescriptorSet(name);
   const req = new CodeGeneratorRequest();
 
@@ -151,8 +196,12 @@ async function buildCodeGeneratorRequest(name: string): Promise<CodeGeneratorReq
 }
 
 function getFileMap(resp: CodeGeneratorResponse): Record<string, string> {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  return resp.getFileList().reduce((m, f) => ({ ...m, [f.getName()!]: f.getContent()! }), {} as Record<string, string>);
+  return resp
+    .getFileList()
+    .reduce(
+      (m, f) => ({ ...m, [f.getName()!]: f.getContent()! }),
+      {} as Record<string, string>
+    );
 }
 
 async function withGeneratedResults<T>(
@@ -165,10 +214,16 @@ async function withGeneratedResults<T>(
     await fs.mkdir(dir, { recursive: true });
     await Promise.all(
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      [...new Set(files.map((f) => join(dir, dirname(f.getName()!))))].map((p) => fs.mkdir(p, { recursive: true }))
+      [...new Set(files.map((f) => join(dir, dirname(f.getName()!))))].map(
+        (p) => fs.mkdir(p, { recursive: true })
+      )
     );
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    await Promise.all(files.map((f) => fs.writeFile(join(dir, f.getName()!), f.getContent()!, "utf-8")));
+
+    await Promise.all(
+      files.map((f) =>
+        fs.writeFile(join(dir, f.getName()!), f.getContent()!, "utf-8")
+      )
+    );
     return await cb(dir);
   } finally {
     await fs.rm(dir, { recursive: true, force: true, maxRetries: 3 });
@@ -181,7 +236,6 @@ async function withGeneratedSchema(
   cb: (dir: string) => Promise<void>
 ) {
   await withGeneratedResults(files, async (dir) => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     try {
       await createSchemaTs(dir, files, extraSchemata);
       execSync(`yarn ts-node --transpile-only ${dir}/schema.ts`, { cwd: dir });
@@ -214,18 +268,29 @@ async function validateGeneratedFiles(dir: string) {
   expect(diagMsgs).toHaveLength(0);
 }
 
-const createSchemaTs = async (dir: string, files: CodeGeneratorResponse.File[], extraSchemata: string[]) => {
+const createSchemaTs = async (
+  dir: string,
+  files: CodeGeneratorResponse.File[],
+  extraSchemata: string[]
+) => {
   const pathAliasPairs = files.map((f, i) => [f.getName()!, `types_${i}`]);
 
   const content = `import { makeSchema } from "nexus";
 import * as path from "path";
 
-${pathAliasPairs.map(([p, a]) => `import * as ${a} from "./${p.replace(/\.[^/.]+$/, "")}";`).join("\n")}
+${pathAliasPairs
+  .map(([p, a]) => `import * as ${a} from "./${p.replace(/\.[^/.]+$/, "")}";`)
+  .join("\n")}
 
-${extraSchemata.map((_, idx) => `import * as extra_${idx} from "./extraSchema_${idx}";`).join("\n")}
+${extraSchemata
+  .map((_, idx) => `import * as extra_${idx} from "./extraSchema_${idx}";`)
+  .join("\n")}
 
 const schema = makeSchema({
-  types: [${[...pathAliasPairs.map(([_, a]) => a), ...extraSchemata.map((_, idx) => `extra_${idx}`)].join(", ")}],
+  types: [${[
+    ...pathAliasPairs.map(([_, a]) => a),
+    ...extraSchemata.map((_, idx) => `extra_${idx}`),
+  ].join(", ")}],
   outputs: {
     schema: path.join(__dirname, "schema.graphql"),
     typegen: path.join(__dirname, "typings.ts"),
@@ -242,12 +307,18 @@ export { schema };
 `;
 
   await Promise.all(
-    extraSchemata.map((content, idx) => fs.writeFile(join(dir, `extraSchema_${idx}.ts`), content, "utf-8"))
+    extraSchemata.map((content, idx) =>
+      fs.writeFile(join(dir, `extraSchema_${idx}.ts`), content, "utf-8")
+    )
   );
   await fs.writeFile(join(dir, "schema.ts"), content, "utf-8");
 };
 
-const execQuery = async (files: CodeGeneratorResponse.File[], extraSchemata: string[], query: string) => {
+const execQuery = async (
+  files: CodeGeneratorResponse.File[],
+  extraSchemata: string[],
+  query: string
+) => {
   const execQueryTs = `
 import { stdout } from "process";
 import { graphql } from "graphql";
@@ -265,7 +336,10 @@ graphql(
     await createSchemaTs(dir, files, extraSchemata);
     await fs.writeFile(join(dir, "execQuery.ts"), execQueryTs, "utf-8");
 
-    const resp = execSync(`yarn --silent ts-node --transpile-only ${dir}/execQuery.ts`, { cwd: dir });
+    const resp = execSync(
+      `yarn --silent ts-node --transpile-only ${dir}/execQuery.ts`,
+      { cwd: dir }
+    );
     return resp.toString("utf-8");
   });
 };

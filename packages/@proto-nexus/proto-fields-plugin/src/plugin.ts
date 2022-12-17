@@ -16,7 +16,14 @@ export const protoFieldsPlugin = () => {
                 _protoNexus: { fields: fieldDefs },
               },
               fieldNames,
-            ] = factoryArgs as [{ _protoNexus: { fields: Record<string, NexusInputFieldConfig<any, any>> } }, string[]];
+            ] = factoryArgs as [
+              {
+                _protoNexus: {
+                  fields: Record<string, NexusInputFieldConfig<any, any>>;
+                };
+              },
+              string[]
+            ];
 
             for (const fieldName of fieldNames) {
               typeDef.field(fieldName, fieldDefs[fieldName]);

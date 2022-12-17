@@ -44,8 +44,8 @@
     "module/"
   ],
   "scripts": {
-    "build": "tsc --build . && tsc --build tsconfig.module.json",
-    "clean": "rimraf lib/ module/ && tsc --build . --clean && tsc --build tsconfig.module.json --clean",
+    "build": "tsc --build tsconfig.cjs.json && tsc --build tsconfig.module.json",
+    "clean": "rimraf lib/ module/ && tsc --build tsconfig.cjs.json --clean && tsc --build tsconfig.module.json --clean",
     "test": "jest --coverage"
   }
 }

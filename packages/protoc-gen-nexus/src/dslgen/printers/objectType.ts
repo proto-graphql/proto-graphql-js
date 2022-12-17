@@ -1,6 +1,16 @@
-import { compact, InterfaceType, ObjectType, protobufGraphQLExtensions, protoType } from "@proto-graphql/codegen-core";
+import {
+  compact,
+  InterfaceType,
+  ObjectType,
+  protobufGraphQLExtensions,
+  protoType,
+} from "@proto-graphql/codegen-core";
 import { code, Code, joinCode, literalOf } from "ts-poet";
-import { createFieldDefinitionCode, createNoopFieldDefinitionCode } from "./field";
+
+import {
+  createFieldDefinitionCode,
+  createNoopFieldDefinitionCode,
+} from "./field";
 import { impNexus, NexusPrinterOptions, nexusTypeDef } from "./util";
 
 /**
@@ -12,9 +22,14 @@ import { impNexus, NexusPrinterOptions, nexusTypeDef } from "./util";
  * })
  * ```
  */
-export function createObjectTypeCode(type: ObjectType, opts: NexusPrinterOptions): Code {
+export function createObjectTypeCode(
+  type: ObjectType,
+  opts: NexusPrinterOptions
+): Code {
   const isInterface = type instanceof InterfaceType;
-  const reExportedPbTypeName = type.proto.fullName.toString().replace(/\./g, "$");
+  const reExportedPbTypeName = type.proto.fullName
+    .toString()
+    .replace(/\./g, "$");
   const typeOpts = {
     name: type.typeName,
     description: type.description,
@@ -43,6 +58,8 @@ export function createObjectTypeCode(type: ObjectType, opts: NexusPrinterOptions
   return code`
     export type ${reExportedPbTypeName} = ${protoType(type.proto, opts)};
     export const ${nexusTypeDef(type)} =
-      ${impNexus(isInterface ? "interfaceType" : "objectType")}(${literalOf(compact(typeOpts))});
+      ${impNexus(isInterface ? "interfaceType" : "objectType")}(${literalOf(
+    compact(typeOpts)
+  )});
   `;
 }

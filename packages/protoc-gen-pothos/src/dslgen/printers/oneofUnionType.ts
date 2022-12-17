@@ -5,6 +5,7 @@ import {
   SquashedOneofUnionType,
 } from "@proto-graphql/codegen-core";
 import { code, Code, literalOf } from "ts-poet";
+
 import { pothosBuilder, PothosPrinterOptions, pothosRef } from "./util";
 
 /**
@@ -27,6 +28,8 @@ export function createOneofUnionTypeCode(
   };
   return code`
     export const ${pothosRef(type)} =
-      ${pothosBuilder(type, opts)}.unionType(${literalOf(type.typeName)}, ${literalOf(compact(typeOpts))});
+      ${pothosBuilder(type, opts)}.unionType(${literalOf(
+    type.typeName
+  )}, ${literalOf(compact(typeOpts))});
   `;
 }

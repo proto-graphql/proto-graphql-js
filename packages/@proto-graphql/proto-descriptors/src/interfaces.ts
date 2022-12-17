@@ -8,6 +8,7 @@ import {
   OneofDescriptorProto,
   ServiceDescriptorProto,
 } from "google-protobuf/google/protobuf/descriptor_pb";
+
 import { ProtoScalar, ProtoScalarType } from "./scalars";
 
 export interface FullName {
@@ -16,7 +17,16 @@ export interface FullName {
   toString(): string;
 }
 
-const protoKinds = ["File", "Service", "Method", "Message", "Oneof", "Field", "Enum", "EnumValue"] as const;
+const protoKinds = [
+  "File",
+  "Service",
+  "Method",
+  "Message",
+  "Oneof",
+  "Field",
+  "Enum",
+  "EnumValue",
+] as const;
 export type ProtoKind = typeof protoKinds[number];
 
 const descriptorByKind = {
@@ -29,7 +39,9 @@ const descriptorByKind = {
   Enum: EnumDescriptorProto,
   EnumValue: EnumValueDescriptorProto,
 };
-export type Descriptor<K extends ProtoKind> = InstanceType<typeof descriptorByKind[K]>;
+export type Descriptor<K extends ProtoKind> = InstanceType<
+  typeof descriptorByKind[K]
+>;
 
 export type { ProtoScalar, ProtoScalarType };
 

@@ -34,8 +34,8 @@
     "nexus": "^1.0.0"
   },
   "scripts": {
-    "build": "tsc --build . && tsc --build tsconfig.module.json",
-    "clean": "rimraf lib/ module/ && tsc --build . --clean && tsc --build tsconfig.module.json --clean",
+    "build": "tsc --build tsconfig.cjs.json && tsc --build tsconfig.module.json",
+    "clean": "rimraf lib/ module/ && tsc --build tsconfig.cjs.json --clean && tsc --build tsconfig.module.json --clean",
     "lint": "frolint --branch main --bail",
     "pretest": "ts-node --transpile-only ./src/__tests__/__helpers__/testSchema.ts",
     "test": "jest"

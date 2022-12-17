@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 type TransformFunc<In, Out> = (input: In) => Out;
 
 export interface Transformer<ProtoType, GqlType> {
@@ -12,12 +10,13 @@ interface WrappedTransformFunc<In, Out> {
   (input: null | undefined): null;
 }
 
-type TransformerWrapper<T extends Transformer<any, any>> = T extends Transformer<infer ProtoType, infer GqlType>
-  ? {
-      protoToGql: WrappedTransformFunc<ProtoType, GqlType>;
-      gqlToProto: WrappedTransformFunc<GqlType, ProtoType>;
-    }
-  : never;
+type TransformerWrapper<T extends Transformer<any, any>> =
+  T extends Transformer<infer ProtoType, infer GqlType>
+    ? {
+        protoToGql: WrappedTransformFunc<ProtoType, GqlType>;
+        gqlToProto: WrappedTransformFunc<GqlType, ProtoType>;
+      }
+    : never;
 
 export const transformers: Record<string, Transformer<any, any>> = {};
 
@@ -30,14 +29,18 @@ declare global {
  * @param protoTypeFullName e.g. `google.protobuf.StringValue`
  * @param transformer transformer object
  */
-export function registerTransformer<ProtoTypeFullName extends keyof ProtoNexusTransformers>(
+export function registerTransformer<
+  ProtoTypeFullName extends keyof ProtoNexusTransformers
+>(
   protoTypeFullName: ProtoTypeFullName,
   transformer: ProtoNexusTransformers[ProtoTypeFullName]
 ) {
   transformers[protoTypeFullName] = transformer;
 }
 
-export function getTransformer<ProtoTypeFullName extends keyof ProtoNexusTransformers>(
+export function getTransformer<
+  ProtoTypeFullName extends keyof ProtoNexusTransformers
+>(
   protoTypeFullName: ProtoTypeFullName
 ): TransformerWrapper<ProtoNexusTransformers[ProtoTypeFullName]> {
   const t = transformers[protoTypeFullName];

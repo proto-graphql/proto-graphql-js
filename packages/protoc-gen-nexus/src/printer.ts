@@ -7,6 +7,7 @@ import {
 } from "@proto-graphql/codegen-core";
 import { ProtoFile, ProtoRegistry } from "@proto-graphql/proto-descriptors";
 import { Code } from "ts-poet";
+
 import { createTypeDslCodes } from "./dslgen";
 import { NexusPrinterOptions } from "./dslgen/printers/util";
 
@@ -22,14 +23,22 @@ export function generateFiles(
       return [
         {
           filename: filenameFromProtoFile(file, opts.printer),
-          content: printCodes(createCodes(types, opts.printer), "protoc-gen-nexus", file),
+          content: printCodes(
+            createCodes(types, opts.printer),
+            "protoc-gen-nexus",
+            file
+          ),
         },
       ];
     }
     case "graphql_type": {
       return types.map((t) => ({
         filename: filename(t, opts.printer),
-        content: printCodes(createCodes([t], opts.printer), "protoc-gen-nexus", file),
+        content: printCodes(
+          createCodes([t], opts.printer),
+          "protoc-gen-nexus",
+          file
+        ),
       }));
     }
     /* istanbul ignore next */
@@ -40,6 +49,9 @@ export function generateFiles(
   }
 }
 
-function createCodes(types: ReturnType<typeof collectTypesFromFile>, opts: NexusPrinterOptions): Code[] {
+function createCodes(
+  types: ReturnType<typeof collectTypesFromFile>,
+  opts: NexusPrinterOptions
+): Code[] {
   return [...createTypeDslCodes(types, opts)];
 }

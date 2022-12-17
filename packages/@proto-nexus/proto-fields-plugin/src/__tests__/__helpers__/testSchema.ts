@@ -6,9 +6,15 @@ const TestInput = Object.assign(
   inputObjectType({
     name: "TestInput",
     definition(t) {
-      t.field("foo", { type: nonNull("String"), description: "Test string field" });
+      t.field("foo", {
+        type: nonNull("String"),
+        description: "Test string field",
+      });
       t.field("bar", { type: nonNull("Int"), description: "Test int field" });
-      t.field("baz", { type: nonNull("Boolean"), description: "Test boolean field" });
+      t.field("baz", {
+        type: nonNull("Boolean"),
+        description: "Test boolean field",
+      });
     },
   }),
   {

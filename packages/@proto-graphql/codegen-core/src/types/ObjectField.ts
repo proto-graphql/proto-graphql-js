@@ -1,4 +1,5 @@
 import { ProtoField } from "@proto-graphql/proto-descriptors";
+
 import * as extensions from "../__generated__/extensions/graphql/schema_pb";
 import { EnumType } from "./EnumType";
 import { FieldBase } from "./FieldBase";
@@ -10,9 +11,18 @@ import { SquashedOneofUnionType } from "./SquashedOneofUnionType";
 import { isRequiredField } from "./util";
 
 export class ObjectField<
-  T extends ObjectType | InterfaceType | SquashedOneofUnionType | EnumType | ScalarType
+  T extends
+    | ObjectType
+    | InterfaceType
+    | SquashedOneofUnionType
+    | EnumType
+    | ScalarType
 > extends FieldBase<ProtoField> {
-  constructor(readonly type: T, readonly parent: ObjectType | OneofUnionType, proto: ProtoField) {
+  constructor(
+    readonly type: T,
+    readonly parent: ObjectType | OneofUnionType,
+    proto: ProtoField
+  ) {
     super(proto);
   }
 
@@ -20,7 +30,12 @@ export class ObjectField<
    * @override
    */
   get name(): string {
-    return this.proto.descriptor.getOptions()?.getExtension(extensions.field)?.getName() || this.proto.jsonName;
+    return (
+      this.proto.descriptor
+        .getOptions()
+        ?.getExtension(extensions.field)
+        ?.getName() || this.proto.jsonName
+    );
   }
 
   /**

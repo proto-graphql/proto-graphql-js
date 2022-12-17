@@ -1,7 +1,14 @@
-import { makeSchema } from "nexus";
 import * as path from "path";
 
-export function makeTestSchema({ rootDir, types }: { rootDir: string; types: any }) {
+import { makeSchema } from "nexus";
+
+export function makeTestSchema({
+  rootDir,
+  types,
+}: {
+  rootDir: string;
+  types: any;
+}) {
   const schema = makeSchema({
     types,
     outputs: {

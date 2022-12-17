@@ -1,9 +1,10 @@
 import * as pbjs from "@testapis/node/lib/testapis/wktypes";
+import { DateTimeResolver } from "graphql-scalars";
 import { queryField } from "nexus";
+import { asNexusMethod } from "nexus";
+
 import { makeTestSchema } from "../../src/makeTestSchema";
 import * as types1 from "../__generated__/nexus/protobufjs/testapis/wktypes/well_known_types_pb_nexus";
-import { asNexusMethod } from "nexus";
-import { DateTimeResolver } from "graphql-scalars";
 import "@proto-nexus/protobufjs";
 
 const test1Query = queryField("test1", {
@@ -35,4 +36,7 @@ const test2Query = queryField("test2", {
 
 const dateTime = asNexusMethod(DateTimeResolver, "dateTime");
 
-export const schema = makeTestSchema({ rootDir: __dirname, types: [dateTime, types1, test1Query, test2Query] });
+export const schema = makeTestSchema({
+  rootDir: __dirname,
+  types: [dateTime, types1, test1Query, test2Query],
+});

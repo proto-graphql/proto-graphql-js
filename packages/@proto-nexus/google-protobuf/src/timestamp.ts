@@ -12,8 +12,8 @@ registerTransformer("google.protobuf.Timestamp", {
     return new Date(v.getSeconds() * 1000 + v.getNanos() / 1e6) as any;
   },
   gqlToProto(v) {
-    const s = Math.floor(v.getTime() / 1000)
-    const ns = v.getMilliseconds() * 1e6
-    return new Timestamp().setSeconds(s).setNanos(ns)
+    const s = Math.floor(v.getTime() / 1000);
+    const ns = v.getMilliseconds() * 1e6;
+    return new Timestamp().setSeconds(s).setNanos(ns);
   },
 });

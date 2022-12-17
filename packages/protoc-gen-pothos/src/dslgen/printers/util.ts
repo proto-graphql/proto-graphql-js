@@ -1,3 +1,5 @@
+import * as path from "path";
+
 import {
   EnumType,
   filename,
@@ -12,19 +14,30 @@ import {
   PrinterOptions,
   SquashedOneofUnionType,
 } from "@proto-graphql/codegen-core";
-import * as path from "path";
 import { code, Code, imp } from "ts-poet";
 
 export type PothosPrinterOptions = Extract<PrinterOptions, { dsl: "pothos" }>;
 
 export function pothosRef(
-  type: ObjectType | InputObjectType | EnumType | OneofUnionType | SquashedOneofUnionType | InterfaceType
+  type:
+    | ObjectType
+    | InputObjectType
+    | EnumType
+    | OneofUnionType
+    | SquashedOneofUnionType
+    | InterfaceType
 ): Code {
   return code`${pothosRefName(type)}`;
 }
 
 function pothosRefName(
-  type: ObjectType | InputObjectType | EnumType | OneofUnionType | SquashedOneofUnionType | InterfaceType
+  type:
+    | ObjectType
+    | InputObjectType
+    | EnumType
+    | OneofUnionType
+    | SquashedOneofUnionType
+    | InterfaceType
 ): string {
   return `${type.typeName}$Ref`;
 }
@@ -39,7 +52,9 @@ export function shapeTypeName(type: InputObjectType): string {
 
 export function fieldTypeRef(
   field:
-    | ObjectField<ObjectType | EnumType | InterfaceType | SquashedOneofUnionType>
+    | ObjectField<
+        ObjectType | EnumType | InterfaceType | SquashedOneofUnionType
+      >
     | InputObjectField<InputObjectType | EnumType>
     | ObjectOneofField,
   opts: PothosPrinterOptions
@@ -52,7 +67,10 @@ export function fieldTypeRef(
   return code`${imported}`;
 }
 
-export function fieldTypeShape(field: InputObjectField<InputObjectType>, opts: PothosPrinterOptions): Code {
+export function fieldTypeShape(
+  field: InputObjectField<InputObjectType>,
+  opts: PothosPrinterOptions
+): Code {
   const importPath = generatedGraphQLTypeImportPath(field, opts);
   if (importPath == null) return shapeType(field.type);
 
@@ -62,8 +80,16 @@ export function fieldTypeShape(field: InputObjectField<InputObjectType>, opts: P
 }
 
 export function pothosBuilder(
-  type: ObjectType | InputObjectType | EnumType | OneofUnionType | SquashedOneofUnionType,
-  opts: Pick<PothosPrinterOptions, "dsl" | "pothos" | "fileLayout" | "filenameSuffix">
+  type:
+    | ObjectType
+    | InputObjectType
+    | EnumType
+    | OneofUnionType
+    | SquashedOneofUnionType,
+  opts: Pick<
+    PothosPrinterOptions,
+    "dsl" | "pothos" | "fileLayout" | "filenameSuffix"
+  >
 ): Code {
   const importPath = opts.pothos.builderPath.startsWith(".")
     ? path.relative(path.dirname(filename(type, opts)), opts.pothos.builderPath)

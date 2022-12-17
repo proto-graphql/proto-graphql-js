@@ -1,5 +1,6 @@
 import * as pbnative from "@testapis/node-native/lib/testapis/primitives/primitives_pb";
 import { queryField } from "nexus";
+
 import { makeTestSchema } from "../../src/makeTestSchema";
 import * as types1 from "../__generated__/nexus/google-protobuf/testapis/primitives/primitives_pb_nexus";
 
@@ -27,4 +28,7 @@ export const testQuery = queryField("test", {
   },
 });
 
-export const schema = makeTestSchema({ rootDir: __dirname, types: [types1, testQuery] });
+export const schema = makeTestSchema({
+  rootDir: __dirname,
+  types: [types1, testQuery],
+});

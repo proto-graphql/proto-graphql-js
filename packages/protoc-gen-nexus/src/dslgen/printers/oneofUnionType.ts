@@ -5,6 +5,7 @@ import {
   SquashedOneofUnionType,
 } from "@proto-graphql/codegen-core";
 import { code, Code, joinCode, literalOf } from "ts-poet";
+
 import { fieldType, impNexus, NexusPrinterOptions, nexusTypeDef } from "./util";
 
 /**
@@ -31,5 +32,7 @@ export function createOneofUnionTypeCode(
     }`,
     extensions: protobufGraphQLExtensions(type),
   };
-  return code`export const ${nexusTypeDef(type)} = ${impNexus("unionType")}(${literalOf(compact(typeOpts))});`;
+  return code`export const ${nexusTypeDef(type)} = ${impNexus(
+    "unionType"
+  )}(${literalOf(compact(typeOpts))});`;
 }

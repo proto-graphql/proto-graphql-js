@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": [
+    ".eslintrc.js",
+    ".lintstagedrc.cjs",
+    ".prettierrc.js",
+    "jest.config.js",
+  ]
+}

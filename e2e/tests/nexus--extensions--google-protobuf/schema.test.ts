@@ -1,4 +1,5 @@
 import { graphql } from "graphql";
+
 import { schema } from "./schema";
 
 it("processes a query with squashed union successfully", async () => {

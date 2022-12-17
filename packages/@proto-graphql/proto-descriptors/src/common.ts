@@ -1,4 +1,5 @@
 import { SourceCodeInfo } from "google-protobuf/google/protobuf/descriptor_pb";
+
 import {
   CommentSet,
   FullName,
@@ -44,7 +45,13 @@ export function memo() {
 }
 
 export function getCommentSetByDescriptors(
-  d: ProtoFile | ProtoMessage | ProtoOneof | ProtoField | ProtoEnum | ProtoEnumValue
+  d:
+    | ProtoFile
+    | ProtoMessage
+    | ProtoOneof
+    | ProtoField
+    | ProtoEnum
+    | ProtoEnumValue
 ): CommentSet {
   const proto = getSourceLocationProto(d);
 
@@ -56,7 +63,13 @@ export function getCommentSetByDescriptors(
 }
 
 function getSourceLocationProto(
-  t: ProtoFile | ProtoMessage | ProtoOneof | ProtoField | ProtoEnum | ProtoEnumValue
+  t:
+    | ProtoFile
+    | ProtoMessage
+    | ProtoOneof
+    | ProtoField
+    | ProtoEnum
+    | ProtoEnumValue
 ): SourceCodeInfo.Location | null {
   let paths: number[] = [];
   let type = t;
@@ -69,8 +82,11 @@ function getSourceLocationProto(
           type.descriptor
             .getSourceCodeInfo()
             ?.getLocationList()
-            .find((l) => l.getPathList().length === paths.length && l.getPathList().every((v, i) => v === paths[i])) ||
-          null
+            .find(
+              (l) =>
+                l.getPathList().length === paths.length &&
+                l.getPathList().every((v, i) => v === paths[i])
+            ) || null
         );
       }
       case "Message": {
@@ -135,7 +151,15 @@ function getSourceLocationProto(
 }
 
 export function isDeprecated(
-  proto: ProtoFile | ProtoService | ProtoMethod | ProtoMessage | ProtoOneof | ProtoField | ProtoEnum | ProtoEnumValue
+  proto:
+    | ProtoFile
+    | ProtoService
+    | ProtoMethod
+    | ProtoMessage
+    | ProtoOneof
+    | ProtoField
+    | ProtoEnum
+    | ProtoEnumValue
 ): boolean {
   if (proto.kind === "Oneof") {
     return proto.fields.every(isDeprecated);

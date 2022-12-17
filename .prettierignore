@@ -1,3 +1,10 @@
-lib/
 tmp/
+coverage/
+
+# build artifacts
+lib/
+module/
+
+# auto generated files
 __generated__/
+/packages/@testapis/

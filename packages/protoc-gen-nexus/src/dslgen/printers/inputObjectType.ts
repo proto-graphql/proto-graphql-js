@@ -10,8 +10,19 @@ import {
   ScalarType,
 } from "@proto-graphql/codegen-core";
 import { Code, code, joinCode, literalOf } from "ts-poet";
-import { createFieldDefinitionCode, createNoopFieldDefinitionCode, createTypeCode } from "./field";
-import { fieldType, impNexus, impProtoNexus, NexusPrinterOptions, nexusTypeDef } from "./util";
+
+import {
+  createFieldDefinitionCode,
+  createNoopFieldDefinitionCode,
+  createTypeCode,
+} from "./field";
+import {
+  fieldType,
+  impNexus,
+  impProtoNexus,
+  NexusPrinterOptions,
+  nexusTypeDef,
+} from "./util";
 
 /**
  * @example
@@ -29,7 +40,10 @@ import { fieldType, impNexus, impProtoNexus, NexusPrinterOptions, nexusTypeDef }
  * )
  * ```
  */
-export function createInputObjectTypeCode(type: InputObjectType, opts: NexusPrinterOptions): Code {
+export function createInputObjectTypeCode(
+  type: InputObjectType,
+  opts: NexusPrinterOptions
+): Code {
   const typeOpts = {
     name: type.typeName,
     description: type.description,
@@ -65,9 +79,15 @@ export function createInputObjectTypeCode(type: InputObjectType, opts: NexusPrin
   `;
 }
 
-export function createToProtoFuncCode(type: InputObjectType, opts: NexusPrinterOptions): Code {
+export function createToProtoFuncCode(
+  type: InputObjectType,
+  opts: NexusPrinterOptions
+): Code {
   return code`
-    (input: NexusGen["inputTypes"][${literalOf(type.typeName)}]): ${protoType(type.proto, opts)} => {
+    (input: NexusGen["inputTypes"][${literalOf(type.typeName)}]): ${protoType(
+    type.proto,
+    opts
+  )} => {
       const output = new ${protoType(type.proto, opts)}();
       ${joinCode(
         type.fields.map((f) => {
@@ -75,7 +95,9 @@ export function createToProtoFuncCode(type: InputObjectType, opts: NexusPrinterO
           if (f.type instanceof ScalarType) {
             if (isProtobufWellKnownType(f.proto.type)) {
               const protoFullName = f.proto.type.fullName.toString();
-              const transformer = code`${impProtoNexus("getTransformer")}("${protoFullName}")`;
+              const transformer = code`${impProtoNexus(
+                "getTransformer"
+              )}("${protoFullName}")`;
               switch (opts.protobuf) {
                 case "google-protobuf":
                   wrapperFunc = (v) => code`${transformer}.gqlToProto(${v})`;
@@ -96,7 +118,8 @@ export function createToProtoFuncCode(type: InputObjectType, opts: NexusPrinterO
                 }
               }
             } else if (isProtobufLong(f.proto)) {
-              wrapperFunc = (v) => code`${impProtoNexus("stringToNumber")}(${v})`;
+              wrapperFunc = (v) =>
+                code`${impProtoNexus("stringToNumber")}(${v})`;
             }
           }
           if (f.type instanceof InputObjectType) {
@@ -106,7 +129,9 @@ export function createToProtoFuncCode(type: InputObjectType, opts: NexusPrinterO
           const value = code`input.${f.name}`;
           const stmt = createSetFieldValueCode(
             code`output`,
-            f.isList() ? code`${value}.map(v => ${wrapperFunc(code`v`)})` : wrapperFunc(value),
+            f.isList()
+              ? code`${value}.map(v => ${wrapperFunc(code`v`)})`
+              : wrapperFunc(value),
             f.proto,
             opts
           );

@@ -1,4 +1,8 @@
-import { ObjectField, ObjectOneofField, SquashedOneofUnionType } from "@proto-graphql/codegen-core";
+import {
+  ObjectField,
+  ObjectOneofField,
+  SquashedOneofUnionType,
+} from "@proto-graphql/codegen-core";
 import { Code, code, joinCode } from "ts-poet";
 
 /**
@@ -15,7 +19,10 @@ export function createOneofUnionResolverCode(
   sourceExpr: Code,
   field: ObjectOneofField | ObjectField<SquashedOneofUnionType>
 ): Code {
-  const createBlockStmtCode = (sourceExpr: Code, { nullable }: { nullable: boolean }): Code => {
+  const createBlockStmtCode = (
+    sourceExpr: Code,
+    { nullable }: { nullable: boolean }
+  ): Code => {
     const createFieldExpr = (memberField: ObjectField<any>) => {
       if (field instanceof ObjectOneofField) {
         return code`${sourceExpr}.${memberField.proto.jsonName}`;
@@ -24,9 +31,15 @@ export function createOneofUnionResolverCode(
     };
 
     return code`
-      const value = ${joinCode(field.type.fields.map(createFieldExpr), { on: "??" })};
+      const value = ${joinCode(field.type.fields.map(createFieldExpr), {
+        on: "??",
+      })};
       if (value == null) {
-        ${nullable ? "return null" : `throw new Error("${field.name} should not be null")`};
+        ${
+          nullable
+            ? "return null"
+            : `throw new Error("${field.name} should not be null")`
+        };
       }
       return value;
     `;

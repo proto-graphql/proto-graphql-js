@@ -1,7 +1,19 @@
-import { compact, InputObjectType, protobufGraphQLExtensions, protoType } from "@proto-graphql/codegen-core";
+import {
+  compact,
+  InputObjectType,
+  protobufGraphQLExtensions,
+  protoType,
+} from "@proto-graphql/codegen-core";
 import { Code, code, imp, joinCode, literalOf } from "ts-poet";
+
 import { createFieldRefCode, createNoopFieldRefCode } from "./field";
-import { fieldTypeShape, pothosBuilder, PothosPrinterOptions, pothosRef, shapeType } from "./util";
+import {
+  fieldTypeShape,
+  pothosBuilder,
+  PothosPrinterOptions,
+  pothosRef,
+  shapeType,
+} from "./util";
 
 /**
  * @example
@@ -17,7 +29,10 @@ import { fieldTypeShape, pothosBuilder, PothosPrinterOptions, pothosRef, shapeTy
  * })
  * ```
  */
-export function createInputObjectTypeCode(type: InputObjectType, opts: PothosPrinterOptions): Code {
+export function createInputObjectTypeCode(
+  type: InputObjectType,
+  opts: PothosPrinterOptions
+): Code {
   const shapeTypeCode = code`
     export type ${shapeType(type)} = {
       ${joinCode(
@@ -28,23 +43,33 @@ export function createInputObjectTypeCode(type: InputObjectType, opts: PothosPri
             typeNode = code`${fieldTypeShape(f, opts)}`;
             if (f.isList()) typeNode = code`Array<${typeNode}>`;
           } else {
-            typeNode = code`${protoType(type.proto, opts)}[${literalOf(f.proto.jsonName)}]`;
+            typeNode = code`${protoType(type.proto, opts)}[${literalOf(
+              f.proto.jsonName
+            )}]`;
           }
-          return f.isNullable() ? code`${f.name}?: ${typeNode} | null,` : code`${f.name}: ${typeNode},`;
+          return f.isNullable()
+            ? code`${f.name}?: ${typeNode} | null,`
+            : code`${f.name}: ${typeNode},`;
         })
       )}
     };
   `;
 
   const refCode = code`
-    export const ${pothosRef(type)}: ${imp("InputObjectRef@@pothos/core")}<${shapeType(type)}> =
-      ${pothosBuilder(type, opts)}.inputRef<${shapeType(type)}>(${literalOf(type.typeName)}).implement(
+    export const ${pothosRef(type)}: ${imp(
+    "InputObjectRef@@pothos/core"
+  )}<${shapeType(type)}> =
+      ${pothosBuilder(type, opts)}.inputRef<${shapeType(type)}>(${literalOf(
+    type.typeName
+  )}).implement(
         ${literalOf(
           compact({
             description: type.description,
             fields: code`t => ({${
               type.fields.length > 0
-                ? type.fields.map((f) => code`${f.name}: ${createFieldRefCode(f, opts)},`)
+                ? type.fields.map(
+                    (f) => code`${f.name}: ${createFieldRefCode(f, opts)},`
+                  )
                 : code`_: ${createNoopFieldRefCode({ input: true })}`
             }})`,
             extensions: protobufGraphQLExtensions(type),
