@@ -86,7 +86,7 @@ export function generatedGraphQLTypeImportPath(
   const importPath = path
     .relative(path.dirname(fromPath), toPath)
     .replace(/\.ts$/, "");
-  return importPath.match(/^[\.\/]/) ? importPath : `./${importPath}`;
+  return importPath.match(/^[./]/) ? importPath : `./${importPath}`;
 }
 
 /** Remove nullish values recursively. */

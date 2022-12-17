@@ -1,6 +1,5 @@
 import { ProtoField } from "@proto-graphql/proto-descriptors";
 
- 
 export type GqlScalarType =
   | "Int"
   | "Float"
@@ -8,6 +7,7 @@ export type GqlScalarType =
   | "Boolean"
   | "ID"
   | "DateTime"
+  // eslint-disable-next-line @typescript-eslint/ban-types
   | (string & {});
 
 export class ScalarType {
