@@ -60,7 +60,7 @@ const config = {
       },
     ],
     // TODO: Change to "error" when all warnings are resolved
-    // "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-explicit-any": "off",
 
     // typescript-eslint: additional rules
     "@typescript-eslint/explicit-member-accessibility": [
