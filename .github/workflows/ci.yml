@@ -4,9 +4,7 @@ on: [push, pull_request]
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
       with:
@@ -17,7 +15,7 @@ jobs:
       with:
         node-version: 14.x
     - run: yarn --frozen-lockfile
-    - run: yarn lint:ci
+    - run: yarn lint
     - run: yarn build
     - run: yarn test
     - name: Coveralls
@@ -27,11 +25,8 @@ jobs:
         path-to-lcov: packages/protoc-gen-nexus/coverage/lcov.info
         base-path: packages/protoc-gen-nexus
 
-
   test-e2e:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
       with:
