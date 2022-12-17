@@ -4,8 +4,14 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@testapp/*": ["./*"]
+      "@testapp/*": [
+        "./*"
+      ]
     }
   },
-  "include": ["./**/*", "../../src/**/*", "../__generated__/nexus/google-protobuf/testapis/deprecation/**/*"]
+  "include": [
+    "./**/*",
+    "../../src/**/*",
+    "../__generated__/nexus/google-protobuf/testapis/deprecation/**/*"
+  ]
 }

@@ -4,8 +4,14 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@testapp/*": ["./*"]
+      "@testapp/*": [
+        "./*"
+      ]
     }
   },
-  "include": ["./**/*", "../../src/**/*", "../__generated__/pothos/ts-proto/testapis/oneof/**/*"]
+  "include": [
+    "./**/*",
+    "../../src/**/*",
+    "../__generated__/pothos/ts-proto/testapis/oneof/**/*"
+  ]
 }
