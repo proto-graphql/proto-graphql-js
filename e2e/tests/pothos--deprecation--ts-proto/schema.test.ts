@@ -3,9 +3,9 @@ import { graphql } from "graphql";
 import { schema } from "./schema";
 
 it("processes a query successfully", async () => {
-  const resp = await graphql(
+  const resp = await graphql({
     schema,
-    /* GraphQL */ `
+    source: /* GraphQL */ `
       query Test {
         test1 {
           body
@@ -14,8 +14,8 @@ it("processes a query successfully", async () => {
           body
         }
       }
-    `
-  );
+    `,
+  });
   expect(resp).toMatchInlineSnapshot(`
     {
       "data": {

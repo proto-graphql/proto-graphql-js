@@ -37,7 +37,7 @@ jobs:
     - run: yarn --frozen-lockfile
     - run: yarn lint
       env:
-        NODE_OPTIONS: "--max_old_space_size=4096"
+        NODE_OPTIONS: "--max_old_space_size=8192"
     - run: yarn format
     - name: check generated code is up to date
       run: git diff --exit-code
