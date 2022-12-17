@@ -23,6 +23,7 @@ jobs:
         base-path: packages/protoc-gen-nexus
 
   lint:
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
