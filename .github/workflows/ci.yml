@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
   test:
+    name: Test
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -22,6 +23,7 @@ jobs:
         base-path: packages/protoc-gen-nexus
 
   test-e2e:
+    name: E2E Test - Node.js v${{ matrix.node-version }}
     strategy:
       matrix:
         node-version: [16, 18]
