@@ -11,10 +11,9 @@ jobs:
       with:
         fetch-depth: 0
         submodules: true
-    - name: Use Node.js 14.x
-      uses: actions/setup-node@v1
+    - uses: actions/setup-node@v1
       with:
-        node-version: 14.x
+        node-version: 18.x
     - run: yarn --frozen-lockfile
     - run: yarn lint
       env:
