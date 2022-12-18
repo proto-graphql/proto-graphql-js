@@ -1,18 +1,18 @@
 name: CI
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
   test:
+    name: Test
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
       with:
         submodules: true
-    - name: Use Node.js 14.x
-      uses: actions/setup-node@v1
+    - uses: actions/setup-node@v1
       with:
-        node-version: 14.x
+        node-version: 18.x
     - run: yarn --frozen-lockfile
     - run: yarn test
     - name: Coveralls
@@ -22,36 +22,19 @@ jobs:
         path-to-lcov: packages/protoc-gen-nexus/coverage/lcov.info
         base-path: packages/protoc-gen-nexus
 
-  lint:
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-        submodules: true
-    - name: Use Node.js 14.x
-      uses: actions/setup-node@v1
-      with:
-        node-version: 14.x
-    - run: yarn --frozen-lockfile
-    - run: yarn lint
-      env:
-        NODE_OPTIONS: "--max_old_space_size=8192"
-    - run: yarn format
-    - name: check generated code is up to date
-      run: git diff --exit-code
-
   test-e2e:
+    name: E2E Test - Node.js v${{ matrix.node-version }}
+    strategy:
+      matrix:
+        node-version: [16, 18]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
       with:
         submodules: true
-    - name: Use Node.js 14.x
-      uses: actions/setup-node@v1
+    - uses: actions/setup-node@v1
       with:
-        node-version: 14.x
+        node-version: ${{ matrix.node-version }}
     - uses: bufbuild/buf-setup-action@v1
     - run: yarn --frozen-lockfile
     - run: yarn test:e2e
