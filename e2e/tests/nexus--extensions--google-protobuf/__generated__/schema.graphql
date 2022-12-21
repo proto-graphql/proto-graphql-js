@@ -102,6 +102,10 @@ enum TestPrefixInterfaceMessageType {
   INNER2
 }
 
+type TestPrefixMessageOnlyOutput {
+  body: String!
+}
+
 enum TestPrefixPrefixedEnum {
   PREFIXED_BAR
   PREFIXED_FOO

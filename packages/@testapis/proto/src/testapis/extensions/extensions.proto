@@ -129,3 +129,9 @@ message InterfaceMessage {
   uint64 id = 1;
   Type type = 2 [(graphql.field).ignore = true];
 }
+
+message MessageOnlyOutput {
+  option (graphql.input_type).ignore = true;
+
+  string body = 1;
+}

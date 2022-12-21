@@ -83,6 +83,7 @@ describe("protobuf custom options", () => {
       "extensions/TestPrefixIgnoredMessageNotIgnoredInput.pothos.ts",
       "extensions/TestPrefixInterfaceMessageInput.pothos.ts",
       "extensions/TestPrefixRenamedMessageInput.pothos.ts",
+      "extensions/TestPrefixMessageOnlyOutput.pothos.ts",
     ]);
   });
 });
