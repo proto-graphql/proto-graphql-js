@@ -1,5 +1,14 @@
 # protoc-gen-pothos
 
+## 0.3.1
+
+### Patch Changes
+
+- [#250](https://github.com/proto-graphql/proto-graphql-js/pull/250) [`81b8ead`](https://github.com/proto-graphql/proto-graphql-js/commit/81b8eadbc1c7831bd287e48eb502233ed8126f7e) Thanks [@izumin5210](https://github.com/izumin5210)! - support `(graphql.input_type).ignore` option
+
+- Updated dependencies [[`81b8ead`](https://github.com/proto-graphql/proto-graphql-js/commit/81b8eadbc1c7831bd287e48eb502233ed8126f7e)]:
+  - @proto-graphql/codegen-core@0.3.1
+
 ## 0.3.0
 
 ### Minor Changes
