@@ -6,7 +6,7 @@ set -o pipefail
 cd $(dirname $0)/..
 
 PLUGIN_ROOT=./packages/@proto-graphql/codegen-core
-LIBRARY_PATH=./proto-graphql
+LIBRARY_PATH=./proto-graphql/proto
 
 ./scripts/protocw \
   -I $LIBRARY_PATH \

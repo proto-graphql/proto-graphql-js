@@ -72,6 +72,9 @@ export class GraphqlInputTypeOptions extends jspb.Message {
   getNoPartial(): boolean;
   setNoPartial(value: boolean): void;
 
+  getIgnore(): boolean;
+  setIgnore(value: boolean): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GraphqlInputTypeOptions.AsObject;
   static toObject(includeInstance: boolean, msg: GraphqlInputTypeOptions): GraphqlInputTypeOptions.AsObject;
@@ -85,6 +88,7 @@ export class GraphqlInputTypeOptions extends jspb.Message {
 export namespace GraphqlInputTypeOptions {
   export type AsObject = {
     noPartial: boolean,
+    ignore: boolean,
   }
 }
 
@@ -97,6 +101,9 @@ export class GraphqlFieldOptions extends jspb.Message {
 
   getSkipResolver(): boolean;
   setSkipResolver(value: boolean): void;
+
+  getId(): boolean;
+  setId(value: boolean): void;
 
   getOutputNullability(): NullabilityMap[keyof NullabilityMap];
   setOutputNullability(value: NullabilityMap[keyof NullabilityMap]): void;
@@ -122,6 +129,7 @@ export namespace GraphqlFieldOptions {
     ignore: boolean,
     name: string,
     skipResolver: boolean,
+    id: boolean,
     outputNullability: NullabilityMap[keyof NullabilityMap],
     inputNullability: NullabilityMap[keyof NullabilityMap],
     partialInputNullability: NullabilityMap[keyof NullabilityMap],
