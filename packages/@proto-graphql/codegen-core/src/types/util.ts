@@ -28,20 +28,14 @@ function nameWithParent(typ: ProtoMessage | ProtoOneof | ProtoEnum): string {
     if (t.kind === "File") break;
     let override: string | undefined;
     if (t.kind === "Message") {
-      override = t.descriptor
-        .getOptions()
-        ?.getExtension(extensions.objectType)
-        ?.getName();
+      override = getExtension(t, "objectType")?.getName();
     }
     name = `${
       t.kind === "Oneof" ? pascalCase(t.name) : override || t.name
     }${name}`;
     t = t.parent;
   }
-  const prefix = t.descriptor
-    .getOptions()
-    ?.getExtension(extensions.schema)
-    ?.getTypePrefix();
+  const prefix = getExtension(t, "schema")?.getTypePrefix();
   if (prefix) {
     name = `${prefix}${name}`;
   }
@@ -115,7 +109,7 @@ export function exceptRequestOrResponse(
   }
 
   return (m) => {
-    const ext = m.file.descriptor.getOptions()?.getExtension(extensions.schema);
+    const ext = getExtension(m.file, "schema");
 
     if (ext?.getIgnoreRequests() && reqSet.has(m.fullName.toString()))
       return false;
@@ -127,42 +121,34 @@ export function exceptRequestOrResponse(
 }
 
 export function isIgnoredType(type: ProtoMessage | ProtoEnum): boolean {
-  let ext: ExtensionFieldInfo<{ getIgnore(): boolean }>;
-  if (
-    type.file.descriptor
-      .getOptions()
-      ?.getExtension(extensions.schema)
-      ?.getIgnore()
-  ) {
+  let ext: { getIgnore(): boolean } | undefined;
+  if (getExtension(type.file, "schema")?.getIgnore()) {
     return true;
   }
   if (type.kind === "Message") {
-    ext = extensions.objectType;
+    ext = getExtension(type, "objectType");
   } else if (type.kind === "Enum") {
-    ext = extensions.enumType;
+    ext = getExtension(type, "enumType");
   } else {
     const _exhaustiveCheck: never = type;
     throw "unreachable";
   }
-  return type.descriptor.getOptions()?.getExtension(ext)?.getIgnore() ?? false;
+  return ext?.getIgnore() ?? false;
+}
+
+export function isIgnoredInputType(type: ProtoMessage): boolean {
+  return (
+    isIgnoredType(type) ||
+    (getExtension(type, "inputType")?.getIgnore() ?? false)
+  );
 }
 
 export function isInterface(m: ProtoMessage): boolean {
-  return (
-    m.descriptor
-      .getOptions()
-      ?.getExtension(extensions.objectType)
-      ?.getInterface() ?? false
-  );
+  return getExtension(m, "objectType")?.getInterface() ?? false;
 }
 
 export function isSquashedUnion(m: ProtoMessage): boolean {
-  return (
-    m.descriptor
-      .getOptions()
-      ?.getExtension(extensions.objectType)
-      ?.getSquashUnion() ?? false
-  );
+  return getExtension(m, "objectType")?.getSquashUnion() ?? false;
 }
 
 export function isScalar(m: ProtoMessage, opts: TypeOptions): boolean {
@@ -177,7 +163,7 @@ export function isRequiredField(
     let nullability:
       | extensions.NullabilityMap[keyof extensions.NullabilityMap]
       | null = null;
-    const ext = field.descriptor.getOptions()?.getExtension(extensions.field);
+    const ext = getExtension(field, "field");
     if (ext != null) {
       switch (fieldType) {
         case "output": {
@@ -243,7 +229,7 @@ export function isInputOnlyField(field: ProtoField | ProtoOneof): boolean {
 export function isIgnoredField(
   field: ProtoField | ProtoEnumValue | ProtoOneof
 ): boolean {
-  let ext: ExtensionFieldInfo<{ getIgnore(): boolean }>;
+  let ext: { getIgnore(): boolean } | undefined;
   if (field.kind === "Field") {
     if (
       field.type &&
@@ -256,19 +242,19 @@ export function isIgnoredField(
     if (oneof && isIgnoredField(oneof)) {
       return true;
     }
-    ext = extensions.field;
+    ext = getExtension(field, "field");
   } else if (field.kind === "EnumValue") {
-    ext = extensions.enumValue;
+    ext = getExtension(field, "enumValue");
   } else if (field.kind === "Oneof") {
     if (isIgnoredType(field.parent)) {
       return true;
     }
-    ext = extensions.oneof;
+    ext = getExtension(field, "oneof");
   } else {
     const _exhaustiveCheck: never = field;
     throw "unreachable";
   }
-  return field.descriptor.getOptions()?.getExtension(ext)?.getIgnore() ?? false;
+  return ext?.getIgnore() ?? false;
 }
 
 const behaviorComments = ["Required", "Input only", "Output only"] as const;
@@ -290,3 +276,36 @@ export function descriptionFromProto(proto: {
 }): string | null {
   return proto.comments.leadingComments.trim() || null;
 }
+
+function getExtension<
+  K extends ExtensionKind,
+  P extends {
+    schema: ProtoFile;
+    objectType: ProtoMessage;
+    inputType: ProtoMessage;
+    field: ProtoField;
+    oneof: ProtoOneof;
+    enumType: ProtoEnum;
+    enumValue: ProtoEnumValue;
+  }[K]
+>(proto: P, kind: K): Extension<K> | undefined {
+  const extInfo = extensionInfoMap[kind];
+  return proto.descriptor.getOptions()?.getExtension(extInfo) as any;
+}
+
+type ExtensionKind = keyof typeof extensionInfoMap;
+
+type Extension<K extends ExtensionKind> =
+  typeof extensionInfoMap[K] extends ExtensionFieldInfo<infer Opt>
+    ? Opt
+    : never;
+
+const extensionInfoMap = {
+  schema: extensions.schema,
+  objectType: extensions.objectType,
+  inputType: extensions.inputType,
+  field: extensions.field,
+  oneof: extensions.oneof,
+  enumType: extensions.enumType,
+  enumValue: extensions.enumValue,
+} as const;

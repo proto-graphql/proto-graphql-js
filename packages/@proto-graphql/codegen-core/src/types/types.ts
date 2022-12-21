@@ -19,6 +19,7 @@ import { TypeOptions } from "./options";
 import {
   exceptRequestOrResponse,
   isIgnoredField,
+  isIgnoredInputType,
   isIgnoredType,
   isInterface,
   isScalar,
@@ -70,7 +71,7 @@ function buildInputObjectTypes(
   registry: ProtoRegistry
 ): InputObjectType[] {
   return msgs
-    .filter((m) => !isIgnoredType(m))
+    .filter((m) => !isIgnoredInputType(m))
     .filter(exceptRequestOrResponse(registry))
     .map((m) => new InputObjectType(m, options))
     .flatMap((t) =>
