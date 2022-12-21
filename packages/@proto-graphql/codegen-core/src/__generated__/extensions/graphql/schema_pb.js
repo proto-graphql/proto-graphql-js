@@ -657,7 +657,8 @@ proto.graphql.GraphqlInputTypeOptions.prototype.toObject = function(opt_includeI
  */
 proto.graphql.GraphqlInputTypeOptions.toObject = function(includeInstance, msg) {
   var f, obj = {
-    noPartial: jspb.Message.getBooleanFieldWithDefault(msg, 1, false)
+    noPartial: jspb.Message.getBooleanFieldWithDefault(msg, 1, false),
+    ignore: jspb.Message.getBooleanFieldWithDefault(msg, 2, false)
   };
 
   if (includeInstance) {
@@ -698,6 +699,10 @@ proto.graphql.GraphqlInputTypeOptions.deserializeBinaryFromReader = function(msg
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setNoPartial(value);
       break;
+    case 2:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIgnore(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -734,6 +739,13 @@ proto.graphql.GraphqlInputTypeOptions.serializeBinaryToWriter = function(message
       f
     );
   }
+  f = message.getIgnore();
+  if (f) {
+    writer.writeBool(
+      2,
+      f
+    );
+  }
 };
 
 
@@ -752,6 +764,24 @@ proto.graphql.GraphqlInputTypeOptions.prototype.getNoPartial = function() {
  */
 proto.graphql.GraphqlInputTypeOptions.prototype.setNoPartial = function(value) {
   return jspb.Message.setProto3BooleanField(this, 1, value);
+};
+
+
+/**
+ * optional bool ignore = 2;
+ * @return {boolean}
+ */
+proto.graphql.GraphqlInputTypeOptions.prototype.getIgnore = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 2, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.graphql.GraphqlInputTypeOptions} returns this
+ */
+proto.graphql.GraphqlInputTypeOptions.prototype.setIgnore = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 2, value);
 };
 
 
@@ -790,6 +820,7 @@ proto.graphql.GraphqlFieldOptions.toObject = function(includeInstance, msg) {
     ignore: jspb.Message.getBooleanFieldWithDefault(msg, 1, false),
     name: jspb.Message.getFieldWithDefault(msg, 2, ""),
     skipResolver: jspb.Message.getBooleanFieldWithDefault(msg, 3, false),
+    id: jspb.Message.getBooleanFieldWithDefault(msg, 4, false),
     outputNullability: jspb.Message.getFieldWithDefault(msg, 11, 0),
     inputNullability: jspb.Message.getFieldWithDefault(msg, 12, 0),
     partialInputNullability: jspb.Message.getFieldWithDefault(msg, 13, 0)
@@ -840,6 +871,10 @@ proto.graphql.GraphqlFieldOptions.deserializeBinaryFromReader = function(msg, re
     case 3:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setSkipResolver(value);
+      break;
+    case 4:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setId(value);
       break;
     case 11:
       var value = /** @type {!proto.graphql.Nullability} */ (reader.readEnum());
@@ -900,6 +935,13 @@ proto.graphql.GraphqlFieldOptions.serializeBinaryToWriter = function(message, wr
   if (f) {
     writer.writeBool(
       3,
+      f
+    );
+  }
+  f = message.getId();
+  if (f) {
+    writer.writeBool(
+      4,
       f
     );
   }
@@ -978,6 +1020,24 @@ proto.graphql.GraphqlFieldOptions.prototype.getSkipResolver = function() {
  */
 proto.graphql.GraphqlFieldOptions.prototype.setSkipResolver = function(value) {
   return jspb.Message.setProto3BooleanField(this, 3, value);
+};
+
+
+/**
+ * optional bool id = 4;
+ * @return {boolean}
+ */
+proto.graphql.GraphqlFieldOptions.prototype.getId = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 4, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.graphql.GraphqlFieldOptions} returns this
+ */
+proto.graphql.GraphqlFieldOptions.prototype.setId = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 4, value);
 };
 
 

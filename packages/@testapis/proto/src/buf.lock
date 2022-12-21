@@ -4,4 +4,4 @@ deps:
   - remote: buf.build
     owner: proto-graphql
     repository: proto-graphql
-    commit: 775e635634544b8b96e11c6977ca391b
+    commit: b3262962a35a4deab0e3d4c287822c97
