@@ -22,6 +22,7 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
       dsl,
       protobuf: "google-protobuf",
       importPrefix: null,
+      emitImportedFiles: false,
       fileLayout: "proto_file",
       filenameSuffix: dsl === "nexus" ? "_pb_nexus.ts" : ".pb.pothos.ts",
       pothos: { builderPath: "./builder" },
@@ -60,6 +61,9 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
         break;
       case "partial_inputs":
         params.type.partialInputs = toBool(k, v);
+        break;
+      case "emit_imported_files":
+        params.printer.emitImportedFiles = toBool(k, v);
         break;
       case "file_layout": {
         const s = toString(k, v);
