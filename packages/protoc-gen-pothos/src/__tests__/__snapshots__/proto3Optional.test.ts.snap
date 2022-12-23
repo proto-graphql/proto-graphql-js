@@ -8,11 +8,11 @@ exports[`proto3 optional with ts-proto generates pothos DSLs: proto3_optional/pr
 
 import { InputObjectRef } from "@pothos/core";
 import { builder } from "../../builder";
-import { Messgae } from "./testapis/proto3_optional/proto3_optional";
+import { Message } from "./testapis/proto3_optional/proto3_optional";
 
-export const Messgae$Ref = builder.objectRef<Messgae>("Messgae");
-builder.objectType(Messgae$Ref, {
-  name: "Messgae",
+export const Message$Ref = builder.objectRef<Message>("Message");
+builder.objectType(Message$Ref, {
+  name: "Message",
   fields: (t) => ({
     requiredStringValue: t.expose("requiredStringValue", {
       type: "String",
@@ -36,25 +36,25 @@ builder.objectType(Messgae$Ref, {
     }),
   }),
   isTypeOf: (source) => {
-    return (source as Messgae | { $type: string & {}; }).$type ===
-      "testapis.proto3_optional.Messgae";
+    return (source as Message | { $type: string & {}; }).$type ===
+      "testapis.proto3_optional.Message";
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.proto3_optional.Messgae",
-      name: "Messgae",
+      fullName: "testapis.proto3_optional.Message",
+      name: "Message",
       package: "testapis.proto3_optional",
     },
   },
 });
 
-export type MessgaeInput$Shape = {
-  requiredStringValue: Messgae["requiredStringValue"];
-  optionalStringValue?: Messgae["optionalStringValue"] | null;
+export type MessageInput$Shape = {
+  requiredStringValue: Message["requiredStringValue"];
+  optionalStringValue?: Message["optionalStringValue"] | null;
 };
 
-export const MessgaeInput$Ref: InputObjectRef<MessgaeInput$Shape> = builder
-  .inputRef<MessgaeInput$Shape>("MessgaeInput").implement({
+export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
+  .inputRef<MessageInput$Shape>("MessageInput").implement({
     fields: (t) => ({
       requiredStringValue: t.field({
         type: "String",
@@ -79,8 +79,8 @@ export const MessgaeInput$Ref: InputObjectRef<MessgaeInput$Shape> = builder
     }),
     extensions: {
       protobufMessage: {
-        fullName: "testapis.proto3_optional.Messgae",
-        name: "Messgae",
+        fullName: "testapis.proto3_optional.Message",
+        name: "Message",
         package: "testapis.proto3_optional",
       },
     },

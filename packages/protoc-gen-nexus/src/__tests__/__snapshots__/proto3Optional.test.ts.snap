@@ -7,11 +7,11 @@ exports[`proto3 optional with native protobuf generates nexus DSLs: proto3_optio
 /* eslint-disable */
 
 import { inputObjectType, nonNull, nullable, objectType } from "nexus";
-import { Messgae as Messgae1 } from "./testapis/proto3_optional/proto3_optional_pb";
+import { Message as Message1 } from "./testapis/proto3_optional/proto3_optional_pb";
 
-export type testapis$proto3_optional$Messgae = Messgae1;
-export const Messgae = objectType({
-  name: "Messgae",
+export type testapis$proto3_optional$Message = Message1;
+export const Message = objectType({
+  name: "Message",
   definition: (t) => {
     t.field("requiredStringValue", {
       type: nonNull("String"),
@@ -41,24 +41,24 @@ export const Messgae = objectType({
     });
   },
   isTypeOf: (data: unknown) => {
-    return data instanceof Messgae1;
+    return data instanceof Message1;
   },
   sourceType: {
     module: __filename,
-    export: "testapis$proto3_optional$Messgae",
+    export: "testapis$proto3_optional$Message",
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.proto3_optional.Messgae",
-      name: "Messgae",
+      fullName: "testapis.proto3_optional.Message",
+      name: "Message",
       package: "testapis.proto3_optional",
     },
   },
 });
 
-export const MessgaeInput = Object.assign(
+export const MessageInput = Object.assign(
   inputObjectType({
-    name: "MessgaeInput",
+    name: "MessageInput",
     definition: (t) => {
       t.field("requiredStringValue", {
         type: nonNull("String"),
@@ -81,15 +81,15 @@ export const MessgaeInput = Object.assign(
     },
     extensions: {
       protobufMessage: {
-        fullName: "testapis.proto3_optional.Messgae",
-        name: "Messgae",
+        fullName: "testapis.proto3_optional.Message",
+        name: "Message",
         package: "testapis.proto3_optional",
       },
     },
   }),
   {
-    toProto: (input: NexusGen["inputTypes"]["MessgaeInput"]): Messgae1 => {
-      const output = new Messgae1();
+    toProto: (input: NexusGen["inputTypes"]["MessageInput"]): Message1 => {
+      const output = new Message1();
       output.setRequiredStringValue(input.requiredStringValue);
       if (input.optionalStringValue != null) {
         output.setOptionalStringValue(input.optionalStringValue);
@@ -132,9 +132,9 @@ exports[`proto3 optional with protobufjs generates nexus DSLs: proto3_optional/p
 import { inputObjectType, nonNull, nullable, objectType } from "nexus";
 import { testapis } from "./testapis/proto3_optional";
 
-export type testapis$proto3_optional$Messgae = testapis.proto3_optional.Messgae;
-export const Messgae = objectType({
-  name: "Messgae",
+export type testapis$proto3_optional$Message = testapis.proto3_optional.Message;
+export const Message = objectType({
+  name: "Message",
   definition: (t) => {
     t.field("requiredStringValue", {
       type: nonNull("String"),
@@ -170,24 +170,24 @@ export const Messgae = objectType({
     });
   },
   isTypeOf: (data: unknown) => {
-    return data instanceof testapis.proto3_optional.Messgae;
+    return data instanceof testapis.proto3_optional.Message;
   },
   sourceType: {
     module: __filename,
-    export: "testapis$proto3_optional$Messgae",
+    export: "testapis$proto3_optional$Message",
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.proto3_optional.Messgae",
-      name: "Messgae",
+      fullName: "testapis.proto3_optional.Message",
+      name: "Message",
       package: "testapis.proto3_optional",
     },
   },
 });
 
-export const MessgaeInput = Object.assign(
+export const MessageInput = Object.assign(
   inputObjectType({
-    name: "MessgaeInput",
+    name: "MessageInput",
     definition: (t) => {
       t.field("requiredStringValue", {
         type: nonNull("String"),
@@ -210,17 +210,17 @@ export const MessgaeInput = Object.assign(
     },
     extensions: {
       protobufMessage: {
-        fullName: "testapis.proto3_optional.Messgae",
-        name: "Messgae",
+        fullName: "testapis.proto3_optional.Message",
+        name: "Message",
         package: "testapis.proto3_optional",
       },
     },
   }),
   {
     toProto: (
-      input: NexusGen["inputTypes"]["MessgaeInput"],
-    ): testapis.proto3_optional.Messgae => {
-      const output = new testapis.proto3_optional.Messgae();
+      input: NexusGen["inputTypes"]["MessageInput"],
+    ): testapis.proto3_optional.Message => {
+      const output = new testapis.proto3_optional.Message();
       output.requiredStringValue = input.requiredStringValue;
       if (input.optionalStringValue != null) {
         output.optionalStringValue = input.optionalStringValue;
