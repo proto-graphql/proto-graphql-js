@@ -32,9 +32,7 @@ export function createProcessor<DSL extends PrinterOptions["dsl"]>({
 
     const params = parseParams(req.getParameter(), dsl);
 
-    for (const fn of req.getFileToGenerateList()) {
-      const file = registry.findFile(fn);
-      if (file == null) throw new Error(`${fn} is not found`);
+    for (const file of getFilesToGenerate(req, registry)) {
       const results = generateFiles(registry, file, params);
 
       for (const result of results) {
@@ -47,4 +45,31 @@ export function createProcessor<DSL extends PrinterOptions["dsl"]>({
 
     return resp;
   };
+}
+
+function getFilesToGenerate(
+  req: CodeGeneratorRequest,
+  reg: ProtoRegistry
+): ProtoFile[] {
+  const filesToGenerateSet = new Set(req.getFileToGenerateList());
+  return req
+    .getProtoFileList()
+    .map((f) => f.getName())
+    .filter(isDefined)
+    .filter((n) => filesToGenerateSet.has(n))
+    .map((n) => reg.findFile(n))
+    .filter(isNotNull)
+    .filter((f) => !isWellKnownTypesFile(f));
+}
+
+function isDefined<V>(v: V | undefined): v is V {
+  return v !== undefined;
+}
+
+function isNotNull<V>(v: V | null): v is V {
+  return v !== null;
+}
+
+function isWellKnownTypesFile(f: ProtoFile): boolean {
+  return f.name.startsWith("google/protobuf/");
 }

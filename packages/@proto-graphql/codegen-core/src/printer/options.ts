@@ -14,6 +14,7 @@ type PrinterProtobufOptions =
   | { protobuf: "ts-proto" };
 
 export type PrinterCommonOptions = {
+  emitImportedFiles: boolean;
   importPrefix: string | null;
   fileLayout: FileLayout;
   filenameSuffix: string;
