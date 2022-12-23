@@ -137,6 +137,11 @@ export interface ProtoOneof extends ProtoBase<"Oneof"> {
   readonly fields: ProtoField[];
   readonly comments: CommentSet;
   readonly deprecated: boolean;
+  /**
+   * return true if this is synthetic oneof for backward compat for proto3 optional.
+   * @see https://github.com/protocolbuffers/protobuf/blob/v21.12/docs/implementing_proto3_presence.md#updating-a-code-generator
+   */
+  readonly synthetic: boolean;
 }
 
 export interface ProtoField extends ProtoBase<"Field"> {
@@ -158,6 +163,7 @@ export interface ProtoField extends ProtoBase<"Field"> {
   readonly type: ProtoMessage | ProtoEnum | ProtoScalar;
   readonly containingOneof: ProtoOneof | null;
   readonly list: boolean;
+  readonly optional: boolean;
   readonly comments: CommentSet;
   readonly deprecated: boolean;
 }

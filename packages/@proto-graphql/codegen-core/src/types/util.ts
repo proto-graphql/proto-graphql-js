@@ -200,6 +200,7 @@ export function isRequiredField(
     }
   }
   if (fieldType === "partial_input") return false;
+  if (field.kind === "Field" && field.optional) return false;
   return hasRequiredLabel(field);
 }
 
@@ -239,7 +240,7 @@ export function isIgnoredField(
       return true;
     }
     const oneof = field.containingOneof;
-    if (oneof && isIgnoredField(oneof)) {
+    if (oneof && !oneof.synthetic && isIgnoredField(oneof)) {
       return true;
     }
     ext = getExtension(field, "field");
@@ -247,6 +248,9 @@ export function isIgnoredField(
     ext = getExtension(field, "enumValue");
   } else if (field.kind === "Oneof") {
     if (isIgnoredType(field.parent)) {
+      return true;
+    }
+    if (field.synthetic) {
       return true;
     }
     ext = getExtension(field, "oneof");
