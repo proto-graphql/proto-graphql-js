@@ -1,5 +1,13 @@
 # @proto-graphql/proto-descriptors
 
+## 0.3.1
+
+### Patch Changes
+
+- [#253](https://github.com/proto-graphql/proto-graphql-js/pull/253) [`db7fcec`](https://github.com/proto-graphql/proto-graphql-js/commit/db7fcec7aa987037523388f9fe4ae9b8c3b4c6a4) Thanks [@izumin5210](https://github.com/izumin5210)! - support `emit_imported_files` option
+
+- [#255](https://github.com/proto-graphql/proto-graphql-js/pull/255) [`70295da`](https://github.com/proto-graphql/proto-graphql-js/commit/70295dae5e83a5ee4ee5185e670348c1a88979e2) Thanks [@izumin5210](https://github.com/izumin5210)! - support proto3 optional
+
 ## 0.3.0
 
 ### Minor Changes
