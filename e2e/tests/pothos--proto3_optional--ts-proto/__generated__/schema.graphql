@@ -1,0 +1,14 @@
+type Message {
+  optionalStringValue: String
+  requiredStringValue: String!
+}
+
+input MessageInput {
+  optionalStringValue: String
+  requiredStringValue: String!
+}
+
+type Query {
+  valuesAreBlank: Message!
+  valuesArePresent: Message!
+}

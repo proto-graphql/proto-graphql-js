@@ -11,7 +11,7 @@ export class ObjectType extends TypeBase<ProtoMessage> {
   get fields(): (ObjectField<any> | ObjectOneofField)[] {
     return [
       ...this.proto.fields
-        .filter((f) => f.containingOneof == null)
+        .filter((f) => f.containingOneof == null || f.containingOneof.synthetic)
         .filter((f) => !isInputOnlyField(f))
         .filter((f) => !isIgnoredField(f))
         .map(

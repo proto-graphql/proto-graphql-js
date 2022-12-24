@@ -69,6 +69,12 @@
       "path": "tests/nexus--primitives--protobufjs"
     },
     {
+      "path": "tests/nexus--proto3_optional--google-protobuf"
+    },
+    {
+      "path": "tests/nexus--proto3_optional--protobufjs"
+    },
+    {
       "path": "tests/nexus--wktypes--google-protobuf"
     },
     {
@@ -109,6 +115,9 @@
     },
     {
       "path": "tests/pothos--primitives--ts-proto-with-forcelong-number"
+    },
+    {
+      "path": "tests/pothos--proto3_optional--ts-proto"
     },
     {
       "path": "tests/pothos--wktypes--ts-proto"

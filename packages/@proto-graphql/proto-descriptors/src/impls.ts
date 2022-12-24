@@ -325,6 +325,11 @@ export class ProtoOneofImpl implements ProtoOneof {
   get deprecated(): boolean {
     return isDeprecated(this);
   }
+
+  @memo()
+  get synthetic(): boolean {
+    return this.fields.length === 1 && this.fields[0].optional;
+  }
 }
 
 export class ProtoFieldImpl implements ProtoField {
@@ -383,6 +388,11 @@ export class ProtoFieldImpl implements ProtoField {
     return (
       this.descriptor.getLabel() === FieldDescriptorProto.Label.LABEL_REPEATED
     );
+  }
+
+  @memo()
+  get optional(): boolean {
+    return this.descriptor.getProto3Optional() ?? false;
   }
 
   @memo()

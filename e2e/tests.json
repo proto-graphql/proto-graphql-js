@@ -22,6 +22,8 @@
     { "target": "nexus", "proto": { "package": "oneof", "lib": "protobufjs" } },
     { "target": "nexus", "proto": { "package": "primitives", "lib": "google-protobuf" } },
     { "target": "nexus", "proto": { "package": "primitives", "lib": "protobufjs" } },
+    { "target": "nexus", "proto": { "package": "proto3_optional", "lib": "google-protobuf" } },
+    { "target": "nexus", "proto": { "package": "proto3_optional", "lib": "protobufjs" } },
     { "target": "nexus", "proto": { "package": "wktypes", "lib": "google-protobuf" } },
     { "target": "nexus", "proto": { "package": "wktypes", "lib": "protobufjs" } },
     { "target": "pothos", "proto": { "package": "deprecation", "lib": "ts-proto" } },
@@ -36,6 +38,7 @@
     { "target": "pothos", "proto": { "package": "oneof", "lib": "ts-proto" } },
     { "target": "pothos", "proto": { "package": "primitives", "lib": "ts-proto" } },
     { "target": "pothos", "proto": { "package": "primitives", "lib": "ts-proto-with-forcelong-number" } },
+    { "target": "pothos", "proto": { "package": "proto3_optional", "lib": "ts-proto" } },
     { "target": "pothos", "proto": { "package": "wktypes", "lib": "ts-proto" } },
     { "target": "pothos", "proto": { "package": "wktypes", "lib": "ts-proto-with-forcelong-number" } }
   ]
