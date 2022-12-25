@@ -4,7 +4,6 @@
   "description": "E2E tests for protoc-gen-pothos",
   "private": true,
   "scripts": {
-    "format": "prettier --write '**/*.{mjs,js,jsx,mts,ts,tsx}'",
     "lint": "eslint --fix .",
     "test:e2e": "yarn test:e2e:gen && yarn test:e2e:jest && yarn test:e2e:schema && yarn test:e2e:typecheck",
     "test:e2e:gen": "rm -rf __generated__ && yarn test:e2e:gen:proto && yarn test:e2e:gen:gql",

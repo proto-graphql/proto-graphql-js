@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "format": "turbo run format",
+    "format": "prettier --write '**/*.{mjs,js,jsx,mts,ts,tsx}'",
     "lint": "turbo run lint",
     "pre-commit": "lint-staged",
     "prepare": "husky install",

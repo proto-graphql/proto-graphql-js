@@ -4,7 +4,6 @@
       "ignores": ["packages/@testapis/*", "devPackages/eslint-config"],
       "package.json": {
         "scripts": {
-          "format": "prettier --write '**/*.{mjs,js,jsx,mts,ts,tsx}'",
           "lint": "eslint --fix ."
         },
         "devDependencies": {
