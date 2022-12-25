@@ -15,8 +15,6 @@ jobs:
         node-version: 18.x
     - run: yarn --frozen-lockfile
     - run: yarn test
-      env:
-        NODE_OPTIONS: "--max_old_space_size=8192"
     - name: Coveralls
       uses: coverallsapp/github-action@v1.1.2
       with:
@@ -40,5 +38,3 @@ jobs:
     - uses: bufbuild/buf-setup-action@v1
     - run: yarn --frozen-lockfile
     - run: yarn test:e2e
-      env:
-        NODE_OPTIONS: "--max_old_space_size=8192"
