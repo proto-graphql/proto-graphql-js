@@ -1,21 +1,7 @@
 /** @type {import("eslint").ESLint.ConfigData} */
 const config = {
-  root: true,
   parser: "@typescript-eslint/parser",
-  parserOptions: {
-    sourceType: "module",
-    tsconfigRootDir: __dirname,
-    project: [
-      "./tsconfig.eslint.json",
-      "./packages/*/tsconfig.json",
-      "./packages/@proto-graphql/*/tsconfig.json",
-      "./packages/@proto-nexus/*/tsconfig.json",
-      "./e2e/tsconfig.eslint.json",
-      "./e2e/tests/*/tsconfig.json",
-    ],
-  },
   ignorePatterns: [
-    "packages/@testapis/**",
     "**/__generated__/**",
     "**/coverage/**",
     "**/lib/**",
@@ -74,6 +60,7 @@ const config = {
       },
     ],
     "@typescript-eslint/no-redeclare": "error",
+    // "@typescript-eslint/strict-boolean-expressions": "error",
 
     // import
     "import/order": [

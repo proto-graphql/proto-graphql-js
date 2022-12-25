@@ -1,0 +1,22 @@
+{
+  "name": "@proto-graphql/eslint-config",
+  "version": "0.1.0",
+  "description": "",
+  "repository": "git@github.com:proto-graphql/proto-graphql-js.git",
+  "author": "izumin5210 <m@izum.in>",
+  "license": "MIT",
+  "scripts": {},
+  "main": "index.js",
+  "peerDependencies": {
+    "eslint": ">= 8.0.0"
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.46.1",
+    "@typescript-eslint/parser": "^5.46.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^27.1.7",
+    "eslint-plugin-unused-imports": "^2.0.0"
+  },
+  "private": true
+}
