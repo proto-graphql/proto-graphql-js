@@ -1,0 +1,16 @@
+{
+  "name": "@proto-graphql/e2e-helper",
+  "version": "0.1.0",
+  "description": "E2E test helpers",
+  "private": true,
+  "main": "./lib/index.js",
+  "peerDependencies": {
+    "graphql": "15.4.0",
+    "nexus": "1.3.0"
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "clean": "yarn build --clean",
+    "lint": "eslint --fix ."
+  }
+}

@@ -1,9 +1,9 @@
 import "@proto-nexus/google-protobuf";
+import { makeTestSchema } from "@proto-graphql/e2e-helper";
 import * as pb from "@testapis/node/lib/testapis/proto3_optional";
 import { queryField } from "nexus";
 
-import { makeTestSchema } from "../../src/makeTestSchema";
-import * as types1 from "../__generated__/nexus/protobufjs/testapis/proto3_optional/proto3_optional_pb_nexus";
+import * as types1 from "./__generated__/schema/testapis/proto3_optional/proto3_optional_pb_nexus";
 
 const testQuery = queryField("test1", {
   type: "Message",

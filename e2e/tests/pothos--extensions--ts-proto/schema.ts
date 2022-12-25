@@ -1,11 +1,11 @@
+import { printGraphqlSchema } from "@proto-graphql/e2e-helper";
 import { PrefixedMessage } from "@testapis/ts-proto/lib/testapis/extensions/extensions";
 
-import { printGraphqlSchema } from "../../src/printGraphqlSchema";
 import {
   TestPrefixInterfaceMessage$Ref,
   TestPrefixPrefixedMessage$Ref,
   TestPrefixPrefixedMessageInnerMessage$Ref,
-} from "../__generated__/pothos/ts-proto/testapis/extensions/extensions.pb.pothos";
+} from "./__generated__/schema/testapis/extensions/extensions.pb.pothos";
 import { builder } from "./builder";
 
 builder.queryField("testSquashedUnion", (t) =>

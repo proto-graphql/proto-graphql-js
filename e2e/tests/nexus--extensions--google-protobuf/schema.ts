@@ -1,11 +1,11 @@
+import { makeTestSchema } from "@proto-graphql/e2e-helper";
 import { PrefixedMessage } from "@testapis/node-native/lib/testapis/extensions/extensions_pb";
 import { queryField, nonNull } from "nexus";
 
-import { makeTestSchema } from "../../src/makeTestSchema";
-import * as types1 from "../__generated__/nexus/google-protobuf/testapis/extensions/extensions_pb_nexus";
-import * as types2 from "../__generated__/nexus/google-protobuf/testapis/extensions/field_nullability/nullability_pb_nexus";
-import * as types3 from "../__generated__/nexus/google-protobuf/testapis/extensions/ignored_pb_nexus";
-import * as types4 from "../__generated__/nexus/google-protobuf/testapis/extensions/no_partial/no_partial_pb_nexus";
+import * as types1 from "./__generated__/schema/testapis/extensions/extensions_pb_nexus";
+import * as types2 from "./__generated__/schema/testapis/extensions/field_nullability/nullability_pb_nexus";
+import * as types3 from "./__generated__/schema/testapis/extensions/ignored_pb_nexus";
+import * as types4 from "./__generated__/schema/testapis/extensions/no_partial/no_partial_pb_nexus";
 
 const testQuery = queryField("test", {
   type: nonNull("TestPrefixPrefixedMessage"),

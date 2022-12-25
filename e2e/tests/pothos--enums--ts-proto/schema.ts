@@ -1,11 +1,11 @@
+import { printGraphqlSchema } from "@proto-graphql/e2e-helper";
 import {
   MessageWithEnums,
   MyEnum,
   MyEnumWithoutUnspecified,
 } from "@testapis/ts-proto/lib/testapis/enums/enums";
 
-import { printGraphqlSchema } from "../../src/printGraphqlSchema";
-import { MessageWithEnums$Ref } from "../__generated__/pothos/ts-proto/testapis/enums/enums.pb.pothos";
+import { MessageWithEnums$Ref } from "./__generated__/schema/testapis/enums/enums.pb.pothos";
 import { builder } from "./builder";
 
 builder.queryField("test", (f) =>
