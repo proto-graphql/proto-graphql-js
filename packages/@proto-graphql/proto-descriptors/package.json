@@ -23,6 +23,7 @@
     "google-protobuf": "^3.12.2"
   },
   "devDependencies": {
+    "@proto-graphql/eslint-config": "*",
     "@types/google-protobuf": "3.15.6"
   },
   "files": [
@@ -32,6 +33,8 @@
   "scripts": {
     "build": "tsc --build tsconfig.cjs.json && tsc --build tsconfig.module.json",
     "clean": "rimraf lib/ module/ && tsc --build tsconfig.cjs.json --clean && tsc --build tsconfig.module.json --clean",
+    "format": "prettier --write '**/*.{mjs,js,jsx,mts,ts,tsx}'",
+    "lint": "eslint --fix .",
     "test": "jest --coverage --passWithNoTests"
   }
 }

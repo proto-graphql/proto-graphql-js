@@ -11,6 +11,10 @@
   "scripts": {
     "build": "tsc --build",
     "clean": "yarn build --clean",
+    "format": "prettier --write '**/*.{mjs,js,jsx,mts,ts,tsx}'",
     "lint": "eslint --fix ."
+  },
+  "devDependencies": {
+    "@proto-graphql/eslint-config": "*"
   }
 }

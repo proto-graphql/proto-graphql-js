@@ -31,13 +31,15 @@
     "nexus": "^1.0.0"
   },
   "devDependencies": {
+    "@proto-graphql/eslint-config": "*",
     "graphql": "15.4.0",
     "nexus": "1.3.0"
   },
   "scripts": {
     "build": "tsc --build tsconfig.cjs.json && tsc --build tsconfig.module.json",
     "clean": "rimraf lib/ module/ && tsc --build tsconfig.cjs.json --clean && tsc --build tsconfig.module.json --clean",
-    "lint": "frolint --branch main --bail",
+    "format": "prettier --write '**/*.{mjs,js,jsx,mts,ts,tsx}'",
+    "lint": "eslint --fix .",
     "pretest": "ts-node --transpile-only ./src/__tests__/__helpers__/testSchema.ts",
     "test": "jest"
   }

@@ -1,0 +1,30 @@
+{
+  "workspacePackageConfigs": [
+    {
+      "ignores": ["packages/@testapis/*", "devPackages/eslint-config"],
+      "package.json": {
+        "scripts": {
+          "format": "prettier --write '**/*.{mjs,js,jsx,mts,ts,tsx}'",
+          "lint": "eslint --fix ."
+        },
+        "devDependencies": {
+          "@proto-graphql/eslint-config": "*"
+        }
+      },
+      "files": [
+        { "src": "configs/.eslintrc.js", "dest": ".eslintrc.js" },
+        { "src": "configs/.lintstagedrc.cjs", "dest": ".lintstagedrc.cjs" }
+      ]
+    },
+    {
+      "ignores": ["packages/@testapis/*", "devPackages/eslint-config", "e2e/tests/*"],
+      "files": [
+        { "src": "configs/.gitignore", "dest": ".gitignore" }
+      ]
+    }
+  ],
+  "sortFields": {
+    "scripts": "alphabetically",
+    "devDependencies": "alphabetically"
+  }
+}
