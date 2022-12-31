@@ -6,41 +6,42 @@ set -o pipefail
 cd $(dirname $0)/..
 
 PLUGIN_ROOT=./packages/protoc-gen-nexus
-TESTAPIS_ROOT=./packages/@testapis
+PROTO_ROOT=./devPackages/testapis-proto/src
+OUT_ROOT=./e2e/testapis
 LIBRARY_PATH=./proto-graphql/proto
 
 clean() {
-  rm -rf $TESTAPIS_ROOT/node-native/lib
-  rm -rf $TESTAPIS_ROOT/node/lib
-  rm -rf $TESTAPIS_ROOT/ts-proto/{src,lib}
-  rm -rf $TESTAPIS_ROOT/ts-proto-with-forcelong-long/{src,lib}
-  rm -rf $TESTAPIS_ROOT/ts-proto-with-forcelong-number/{src,lib}
+  rm -rf $OUT_ROOT/google-protobuf/lib
+  rm -rf $OUT_ROOT/protobufjs/lib
+  rm -rf $OUT_ROOT/ts-proto/{src,lib}
+  rm -rf $OUT_ROOT/ts-proto-with-forcelong-long/{src,lib}
+  rm -rf $OUT_ROOT/ts-proto-with-forcelong-number/{src,lib}
 }
 
 init() {
-  mkdir -p $TESTAPIS_ROOT/node-native/lib
-  mkdir -p $TESTAPIS_ROOT/node/lib
-  mkdir -p $TESTAPIS_ROOT/ts-proto/{src,lib}
-  mkdir -p $TESTAPIS_ROOT/ts-proto-with-forcelong-long/{src,lib}
-  mkdir -p $TESTAPIS_ROOT/ts-proto-with-forcelong-number/{src,lib}
+  mkdir -p $OUT_ROOT/google-protobuf/lib
+  mkdir -p $OUT_ROOT/protobufjs/lib
+  mkdir -p $OUT_ROOT/ts-proto/{src,lib}
+  mkdir -p $OUT_ROOT/ts-proto-with-forcelong-long/{src,lib}
+  mkdir -p $OUT_ROOT/ts-proto-with-forcelong-number/{src,lib}
 }
 
 protocw() {
   ./scripts/protocw \
     -I $LIBRARY_PATH \
-    -I $TESTAPIS_ROOT/proto/src \
+    -I $PROTO_ROOT \
   "$@"
 }
 
 listPackages() {
-  find $TESTAPIS_ROOT/proto/src/testapis -name '*.proto' | xargs dirname | sort | uniq
+  find $PROTO_ROOT/testapis -name '*.proto' | xargs dirname | sort | uniq
 }
 
 execProtoc() {
   protocw \
     --plugin=protoc-gen-ts=`yarn bin protoc-gen-ts` \
-    --js_out="$TESTAPIS_ROOT/node-native/lib" --js_opt=import_style=commonjs,binary \
-    --ts_out="$TESTAPIS_ROOT/node-native/lib" \
+    --js_out="$OUT_ROOT/google-protobuf/lib" --js_opt=import_style=commonjs,binary \
+    --ts_out="$OUT_ROOT/google-protobuf/lib" \
     ${LIBRARY_PATH}/graphql/*.proto
 
   for protoDir in $(listPackages); do
@@ -48,34 +49,34 @@ execProtoc() {
 
     protocw \
       --plugin=protoc-gen-ts=`yarn bin protoc-gen-ts` \
-      --js_out="$TESTAPIS_ROOT/node-native/lib" --js_opt=import_style=commonjs,binary \
-      --ts_out="$TESTAPIS_ROOT/node-native/lib" \
+      --js_out="$OUT_ROOT/google-protobuf/lib" --js_opt=import_style=commonjs,binary \
+      --ts_out="$OUT_ROOT/google-protobuf/lib" \
       ${protoDir}/*.proto
 
-    nodeOutDir="${protoDir/\/proto\/src\///node/lib/}"
-    mkdir -p $nodeOutDir
+    pbjsOutDir="${protoDir/$PROTO_ROOT\//$OUT_ROOT/protobufjs/lib/}"
+    mkdir -p $pbjsOutDir
     yarn pbjs \
       --target static-module \
       --wrap commonjs \
       --force-message \
-      --path $TESTAPIS_ROOT/proto/src \
-      --out "$nodeOutDir/index.js" \
+      --path $PROTO_ROOT \
+      --out "$pbjsOutDir/index.js" \
       ${protoDir}/*.proto
-    yarn pbts --out "$nodeOutDir/index.d.ts" "$nodeOutDir/index.js"
+    yarn pbts --out "$pbjsOutDir/index.d.ts" "$pbjsOutDir/index.js"
 
     protocw \
       --plugin=protoc-gen-ts_proto=`yarn bin protoc-gen-ts_proto` \
-      --ts_proto_out="$TESTAPIS_ROOT/ts-proto/src" --ts_proto_opt=enumsAsLiterals=true,forceLong=string,unrecognizedEnum=false,outputTypeRegistry=true,esModuleInterop=true \
-      ${protoDir}/*.proto
-
-    protocw \
-      --plugin=protoc-gen-ts_proto=`yarn bin protoc-gen-ts_proto` \
-      --ts_proto_out="$TESTAPIS_ROOT/ts-proto-with-forcelong-long/src" --ts_proto_opt=enumsAsLiterals=true,forceLong=long,unrecognizedEnum=false,outputTypeRegistry=true,esModuleInterop=true \
+      --ts_proto_out="$OUT_ROOT/ts-proto/src" --ts_proto_opt=enumsAsLiterals=true,forceLong=string,unrecognizedEnum=false,outputTypeRegistry=true,esModuleInterop=true \
       ${protoDir}/*.proto
 
     protocw \
       --plugin=protoc-gen-ts_proto=`yarn bin protoc-gen-ts_proto` \
-      --ts_proto_out="$TESTAPIS_ROOT/ts-proto-with-forcelong-number/src" --ts_proto_opt=enumsAsLiterals=true,forceLong=number,unrecognizedEnum=false,outputTypeRegistry=true,esModuleInterop=true \
+      --ts_proto_out="$OUT_ROOT/ts-proto-with-forcelong-long/src" --ts_proto_opt=enumsAsLiterals=true,forceLong=long,unrecognizedEnum=false,outputTypeRegistry=true,esModuleInterop=true \
+      ${protoDir}/*.proto
+
+    protocw \
+      --plugin=protoc-gen-ts_proto=`yarn bin protoc-gen-ts_proto` \
+      --ts_proto_out="$OUT_ROOT/ts-proto-with-forcelong-number/src" --ts_proto_opt=enumsAsLiterals=true,forceLong=number,unrecognizedEnum=false,outputTypeRegistry=true,esModuleInterop=true \
       ${protoDir}/*.proto
   done
 }
@@ -84,9 +85,9 @@ _main() {
   clean
   init
   execProtoc
-  yarn workspace @testapis/ts-proto build:test
-  yarn workspace @testapis/ts-proto-with-forcelong-long build:test
-  yarn workspace @testapis/ts-proto-with-forcelong-number build:test
+  yarn workspace @proto-graphql/e2e-testapis-ts-proto build:test
+  yarn workspace @proto-graphql/e2e-testapis-ts-proto-with-forcelong-long build:test
+  yarn workspace @proto-graphql/e2e-testapis-ts-proto-with-forcelong-number build:test
 }
 
 _main

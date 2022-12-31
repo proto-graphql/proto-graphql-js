@@ -1,5 +1,5 @@
 import { makeTestSchema } from "@proto-graphql/e2e-helper";
-import * as pbjs from "@testapis/node/lib/testapis/nested";
+import * as pbjs from "@proto-graphql/e2e-testapis-protobufjs/lib/testapis/nested";
 import { queryField } from "nexus";
 
 import * as types1 from "./__generated__/schema/testapis/nested/nested_pb_nexus";

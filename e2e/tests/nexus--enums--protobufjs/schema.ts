@@ -1,5 +1,5 @@
 import { makeTestSchema } from "@proto-graphql/e2e-helper";
-import * as pbjs from "@testapis/node/lib/testapis/enums";
+import * as pbjs from "@proto-graphql/e2e-testapis-protobufjs/lib/testapis/enums";
 import { queryField } from "nexus";
 
 import * as types1 from "./__generated__/schema/testapis/enums/enums_pb_nexus";

@@ -1,4 +1,4 @@
-# @testapis/node-native
+# @proto-graphql/e2e-testapis-ts-proto
 
 ## 0.5.1
 

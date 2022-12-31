@@ -1,6 +1,6 @@
 import "@proto-nexus/google-protobuf";
 import { makeTestSchema } from "@proto-graphql/e2e-helper";
-import * as pb from "@testapis/node/lib/testapis/proto3_optional";
+import * as pb from "@proto-graphql/e2e-testapis-protobufjs/lib/testapis/proto3_optional";
 import { queryField } from "nexus";
 
 import * as types1 from "./__generated__/schema/testapis/proto3_optional/proto3_optional_pb_nexus";

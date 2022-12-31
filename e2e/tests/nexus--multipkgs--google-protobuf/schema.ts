@@ -1,5 +1,5 @@
 import { makeTestSchema } from "@proto-graphql/e2e-helper";
-import { MessageWithSubpkg } from "@testapis/node-native/lib/testapis/multipkgs/subpkg2/types_pb";
+import { MessageWithSubpkg } from "@proto-graphql/e2e-testapis-google-protobuf/lib/testapis/multipkgs/subpkg2/types_pb";
 import { queryField } from "nexus";
 
 import * as types1 from "./__generated__/schema/testapis/multipkgs/subpkg1/types_pb_nexus";

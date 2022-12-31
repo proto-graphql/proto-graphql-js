@@ -1,7 +1,7 @@
 {
   "workspacePackageConfigs": [
     {
-      "files": ["packages/*", "packages/!(@testapis)/*", "e2e/**"],
+      "files": ["packages/**", "e2e/!(testapis)/**"],
       "package.json": {
         "scripts": {
           "lint": "eslint --fix ."
@@ -17,7 +17,7 @@
       ]
     },
     {
-      "files": ["packages/*", "packages/!(@testapis)/*"],
+      "files": ["packages/**"],
       "package.json": {
         "main": "./lib/index.js",
         "module": "./module/index.js",
@@ -43,7 +43,7 @@
       ]
     },
     {
-      "files": ["e2e/helper", "packages/@testapis/ts-proto*"],
+      "files": ["e2e/helper", "e2e/testapis/ts-proto*"],
       "package.json": {
         "main": "./lib/index.js",
         "types": "./lib/index.d.ts",

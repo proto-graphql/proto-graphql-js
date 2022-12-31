@@ -1,5 +1,5 @@
 import { printGraphqlSchema } from "@proto-graphql/e2e-helper";
-import { OneofParent } from "@testapis/ts-proto/lib/testapis/oneof/oneof";
+import { OneofParent } from "@proto-graphql/e2e-testapis-ts-proto/lib/testapis/oneof/oneof";
 
 import { OneofParent$Ref } from "./__generated__/schema/testapis/oneof/oneof.pb.pothos";
 import { builder } from "./builder";

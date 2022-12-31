@@ -24,12 +24,15 @@ export async function generateDSLs(
   const params = [];
   switch (target) {
     case "protobufjs":
-      if (opts.withPrefix) params.push("import_prefix=@testapis/node/lib");
+      if (opts.withPrefix)
+        params.push("import_prefix=@proto-graphql/e2e-testapis-protobufjs/lib");
       params.push("use_protobufjs");
       break;
     case "native protobuf":
       if (opts.withPrefix)
-        params.push("import_prefix=@testapis/node-native/lib");
+        params.push(
+          "import_prefix=@proto-graphql/e2e-testapis-google-protobuf/lib"
+        );
       break;
     default: {
       const _exhaustiveCheck: never = target;

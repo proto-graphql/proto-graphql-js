@@ -6,7 +6,7 @@
   * [#183](https://github.com/proto-graphql/proto-graphql-js/pull/183) Fixing the process of converting to timestamp ([@takizuka](https://github.com/takizuka))
 
 #### Dependencies
-* `@testapis/node-native`
+* `@proto-graphql/e2e-testapis-google-protobuf`
   * [#175](https://github.com/proto-graphql/proto-graphql-js/pull/175) fix(deps): update dependency google-protobuf to v3.20.1 ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 1
@@ -105,7 +105,7 @@
 #### Dependencies
 * Other
   * [#121](https://github.com/proto-graphql/proto-graphql-js/pull/121) chore(deps): update dependency graphql-scalars to v1.10.0 ([@renovate[bot]](https://github.com/apps/renovate))
-* `@testapis/node-native`, `protoc-gen-nexus`
+* `@proto-graphql/e2e-testapis-google-protobuf`, `protoc-gen-nexus`
   * [#117](https://github.com/proto-graphql/proto-graphql-js/pull/117) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 1
@@ -371,13 +371,13 @@
 ## v0.2.0 (2020-12-28)
 
 #### ⚠️ Breaking Changes - Code Generation
-* `@testapis/nexus-native`, `@testapis/nexus`, `@testapis/node-native`, `@testapis/node`, `@testapis/proto`, `protoc-gen-nexus`
+* `@testapis/nexus-native`, `@testapis/nexus`, `@proto-graphql/e2e-testapis-google-protobuf`, `@proto-graphql/e2e-testapis-protobufjs`, `@testapis/proto`, `protoc-gen-nexus`
   * [#42](https://github.com/proto-graphql/proto-graphql-js/pull/42) ignore `<ENUM_NAME>_UNSPECIFIED` value ([@izumin5210](https://github.com/izumin5210))
 
 #### Features - Code Generation
-* `@testapis/node-native`, `@testapis/node`, `@testapis/proto`, `protoc-gen-nexus`
+* `@proto-graphql/e2e-testapis-google-protobuf`, `@proto-graphql/e2e-testapis-protobufjs`, `@testapis/proto`, `protoc-gen-nexus`
   * [#41](https://github.com/proto-graphql/proto-graphql-js/pull/41) graphql.field.ignore option ([@izumin5210](https://github.com/izumin5210))
-* `@proto-nexus/protobufjs-adapter`, `@testapis/nexus-native`, `@testapis/nexus`, `@testapis/node-native`, `@testapis/node`, `@testapis/proto`, `protoc-gen-nexus`
+* `@proto-nexus/protobufjs-adapter`, `@testapis/nexus-native`, `@testapis/nexus`, `@proto-graphql/e2e-testapis-google-protobuf`, `@proto-graphql/e2e-testapis-protobufjs`, `@testapis/proto`, `protoc-gen-nexus`
   * [#39](https://github.com/proto-graphql/proto-graphql-js/pull/39) Support protobuf.js ([@izumin5210](https://github.com/izumin5210))
 
 #### Committers: 1

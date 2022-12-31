@@ -1,6 +1,6 @@
-# @testapis/ts-proto
+# @proto-graphql/e2e-testapis-protobufjs
 
-## 0.5.1
+## 0.5.0
 
 ### Patch Changes
 

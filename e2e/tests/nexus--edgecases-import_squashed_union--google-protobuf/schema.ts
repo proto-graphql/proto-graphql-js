@@ -1,5 +1,5 @@
 import { makeTestSchema } from "@proto-graphql/e2e-helper";
-import { Message } from "@testapis/node-native/lib/testapis/edgecases/import_squashed_union/pkg2/types_pb";
+import { Message } from "@proto-graphql/e2e-testapis-google-protobuf/lib/testapis/edgecases/import_squashed_union/pkg2/types_pb";
 import { queryField } from "nexus";
 
 import * as types1 from "./__generated__/schema/testapis/edgecases/import_squashed_union/pkg1/types_pb_nexus";

@@ -1,5 +1,5 @@
 import { printGraphqlSchema } from "@proto-graphql/e2e-helper";
-import { FieldBehaviorComentsMessage } from "@testapis/ts-proto/lib/testapis/field_behavior/comments";
+import { FieldBehaviorComentsMessage } from "@proto-graphql/e2e-testapis-ts-proto/lib/testapis/field_behavior/comments";
 
 import { FieldBehaviorComentsMessage$Ref } from "./__generated__/schema/testapis/field_behavior/comments.pb.pothos";
 import { builder } from "./builder";

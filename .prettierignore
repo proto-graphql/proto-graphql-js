@@ -7,4 +7,4 @@ module/
 
 # auto generated files
 __generated__/
-/packages/@testapis/
+/e2e/testapis/

@@ -1,5 +1,5 @@
 import { printGraphqlSchema } from "@proto-graphql/e2e-helper";
-import { Message } from "@testapis/ts-proto/lib/testapis/primitives/primitives";
+import { Message } from "@proto-graphql/e2e-testapis-ts-proto/lib/testapis/primitives/primitives";
 
 import { Message$Ref } from "./__generated__/schema/testapis/primitives/primitives.pb.pothos";
 import { builder } from "./builder";

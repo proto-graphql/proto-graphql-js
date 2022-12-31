@@ -1,5 +1,5 @@
 import { makeTestSchema } from "@proto-graphql/e2e-helper";
-import { FieldBehaviorComentsMessage } from "@testapis/node-native/lib/testapis/field_behavior/comments_pb";
+import { FieldBehaviorComentsMessage } from "@proto-graphql/e2e-testapis-google-protobuf/lib/testapis/field_behavior/comments_pb";
 import { queryField } from "nexus";
 
 import * as types1 from "./__generated__/schema/testapis/field_behavior/comments_pb_nexus";

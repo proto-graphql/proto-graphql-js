@@ -1,4 +1,4 @@
-# @testapis/ts-proto
+# @proto-graphql/e2e-testapis-ts-proto
 
 ## 0.6.0
 

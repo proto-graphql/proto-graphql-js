@@ -1,5 +1,5 @@
 import { makeTestSchema } from "@proto-graphql/e2e-helper";
-import { OneofParent } from "@testapis/node-native/lib/testapis/oneof/oneof_pb";
+import { OneofParent } from "@proto-graphql/e2e-testapis-google-protobuf/lib/testapis/oneof/oneof_pb";
 import { queryField } from "nexus";
 
 import * as types1 from "./__generated__/schema/testapis/oneof/oneof_pb_nexus";

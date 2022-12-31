@@ -1,5 +1,5 @@
 import { printGraphqlSchema } from "@proto-graphql/e2e-helper";
-import { ParentMessage } from "@testapis/ts-proto/lib/testapis/edgecases/import_from_same_pkg/parent";
+import { ParentMessage } from "@proto-graphql/e2e-testapis-ts-proto/lib/testapis/edgecases/import_from_same_pkg/parent";
 
 import { ParentMessage$Ref } from "./__generated__/schema/testapis/edgecases/import_from_same_pkg/parent.pb.pothos";
 import { builder } from "./builder";

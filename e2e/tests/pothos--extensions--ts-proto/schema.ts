@@ -1,5 +1,5 @@
 import { printGraphqlSchema } from "@proto-graphql/e2e-helper";
-import { PrefixedMessage } from "@testapis/ts-proto/lib/testapis/extensions/extensions";
+import { PrefixedMessage } from "@proto-graphql/e2e-testapis-ts-proto/lib/testapis/extensions/extensions";
 
 import {
   TestPrefixInterfaceMessage$Ref,

@@ -1,5 +1,5 @@
 import { makeTestSchema } from "@proto-graphql/e2e-helper";
-import { PrefixedMessage } from "@testapis/node-native/lib/testapis/extensions/extensions_pb";
+import { PrefixedMessage } from "@proto-graphql/e2e-testapis-google-protobuf/lib/testapis/extensions/extensions_pb";
 import { queryField, nonNull } from "nexus";
 
 import * as types1 from "./__generated__/schema/testapis/extensions/extensions_pb_nexus";

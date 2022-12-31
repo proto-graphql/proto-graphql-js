@@ -1,6 +1,6 @@
-# @testapis/node
+# @proto-graphql/e2e-testapis-google-protobuf
 
-## 0.5.0
+## 0.5.1
 
 ### Patch Changes
 

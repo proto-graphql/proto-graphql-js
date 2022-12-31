@@ -1,5 +1,5 @@
 {
-  "name": "@testapis/ts-proto-with-forcelong-long",
+  "name": "@proto-graphql/e2e-testapis-ts-proto-with-forcelong-long",
   "version": "0.6.0",
   "description": "Generated codes with protocolbuffers/protobuf's js_out",
   "private": true,
@@ -8,7 +8,7 @@
     "google-protobuf": "3.21.2"
   },
   "devDependencies": {
-    "@testapis/proto": "^0.5.0"
+    "@proto-graphql/testapis-proto": "*"
   },
   "scripts": {
     "build:test": "tsc --build tsconfig.cjs.json",
