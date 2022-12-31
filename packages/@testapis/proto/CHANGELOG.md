@@ -1,5 +1,11 @@
 # @testapis/proto
 
+## 0.5.6
+
+### Patch Changes
+
+- [#255](https://github.com/proto-graphql/proto-graphql-js/pull/255) [`70295da`](https://github.com/proto-graphql/proto-graphql-js/commit/70295dae5e83a5ee4ee5185e670348c1a88979e2) Thanks [@izumin5210](https://github.com/izumin5210)! - support proto3 optional
+
 ## 0.5.5
 
 ### Patch Changes
