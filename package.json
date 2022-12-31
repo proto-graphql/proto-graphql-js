@@ -26,7 +26,7 @@
     "@changesets/cli": "^2.25.0",
     "@pothos/core": "3.23.2",
     "@types/eslint": "^8.4.10",
-    "@types/jest": "29.2.4",
+    "@types/jest": "29.2.5",
     "@types/minimatch": "^5.1.2",
     "eslint": "^8.30.0",
     "graphql": "15.4.0",
