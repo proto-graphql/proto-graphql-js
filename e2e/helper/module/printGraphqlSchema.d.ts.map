@@ -1,0 +1,1 @@
+{"version":3,"file":"printGraphqlSchema.d.ts","sourceRoot":"","sources":["../src/printGraphqlSchema.ts"],"names":[],"mappings":"AAGA,OAAO,EAAE,aAAa,EAAe,MAAM,SAAS,CAAC;AAErD,wBAAgB,kBAAkB,CAAC,EACjC,OAAO,EACP,MAAM,GACP,EAAE;IACD,OAAO,EAAE,MAAM,CAAC;IAChB,MAAM,EAAE,aAAa,CAAC;CACvB,QAOA"}

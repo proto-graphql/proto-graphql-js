@@ -103,23 +103,6 @@ async function genPackageJson(test: TestCase): Promise<void> {
   );
 }
 
-async function genTsconfig(test: TestCase): Promise<void> {
-  const tsconfig = {
-    extends: "../../../tsconfig.base.json",
-    compilerOptions: {
-      baseUrl: ".",
-      noEmit: true,
-    },
-    include: ["."],
-  };
-
-  await writeFile(
-    join(getTestPath(test), "tsconfig.json"),
-    `${header}\n${JSON.stringify(tsconfig, undefined, 2)}`,
-    "utf-8"
-  );
-}
-
 async function genBufGemTemplate(test: TestCase): Promise<void> {
   const genDir = join("__generated__", "schema");
 
@@ -149,7 +132,7 @@ async function genBufGemTemplate(test: TestCase): Promise<void> {
     plugins: [
       {
         name: test.target,
-        path: `../../..//packages/protoc-gen-${test.target}/bin/protoc-gen-${test.target}`,
+        path: `../../../packages/protoc-gen-${test.target}/bin/protoc-gen-${test.target}`,
         out: genDir,
         opt: (pluginOpts[test.target] as Record<string, string[]>)[
           test.proto.lib
@@ -171,7 +154,6 @@ async function main() {
 
   await Promise.all([
     ...config.tests.map(genPackageJson),
-    ...config.tests.map(genTsconfig),
     ...config.tests.map(genBufGemTemplate),
   ]);
 }

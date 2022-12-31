@@ -16,6 +16,7 @@
   "devDependencies": {
     "@proto-graphql/e2e-helper": "*",
     "@proto-graphql/eslint-config": "*",
+    "@proto-graphql/tsconfig": "*",
     "@proto-nexus/google-protobuf": "*",
     "@testapis/node-native": "*",
     "proto-nexus": "*",

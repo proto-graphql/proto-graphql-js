@@ -60,7 +60,6 @@ const config = {
       },
     ],
     "@typescript-eslint/no-redeclare": "error",
-    // "@typescript-eslint/strict-boolean-expressions": "error",
 
     // import
     "import/order": [

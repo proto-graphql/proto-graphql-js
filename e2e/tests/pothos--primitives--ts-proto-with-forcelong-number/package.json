@@ -16,6 +16,7 @@
   "devDependencies": {
     "@proto-graphql/e2e-helper": "*",
     "@proto-graphql/eslint-config": "*",
+    "@proto-graphql/tsconfig": "*",
     "@testapis/ts-proto-with-forcelong-number": "*",
     "protoc-gen-pothos": "*"
   },

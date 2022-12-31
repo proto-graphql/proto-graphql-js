@@ -7,5 +7,5 @@
     "outDir": "./lib",
     "noEmit": false
   },
-  "exclude": ["**/*.test.*", "**/__tests__/**"]
+  "exclude": ["**/*.test.*", "**/__tests__/**", "jest.config.js", ".eslintrc.js", ".lintstagedrc.cjs"]
 }

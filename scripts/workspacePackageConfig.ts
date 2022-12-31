@@ -4,7 +4,7 @@ import { join } from "path";
 import { exec as _exec } from "child_process";
 import { readFile, copyFile, writeFile } from "fs/promises";
 import { promisify } from "util";
-import ignore from "ignore";
+import minimatch from "minimatch";
 
 const exec = promisify(_exec);
 
@@ -15,14 +15,16 @@ interface Config {
 
 type Sort = "alphabetically";
 
-type ObjectValues = Record<string, unknown>;
+type PrimitiveValue = string | number | boolean;
+type ObjectValue = Record<string, unknown>;
+type Value = PrimitiveValue | ObjectValue | Array<PrimitiveValue>;
 
 interface WorkspacePackageConfig {
-  ignores?: string[];
+  files?: string[];
   "package.json"?: {
-    [key: string]: ObjectValues;
+    [key: string]: Value;
   };
-  files?: [{ src: string; dest: string }];
+  copy?: [{ src: string; dest: string }];
 }
 
 export async function main() {
@@ -43,8 +45,8 @@ export async function main() {
   // update package.json
   for (const [wsCfg, pkgPaths] of wsCfgAndPkgPathsPairs) {
     for (const pkgPath of pkgPaths) {
-      for (const [key, values] of Object.entries(wsCfg["package.json"] ?? {})) {
-        await pkgJSONStore.addValues({ packagePath: pkgPath, key, values });
+      for (const [key, value] of Object.entries(wsCfg["package.json"] ?? {})) {
+        await pkgJSONStore.addValue({ packagePath: pkgPath, key, value });
       }
     }
   }
@@ -54,7 +56,7 @@ export async function main() {
   // copy files
   for (const [wsCfg, pkgPaths] of wsCfgAndPkgPathsPairs) {
     for (const pkgPath of pkgPaths) {
-      for (const file of wsCfg.files ?? []) {
+      for (const file of wsCfg.copy ?? []) {
         const src = file.src;
         const dest = join(pkgPath, file.dest);
         await copyFile(src, dest);
@@ -64,14 +66,17 @@ export async function main() {
 }
 
 function buildWorkspaceConfigAndPkgPathsPairs(
-  pkgPaths: string[],
+  allPkgPaths: string[],
   cfg: Config
 ): [wsCfg: WorkspacePackageConfig, pkgPaths: string[]][] {
   return cfg.workspacePackageConfigs.map((wsCfg) => {
-    const ig = ignore();
-    if (wsCfg.ignores != null) ig.add(wsCfg.ignores);
-
-    return [wsCfg, pkgPaths.filter(ig.createFilter())];
+    let pkgPaths = new Set<string>();
+    for (const pattern of wsCfg.files ?? []) {
+      for (const file of allPkgPaths.filter(minimatch.filter(pattern))) {
+        pkgPaths.add(file);
+      }
+    }
+    return [wsCfg, [...pkgPaths]];
   });
 }
 
@@ -92,19 +97,37 @@ class PackageJSONStore {
     }
   }
 
-  public async addValues({
+  public async addValue({
     packagePath,
     key,
-    values,
+    value,
   }: {
     packagePath: string;
     key: string;
-    values: ObjectValues;
+    value: Value;
   }) {
-    await this.setIn(packagePath, key, {
-      ...((await this.getIn(packagePath, key)) as Record<string, unknown>),
-      ...values,
-    });
+    if (
+      typeof value === "string" ||
+      typeof value === "number" ||
+      typeof value === "boolean"
+    ) {
+      await this.setIn(packagePath, key, value);
+    } else if (Array.isArray(value)) {
+      await this.setIn(
+        packagePath,
+        key,
+        [
+          ...(((await this.getIn(packagePath, key)) as Array<unknown>) ?? []),
+          ...value,
+        ].filter(isUnique())
+      );
+    } else {
+      await this.setIn(packagePath, key, {
+        ...(((await this.getIn(packagePath, key)) as Record<string, unknown>) ??
+          {}),
+        ...value,
+      });
+    }
   }
 
   public async sortFields(sortCfg: Record<string, Sort>) {
@@ -140,12 +163,9 @@ class PackageJSONStore {
   private async getIn(pkgPath: string, field: string): Promise<unknown> {
     const pkgJSON = await this.loadPkgJSON(pkgPath);
 
-    let obj: Record<string, unknown> = pkgJSON;
+    let obj: Record<string, unknown> | undefined = pkgJSON;
     for (const key of field.split(".")) {
-      if (obj[key] == null) {
-        obj[key] = {};
-      }
-      obj = obj[key] as Record<string, unknown>;
+      obj = obj?.[key] as typeof obj;
     }
 
     return obj;
@@ -166,6 +186,15 @@ class PackageJSONStore {
     }
     parent[fieldPaths.slice(-1)[0]] = value;
   }
+}
+
+function isUnique<V>(): (v: V) => boolean {
+  const set = new Set<V>();
+  return (v) => {
+    if (set.has(v)) return false;
+    set.add(v);
+    return true;
+  };
 }
 
 main();
