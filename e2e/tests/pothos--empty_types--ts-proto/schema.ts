@@ -1,7 +1,7 @@
+import { printGraphqlSchema } from "@proto-graphql/e2e-helper";
 import { EmptyMessage } from "@testapis/ts-proto/lib/testapis/empty_types/empty";
 
-import { printGraphqlSchema } from "../../src/printGraphqlSchema";
-import { EmptyMessage$Ref } from "../__generated__/pothos/ts-proto/testapis/empty_types/empty.pb.pothos";
+import { EmptyMessage$Ref } from "./__generated__/schema/testapis/empty_types/empty.pb.pothos";
 import { builder } from "./builder";
 
 builder.queryField("test", (t) =>

@@ -84,9 +84,9 @@ _main() {
   clean
   init
   execProtoc
-  yarn workspace @testapis/ts-proto build:testapis
-  yarn workspace @testapis/ts-proto-with-forcelong-long build:testapis
-  yarn workspace @testapis/ts-proto-with-forcelong-number build:testapis
+  yarn workspace @testapis/ts-proto build:test
+  yarn workspace @testapis/ts-proto-with-forcelong-long build:test
+  yarn workspace @testapis/ts-proto-with-forcelong-number build:test
 }
 
 _main

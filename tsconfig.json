@@ -1,6 +1,11 @@
 {
-  "extends": "./tsconfig.base.json",
+  "extends": "@proto-graphql/tsconfig/tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": "./packages",
-  }
+    "noEmit": true
+  },
+  "include": [
+    "scripts",
+    ".lintstagedrc.cjs",
+    ".prettierrc.js",
+  ]
 }

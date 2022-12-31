@@ -30,17 +30,23 @@
     "ts-poet": "^6.3.0"
   },
   "devDependencies": {
+    "@proto-graphql/eslint-config": "*",
+    "@proto-graphql/tsconfig": "*",
     "@types/google-protobuf": "^3.15.6"
   },
   "files": [
     "bin/",
-    "include/",
     "lib/",
     "module/"
   ],
   "scripts": {
-    "build": "tsc --build tsconfig.cjs.json && tsc --build tsconfig.module.json",
-    "clean": "rimraf lib/ module/ && tsc --build tsconfig.cjs.json --clean && tsc --build tsconfig.module.json --clean",
+    "build": "yarn build:cjs && yarn build:module",
+    "build:cjs": "tsc --build tsconfig.cjs.json",
+    "build:module": "tsc --build tsconfig.module.json",
+    "clean": "yarn clean:cjs && yarn clean:module",
+    "clean:cjs": "yarn build:cjs --clean",
+    "clean:module": "yarn build:module --clean",
+    "lint": "eslint --fix .",
     "test": "jest --coverage"
   }
 }

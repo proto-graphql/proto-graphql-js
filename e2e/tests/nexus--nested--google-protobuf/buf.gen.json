@@ -1,0 +1,13 @@
+{
+  "version": "v1",
+  "plugins": [
+    {
+      "name": "nexus",
+      "path": "../../..//packages/protoc-gen-nexus/bin/protoc-gen-nexus",
+      "out": "__generated__/schema",
+      "opt": [
+        "import_prefix=@testapis/node-native/lib/"
+      ]
+    }
+  ]
+}

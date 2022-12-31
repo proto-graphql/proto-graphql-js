@@ -1,8 +1,8 @@
+import { makeTestSchema } from "@proto-graphql/e2e-helper";
 import * as pbjs from "@testapis/node/lib/testapis/nested";
 import { queryField } from "nexus";
 
-import { makeTestSchema } from "../../src/makeTestSchema";
-import * as types1 from "../__generated__/nexus/protobufjs/testapis/nested/nested_pb_nexus";
+import * as types1 from "./__generated__/schema/testapis/nested/nested_pb_nexus";
 
 const testQuery = queryField("test1", {
   type: "ParentMessage",

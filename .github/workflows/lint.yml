@@ -16,8 +16,6 @@ jobs:
         node-version: 18.x
     - run: yarn --frozen-lockfile
     - run: yarn lint
-      env:
-        NODE_OPTIONS: "--max_old_space_size=8192"
     - run: yarn format
     - name: check code is up to date
       run: git diff --exit-code

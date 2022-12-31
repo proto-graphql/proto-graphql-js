@@ -11,6 +11,9 @@
     "@testapis/proto": "^0.5.0"
   },
   "scripts": {
-    "build:testapis": "tsc --build ."
-  }
+    "build:test": "tsc --build tsconfig.cjs.json",
+    "clean": "yarn build:test --clean"
+  },
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts"
 }

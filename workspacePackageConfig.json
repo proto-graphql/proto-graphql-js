@@ -1,0 +1,72 @@
+{
+  "workspacePackageConfigs": [
+    {
+      "files": ["packages/*", "packages/!(@testapis)/*", "e2e/**"],
+      "package.json": {
+        "scripts": {
+          "lint": "eslint --fix ."
+        },
+        "devDependencies": {
+          "@proto-graphql/eslint-config": "*",
+          "@proto-graphql/tsconfig": "*"
+        }
+      },
+      "copy": [
+        { "src": "configs/.eslintrc.js", "dest": ".eslintrc.js" },
+        { "src": "configs/.lintstagedrc.cjs", "dest": ".lintstagedrc.cjs" }
+      ]
+    },
+    {
+      "files": ["packages/*", "packages/!(@testapis)/*"],
+      "package.json": {
+        "main": "./lib/index.js",
+        "module": "./module/index.js",
+        "types": "./lib/index.d.ts",
+        "files": [
+          "lib/",
+          "module/"
+        ],
+        "scripts": {
+          "build": "yarn build:cjs && yarn build:module",
+          "build:cjs": "tsc --build tsconfig.cjs.json",
+          "build:module": "tsc --build tsconfig.module.json",
+          "clean": "yarn clean:cjs && yarn clean:module",
+          "clean:cjs": "yarn build:cjs --clean",
+          "clean:module": "yarn build:module --clean"
+        }
+      },
+      "copy": [
+        { "src": "configs/.gitignore", "dest": ".gitignore" },
+        { "src": "configs/tsconfig.json", "dest": "tsconfig.json" },
+        { "src": "configs/tsconfig.cjs.json", "dest": "tsconfig.cjs.json" },
+        { "src": "configs/tsconfig.module.json", "dest": "tsconfig.module.json" }
+      ]
+    },
+    {
+      "files": ["e2e/helper", "packages/@testapis/ts-proto*"],
+      "package.json": {
+        "main": "./lib/index.js",
+        "types": "./lib/index.d.ts",
+        "scripts": {
+          "build:test": "tsc --build tsconfig.cjs.json",
+          "clean": "yarn build:test --clean"
+        }
+      },
+      "copy": [
+        { "src": "configs/.gitignore.test", "dest": ".gitignore" },
+        { "src": "configs/tsconfig.json", "dest": "tsconfig.json" },
+        { "src": "configs/tsconfig.cjs.json", "dest": "tsconfig.cjs.json" }
+      ]
+    },
+    {
+      "files": ["e2e/tests/*"],
+      "copy": [
+        { "src": "configs/tsconfig.e2e.json", "dest": "tsconfig.json" }
+      ]
+    }
+  ],
+  "sortFields": {
+    "scripts": "alphabetically",
+    "devDependencies": "alphabetically"
+  }
+}

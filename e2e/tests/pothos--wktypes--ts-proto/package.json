@@ -1,0 +1,27 @@
+{
+  "name": "@proto-graphql/e2e-pothos--wktypes--ts-proto",
+  "version": "0.1.0",
+  "description": "E2E tests for protoc-gen-pothos",
+  "private": true,
+  "scripts": {
+    "lint": "eslint --fix .",
+    "test:e2e": "yarn test:e2e:gen && yarn test:e2e:jest && yarn test:e2e:schema && yarn test:e2e:typecheck",
+    "test:e2e:gen": "rm -rf __generated__ && yarn test:e2e:gen:proto && yarn test:e2e:gen:gql",
+    "test:e2e:gen:gql": "ts-node --transpile-only --require tsconfig-paths/register --project tsconfig.json schema.ts",
+    "test:e2e:gen:proto": "buf generate --template buf.gen.json --path ../../../packages/@testapis/proto/src/testapis/wktypes ../../../packages/@testapis/proto/src",
+    "test:e2e:jest": "jest --passWithNoTests",
+    "test:e2e:schema": "git diff --exit-code __generated__/schema.graphql",
+    "test:e2e:typecheck": "tsc --build tsconfig.json"
+  },
+  "devDependencies": {
+    "@proto-graphql/e2e-helper": "*",
+    "@proto-graphql/eslint-config": "*",
+    "@proto-graphql/tsconfig": "*",
+    "@testapis/ts-proto": "*",
+    "protoc-gen-pothos": "*"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node"
+  }
+}
