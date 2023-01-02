@@ -5,9 +5,13 @@ import {
 
 describe("no_partial", () => {
   it("generates pothos DSLs with partial inputs", async () => {
-    const resp = await generateDSLs("extensions/no_partial", "ts-proto", {
-      partialInputs: true,
-    });
+    const resp = await generateDSLs(
+      "testapis.extensions.no_partial",
+      "ts-proto",
+      {
+        partialInputs: true,
+      }
+    );
     snapshotGeneratedFiles(resp, [
       "extensions/no_partial/no_partial.pb.pothos.ts",
     ]);
@@ -17,7 +21,7 @@ describe("no_partial", () => {
 describe("field_nullability", () => {
   it("generates pothos DSLs with partial inputs", async () => {
     const resp = await generateDSLs(
-      "extensions/field_nullability",
+      "testapis.extensions.field_nullability",
       "ts-proto",
       { partialInputs: true }
     );

@@ -1,7 +1,7 @@
 {
   "workspacePackageConfigs": [
     {
-      "files": ["packages/**", "e2e/!(testapis)/**"],
+      "files": ["packages/**", "devPackages/testapis-proto", "e2e/!(testapis)/**"],
       "package.json": {
         "scripts": {
           "lint": "eslint --fix ."
@@ -43,7 +43,7 @@
       ]
     },
     {
-      "files": ["e2e/helper", "e2e/testapis/ts-proto*"],
+      "files": ["devPackages/testapis-proto", "e2e/helper", "e2e/testapis/ts-proto*"],
       "package.json": {
         "main": "./lib/index.js",
         "types": "./lib/index.d.ts",

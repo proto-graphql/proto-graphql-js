@@ -1,6 +1,24 @@
 {
   "name": "@proto-graphql/testapis-proto",
-  "version": "0.5.6",
+  "version": "0.0.0",
   "description": "Generated codes from protobuf IDL",
-  "private": true
+  "private": true,
+  "scripts": {
+    "build:test": "tsc --build tsconfig.cjs.json",
+    "clean": "yarn build:test --clean",
+    "lint": "eslint --fix .",
+    "prebuild:test": "./scripts/build-proto.ts"
+  },
+  "dependencies": {
+    "google-protobuf": "^3.20.1"
+  },
+  "devDependencies": {
+    "@proto-graphql/eslint-config": "*",
+    "@proto-graphql/tsconfig": "*",
+    "@types/glob": "^8.0.0",
+    "@types/google-protobuf": "3.15.6",
+    "glob": "^8.0.3"
+  },
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts"
 }

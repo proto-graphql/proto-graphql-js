@@ -5,12 +5,12 @@ import {
 } from "./__helpers__/process.test.helper";
 
 describe("simple proto file", () => {
-  itGeneratesDSLsToMatchSnapshtos("primitives", [
+  itGeneratesDSLsToMatchSnapshtos("testapis.primitives", [
     "primitives/primitives.pb.pothos.ts",
   ]);
 
   it("generates pothos DSLs with graphql_type file layout", async () => {
-    const resp = await generateDSLs("primitives", "ts-proto", {
+    const resp = await generateDSLs("testapis.primitives", "ts-proto", {
       perGraphQLType: true,
     });
     snapshotGeneratedFiles(resp, [
@@ -22,7 +22,7 @@ describe("simple proto file", () => {
   });
 
   it("generates pothos DSLs with partial inputs", async () => {
-    const resp = await generateDSLs("primitives", "ts-proto", {
+    const resp = await generateDSLs("testapis.primitives", "ts-proto", {
       partialInputs: true,
     });
     snapshotGeneratedFiles(resp, ["primitives/primitives.pb.pothos.ts"]);
@@ -30,16 +30,18 @@ describe("simple proto file", () => {
 });
 
 describe("well-known protobuf types", () => {
-  itGeneratesDSLsToMatchSnapshtos("wktypes", [
+  itGeneratesDSLsToMatchSnapshtos("testapis.wktypes", [
     "wktypes/well_known_types.pb.pothos.ts",
   ]);
 });
 
 describe("protobuf enums", () => {
-  itGeneratesDSLsToMatchSnapshtos("enums", ["enums/enums.pb.pothos.ts"]);
+  itGeneratesDSLsToMatchSnapshtos("testapis.enums", [
+    "enums/enums.pb.pothos.ts",
+  ]);
 
   it("generates pothos DSLs with graphql_type file layout", async () => {
-    const resp = await generateDSLs("enums", "ts-proto", {
+    const resp = await generateDSLs("testapis.enums", "ts-proto", {
       perGraphQLType: true,
     });
     snapshotGeneratedFiles(resp, [
@@ -52,17 +54,19 @@ describe("protobuf enums", () => {
 });
 
 describe("nested protobuf types", () => {
-  itGeneratesDSLsToMatchSnapshtos("nested", ["nested/nested.pb.pothos.ts"]);
+  itGeneratesDSLsToMatchSnapshtos("testapis.nested", [
+    "nested/nested.pb.pothos.ts",
+  ]);
 });
 
 describe("protobuf custom options", () => {
-  itGeneratesDSLsToMatchSnapshtos("extensions", [
+  itGeneratesDSLsToMatchSnapshtos("testapis.extensions", [
     "extensions/extensions.pb.pothos.ts",
     "extensions/ignored.pb.pothos.ts",
   ]);
 
   it("generates pothos DSLs with graphql_type file layout", async () => {
-    const resp = await generateDSLs("extensions", "ts-proto", {
+    const resp = await generateDSLs("testapis.extensions", "ts-proto", {
       perGraphQLType: true,
     });
     snapshotGeneratedFiles(resp, [
@@ -89,10 +93,12 @@ describe("protobuf custom options", () => {
 });
 
 describe("protobuf oneof", () => {
-  itGeneratesDSLsToMatchSnapshtos("oneof", ["oneof/oneof.pb.pothos.ts"]);
+  itGeneratesDSLsToMatchSnapshtos("testapis.oneof", [
+    "oneof/oneof.pb.pothos.ts",
+  ]);
 
   it("generates pothos DSLs with graphql_type file layout", async () => {
-    const resp = await generateDSLs("oneof", "ts-proto", {
+    const resp = await generateDSLs("testapis.oneof", "ts-proto", {
       perGraphQLType: true,
     });
     snapshotGeneratedFiles(resp, [
@@ -109,29 +115,29 @@ describe("protobuf oneof", () => {
 });
 
 describe("multipkgs", () => {
-  itGeneratesDSLsToMatchSnapshtos("multipkgs/subpkg1", [
+  itGeneratesDSLsToMatchSnapshtos("testapis.multipkgs.subpkg1", [
     "multipkgs/subpkg1/types.pb.pothos.ts",
   ]);
-  itGeneratesDSLsToMatchSnapshtos("multipkgs/subpkg2", [
+  itGeneratesDSLsToMatchSnapshtos("testapis.multipkgs.subpkg2", [
     "multipkgs/subpkg2/types.pb.pothos.ts",
   ]);
 });
 
 describe("deprecation", () => {
-  itGeneratesDSLsToMatchSnapshtos("deprecation", [
+  itGeneratesDSLsToMatchSnapshtos("testapis.deprecation", [
     "deprecation/deprecation.pb.pothos.ts",
     "deprecation/file_deprecation.pb.pothos.ts",
   ]);
 });
 
 describe("field_behavior", () => {
-  itGeneratesDSLsToMatchSnapshtos("field_behavior", [
+  itGeneratesDSLsToMatchSnapshtos("testapis.field_behavior", [
     "field_behavior/comments.pb.pothos.ts",
   ]);
 });
 
 describe("empty types", () => {
-  itGeneratesDSLsToMatchSnapshtos("empty_types", [
+  itGeneratesDSLsToMatchSnapshtos("testapis.empty_types", [
     "empty_types/empty.pb.pothos.ts",
   ]);
 });

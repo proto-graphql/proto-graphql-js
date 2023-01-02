@@ -5,12 +5,12 @@ import {
 } from "./__helpers__/process.test.helper";
 
 describe("simple proto file", () => {
-  itGeneratesNexusDSLsToMatchSnapshtos("primitives", [
+  itGeneratesNexusDSLsToMatchSnapshtos("testapis.primitives", [
     "primitives/primitives_pb_nexus.ts",
   ]);
 
   it("generates nexus DSLs with graphql_type file layout", async () => {
-    const resp = await generateDSLs("primitives", "protobufjs", {
+    const resp = await generateDSLs("testapis.primitives", "protobufjs", {
       perGraphQLType: true,
     });
     snapshotGeneratedFiles(resp, [
@@ -22,7 +22,7 @@ describe("simple proto file", () => {
   });
 
   it("generates nexus DSLs with partial inputs", async () => {
-    const resp = await generateDSLs("primitives", "protobufjs", {
+    const resp = await generateDSLs("testapis.primitives", "protobufjs", {
       partialInputs: true,
     });
     snapshotGeneratedFiles(resp, ["primitives/primitives_pb_nexus.ts"]);
@@ -30,16 +30,18 @@ describe("simple proto file", () => {
 });
 
 describe("well-known protobuf types", () => {
-  itGeneratesNexusDSLsToMatchSnapshtos("wktypes", [
+  itGeneratesNexusDSLsToMatchSnapshtos("testapis.wktypes", [
     "wktypes/well_known_types_pb_nexus.ts",
   ]);
 });
 
 describe("protobuf enums", () => {
-  itGeneratesNexusDSLsToMatchSnapshtos("enums", ["enums/enums_pb_nexus.ts"]);
+  itGeneratesNexusDSLsToMatchSnapshtos("testapis.enums", [
+    "enums/enums_pb_nexus.ts",
+  ]);
 
   it("generates nexus DSLs with graphql_type file layout", async () => {
-    const resp = await generateDSLs("enums", "protobufjs", {
+    const resp = await generateDSLs("testapis.enums", "protobufjs", {
       perGraphQLType: true,
     });
     snapshotGeneratedFiles(resp, [
@@ -52,17 +54,19 @@ describe("protobuf enums", () => {
 });
 
 describe("nested protobuf types", () => {
-  itGeneratesNexusDSLsToMatchSnapshtos("nested", ["nested/nested_pb_nexus.ts"]);
+  itGeneratesNexusDSLsToMatchSnapshtos("testapis.nested", [
+    "nested/nested_pb_nexus.ts",
+  ]);
 });
 
 describe("protobuf custom options", () => {
-  itGeneratesNexusDSLsToMatchSnapshtos("extensions", [
+  itGeneratesNexusDSLsToMatchSnapshtos("testapis.extensions", [
     "extensions/extensions_pb_nexus.ts",
     "extensions/ignored_pb_nexus.ts",
   ]);
 
   it("generates nexus DSLs with graphql_type file layout", async () => {
-    const resp = await generateDSLs("extensions", "protobufjs", {
+    const resp = await generateDSLs("testapis.extensions", "protobufjs", {
       perGraphQLType: true,
     });
     snapshotGeneratedFiles(resp, [
@@ -89,10 +93,12 @@ describe("protobuf custom options", () => {
 });
 
 describe("protobuf oneof", () => {
-  itGeneratesNexusDSLsToMatchSnapshtos("oneof", ["oneof/oneof_pb_nexus.ts"]);
+  itGeneratesNexusDSLsToMatchSnapshtos("testapis.oneof", [
+    "oneof/oneof_pb_nexus.ts",
+  ]);
 
   it("generates nexus DSLs with graphql_type file layout", async () => {
-    const resp = await generateDSLs("oneof", "protobufjs", {
+    const resp = await generateDSLs("testapis.oneof", "protobufjs", {
       perGraphQLType: true,
     });
     snapshotGeneratedFiles(resp, [
@@ -109,29 +115,29 @@ describe("protobuf oneof", () => {
 });
 
 describe("multipkgs", () => {
-  itGeneratesNexusDSLsToMatchSnapshtos("multipkgs/subpkg1", [
+  itGeneratesNexusDSLsToMatchSnapshtos("testapis.multipkgs.subpkg1", [
     "multipkgs/subpkg1/types_pb_nexus.ts",
   ]);
-  itGeneratesNexusDSLsToMatchSnapshtos("multipkgs/subpkg2", [
+  itGeneratesNexusDSLsToMatchSnapshtos("testapis.multipkgs.subpkg2", [
     "multipkgs/subpkg2/types_pb_nexus.ts",
   ]);
 });
 
 describe("deprecation", () => {
-  itGeneratesNexusDSLsToMatchSnapshtos("deprecation", [
+  itGeneratesNexusDSLsToMatchSnapshtos("testapis.deprecation", [
     "deprecation/deprecation_pb_nexus.ts",
     "deprecation/file_deprecation_pb_nexus.ts",
   ]);
 });
 
 describe("field_behavior", () => {
-  itGeneratesNexusDSLsToMatchSnapshtos("field_behavior", [
+  itGeneratesNexusDSLsToMatchSnapshtos("testapis.field_behavior", [
     "field_behavior/comments_pb_nexus.ts",
   ]);
 });
 
 describe("empty types", () => {
-  itGeneratesNexusDSLsToMatchSnapshtos("empty_types", [
+  itGeneratesNexusDSLsToMatchSnapshtos("testapis.empty_types", [
     "empty_types/empty_pb_nexus.ts",
   ]);
 });

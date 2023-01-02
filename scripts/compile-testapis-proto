@@ -45,8 +45,6 @@ execProtoc() {
     ${LIBRARY_PATH}/graphql/*.proto
 
   for protoDir in $(listPackages); do
-    protocw --include_source_info --include_imports --descriptor_set_out=${protoDir}/descriptor_set.pb ${protoDir}/*.proto
-
     protocw \
       --plugin=protoc-gen-ts=`yarn bin protoc-gen-ts` \
       --js_out="$OUT_ROOT/google-protobuf/lib" --js_opt=import_style=commonjs,binary \
