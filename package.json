@@ -1,15 +1,5 @@
 {
   "private": true,
-  "workspaces": [
-    "packages/*",
-    "packages/@proto-graphql/*",
-    "packages/@proto-nexus/*",
-    "devPackages/*",
-    "e2e",
-    "e2e/helper",
-    "e2e/testapis/*",
-    "e2e/tests/*"
-  ],
   "scripts": {
     "build": "turbo run build",
     "format": "prettier --write '**/*.{mjs,js,jsx,mts,ts,tsx}'",
