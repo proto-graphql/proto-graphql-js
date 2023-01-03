@@ -1,13 +1,10 @@
+# :warning: This file has not been updated. Please see [GitHub Releases](https://github.com/proto-graphql/proto-graphql-js/releases) for the latest changes.
 
 ## v0.5.0 (2022-10-22)
 
 #### Bug Fixes
 * `@proto-nexus/google-protobuf`
   * [#183](https://github.com/proto-graphql/proto-graphql-js/pull/183) Fixing the process of converting to timestamp ([@takizuka](https://github.com/takizuka))
-
-#### Dependencies
-* `@proto-graphql/e2e-testapis-google-protobuf`
-  * [#175](https://github.com/proto-graphql/proto-graphql-js/pull/175) fix(deps): update dependency google-protobuf to v3.20.1 ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 1
 - takizuka ([@takizuka](https://github.com/takizuka))
@@ -41,7 +38,7 @@
 ## v0.5.0-alpha.18 (2021-08-10)
 
 #### Features - Code Generation
-* `@testapis/proto`, `protoc-gen-nexus`
+* `protoc-gen-nexus`
   * [#144](https://github.com/proto-graphql/proto-graphql-js/pull/144) feat: support `graphql.field.(output|input|partial_input)_nullability` ([@izumin5210](https://github.com/izumin5210))
 
 #### Committers: 1
@@ -61,7 +58,7 @@
 ## v0.5.0-alpha.16 (2021-08-02)
 
 #### Features - Code Generation
-* `@proto-nexus/google-protobuf`, `@proto-nexus/protobufjs`, `@testapis/proto`, `proto-nexus`, `protoc-gen-nexus`
+* `@proto-nexus/google-protobuf`, `@proto-nexus/protobufjs`, `proto-nexus`, `protoc-gen-nexus`
   * [#140](https://github.com/proto-graphql/proto-graphql-js/pull/140) support custom scalar ([@izumin5210](https://github.com/izumin5210))
 
 #### Committers: 1
@@ -71,7 +68,7 @@
 ## v0.5.0-alpha.15 (2021-06-29)
 
 #### Features - Code Generation
-* `@testapis/proto`, `protoc-gen-nexus`
+* `protoc-gen-nexus`
   * [#134](https://github.com/proto-graphql/proto-graphql-js/pull/134) feat: support `(graphql.input_type).no_partial` option ([@izumin5210](https://github.com/izumin5210))
 
 #### Dependencies
@@ -105,7 +102,7 @@
 #### Dependencies
 * Other
   * [#121](https://github.com/proto-graphql/proto-graphql-js/pull/121) chore(deps): update dependency graphql-scalars to v1.10.0 ([@renovate[bot]](https://github.com/apps/renovate))
-* `@proto-graphql/e2e-testapis-google-protobuf`, `protoc-gen-nexus`
+* `protoc-gen-nexus`
   * [#117](https://github.com/proto-graphql/proto-graphql-js/pull/117) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 1
@@ -119,7 +116,7 @@
   * [#107](https://github.com/proto-graphql/proto-graphql-js/pull/107) feat: @proto-nexus/proto-fields-plugin ([@izumin5210](https://github.com/izumin5210))
 
 #### Bug Fixes
-* `@testapis/proto`, `protoc-gen-nexus`
+* `protoc-gen-nexus`
   * [#108](https://github.com/proto-graphql/proto-graphql-js/pull/108) fix: import parent message of squashed oneof union ([@izumin5210](https://github.com/izumin5210))
 
 #### Committers: 1
@@ -129,7 +126,7 @@
 ## v0.5.0-alpha.11 (2021-02-22)
 
 #### ⚠️ Breaking Changes - Code Generation
-* `@testapis/proto`, `protoc-gen-nexus`
+* `protoc-gen-nexus`
   * [#105](https://github.com/proto-graphql/proto-graphql-js/pull/105) feat: generate noop fields when types have no fields ([@izumin5210](https://github.com/izumin5210))
 
 #### Committers: 1
@@ -153,7 +150,7 @@
 ## v0.5.0-alpha.9 (2021-02-06)
 
 #### Features - Code Generation
-* `@testapis/proto`, `protoc-gen-nexus`
+* `protoc-gen-nexus`
   * [#101](https://github.com/proto-graphql/proto-graphql-js/pull/101) feat: support graphql.object_type.name for overriding type names ([@izumin5210](https://github.com/izumin5210))
 
 #### Committers: 1
@@ -173,7 +170,7 @@
 ## v0.5.0-alpha.7 (2021-02-05)
 
 #### Bug Fixes
-* `@testapis/proto`, `protoc-gen-nexus`
+* `protoc-gen-nexus`
   * [#99](https://github.com/proto-graphql/proto-graphql-js/pull/99) fix: error in repeated squashed union resolver ([@izumin5210](https://github.com/izumin5210))
 
 #### Committers: 1
@@ -233,7 +230,7 @@
 ## v0.5.0-alpha.1 (2021-01-26)
 
 #### Features - Code Generation
-* `@testapis/proto`, `protoc-gen-nexus`
+* `protoc-gen-nexus`
   * [#93](https://github.com/proto-graphql/proto-graphql-js/pull/93) feat: Support graphql.field.skip_resolver option ([@izumin5210](https://github.com/izumin5210))
 
 #### Committers: 1
@@ -243,7 +240,7 @@
 ## v0.4.6 (2021-01-24)
 
 #### Features - Code Generation
-* `@testapis/proto`, `protoc-gen-nexus`
+* `protoc-gen-nexus`
   * [#86](https://github.com/proto-graphql/proto-graphql-js/pull/86) Add graphql.schema.ignore option ([@izumin5210](https://github.com/izumin5210))
 
 #### Committers: 1
@@ -253,7 +250,7 @@
 ## v0.4.5 (2021-01-24)
 
 #### Bug Fixes
-* `@testapis/proto`, `protoc-gen-nexus`
+* `protoc-gen-nexus`
   * [#85](https://github.com/proto-graphql/proto-graphql-js/pull/85) fix: convert values within map function in repeated scalars ([@izumin5210](https://github.com/izumin5210))
 
 #### Committers: 1
@@ -263,7 +260,7 @@
 ## v0.4.4 (2021-01-22)
 
 #### Bug Fixes
-* `@testapis/proto`, `protoc-gen-nexus`
+* `protoc-gen-nexus`
   * [#84](https://github.com/proto-graphql/proto-graphql-js/pull/84) fix guard clauses for repeated enums ([@izumin5210](https://github.com/izumin5210))
 
 #### Committers: 1
@@ -283,7 +280,7 @@
 ## v0.4.2 (2021-01-07)
 
 #### ⚠️ Breaking Changes - Code Generation
-* `@testapis/proto`, `protoc-gen-nexus`
+* `protoc-gen-nexus`
   * [#79](https://github.com/proto-graphql/proto-graphql-js/pull/79)  ignore oneof union types when parent message is ignored ([@izumin5210](https://github.com/izumin5210))
 
 #### Committers: 1
@@ -293,7 +290,7 @@
 ## v0.4.1 (2021-01-07)
 
 #### ⚠️ Breaking Changes - Code Generation
-* `@testapis/proto`, `protoc-gen-nexus`
+* `protoc-gen-nexus`
   * [#77](https://github.com/proto-graphql/proto-graphql-js/pull/77) fix: do not ignore nested types ([@izumin5210](https://github.com/izumin5210))
 
 #### Committers: 1
@@ -308,7 +305,7 @@
   * [#70](https://github.com/proto-graphql/proto-graphql-js/pull/70) Camelize oneof-union name ([@izumin5210](https://github.com/izumin5210))
 
 #### Features - Code Generation
-* `@testapis/proto`, `protoc-gen-nexus`
+* `protoc-gen-nexus`
   * [#76](https://github.com/proto-graphql/proto-graphql-js/pull/76) support interface ([@izumin5210](https://github.com/izumin5210))
   * [#71](https://github.com/proto-graphql/proto-graphql-js/pull/71) consider graphql.field.ignore option for oneof members ([@izumin5210](https://github.com/izumin5210))
 
@@ -324,11 +321,11 @@
 ## v0.3.0 (2021-01-03)
 
 #### ⚠️ Breaking Changes - Code Generation
-* `@testapis/proto`, `protoc-gen-nexus`
+* `protoc-gen-nexus`
   * [#65](https://github.com/proto-graphql/proto-graphql-js/pull/65)  integrate graphql.object_type.ignore and grahpql.input_type.ignore ([@izumin5210](https://github.com/izumin5210))
 
 #### Features - Code Generation
-* `@testapis/proto`, `protoc-gen-nexus`
+* `protoc-gen-nexus`
   * [#64](https://github.com/proto-graphql/proto-graphql-js/pull/64) support `graphql.field.name` option ([@izumin5210](https://github.com/izumin5210))
   * [#60](https://github.com/proto-graphql/proto-graphql-js/pull/60) support `graphql.object_type.squash_union` option ([@izumin5210](https://github.com/izumin5210))
 
@@ -339,7 +336,7 @@
 #### Bug Fixes
 * `protoc-gen-nexus`
   * [#57](https://github.com/proto-graphql/proto-graphql-js/pull/57) fix bugs in enum field resolvers ([@izumin5210](https://github.com/izumin5210))
-* `@testapis/proto`, `protoc-gen-nexus`
+* `protoc-gen-nexus`
   * [#56](https://github.com/proto-graphql/proto-graphql-js/pull/56) do not consdier graphql.object_type.ignore for input types ([@izumin5210](https://github.com/izumin5210))
 
 #### Committers: 1
@@ -349,7 +346,7 @@
 ## v0.2.2 (2020-12-29)
 
 #### Features - Code Generation
-* `@testapis/proto`, `protoc-gen-nexus`
+* `protoc-gen-nexus`
   * [#55](https://github.com/proto-graphql/proto-graphql-js/pull/55) support graphql.schema.ignore_{requests,responses} options ([@izumin5210](https://github.com/izumin5210))
   * [#54](https://github.com/proto-graphql/proto-graphql-js/pull/54) support graphql.(object,input,enum}_type.ignore option ([@izumin5210](https://github.com/izumin5210))
 
@@ -360,7 +357,7 @@
 ## v0.2.1 (2020-12-29)
 
 #### Features - Code Generation
-* `@testapis/proto`, `protoc-gen-nexus`
+* `protoc-gen-nexus`
   * [#52](https://github.com/proto-graphql/proto-graphql-js/pull/52) Support graphql.(oneof|enum_value).ignore ([@izumin5210](https://github.com/izumin5210))
   * [#50](https://github.com/proto-graphql/proto-graphql-js/pull/50) support referencing other packages ([@izumin5210](https://github.com/izumin5210))
 
@@ -371,13 +368,13 @@
 ## v0.2.0 (2020-12-28)
 
 #### ⚠️ Breaking Changes - Code Generation
-* `@testapis/nexus-native`, `@testapis/nexus`, `@proto-graphql/e2e-testapis-google-protobuf`, `@proto-graphql/e2e-testapis-protobufjs`, `@testapis/proto`, `protoc-gen-nexus`
+* `protoc-gen-nexus`
   * [#42](https://github.com/proto-graphql/proto-graphql-js/pull/42) ignore `<ENUM_NAME>_UNSPECIFIED` value ([@izumin5210](https://github.com/izumin5210))
 
 #### Features - Code Generation
-* `@proto-graphql/e2e-testapis-google-protobuf`, `@proto-graphql/e2e-testapis-protobufjs`, `@testapis/proto`, `protoc-gen-nexus`
+* `protoc-gen-nexus`
   * [#41](https://github.com/proto-graphql/proto-graphql-js/pull/41) graphql.field.ignore option ([@izumin5210](https://github.com/izumin5210))
-* `@proto-nexus/protobufjs-adapter`, `@testapis/nexus-native`, `@testapis/nexus`, `@proto-graphql/e2e-testapis-google-protobuf`, `@proto-graphql/e2e-testapis-protobufjs`, `@testapis/proto`, `protoc-gen-nexus`
+* `@proto-nexus/protobufjs-adapter`, `protoc-gen-nexus`
   * [#39](https://github.com/proto-graphql/proto-graphql-js/pull/39) Support protobuf.js ([@izumin5210](https://github.com/izumin5210))
 
 #### Committers: 1
