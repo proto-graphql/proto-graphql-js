@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "@proto-graphql/eslint-config": "*",
+    "@proto-graphql/testapis-proto": "*",
     "@proto-graphql/tsconfig": "*",
     "@types/google-protobuf": "^3.15.6"
   },

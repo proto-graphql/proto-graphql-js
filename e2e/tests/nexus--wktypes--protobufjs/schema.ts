@@ -1,5 +1,5 @@
 import { makeTestSchema } from "@proto-graphql/e2e-helper";
-import * as pbjs from "@testapis/node/lib/testapis/wktypes";
+import * as pbjs from "@proto-graphql/e2e-testapis-protobufjs/lib/testapis/wktypes";
 import { DateTimeResolver } from "graphql-scalars";
 import { queryField } from "nexus";
 import { asNexusMethod } from "nexus";

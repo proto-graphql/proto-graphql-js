@@ -47,6 +47,7 @@
   },
   "devDependencies": {
     "@proto-graphql/eslint-config": "*",
+    "@proto-graphql/testapis-proto": "*",
     "@proto-graphql/tsconfig": "*"
   }
 }

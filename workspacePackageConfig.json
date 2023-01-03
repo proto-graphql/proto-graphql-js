@@ -1,7 +1,7 @@
 {
   "workspacePackageConfigs": [
     {
-      "files": ["packages/*", "packages/!(@testapis)/*", "e2e/**"],
+      "files": ["packages/**", "devPackages/testapis-proto", "e2e/!(testapis)/**"],
       "package.json": {
         "scripts": {
           "lint": "eslint --fix ."
@@ -17,7 +17,7 @@
       ]
     },
     {
-      "files": ["packages/*", "packages/!(@testapis)/*"],
+      "files": ["packages/**"],
       "package.json": {
         "main": "./lib/index.js",
         "module": "./module/index.js",
@@ -43,19 +43,38 @@
       ]
     },
     {
-      "files": ["e2e/helper", "packages/@testapis/ts-proto*"],
+      "files": ["devPackages/testapis-proto", "e2e/helper", "e2e/testapis/ts-proto*"],
       "package.json": {
         "main": "./lib/index.js",
-        "types": "./lib/index.d.ts",
+        "types": "./lib/index.d.ts"
+      },
+      "copy": [
+        { "src": "configs/tsconfig.json", "dest": "tsconfig.json" },
+        { "src": "configs/tsconfig.cjs.json", "dest": "tsconfig.cjs.json" }
+      ]
+    },
+    {
+      "files": ["devPackages/testapis-proto"],
+      "package.json": {
         "scripts": {
           "build:test": "tsc --build tsconfig.cjs.json",
           "clean": "yarn build:test --clean"
         }
       },
       "copy": [
-        { "src": "configs/.gitignore.test", "dest": ".gitignore" },
-        { "src": "configs/tsconfig.json", "dest": "tsconfig.json" },
-        { "src": "configs/tsconfig.cjs.json", "dest": "tsconfig.cjs.json" }
+        { "src": "configs/.gitignore", "dest": ".gitignore" }
+      ]
+    },
+    {
+      "files": ["e2e/helper", "e2e/testapis/ts-proto*"],
+      "package.json": {
+        "scripts": {
+          "build:e2e": "tsc --build tsconfig.cjs.json",
+          "clean": "yarn build:e2e --clean"
+        }
+      },
+      "copy": [
+        { "src": "configs/.gitignore.test", "dest": ".gitignore" }
       ]
     },
     {

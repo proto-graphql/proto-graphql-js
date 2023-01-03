@@ -1,5 +1,5 @@
 import { makeTestSchema } from "@proto-graphql/e2e-helper";
-import { EmptyMessage } from "@testapis/node-native/lib/testapis/empty_types/empty_pb";
+import { EmptyMessage } from "@proto-graphql/e2e-testapis-google-protobuf/lib/testapis/empty_types/empty_pb";
 import { queryField } from "nexus";
 
 import * as types1 from "./__generated__/schema/testapis/empty_types/empty_pb_nexus";

@@ -1,9 +1,0 @@
-{
-  "extends": "@proto-graphql/tsconfig/tsconfig.base.json",
-  "compilerOptions": {
-    "noEmit": true,
-    "rootDir": ".",
-    "allowJs": true
-  },
-  "include": ["./src", "jest.config.js", ".eslintrc.js", ".lintstagedrc.cjs"]
-}

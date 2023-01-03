@@ -1,6 +1,6 @@
 import { printGraphqlSchema } from "@proto-graphql/e2e-helper";
-import { DeprecatedMessage } from "@testapis/ts-proto/lib/testapis/deprecation/deprecation";
-import { DeprecatedFileMessage } from "@testapis/ts-proto/lib/testapis/deprecation/file_deprecation";
+import { DeprecatedMessage } from "@proto-graphql/e2e-testapis-ts-proto/lib/testapis/deprecation/deprecation";
+import { DeprecatedFileMessage } from "@proto-graphql/e2e-testapis-ts-proto/lib/testapis/deprecation/file_deprecation";
 
 import { DeprecatedMessage$Ref } from "./__generated__/schema/testapis/deprecation/deprecation.pb.pothos";
 import { DeprecatedFileMessage$Ref } from "./__generated__/schema/testapis/deprecation/file_deprecation.pb.pothos";

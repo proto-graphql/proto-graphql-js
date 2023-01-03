@@ -6,7 +6,7 @@ import {
 describe("no_partial", () => {
   it("generates nexus DSLs with partial inputs", async () => {
     const resp = await generateDSLs(
-      "extensions/no_partial",
+      "testapis.extensions.no_partial",
       "native protobuf",
       { partialInputs: true }
     );
@@ -19,7 +19,7 @@ describe("no_partial", () => {
 describe("field_nullability", () => {
   it("generates nexus DSLs with partial inputs", async () => {
     const resp = await generateDSLs(
-      "extensions/field_nullability",
+      "testapis.extensions.field_nullability",
       "native protobuf",
       { partialInputs: true }
     );

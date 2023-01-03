@@ -1,5 +1,5 @@
 import { makeTestSchema } from "@proto-graphql/e2e-helper";
-import * as pbjs from "@testapis/node/lib/testapis/multipkgs/subpkg2";
+import * as pbjs from "@proto-graphql/e2e-testapis-protobufjs/lib/testapis/multipkgs/subpkg2";
 import { queryField } from "nexus";
 
 import * as types1 from "./__generated__/schema/testapis/multipkgs/subpkg1/types_pb_nexus";

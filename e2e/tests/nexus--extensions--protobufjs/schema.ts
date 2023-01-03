@@ -7,7 +7,7 @@ import * as types4 from "./__generated__/schema/testapis/extensions/no_partial/n
 
 // should import at last
 // eslint-disable-next-line import/order
-import * as pbjs from "@testapis/node/lib/testapis/extensions";
+import * as pbjs from "@proto-graphql/e2e-testapis-protobufjs/lib/testapis/extensions";
 // eslint-disable-next-line import/order
 import * as types1 from "./__generated__/schema/testapis/extensions/extensions_pb_nexus";
 

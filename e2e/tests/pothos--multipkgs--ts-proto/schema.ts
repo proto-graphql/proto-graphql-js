@@ -1,6 +1,6 @@
 import { printGraphqlSchema } from "@proto-graphql/e2e-helper";
-import { SubpkgEnum } from "@testapis/ts-proto/lib/testapis/multipkgs/subpkg1/types";
-import { MessageWithSubpkg } from "@testapis/ts-proto/lib/testapis/multipkgs/subpkg2/types";
+import { SubpkgEnum } from "@proto-graphql/e2e-testapis-ts-proto/lib/testapis/multipkgs/subpkg1/types";
+import { MessageWithSubpkg } from "@proto-graphql/e2e-testapis-ts-proto/lib/testapis/multipkgs/subpkg2/types";
 
 import { MessageWithSubpkg$Ref } from "./__generated__/schema/testapis/multipkgs/subpkg2/types.pb.pothos";
 import { builder } from "./builder";

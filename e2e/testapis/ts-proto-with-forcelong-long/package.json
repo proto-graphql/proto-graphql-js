@@ -1,0 +1,19 @@
+{
+  "name": "@proto-graphql/e2e-testapis-ts-proto-with-forcelong-long",
+  "version": "0.6.0",
+  "description": "Generated codes with protocolbuffers/protobuf's js_out",
+  "private": true,
+  "dependencies": {
+    "@types/google-protobuf": "3.15.6",
+    "google-protobuf": "3.21.2"
+  },
+  "devDependencies": {
+    "@proto-graphql/testapis-proto": "*"
+  },
+  "scripts": {
+    "build:e2e": "tsc --build tsconfig.cjs.json",
+    "clean": "yarn build:e2e --clean"
+  },
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts"
+}

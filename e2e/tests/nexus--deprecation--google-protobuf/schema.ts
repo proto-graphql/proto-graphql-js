@@ -1,5 +1,5 @@
 import { makeTestSchema } from "@proto-graphql/e2e-helper";
-import { DeprecatedMessage } from "@testapis/node-native/lib/testapis/deprecation/deprecation_pb";
+import { DeprecatedMessage } from "@proto-graphql/e2e-testapis-google-protobuf/lib/testapis/deprecation/deprecation_pb";
 import { queryField } from "nexus";
 
 import * as types1 from "./__generated__/schema/testapis/deprecation/deprecation_pb_nexus";

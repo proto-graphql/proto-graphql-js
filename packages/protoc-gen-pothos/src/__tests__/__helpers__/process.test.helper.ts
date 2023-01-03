@@ -1,12 +1,9 @@
-import { promises as fs } from "fs";
-import { join } from "path";
-
 import { LongNumberMapping } from "@proto-graphql/codegen-core";
 import {
-  CodeGeneratorRequest,
-  CodeGeneratorResponse,
-} from "google-protobuf/google/protobuf/compiler/plugin_pb";
-import { FileDescriptorSet } from "google-protobuf/google/protobuf/descriptor_pb";
+  buildCodeGeneratorRequest,
+  TestapisPackage,
+} from "@proto-graphql/testapis-proto";
+import { CodeGeneratorResponse } from "google-protobuf/google/protobuf/compiler/plugin_pb";
 
 import { processRequest } from "../../process";
 
@@ -17,8 +14,8 @@ const generationTargets = [
 ] as const;
 type GenerationTarget = typeof generationTargets[number];
 
-export async function generateDSLs(
-  name: string,
+export function generateDSLs(
+  pkg: TestapisPackage,
   target: GenerationTarget,
   opts: {
     withPrefix?: boolean;
@@ -48,16 +45,16 @@ export async function generateDSLs(
   if (opts.longNumber) {
     params.push(`long_number=${opts.longNumber}`);
   }
-  return await processCodeGeneration(name, params.join(","));
+  return processCodeGeneration(pkg, params.join(","));
 }
 
 export function itGeneratesDSLsToMatchSnapshtos(
-  name: string,
+  pkg: TestapisPackage,
   expectedGeneratedFiles: string[]
 ) {
   describe.each(["ts-proto"] as const)("with %s", (target) => {
-    it("generates pothos DSLs", async () => {
-      const resp = await generateDSLs(name, target);
+    it("generates pothos DSLs", () => {
+      const resp = generateDSLs(pkg, target);
       snapshotGeneratedFiles(resp, expectedGeneratedFiles);
     });
   });
@@ -77,54 +74,15 @@ export function snapshotGeneratedFiles(
   }
 }
 
-export async function processCodeGeneration(
-  name: string,
+export function processCodeGeneration(
+  pkg: TestapisPackage,
   param?: string
-): Promise<CodeGeneratorResponse> {
-  const req = await buildCodeGeneratorRequest(name);
+): CodeGeneratorResponse {
+  const req = buildCodeGeneratorRequest(pkg);
   if (param) {
     req.setParameter(param);
   }
   return processRequest(req);
-}
-
-async function getFixtureFileDescriptorSet(
-  name: string
-): Promise<FileDescriptorSet> {
-  const buf = await fs.readFile(
-    join(
-      __dirname,
-      "..",
-      "..",
-      "..",
-      "..",
-      "@testapis",
-      "proto",
-      "src",
-      "testapis",
-      name,
-      "descriptor_set.pb"
-    )
-  );
-  return FileDescriptorSet.deserializeBinary(buf);
-}
-
-async function buildCodeGeneratorRequest(
-  name: string
-): Promise<CodeGeneratorRequest> {
-  const descSet = await getFixtureFileDescriptorSet(name);
-  const req = new CodeGeneratorRequest();
-
-  for (const fd of descSet.getFileList()) {
-    req.addProtoFile(fd);
-
-    const filename = fd.getName();
-    if (filename && filename.startsWith(`testapis/${name}/`)) {
-      req.addFileToGenerate(filename);
-    }
-  }
-
-  return req;
 }
 
 function getFileMap(resp: CodeGeneratorResponse): Record<string, string> {

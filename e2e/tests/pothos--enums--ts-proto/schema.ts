@@ -3,7 +3,7 @@ import {
   MessageWithEnums,
   MyEnum,
   MyEnumWithoutUnspecified,
-} from "@testapis/ts-proto/lib/testapis/enums/enums";
+} from "@proto-graphql/e2e-testapis-ts-proto/lib/testapis/enums/enums";
 
 import { MessageWithEnums$Ref } from "./__generated__/schema/testapis/enums/enums.pb.pothos";
 import { builder } from "./builder";

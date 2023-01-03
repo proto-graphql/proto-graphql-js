@@ -3,10 +3,10 @@
   "plugins": [
     {
       "name": "pothos",
-      "path": "../../..//packages/protoc-gen-pothos/bin/protoc-gen-pothos",
+      "path": "../../../packages/protoc-gen-pothos/bin/protoc-gen-pothos",
       "out": "__generated__/schema",
       "opt": [
-        "import_prefix=@testapis/ts-proto-with-forcelong-number/lib/",
+        "import_prefix=@proto-graphql/e2e-testapis-ts-proto-with-forcelong-number/lib/",
         "pothos_builder_path=../../builder",
         "long_number=Int"
       ]

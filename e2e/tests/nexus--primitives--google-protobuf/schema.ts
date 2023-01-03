@@ -1,5 +1,5 @@
 import { makeTestSchema } from "@proto-graphql/e2e-helper";
-import * as pbnative from "@testapis/node-native/lib/testapis/primitives/primitives_pb";
+import * as pbnative from "@proto-graphql/e2e-testapis-google-protobuf/lib/testapis/primitives/primitives_pb";
 import { queryField } from "nexus";
 
 import * as types1 from "./__generated__/schema/testapis/primitives/primitives_pb_nexus";

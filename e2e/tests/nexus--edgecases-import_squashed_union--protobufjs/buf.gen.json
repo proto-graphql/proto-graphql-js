@@ -3,11 +3,11 @@
   "plugins": [
     {
       "name": "nexus",
-      "path": "../../..//packages/protoc-gen-nexus/bin/protoc-gen-nexus",
+      "path": "../../../packages/protoc-gen-nexus/bin/protoc-gen-nexus",
       "out": "__generated__/schema",
       "opt": [
         "use_protobufjs",
-        "import_prefix=@testapis/node/lib/"
+        "import_prefix=@proto-graphql/e2e-testapis-protobufjs/lib/"
       ]
     }
   ]
