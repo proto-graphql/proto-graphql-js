@@ -1,6 +1,6 @@
 {
   "name": "@proto-graphql/e2e-nexus--field_behavior--protobufjs",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "E2E tests for protoc-gen-nexus",
   "private": true,
   "scripts": {

@@ -137,6 +137,7 @@ class PackageJSONStore {
           string,
           unknown
         >;
+        if (values == null) continue;
         if (sort === "alphabetically") {
           const newObj: typeof values = {};
           for (const key of Object.keys(values).sort()) {
