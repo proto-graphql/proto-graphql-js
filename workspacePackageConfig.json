@@ -46,17 +46,31 @@
       "files": ["devPackages/testapis-proto", "e2e/helper", "e2e/testapis/ts-proto*"],
       "package.json": {
         "main": "./lib/index.js",
-        "types": "./lib/index.d.ts",
-        "scripts": {
-          "build:test": "tsc --build tsconfig.cjs.json",
-          "clean": "yarn build:test --clean"
-        }
+        "types": "./lib/index.d.ts"
       },
       "copy": [
         { "src": "configs/.gitignore.test", "dest": ".gitignore" },
         { "src": "configs/tsconfig.json", "dest": "tsconfig.json" },
         { "src": "configs/tsconfig.cjs.json", "dest": "tsconfig.cjs.json" }
       ]
+    },
+    {
+      "files": ["devPackages/testapis-proto"],
+      "package.json": {
+        "scripts": {
+          "build:test": "tsc --build tsconfig.cjs.json",
+          "clean": "yarn build:test --clean"
+        }
+      }
+    },
+    {
+      "files": ["e2e/helper", "e2e/testapis/ts-proto*"],
+      "package.json": {
+        "scripts": {
+          "build:e2e": "tsc --build tsconfig.cjs.json",
+          "clean": "yarn build:e2e --clean"
+        }
+      }
     },
     {
       "files": ["e2e/tests/*"],
