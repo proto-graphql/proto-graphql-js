@@ -59,5 +59,6 @@
       "dependencies": "Dependencies"
     }
   },
-  "name": "proto-nexus"
+  "name": "proto-nexus",
+  "packageManager": "pnpm@7.21.0"
 }
