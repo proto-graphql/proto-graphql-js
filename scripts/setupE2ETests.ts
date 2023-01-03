@@ -63,7 +63,7 @@ async function genPackageJson(test: TestCase): Promise<void> {
 
   const packageJson = {
     name: `@proto-graphql/e2e-${getTestName(test)}`,
-    version: "0.1.0",
+    version: "0.0.0",
     description: `E2E tests for protoc-gen-${test.target}`,
     private: true,
     scripts: {
