@@ -6,7 +6,7 @@ set -o pipefail
 cd $(dirname $0)/..
 
 PLUGIN_ROOT=./packages/protoc-gen-nexus
-PROTO_ROOT=./devPackages/testapis-proto/src
+PROTO_ROOT=./devPackages/testapis-proto/proto
 OUT_ROOT=./e2e/testapis
 LIBRARY_PATH=./proto-graphql/proto
 
@@ -83,9 +83,6 @@ _main() {
   clean
   init
   execProtoc
-  yarn workspace @proto-graphql/e2e-testapis-ts-proto build:test
-  yarn workspace @proto-graphql/e2e-testapis-ts-proto-with-forcelong-long build:test
-  yarn workspace @proto-graphql/e2e-testapis-ts-proto-with-forcelong-number build:test
 }
 
 _main
