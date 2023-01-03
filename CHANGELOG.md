@@ -1,3 +1,4 @@
+# :warning: This file has not been updated. Please see [GitHub Releases](https://github.com/proto-graphql/proto-graphql-js/releases) for the latest changes.
 
 ## v0.5.0 (2022-10-22)
 
