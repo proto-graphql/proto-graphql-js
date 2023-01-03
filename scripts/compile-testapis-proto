@@ -39,41 +39,41 @@ listPackages() {
 
 execProtoc() {
   protocw \
-    --plugin=protoc-gen-ts=`yarn bin protoc-gen-ts` \
+    --plugin=protoc-gen-ts=$(pnpm bin)/protoc-gen-ts \
     --js_out="$OUT_ROOT/google-protobuf/lib" --js_opt=import_style=commonjs,binary \
     --ts_out="$OUT_ROOT/google-protobuf/lib" \
     ${LIBRARY_PATH}/graphql/*.proto
 
   for protoDir in $(listPackages); do
     protocw \
-      --plugin=protoc-gen-ts=`yarn bin protoc-gen-ts` \
+      --plugin=protoc-gen-ts=$(pnpm bin)/protoc-gen-ts \
       --js_out="$OUT_ROOT/google-protobuf/lib" --js_opt=import_style=commonjs,binary \
       --ts_out="$OUT_ROOT/google-protobuf/lib" \
       ${protoDir}/*.proto
 
     pbjsOutDir="${protoDir/$PROTO_ROOT\//$OUT_ROOT/protobufjs/lib/}"
     mkdir -p $pbjsOutDir
-    yarn pbjs \
+    pnpm exec pbjs \
       --target static-module \
       --wrap commonjs \
       --force-message \
       --path $PROTO_ROOT \
       --out "$pbjsOutDir/index.js" \
       ${protoDir}/*.proto
-    yarn pbts --out "$pbjsOutDir/index.d.ts" "$pbjsOutDir/index.js"
+    pnpm exec pbts --out "$pbjsOutDir/index.d.ts" "$pbjsOutDir/index.js"
 
     protocw \
-      --plugin=protoc-gen-ts_proto=`yarn bin protoc-gen-ts_proto` \
+      --plugin=protoc-gen-ts_proto=$(pnpm bin)/protoc-gen-ts_proto \
       --ts_proto_out="$OUT_ROOT/ts-proto/src" --ts_proto_opt=enumsAsLiterals=true,forceLong=string,unrecognizedEnum=false,outputTypeRegistry=true,esModuleInterop=true \
       ${protoDir}/*.proto
 
     protocw \
-      --plugin=protoc-gen-ts_proto=`yarn bin protoc-gen-ts_proto` \
+      --plugin=protoc-gen-ts_proto=$(pnpm bin)/protoc-gen-ts_proto \
       --ts_proto_out="$OUT_ROOT/ts-proto-with-forcelong-long/src" --ts_proto_opt=enumsAsLiterals=true,forceLong=long,unrecognizedEnum=false,outputTypeRegistry=true,esModuleInterop=true \
       ${protoDir}/*.proto
 
     protocw \
-      --plugin=protoc-gen-ts_proto=`yarn bin protoc-gen-ts_proto` \
+      --plugin=protoc-gen-ts_proto=$(pnpm bin)/protoc-gen-ts_proto \
       --ts_proto_out="$OUT_ROOT/ts-proto-with-forcelong-number/src" --ts_proto_opt=enumsAsLiterals=true,forceLong=number,unrecognizedEnum=false,outputTypeRegistry=true,esModuleInterop=true \
       ${protoDir}/*.proto
   done

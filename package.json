@@ -16,9 +16,9 @@
     "lint": "turbo run lint",
     "pre-commit": "lint-staged",
     "prepare": "husky install",
-    "release": "yarn build && changeset publish",
+    "release": "pnpm run build && changeset publish",
     "test": "turbo run test",
-    "test:e2e": "yarn test:e2e:gen && turbo run test:e2e",
+    "test:e2e": "pnpm run test:e2e:gen && turbo run test:e2e",
     "test:e2e:gen": "./scripts/compile-testapis-proto"
   },
   "devDependencies": {

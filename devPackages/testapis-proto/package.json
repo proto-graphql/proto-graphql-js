@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "build:test": "tsc --build tsconfig.cjs.json",
-    "clean": "yarn build:test --clean",
+    "clean": "pnpm run build:test --clean",
     "lint": "eslint --fix .",
     "prebuild:test": "./scripts/build-proto.ts"
   },

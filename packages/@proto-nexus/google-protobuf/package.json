@@ -40,12 +40,12 @@
     "google-protobuf": "^3.21.2"
   },
   "scripts": {
-    "build": "yarn build:cjs && yarn build:module",
+    "build": "pnpm run build:cjs && pnpm run build:module",
     "build:cjs": "tsc --build tsconfig.cjs.json",
     "build:module": "tsc --build tsconfig.module.json",
-    "clean": "yarn clean:cjs && yarn clean:module",
-    "clean:cjs": "yarn build:cjs --clean",
-    "clean:module": "yarn build:module --clean",
+    "clean": "pnpm run clean:cjs && pnpm run clean:module",
+    "clean:cjs": "pnpm run build:cjs --clean",
+    "clean:module": "pnpm run build:module --clean",
     "lint": "eslint --fix ."
   }
 }

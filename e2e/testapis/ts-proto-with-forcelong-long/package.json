@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build:e2e": "tsc --build tsconfig.cjs.json",
-    "clean": "yarn build:e2e --clean"
+    "clean": "pnpm run build:e2e --clean"
   },
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts"

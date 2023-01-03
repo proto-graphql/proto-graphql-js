@@ -1,4 +1,4 @@
-#!/usr/bin/env -S yarn ts-node --transpile-only
+#!/usr/bin/env -S pnpm exec ts-node --transpile-only
 
 import { readFile, writeFile } from "fs/promises";
 import { join } from "path";
@@ -68,11 +68,11 @@ async function genPackageJson(test: TestCase): Promise<void> {
     private: true,
     scripts: {
       "test:e2e": ["gen", "jest", "schema", "typecheck"]
-        .map((t) => `yarn test:e2e:${t}`)
+        .map((t) => `pnpm run test:e2e:${t}`)
         .join(" && "),
       "test:e2e:gen": [
         "rm -rf __generated__",
-        ...["proto", "gql"].map((t) => `yarn test:e2e:gen:${t}`),
+        ...["proto", "gql"].map((t) => `pnpm run test:e2e:gen:${t}`),
       ].join(" && "),
       "test:e2e:gen:gql":
         "ts-node --transpile-only --require tsconfig-paths/register --project tsconfig.json schema.ts",
