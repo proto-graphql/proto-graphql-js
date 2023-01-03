@@ -113,27 +113,21 @@ importers:
 
   e2e/testapis/ts-proto:
     specifiers:
-      '@types/google-protobuf': 3.15.6
-      google-protobuf: 3.21.2
+      long: ^5.2.1
     dependencies:
-      '@types/google-protobuf': 3.15.6
-      google-protobuf: 3.21.2
+      long: 5.2.1
 
   e2e/testapis/ts-proto-with-forcelong-long:
     specifiers:
-      '@types/google-protobuf': 3.15.6
-      google-protobuf: 3.21.2
+      long: ^5.2.1
     dependencies:
-      '@types/google-protobuf': 3.15.6
-      google-protobuf: 3.21.2
+      long: 5.2.1
 
   e2e/testapis/ts-proto-with-forcelong-number:
     specifiers:
-      '@types/google-protobuf': 3.15.6
-      google-protobuf: 3.21.2
+      long: ^5.2.1
     dependencies:
-      '@types/google-protobuf': 3.15.6
-      google-protobuf: 3.21.2
+      long: 5.2.1
 
   e2e/tests/nexus--deprecation--google-protobuf:
     specifiers:
@@ -4433,6 +4427,10 @@ packages:
   /long/4.0.0:
     resolution: {integrity: sha512-XsP+KhQif4bjX1kbuSiySJFNAehNxgLb6hPRGJ9QsUr8ajHkuXGdrHmFUTUUXhDwVX2R5bY4JNZEwbUiMhV+MA==}
     dev: true
+
+  /long/5.2.1:
+    resolution: {integrity: sha512-GKSNGeNAtw8IryjjkhZxuKB3JzlcLTwjtiQCHKvqQet81I93kXslhDQruGI/QsddO83mcDToBVy7GqGS/zYf/A==}
+    dev: false
 
   /lower-case/2.0.2:
     resolution: {integrity: sha512-7fm3l3NAF9WfN6W3JOmf5drwpVqX78JtoGJ3A6W0a6ZnldM41w2fV5D490psKFTpMds8TJse/eHLFFsNHHjHgg==}
