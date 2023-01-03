@@ -13,11 +13,12 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 18.x
+        cache: 'pnpm'
     - uses: bufbuild/buf-setup-action@v1
       with:
         github_token: ${{ github.token }}
-    - run: yarn --frozen-lockfile
-    - run: yarn test
+    - run: pnpm install --frozen-lockfile
+    - run: pnpm test
     - name: Coveralls
       uses: coverallsapp/github-action@v1.1.2
       with:
@@ -38,8 +39,9 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+        cache: 'pnpm'
     - uses: bufbuild/buf-setup-action@v1
       with:
         github_token: ${{ github.token }}
-    - run: yarn --frozen-lockfile
-    - run: yarn test:e2e
+    - run: pnpm install --frozen-lockfile
+    - run: pnpm test:e2e
