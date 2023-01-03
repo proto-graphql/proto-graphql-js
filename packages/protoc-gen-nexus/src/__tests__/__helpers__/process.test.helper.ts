@@ -2,9 +2,7 @@ import {
   buildCodeGeneratorRequest,
   TestapisPackage,
 } from "@proto-graphql/testapis-proto";
-import {
-  CodeGeneratorResponse,
-} from "google-protobuf/google/protobuf/compiler/plugin_pb";
+import { CodeGeneratorResponse } from "google-protobuf/google/protobuf/compiler/plugin_pb";
 
 import { processRequest } from "../../process";
 
