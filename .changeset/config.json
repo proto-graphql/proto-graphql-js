@@ -7,5 +7,10 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": []
+  "ignore": [
+    "@proto-graphql/e2e-*",
+    "@proto-graphql/eslint-config",
+    "@proto-graphql/testapis-proto",
+    "@proto-graphql/tsconfig"
+  ]
 }
