@@ -1,4 +1,4 @@
-# @testapis/proto
+# @proto-graphql/testapis-proto
 
 ## 0.5.6
 
