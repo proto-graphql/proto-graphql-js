@@ -58,7 +58,7 @@ async function genPackageJson(test: TestCase): Promise<void> {
   };
 
   const rootDir = join("..", "..", "..");
-  const bufDir = join(rootDir, "devPackages", "testapis-proto", "src");
+  const bufDir = join(rootDir, "devPackages", "testapis-proto", "proto");
   const protoPath = join(bufDir, "testapis", test.proto.package);
 
   const packageJson = {

@@ -12,6 +12,7 @@
       "dependsOn": ["^build", "^build:test"]
     },
     "build:test": {},
+    "build:e2e": {},
     "test:e2e": {
       "dependsOn": ["^build", "^build:e2e"]
     }
