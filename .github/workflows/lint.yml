@@ -11,11 +11,15 @@ jobs:
       with:
         fetch-depth: 0
         submodules: true
+    - uses: pnpm/action-setup@v2
+      with:
+        version: 7
     - uses: actions/setup-node@v1
       with:
         node-version: 18.x
-    - run: yarn --frozen-lockfile
-    - run: yarn lint
-    - run: yarn format
+        cache: 'pnpm'
+    - run: pnpm install  --frozen-lockfile
+    - run: pnpm lint
+    - run: pnpm format
     - name: check code is up to date
       run: git diff --exit-code

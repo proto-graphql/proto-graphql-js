@@ -8,8 +8,7 @@
     {
       "matchPaths": ["package.json"],
       "enabled": true,
-      "rangeStrategy": "auto",
-      "postUpdateOptions": ["yarnDedupeHighest"]
+      "rangeStrategy": "auto"
     },
     {
       "matchDepTypes": ["dependencies", "peerDependencies"],

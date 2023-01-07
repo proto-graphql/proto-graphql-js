@@ -1,4 +1,4 @@
-#!/usr/bin/env -S yarn ts-node --transpile-only
+#!/usr/bin/env -S pnpm exec ts-node --transpile-only
 
 import { exec as _exec } from "child_process";
 import { mkdir, writeFile } from "fs/promises";

@@ -1,4 +1,4 @@
-#!/usr/bin/env -S yarn ts-node --transpile-only
+#!/usr/bin/env -S pnpm exec ts-node --transpile-only
 
 import { join } from "path";
 import { exec as _exec } from "child_process";
@@ -31,9 +31,9 @@ export async function main() {
   const cfg: Config = JSON.parse(
     await readFile("workspacePackageConfig.json", { encoding: "utf-8" })
   );
-  const pkgPaths = Object.values(
-    JSON.parse((await exec("yarn --silent workspaces info")).stdout)
-  ).map((p) => (p as { location: string }).location);
+  const pkgPaths = (await exec("pnpm recursive exec pwd")).stdout
+    .trim()
+    .split("\n");
 
   const pkgJSONStore = new PackageJSONStore();
 
