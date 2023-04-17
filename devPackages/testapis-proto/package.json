@@ -17,7 +17,7 @@
     "@proto-graphql/tsconfig": "*",
     "@types/glob": "^8.0.0",
     "@types/google-protobuf": "3.15.6",
-    "glob": "^8.0.3"
+    "glob": "^10.0.0"
   },
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts"
