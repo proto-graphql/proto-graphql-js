@@ -104,6 +104,9 @@ function createResolverCode(
   opts: NexusPrinterOptions
 ): Code | null {
   if (field instanceof InputObjectField) return null;
+  if (field.isResolverSkipped()) {
+    return code`(source) => { throw new Error("not implemented"); }`;
+  }
   if (
     field instanceof ObjectOneofField ||
     field.type instanceof SquashedOneofUnionType
