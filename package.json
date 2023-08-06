@@ -50,5 +50,5 @@
     }
   },
   "name": "proto-nexus",
-  "packageManager": "pnpm@7.21.0"
+  "packageManager": "pnpm@7.33.6"
 }
