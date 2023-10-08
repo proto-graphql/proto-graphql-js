@@ -31,4 +31,8 @@ export class ScalarType {
       this.proto.type.file.name === "google/protobuf/wrappers.proto"
     );
   }
+
+  public isCustomScalar(): boolean {
+    return !this.isPrimitive() && !this.isPrimitive();
+  }
 }

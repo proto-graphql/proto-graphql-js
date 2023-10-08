@@ -3,6 +3,7 @@ import {
   InputObjectType,
   protobufGraphQLExtensions,
   protoType,
+  ScalarType,
 } from "@proto-graphql/codegen-core";
 import { Code, code, imp, joinCode, literalOf } from "ts-poet";
 
@@ -49,7 +50,11 @@ export function createInputObjectTypeCode(
           }
           return f.isNullable()
             ? code`${f.name}?: ${typeNode} | null,`
-            : code`${f.name}: ${typeNode},`;
+            : code`${f.name}: ${
+                f.type instanceof ScalarType && f.type.isCustomScalar()
+                  ? code`NonNullable<${typeNode}>`
+                  : typeNode
+              },`;
         })
       )}
     };

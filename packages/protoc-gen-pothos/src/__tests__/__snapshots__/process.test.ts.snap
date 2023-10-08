@@ -7181,7 +7181,7 @@ export type MessageInput$Shape = {
   doubleValues?: Message["doubleValues"] | null;
   boolValues?: Message["boolValues"] | null;
   stringValues?: Message["stringValues"] | null;
-  requiredTimestamp: Message["requiredTimestamp"];
+  requiredTimestamp: NonNullable<Message["requiredTimestamp"]>;
 };
 
 export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
