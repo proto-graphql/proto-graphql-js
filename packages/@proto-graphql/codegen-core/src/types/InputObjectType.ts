@@ -1,12 +1,12 @@
 import { ProtoMessage } from "@proto-graphql/proto-descriptors";
 
-import * as extensions from "../__generated__/extensions/graphql/schema_pb";
 import { EnumType } from "./EnumType";
 import { InputObjectField } from "./InputObjectField";
 import { ScalarType } from "./ScalarType";
 import { TypeBase } from "./TypeBase";
 import { getInputObjectFieldType } from "./types";
 import { gqlTypeName, isIgnoredField, isOutputOnlyField } from "./util";
+import * as extensions from "../__generated__/extensions/graphql/schema_pb";
 
 export class InputObjectType extends TypeBase<ProtoMessage> {
   /**

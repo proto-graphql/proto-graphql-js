@@ -16,7 +16,7 @@ declare global {
 
 registerTransformer("google.protobuf.Int32Value", {
   protoToGql(v) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+     
     return v.value!;
   },
   gqlToProto(v) {
@@ -26,7 +26,7 @@ registerTransformer("google.protobuf.Int32Value", {
 
 registerTransformer("google.protobuf.Int64Value", {
   protoToGql(v) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+     
     return v.value!.toString();
   },
   gqlToProto(v) {
@@ -36,7 +36,7 @@ registerTransformer("google.protobuf.Int64Value", {
 
 registerTransformer("google.protobuf.UInt32Value", {
   protoToGql(v) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+     
     return v.value!;
   },
   gqlToProto(v) {
@@ -46,7 +46,7 @@ registerTransformer("google.protobuf.UInt32Value", {
 
 registerTransformer("google.protobuf.UInt64Value", {
   protoToGql(v) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+     
     return v.value!.toString();
   },
   gqlToProto(v) {
@@ -56,7 +56,7 @@ registerTransformer("google.protobuf.UInt64Value", {
 
 registerTransformer("google.protobuf.FloatValue", {
   protoToGql(v) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+     
     return v.value!;
   },
   gqlToProto(v) {
@@ -66,7 +66,7 @@ registerTransformer("google.protobuf.FloatValue", {
 
 registerTransformer("google.protobuf.DoubleValue", {
   protoToGql(v) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+     
     return v.value!;
   },
   gqlToProto(v) {
@@ -76,7 +76,7 @@ registerTransformer("google.protobuf.DoubleValue", {
 
 registerTransformer("google.protobuf.BoolValue", {
   protoToGql(v) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+     
     return v.value!;
   },
   gqlToProto(v) {
@@ -86,7 +86,7 @@ registerTransformer("google.protobuf.BoolValue", {
 
 registerTransformer("google.protobuf.StringValue", {
   protoToGql(v) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+     
     return v.value!;
   },
   gqlToProto(v) {

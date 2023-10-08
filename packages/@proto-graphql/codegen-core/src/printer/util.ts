@@ -11,6 +11,7 @@ import {
 import { camelCase } from "change-case";
 import { code, Code, imp } from "ts-poet";
 
+import { PrinterOptions } from "./options";
 import {
   EnumType,
   InputObjectField,
@@ -22,7 +23,6 @@ import {
   OneofUnionType,
   SquashedOneofUnionType,
 } from "../types";
-import { PrinterOptions } from "./options";
 
 export function filename(
   type:

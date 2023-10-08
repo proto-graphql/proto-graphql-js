@@ -51,7 +51,7 @@ export class ProtoRegistry {
 
   public addFile(fd: FileDescriptorProto) {
     const file = new ProtoFileImpl(fd, this);
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+     
     this.fileByName[fd.getName()!] = file;
 
     const [msgs, enums] = file.collectTypesRecursively();
@@ -70,7 +70,7 @@ export class ProtoFileImpl implements ProtoFile {
   ) {}
 
   get name(): string {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+     
     return this.descriptor.getName()!;
   }
 
@@ -86,7 +86,7 @@ export class ProtoFileImpl implements ProtoFile {
   }
 
   get package(): string {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+     
     return this.descriptor.getPackage()!;
   }
 
@@ -146,7 +146,7 @@ export class ProtoServiceImpl implements ProtoService {
   ) {}
 
   get name(): string {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+     
     return this.descriptor.getName()!;
   }
 
@@ -184,7 +184,7 @@ export class ProtoMethodImpl implements ProtoMethod {
   ) {}
 
   get name(): string {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+     
     return this.descriptor.getName()!;
   }
 
@@ -195,7 +195,7 @@ export class ProtoMethodImpl implements ProtoMethod {
 
   @memo()
   get input(): ProtoMessage {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+     
     const fullName = this.descriptor.getInputType()!.replace(/^./, "");
     const msg = this.registry.findTypeByFullName(fullName);
     if (msg == null || msg.kind !== "Message")
@@ -205,7 +205,7 @@ export class ProtoMethodImpl implements ProtoMethod {
 
   @memo()
   get output(): ProtoMessage {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+     
     const fullName = this.descriptor.getOutputType()!.replace(/^./, "");
     const msg = this.registry.findTypeByFullName(fullName);
     if (msg == null || msg.kind !== "Message")
@@ -230,7 +230,7 @@ export class ProtoMessageImpl implements ProtoMessage {
   ) {}
 
   get name(): string {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+     
     return this.descriptor.getName()!;
   }
 
@@ -293,7 +293,7 @@ export class ProtoOneofImpl implements ProtoOneof {
   ) {}
 
   get name(): string {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+     
     return this.descriptor.getName()!;
   }
 
@@ -343,7 +343,7 @@ export class ProtoFieldImpl implements ProtoField {
   ) {}
 
   get name(): string {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+     
     return this.descriptor.getName()!;
   }
 
@@ -353,12 +353,12 @@ export class ProtoFieldImpl implements ProtoField {
   }
 
   get jsonName(): string {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+     
     return this.descriptor.getJsonName()!;
   }
 
   get number(): number {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+     
     return this.descriptor.getNumber()!;
   }
 
@@ -416,7 +416,7 @@ export class ProtoEnumImpl implements ProtoEnum {
   ) {}
 
   get name(): string {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+     
     return this.descriptor.getName()!;
   }
 
@@ -458,7 +458,7 @@ export class ProtoEnumValueImpl implements ProtoEnumValue {
   ) {}
 
   get name(): string {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+     
     return this.descriptor.getName()!;
   }
 
@@ -468,7 +468,7 @@ export class ProtoEnumValueImpl implements ProtoEnumValue {
   }
 
   get number(): number {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+     
     return this.descriptor.getNumber()!;
   }
 

@@ -1,4 +1,4 @@
-export type ProtobufMessageExtensions = {
+export interface ProtobufMessageExtensions {
   protobufMessage: {
     /**
      * @example
@@ -16,9 +16,9 @@ export type ProtobufMessageExtensions = {
      */
     package: string;
   };
-};
+}
 
-export type ProtobufFieldExtensions = {
+export interface ProtobufFieldExtensions {
   protobufField: {
     /**
      * @example
@@ -26,9 +26,9 @@ export type ProtobufFieldExtensions = {
      */
     name: string;
   };
-};
+}
 
-export type ProtobufEnumExtensions = {
+export interface ProtobufEnumExtensions {
   protobufEnum: {
     /**
      * @example
@@ -46,9 +46,9 @@ export type ProtobufEnumExtensions = {
      */
     package: string;
   };
-};
+}
 
-export type ProtobufEnumValueExtensions = {
+export interface ProtobufEnumValueExtensions {
   protobufEnumValue: {
     /**
      * @example
@@ -56,9 +56,9 @@ export type ProtobufEnumValueExtensions = {
      */
     name: string;
   };
-};
+}
 
-export type ProtobufOneofExtensions = {
+export interface ProtobufOneofExtensions {
   protobufOneof: {
     /**
      * @example
@@ -94,4 +94,4 @@ export type ProtobufOneofExtensions = {
       type: string;
     }[];
   };
-};
+}

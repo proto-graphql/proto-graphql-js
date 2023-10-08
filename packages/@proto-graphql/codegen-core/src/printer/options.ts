@@ -13,12 +13,12 @@ type PrinterProtobufOptions =
   | { protobuf: "protobufjs" }
   | { protobuf: "ts-proto" };
 
-export type PrinterCommonOptions = {
+export interface PrinterCommonOptions {
   emitImportedFiles: boolean;
   importPrefix: string | null;
   fileLayout: FileLayout;
   filenameSuffix: string;
-};
+}
 
 export type PrinterOptions = PrinterCommonOptions &
   PrinterDSLOptions &

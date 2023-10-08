@@ -1,4 +1,4 @@
-export type TypeOptions = {
+export interface TypeOptions {
   partialInputs: boolean;
   typeMappings: Record<string, string>;
   /**
@@ -14,7 +14,7 @@ export type TypeOptions = {
    * - when `longNumber="Int"`, you should specify `forceLong=number` for ts-proto
    */
   longNumber: LongNumberMapping;
-};
+}
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type LongNumberMapping = "String" | "Int" | (string & {});
