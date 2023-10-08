@@ -30,7 +30,7 @@ plugins:
   - plugin: ts_proto
     opt:
       - enumsAsLiterals=true
-      - forceLong=long
+      - forceLong=number
       - unrecognizedEnum=false
       - outputTypeRegistry=true
       - esModuleInterop=true
