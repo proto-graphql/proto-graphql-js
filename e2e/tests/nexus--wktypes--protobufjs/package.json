@@ -14,13 +14,13 @@
     "test:e2e:typecheck": "tsc --build tsconfig.json"
   },
   "devDependencies": {
-    "@proto-graphql/e2e-helper": "*",
-    "@proto-graphql/e2e-testapis-protobufjs": "*",
-    "@proto-graphql/eslint-config": "*",
-    "@proto-graphql/tsconfig": "*",
-    "@proto-nexus/protobufjs": "*",
-    "proto-nexus": "*",
-    "protoc-gen-nexus": "*"
+    "@proto-graphql/e2e-helper": "workspace:*",
+    "@proto-graphql/e2e-testapis-protobufjs": "workspace:*",
+    "@proto-graphql/eslint-config": "workspace:*",
+    "@proto-graphql/tsconfig": "workspace:*",
+    "@proto-nexus/protobufjs": "workspace:*",
+    "proto-nexus": "workspace:*",
+    "protoc-gen-nexus": "workspace:*"
   },
   "jest": {
     "preset": "ts-jest",

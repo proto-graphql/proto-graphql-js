@@ -84,7 +84,7 @@ async function genPackageJson(test: TestCase): Promise<void> {
     devDependencies: Object.fromEntries(
       ["@proto-graphql/e2e-helper", ...protoPackages[test.proto.lib]]
         .sort()
-        .map((pkg) => [pkg, "*"])
+        .map((pkg) => [pkg, "workspace:*"])
     ),
     jest: {
       preset: "ts-jest",
