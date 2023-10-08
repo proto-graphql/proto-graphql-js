@@ -27,7 +27,7 @@
     "module/"
   ],
   "dependencies": {
-    "proto-nexus": "^0.5.1"
+    "proto-nexus": "workspace:*"
   },
   "peerDependencies": {
     "google-protobuf": "^3.12.2"

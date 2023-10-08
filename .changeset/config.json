@@ -1,13 +1,15 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@2.2.0/schema.json",
-  "changelog": ["@changesets/changelog-github", { "repo": "proto-graphql/proto-graphql-js" }],
+  "changelog": [
+    "@changesets/changelog-github",
+    { "repo": "proto-graphql/proto-graphql-js" }
+  ],
   "commit": true,
   "fixed": [],
   "linked": [],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": [
-    "@proto-graphql/e2e-*"
-  ]
+  "bumpVersionsWithWorkspaceProtocolOnly": true,
+  "ignore": ["@proto-graphql/e2e-*"]
 }
