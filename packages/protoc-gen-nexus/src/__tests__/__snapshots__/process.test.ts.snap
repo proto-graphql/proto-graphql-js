@@ -3996,11 +3996,7 @@ export const TestPrefixPrefixedMessage = objectType({
     t.field("skipResolver", {
       type: nonNull("String"),
       resolve: (source) => {
-        const value = source.skipResolver;
-        if (value == null) {
-          throw new Error("Cannot return null for non-nullable field");
-        }
-        return value;
+        throw new Error("not implemented");
       },
       extensions: {
         protobufField: { name: "skip_resolver", typeFullName: "string" },
@@ -4905,8 +4901,7 @@ export const TestPrefixPrefixedMessage = objectType({
     t.field("skipResolver", {
       type: nonNull("String"),
       resolve: (source) => {
-        const value = source.getSkipResolver();
-        return value;
+        throw new Error("not implemented");
       },
       extensions: {
         protobufField: { name: "skip_resolver", typeFullName: "string" },
@@ -5898,11 +5893,7 @@ export const TestPrefixPrefixedMessage = objectType({
     t.field("skipResolver", {
       type: nonNull("String"),
       resolve: (source) => {
-        const value = source.skipResolver;
-        if (value == null) {
-          throw new Error("Cannot return null for non-nullable field");
-        }
-        return value;
+        throw new Error("not implemented");
       },
       extensions: {
         protobufField: { name: "skip_resolver", typeFullName: "string" },
