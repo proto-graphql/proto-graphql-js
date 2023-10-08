@@ -7,7 +7,7 @@ import { CodeGeneratorResponse } from "google-protobuf/google/protobuf/compiler/
 import { processRequest } from "../../process";
 
 const generationTargets = ["native protobuf", "protobufjs"] as const;
-type GenerationTarget = typeof generationTargets[number];
+type GenerationTarget = (typeof generationTargets)[number];
 
 export function generateDSLs(
   pkg: TestapisPackage,

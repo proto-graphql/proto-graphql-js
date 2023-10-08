@@ -43,7 +43,7 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
 
   function checkEnum<T extends string>(
     v: string,
-    whitelist: ReadonlyArray<T>
+    whitelist: readonly T[]
   ): v is T {
     return whitelist.includes(v as any);
   }

@@ -8,9 +8,12 @@ import { TypeOptions } from "./options";
 import { descriptionFromProto, gqlTypeName } from "./util";
 
 export abstract class TypeBase<
-  P extends ProtoMessage | ProtoEnum | ProtoOneof
+  P extends ProtoMessage | ProtoEnum | ProtoOneof,
 > {
-  constructor(readonly proto: P, readonly options: TypeOptions) {}
+  constructor(
+    readonly proto: P,
+    readonly options: TypeOptions
+  ) {}
 
   get typeName(): string {
     return gqlTypeName(this.proto);

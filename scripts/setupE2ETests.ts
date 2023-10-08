@@ -11,10 +11,10 @@ const protoLibs = [
   "ts-proto",
   "ts-proto-with-forcelong-number",
 ] as const;
-type ProtoLib = typeof protoLibs[number];
+type ProtoLib = (typeof protoLibs)[number];
 
 const plugins = ["nexus", "pothos"] as const;
-type Plugin = typeof plugins[number];
+type Plugin = (typeof plugins)[number];
 
 type TestCase = {
   target: Plugin;

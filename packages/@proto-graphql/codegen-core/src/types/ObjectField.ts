@@ -1,6 +1,5 @@
 import { ProtoField } from "@proto-graphql/proto-descriptors";
 
-import * as extensions from "../__generated__/extensions/graphql/schema_pb";
 import { EnumType } from "./EnumType";
 import { FieldBase } from "./FieldBase";
 import { InterfaceType } from "./InterfaceType";
@@ -9,6 +8,7 @@ import { OneofUnionType } from "./OneofUnionType";
 import { ScalarType } from "./ScalarType";
 import { SquashedOneofUnionType } from "./SquashedOneofUnionType";
 import { isRequiredField } from "./util";
+import * as extensions from "../__generated__/extensions/graphql/schema_pb";
 
 export class ObjectField<
   T extends
@@ -16,7 +16,7 @@ export class ObjectField<
     | InterfaceType
     | SquashedOneofUnionType
     | EnumType
-    | ScalarType
+    | ScalarType,
 > extends FieldBase<ProtoField> {
   constructor(
     readonly type: T,

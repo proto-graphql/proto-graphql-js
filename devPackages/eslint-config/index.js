@@ -14,6 +14,7 @@ const config = {
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/stylistic",
     "prettier",
     // 'plugin:import/recommended', // use only `import/order`
     // 'plugin:import/typescript', // Not necessary for `import/order` use only

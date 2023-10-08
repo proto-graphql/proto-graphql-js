@@ -1,3 +1,4 @@
+import { compact } from "./util";
 import {
   EnumType,
   EnumTypeValue,
@@ -9,7 +10,6 @@ import {
   OneofUnionType,
   SquashedOneofUnionType,
 } from "../types";
-import { compact } from "./util";
 
 export function protobufGraphQLExtensions(
   type:

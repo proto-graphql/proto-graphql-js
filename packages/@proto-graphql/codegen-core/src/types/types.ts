@@ -147,7 +147,7 @@ function detectType<
     | InterfaceType
     | SquashedOneofUnionType
     | InputObjectType
-    | ScalarType
+    | ScalarType,
 >(
   proto: ProtoField,
   options: TypeOptions,

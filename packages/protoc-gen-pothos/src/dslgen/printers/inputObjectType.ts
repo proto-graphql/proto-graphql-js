@@ -57,11 +57,11 @@ export function createInputObjectTypeCode(
 
   const refCode = code`
     export const ${pothosRef(type)}: ${imp(
-    "InputObjectRef@@pothos/core"
-  )}<${shapeType(type)}> =
+      "InputObjectRef@@pothos/core"
+    )}<${shapeType(type)}> =
       ${pothosBuilder(type, opts)}.inputRef<${shapeType(type)}>(${literalOf(
-    type.typeName
-  )}).implement(
+        type.typeName
+      )}).implement(
         ${literalOf(
           compact({
             description: type.description,
