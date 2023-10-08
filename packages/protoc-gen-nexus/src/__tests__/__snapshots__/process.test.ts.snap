@@ -264,7 +264,7 @@ export const DeprecatedMessageInput = Object.assign(
     name: "DeprecatedMessageInput",
     definition: (t) => {
       t.field("body", {
-        type: nonNull("String"),
+        type: nullable("String"),
         deprecation:
           "testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.",
         extensions: { protobufField: { name: "body", typeFullName: "string" } },
@@ -294,7 +294,9 @@ export const DeprecatedMessageInput = Object.assign(
       input: NexusGen["inputTypes"]["DeprecatedMessageInput"],
     ): DeprecatedMessage1 => {
       const output = new DeprecatedMessage1();
-      output.setBody(input.body);
+      if (input.body != null) {
+        output.setBody(input.body);
+      }
       if (input.enum != null) {
         output.setEnum(input.enum);
       }
@@ -303,7 +305,7 @@ export const DeprecatedMessageInput = Object.assign(
     _protoNexus: {
       fields: {
         body: {
-          type: nonNull("String"),
+          type: nullable("String"),
           extensions: {
             protobufField: { name: "body", typeFullName: "string" },
           },
@@ -327,7 +329,7 @@ export const NotDeprecatedMessageInput = Object.assign(
     name: "NotDeprecatedMessageInput",
     definition: (t) => {
       t.field("body", {
-        type: nonNull("String"),
+        type: nullable("String"),
         deprecation:
           "testapis.deprecation.NotDeprecatedMessage.body is mark as deprecated in a *.proto file.",
         extensions: { protobufField: { name: "body", typeFullName: "string" } },
@@ -403,7 +405,9 @@ export const NotDeprecatedMessageInput = Object.assign(
       input: NexusGen["inputTypes"]["NotDeprecatedMessageInput"],
     ): NotDeprecatedMessage2 => {
       const output = new NotDeprecatedMessage2();
-      output.setBody(input.body);
+      if (input.body != null) {
+        output.setBody(input.body);
+      }
       if (input.enum != null) {
         output.setEnum(input.enum);
       }
@@ -432,7 +436,7 @@ export const NotDeprecatedMessageInput = Object.assign(
     _protoNexus: {
       fields: {
         body: {
-          type: nonNull("String"),
+          type: nullable("String"),
           extensions: {
             protobufField: { name: "body", typeFullName: "string" },
           },
@@ -496,7 +500,7 @@ export const DeprecatedMessageInnerMessageInput = Object.assign(
     name: "DeprecatedMessageInnerMessageInput",
     definition: (t) => {
       t.field("body", {
-        type: nonNull("String"),
+        type: nullable("String"),
         deprecation:
           "testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.",
         extensions: { protobufField: { name: "body", typeFullName: "string" } },
@@ -515,13 +519,15 @@ export const DeprecatedMessageInnerMessageInput = Object.assign(
       input: NexusGen["inputTypes"]["DeprecatedMessageInnerMessageInput"],
     ): DeprecatedMessage1.InnerMessage => {
       const output = new DeprecatedMessage1.InnerMessage();
-      output.setBody(input.body);
+      if (input.body != null) {
+        output.setBody(input.body);
+      }
       return output;
     },
     _protoNexus: {
       fields: {
         body: {
-          type: nonNull("String"),
+          type: nullable("String"),
           extensions: {
             protobufField: { name: "body", typeFullName: "string" },
           },
@@ -809,7 +815,7 @@ export const DeprecatedFileMessageInput = Object.assign(
     name: "DeprecatedFileMessageInput",
     definition: (t) => {
       t.field("body", {
-        type: nonNull("String"),
+        type: nullable("String"),
         deprecation:
           "testapis/deprecation/file_deprecation.proto is mark as deprecated.",
         extensions: { protobufField: { name: "body", typeFullName: "string" } },
@@ -839,7 +845,9 @@ export const DeprecatedFileMessageInput = Object.assign(
       input: NexusGen["inputTypes"]["DeprecatedFileMessageInput"],
     ): DeprecatedFileMessage1 => {
       const output = new DeprecatedFileMessage1();
-      output.setBody(input.body);
+      if (input.body != null) {
+        output.setBody(input.body);
+      }
       if (input.enum != null) {
         output.setEnum(input.enum);
       }
@@ -848,7 +856,7 @@ export const DeprecatedFileMessageInput = Object.assign(
     _protoNexus: {
       fields: {
         body: {
-          type: nonNull("String"),
+          type: nullable("String"),
           extensions: {
             protobufField: { name: "body", typeFullName: "string" },
           },
@@ -872,7 +880,7 @@ export const DeprecatedFileMessageInnerMessageInput = Object.assign(
     name: "DeprecatedFileMessageInnerMessageInput",
     definition: (t) => {
       t.field("body", {
-        type: nonNull("String"),
+        type: nullable("String"),
         deprecation:
           "testapis/deprecation/file_deprecation.proto is mark as deprecated.",
         extensions: { protobufField: { name: "body", typeFullName: "string" } },
@@ -891,13 +899,15 @@ export const DeprecatedFileMessageInnerMessageInput = Object.assign(
       input: NexusGen["inputTypes"]["DeprecatedFileMessageInnerMessageInput"],
     ): DeprecatedFileMessage1.InnerMessage => {
       const output = new DeprecatedFileMessage1.InnerMessage();
-      output.setBody(input.body);
+      if (input.body != null) {
+        output.setBody(input.body);
+      }
       return output;
     },
     _protoNexus: {
       fields: {
         body: {
-          type: nonNull("String"),
+          type: nullable("String"),
           extensions: {
             protobufField: { name: "body", typeFullName: "string" },
           },
@@ -1205,7 +1215,7 @@ export const DeprecatedMessageInput = Object.assign(
     name: "DeprecatedMessageInput",
     definition: (t) => {
       t.field("body", {
-        type: nonNull("String"),
+        type: nullable("String"),
         deprecation:
           "testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.",
         extensions: { protobufField: { name: "body", typeFullName: "string" } },
@@ -1235,7 +1245,9 @@ export const DeprecatedMessageInput = Object.assign(
       input: NexusGen["inputTypes"]["DeprecatedMessageInput"],
     ): testapis.deprecation.DeprecatedMessage => {
       const output = new testapis.deprecation.DeprecatedMessage();
-      output.body = input.body;
+      if (input.body != null) {
+        output.body = input.body;
+      }
       if (input.enum != null) {
         output.enum = input.enum;
       }
@@ -1244,7 +1256,7 @@ export const DeprecatedMessageInput = Object.assign(
     _protoNexus: {
       fields: {
         body: {
-          type: nonNull("String"),
+          type: nullable("String"),
           extensions: {
             protobufField: { name: "body", typeFullName: "string" },
           },
@@ -1268,7 +1280,7 @@ export const NotDeprecatedMessageInput = Object.assign(
     name: "NotDeprecatedMessageInput",
     definition: (t) => {
       t.field("body", {
-        type: nonNull("String"),
+        type: nullable("String"),
         deprecation:
           "testapis.deprecation.NotDeprecatedMessage.body is mark as deprecated in a *.proto file.",
         extensions: { protobufField: { name: "body", typeFullName: "string" } },
@@ -1344,7 +1356,9 @@ export const NotDeprecatedMessageInput = Object.assign(
       input: NexusGen["inputTypes"]["NotDeprecatedMessageInput"],
     ): testapis.deprecation.NotDeprecatedMessage => {
       const output = new testapis.deprecation.NotDeprecatedMessage();
-      output.body = input.body;
+      if (input.body != null) {
+        output.body = input.body;
+      }
       if (input.enum != null) {
         output.enum = input.enum;
       }
@@ -1373,7 +1387,7 @@ export const NotDeprecatedMessageInput = Object.assign(
     _protoNexus: {
       fields: {
         body: {
-          type: nonNull("String"),
+          type: nullable("String"),
           extensions: {
             protobufField: { name: "body", typeFullName: "string" },
           },
@@ -1437,7 +1451,7 @@ export const DeprecatedMessageInnerMessageInput = Object.assign(
     name: "DeprecatedMessageInnerMessageInput",
     definition: (t) => {
       t.field("body", {
-        type: nonNull("String"),
+        type: nullable("String"),
         deprecation:
           "testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.",
         extensions: { protobufField: { name: "body", typeFullName: "string" } },
@@ -1456,13 +1470,15 @@ export const DeprecatedMessageInnerMessageInput = Object.assign(
       input: NexusGen["inputTypes"]["DeprecatedMessageInnerMessageInput"],
     ): testapis.deprecation.DeprecatedMessage.InnerMessage => {
       const output = new testapis.deprecation.DeprecatedMessage.InnerMessage();
-      output.body = input.body;
+      if (input.body != null) {
+        output.body = input.body;
+      }
       return output;
     },
     _protoNexus: {
       fields: {
         body: {
-          type: nonNull("String"),
+          type: nullable("String"),
           extensions: {
             protobufField: { name: "body", typeFullName: "string" },
           },
@@ -1761,7 +1777,7 @@ export const DeprecatedFileMessageInput = Object.assign(
     name: "DeprecatedFileMessageInput",
     definition: (t) => {
       t.field("body", {
-        type: nonNull("String"),
+        type: nullable("String"),
         deprecation:
           "testapis/deprecation/file_deprecation.proto is mark as deprecated.",
         extensions: { protobufField: { name: "body", typeFullName: "string" } },
@@ -1791,7 +1807,9 @@ export const DeprecatedFileMessageInput = Object.assign(
       input: NexusGen["inputTypes"]["DeprecatedFileMessageInput"],
     ): testapis.deprecation.DeprecatedFileMessage => {
       const output = new testapis.deprecation.DeprecatedFileMessage();
-      output.body = input.body;
+      if (input.body != null) {
+        output.body = input.body;
+      }
       if (input.enum != null) {
         output.enum = input.enum;
       }
@@ -1800,7 +1818,7 @@ export const DeprecatedFileMessageInput = Object.assign(
     _protoNexus: {
       fields: {
         body: {
-          type: nonNull("String"),
+          type: nullable("String"),
           extensions: {
             protobufField: { name: "body", typeFullName: "string" },
           },
@@ -1824,7 +1842,7 @@ export const DeprecatedFileMessageInnerMessageInput = Object.assign(
     name: "DeprecatedFileMessageInnerMessageInput",
     definition: (t) => {
       t.field("body", {
-        type: nonNull("String"),
+        type: nullable("String"),
         deprecation:
           "testapis/deprecation/file_deprecation.proto is mark as deprecated.",
         extensions: { protobufField: { name: "body", typeFullName: "string" } },
@@ -1844,13 +1862,15 @@ export const DeprecatedFileMessageInnerMessageInput = Object.assign(
     ): testapis.deprecation.DeprecatedFileMessage.InnerMessage => {
       const output = new testapis.deprecation.DeprecatedFileMessage
         .InnerMessage();
-      output.body = input.body;
+      if (input.body != null) {
+        output.body = input.body;
+      }
       return output;
     },
     _protoNexus: {
       fields: {
         body: {
-          type: nonNull("String"),
+          type: nullable("String"),
           extensions: {
             protobufField: { name: "body", typeFullName: "string" },
           },

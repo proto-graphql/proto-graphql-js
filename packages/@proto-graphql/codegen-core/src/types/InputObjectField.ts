@@ -30,7 +30,8 @@ export class InputObjectField<
   /**
    * @override
    */
-  public override isNullable() {
+  public override isNullable(): boolean {
+    if (this.deprecationReason) return true;
     return !isRequiredField(this.proto, "input");
   }
 
