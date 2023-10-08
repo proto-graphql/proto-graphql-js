@@ -43,6 +43,10 @@ export function createProcessor<DSL extends PrinterOptions["dsl"]>({
       }
     }
 
+    resp.setSupportedFeatures(
+      CodeGeneratorResponse.Feature.FEATURE_PROTO3_OPTIONAL
+    );
+
     return resp;
   };
 }
