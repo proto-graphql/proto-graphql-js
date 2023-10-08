@@ -1,0 +1,11 @@
+version: v1
+managed:
+  enabled: true
+plugins:
+  - plugin: buf.build/protocolbuffers/js:v3.21.2
+    opt:
+      - import_style=commonjs
+      - binary
+    out: ./packages/@proto-graphql/codegen-core/src/__generated__/extensions
+  - plugin: ts
+    out: ./packages/@proto-graphql/codegen-core/src/__generated__/extensions
