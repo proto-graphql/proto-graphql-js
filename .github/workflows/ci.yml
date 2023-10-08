@@ -1,53 +1,67 @@
 name: CI
 
-on: [push]
+on:
+  pull_request:
+    branches:
+      - "**"
+  push:
+    branches:
+      - main
 
 jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup-node
+      - run: pnpm lint
+      - name: check code is up to date
+        run: git diff --exit-code
+
+  format:
+    name: Format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup-node
+      - run: pnpm format
+      - name: check code is up to date
+        run: git diff --exit-code
+
   test:
     name: Test
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: pnpm/action-setup@v2
-      with:
-        version: 7
-    - uses: actions/setup-node@v1
-      with:
-        node-version: 18.x
-        cache: 'pnpm'
-    - uses: bufbuild/buf-setup-action@v1
-      with:
-        github_token: ${{ github.token }}
-    - run: pnpm install --frozen-lockfile
-    - run: pnpm test
-    - name: Coveralls
-      uses: coverallsapp/github-action@v1.1.2
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: packages/protoc-gen-nexus/coverage/lcov.info
-        base-path: packages/protoc-gen-nexus
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup-node
+      - run: pnpm test
+      - name: check code is up to date
+        run: git diff --exit-code
+      - name: Coveralls
+        uses: coverallsapp/github-action@v1.1.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: packages/protoc-gen-nexus/coverage/lcov.info
+          base-path: packages/protoc-gen-nexus
 
   test-e2e:
     name: E2E Test - Node.js v${{ matrix.node-version }}
     strategy:
       matrix:
-        node-version: [16, 18]
+        node-version: ["16.x", "18.x"]
+      fail-fast: false
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - uses: pnpm/action-setup@v2
-      with:
-        version: 7
-    - uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'pnpm'
-    - uses: bufbuild/buf-setup-action@v1
-      with:
-        github_token: ${{ github.token }}
-    - run: pnpm install --frozen-lockfile
-    - run: pnpm test:e2e
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - uses: ./.github/actions/setup-node
+        with:
+          node-version: ${{ matrix.node-version }}
+      - uses: bufbuild/buf-setup-action@v1
+        with:
+          github_token: ${{ github.token }}
+      - run: pnpm test:e2e
+      - name: check code is up to date
+        run: git diff --exit-code
