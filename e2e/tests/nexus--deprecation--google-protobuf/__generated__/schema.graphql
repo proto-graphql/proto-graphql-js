@@ -22,11 +22,11 @@ type DeprecatedFileMessageInnerMessage {
 }
 
 input DeprecatedFileMessageInnerMessageInput {
-  body: String!
+  body: String
 }
 
 input DeprecatedFileMessageInput {
-  body: String!
+  body: String
   enum: DeprecatedFileEnum
 }
 
@@ -40,11 +40,11 @@ type DeprecatedMessageInnerMessage {
 }
 
 input DeprecatedMessageInnerMessageInput {
-  body: String!
+  body: String
 }
 
 input DeprecatedMessageInput {
-  body: String!
+  body: String
   enum: NotDeprecatedEnum
 }
 
@@ -79,7 +79,7 @@ input NotDeprecatedMessageInnerMessage2Input {
 }
 
 input NotDeprecatedMessageInput {
-  body: String!
+  body: String
   enum: DeprecatedEnum
   msg1: NotDeprecatedMessageInnerMessage1Input
   msg2: NotDeprecatedMessageInnerMessage2Input

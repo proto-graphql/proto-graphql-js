@@ -18,11 +18,11 @@ type DeprecatedFileMessageInnerMessage {
 }
 
 input DeprecatedFileMessageInnerMessageInput {
-  body: String! @deprecated(reason: "testapis/deprecation/file_deprecation.proto is mark as deprecated.")
+  body: String @deprecated(reason: "testapis/deprecation/file_deprecation.proto is mark as deprecated.")
 }
 
 input DeprecatedFileMessageInput {
-  body: String! @deprecated(reason: "testapis/deprecation/file_deprecation.proto is mark as deprecated.")
+  body: String @deprecated(reason: "testapis/deprecation/file_deprecation.proto is mark as deprecated.")
   enum: DeprecatedFileEnum @deprecated(reason: "testapis/deprecation/file_deprecation.proto is mark as deprecated.")
 }
 
@@ -36,11 +36,11 @@ type DeprecatedMessageInnerMessage {
 }
 
 input DeprecatedMessageInnerMessageInput {
-  body: String! @deprecated(reason: "testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.")
+  body: String @deprecated(reason: "testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.")
 }
 
 input DeprecatedMessageInput {
-  body: String! @deprecated(reason: "testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.")
+  body: String @deprecated(reason: "testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.")
   enum: NotDeprecatedEnum @deprecated(reason: "testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.")
 }
 
@@ -75,7 +75,7 @@ input NotDeprecatedMessageInnerMessage2Input {
 }
 
 input NotDeprecatedMessageInput {
-  body: String! @deprecated(reason: "testapis.deprecation.NotDeprecatedMessage.body is mark as deprecated in a *.proto file.")
+  body: String @deprecated(reason: "testapis.deprecation.NotDeprecatedMessage.body is mark as deprecated in a *.proto file.")
   enum: DeprecatedEnum @deprecated(reason: "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.")
   msg1: NotDeprecatedMessageInnerMessage1Input @deprecated(reason: "testapis.deprecation.NotDeprecatedMessage.msg1 is mark as deprecated in a *.proto file.")
   msg2: NotDeprecatedMessageInnerMessage2Input
