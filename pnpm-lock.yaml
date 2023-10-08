@@ -15,8 +15,8 @@ importers:
         specifier: ^2.26.2
         version: 2.26.2
       '@pothos/core':
-        specifier: 3.23.2
-        version: 3.23.2(graphql@16.8.1)
+        specifier: 3.38.0
+        version: 3.38.0(graphql@16.8.1)
       '@proto-graphql/tsconfig':
         specifier: workspace:*
         version: link:devPackages/tsconfig
@@ -2122,8 +2122,8 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.9.0
 
-  /@pothos/core@3.23.2(graphql@16.8.1):
-    resolution: {integrity: sha512-A+YANU9RKIXQdJyOl6elPp95SHtQdl8f/v9FSTK7cfwn5V1wapz9NFouOCtuh9BCnFntH5HBTA2RexOf4LpryQ==}
+  /@pothos/core@3.38.0(graphql@16.8.1):
+    resolution: {integrity: sha512-2jlnvkrCmbrHxK269745TXxl185LwJtC5oMz4nbFP40LmVV9zbDV3WKqbG7D+3rg9hvxBe0RmmwWrOjNcGpICA==}
     peerDependencies:
       graphql: '>=15.1.0'
     dependencies:
