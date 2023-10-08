@@ -1,5 +1,14 @@
 # protoc-gen-nexus
 
+## 0.6.3
+
+### Patch Changes
+
+- [#274](https://github.com/proto-graphql/proto-graphql-js/pull/274) [`e854e95`](https://github.com/proto-graphql/proto-graphql-js/commit/e854e953d5b22057678224672e95f18bd952513d) Thanks [@qnighy](https://github.com/qnighy)! - Fix regression on skip_resolver
+
+- Updated dependencies [[`ff3638b`](https://github.com/proto-graphql/proto-graphql-js/commit/ff3638b382953cef02df774df0e93fbd991548ee)]:
+  - @proto-graphql/protoc-plugin-helpers@0.2.4
+
 ## 0.6.2
 
 ### Patch Changes

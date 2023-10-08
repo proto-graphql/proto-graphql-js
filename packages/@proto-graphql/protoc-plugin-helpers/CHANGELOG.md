@@ -1,5 +1,11 @@
 # @proto-graphql/protoc-plugin-helpers
 
+## 0.2.4
+
+### Patch Changes
+
+- [#290](https://github.com/proto-graphql/proto-graphql-js/pull/290) [`ff3638b`](https://github.com/proto-graphql/proto-graphql-js/commit/ff3638b382953cef02df774df0e93fbd991548ee) Thanks [@izumin5210](https://github.com/izumin5210)! - add PROTO3_OPTIONAL to supported features
+
 ## 0.2.3
 
 ### Patch Changes
