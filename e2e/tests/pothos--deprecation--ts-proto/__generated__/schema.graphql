@@ -18,12 +18,12 @@ type DeprecatedFileMessageInnerMessage {
 }
 
 input DeprecatedFileMessageInnerMessageInput {
-  body: String
+  body: String @deprecated(reason: "testapis/deprecation/file_deprecation.proto is mark as deprecated.")
 }
 
 input DeprecatedFileMessageInput {
-  body: String
-  enum: DeprecatedFileEnum
+  body: String @deprecated(reason: "testapis/deprecation/file_deprecation.proto is mark as deprecated.")
+  enum: DeprecatedFileEnum @deprecated(reason: "testapis/deprecation/file_deprecation.proto is mark as deprecated.")
 }
 
 type DeprecatedMessage {
@@ -36,12 +36,12 @@ type DeprecatedMessageInnerMessage {
 }
 
 input DeprecatedMessageInnerMessageInput {
-  body: String
+  body: String @deprecated(reason: "testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.")
 }
 
 input DeprecatedMessageInput {
-  body: String
-  enum: NotDeprecatedEnum
+  body: String @deprecated(reason: "testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.")
+  enum: NotDeprecatedEnum @deprecated(reason: "testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.")
 }
 
 enum NotDeprecatedEnum {
@@ -75,12 +75,12 @@ input NotDeprecatedMessageInnerMessage2Input {
 }
 
 input NotDeprecatedMessageInput {
-  body: String
-  enum: DeprecatedEnum
-  msg1: NotDeprecatedMessageInnerMessage1Input
+  body: String @deprecated(reason: "testapis.deprecation.NotDeprecatedMessage.body is mark as deprecated in a *.proto file.")
+  enum: DeprecatedEnum @deprecated(reason: "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.")
+  msg1: NotDeprecatedMessageInnerMessage1Input @deprecated(reason: "testapis.deprecation.NotDeprecatedMessage.msg1 is mark as deprecated in a *.proto file.")
   msg2: NotDeprecatedMessageInnerMessage2Input
-  msg3: NotDeprecatedMessageInnerMessage1Input
-  msg4: NotDeprecatedMessageInnerMessage2Input
+  msg3: NotDeprecatedMessageInnerMessage1Input @deprecated(reason: "testapis.deprecation.NotDeprecatedMessage.msg3 is mark as deprecated in a *.proto file.")
+  msg4: NotDeprecatedMessageInnerMessage2Input @deprecated(reason: "testapis.deprecation.NotDeprecatedMessage.msg4 is mark as deprecated in a *.proto file.")
 }
 
 union NotDeprecatedMessageNotDeprecatedOneof = NotDeprecatedMessageInnerMessage1 | NotDeprecatedMessageInnerMessage2
