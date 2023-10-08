@@ -1057,7 +1057,7 @@ importers:
   packages/@proto-graphql/codegen-core:
     dependencies:
       '@proto-graphql/proto-descriptors':
-        specifier: ^0.3.1
+        specifier: workspace:*
         version: link:../proto-descriptors
       change-case:
         specifier: ^4.1.2
@@ -1092,10 +1092,10 @@ importers:
   packages/@proto-graphql/protoc-plugin-helpers:
     dependencies:
       '@proto-graphql/codegen-core':
-        specifier: ^0.3.2
+        specifier: workspace:*
         version: link:../codegen-core
       '@proto-graphql/proto-descriptors':
-        specifier: ^0.3.1
+        specifier: workspace:*
         version: link:../proto-descriptors
       google-protobuf:
         specifier: 3.21.2
@@ -1114,7 +1114,7 @@ importers:
         specifier: ^3.12.2
         version: 3.21.2
       proto-nexus:
-        specifier: ^0.5.1
+        specifier: workspace:*
         version: link:../../proto-nexus
     devDependencies:
       '@proto-graphql/eslint-config':
@@ -1140,7 +1140,7 @@ importers:
   packages/@proto-nexus/protobufjs:
     dependencies:
       proto-nexus:
-        specifier: ^0.5.1
+        specifier: workspace:*
         version: link:../../proto-nexus
       protobufjs:
         specifier: ^6.10.2
@@ -1165,13 +1165,13 @@ importers:
   packages/protoc-gen-nexus:
     dependencies:
       '@proto-graphql/codegen-core':
-        specifier: ^0.3.2
+        specifier: workspace:*
         version: link:../@proto-graphql/codegen-core
       '@proto-graphql/proto-descriptors':
-        specifier: ^0.3.1
+        specifier: workspace:*
         version: link:../@proto-graphql/proto-descriptors
       '@proto-graphql/protoc-plugin-helpers':
-        specifier: ^0.2.3
+        specifier: workspace:*
         version: link:../@proto-graphql/protoc-plugin-helpers
       change-case:
         specifier: ^4.1.2
@@ -1196,13 +1196,13 @@ importers:
   packages/protoc-gen-pothos:
     dependencies:
       '@proto-graphql/codegen-core':
-        specifier: ^0.3.2
+        specifier: workspace:*
         version: link:../@proto-graphql/codegen-core
       '@proto-graphql/proto-descriptors':
-        specifier: ^0.3.1
+        specifier: workspace:*
         version: link:../@proto-graphql/proto-descriptors
       '@proto-graphql/protoc-plugin-helpers':
-        specifier: ^0.2.3
+        specifier: workspace:*
         version: link:../@proto-graphql/protoc-plugin-helpers
       google-protobuf:
         specifier: ^3.21.2
