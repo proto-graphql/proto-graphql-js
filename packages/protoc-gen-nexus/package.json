@@ -23,9 +23,9 @@
     "node": ">= 14.0.0"
   },
   "dependencies": {
-    "@proto-graphql/codegen-core": "^0.3.2",
-    "@proto-graphql/proto-descriptors": "^0.3.1",
-    "@proto-graphql/protoc-plugin-helpers": "^0.2.4",
+    "@proto-graphql/codegen-core": "workspace:*",
+    "@proto-graphql/proto-descriptors": "workspace:*",
+    "@proto-graphql/protoc-plugin-helpers": "workspace:*",
     "change-case": "^4.1.2",
     "google-protobuf": "^3.20.1",
     "ts-poet": "^6.3.0"

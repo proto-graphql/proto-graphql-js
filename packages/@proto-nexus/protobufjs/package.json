@@ -27,7 +27,7 @@
     "module/"
   ],
   "dependencies": {
-    "proto-nexus": "^0.5.1"
+    "proto-nexus": "workspace:*"
   },
   "peerDependencies": {
     "protobufjs": "^6.10.2"
