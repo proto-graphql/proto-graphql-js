@@ -8,7 +8,7 @@ import { isRequiredField } from "./util";
 import * as extensions from "../__generated__/extensions/graphql/schema_pb";
 
 export class InputObjectField<
-  T extends ScalarType | EnumType | InputObjectType
+  T extends ScalarType | EnumType | InputObjectType,
 > extends FieldBase<ProtoField> {
   constructor(
     readonly type: T,
@@ -49,7 +49,7 @@ export class InputObjectField<
 }
 
 class PartialInputObjectField<
-  T extends ScalarType | EnumType | InputObjectType
+  T extends ScalarType | EnumType | InputObjectType,
 > extends InputObjectField<T> {
   /**
    * @override

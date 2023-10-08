@@ -16,7 +16,7 @@ export class ObjectField<
     | InterfaceType
     | SquashedOneofUnionType
     | EnumType
-    | ScalarType
+    | ScalarType,
 > extends FieldBase<ProtoField> {
   constructor(
     readonly type: T,

@@ -30,7 +30,7 @@ declare global {
  * @param transformer transformer object
  */
 export function registerTransformer<
-  ProtoTypeFullName extends keyof ProtoNexusTransformers
+  ProtoTypeFullName extends keyof ProtoNexusTransformers,
 >(
   protoTypeFullName: ProtoTypeFullName,
   transformer: ProtoNexusTransformers[ProtoTypeFullName]
@@ -39,7 +39,7 @@ export function registerTransformer<
 }
 
 export function getTransformer<
-  ProtoTypeFullName extends keyof ProtoNexusTransformers
+  ProtoTypeFullName extends keyof ProtoNexusTransformers,
 >(
   protoTypeFullName: ProtoTypeFullName
 ): TransformerWrapper<ProtoNexusTransformers[ProtoTypeFullName]> {

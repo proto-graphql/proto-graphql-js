@@ -48,7 +48,7 @@ export function createEnumTypeCode(
   return code`
     export const ${pothosRef(type)} =
       ${pothosBuilder(type, opts)}.enumType(${literalOf(
-    type.typeName
-  )}, ${literalOf(compact(typeOpts))});
+        type.typeName
+      )}, ${literalOf(compact(typeOpts))});
   `;
 }

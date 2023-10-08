@@ -265,12 +265,12 @@ const behaviorComments = ["Required", "Input only", "Output only"] as const;
 
 function extractBehaviorComments(
   field: ProtoField | ProtoOneof
-): typeof behaviorComments[number][] {
+): (typeof behaviorComments)[number][] {
   return (field.comments.leadingComments.trim() ?? "")
     .split(/\.\s+/, 3)
     .slice(0, 2)
     .map((c) => c.replace(/\.\s*$/, ""))
-    .filter((c): c is typeof behaviorComments[number] =>
+    .filter((c): c is (typeof behaviorComments)[number] =>
       behaviorComments.includes(c as any)
     );
 }
@@ -291,7 +291,7 @@ function getExtension<
     oneof: ProtoOneof;
     enumType: ProtoEnum;
     enumValue: ProtoEnumValue;
-  }[K]
+  }[K],
 >(proto: P, kind: K): Extension<K> | undefined {
   const extInfo = extensionInfoMap[kind];
   return proto.descriptor.getOptions()?.getExtension(extInfo) as any;
@@ -300,7 +300,7 @@ function getExtension<
 type ExtensionKind = keyof typeof extensionInfoMap;
 
 type Extension<K extends ExtensionKind> =
-  typeof extensionInfoMap[K] extends ExtensionFieldInfo<infer Opt>
+  (typeof extensionInfoMap)[K] extends ExtensionFieldInfo<infer Opt>
     ? Opt
     : never;
 

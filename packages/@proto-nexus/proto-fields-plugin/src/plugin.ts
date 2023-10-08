@@ -22,7 +22,7 @@ export const protoFieldsPlugin = () => {
                   fields: Record<string, NexusInputFieldConfig<any, any>>;
                 };
               },
-              string[]
+              string[],
             ];
 
             for (const fieldName of fieldNames) {

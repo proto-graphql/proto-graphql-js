@@ -85,9 +85,9 @@ export function createToProtoFuncCode(
 ): Code {
   return code`
     (input: NexusGen["inputTypes"][${literalOf(type.typeName)}]): ${protoType(
-    type.proto,
-    opts
-  )} => {
+      type.proto,
+      opts
+    )} => {
       const output = new ${protoType(type.proto, opts)}();
       ${joinCode(
         type.fields.map((f) => {

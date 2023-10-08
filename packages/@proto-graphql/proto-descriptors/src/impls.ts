@@ -51,7 +51,7 @@ export class ProtoRegistry {
 
   public addFile(fd: FileDescriptorProto) {
     const file = new ProtoFileImpl(fd, this);
-     
+
     this.fileByName[fd.getName()!] = file;
 
     const [msgs, enums] = file.collectTypesRecursively();
@@ -70,7 +70,6 @@ export class ProtoFileImpl implements ProtoFile {
   ) {}
 
   get name(): string {
-     
     return this.descriptor.getName()!;
   }
 
@@ -86,7 +85,6 @@ export class ProtoFileImpl implements ProtoFile {
   }
 
   get package(): string {
-     
     return this.descriptor.getPackage()!;
   }
 
@@ -146,7 +144,6 @@ export class ProtoServiceImpl implements ProtoService {
   ) {}
 
   get name(): string {
-     
     return this.descriptor.getName()!;
   }
 
@@ -184,7 +181,6 @@ export class ProtoMethodImpl implements ProtoMethod {
   ) {}
 
   get name(): string {
-     
     return this.descriptor.getName()!;
   }
 
@@ -195,7 +191,6 @@ export class ProtoMethodImpl implements ProtoMethod {
 
   @memo()
   get input(): ProtoMessage {
-     
     const fullName = this.descriptor.getInputType()!.replace(/^./, "");
     const msg = this.registry.findTypeByFullName(fullName);
     if (msg == null || msg.kind !== "Message")
@@ -205,7 +200,6 @@ export class ProtoMethodImpl implements ProtoMethod {
 
   @memo()
   get output(): ProtoMessage {
-     
     const fullName = this.descriptor.getOutputType()!.replace(/^./, "");
     const msg = this.registry.findTypeByFullName(fullName);
     if (msg == null || msg.kind !== "Message")
@@ -230,7 +224,6 @@ export class ProtoMessageImpl implements ProtoMessage {
   ) {}
 
   get name(): string {
-     
     return this.descriptor.getName()!;
   }
 
@@ -293,7 +286,6 @@ export class ProtoOneofImpl implements ProtoOneof {
   ) {}
 
   get name(): string {
-     
     return this.descriptor.getName()!;
   }
 
@@ -343,7 +335,6 @@ export class ProtoFieldImpl implements ProtoField {
   ) {}
 
   get name(): string {
-     
     return this.descriptor.getName()!;
   }
 
@@ -353,12 +344,10 @@ export class ProtoFieldImpl implements ProtoField {
   }
 
   get jsonName(): string {
-     
     return this.descriptor.getJsonName()!;
   }
 
   get number(): number {
-     
     return this.descriptor.getNumber()!;
   }
 
@@ -416,7 +405,6 @@ export class ProtoEnumImpl implements ProtoEnum {
   ) {}
 
   get name(): string {
-     
     return this.descriptor.getName()!;
   }
 
@@ -458,7 +446,6 @@ export class ProtoEnumValueImpl implements ProtoEnumValue {
   ) {}
 
   get name(): string {
-     
     return this.descriptor.getName()!;
   }
 
@@ -468,7 +455,6 @@ export class ProtoEnumValueImpl implements ProtoEnumValue {
   }
 
   get number(): number {
-     
     return this.descriptor.getNumber()!;
   }
 

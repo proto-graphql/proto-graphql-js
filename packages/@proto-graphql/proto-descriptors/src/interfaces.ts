@@ -27,7 +27,7 @@ const protoKinds = [
   "Enum",
   "EnumValue",
 ] as const;
-export type ProtoKind = typeof protoKinds[number];
+export type ProtoKind = (typeof protoKinds)[number];
 
 const descriptorByKind = {
   File: FileDescriptorProto,
@@ -40,7 +40,7 @@ const descriptorByKind = {
   EnumValue: EnumValueDescriptorProto,
 };
 export type Descriptor<K extends ProtoKind> = InstanceType<
-  typeof descriptorByKind[K]
+  (typeof descriptorByKind)[K]
 >;
 
 export type { ProtoScalar, ProtoScalarType };

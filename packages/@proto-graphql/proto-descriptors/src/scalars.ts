@@ -8,7 +8,7 @@ type FieldDescriptorScalarType = Exclude<
 >;
 
 export type ProtoScalarType =
-  typeof protoScalarByFieldDescriptorType[FieldDescriptorScalarType];
+  (typeof protoScalarByFieldDescriptorType)[FieldDescriptorScalarType];
 export interface ProtoScalar {
   kind: "Scalar";
   type: ProtoScalarType;

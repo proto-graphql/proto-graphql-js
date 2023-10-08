@@ -37,8 +37,8 @@ export function createEnumResolverCode(
           : code`throw new Error("${field.name} is required field. But got unspecified.");`;
       chunks.push(code`
         if (${valueExpr} === ${protoType(field.type.proto, opts)}.${
-        field.type.unspecifiedValue.proto.name
-      }) {
+          field.type.unspecifiedValue.proto.name
+        }) {
           ${escapeCode}
         }
       `);

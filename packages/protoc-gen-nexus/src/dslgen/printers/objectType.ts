@@ -59,7 +59,7 @@ export function createObjectTypeCode(
     export type ${reExportedPbTypeName} = ${protoType(type.proto, opts)};
     export const ${nexusTypeDef(type)} =
       ${impNexus(isInterface ? "interfaceType" : "objectType")}(${literalOf(
-    compact(typeOpts)
-  )});
+        compact(typeOpts)
+      )});
   `;
 }

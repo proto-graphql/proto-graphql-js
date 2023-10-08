@@ -14,7 +14,10 @@ import {
 } from "./interfaces";
 
 export class FullNameImpl implements FullName {
-  constructor(readonly parent: FullName | null, readonly name: string) {}
+  constructor(
+    readonly parent: FullName | null,
+    readonly name: string
+  ) {}
 
   @memo()
   public toString() {

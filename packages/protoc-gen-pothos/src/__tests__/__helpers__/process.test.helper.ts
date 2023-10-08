@@ -12,7 +12,7 @@ const generationTargets = [
   "ts-proto-with-forcelong-long",
   "ts-proto-with-forcelong-number",
 ] as const;
-type GenerationTarget = typeof generationTargets[number];
+type GenerationTarget = (typeof generationTargets)[number];
 
 export function generateDSLs(
   pkg: TestapisPackage,

@@ -145,8 +145,8 @@ function createResolverCode(
             ${oneofFields.map(
               (f) => code`
                 case ${oneofParent}.${oneofName}Case.${constantCase(
-                f.proto.name
-              )}: {
+                  f.proto.name
+                )}: {
                   return ${createGetFieldValueCode(
                     code`value`,
                     f.proto,
@@ -223,8 +223,8 @@ function createResolverCode(
     if (field.type.unspecifiedValue != null) {
       chunks.push(code`
         if (value === ${protoType(field.type.proto, opts)}.${
-        field.type.unspecifiedValue.proto.name
-      }) {
+          field.type.unspecifiedValue.proto.name
+        }) {
           ${
             field.isNullable() && !field.isList()
               ? "return null;"
