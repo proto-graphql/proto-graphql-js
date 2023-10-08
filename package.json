@@ -21,7 +21,7 @@
     "@types/node": "^18.11.18",
     "eslint": "^8.51.0",
     "google-protobuf": "^3.12.2",
-    "graphql": "15.4.0",
+    "graphql": "15.8.0",
     "graphql-scalars": "1.22.2",
     "jest": "29.7.0",
     "minimatch": "^5.1.2",
