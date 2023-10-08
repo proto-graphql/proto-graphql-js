@@ -30,14 +30,11 @@
     "proto-nexus": "^0.5.1"
   },
   "peerDependencies": {
-    "@types/google-protobuf": "^3.7.2",
     "google-protobuf": "^3.12.2"
   },
   "devDependencies": {
-    "@proto-graphql/eslint-config": "*",
-    "@proto-graphql/tsconfig": "*",
-    "@types/google-protobuf": "^3.15.6",
-    "google-protobuf": "^3.21.2"
+    "@proto-graphql/eslint-config": "workspace:*",
+    "@proto-graphql/tsconfig": "workspace:*"
   },
   "scripts": {
     "build": "pnpm run build:cjs && pnpm run build:module",

@@ -23,6 +23,9 @@ importers:
       '@types/eslint':
         specifier: ^8.44.3
         version: 8.44.3
+      '@types/google-protobuf':
+        specifier: ^3.7.2
+        version: 3.15.6
       '@types/jest':
         specifier: 29.2.5
         version: 29.2.5
@@ -35,6 +38,9 @@ importers:
       eslint:
         specifier: ^8.51.0
         version: 8.51.0
+      google-protobuf:
+        specifier: ^3.12.2
+        version: 3.21.2
       graphql:
         specifier: 15.4.0
         version: 15.4.0
@@ -92,9 +98,6 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^6.7.4
         version: 6.7.4(eslint@8.51.0)(typescript@5.2.2)
-      eslint:
-        specifier: ^8.0.0
-        version: 8.51.0
       eslint-config-prettier:
         specifier: ^9.0.0
         version: 9.0.0(eslint@8.51.0)
@@ -107,9 +110,6 @@ importers:
       eslint-plugin-unused-imports:
         specifier: ^3.0.0
         version: 3.0.0(@typescript-eslint/eslint-plugin@6.7.4)(eslint@8.51.0)
-      typescript:
-        specifier: ^5.0.0
-        version: 5.2.2
 
   devPackages/testapis-proto:
     dependencies:
@@ -118,17 +118,14 @@ importers:
         version: 3.21.2
     devDependencies:
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../tsconfig
       '@types/glob':
         specifier: ^8.0.0
         version: 8.0.0
-      '@types/google-protobuf':
-        specifier: 3.15.6
-        version: 3.15.6
       glob:
         specifier: ^8.0.3
         version: 8.0.3
@@ -136,13 +133,6 @@ importers:
   devPackages/tsconfig: {}
 
   e2e/helper:
-    dependencies:
-      graphql:
-        specifier: 15.4.0
-        version: 15.4.0
-      nexus:
-        specifier: 1.3.0
-        version: 1.3.0(graphql@15.4.0)
     devDependencies:
       '@proto-graphql/eslint-config':
         specifier: workspace:*
@@ -151,14 +141,7 @@ importers:
         specifier: workspace:*
         version: link:../../devPackages/tsconfig
 
-  e2e/testapis/google-protobuf:
-    dependencies:
-      '@types/google-protobuf':
-        specifier: 3.15.6
-        version: 3.15.6
-      google-protobuf:
-        specifier: 3.21.2
-        version: 3.21.2
+  e2e/testapis/google-protobuf: {}
 
   e2e/testapis/protobufjs: {}
 
@@ -183,895 +166,895 @@ importers:
   e2e/tests/nexus--deprecation--google-protobuf:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-google-protobuf':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/google-protobuf
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       '@proto-nexus/google-protobuf':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/@proto-nexus/google-protobuf
       proto-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/proto-nexus
       protoc-gen-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-nexus
 
   e2e/tests/nexus--deprecation--protobufjs:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-protobufjs':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/protobufjs
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       '@proto-nexus/protobufjs':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/@proto-nexus/protobufjs
       proto-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/proto-nexus
       protoc-gen-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-nexus
 
   e2e/tests/nexus--edgecases-import_from_same_pkg--google-protobuf:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-google-protobuf':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/google-protobuf
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       '@proto-nexus/google-protobuf':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/@proto-nexus/google-protobuf
       proto-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/proto-nexus
       protoc-gen-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-nexus
 
   e2e/tests/nexus--edgecases-import_from_same_pkg--protobufjs:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-protobufjs':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/protobufjs
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       '@proto-nexus/protobufjs':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/@proto-nexus/protobufjs
       proto-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/proto-nexus
       protoc-gen-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-nexus
 
   e2e/tests/nexus--edgecases-import_squashed_union--google-protobuf:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-google-protobuf':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/google-protobuf
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       '@proto-nexus/google-protobuf':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/@proto-nexus/google-protobuf
       proto-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/proto-nexus
       protoc-gen-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-nexus
 
   e2e/tests/nexus--edgecases-import_squashed_union--protobufjs:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-protobufjs':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/protobufjs
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       '@proto-nexus/protobufjs':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/@proto-nexus/protobufjs
       proto-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/proto-nexus
       protoc-gen-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-nexus
 
   e2e/tests/nexus--empty_types--google-protobuf:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-google-protobuf':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/google-protobuf
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       '@proto-nexus/google-protobuf':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/@proto-nexus/google-protobuf
       proto-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/proto-nexus
       protoc-gen-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-nexus
 
   e2e/tests/nexus--empty_types--protobufjs:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-protobufjs':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/protobufjs
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       '@proto-nexus/protobufjs':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/@proto-nexus/protobufjs
       proto-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/proto-nexus
       protoc-gen-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-nexus
 
   e2e/tests/nexus--enums--google-protobuf:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-google-protobuf':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/google-protobuf
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       '@proto-nexus/google-protobuf':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/@proto-nexus/google-protobuf
       proto-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/proto-nexus
       protoc-gen-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-nexus
 
   e2e/tests/nexus--enums--protobufjs:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-protobufjs':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/protobufjs
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       '@proto-nexus/protobufjs':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/@proto-nexus/protobufjs
       proto-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/proto-nexus
       protoc-gen-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-nexus
 
   e2e/tests/nexus--extensions--google-protobuf:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-google-protobuf':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/google-protobuf
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       '@proto-nexus/google-protobuf':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/@proto-nexus/google-protobuf
       proto-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/proto-nexus
       protoc-gen-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-nexus
 
   e2e/tests/nexus--extensions--protobufjs:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-protobufjs':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/protobufjs
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       '@proto-nexus/protobufjs':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/@proto-nexus/protobufjs
       proto-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/proto-nexus
       protoc-gen-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-nexus
 
   e2e/tests/nexus--field_behavior--google-protobuf:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-google-protobuf':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/google-protobuf
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       '@proto-nexus/google-protobuf':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/@proto-nexus/google-protobuf
       proto-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/proto-nexus
       protoc-gen-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-nexus
 
   e2e/tests/nexus--field_behavior--protobufjs:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-protobufjs':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/protobufjs
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       '@proto-nexus/protobufjs':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/@proto-nexus/protobufjs
       proto-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/proto-nexus
       protoc-gen-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-nexus
 
   e2e/tests/nexus--multipkgs--google-protobuf:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-google-protobuf':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/google-protobuf
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       '@proto-nexus/google-protobuf':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/@proto-nexus/google-protobuf
       proto-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/proto-nexus
       protoc-gen-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-nexus
 
   e2e/tests/nexus--multipkgs--protobufjs:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-protobufjs':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/protobufjs
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       '@proto-nexus/protobufjs':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/@proto-nexus/protobufjs
       proto-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/proto-nexus
       protoc-gen-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-nexus
 
   e2e/tests/nexus--nested--google-protobuf:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-google-protobuf':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/google-protobuf
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       '@proto-nexus/google-protobuf':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/@proto-nexus/google-protobuf
       proto-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/proto-nexus
       protoc-gen-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-nexus
 
   e2e/tests/nexus--nested--protobufjs:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-protobufjs':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/protobufjs
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       '@proto-nexus/protobufjs':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/@proto-nexus/protobufjs
       proto-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/proto-nexus
       protoc-gen-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-nexus
 
   e2e/tests/nexus--oneof--google-protobuf:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-google-protobuf':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/google-protobuf
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       '@proto-nexus/google-protobuf':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/@proto-nexus/google-protobuf
       proto-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/proto-nexus
       protoc-gen-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-nexus
 
   e2e/tests/nexus--oneof--protobufjs:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-protobufjs':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/protobufjs
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       '@proto-nexus/protobufjs':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/@proto-nexus/protobufjs
       proto-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/proto-nexus
       protoc-gen-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-nexus
 
   e2e/tests/nexus--primitives--google-protobuf:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-google-protobuf':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/google-protobuf
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       '@proto-nexus/google-protobuf':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/@proto-nexus/google-protobuf
       proto-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/proto-nexus
       protoc-gen-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-nexus
 
   e2e/tests/nexus--primitives--protobufjs:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-protobufjs':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/protobufjs
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       '@proto-nexus/protobufjs':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/@proto-nexus/protobufjs
       proto-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/proto-nexus
       protoc-gen-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-nexus
 
   e2e/tests/nexus--proto3_optional--google-protobuf:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-google-protobuf':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/google-protobuf
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       '@proto-nexus/google-protobuf':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/@proto-nexus/google-protobuf
       proto-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/proto-nexus
       protoc-gen-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-nexus
 
   e2e/tests/nexus--proto3_optional--protobufjs:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-protobufjs':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/protobufjs
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       '@proto-nexus/protobufjs':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/@proto-nexus/protobufjs
       proto-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/proto-nexus
       protoc-gen-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-nexus
 
   e2e/tests/nexus--wktypes--google-protobuf:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-google-protobuf':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/google-protobuf
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       '@proto-nexus/google-protobuf':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/@proto-nexus/google-protobuf
       proto-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/proto-nexus
       protoc-gen-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-nexus
 
   e2e/tests/nexus--wktypes--protobufjs:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-protobufjs':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/protobufjs
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       '@proto-nexus/protobufjs':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/@proto-nexus/protobufjs
       proto-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/proto-nexus
       protoc-gen-nexus:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-nexus
 
   e2e/tests/pothos--deprecation--ts-proto:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-ts-proto':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/ts-proto
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       protoc-gen-pothos:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
 
   e2e/tests/pothos--edgecases-import_from_same_pkg--ts-proto:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-ts-proto':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/ts-proto
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       protoc-gen-pothos:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
 
   e2e/tests/pothos--edgecases-import_squashed_union--ts-proto:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-ts-proto':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/ts-proto
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       protoc-gen-pothos:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
 
   e2e/tests/pothos--empty_types--ts-proto:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-ts-proto':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/ts-proto
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       protoc-gen-pothos:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
 
   e2e/tests/pothos--enums--ts-proto:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-ts-proto':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/ts-proto
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       protoc-gen-pothos:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
 
   e2e/tests/pothos--extensions--ts-proto:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-ts-proto':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/ts-proto
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       protoc-gen-pothos:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
 
   e2e/tests/pothos--field_behavior--ts-proto:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-ts-proto':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/ts-proto
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       protoc-gen-pothos:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
 
   e2e/tests/pothos--multipkgs--ts-proto:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-ts-proto':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/ts-proto
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       protoc-gen-pothos:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
 
   e2e/tests/pothos--nested--ts-proto:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-ts-proto':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/ts-proto
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       protoc-gen-pothos:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
 
   e2e/tests/pothos--oneof--ts-proto:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-ts-proto':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/ts-proto
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       protoc-gen-pothos:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
 
   e2e/tests/pothos--primitives--ts-proto:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-ts-proto':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/ts-proto
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       protoc-gen-pothos:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
 
   e2e/tests/pothos--primitives--ts-proto-with-forcelong-number:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-ts-proto-with-forcelong-number':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/ts-proto-with-forcelong-number
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       protoc-gen-pothos:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
 
   e2e/tests/pothos--proto3_optional--ts-proto:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-ts-proto':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/ts-proto
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       protoc-gen-pothos:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
 
   e2e/tests/pothos--wktypes--ts-proto:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-ts-proto':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/ts-proto
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       protoc-gen-pothos:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
 
   e2e/tests/pothos--wktypes--ts-proto-with-forcelong-number:
     devDependencies:
       '@proto-graphql/e2e-helper':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../helper
       '@proto-graphql/e2e-testapis-ts-proto-with-forcelong-number':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../testapis/ts-proto-with-forcelong-number
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
       protoc-gen-pothos:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
 
   packages/@proto-graphql/codegen-core:
@@ -1090,14 +1073,11 @@ importers:
         version: 6.3.0
     devDependencies:
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
-      '@types/google-protobuf':
-        specifier: 3.15.6
-        version: 3.15.6
 
   packages/@proto-graphql/proto-descriptors:
     dependencies:
@@ -1106,14 +1086,11 @@ importers:
         version: 3.21.2
     devDependencies:
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
-      '@types/google-protobuf':
-        specifier: 3.15.6
-        version: 3.15.6
 
   packages/@proto-graphql/protoc-plugin-helpers:
     dependencies:
@@ -1128,48 +1105,40 @@ importers:
         version: 3.21.2
     devDependencies:
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
-      '@types/google-protobuf':
-        specifier: 3.15.6
-        version: 3.15.6
 
   packages/@proto-nexus/google-protobuf:
     dependencies:
+      google-protobuf:
+        specifier: ^3.12.2
+        version: 3.21.2
       proto-nexus:
         specifier: ^0.5.1
         version: link:../../proto-nexus
     devDependencies:
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
-      '@types/google-protobuf':
-        specifier: ^3.15.6
-        version: 3.15.6
-      google-protobuf:
-        specifier: ^3.21.2
-        version: 3.21.2
 
   packages/@proto-nexus/proto-fields-plugin:
+    dependencies:
+      nexus:
+        specifier: ^1.0.0
+        version: 1.3.0(graphql@15.4.0)
     devDependencies:
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
-      graphql:
-        specifier: 15.4.0
-        version: 15.4.0
-      nexus:
-        specifier: 1.3.0
-        version: 1.3.0(graphql@15.4.0)
 
   packages/@proto-nexus/protobufjs:
     dependencies:
@@ -1181,19 +1150,19 @@ importers:
         version: 6.11.3
     devDependencies:
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../../devPackages/tsconfig
 
   packages/proto-nexus:
     devDependencies:
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../devPackages/eslint-config
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../devPackages/tsconfig
 
   packages/protoc-gen-nexus:
@@ -1218,17 +1187,14 @@ importers:
         version: 6.3.0
     devDependencies:
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../devPackages/eslint-config
       '@proto-graphql/testapis-proto':
         specifier: workspace:*
         version: link:../../devPackages/testapis-proto
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../devPackages/tsconfig
-      '@types/google-protobuf':
-        specifier: ^3.15.6
-        version: 3.15.6
 
   packages/protoc-gen-pothos:
     dependencies:
@@ -1249,17 +1215,14 @@ importers:
         version: 6.3.0
     devDependencies:
       '@proto-graphql/eslint-config':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../devPackages/eslint-config
       '@proto-graphql/testapis-proto':
         specifier: workspace:*
         version: link:../../devPackages/testapis-proto
       '@proto-graphql/tsconfig':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../devPackages/tsconfig
-      '@types/google-protobuf':
-        specifier: ^3.15.6
-        version: 3.15.6
 
 packages:
 
@@ -2224,6 +2187,7 @@ packages:
 
   /@types/google-protobuf@3.15.6:
     resolution: {integrity: sha512-pYVNNJ+winC4aek+lZp93sIKxnXt5qMkuKmaqS3WGuTq0Bw1ZDYNBgzG5kkdtwcv+GmYJGo3yEg6z2cKKAiEdw==}
+    dev: true
 
   /@types/graceful-fs@4.1.5:
     resolution: {integrity: sha512-anKkLmZZ+xm4p8JWBf4hElkM4XR+EZeA2M9BAkkTldmcyDY4mbdIJnRghDJH3Ov5ooY7/UAoENtmdMSkaAd7Cw==}
@@ -5411,7 +5375,7 @@ packages:
   /rxjs@7.8.0:
     resolution: {integrity: sha512-F2+gxDshqmIub1KdvZkaEfGDwLNpPvk9Fs6LD/MyQxNgMds/WH9OdDDXOmxUZpME+iSK3rQCctkL0DYyytUqMg==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.6.2
     dev: true
 
   /safe-array-concat@1.0.1:
@@ -5935,6 +5899,10 @@ packages:
 
   /tslib@2.4.1:
     resolution: {integrity: sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==}
+
+  /tslib@2.6.2:
+    resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
+    dev: true
 
   /tsutils@3.21.0(typescript@5.2.2):
     resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}

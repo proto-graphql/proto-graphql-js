@@ -4,10 +4,6 @@
   "description": "E2E test helpers",
   "private": true,
   "main": "./lib/index.js",
-  "peerDependencies": {
-    "graphql": "15.4.0",
-    "nexus": "1.3.0"
-  },
   "scripts": {
     "build:e2e": "tsc --build tsconfig.cjs.json",
     "clean": "pnpm run build:e2e --clean",

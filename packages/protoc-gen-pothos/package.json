@@ -30,10 +30,9 @@
     "ts-poet": "^6.3.0"
   },
   "devDependencies": {
-    "@proto-graphql/eslint-config": "*",
+    "@proto-graphql/eslint-config": "workspace:*",
     "@proto-graphql/testapis-proto": "workspace:*",
-    "@proto-graphql/tsconfig": "*",
-    "@types/google-protobuf": "^3.15.6"
+    "@proto-graphql/tsconfig": "workspace:*"
   },
   "files": [
     "bin/",

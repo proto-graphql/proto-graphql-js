@@ -7,8 +7,8 @@
           "lint": "eslint --fix ."
         },
         "devDependencies": {
-          "@proto-graphql/eslint-config": "*",
-          "@proto-graphql/tsconfig": "*"
+          "@proto-graphql/eslint-config": "workspace:*",
+          "@proto-graphql/tsconfig": "workspace:*"
         }
       },
       "copy": [

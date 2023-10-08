@@ -7,10 +7,6 @@
   "license": "MIT",
   "scripts": {},
   "main": "index.js",
-  "peerDependencies": {
-    "eslint": "^8.0.0",
-    "typescript": "^5.0.0"
-  },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^6.7.4",
     "@typescript-eslint/parser": "^6.7.4",
