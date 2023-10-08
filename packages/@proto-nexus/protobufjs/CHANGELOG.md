@@ -1,5 +1,14 @@
 # @proto-nexus/protobufjs
 
+## 0.5.2
+
+### Patch Changes
+
+- [#294](https://github.com/proto-graphql/proto-graphql-js/pull/294) [`709c7da`](https://github.com/proto-graphql/proto-graphql-js/commit/709c7da021fb503efeaa7ec4a3485fd166204563) Thanks [@izumin5210](https://github.com/izumin5210)! - refer internal dependencies with `workspace:`
+
+- Updated dependencies [[`709c7da`](https://github.com/proto-graphql/proto-graphql-js/commit/709c7da021fb503efeaa7ec4a3485fd166204563)]:
+  - proto-nexus@0.5.2
+
 ## 0.5.1
 
 ### Patch Changes

@@ -1,5 +1,18 @@
 # protoc-gen-pothos
 
+## 0.3.3
+
+### Patch Changes
+
+- [#294](https://github.com/proto-graphql/proto-graphql-js/pull/294) [`709c7da`](https://github.com/proto-graphql/proto-graphql-js/commit/709c7da021fb503efeaa7ec4a3485fd166204563) Thanks [@izumin5210](https://github.com/izumin5210)! - refer internal dependencies with `workspace:`
+
+- [#295](https://github.com/proto-graphql/proto-graphql-js/pull/295) [`fc4512a`](https://github.com/proto-graphql/proto-graphql-js/commit/fc4512a1db42b7bbc4683e6ad4eb9fbf3a6d24f0) Thanks [@izumin5210](https://github.com/izumin5210)! - fix required custom scalar type of input object field
+
+- Updated dependencies [[`709c7da`](https://github.com/proto-graphql/proto-graphql-js/commit/709c7da021fb503efeaa7ec4a3485fd166204563), [`fc4512a`](https://github.com/proto-graphql/proto-graphql-js/commit/fc4512a1db42b7bbc4683e6ad4eb9fbf3a6d24f0)]:
+  - @proto-graphql/protoc-plugin-helpers@0.2.5
+  - @proto-graphql/codegen-core@0.3.3
+  - @proto-graphql/proto-descriptors@0.3.2
+
 ## 0.3.2
 
 ### Patch Changes
