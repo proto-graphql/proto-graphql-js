@@ -216,7 +216,7 @@ builder.objectType(NotDeprecatedMessageInnerMessage2$Ref, {
 });
 
 export type DeprecatedMessageInput$Shape = {
-  body: DeprecatedMessage["body"];
+  body?: DeprecatedMessage["body"] | null;
   enum?: DeprecatedMessage["enum"] | null;
 };
 
@@ -227,7 +227,7 @@ export const DeprecatedMessageInput$Ref: InputObjectRef<
     fields: (t) => ({
       body: t.field({
         type: "String",
-        required: true,
+        required: false,
         deprecationReason:
           "testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.",
         extensions: { protobufField: { name: "body", typeFullName: "string" } },
@@ -255,7 +255,7 @@ export const DeprecatedMessageInput$Ref: InputObjectRef<
   });
 
 export type NotDeprecatedMessageInput$Shape = {
-  body: NotDeprecatedMessage["body"];
+  body?: NotDeprecatedMessage["body"] | null;
   enum?: NotDeprecatedMessage["enum"] | null;
   msg1?: NotDeprecatedMessageInnerMessage1Input$Shape | null;
   msg2?: NotDeprecatedMessageInnerMessage2Input$Shape | null;
@@ -271,7 +271,7 @@ export const NotDeprecatedMessageInput$Ref: InputObjectRef<
   fields: (t) => ({
     body: t.field({
       type: "String",
-      required: true,
+      required: false,
       deprecationReason:
         "testapis.deprecation.NotDeprecatedMessage.body is mark as deprecated in a *.proto file.",
       extensions: { protobufField: { name: "body", typeFullName: "string" } },
@@ -349,7 +349,7 @@ export const NotDeprecatedMessageInput$Ref: InputObjectRef<
 });
 
 export type DeprecatedMessageInnerMessageInput$Shape = {
-  body: DeprecatedMessage_InnerMessage["body"];
+  body?: DeprecatedMessage_InnerMessage["body"] | null;
 };
 
 export const DeprecatedMessageInnerMessageInput$Ref: InputObjectRef<
@@ -360,7 +360,7 @@ export const DeprecatedMessageInnerMessageInput$Ref: InputObjectRef<
   fields: (t) => ({
     body: t.field({
       type: "String",
-      required: true,
+      required: false,
       deprecationReason:
         "testapis.deprecation.DeprecatedMessage is mark as deprecated in a *.proto file.",
       extensions: { protobufField: { name: "body", typeFullName: "string" } },
@@ -615,7 +615,7 @@ builder.objectType(DeprecatedFileMessageInnerMessage$Ref, {
 });
 
 export type DeprecatedFileMessageInput$Shape = {
-  body: DeprecatedFileMessage["body"];
+  body?: DeprecatedFileMessage["body"] | null;
   enum?: DeprecatedFileMessage["enum"] | null;
 };
 
@@ -627,7 +627,7 @@ export const DeprecatedFileMessageInput$Ref: InputObjectRef<
   fields: (t) => ({
     body: t.field({
       type: "String",
-      required: true,
+      required: false,
       deprecationReason:
         "testapis/deprecation/file_deprecation.proto is mark as deprecated.",
       extensions: { protobufField: { name: "body", typeFullName: "string" } },
@@ -655,7 +655,7 @@ export const DeprecatedFileMessageInput$Ref: InputObjectRef<
 });
 
 export type DeprecatedFileMessageInnerMessageInput$Shape = {
-  body: DeprecatedFileMessage_InnerMessage["body"];
+  body?: DeprecatedFileMessage_InnerMessage["body"] | null;
 };
 
 export const DeprecatedFileMessageInnerMessageInput$Ref: InputObjectRef<
@@ -666,7 +666,7 @@ export const DeprecatedFileMessageInnerMessageInput$Ref: InputObjectRef<
   fields: (t) => ({
     body: t.field({
       type: "String",
-      required: true,
+      required: false,
       deprecationReason:
         "testapis/deprecation/file_deprecation.proto is mark as deprecated.",
       extensions: { protobufField: { name: "body", typeFullName: "string" } },
