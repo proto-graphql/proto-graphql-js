@@ -1,6 +1,6 @@
 #!/usr/bin/env -S pnpm exec ts-node --transpile-only
 
-import { join } from "path";
+import { join, dirname } from "path";
 import { exec as _exec } from "child_process";
 import { readFile, copyFile, writeFile } from "fs/promises";
 import { promisify } from "util";
@@ -33,7 +33,8 @@ export async function main() {
   );
   const pkgPaths = (await exec("pnpm recursive exec pwd")).stdout
     .trim()
-    .split("\n");
+    .split("\n")
+    .map((p) => p.replace(new RegExp(`^${dirname(__dirname)}/`), ""));
 
   const pkgJSONStore = new PackageJSONStore();
 
