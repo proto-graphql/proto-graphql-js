@@ -126,7 +126,16 @@ async function genBufGemTemplate(test: TestCase): Promise<void> {
       "ts-proto-with-forcelong-number": [
         "import_prefix=@proto-graphql/e2e-testapis-ts-proto-with-forcelong-number/lib/",
         "pothos_builder_path=../../builder",
-        "long_number=Int",
+        "scalar=int64=Int",
+        "scalar=uint64=Int",
+        "scalar=sint64=Int",
+        "scalar=fixed64=Int",
+        "scalar=sfixed64=Int",
+        "scalar=google.protobuf.Int64Value=Int",
+        "scalar=google.protobuf.UInt64Value=Int",
+        "scalar=google.protobuf.SInt64Value=Int",
+        "scalar=google.protobuf.Fixed64Value=Int",
+        "scalar=google.protobuf.SFixed64Value=Int",
       ],
     },
   };
