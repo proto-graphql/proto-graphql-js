@@ -67,6 +67,7 @@ async function genPackageJson(test: TestCase): Promise<void> {
     description: `E2E tests for protoc-gen-${test.target}`,
     private: true,
     scripts: {
+      lint: "eslint --fix .",
       "test:e2e": ["gen", "jest", "schema", "typecheck"]
         .map((t) => `pnpm run test:e2e:${t}`)
         .join(" && "),
@@ -82,7 +83,12 @@ async function genPackageJson(test: TestCase): Promise<void> {
       "test:e2e:typecheck": "tsc --build tsconfig.json",
     },
     devDependencies: Object.fromEntries(
-      ["@proto-graphql/e2e-helper", ...protoPackages[test.proto.lib]]
+      [
+        "@proto-graphql/e2e-helper",
+        "@proto-graphql/eslint-config",
+        "@proto-graphql/tsconfig",
+        ...protoPackages[test.proto.lib],
+      ]
         .sort()
         .map((pkg) => [pkg, "workspace:*"])
     ),
