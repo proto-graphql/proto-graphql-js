@@ -5,12 +5,4 @@ set -o pipefail
 
 cd $(dirname $0)/..
 
-PLUGIN_ROOT=./packages/@proto-graphql/codegen-core
-LIBRARY_PATH=./proto-graphql/proto
-
-./scripts/protocw \
-  -I $LIBRARY_PATH \
-  --plugin=protoc-gen-ts=$(pnpm bin)/protoc-gen-ts \
-  --js_out="$PLUGIN_ROOT/src/__generated__/extensions" --js_opt=import_style=commonjs,binary \
-  --ts_out="$PLUGIN_ROOT/src/__generated__/extensions" \
-  $LIBRARY_PATH/graphql/*.proto
+PATH=$PATH:$(pnpm bin) buf generate --template buf.gen.yaml --path proto-graphql/proto/graphql

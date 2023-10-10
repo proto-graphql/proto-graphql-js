@@ -1,0 +1,38 @@
+version: v1
+managed:
+  enabled: true
+plugins:
+  - plugin: buf.build/protocolbuffers/js:v3.21.2
+    opt:
+      - import_style=commonjs
+      - binary
+    out: ./e2e/testapis/google-protobuf/lib
+  - plugin: ts
+    out: ./e2e/testapis/google-protobuf/lib
+  - plugin: ts_proto
+    opt:
+      - enumsAsLiterals=true
+      - forceLong=string
+      - unrecognizedEnum=false
+      - outputTypeRegistry=true
+      - esModuleInterop=true
+    out: ./e2e/testapis/ts-proto/src
+    strategy: all
+  - plugin: ts_proto
+    opt:
+      - enumsAsLiterals=true
+      - forceLong=long
+      - unrecognizedEnum=false
+      - outputTypeRegistry=true
+      - esModuleInterop=true
+    out: ./e2e/testapis/ts-proto-with-forcelong-long/src
+    strategy: all
+  - plugin: ts_proto
+    opt:
+      - enumsAsLiterals=true
+      - forceLong=number
+      - unrecognizedEnum=false
+      - outputTypeRegistry=true
+      - esModuleInterop=true
+    out: ./e2e/testapis/ts-proto-with-forcelong-number/src
+    strategy: all

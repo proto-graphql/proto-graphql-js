@@ -5,10 +5,8 @@ set -o pipefail
 
 cd $(dirname $0)/..
 
-PLUGIN_ROOT=./packages/protoc-gen-nexus
 PROTO_ROOT=./devPackages/testapis-proto/proto
 OUT_ROOT=./e2e/testapis
-LIBRARY_PATH=./proto-graphql/proto
 
 clean() {
   rm -rf $OUT_ROOT/google-protobuf/lib
@@ -26,31 +24,14 @@ init() {
   mkdir -p $OUT_ROOT/ts-proto-with-forcelong-number/{src,lib}
 }
 
-protocw() {
-  ./scripts/protocw \
-    -I $LIBRARY_PATH \
-    -I $PROTO_ROOT \
-  "$@"
-}
-
 listPackages() {
   find $PROTO_ROOT/testapis -name '*.proto' | xargs dirname | sort | uniq
 }
 
 execProtoc() {
-  protocw \
-    --plugin=protoc-gen-ts=$(pnpm bin)/protoc-gen-ts \
-    --js_out="$OUT_ROOT/google-protobuf/lib" --js_opt=import_style=commonjs,binary \
-    --ts_out="$OUT_ROOT/google-protobuf/lib" \
-    ${LIBRARY_PATH}/graphql/*.proto
+  PATH=$PATH:$(pnpm bin -w) pnpm buf generate --template buf.gen.e2e.yaml
 
   for protoDir in $(listPackages); do
-    protocw \
-      --plugin=protoc-gen-ts=$(pnpm bin)/protoc-gen-ts \
-      --js_out="$OUT_ROOT/google-protobuf/lib" --js_opt=import_style=commonjs,binary \
-      --ts_out="$OUT_ROOT/google-protobuf/lib" \
-      ${protoDir}/*.proto
-
     pbjsOutDir="${protoDir/$PROTO_ROOT\//$OUT_ROOT/protobufjs/lib/}"
     mkdir -p $pbjsOutDir
     pnpm exec pbjs \
@@ -61,21 +42,6 @@ execProtoc() {
       --out "$pbjsOutDir/index.js" \
       ${protoDir}/*.proto
     pnpm exec pbts --out "$pbjsOutDir/index.d.ts" "$pbjsOutDir/index.js"
-
-    protocw \
-      --plugin=protoc-gen-ts_proto=$(pnpm bin)/protoc-gen-ts_proto \
-      --ts_proto_out="$OUT_ROOT/ts-proto/src" --ts_proto_opt=enumsAsLiterals=true,forceLong=string,unrecognizedEnum=false,outputTypeRegistry=true,esModuleInterop=true \
-      ${protoDir}/*.proto
-
-    protocw \
-      --plugin=protoc-gen-ts_proto=$(pnpm bin)/protoc-gen-ts_proto \
-      --ts_proto_out="$OUT_ROOT/ts-proto-with-forcelong-long/src" --ts_proto_opt=enumsAsLiterals=true,forceLong=long,unrecognizedEnum=false,outputTypeRegistry=true,esModuleInterop=true \
-      ${protoDir}/*.proto
-
-    protocw \
-      --plugin=protoc-gen-ts_proto=$(pnpm bin)/protoc-gen-ts_proto \
-      --ts_proto_out="$OUT_ROOT/ts-proto-with-forcelong-number/src" --ts_proto_opt=enumsAsLiterals=true,forceLong=number,unrecognizedEnum=false,outputTypeRegistry=true,esModuleInterop=true \
-      ${protoDir}/*.proto
   done
 }
 
