@@ -25,7 +25,7 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          publish: pnpm build && pnpm publish -r
+          publish: pnpm release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -42,9 +42,7 @@ jobs:
       - uses: ./.github/actions/setup-node
       - name: "Release @next"
         run: |
-          pnpm build
-          pnpm changeset version --snapshot next
-          pnpm changeset publish --no-git-tag --snapshot --tag next
+          pnpm release:snapshot
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
