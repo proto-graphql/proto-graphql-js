@@ -5,6 +5,11 @@
     "clean": "turbo run clean",
     "format": "prettier --write '**/*.{mjs,js,jsx,mts,ts,tsx}'",
     "lint": "turbo run lint",
+    "release:stable": "pnpm release:prepare && pnpm publish -r",
+    "release:prepare": "pnpm clean && pnpm build",
+    "release:snapshot": "pnpm release:prepare && pnpm release:snapshot:version && pnpm release:snapshot:publish",
+    "release:snapshot:version": "pnpm changeset version --snapshot next",
+    "release:snapshot:publish": "pnpm changeset publsh --no-git-tag --snapshot --tag next",
     "test": "turbo run test",
     "test:e2e": "pnpm run test:e2e:gen && turbo run test:e2e",
     "test:e2e:gen": "./scripts/compile-testapis-proto"
