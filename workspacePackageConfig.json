@@ -12,8 +12,7 @@
         }
       },
       "copy": [
-        { "src": "configs/.eslintrc.js", "dest": ".eslintrc.js" },
-        { "src": "configs/.lintstagedrc.cjs", "dest": ".lintstagedrc.cjs" }
+        { "src": "configs/.eslintrc.js", "dest": ".eslintrc.js" }
       ]
     },
     {
