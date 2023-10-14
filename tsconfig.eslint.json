@@ -3,10 +3,5 @@
   "compilerOptions": {
     "noEmit": true
   },
-  "include": [
-    ".eslintrc.js",
-    ".lintstagedrc.cjs",
-    ".prettierrc.js",
-    "jest.config.js",
-  ]
+  "include": [".eslintrc.js", ".prettierrc.js", "jest.config.js"]
 }

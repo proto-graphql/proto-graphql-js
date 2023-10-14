@@ -4,5 +4,5 @@
     "noEmit": true,
     "rootDir": "."
   },
-  "include": [".", ".eslintrc.js", ".lintstagedrc.cjs"]
+  "include": [".", ".eslintrc.js"]
 }

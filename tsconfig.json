@@ -3,9 +3,5 @@
   "compilerOptions": {
     "noEmit": true
   },
-  "include": [
-    "scripts",
-    ".lintstagedrc.cjs",
-    ".prettierrc.js",
-  ]
+  "include": ["scripts", ".prettierrc.js"]
 }
