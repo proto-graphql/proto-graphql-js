@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "build": "turbo run build",
     "clean": "turbo run clean",
     "format": "prettier --write '**/*.{mjs,js,jsx,mts,ts,tsx}'",
     "lint": "turbo run lint",
