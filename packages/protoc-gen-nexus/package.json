@@ -1,6 +1,6 @@
 {
   "name": "protoc-gen-nexus",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "description": "Generate DSL for GraphQL Nexus from Protocol Buffers IDL",
   "keywords": [
     "graphql",
