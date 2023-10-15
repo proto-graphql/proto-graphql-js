@@ -1,6 +1,6 @@
 {
   "name": "@proto-nexus/proto-fields-plugin",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Nexus plugin for building subset types from proto-nexus's artifacts",
   "keywords": [
     "graphql",
