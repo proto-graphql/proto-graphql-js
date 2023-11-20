@@ -6,6 +6,7 @@ import {
   InputObjectType,
   InterfaceType,
   isProtobufLong,
+  isGoogleWellKnownType,
   isProtobufWellKnownType,
   ObjectField,
   ObjectOneofField,
@@ -251,7 +252,7 @@ function createResolverCode(
     }
   }
 
-  if (isProtobufWellKnownType(field.proto.type)) {
+  if (isProtobufWellKnownType(field.proto.type)|| isGoogleWellKnownType(field.proto.type)) {
     const transformer = code`${impProtoNexus(
       "getTransformer"
     )}("${field.proto.type.fullName.toString()}")`;
