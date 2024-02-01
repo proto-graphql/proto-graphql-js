@@ -68,7 +68,7 @@ message PrefixedMessage {
 
   oneof partial_ignore_oneof {
     InnerMessage oneof_not_ignored_field = 12;
-    InnerMessage2 oneof_ignored_field = 13 [(graphql.field).ignore =  true];
+    InnerMessage2 oneof_ignored_field = 13 [(graphql.field).ignore = true];
   }
 
   InterfaceMessage interface_message = 14 [(graphql.field).ignore = true];
@@ -78,6 +78,8 @@ message PrefixedMessage {
   repeated SquashedMessage squashed_messages = 16;
 
   MessageWillRename renamed_message = 17;
+
+  EnumWillRename renamed_enum = 18;
 }
 
 enum PrefixedEnum {
@@ -91,6 +93,14 @@ message MessageWillRename {
   option (graphql.object_type).name = "RenamedMessage";
 
   string body = 1;
+}
+
+enum EnumWillRename {
+  option (graphql.object_type).name = "RenamedEnum";
+
+  ENUM_WILL_RENAME_ENUM_UNSPECIFIED = 0;
+  ENUM_WILL_RENAME_FOO = 1;
+  ENUM_WILL_RENAME_BAR = 2;
 }
 
 message IgnoredMessage {
