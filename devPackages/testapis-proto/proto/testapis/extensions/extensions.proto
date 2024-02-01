@@ -96,7 +96,7 @@ message MessageWillRename {
 }
 
 enum EnumWillRename {
-  option (graphql.object_type).name = "RenamedEnum";
+  option (graphql.enum_type).name = "RenamedEnum";
 
   ENUM_WILL_RENAME_ENUM_UNSPECIFIED = 0;
   ENUM_WILL_RENAME_FOO = 1;
