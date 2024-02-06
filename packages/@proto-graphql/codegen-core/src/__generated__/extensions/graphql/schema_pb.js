@@ -1257,7 +1257,8 @@ proto.graphql.GraphqlEnumOptions.prototype.toObject = function(opt_includeInstan
  */
 proto.graphql.GraphqlEnumOptions.toObject = function(includeInstance, msg) {
   var f, obj = {
-    ignore: jspb.Message.getBooleanFieldWithDefault(msg, 1, false)
+    ignore: jspb.Message.getBooleanFieldWithDefault(msg, 1, false),
+    name: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
   if (includeInstance) {
@@ -1298,6 +1299,10 @@ proto.graphql.GraphqlEnumOptions.deserializeBinaryFromReader = function(msg, rea
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setIgnore(value);
       break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setName(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -1334,6 +1339,13 @@ proto.graphql.GraphqlEnumOptions.serializeBinaryToWriter = function(message, wri
       f
     );
   }
+  f = message.getName();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
 };
 
 
@@ -1352,6 +1364,24 @@ proto.graphql.GraphqlEnumOptions.prototype.getIgnore = function() {
  */
 proto.graphql.GraphqlEnumOptions.prototype.setIgnore = function(value) {
   return jspb.Message.setProto3BooleanField(this, 1, value);
+};
+
+
+/**
+ * optional string name = 4;
+ * @return {string}
+ */
+proto.graphql.GraphqlEnumOptions.prototype.getName = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.graphql.GraphqlEnumOptions} returns this
+ */
+proto.graphql.GraphqlEnumOptions.prototype.setName = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 

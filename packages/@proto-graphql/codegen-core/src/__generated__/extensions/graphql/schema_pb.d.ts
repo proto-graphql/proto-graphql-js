@@ -160,6 +160,9 @@ export class GraphqlEnumOptions extends jspb.Message {
   getIgnore(): boolean;
   setIgnore(value: boolean): void;
 
+  getName(): string;
+  setName(value: string): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): GraphqlEnumOptions.AsObject;
   static toObject(includeInstance: boolean, msg: GraphqlEnumOptions): GraphqlEnumOptions.AsObject;
@@ -173,6 +176,7 @@ export class GraphqlEnumOptions extends jspb.Message {
 export namespace GraphqlEnumOptions {
   export type AsObject = {
     ignore: boolean,
+    name: string,
   }
 }
 
