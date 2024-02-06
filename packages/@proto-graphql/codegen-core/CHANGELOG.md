@@ -1,5 +1,11 @@
 # @proto-graphql/codegen-core
 
+## 0.3.5
+
+### Patch Changes
+
+- [#324](https://github.com/proto-graphql/proto-graphql-js/pull/324) [`16b1fac`](https://github.com/proto-graphql/proto-graphql-js/commit/16b1facf48cae5ceb959bf3e81643b7fc58011fc) Thanks [@yyoshiki41](https://github.com/yyoshiki41)! - feat(codegen-code): Add support for getting custom enum names in nameWithParent function
+
 ## 0.3.4
 
 ### Patch Changes
