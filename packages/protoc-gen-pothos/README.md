@@ -46,8 +46,34 @@ plugins:
   - path to file that exports pothos builder
 - `emit_imported_files` (`bool`, optional)
   - if `true`, protoc-gen-pothos also emits types defined in imported `.proto` file.
-- `custom_type` (`string`, optional)
-- `long_number` (`string`, optional, default `String`)
+- `scalar` (`string`, optional)
+
+  - add scalar mapping
+  - default:
+    - Protobuf's 64-bit integer types to `String`
+    - Protobuf's bytes type to `Bytes`
+    - `google.protobuf.Timestamp` to `DateTime`
+  - e.g.
+    - Map `google.type.Date` to `Date`
+      - ```yaml
+        opt:
+          - scalar=google.type.Date=Date
+        ```
+        opt:
+    - Map Protobuf's 64-bit integer types to `BigInt`
+      - ```yaml
+        opt:
+          - scalar=int64=BigInt
+          - scalar=uint64=BigInt
+          - scalar=sint64=BigInt
+          - scalar=fixed64=BigInt
+          - scalar=sfixed64=BigInt
+          - scalar=google.protobuf.Int64Value=BigInt
+          - scalar=google.protobuf.UInt64Value=BigInt
+          - scalar=google.protobuf.SInt64Value=BigInt
+          - scalar=google.protobuf.Fixed64Value=BigInt
+          - scalar=google.protobuf.SFixed64Value=BigInt
+        ```
 
 ## Author
 

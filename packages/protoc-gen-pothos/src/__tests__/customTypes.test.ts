@@ -7,7 +7,7 @@ describe("custom types", () => {
   it("generates pothos DSLs", async () => {
     const resp = await processCodeGeneration(
       "testapis.custom_types",
-      "custom_type=testapis.custom_types.Date=Date"
+      "scalar=testapis.custom_types.Date=Date"
     );
     snapshotGeneratedFiles(resp, [
       "custom_types/post.pb.pothos.ts",

@@ -22,7 +22,6 @@ import {
   isIgnoredInputType,
   isIgnoredType,
   isInterface,
-  isScalar,
   isSquashedUnion,
 } from "./util";
 
@@ -162,12 +161,8 @@ function detectType<
     case "Message": {
       assert(proto.type && proto.type.kind === "Message");
       const msg = proto.type;
-      if (isScalar(msg, options)) {
-        return new ScalarType(
-          proto,
-          options.typeMappings[msg.fullName.toString()] as any
-        );
-      }
+      const customScalar = options.scalarMapping[msg.fullName.toString()];
+      if (customScalar) return new ScalarType(proto, customScalar);
       return f(msg, options);
     }
     case "Enum": {
@@ -175,42 +170,7 @@ function detectType<
       return new EnumType(proto.type, options);
     }
     case "Scalar": {
-      switch (proto.type.type) {
-        case "string":
-          return new ScalarType(proto, "String");
-        case "double":
-        case "float":
-          return new ScalarType(proto, "Float");
-        case "int64":
-          return new ScalarType(proto, options.longNumber);
-        case "uint64":
-          return new ScalarType(proto, options.longNumber);
-        case "int32":
-          return new ScalarType(proto, "Int");
-        case "fixed64":
-          return new ScalarType(proto, options.longNumber);
-        case "fixed32":
-          return new ScalarType(proto, "Int");
-        case "uint32":
-          return new ScalarType(proto, "Int");
-        case "sfixed32":
-          return new ScalarType(proto, "Int");
-        case "sfixed64":
-          return new ScalarType(proto, options.longNumber);
-        case "sint32":
-          return new ScalarType(proto, "Int");
-        case "sint64":
-          return new ScalarType(proto, options.longNumber);
-        case "bool":
-          return new ScalarType(proto, "Boolean");
-        case "bytes":
-          throw "not supported";
-        /* istanbul ignore next */
-        default: {
-          const _exhaustiveCheck: never = proto.type.type;
-          throw "unreachable";
-        }
-      }
+      return new ScalarType(proto, options.scalarMapping[proto.type.type]);
     }
     /* istanbul ignore next */
     default: {
