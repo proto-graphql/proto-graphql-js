@@ -17,6 +17,7 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
       partialInputs: false,
       typeMappings: wktypeMappings({ longNumber: "String" }),
       longNumber: "String",
+      ignoreNonMessageOneofFields: false,
     } as TypeOptions,
     printer: {
       dsl,
@@ -96,6 +97,10 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
           ...params.type.typeMappings,
           ...wktypeMappings({ longNumber: params.type.longNumber }),
         };
+        break;
+      }
+      case "ignore_non_message_oneof_fields": {
+        params.type.ignoreNonMessageOneofFields = true;
         break;
       }
       default:

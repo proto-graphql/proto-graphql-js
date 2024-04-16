@@ -1,5 +1,3 @@
-import assert from "assert";
-
 import { ProtoOneof } from "@proto-graphql/proto-descriptors";
 
 import { ObjectField } from "./ObjectField";
@@ -15,9 +13,12 @@ export class OneofUnionType extends TypeBase<ProtoOneof> {
       .filter((f) => !isInputOnlyField(f))
       .map((f) => {
         const type = getObjectFieldType(f, this.options);
-        // FIXME: raise user-friendly error
-        assert(type instanceof ObjectType);
+        if (!(type instanceof ObjectType)) {
+          if (this.options.ignoreNonMessageOneofFields) return null;
+          throw new Error("non-message types in oneof fields are not required");
+        }
         return new ObjectField(type, this, f);
-      });
+      })
+      .filter((f): f is NonNullable<typeof f> => f != null);
   }
 }
