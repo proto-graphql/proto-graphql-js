@@ -48,6 +48,7 @@ plugins:
   - if `true`, protoc-gen-pothos also emits types defined in imported `.proto` file.
 - `custom_type` (`string`, optional)
 - `long_number` (`string`, optional, default `String`)
+- `ignore_non_message_oneof_fields` (`bool`, optional)
 
 ## Author
 

@@ -14,6 +14,7 @@ export interface TypeOptions {
    * - when `longNumber="Int"`, you should specify `forceLong=number` for ts-proto
    */
   longNumber: LongNumberMapping;
+  ignoreNonMessageOneofFields: boolean;
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-types
