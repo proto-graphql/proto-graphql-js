@@ -3,7 +3,7 @@ description: "Setup Node.js environment"
 inputs:
   node-version:
     description: Node.js version
-    default: "18.x"
+    default: "20.x"
 runs:
   using: "composite"
   steps:
