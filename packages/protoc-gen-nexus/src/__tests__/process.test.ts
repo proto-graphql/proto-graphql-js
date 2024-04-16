@@ -86,6 +86,7 @@ describe("protobuf custom options", () => {
       "extensions/TestPrefixPrefixedMessageSquashedMessageInput.nexus.ts",
       "extensions/TestPrefixIgnoredMessageNotIgnoredInput.nexus.ts",
       "extensions/TestPrefixInterfaceMessageInput.nexus.ts",
+      "extensions/TestPrefixRenamedEnum.nexus.ts",
       "extensions/TestPrefixRenamedMessageInput.nexus.ts",
       "extensions/TestPrefixMessageOnlyOutput.nexus.ts",
     ]);
