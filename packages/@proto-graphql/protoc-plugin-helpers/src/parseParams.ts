@@ -1,6 +1,6 @@
 import {
+  defaultScalarMapping,
   fileLayouts,
-  LongNumberMapping,
   PrinterOptions,
   TypeOptions,
 } from "@proto-graphql/codegen-core";
@@ -15,8 +15,7 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
   const params = {
     type: {
       partialInputs: false,
-      typeMappings: wktypeMappings({ longNumber: "String" }),
-      longNumber: "String",
+      scalarMapping: { ...defaultScalarMapping },
       ignoreNonMessageOneofFields: false,
     } as TypeOptions,
     printer: {
@@ -78,25 +77,17 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
         params.printer.fileLayout = s;
         break;
       }
-      case "custom_type": {
+      case "scalar": {
         const idx = v.indexOf("=");
         const [protoType, gqlType] =
           idx === -1 ? [v, ""] : [v.slice(0, idx), v.slice(idx + 1)];
-        params.type.typeMappings[protoType] = gqlType;
+        params.type.scalarMapping[protoType] = gqlType;
         break;
       }
       case "pothos_builder_path": {
         (
           params.printer as Extract<PrinterOptions, { dsl: "pothos" }>
         ).pothos.builderPath = toString(k, v);
-        break;
-      }
-      case "long_number": {
-        params.type.longNumber = toString(k, v);
-        params.type.typeMappings = {
-          ...params.type.typeMappings,
-          ...wktypeMappings({ longNumber: params.type.longNumber }),
-        };
         break;
       }
       case "ignore_non_message_oneof_fields": {
@@ -109,18 +100,4 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
   }
 
   return params;
-}
-
-function wktypeMappings({ longNumber }: { longNumber: LongNumberMapping }) {
-  return {
-    "google.protobuf.Int32Value": "Int",
-    "google.protobuf.Int64Value": longNumber,
-    "google.protobuf.UInt32Value": "Int",
-    "google.protobuf.UInt64Value": longNumber,
-    "google.protobuf.FloatValue": "Float",
-    "google.protobuf.DoubleValue": "Float",
-    "google.protobuf.BoolValue": "Boolean",
-    "google.protobuf.StringValue": "String",
-    "google.protobuf.Timestamp": "DateTime",
-  };
 }

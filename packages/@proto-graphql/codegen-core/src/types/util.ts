@@ -12,7 +12,6 @@ import { pascalCase } from "change-case";
 import { ExtensionFieldInfo } from "google-protobuf";
 import { FieldDescriptorProto } from "google-protobuf/google/protobuf/descriptor_pb";
 
-import { TypeOptions } from "./options";
 import * as extensions from "../__generated__/extensions/graphql/schema_pb";
 
 export function gqlTypeName(
@@ -152,10 +151,6 @@ export function isInterface(m: ProtoMessage): boolean {
 
 export function isSquashedUnion(m: ProtoMessage): boolean {
   return getExtension(m, "objectType")?.getSquashUnion() ?? false;
-}
-
-export function isScalar(m: ProtoMessage, opts: TypeOptions): boolean {
-  return m.fullName.toString() in opts.typeMappings;
 }
 
 export function isRequiredField(

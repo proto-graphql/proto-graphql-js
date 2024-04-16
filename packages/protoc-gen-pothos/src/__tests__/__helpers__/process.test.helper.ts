@@ -1,4 +1,3 @@
-import { LongNumberMapping } from "@proto-graphql/codegen-core";
 import {
   buildCodeGeneratorRequest,
   TestapisPackage,
@@ -21,7 +20,7 @@ export function generateDSLs(
     withPrefix?: boolean;
     perGraphQLType?: boolean;
     partialInputs?: boolean;
-    longNumber?: LongNumberMapping;
+    scalars?: Record<string, string>;
   } = {}
 ) {
   const params = [];
@@ -42,8 +41,10 @@ export function generateDSLs(
   if (opts.partialInputs) {
     params.push("partial_inputs");
   }
-  if (opts.longNumber) {
-    params.push(`long_number=${opts.longNumber}`);
+  if (opts.scalars) {
+    for (const [k, v] of Object.entries(opts.scalars)) {
+      params.push(`scalar=${k}=${v}`);
+    }
   }
   return processCodeGeneration(pkg, params.join(","));
 }
