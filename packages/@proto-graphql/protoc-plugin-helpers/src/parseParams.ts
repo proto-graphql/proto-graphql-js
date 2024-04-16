@@ -90,30 +90,10 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
         ).pothos.builderPath = toString(k, v);
         break;
       }
-<<<<<<< HEAD
-||||||| 06bb308
-      case "long_number": {
-        params.type.longNumber = toString(k, v);
-        params.type.typeMappings = {
-          ...params.type.typeMappings,
-          ...wktypeMappings({ longNumber: params.type.longNumber }),
-        };
-        break;
-      }
-=======
-      case "long_number": {
-        params.type.longNumber = toString(k, v);
-        params.type.typeMappings = {
-          ...params.type.typeMappings,
-          ...wktypeMappings({ longNumber: params.type.longNumber }),
-        };
-        break;
-      }
       case "ignore_non_message_oneof_fields": {
         params.type.ignoreNonMessageOneofFields = true;
         break;
       }
->>>>>>> main
       default:
         throw new Error(`unknown param: ${kv}`);
     }
