@@ -47,7 +47,6 @@ plugins:
 - `emit_imported_files` (`bool`, optional)
   - if `true`, protoc-gen-pothos also emits types defined in imported `.proto` file.
 - `scalar` (`string`, optional)
-
   - add scalar mapping
   - default:
     - Protobuf's 64-bit integer types to `String`
@@ -74,6 +73,7 @@ plugins:
           - scalar=google.protobuf.Fixed64Value=BigInt
           - scalar=google.protobuf.SFixed64Value=BigInt
         ```
+- `ignore_non_message_oneof_fields` (`bool`, optional)
 
 ## Author
 

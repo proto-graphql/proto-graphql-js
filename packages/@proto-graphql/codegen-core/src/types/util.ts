@@ -29,6 +29,9 @@ function nameWithParent(typ: ProtoMessage | ProtoOneof | ProtoEnum): string {
     if (t.kind === "Message") {
       override = getExtension(t, "objectType")?.getName();
     }
+    if (t.kind === "Enum") {
+      override = getExtension(t, "enumType")?.getName();
+    }
     name = `${
       t.kind === "Oneof" ? pascalCase(t.name) : override || t.name
     }${name}`;

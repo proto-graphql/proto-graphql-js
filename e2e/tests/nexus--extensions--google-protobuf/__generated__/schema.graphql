@@ -119,6 +119,7 @@ type TestPrefixPrefixedMessage {
   notIgnoredMessage: TestPrefixIgnoredMessageNotIgnored
   partialIgnoreOneof: TestPrefixPrefixedMessagePartialIgnoreOneof
   prefixedEnum: TestPrefixPrefixedEnum
+  renamedEnum: TestPrefixRenamedEnum
   renamedMessage: TestPrefixRenamedMessage
   skipResolver: String!
   squashedMessage: TestPrefixPrefixedMessageSquashedMessage
@@ -151,6 +152,7 @@ input TestPrefixPrefixedMessageInput {
   notIgnoredMessage: TestPrefixIgnoredMessageNotIgnoredInput
   oneofNotIgnoredField: TestPrefixPrefixedMessageInnerMessageInput
   prefixedEnum: TestPrefixPrefixedEnum
+  renamedEnum: TestPrefixRenamedEnum
   renamedMessage: TestPrefixRenamedMessageInput
   skipResolver: String!
   squashedMessage: TestPrefixPrefixedMessageSquashedMessageInput
@@ -165,6 +167,11 @@ union TestPrefixPrefixedMessageSquashedMessage = TestPrefixPrefixedMessageInnerM
 input TestPrefixPrefixedMessageSquashedMessageInput {
   oneofField: TestPrefixPrefixedMessageInnerMessageInput
   oneofField2: TestPrefixPrefixedMessageInnerMessage2Input
+}
+
+enum TestPrefixRenamedEnum {
+  BAR
+  FOO
 }
 
 type TestPrefixRenamedMessage {

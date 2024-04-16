@@ -67,6 +67,7 @@ export interface TypeOptions {
    * ```
    */
   scalarMapping: Record<string, string>;
+  ignoreNonMessageOneofFields: boolean;
 }
 
 export const defaultScalarMapping: Readonly<
