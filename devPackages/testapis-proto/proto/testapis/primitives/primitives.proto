@@ -14,7 +14,7 @@ message Message {
 }
 
 message Primitives {
-  double required_double_value =1;
+  double required_double_value = 1;
   float required_float_value = 2;
   int32 required_int32_value = 3;
   int64 required_int64_value = 4;
@@ -28,7 +28,7 @@ message Primitives {
   sfixed64 required_sfixed64_value = 12;
   bool required_bool_value = 13;
   string required_string_value = 14;
-  // bytes required_bytes_value = 1;
+  bytes required_bytes_value = 15;
 
   repeated double required_double_values = 101;
   repeated float required_float_values = 102;
@@ -44,4 +44,5 @@ message Primitives {
   repeated sfixed64 required_sfixed64_values = 112;
   repeated bool required_bool_values = 113;
   repeated string required_string_values = 114;
+  repeated bytes required_bytes_values = 115;
 }

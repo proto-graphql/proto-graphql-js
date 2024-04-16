@@ -2,6 +2,9 @@
 ### Do not make changes to this file directly
 
 
+"""The `Byte` scalar type represents byte value as a Buffer"""
+scalar Byte
+
 """
 A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
 """
@@ -10,6 +13,8 @@ scalar DateTime
 type Message {
   boolValue: Boolean
   boolValues: [Boolean!]
+  bytesValue: Byte
+  bytesValues: [Byte!]
   doubleValue: Float
   doubleValues: [Float!]
   floatValue: Float
@@ -34,6 +39,8 @@ type Message {
 input MessageInput {
   boolValue: Boolean
   boolValues: [Boolean!]
+  bytesValue: Byte
+  bytesValues: [Byte!]
   doubleValue: Float
   doubleValues: [Float!]
   floatValue: Float

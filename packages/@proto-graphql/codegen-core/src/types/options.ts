@@ -24,7 +24,7 @@ export interface TypeOptions {
    *   double: "Float",
    *   string: "String",
    *   bool: "Boolean",
-   *   bytes: "Bytes",
+   *   bytes: "Byte",
    *   "google.protobuf.Int32Value": "Int",
    *   "google.protobuf.Int64Value": "String",
    *   "google.protobuf.UInt32Value": "Int",
@@ -39,7 +39,7 @@ export interface TypeOptions {
    *   "google.protobuf.DoubleValue": "Float",
    *   "google.protobuf.StringValue": "String",
    *   "google.protobuf.BoolValue": "Boolean",
-   *   "google.protobuf.BytesValue": "Bytes",
+   *   "google.protobuf.BytesValue": "Byte",
    *   "google.protobuf.Timestamp": "DateTime",
    * }
    * ```
@@ -91,7 +91,7 @@ export const defaultScalarMapping: Readonly<
   double: "Float",
   string: "String",
   bool: "Boolean",
-  bytes: "Bytes",
+  bytes: "Byte",
   "google.protobuf.Int32Value": "Int",
   "google.protobuf.Int64Value": "String",
   "google.protobuf.UInt32Value": "Int",
@@ -106,6 +106,6 @@ export const defaultScalarMapping: Readonly<
   "google.protobuf.DoubleValue": "Float",
   "google.protobuf.StringValue": "String",
   "google.protobuf.BoolValue": "Boolean",
-  "google.protobuf.BytesValue": "Bytes",
+  "google.protobuf.BytesValue": "Byte",
   "google.protobuf.Timestamp": "DateTime",
 };
