@@ -247,6 +247,14 @@ export function isProtobufWrapperType(
   );
 }
 
+export function isGoogleWellKnownType(
+  proto: ProtoField["type"]
+): proto is ProtoMessage {
+  return (
+    proto.kind === "Message" && proto.file.name.startsWith("google/type/")
+  );
+}
+
 export function isProtobufWellKnownType(
   proto: ProtoField["type"]
 ): proto is ProtoMessage {
