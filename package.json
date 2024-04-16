@@ -22,7 +22,7 @@
     "@proto-graphql/tsconfig": "workspace:*",
     "@types/eslint": "^8.44.3",
     "@types/google-protobuf": "^3.7.2",
-    "@types/jest": "29.5.5",
+    "@types/jest": "29.5.12",
     "@types/minimatch": "^5.1.2",
     "@types/node": "^20.0.0",
     "eslint": "^8.51.0",
