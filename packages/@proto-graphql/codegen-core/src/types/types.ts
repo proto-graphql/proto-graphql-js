@@ -165,7 +165,10 @@ function detectType<
       if (isScalar(msg, options)) {
         return new ScalarType(
           proto,
-          options.typeMappings[msg.fullName.toString()] as any
+          options.typeMappings[msg.fullName.toString()] as any,
+          {
+            isBytes: msg.fullName.toString() === "google.protobuf.BytesValue",
+          }
         );
       }
       return f(msg, options);
@@ -204,7 +207,7 @@ function detectType<
         case "bool":
           return new ScalarType(proto, "Boolean");
         case "bytes":
-          throw "not supported";
+          return new ScalarType(proto, "Byte", { isBytes: true });
         /* istanbul ignore next */
         default: {
           const _exhaustiveCheck: never = proto.type.type;

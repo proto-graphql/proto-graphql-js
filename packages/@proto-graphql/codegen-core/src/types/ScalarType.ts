@@ -11,10 +11,15 @@ export type GqlScalarType =
   | (string & {});
 
 export class ScalarType {
+  public readonly isBytes: boolean;
+
   constructor(
     private readonly proto: ProtoField,
-    private readonly type: GqlScalarType
-  ) {}
+    private readonly type: GqlScalarType,
+    { isBytes = false }: { isBytes?: boolean } = {}
+  ) {
+    this.isBytes = isBytes;
+  }
 
   get typeName(): string {
     return this.type;

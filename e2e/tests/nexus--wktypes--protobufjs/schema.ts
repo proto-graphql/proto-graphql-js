@@ -1,6 +1,6 @@
 import { makeTestSchema } from "@proto-graphql/e2e-helper";
 import * as pbjs from "@proto-graphql/e2e-testapis-protobufjs/lib/testapis/wktypes";
-import { DateTimeResolver } from "graphql-scalars";
+import { ByteResolver, DateTimeResolver } from "graphql-scalars";
 import { queryField } from "nexus";
 import { asNexusMethod } from "nexus";
 
@@ -34,9 +34,10 @@ const test2Query = queryField("test2", {
   },
 });
 
+const byte = asNexusMethod(ByteResolver, "byte");
 const dateTime = asNexusMethod(DateTimeResolver, "dateTime");
 
 export const schema = makeTestSchema({
   rootDir: __dirname,
-  types: [dateTime, types1, test1Query, test2Query],
+  types: [byte, dateTime, types1, test1Query, test2Query],
 });

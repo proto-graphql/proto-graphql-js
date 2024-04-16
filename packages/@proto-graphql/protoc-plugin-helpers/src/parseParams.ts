@@ -121,6 +121,7 @@ function wktypeMappings({ longNumber }: { longNumber: LongNumberMapping }) {
     "google.protobuf.DoubleValue": "Float",
     "google.protobuf.BoolValue": "Boolean",
     "google.protobuf.StringValue": "String",
+    "google.protobuf.BytesValue": "Byte",
     "google.protobuf.Timestamp": "DateTime",
   };
 }

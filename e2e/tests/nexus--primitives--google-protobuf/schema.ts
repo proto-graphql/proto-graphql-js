@@ -1,6 +1,7 @@
 import { makeTestSchema } from "@proto-graphql/e2e-helper";
 import * as pbnative from "@proto-graphql/e2e-testapis-google-protobuf/lib/testapis/primitives/primitives_pb";
-import { queryField } from "nexus";
+import { ByteResolver } from "graphql-scalars";
+import { asNexusMethod, queryField } from "nexus";
 
 import * as types1 from "./__generated__/schema/testapis/primitives/primitives_pb_nexus";
 
@@ -28,7 +29,9 @@ export const testQuery = queryField("test", {
   },
 });
 
+const byte = asNexusMethod(ByteResolver, "byte");
+
 export const schema = makeTestSchema({
   rootDir: __dirname,
-  types: [types1, testQuery],
+  types: [byte, types1, testQuery],
 });
