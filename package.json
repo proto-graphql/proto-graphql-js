@@ -41,7 +41,7 @@
     "ts-protoc-gen": "0.15.0",
     "tsconfig-paths": "^4.1.0",
     "turbo": "^1.10.15",
-    "typescript": "5.2.2"
+    "typescript": "5.4.5"
   },
   "changelog": {
     "repo": "proto-graphql/proto-graphql-js",
