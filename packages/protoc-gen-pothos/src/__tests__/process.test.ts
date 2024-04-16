@@ -85,6 +85,7 @@ describe("protobuf custom options", () => {
       "extensions/TestPrefixPrefixedMessageInnerMessage2Input.pothos.ts",
       "extensions/TestPrefixPrefixedMessageSquashedMessageInput.pothos.ts",
       "extensions/TestPrefixIgnoredMessageNotIgnoredInput.pothos.ts",
+      "extensions/TestPrefixRenamedEnum.pothos.ts",
       "extensions/TestPrefixInterfaceMessageInput.pothos.ts",
       "extensions/TestPrefixRenamedMessageInput.pothos.ts",
       "extensions/TestPrefixMessageOnlyOutput.pothos.ts",
