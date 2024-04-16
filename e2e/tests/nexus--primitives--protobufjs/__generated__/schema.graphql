@@ -2,6 +2,9 @@
 ### Do not make changes to this file directly
 
 
+"""The `Byte` scalar type represents byte value as a Buffer"""
+scalar Byte
+
 type Message {
   """Optional."""
   optionalPrimitives: Primitives
@@ -33,6 +36,8 @@ input MessageInput {
 type Primitives {
   requiredBoolValue: Boolean!
   requiredBoolValues: [Boolean!]!
+  requiredBytesValue: Byte!
+  requiredBytesValues: [Byte!]!
   requiredDoubleValue: Float!
   requiredDoubleValues: [Float!]!
   requiredFixed32Value: Int!
@@ -64,6 +69,8 @@ type Primitives {
 input PrimitivesInput {
   requiredBoolValue: Boolean!
   requiredBoolValues: [Boolean!]!
+  requiredBytesValue: Byte!
+  requiredBytesValues: [Byte!]!
   requiredDoubleValue: Float!
   requiredDoubleValues: [Float!]!
   requiredFixed32Value: Int!

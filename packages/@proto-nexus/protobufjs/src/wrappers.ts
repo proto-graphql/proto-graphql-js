@@ -11,6 +11,7 @@ declare global {
     "google.protobuf.DoubleValue": Transformer<common.IDoubleValue, number>;
     "google.protobuf.BoolValue": Transformer<common.IBoolValue, boolean>;
     "google.protobuf.StringValue": Transformer<common.IStringValue, string>;
+    "google.protobuf.BytesValue": Transformer<common.IBytesValue, Buffer>;
   }
 }
 
@@ -80,6 +81,15 @@ registerTransformer("google.protobuf.BoolValue", {
 registerTransformer("google.protobuf.StringValue", {
   protoToGql(v) {
     return v.value!;
+  },
+  gqlToProto(v) {
+    return { value: v };
+  },
+});
+
+registerTransformer("google.protobuf.BytesValue", {
+  protoToGql(v) {
+    return Buffer.from(v.value!);
   },
   gqlToProto(v) {
     return { value: v };

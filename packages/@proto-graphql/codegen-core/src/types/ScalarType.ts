@@ -35,4 +35,21 @@ export class ScalarType {
   public isCustomScalar(): boolean {
     return !this.isPrimitive() && !this.isPrimitive();
   }
+
+  public isBytes(): boolean {
+    switch (this.proto.type.kind) {
+      case "Scalar":
+        return this.proto.type.type === "bytes";
+      case "Message":
+        return (
+          this.proto.type.fullName.toString() === "google.protobuf.BytesValue"
+        );
+      case "Enum":
+        return false;
+      default: {
+        this.proto.type satisfies never;
+        return false;
+      }
+    }
+  }
 }

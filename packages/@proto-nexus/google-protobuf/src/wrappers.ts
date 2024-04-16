@@ -11,6 +11,7 @@ declare global {
     "google.protobuf.DoubleValue": Transformer<wrappersPb.DoubleValue, number>;
     "google.protobuf.BoolValue": Transformer<wrappersPb.BoolValue, boolean>;
     "google.protobuf.StringValue": Transformer<wrappersPb.StringValue, string>;
+    "google.protobuf.BytesValue": Transformer<wrappersPb.BytesValue, Buffer>;
   }
 }
 
@@ -83,5 +84,14 @@ registerTransformer("google.protobuf.StringValue", {
   },
   gqlToProto(v) {
     return new wrappersPb.StringValue().setValue(v);
+  },
+});
+
+registerTransformer("google.protobuf.BytesValue", {
+  protoToGql(v) {
+    return Buffer.from(v.getValue());
+  },
+  gqlToProto(v) {
+    return new wrappersPb.BytesValue().setValue(v);
   },
 });

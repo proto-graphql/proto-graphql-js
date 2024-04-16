@@ -15,6 +15,7 @@ message Message {
   google.protobuf.DoubleValue double_value = 7;
   google.protobuf.BoolValue bool_value = 8;
   google.protobuf.StringValue string_value = 9;
+  google.protobuf.BytesValue bytes_value = 10;
 
   repeated google.protobuf.Timestamp timestamps = 101;
   repeated google.protobuf.Int32Value int32_values = 102;
@@ -25,6 +26,7 @@ message Message {
   repeated google.protobuf.DoubleValue double_values = 107;
   repeated google.protobuf.BoolValue bool_values = 108;
   repeated google.protobuf.StringValue string_values = 109;
+  repeated google.protobuf.BytesValue bytes_values = 110;
 
   // Required.
   google.protobuf.Timestamp required_timestamp = 201;

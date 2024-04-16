@@ -72,6 +72,15 @@ export function createFieldRefCode(
       ) {
         resolverCode = createOneofUnionResolverCode(valueExpr, field);
       }
+      if (field.type instanceof ScalarType && field.type.isBytes()) {
+        if (field.isList()) {
+          resolverCode = code`return ${valueExpr}.map(v => Buffer.from(v));`;
+        } else if (field.isNullable()) {
+          resolverCode = code`return ${valueExpr} == null ? null : Buffer.from(${valueExpr});`;
+        } else {
+          resolverCode = code`return Buffer.from(${valueExpr});`;
+        }
+      }
     }
   }
 
