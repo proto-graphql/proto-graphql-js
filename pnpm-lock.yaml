@@ -48,8 +48,8 @@ importers:
         specifier: 16.8.1
         version: 16.8.1
       graphql-scalars:
-        specifier: 1.22.4
-        version: 1.22.4(graphql@16.8.1)
+        specifier: 1.23.0
+        version: 1.23.0(graphql@16.8.1)
       jest:
         specifier: 29.7.0
         version: 29.7.0(@types/node@20.8.8)(ts-node@10.9.1)
@@ -4035,8 +4035,8 @@ packages:
   /graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
 
-  /graphql-scalars@1.22.4(graphql@16.8.1):
-    resolution: {integrity: sha512-ILnv7jq5VKHLUyoaTFX7lgYrjCd6vTee9i8/B+D4zJKJT5TguOl0KkpPEbXHjmeor8AZYrVsrYUHdqRBMX1pjA==}
+  /graphql-scalars@1.23.0(graphql@16.8.1):
+    resolution: {integrity: sha512-YTRNcwitkn8CqYcleKOx9IvedA8JIERn8BRq21nlKgOr4NEcTaWEG0sT+H92eF3ALTFbPgsqfft4cw+MGgv0Gg==}
     engines: {node: '>=10'}
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
