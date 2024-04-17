@@ -17,7 +17,7 @@ const testSquashedUnionQuery = queryField("testSquashedUnion", {
     return new pbjs.testapis.extensions.PrefixedMessage({
       squashedMessage:
         new pbjs.testapis.extensions.PrefixedMessage.SquashedMessage({
-          oneofField2:
+          oneofField_2:
             new pbjs.testapis.extensions.PrefixedMessage.InnerMessage2({
               body: "field 2",
             }),

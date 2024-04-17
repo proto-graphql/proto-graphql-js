@@ -43,7 +43,7 @@ message PrefixedMessage {
 
     oneof squashed_message {
       InnerMessage oneof_field = 1;
-      InnerMessage2 oneof_field2 = 2;
+      InnerMessage2 oneof_field_2 = 2;
     }
   }
 

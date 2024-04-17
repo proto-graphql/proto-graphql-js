@@ -1068,6 +1068,9 @@ importers:
       '@bufbuild/protoplugin':
         specifier: ^1.8.0
         version: 1.8.0
+      case-anything:
+        specifier: ^2.1.13
+        version: 2.1.13
       change-case:
         specifier: ^4.1.2
         version: 4.1.2
@@ -2136,6 +2139,10 @@ packages:
 
   capital-case@1.0.4:
     resolution: {integrity: sha512-ds37W8CytHgwnhGGTi88pcPyR15qoNkOpYwmMMfnWqqWgESapLqvDx6huFjQ5vqWSn2Z06173XNA7LtMOeUh1A==}
+
+  case-anything@2.1.13:
+    resolution: {integrity: sha512-zlOQ80VrQ2Ue+ymH5OuM/DlDq64mEm+B9UTdHULv5osUMD6HalNTblf2b1u/m6QecjsnOkBpqVZ+XPwIVsy7Ng==}
+    engines: {node: '>=12.13'}
 
   catharsis@0.9.0:
     resolution: {integrity: sha512-prMTQVpcns/tzFgFVkVp6ak6RykZyWb3gu8ckUpd6YkTlacOd3DXGJjIpD4Q6zJirizvaiAjSSHlOsA+6sNh2A==}
@@ -5344,6 +5351,8 @@ snapshots:
       no-case: 3.0.4
       tslib: 2.6.2
       upper-case-first: 2.0.2
+
+  case-anything@2.1.13: {}
 
   catharsis@0.9.0:
     dependencies:

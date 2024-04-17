@@ -1,5 +1,5 @@
 import { DescOneof } from "@bufbuild/protobuf";
-import { camelCase } from "change-case";
+import { camelCase } from "case-anything";
 
 import { FieldBase } from "./FieldBase";
 import { ObjectType } from "./ObjectType";

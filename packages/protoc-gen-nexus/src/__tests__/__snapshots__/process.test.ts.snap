@@ -3986,8 +3986,8 @@ export const TestPrefixPrefixedMessage = objectType({
         if (value.oneofField != null) {
           return value.oneofField;
         }
-        if (value.oneofField2 != null) {
-          return value.oneofField2;
+        if (value.oneofField_2 != null) {
+          return value.oneofField_2;
         }
         return null;
       },
@@ -4030,11 +4030,11 @@ export const TestPrefixPrefixedMessage = objectType({
           if (value.oneofField != null) {
             return value.oneofField;
           }
-          if (value.oneofField2 != null) {
-            return value.oneofField2;
+          if (value.oneofField_2 != null) {
+            return value.oneofField_2;
           }
           throw new Error(
-            "One of the following fields must be non-null: oneof_field, oneof_field2",
+            "One of the following fields must be non-null: oneof_field, oneof_field_2",
           );
         });
       },
@@ -4647,7 +4647,7 @@ export const TestPrefixPrefixedMessageSquashedMessage = unionType({
         name: "oneof_field",
         type: "testapis.extensions.PrefixedMessage.InnerMessage",
       }, {
-        name: "oneof_field2",
+        name: "oneof_field_2",
         type: "testapis.extensions.PrefixedMessage.InnerMessage2",
       }],
     },
@@ -4684,7 +4684,7 @@ export const TestPrefixPrefixedMessageSquashedMessageInput = Object.assign(
         type: nullable(TestPrefixPrefixedMessageInnerMessage2Input),
         extensions: {
           protobufField: {
-            name: "oneof_field2",
+            name: "oneof_field_2",
             typeFullName: "testapis.extensions.PrefixedMessage.InnerMessage2",
           },
         },
@@ -4710,7 +4710,7 @@ export const TestPrefixPrefixedMessageSquashedMessageInput = Object.assign(
         );
       }
       if (input.oneofField2 != null) {
-        output.oneofField2 = TestPrefixPrefixedMessageInnerMessage2Input
+        output.oneofField_2 = TestPrefixPrefixedMessageInnerMessage2Input
           .toProto(input.oneofField2);
       }
       return output;
@@ -4730,7 +4730,7 @@ export const TestPrefixPrefixedMessageSquashedMessageInput = Object.assign(
           type: nullable(TestPrefixPrefixedMessageInnerMessage2Input),
           extensions: {
             protobufField: {
-              name: "oneof_field2",
+              name: "oneof_field_2",
               typeFullName: "testapis.extensions.PrefixedMessage.InnerMessage2",
             },
           },
@@ -4965,7 +4965,7 @@ export const TestPrefixPrefixedMessage = objectType({
           }
 
           case PrefixedMessage.SquashedMessage.SquashedMessageCase
-            .ONEOF_FIELD2: {
+            .ONEOF_FIELD_2: {
             return value.getOneofField2()!;
           }
 
@@ -5014,13 +5014,13 @@ export const TestPrefixPrefixedMessage = objectType({
             }
 
             case PrefixedMessage.SquashedMessage.SquashedMessageCase
-              .ONEOF_FIELD2: {
+              .ONEOF_FIELD_2: {
               return value.getOneofField2()!;
             }
 
             default: {
               throw new Error(
-                "One of the following fields must be non-null: oneof_field, oneof_field2",
+                "One of the following fields must be non-null: oneof_field, oneof_field_2",
               );
             }
           }
@@ -5691,7 +5691,7 @@ export const TestPrefixPrefixedMessageSquashedMessageInput = Object.assign(
         type: nullable("TestPrefixPrefixedMessageInnerMessage2Input"),
         extensions: {
           protobufField: {
-            name: "oneof_field2",
+            name: "oneof_field_2",
             typeFullName: "testapis.extensions.PrefixedMessage.InnerMessage2",
           },
         },
@@ -5740,7 +5740,7 @@ export const TestPrefixPrefixedMessageSquashedMessageInput = Object.assign(
           type: nullable("TestPrefixPrefixedMessageInnerMessage2Input"),
           extensions: {
             protobufField: {
-              name: "oneof_field2",
+              name: "oneof_field_2",
               typeFullName: "testapis.extensions.PrefixedMessage.InnerMessage2",
             },
           },
@@ -5826,7 +5826,7 @@ export const TestPrefixPrefixedMessageSquashedMessage = unionType({
         name: "oneof_field",
         type: "testapis.extensions.PrefixedMessage.InnerMessage",
       }, {
-        name: "oneof_field2",
+        name: "oneof_field_2",
         type: "testapis.extensions.PrefixedMessage.InnerMessage2",
       }],
     },
@@ -6017,8 +6017,8 @@ export const TestPrefixPrefixedMessage = objectType({
         if (value.oneofField != null) {
           return value.oneofField;
         }
-        if (value.oneofField2 != null) {
-          return value.oneofField2;
+        if (value.oneofField_2 != null) {
+          return value.oneofField_2;
         }
         return null;
       },
@@ -6061,11 +6061,11 @@ export const TestPrefixPrefixedMessage = objectType({
           if (value.oneofField != null) {
             return value.oneofField;
           }
-          if (value.oneofField2 != null) {
-            return value.oneofField2;
+          if (value.oneofField_2 != null) {
+            return value.oneofField_2;
           }
           throw new Error(
-            "One of the following fields must be non-null: oneof_field, oneof_field2",
+            "One of the following fields must be non-null: oneof_field, oneof_field_2",
           );
         });
       },
@@ -6746,7 +6746,7 @@ export const TestPrefixPrefixedMessageSquashedMessageInput = Object.assign(
         type: nullable("TestPrefixPrefixedMessageInnerMessage2Input"),
         extensions: {
           protobufField: {
-            name: "oneof_field2",
+            name: "oneof_field_2",
             typeFullName: "testapis.extensions.PrefixedMessage.InnerMessage2",
           },
         },
@@ -6772,7 +6772,7 @@ export const TestPrefixPrefixedMessageSquashedMessageInput = Object.assign(
         );
       }
       if (input.oneofField2 != null) {
-        output.oneofField2 = TestPrefixPrefixedMessageInnerMessage2Input
+        output.oneofField_2 = TestPrefixPrefixedMessageInnerMessage2Input
           .toProto(input.oneofField2);
       }
       return output;
@@ -6792,7 +6792,7 @@ export const TestPrefixPrefixedMessageSquashedMessageInput = Object.assign(
           type: nullable("TestPrefixPrefixedMessageInnerMessage2Input"),
           extensions: {
             protobufField: {
-              name: "oneof_field2",
+              name: "oneof_field_2",
               typeFullName: "testapis.extensions.PrefixedMessage.InnerMessage2",
             },
           },
@@ -6882,7 +6882,7 @@ export const TestPrefixPrefixedMessageSquashedMessage = unionType({
         name: "oneof_field",
         type: "testapis.extensions.PrefixedMessage.InnerMessage",
       }, {
-        name: "oneof_field2",
+        name: "oneof_field_2",
         type: "testapis.extensions.PrefixedMessage.InnerMessage2",
       }],
     },

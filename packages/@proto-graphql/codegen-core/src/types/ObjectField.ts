@@ -1,5 +1,5 @@
 import { DescField } from "@bufbuild/protobuf";
-import { camelCase } from "change-case";
+import { camelCase } from "case-anything";
 
 import { EnumType } from "./EnumType";
 import { FieldBase } from "./FieldBase";
