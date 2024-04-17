@@ -2123,7 +2123,7 @@ export const TestPrefixPrefixedMessageSquashedMessage$Ref = builder.unionType(
           name: "oneof_field",
           type: "testapis.extensions.PrefixedMessage.InnerMessage",
         }, {
-          name: "oneof_field_2",
+          name: "oneof_field2",
           type: "testapis.extensions.PrefixedMessage.InnerMessage2",
         }],
       },
@@ -2176,7 +2176,7 @@ export const TestPrefixPrefixedMessageSquashedMessageInput$Ref: InputObjectRef<
       required: false,
       extensions: {
         protobufField: {
-          name: "oneof_field_2",
+          name: "oneof_field2",
           typeFullName: "testapis.extensions.PrefixedMessage.InnerMessage2",
         },
       },
@@ -2874,7 +2874,7 @@ export const TestPrefixPrefixedMessageSquashedMessageInput$Ref: InputObjectRef<
       required: false,
       extensions: {
         protobufField: {
-          name: "oneof_field_2",
+          name: "oneof_field2",
           typeFullName: "testapis.extensions.PrefixedMessage.InnerMessage2",
         },
       },
@@ -2951,7 +2951,7 @@ export const TestPrefixPrefixedMessageSquashedMessage$Ref = builder.unionType(
           name: "oneof_field",
           type: "testapis.extensions.PrefixedMessage.InnerMessage",
         }, {
-          name: "oneof_field_2",
+          name: "oneof_field2",
           type: "testapis.extensions.PrefixedMessage.InnerMessage2",
         }],
       },
