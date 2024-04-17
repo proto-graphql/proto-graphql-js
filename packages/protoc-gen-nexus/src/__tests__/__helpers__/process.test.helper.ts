@@ -1,10 +1,10 @@
+import { CodeGeneratorResponse } from "@bufbuild/protobuf";
 import {
   buildCodeGeneratorRequest,
   TestapisPackage,
 } from "@proto-graphql/testapis-proto";
-import { CodeGeneratorResponse } from "google-protobuf/google/protobuf/compiler/plugin_pb";
 
-import { processRequest } from "../../process";
+import { protocGenNexus } from "../../plugin";
 
 const generationTargets = ["native protobuf", "protobufjs"] as const;
 type GenerationTarget = (typeof generationTargets)[number];
@@ -61,7 +61,7 @@ export function snapshotGeneratedFiles(
   resp: CodeGeneratorResponse,
   files: string[]
 ) {
-  expect(Object.keys(resp.getFileList())).toHaveLength(files.length);
+  expect(Object.keys(resp.file)).toHaveLength(files.length);
 
   const fileByName = getFileMap(resp);
   for (const filename of files) {
@@ -76,17 +76,16 @@ export function processCodeGeneration(
   param?: string
 ): CodeGeneratorResponse {
   const req = buildCodeGeneratorRequest(pkg);
+  req.parameter = "target=ts";
   if (param) {
-    req.setParameter(param);
+    req.parameter += "," + param;
   }
-  return processRequest(req);
+  return protocGenNexus.run(req);
 }
 
 function getFileMap(resp: CodeGeneratorResponse): Record<string, string> {
-  return resp
-    .getFileList()
-    .reduce(
-      (m, f) => ({ ...m, [f.getName()!]: f.getContent()! }),
-      {} as Record<string, string>
-    );
+  return resp.file.reduce(
+    (m, f) => ({ ...m, [f.name!]: f.content! }),
+    {} as Record<string, string>
+  );
 }

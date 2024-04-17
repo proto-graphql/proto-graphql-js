@@ -27,9 +27,7 @@ export function createObjectTypeCode(
   opts: NexusPrinterOptions
 ): Code {
   const isInterface = type instanceof InterfaceType;
-  const reExportedPbTypeName = type.proto.fullName
-    .toString()
-    .replace(/\./g, "$");
+  const reExportedPbTypeName = type.proto.typeName.replace(/\./g, "$");
   const typeOpts = {
     name: type.typeName,
     description: type.description,

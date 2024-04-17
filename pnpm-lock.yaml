@@ -1185,6 +1185,12 @@ importers:
 
   packages/protoc-gen-nexus:
     dependencies:
+      '@bufbuild/protobuf':
+        specifier: ^1.8.0
+        version: 1.8.0
+      '@bufbuild/protoplugin':
+        specifier: ^1.8.0
+        version: 1.8.0
       '@proto-graphql/codegen-core':
         specifier: workspace:*
         version: link:../@proto-graphql/codegen-core

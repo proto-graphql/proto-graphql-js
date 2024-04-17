@@ -1,3 +1,5 @@
+import { DescFile } from "@bufbuild/protobuf";
+import { Schema } from "@bufbuild/protoplugin/ecmascript";
 import {
   collectTypesFromFile,
   filename,
@@ -5,41 +7,40 @@ import {
   printCodes,
   TypeOptions,
 } from "@proto-graphql/codegen-core";
-import { ProtoFile, ProtoRegistry } from "@proto-graphql/proto-descriptors";
 import { Code } from "ts-poet";
 
 import { createTypeDslCodes } from "./dslgen";
 import { NexusPrinterOptions } from "./dslgen/printers/util";
 
 export function generateFiles(
-  registry: ProtoRegistry,
-  file: ProtoFile,
+  schema: Schema,
+  file: DescFile,
   opts: { type: TypeOptions; printer: NexusPrinterOptions }
-): { filename: string; content: string }[] {
-  const types = collectTypesFromFile(file, opts.type, registry);
+): void {
+  const types = collectTypesFromFile(file, opts.type, schema.allFiles);
 
   switch (opts.printer.fileLayout) {
     case "proto_file": {
-      return [
-        {
-          filename: filenameFromProtoFile(file, opts.printer),
-          content: printCodes(
-            createCodes(types, opts.printer),
-            "protoc-gen-nexus",
-            file
-          ),
-        },
-      ];
+      const f = schema.generateFile(filenameFromProtoFile(file, opts.printer));
+      const code = printCodes(
+        createCodes(types, opts.printer),
+        "protoc-gen-nexus",
+        file
+      );
+      f.print(code.trimEnd());
+      break;
     }
     case "graphql_type": {
-      return types.map((t) => ({
-        filename: filename(t, opts.printer),
-        content: printCodes(
+      for (const t of types) {
+        const f = schema.generateFile(filename(t, opts.printer));
+        const code = printCodes(
           createCodes([t], opts.printer),
           "protoc-gen-nexus",
           file
-        ),
-      }));
+        );
+        f.print(code.trimEnd());
+      }
+      break;
     }
     /* istanbul ignore next */
     default: {

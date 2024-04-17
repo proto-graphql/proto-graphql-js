@@ -1,6 +1,12 @@
 import * as path from "path";
 
-import { DescFile, DescMessage, DescField, DescEnum } from "@bufbuild/protobuf";
+import {
+  DescFile,
+  DescMessage,
+  DescField,
+  DescEnum,
+  ScalarType as ProtoScalarType,
+} from "@bufbuild/protobuf";
 import { camelCase } from "change-case";
 import { Code, code, imp } from "ts-poet";
 
@@ -201,7 +207,7 @@ export function tsFieldName(desc: DescField, opts: PrinterOptions): string {
     case "protobufjs":
       return camelCase(desc.name);
     case "ts-proto": {
-      return camelCase(desc.name);
+      return camelCase(desc.name, {});
     }
     /* istanbul ignore next */
     default: {
@@ -244,6 +250,38 @@ function googleProtobufFieldAccessor(type: "get" | "set", proto: DescField) {
 
 function upperCaseFirst(s: string): string {
   return `${s.charAt(0).toUpperCase()}${s.slice(1)}`;
+}
+
+const longScalarPrimitiveTypes: ReadonlySet<ProtoScalarType> = new Set([
+  ProtoScalarType.INT64,
+  ProtoScalarType.UINT64,
+  ProtoScalarType.FIXED64,
+  ProtoScalarType.SFIXED64,
+  ProtoScalarType.SINT64,
+]);
+const longScalarWrapperTypes: ReadonlySet<string> = new Set([
+  "google.protobuf.Int64Value",
+  "google.protobuf.UInt64Value",
+]);
+
+export function isProtobufLong(proto: DescField): boolean {
+  switch (proto.fieldKind) {
+    case "scalar":
+      return longScalarPrimitiveTypes.has(proto.scalar);
+    case "message":
+      return longScalarWrapperTypes.has(proto.message.typeName);
+    default:
+      return false;
+  }
+}
+
+export function isProtobufWellKnownTypeField(
+  proto: DescField
+): proto is Extract<DescField, { fieldKind: "message" }> {
+  return (
+    proto.fieldKind === "message" &&
+    proto.message.file.name.startsWith("google/protobuf/")
+  );
 }
 
 function protoImportPath(
