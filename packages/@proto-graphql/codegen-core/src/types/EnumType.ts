@@ -1,4 +1,4 @@
-import { ProtoEnum, ProtoEnumValue } from "@proto-graphql/proto-descriptors";
+import { DescEnum, DescEnumValue } from "@bufbuild/protobuf";
 import { constantCase } from "change-case";
 
 import { TypeBase } from "./TypeBase";
@@ -8,7 +8,7 @@ import {
   isIgnoredField,
 } from "./util";
 
-export class EnumType extends TypeBase<ProtoEnum> {
+export class EnumType extends TypeBase<DescEnum> {
   get unspecifiedValue(): EnumTypeValue | null {
     return this.valuesWithIgnored.find((v) => v.isUnespecified()) ?? null;
   }
@@ -25,7 +25,7 @@ export class EnumType extends TypeBase<ProtoEnum> {
 }
 
 export class EnumTypeValue {
-  constructor(readonly proto: ProtoEnumValue) {}
+  constructor(readonly proto: DescEnumValue) {}
 
   get name(): string {
     const prefix = constantCase(this.proto.parent.name);
@@ -46,7 +46,7 @@ export class EnumTypeValue {
 
   public isUnespecified(): boolean {
     return (
-      this.proto.index === 0 &&
+      this.proto.number === 0 &&
       this.proto.name === `${constantCase(this.proto.parent.name)}_UNSPECIFIED`
     );
   }

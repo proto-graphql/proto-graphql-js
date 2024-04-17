@@ -1,12 +1,10 @@
-import assert from "assert";
-
 import {
-  ProtoEnum,
-  ProtoField,
-  ProtoFile,
-  ProtoMessage,
-  ProtoRegistry,
-} from "@proto-graphql/proto-descriptors";
+  DescFile,
+  DescMessage,
+  DescField,
+  DescEnum,
+  ScalarType as ProtoScalarType,
+} from "@bufbuild/protobuf";
 
 import { EnumType } from "./EnumType";
 import { InputObjectType } from "./InputObjectType";
@@ -35,43 +33,65 @@ export type GlType =
   | InputObjectType;
 
 export function collectTypesFromFile(
-  file: ProtoFile,
+  file: DescFile,
   options: TypeOptions,
-  registry: ProtoRegistry
+  files: readonly DescFile[]
 ) {
-  const [msgs, enums] = file.collectTypesRecursively();
+  const [msgs, enums] = collectDescsRecursively({
+    nestedMessages: file.messages,
+    nestedEnums: file.enums,
+  });
 
   return [
-    ...buildObjectTypes(msgs, options, registry),
-    ...buildInputObjectTypes(msgs, options, registry),
-    ...buildInterfaceType(msgs, options, registry),
+    ...buildObjectTypes(msgs, options, files),
+    ...buildInputObjectTypes(msgs, options, files),
+    ...buildInterfaceType(msgs, options, files),
     ...buildSquashedOneofUnionTypes(msgs, options),
     ...buildOneofUnionTypes(msgs, options),
     ...buildEnumTypes(enums, options),
   ];
 }
 
+function collectDescsRecursively({
+  nestedMessages,
+  nestedEnums,
+}: {
+  nestedMessages: DescMessage[];
+  nestedEnums: DescEnum[];
+}): [DescMessage[], DescEnum[]] {
+  const foundMsgs: DescMessage[] = [...nestedMessages];
+  const foundEnums: DescEnum[] = [...nestedEnums];
+
+  for (const msg of nestedMessages) {
+    const [childMsgs, childEnums] = collectDescsRecursively(msg);
+    foundMsgs.push(...childMsgs);
+    foundEnums.push(...childEnums);
+  }
+
+  return [foundMsgs, foundEnums];
+}
+
 function buildObjectTypes(
-  msgs: ProtoMessage[],
+  msgs: DescMessage[],
   options: TypeOptions,
-  registry: ProtoRegistry
+  files: readonly DescFile[]
 ): ObjectType[] {
   return msgs
     .filter((m) => !isIgnoredType(m))
     .filter((m) => !isSquashedUnion(m))
     .filter((m) => !isInterface(m))
-    .filter(exceptRequestOrResponse(registry))
+    .filter(exceptRequestOrResponse(files))
     .map((m) => new ObjectType(m, options));
 }
 
 function buildInputObjectTypes(
-  msgs: ProtoMessage[],
+  msgs: DescMessage[],
   options: TypeOptions,
-  registry: ProtoRegistry
+  files: readonly DescFile[]
 ): InputObjectType[] {
   return msgs
     .filter((m) => !isIgnoredInputType(m))
-    .filter(exceptRequestOrResponse(registry))
+    .filter(exceptRequestOrResponse(files))
     .map((m) => new InputObjectType(m, options))
     .flatMap((t) =>
       options.partialInputs && t.hasPartialInput() ? [t, t.toPartialInput()] : t
@@ -79,20 +99,20 @@ function buildInputObjectTypes(
 }
 
 function buildInterfaceType(
-  msgs: ProtoMessage[],
+  msgs: DescMessage[],
   options: TypeOptions,
-  registry: ProtoRegistry
+  files: readonly DescFile[]
 ): InterfaceType[] {
   return msgs
     .filter((m) => !isIgnoredType(m))
     .filter((m) => !isSquashedUnion(m))
     .filter((m) => isInterface(m))
-    .filter(exceptRequestOrResponse(registry))
+    .filter(exceptRequestOrResponse(files))
     .map((m) => new InterfaceType(m, options));
 }
 
 function buildSquashedOneofUnionTypes(
-  msgs: ProtoMessage[],
+  msgs: DescMessage[],
   options: TypeOptions
 ): SquashedOneofUnionType[] {
   return msgs
@@ -102,7 +122,7 @@ function buildSquashedOneofUnionTypes(
 }
 
 function buildOneofUnionTypes(
-  msgs: ProtoMessage[],
+  msgs: DescMessage[],
   options: TypeOptions
 ): OneofUnionType[] {
   return msgs
@@ -112,14 +132,14 @@ function buildOneofUnionTypes(
     .map((o) => new OneofUnionType(o, options));
 }
 
-function buildEnumTypes(enums: ProtoEnum[], options: TypeOptions): EnumType[] {
+function buildEnumTypes(enums: DescEnum[], options: TypeOptions): EnumType[] {
   return enums
     .filter((e) => !isIgnoredType(e))
     .map((e) => new EnumType(e, options));
 }
 
 export function getObjectFieldType(
-  proto: ProtoField,
+  proto: DescField,
   options: TypeOptions
 ): ScalarType | EnumType | ObjectType | InterfaceType | SquashedOneofUnionType {
   return detectType<
@@ -132,7 +152,7 @@ export function getObjectFieldType(
 }
 
 export function getInputObjectFieldType(
-  proto: ProtoField,
+  proto: DescField,
   options: TypeOptions
 ): ScalarType | EnumType | InputObjectType {
   return detectType<InputObjectType>(proto, options, (msg, file) => {
@@ -148,34 +168,50 @@ function detectType<
     | InputObjectType
     | ScalarType,
 >(
-  proto: ProtoField,
+  desc: DescField,
   options: TypeOptions,
-  f: (msg: ProtoMessage, options: TypeOptions) => T
+  f: (msg: DescMessage, options: TypeOptions) => T
 ): ScalarType | EnumType | T {
-  if (proto.type === null) {
-    throw new Error(
-      `unsupported field type in proto(name: ${proto.fullName.toString()}, type: ${proto.descriptor.getType()})`
-    );
-  }
-  switch (proto.type.kind) {
-    case "Message": {
-      assert(proto.type && proto.type.kind === "Message");
-      const msg = proto.type;
-      const customScalar = options.scalarMapping[msg.fullName.toString()];
-      if (customScalar) return new ScalarType(proto, customScalar);
-      return f(msg, options);
+  switch (desc.fieldKind) {
+    case "message": {
+      const customScalar = options.scalarMapping[desc.message.typeName];
+      if (customScalar) return new ScalarType(desc, customScalar);
+      return f(desc.message, options);
     }
-    case "Enum": {
-      assert(proto.type && proto.type.kind === "Enum");
-      return new EnumType(proto.type, options);
+    case "enum": {
+      return new EnumType(desc.enum, options);
     }
-    case "Scalar": {
-      return new ScalarType(proto, options.scalarMapping[proto.type.type]);
+    case "scalar": {
+      return new ScalarType(
+        desc,
+        options.scalarMapping[scalarMapLabelByType[desc.scalar]]
+      );
+    }
+    case "map": {
+      throw new Error("map type is not supported");
     }
     /* istanbul ignore next */
     default: {
-      const _exhaustiveCheck: never = proto.type;
+      const _exhaustiveCheck: never = desc;
       throw "unreachable";
     }
   }
 }
+
+export const scalarMapLabelByType: Record<ProtoScalarType, string> = {
+  [ProtoScalarType.DOUBLE]: "double",
+  [ProtoScalarType.FLOAT]: "float",
+  [ProtoScalarType.INT64]: "int64",
+  [ProtoScalarType.UINT64]: "uint64",
+  [ProtoScalarType.INT32]: "int32",
+  [ProtoScalarType.FIXED64]: "fixed64",
+  [ProtoScalarType.FIXED32]: "fixed32",
+  [ProtoScalarType.BOOL]: "bool",
+  [ProtoScalarType.STRING]: "string",
+  [ProtoScalarType.BYTES]: "bytes",
+  [ProtoScalarType.UINT32]: "uint32",
+  [ProtoScalarType.SFIXED32]: "sfixed32",
+  [ProtoScalarType.SFIXED64]: "sfixed64",
+  [ProtoScalarType.SINT32]: "sint32",
+  [ProtoScalarType.SINT64]: "sint64",
+};

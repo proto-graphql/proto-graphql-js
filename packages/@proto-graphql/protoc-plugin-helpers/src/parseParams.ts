@@ -94,6 +94,10 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
         params.type.ignoreNonMessageOneofFields = true;
         break;
       }
+      case "target":
+        // used by @bufbuild/protoplugin
+        // no-op
+        break;
       default:
         throw new Error(`unknown param: ${kv}`);
     }

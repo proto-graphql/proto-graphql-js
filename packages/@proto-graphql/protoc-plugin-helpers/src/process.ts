@@ -1,3 +1,5 @@
+import { DescFile } from "@bufbuild/protobuf";
+import { Schema } from "@bufbuild/protoplugin/ecmascript";
 import { PrinterOptions, TypeOptions } from "@proto-graphql/codegen-core";
 import { ProtoFile, ProtoRegistry } from "@proto-graphql/proto-descriptors";
 import {
@@ -6,6 +8,28 @@ import {
 } from "google-protobuf/google/protobuf/compiler/plugin_pb";
 
 import { parseParams } from "./parseParams";
+
+export function createTsGenerator<DSL extends PrinterOptions["dsl"]>({
+  generateFiles,
+  dsl,
+}: {
+  generateFiles: (
+    schema: Schema,
+    file: DescFile,
+    opts: {
+      type: TypeOptions;
+      printer: Extract<PrinterOptions, { dsl: DSL }>;
+    }
+  ) => void;
+  dsl: DSL;
+}): (schema: Schema) => void {
+  return function generateTs(schema: Schema) {
+    const params = parseParams(schema.proto.parameter, dsl);
+    for (const file of schema.files) {
+      generateFiles(schema, file, params);
+    }
+  };
+}
 
 export function createProcessor<DSL extends PrinterOptions["dsl"]>({
   generateFiles,

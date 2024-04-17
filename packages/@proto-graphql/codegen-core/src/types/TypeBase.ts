@@ -1,15 +1,9 @@
-import {
-  ProtoEnum,
-  ProtoMessage,
-  ProtoOneof,
-} from "@proto-graphql/proto-descriptors";
+import { DescEnum, DescMessage, DescOneof } from "@bufbuild/protobuf";
 
 import { TypeOptions } from "./options";
 import { descriptionFromProto, gqlTypeName } from "./util";
 
-export abstract class TypeBase<
-  P extends ProtoMessage | ProtoEnum | ProtoOneof,
-> {
+export abstract class TypeBase<P extends DescMessage | DescEnum | DescOneof> {
   constructor(
     readonly proto: P,
     readonly options: TypeOptions

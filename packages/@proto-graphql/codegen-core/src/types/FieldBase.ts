@@ -1,9 +1,12 @@
-import { ProtoField, ProtoOneof } from "@proto-graphql/proto-descriptors";
+import { DescField, DescOneof } from "@bufbuild/protobuf";
 
-import { descriptionFromProto, getDeprecationReason } from "./util";
-import * as extensions from "../__generated__/extensions/graphql/schema_pb";
+import {
+  descriptionFromProto,
+  getDeprecationReason,
+  getFieldOptions,
+} from "./util";
 
-export abstract class FieldBase<P extends ProtoField | ProtoOneof> {
+export abstract class FieldBase<P extends DescField | DescOneof> {
   constructor(readonly proto: P) {}
 
   abstract get name(): string;
@@ -14,8 +17,8 @@ export abstract class FieldBase<P extends ProtoField | ProtoOneof> {
   }
 
   public isList(): boolean {
-    const proto: ProtoField | ProtoOneof = this.proto;
-    return proto.kind === "Field" && proto.list;
+    const proto: DescField | DescOneof = this.proto;
+    return proto.kind === "field" && proto.repeated;
   }
 
   get deprecationReason(): string | null {
@@ -23,11 +26,13 @@ export abstract class FieldBase<P extends ProtoField | ProtoOneof> {
   }
 
   public isResolverSkipped(): boolean {
-    return (
-      this.proto.descriptor
-        .getOptions()
-        ?.getExtension(extensions.field)
-        ?.getSkipResolver() ?? false
-    );
+    switch (this.proto.kind) {
+      case "field": {
+        return getFieldOptions(this.proto).skipResolver;
+      }
+      case "oneof": {
+        return false;
+      }
+    }
   }
 }

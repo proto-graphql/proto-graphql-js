@@ -20,6 +20,8 @@
     "node": ">= 14.0.0"
   },
   "dependencies": {
+    "@bufbuild/protobuf": "^1.8.0",
+    "@bufbuild/protoplugin": "^1.8.0",
     "@proto-graphql/proto-descriptors": "workspace:*",
     "change-case": "^4.1.2",
     "google-protobuf": "^3.21.2",

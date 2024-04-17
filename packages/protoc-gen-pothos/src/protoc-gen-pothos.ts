@@ -1,5 +1,5 @@
-import { withCodeGeneratorRequest } from "@proto-graphql/protoc-plugin-helpers";
+import { runNodeJs } from "@bufbuild/protoplugin";
 
-import { processRequest } from "./process";
+import { protocGenPothos } from "./plugin";
 
-withCodeGeneratorRequest(processRequest);
+runNodeJs(protocGenPothos);

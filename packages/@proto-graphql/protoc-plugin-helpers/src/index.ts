@@ -1,2 +1,2 @@
 export { withCodeGeneratorRequest } from "./utils";
-export { createProcessor } from "./process";
+export { createProcessor, createTsGenerator } from "./process";
