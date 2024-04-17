@@ -119,9 +119,6 @@ importers:
       '@bufbuild/protobuf':
         specifier: ^1.8.0
         version: 1.8.0
-      google-protobuf:
-        specifier: ^3.20.1
-        version: 3.21.2
     devDependencies:
       '@proto-graphql/eslint-config':
         specifier: workspace:*
@@ -1071,15 +1068,9 @@ importers:
       '@bufbuild/protoplugin':
         specifier: ^1.8.0
         version: 1.8.0
-      '@proto-graphql/proto-descriptors':
-        specifier: workspace:*
-        version: link:../proto-descriptors
       change-case:
         specifier: ^4.1.2
         version: 4.1.2
-      google-protobuf:
-        specifier: ^3.21.2
-        version: 3.21.2
       ts-poet:
         specifier: ^6.3.0
         version: 6.3.0
@@ -1109,19 +1100,13 @@ importers:
       '@bufbuild/protobuf':
         specifier: ^1.8.0
         version: 1.8.0
-      '@proto-graphql/codegen-core':
-        specifier: workspace:*
-        version: link:../codegen-core
-      '@proto-graphql/proto-descriptors':
-        specifier: workspace:*
-        version: link:../proto-descriptors
-      google-protobuf:
-        specifier: 3.21.2
-        version: 3.21.2
-    devDependencies:
       '@bufbuild/protoplugin':
         specifier: ^1.8.0
         version: 1.8.0
+      '@proto-graphql/codegen-core':
+        specifier: workspace:*
+        version: link:../codegen-core
+    devDependencies:
       '@proto-graphql/eslint-config':
         specifier: workspace:*
         version: link:../../../devPackages/eslint-config

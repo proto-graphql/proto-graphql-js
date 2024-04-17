@@ -1,4 +1,4 @@
-import { ProtoScalarType } from "@proto-graphql/proto-descriptors";
+import { ScalarType } from "@bufbuild/protobuf";
 
 export interface TypeOptions {
   partialInputs: boolean;
@@ -70,10 +70,28 @@ export interface TypeOptions {
   ignoreNonMessageOneofFields: boolean;
 }
 
+const scalarLabelByType: Record<ScalarType, string> = {
+  [ScalarType.DOUBLE]: "double",
+  [ScalarType.FLOAT]: "float",
+  [ScalarType.INT64]: "int64",
+  [ScalarType.UINT64]: "uint64",
+  [ScalarType.INT32]: "int32",
+  [ScalarType.FIXED64]: "fixed64",
+  [ScalarType.FIXED32]: "fixed32",
+  [ScalarType.BOOL]: "bool",
+  [ScalarType.STRING]: "string",
+  [ScalarType.BYTES]: "bytes",
+  [ScalarType.UINT32]: "uint32",
+  [ScalarType.SFIXED32]: "sfixed32",
+  [ScalarType.SFIXED64]: "sfixed64",
+  [ScalarType.SINT32]: "sint32",
+  [ScalarType.SINT64]: "sint64",
+};
+
 export const defaultScalarMapping: Readonly<
   Record<
     // eslint-disable-next-line @typescript-eslint/ban-types
-    ProtoScalarType | (string & {}),
+    (typeof scalarLabelByType)[ScalarType] | (string & {}),
     string
   >
 > = {
