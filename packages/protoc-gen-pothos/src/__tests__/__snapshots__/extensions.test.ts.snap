@@ -22,7 +22,17 @@ builder.objectType(Message$Ref, {
       nullable: false,
       description: "Required.",
       extensions: {
-        protobufField: { name: "user_id", typeFullName: "uint64" },
+        protobufField: {
+          name: "user_id",
+          typeFullName: "uint64",
+          options: {
+            "[graphql.field]": {
+              outputNullability: "NON_NULL",
+              inputNullability: "NULLABLE",
+              partialInputNullability: "NON_NULL",
+            },
+          },
+        },
       },
     }),
     body: t.expose("body", {
@@ -46,6 +56,12 @@ builder.objectType(Message$Ref, {
         protobufField: {
           name: "status",
           typeFullName: "testapis.extensions.field_nullability.Message.Status",
+          options: {
+            "[graphql.field]": {
+              outputNullability: "NULLABLE",
+              inputNullability: "NULLABLE",
+            },
+          },
         },
       },
     }),
@@ -77,7 +93,17 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         required: false,
         description: "Required.",
         extensions: {
-          protobufField: { name: "user_id", typeFullName: "uint64" },
+          protobufField: {
+            name: "user_id",
+            typeFullName: "uint64",
+            options: {
+              "[graphql.field]": {
+                outputNullability: "NON_NULL",
+                inputNullability: "NULLABLE",
+                partialInputNullability: "NON_NULL",
+              },
+            },
+          },
         },
       }),
       body: t.field({
@@ -95,6 +121,12 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
             name: "status",
             typeFullName:
               "testapis.extensions.field_nullability.Message.Status",
+            options: {
+              "[graphql.field]": {
+                outputNullability: "NULLABLE",
+                inputNullability: "NULLABLE",
+              },
+            },
           },
         },
       }),
@@ -124,7 +156,17 @@ export const MessagePartialInput$Ref: InputObjectRef<
         required: true,
         description: "Required.",
         extensions: {
-          protobufField: { name: "user_id", typeFullName: "uint64" },
+          protobufField: {
+            name: "user_id",
+            typeFullName: "uint64",
+            options: {
+              "[graphql.field]": {
+                outputNullability: "NON_NULL",
+                inputNullability: "NULLABLE",
+                partialInputNullability: "NON_NULL",
+              },
+            },
+          },
         },
       }),
       body: t.field({
@@ -142,6 +184,12 @@ export const MessagePartialInput$Ref: InputObjectRef<
             name: "status",
             typeFullName:
               "testapis.extensions.field_nullability.Message.Status",
+            options: {
+              "[graphql.field]": {
+                outputNullability: "NULLABLE",
+                inputNullability: "NULLABLE",
+              },
+            },
           },
         },
       }),
@@ -297,6 +345,7 @@ builder.objectType(NoPartialInputMessage$Ref, {
       fullName: "testapis.extensions.no_partial.NoPartialInputMessage",
       name: "NoPartialInputMessage",
       package: "testapis.extensions.no_partial",
+      options: { "[graphql.input_type]": { noPartial: true } },
     },
   },
 });
@@ -482,6 +531,7 @@ export const NoPartialInputMessageInput$Ref: InputObjectRef<
       fullName: "testapis.extensions.no_partial.NoPartialInputMessage",
       name: "NoPartialInputMessage",
       package: "testapis.extensions.no_partial",
+      options: { "[graphql.input_type]": { noPartial: true } },
     },
   },
 });

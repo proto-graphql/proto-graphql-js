@@ -79,6 +79,7 @@ export const SquashedOneofInput$Ref: InputObjectRef<SquashedOneofInput$Shape> =
         fullName: "testapis.edgecases.import_squashed_union.pkg1.SquashedOneof",
         name: "SquashedOneof",
         package: "testapis.edgecases.import_squashed_union.pkg1",
+        options: { "[graphql.object_type]": { squashUnion: true } },
       },
     },
   });
@@ -93,6 +94,7 @@ export const SquashedOneof$Ref = builder.unionType("SquashedOneof", {
       fields: [{
         name: "msg1",
         type: "testapis.edgecases.import_squashed_union.pkg1.OneofMessage1",
+        options: { "[graphql.object_type]": { squashUnion: true } },
       }],
     },
   },

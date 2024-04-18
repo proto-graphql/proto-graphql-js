@@ -1,4 +1,4 @@
-import { DescField } from "@bufbuild/protobuf";
+import { createRegistry, DescField } from "@bufbuild/protobuf";
 import {
   compact,
   createGetFieldValueCode,
@@ -41,6 +41,7 @@ import { fieldTypeRef, PothosPrinterOptions } from "./util";
  */
 export function createFieldRefCode(
   field: ObjectField<any> | ObjectOneofField | InputObjectField<any>,
+  registry: ReturnType<typeof createRegistry>,
   opts: PothosPrinterOptions
 ): Code {
   const isInput = field instanceof InputObjectField;
@@ -94,7 +95,7 @@ export function createFieldRefCode(
     description: field.description,
     deprecationReason: field.deprecationReason,
     resolve: resolverCode ? code`${sourceExpr} => {${resolverCode}}` : null,
-    extensions: protobufGraphQLExtensions(field),
+    extensions: protobufGraphQLExtensions(field, registry),
   };
 
   const shouldUseFieldFunc = isInput || resolverCode != null;

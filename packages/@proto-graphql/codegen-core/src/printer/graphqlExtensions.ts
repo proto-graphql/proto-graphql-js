@@ -8,6 +8,7 @@ import {
   ObjectOneofField,
   ObjectType,
   OneofUnionType,
+  Registry,
   SquashedOneofUnionType,
   scalarMapLabelByType,
 } from "../types";
@@ -22,14 +23,16 @@ export function protobufGraphQLExtensions(
     | ObjectField<any>
     | ObjectOneofField
     | InputObjectField<any>
-    | EnumTypeValue
-): Record<string, Record<string, string>> {
+    | EnumTypeValue,
+  typeRegistry: Registry
+): Record<string, Record<string, unknown>> {
   if (type instanceof ObjectType || type instanceof InputObjectType) {
     return {
       protobufMessage: {
         fullName: type.proto.typeName,
         name: type.proto.name,
         package: type.proto.file.proto.package ?? "",
+        options: type.proto.proto.options?.toJson({ typeRegistry }),
       },
     };
   }
@@ -39,6 +42,7 @@ export function protobufGraphQLExtensions(
         name: type.proto.name,
         fullName: type.proto.typeName,
         package: type.proto.file.proto.package ?? "",
+        options: type.proto.proto.options?.toJson({ typeRegistry }),
       },
     };
   }
@@ -61,6 +65,7 @@ export function protobufGraphQLExtensions(
         fields: type.fields.map((f) => ({
           name: f.proto.name,
           type: protoFieldTypeFullName(f),
+          options: type.proto.proto.options?.toJson({ typeRegistry }),
         })),
       }),
     };
@@ -74,6 +79,7 @@ export function protobufGraphQLExtensions(
       protobufField: compact({
         name: type.proto.name,
         typeFullName: protoFieldTypeFullName(type),
+        options: type.proto.proto.options?.toJson({ typeRegistry }),
       }),
     };
   }
@@ -81,6 +87,7 @@ export function protobufGraphQLExtensions(
     return {
       protobufEnumValue: {
         name: type.proto.name,
+        options: type.proto.proto.options?.toJson({ typeRegistry }),
       },
     };
   }

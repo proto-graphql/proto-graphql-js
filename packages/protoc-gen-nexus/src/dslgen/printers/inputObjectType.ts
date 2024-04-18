@@ -7,6 +7,7 @@ import {
   isProtobufWellKnownTypeField,
   protobufGraphQLExtensions,
   protoType,
+  Registry,
   ScalarType,
 } from "@proto-graphql/codegen-core";
 import { Code, code, joinCode, literalOf } from "ts-poet";
@@ -42,6 +43,7 @@ import {
  */
 export function createInputObjectTypeCode(
   type: InputObjectType,
+  registry: Registry,
   opts: NexusPrinterOptions
 ): Code {
   const typeOpts = {
@@ -50,11 +52,15 @@ export function createInputObjectTypeCode(
     definition: code`(t) => {
       ${
         type.fields.length > 0
-          ? joinCode(type.fields.map((f) => createFieldDefinitionCode(f, opts)))
+          ? joinCode(
+              type.fields.map((f) =>
+                createFieldDefinitionCode(f, registry, opts)
+              )
+            )
           : createNoopFieldDefinitionCode({ input: true })
       }
     }`,
-    extensions: protobufGraphQLExtensions(type),
+    extensions: protobufGraphQLExtensions(type, registry),
   };
   return code`
     export const ${nexusTypeDef(type)} = Object.assign(
@@ -68,7 +74,7 @@ export function createInputObjectTypeCode(
                 (f) =>
                   code`${f.name}: ${literalOf({
                     type: createTypeCode(f, opts),
-                    extensions: protobufGraphQLExtensions(f),
+                    extensions: protobufGraphQLExtensions(f, registry),
                   })},`
               )
             )}

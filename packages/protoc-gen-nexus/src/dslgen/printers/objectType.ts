@@ -4,6 +4,7 @@ import {
   ObjectType,
   protobufGraphQLExtensions,
   protoType,
+  Registry,
 } from "@proto-graphql/codegen-core";
 import { code, Code, joinCode, literalOf } from "ts-poet";
 
@@ -24,6 +25,7 @@ import { impNexus, NexusPrinterOptions, nexusTypeDef } from "./util";
  */
 export function createObjectTypeCode(
   type: ObjectType,
+  registry: Registry,
   opts: NexusPrinterOptions
 ): Code {
   const isInterface = type instanceof InterfaceType;
@@ -34,7 +36,11 @@ export function createObjectTypeCode(
     definition: code`(t) => {
       ${
         type.fields.length > 0
-          ? joinCode(type.fields.map((f) => createFieldDefinitionCode(f, opts)))
+          ? joinCode(
+              type.fields.map((f) =>
+                createFieldDefinitionCode(f, registry, opts)
+              )
+            )
           : createNoopFieldDefinitionCode({ input: false })
       }
     }`,
@@ -51,7 +57,7 @@ export function createObjectTypeCode(
           module: code`__filename`,
           export: reExportedPbTypeName,
         },
-    extensions: protobufGraphQLExtensions(type),
+    extensions: protobufGraphQLExtensions(type, registry),
   };
   return code`
     export type ${reExportedPbTypeName} = ${protoType(type.proto, opts)};

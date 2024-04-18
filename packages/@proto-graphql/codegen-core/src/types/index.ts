@@ -10,3 +10,4 @@ export * from "./ScalarType";
 export * from "./EnumType";
 export * from "./InputObjectType";
 export * from "./InputObjectField";
+export * from "./registry";

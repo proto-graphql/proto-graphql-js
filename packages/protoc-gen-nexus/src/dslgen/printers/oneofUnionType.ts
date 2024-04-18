@@ -2,6 +2,7 @@ import {
   compact,
   OneofUnionType,
   protobufGraphQLExtensions,
+  Registry,
   SquashedOneofUnionType,
 } from "@proto-graphql/codegen-core";
 import { code, Code, joinCode, literalOf } from "ts-poet";
@@ -19,6 +20,7 @@ import { fieldType, impNexus, NexusPrinterOptions, nexusTypeDef } from "./util";
  */
 export function createOneofUnionTypeCode(
   type: OneofUnionType | SquashedOneofUnionType,
+  registry: Registry,
   opts: NexusPrinterOptions
 ): Code {
   const typeOpts = {
@@ -30,7 +32,7 @@ export function createOneofUnionTypeCode(
         { on: "," }
       )});
     }`,
-    extensions: protobufGraphQLExtensions(type),
+    extensions: protobufGraphQLExtensions(type, registry),
   };
   return code`export const ${nexusTypeDef(type)} = ${impNexus(
     "unionType"
