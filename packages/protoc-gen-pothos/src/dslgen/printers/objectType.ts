@@ -5,6 +5,7 @@ import {
   ObjectType,
   protobufGraphQLExtensions,
   protoType,
+  Registry,
   tsFieldName,
 } from "@proto-graphql/codegen-core";
 import { Code, code, joinCode, literalOf } from "ts-poet";
@@ -24,6 +25,7 @@ import { pothosBuilder, PothosPrinterOptions, pothosRef } from "./util";
  */
 export function createObjectTypeCode(
   type: ObjectType,
+  registry: Registry,
   opts: PothosPrinterOptions
 ): Code {
   const isInterface = type instanceof InterfaceType;
@@ -33,7 +35,7 @@ export function createObjectTypeCode(
       type.fields.length > 0
         ? joinCode(
             type.fields.map(
-              (f) => code`${f.name}: ${createFieldRefCode(f, opts)},`
+              (f) => code`${f.name}: ${createFieldRefCode(f, registry, opts)},`
             )
           )
         : code`_: ${createNoopFieldRefCode({ input: false })}`
@@ -50,7 +52,7 @@ export function createObjectTypeCode(
             === ${literalOf(type.proto.typeName)};
         }
       `,
-    extensions: protobufGraphQLExtensions(type),
+    extensions: protobufGraphQLExtensions(type, registry),
   };
   const buildRefFunc = code`${pothosBuilder(type, opts)}.${
     isInterface ? "interface" : "object"

@@ -1,3 +1,4 @@
+import { createRegistry } from "@bufbuild/protobuf";
 import {
   EnumType,
   InputObjectType,
@@ -21,23 +22,24 @@ export function createTypeDslCodes(
     | OneofUnionType
     | SquashedOneofUnionType
   )[],
+  registry: ReturnType<typeof createRegistry>,
   opts: PothosPrinterOptions
 ): Code[] {
   return types.flatMap((type) => {
     if (type instanceof ObjectType) {
-      return createObjectTypeCode(type, opts);
+      return createObjectTypeCode(type, registry, opts);
     }
     if (type instanceof InputObjectType) {
-      return createInputObjectTypeCode(type, opts);
+      return createInputObjectTypeCode(type, registry, opts);
     }
     if (type instanceof EnumType) {
-      return [createEnumTypeCode(type, opts)];
+      return [createEnumTypeCode(type, registry, opts)];
     }
     if (
       type instanceof OneofUnionType ||
       type instanceof SquashedOneofUnionType
     ) {
-      return [createOneofUnionTypeCode(type, opts)];
+      return [createOneofUnionTypeCode(type, registry, opts)];
     }
 
     const _exhaustiveCheck: never = type;

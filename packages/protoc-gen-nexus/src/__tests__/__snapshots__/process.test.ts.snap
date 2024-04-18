@@ -69,6 +69,7 @@ export const DeprecatedMessage = objectType({
       fullName: "testapis.deprecation.DeprecatedMessage",
       name: "DeprecatedMessage",
       package: "testapis.deprecation",
+      options: { deprecated: true },
     },
   },
 });
@@ -85,7 +86,13 @@ export const NotDeprecatedMessage = objectType({
         const value = source.getBody();
         return value;
       },
-      extensions: { protobufField: { name: "body", typeFullName: "string" } },
+      extensions: {
+        protobufField: {
+          name: "body",
+          typeFullName: "string",
+          options: { deprecated: true },
+        },
+      },
     });
     t.field("enum", {
       type: nullable("DeprecatedEnum"),
@@ -286,6 +293,7 @@ export const DeprecatedMessageInput = Object.assign(
         fullName: "testapis.deprecation.DeprecatedMessage",
         name: "DeprecatedMessage",
         package: "testapis.deprecation",
+        options: { deprecated: true },
       },
     },
   }),
@@ -332,7 +340,13 @@ export const NotDeprecatedMessageInput = Object.assign(
         type: nullable("String"),
         deprecation:
           "testapis.deprecation.NotDeprecatedMessage.body is mark as deprecated in a *.proto file.",
-        extensions: { protobufField: { name: "body", typeFullName: "string" } },
+        extensions: {
+          protobufField: {
+            name: "body",
+            typeFullName: "string",
+            options: { deprecated: true },
+          },
+        },
       });
       t.field("enum", {
         type: nullable("DeprecatedEnum"),
@@ -354,6 +368,7 @@ export const NotDeprecatedMessageInput = Object.assign(
             name: "msg1",
             typeFullName:
               "testapis.deprecation.NotDeprecatedMessage.InnerMessage1",
+            options: { deprecated: true },
           },
         },
       });
@@ -376,6 +391,7 @@ export const NotDeprecatedMessageInput = Object.assign(
             name: "msg3",
             typeFullName:
               "testapis.deprecation.NotDeprecatedMessage.InnerMessage1",
+            options: { deprecated: true },
           },
         },
       });
@@ -388,6 +404,7 @@ export const NotDeprecatedMessageInput = Object.assign(
             name: "msg4",
             typeFullName:
               "testapis.deprecation.NotDeprecatedMessage.InnerMessage2",
+            options: { deprecated: true },
           },
         },
       });
@@ -438,7 +455,11 @@ export const NotDeprecatedMessageInput = Object.assign(
         body: {
           type: nullable("String"),
           extensions: {
-            protobufField: { name: "body", typeFullName: "string" },
+            protobufField: {
+              name: "body",
+              typeFullName: "string",
+              options: { deprecated: true },
+            },
           },
         },
         enum: {
@@ -457,6 +478,7 @@ export const NotDeprecatedMessageInput = Object.assign(
               name: "msg1",
               typeFullName:
                 "testapis.deprecation.NotDeprecatedMessage.InnerMessage1",
+              options: { deprecated: true },
             },
           },
         },
@@ -477,6 +499,7 @@ export const NotDeprecatedMessageInput = Object.assign(
               name: "msg3",
               typeFullName:
                 "testapis.deprecation.NotDeprecatedMessage.InnerMessage1",
+              options: { deprecated: true },
             },
           },
         },
@@ -487,6 +510,7 @@ export const NotDeprecatedMessageInput = Object.assign(
               name: "msg4",
               typeFullName:
                 "testapis.deprecation.NotDeprecatedMessage.InnerMessage2",
+              options: { deprecated: true },
             },
           },
         },
@@ -672,7 +696,12 @@ export const NotDeprecatedEnum = enumType({
     value: 2,
     deprecation:
       "testapis.deprecation.NotDeprecatedEnum.DEPRECATED_BAR is mark as deprecated in a *.proto file.",
-    extensions: { protobufEnumValue: { name: "DEPRECATED_BAR" } },
+    extensions: {
+      protobufEnumValue: {
+        name: "DEPRECATED_BAR",
+        options: { deprecated: true },
+      },
+    },
   }],
   extensions: {
     protobufEnum: {
@@ -702,6 +731,7 @@ export const DeprecatedEnum = enumType({
       name: "DeprecatedEnum",
       fullName: "testapis.deprecation.DeprecatedEnum",
       package: "testapis.deprecation",
+      options: { deprecated: true },
     },
   },
 });
@@ -1014,6 +1044,7 @@ export const DeprecatedMessage = objectType({
       fullName: "testapis.deprecation.DeprecatedMessage",
       name: "DeprecatedMessage",
       package: "testapis.deprecation",
+      options: { deprecated: true },
     },
   },
 });
@@ -1034,7 +1065,13 @@ export const NotDeprecatedMessage = objectType({
         }
         return value;
       },
-      extensions: { protobufField: { name: "body", typeFullName: "string" } },
+      extensions: {
+        protobufField: {
+          name: "body",
+          typeFullName: "string",
+          options: { deprecated: true },
+        },
+      },
     });
     t.field("enum", {
       type: nullable("DeprecatedEnum"),
@@ -1237,6 +1274,7 @@ export const DeprecatedMessageInput = Object.assign(
         fullName: "testapis.deprecation.DeprecatedMessage",
         name: "DeprecatedMessage",
         package: "testapis.deprecation",
+        options: { deprecated: true },
       },
     },
   }),
@@ -1283,7 +1321,13 @@ export const NotDeprecatedMessageInput = Object.assign(
         type: nullable("String"),
         deprecation:
           "testapis.deprecation.NotDeprecatedMessage.body is mark as deprecated in a *.proto file.",
-        extensions: { protobufField: { name: "body", typeFullName: "string" } },
+        extensions: {
+          protobufField: {
+            name: "body",
+            typeFullName: "string",
+            options: { deprecated: true },
+          },
+        },
       });
       t.field("enum", {
         type: nullable("DeprecatedEnum"),
@@ -1305,6 +1349,7 @@ export const NotDeprecatedMessageInput = Object.assign(
             name: "msg1",
             typeFullName:
               "testapis.deprecation.NotDeprecatedMessage.InnerMessage1",
+            options: { deprecated: true },
           },
         },
       });
@@ -1327,6 +1372,7 @@ export const NotDeprecatedMessageInput = Object.assign(
             name: "msg3",
             typeFullName:
               "testapis.deprecation.NotDeprecatedMessage.InnerMessage1",
+            options: { deprecated: true },
           },
         },
       });
@@ -1339,6 +1385,7 @@ export const NotDeprecatedMessageInput = Object.assign(
             name: "msg4",
             typeFullName:
               "testapis.deprecation.NotDeprecatedMessage.InnerMessage2",
+            options: { deprecated: true },
           },
         },
       });
@@ -1389,7 +1436,11 @@ export const NotDeprecatedMessageInput = Object.assign(
         body: {
           type: nullable("String"),
           extensions: {
-            protobufField: { name: "body", typeFullName: "string" },
+            protobufField: {
+              name: "body",
+              typeFullName: "string",
+              options: { deprecated: true },
+            },
           },
         },
         enum: {
@@ -1408,6 +1459,7 @@ export const NotDeprecatedMessageInput = Object.assign(
               name: "msg1",
               typeFullName:
                 "testapis.deprecation.NotDeprecatedMessage.InnerMessage1",
+              options: { deprecated: true },
             },
           },
         },
@@ -1428,6 +1480,7 @@ export const NotDeprecatedMessageInput = Object.assign(
               name: "msg3",
               typeFullName:
                 "testapis.deprecation.NotDeprecatedMessage.InnerMessage1",
+              options: { deprecated: true },
             },
           },
         },
@@ -1438,6 +1491,7 @@ export const NotDeprecatedMessageInput = Object.assign(
               name: "msg4",
               typeFullName:
                 "testapis.deprecation.NotDeprecatedMessage.InnerMessage2",
+              options: { deprecated: true },
             },
           },
         },
@@ -1625,7 +1679,12 @@ export const NotDeprecatedEnum = enumType({
     value: 2,
     deprecation:
       "testapis.deprecation.NotDeprecatedEnum.DEPRECATED_BAR is mark as deprecated in a *.proto file.",
-    extensions: { protobufEnumValue: { name: "DEPRECATED_BAR" } },
+    extensions: {
+      protobufEnumValue: {
+        name: "DEPRECATED_BAR",
+        options: { deprecated: true },
+      },
+    },
   }],
   extensions: {
     protobufEnum: {
@@ -1655,6 +1714,7 @@ export const DeprecatedEnum = enumType({
       name: "DeprecatedEnum",
       fullName: "testapis.deprecation.DeprecatedEnum",
       package: "testapis.deprecation",
+      options: { deprecated: true },
     },
   },
 });
@@ -3736,6 +3796,7 @@ export const TestPrefixInterfaceMessage = interfaceType({
       fullName: "testapis.extensions.InterfaceMessage",
       name: "InterfaceMessage",
       package: "testapis.extensions",
+      options: { "[graphql.object_type]": { interface: true } },
     },
   },
 });
@@ -3766,6 +3827,7 @@ export const TestPrefixInterfaceMessageInput = Object.assign(
         fullName: "testapis.extensions.InterfaceMessage",
         name: "InterfaceMessage",
         package: "testapis.extensions",
+        options: { "[graphql.object_type]": { interface: true } },
       },
     },
   }),
@@ -3858,6 +3920,7 @@ export const TestPrefixMessageOnlyOutput = objectType({
       fullName: "testapis.extensions.MessageOnlyOutput",
       name: "MessageOnlyOutput",
       package: "testapis.extensions",
+      options: { "[graphql.input_type]": { ignore: true } },
     },
   },
 });
@@ -4011,6 +4074,7 @@ export const TestPrefixPrefixedMessage = objectType({
         protobufField: {
           name: "this_field_will_be_renamed",
           typeFullName: "string",
+          options: { "[graphql.field]": { name: "thisFieldWasRenamed" } },
         },
       },
     });
@@ -4020,7 +4084,11 @@ export const TestPrefixPrefixedMessage = objectType({
         throw new Error("not implemented");
       },
       extensions: {
-        protobufField: { name: "skip_resolver", typeFullName: "string" },
+        protobufField: {
+          name: "skip_resolver",
+          typeFullName: "string",
+          options: { "[graphql.field]": { skipResolver: true } },
+        },
       },
     });
     t.field("squashedMessages", {
@@ -4399,6 +4467,7 @@ export const TestPrefixPrefixedMessageInput = Object.assign(
           protobufField: {
             name: "this_field_will_be_renamed",
             typeFullName: "string",
+            options: { "[graphql.field]": { name: "thisFieldWasRenamed" } },
           },
         },
       });
@@ -4414,7 +4483,11 @@ export const TestPrefixPrefixedMessageInput = Object.assign(
       t.field("skipResolver", {
         type: nonNull("String"),
         extensions: {
-          protobufField: { name: "skip_resolver", typeFullName: "string" },
+          protobufField: {
+            name: "skip_resolver",
+            typeFullName: "string",
+            options: { "[graphql.field]": { skipResolver: true } },
+          },
         },
       });
       t.field("squashedMessages", {
@@ -4535,6 +4608,7 @@ export const TestPrefixPrefixedMessageInput = Object.assign(
             protobufField: {
               name: "this_field_will_be_renamed",
               typeFullName: "string",
+              options: { "[graphql.field]": { name: "thisFieldWasRenamed" } },
             },
           },
         },
@@ -4550,7 +4624,11 @@ export const TestPrefixPrefixedMessageInput = Object.assign(
         skipResolver: {
           type: nonNull("String"),
           extensions: {
-            protobufField: { name: "skip_resolver", typeFullName: "string" },
+            protobufField: {
+              name: "skip_resolver",
+              typeFullName: "string",
+              options: { "[graphql.field]": { skipResolver: true } },
+            },
           },
         },
         squashedMessages: {
@@ -4646,9 +4724,11 @@ export const TestPrefixPrefixedMessageSquashedMessage = unionType({
       fields: [{
         name: "oneof_field",
         type: "testapis.extensions.PrefixedMessage.InnerMessage",
+        options: { "[graphql.object_type]": { squashUnion: true } },
       }, {
         name: "oneof_field_2",
         type: "testapis.extensions.PrefixedMessage.InnerMessage2",
+        options: { "[graphql.object_type]": { squashUnion: true } },
       }],
     },
   },
@@ -4695,6 +4775,7 @@ export const TestPrefixPrefixedMessageSquashedMessageInput = Object.assign(
         fullName: "testapis.extensions.PrefixedMessage.SquashedMessage",
         name: "SquashedMessage",
         package: "testapis.extensions",
+        options: { "[graphql.object_type]": { squashUnion: true } },
       },
     },
   }),
@@ -4766,6 +4847,7 @@ export const TestPrefixRenamedEnum = enumType({
       name: "EnumWillRename",
       fullName: "testapis.extensions.EnumWillRename",
       package: "testapis.extensions",
+      options: { "[graphql.enum_type]": { name: "RenamedEnum" } },
     },
   },
 });
@@ -4810,6 +4892,7 @@ export const TestPrefixRenamedMessage = objectType({
       fullName: "testapis.extensions.MessageWillRename",
       name: "MessageWillRename",
       package: "testapis.extensions",
+      options: { "[graphql.object_type]": { name: "RenamedMessage" } },
     },
   },
 });
@@ -4839,6 +4922,7 @@ export const TestPrefixRenamedMessageInput = Object.assign(
         fullName: "testapis.extensions.MessageWillRename",
         name: "MessageWillRename",
         package: "testapis.extensions",
+        options: { "[graphql.object_type]": { name: "RenamedMessage" } },
       },
     },
   }),
@@ -4991,6 +5075,7 @@ export const TestPrefixPrefixedMessage = objectType({
         protobufField: {
           name: "this_field_will_be_renamed",
           typeFullName: "string",
+          options: { "[graphql.field]": { name: "thisFieldWasRenamed" } },
         },
       },
     });
@@ -5000,7 +5085,11 @@ export const TestPrefixPrefixedMessage = objectType({
         throw new Error("not implemented");
       },
       extensions: {
-        protobufField: { name: "skip_resolver", typeFullName: "string" },
+        protobufField: {
+          name: "skip_resolver",
+          typeFullName: "string",
+          options: { "[graphql.field]": { skipResolver: true } },
+        },
       },
     });
     t.field("squashedMessages", {
@@ -5126,6 +5215,7 @@ export const TestPrefixRenamedMessage = objectType({
       fullName: "testapis.extensions.MessageWillRename",
       name: "MessageWillRename",
       package: "testapis.extensions",
+      options: { "[graphql.object_type]": { name: "RenamedMessage" } },
     },
   },
 });
@@ -5155,6 +5245,7 @@ export const TestPrefixMessageOnlyOutput = objectType({
       fullName: "testapis.extensions.MessageOnlyOutput",
       name: "MessageOnlyOutput",
       package: "testapis.extensions",
+      options: { "[graphql.input_type]": { ignore: true } },
     },
   },
 });
@@ -5306,6 +5397,7 @@ export const TestPrefixPrefixedMessageInput = Object.assign(
           protobufField: {
             name: "this_field_will_be_renamed",
             typeFullName: "string",
+            options: { "[graphql.field]": { name: "thisFieldWasRenamed" } },
           },
         },
       });
@@ -5321,7 +5413,11 @@ export const TestPrefixPrefixedMessageInput = Object.assign(
       t.field("skipResolver", {
         type: nonNull("String"),
         extensions: {
-          protobufField: { name: "skip_resolver", typeFullName: "string" },
+          protobufField: {
+            name: "skip_resolver",
+            typeFullName: "string",
+            options: { "[graphql.field]": { skipResolver: true } },
+          },
         },
       });
       t.field("squashedMessages", {
@@ -5451,6 +5547,7 @@ export const TestPrefixPrefixedMessageInput = Object.assign(
             protobufField: {
               name: "this_field_will_be_renamed",
               typeFullName: "string",
+              options: { "[graphql.field]": { name: "thisFieldWasRenamed" } },
             },
           },
         },
@@ -5466,7 +5563,11 @@ export const TestPrefixPrefixedMessageInput = Object.assign(
         skipResolver: {
           type: nonNull("String"),
           extensions: {
-            protobufField: { name: "skip_resolver", typeFullName: "string" },
+            protobufField: {
+              name: "skip_resolver",
+              typeFullName: "string",
+              options: { "[graphql.field]": { skipResolver: true } },
+            },
           },
         },
         squashedMessages: {
@@ -5518,6 +5619,7 @@ export const TestPrefixRenamedMessageInput = Object.assign(
         fullName: "testapis.extensions.MessageWillRename",
         name: "MessageWillRename",
         package: "testapis.extensions",
+        options: { "[graphql.object_type]": { name: "RenamedMessage" } },
       },
     },
   }),
@@ -5556,6 +5658,7 @@ export const TestPrefixInterfaceMessageInput = Object.assign(
         fullName: "testapis.extensions.InterfaceMessage",
         name: "InterfaceMessage",
         package: "testapis.extensions",
+        options: { "[graphql.object_type]": { interface: true } },
       },
     },
   }),
@@ -5702,6 +5805,7 @@ export const TestPrefixPrefixedMessageSquashedMessageInput = Object.assign(
         fullName: "testapis.extensions.PrefixedMessage.SquashedMessage",
         name: "SquashedMessage",
         package: "testapis.extensions",
+        options: { "[graphql.object_type]": { squashUnion: true } },
       },
     },
   }),
@@ -5806,6 +5910,7 @@ export const TestPrefixInterfaceMessage = interfaceType({
       fullName: "testapis.extensions.InterfaceMessage",
       name: "InterfaceMessage",
       package: "testapis.extensions",
+      options: { "[graphql.object_type]": { interface: true } },
     },
   },
 });
@@ -5825,9 +5930,11 @@ export const TestPrefixPrefixedMessageSquashedMessage = unionType({
       fields: [{
         name: "oneof_field",
         type: "testapis.extensions.PrefixedMessage.InnerMessage",
+        options: { "[graphql.object_type]": { squashUnion: true } },
       }, {
         name: "oneof_field_2",
         type: "testapis.extensions.PrefixedMessage.InnerMessage2",
+        options: { "[graphql.object_type]": { squashUnion: true } },
       }],
     },
   },
@@ -5885,6 +5992,7 @@ export const TestPrefixRenamedEnum = enumType({
       name: "EnumWillRename",
       fullName: "testapis.extensions.EnumWillRename",
       package: "testapis.extensions",
+      options: { "[graphql.enum_type]": { name: "RenamedEnum" } },
     },
   },
 });
@@ -6042,6 +6150,7 @@ export const TestPrefixPrefixedMessage = objectType({
         protobufField: {
           name: "this_field_will_be_renamed",
           typeFullName: "string",
+          options: { "[graphql.field]": { name: "thisFieldWasRenamed" } },
         },
       },
     });
@@ -6051,7 +6160,11 @@ export const TestPrefixPrefixedMessage = objectType({
         throw new Error("not implemented");
       },
       extensions: {
-        protobufField: { name: "skip_resolver", typeFullName: "string" },
+        protobufField: {
+          name: "skip_resolver",
+          typeFullName: "string",
+          options: { "[graphql.field]": { skipResolver: true } },
+        },
       },
     });
     t.field("squashedMessages", {
@@ -6171,6 +6284,7 @@ export const TestPrefixRenamedMessage = objectType({
       fullName: "testapis.extensions.MessageWillRename",
       name: "MessageWillRename",
       package: "testapis.extensions",
+      options: { "[graphql.object_type]": { name: "RenamedMessage" } },
     },
   },
 });
@@ -6204,6 +6318,7 @@ export const TestPrefixMessageOnlyOutput = objectType({
       fullName: "testapis.extensions.MessageOnlyOutput",
       name: "MessageOnlyOutput",
       package: "testapis.extensions",
+      options: { "[graphql.input_type]": { ignore: true } },
     },
   },
 });
@@ -6370,6 +6485,7 @@ export const TestPrefixPrefixedMessageInput = Object.assign(
           protobufField: {
             name: "this_field_will_be_renamed",
             typeFullName: "string",
+            options: { "[graphql.field]": { name: "thisFieldWasRenamed" } },
           },
         },
       });
@@ -6385,7 +6501,11 @@ export const TestPrefixPrefixedMessageInput = Object.assign(
       t.field("skipResolver", {
         type: nonNull("String"),
         extensions: {
-          protobufField: { name: "skip_resolver", typeFullName: "string" },
+          protobufField: {
+            name: "skip_resolver",
+            typeFullName: "string",
+            options: { "[graphql.field]": { skipResolver: true } },
+          },
         },
       });
       t.field("squashedMessages", {
@@ -6506,6 +6626,7 @@ export const TestPrefixPrefixedMessageInput = Object.assign(
             protobufField: {
               name: "this_field_will_be_renamed",
               typeFullName: "string",
+              options: { "[graphql.field]": { name: "thisFieldWasRenamed" } },
             },
           },
         },
@@ -6521,7 +6642,11 @@ export const TestPrefixPrefixedMessageInput = Object.assign(
         skipResolver: {
           type: nonNull("String"),
           extensions: {
-            protobufField: { name: "skip_resolver", typeFullName: "string" },
+            protobufField: {
+              name: "skip_resolver",
+              typeFullName: "string",
+              options: { "[graphql.field]": { skipResolver: true } },
+            },
           },
         },
         squashedMessages: {
@@ -6573,6 +6698,7 @@ export const TestPrefixRenamedMessageInput = Object.assign(
         fullName: "testapis.extensions.MessageWillRename",
         name: "MessageWillRename",
         package: "testapis.extensions",
+        options: { "[graphql.object_type]": { name: "RenamedMessage" } },
       },
     },
   }),
@@ -6611,6 +6737,7 @@ export const TestPrefixInterfaceMessageInput = Object.assign(
         fullName: "testapis.extensions.InterfaceMessage",
         name: "InterfaceMessage",
         package: "testapis.extensions",
+        options: { "[graphql.object_type]": { interface: true } },
       },
     },
   }),
@@ -6757,6 +6884,7 @@ export const TestPrefixPrefixedMessageSquashedMessageInput = Object.assign(
         fullName: "testapis.extensions.PrefixedMessage.SquashedMessage",
         name: "SquashedMessage",
         package: "testapis.extensions",
+        options: { "[graphql.object_type]": { squashUnion: true } },
       },
     },
   }),
@@ -6862,6 +6990,7 @@ export const TestPrefixInterfaceMessage = interfaceType({
       fullName: "testapis.extensions.InterfaceMessage",
       name: "InterfaceMessage",
       package: "testapis.extensions",
+      options: { "[graphql.object_type]": { interface: true } },
     },
   },
 });
@@ -6881,9 +7010,11 @@ export const TestPrefixPrefixedMessageSquashedMessage = unionType({
       fields: [{
         name: "oneof_field",
         type: "testapis.extensions.PrefixedMessage.InnerMessage",
+        options: { "[graphql.object_type]": { squashUnion: true } },
       }, {
         name: "oneof_field_2",
         type: "testapis.extensions.PrefixedMessage.InnerMessage2",
+        options: { "[graphql.object_type]": { squashUnion: true } },
       }],
     },
   },
@@ -6941,6 +7072,7 @@ export const TestPrefixRenamedEnum = enumType({
       name: "EnumWillRename",
       fullName: "testapis.extensions.EnumWillRename",
       package: "testapis.extensions",
+      options: { "[graphql.enum_type]": { name: "RenamedEnum" } },
     },
   },
 });

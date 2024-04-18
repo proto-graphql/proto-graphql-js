@@ -3,6 +3,7 @@ import {
   InputObjectType,
   protobufGraphQLExtensions,
   protoType,
+  Registry,
   ScalarType,
   tsFieldName,
 } from "@proto-graphql/codegen-core";
@@ -33,6 +34,7 @@ import {
  */
 export function createInputObjectTypeCode(
   type: InputObjectType,
+  registry: Registry,
   opts: PothosPrinterOptions
 ): Code {
   const shapeTypeCode = code`
@@ -74,11 +76,12 @@ export function createInputObjectTypeCode(
             fields: code`t => ({${
               type.fields.length > 0
                 ? type.fields.map(
-                    (f) => code`${f.name}: ${createFieldRefCode(f, opts)},`
+                    (f) =>
+                      code`${f.name}: ${createFieldRefCode(f, registry, opts)},`
                   )
                 : code`_: ${createNoopFieldRefCode({ input: true })}`
             }})`,
-            extensions: protobufGraphQLExtensions(type),
+            extensions: protobufGraphQLExtensions(type, registry),
           })
         )}
       );

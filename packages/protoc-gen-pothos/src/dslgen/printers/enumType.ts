@@ -2,6 +2,7 @@ import {
   compact,
   EnumType,
   protobufGraphQLExtensions,
+  Registry,
 } from "@proto-graphql/codegen-core";
 import { code, Code, joinCode, literalOf } from "ts-poet";
 
@@ -20,6 +21,7 @@ import { pothosBuilder, PothosPrinterOptions, pothosRef } from "./util";
  */
 export function createEnumTypeCode(
   type: EnumType,
+  registry: Registry,
   opts: PothosPrinterOptions
 ): Code {
   const typeOpts = {
@@ -34,16 +36,12 @@ export function createEnumTypeCode(
                 description: ev.description,
                 deprecationReason: ev.deprecationReason,
                 value: ev.number,
-                extensions: {
-                  protobufEnumValue: {
-                    name: ev.proto.name,
-                  },
-                },
+                extensions: protobufGraphQLExtensions(ev, registry),
               })
             )},`
         )
     )}} as const`,
-    extensions: protobufGraphQLExtensions(type),
+    extensions: protobufGraphQLExtensions(type, registry),
   };
   return code`
     export const ${pothosRef(type)} =

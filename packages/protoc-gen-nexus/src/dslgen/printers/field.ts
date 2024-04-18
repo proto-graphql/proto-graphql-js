@@ -12,6 +12,7 @@ import {
   ObjectType,
   protobufGraphQLExtensions,
   protoType,
+  Registry,
   ScalarType,
   SquashedOneofUnionType,
 } from "@proto-graphql/codegen-core";
@@ -35,6 +36,7 @@ import {
  */
 export function createFieldDefinitionCode(
   field: ObjectField<any> | ObjectOneofField | InputObjectField<any>,
+  registry: Registry,
   opts: NexusPrinterOptions
 ): Code {
   const fieldOpts = {
@@ -42,7 +44,7 @@ export function createFieldDefinitionCode(
     description: field.description,
     deprecation: field.deprecationReason,
     resolve: createResolverCode(field, opts),
-    extensions: protobufGraphQLExtensions(field),
+    extensions: protobufGraphQLExtensions(field, registry),
   };
   return code`t.field(${literalOf(field.name)}, ${literalOf(
     compact(fieldOpts)
