@@ -531,7 +531,7 @@ export const NoPartialInputMessageInput$Ref: InputObjectRef<
       fullName: "testapis.extensions.no_partial.NoPartialInputMessage",
       name: "NoPartialInputMessage",
       package: "testapis.extensions.no_partial",
-      options: {},
+      options: { "[graphql.input_type]": { noPartial: true } },
     },
   },
 });

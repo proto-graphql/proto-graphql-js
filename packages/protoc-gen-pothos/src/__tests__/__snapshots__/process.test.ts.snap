@@ -1491,7 +1491,7 @@ export const TestPrefixInterfaceMessageInput$Ref: InputObjectRef<
       fullName: "testapis.extensions.InterfaceMessage",
       name: "InterfaceMessage",
       package: "testapis.extensions",
-      options: {},
+      options: { "[graphql.object_type]": { interface: true } },
     },
   },
 });
@@ -2225,7 +2225,7 @@ export const TestPrefixPrefixedMessageSquashedMessageInput$Ref: InputObjectRef<
       fullName: "testapis.extensions.PrefixedMessage.SquashedMessage",
       name: "SquashedMessage",
       package: "testapis.extensions",
-      options: {},
+      options: { "[graphql.object_type]": { squashUnion: true } },
     },
   },
 });
@@ -2334,7 +2334,7 @@ export const TestPrefixRenamedMessageInput$Ref: InputObjectRef<
       fullName: "testapis.extensions.MessageWillRename",
       name: "MessageWillRename",
       package: "testapis.extensions",
-      options: {},
+      options: { "[graphql.object_type]": { name: "RenamedMessage" } },
     },
   },
 });
@@ -2811,7 +2811,7 @@ export const TestPrefixRenamedMessageInput$Ref: InputObjectRef<
       fullName: "testapis.extensions.MessageWillRename",
       name: "MessageWillRename",
       package: "testapis.extensions",
-      options: {},
+      options: { "[graphql.object_type]": { name: "RenamedMessage" } },
     },
   },
 });
@@ -2837,7 +2837,7 @@ export const TestPrefixInterfaceMessageInput$Ref: InputObjectRef<
       fullName: "testapis.extensions.InterfaceMessage",
       name: "InterfaceMessage",
       package: "testapis.extensions",
-      options: {},
+      options: { "[graphql.object_type]": { interface: true } },
     },
   },
 });
@@ -2941,7 +2941,7 @@ export const TestPrefixPrefixedMessageSquashedMessageInput$Ref: InputObjectRef<
       fullName: "testapis.extensions.PrefixedMessage.SquashedMessage",
       name: "SquashedMessage",
       package: "testapis.extensions",
-      options: {},
+      options: { "[graphql.object_type]": { squashUnion: true } },
     },
   },
 });
