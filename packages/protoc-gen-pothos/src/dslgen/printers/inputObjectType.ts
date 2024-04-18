@@ -4,6 +4,7 @@ import {
   protobufGraphQLExtensions,
   protoType,
   ScalarType,
+  tsFieldName,
 } from "@proto-graphql/codegen-core";
 import { Code, code, imp, joinCode, literalOf } from "ts-poet";
 
@@ -45,7 +46,7 @@ export function createInputObjectTypeCode(
             if (f.isList()) typeNode = code`Array<${typeNode}>`;
           } else {
             typeNode = code`${protoType(type.proto, opts)}[${literalOf(
-              f.proto.jsonName
+              tsFieldName(f.proto, opts)
             )}]`;
           }
           return f.isNullable()

@@ -1,14 +1,18 @@
-import { ProtoMessage } from "@proto-graphql/proto-descriptors";
+import { DescMessage } from "@bufbuild/protobuf";
 
 import { EnumType } from "./EnumType";
 import { InputObjectField } from "./InputObjectField";
 import { ScalarType } from "./ScalarType";
 import { TypeBase } from "./TypeBase";
 import { getInputObjectFieldType } from "./types";
-import { gqlTypeName, isIgnoredField, isOutputOnlyField } from "./util";
-import * as extensions from "../__generated__/extensions/graphql/schema_pb";
+import {
+  getInputTypeOptions,
+  gqlTypeName,
+  isIgnoredField,
+  isOutputOnlyField,
+} from "./util";
 
-export class InputObjectType extends TypeBase<ProtoMessage> {
+export class InputObjectType extends TypeBase<DescMessage> {
   /**
    * @override
    */
@@ -33,11 +37,7 @@ export class InputObjectType extends TypeBase<ProtoMessage> {
   }
 
   public hasPartialInput(): boolean {
-    const noPartial =
-      this.proto.descriptor
-        .getOptions()
-        ?.getExtension(extensions.inputType)
-        ?.getNoPartial() ?? false;
+    const noPartial = getInputTypeOptions(this.proto).noPartial;
     return !noPartial;
   }
 

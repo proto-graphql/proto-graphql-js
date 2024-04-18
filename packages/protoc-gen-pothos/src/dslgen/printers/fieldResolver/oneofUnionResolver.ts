@@ -1,7 +1,9 @@
 import {
   ObjectField,
   ObjectOneofField,
+  PrinterOptions,
   SquashedOneofUnionType,
+  tsFieldName,
 } from "@proto-graphql/codegen-core";
 import { Code, code, joinCode } from "ts-poet";
 
@@ -17,7 +19,8 @@ import { Code, code, joinCode } from "ts-poet";
  */
 export function createOneofUnionResolverCode(
   sourceExpr: Code,
-  field: ObjectOneofField | ObjectField<SquashedOneofUnionType>
+  field: ObjectOneofField | ObjectField<SquashedOneofUnionType>,
+  opts: PrinterOptions
 ): Code {
   const createBlockStmtCode = (
     sourceExpr: Code,
@@ -25,9 +28,9 @@ export function createOneofUnionResolverCode(
   ): Code => {
     const createFieldExpr = (memberField: ObjectField<any>) => {
       if (field instanceof ObjectOneofField) {
-        return code`${sourceExpr}.${memberField.proto.jsonName}`;
+        return code`${sourceExpr}.${tsFieldName(memberField.proto, opts)}`;
       }
-      return code`${sourceExpr}?.${memberField.proto.jsonName}`;
+      return code`${sourceExpr}?.${tsFieldName(memberField.proto, opts)}`;
     };
 
     return code`

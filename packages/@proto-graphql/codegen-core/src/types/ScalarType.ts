@@ -1,4 +1,4 @@
-import { ProtoField } from "@proto-graphql/proto-descriptors";
+import { DescField, ScalarType as ProtoScalarType } from "@bufbuild/protobuf";
 
 export type GqlScalarType =
   | "Int"
@@ -12,7 +12,7 @@ export type GqlScalarType =
 
 export class ScalarType {
   constructor(
-    private readonly proto: ProtoField,
+    private readonly proto: DescField,
     private readonly type: GqlScalarType
   ) {}
 
@@ -21,14 +21,13 @@ export class ScalarType {
   }
 
   public isPrimitive(): boolean {
-    return this.proto.type == null || this.proto.type.kind === "Scalar";
+    return this.proto.fieldKind === "scalar";
   }
 
   public isWrapperType(): boolean {
     return (
-      this.proto.type != null &&
-      this.proto.type.kind !== "Scalar" &&
-      this.proto.type.file.name === "google/protobuf/wrappers.proto"
+      this.proto.fieldKind === "message" &&
+      this.proto.message.file.name === "google/protobuf/wrappers.proto"
     );
   }
 
@@ -37,17 +36,16 @@ export class ScalarType {
   }
 
   public isBytes(): boolean {
-    switch (this.proto.type.kind) {
-      case "Scalar":
-        return this.proto.type.type === "bytes";
-      case "Message":
-        return (
-          this.proto.type.fullName.toString() === "google.protobuf.BytesValue"
-        );
-      case "Enum":
+    switch (this.proto.fieldKind) {
+      case "scalar":
+        return this.proto.scalar === ProtoScalarType.BYTES;
+      case "message":
+        return this.proto.message.typeName === "google.protobuf.BytesValue";
+      case "enum":
+      case "map":
         return false;
       default: {
-        this.proto.type satisfies never;
+        this.proto satisfies never;
         return false;
       }
     }

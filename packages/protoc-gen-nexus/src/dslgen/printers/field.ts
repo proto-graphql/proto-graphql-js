@@ -6,7 +6,7 @@ import {
   InputObjectType,
   InterfaceType,
   isProtobufLong,
-  isProtobufWellKnownType,
+  isProtobufWellKnownTypeField,
   ObjectField,
   ObjectOneofField,
   ObjectType,
@@ -251,10 +251,10 @@ function createResolverCode(
     }
   }
 
-  if (isProtobufWellKnownType(field.proto.type)) {
-    const transformer = code`${impProtoNexus(
-      "getTransformer"
-    )}("${field.proto.type.fullName.toString()}")`;
+  if (isProtobufWellKnownTypeField(field.proto)) {
+    const transformer = code`${impProtoNexus("getTransformer")}("${
+      field.proto.message.typeName
+    }")`;
     chunks.push(code`return ${transformer}.protoToGql(value);`);
   } else if (isProtobufLong(field.proto)) {
     chunks.push(code`return value.toString();`);

@@ -4,7 +4,7 @@ import {
   InputObjectField,
   InputObjectType,
   isProtobufLong,
-  isProtobufWellKnownType,
+  isProtobufWellKnownTypeField,
   protobufGraphQLExtensions,
   protoType,
   ScalarType,
@@ -93,8 +93,8 @@ export function createToProtoFuncCode(
         type.fields.map((f) => {
           let wrapperFunc: (v: Code) => Code = (v) => v;
           if (f.type instanceof ScalarType) {
-            if (isProtobufWellKnownType(f.proto.type)) {
-              const protoFullName = f.proto.type.fullName.toString();
+            if (isProtobufWellKnownTypeField(f.proto)) {
+              const protoFullName = f.proto.message.typeName;
               const transformer = code`${impProtoNexus(
                 "getTransformer"
               )}("${protoFullName}")`;

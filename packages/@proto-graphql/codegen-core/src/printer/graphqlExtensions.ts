@@ -9,6 +9,7 @@ import {
   ObjectType,
   OneofUnionType,
   SquashedOneofUnionType,
+  scalarMapLabelByType,
 } from "../types";
 
 export function protobufGraphQLExtensions(
@@ -26,9 +27,9 @@ export function protobufGraphQLExtensions(
   if (type instanceof ObjectType || type instanceof InputObjectType) {
     return {
       protobufMessage: {
-        fullName: type.proto.fullName.toString(),
+        fullName: type.proto.typeName,
         name: type.proto.name,
-        package: type.proto.file.package,
+        package: type.proto.file.proto.package ?? "",
       },
     };
   }
@@ -36,8 +37,8 @@ export function protobufGraphQLExtensions(
     return {
       protobufEnum: {
         name: type.proto.name,
-        fullName: type.proto.fullName.toString(),
-        package: type.proto.file.package,
+        fullName: type.proto.typeName,
+        package: type.proto.file.proto.package ?? "",
       },
     };
   }
@@ -47,14 +48,16 @@ export function protobufGraphQLExtensions(
   ) {
     return {
       protobufOneof: compact({
-        fullName: type.proto.fullName.toString(),
+        fullName:
+          type.proto.kind === "oneof"
+            ? `${type.proto.parent.typeName}.${type.proto.name}`
+            : type.proto.typeName,
         name: type.proto.name,
         messageName:
-          type.proto.kind === "Oneof" ? type.proto.parent.name : undefined,
-        package: (type.proto.kind === "Message"
-          ? type.proto
-          : type.proto.parent
-        ).file.package,
+          type.proto.kind === "oneof" ? type.proto.parent.name : undefined,
+        package:
+          (type.proto.kind === "message" ? type.proto : type.proto.parent).file
+            .proto.package ?? "",
         fields: type.fields.map((f) => ({
           name: f.proto.name,
           type: protoFieldTypeFullName(f),
@@ -90,14 +93,21 @@ export function protobufGraphQLExtensions(
 function protoFieldTypeFullName(
   field: ObjectField<any> | ObjectOneofField | InputObjectField<any>
 ): string | undefined {
-  if (
-    (field instanceof ObjectField || field instanceof InputObjectField) &&
-    field.proto.type !== null
-  ) {
-    if (field.proto.type.kind === "Scalar") {
-      return field.proto.type.type;
+  if (field instanceof ObjectField || field instanceof InputObjectField) {
+    switch (field.proto.fieldKind) {
+      case "message":
+        return field.proto.message.typeName;
+      case "enum":
+        return field.proto.enum.typeName;
+      case "scalar":
+        return scalarMapLabelByType[field.proto.scalar];
+      case "map":
+        return undefined;
+      default: {
+        field.proto satisfies never;
+        return undefined;
+      }
     }
-    return field.proto.type.fullName.toString();
   }
   return undefined;
 }

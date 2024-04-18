@@ -1,17 +1,17 @@
-import { ProtoMessage } from "@proto-graphql/proto-descriptors";
+import { DescMessage } from "@bufbuild/protobuf";
 
 import { ObjectField } from "./ObjectField";
 import { ObjectOneofField } from "./ObjectOneofField";
 import { OneofUnionType } from "./OneofUnionType";
 import { TypeBase } from "./TypeBase";
 import { getObjectFieldType } from "./types";
-import { isIgnoredField, isInputOnlyField } from "./util";
+import { isIgnoredField, isInputOnlyField, isSyntheticOneof } from "./util";
 
-export class ObjectType extends TypeBase<ProtoMessage> {
+export class ObjectType extends TypeBase<DescMessage> {
   get fields(): (ObjectField<any> | ObjectOneofField)[] {
     return [
       ...this.proto.fields
-        .filter((f) => f.containingOneof == null || f.containingOneof.synthetic)
+        .filter((f) => f.oneof == null || isSyntheticOneof(f.oneof))
         .filter((f) => !isInputOnlyField(f))
         .filter((f) => !isIgnoredField(f))
         .map(

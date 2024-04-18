@@ -1,16 +1,16 @@
-import { ProtoOneof } from "@proto-graphql/proto-descriptors";
-import { camelCase } from "change-case";
+import { DescOneof } from "@bufbuild/protobuf";
+import { camelCase } from "case-anything";
 
 import { FieldBase } from "./FieldBase";
 import { ObjectType } from "./ObjectType";
 import { OneofUnionType } from "./OneofUnionType";
 import { isRequiredField } from "./util";
 
-export class ObjectOneofField extends FieldBase<ProtoOneof> {
+export class ObjectOneofField extends FieldBase<DescOneof> {
   constructor(
     readonly type: OneofUnionType,
     private readonly parent: ObjectType,
-    proto: ProtoOneof
+    proto: DescOneof
   ) {
     super(proto);
   }

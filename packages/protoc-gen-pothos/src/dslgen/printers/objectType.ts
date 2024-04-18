@@ -1,11 +1,12 @@
+import { DescField } from "@bufbuild/protobuf";
 import {
   compact,
   InterfaceType,
   ObjectType,
   protobufGraphQLExtensions,
   protoType,
+  tsFieldName,
 } from "@proto-graphql/codegen-core";
-import { ProtoField } from "@proto-graphql/proto-descriptors";
 import { Code, code, joinCode, literalOf } from "ts-poet";
 
 import { createFieldRefCode, createNoopFieldRefCode } from "./field";
@@ -46,7 +47,7 @@ export function createObjectTypeCode(
             type.proto,
             opts
           )} | { $type: string & {} }).$type
-            === ${literalOf(type.proto.fullName.toString())};
+            === ${literalOf(type.proto.typeName)};
         }
       `,
     extensions: protobufGraphQLExtensions(type),
@@ -63,7 +64,7 @@ export function createObjectTypeCode(
           ${protoType(type.proto, opts)},
           ${joinCode(
             type.fields.map(
-              (f) => code`${literalOf((f.proto as ProtoField).jsonName)}`
+              (f) => code`${literalOf(tsFieldName(f.proto as DescField, opts))}`
             ),
             { on: "|" }
           )}

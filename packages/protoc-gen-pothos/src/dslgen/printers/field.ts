@@ -1,3 +1,4 @@
+import { DescField } from "@bufbuild/protobuf";
 import {
   compact,
   createGetFieldValueCode,
@@ -9,8 +10,8 @@ import {
   protobufGraphQLExtensions,
   ScalarType,
   SquashedOneofUnionType,
+  tsFieldName,
 } from "@proto-graphql/codegen-core";
-import { ProtoField } from "@proto-graphql/proto-descriptors";
 import { code, Code, literalOf } from "ts-poet";
 
 import { createEnumResolverCode } from "./fieldResolver/enumFieldResolver";
@@ -52,7 +53,7 @@ export function createFieldRefCode(
   let resolverCode: Code | undefined;
   if (!isInput) {
     if (field instanceof ObjectOneofField) {
-      resolverCode = createOneofUnionResolverCode(sourceExpr, field);
+      resolverCode = createOneofUnionResolverCode(sourceExpr, field, opts);
     } else {
       const valueExpr = createGetFieldValueCode(sourceExpr, field.proto, opts);
       const nullableInProto =
@@ -70,7 +71,7 @@ export function createFieldRefCode(
         field.type instanceof SquashedOneofUnionType &&
         field instanceof ObjectField
       ) {
-        resolverCode = createOneofUnionResolverCode(valueExpr, field);
+        resolverCode = createOneofUnionResolverCode(valueExpr, field, opts);
       }
       if (field.type instanceof ScalarType && field.type.isBytes()) {
         if (field.isList()) {
@@ -100,7 +101,7 @@ export function createFieldRefCode(
   return shouldUseFieldFunc
     ? code`t.field(${literalOf(compact(fieldOpts))})`
     : code`t.expose(${literalOf(
-        (field.proto as ProtoField).jsonName
+        tsFieldName(field.proto as DescField, opts)
       )}, ${literalOf(compact(fieldOpts))})`;
 }
 
