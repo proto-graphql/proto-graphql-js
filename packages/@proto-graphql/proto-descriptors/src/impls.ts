@@ -15,6 +15,8 @@ import {
   isDeprecated,
   memo,
 } from "./common";
+import { getScalarTypeFromDescriptor } from "./scalars";
+
 import type {
   CommentSet,
   FullName,
@@ -28,7 +30,6 @@ import type {
   ProtoScalar,
   ProtoService,
 } from "./interfaces";
-import { getScalarTypeFromDescriptor } from "./scalars";
 
 export class ProtoRegistry {
   public fileByName: Record<string, ProtoFile>;
@@ -52,6 +53,7 @@ export class ProtoRegistry {
   public addFile(fd: FileDescriptorProto) {
     const file = new ProtoFileImpl(fd, this);
 
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     this.fileByName[fd.getName()!] = file;
 
     const [msgs, enums] = file.collectTypesRecursively();
@@ -70,6 +72,7 @@ export class ProtoFileImpl implements ProtoFile {
   ) {}
 
   get name(): string {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     return this.descriptor.getName()!;
   }
 
@@ -85,6 +88,7 @@ export class ProtoFileImpl implements ProtoFile {
   }
 
   get package(): string {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     return this.descriptor.getPackage()!;
   }
 
@@ -144,6 +148,7 @@ export class ProtoServiceImpl implements ProtoService {
   ) {}
 
   get name(): string {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     return this.descriptor.getName()!;
   }
 
@@ -181,6 +186,7 @@ export class ProtoMethodImpl implements ProtoMethod {
   ) {}
 
   get name(): string {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     return this.descriptor.getName()!;
   }
 
@@ -191,6 +197,7 @@ export class ProtoMethodImpl implements ProtoMethod {
 
   @memo()
   get input(): ProtoMessage {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     const fullName = this.descriptor.getInputType()!.replace(/^./, "");
     const msg = this.registry.findTypeByFullName(fullName);
     if (msg == null || msg.kind !== "Message")
@@ -200,6 +207,7 @@ export class ProtoMethodImpl implements ProtoMethod {
 
   @memo()
   get output(): ProtoMessage {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     const fullName = this.descriptor.getOutputType()!.replace(/^./, "");
     const msg = this.registry.findTypeByFullName(fullName);
     if (msg == null || msg.kind !== "Message")
@@ -224,6 +232,7 @@ export class ProtoMessageImpl implements ProtoMessage {
   ) {}
 
   get name(): string {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     return this.descriptor.getName()!;
   }
 
@@ -286,6 +295,7 @@ export class ProtoOneofImpl implements ProtoOneof {
   ) {}
 
   get name(): string {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     return this.descriptor.getName()!;
   }
 
@@ -335,6 +345,7 @@ export class ProtoFieldImpl implements ProtoField {
   ) {}
 
   get name(): string {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     return this.descriptor.getName()!;
   }
 
@@ -344,10 +355,12 @@ export class ProtoFieldImpl implements ProtoField {
   }
 
   get jsonName(): string {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     return this.descriptor.getJsonName()!;
   }
 
   get number(): number {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     return this.descriptor.getNumber()!;
   }
 
@@ -357,6 +370,7 @@ export class ProtoFieldImpl implements ProtoField {
     if (scalarType !== undefined) return { kind: "Scalar", type: scalarType };
 
     const foundType = this.registry.findTypeByFullName(
+      // biome-ignore lint/style/noNonNullAssertion: definitely non-null
       this.descriptor.getTypeName()!.replace(/^\./, ""),
     );
     if (foundType === null)
@@ -405,6 +419,7 @@ export class ProtoEnumImpl implements ProtoEnum {
   ) {}
 
   get name(): string {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     return this.descriptor.getName()!;
   }
 
@@ -446,6 +461,7 @@ export class ProtoEnumValueImpl implements ProtoEnumValue {
   ) {}
 
   get name(): string {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     return this.descriptor.getName()!;
   }
 
@@ -455,6 +471,7 @@ export class ProtoEnumValueImpl implements ProtoEnumValue {
   }
 
   get number(): number {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     return this.descriptor.getNumber()!;
   }
 
