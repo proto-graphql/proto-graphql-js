@@ -1,19 +1,19 @@
 import {
-  compact,
   InputObjectType,
-  protobufGraphQLExtensions,
-  protoType,
   type Registry,
   ScalarType,
+  compact,
+  protoType,
+  protobufGraphQLExtensions,
   tsFieldName,
 } from "@proto-graphql/codegen-core";
 import { type Code, code, imp, joinCode, literalOf } from "ts-poet";
 
 import { createFieldRefCode, createNoopFieldRefCode } from "./field";
 import {
+  type PothosPrinterOptions,
   fieldTypeShape,
   pothosBuilder,
-  type PothosPrinterOptions,
   pothosRef,
   shapeType,
 } from "./util";

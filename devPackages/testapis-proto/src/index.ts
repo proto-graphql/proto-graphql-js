@@ -1,4 +1,4 @@
-import { FileDescriptorSet, CodeGeneratorRequest } from "@bufbuild/protobuf";
+import { CodeGeneratorRequest, FileDescriptorSet } from "@bufbuild/protobuf";
 
 import { fileDescriptorSetBins } from "./__generated__/fileDescriptorSetBins";
 

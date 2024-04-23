@@ -1,13 +1,13 @@
 import type { DescFile } from "@bufbuild/protobuf";
 import type { Schema } from "@bufbuild/protoplugin/ecmascript";
 import {
+  type Registry,
+  type TypeOptions,
   collectTypesFromFile,
   createRegistryFromSchema,
   filename,
   filenameFromProtoFile,
   printCodes,
-  type Registry,
-  type TypeOptions,
 } from "@proto-graphql/codegen-core";
 import type { Code } from "ts-poet";
 

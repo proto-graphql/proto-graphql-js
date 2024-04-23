@@ -1,8 +1,8 @@
 import {
+  type DescEnum,
+  type DescField,
   type DescFile,
   type DescMessage,
-  type DescField,
-  type DescEnum,
   ScalarType as ProtoScalarType,
 } from "@bufbuild/protobuf";
 

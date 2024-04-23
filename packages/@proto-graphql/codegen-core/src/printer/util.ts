@@ -1,17 +1,16 @@
 import * as path from "node:path";
 
 import {
+  type DescEnum,
+  type DescField,
   type DescFile,
   type DescMessage,
-  type DescField,
-  type DescEnum,
   ScalarType as ProtoScalarType,
 } from "@bufbuild/protobuf";
 import { camelCase as camelCaseAnything } from "case-anything";
 import { camelCase } from "change-case";
 import { type Code, code, imp } from "ts-poet";
 
-import type { PrinterOptions } from "./options";
 import {
   type EnumType,
   type InputObjectField,
@@ -23,6 +22,7 @@ import {
   type OneofUnionType,
   type SquashedOneofUnionType,
 } from "../types";
+import type { PrinterOptions } from "./options";
 
 export function filename(
   type:
@@ -39,12 +39,11 @@ export function filename(
   switch (opts.fileLayout) {
     case "proto_file":
       return filenameFromProtoFile(file, opts);
-    case "graphql_type": {
+    case "graphql_type":
       return path.join(
         path.dirname(file.name),
         `${type.typeName}.${opts.dsl}.ts`,
       );
-    }
     /* istanbul ignore next */
     default: {
       const _exhaustiveCheck: never = opts.fileLayout;

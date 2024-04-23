@@ -2,8 +2,6 @@ import * as path from "node:path";
 
 import {
   type EnumType,
-  filename,
-  generatedGraphQLTypeImportPath,
   type InputObjectField,
   type InputObjectType,
   type InterfaceType,
@@ -13,8 +11,10 @@ import {
   type OneofUnionType,
   type PrinterOptions,
   type SquashedOneofUnionType,
+  filename,
+  generatedGraphQLTypeImportPath,
 } from "@proto-graphql/codegen-core";
-import { code, type Code, imp } from "ts-poet";
+import { type Code, code, imp } from "ts-poet";
 
 export type PothosPrinterOptions = Extract<PrinterOptions, { dsl: "pothos" }>;
 

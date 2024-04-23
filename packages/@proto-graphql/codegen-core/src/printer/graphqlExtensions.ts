@@ -1,4 +1,3 @@
-import { compact } from "./util";
 import {
   EnumType,
   EnumTypeValue,
@@ -12,6 +11,7 @@ import {
   SquashedOneofUnionType,
   scalarMapLabelByType,
 } from "../types";
+import { compact } from "./util";
 
 export function protobufGraphQLExtensions(
   type:

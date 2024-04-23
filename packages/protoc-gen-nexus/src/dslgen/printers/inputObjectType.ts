@@ -1,14 +1,14 @@
 import {
-  compact,
-  createSetFieldValueCode,
   type InputObjectField,
   InputObjectType,
-  isProtobufLong,
-  isProtobufWellKnownTypeField,
-  protobufGraphQLExtensions,
-  protoType,
   type Registry,
   ScalarType,
+  compact,
+  createSetFieldValueCode,
+  isProtobufLong,
+  isProtobufWellKnownTypeField,
+  protoType,
+  protobufGraphQLExtensions,
 } from "@proto-graphql/codegen-core";
 import { type Code, code, joinCode, literalOf } from "ts-poet";
 
@@ -18,10 +18,10 @@ import {
   createTypeCode,
 } from "./field";
 import {
+  type NexusPrinterOptions,
   fieldType,
   impNexus,
   impProtoNexus,
-  type NexusPrinterOptions,
   nexusTypeDef,
 } from "./util";
 

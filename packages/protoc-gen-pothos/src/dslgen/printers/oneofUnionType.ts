@@ -1,13 +1,13 @@
 import {
-  compact,
   type OneofUnionType,
-  protobufGraphQLExtensions,
   type Registry,
   type SquashedOneofUnionType,
+  compact,
+  protobufGraphQLExtensions,
 } from "@proto-graphql/codegen-core";
-import { code, type Code, literalOf } from "ts-poet";
+import { type Code, code, literalOf } from "ts-poet";
 
-import { pothosBuilder, type PothosPrinterOptions, pothosRef } from "./util";
+import { type PothosPrinterOptions, pothosBuilder, pothosRef } from "./util";
 
 /**
  * @example

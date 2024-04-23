@@ -1,10 +1,10 @@
 import {
-  compact,
   type EnumType,
-  protobufGraphQLExtensions,
   type Registry,
+  compact,
+  protobufGraphQLExtensions,
 } from "@proto-graphql/codegen-core";
-import { code, type Code, literalOf } from "ts-poet";
+import { type Code, code, literalOf } from "ts-poet";
 
 import { impNexus, nexusTypeDef } from "./util";
 

@@ -1,7 +1,7 @@
 import * as wrappersPb from "google-protobuf/google/protobuf/wrappers_pb";
 import {
-  registerTransformer,
   type Transformer,
+  registerTransformer,
   stringToNumber,
 } from "proto-nexus";
 

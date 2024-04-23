@@ -1,8 +1,8 @@
 import { createEcmaScriptPlugin } from "@bufbuild/protoplugin";
 import { createTsGenerator } from "@proto-graphql/protoc-plugin-helpers";
 
-import { generateFiles } from "./printer";
 import { version } from "../package.json";
+import { generateFiles } from "./printer";
 
 export const protocGenPothos = createEcmaScriptPlugin({
   name: "protoc-gen-pothos",

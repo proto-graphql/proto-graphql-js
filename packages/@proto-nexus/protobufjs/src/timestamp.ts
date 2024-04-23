@@ -1,4 +1,4 @@
-import { registerTransformer, type Transformer } from "proto-nexus";
+import { type Transformer, registerTransformer } from "proto-nexus";
 import type { common } from "protobufjs";
 
 declare global {

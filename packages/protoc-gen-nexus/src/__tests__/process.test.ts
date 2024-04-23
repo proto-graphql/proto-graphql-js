@@ -1,6 +1,6 @@
 import {
-  itGeneratesNexusDSLsToMatchSnapshtos,
   generateDSLs,
+  itGeneratesNexusDSLsToMatchSnapshtos,
   snapshotGeneratedFiles,
 } from "./__helpers__/process.test.helper";
 

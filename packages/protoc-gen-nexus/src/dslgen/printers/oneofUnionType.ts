@@ -1,16 +1,16 @@
 import {
-  compact,
   type OneofUnionType,
-  protobufGraphQLExtensions,
   type Registry,
   type SquashedOneofUnionType,
+  compact,
+  protobufGraphQLExtensions,
 } from "@proto-graphql/codegen-core";
-import { code, type Code, joinCode, literalOf } from "ts-poet";
+import { type Code, code, joinCode, literalOf } from "ts-poet";
 
 import {
+  type NexusPrinterOptions,
   fieldType,
   impNexus,
-  type NexusPrinterOptions,
   nexusTypeDef,
 } from "./util";
 

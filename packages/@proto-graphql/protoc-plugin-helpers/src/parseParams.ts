@@ -1,8 +1,8 @@
 import {
-  defaultScalarMapping,
-  fileLayouts,
   type PrinterOptions,
   type TypeOptions,
+  defaultScalarMapping,
+  fileLayouts,
 } from "@proto-graphql/codegen-core";
 
 export function parseParams<DSL extends PrinterOptions["dsl"]>(

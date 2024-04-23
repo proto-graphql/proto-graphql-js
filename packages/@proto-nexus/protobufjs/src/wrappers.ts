@@ -1,6 +1,6 @@
 import {
-  registerTransformer,
   type Transformer,
+  registerTransformer,
   stringToNumber,
 } from "proto-nexus";
 import type { common } from "protobufjs";

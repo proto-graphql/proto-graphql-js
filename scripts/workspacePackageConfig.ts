@@ -1,8 +1,8 @@
 #!/usr/bin/env -S pnpm exec ts-node --transpile-only
 
-import { join, dirname } from "node:path";
 import { exec as _exec } from "node:child_process";
-import { readFile, copyFile, writeFile } from "node:fs/promises";
+import { copyFile, readFile, writeFile } from "node:fs/promises";
+import { dirname, join } from "node:path";
 import { promisify } from "node:util";
 import minimatch from "minimatch";
 
