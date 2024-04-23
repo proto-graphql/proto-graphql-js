@@ -17,7 +17,6 @@
     "google-protobuf": "^3.12.2"
   },
   "devDependencies": {
-    "@proto-graphql/eslint-config": "workspace:*",
     "@proto-graphql/tsconfig": "workspace:*"
   },
   "files": ["lib/", "module/"],
@@ -28,7 +27,7 @@
     "clean": "pnpm run clean:cjs && pnpm run clean:module",
     "clean:cjs": "pnpm run build:cjs --clean",
     "clean:module": "pnpm run build:module --clean",
-    "lint": "eslint --fix .",
+
     "test": "jest --coverage --passWithNoTests"
   }
 }

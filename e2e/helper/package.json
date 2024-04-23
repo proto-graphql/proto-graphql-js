@@ -6,11 +6,9 @@
   "main": "./lib/index.js",
   "scripts": {
     "build:e2e": "tsc --build tsconfig.cjs.json",
-    "clean": "pnpm run build:e2e --clean",
-    "lint": "eslint --fix ."
+    "clean": "pnpm run build:e2e --clean"
   },
   "devDependencies": {
-    "@proto-graphql/eslint-config": "workspace:*",
     "@proto-graphql/tsconfig": "workspace:*"
   },
   "types": "./lib/index.d.ts"

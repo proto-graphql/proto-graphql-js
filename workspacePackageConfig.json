@@ -7,15 +7,10 @@
         "e2e/!(testapis)/**"
       ],
       "package.json": {
-        "scripts": {
-          "lint": "eslint --fix ."
-        },
         "devDependencies": {
-          "@proto-graphql/eslint-config": "workspace:*",
           "@proto-graphql/tsconfig": "workspace:*"
         }
-      },
-      "copy": [{ "src": "configs/.eslintrc.js", "dest": ".eslintrc.js" }]
+      }
     },
     {
       "files": ["packages/**"],

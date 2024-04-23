@@ -29,11 +29,9 @@
     "build:module": "tsc --build tsconfig.module.json",
     "clean": "pnpm run clean:cjs && pnpm run clean:module",
     "clean:cjs": "pnpm run build:cjs --clean",
-    "clean:module": "pnpm run build:module --clean",
-    "lint": "eslint --fix ."
+    "clean:module": "pnpm run build:module --clean"
   },
   "devDependencies": {
-    "@proto-graphql/eslint-config": "workspace:*",
     "@proto-graphql/tsconfig": "workspace:*"
   }
 }
