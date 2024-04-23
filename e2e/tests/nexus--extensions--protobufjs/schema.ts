@@ -100,7 +100,7 @@ const testSkipResolverQuery = queryField("testSkipResolver", {
       squashedMessage:
         new pbjs.testapis.extensions.PrefixedMessage.SquashedMessage({
           oneofField: new pbjs.testapis.extensions.PrefixedMessage.InnerMessage(
-            {}
+            {},
           ),
         }),
     });

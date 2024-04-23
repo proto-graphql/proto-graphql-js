@@ -16,7 +16,7 @@ export function generateDSLs(
     withPrefix?: boolean;
     perGraphQLType?: boolean;
     partialInputs?: boolean;
-  } = {}
+  } = {},
 ) {
   const params = [];
   switch (target) {
@@ -28,7 +28,7 @@ export function generateDSLs(
     case "native protobuf":
       if (opts.withPrefix)
         params.push(
-          "import_prefix=@proto-graphql/e2e-testapis-google-protobuf/lib"
+          "import_prefix=@proto-graphql/e2e-testapis-google-protobuf/lib",
         );
       break;
     default: {
@@ -47,7 +47,7 @@ export function generateDSLs(
 
 export function itGeneratesNexusDSLsToMatchSnapshtos(
   pkg: TestapisPackage,
-  expectedGeneratedFiles: string[]
+  expectedGeneratedFiles: string[],
 ) {
   describe.each(generationTargets)("with %s", (target) => {
     it("generates nexus DSLs", () => {
@@ -59,7 +59,7 @@ export function itGeneratesNexusDSLsToMatchSnapshtos(
 
 export function snapshotGeneratedFiles(
   resp: CodeGeneratorResponse,
-  files: string[]
+  files: string[],
 ) {
   expect(Object.keys(resp.file)).toHaveLength(files.length);
 
@@ -73,7 +73,7 @@ export function snapshotGeneratedFiles(
 
 export function processCodeGeneration(
   pkg: TestapisPackage,
-  param?: string
+  param?: string,
 ): CodeGeneratorResponse {
   const req = buildCodeGeneratorRequest(pkg);
   req.parameter = "target=ts";
@@ -86,6 +86,6 @@ export function processCodeGeneration(
 function getFileMap(resp: CodeGeneratorResponse): Record<string, string> {
   return resp.file.reduce(
     (m, f) => ({ ...m, [f.name!]: f.content! }),
-    {} as Record<string, string>
+    {} as Record<string, string>,
   );
 }

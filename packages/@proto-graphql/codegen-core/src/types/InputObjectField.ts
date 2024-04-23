@@ -13,7 +13,7 @@ export class InputObjectField<
   constructor(
     readonly type: T,
     readonly parent: InputObjectType,
-    proto: DescField
+    proto: DescField,
   ) {
     super(proto);
   }
@@ -41,7 +41,7 @@ export class InputObjectField<
           ? this.type.toPartialInput()
           : this.type) as any,
         this.parent,
-        this.proto
+        this.proto,
       );
     }
     return new PartialInputObjectField(this.type, this.parent, this.proto);

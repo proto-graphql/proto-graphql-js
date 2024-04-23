@@ -21,7 +21,7 @@ import { fieldType, impNexus, NexusPrinterOptions, nexusTypeDef } from "./util";
 export function createOneofUnionTypeCode(
   type: OneofUnionType | SquashedOneofUnionType,
   registry: Registry,
-  opts: NexusPrinterOptions
+  opts: NexusPrinterOptions,
 ): Code {
   const typeOpts = {
     name: type.typeName,
@@ -29,12 +29,12 @@ export function createOneofUnionTypeCode(
     definition: code`(t) => {
       t.members(${joinCode(
         type.fields.map((f) => fieldType(f, opts)),
-        { on: "," }
+        { on: "," },
       )});
     }`,
     extensions: protobufGraphQLExtensions(type, registry),
   };
   return code`export const ${nexusTypeDef(type)} = ${impNexus(
-    "unionType"
+    "unionType",
   )}(${literalOf(compact(typeOpts))});`;
 }

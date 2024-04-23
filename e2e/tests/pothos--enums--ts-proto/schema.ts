@@ -18,7 +18,7 @@ builder.queryField("test", (f) =>
           MyEnumWithoutUnspecified.MY_ENUM_WITHOUT_UNSPECIFIED_FOO,
       });
     },
-  })
+  }),
 );
 
 export const schema = builder.toSchema();

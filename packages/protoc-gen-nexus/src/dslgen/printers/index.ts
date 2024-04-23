@@ -23,7 +23,7 @@ export function createTypeDslCodes(
     | SquashedOneofUnionType
   )[],
   registry: Registry,
-  opts: NexusPrinterOptions
+  opts: NexusPrinterOptions,
 ): Code[] {
   return types.flatMap((type) => {
     if (type instanceof ObjectType) {

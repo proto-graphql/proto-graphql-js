@@ -19,7 +19,7 @@ builder.queryField("test", (t) =>
         nestedEnum: ParentMessage_NestedEnum.BAR,
       });
     },
-  })
+  }),
 );
 
 export const schema = builder.toSchema();

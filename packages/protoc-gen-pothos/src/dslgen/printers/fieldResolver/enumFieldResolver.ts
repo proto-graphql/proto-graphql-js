@@ -25,7 +25,7 @@ import { Code, code } from "ts-poet";
 export function createEnumResolverCode(
   valueExpr: Code,
   field: ObjectField<EnumType>,
-  opts: PrinterOptions
+  opts: PrinterOptions,
 ): Code {
   const createBlockStmtCodes = (valueExpr: Code): Code[] => {
     const chunks: Code[] = [];
@@ -46,9 +46,7 @@ export function createEnumResolverCode(
     for (const ev of field.type.valuesWithIgnored) {
       if (!ev.isIgnored()) continue;
       chunks.push(code`
-      if (${valueExpr} === ${protoType(field.type.proto, opts)}.${
-        ev.proto.name
-      }) {
+      if (${valueExpr} === ${protoType(field.type.proto, opts)}.${ev.proto.name}) {
         throw new Error("${ev.name} is ignored in GraphQL schema");
       }
     `);

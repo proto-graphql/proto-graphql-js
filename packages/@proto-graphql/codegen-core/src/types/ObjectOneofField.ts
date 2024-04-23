@@ -10,7 +10,7 @@ export class ObjectOneofField extends FieldBase<DescOneof> {
   constructor(
     readonly type: OneofUnionType,
     private readonly parent: ObjectType,
-    proto: DescOneof
+    proto: DescOneof,
   ) {
     super(proto);
   }

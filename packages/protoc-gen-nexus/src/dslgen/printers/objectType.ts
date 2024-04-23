@@ -26,7 +26,7 @@ import { impNexus, NexusPrinterOptions, nexusTypeDef } from "./util";
 export function createObjectTypeCode(
   type: ObjectType,
   registry: Registry,
-  opts: NexusPrinterOptions
+  opts: NexusPrinterOptions,
 ): Code {
   const isInterface = type instanceof InterfaceType;
   const reExportedPbTypeName = type.proto.typeName.replace(/\./g, "$");
@@ -38,8 +38,8 @@ export function createObjectTypeCode(
         type.fields.length > 0
           ? joinCode(
               type.fields.map((f) =>
-                createFieldDefinitionCode(f, registry, opts)
-              )
+                createFieldDefinitionCode(f, registry, opts),
+              ),
             )
           : createNoopFieldDefinitionCode({ input: false })
       }
@@ -63,7 +63,7 @@ export function createObjectTypeCode(
     export type ${reExportedPbTypeName} = ${protoType(type.proto, opts)};
     export const ${nexusTypeDef(type)} =
       ${impNexus(isInterface ? "interfaceType" : "objectType")}(${literalOf(
-        compact(typeOpts)
+        compact(typeOpts),
       )});
   `;
 }

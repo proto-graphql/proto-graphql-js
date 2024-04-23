@@ -21,7 +21,7 @@ import { pothosBuilder, PothosPrinterOptions, pothosRef } from "./util";
 export function createOneofUnionTypeCode(
   type: OneofUnionType | SquashedOneofUnionType,
   registry: Registry,
-  opts: PothosPrinterOptions
+  opts: PothosPrinterOptions,
 ): Code {
   const typeOpts = {
     types: type.fields.map((f) => pothosRef(f.type)),
@@ -31,7 +31,7 @@ export function createOneofUnionTypeCode(
   return code`
     export const ${pothosRef(type)} =
       ${pothosBuilder(type, opts)}.unionType(${literalOf(
-        type.typeName
+        type.typeName,
       )}, ${literalOf(compact(typeOpts))});
   `;
 }

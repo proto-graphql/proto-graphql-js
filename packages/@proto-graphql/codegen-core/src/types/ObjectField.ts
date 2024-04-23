@@ -21,7 +21,7 @@ export class ObjectField<
   constructor(
     readonly type: T,
     readonly parent: ObjectType | OneofUnionType,
-    proto: DescField
+    proto: DescField,
   ) {
     super(proto);
   }

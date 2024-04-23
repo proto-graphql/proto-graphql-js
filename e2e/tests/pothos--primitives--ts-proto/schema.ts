@@ -28,7 +28,7 @@ builder.queryField("test", (t) =>
         requiredPrimitivesList: [],
       });
     },
-  })
+  }),
 );
 
 export const schema = builder.toSchema();

@@ -7,7 +7,7 @@ import {
 
 export function parseParams<DSL extends PrinterOptions["dsl"]>(
   input: string | undefined,
-  dsl: DSL
+  dsl: DSL,
 ): {
   type: TypeOptions;
   printer: Extract<PrinterOptions, { dsl: DSL }>;
@@ -43,7 +43,7 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
 
   function checkEnum<T extends string>(
     v: string,
-    whitelist: readonly T[]
+    whitelist: readonly T[],
   ): v is T {
     return whitelist.includes(v as any);
   }
@@ -71,7 +71,7 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
           throw new Error(
             `file_layout should be ${fileLayouts
               .map((s) => `"${s}"`)
-              .join(", ")}`
+              .join(", ")}`,
           );
         }
         params.printer.fileLayout = s;

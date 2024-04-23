@@ -29,7 +29,7 @@ export const protoFieldsPlugin = () => {
               typeDef.field(fieldName, fieldDefs[fieldName]);
             }
           },
-        })
+        }),
       );
     },
   });

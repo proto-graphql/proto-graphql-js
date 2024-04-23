@@ -1,7 +1,11 @@
 {
   "workspacePackageConfigs": [
     {
-      "files": ["packages/**", "devPackages/testapis-proto", "e2e/!(testapis)/**"],
+      "files": [
+        "packages/**",
+        "devPackages/testapis-proto",
+        "e2e/!(testapis)/**"
+      ],
       "package.json": {
         "scripts": {
           "lint": "eslint --fix ."
@@ -11,9 +15,7 @@
           "@proto-graphql/tsconfig": "workspace:*"
         }
       },
-      "copy": [
-        { "src": "configs/.eslintrc.js", "dest": ".eslintrc.js" }
-      ]
+      "copy": [{ "src": "configs/.eslintrc.js", "dest": ".eslintrc.js" }]
     },
     {
       "files": ["packages/**"],
@@ -21,10 +23,7 @@
         "main": "./lib/index.js",
         "module": "./module/index.js",
         "types": "./lib/index.d.ts",
-        "files": [
-          "lib/",
-          "module/"
-        ],
+        "files": ["lib/", "module/"],
         "scripts": {
           "build": "pnpm run build:cjs && pnpm run build:module",
           "build:cjs": "tsc --build tsconfig.cjs.json",
@@ -38,11 +37,18 @@
         { "src": "configs/.gitignore", "dest": ".gitignore" },
         { "src": "configs/tsconfig.json", "dest": "tsconfig.json" },
         { "src": "configs/tsconfig.cjs.json", "dest": "tsconfig.cjs.json" },
-        { "src": "configs/tsconfig.module.json", "dest": "tsconfig.module.json" }
+        {
+          "src": "configs/tsconfig.module.json",
+          "dest": "tsconfig.module.json"
+        }
       ]
     },
     {
-      "files": ["devPackages/testapis-proto", "e2e/helper", "e2e/testapis/ts-proto*"],
+      "files": [
+        "devPackages/testapis-proto",
+        "e2e/helper",
+        "e2e/testapis/ts-proto*"
+      ],
       "package.json": {
         "main": "./lib/index.js",
         "types": "./lib/index.d.ts"
@@ -60,9 +66,7 @@
           "clean": "pnpm run build:test --clean"
         }
       },
-      "copy": [
-        { "src": "configs/.gitignore", "dest": ".gitignore" }
-      ]
+      "copy": [{ "src": "configs/.gitignore", "dest": ".gitignore" }]
     },
     {
       "files": ["e2e/helper", "e2e/testapis/ts-proto*"],
@@ -72,15 +76,11 @@
           "clean": "pnpm run build:e2e --clean"
         }
       },
-      "copy": [
-        { "src": "configs/.gitignore.test", "dest": ".gitignore" }
-      ]
+      "copy": [{ "src": "configs/.gitignore.test", "dest": ".gitignore" }]
     },
     {
       "files": ["e2e/tests/*"],
-      "copy": [
-        { "src": "configs/tsconfig.e2e.json", "dest": "tsconfig.json" }
-      ]
+      "copy": [{ "src": "configs/tsconfig.e2e.json", "dest": "tsconfig.json" }]
     }
   ],
   "sortFields": {

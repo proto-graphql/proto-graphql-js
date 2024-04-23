@@ -16,7 +16,7 @@ import {
 export class FullNameImpl implements FullName {
   constructor(
     readonly parent: FullName | null,
-    readonly name: string
+    readonly name: string,
   ) {}
 
   @memo()
@@ -54,7 +54,7 @@ export function getCommentSetByDescriptors(
     | ProtoOneof
     | ProtoField
     | ProtoEnum
-    | ProtoEnumValue
+    | ProtoEnumValue,
 ): CommentSet {
   const proto = getSourceLocationProto(d);
 
@@ -72,7 +72,7 @@ function getSourceLocationProto(
     | ProtoOneof
     | ProtoField
     | ProtoEnum
-    | ProtoEnumValue
+    | ProtoEnumValue,
 ): SourceCodeInfo.Location | null {
   let paths: number[] = [];
   let type = t;
@@ -88,7 +88,7 @@ function getSourceLocationProto(
             .find(
               (l) =>
                 l.getPathList().length === paths.length &&
-                l.getPathList().every((v, i) => v === paths[i])
+                l.getPathList().every((v, i) => v === paths[i]),
             ) || null
         );
       }
@@ -162,7 +162,7 @@ export function isDeprecated(
     | ProtoOneof
     | ProtoField
     | ProtoEnum
-    | ProtoEnumValue
+    | ProtoEnumValue,
 ): boolean {
   if (proto.kind === "Oneof") {
     return proto.fields.every(isDeprecated);

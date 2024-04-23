@@ -30,8 +30,8 @@ export class InputObjectType extends TypeBase<DescMessage> {
             new InputObjectField(
               getInputObjectFieldType(f, this.options),
               this,
-              f
-            )
+              f,
+            ),
         ),
     ];
   }

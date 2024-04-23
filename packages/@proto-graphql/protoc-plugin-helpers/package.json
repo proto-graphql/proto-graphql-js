@@ -2,13 +2,7 @@
   "name": "@proto-graphql/protoc-plugin-helpers",
   "version": "0.2.7",
   "description": "",
-  "keywords": [
-    "graphql",
-    "grpc",
-    "nexus",
-    "protobuf",
-    "typescript"
-  ],
+  "keywords": ["graphql", "grpc", "nexus", "protobuf", "typescript"],
   "repository": "git@github.com:proto-graphql/proto-graphql-js.git",
   "author": "izumin5210 <m@izum.in>",
   "license": "MIT",
@@ -28,10 +22,7 @@
     "@proto-graphql/eslint-config": "workspace:*",
     "@proto-graphql/tsconfig": "workspace:*"
   },
-  "files": [
-    "lib/",
-    "module/"
-  ],
+  "files": ["lib/", "module/"],
   "scripts": {
     "build": "pnpm run build:cjs && pnpm run build:module",
     "build:cjs": "tsc --build tsconfig.cjs.json",

@@ -35,8 +35,9 @@ function nameWithParent(typ: DescMessage | DescOneof | DescEnum): string {
     }${name}`;
     t = t.parent;
   }
-  const prefix = getSchemaOptions(typ.kind === "oneof" ? typ.parent : typ)
-    ?.typePrefix;
+  const prefix = getSchemaOptions(
+    typ.kind === "oneof" ? typ.parent : typ,
+  )?.typePrefix;
   if (prefix) {
     name = `${prefix}${name}`;
   }
@@ -50,7 +51,7 @@ export function getDeprecationReason(
     | DescOneof
     | DescField
     | DescEnum
-    | DescEnumValue
+    | DescEnumValue,
 ): string | null {
   const reason = getDeprecationReasonType(proto);
   if (!reason) return null;
@@ -81,7 +82,7 @@ function getDeprecationReasonType(
     | DescOneof
     | DescField
     | DescEnum
-    | DescEnumValue
+    | DescEnumValue,
 ):
   | DescFile
   | DescMessage
@@ -133,7 +134,7 @@ function getDeprecationReasonType(
 }
 
 export function exceptRequestOrResponse(
-  files: readonly DescFile[]
+  files: readonly DescFile[],
 ): (m: DescMessage) => boolean {
   const reqSet = new Set();
   const respSet = new Set();
@@ -190,7 +191,7 @@ export function isSquashedUnion(m: DescMessage): boolean {
 
 export function isRequiredField(
   field: DescField | DescOneof,
-  fieldType: "output" | "input" | "partial_input"
+  fieldType: "output" | "input" | "partial_input",
 ): boolean {
   if (field.kind === "field") {
     let nullability: extensions.Nullability | null = null;
@@ -258,7 +259,7 @@ export function isInputOnlyField(field: DescField | DescOneof): boolean {
 }
 
 export function isIgnoredField(
-  field: DescField | DescEnumValue | DescOneof
+  field: DescField | DescEnumValue | DescOneof,
 ): boolean {
   let ext: { ignore: boolean } | undefined;
   if (field.kind === "field") {
@@ -303,14 +304,14 @@ export function isSyntheticOneof(desc: DescOneof): boolean {
 const behaviorComments = ["Required", "Input only", "Output only"] as const;
 
 function extractBehaviorComments(
-  field: DescField | DescOneof
+  field: DescField | DescOneof,
 ): (typeof behaviorComments)[number][] {
   return (field.getComments().leading?.trim() ?? "")
     .split(/\.\s+/, 3)
     .slice(0, 2)
     .map((c) => c.replace(/\.\s*$/, ""))
     .filter((c): c is (typeof behaviorComments)[number] =>
-      behaviorComments.includes(c as any)
+      behaviorComments.includes(c as any),
     );
 }
 
@@ -321,7 +322,7 @@ export function descriptionFromProto(proto: {
 }
 
 function getSchemaOptions(
-  desc: DescMessage | DescEnum
+  desc: DescMessage | DescEnum,
 ): extensions.GraphqlSchemaOptions {
   if (desc.file.proto.options == null)
     return new extensions.GraphqlSchemaOptions();
@@ -329,7 +330,7 @@ function getSchemaOptions(
 }
 
 function getObjectTypeOptions(
-  desc: DescMessage
+  desc: DescMessage,
 ): extensions.GraphqlObjectTypeOptions {
   if (desc.proto.options == null)
     return new extensions.GraphqlObjectTypeOptions();
@@ -337,7 +338,7 @@ function getObjectTypeOptions(
 }
 
 export function getInputTypeOptions(
-  desc: DescMessage
+  desc: DescMessage,
 ): extensions.GraphqlInputTypeOptions {
   if (desc.proto.options == null)
     return new extensions.GraphqlInputTypeOptions();
@@ -345,7 +346,7 @@ export function getInputTypeOptions(
 }
 
 export function getFieldOptions(
-  desc: DescField
+  desc: DescField,
 ): extensions.GraphqlFieldOptions {
   if (desc.proto.options == null) return new extensions.GraphqlFieldOptions();
   return getExtension(desc.proto.options, extensions.field);
@@ -362,7 +363,7 @@ function getEnumTypeOptions(desc: DescEnum): extensions.GraphqlEnumOptions {
 }
 
 function getEnumValueOptions(
-  desc: DescEnumValue
+  desc: DescEnumValue,
 ): extensions.GraphqlEnumValueOptions {
   if (desc.proto.options == null)
     return new extensions.GraphqlEnumValueOptions();

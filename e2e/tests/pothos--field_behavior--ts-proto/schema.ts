@@ -12,7 +12,7 @@ builder.queryField("test", (t) =>
         requiredField: { body: "hello" },
       });
     },
-  })
+  }),
 );
 
 export const schema = builder.toSchema();

@@ -24,13 +24,13 @@ async function main() {
       .map(async (protoPath) => {
         const bin = await exec(
           `buf build --as-file-descriptor-set --path ${protoPath} --output -`,
-          { cwd: protoDir, encoding: "buffer" }
+          { cwd: protoDir, encoding: "buffer" },
         );
         return {
           pkg: protoPath.replace(/\/$/, "").replace(/\//g, "."),
           bin: bin.stdout,
         };
-      })
+      }),
   );
 
   const lines: string[] = [];

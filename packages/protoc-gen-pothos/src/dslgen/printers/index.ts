@@ -23,7 +23,7 @@ export function createTypeDslCodes(
     | SquashedOneofUnionType
   )[],
   registry: ReturnType<typeof createRegistry>,
-  opts: PothosPrinterOptions
+  opts: PothosPrinterOptions,
 ): Code[] {
   return types.flatMap((type) => {
     if (type instanceof ObjectType) {

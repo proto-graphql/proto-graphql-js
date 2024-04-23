@@ -13,7 +13,7 @@ export type GqlScalarType =
 export class ScalarType {
   constructor(
     private readonly proto: DescField,
-    private readonly type: GqlScalarType
+    private readonly type: GqlScalarType,
   ) {}
 
   get typeName(): string {

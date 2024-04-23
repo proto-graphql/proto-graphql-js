@@ -6,7 +6,7 @@ import { descriptionFromProto, gqlTypeName } from "./util";
 export abstract class TypeBase<P extends DescMessage | DescEnum | DescOneof> {
   constructor(
     readonly proto: P,
-    readonly options: TypeOptions
+    readonly options: TypeOptions,
   ) {}
 
   get typeName(): string {

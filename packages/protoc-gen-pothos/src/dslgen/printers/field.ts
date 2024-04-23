@@ -42,7 +42,7 @@ import { fieldTypeRef, PothosPrinterOptions } from "./util";
 export function createFieldRefCode(
   field: ObjectField<any> | ObjectOneofField | InputObjectField<any>,
   registry: ReturnType<typeof createRegistry>,
-  opts: PothosPrinterOptions
+  opts: PothosPrinterOptions,
 ): Code {
   const isInput = field instanceof InputObjectField;
   const baseType =
@@ -102,7 +102,7 @@ export function createFieldRefCode(
   return shouldUseFieldFunc
     ? code`t.field(${literalOf(compact(fieldOpts))})`
     : code`t.expose(${literalOf(
-        tsFieldName(field.proto as DescField, opts)
+        tsFieldName(field.proto as DescField, opts),
       )}, ${literalOf(compact(fieldOpts))})`;
 }
 

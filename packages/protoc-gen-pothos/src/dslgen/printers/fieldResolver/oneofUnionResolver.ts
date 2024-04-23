@@ -20,11 +20,11 @@ import { Code, code, joinCode } from "ts-poet";
 export function createOneofUnionResolverCode(
   sourceExpr: Code,
   field: ObjectOneofField | ObjectField<SquashedOneofUnionType>,
-  opts: PrinterOptions
+  opts: PrinterOptions,
 ): Code {
   const createBlockStmtCode = (
     sourceExpr: Code,
-    { nullable }: { nullable: boolean }
+    { nullable }: { nullable: boolean },
   ): Code => {
     const createFieldExpr = (memberField: ObjectField<any>) => {
       if (field instanceof ObjectOneofField) {

@@ -10,6 +10,6 @@ export type Registry = ReturnType<typeof createRegistryFromSchema>;
 
 export function createRegistryFromSchema(schema: Schema) {
   return createRegistryFromDescriptors(
-    createDescriptorSet(schema.proto.protoFile)
+    createDescriptorSet(schema.proto.protoFile),
   );
 }

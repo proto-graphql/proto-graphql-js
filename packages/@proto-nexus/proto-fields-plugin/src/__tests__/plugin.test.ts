@@ -10,7 +10,7 @@ it("creates subset types", () => {
       name: f.name,
       description: f.description,
       type: f.type,
-    }))
+    })),
   ).toMatchInlineSnapshot(`
     [
       {

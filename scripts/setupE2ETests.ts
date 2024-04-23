@@ -90,7 +90,7 @@ async function genPackageJson(test: TestCase): Promise<void> {
         ...protoPackages[test.proto.lib],
       ]
         .sort()
-        .map((pkg) => [pkg, "workspace:*"])
+        .map((pkg) => [pkg, "workspace:*"]),
     ),
     jest: {
       preset: "ts-jest",
@@ -101,7 +101,7 @@ async function genPackageJson(test: TestCase): Promise<void> {
   await writeFile(
     join(getTestPath(test), "package.json"),
     JSON.stringify(packageJson, undefined, 2),
-    "utf-8"
+    "utf-8",
   );
 }
 
@@ -157,7 +157,7 @@ async function genBufGemTemplate(test: TestCase): Promise<void> {
   await writeFile(
     join(getTestPath(test), "buf.gen.json"),
     JSON.stringify(tmpl, undefined, 2),
-    "utf-8"
+    "utf-8",
   );
 }
 

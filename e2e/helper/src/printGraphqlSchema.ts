@@ -14,6 +14,6 @@ export function printGraphqlSchema({
   writeFileSync(
     join(rootDir, "__generated__", "schema.graphql"),
     printSchema(schema),
-    "utf-8"
+    "utf-8",
   );
 }

@@ -5,15 +5,15 @@ import { fileDescriptorSetBins } from "./__generated__/fileDescriptorSetBins";
 export type TestapisPackage = keyof typeof fileDescriptorSetBins;
 
 export function getTestapisFileDescriptorSet(
-  pkg: TestapisPackage
+  pkg: TestapisPackage,
 ): FileDescriptorSet {
   return FileDescriptorSet.fromBinary(
-    Buffer.from(fileDescriptorSetBins[pkg], "base64")
+    Buffer.from(fileDescriptorSetBins[pkg], "base64"),
   );
 }
 
 export function buildCodeGeneratorRequest(
-  pkg: TestapisPackage
+  pkg: TestapisPackage,
 ): CodeGeneratorRequest {
   const descSet = getTestapisFileDescriptorSet(pkg);
   const req = new CodeGeneratorRequest();

@@ -32,7 +32,7 @@ export function filename(
     | OneofUnionType
     | SquashedOneofUnionType
     | InterfaceType,
-  opts: Pick<PrinterOptions, "dsl" | "fileLayout" | "filenameSuffix">
+  opts: Pick<PrinterOptions, "dsl" | "fileLayout" | "filenameSuffix">,
 ): string {
   const file = (type.proto.kind === "oneof" ? type.proto.parent : type.proto)
     .file;
@@ -42,7 +42,7 @@ export function filename(
     case "graphql_type": {
       return path.join(
         path.dirname(file.name),
-        `${type.typeName}.${opts.dsl}.ts`
+        `${type.typeName}.${opts.dsl}.ts`,
       );
     }
     /* istanbul ignore next */
@@ -55,7 +55,7 @@ export function filename(
 
 export function filenameFromProtoFile(
   file: DescFile,
-  opts: Pick<PrinterOptions, "fileLayout" | "filenameSuffix">
+  opts: Pick<PrinterOptions, "fileLayout" | "filenameSuffix">,
 ) {
   switch (opts.fileLayout) {
     case "proto_file":
@@ -75,7 +75,7 @@ export function generatedGraphQLTypeImportPath(
       >
     | InputObjectField<InputObjectType | EnumType>
     | ObjectOneofField,
-  opts: PrinterOptions
+  opts: PrinterOptions,
 ): string | null {
   if (field instanceof ObjectOneofField) return null;
   const [fromPath, toPath] = [
@@ -101,7 +101,7 @@ export function compact(v: any): any {
 }
 
 function compactObj<In extends Out, Out extends Record<string, unknown>>(
-  obj: In
+  obj: In,
 ): Out {
   return Object.keys(obj).reduce((newObj, key) => {
     const v = obj[key];
@@ -111,7 +111,7 @@ function compactObj<In extends Out, Out extends Record<string, unknown>>(
 
 export function protoType(
   origProto: DescMessage | DescEnum | DescField,
-  opts: PrinterOptions
+  opts: PrinterOptions,
 ): Code {
   let origProtoType: DescMessage | DescEnum | undefined;
   switch (origProto.kind) {
@@ -160,7 +160,7 @@ export function protoType(
       chunks.unshift(...(proto.file.proto.package ?? "").split("."));
       const importPath = protoImportPath(
         origProto.kind === "field" ? origProto.parent : origProto,
-        opts
+        opts,
       );
       return code`${imp(`${chunks[0]}@${importPath}`)}.${chunks
         .slice(1)
@@ -168,7 +168,7 @@ export function protoType(
     }
     case "ts-proto": {
       return code`${imp(
-        `${chunks.join("_")}@${protoImportPath(proto, opts)}`
+        `${chunks.join("_")}@${protoImportPath(proto, opts)}`,
       )}`;
     }
     /* istanbul ignore next */
@@ -182,7 +182,7 @@ export function protoType(
 export function createGetFieldValueCode(
   parentExpr: Code,
   proto: DescField,
-  opts: PrinterOptions
+  opts: PrinterOptions,
 ): Code {
   switch (opts.protobuf) {
     case "google-protobuf": {
@@ -222,13 +222,13 @@ export function createSetFieldValueCode(
   parentExpr: Code,
   valueExpr: Code,
   proto: DescField,
-  opts: PrinterOptions
+  opts: PrinterOptions,
 ): Code {
   switch (opts.protobuf) {
     case "google-protobuf": {
       return code`${parentExpr}.${googleProtobufFieldAccessor(
         "set",
-        proto
+        proto,
       )}(${valueExpr})`;
     }
     case "protobufjs":
@@ -245,7 +245,7 @@ export function createSetFieldValueCode(
 
 function googleProtobufFieldAccessor(type: "get" | "set", proto: DescField) {
   return `${type}${upperCaseFirst(
-    proto.jsonName ?? camelCaseAnything(proto.name)
+    proto.jsonName ?? camelCaseAnything(proto.name),
   )}${proto.repeated ? "List" : ""}`;
 }
 
@@ -277,7 +277,7 @@ export function isProtobufLong(proto: DescField): boolean {
 }
 
 export function isProtobufWellKnownTypeField(
-  proto: DescField
+  proto: DescField,
 ): proto is Extract<DescField, { fieldKind: "message" }> {
   return (
     proto.fieldKind === "message" &&
@@ -287,17 +287,17 @@ export function isProtobufWellKnownTypeField(
 
 function protoImportPath(
   t: DescMessage | DescEnum,
-  o: Pick<PrinterOptions, "protobuf" | "importPrefix">
+  o: Pick<PrinterOptions, "protobuf" | "importPrefix">,
 ) {
   const importPath =
     o.protobuf === "protobufjs"
       ? path.dirname(t.file.name)
       : o.protobuf === "ts-proto"
-      ? t.file.name
-      : googleProtobufImportPath(t.file);
+        ? t.file.name
+        : googleProtobufImportPath(t.file);
   return `${o.importPrefix ? `${o.importPrefix}/` : "./"}${importPath}`.replace(
     /(?<!:)\/\//,
-    "/"
+    "/",
   );
 }
 

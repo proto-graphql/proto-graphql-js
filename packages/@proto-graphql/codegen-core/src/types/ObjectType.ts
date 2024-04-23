@@ -15,14 +15,14 @@ export class ObjectType extends TypeBase<DescMessage> {
         .filter((f) => !isInputOnlyField(f))
         .filter((f) => !isIgnoredField(f))
         .map(
-          (f) => new ObjectField(getObjectFieldType(f, this.options), this, f)
+          (f) => new ObjectField(getObjectFieldType(f, this.options), this, f),
         ),
       ...this.proto.oneofs
         .filter((f) => !isInputOnlyField(f))
         .filter((f) => !isIgnoredField(f))
         .map(
           (o) =>
-            new ObjectOneofField(new OneofUnionType(o, this.options), this, o)
+            new ObjectOneofField(new OneofUnionType(o, this.options), this, o),
         ),
     ];
   }

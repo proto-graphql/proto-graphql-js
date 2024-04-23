@@ -4,7 +4,7 @@ import { code, Code } from "ts-poet";
 export function printCodes(
   codes: Code[],
   programName: string,
-  file: DescFile
+  file: DescFile,
 ): string {
   return (codes.length === 0 ? code`export {};` : code`${codes}`).toString({
     prefix: `

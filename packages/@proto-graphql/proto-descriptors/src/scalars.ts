@@ -33,7 +33,7 @@ const protoScalarByFieldDescriptorType = {
 } as const satisfies Record<FieldDescriptorScalarType, string>;
 
 export function getScalarTypeFromDescriptor(
-  desc: FieldDescriptorProto
+  desc: FieldDescriptorProto,
 ): ProtoScalarType | undefined {
   const t = desc.getType();
   if (t === undefined) return undefined;

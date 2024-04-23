@@ -20,7 +20,7 @@ builder.queryField("valuesArePresent", (f) =>
         stringValue: "foobar",
       });
     },
-  })
+  }),
 );
 
 builder.queryField("valuesAreBlank", (f) =>
@@ -29,7 +29,7 @@ builder.queryField("valuesAreBlank", (f) =>
     resolve() {
       return Message.fromPartial({});
     },
-  })
+  }),
 );
 
 export const schema = builder.toSchema();

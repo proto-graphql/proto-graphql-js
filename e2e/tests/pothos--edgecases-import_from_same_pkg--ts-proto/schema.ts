@@ -14,7 +14,7 @@ builder.queryField("test", (t) =>
         },
       });
     },
-  })
+  }),
 );
 
 export const schema = builder.toSchema();

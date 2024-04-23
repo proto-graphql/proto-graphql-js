@@ -21,7 +21,7 @@ export function generateDSLs(
     perGraphQLType?: boolean;
     partialInputs?: boolean;
     scalars?: Record<string, string>;
-  } = {}
+  } = {},
 ) {
   const params = [];
   switch (target) {
@@ -51,7 +51,7 @@ export function generateDSLs(
 
 export function itGeneratesDSLsToMatchSnapshtos(
   pkg: TestapisPackage,
-  expectedGeneratedFiles: string[]
+  expectedGeneratedFiles: string[],
 ) {
   describe.each(["ts-proto"] as const)("with %s", (target) => {
     it("generates pothos DSLs", () => {
@@ -63,7 +63,7 @@ export function itGeneratesDSLsToMatchSnapshtos(
 
 export function snapshotGeneratedFiles(
   resp: CodeGeneratorResponse,
-  files: string[]
+  files: string[],
 ) {
   expect(Object.keys(resp.file)).toHaveLength(files.length);
 
@@ -77,7 +77,7 @@ export function snapshotGeneratedFiles(
 
 export function processCodeGeneration(
   pkg: TestapisPackage,
-  param?: string
+  param?: string,
 ): CodeGeneratorResponse {
   const req = buildCodeGeneratorRequest(pkg);
   req.parameter = "target=ts";
@@ -91,6 +91,6 @@ export function processCodeGeneration(
 function getFileMap(resp: CodeGeneratorResponse): Record<string, string> {
   return resp.file.reduce(
     (m, f) => ({ ...m, [f.name!]: f.content! }),
-    {} as Record<string, string>
+    {} as Record<string, string>,
   );
 }

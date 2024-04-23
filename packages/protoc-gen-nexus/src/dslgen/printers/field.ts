@@ -37,7 +37,7 @@ import {
 export function createFieldDefinitionCode(
   field: ObjectField<any> | ObjectOneofField | InputObjectField<any>,
   registry: Registry,
-  opts: NexusPrinterOptions
+  opts: NexusPrinterOptions,
 ): Code {
   const fieldOpts = {
     type: createTypeCode(field, opts),
@@ -47,7 +47,7 @@ export function createFieldDefinitionCode(
     extensions: protobufGraphQLExtensions(field, registry),
   };
   return code`t.field(${literalOf(field.name)}, ${literalOf(
-    compact(fieldOpts)
+    compact(fieldOpts),
   )});`;
 }
 
@@ -69,7 +69,7 @@ export function createNoopFieldDefinitionCode(opts: { input: boolean }): Code {
  */
 export function createTypeCode(
   field: ObjectField<any> | ObjectOneofField | InputObjectField<any>,
-  opts: NexusPrinterOptions
+  opts: NexusPrinterOptions,
 ): Code {
   let typeCode =
     opts.fileLayout === "proto_file" || field.type instanceof ScalarType
@@ -80,7 +80,7 @@ export function createTypeCode(
     typeCode = code`${impNexus("list")}(${typeCode})`;
   }
   return code`${impNexus(
-    field.isNullable() ? "nullable" : "nonNull"
+    field.isNullable() ? "nullable" : "nonNull",
   )}(${typeCode})`;
 }
 
@@ -103,7 +103,7 @@ function createResolverCode(
       >
     | ObjectOneofField
     | InputObjectField<InputObjectType | EnumType | ScalarType>,
-  opts: NexusPrinterOptions
+  opts: NexusPrinterOptions,
 ): Code | null {
   if (field instanceof InputObjectField) return null;
   if (field.isResolverSkipped()) {
@@ -124,7 +124,7 @@ function createResolverCode(
       field.isNullable() && !field.isList()
         ? code`return null;`
         : code`throw new Error("One of the following fields must be non-null: ${fieldNames.join(
-            ", "
+            ", ",
           )}");`;
 
     const chunks = [];
@@ -139,7 +139,7 @@ function createResolverCode(
           (field instanceof ObjectOneofField
             ? field.proto
             : (field.type as SquashedOneofUnionType).proto.oneofs[0]
-          ).name
+          ).name,
         );
         const oneofParent =
           field instanceof ObjectOneofField
@@ -150,15 +150,11 @@ function createResolverCode(
             ${oneofFields.map(
               (f) => code`
                 case ${oneofParent}.${oneofName}Case.${constantCase(
-                  f.proto.name
+                  f.proto.name,
                 )}: {
-                  return ${createGetFieldValueCode(
-                    code`value`,
-                    f.proto,
-                    opts
-                  )}!;
+                  return ${createGetFieldValueCode(code`value`, f.proto, opts)}!;
                 }
-              `
+              `,
             )}
             default: { ${whenNullCode} }
           }
@@ -171,7 +167,7 @@ function createResolverCode(
             const valueCode = createGetFieldValueCode(
               code`value`,
               f.proto,
-              opts
+              opts,
             );
             return code`
               if (${valueCode} != null) {
@@ -179,7 +175,7 @@ function createResolverCode(
               }
             `;
           }),
-          whenNullCode
+          whenNullCode,
         );
         break;
       }
@@ -187,7 +183,7 @@ function createResolverCode(
       default: {
         const _exhaustiveCheck: "ts-proto" = opts.protobuf;
         throw new Error(
-          `unsupported protobuf implementation: ${opts.protobuf}`
+          `unsupported protobuf implementation: ${opts.protobuf}`,
         );
       }
     }
@@ -268,7 +264,7 @@ function createResolverCode(
     const fieldValueCode = createGetFieldValueCode(
       code`source`,
       field.proto,
-      opts
+      opts,
     );
     if (field.isList()) {
       chunks.unshift(code`return ${fieldValueCode}.map((value) => {`);

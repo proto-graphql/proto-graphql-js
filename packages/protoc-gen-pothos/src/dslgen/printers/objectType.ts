@@ -26,7 +26,7 @@ import { pothosBuilder, PothosPrinterOptions, pothosRef } from "./util";
 export function createObjectTypeCode(
   type: ObjectType,
   registry: Registry,
-  opts: PothosPrinterOptions
+  opts: PothosPrinterOptions,
 ): Code {
   const isInterface = type instanceof InterfaceType;
   const typeOpts = {
@@ -35,8 +35,8 @@ export function createObjectTypeCode(
       type.fields.length > 0
         ? joinCode(
             type.fields.map(
-              (f) => code`${f.name}: ${createFieldRefCode(f, registry, opts)},`
-            )
+              (f) => code`${f.name}: ${createFieldRefCode(f, registry, opts)},`,
+            ),
           )
         : code`_: ${createNoopFieldRefCode({ input: false })}`
     }})`,
@@ -45,10 +45,7 @@ export function createObjectTypeCode(
       ? undefined
       : code`
         (source) => {
-          return (source as ${protoType(
-            type.proto,
-            opts
-          )} | { $type: string & {} }).$type
+          return (source as ${protoType(type.proto, opts)} | { $type: string & {} }).$type
             === ${literalOf(type.proto.typeName)};
         }
       `,
@@ -66,16 +63,17 @@ export function createObjectTypeCode(
           ${protoType(type.proto, opts)},
           ${joinCode(
             type.fields.map(
-              (f) => code`${literalOf(tsFieldName(f.proto as DescField, opts))}`
+              (f) =>
+                code`${literalOf(tsFieldName(f.proto as DescField, opts))}`,
             ),
-            { on: "|" }
+            { on: "|" },
           )}
         >`
     : protoType(type.proto, opts);
 
   return code`
     export const ${pothosRef(
-      type
+      type,
     )} = ${buildRefFunc}<${refFuncTypeArg}>(${literalOf(type.typeName)});
     ${buildTypeFunc}(${pothosRef(type)}, ${literalOf(compact(typeOpts))});
   `;

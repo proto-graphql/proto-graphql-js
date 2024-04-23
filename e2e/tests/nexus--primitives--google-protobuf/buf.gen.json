@@ -5,9 +5,7 @@
       "name": "nexus",
       "path": "../../../packages/protoc-gen-nexus/bin/protoc-gen-nexus",
       "out": "__generated__/schema",
-      "opt": [
-        "import_prefix=@proto-graphql/e2e-testapis-google-protobuf/lib/"
-      ]
+      "opt": ["import_prefix=@proto-graphql/e2e-testapis-google-protobuf/lib/"]
     }
   ]
 }

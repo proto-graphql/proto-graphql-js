@@ -44,7 +44,7 @@ import {
 export function createInputObjectTypeCode(
   type: InputObjectType,
   registry: Registry,
-  opts: NexusPrinterOptions
+  opts: NexusPrinterOptions,
 ): Code {
   const typeOpts = {
     name: type.typeName,
@@ -54,8 +54,8 @@ export function createInputObjectTypeCode(
         type.fields.length > 0
           ? joinCode(
               type.fields.map((f) =>
-                createFieldDefinitionCode(f, registry, opts)
-              )
+                createFieldDefinitionCode(f, registry, opts),
+              ),
             )
           : createNoopFieldDefinitionCode({ input: true })
       }
@@ -75,8 +75,8 @@ export function createInputObjectTypeCode(
                   code`${f.name}: ${literalOf({
                     type: createTypeCode(f, opts),
                     extensions: protobufGraphQLExtensions(f, registry),
-                  })},`
-              )
+                  })},`,
+              ),
             )}
           },
         },
@@ -87,12 +87,12 @@ export function createInputObjectTypeCode(
 
 export function createToProtoFuncCode(
   type: InputObjectType,
-  opts: NexusPrinterOptions
+  opts: NexusPrinterOptions,
 ): Code {
   return code`
     (input: NexusGen["inputTypes"][${literalOf(type.typeName)}]): ${protoType(
       type.proto,
-      opts
+      opts,
     )} => {
       const output = new ${protoType(type.proto, opts)}();
       ${joinCode(
@@ -102,7 +102,7 @@ export function createToProtoFuncCode(
             if (isProtobufWellKnownTypeField(f.proto)) {
               const protoFullName = f.proto.message.typeName;
               const transformer = code`${impProtoNexus(
-                "getTransformer"
+                "getTransformer",
               )}("${protoFullName}")`;
               switch (opts.protobuf) {
                 case "google-protobuf":
@@ -139,7 +139,7 @@ export function createToProtoFuncCode(
               ? code`${value}.map(v => ${wrapperFunc(code`v`)})`
               : wrapperFunc(value),
             f.proto,
-            opts
+            opts,
           );
           if (f.isNullable()) {
             return code`if (input.${f.name} != null) {
@@ -147,7 +147,7 @@ export function createToProtoFuncCode(
             }`;
           }
           return code`${stmt};`;
-        })
+        }),
       )}
       return output;
     }

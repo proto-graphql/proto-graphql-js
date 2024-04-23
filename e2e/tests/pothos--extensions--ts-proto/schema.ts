@@ -20,7 +20,7 @@ builder.queryField("testSquashedUnion", (t) =>
         },
       });
     },
-  })
+  }),
 );
 
 const ImplObject$Ref = builder.objectRef<{
@@ -45,7 +45,7 @@ builder.queryField("testInterface", (t) =>
         body: "hello",
       };
     },
-  })
+  }),
 );
 
 builder.objectField(
@@ -58,7 +58,7 @@ builder.objectField(
       resolve() {
         return "implemented";
       },
-    })
+    }),
 );
 builder.queryField("testSkipResolver", (t) =>
   t.field({
@@ -70,7 +70,7 @@ builder.queryField("testSkipResolver", (t) =>
         },
       });
     },
-  })
+  }),
 );
 
 export const schema = builder.toSchema();

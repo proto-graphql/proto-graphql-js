@@ -14,7 +14,7 @@ export function createTsGenerator<DSL extends PrinterOptions["dsl"]>({
     opts: {
       type: TypeOptions;
       printer: Extract<PrinterOptions, { dsl: DSL }>;
-    }
+    },
   ) => void;
   dsl: DSL;
 }): (schema: Schema) => void {

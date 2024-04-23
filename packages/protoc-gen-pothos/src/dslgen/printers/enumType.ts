@@ -22,7 +22,7 @@ import { pothosBuilder, PothosPrinterOptions, pothosRef } from "./util";
 export function createEnumTypeCode(
   type: EnumType,
   registry: Registry,
-  opts: PothosPrinterOptions
+  opts: PothosPrinterOptions,
 ): Code {
   const typeOpts = {
     description: type.description,
@@ -37,16 +37,16 @@ export function createEnumTypeCode(
                 deprecationReason: ev.deprecationReason,
                 value: ev.number,
                 extensions: protobufGraphQLExtensions(ev, registry),
-              })
-            )},`
-        )
+              }),
+            )},`,
+        ),
     )}} as const`,
     extensions: protobufGraphQLExtensions(type, registry),
   };
   return code`
     export const ${pothosRef(type)} =
       ${pothosBuilder(type, opts)}.enumType(${literalOf(
-        type.typeName
+        type.typeName,
       )}, ${literalOf(compact(typeOpts))});
   `;
 }

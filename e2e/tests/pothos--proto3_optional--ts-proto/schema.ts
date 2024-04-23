@@ -13,7 +13,7 @@ builder.queryField("valuesArePresent", (f) =>
         optionalStringValue: "optional field",
       });
     },
-  })
+  }),
 );
 
 builder.queryField("valuesAreBlank", (f) =>
@@ -22,7 +22,7 @@ builder.queryField("valuesAreBlank", (f) =>
     resolve() {
       return Message.fromPartial({});
     },
-  })
+  }),
 );
 
 export const schema = builder.toSchema();

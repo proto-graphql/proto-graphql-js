@@ -29,7 +29,7 @@ export function nexusTypeDef(
     | InputObjectType
     | EnumType
     | OneofUnionType
-    | SquashedOneofUnionType
+    | SquashedOneofUnionType,
 ): Code {
   return code`${def(type.typeName)}`;
 }
@@ -41,7 +41,7 @@ export function fieldType(
       >
     | InputObjectField<InputObjectType | EnumType>
     | ObjectOneofField,
-  opts: NexusPrinterOptions
+  opts: NexusPrinterOptions,
 ): Code {
   const importPath = generatedGraphQLTypeImportPath(field, opts);
   if (importPath) return code`${imp(`${field.type.typeName}@${importPath}`)}`;

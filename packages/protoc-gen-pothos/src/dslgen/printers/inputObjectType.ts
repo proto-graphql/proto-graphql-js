@@ -35,7 +35,7 @@ import {
 export function createInputObjectTypeCode(
   type: InputObjectType,
   registry: Registry,
-  opts: PothosPrinterOptions
+  opts: PothosPrinterOptions,
 ): Code {
   const shapeTypeCode = code`
     export type ${shapeType(type)} = {
@@ -48,7 +48,7 @@ export function createInputObjectTypeCode(
             if (f.isList()) typeNode = code`Array<${typeNode}>`;
           } else {
             typeNode = code`${protoType(type.proto, opts)}[${literalOf(
-              tsFieldName(f.proto, opts)
+              tsFieldName(f.proto, opts),
             )}]`;
           }
           return f.isNullable()
@@ -58,17 +58,17 @@ export function createInputObjectTypeCode(
                   ? code`NonNullable<${typeNode}>`
                   : typeNode
               },`;
-        })
+        }),
       )}
     };
   `;
 
   const refCode = code`
     export const ${pothosRef(type)}: ${imp(
-      "InputObjectRef@@pothos/core"
+      "InputObjectRef@@pothos/core",
     )}<${shapeType(type)}> =
       ${pothosBuilder(type, opts)}.inputRef<${shapeType(type)}>(${literalOf(
-        type.typeName
+        type.typeName,
       )}).implement(
         ${literalOf(
           compact({
@@ -77,12 +77,16 @@ export function createInputObjectTypeCode(
               type.fields.length > 0
                 ? type.fields.map(
                     (f) =>
-                      code`${f.name}: ${createFieldRefCode(f, registry, opts)},`
+                      code`${f.name}: ${createFieldRefCode(
+                        f,
+                        registry,
+                        opts,
+                      )},`,
                   )
                 : code`_: ${createNoopFieldRefCode({ input: true })}`
             }})`,
             extensions: protobufGraphQLExtensions(type, registry),
-          })
+          }),
         )}
       );
   `;

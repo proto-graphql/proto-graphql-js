@@ -31,6 +31,6 @@ export function createEnumTypeCode(type: EnumType, registry: Registry): Code {
     extensions: protobufGraphQLExtensions(type, registry),
   };
   return code`export const ${nexusTypeDef(type)} = ${impNexus(
-    "enumType"
+    "enumType",
   )}(${literalOf(compact(typeOpts))});`;
 }

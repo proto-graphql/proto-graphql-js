@@ -14,7 +14,7 @@ builder.queryField("test1", (t) =>
         body: "hello",
       });
     },
-  })
+  }),
 );
 
 builder.queryField("test2", (t) =>
@@ -25,7 +25,7 @@ builder.queryField("test2", (t) =>
         body: "world",
       });
     },
-  })
+  }),
 );
 
 export const schema = builder.toSchema();
