@@ -1,9 +1,9 @@
 #!/usr/bin/env -S pnpm exec ts-node --transpile-only
 
-import { exec as _exec } from "child_process";
-import { mkdir, writeFile } from "fs/promises";
-import { dirname, join, relative } from "path";
-import { promisify } from "util";
+import { exec as _exec } from "node:child_process";
+import { mkdir, writeFile } from "node:fs/promises";
+import { dirname, join, relative } from "node:path";
+import { promisify } from "node:util";
 
 import { glob as _glob } from "glob";
 

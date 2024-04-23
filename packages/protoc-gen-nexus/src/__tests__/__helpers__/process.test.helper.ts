@@ -78,7 +78,7 @@ export function processCodeGeneration(
   const req = buildCodeGeneratorRequest(pkg);
   req.parameter = "target=ts";
   if (param) {
-    req.parameter += "," + param;
+    req.parameter += `,${param}`;
   }
   return protocGenNexus.run(req);
 }

@@ -1,7 +1,7 @@
 #!/usr/bin/env -S pnpm exec ts-node --transpile-only
 
-import { readFile, writeFile } from "fs/promises";
-import { join } from "path";
+import { readFile, writeFile } from "node:fs/promises";
+import { join } from "node:path";
 
 const testsDir = "e2e/tests";
 

@@ -1,9 +1,9 @@
 #!/usr/bin/env -S pnpm exec ts-node --transpile-only
 
-import { join, dirname } from "path";
-import { exec as _exec } from "child_process";
-import { readFile, copyFile, writeFile } from "fs/promises";
-import { promisify } from "util";
+import { join, dirname } from "node:path";
+import { exec as _exec } from "node:child_process";
+import { readFile, copyFile, writeFile } from "node:fs/promises";
+import { promisify } from "node:util";
 import minimatch from "minimatch";
 
 const exec = promisify(_exec);
@@ -92,7 +92,7 @@ class PackageJSONStore {
     for (const [pkgPath, pkgJSON] of Object.entries(this.pkgJSONByPath)) {
       await writeFile(
         join(pkgPath, "package.json"),
-        JSON.stringify(pkgJSON, undefined, 2) + "\n",
+        `${JSON.stringify(pkgJSON, undefined, 2)}\n`,
         { encoding: "utf-8" },
       );
     }
