@@ -1,11 +1,11 @@
 import {
   ObjectField,
   ObjectOneofField,
-  PrinterOptions,
-  SquashedOneofUnionType,
+  type PrinterOptions,
+  type SquashedOneofUnionType,
   tsFieldName,
 } from "@proto-graphql/codegen-core";
-import { Code, code, joinCode } from "ts-poet";
+import { type Code, code, joinCode } from "ts-poet";
 
 /**
  * @example nullable

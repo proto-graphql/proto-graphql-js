@@ -1,17 +1,17 @@
 import {
-  EnumType,
+  type EnumType,
   generatedGraphQLTypeImportPath,
-  InputObjectField,
-  InputObjectType,
-  InterfaceType,
-  ObjectField,
-  ObjectOneofField,
-  ObjectType,
-  OneofUnionType,
-  PrinterOptions,
-  SquashedOneofUnionType,
+  type InputObjectField,
+  type InputObjectType,
+  type InterfaceType,
+  type ObjectField,
+  type ObjectOneofField,
+  type ObjectType,
+  type OneofUnionType,
+  type PrinterOptions,
+  type SquashedOneofUnionType,
 } from "@proto-graphql/codegen-core";
-import { code, Code, def, imp, Import } from "ts-poet";
+import { code, type Code, def, imp, type Import } from "ts-poet";
 
 export type NexusPrinterOptions = Extract<PrinterOptions, { dsl: "nexus" }>;
 

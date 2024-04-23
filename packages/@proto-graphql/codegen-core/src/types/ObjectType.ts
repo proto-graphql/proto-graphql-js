@@ -1,4 +1,4 @@
-import { DescMessage } from "@bufbuild/protobuf";
+import type { DescMessage } from "@bufbuild/protobuf";
 
 import { ObjectField } from "./ObjectField";
 import { ObjectOneofField } from "./ObjectOneofField";

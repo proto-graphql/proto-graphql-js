@@ -1,5 +1,5 @@
-import { registerTransformer, Transformer, stringToNumber } from "proto-nexus";
-import { common } from "protobufjs";
+import { registerTransformer, type Transformer, stringToNumber } from "proto-nexus";
+import type { common } from "protobufjs";
 
 declare global {
   interface ProtoNexusTransformers {

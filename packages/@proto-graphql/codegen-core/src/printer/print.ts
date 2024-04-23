@@ -1,5 +1,5 @@
-import { DescFile } from "@bufbuild/protobuf";
-import { code, Code } from "ts-poet";
+import type { DescFile } from "@bufbuild/protobuf";
+import { code, type Code } from "ts-poet";
 
 export function printCodes(
   codes: Code[],

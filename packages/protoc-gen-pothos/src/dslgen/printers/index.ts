@@ -1,4 +1,4 @@
-import { createRegistry } from "@bufbuild/protobuf";
+import type { createRegistry } from "@bufbuild/protobuf";
 import {
   EnumType,
   InputObjectType,
@@ -6,13 +6,13 @@ import {
   OneofUnionType,
   SquashedOneofUnionType,
 } from "@proto-graphql/codegen-core";
-import { Code } from "ts-poet";
+import type { Code } from "ts-poet";
 
 import { createEnumTypeCode } from "./enumType";
 import { createInputObjectTypeCode } from "./inputObjectType";
 import { createObjectTypeCode } from "./objectType";
 import { createOneofUnionTypeCode } from "./oneofUnionType";
-import { PothosPrinterOptions } from "./util";
+import type { PothosPrinterOptions } from "./util";
 
 export function createTypeDslCodes(
   types: (

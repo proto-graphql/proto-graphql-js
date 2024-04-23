@@ -3,17 +3,17 @@ import {
   InputObjectType,
   protobufGraphQLExtensions,
   protoType,
-  Registry,
+  type Registry,
   ScalarType,
   tsFieldName,
 } from "@proto-graphql/codegen-core";
-import { Code, code, imp, joinCode, literalOf } from "ts-poet";
+import { type Code, code, imp, joinCode, literalOf } from "ts-poet";
 
 import { createFieldRefCode, createNoopFieldRefCode } from "./field";
 import {
   fieldTypeShape,
   pothosBuilder,
-  PothosPrinterOptions,
+  type PothosPrinterOptions,
   pothosRef,
   shapeType,
 } from "./util";

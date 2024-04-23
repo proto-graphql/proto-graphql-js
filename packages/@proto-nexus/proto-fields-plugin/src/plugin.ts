@@ -1,5 +1,5 @@
 import { dynamicInputMethod, plugin } from "nexus";
-import { NexusInputFieldConfig } from "nexus/dist/core";
+import type { NexusInputFieldConfig } from "nexus/dist/core";
 
 export const protoFieldsPlugin = () => {
   return plugin({

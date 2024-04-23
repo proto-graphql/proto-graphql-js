@@ -1,4 +1,4 @@
-import { GraphQLInputObjectType } from "graphql";
+import type { GraphQLInputObjectType } from "graphql";
 
 import { schema } from "./__helpers__/testSchema";
 

@@ -1,6 +1,6 @@
-import { DescFile } from "@bufbuild/protobuf";
-import { Schema } from "@bufbuild/protoplugin/ecmascript";
-import { PrinterOptions, TypeOptions } from "@proto-graphql/codegen-core";
+import type { DescFile } from "@bufbuild/protobuf";
+import type { Schema } from "@bufbuild/protoplugin/ecmascript";
+import type { PrinterOptions, TypeOptions } from "@proto-graphql/codegen-core";
 
 import { parseParams } from "./parseParams";
 

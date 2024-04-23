@@ -71,7 +71,7 @@ function buildWorkspaceConfigAndPkgPathsPairs(
   cfg: Config,
 ): [wsCfg: WorkspacePackageConfig, pkgPaths: string[]][] {
   return cfg.workspacePackageConfigs.map((wsCfg) => {
-    let pkgPaths = new Set<string>();
+    const pkgPaths = new Set<string>();
     for (const pattern of wsCfg.files ?? []) {
       for (const file of allPkgPaths.filter(minimatch.filter(pattern))) {
         pkgPaths.add(file);

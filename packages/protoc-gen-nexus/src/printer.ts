@@ -1,18 +1,18 @@
-import { DescFile } from "@bufbuild/protobuf";
-import { Schema } from "@bufbuild/protoplugin/ecmascript";
+import type { DescFile } from "@bufbuild/protobuf";
+import type { Schema } from "@bufbuild/protoplugin/ecmascript";
 import {
   collectTypesFromFile,
   createRegistryFromSchema,
   filename,
   filenameFromProtoFile,
   printCodes,
-  Registry,
-  TypeOptions,
+  type Registry,
+  type TypeOptions,
 } from "@proto-graphql/codegen-core";
-import { Code } from "ts-poet";
+import type { Code } from "ts-poet";
 
 import { createTypeDslCodes } from "./dslgen";
-import { NexusPrinterOptions } from "./dslgen/printers/util";
+import type { NexusPrinterOptions } from "./dslgen/printers/util";
 
 export function generateFiles(
   schema: Schema,

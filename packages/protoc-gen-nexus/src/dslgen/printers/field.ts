@@ -3,27 +3,27 @@ import {
   createGetFieldValueCode,
   EnumType,
   InputObjectField,
-  InputObjectType,
-  InterfaceType,
+  type InputObjectType,
+  type InterfaceType,
   isProtobufLong,
   isProtobufWellKnownTypeField,
   ObjectField,
   ObjectOneofField,
-  ObjectType,
+  type ObjectType,
   protobufGraphQLExtensions,
   protoType,
-  Registry,
+  type Registry,
   ScalarType,
   SquashedOneofUnionType,
 } from "@proto-graphql/codegen-core";
 import { constantCase, pascalCase } from "change-case";
-import { code, Code, joinCode, literalOf } from "ts-poet";
+import { code, type Code, joinCode, literalOf } from "ts-poet";
 
 import {
   fieldType,
   impNexus,
   impProtoNexus,
-  NexusPrinterOptions,
+  type NexusPrinterOptions,
 } from "./util";
 
 /**

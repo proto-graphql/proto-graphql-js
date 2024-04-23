@@ -1,14 +1,14 @@
 import {
-  DescFile,
-  DescMessage,
-  DescField,
-  DescOneof,
-  DescEnum,
-  DescEnumValue,
+  type DescFile,
+  type DescMessage,
+  type DescField,
+  type DescOneof,
+  type DescEnum,
+  type DescEnumValue,
   getExtension,
   FieldDescriptorProto_Label,
   FieldDescriptorProto_Type,
-  DescComments,
+  type DescComments,
 } from "@bufbuild/protobuf";
 import { pascalCase } from "change-case";
 

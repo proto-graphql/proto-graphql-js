@@ -1,27 +1,27 @@
 import * as path from "path";
 
 import {
-  DescFile,
-  DescMessage,
-  DescField,
-  DescEnum,
+  type DescFile,
+  type DescMessage,
+  type DescField,
+  type DescEnum,
   ScalarType as ProtoScalarType,
 } from "@bufbuild/protobuf";
 import { camelCase as camelCaseAnything } from "case-anything";
 import { camelCase } from "change-case";
-import { Code, code, imp } from "ts-poet";
+import { type Code, code, imp } from "ts-poet";
 
-import { PrinterOptions } from "./options";
+import type { PrinterOptions } from "./options";
 import {
-  EnumType,
-  InputObjectField,
-  InputObjectType,
-  InterfaceType,
-  ObjectField,
+  type EnumType,
+  type InputObjectField,
+  type InputObjectType,
+  type InterfaceType,
+  type ObjectField,
   ObjectOneofField,
-  ObjectType,
-  OneofUnionType,
-  SquashedOneofUnionType,
+  type ObjectType,
+  type OneofUnionType,
+  type SquashedOneofUnionType,
 } from "../types";
 
 export function filename(

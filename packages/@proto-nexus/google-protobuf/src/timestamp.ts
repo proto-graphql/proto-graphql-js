@@ -1,5 +1,5 @@
 import { Timestamp } from "google-protobuf/google/protobuf/timestamp_pb";
-import { registerTransformer, Transformer } from "proto-nexus";
+import { registerTransformer, type Transformer } from "proto-nexus";
 
 declare global {
   interface ProtoNexusTransformers {

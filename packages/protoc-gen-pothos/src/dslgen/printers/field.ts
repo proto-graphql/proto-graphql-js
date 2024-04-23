@@ -1,4 +1,4 @@
-import { createRegistry, DescField } from "@bufbuild/protobuf";
+import type { createRegistry, DescField } from "@bufbuild/protobuf";
 import {
   compact,
   createGetFieldValueCode,
@@ -12,12 +12,12 @@ import {
   SquashedOneofUnionType,
   tsFieldName,
 } from "@proto-graphql/codegen-core";
-import { code, Code, literalOf } from "ts-poet";
+import { code, type Code, literalOf } from "ts-poet";
 
 import { createEnumResolverCode } from "./fieldResolver/enumFieldResolver";
 import { createNonNullResolverCode } from "./fieldResolver/nonNullResolver";
 import { createOneofUnionResolverCode } from "./fieldResolver/oneofUnionResolver";
-import { fieldTypeRef, PothosPrinterOptions } from "./util";
+import { fieldTypeRef, type PothosPrinterOptions } from "./util";
 
 /**
  * @example

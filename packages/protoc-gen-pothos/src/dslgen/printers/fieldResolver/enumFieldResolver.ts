@@ -1,10 +1,10 @@
 import {
-  EnumType,
-  ObjectField,
-  PrinterOptions,
+  type EnumType,
+  type ObjectField,
+  type PrinterOptions,
   protoType,
 } from "@proto-graphql/codegen-core";
-import { Code, code } from "ts-poet";
+import { type Code, code } from "ts-poet";
 
 /**
  * @example nullable

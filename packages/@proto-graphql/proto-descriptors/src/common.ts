@@ -1,6 +1,6 @@
-import { SourceCodeInfo } from "google-protobuf/google/protobuf/descriptor_pb";
+import type { SourceCodeInfo } from "google-protobuf/google/protobuf/descriptor_pb";
 
-import {
+import type {
   CommentSet,
   FullName,
   ProtoEnum,
@@ -29,7 +29,7 @@ export class FullNameImpl implements FullName {
 }
 
 export function memo() {
-  return function (_target: any, propKey: string, desc: PropertyDescriptor) {
+  return (_target: any, propKey: string, desc: PropertyDescriptor) => {
     const origGet = desc.get;
     if (!origGet) return;
 

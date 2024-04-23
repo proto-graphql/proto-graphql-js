@@ -1,9 +1,9 @@
-import { DescOneof } from "@bufbuild/protobuf";
+import type { DescOneof } from "@bufbuild/protobuf";
 import { camelCase } from "case-anything";
 
 import { FieldBase } from "./FieldBase";
-import { ObjectType } from "./ObjectType";
-import { OneofUnionType } from "./OneofUnionType";
+import type { ObjectType } from "./ObjectType";
+import type { OneofUnionType } from "./OneofUnionType";
 import { isRequiredField } from "./util";
 
 export class ObjectOneofField extends FieldBase<DescOneof> {

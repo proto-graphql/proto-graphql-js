@@ -1,17 +1,17 @@
-import { DescField } from "@bufbuild/protobuf";
+import type { DescField } from "@bufbuild/protobuf";
 import {
   compact,
   InterfaceType,
-  ObjectType,
+  type ObjectType,
   protobufGraphQLExtensions,
   protoType,
-  Registry,
+  type Registry,
   tsFieldName,
 } from "@proto-graphql/codegen-core";
-import { Code, code, joinCode, literalOf } from "ts-poet";
+import { type Code, code, joinCode, literalOf } from "ts-poet";
 
 import { createFieldRefCode, createNoopFieldRefCode } from "./field";
-import { pothosBuilder, PothosPrinterOptions, pothosRef } from "./util";
+import { pothosBuilder, type PothosPrinterOptions, pothosRef } from "./util";
 
 /**
  * @example

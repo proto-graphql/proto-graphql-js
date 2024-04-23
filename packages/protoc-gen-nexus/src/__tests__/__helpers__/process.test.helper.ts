@@ -1,7 +1,7 @@
-import { CodeGeneratorResponse } from "@bufbuild/protobuf";
+import type { CodeGeneratorResponse } from "@bufbuild/protobuf";
 import {
   buildCodeGeneratorRequest,
-  TestapisPackage,
+  type TestapisPackage,
 } from "@proto-graphql/testapis-proto";
 
 import { protocGenNexus } from "../../plugin";

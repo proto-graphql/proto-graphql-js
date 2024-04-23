@@ -1,8 +1,8 @@
 import {
-  DescFile,
-  DescMessage,
-  DescField,
-  DescEnum,
+  type DescFile,
+  type DescMessage,
+  type DescField,
+  type DescEnum,
   ScalarType as ProtoScalarType,
 } from "@bufbuild/protobuf";
 
@@ -13,7 +13,7 @@ import { ObjectType } from "./ObjectType";
 import { OneofUnionType } from "./OneofUnionType";
 import { ScalarType } from "./ScalarType";
 import { SquashedOneofUnionType } from "./SquashedOneofUnionType";
-import { TypeOptions } from "./options";
+import type { TypeOptions } from "./options";
 import {
   exceptRequestOrResponse,
   isIgnoredField,

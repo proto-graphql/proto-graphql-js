@@ -1,6 +1,6 @@
-import { DescEnum, DescMessage, DescOneof } from "@bufbuild/protobuf";
+import type { DescEnum, DescMessage, DescOneof } from "@bufbuild/protobuf";
 
-import { TypeOptions } from "./options";
+import type { TypeOptions } from "./options";
 import { descriptionFromProto, gqlTypeName } from "./util";
 
 export abstract class TypeBase<P extends DescMessage | DescEnum | DescOneof> {

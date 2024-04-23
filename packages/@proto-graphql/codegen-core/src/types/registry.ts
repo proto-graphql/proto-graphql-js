@@ -4,7 +4,7 @@ import {
   createDescriptorSet,
   createRegistryFromDescriptors,
 } from "@bufbuild/protobuf";
-import { Schema } from "@bufbuild/protoplugin";
+import type { Schema } from "@bufbuild/protoplugin";
 
 export type Registry = ReturnType<typeof createRegistryFromSchema>;
 

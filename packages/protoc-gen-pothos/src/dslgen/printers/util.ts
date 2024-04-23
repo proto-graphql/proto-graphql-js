@@ -1,20 +1,20 @@
 import * as path from "path";
 
 import {
-  EnumType,
+  type EnumType,
   filename,
   generatedGraphQLTypeImportPath,
-  InputObjectField,
-  InputObjectType,
-  InterfaceType,
-  ObjectField,
-  ObjectOneofField,
-  ObjectType,
-  OneofUnionType,
-  PrinterOptions,
-  SquashedOneofUnionType,
+  type InputObjectField,
+  type InputObjectType,
+  type InterfaceType,
+  type ObjectField,
+  type ObjectOneofField,
+  type ObjectType,
+  type OneofUnionType,
+  type PrinterOptions,
+  type SquashedOneofUnionType,
 } from "@proto-graphql/codegen-core";
-import { code, Code, imp } from "ts-poet";
+import { code, type Code, imp } from "ts-poet";
 
 export type PothosPrinterOptions = Extract<PrinterOptions, { dsl: "pothos" }>;
 

@@ -1,18 +1,18 @@
 import {
   compact,
   InterfaceType,
-  ObjectType,
+  type ObjectType,
   protobufGraphQLExtensions,
   protoType,
-  Registry,
+  type Registry,
 } from "@proto-graphql/codegen-core";
-import { code, Code, joinCode, literalOf } from "ts-poet";
+import { code, type Code, joinCode, literalOf } from "ts-poet";
 
 import {
   createFieldDefinitionCode,
   createNoopFieldDefinitionCode,
 } from "./field";
-import { impNexus, NexusPrinterOptions, nexusTypeDef } from "./util";
+import { impNexus, type NexusPrinterOptions, nexusTypeDef } from "./util";
 
 /**
  * @example

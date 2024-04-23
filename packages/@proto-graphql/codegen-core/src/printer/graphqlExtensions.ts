@@ -8,7 +8,7 @@ import {
   ObjectOneofField,
   ObjectType,
   OneofUnionType,
-  Registry,
+  type Registry,
   SquashedOneofUnionType,
   scalarMapLabelByType,
 } from "../types";

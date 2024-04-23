@@ -1,12 +1,12 @@
 import {
-  DescriptorProto,
-  EnumDescriptorProto,
-  EnumValueDescriptorProto,
+  type DescriptorProto,
+  type EnumDescriptorProto,
+  type EnumValueDescriptorProto,
   FieldDescriptorProto,
-  FileDescriptorProto,
-  MethodDescriptorProto,
-  OneofDescriptorProto,
-  ServiceDescriptorProto,
+  type FileDescriptorProto,
+  type MethodDescriptorProto,
+  type OneofDescriptorProto,
+  type ServiceDescriptorProto,
 } from "google-protobuf/google/protobuf/descriptor_pb";
 
 import {
@@ -15,7 +15,7 @@ import {
   isDeprecated,
   memo,
 } from "./common";
-import {
+import type {
   CommentSet,
   FullName,
   ProtoEnum,

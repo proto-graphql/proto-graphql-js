@@ -1,4 +1,4 @@
-import { DescEnum, DescEnumValue } from "@bufbuild/protobuf";
+import type { DescEnum, DescEnumValue } from "@bufbuild/protobuf";
 import { constantCase } from "change-case";
 
 import { TypeBase } from "./TypeBase";
