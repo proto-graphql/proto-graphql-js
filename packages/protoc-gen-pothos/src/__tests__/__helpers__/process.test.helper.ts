@@ -90,7 +90,8 @@ export function processCodeGeneration(
 
 function getFileMap(resp: CodeGeneratorResponse): Record<string, string> {
   return resp.file.reduce(
-    (m, f) => ({ ...m, [f.name!]: f.content! }),
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
+    (m, f) => Object.assign(m, { [f.name!]: f.content! }),
     {} as Record<string, string>,
   );
 }

@@ -41,7 +41,9 @@ export function memo() {
         if (memoKey in this) {
           return this[memoKey];
         }
-        return (this[memoKey] = origGet.call(this));
+        const v = origGet.call(this);
+        this[memoKey] = v;
+        return v;
       },
     } as PropertyDescriptor & Record<string, unknown>;
   };

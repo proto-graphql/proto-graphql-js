@@ -6,7 +6,13 @@
     "useIgnoreFile": true
   },
   "files": {
-    "ignore": ["tsconfig.*.json"]
+    "ignore": [
+      "tsconfig.*.json",
+      "lib",
+      "module",
+      "__generated__",
+      "e2e/testapis"
+    ]
   },
   "organizeImports": {
     "enabled": true
@@ -18,7 +24,11 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "suspicious": {
+        "noExplicitAny": "off",
+        "noExportsInTest": "off"
+      }
     }
   }
 }

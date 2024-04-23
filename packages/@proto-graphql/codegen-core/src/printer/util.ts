@@ -105,7 +105,7 @@ function compactObj<In extends Out, Out extends Record<string, unknown>>(
 ): Out {
   return Object.keys(obj).reduce((newObj, key) => {
     const v = obj[key];
-    return v == null ? newObj : { ...newObj, [key]: compact(v) };
+    return v == null ? newObj : Object.assign(newObj, { [key]: compact(v) });
   }, {} as Out);
 }
 
