@@ -3,8 +3,7 @@
   "scripts": {
     "build": "turbo run build",
     "clean": "turbo run clean",
-    "format": "biome format --write .",
-    "lint": "biome lint --apply .",
+    "lint": "biome check --apply .",
     "release:stable": "pnpm release:prepare && pnpm publish -r",
     "release:prepare": "pnpm clean && pnpm build",
     "release:snapshot": "pnpm release:prepare && pnpm release:snapshot:version && pnpm release:snapshot:publish",
