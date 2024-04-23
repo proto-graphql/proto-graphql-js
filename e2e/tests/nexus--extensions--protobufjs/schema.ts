@@ -6,9 +6,7 @@ import * as types3 from "./__generated__/schema/testapis/extensions/ignored_pb_n
 import * as types4 from "./__generated__/schema/testapis/extensions/no_partial/no_partial_pb_nexus";
 
 // should import at last
-// eslint-disable-next-line import/order
 import * as pbjs from "@proto-graphql/e2e-testapis-protobufjs/lib/testapis/extensions";
-// eslint-disable-next-line import/order
 import * as types1 from "./__generated__/schema/testapis/extensions/extensions_pb_nexus";
 
 const testSquashedUnionQuery = queryField("testSquashedUnion", {
