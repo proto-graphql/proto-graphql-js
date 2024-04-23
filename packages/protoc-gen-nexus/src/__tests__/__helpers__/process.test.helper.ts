@@ -20,17 +20,19 @@ export function generateDSLs(
 ) {
   const params = [];
   switch (target) {
-    case "protobufjs":
+    case "protobufjs": {
       if (opts.withPrefix)
         params.push("import_prefix=@proto-graphql/e2e-testapis-protobufjs/lib");
       params.push("use_protobufjs");
       break;
-    case "native protobuf":
+    }
+    case "native protobuf": {
       if (opts.withPrefix)
         params.push(
           "import_prefix=@proto-graphql/e2e-testapis-google-protobuf/lib",
         );
       break;
+    }
     default: {
       const _exhaustiveCheck: never = target;
       throw "unreachable";

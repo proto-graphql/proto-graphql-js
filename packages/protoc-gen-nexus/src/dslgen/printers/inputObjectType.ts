@@ -105,9 +105,10 @@ export function createToProtoFuncCode(
                 "getTransformer",
               )}("${protoFullName}")`;
               switch (opts.protobuf) {
-                case "google-protobuf":
+                case "google-protobuf": {
                   wrapperFunc = (v) => code`${transformer}.gqlToProto(${v})`;
                   break;
+                }
                 case "protobufjs": {
                   const wktype = protoType(f.proto, opts);
                   const needsAsAny =

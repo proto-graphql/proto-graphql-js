@@ -69,9 +69,10 @@ export function getDeprecationReason(
     case "enum_value": {
       return `${reason.parent.typeName}.${reason.name} is mark as deprecated in a *.proto file.`;
     }
-    default:
+    default: {
       reason satisfies never;
       throw "unreachable";
+    }
   }
 }
 
@@ -111,14 +112,16 @@ function getDeprecationReasonType(
         case "scalar":
         case "map":
           return getDeprecationReasonType(desc.parent);
-        default:
+        default: {
           desc satisfies never;
           throw "unreachable";
+        }
       }
     }
-    case "oneof":
+    case "oneof": {
       if (desc.fields.every((f) => f.deprecated)) return desc;
       return getDeprecationReasonType(desc.parent);
+    }
     case "enum_value":
       return getDeprecationReasonType(desc.parent);
 

@@ -116,29 +116,35 @@ export function protoType(
   let origProtoType: DescMessage | DescEnum | undefined;
   switch (origProto.kind) {
     case "message":
-    case "enum":
+    case "enum": {
       origProtoType = origProto;
       break;
-    case "field":
+    }
+    case "field": {
       switch (origProto.fieldKind) {
-        case "message":
+        case "message": {
           origProtoType = origProto.message;
           break;
-        case "enum":
+        }
+        case "enum": {
           origProtoType = origProto.enum;
           break;
+        }
         case "map":
           throw new Error("cannot import protobuf map types");
         case "scalar":
           throw new Error("cannot import protobuf primitive types");
-        default:
+        default: {
           origProto satisfies never;
           throw "unreachable";
+        }
       }
       break;
-    default:
+    }
+    default: {
       origProto satisfies never;
       throw "unreachable";
+    }
   }
   if (origProtoType === undefined) {
     throw "unreachable";

@@ -28,6 +28,10 @@
       "suspicious": {
         "noExplicitAny": "off",
         "noExportsInTest": "off"
+      },
+      "style": {
+        "noDefaultExport": "error",
+        "useSingleCaseStatement": "error"
       }
     }
   }

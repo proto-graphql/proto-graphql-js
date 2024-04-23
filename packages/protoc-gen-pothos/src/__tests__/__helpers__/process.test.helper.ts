@@ -27,9 +27,10 @@ export function generateDSLs(
   switch (target) {
     case "ts-proto":
     case "ts-proto-with-forcelong-long":
-    case "ts-proto-with-forcelong-number":
+    case "ts-proto-with-forcelong-number": {
       if (opts.withPrefix) params.push(`import_prefix=@testapis/${target}/lib`);
       break;
+    }
     default: {
       const _exhaustiveCheck: never = target;
       throw "unreachable";

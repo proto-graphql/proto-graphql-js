@@ -53,18 +53,22 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
     const [k, v] =
       idx === -1 ? [kv, ""] : [kv.slice(0, idx), kv.slice(idx + 1)];
     switch (k) {
-      case "use_protobufjs":
+      case "use_protobufjs": {
         if (boolParam(k, v)) params.printer.protobuf = "protobufjs";
         break;
-      case "import_prefix":
+      }
+      case "import_prefix": {
         params.printer.importPrefix = stringParam(k, v);
         break;
-      case "partial_inputs":
+      }
+      case "partial_inputs": {
         params.type.partialInputs = boolParam(k, v);
         break;
-      case "emit_imported_files":
+      }
+      case "emit_imported_files": {
         params.printer.emitImportedFiles = boolParam(k, v);
         break;
+      }
       case "file_layout": {
         const s = stringParam(k, v);
         if (!checkEnum(s, fileLayouts)) {

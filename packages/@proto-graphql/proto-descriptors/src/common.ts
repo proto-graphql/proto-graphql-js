@@ -98,12 +98,14 @@ function getSourceLocationProto(
         paths.push(type.index);
         type = type.parent;
         switch (type.kind) {
-          case "File":
+          case "File": {
             paths.push(4); // FileDescriptorProto.message_type
             break;
-          case "Message":
+          }
+          case "Message": {
             paths.push(3); // DescriptorProto.nested_type
             break;
+          }
           /* istanbul ignore next */
           default: {
             const _exhaustiveCheck: never = type;
@@ -127,12 +129,14 @@ function getSourceLocationProto(
         paths.push(type.index);
         type = type.parent;
         switch (type.kind) {
-          case "File":
+          case "File": {
             paths.push(5); // FileDescriptorProto.enum_type
             break;
-          case "Message":
+          }
+          case "Message": {
             paths.push(4); // DescriptorProto.enum_type
             break;
+          }
           /* istanbul ignore next */
           default: {
             const _exhaustiveCheck: never = type;
