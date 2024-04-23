@@ -1,5 +1,9 @@
 import * as wrappersPb from "google-protobuf/google/protobuf/wrappers_pb";
-import { registerTransformer, type Transformer, stringToNumber } from "proto-nexus";
+import {
+  registerTransformer,
+  type Transformer,
+  stringToNumber,
+} from "proto-nexus";
 
 declare global {
   interface ProtoNexusTransformers {

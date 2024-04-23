@@ -371,7 +371,9 @@ export class ProtoFieldImpl implements ProtoField {
 
     const foundType = this.registry.findTypeByFullName(
       // biome-ignore lint/style/noNonNullAssertion: definitely non-null
-      this.descriptor.getTypeName()!.replace(/^\./, ""),
+      this.descriptor
+        .getTypeName()!
+        .replace(/^\./, ""),
     );
     if (foundType === null)
       throw new Error(`Not found type for ${this.fullName.toString()}`);

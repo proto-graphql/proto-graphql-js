@@ -1,4 +1,7 @@
-import { type DescField, ScalarType as ProtoScalarType } from "@bufbuild/protobuf";
+import {
+  type DescField,
+  ScalarType as ProtoScalarType,
+} from "@bufbuild/protobuf";
 
 export type GqlScalarType =
   | "Int"

@@ -7,7 +7,12 @@ import {
 } from "@proto-graphql/codegen-core";
 import { code, type Code, joinCode, literalOf } from "ts-poet";
 
-import { fieldType, impNexus, type NexusPrinterOptions, nexusTypeDef } from "./util";
+import {
+  fieldType,
+  impNexus,
+  type NexusPrinterOptions,
+  nexusTypeDef,
+} from "./util";
 
 /**
  * @example
