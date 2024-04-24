@@ -1,6 +1,7 @@
 {
   "extends": "@proto-graphql/tsconfig/tsconfig.base.json",
   "compilerOptions": {
+    "emitDeclarationOnly": false,
     "noEmit": true,
     "rootDir": "."
   },

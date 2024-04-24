@@ -6,5 +6,9 @@
   "author": "izumin5210 <m@izum.in>",
   "license": "MIT",
   "scripts": {},
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "@tsconfig/node18": "^18.2.4",
+    "@tsconfig/strictest": "^2.0.5"
+  }
 }

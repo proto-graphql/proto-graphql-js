@@ -1,4 +1,4 @@
-#!/usr/bin/env -S pnpm exec ts-node --transpile-only
+#!/usr/bin/env -S pnpm exec tsx
 
 import { exec as _exec } from "node:child_process";
 import { copyFile, readFile, writeFile } from "node:fs/promises";

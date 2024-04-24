@@ -4,10 +4,8 @@
   "description": "Generated codes from protobuf IDL",
   "private": true,
   "scripts": {
-    "build:test": "tsc --build tsconfig.cjs.json",
-    "clean": "pnpm run build:test --clean",
-
-    "prebuild:test": "./scripts/build-proto.ts"
+    "build": "tsup",
+    "prebuild": "./scripts/build-proto.ts"
   },
   "dependencies": {
     "@bufbuild/protobuf": "^1.8.0"
@@ -17,6 +15,15 @@
     "@types/glob": "^8.0.0",
     "glob": "^8.0.3"
   },
-  "main": "./lib/index.js",
-  "types": "./lib/index.d.ts"
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  }
 }

@@ -15,35 +15,29 @@
     {
       "files": ["packages/**"],
       "package.json": {
-        "main": "./lib/index.js",
-        "module": "./module/index.js",
-        "types": "./lib/index.d.ts",
-        "files": ["lib/", "module/"],
+        "main": "./dist/index.js",
+        "module": "./dist/index.mjs",
+        "types": "./dist/index.d.ts",
+        "exports": {
+          ".": {
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.js",
+            "types": "./dist/index.d.ts",
+            "default": "./dist/index.js"
+          }
+        },
+        "files": ["src/", "dist/", "!src/**/*.test.ts", "!src/**/__tests__/"],
         "scripts": {
-          "build": "pnpm run build:cjs && pnpm run build:module",
-          "build:cjs": "tsc --build tsconfig.cjs.json",
-          "build:module": "tsc --build tsconfig.module.json",
-          "clean": "pnpm run clean:cjs && pnpm run clean:module",
-          "clean:cjs": "pnpm run build:cjs --clean",
-          "clean:module": "pnpm run build:module --clean"
+          "build": "tsup"
         }
       },
       "copy": [
         { "src": "configs/.gitignore", "dest": ".gitignore" },
-        { "src": "configs/tsconfig.json", "dest": "tsconfig.json" },
-        { "src": "configs/tsconfig.cjs.json", "dest": "tsconfig.cjs.json" },
-        {
-          "src": "configs/tsconfig.module.json",
-          "dest": "tsconfig.module.json"
-        }
+        { "src": "configs/tsconfig.json", "dest": "tsconfig.json" }
       ]
     },
     {
-      "files": [
-        "devPackages/testapis-proto",
-        "e2e/helper",
-        "e2e/testapis/ts-proto*"
-      ],
+      "files": ["e2e/helper", "e2e/testapis/ts-proto*"],
       "package.json": {
         "main": "./lib/index.js",
         "types": "./lib/index.d.ts"
@@ -52,16 +46,6 @@
         { "src": "configs/tsconfig.json", "dest": "tsconfig.json" },
         { "src": "configs/tsconfig.cjs.json", "dest": "tsconfig.cjs.json" }
       ]
-    },
-    {
-      "files": ["devPackages/testapis-proto"],
-      "package.json": {
-        "scripts": {
-          "build:test": "tsc --build tsconfig.cjs.json",
-          "clean": "pnpm run build:test --clean"
-        }
-      },
-      "copy": [{ "src": "configs/.gitignore", "dest": ".gitignore" }]
     },
     {
       "files": ["e2e/helper", "e2e/testapis/ts-proto*"],

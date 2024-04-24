@@ -1,9 +1,4 @@
 {
   "extends": "@proto-graphql/tsconfig/tsconfig.base.json",
-  "compilerOptions": {
-    "noEmit": true,
-    "rootDir": ".",
-    "allowJs": true
-  },
-  "include": ["./src", "./scripts", "jest.config.js"]
+  "include": ["./src"]
 }
