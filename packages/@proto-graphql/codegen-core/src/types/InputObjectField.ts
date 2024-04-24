@@ -1,10 +1,10 @@
-import { DescField } from "@bufbuild/protobuf";
+import type { DescField } from "@bufbuild/protobuf";
 import { camelCase } from "case-anything";
 
-import { EnumType } from "./EnumType";
+import type { EnumType } from "./EnumType";
 import { FieldBase } from "./FieldBase";
 import { InputObjectType } from "./InputObjectType";
-import { ScalarType } from "./ScalarType";
+import type { ScalarType } from "./ScalarType";
 import { getFieldOptions, isRequiredField } from "./util";
 
 export class InputObjectField<
@@ -13,7 +13,7 @@ export class InputObjectField<
   constructor(
     readonly type: T,
     readonly parent: InputObjectType,
-    proto: DescField
+    proto: DescField,
   ) {
     super(proto);
   }
@@ -41,7 +41,7 @@ export class InputObjectField<
           ? this.type.toPartialInput()
           : this.type) as any,
         this.parent,
-        this.proto
+        this.proto,
       );
     }
     return new PartialInputObjectField(this.type, this.parent, this.proto);

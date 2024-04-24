@@ -8,7 +8,7 @@ describe("no_partial", () => {
     const resp = await generateDSLs(
       "testapis.extensions.no_partial",
       "native protobuf",
-      { partialInputs: true }
+      { partialInputs: true },
     );
     snapshotGeneratedFiles(resp, [
       "extensions/no_partial/no_partial_pb_nexus.ts",
@@ -21,7 +21,7 @@ describe("field_nullability", () => {
     const resp = await generateDSLs(
       "testapis.extensions.field_nullability",
       "native protobuf",
-      { partialInputs: true }
+      { partialInputs: true },
     );
     snapshotGeneratedFiles(resp, [
       "extensions/field_nullability/nullability_pb_nexus.ts",

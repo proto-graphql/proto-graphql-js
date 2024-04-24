@@ -1,8 +1,8 @@
 import {
-  DescFile,
-  DescMessage,
-  DescField,
-  DescEnum,
+  type DescEnum,
+  type DescField,
+  type DescFile,
+  type DescMessage,
   ScalarType as ProtoScalarType,
 } from "@bufbuild/protobuf";
 
@@ -13,7 +13,7 @@ import { ObjectType } from "./ObjectType";
 import { OneofUnionType } from "./OneofUnionType";
 import { ScalarType } from "./ScalarType";
 import { SquashedOneofUnionType } from "./SquashedOneofUnionType";
-import { TypeOptions } from "./options";
+import type { TypeOptions } from "./options";
 import {
   exceptRequestOrResponse,
   isIgnoredField,
@@ -35,7 +35,7 @@ export type GlType =
 export function collectTypesFromFile(
   file: DescFile,
   options: TypeOptions,
-  files: readonly DescFile[]
+  files: readonly DescFile[],
 ) {
   const [msgs, enums] = collectDescsRecursively({
     nestedMessages: file.messages,
@@ -74,7 +74,7 @@ function collectDescsRecursively({
 function buildObjectTypes(
   msgs: DescMessage[],
   options: TypeOptions,
-  files: readonly DescFile[]
+  files: readonly DescFile[],
 ): ObjectType[] {
   return msgs
     .filter((m) => !isIgnoredType(m))
@@ -87,21 +87,23 @@ function buildObjectTypes(
 function buildInputObjectTypes(
   msgs: DescMessage[],
   options: TypeOptions,
-  files: readonly DescFile[]
+  files: readonly DescFile[],
 ): InputObjectType[] {
   return msgs
     .filter((m) => !isIgnoredInputType(m))
     .filter(exceptRequestOrResponse(files))
     .map((m) => new InputObjectType(m, options))
     .flatMap((t) =>
-      options.partialInputs && t.hasPartialInput() ? [t, t.toPartialInput()] : t
+      options.partialInputs && t.hasPartialInput()
+        ? [t, t.toPartialInput()]
+        : t,
     );
 }
 
 function buildInterfaceType(
   msgs: DescMessage[],
   options: TypeOptions,
-  files: readonly DescFile[]
+  files: readonly DescFile[],
 ): InterfaceType[] {
   return msgs
     .filter((m) => !isIgnoredType(m))
@@ -113,7 +115,7 @@ function buildInterfaceType(
 
 function buildSquashedOneofUnionTypes(
   msgs: DescMessage[],
-  options: TypeOptions
+  options: TypeOptions,
 ): SquashedOneofUnionType[] {
   return msgs
     .filter((m) => !isIgnoredType(m))
@@ -123,7 +125,7 @@ function buildSquashedOneofUnionTypes(
 
 function buildOneofUnionTypes(
   msgs: DescMessage[],
-  options: TypeOptions
+  options: TypeOptions,
 ): OneofUnionType[] {
   return msgs
     .filter((m) => !isSquashedUnion(m))
@@ -140,7 +142,7 @@ function buildEnumTypes(enums: DescEnum[], options: TypeOptions): EnumType[] {
 
 export function getObjectFieldType(
   proto: DescField,
-  options: TypeOptions
+  options: TypeOptions,
 ): ScalarType | EnumType | ObjectType | InterfaceType | SquashedOneofUnionType {
   return detectType<
     ObjectType | InterfaceType | SquashedOneofUnionType | ScalarType
@@ -153,7 +155,7 @@ export function getObjectFieldType(
 
 export function getInputObjectFieldType(
   proto: DescField,
-  options: TypeOptions
+  options: TypeOptions,
 ): ScalarType | EnumType | InputObjectType {
   return detectType<InputObjectType>(proto, options, (msg, file) => {
     return new InputObjectType(msg, file);
@@ -170,7 +172,7 @@ function detectType<
 >(
   desc: DescField,
   options: TypeOptions,
-  f: (msg: DescMessage, options: TypeOptions) => T
+  f: (msg: DescMessage, options: TypeOptions) => T,
 ): ScalarType | EnumType | T {
   switch (desc.fieldKind) {
     case "message": {
@@ -184,7 +186,7 @@ function detectType<
     case "scalar": {
       return new ScalarType(
         desc,
-        options.scalarMapping[scalarMapLabelByType[desc.scalar]]
+        options.scalarMapping[scalarMapLabelByType[desc.scalar]],
       );
     }
     case "map": {

@@ -1,6 +1,6 @@
-import { SourceCodeInfo } from "google-protobuf/google/protobuf/descriptor_pb";
+import type { SourceCodeInfo } from "google-protobuf/google/protobuf/descriptor_pb";
 
-import {
+import type {
   CommentSet,
   FullName,
   ProtoEnum,
@@ -16,7 +16,7 @@ import {
 export class FullNameImpl implements FullName {
   constructor(
     readonly parent: FullName | null,
-    readonly name: string
+    readonly name: string,
   ) {}
 
   @memo()
@@ -29,7 +29,7 @@ export class FullNameImpl implements FullName {
 }
 
 export function memo() {
-  return function (_target: any, propKey: string, desc: PropertyDescriptor) {
+  return (_target: any, propKey: string, desc: PropertyDescriptor) => {
     const origGet = desc.get;
     if (!origGet) return;
 
@@ -41,7 +41,9 @@ export function memo() {
         if (memoKey in this) {
           return this[memoKey];
         }
-        return (this[memoKey] = origGet.call(this));
+        const v = origGet.call(this);
+        this[memoKey] = v;
+        return v;
       },
     } as PropertyDescriptor & Record<string, unknown>;
   };
@@ -54,7 +56,7 @@ export function getCommentSetByDescriptors(
     | ProtoOneof
     | ProtoField
     | ProtoEnum
-    | ProtoEnumValue
+    | ProtoEnumValue,
 ): CommentSet {
   const proto = getSourceLocationProto(d);
 
@@ -72,7 +74,7 @@ function getSourceLocationProto(
     | ProtoOneof
     | ProtoField
     | ProtoEnum
-    | ProtoEnumValue
+    | ProtoEnumValue,
 ): SourceCodeInfo.Location | null {
   let paths: number[] = [];
   let type = t;
@@ -88,7 +90,7 @@ function getSourceLocationProto(
             .find(
               (l) =>
                 l.getPathList().length === paths.length &&
-                l.getPathList().every((v, i) => v === paths[i])
+                l.getPathList().every((v, i) => v === paths[i]),
             ) || null
         );
       }
@@ -96,12 +98,14 @@ function getSourceLocationProto(
         paths.push(type.index);
         type = type.parent;
         switch (type.kind) {
-          case "File":
+          case "File": {
             paths.push(4); // FileDescriptorProto.message_type
             break;
-          case "Message":
+          }
+          case "Message": {
             paths.push(3); // DescriptorProto.nested_type
             break;
+          }
           /* istanbul ignore next */
           default: {
             const _exhaustiveCheck: never = type;
@@ -125,12 +129,14 @@ function getSourceLocationProto(
         paths.push(type.index);
         type = type.parent;
         switch (type.kind) {
-          case "File":
+          case "File": {
             paths.push(5); // FileDescriptorProto.enum_type
             break;
-          case "Message":
+          }
+          case "Message": {
             paths.push(4); // DescriptorProto.enum_type
             break;
+          }
           /* istanbul ignore next */
           default: {
             const _exhaustiveCheck: never = type;
@@ -162,7 +168,7 @@ export function isDeprecated(
     | ProtoOneof
     | ProtoField
     | ProtoEnum
-    | ProtoEnumValue
+    | ProtoEnumValue,
 ): boolean {
   if (proto.kind === "Oneof") {
     return proto.fields.every(isDeprecated);

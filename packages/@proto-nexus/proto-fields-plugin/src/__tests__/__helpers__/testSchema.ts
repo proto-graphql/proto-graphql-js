@@ -25,7 +25,7 @@ const TestInput = Object.assign(
         baz: { type: nonNull("Boolean"), description: "Test boolean field" },
       },
     },
-  }
+  },
 );
 
 const TestSubsetInput = inputObjectType({

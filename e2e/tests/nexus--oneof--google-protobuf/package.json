@@ -4,7 +4,6 @@
   "description": "E2E tests for protoc-gen-nexus",
   "private": true,
   "scripts": {
-    "lint": "eslint --fix .",
     "test:e2e": "pnpm run test:e2e:gen && pnpm run test:e2e:jest && pnpm run test:e2e:schema && pnpm run test:e2e:typecheck",
     "test:e2e:gen": "rm -rf __generated__ && pnpm run test:e2e:gen:proto && pnpm run test:e2e:gen:gql",
     "test:e2e:gen:gql": "ts-node --transpile-only --require tsconfig-paths/register --project tsconfig.json schema.ts",
@@ -16,7 +15,6 @@
   "devDependencies": {
     "@proto-graphql/e2e-helper": "workspace:*",
     "@proto-graphql/e2e-testapis-google-protobuf": "workspace:*",
-    "@proto-graphql/eslint-config": "workspace:*",
     "@proto-graphql/tsconfig": "workspace:*",
     "@proto-nexus/google-protobuf": "workspace:*",
     "proto-nexus": "workspace:*",

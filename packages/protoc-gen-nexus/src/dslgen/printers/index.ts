@@ -3,16 +3,16 @@ import {
   InputObjectType,
   ObjectType,
   OneofUnionType,
-  Registry,
+  type Registry,
   SquashedOneofUnionType,
 } from "@proto-graphql/codegen-core";
-import { Code } from "ts-poet";
+import type { Code } from "ts-poet";
 
 import { createEnumTypeCode } from "./enumType";
 import { createInputObjectTypeCode } from "./inputObjectType";
 import { createObjectTypeCode } from "./objectType";
 import { createOneofUnionTypeCode } from "./oneofUnionType";
-import { NexusPrinterOptions } from "./util";
+import type { NexusPrinterOptions } from "./util";
 
 export function createTypeDslCodes(
   types: (
@@ -23,7 +23,7 @@ export function createTypeDslCodes(
     | SquashedOneofUnionType
   )[],
   registry: Registry,
-  opts: NexusPrinterOptions
+  opts: NexusPrinterOptions,
 ): Code[] {
   return types.flatMap((type) => {
     if (type instanceof ObjectType) {

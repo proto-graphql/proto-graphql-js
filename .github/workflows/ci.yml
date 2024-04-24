@@ -19,16 +19,6 @@ jobs:
       - name: check code is up to date
         run: git diff --exit-code
 
-  format:
-    name: Format
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/actions/setup-node
-      - run: pnpm format
-      - name: check code is up to date
-        run: git diff --exit-code
-
   test:
     name: Test
     runs-on: ubuntu-latest

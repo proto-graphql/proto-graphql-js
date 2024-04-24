@@ -4,8 +4,8 @@ import { ByteResolver, DateTimeResolver } from "graphql-scalars";
 import { queryField } from "nexus";
 import { asNexusMethod } from "nexus";
 
-import * as types1 from "./__generated__/schema/testapis/wktypes/well_known_types_pb_nexus";
 import "@proto-nexus/protobufjs";
+import * as types1 from "./__generated__/schema/testapis/wktypes/well_known_types_pb_nexus";
 
 const test1Query = queryField("test1", {
   type: "Message",

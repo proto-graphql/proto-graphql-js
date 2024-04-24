@@ -1,17 +1,17 @@
 import {
-  EnumType,
+  type EnumType,
+  type InputObjectField,
+  type InputObjectType,
+  type InterfaceType,
+  type ObjectField,
+  type ObjectOneofField,
+  type ObjectType,
+  type OneofUnionType,
+  type PrinterOptions,
+  type SquashedOneofUnionType,
   generatedGraphQLTypeImportPath,
-  InputObjectField,
-  InputObjectType,
-  InterfaceType,
-  ObjectField,
-  ObjectOneofField,
-  ObjectType,
-  OneofUnionType,
-  PrinterOptions,
-  SquashedOneofUnionType,
 } from "@proto-graphql/codegen-core";
-import { code, Code, def, imp, Import } from "ts-poet";
+import { type Code, type Import, code, def, imp } from "ts-poet";
 
 export type NexusPrinterOptions = Extract<PrinterOptions, { dsl: "nexus" }>;
 
@@ -29,7 +29,7 @@ export function nexusTypeDef(
     | InputObjectType
     | EnumType
     | OneofUnionType
-    | SquashedOneofUnionType
+    | SquashedOneofUnionType,
 ): Code {
   return code`${def(type.typeName)}`;
 }
@@ -41,7 +41,7 @@ export function fieldType(
       >
     | InputObjectField<InputObjectType | EnumType>
     | ObjectOneofField,
-  opts: NexusPrinterOptions
+  opts: NexusPrinterOptions,
 ): Code {
   const importPath = generatedGraphQLTypeImportPath(field, opts);
   if (importPath) return code`${imp(`${field.type.typeName}@${importPath}`)}`;

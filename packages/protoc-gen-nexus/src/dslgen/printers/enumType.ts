@@ -1,10 +1,10 @@
 import {
+  type EnumType,
+  type Registry,
   compact,
-  EnumType,
   protobufGraphQLExtensions,
-  Registry,
 } from "@proto-graphql/codegen-core";
-import { code, Code, literalOf } from "ts-poet";
+import { type Code, code, literalOf } from "ts-poet";
 
 import { impNexus, nexusTypeDef } from "./util";
 
@@ -31,6 +31,6 @@ export function createEnumTypeCode(type: EnumType, registry: Registry): Code {
     extensions: protobufGraphQLExtensions(type, registry),
   };
   return code`export const ${nexusTypeDef(type)} = ${impNexus(
-    "enumType"
+    "enumType",
   )}(${literalOf(compact(typeOpts))});`;
 }

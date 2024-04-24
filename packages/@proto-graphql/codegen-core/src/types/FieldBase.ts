@@ -1,4 +1,4 @@
-import { DescField, DescOneof } from "@bufbuild/protobuf";
+import type { DescField, DescOneof } from "@bufbuild/protobuf";
 
 import {
   descriptionFromProto,

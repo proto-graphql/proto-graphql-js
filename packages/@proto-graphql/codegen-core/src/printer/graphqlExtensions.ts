@@ -1,4 +1,3 @@
-import { compact } from "./util";
 import {
   EnumType,
   EnumTypeValue,
@@ -8,10 +7,11 @@ import {
   ObjectOneofField,
   ObjectType,
   OneofUnionType,
-  Registry,
+  type Registry,
   SquashedOneofUnionType,
   scalarMapLabelByType,
 } from "../types";
+import { compact } from "./util";
 
 export function protobufGraphQLExtensions(
   type:
@@ -24,7 +24,7 @@ export function protobufGraphQLExtensions(
     | ObjectOneofField
     | InputObjectField<any>
     | EnumTypeValue,
-  typeRegistry: Registry
+  typeRegistry: Registry,
 ): Record<string, Record<string, unknown>> {
   if (type instanceof ObjectType || type instanceof InputObjectType) {
     return {
@@ -98,7 +98,7 @@ export function protobufGraphQLExtensions(
 }
 
 function protoFieldTypeFullName(
-  field: ObjectField<any> | ObjectOneofField | InputObjectField<any>
+  field: ObjectField<any> | ObjectOneofField | InputObjectField<any>,
 ): string | undefined {
   if (field instanceof ObjectField || field instanceof InputObjectField) {
     switch (field.proto.fieldKind) {

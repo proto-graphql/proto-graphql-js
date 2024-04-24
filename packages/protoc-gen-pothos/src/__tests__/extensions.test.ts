@@ -10,7 +10,7 @@ describe("no_partial", () => {
       "ts-proto",
       {
         partialInputs: true,
-      }
+      },
     );
     snapshotGeneratedFiles(resp, [
       "extensions/no_partial/no_partial.pb.pothos.ts",
@@ -23,7 +23,7 @@ describe("field_nullability", () => {
     const resp = await generateDSLs(
       "testapis.extensions.field_nullability",
       "ts-proto",
-      { partialInputs: true }
+      { partialInputs: true },
     );
     snapshotGeneratedFiles(resp, [
       "extensions/field_nullability/nullability.pb.pothos.ts",

@@ -1,7 +1,7 @@
 #!/usr/bin/env -S pnpm exec ts-node --transpile-only
 
-import { readFile, writeFile } from "fs/promises";
-import { join } from "path";
+import { readFile, writeFile } from "node:fs/promises";
+import { join } from "node:path";
 
 const testsDir = "e2e/tests";
 
@@ -67,7 +67,6 @@ async function genPackageJson(test: TestCase): Promise<void> {
     description: `E2E tests for protoc-gen-${test.target}`,
     private: true,
     scripts: {
-      lint: "eslint --fix .",
       "test:e2e": ["gen", "jest", "schema", "typecheck"]
         .map((t) => `pnpm run test:e2e:${t}`)
         .join(" && "),
@@ -85,12 +84,11 @@ async function genPackageJson(test: TestCase): Promise<void> {
     devDependencies: Object.fromEntries(
       [
         "@proto-graphql/e2e-helper",
-        "@proto-graphql/eslint-config",
         "@proto-graphql/tsconfig",
         ...protoPackages[test.proto.lib],
       ]
         .sort()
-        .map((pkg) => [pkg, "workspace:*"])
+        .map((pkg) => [pkg, "workspace:*"]),
     ),
     jest: {
       preset: "ts-jest",
@@ -101,7 +99,7 @@ async function genPackageJson(test: TestCase): Promise<void> {
   await writeFile(
     join(getTestPath(test), "package.json"),
     JSON.stringify(packageJson, undefined, 2),
-    "utf-8"
+    "utf-8",
   );
 }
 
@@ -157,7 +155,7 @@ async function genBufGemTemplate(test: TestCase): Promise<void> {
   await writeFile(
     join(getTestPath(test), "buf.gen.json"),
     JSON.stringify(tmpl, undefined, 2),
-    "utf-8"
+    "utf-8",
   );
 }
 

@@ -1,7 +1,7 @@
-import { CodeGeneratorResponse } from "@bufbuild/protobuf";
+import type { CodeGeneratorResponse } from "@bufbuild/protobuf";
 import {
+  type TestapisPackage,
   buildCodeGeneratorRequest,
-  TestapisPackage,
 } from "@proto-graphql/testapis-proto";
 
 import { protocGenPothos } from "../../plugin";
@@ -21,15 +21,16 @@ export function generateDSLs(
     perGraphQLType?: boolean;
     partialInputs?: boolean;
     scalars?: Record<string, string>;
-  } = {}
+  } = {},
 ) {
   const params = [];
   switch (target) {
     case "ts-proto":
     case "ts-proto-with-forcelong-long":
-    case "ts-proto-with-forcelong-number":
+    case "ts-proto-with-forcelong-number": {
       if (opts.withPrefix) params.push(`import_prefix=@testapis/${target}/lib`);
       break;
+    }
     default: {
       const _exhaustiveCheck: never = target;
       throw "unreachable";
@@ -51,7 +52,7 @@ export function generateDSLs(
 
 export function itGeneratesDSLsToMatchSnapshtos(
   pkg: TestapisPackage,
-  expectedGeneratedFiles: string[]
+  expectedGeneratedFiles: string[],
 ) {
   describe.each(["ts-proto"] as const)("with %s", (target) => {
     it("generates pothos DSLs", () => {
@@ -63,7 +64,7 @@ export function itGeneratesDSLsToMatchSnapshtos(
 
 export function snapshotGeneratedFiles(
   resp: CodeGeneratorResponse,
-  files: string[]
+  files: string[],
 ) {
   expect(Object.keys(resp.file)).toHaveLength(files.length);
 
@@ -77,12 +78,12 @@ export function snapshotGeneratedFiles(
 
 export function processCodeGeneration(
   pkg: TestapisPackage,
-  param?: string
+  param?: string,
 ): CodeGeneratorResponse {
   const req = buildCodeGeneratorRequest(pkg);
   req.parameter = "target=ts";
   if (param) {
-    req.parameter += "," + param;
+    req.parameter += `,${param}`;
   }
 
   return protocGenPothos.run(req);
@@ -90,7 +91,8 @@ export function processCodeGeneration(
 
 function getFileMap(resp: CodeGeneratorResponse): Record<string, string> {
   return resp.file.reduce(
-    (m, f) => ({ ...m, [f.name!]: f.content! }),
-    {} as Record<string, string>
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
+    (m, f) => Object.assign(m, { [f.name!]: f.content! }),
+    {} as Record<string, string>,
   );
 }

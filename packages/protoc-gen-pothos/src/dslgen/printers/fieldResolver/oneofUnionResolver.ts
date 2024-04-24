@@ -1,11 +1,11 @@
 import {
   ObjectField,
   ObjectOneofField,
-  PrinterOptions,
-  SquashedOneofUnionType,
+  type PrinterOptions,
+  type SquashedOneofUnionType,
   tsFieldName,
 } from "@proto-graphql/codegen-core";
-import { Code, code, joinCode } from "ts-poet";
+import { type Code, code, joinCode } from "ts-poet";
 
 /**
  * @example nullable
@@ -20,11 +20,11 @@ import { Code, code, joinCode } from "ts-poet";
 export function createOneofUnionResolverCode(
   sourceExpr: Code,
   field: ObjectOneofField | ObjectField<SquashedOneofUnionType>,
-  opts: PrinterOptions
+  opts: PrinterOptions,
 ): Code {
   const createBlockStmtCode = (
     sourceExpr: Code,
-    { nullable }: { nullable: boolean }
+    { nullable }: { nullable: boolean },
   ): Code => {
     const createFieldExpr = (memberField: ObjectField<any>) => {
       if (field instanceof ObjectOneofField) {

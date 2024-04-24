@@ -89,11 +89,7 @@ const scalarLabelByType: Record<ScalarType, string> = {
 };
 
 export const defaultScalarMapping: Readonly<
-  Record<
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    (typeof scalarLabelByType)[ScalarType] | (string & {}),
-    string
-  >
+  Record<(typeof scalarLabelByType)[ScalarType] | (string & {}), string>
 > = {
   int32: "Int",
   int64: "String",

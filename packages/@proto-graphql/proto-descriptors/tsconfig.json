@@ -5,5 +5,5 @@
     "rootDir": ".",
     "allowJs": true
   },
-  "include": ["./src", "./scripts", "jest.config.js", ".eslintrc.js"]
+  "include": ["./src", "./scripts", "jest.config.js"]
 }

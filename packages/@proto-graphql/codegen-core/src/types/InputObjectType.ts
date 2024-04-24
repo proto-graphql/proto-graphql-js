@@ -1,8 +1,8 @@
-import { DescMessage } from "@bufbuild/protobuf";
+import type { DescMessage } from "@bufbuild/protobuf";
 
-import { EnumType } from "./EnumType";
+import type { EnumType } from "./EnumType";
 import { InputObjectField } from "./InputObjectField";
-import { ScalarType } from "./ScalarType";
+import type { ScalarType } from "./ScalarType";
 import { TypeBase } from "./TypeBase";
 import { getInputObjectFieldType } from "./types";
 import {
@@ -30,8 +30,8 @@ export class InputObjectType extends TypeBase<DescMessage> {
             new InputObjectField(
               getInputObjectFieldType(f, this.options),
               this,
-              f
-            )
+              f,
+            ),
         ),
     ];
   }

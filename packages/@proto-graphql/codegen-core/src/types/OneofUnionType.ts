@@ -1,4 +1,4 @@
-import { DescOneof } from "@bufbuild/protobuf";
+import type { DescOneof } from "@bufbuild/protobuf";
 
 import { ObjectField } from "./ObjectField";
 import { ObjectType } from "./ObjectType";

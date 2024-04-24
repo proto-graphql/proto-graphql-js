@@ -6,14 +6,13 @@
   "scripts": {
     "build:test": "tsc --build tsconfig.cjs.json",
     "clean": "pnpm run build:test --clean",
-    "lint": "eslint --fix .",
+
     "prebuild:test": "./scripts/build-proto.ts"
   },
   "dependencies": {
     "@bufbuild/protobuf": "^1.8.0"
   },
   "devDependencies": {
-    "@proto-graphql/eslint-config": "workspace:*",
     "@proto-graphql/tsconfig": "workspace:*",
     "@types/glob": "^8.0.0",
     "glob": "^8.0.3"

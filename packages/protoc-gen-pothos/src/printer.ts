@@ -1,23 +1,23 @@
-import { DescFile } from "@bufbuild/protobuf";
-import { Schema } from "@bufbuild/protoplugin/ecmascript";
+import type { DescFile } from "@bufbuild/protobuf";
+import type { Schema } from "@bufbuild/protoplugin/ecmascript";
 import {
+  type Registry,
+  type TypeOptions,
   collectTypesFromFile,
   createRegistryFromSchema,
   filename,
   filenameFromProtoFile,
   printCodes,
-  Registry,
-  TypeOptions,
 } from "@proto-graphql/codegen-core";
-import { Code } from "ts-poet";
+import type { Code } from "ts-poet";
 
 import { createTypeDslCodes } from "./dslgen";
-import { PothosPrinterOptions } from "./dslgen/printers/util";
+import type { PothosPrinterOptions } from "./dslgen/printers/util";
 
 export function generateFiles(
   schema: Schema,
   file: DescFile,
-  opts: { type: TypeOptions; printer: PothosPrinterOptions }
+  opts: { type: TypeOptions; printer: PothosPrinterOptions },
 ): void {
   opts.printer.protobuf = "ts-proto"; // default
 
@@ -31,7 +31,7 @@ export function generateFiles(
       const code = printCodes(
         createCodes(types, registry, opts.printer),
         "protoc-gen-pothos",
-        file
+        file,
       );
       f.print(code.trimEnd());
       break;
@@ -42,7 +42,7 @@ export function generateFiles(
         const code = printCodes(
           createCodes([t], registry, opts.printer),
           "protoc-gen-pothos",
-          file
+          file,
         );
         f.print(code.trimEnd());
       }
@@ -59,7 +59,7 @@ export function generateFiles(
 function createCodes(
   types: ReturnType<typeof collectTypesFromFile>,
   registry: Registry,
-  opts: PothosPrinterOptions
+  opts: PothosPrinterOptions,
 ): Code[] {
   return [...createTypeDslCodes(types, registry, opts)];
 }

@@ -1,10 +1,10 @@
-import { DescFile } from "@bufbuild/protobuf";
-import { code, Code } from "ts-poet";
+import type { DescFile } from "@bufbuild/protobuf";
+import { type Code, code } from "ts-poet";
 
 export function printCodes(
   codes: Code[],
   programName: string,
-  file: DescFile
+  file: DescFile,
 ): string {
   return (codes.length === 0 ? code`export {};` : code`${codes}`).toString({
     prefix: `

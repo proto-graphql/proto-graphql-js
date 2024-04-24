@@ -1,4 +1,4 @@
-import { GraphQLInputObjectType } from "graphql";
+import type { GraphQLInputObjectType } from "graphql";
 
 import { schema } from "./__helpers__/testSchema";
 
@@ -10,7 +10,7 @@ it("creates subset types", () => {
       name: f.name,
       description: f.description,
       type: f.type,
-    }))
+    })),
   ).toMatchInlineSnapshot(`
     [
       {

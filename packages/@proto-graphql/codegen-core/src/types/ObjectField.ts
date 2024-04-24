@@ -1,13 +1,13 @@
-import { DescField } from "@bufbuild/protobuf";
+import type { DescField } from "@bufbuild/protobuf";
 import { camelCase } from "case-anything";
 
-import { EnumType } from "./EnumType";
+import type { EnumType } from "./EnumType";
 import { FieldBase } from "./FieldBase";
-import { InterfaceType } from "./InterfaceType";
-import { ObjectType } from "./ObjectType";
-import { OneofUnionType } from "./OneofUnionType";
-import { ScalarType } from "./ScalarType";
-import { SquashedOneofUnionType } from "./SquashedOneofUnionType";
+import type { InterfaceType } from "./InterfaceType";
+import type { ObjectType } from "./ObjectType";
+import type { OneofUnionType } from "./OneofUnionType";
+import type { ScalarType } from "./ScalarType";
+import type { SquashedOneofUnionType } from "./SquashedOneofUnionType";
 import { getFieldOptions, isRequiredField } from "./util";
 
 export class ObjectField<
@@ -21,7 +21,7 @@ export class ObjectField<
   constructor(
     readonly type: T,
     readonly parent: ObjectType | OneofUnionType,
-    proto: DescField
+    proto: DescField,
   ) {
     super(proto);
   }

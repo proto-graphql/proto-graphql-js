@@ -1,9 +1,9 @@
 #!/usr/bin/env -S pnpm exec ts-node --transpile-only
 
-import { join, dirname } from "path";
-import { exec as _exec } from "child_process";
-import { readFile, copyFile, writeFile } from "fs/promises";
-import { promisify } from "util";
+import { exec as _exec } from "node:child_process";
+import { copyFile, readFile, writeFile } from "node:fs/promises";
+import { dirname, join } from "node:path";
+import { promisify } from "node:util";
 import minimatch from "minimatch";
 
 const exec = promisify(_exec);
@@ -29,7 +29,7 @@ interface WorkspacePackageConfig {
 
 export async function main() {
   const cfg: Config = JSON.parse(
-    await readFile("workspacePackageConfig.json", { encoding: "utf-8" })
+    await readFile("workspacePackageConfig.json", { encoding: "utf-8" }),
   );
   const pkgPaths = (await exec("pnpm recursive exec pwd")).stdout
     .trim()
@@ -40,7 +40,7 @@ export async function main() {
 
   const wsCfgAndPkgPathsPairs = buildWorkspaceConfigAndPkgPathsPairs(
     pkgPaths,
-    cfg
+    cfg,
   );
 
   // update package.json
@@ -68,10 +68,10 @@ export async function main() {
 
 function buildWorkspaceConfigAndPkgPathsPairs(
   allPkgPaths: string[],
-  cfg: Config
+  cfg: Config,
 ): [wsCfg: WorkspacePackageConfig, pkgPaths: string[]][] {
   return cfg.workspacePackageConfigs.map((wsCfg) => {
-    let pkgPaths = new Set<string>();
+    const pkgPaths = new Set<string>();
     for (const pattern of wsCfg.files ?? []) {
       for (const file of allPkgPaths.filter(minimatch.filter(pattern))) {
         pkgPaths.add(file);
@@ -92,8 +92,8 @@ class PackageJSONStore {
     for (const [pkgPath, pkgJSON] of Object.entries(this.pkgJSONByPath)) {
       await writeFile(
         join(pkgPath, "package.json"),
-        JSON.stringify(pkgJSON, undefined, 2) + "\n",
-        { encoding: "utf-8" }
+        `${JSON.stringify(pkgJSON, undefined, 2)}\n`,
+        { encoding: "utf-8" },
       );
     }
   }
@@ -120,7 +120,7 @@ class PackageJSONStore {
         [
           ...(((await this.getIn(packagePath, key)) as Array<unknown>) ?? []),
           ...value,
-        ].filter(isUnique())
+        ].filter(isUnique()),
       );
     } else {
       await this.setIn(packagePath, key, {
@@ -156,7 +156,7 @@ class PackageJSONStore {
     if (pkgJSON != null) return pkgJSON;
 
     const loaded = JSON.parse(
-      await readFile(join(pkgPath, "package.json"), { encoding: "utf-8" })
+      await readFile(join(pkgPath, "package.json"), { encoding: "utf-8" }),
     );
     this.pkgJSONByPath[pkgPath] = loaded;
     return loaded;

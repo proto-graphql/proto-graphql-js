@@ -10,7 +10,7 @@ builder.queryField("test", (t) =>
     resolve() {
       return EmptyMessage.fromPartial({});
     },
-  })
+  }),
 );
 
 export const schema = builder.toSchema();

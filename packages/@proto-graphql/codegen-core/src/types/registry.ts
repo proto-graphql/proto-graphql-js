@@ -4,12 +4,12 @@ import {
   createDescriptorSet,
   createRegistryFromDescriptors,
 } from "@bufbuild/protobuf";
-import { Schema } from "@bufbuild/protoplugin";
+import type { Schema } from "@bufbuild/protoplugin";
 
 export type Registry = ReturnType<typeof createRegistryFromSchema>;
 
 export function createRegistryFromSchema(schema: Schema) {
   return createRegistryFromDescriptors(
-    createDescriptorSet(schema.proto.protoFile)
+    createDescriptorSet(schema.proto.protoFile),
   );
 }

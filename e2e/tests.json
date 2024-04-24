@@ -1,45 +1,174 @@
 {
   "tests": [
-    { "target": "nexus", "proto": { "package": "deprecation", "lib": "google-protobuf" } },
-    { "target": "nexus", "proto": { "package": "deprecation", "lib": "protobufjs" } },
-    { "target": "nexus", "proto": { "package": "edgecases/import_from_same_pkg", "lib": "google-protobuf" } },
-    { "target": "nexus", "proto": { "package": "edgecases/import_from_same_pkg", "lib": "protobufjs" } },
-    { "target": "nexus", "proto": { "package": "edgecases/import_squashed_union", "lib": "google-protobuf" } },
-    { "target": "nexus", "proto": { "package": "edgecases/import_squashed_union", "lib": "protobufjs" } },
-    { "target": "nexus", "proto": { "package": "empty_types", "lib": "google-protobuf" } },
-    { "target": "nexus", "proto": { "package": "empty_types", "lib": "protobufjs" } },
-    { "target": "nexus", "proto": { "package": "enums", "lib": "google-protobuf" } },
+    {
+      "target": "nexus",
+      "proto": { "package": "deprecation", "lib": "google-protobuf" }
+    },
+    {
+      "target": "nexus",
+      "proto": { "package": "deprecation", "lib": "protobufjs" }
+    },
+    {
+      "target": "nexus",
+      "proto": {
+        "package": "edgecases/import_from_same_pkg",
+        "lib": "google-protobuf"
+      }
+    },
+    {
+      "target": "nexus",
+      "proto": {
+        "package": "edgecases/import_from_same_pkg",
+        "lib": "protobufjs"
+      }
+    },
+    {
+      "target": "nexus",
+      "proto": {
+        "package": "edgecases/import_squashed_union",
+        "lib": "google-protobuf"
+      }
+    },
+    {
+      "target": "nexus",
+      "proto": {
+        "package": "edgecases/import_squashed_union",
+        "lib": "protobufjs"
+      }
+    },
+    {
+      "target": "nexus",
+      "proto": { "package": "empty_types", "lib": "google-protobuf" }
+    },
+    {
+      "target": "nexus",
+      "proto": { "package": "empty_types", "lib": "protobufjs" }
+    },
+    {
+      "target": "nexus",
+      "proto": { "package": "enums", "lib": "google-protobuf" }
+    },
     { "target": "nexus", "proto": { "package": "enums", "lib": "protobufjs" } },
-    { "target": "nexus", "proto": { "package": "extensions", "lib": "google-protobuf" } },
-    { "target": "nexus", "proto": { "package": "extensions", "lib": "protobufjs" } },
-    { "target": "nexus", "proto": { "package": "field_behavior", "lib": "google-protobuf" } },
-    { "target": "nexus", "proto": { "package": "field_behavior", "lib": "protobufjs" } },
-    { "target": "nexus", "proto": { "package": "multipkgs", "lib": "google-protobuf" } },
-    { "target": "nexus", "proto": { "package": "multipkgs", "lib": "protobufjs" } },
-    { "target": "nexus", "proto": { "package": "nested", "lib": "google-protobuf" } },
-    { "target": "nexus", "proto": { "package": "nested", "lib": "protobufjs" } },
-    { "target": "nexus", "proto": { "package": "oneof", "lib": "google-protobuf" } },
+    {
+      "target": "nexus",
+      "proto": { "package": "extensions", "lib": "google-protobuf" }
+    },
+    {
+      "target": "nexus",
+      "proto": { "package": "extensions", "lib": "protobufjs" }
+    },
+    {
+      "target": "nexus",
+      "proto": { "package": "field_behavior", "lib": "google-protobuf" }
+    },
+    {
+      "target": "nexus",
+      "proto": { "package": "field_behavior", "lib": "protobufjs" }
+    },
+    {
+      "target": "nexus",
+      "proto": { "package": "multipkgs", "lib": "google-protobuf" }
+    },
+    {
+      "target": "nexus",
+      "proto": { "package": "multipkgs", "lib": "protobufjs" }
+    },
+    {
+      "target": "nexus",
+      "proto": { "package": "nested", "lib": "google-protobuf" }
+    },
+    {
+      "target": "nexus",
+      "proto": { "package": "nested", "lib": "protobufjs" }
+    },
+    {
+      "target": "nexus",
+      "proto": { "package": "oneof", "lib": "google-protobuf" }
+    },
     { "target": "nexus", "proto": { "package": "oneof", "lib": "protobufjs" } },
-    { "target": "nexus", "proto": { "package": "primitives", "lib": "google-protobuf" } },
-    { "target": "nexus", "proto": { "package": "primitives", "lib": "protobufjs" } },
-    { "target": "nexus", "proto": { "package": "proto3_optional", "lib": "google-protobuf" } },
-    { "target": "nexus", "proto": { "package": "proto3_optional", "lib": "protobufjs" } },
-    { "target": "nexus", "proto": { "package": "wktypes", "lib": "google-protobuf" } },
-    { "target": "nexus", "proto": { "package": "wktypes", "lib": "protobufjs" } },
-    { "target": "pothos", "proto": { "package": "deprecation", "lib": "ts-proto" } },
-    { "target": "pothos", "proto": { "package": "edgecases/import_from_same_pkg", "lib": "ts-proto" } },
-    { "target": "pothos", "proto": { "package": "edgecases/import_squashed_union", "lib": "ts-proto" } },
-    { "target": "pothos", "proto": { "package": "empty_types", "lib": "ts-proto" } },
+    {
+      "target": "nexus",
+      "proto": { "package": "primitives", "lib": "google-protobuf" }
+    },
+    {
+      "target": "nexus",
+      "proto": { "package": "primitives", "lib": "protobufjs" }
+    },
+    {
+      "target": "nexus",
+      "proto": { "package": "proto3_optional", "lib": "google-protobuf" }
+    },
+    {
+      "target": "nexus",
+      "proto": { "package": "proto3_optional", "lib": "protobufjs" }
+    },
+    {
+      "target": "nexus",
+      "proto": { "package": "wktypes", "lib": "google-protobuf" }
+    },
+    {
+      "target": "nexus",
+      "proto": { "package": "wktypes", "lib": "protobufjs" }
+    },
+    {
+      "target": "pothos",
+      "proto": { "package": "deprecation", "lib": "ts-proto" }
+    },
+    {
+      "target": "pothos",
+      "proto": {
+        "package": "edgecases/import_from_same_pkg",
+        "lib": "ts-proto"
+      }
+    },
+    {
+      "target": "pothos",
+      "proto": {
+        "package": "edgecases/import_squashed_union",
+        "lib": "ts-proto"
+      }
+    },
+    {
+      "target": "pothos",
+      "proto": { "package": "empty_types", "lib": "ts-proto" }
+    },
     { "target": "pothos", "proto": { "package": "enums", "lib": "ts-proto" } },
-    { "target": "pothos", "proto": { "package": "extensions", "lib": "ts-proto" } },
-    { "target": "pothos", "proto": { "package": "field_behavior", "lib": "ts-proto" } },
-    { "target": "pothos", "proto": { "package": "multipkgs", "lib": "ts-proto" } },
+    {
+      "target": "pothos",
+      "proto": { "package": "extensions", "lib": "ts-proto" }
+    },
+    {
+      "target": "pothos",
+      "proto": { "package": "field_behavior", "lib": "ts-proto" }
+    },
+    {
+      "target": "pothos",
+      "proto": { "package": "multipkgs", "lib": "ts-proto" }
+    },
     { "target": "pothos", "proto": { "package": "nested", "lib": "ts-proto" } },
     { "target": "pothos", "proto": { "package": "oneof", "lib": "ts-proto" } },
-    { "target": "pothos", "proto": { "package": "primitives", "lib": "ts-proto" } },
-    { "target": "pothos", "proto": { "package": "primitives", "lib": "ts-proto-with-forcelong-number" } },
-    { "target": "pothos", "proto": { "package": "proto3_optional", "lib": "ts-proto" } },
-    { "target": "pothos", "proto": { "package": "wktypes", "lib": "ts-proto" } },
-    { "target": "pothos", "proto": { "package": "wktypes", "lib": "ts-proto-with-forcelong-number" } }
+    {
+      "target": "pothos",
+      "proto": { "package": "primitives", "lib": "ts-proto" }
+    },
+    {
+      "target": "pothos",
+      "proto": {
+        "package": "primitives",
+        "lib": "ts-proto-with-forcelong-number"
+      }
+    },
+    {
+      "target": "pothos",
+      "proto": { "package": "proto3_optional", "lib": "ts-proto" }
+    },
+    {
+      "target": "pothos",
+      "proto": { "package": "wktypes", "lib": "ts-proto" }
+    },
+    {
+      "target": "pothos",
+      "proto": { "package": "wktypes", "lib": "ts-proto-with-forcelong-number" }
+    }
   ]
 }

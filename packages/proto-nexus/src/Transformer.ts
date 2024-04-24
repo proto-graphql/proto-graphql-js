@@ -21,7 +21,7 @@ type TransformerWrapper<T extends Transformer<any, any>> =
 export const transformers: Record<string, Transformer<any, any>> = {};
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  // biome-ignore lint/suspicious/noEmptyInterface: use interface that package users can add own transformers
   interface ProtoNexusTransformers {}
 }
 
@@ -33,7 +33,7 @@ export function registerTransformer<
   ProtoTypeFullName extends keyof ProtoNexusTransformers,
 >(
   protoTypeFullName: ProtoTypeFullName,
-  transformer: ProtoNexusTransformers[ProtoTypeFullName]
+  transformer: ProtoNexusTransformers[ProtoTypeFullName],
 ) {
   transformers[protoTypeFullName] = transformer;
 }
@@ -41,7 +41,7 @@ export function registerTransformer<
 export function getTransformer<
   ProtoTypeFullName extends keyof ProtoNexusTransformers,
 >(
-  protoTypeFullName: ProtoTypeFullName
+  protoTypeFullName: ProtoTypeFullName,
 ): TransformerWrapper<ProtoNexusTransformers[ProtoTypeFullName]> {
   const t = transformers[protoTypeFullName];
   if (t == null) {

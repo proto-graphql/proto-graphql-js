@@ -1,13 +1,13 @@
 import {
+  type PrinterOptions,
+  type TypeOptions,
   defaultScalarMapping,
   fileLayouts,
-  PrinterOptions,
-  TypeOptions,
 } from "@proto-graphql/codegen-core";
 
 export function parseParams<DSL extends PrinterOptions["dsl"]>(
   input: string | undefined,
-  dsl: DSL
+  dsl: DSL,
 ): {
   type: TypeOptions;
   printer: Extract<PrinterOptions, { dsl: DSL }>;
@@ -31,19 +31,19 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
 
   if (!input) return params;
 
-  const toBool = (name: string, v: string | undefined): boolean => {
+  const boolParam = (name: string, v: string | undefined): boolean => {
     if (!v || v === "true") return true;
     if (v === "false") return false;
     throw new Error(`${name} should be bool, got string: ${v}`);
   };
-  const toString = (name: string, v: string | undefined): string => {
+  const stringParam = (name: string, v: string | undefined): string => {
     if (!v) throw new Error(`${name} should be string`);
     return v;
   };
 
   function checkEnum<T extends string>(
     v: string,
-    whitelist: readonly T[]
+    whitelist: readonly T[],
   ): v is T {
     return whitelist.includes(v as any);
   }
@@ -53,25 +53,29 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
     const [k, v] =
       idx === -1 ? [kv, ""] : [kv.slice(0, idx), kv.slice(idx + 1)];
     switch (k) {
-      case "use_protobufjs":
-        if (toBool(k, v)) params.printer.protobuf = "protobufjs";
+      case "use_protobufjs": {
+        if (boolParam(k, v)) params.printer.protobuf = "protobufjs";
         break;
-      case "import_prefix":
-        params.printer.importPrefix = toString(k, v);
+      }
+      case "import_prefix": {
+        params.printer.importPrefix = stringParam(k, v);
         break;
-      case "partial_inputs":
-        params.type.partialInputs = toBool(k, v);
+      }
+      case "partial_inputs": {
+        params.type.partialInputs = boolParam(k, v);
         break;
-      case "emit_imported_files":
-        params.printer.emitImportedFiles = toBool(k, v);
+      }
+      case "emit_imported_files": {
+        params.printer.emitImportedFiles = boolParam(k, v);
         break;
+      }
       case "file_layout": {
-        const s = toString(k, v);
+        const s = stringParam(k, v);
         if (!checkEnum(s, fileLayouts)) {
           throw new Error(
             `file_layout should be ${fileLayouts
               .map((s) => `"${s}"`)
-              .join(", ")}`
+              .join(", ")}`,
           );
         }
         params.printer.fileLayout = s;
@@ -87,7 +91,7 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
       case "pothos_builder_path": {
         (
           params.printer as Extract<PrinterOptions, { dsl: "pothos" }>
-        ).pothos.builderPath = toString(k, v);
+        ).pothos.builderPath = stringParam(k, v);
         break;
       }
       case "ignore_non_message_oneof_fields": {

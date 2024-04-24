@@ -1,23 +1,23 @@
-import { createRegistry, DescField } from "@bufbuild/protobuf";
+import type { DescField, createRegistry } from "@bufbuild/protobuf";
 import {
-  compact,
-  createGetFieldValueCode,
   EnumType,
   InputObjectField,
   ObjectField,
   ObjectOneofField,
   ObjectType,
-  protobufGraphQLExtensions,
   ScalarType,
   SquashedOneofUnionType,
+  compact,
+  createGetFieldValueCode,
+  protobufGraphQLExtensions,
   tsFieldName,
 } from "@proto-graphql/codegen-core";
-import { code, Code, literalOf } from "ts-poet";
+import { type Code, code, literalOf } from "ts-poet";
 
 import { createEnumResolverCode } from "./fieldResolver/enumFieldResolver";
 import { createNonNullResolverCode } from "./fieldResolver/nonNullResolver";
 import { createOneofUnionResolverCode } from "./fieldResolver/oneofUnionResolver";
-import { fieldTypeRef, PothosPrinterOptions } from "./util";
+import { type PothosPrinterOptions, fieldTypeRef } from "./util";
 
 /**
  * @example
@@ -42,7 +42,7 @@ import { fieldTypeRef, PothosPrinterOptions } from "./util";
 export function createFieldRefCode(
   field: ObjectField<any> | ObjectOneofField | InputObjectField<any>,
   registry: ReturnType<typeof createRegistry>,
-  opts: PothosPrinterOptions
+  opts: PothosPrinterOptions,
 ): Code {
   const isInput = field instanceof InputObjectField;
   const baseType =
@@ -102,7 +102,7 @@ export function createFieldRefCode(
   return shouldUseFieldFunc
     ? code`t.field(${literalOf(compact(fieldOpts))})`
     : code`t.expose(${literalOf(
-        tsFieldName(field.proto as DescField, opts)
+        tsFieldName(field.proto as DescField, opts),
       )}, ${literalOf(compact(fieldOpts))})`;
 }
 

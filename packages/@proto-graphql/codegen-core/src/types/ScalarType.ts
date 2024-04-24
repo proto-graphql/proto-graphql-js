@@ -1,4 +1,7 @@
-import { DescField, ScalarType as ProtoScalarType } from "@bufbuild/protobuf";
+import {
+  type DescField,
+  ScalarType as ProtoScalarType,
+} from "@bufbuild/protobuf";
 
 export type GqlScalarType =
   | "Int"
@@ -7,13 +10,12 @@ export type GqlScalarType =
   | "Boolean"
   | "ID"
   | "DateTime"
-  // eslint-disable-next-line @typescript-eslint/ban-types
   | (string & {});
 
 export class ScalarType {
   constructor(
     private readonly proto: DescField,
-    private readonly type: GqlScalarType
+    private readonly type: GqlScalarType,
   ) {}
 
   get typeName(): string {

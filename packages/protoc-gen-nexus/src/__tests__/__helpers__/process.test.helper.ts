@@ -1,7 +1,7 @@
-import { CodeGeneratorResponse } from "@bufbuild/protobuf";
+import type { CodeGeneratorResponse } from "@bufbuild/protobuf";
 import {
+  type TestapisPackage,
   buildCodeGeneratorRequest,
-  TestapisPackage,
 } from "@proto-graphql/testapis-proto";
 
 import { protocGenNexus } from "../../plugin";
@@ -16,21 +16,23 @@ export function generateDSLs(
     withPrefix?: boolean;
     perGraphQLType?: boolean;
     partialInputs?: boolean;
-  } = {}
+  } = {},
 ) {
   const params = [];
   switch (target) {
-    case "protobufjs":
+    case "protobufjs": {
       if (opts.withPrefix)
         params.push("import_prefix=@proto-graphql/e2e-testapis-protobufjs/lib");
       params.push("use_protobufjs");
       break;
-    case "native protobuf":
+    }
+    case "native protobuf": {
       if (opts.withPrefix)
         params.push(
-          "import_prefix=@proto-graphql/e2e-testapis-google-protobuf/lib"
+          "import_prefix=@proto-graphql/e2e-testapis-google-protobuf/lib",
         );
       break;
+    }
     default: {
       const _exhaustiveCheck: never = target;
       throw "unreachable";
@@ -47,7 +49,7 @@ export function generateDSLs(
 
 export function itGeneratesNexusDSLsToMatchSnapshtos(
   pkg: TestapisPackage,
-  expectedGeneratedFiles: string[]
+  expectedGeneratedFiles: string[],
 ) {
   describe.each(generationTargets)("with %s", (target) => {
     it("generates nexus DSLs", () => {
@@ -59,7 +61,7 @@ export function itGeneratesNexusDSLsToMatchSnapshtos(
 
 export function snapshotGeneratedFiles(
   resp: CodeGeneratorResponse,
-  files: string[]
+  files: string[],
 ) {
   expect(Object.keys(resp.file)).toHaveLength(files.length);
 
@@ -73,19 +75,20 @@ export function snapshotGeneratedFiles(
 
 export function processCodeGeneration(
   pkg: TestapisPackage,
-  param?: string
+  param?: string,
 ): CodeGeneratorResponse {
   const req = buildCodeGeneratorRequest(pkg);
   req.parameter = "target=ts";
   if (param) {
-    req.parameter += "," + param;
+    req.parameter += `,${param}`;
   }
   return protocGenNexus.run(req);
 }
 
 function getFileMap(resp: CodeGeneratorResponse): Record<string, string> {
   return resp.file.reduce(
-    (m, f) => ({ ...m, [f.name!]: f.content! }),
-    {} as Record<string, string>
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
+    (m, f) => Object.assign(m, { [f.name!]: f.content! }),
+    {} as Record<string, string>,
   );
 }

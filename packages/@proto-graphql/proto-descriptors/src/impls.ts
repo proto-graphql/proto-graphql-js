@@ -1,12 +1,12 @@
 import {
-  DescriptorProto,
-  EnumDescriptorProto,
-  EnumValueDescriptorProto,
+  type DescriptorProto,
+  type EnumDescriptorProto,
+  type EnumValueDescriptorProto,
   FieldDescriptorProto,
-  FileDescriptorProto,
-  MethodDescriptorProto,
-  OneofDescriptorProto,
-  ServiceDescriptorProto,
+  type FileDescriptorProto,
+  type MethodDescriptorProto,
+  type OneofDescriptorProto,
+  type ServiceDescriptorProto,
 } from "google-protobuf/google/protobuf/descriptor_pb";
 
 import {
@@ -15,7 +15,9 @@ import {
   isDeprecated,
   memo,
 } from "./common";
-import {
+import { getScalarTypeFromDescriptor } from "./scalars";
+
+import type {
   CommentSet,
   FullName,
   ProtoEnum,
@@ -28,7 +30,6 @@ import {
   ProtoScalar,
   ProtoService,
 } from "./interfaces";
-import { getScalarTypeFromDescriptor } from "./scalars";
 
 export class ProtoRegistry {
   public fileByName: Record<string, ProtoFile>;
@@ -44,7 +45,7 @@ export class ProtoRegistry {
   }
 
   public findTypeByFullName(
-    fn: FullName | string
+    fn: FullName | string,
   ): ProtoMessage | ProtoEnum | null {
     return this.typeByFullName[fn.toString()] ?? null;
   }
@@ -52,6 +53,7 @@ export class ProtoRegistry {
   public addFile(fd: FileDescriptorProto) {
     const file = new ProtoFileImpl(fd, this);
 
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     this.fileByName[fd.getName()!] = file;
 
     const [msgs, enums] = file.collectTypesRecursively();
@@ -66,10 +68,11 @@ export class ProtoFileImpl implements ProtoFile {
 
   constructor(
     readonly descriptor: FileDescriptorProto,
-    private readonly registry: ProtoRegistry
+    private readonly registry: ProtoRegistry,
   ) {}
 
   get name(): string {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     return this.descriptor.getName()!;
   }
 
@@ -85,6 +88,7 @@ export class ProtoFileImpl implements ProtoFile {
   }
 
   get package(): string {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     return this.descriptor.getPackage()!;
   }
 
@@ -108,7 +112,7 @@ export class ProtoFileImpl implements ProtoFile {
   public collectTypesRecursively(): [ProtoMessage[], ProtoEnum[]] {
     const [msgs, enums] = [this.messages, this.enums];
     const [childMsgs, childEnums] = this.collectTypesRecursivelyFromMessage(
-      this.messages
+      this.messages,
     );
     msgs.push(...childMsgs);
     enums.push(...childEnums);
@@ -116,14 +120,14 @@ export class ProtoFileImpl implements ProtoFile {
   }
 
   private collectTypesRecursivelyFromMessage(
-    inputs: ProtoMessage[]
+    inputs: ProtoMessage[],
   ): [ProtoMessage[], ProtoEnum[]] {
     const msgs: ProtoMessage[] = [];
     const enums: ProtoEnum[] = [];
 
     for (const input of inputs) {
       const [childMsgs, childEnums] = this.collectTypesRecursivelyFromMessage(
-        input.messages
+        input.messages,
       );
       msgs.push(...input.messages, ...childMsgs);
       enums.push(...input.enums, ...childEnums);
@@ -140,10 +144,11 @@ export class ProtoServiceImpl implements ProtoService {
     readonly descriptor: ServiceDescriptorProto,
     readonly parent: ProtoFile,
     readonly index: number,
-    private readonly registry: ProtoRegistry
+    private readonly registry: ProtoRegistry,
   ) {}
 
   get name(): string {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     return this.descriptor.getName()!;
   }
 
@@ -177,10 +182,11 @@ export class ProtoMethodImpl implements ProtoMethod {
     readonly descriptor: MethodDescriptorProto,
     readonly parent: ProtoService,
     readonly index: number,
-    private readonly registry: ProtoRegistry
+    private readonly registry: ProtoRegistry,
   ) {}
 
   get name(): string {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     return this.descriptor.getName()!;
   }
 
@@ -191,6 +197,7 @@ export class ProtoMethodImpl implements ProtoMethod {
 
   @memo()
   get input(): ProtoMessage {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     const fullName = this.descriptor.getInputType()!.replace(/^./, "");
     const msg = this.registry.findTypeByFullName(fullName);
     if (msg == null || msg.kind !== "Message")
@@ -200,6 +207,7 @@ export class ProtoMethodImpl implements ProtoMethod {
 
   @memo()
   get output(): ProtoMessage {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     const fullName = this.descriptor.getOutputType()!.replace(/^./, "");
     const msg = this.registry.findTypeByFullName(fullName);
     if (msg == null || msg.kind !== "Message")
@@ -220,10 +228,11 @@ export class ProtoMessageImpl implements ProtoMessage {
     readonly descriptor: DescriptorProto,
     readonly parent: ProtoFile | ProtoMessage,
     readonly index: number,
-    private readonly registry: ProtoRegistry
+    private readonly registry: ProtoRegistry,
   ) {}
 
   get name(): string {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     return this.descriptor.getName()!;
   }
 
@@ -282,10 +291,11 @@ export class ProtoOneofImpl implements ProtoOneof {
   constructor(
     readonly descriptor: OneofDescriptorProto,
     readonly parent: ProtoMessage,
-    readonly index: number
+    readonly index: number,
   ) {}
 
   get name(): string {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     return this.descriptor.getName()!;
   }
 
@@ -304,7 +314,7 @@ export class ProtoOneofImpl implements ProtoOneof {
     return this.parent.fields.filter(
       (f) =>
         f.descriptor.hasOneofIndex() &&
-        f.descriptor.getOneofIndex() === this.index
+        f.descriptor.getOneofIndex() === this.index,
     );
   }
 
@@ -331,10 +341,11 @@ export class ProtoFieldImpl implements ProtoField {
     readonly descriptor: FieldDescriptorProto,
     readonly parent: ProtoMessage,
     readonly index: number,
-    private readonly registry: ProtoRegistry
+    private readonly registry: ProtoRegistry,
   ) {}
 
   get name(): string {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     return this.descriptor.getName()!;
   }
 
@@ -344,10 +355,12 @@ export class ProtoFieldImpl implements ProtoField {
   }
 
   get jsonName(): string {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     return this.descriptor.getJsonName()!;
   }
 
   get number(): number {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     return this.descriptor.getNumber()!;
   }
 
@@ -357,7 +370,10 @@ export class ProtoFieldImpl implements ProtoField {
     if (scalarType !== undefined) return { kind: "Scalar", type: scalarType };
 
     const foundType = this.registry.findTypeByFullName(
-      this.descriptor.getTypeName()!.replace(/^\./, "")
+      // biome-ignore lint/style/noNonNullAssertion: definitely non-null
+      this.descriptor
+        .getTypeName()!
+        .replace(/^\./, ""),
     );
     if (foundType === null)
       throw new Error(`Not found type for ${this.fullName.toString()}`);
@@ -401,10 +417,11 @@ export class ProtoEnumImpl implements ProtoEnum {
   constructor(
     readonly descriptor: EnumDescriptorProto,
     readonly parent: ProtoFile | ProtoMessage,
-    readonly index: number
+    readonly index: number,
   ) {}
 
   get name(): string {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     return this.descriptor.getName()!;
   }
 
@@ -442,10 +459,11 @@ export class ProtoEnumValueImpl implements ProtoEnumValue {
   constructor(
     readonly descriptor: EnumValueDescriptorProto,
     readonly parent: ProtoEnum,
-    readonly index: number
+    readonly index: number,
   ) {}
 
   get name(): string {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     return this.descriptor.getName()!;
   }
 
@@ -455,6 +473,7 @@ export class ProtoEnumValueImpl implements ProtoEnumValue {
   }
 
   get number(): number {
+    // biome-ignore lint/style/noNonNullAssertion: definitely non-null
     return this.descriptor.getNumber()!;
   }
 

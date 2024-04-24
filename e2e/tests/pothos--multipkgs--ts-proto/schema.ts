@@ -16,7 +16,7 @@ builder.queryField("test", (t) =>
         enum: SubpkgEnum.BAR,
       });
     },
-  })
+  }),
 );
 
 export const schema = builder.toSchema();
