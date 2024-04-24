@@ -7,7 +7,6 @@ import {
   type DescMessage,
   ScalarType as ProtoScalarType,
 } from "@bufbuild/protobuf";
-import { camelCase as camelCaseAnything } from "case-anything";
 import { camelCase } from "change-case";
 import { type Code, code, imp } from "ts-poet";
 
@@ -213,7 +212,7 @@ export function tsFieldName(desc: DescField, opts: PrinterOptions): string {
     case "protobufjs":
       return camelCase(desc.name);
     case "ts-proto": {
-      return camelCaseAnything(desc.name);
+      return desc.proto.jsonName || camelCase(desc.name);
     }
     /* istanbul ignore next */
     default: {
@@ -250,7 +249,7 @@ export function createSetFieldValueCode(
 
 function googleProtobufFieldAccessor(type: "get" | "set", proto: DescField) {
   return `${type}${upperCaseFirst(
-    proto.jsonName ?? camelCaseAnything(proto.name),
+    proto.jsonName || proto.proto.jsonName || camelCase(proto.name),
   )}${proto.repeated ? "List" : ""}`;
 }
 
