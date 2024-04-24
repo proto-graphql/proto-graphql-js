@@ -1,5 +1,5 @@
 import type { DescField } from "@bufbuild/protobuf";
-import { camelCase } from "case-anything";
+import { camelCase } from "change-case";
 
 import type { EnumType } from "./EnumType";
 import { FieldBase } from "./FieldBase";
@@ -33,6 +33,7 @@ export class ObjectField<
     return (
       getFieldOptions(this.proto).name ||
       this.proto.jsonName ||
+      this.proto.proto.jsonName ||
       camelCase(this.proto.name)
     );
   }
