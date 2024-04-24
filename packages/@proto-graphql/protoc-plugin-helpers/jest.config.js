@@ -1,17 +1,12 @@
 const base = {
   preset: "ts-jest",
   testEnvironment: "node",
-  testPathIgnorePatterns: ["/node_mo]dules/", "__helpers__/"],
+  testPathIgnorePatterns: ["/node_modules/", "__helpers__/", "/dist/"],
   coveragePathIgnorePatterns: [
     "/node_modules/",
     "<rootDir>/src/__generated__/extensions/",
     "<rootDir>/src/__tests__/",
   ],
-  globals: {
-    "ts-jest": {
-      tsconfig: "tsconfig.test.json",
-    },
-  },
 };
 
 if (process.env.TEST_TARGET === "integration") {

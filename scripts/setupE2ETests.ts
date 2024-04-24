@@ -1,4 +1,4 @@
-#!/usr/bin/env -S pnpm exec ts-node --transpile-only
+#!/usr/bin/env -S pnpm exec tsx
 
 import { readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
@@ -74,8 +74,7 @@ async function genPackageJson(test: TestCase): Promise<void> {
         "rm -rf __generated__",
         ...["proto", "gql"].map((t) => `pnpm run test:e2e:gen:${t}`),
       ].join(" && "),
-      "test:e2e:gen:gql":
-        "ts-node --transpile-only --require tsconfig-paths/register --project tsconfig.json schema.ts",
+      "test:e2e:gen:gql": "tsx schema.ts",
       "test:e2e:gen:proto": `buf generate --template buf.gen.json --path ${protoPath} ${bufDir}`,
       "test:e2e:jest": "jest --passWithNoTests",
       "test:e2e:schema": "git diff --exit-code __generated__/schema.graphql",
