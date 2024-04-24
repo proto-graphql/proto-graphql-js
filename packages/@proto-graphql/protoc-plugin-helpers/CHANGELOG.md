@@ -1,5 +1,55 @@
 # @proto-graphql/protoc-plugin-helpers
 
+## 0.3.0
+
+### Minor Changes
+
+- [#327](https://github.com/proto-graphql/proto-graphql-js/pull/327) [`cb38fa7`](https://github.com/proto-graphql/proto-graphql-js/commit/cb38fa72abf3f1ff2fba0fcfc75d725f63c0ff85) Thanks [@izumin5210](https://github.com/izumin5210)! - support `ignore_non_message_oneof_fields` option
+
+- [#346](https://github.com/proto-graphql/proto-graphql-js/pull/346) [`fa1e455`](https://github.com/proto-graphql/proto-graphql-js/commit/fa1e455561e2ea2a80accf7e80e2ff731e80eac6) Thanks [@izumin5210](https://github.com/izumin5210)! - refactor: use `@bufbuild/protoplugin`
+
+- [#310](https://github.com/proto-graphql/proto-graphql-js/pull/310) [`8f7ad44`](https://github.com/proto-graphql/proto-graphql-js/commit/8f7ad44e56356867a3f95c0d08437d31bc4b8f33) Thanks [@izumin5210](https://github.com/izumin5210)! - support scalar option for define custom scalar type mappings instead of legacy option
+
+  BREAKING CHANGE: drop `long_number` and `custom_type` options
+
+  #### Migration
+
+  `long_number` and `custom_type` can be replaced with `scalar`.
+
+  ```patch
+   plugins:
+     name: pothos
+     out: src/__generated__/schema
+     opt:
+  -    - long_number=Int
+  +    - scalar=int64=Int
+  +    - scalar=uint64=Int
+  +    - scalar=sint64=Int
+  +    - scalar=fixed64=Int
+  +    - scalar=sfixed64=Int
+  +    - scalar=google.protobuf.Int64Value=Int
+  +    - scalar=google.protobuf.UInt64Value=Int
+  +    - scalar=google.protobuf.SInt64Value=Int
+  +    - scalar=google.protobuf.Fixed64Value=Int
+  +    - scalar=google.protobuf.SFixed64Value=Int
+  ```
+
+  ```patch
+   plugins:
+     name: pothos
+     out: src/__generated__/schema
+     opt:
+  -    - custom_type=google.type.Date=Date
+  +    - scalar=google.type.Date=Date
+  ```
+
+### Patch Changes
+
+- [#354](https://github.com/proto-graphql/proto-graphql-js/pull/354) [`0b532bc`](https://github.com/proto-graphql/proto-graphql-js/commit/0b532bcc1fb21d2364a911d2234bd30449804cb6) Thanks [@izumin5210](https://github.com/izumin5210)! - build with tsup
+
+- Updated dependencies [[`9fd6869`](https://github.com/proto-graphql/proto-graphql-js/commit/9fd6869ead97335506076bcb7086a9d561aa4bb9), [`0b532bc`](https://github.com/proto-graphql/proto-graphql-js/commit/0b532bcc1fb21d2364a911d2234bd30449804cb6), [`cb38fa7`](https://github.com/proto-graphql/proto-graphql-js/commit/cb38fa72abf3f1ff2fba0fcfc75d725f63c0ff85), [`2b3d87f`](https://github.com/proto-graphql/proto-graphql-js/commit/2b3d87fcc05b3ef6ae7921ef8e72a667ec751159), [`fa1e455`](https://github.com/proto-graphql/proto-graphql-js/commit/fa1e455561e2ea2a80accf7e80e2ff731e80eac6), [`8f7ad44`](https://github.com/proto-graphql/proto-graphql-js/commit/8f7ad44e56356867a3f95c0d08437d31bc4b8f33), [`1166d7b`](https://github.com/proto-graphql/proto-graphql-js/commit/1166d7bb4e183e06e7964be897a204d864b94381)]:
+  - @proto-graphql/codegen-core@0.4.0
+
 ## 0.2.7
 
 ### Patch Changes

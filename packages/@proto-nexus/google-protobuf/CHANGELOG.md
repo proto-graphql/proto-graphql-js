@@ -1,5 +1,18 @@
 # @proto-nexus/google-protobuf
 
+## 0.6.0
+
+### Minor Changes
+
+- [#330](https://github.com/proto-graphql/proto-graphql-js/pull/330) [`9fd6869`](https://github.com/proto-graphql/proto-graphql-js/commit/9fd6869ead97335506076bcb7086a9d561aa4bb9) Thanks [@izumin5210](https://github.com/izumin5210)! - support bytes
+
+### Patch Changes
+
+- [#354](https://github.com/proto-graphql/proto-graphql-js/pull/354) [`0b532bc`](https://github.com/proto-graphql/proto-graphql-js/commit/0b532bcc1fb21d2364a911d2234bd30449804cb6) Thanks [@izumin5210](https://github.com/izumin5210)! - build with tsup
+
+- Updated dependencies [[`0b532bc`](https://github.com/proto-graphql/proto-graphql-js/commit/0b532bcc1fb21d2364a911d2234bd30449804cb6)]:
+  - proto-nexus@0.5.4
+
 ## 0.5.3
 
 ### Patch Changes

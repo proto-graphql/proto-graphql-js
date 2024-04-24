@@ -1,5 +1,11 @@
 # @proto-graphql/testapis-proto
 
+## 0.1.1
+
+### Patch Changes
+
+- [#330](https://github.com/proto-graphql/proto-graphql-js/pull/330) [`9fd6869`](https://github.com/proto-graphql/proto-graphql-js/commit/9fd6869ead97335506076bcb7086a9d561aa4bb9) Thanks [@izumin5210](https://github.com/izumin5210)! - support bytes
+
 ## 0.5.6
 
 ### Patch Changes
