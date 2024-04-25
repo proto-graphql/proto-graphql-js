@@ -18,6 +18,11 @@
       "matchDepTypes": ["devDependencies"],
       "labels": ["devDependencies"],
       "rangeStrategy": "pin"
+    },
+    {
+      "matchSourceUrls": ["https://github.com/bufbuild/protobuf-es"],
+      "groupName": "bufbuild/protobuf-es monorepo",
+      "matchUpdateTypes": ["digest", "patch", "minor", "major"]
     }
   ]
 }
