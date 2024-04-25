@@ -2,13 +2,7 @@
   "name": "@proto-nexus/protobufjs",
   "version": "0.6.0",
   "description": "Generate DSL for GraphQL Nexus from Protocol Buffers IDL",
-  "keywords": [
-    "graphql",
-    "grpc",
-    "nexus",
-    "protobuf",
-    "typescript"
-  ],
+  "keywords": ["graphql", "grpc", "nexus", "protobuf", "typescript"],
   "repository": "git@github.com:proto-graphql/proto-graphql-js.git",
   "author": "izumin5210 <m@izum.in>",
   "license": "MIT",
@@ -30,12 +24,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": [
-    "src/",
-    "dist/",
-    "!src/**/*.test.ts",
-    "!src/**/__tests__/"
-  ],
+  "files": ["src/", "dist/", "!src/**/*.test.ts", "!src/**/__tests__/"],
   "dependencies": {
     "proto-nexus": "workspace:*"
   },
