@@ -26,7 +26,8 @@
   },
   "files": ["src/", "dist/", "!src/**/*.test.ts", "!src/**/__tests__/"],
   "scripts": {
-    "build": "tsup"
+    "build": "tsup",
+    "test": "vitest run --passWithNoTests"
   },
   "devDependencies": {
     "@proto-graphql/tsconfig": "workspace:*"

@@ -1,4 +1,5 @@
 import { graphql } from "graphql";
+import { expect, it } from "vitest";
 
 import { schema } from "./schema";
 

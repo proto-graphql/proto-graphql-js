@@ -32,7 +32,8 @@
     "protobufjs": "^6.10.2"
   },
   "scripts": {
-    "build": "tsup"
+    "build": "tsup",
+    "test": "vitest run --passWithNoTests"
   },
   "devDependencies": {
     "@proto-graphql/tsconfig": "workspace:*"

@@ -37,7 +37,7 @@
   "files": ["bin/", "src/", "dist/", "!src/**/*.test.ts", "!src/**/__tests__/"],
   "scripts": {
     "build": "tsup",
-    "test": "jest --coverage"
+    "test": "vitest run --passWithNoTests"
   },
   "devDependencies": {
     "@proto-graphql/testapis-proto": "workspace:*",

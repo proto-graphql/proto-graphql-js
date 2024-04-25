@@ -35,6 +35,7 @@
     "@proto-graphql/tsconfig": "workspace:*"
   },
   "scripts": {
-    "build": "tsup"
+    "build": "tsup",
+    "test": "vitest run --passWithNoTests"
   }
 }

@@ -1,5 +1,5 @@
 import type { GraphQLInputObjectType } from "graphql";
-
+import { expect, it } from "vitest";
 import { schema } from "./__helpers__/testSchema";
 
 it("creates subset types", () => {

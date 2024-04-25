@@ -35,6 +35,6 @@
   "scripts": {
     "build": "tsup",
     "prebuild": "../../../scripts/compile-extensions-proto",
-    "test": "jest --coverage --passWithNoTests"
+    "test": "vitest run --passWithNoTests"
   }
 }

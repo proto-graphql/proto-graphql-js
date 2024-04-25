@@ -7,6 +7,5 @@
     "rootDir": "./src",
     "outDir": "./lib",
     "noEmit": false
-  },
-  "exclude": ["**/*.test.*", "**/__tests__/**", "./scripts", "jest.config.js"]
+  }
 }

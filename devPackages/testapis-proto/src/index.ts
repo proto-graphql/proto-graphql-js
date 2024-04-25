@@ -2,6 +2,11 @@ import { CodeGeneratorRequest, FileDescriptorSet } from "@bufbuild/protobuf";
 
 import { fileDescriptorSetBins } from "./__generated__/fileDescriptorSetBins";
 
+function objectKeys<K extends string>(obj: Record<K, unknown>): K[] {
+  return Object.keys(obj) as K[];
+}
+
+export const testapisPackages = objectKeys(fileDescriptorSetBins);
 export type TestapisPackage = keyof typeof fileDescriptorSetBins;
 
 export function getTestapisFileDescriptorSet(
@@ -14,9 +19,10 @@ export function getTestapisFileDescriptorSet(
 
 export function buildCodeGeneratorRequest(
   pkg: TestapisPackage,
+  { param }: { param?: string } = {},
 ): CodeGeneratorRequest {
   const descSet = getTestapisFileDescriptorSet(pkg);
-  const req = new CodeGeneratorRequest();
+  const req = new CodeGeneratorRequest({ parameter: param });
 
   for (const fd of descSet.file) {
     req.protoFile.push(fd);
