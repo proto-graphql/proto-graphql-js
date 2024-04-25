@@ -67,7 +67,7 @@ async function genPackageJson(test: TestCase): Promise<void> {
     description: `E2E tests for protoc-gen-${test.target}`,
     private: true,
     scripts: {
-      "test:e2e": ["gen", "jest", "schema", "typecheck"]
+      "test:e2e": ["gen", "vitest", "schema", "typecheck"]
         .map((t) => `pnpm run test:e2e:${t}`)
         .join(" && "),
       "test:e2e:gen": [
@@ -76,7 +76,8 @@ async function genPackageJson(test: TestCase): Promise<void> {
       ].join(" && "),
       "test:e2e:gen:gql": "tsx schema.ts",
       "test:e2e:gen:proto": `buf generate --template buf.gen.json --path ${protoPath} ${bufDir}`,
-      "test:e2e:jest": "jest --passWithNoTests",
+      "test:e2e:vitest":
+        "vitest run --passWithNoTests --config ../../vitest.config.ts",
       "test:e2e:schema": "git diff --exit-code __generated__/schema.graphql",
       "test:e2e:typecheck": "tsc --build tsconfig.json",
     },
@@ -89,10 +90,6 @@ async function genPackageJson(test: TestCase): Promise<void> {
         .sort()
         .map((pkg) => [pkg, "workspace:*"]),
     ),
-    jest: {
-      preset: "ts-jest",
-      testEnvironment: "node",
-    },
   };
 
   await writeFile(

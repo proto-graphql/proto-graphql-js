@@ -2,13 +2,7 @@
   "name": "protoc-gen-nexus",
   "version": "0.7.0",
   "description": "Generate DSL for GraphQL Nexus from Protocol Buffers IDL",
-  "keywords": [
-    "graphql",
-    "grpc",
-    "nexus",
-    "protobuf",
-    "typescript"
-  ],
+  "keywords": ["graphql", "grpc", "nexus", "protobuf", "typescript"],
   "bin": {
     "protoc-gen-nexus": "./bin/protoc-gen-nexus"
   },
@@ -40,13 +34,7 @@
     "google-protobuf": "^3.20.1",
     "ts-poet": "^6.3.0"
   },
-  "files": [
-    "bin/",
-    "src/",
-    "dist/",
-    "!src/**/*.test.ts",
-    "!src/**/__tests__/"
-  ],
+  "files": ["bin/", "src/", "dist/", "!src/**/*.test.ts", "!src/**/__tests__/"],
   "scripts": {
     "build": "tsup",
     "test": "vitest run --passWithNoTests",
