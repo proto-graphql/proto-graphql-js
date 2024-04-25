@@ -32,7 +32,6 @@
   "files": ["src/", "dist/", "!src/**/*.test.ts", "!src/**/__tests__/"],
   "scripts": {
     "build": "tsup",
-    "test": "vitest run --passWithNoTests",
-    "test:coverage": "vitest run --coverage --passWithNoTests"
+    "test": "vitest run --passWithNoTests"
   }
 }

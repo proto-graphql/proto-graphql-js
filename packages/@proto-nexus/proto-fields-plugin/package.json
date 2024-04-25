@@ -34,7 +34,6 @@
   "scripts": {
     "build": "tsup",
     "pretest": "tsx ./src/__tests__/__helpers__/testSchema.ts",
-    "test": "vitest run --passWithNoTests",
-    "test:coverage": "vitest run --coverage --passWithNoTests"
+    "test": "vitest run --passWithNoTests"
   }
 }
