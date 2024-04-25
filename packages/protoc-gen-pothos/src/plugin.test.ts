@@ -29,3 +29,39 @@ describe.each(testGorups)("$pkg", ({ pkg, tests }) => {
     expect(files).toMatchSnapshot();
   });
 });
+
+describe("with scalar type override", () => {
+  test("maps testapis.custom_types.Date to Date scalar", () => {
+    const req = buildCodeGeneratorRequest("testapis.custom_types", {
+      param: "scalar=testapis.custom_types.Date=Date",
+    });
+    const resp = protocGenPothos.run(req);
+    const files = resp.file.map((f) => f.toJson());
+    expect(files).toMatchSnapshot();
+  });
+
+  describe("maps 64bit integers to bigint", () => {
+    test.each([
+      { pkg: "testapis.primitives" },
+      { pkg: "testapis.wktypes" },
+    ] as const)("generates files from $pkg", ({ pkg }) => {
+      const req = buildCodeGeneratorRequest(pkg, {
+        param: [
+          "scalar=int64=Int",
+          "scalar=uint64=Int",
+          "scalar=sint64=Int",
+          "scalar=fixed64=Int",
+          "scalar=sfixed64=Int",
+          "scalar=google.protobuf.Int64Value=Int",
+          "scalar=google.protobuf.UInt64Value=Int",
+          "scalar=google.protobuf.SInt64Value=Int",
+          "scalar=google.protobuf.Fixed64Value=Int",
+          "scalar=google.protobuf.SFixed64Value=Int",
+        ].join(","),
+      });
+      const resp = protocGenPothos.run(req);
+      const files = resp.file.map((f) => f.toJson());
+      expect(files).toMatchSnapshot();
+    });
+  });
+});
