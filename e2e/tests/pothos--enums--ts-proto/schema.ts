@@ -13,7 +13,6 @@ builder.queryField("test", (f) =>
     type: MessageWithEnums$Ref,
     resolve() {
       return MessageWithEnums.fromPartial({
-        foo: "bar",
         requiredMyEnum: MyEnum.MY_ENUM_BAR,
         requiredMyEnumWithoutUnspecified:
           MyEnumWithoutUnspecified.MY_ENUM_WITHOUT_UNSPECIFIED_FOO,
