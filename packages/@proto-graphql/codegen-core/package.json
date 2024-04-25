@@ -2,7 +2,13 @@
   "name": "@proto-graphql/codegen-core",
   "version": "0.4.0",
   "description": "",
-  "keywords": ["graphql", "grpc", "nexus", "protobuf", "typescript"],
+  "keywords": [
+    "graphql",
+    "grpc",
+    "nexus",
+    "protobuf",
+    "typescript"
+  ],
   "repository": "git@github.com:proto-graphql/proto-graphql-js.git",
   "author": "izumin5210 <m@izum.in>",
   "license": "MIT",
@@ -31,10 +37,16 @@
   "devDependencies": {
     "@proto-graphql/tsconfig": "workspace:*"
   },
-  "files": ["src/", "dist/", "!src/**/*.test.ts", "!src/**/__tests__/"],
+  "files": [
+    "src/",
+    "dist/",
+    "!src/**/*.test.ts",
+    "!src/**/__tests__/"
+  ],
   "scripts": {
     "build": "tsup",
     "prebuild": "../../../scripts/compile-extensions-proto",
-    "test": "jest --coverage --passWithNoTests"
+    "test": "vitest run --passWithNoTests",
+    "test:coverage": "vitest run --coverage --passWithNoTests"
   }
 }

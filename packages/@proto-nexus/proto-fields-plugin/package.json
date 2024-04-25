@@ -2,7 +2,13 @@
   "name": "@proto-nexus/proto-fields-plugin",
   "version": "0.5.4",
   "description": "Nexus plugin for building subset types from proto-nexus's artifacts",
-  "keywords": ["graphql", "grpc", "nexus", "protobuf", "typescript"],
+  "keywords": [
+    "graphql",
+    "grpc",
+    "nexus",
+    "protobuf",
+    "typescript"
+  ],
   "repository": "git@github.com:proto-graphql/proto-graphql-js.git",
   "author": "izumin5210 <m@izum.in>",
   "license": "MIT",
@@ -24,7 +30,12 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": ["src/", "dist/", "!src/**/*.test.ts", "!src/**/__tests__/"],
+  "files": [
+    "src/",
+    "dist/",
+    "!src/**/*.test.ts",
+    "!src/**/__tests__/"
+  ],
   "peerDependencies": {
     "nexus": "^1.0.0"
   },
@@ -34,6 +45,7 @@
   "scripts": {
     "build": "tsup",
     "pretest": "tsx ./src/__tests__/__helpers__/testSchema.ts",
-    "test": "jest"
+    "test": "vitest run --passWithNoTests",
+    "test:coverage": "vitest run --coverage --passWithNoTests"
   }
 }
