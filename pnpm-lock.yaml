@@ -14,6 +14,9 @@ importers:
       '@bufbuild/buf':
         specifier: 1.27.0
         version: 1.27.0
+      '@bufbuild/protobuf':
+        specifier: ^1.8.0
+        version: 1.8.0
       '@bufbuild/protoc-gen-es':
         specifier: 1.8.0
         version: 1.8.0(@bufbuild/protobuf@1.8.0)
@@ -116,6 +119,12 @@ importers:
         version: link:../../devPackages/tsconfig
 
   e2e/testapis/google-protobuf: {}
+
+  e2e/testapis/protobuf-es:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: ^1.8.0
+        version: 1.8.0
 
   e2e/testapis/protobufjs: {}
 
@@ -683,6 +692,28 @@ importers:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-nexus
 
+  e2e/tests/pothos--deprecation--protobuf-es:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: '*'
+        version: 1.8.0
+    devDependencies:
+      '@proto-graphql/e2e-helper':
+        specifier: workspace:*
+        version: link:../../helper
+      '@proto-graphql/e2e-testapis-protobuf-es':
+        specifier: workspace:*
+        version: link:../../testapis/protobuf-es
+      '@proto-graphql/scalars-protobuf-es':
+        specifier: workspace:*
+        version: link:../../../packages/@proto-graphql/scalars-protobuf-es
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../devPackages/tsconfig
+      protoc-gen-pothos:
+        specifier: workspace:*
+        version: link:../../../packages/protoc-gen-pothos
+
   e2e/tests/pothos--deprecation--ts-proto:
     devDependencies:
       '@proto-graphql/e2e-helper':
@@ -691,6 +722,28 @@ importers:
       '@proto-graphql/e2e-testapis-ts-proto':
         specifier: workspace:*
         version: link:../../testapis/ts-proto
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../devPackages/tsconfig
+      protoc-gen-pothos:
+        specifier: workspace:*
+        version: link:../../../packages/protoc-gen-pothos
+
+  e2e/tests/pothos--edgecases-import_from_same_pkg--protobuf-es:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: '*'
+        version: 1.8.0
+    devDependencies:
+      '@proto-graphql/e2e-helper':
+        specifier: workspace:*
+        version: link:../../helper
+      '@proto-graphql/e2e-testapis-protobuf-es':
+        specifier: workspace:*
+        version: link:../../testapis/protobuf-es
+      '@proto-graphql/scalars-protobuf-es':
+        specifier: workspace:*
+        version: link:../../../packages/@proto-graphql/scalars-protobuf-es
       '@proto-graphql/tsconfig':
         specifier: workspace:*
         version: link:../../../devPackages/tsconfig
@@ -713,6 +766,28 @@ importers:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
 
+  e2e/tests/pothos--edgecases-import_squashed_union--protobuf-es:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: '*'
+        version: 1.8.0
+    devDependencies:
+      '@proto-graphql/e2e-helper':
+        specifier: workspace:*
+        version: link:../../helper
+      '@proto-graphql/e2e-testapis-protobuf-es':
+        specifier: workspace:*
+        version: link:../../testapis/protobuf-es
+      '@proto-graphql/scalars-protobuf-es':
+        specifier: workspace:*
+        version: link:../../../packages/@proto-graphql/scalars-protobuf-es
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../devPackages/tsconfig
+      protoc-gen-pothos:
+        specifier: workspace:*
+        version: link:../../../packages/protoc-gen-pothos
+
   e2e/tests/pothos--edgecases-import_squashed_union--ts-proto:
     devDependencies:
       '@proto-graphql/e2e-helper':
@@ -721,6 +796,28 @@ importers:
       '@proto-graphql/e2e-testapis-ts-proto':
         specifier: workspace:*
         version: link:../../testapis/ts-proto
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../devPackages/tsconfig
+      protoc-gen-pothos:
+        specifier: workspace:*
+        version: link:../../../packages/protoc-gen-pothos
+
+  e2e/tests/pothos--empty_types--protobuf-es:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: '*'
+        version: 1.8.0
+    devDependencies:
+      '@proto-graphql/e2e-helper':
+        specifier: workspace:*
+        version: link:../../helper
+      '@proto-graphql/e2e-testapis-protobuf-es':
+        specifier: workspace:*
+        version: link:../../testapis/protobuf-es
+      '@proto-graphql/scalars-protobuf-es':
+        specifier: workspace:*
+        version: link:../../../packages/@proto-graphql/scalars-protobuf-es
       '@proto-graphql/tsconfig':
         specifier: workspace:*
         version: link:../../../devPackages/tsconfig
@@ -743,6 +840,28 @@ importers:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
 
+  e2e/tests/pothos--enums--protobuf-es:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: '*'
+        version: 1.8.0
+    devDependencies:
+      '@proto-graphql/e2e-helper':
+        specifier: workspace:*
+        version: link:../../helper
+      '@proto-graphql/e2e-testapis-protobuf-es':
+        specifier: workspace:*
+        version: link:../../testapis/protobuf-es
+      '@proto-graphql/scalars-protobuf-es':
+        specifier: workspace:*
+        version: link:../../../packages/@proto-graphql/scalars-protobuf-es
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../devPackages/tsconfig
+      protoc-gen-pothos:
+        specifier: workspace:*
+        version: link:../../../packages/protoc-gen-pothos
+
   e2e/tests/pothos--enums--ts-proto:
     devDependencies:
       '@proto-graphql/e2e-helper':
@@ -751,6 +870,28 @@ importers:
       '@proto-graphql/e2e-testapis-ts-proto':
         specifier: workspace:*
         version: link:../../testapis/ts-proto
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../devPackages/tsconfig
+      protoc-gen-pothos:
+        specifier: workspace:*
+        version: link:../../../packages/protoc-gen-pothos
+
+  e2e/tests/pothos--extensions--protobuf-es:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: '*'
+        version: 1.8.0
+    devDependencies:
+      '@proto-graphql/e2e-helper':
+        specifier: workspace:*
+        version: link:../../helper
+      '@proto-graphql/e2e-testapis-protobuf-es':
+        specifier: workspace:*
+        version: link:../../testapis/protobuf-es
+      '@proto-graphql/scalars-protobuf-es':
+        specifier: workspace:*
+        version: link:../../../packages/@proto-graphql/scalars-protobuf-es
       '@proto-graphql/tsconfig':
         specifier: workspace:*
         version: link:../../../devPackages/tsconfig
@@ -773,6 +914,28 @@ importers:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
 
+  e2e/tests/pothos--field_behavior--protobuf-es:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: '*'
+        version: 1.8.0
+    devDependencies:
+      '@proto-graphql/e2e-helper':
+        specifier: workspace:*
+        version: link:../../helper
+      '@proto-graphql/e2e-testapis-protobuf-es':
+        specifier: workspace:*
+        version: link:../../testapis/protobuf-es
+      '@proto-graphql/scalars-protobuf-es':
+        specifier: workspace:*
+        version: link:../../../packages/@proto-graphql/scalars-protobuf-es
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../devPackages/tsconfig
+      protoc-gen-pothos:
+        specifier: workspace:*
+        version: link:../../../packages/protoc-gen-pothos
+
   e2e/tests/pothos--field_behavior--ts-proto:
     devDependencies:
       '@proto-graphql/e2e-helper':
@@ -781,6 +944,28 @@ importers:
       '@proto-graphql/e2e-testapis-ts-proto':
         specifier: workspace:*
         version: link:../../testapis/ts-proto
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../devPackages/tsconfig
+      protoc-gen-pothos:
+        specifier: workspace:*
+        version: link:../../../packages/protoc-gen-pothos
+
+  e2e/tests/pothos--multipkgs--protobuf-es:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: '*'
+        version: 1.8.0
+    devDependencies:
+      '@proto-graphql/e2e-helper':
+        specifier: workspace:*
+        version: link:../../helper
+      '@proto-graphql/e2e-testapis-protobuf-es':
+        specifier: workspace:*
+        version: link:../../testapis/protobuf-es
+      '@proto-graphql/scalars-protobuf-es':
+        specifier: workspace:*
+        version: link:../../../packages/@proto-graphql/scalars-protobuf-es
       '@proto-graphql/tsconfig':
         specifier: workspace:*
         version: link:../../../devPackages/tsconfig
@@ -803,6 +988,28 @@ importers:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
 
+  e2e/tests/pothos--nested--protobuf-es:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: '*'
+        version: 1.8.0
+    devDependencies:
+      '@proto-graphql/e2e-helper':
+        specifier: workspace:*
+        version: link:../../helper
+      '@proto-graphql/e2e-testapis-protobuf-es':
+        specifier: workspace:*
+        version: link:../../testapis/protobuf-es
+      '@proto-graphql/scalars-protobuf-es':
+        specifier: workspace:*
+        version: link:../../../packages/@proto-graphql/scalars-protobuf-es
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../devPackages/tsconfig
+      protoc-gen-pothos:
+        specifier: workspace:*
+        version: link:../../../packages/protoc-gen-pothos
+
   e2e/tests/pothos--nested--ts-proto:
     devDependencies:
       '@proto-graphql/e2e-helper':
@@ -818,6 +1025,28 @@ importers:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
 
+  e2e/tests/pothos--oneof--protobuf-es:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: '*'
+        version: 1.8.0
+    devDependencies:
+      '@proto-graphql/e2e-helper':
+        specifier: workspace:*
+        version: link:../../helper
+      '@proto-graphql/e2e-testapis-protobuf-es':
+        specifier: workspace:*
+        version: link:../../testapis/protobuf-es
+      '@proto-graphql/scalars-protobuf-es':
+        specifier: workspace:*
+        version: link:../../../packages/@proto-graphql/scalars-protobuf-es
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../devPackages/tsconfig
+      protoc-gen-pothos:
+        specifier: workspace:*
+        version: link:../../../packages/protoc-gen-pothos
+
   e2e/tests/pothos--oneof--ts-proto:
     devDependencies:
       '@proto-graphql/e2e-helper':
@@ -826,6 +1055,28 @@ importers:
       '@proto-graphql/e2e-testapis-ts-proto':
         specifier: workspace:*
         version: link:../../testapis/ts-proto
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../devPackages/tsconfig
+      protoc-gen-pothos:
+        specifier: workspace:*
+        version: link:../../../packages/protoc-gen-pothos
+
+  e2e/tests/pothos--primitives--protobuf-es:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: '*'
+        version: 1.8.0
+    devDependencies:
+      '@proto-graphql/e2e-helper':
+        specifier: workspace:*
+        version: link:../../helper
+      '@proto-graphql/e2e-testapis-protobuf-es':
+        specifier: workspace:*
+        version: link:../../testapis/protobuf-es
+      '@proto-graphql/scalars-protobuf-es':
+        specifier: workspace:*
+        version: link:../../../packages/@proto-graphql/scalars-protobuf-es
       '@proto-graphql/tsconfig':
         specifier: workspace:*
         version: link:../../../devPackages/tsconfig
@@ -863,6 +1114,28 @@ importers:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
 
+  e2e/tests/pothos--proto3_optional--protobuf-es:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: '*'
+        version: 1.8.0
+    devDependencies:
+      '@proto-graphql/e2e-helper':
+        specifier: workspace:*
+        version: link:../../helper
+      '@proto-graphql/e2e-testapis-protobuf-es':
+        specifier: workspace:*
+        version: link:../../testapis/protobuf-es
+      '@proto-graphql/scalars-protobuf-es':
+        specifier: workspace:*
+        version: link:../../../packages/@proto-graphql/scalars-protobuf-es
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../devPackages/tsconfig
+      protoc-gen-pothos:
+        specifier: workspace:*
+        version: link:../../../packages/protoc-gen-pothos
+
   e2e/tests/pothos--proto3_optional--ts-proto:
     devDependencies:
       '@proto-graphql/e2e-helper':
@@ -871,6 +1144,28 @@ importers:
       '@proto-graphql/e2e-testapis-ts-proto':
         specifier: workspace:*
         version: link:../../testapis/ts-proto
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../devPackages/tsconfig
+      protoc-gen-pothos:
+        specifier: workspace:*
+        version: link:../../../packages/protoc-gen-pothos
+
+  e2e/tests/pothos--wktypes--protobuf-es:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: '*'
+        version: 1.8.0
+    devDependencies:
+      '@proto-graphql/e2e-helper':
+        specifier: workspace:*
+        version: link:../../helper
+      '@proto-graphql/e2e-testapis-protobuf-es':
+        specifier: workspace:*
+        version: link:../../testapis/protobuf-es
+      '@proto-graphql/scalars-protobuf-es':
+        specifier: workspace:*
+        version: link:../../../packages/@proto-graphql/scalars-protobuf-es
       '@proto-graphql/tsconfig':
         specifier: workspace:*
         version: link:../../../devPackages/tsconfig
@@ -951,6 +1246,22 @@ importers:
       '@proto-graphql/codegen-core':
         specifier: workspace:*
         version: link:../codegen-core
+    devDependencies:
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../devPackages/tsconfig
+
+  packages/@proto-graphql/scalars-protobuf-es:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: ^1.8.0
+        version: 1.8.0
+      graphql:
+        specifier: ^16.0.0
+        version: 16.8.1
+      graphql-scalars:
+        specifier: ^1.23.0
+        version: 1.23.0(graphql@16.8.1)
     devDependencies:
       '@proto-graphql/tsconfig':
         specifier: workspace:*
@@ -1191,6 +1502,7 @@ packages:
   '@bufbuild/protoc-gen-es@1.8.0':
     resolution: {integrity: sha512-jnvBKwHq3o/iOgfKxaxn5Za7ay4oAs8KWgoHiDc9Fsb0g+/d1z+mHlHvmevOiCPcVZsnH6V3LImOJvGStPONpA==}
     engines: {node: '>=14'}
+    hasBin: true
     peerDependencies:
       '@bufbuild/protobuf': 1.8.0
     peerDependenciesMeta:
@@ -3031,6 +3343,7 @@ packages:
   protobufjs-cli@1.1.2:
     resolution: {integrity: sha512-8ivXWxT39gZN4mm4ArQyJrRgnIwZqffBWoLDsE21TmMcKI3XwJMV4lEF2WU02C4JAtgYYc2SfJIltelD8to35g==}
     engines: {node: '>=12.0.0'}
+    hasBin: true
     peerDependencies:
       protobufjs: ^7.0.0
 
@@ -3383,6 +3696,7 @@ packages:
   tsup@8.0.2:
     resolution: {integrity: sha512-NY8xtQXdH7hDUAZwcQdY/Vzlw9johQsaqf7iwZ6g1DOUlFYQ5/AtVAjTvihhEyeRlGo4dLRVHtrRaL35M1daqQ==}
     engines: {node: '>=18'}
+    hasBin: true
     peerDependencies:
       '@microsoft/api-extractor': ^7.36.0
       '@swc/core': ^1
@@ -3478,6 +3792,7 @@ packages:
   typescript@4.5.2:
     resolution: {integrity: sha512-5BlMof9H1yGt0P8/WF+wPNw6GfctgGjXp5hkblpyT+8rkASSmkUKMXrxR0Xg8ThVCi/JnHQiKXeBaEwCeQwMFw==}
     engines: {node: '>=4.2.0'}
+    hasBin: true
 
   typescript@5.4.5:
     resolution: {integrity: sha512-vcI4UpRgg81oIRUFwR0WSIHKt11nJ7SAVlYNIu+QpqeyXP+gpQJy/Z4+F0aGxSE4MqwjyXvW/TzgkLAx2AGHwQ==}
@@ -3525,6 +3840,7 @@ packages:
   vite@5.2.10:
     resolution: {integrity: sha512-PAzgUZbP7msvQvqdSD+ErD5qGnSFiGOoWmV5yAKUEI0kdhjbH6nMWVyZQC/hSc4aXwc0oJ9aEdIiF9Oje0JFCw==}
     engines: {node: ^18.0.0 || >=20.0.0}
+    hasBin: true
     peerDependencies:
       '@types/node': ^18.0.0 || >=20.0.0
       less: '*'
@@ -3552,6 +3868,7 @@ packages:
   vitest@1.5.1:
     resolution: {integrity: sha512-3GvBMpoRnUNbZRX1L3mJCv3Ou3NAobb4dM48y8k9ZGwDofePpclTOyO+lqJFKSQpubH1V8tEcAEw/Y3mJKGJQQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
+    hasBin: true
     peerDependencies:
       '@edge-runtime/vm': '*'
       '@types/node': ^18.0.0 || >=20.0.0

@@ -6,6 +6,7 @@ import {
   type DescFile,
   type DescMessage,
   ScalarType as ProtoScalarType,
+  DescOneof,
 } from "@bufbuild/protobuf";
 import { camelCase } from "change-case";
 import { type Code, code, imp } from "ts-poet";
@@ -170,7 +171,8 @@ export function protoType(
         .slice(1)
         .join(".")}`;
     }
-    case "ts-proto": {
+    case "ts-proto":
+    case "protobuf-es": {
       return code`${imp(
         `${chunks.join("_")}@${protoImportPath(proto, opts)}`,
       )}`;
@@ -193,7 +195,8 @@ export function createGetFieldValueCode(
       return code`${parentExpr}.${googleProtobufFieldAccessor("get", proto)}()`;
     }
     case "protobufjs":
-    case "ts-proto": {
+    case "ts-proto":
+    case "protobuf-es": {
       return code`${parentExpr}.${tsFieldName(proto, opts)}`;
     }
     /* istanbul ignore next */
@@ -204,14 +207,21 @@ export function createGetFieldValueCode(
   }
 }
 
-export function tsFieldName(desc: DescField, opts: PrinterOptions): string {
+export function tsFieldName(
+  desc: DescField | DescOneof,
+  opts: PrinterOptions,
+): string {
   switch (opts.protobuf) {
     case "google-protobuf": {
       throw "unsupported";
     }
     case "protobufjs":
       return camelCase(desc.name);
-    case "ts-proto": {
+    case "ts-proto":
+    case "protobuf-es": {
+      if (desc.kind === "oneof") {
+        return camelCase(desc.name);
+      }
       return desc.proto.jsonName || camelCase(desc.name);
     }
     /* istanbul ignore next */
@@ -236,7 +246,8 @@ export function createSetFieldValueCode(
       )}(${valueExpr})`;
     }
     case "protobufjs":
-    case "ts-proto": {
+    case "ts-proto":
+    case "protobuf-es": {
       return code`${parentExpr}.${tsFieldName(proto, opts)} = ${valueExpr}`;
     }
     /* istanbul ignore next */
@@ -293,12 +304,24 @@ function protoImportPath(
   t: DescMessage | DescEnum,
   o: Pick<PrinterOptions, "protobuf" | "importPrefix">,
 ) {
-  const importPath =
-    o.protobuf === "protobufjs"
-      ? path.dirname(t.file.name)
-      : o.protobuf === "ts-proto"
-        ? t.file.name
-        : googleProtobufImportPath(t.file);
+  let importPath: string;
+  switch (o.protobuf) {
+    case "google-protobuf":
+      importPath = googleProtobufImportPath(t.file);
+      break;
+    case "protobufjs":
+      importPath = path.dirname(t.file.name);
+      break;
+    case "ts-proto":
+      importPath = t.file.name;
+      break;
+    case "protobuf-es":
+      importPath = googleProtobufImportPath(t.file);
+      break;
+    default:
+      o.protobuf satisfies never;
+      throw new Error(`unexpected protobuf option: ${o.protobuf}`);
+  }
   return `${o.importPrefix ? `${o.importPrefix}/` : "./"}${importPath}`.replace(
     /(?<!:)\/\//,
     "/",

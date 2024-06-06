@@ -1,0 +1,105 @@
+"""The `Byte` scalar type represents byte value as a Buffer"""
+scalar Byte
+
+"""
+The `BigInt` scalar type represents non-fractional signed whole numeric values.
+"""
+scalar Int64
+
+type Message {
+  """Optional."""
+  optionalPrimitives: Primitives
+
+  """Optional."""
+  optionalPrimitivesList: [Primitives!]
+
+  """Required."""
+  requiredPrimitives: Primitives!
+
+  """Required."""
+  requiredPrimitivesList: [Primitives!]!
+}
+
+input MessageInput {
+  """Optional."""
+  optionalPrimitives: PrimitivesInput
+
+  """Optional."""
+  optionalPrimitivesList: [PrimitivesInput!]
+
+  """Required."""
+  requiredPrimitives: PrimitivesInput!
+
+  """Required."""
+  requiredPrimitivesList: [PrimitivesInput!]!
+}
+
+type Primitives {
+  requiredBoolValue: Boolean!
+  requiredBoolValues: [Boolean!]!
+  requiredBytesValue: Byte!
+  requiredBytesValues: [Byte!]!
+  requiredDoubleValue: Float!
+  requiredDoubleValues: [Float!]!
+  requiredFixed32Value: Int!
+  requiredFixed32Values: [Int!]!
+  requiredFixed64Value: Int64!
+  requiredFixed64Values: [Int64!]!
+  requiredFloatValue: Float!
+  requiredFloatValues: [Float!]!
+  requiredInt32Value: Int!
+  requiredInt32Values: [Int!]!
+  requiredInt64Value: Int64!
+  requiredInt64Values: [Int64!]!
+  requiredSfixed32Value: Int!
+  requiredSfixed32Values: [Int!]!
+  requiredSfixed64Value: Int64!
+  requiredSfixed64Values: [Int64!]!
+  requiredSint32Value: Int!
+  requiredSint32Values: [Int!]!
+  requiredSint64Value: Int64!
+  requiredSint64Values: [Int64!]!
+  requiredStringValue: String!
+  requiredStringValues: [String!]!
+  requiredUint32Value: Int!
+  requiredUint32Values: [Int!]!
+  requiredUint64Value: Int64!
+  requiredUint64Values: [Int64!]!
+}
+
+input PrimitivesInput {
+  requiredBoolValue: Boolean!
+  requiredBoolValues: [Boolean!]!
+  requiredBytesValue: Byte!
+  requiredBytesValues: [Byte!]!
+  requiredDoubleValue: Float!
+  requiredDoubleValues: [Float!]!
+  requiredFixed32Value: Int!
+  requiredFixed32Values: [Int!]!
+  requiredFixed64Value: Int64!
+  requiredFixed64Values: [Int64!]!
+  requiredFloatValue: Float!
+  requiredFloatValues: [Float!]!
+  requiredInt32Value: Int!
+  requiredInt32Values: [Int!]!
+  requiredInt64Value: Int64!
+  requiredInt64Values: [Int64!]!
+  requiredSfixed32Value: Int!
+  requiredSfixed32Values: [Int!]!
+  requiredSfixed64Value: Int64!
+  requiredSfixed64Values: [Int64!]!
+  requiredSint32Value: Int!
+  requiredSint32Values: [Int!]!
+  requiredSint64Value: Int64!
+  requiredSint64Values: [Int64!]!
+  requiredStringValue: String!
+  requiredStringValues: [String!]!
+  requiredUint32Value: Int!
+  requiredUint32Values: [Int!]!
+  requiredUint64Value: Int64!
+  requiredUint64Values: [Int64!]!
+}
+
+type Query {
+  test: Message!
+}

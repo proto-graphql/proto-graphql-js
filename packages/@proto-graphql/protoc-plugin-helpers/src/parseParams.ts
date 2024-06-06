@@ -3,11 +3,12 @@ import {
   type TypeOptions,
   defaultScalarMapping,
   fileLayouts,
+  protobufLibs,
 } from "@proto-graphql/codegen-core";
 
 export function parseParams<DSL extends PrinterOptions["dsl"]>(
   input: string | undefined,
-  dsl: DSL,
+  dsl: DSL
 ): {
   type: TypeOptions;
   printer: Extract<PrinterOptions, { dsl: DSL }>;
@@ -43,7 +44,7 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
 
   function checkEnum<T extends string>(
     v: string,
-    whitelist: readonly T[],
+    whitelist: readonly T[]
   ): v is T {
     return whitelist.includes(v as any);
   }
@@ -55,6 +56,16 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
     switch (k) {
       case "use_protobufjs": {
         if (boolParam(k, v)) params.printer.protobuf = "protobufjs";
+        break;
+      }
+      case "protobuf_lib": {
+        const s = stringParam(k, v);
+        if (!checkEnum(s, protobufLibs)) {
+          throw new Error(
+            "protobuf_lib should be one of " + protobufLibs.join(", ")
+          );
+        }
+        params.printer.protobuf = s;
         break;
       }
       case "import_prefix": {
@@ -75,7 +86,7 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
           throw new Error(
             `file_layout should be ${fileLayouts
               .map((s) => `"${s}"`)
-              .join(", ")}`,
+              .join(", ")}`
           );
         }
         params.printer.fileLayout = s;

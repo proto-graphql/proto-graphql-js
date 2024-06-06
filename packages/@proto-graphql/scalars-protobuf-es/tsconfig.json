@@ -1,0 +1,4 @@
+{
+  "extends": "@proto-graphql/tsconfig/tsconfig.base.json",
+  "include": ["./src"]
+}

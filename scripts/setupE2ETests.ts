@@ -1,6 +1,6 @@
 #!/usr/bin/env -S pnpm exec tsx
 
-import { readFile, writeFile } from "node:fs/promises";
+import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { join } from "node:path";
 
 const testsDir = "e2e/tests";
@@ -10,6 +10,7 @@ const protoLibs = [
   "protobufjs",
   "ts-proto",
   "ts-proto-with-forcelong-number",
+  "protobuf-es",
 ] as const;
 type ProtoLib = (typeof protoLibs)[number];
 
@@ -55,11 +56,20 @@ async function genPackageJson(test: TestCase): Promise<void> {
       "@proto-graphql/e2e-testapis-ts-proto-with-forcelong-number",
       "protoc-gen-pothos",
     ],
+    "protobuf-es": [
+      "@proto-graphql/e2e-testapis-protobuf-es",
+      "@proto-graphql/scalars-protobuf-es",
+      "protoc-gen-pothos",
+    ],
   };
-
   const rootDir = join("..", "..", "..");
   const bufDir = join(rootDir, "devPackages", "testapis-proto", "proto");
   const protoPath = join(bufDir, "testapis", test.proto.package);
+
+  const deps =
+    test.proto.lib === "protobuf-es"
+      ? { "@bufbuild/protobuf": "*" }
+      : undefined;
 
   const packageJson = {
     name: `@proto-graphql/e2e-${getTestName(test)}`,
@@ -81,6 +91,7 @@ async function genPackageJson(test: TestCase): Promise<void> {
       "test:e2e:schema": "git diff --exit-code __generated__/schema.graphql",
       "test:e2e:typecheck": "tsc --build tsconfig.json",
     },
+    dependencies: deps,
     devDependencies: Object.fromEntries(
       [
         "@proto-graphql/e2e-helper",
@@ -92,8 +103,12 @@ async function genPackageJson(test: TestCase): Promise<void> {
     ),
   };
 
+  const testPath = getTestPath(test);
+
+  await mkdir(testPath, { recursive: true });
+
   await writeFile(
-    join(getTestPath(test), "package.json"),
+    join(testPath, "package.json"),
     JSON.stringify(packageJson, undefined, 2),
     "utf-8",
   );
@@ -116,6 +131,16 @@ async function genBufGemTemplate(test: TestCase): Promise<void> {
       "ts-proto": [
         "import_prefix=@proto-graphql/e2e-testapis-ts-proto/lib/",
         "pothos_builder_path=../../builder",
+        "scalar=int64=String",
+        "scalar=uint64=String",
+        "scalar=sint64=String",
+        "scalar=fixed64=String",
+        "scalar=sfixed64=String",
+        "scalar=google.protobuf.Int64Value=String",
+        "scalar=google.protobuf.UInt64Value=String",
+        "scalar=google.protobuf.SInt64Value=String",
+        "scalar=google.protobuf.Fixed64Value=String",
+        "scalar=google.protobuf.SFixed64Value=String",
       ],
       "ts-proto-with-forcelong-number": [
         "import_prefix=@proto-graphql/e2e-testapis-ts-proto-with-forcelong-number/lib/",
@@ -130,6 +155,11 @@ async function genBufGemTemplate(test: TestCase): Promise<void> {
         "scalar=google.protobuf.SInt64Value=Int",
         "scalar=google.protobuf.Fixed64Value=Int",
         "scalar=google.protobuf.SFixed64Value=Int",
+      ],
+      "protobuf-es": [
+        "import_prefix=@proto-graphql/e2e-testapis-protobuf-es/lib/",
+        "pothos_builder_path=../../builder",
+        "protobuf_lib=protobuf-es",
       ],
     },
   };

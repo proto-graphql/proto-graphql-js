@@ -8,10 +8,18 @@ type PrinterDSLOptions =
       pothos: { builderPath: string };
     };
 
+export const protobufLibs = [
+  "google-protobuf",
+  "protobufjs",
+  "ts-proto",
+  "protobuf-es",
+] as const;
+
 type PrinterProtobufOptions =
   | { protobuf: "google-protobuf" }
   | { protobuf: "protobufjs" }
-  | { protobuf: "ts-proto" };
+  | { protobuf: "ts-proto" }
+  | { protobuf: "protobuf-es" };
 
 export interface PrinterCommonOptions {
   emitImportedFiles: boolean;

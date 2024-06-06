@@ -1,0 +1,16 @@
+{
+  "name": "@proto-graphql/e2e-testapis-protobuf-es",
+  "version": "0.0.0",
+  "description": "Generated codes with protoc-gen-es's out",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:e2e": "tsc --build tsconfig.json",
+    "clean": "pnpm run build:e2e --clean"
+  },
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "dependencies": {
+    "@bufbuild/protobuf": "^1.8.0"
+  }
+}

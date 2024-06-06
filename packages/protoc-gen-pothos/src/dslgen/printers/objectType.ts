@@ -26,7 +26,7 @@ import { type PothosPrinterOptions, pothosBuilder, pothosRef } from "./util";
 export function createObjectTypeCode(
   type: ObjectType,
   registry: Registry,
-  opts: PothosPrinterOptions,
+  opts: PothosPrinterOptions
 ): Code {
   const isInterface = type instanceof InterfaceType;
   const typeOpts = {
@@ -35,20 +35,15 @@ export function createObjectTypeCode(
       type.fields.length > 0
         ? joinCode(
             type.fields.map(
-              (f) => code`${f.name}: ${createFieldRefCode(f, registry, opts)},`,
-            ),
+              (f) => code`${f.name}: ${createFieldRefCode(f, registry, opts)},`
+            )
           )
         : code`_: ${createNoopFieldRefCode({ input: false })}`
     }})`,
     description: type.description,
     isTypeOf: isInterface
       ? undefined
-      : code`
-        (source) => {
-          return (source as ${protoType(type.proto, opts)} | { $type: string & {} }).$type
-            === ${literalOf(type.proto.typeName)};
-        }
-      `,
+      : createIsTypeOfFuncCode(type, registry, opts),
     extensions: protobufGraphQLExtensions(type, registry),
   };
   const buildRefFunc = code`${pothosBuilder(type, opts)}.${
@@ -63,18 +58,52 @@ export function createObjectTypeCode(
           ${protoType(type.proto, opts)},
           ${joinCode(
             type.fields.map(
-              (f) =>
-                code`${literalOf(tsFieldName(f.proto as DescField, opts))}`,
+              (f) => code`${literalOf(tsFieldName(f.proto as DescField, opts))}`
             ),
-            { on: "|" },
+            { on: "|" }
           )}
         >`
     : protoType(type.proto, opts);
 
   return code`
     export const ${pothosRef(
-      type,
+      type
     )} = ${buildRefFunc}<${refFuncTypeArg}>(${literalOf(type.typeName)});
     ${buildTypeFunc}(${pothosRef(type)}, ${literalOf(compact(typeOpts))});
   `;
+}
+
+function createIsTypeOfFuncCode(
+  type: ObjectType,
+  registry: Registry,
+  opts: PothosPrinterOptions
+): Code {
+  switch (opts.protobuf) {
+    case "ts-proto": {
+      return code`
+        (source) => {
+          return (source as ${protoType(
+            type.proto,
+            opts
+          )} | { $type: string & {} }).$type
+            === ${literalOf(type.proto.typeName)};
+        }
+      `;
+    }
+    case "protobuf-es": {
+      return code`
+        (source) => {
+          return source instanceof ${protoType(type.proto, opts)}
+        }
+      `;
+    }
+    case "google-protobuf":
+    case "protobufjs": {
+      throw new Error(`Unsupported protobuf lib: ${opts.protobuf}`);
+    }
+    default: {
+      opts satisfies never;
+      throw "unreachable";
+    }
+  }
 }

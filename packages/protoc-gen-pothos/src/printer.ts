@@ -14,12 +14,16 @@ import type { Code } from "ts-poet";
 import { createTypeDslCodes } from "./dslgen";
 import type { PothosPrinterOptions } from "./dslgen/printers/util";
 
+const allowedProtobufs = ["ts-proto", "protobuf-es"];
+
 export function generateFiles(
   schema: Schema,
   file: DescFile,
   opts: { type: TypeOptions; printer: PothosPrinterOptions },
 ): void {
-  opts.printer.protobuf = "ts-proto"; // default
+  if (!allowedProtobufs.includes(opts.printer.protobuf)) {
+    opts.printer.protobuf = "ts-proto"; // default
+  }
 
   const registry = createRegistryFromSchema(schema);
   const types = collectTypesFromFile(file, opts.type, schema.allFiles);

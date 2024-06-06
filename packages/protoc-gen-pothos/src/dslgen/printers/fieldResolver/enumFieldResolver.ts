@@ -3,6 +3,7 @@ import {
   type ObjectField,
   type PrinterOptions,
   protoType,
+  EnumTypeValue,
 } from "@proto-graphql/codegen-core";
 import { type Code, code } from "ts-poet";
 
@@ -36,9 +37,10 @@ export function createEnumResolverCode(
           ? code`return null;`
           : code`throw new Error("${field.name} is required field. But got unspecified.");`;
       chunks.push(code`
-        if (${valueExpr} === ${protoType(field.type.proto, opts)}.${
-          field.type.unspecifiedValue.proto.name
-        }) {
+        if (${valueExpr} === ${protoType(
+          field.type.proto,
+          opts,
+        )}.${enumValueJsName(field.type, field.type.unspecifiedValue, opts)}) {
           ${escapeCode}
         }
       `);
@@ -46,7 +48,10 @@ export function createEnumResolverCode(
     for (const ev of field.type.valuesWithIgnored) {
       if (!ev.isIgnored()) continue;
       chunks.push(code`
-      if (${valueExpr} === ${protoType(field.type.proto, opts)}.${ev.proto.name}) {
+      if (${valueExpr} === ${protoType(
+        field.type.proto,
+        opts,
+      )}.${enumValueJsName(field.type, ev, opts)}) {
         throw new Error("${ev.name} is ignored in GraphQL schema");
       }
     `);
@@ -70,4 +75,27 @@ export function createEnumResolverCode(
     ${createBlockStmtCodes(valueExpr)}
     return ${valueExpr};
   `;
+}
+
+function enumValueJsName(
+  et: EnumType,
+  ev: EnumTypeValue,
+  opts: PrinterOptions,
+): string {
+  switch (opts.protobuf) {
+    case "ts-proto":
+      return ev.proto.name;
+    case "protobuf-es":
+      if (et.isAllValueSharePrefix()) {
+        return ev.name;
+      }
+      return ev.proto.name;
+    case "protobufjs":
+    case "google-protobuf":
+      throw new Error(`Unsupported protobuf: ${opts.protobuf}`);
+    default: {
+      opts satisfies never;
+      throw "unreachable";
+    }
+  }
 }
