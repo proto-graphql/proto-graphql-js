@@ -2,6 +2,7 @@ import {
   type PrinterOptions,
   type TypeOptions,
   defaultScalarMapping,
+  defaultScalarMappingForTsProto,
   fileLayouts,
   protobufLibs,
 } from "@proto-graphql/codegen-core";
@@ -116,6 +117,13 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
       default:
         throw new Error(`unknown param: ${kv}`);
     }
+  }
+
+  if (params.printer.protobuf === "ts-proto") {
+    params.type.scalarMapping = {
+      ...defaultScalarMappingForTsProto,
+      ...params.type.scalarMapping,
+    };
   }
 
   return params;
