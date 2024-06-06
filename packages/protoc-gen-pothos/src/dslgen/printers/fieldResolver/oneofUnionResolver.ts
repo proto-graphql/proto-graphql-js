@@ -99,18 +99,21 @@ function createBlockStmtCodeForProtobufEs(
 ): Code {
   let valueExpr: Code;
   switch (true) {
-    case field instanceof ObjectOneofField:
+    case field instanceof ObjectOneofField: {
       valueExpr = code`${sourceExpr}.${tsFieldName(field.proto, opts)}.value`;
       break;
-    case field instanceof ObjectField:
+    }
+    case field instanceof ObjectField: {
       valueExpr = code`${sourceExpr}${list ? "" : "?"}.${tsFieldName(
         field.type.oneofUnionType.proto,
         opts,
       )}.value`;
       break;
-    default:
+    }
+    default: {
       field satisfies never;
       throw "unreachable";
+    }
   }
   if (nullable) {
     return code`return ${valueExpr};`;

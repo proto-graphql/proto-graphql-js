@@ -1,9 +1,9 @@
 import {
   type EnumType,
+  type EnumTypeValue,
   type ObjectField,
   type PrinterOptions,
   protoType,
-  EnumTypeValue,
 } from "@proto-graphql/codegen-core";
 import { type Code, code } from "ts-poet";
 
@@ -85,11 +85,12 @@ function enumValueJsName(
   switch (opts.protobuf) {
     case "ts-proto":
       return ev.proto.name;
-    case "protobuf-es":
+    case "protobuf-es": {
       if (et.isAllValueSharePrefix()) {
         return ev.name;
       }
       return ev.proto.name;
+    }
     case "protobufjs":
     case "google-protobuf":
       throw new Error(`Unsupported protobuf: ${opts.protobuf}`);

@@ -1,6 +1,6 @@
 #!/usr/bin/env -S pnpm exec tsx
 
-import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 
 const testsDir = "e2e/tests";

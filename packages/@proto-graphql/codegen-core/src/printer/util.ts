@@ -5,8 +5,8 @@ import {
   type DescField,
   type DescFile,
   type DescMessage,
+  type DescOneof,
   ScalarType as ProtoScalarType,
-  DescOneof,
 } from "@bufbuild/protobuf";
 import { camelCase } from "change-case";
 import { type Code, code, imp } from "ts-poet";
@@ -306,21 +306,26 @@ function protoImportPath(
 ) {
   let importPath: string;
   switch (o.protobuf) {
-    case "google-protobuf":
+    case "google-protobuf": {
       importPath = googleProtobufImportPath(t.file);
       break;
-    case "protobufjs":
+    }
+    case "protobufjs": {
       importPath = path.dirname(t.file.name);
       break;
-    case "ts-proto":
+    }
+    case "ts-proto": {
       importPath = t.file.name;
       break;
-    case "protobuf-es":
+    }
+    case "protobuf-es": {
       importPath = googleProtobufImportPath(t.file);
       break;
-    default:
+    }
+    default: {
       o.protobuf satisfies never;
       throw new Error(`unexpected protobuf option: ${o.protobuf}`);
+    }
   }
   return `${o.importPrefix ? `${o.importPrefix}/` : "./"}${importPath}`.replace(
     /(?<!:)\/\//,

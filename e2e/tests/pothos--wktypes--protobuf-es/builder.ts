@@ -1,7 +1,7 @@
+import type { Timestamp } from "@bufbuild/protobuf";
 import SchemaBuilder from "@pothos/core";
-import { GraphQLBigInt, GraphQLByte } from "graphql-scalars";
 import { ProtoGraphQLDateTime } from "@proto-graphql/scalars-protobuf-es";
-import { Timestamp } from "@bufbuild/protobuf";
+import { GraphQLBigInt, GraphQLByte } from "graphql-scalars";
 
 export const builder = new SchemaBuilder<{
   Scalars: {
