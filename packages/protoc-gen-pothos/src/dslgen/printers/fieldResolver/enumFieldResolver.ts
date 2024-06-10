@@ -1,3 +1,4 @@
+import { localName } from "@bufbuild/protoplugin/ecmascript";
 import {
   type EnumType,
   type EnumTypeValue,
@@ -86,10 +87,7 @@ function enumValueJsName(
     case "ts-proto":
       return ev.proto.name;
     case "protobuf-es": {
-      if (et.isAllValueSharePrefix()) {
-        return ev.name;
-      }
-      return ev.proto.name;
+      return localName(ev.proto);
     }
     case "protobufjs":
     case "google-protobuf":

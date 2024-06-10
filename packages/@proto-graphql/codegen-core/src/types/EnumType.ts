@@ -22,11 +22,6 @@ export class EnumType extends TypeBase<DescEnum> {
   get valuesWithIgnored(): EnumTypeValue[] {
     return this.proto.values.map((v) => new EnumTypeValue(v));
   }
-
-  public isAllValueSharePrefix(): boolean {
-    const prefix = getPrefix(this.proto);
-    return this.values.every((v) => v.proto.name.startsWith(prefix));
-  }
 }
 
 export class EnumTypeValue {
