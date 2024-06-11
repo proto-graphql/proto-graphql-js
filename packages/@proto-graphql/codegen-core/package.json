@@ -24,6 +24,9 @@
     }
   },
   "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
     "node": ">= 14.0.0"
   },
