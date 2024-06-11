@@ -1,0 +1,37 @@
+{
+  "name": "@proto-graphql/scalars-protobuf-es",
+  "version": "0.3.0",
+  "description": "",
+  "keywords": ["graphql", "grpc", "protobuf", "typescript"],
+  "repository": "git@github.com:proto-graphql/proto-graphql-js.git",
+  "author": "izumin5210 <m@izum.in>",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "private": false,
+  "engines": {
+    "node": ">= 14.0.0"
+  },
+  "peerDependencies": {
+    "@bufbuild/protobuf": "^1.8.0",
+    "graphql": "^16.0.0",
+    "graphql-scalars": "^1.23.0"
+  },
+  "devDependencies": {
+    "@proto-graphql/tsconfig": "workspace:*"
+  },
+  "files": ["src/", "dist/", "!src/**/*.test.ts", "!src/**/__tests__/"],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run --passWithNoTests"
+  }
+}

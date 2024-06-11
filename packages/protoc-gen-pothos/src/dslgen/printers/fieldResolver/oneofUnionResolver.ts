@@ -24,37 +24,105 @@ export function createOneofUnionResolverCode(
 ): Code {
   const createBlockStmtCode = (
     sourceExpr: Code,
-    { nullable }: { nullable: boolean },
+    { nullable, list }: { nullable: boolean; list: boolean },
   ): Code => {
-    const createFieldExpr = (memberField: ObjectField<any>) => {
-      if (field instanceof ObjectOneofField) {
-        return code`${sourceExpr}.${tsFieldName(memberField.proto, opts)}`;
+    switch (opts.protobuf) {
+      case "ts-proto": {
+        return createBlockStmtCodeForTsProto(sourceExpr, field, opts, {
+          nullable,
+        });
       }
-      return code`${sourceExpr}?.${tsFieldName(memberField.proto, opts)}`;
-    };
-
-    return code`
-      const value = ${joinCode(field.type.fields.map(createFieldExpr), {
-        on: "??",
-      })};
-      if (value == null) {
-        ${
-          nullable
-            ? "return null"
-            : `throw new Error("${field.name} should not be null")`
-        };
+      case "protobuf-es": {
+        return createBlockStmtCodeForProtobufEs(sourceExpr, field, opts, {
+          nullable,
+          list,
+        });
       }
-      return value;
-    `;
+      case "google-protobuf":
+      case "protobufjs": {
+        throw new Error(`Unsupported protobuf: ${opts.protobuf}`);
+      }
+      default: {
+        opts satisfies never;
+        throw "unreachable";
+      }
+    }
   };
 
   if (field instanceof ObjectField && field.isList()) {
     return code`
       return ${sourceExpr}.map(item => {
-        ${createBlockStmtCode(code`item`, { nullable: false })}
+        ${createBlockStmtCode(code`item`, { nullable: false, list: true })}
       })
     `;
   }
 
-  return createBlockStmtCode(sourceExpr, { nullable: field.isNullable() });
+  return createBlockStmtCode(sourceExpr, {
+    nullable: field.isNullable(),
+    list: false,
+  });
+}
+
+function createBlockStmtCodeForTsProto(
+  sourceExpr: Code,
+  field: ObjectOneofField | ObjectField<SquashedOneofUnionType>,
+  opts: PrinterOptions,
+  { nullable }: { nullable: boolean },
+): Code {
+  const createFieldExpr = (memberField: ObjectField<any>) => {
+    if (field instanceof ObjectOneofField) {
+      return code`${sourceExpr}.${tsFieldName(memberField.proto, opts)}`;
+    }
+    return code`${sourceExpr}?.${tsFieldName(memberField.proto, opts)}`;
+  };
+
+  return code`
+    const value = ${joinCode(field.type.fields.map(createFieldExpr), {
+      on: "??",
+    })};
+    if (value == null) {
+      ${
+        nullable
+          ? "return null"
+          : `throw new Error("${field.name} should not be null")`
+      };
+    }
+    return value;
+  `;
+}
+
+function createBlockStmtCodeForProtobufEs(
+  sourceExpr: Code,
+  field: ObjectOneofField | ObjectField<SquashedOneofUnionType>,
+  opts: PrinterOptions,
+  { nullable, list }: { nullable: boolean; list: boolean },
+): Code {
+  let valueExpr: Code;
+  switch (true) {
+    case field instanceof ObjectOneofField: {
+      valueExpr = code`${sourceExpr}.${tsFieldName(field.proto, opts)}.value`;
+      break;
+    }
+    case field instanceof ObjectField: {
+      valueExpr = code`${sourceExpr}${list ? "" : "?"}.${tsFieldName(
+        field.type.oneofUnionType.proto,
+        opts,
+      )}.value`;
+      break;
+    }
+    default: {
+      field satisfies never;
+      throw "unreachable";
+    }
+  }
+  if (nullable) {
+    return code`return ${valueExpr};`;
+  }
+  return code`
+    const value = ${valueExpr};
+    if (value == null) {
+      throw new Error("${field.name} should not be null");
+    }
+    return value;
+  `;
 }

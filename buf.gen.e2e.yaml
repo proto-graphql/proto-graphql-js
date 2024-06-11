@@ -36,3 +36,8 @@ plugins:
       - esModuleInterop=true
     out: ./e2e/testapis/ts-proto-with-forcelong-number/src
     strategy: all
+  - plugin: es
+    opt:
+      - target=ts
+    out: ./e2e/testapis/protobuf-es/src
+    strategy: all

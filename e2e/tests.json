@@ -169,6 +169,64 @@
     {
       "target": "pothos",
       "proto": { "package": "wktypes", "lib": "ts-proto-with-forcelong-number" }
+    },
+    {
+      "target": "pothos",
+      "proto": { "package": "deprecation", "lib": "protobuf-es" }
+    },
+    {
+      "target": "pothos",
+      "proto": {
+        "package": "edgecases/import_from_same_pkg",
+        "lib": "protobuf-es"
+      }
+    },
+    {
+      "target": "pothos",
+      "proto": {
+        "package": "edgecases/import_squashed_union",
+        "lib": "protobuf-es"
+      }
+    },
+    {
+      "target": "pothos",
+      "proto": { "package": "empty_types", "lib": "protobuf-es" }
+    },
+    {
+      "target": "pothos",
+      "proto": { "package": "enums", "lib": "protobuf-es" }
+    },
+    {
+      "target": "pothos",
+      "proto": { "package": "extensions", "lib": "protobuf-es" }
+    },
+    {
+      "target": "pothos",
+      "proto": { "package": "field_behavior", "lib": "protobuf-es" }
+    },
+    {
+      "target": "pothos",
+      "proto": { "package": "multipkgs", "lib": "protobuf-es" }
+    },
+    {
+      "target": "pothos",
+      "proto": { "package": "nested", "lib": "protobuf-es" }
+    },
+    {
+      "target": "pothos",
+      "proto": { "package": "oneof", "lib": "protobuf-es" }
+    },
+    {
+      "target": "pothos",
+      "proto": { "package": "primitives", "lib": "protobuf-es" }
+    },
+    {
+      "target": "pothos",
+      "proto": { "package": "proto3_optional", "lib": "protobuf-es" }
+    },
+    {
+      "target": "pothos",
+      "proto": { "package": "wktypes", "lib": "protobuf-es" }
     }
   ]
 }

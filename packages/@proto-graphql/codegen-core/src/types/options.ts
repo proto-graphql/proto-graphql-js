@@ -43,19 +43,19 @@ export interface TypeOptions {
    *   "google.protobuf.Timestamp": "DateTime",
    * }
    * ```
-   * @example Map long numbers to `BigInt` (default: `String`)
+   * @example Map long numbers to `Int64` (default: `String`)
    * ```
    * {
-   *   "int64": "BigInt",
-   *   "uint64": "BigInt",
-   *   "sint64": "BigInt",
-   *   "fixed64": "BigInt",
-   *   "sfixed64": "BigInt",
-   *   "google.protobuf.Int64": "BigInt",
-   *   "google.protobuf.UInt64": "BigInt",
-   *   "google.protobuf.SInt64": "BigInt",
-   *   "google.protobuf.Fixed64": "BigInt",
-   *   "google.protobuf.SFixed64": "BigInt",
+   *   "int64": "Int64",
+   *   "uint64": "Int64",
+   *   "sint64": "Int64",
+   *   "fixed64": "Int64",
+   *   "sfixed64": "Int64",
+   *   "google.protobuf.Int64": "Int64",
+   *   "google.protobuf.UInt64": "Int64",
+   *   "google.protobuf.SInt64": "Int64",
+   *   "google.protobuf.Fixed64": "Int64",
+   *   "google.protobuf.SFixed64": "Int64",
    * }
    * ```
    * @example Map `google.protobuf.Timestamp` to `DateTime`, `google.type.Date` to `Date`
@@ -89,6 +89,42 @@ const scalarLabelByType: Record<ScalarType, string> = {
 };
 
 export const defaultScalarMapping: Readonly<
+  Record<(typeof scalarLabelByType)[ScalarType] | (string & {}), string>
+> = {
+  int32: "Int",
+  int64: "Int64",
+  uint32: "Int",
+  uint64: "Int64",
+  sint32: "Int",
+  sint64: "Int64",
+  fixed32: "Int",
+  fixed64: "Int64",
+  sfixed32: "Int",
+  sfixed64: "Int64",
+  float: "Float",
+  double: "Float",
+  string: "String",
+  bool: "Boolean",
+  bytes: "Byte",
+  "google.protobuf.Int32Value": "Int",
+  "google.protobuf.Int64Value": "Int64",
+  "google.protobuf.UInt32Value": "Int",
+  "google.protobuf.UInt64Value": "Int64",
+  "google.protobuf.SInt32Value": "Int",
+  "google.protobuf.SInt64Value": "Int64",
+  "google.protobuf.Fixed32Value": "Int",
+  "google.protobuf.Fixed64Value": "Int64",
+  "google.protobuf.SFixed32Value": "Int",
+  "google.protobuf.SFixed64Value": "Int64",
+  "google.protobuf.FloatValue": "Float",
+  "google.protobuf.DoubleValue": "Float",
+  "google.protobuf.StringValue": "String",
+  "google.protobuf.BoolValue": "Boolean",
+  "google.protobuf.BytesValue": "Byte",
+  "google.protobuf.Timestamp": "DateTime",
+};
+
+export const defaultScalarMappingForTsProto: Readonly<
   Record<(typeof scalarLabelByType)[ScalarType] | (string & {}), string>
 > = {
   int32: "Int",

@@ -181,7 +181,7 @@ function createResolverCode(
       }
       /* istanbul ignore next */
       default: {
-        const _exhaustiveCheck: "ts-proto" = opts.protobuf;
+        const _exhaustiveCheck: "ts-proto" | "protobuf-es" = opts.protobuf;
         throw new Error(
           `unsupported protobuf implementation: ${opts.protobuf}`,
         );

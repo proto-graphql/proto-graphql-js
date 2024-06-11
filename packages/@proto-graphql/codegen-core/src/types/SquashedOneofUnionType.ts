@@ -7,7 +7,7 @@ import { TypeBase } from "./TypeBase";
 import type { TypeOptions } from "./options";
 
 export class SquashedOneofUnionType extends TypeBase<DescMessage> {
-  private readonly oneofUnionType: OneofUnionType;
+  readonly oneofUnionType: OneofUnionType;
   constructor(proto: DescMessage, options: TypeOptions) {
     super(proto, options);
     this.oneofUnionType = new OneofUnionType(proto.oneofs[0], options);

@@ -2,16 +2,17 @@ import {
   type EnumType,
   type Registry,
   compact,
+  protoType,
   protobufGraphQLExtensions,
 } from "@proto-graphql/codegen-core";
-import { type Code, code, joinCode, literalOf } from "ts-poet";
+import { type Code, code, imp, joinCode, literalOf } from "ts-poet";
 
 import { type PothosPrinterOptions, pothosBuilder, pothosRef } from "./util";
 
 /**
  * @example
  * ```ts
- * export cosnt Hello$Ref = builder.enumType("Hello", {
+ * export cosnt Hello$Ref: EnumRef<Hello, Hello> = builder.enumType("Hello", {
  *   values: [
  *     // ...
  *   ],
@@ -43,8 +44,15 @@ export function createEnumTypeCode(
     )}} as const`,
     extensions: protobufGraphQLExtensions(type, registry),
   };
+
+  const protoTypeExpr = protoType(type.proto, opts);
+  // EnumRef<Hello, Hello>
+  const refTypeExpr = code`${imp(
+    "EnumRef@@pothos/core",
+  )}<${protoTypeExpr}, ${protoTypeExpr}>`;
+
   return code`
-    export const ${pothosRef(type)} =
+    export const ${pothosRef(type)}: ${refTypeExpr} =
       ${pothosBuilder(type, opts)}.enumType(${literalOf(
         type.typeName,
       )}, ${literalOf(compact(typeOpts))});

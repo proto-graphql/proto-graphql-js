@@ -2,7 +2,9 @@ import {
   type PrinterOptions,
   type TypeOptions,
   defaultScalarMapping,
+  defaultScalarMappingForTsProto,
   fileLayouts,
+  protobufLibs,
 } from "@proto-graphql/codegen-core";
 
 export function parseParams<DSL extends PrinterOptions["dsl"]>(
@@ -15,7 +17,7 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
   const params = {
     type: {
       partialInputs: false,
-      scalarMapping: { ...defaultScalarMapping },
+      scalarMapping: {},
       ignoreNonMessageOneofFields: false,
     } as TypeOptions,
     printer: {
@@ -28,8 +30,6 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
       pothos: { builderPath: "./builder" },
     } as Extract<PrinterOptions, { dsl: DSL }>,
   };
-
-  if (!input) return params;
 
   const boolParam = (name: string, v: string | undefined): boolean => {
     if (!v || v === "true") return true;
@@ -48,13 +48,24 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
     return whitelist.includes(v as any);
   }
 
-  for (const kv of input.split(",")) {
+  const kvs = input ? input.split(",") : [];
+  for (const kv of kvs) {
     const idx = kv.indexOf("=");
     const [k, v] =
       idx === -1 ? [kv, ""] : [kv.slice(0, idx), kv.slice(idx + 1)];
     switch (k) {
       case "use_protobufjs": {
         if (boolParam(k, v)) params.printer.protobuf = "protobufjs";
+        break;
+      }
+      case "protobuf_lib": {
+        const s = stringParam(k, v);
+        if (!checkEnum(s, protobufLibs)) {
+          throw new Error(
+            `protobuf_lib should be one of ${protobufLibs.join(", ")}`,
+          );
+        }
+        params.printer.protobuf = s;
         break;
       }
       case "import_prefix": {
@@ -106,6 +117,13 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
         throw new Error(`unknown param: ${kv}`);
     }
   }
+
+  params.type.scalarMapping = {
+    ...(params.printer.protobuf === "protobuf-es"
+      ? defaultScalarMapping
+      : defaultScalarMappingForTsProto),
+    ...params.type.scalarMapping,
+  };
 
   return params;
 }

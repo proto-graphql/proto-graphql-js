@@ -43,12 +43,7 @@ export function createObjectTypeCode(
     description: type.description,
     isTypeOf: isInterface
       ? undefined
-      : code`
-        (source) => {
-          return (source as ${protoType(type.proto, opts)} | { $type: string & {} }).$type
-            === ${literalOf(type.proto.typeName)};
-        }
-      `,
+      : createIsTypeOfFuncCode(type, registry, opts),
     extensions: protobufGraphQLExtensions(type, registry),
   };
   const buildRefFunc = code`${pothosBuilder(type, opts)}.${
@@ -77,4 +72,36 @@ export function createObjectTypeCode(
     )} = ${buildRefFunc}<${refFuncTypeArg}>(${literalOf(type.typeName)});
     ${buildTypeFunc}(${pothosRef(type)}, ${literalOf(compact(typeOpts))});
   `;
+}
+
+function createIsTypeOfFuncCode(
+  type: ObjectType,
+  registry: Registry,
+  opts: PothosPrinterOptions,
+): Code {
+  switch (opts.protobuf) {
+    case "ts-proto": {
+      return code`
+        (source) => {
+          return (source as ${protoType(type.proto, opts)} | { $type: string & {} }).$type
+            === ${literalOf(type.proto.typeName)};
+        }
+      `;
+    }
+    case "protobuf-es": {
+      return code`
+        (source) => {
+          return source instanceof ${protoType(type.proto, opts)}
+        }
+      `;
+    }
+    case "google-protobuf":
+    case "protobufjs": {
+      throw new Error(`Unsupported protobuf lib: ${opts.protobuf}`);
+    }
+    default: {
+      opts satisfies never;
+      throw "unreachable";
+    }
+  }
 }
