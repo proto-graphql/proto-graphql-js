@@ -2,10 +2,10 @@ import {
   type EnumType,
   type Registry,
   compact,
-  protobufGraphQLExtensions,
   protoType,
+  protobufGraphQLExtensions,
 } from "@proto-graphql/codegen-core";
-import { type Code, code, joinCode, literalOf, imp } from "ts-poet";
+import { type Code, code, imp, joinCode, literalOf } from "ts-poet";
 
 import { type PothosPrinterOptions, pothosBuilder, pothosRef } from "./util";
 
