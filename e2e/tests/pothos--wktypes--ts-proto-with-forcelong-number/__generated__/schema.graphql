@@ -8,54 +8,34 @@ scalar DateTime
 
 type Message {
   boolValue: Boolean
-  boolValues: [Boolean!]
   bytesValue: Byte
-  bytesValues: [Byte!]
   doubleValue: Float
-  doubleValues: [Float!]
   floatValue: Float
-  floatValues: [Float!]
   int32Value: Int
-  int32Values: [Int!]
   int64Value: Int
-  int64Values: [Int!]
 
   """Required."""
   requiredTimestamp: DateTime!
   stringValue: String
-  stringValues: [String!]
   timestamp: DateTime
-  timestamps: [DateTime!]
   uint32Value: Int
-  uint32Values: [Int!]
   uint64Value: Int
-  uint64Values: [Int!]
 }
 
 input MessageInput {
   boolValue: Boolean
-  boolValues: [Boolean!]
   bytesValue: Byte
-  bytesValues: [Byte!]
   doubleValue: Float
-  doubleValues: [Float!]
   floatValue: Float
-  floatValues: [Float!]
   int32Value: Int
-  int32Values: [Int!]
   int64Value: Int
-  int64Values: [Int!]
 
   """Required."""
   requiredTimestamp: DateTime!
   stringValue: String
-  stringValues: [String!]
   timestamp: DateTime
-  timestamps: [DateTime!]
   uint32Value: Int
-  uint32Values: [Int!]
   uint64Value: Int
-  uint64Values: [Int!]
 }
 
 type Query {
