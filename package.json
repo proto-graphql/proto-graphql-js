@@ -35,7 +35,7 @@
     "ts-proto": "1.129.0",
     "ts-protoc-gen": "0.15.0",
     "tsup": "8.0.2",
-    "tsx": "4.7.2",
+    "tsx": "4.15.2",
     "turbo": "1.10.15",
     "typescript": "5.4.5",
     "vitest": "1.5.1"
