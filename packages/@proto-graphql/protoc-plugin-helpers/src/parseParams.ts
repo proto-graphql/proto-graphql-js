@@ -119,7 +119,7 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
     }
   }
 
-  if (params.printer.protobuf === "ts-proto") {
+  if (params.printer.protobuf !== "protobuf-es") {
     params.type.scalarMapping = {
       ...defaultScalarMappingForTsProto,
       ...params.type.scalarMapping,
