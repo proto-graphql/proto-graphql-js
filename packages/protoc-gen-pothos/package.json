@@ -2,13 +2,7 @@
   "name": "protoc-gen-pothos",
   "version": "0.5.0",
   "description": "Generate DSL for Pothos GraphQL from Protocol Buffers IDL",
-  "keywords": [
-    "graphql",
-    "grpc",
-    "pothos",
-    "protobuf",
-    "typescript"
-  ],
+  "keywords": ["graphql", "grpc", "pothos", "protobuf", "typescript"],
   "bin": {
     "protoc-gen-pothos": "./bin/protoc-gen-pothos"
   },
@@ -27,6 +21,9 @@
     }
   },
   "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
     "node": ">= 14.0.0"
   },
@@ -43,13 +40,7 @@
     "@proto-graphql/testapis-proto": "workspace:*",
     "@proto-graphql/tsconfig": "workspace:*"
   },
-  "files": [
-    "bin/",
-    "src/",
-    "dist/",
-    "!src/**/*.test.ts",
-    "!src/**/__tests__/"
-  ],
+  "files": ["bin/", "src/", "dist/", "!src/**/*.test.ts", "!src/**/__tests__/"],
   "scripts": {
     "build": "tsup",
     "test": "vitest run --passWithNoTests"
