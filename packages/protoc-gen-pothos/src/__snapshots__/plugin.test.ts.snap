@@ -1414,9 +1414,14 @@ export const NotDeprecatedMessageDeprecatedOneof$Ref = builder.unionType(
 
 /* eslint-disable */
 
+import { EnumRef } from "@pothos/core";
+import { NotDeprecatedEnum } from "@testapis/ts-proto/testapis/deprecation/deprecation";
 import { builder } from "../../builder";
 
-export const NotDeprecatedEnum$Ref = builder.enumType("NotDeprecatedEnum", {
+export const NotDeprecatedEnum$Ref: EnumRef<
+  NotDeprecatedEnum,
+  NotDeprecatedEnum
+> = builder.enumType("NotDeprecatedEnum", {
   values: {
     NOT_DEPRECATED_FOO: {
       value: 1,
@@ -1451,32 +1456,35 @@ export const NotDeprecatedEnum$Ref = builder.enumType("NotDeprecatedEnum", {
 
 /* eslint-disable */
 
+import { EnumRef } from "@pothos/core";
+import { DeprecatedEnum } from "@testapis/ts-proto/testapis/deprecation/deprecation";
 import { builder } from "../../builder";
 
-export const DeprecatedEnum$Ref = builder.enumType("DeprecatedEnum", {
-  values: {
-    DEPRECATED_BAZ: {
-      deprecationReason:
-        "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
-      value: 1,
-      extensions: { protobufEnumValue: { name: "DEPRECATED_BAZ" } },
+export const DeprecatedEnum$Ref: EnumRef<DeprecatedEnum, DeprecatedEnum> =
+  builder.enumType("DeprecatedEnum", {
+    values: {
+      DEPRECATED_BAZ: {
+        deprecationReason:
+          "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
+        value: 1,
+        extensions: { protobufEnumValue: { name: "DEPRECATED_BAZ" } },
+      },
+      DEPRECATED_QUX: {
+        deprecationReason:
+          "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
+        value: 2,
+        extensions: { protobufEnumValue: { name: "DEPRECATED_QUX" } },
+      },
+    } as const,
+    extensions: {
+      protobufEnum: {
+        name: "DeprecatedEnum",
+        fullName: "testapis.deprecation.DeprecatedEnum",
+        package: "testapis.deprecation",
+        options: { deprecated: true },
+      },
     },
-    DEPRECATED_QUX: {
-      deprecationReason:
-        "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
-      value: 2,
-      extensions: { protobufEnumValue: { name: "DEPRECATED_QUX" } },
-    },
-  } as const,
-  extensions: {
-    protobufEnum: {
-      name: "DeprecatedEnum",
-      fullName: "testapis.deprecation.DeprecatedEnum",
-      package: "testapis.deprecation",
-      options: { deprecated: true },
-    },
-  },
-});
+  });
 ",
     "name": "testapis/deprecation/DeprecatedEnum.pothos.ts",
   },
@@ -1680,9 +1688,14 @@ export const DeprecatedFileMessageInnerMessageInput$Ref: InputObjectRef<
 
 /* eslint-disable */
 
+import { EnumRef } from "@pothos/core";
+import { DeprecatedFileEnum } from "@testapis/ts-proto/testapis/deprecation/file_deprecation";
 import { builder } from "../../builder";
 
-export const DeprecatedFileEnum$Ref = builder.enumType("DeprecatedFileEnum", {
+export const DeprecatedFileEnum$Ref: EnumRef<
+  DeprecatedFileEnum,
+  DeprecatedFileEnum
+> = builder.enumType("DeprecatedFileEnum", {
   values: {
     DEPRECATED_FILE_FOO: {
       deprecationReason:
@@ -1719,7 +1732,7 @@ exports[`'testapis.deprecation' > generates files by plugin 'with import prefix'
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import {
   DeprecatedEnum,
   DeprecatedMessage,
@@ -2206,7 +2219,10 @@ export const NotDeprecatedMessageDeprecatedOneof$Ref = builder.unionType(
   },
 );
 
-export const NotDeprecatedEnum$Ref = builder.enumType("NotDeprecatedEnum", {
+export const NotDeprecatedEnum$Ref: EnumRef<
+  NotDeprecatedEnum,
+  NotDeprecatedEnum
+> = builder.enumType("NotDeprecatedEnum", {
   values: {
     NOT_DEPRECATED_FOO: {
       value: 1,
@@ -2233,30 +2249,31 @@ export const NotDeprecatedEnum$Ref = builder.enumType("NotDeprecatedEnum", {
   },
 });
 
-export const DeprecatedEnum$Ref = builder.enumType("DeprecatedEnum", {
-  values: {
-    DEPRECATED_BAZ: {
-      deprecationReason:
-        "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
-      value: 1,
-      extensions: { protobufEnumValue: { name: "DEPRECATED_BAZ" } },
+export const DeprecatedEnum$Ref: EnumRef<DeprecatedEnum, DeprecatedEnum> =
+  builder.enumType("DeprecatedEnum", {
+    values: {
+      DEPRECATED_BAZ: {
+        deprecationReason:
+          "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
+        value: 1,
+        extensions: { protobufEnumValue: { name: "DEPRECATED_BAZ" } },
+      },
+      DEPRECATED_QUX: {
+        deprecationReason:
+          "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
+        value: 2,
+        extensions: { protobufEnumValue: { name: "DEPRECATED_QUX" } },
+      },
+    } as const,
+    extensions: {
+      protobufEnum: {
+        name: "DeprecatedEnum",
+        fullName: "testapis.deprecation.DeprecatedEnum",
+        package: "testapis.deprecation",
+        options: { deprecated: true },
+      },
     },
-    DEPRECATED_QUX: {
-      deprecationReason:
-        "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
-      value: 2,
-      extensions: { protobufEnumValue: { name: "DEPRECATED_QUX" } },
-    },
-  } as const,
-  extensions: {
-    protobufEnum: {
-      name: "DeprecatedEnum",
-      fullName: "testapis.deprecation.DeprecatedEnum",
-      package: "testapis.deprecation",
-      options: { deprecated: true },
-    },
-  },
-});
+  });
 ",
     "name": "testapis/deprecation/deprecation.pb.pothos.ts",
   },
@@ -2266,7 +2283,7 @@ export const DeprecatedEnum$Ref = builder.enumType("DeprecatedEnum", {
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import {
   DeprecatedFileEnum,
   DeprecatedFileMessage,
@@ -2417,7 +2434,10 @@ export const DeprecatedFileMessageInnerMessageInput$Ref: InputObjectRef<
   },
 });
 
-export const DeprecatedFileEnum$Ref = builder.enumType("DeprecatedFileEnum", {
+export const DeprecatedFileEnum$Ref: EnumRef<
+  DeprecatedFileEnum,
+  DeprecatedFileEnum
+> = builder.enumType("DeprecatedFileEnum", {
   values: {
     DEPRECATED_FILE_FOO: {
       deprecationReason:
@@ -2454,7 +2474,7 @@ exports[`'testapis.deprecation' > generates files by plugin 'with partial inputs
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import {
   DeprecatedEnum,
   DeprecatedMessage,
@@ -3162,7 +3182,10 @@ export const NotDeprecatedMessageDeprecatedOneof$Ref = builder.unionType(
   },
 );
 
-export const NotDeprecatedEnum$Ref = builder.enumType("NotDeprecatedEnum", {
+export const NotDeprecatedEnum$Ref: EnumRef<
+  NotDeprecatedEnum,
+  NotDeprecatedEnum
+> = builder.enumType("NotDeprecatedEnum", {
   values: {
     NOT_DEPRECATED_FOO: {
       value: 1,
@@ -3189,30 +3212,31 @@ export const NotDeprecatedEnum$Ref = builder.enumType("NotDeprecatedEnum", {
   },
 });
 
-export const DeprecatedEnum$Ref = builder.enumType("DeprecatedEnum", {
-  values: {
-    DEPRECATED_BAZ: {
-      deprecationReason:
-        "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
-      value: 1,
-      extensions: { protobufEnumValue: { name: "DEPRECATED_BAZ" } },
+export const DeprecatedEnum$Ref: EnumRef<DeprecatedEnum, DeprecatedEnum> =
+  builder.enumType("DeprecatedEnum", {
+    values: {
+      DEPRECATED_BAZ: {
+        deprecationReason:
+          "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
+        value: 1,
+        extensions: { protobufEnumValue: { name: "DEPRECATED_BAZ" } },
+      },
+      DEPRECATED_QUX: {
+        deprecationReason:
+          "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
+        value: 2,
+        extensions: { protobufEnumValue: { name: "DEPRECATED_QUX" } },
+      },
+    } as const,
+    extensions: {
+      protobufEnum: {
+        name: "DeprecatedEnum",
+        fullName: "testapis.deprecation.DeprecatedEnum",
+        package: "testapis.deprecation",
+        options: { deprecated: true },
+      },
     },
-    DEPRECATED_QUX: {
-      deprecationReason:
-        "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
-      value: 2,
-      extensions: { protobufEnumValue: { name: "DEPRECATED_QUX" } },
-    },
-  } as const,
-  extensions: {
-    protobufEnum: {
-      name: "DeprecatedEnum",
-      fullName: "testapis.deprecation.DeprecatedEnum",
-      package: "testapis.deprecation",
-      options: { deprecated: true },
-    },
-  },
-});
+  });
 ",
     "name": "testapis/deprecation/deprecation.pb.pothos.ts",
   },
@@ -3222,7 +3246,7 @@ export const DeprecatedEnum$Ref = builder.enumType("DeprecatedEnum", {
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import {
   DeprecatedFileEnum,
   DeprecatedFileMessage,
@@ -3440,7 +3464,10 @@ export const DeprecatedFileMessageInnerMessagePartialInput$Ref: InputObjectRef<
   },
 });
 
-export const DeprecatedFileEnum$Ref = builder.enumType("DeprecatedFileEnum", {
+export const DeprecatedFileEnum$Ref: EnumRef<
+  DeprecatedFileEnum,
+  DeprecatedFileEnum
+> = builder.enumType("DeprecatedFileEnum", {
   values: {
     DEPRECATED_FILE_FOO: {
       deprecationReason:
@@ -3477,7 +3504,7 @@ exports[`'testapis.deprecation' > generates files by plugin 'without import pref
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import { builder } from "../../builder";
 import {
   DeprecatedEnum,
@@ -3964,7 +3991,10 @@ export const NotDeprecatedMessageDeprecatedOneof$Ref = builder.unionType(
   },
 );
 
-export const NotDeprecatedEnum$Ref = builder.enumType("NotDeprecatedEnum", {
+export const NotDeprecatedEnum$Ref: EnumRef<
+  NotDeprecatedEnum,
+  NotDeprecatedEnum
+> = builder.enumType("NotDeprecatedEnum", {
   values: {
     NOT_DEPRECATED_FOO: {
       value: 1,
@@ -3991,30 +4021,31 @@ export const NotDeprecatedEnum$Ref = builder.enumType("NotDeprecatedEnum", {
   },
 });
 
-export const DeprecatedEnum$Ref = builder.enumType("DeprecatedEnum", {
-  values: {
-    DEPRECATED_BAZ: {
-      deprecationReason:
-        "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
-      value: 1,
-      extensions: { protobufEnumValue: { name: "DEPRECATED_BAZ" } },
+export const DeprecatedEnum$Ref: EnumRef<DeprecatedEnum, DeprecatedEnum> =
+  builder.enumType("DeprecatedEnum", {
+    values: {
+      DEPRECATED_BAZ: {
+        deprecationReason:
+          "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
+        value: 1,
+        extensions: { protobufEnumValue: { name: "DEPRECATED_BAZ" } },
+      },
+      DEPRECATED_QUX: {
+        deprecationReason:
+          "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
+        value: 2,
+        extensions: { protobufEnumValue: { name: "DEPRECATED_QUX" } },
+      },
+    } as const,
+    extensions: {
+      protobufEnum: {
+        name: "DeprecatedEnum",
+        fullName: "testapis.deprecation.DeprecatedEnum",
+        package: "testapis.deprecation",
+        options: { deprecated: true },
+      },
     },
-    DEPRECATED_QUX: {
-      deprecationReason:
-        "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
-      value: 2,
-      extensions: { protobufEnumValue: { name: "DEPRECATED_QUX" } },
-    },
-  } as const,
-  extensions: {
-    protobufEnum: {
-      name: "DeprecatedEnum",
-      fullName: "testapis.deprecation.DeprecatedEnum",
-      package: "testapis.deprecation",
-      options: { deprecated: true },
-    },
-  },
-});
+  });
 ",
     "name": "testapis/deprecation/deprecation.pb.pothos.ts",
   },
@@ -4024,7 +4055,7 @@ export const DeprecatedEnum$Ref = builder.enumType("DeprecatedEnum", {
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import { builder } from "../../builder";
 import {
   DeprecatedFileEnum,
@@ -4175,7 +4206,10 @@ export const DeprecatedFileMessageInnerMessageInput$Ref: InputObjectRef<
   },
 });
 
-export const DeprecatedFileEnum$Ref = builder.enumType("DeprecatedFileEnum", {
+export const DeprecatedFileEnum$Ref: EnumRef<
+  DeprecatedFileEnum,
+  DeprecatedFileEnum
+> = builder.enumType("DeprecatedFileEnum", {
   values: {
     DEPRECATED_FILE_FOO: {
       deprecationReason:
@@ -6320,9 +6354,11 @@ export const MessageWithEnumsInput$Ref: InputObjectRef<
 
 /* eslint-disable */
 
+import { EnumRef } from "@pothos/core";
+import { MyEnum } from "@testapis/ts-proto/testapis/enums/enums";
 import { builder } from "../../builder";
 
-export const MyEnum$Ref = builder.enumType("MyEnum", {
+export const MyEnum$Ref: EnumRef<MyEnum, MyEnum> = builder.enumType("MyEnum", {
   values: {
     FOO: {
       value: 1,
@@ -6355,40 +6391,42 @@ export const MyEnum$Ref = builder.enumType("MyEnum", {
 
 /* eslint-disable */
 
+import { EnumRef } from "@pothos/core";
+import { MyEnumWithoutUnspecified } from "@testapis/ts-proto/testapis/enums/enums";
 import { builder } from "../../builder";
 
-export const MyEnumWithoutUnspecified$Ref = builder.enumType(
-  "MyEnumWithoutUnspecified",
-  {
-    values: {
-      FOO: {
-        value: 0,
-        extensions: {
-          protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_FOO" },
-        },
-      },
-      BAR: {
-        value: 1,
-        extensions: {
-          protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAR" },
-        },
-      },
-      BAZ: {
-        value: 2,
-        extensions: {
-          protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAZ" },
-        },
-      },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "MyEnumWithoutUnspecified",
-        fullName: "testapi.enums.MyEnumWithoutUnspecified",
-        package: "testapi.enums",
+export const MyEnumWithoutUnspecified$Ref: EnumRef<
+  MyEnumWithoutUnspecified,
+  MyEnumWithoutUnspecified
+> = builder.enumType("MyEnumWithoutUnspecified", {
+  values: {
+    FOO: {
+      value: 0,
+      extensions: {
+        protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_FOO" },
       },
     },
+    BAR: {
+      value: 1,
+      extensions: {
+        protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAR" },
+      },
+    },
+    BAZ: {
+      value: 2,
+      extensions: {
+        protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAZ" },
+      },
+    },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "MyEnumWithoutUnspecified",
+      fullName: "testapi.enums.MyEnumWithoutUnspecified",
+      package: "testapi.enums",
+    },
   },
-);
+});
 ",
     "name": "testapis/enums/MyEnumWithoutUnspecified.pothos.ts",
   },
@@ -6403,10 +6441,11 @@ exports[`'testapis.enums' > generates files by plugin 'with import prefix' 1`] =
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import {
   MessageWithEnums,
   MyEnum,
+  MyEnumWithoutUnspecified,
 } from "@testapis/ts-proto/testapis/enums/enums";
 import { builder } from "../../builder";
 
@@ -6688,7 +6727,7 @@ export const MessageWithEnumsInput$Ref: InputObjectRef<
     },
   });
 
-export const MyEnum$Ref = builder.enumType("MyEnum", {
+export const MyEnum$Ref: EnumRef<MyEnum, MyEnum> = builder.enumType("MyEnum", {
   values: {
     FOO: {
       value: 1,
@@ -6713,38 +6752,38 @@ export const MyEnum$Ref = builder.enumType("MyEnum", {
   },
 });
 
-export const MyEnumWithoutUnspecified$Ref = builder.enumType(
-  "MyEnumWithoutUnspecified",
-  {
-    values: {
-      FOO: {
-        value: 0,
-        extensions: {
-          protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_FOO" },
-        },
-      },
-      BAR: {
-        value: 1,
-        extensions: {
-          protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAR" },
-        },
-      },
-      BAZ: {
-        value: 2,
-        extensions: {
-          protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAZ" },
-        },
-      },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "MyEnumWithoutUnspecified",
-        fullName: "testapi.enums.MyEnumWithoutUnspecified",
-        package: "testapi.enums",
+export const MyEnumWithoutUnspecified$Ref: EnumRef<
+  MyEnumWithoutUnspecified,
+  MyEnumWithoutUnspecified
+> = builder.enumType("MyEnumWithoutUnspecified", {
+  values: {
+    FOO: {
+      value: 0,
+      extensions: {
+        protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_FOO" },
       },
     },
+    BAR: {
+      value: 1,
+      extensions: {
+        protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAR" },
+      },
+    },
+    BAZ: {
+      value: 2,
+      extensions: {
+        protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAZ" },
+      },
+    },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "MyEnumWithoutUnspecified",
+      fullName: "testapi.enums.MyEnumWithoutUnspecified",
+      package: "testapi.enums",
+    },
   },
-);
+});
 ",
     "name": "testapis/enums/enums.pb.pothos.ts",
   },
@@ -6759,10 +6798,11 @@ exports[`'testapis.enums' > generates files by plugin 'with partial inputs' 1`] 
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import {
   MessageWithEnums,
   MyEnum,
+  MyEnumWithoutUnspecified,
 } from "@testapis/ts-proto/testapis/enums/enums";
 import { builder } from "../../builder";
 
@@ -7167,7 +7207,7 @@ export const MessageWithEnumsPartialInput$Ref: InputObjectRef<
   },
 });
 
-export const MyEnum$Ref = builder.enumType("MyEnum", {
+export const MyEnum$Ref: EnumRef<MyEnum, MyEnum> = builder.enumType("MyEnum", {
   values: {
     FOO: {
       value: 1,
@@ -7192,38 +7232,38 @@ export const MyEnum$Ref = builder.enumType("MyEnum", {
   },
 });
 
-export const MyEnumWithoutUnspecified$Ref = builder.enumType(
-  "MyEnumWithoutUnspecified",
-  {
-    values: {
-      FOO: {
-        value: 0,
-        extensions: {
-          protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_FOO" },
-        },
-      },
-      BAR: {
-        value: 1,
-        extensions: {
-          protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAR" },
-        },
-      },
-      BAZ: {
-        value: 2,
-        extensions: {
-          protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAZ" },
-        },
-      },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "MyEnumWithoutUnspecified",
-        fullName: "testapi.enums.MyEnumWithoutUnspecified",
-        package: "testapi.enums",
+export const MyEnumWithoutUnspecified$Ref: EnumRef<
+  MyEnumWithoutUnspecified,
+  MyEnumWithoutUnspecified
+> = builder.enumType("MyEnumWithoutUnspecified", {
+  values: {
+    FOO: {
+      value: 0,
+      extensions: {
+        protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_FOO" },
       },
     },
+    BAR: {
+      value: 1,
+      extensions: {
+        protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAR" },
+      },
+    },
+    BAZ: {
+      value: 2,
+      extensions: {
+        protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAZ" },
+      },
+    },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "MyEnumWithoutUnspecified",
+      fullName: "testapi.enums.MyEnumWithoutUnspecified",
+      package: "testapi.enums",
+    },
   },
-);
+});
 ",
     "name": "testapis/enums/enums.pb.pothos.ts",
   },
@@ -7238,9 +7278,13 @@ exports[`'testapis.enums' > generates files by plugin 'without import prefix' 1`
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import { builder } from "../../builder";
-import { MessageWithEnums, MyEnum } from "./testapis/enums/enums";
+import {
+  MessageWithEnums,
+  MyEnum,
+  MyEnumWithoutUnspecified,
+} from "./testapis/enums/enums";
 
 export const MessageWithEnums$Ref = builder.objectRef<MessageWithEnums>(
   "MessageWithEnums",
@@ -7520,7 +7564,7 @@ export const MessageWithEnumsInput$Ref: InputObjectRef<
     },
   });
 
-export const MyEnum$Ref = builder.enumType("MyEnum", {
+export const MyEnum$Ref: EnumRef<MyEnum, MyEnum> = builder.enumType("MyEnum", {
   values: {
     FOO: {
       value: 1,
@@ -7545,38 +7589,38 @@ export const MyEnum$Ref = builder.enumType("MyEnum", {
   },
 });
 
-export const MyEnumWithoutUnspecified$Ref = builder.enumType(
-  "MyEnumWithoutUnspecified",
-  {
-    values: {
-      FOO: {
-        value: 0,
-        extensions: {
-          protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_FOO" },
-        },
-      },
-      BAR: {
-        value: 1,
-        extensions: {
-          protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAR" },
-        },
-      },
-      BAZ: {
-        value: 2,
-        extensions: {
-          protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAZ" },
-        },
-      },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "MyEnumWithoutUnspecified",
-        fullName: "testapi.enums.MyEnumWithoutUnspecified",
-        package: "testapi.enums",
+export const MyEnumWithoutUnspecified$Ref: EnumRef<
+  MyEnumWithoutUnspecified,
+  MyEnumWithoutUnspecified
+> = builder.enumType("MyEnumWithoutUnspecified", {
+  values: {
+    FOO: {
+      value: 0,
+      extensions: {
+        protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_FOO" },
       },
     },
+    BAR: {
+      value: 1,
+      extensions: {
+        protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAR" },
+      },
+    },
+    BAZ: {
+      value: 2,
+      extensions: {
+        protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAZ" },
+      },
+    },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "MyEnumWithoutUnspecified",
+      fullName: "testapi.enums.MyEnumWithoutUnspecified",
+      package: "testapi.enums",
+    },
   },
-);
+});
 ",
     "name": "testapis/enums/enums.pb.pothos.ts",
   },
@@ -8481,11 +8525,12 @@ export const TestPrefixPrefixedMessagePartialIgnoreOneof$Ref = builder
 
 /* eslint-disable */
 
+import { EnumRef } from "@pothos/core";
+import { PrefixedEnum } from "@testapis/ts-proto/testapis/extensions/extensions";
 import { builder } from "../../builder";
 
-export const TestPrefixPrefixedEnum$Ref = builder.enumType(
-  "TestPrefixPrefixedEnum",
-  {
+export const TestPrefixPrefixedEnum$Ref: EnumRef<PrefixedEnum, PrefixedEnum> =
+  builder.enumType("TestPrefixPrefixedEnum", {
     values: {
       PREFIXED_FOO: {
         value: 1,
@@ -8503,8 +8548,7 @@ export const TestPrefixPrefixedEnum$Ref = builder.enumType(
         package: "testapis.extensions",
       },
     },
-  },
-);
+  });
 ",
     "name": "testapis/extensions/TestPrefixPrefixedEnum.pothos.ts",
   },
@@ -8514,31 +8558,33 @@ export const TestPrefixPrefixedEnum$Ref = builder.enumType(
 
 /* eslint-disable */
 
+import { EnumRef } from "@pothos/core";
+import { EnumWillRename } from "@testapis/ts-proto/testapis/extensions/extensions";
 import { builder } from "../../builder";
 
-export const TestPrefixRenamedEnum$Ref = builder.enumType(
-  "TestPrefixRenamedEnum",
-  {
-    values: {
-      FOO: {
-        value: 1,
-        extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_FOO" } },
-      },
-      BAR: {
-        value: 2,
-        extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_BAR" } },
-      },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "EnumWillRename",
-        fullName: "testapis.extensions.EnumWillRename",
-        package: "testapis.extensions",
-        options: { "[graphql.enum_type]": { name: "RenamedEnum" } },
-      },
+export const TestPrefixRenamedEnum$Ref: EnumRef<
+  EnumWillRename,
+  EnumWillRename
+> = builder.enumType("TestPrefixRenamedEnum", {
+  values: {
+    FOO: {
+      value: 1,
+      extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_FOO" } },
+    },
+    BAR: {
+      value: 2,
+      extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_BAR" } },
+    },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "EnumWillRename",
+      fullName: "testapis.extensions.EnumWillRename",
+      package: "testapis.extensions",
+      options: { "[graphql.enum_type]": { name: "RenamedEnum" } },
     },
   },
-);
+});
 ",
     "name": "testapis/extensions/TestPrefixRenamedEnum.pothos.ts",
   },
@@ -8548,27 +8594,26 @@ export const TestPrefixRenamedEnum$Ref = builder.enumType(
 
 /* eslint-disable */
 
+import { EnumRef } from "@pothos/core";
+import { InterfaceMessage_Type } from "@testapis/ts-proto/testapis/extensions/extensions";
 import { builder } from "../../builder";
 
-export const TestPrefixInterfaceMessageType$Ref = builder.enumType(
-  "TestPrefixInterfaceMessageType",
-  {
-    values: {
-      INNER: { value: 1, extensions: { protobufEnumValue: { name: "INNER" } } },
-      INNER2: {
-        value: 2,
-        extensions: { protobufEnumValue: { name: "INNER2" } },
-      },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "Type",
-        fullName: "testapis.extensions.InterfaceMessage.Type",
-        package: "testapis.extensions",
-      },
+export const TestPrefixInterfaceMessageType$Ref: EnumRef<
+  InterfaceMessage_Type,
+  InterfaceMessage_Type
+> = builder.enumType("TestPrefixInterfaceMessageType", {
+  values: {
+    INNER: { value: 1, extensions: { protobufEnumValue: { name: "INNER" } } },
+    INNER2: { value: 2, extensions: { protobufEnumValue: { name: "INNER2" } } },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "Type",
+      fullName: "testapis.extensions.InterfaceMessage.Type",
+      package: "testapis.extensions",
     },
   },
-);
+});
 ",
     "name": "testapis/extensions/TestPrefixInterfaceMessageType.pothos.ts",
   },
@@ -8583,11 +8628,12 @@ exports[`'testapis.extensions' > generates files by plugin 'with import prefix' 
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import {
   EnumWillRename,
   IgnoredMessage_NotIgnored,
   InterfaceMessage,
+  InterfaceMessage_Type,
   MessageOnlyOutput,
   MessageWillRename,
   PrefixedEnum,
@@ -9272,9 +9318,8 @@ export const TestPrefixPrefixedMessagePartialIgnoreOneof$Ref = builder
     },
   });
 
-export const TestPrefixPrefixedEnum$Ref = builder.enumType(
-  "TestPrefixPrefixedEnum",
-  {
+export const TestPrefixPrefixedEnum$Ref: EnumRef<PrefixedEnum, PrefixedEnum> =
+  builder.enumType("TestPrefixPrefixedEnum", {
     values: {
       PREFIXED_FOO: {
         value: 1,
@@ -9292,52 +9337,48 @@ export const TestPrefixPrefixedEnum$Ref = builder.enumType(
         package: "testapis.extensions",
       },
     },
-  },
-);
+  });
 
-export const TestPrefixRenamedEnum$Ref = builder.enumType(
-  "TestPrefixRenamedEnum",
-  {
-    values: {
-      FOO: {
-        value: 1,
-        extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_FOO" } },
-      },
-      BAR: {
-        value: 2,
-        extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_BAR" } },
-      },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "EnumWillRename",
-        fullName: "testapis.extensions.EnumWillRename",
-        package: "testapis.extensions",
-        options: { "[graphql.enum_type]": { name: "RenamedEnum" } },
-      },
+export const TestPrefixRenamedEnum$Ref: EnumRef<
+  EnumWillRename,
+  EnumWillRename
+> = builder.enumType("TestPrefixRenamedEnum", {
+  values: {
+    FOO: {
+      value: 1,
+      extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_FOO" } },
+    },
+    BAR: {
+      value: 2,
+      extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_BAR" } },
+    },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "EnumWillRename",
+      fullName: "testapis.extensions.EnumWillRename",
+      package: "testapis.extensions",
+      options: { "[graphql.enum_type]": { name: "RenamedEnum" } },
     },
   },
-);
+});
 
-export const TestPrefixInterfaceMessageType$Ref = builder.enumType(
-  "TestPrefixInterfaceMessageType",
-  {
-    values: {
-      INNER: { value: 1, extensions: { protobufEnumValue: { name: "INNER" } } },
-      INNER2: {
-        value: 2,
-        extensions: { protobufEnumValue: { name: "INNER2" } },
-      },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "Type",
-        fullName: "testapis.extensions.InterfaceMessage.Type",
-        package: "testapis.extensions",
-      },
+export const TestPrefixInterfaceMessageType$Ref: EnumRef<
+  InterfaceMessage_Type,
+  InterfaceMessage_Type
+> = builder.enumType("TestPrefixInterfaceMessageType", {
+  values: {
+    INNER: { value: 1, extensions: { protobufEnumValue: { name: "INNER" } } },
+    INNER2: { value: 2, extensions: { protobufEnumValue: { name: "INNER2" } } },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "Type",
+      fullName: "testapis.extensions.InterfaceMessage.Type",
+      package: "testapis.extensions",
     },
   },
-);
+});
 ",
     "name": "testapis/extensions/extensions.pb.pothos.ts",
   },
@@ -9362,11 +9403,12 @@ exports[`'testapis.extensions' > generates files by plugin 'with partial inputs'
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import {
   EnumWillRename,
   IgnoredMessage_NotIgnored,
   InterfaceMessage,
+  InterfaceMessage_Type,
   MessageOnlyOutput,
   MessageWillRename,
   PrefixedEnum,
@@ -10372,9 +10414,8 @@ export const TestPrefixPrefixedMessagePartialIgnoreOneof$Ref = builder
     },
   });
 
-export const TestPrefixPrefixedEnum$Ref = builder.enumType(
-  "TestPrefixPrefixedEnum",
-  {
+export const TestPrefixPrefixedEnum$Ref: EnumRef<PrefixedEnum, PrefixedEnum> =
+  builder.enumType("TestPrefixPrefixedEnum", {
     values: {
       PREFIXED_FOO: {
         value: 1,
@@ -10392,52 +10433,48 @@ export const TestPrefixPrefixedEnum$Ref = builder.enumType(
         package: "testapis.extensions",
       },
     },
-  },
-);
+  });
 
-export const TestPrefixRenamedEnum$Ref = builder.enumType(
-  "TestPrefixRenamedEnum",
-  {
-    values: {
-      FOO: {
-        value: 1,
-        extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_FOO" } },
-      },
-      BAR: {
-        value: 2,
-        extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_BAR" } },
-      },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "EnumWillRename",
-        fullName: "testapis.extensions.EnumWillRename",
-        package: "testapis.extensions",
-        options: { "[graphql.enum_type]": { name: "RenamedEnum" } },
-      },
+export const TestPrefixRenamedEnum$Ref: EnumRef<
+  EnumWillRename,
+  EnumWillRename
+> = builder.enumType("TestPrefixRenamedEnum", {
+  values: {
+    FOO: {
+      value: 1,
+      extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_FOO" } },
+    },
+    BAR: {
+      value: 2,
+      extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_BAR" } },
+    },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "EnumWillRename",
+      fullName: "testapis.extensions.EnumWillRename",
+      package: "testapis.extensions",
+      options: { "[graphql.enum_type]": { name: "RenamedEnum" } },
     },
   },
-);
+});
 
-export const TestPrefixInterfaceMessageType$Ref = builder.enumType(
-  "TestPrefixInterfaceMessageType",
-  {
-    values: {
-      INNER: { value: 1, extensions: { protobufEnumValue: { name: "INNER" } } },
-      INNER2: {
-        value: 2,
-        extensions: { protobufEnumValue: { name: "INNER2" } },
-      },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "Type",
-        fullName: "testapis.extensions.InterfaceMessage.Type",
-        package: "testapis.extensions",
-      },
+export const TestPrefixInterfaceMessageType$Ref: EnumRef<
+  InterfaceMessage_Type,
+  InterfaceMessage_Type
+> = builder.enumType("TestPrefixInterfaceMessageType", {
+  values: {
+    INNER: { value: 1, extensions: { protobufEnumValue: { name: "INNER" } } },
+    INNER2: { value: 2, extensions: { protobufEnumValue: { name: "INNER2" } } },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "Type",
+      fullName: "testapis.extensions.InterfaceMessage.Type",
+      package: "testapis.extensions",
     },
   },
-);
+});
 ",
     "name": "testapis/extensions/extensions.pb.pothos.ts",
   },
@@ -10462,12 +10499,13 @@ exports[`'testapis.extensions' > generates files by plugin 'without import prefi
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import { builder } from "../../builder";
 import {
   EnumWillRename,
   IgnoredMessage_NotIgnored,
   InterfaceMessage,
+  InterfaceMessage_Type,
   MessageOnlyOutput,
   MessageWillRename,
   PrefixedEnum,
@@ -11151,9 +11189,8 @@ export const TestPrefixPrefixedMessagePartialIgnoreOneof$Ref = builder
     },
   });
 
-export const TestPrefixPrefixedEnum$Ref = builder.enumType(
-  "TestPrefixPrefixedEnum",
-  {
+export const TestPrefixPrefixedEnum$Ref: EnumRef<PrefixedEnum, PrefixedEnum> =
+  builder.enumType("TestPrefixPrefixedEnum", {
     values: {
       PREFIXED_FOO: {
         value: 1,
@@ -11171,52 +11208,48 @@ export const TestPrefixPrefixedEnum$Ref = builder.enumType(
         package: "testapis.extensions",
       },
     },
-  },
-);
+  });
 
-export const TestPrefixRenamedEnum$Ref = builder.enumType(
-  "TestPrefixRenamedEnum",
-  {
-    values: {
-      FOO: {
-        value: 1,
-        extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_FOO" } },
-      },
-      BAR: {
-        value: 2,
-        extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_BAR" } },
-      },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "EnumWillRename",
-        fullName: "testapis.extensions.EnumWillRename",
-        package: "testapis.extensions",
-        options: { "[graphql.enum_type]": { name: "RenamedEnum" } },
-      },
+export const TestPrefixRenamedEnum$Ref: EnumRef<
+  EnumWillRename,
+  EnumWillRename
+> = builder.enumType("TestPrefixRenamedEnum", {
+  values: {
+    FOO: {
+      value: 1,
+      extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_FOO" } },
+    },
+    BAR: {
+      value: 2,
+      extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_BAR" } },
+    },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "EnumWillRename",
+      fullName: "testapis.extensions.EnumWillRename",
+      package: "testapis.extensions",
+      options: { "[graphql.enum_type]": { name: "RenamedEnum" } },
     },
   },
-);
+});
 
-export const TestPrefixInterfaceMessageType$Ref = builder.enumType(
-  "TestPrefixInterfaceMessageType",
-  {
-    values: {
-      INNER: { value: 1, extensions: { protobufEnumValue: { name: "INNER" } } },
-      INNER2: {
-        value: 2,
-        extensions: { protobufEnumValue: { name: "INNER2" } },
-      },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "Type",
-        fullName: "testapis.extensions.InterfaceMessage.Type",
-        package: "testapis.extensions",
-      },
+export const TestPrefixInterfaceMessageType$Ref: EnumRef<
+  InterfaceMessage_Type,
+  InterfaceMessage_Type
+> = builder.enumType("TestPrefixInterfaceMessageType", {
+  values: {
+    INNER: { value: 1, extensions: { protobufEnumValue: { name: "INNER" } } },
+    INNER2: { value: 2, extensions: { protobufEnumValue: { name: "INNER2" } } },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "Type",
+      fullName: "testapis.extensions.InterfaceMessage.Type",
+      package: "testapis.extensions",
     },
   },
-);
+});
 ",
     "name": "testapis/extensions/extensions.pb.pothos.ts",
   },
@@ -11396,24 +11429,27 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
 
 /* eslint-disable */
 
+import { EnumRef } from "@pothos/core";
+import { Message_Status } from "@testapis/ts-proto/testapis/extensions/field_nullability/nullability";
 import { builder } from "../../../builder";
 
-export const MessageStatus$Ref = builder.enumType("MessageStatus", {
-  values: {
-    DRAFT: { value: 1, extensions: { protobufEnumValue: { name: "DRAFT" } } },
-    PUBLISHED: {
-      value: 2,
-      extensions: { protobufEnumValue: { name: "PUBLISHED" } },
+export const MessageStatus$Ref: EnumRef<Message_Status, Message_Status> =
+  builder.enumType("MessageStatus", {
+    values: {
+      DRAFT: { value: 1, extensions: { protobufEnumValue: { name: "DRAFT" } } },
+      PUBLISHED: {
+        value: 2,
+        extensions: { protobufEnumValue: { name: "PUBLISHED" } },
+      },
+    } as const,
+    extensions: {
+      protobufEnum: {
+        name: "Status",
+        fullName: "testapis.extensions.field_nullability.Message.Status",
+        package: "testapis.extensions.field_nullability",
+      },
     },
-  } as const,
-  extensions: {
-    protobufEnum: {
-      name: "Status",
-      fullName: "testapis.extensions.field_nullability.Message.Status",
-      package: "testapis.extensions.field_nullability",
-    },
-  },
-});
+  });
 ",
     "name": "testapis/extensions/field_nullability/MessageStatus.pothos.ts",
   },
@@ -11428,7 +11464,7 @@ exports[`'testapis.extensions.field_nullability' > generates files by plugin 'wi
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import {
   Message,
   Message_Status,
@@ -11562,22 +11598,23 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
     },
   });
 
-export const MessageStatus$Ref = builder.enumType("MessageStatus", {
-  values: {
-    DRAFT: { value: 1, extensions: { protobufEnumValue: { name: "DRAFT" } } },
-    PUBLISHED: {
-      value: 2,
-      extensions: { protobufEnumValue: { name: "PUBLISHED" } },
+export const MessageStatus$Ref: EnumRef<Message_Status, Message_Status> =
+  builder.enumType("MessageStatus", {
+    values: {
+      DRAFT: { value: 1, extensions: { protobufEnumValue: { name: "DRAFT" } } },
+      PUBLISHED: {
+        value: 2,
+        extensions: { protobufEnumValue: { name: "PUBLISHED" } },
+      },
+    } as const,
+    extensions: {
+      protobufEnum: {
+        name: "Status",
+        fullName: "testapis.extensions.field_nullability.Message.Status",
+        package: "testapis.extensions.field_nullability",
+      },
     },
-  } as const,
-  extensions: {
-    protobufEnum: {
-      name: "Status",
-      fullName: "testapis.extensions.field_nullability.Message.Status",
-      package: "testapis.extensions.field_nullability",
-    },
-  },
-});
+  });
 ",
     "name": "testapis/extensions/field_nullability/nullability.pb.pothos.ts",
   },
@@ -11592,7 +11629,7 @@ exports[`'testapis.extensions.field_nullability' > generates files by plugin 'wi
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import {
   Message,
   Message_Status,
@@ -11789,22 +11826,23 @@ export const MessagePartialInput$Ref: InputObjectRef<
     },
   });
 
-export const MessageStatus$Ref = builder.enumType("MessageStatus", {
-  values: {
-    DRAFT: { value: 1, extensions: { protobufEnumValue: { name: "DRAFT" } } },
-    PUBLISHED: {
-      value: 2,
-      extensions: { protobufEnumValue: { name: "PUBLISHED" } },
+export const MessageStatus$Ref: EnumRef<Message_Status, Message_Status> =
+  builder.enumType("MessageStatus", {
+    values: {
+      DRAFT: { value: 1, extensions: { protobufEnumValue: { name: "DRAFT" } } },
+      PUBLISHED: {
+        value: 2,
+        extensions: { protobufEnumValue: { name: "PUBLISHED" } },
+      },
+    } as const,
+    extensions: {
+      protobufEnum: {
+        name: "Status",
+        fullName: "testapis.extensions.field_nullability.Message.Status",
+        package: "testapis.extensions.field_nullability",
+      },
     },
-  } as const,
-  extensions: {
-    protobufEnum: {
-      name: "Status",
-      fullName: "testapis.extensions.field_nullability.Message.Status",
-      package: "testapis.extensions.field_nullability",
-    },
-  },
-});
+  });
 ",
     "name": "testapis/extensions/field_nullability/nullability.pb.pothos.ts",
   },
@@ -11819,7 +11857,7 @@ exports[`'testapis.extensions.field_nullability' > generates files by plugin 'wi
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import { builder } from "../../../builder";
 import {
   Message,
@@ -11953,22 +11991,23 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
     },
   });
 
-export const MessageStatus$Ref = builder.enumType("MessageStatus", {
-  values: {
-    DRAFT: { value: 1, extensions: { protobufEnumValue: { name: "DRAFT" } } },
-    PUBLISHED: {
-      value: 2,
-      extensions: { protobufEnumValue: { name: "PUBLISHED" } },
+export const MessageStatus$Ref: EnumRef<Message_Status, Message_Status> =
+  builder.enumType("MessageStatus", {
+    values: {
+      DRAFT: { value: 1, extensions: { protobufEnumValue: { name: "DRAFT" } } },
+      PUBLISHED: {
+        value: 2,
+        extensions: { protobufEnumValue: { name: "PUBLISHED" } },
+      },
+    } as const,
+    extensions: {
+      protobufEnum: {
+        name: "Status",
+        fullName: "testapis.extensions.field_nullability.Message.Status",
+        package: "testapis.extensions.field_nullability",
+      },
     },
-  } as const,
-  extensions: {
-    protobufEnum: {
-      name: "Status",
-      fullName: "testapis.extensions.field_nullability.Message.Status",
-      package: "testapis.extensions.field_nullability",
-    },
-  },
-});
+  });
 ",
     "name": "testapis/extensions/field_nullability/nullability.pb.pothos.ts",
   },
@@ -14149,21 +14188,26 @@ export const SubpkgMessageInput$Ref: InputObjectRef<SubpkgMessageInput$Shape> =
 
 /* eslint-disable */
 
+import { EnumRef } from "@pothos/core";
+import { SubpkgEnum } from "@testapis/ts-proto/testapis/multipkgs/subpkg1/types";
 import { builder } from "../../../builder";
 
-export const SubpkgEnum$Ref = builder.enumType("SubpkgEnum", {
-  values: {
-    FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
-    BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
-  } as const,
-  extensions: {
-    protobufEnum: {
-      name: "SubpkgEnum",
-      fullName: "testapis.multipkgs.subpkg1.SubpkgEnum",
-      package: "testapis.multipkgs.subpkg1",
+export const SubpkgEnum$Ref: EnumRef<SubpkgEnum, SubpkgEnum> = builder.enumType(
+  "SubpkgEnum",
+  {
+    values: {
+      FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
+      BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
+    } as const,
+    extensions: {
+      protobufEnum: {
+        name: "SubpkgEnum",
+        fullName: "testapis.multipkgs.subpkg1.SubpkgEnum",
+        package: "testapis.multipkgs.subpkg1",
+      },
     },
   },
-});
+);
 ",
     "name": "testapis/multipkgs/subpkg1/SubpkgEnum.pothos.ts",
   },
@@ -14178,8 +14222,11 @@ exports[`'testapis.multipkgs.subpkg1' > generates files by plugin 'with import p
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
-import { SubpkgMessage } from "@testapis/ts-proto/testapis/multipkgs/subpkg1/types";
+import { EnumRef, InputObjectRef } from "@pothos/core";
+import {
+  SubpkgEnum,
+  SubpkgMessage,
+} from "@testapis/ts-proto/testapis/multipkgs/subpkg1/types";
 import { builder } from "../../../builder";
 
 export const SubpkgMessage$Ref = builder.objectRef<SubpkgMessage>(
@@ -14227,19 +14274,22 @@ export const SubpkgMessageInput$Ref: InputObjectRef<SubpkgMessageInput$Shape> =
     },
   });
 
-export const SubpkgEnum$Ref = builder.enumType("SubpkgEnum", {
-  values: {
-    FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
-    BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
-  } as const,
-  extensions: {
-    protobufEnum: {
-      name: "SubpkgEnum",
-      fullName: "testapis.multipkgs.subpkg1.SubpkgEnum",
-      package: "testapis.multipkgs.subpkg1",
+export const SubpkgEnum$Ref: EnumRef<SubpkgEnum, SubpkgEnum> = builder.enumType(
+  "SubpkgEnum",
+  {
+    values: {
+      FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
+      BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
+    } as const,
+    extensions: {
+      protobufEnum: {
+        name: "SubpkgEnum",
+        fullName: "testapis.multipkgs.subpkg1.SubpkgEnum",
+        package: "testapis.multipkgs.subpkg1",
+      },
     },
   },
-});
+);
 ",
     "name": "testapis/multipkgs/subpkg1/types.pb.pothos.ts",
   },
@@ -14254,8 +14304,11 @@ exports[`'testapis.multipkgs.subpkg1' > generates files by plugin 'with partial 
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
-import { SubpkgMessage } from "@testapis/ts-proto/testapis/multipkgs/subpkg1/types";
+import { EnumRef, InputObjectRef } from "@pothos/core";
+import {
+  SubpkgEnum,
+  SubpkgMessage,
+} from "@testapis/ts-proto/testapis/multipkgs/subpkg1/types";
 import { builder } from "../../../builder";
 
 export const SubpkgMessage$Ref = builder.objectRef<SubpkgMessage>(
@@ -14328,19 +14381,22 @@ export const SubpkgMessagePartialInput$Ref: InputObjectRef<
   },
 });
 
-export const SubpkgEnum$Ref = builder.enumType("SubpkgEnum", {
-  values: {
-    FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
-    BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
-  } as const,
-  extensions: {
-    protobufEnum: {
-      name: "SubpkgEnum",
-      fullName: "testapis.multipkgs.subpkg1.SubpkgEnum",
-      package: "testapis.multipkgs.subpkg1",
+export const SubpkgEnum$Ref: EnumRef<SubpkgEnum, SubpkgEnum> = builder.enumType(
+  "SubpkgEnum",
+  {
+    values: {
+      FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
+      BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
+    } as const,
+    extensions: {
+      protobufEnum: {
+        name: "SubpkgEnum",
+        fullName: "testapis.multipkgs.subpkg1.SubpkgEnum",
+        package: "testapis.multipkgs.subpkg1",
+      },
     },
   },
-});
+);
 ",
     "name": "testapis/multipkgs/subpkg1/types.pb.pothos.ts",
   },
@@ -14355,9 +14411,9 @@ exports[`'testapis.multipkgs.subpkg1' > generates files by plugin 'without impor
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import { builder } from "../../../builder";
-import { SubpkgMessage } from "./testapis/multipkgs/subpkg1/types";
+import { SubpkgEnum, SubpkgMessage } from "./testapis/multipkgs/subpkg1/types";
 
 export const SubpkgMessage$Ref = builder.objectRef<SubpkgMessage>(
   "SubpkgMessage",
@@ -14404,19 +14460,22 @@ export const SubpkgMessageInput$Ref: InputObjectRef<SubpkgMessageInput$Shape> =
     },
   });
 
-export const SubpkgEnum$Ref = builder.enumType("SubpkgEnum", {
-  values: {
-    FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
-    BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
-  } as const,
-  extensions: {
-    protobufEnum: {
-      name: "SubpkgEnum",
-      fullName: "testapis.multipkgs.subpkg1.SubpkgEnum",
-      package: "testapis.multipkgs.subpkg1",
+export const SubpkgEnum$Ref: EnumRef<SubpkgEnum, SubpkgEnum> = builder.enumType(
+  "SubpkgEnum",
+  {
+    values: {
+      FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
+      BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
+    } as const,
+    extensions: {
+      protobufEnum: {
+        name: "SubpkgEnum",
+        fullName: "testapis.multipkgs.subpkg1.SubpkgEnum",
+        package: "testapis.multipkgs.subpkg1",
+      },
     },
   },
-});
+);
 ",
     "name": "testapis/multipkgs/subpkg1/types.pb.pothos.ts",
   },
@@ -15138,24 +15197,26 @@ export const ParentMessageNestedMessageInput$Ref: InputObjectRef<
 
 /* eslint-disable */
 
+import { EnumRef } from "@pothos/core";
+import { ParentMessage_NestedEnum } from "@testapis/ts-proto/testapis/nested/nested";
 import { builder } from "../../builder";
 
-export const ParentMessageNestedEnum$Ref = builder.enumType(
-  "ParentMessageNestedEnum",
-  {
-    values: {
-      FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
-      BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "NestedEnum",
-        fullName: "testapis.nested.ParentMessage.NestedEnum",
-        package: "testapis.nested",
-      },
+export const ParentMessageNestedEnum$Ref: EnumRef<
+  ParentMessage_NestedEnum,
+  ParentMessage_NestedEnum
+> = builder.enumType("ParentMessageNestedEnum", {
+  values: {
+    FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
+    BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "NestedEnum",
+      fullName: "testapis.nested.ParentMessage.NestedEnum",
+      package: "testapis.nested",
     },
   },
-);
+});
 ",
     "name": "testapis/nested/ParentMessageNestedEnum.pothos.ts",
   },
@@ -15170,7 +15231,7 @@ exports[`'testapis.nested' > generates files by plugin 'with import prefix' 1`] 
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import {
   ParentMessage,
   ParentMessage_NestedEnum,
@@ -15330,22 +15391,22 @@ export const ParentMessageNestedMessageInput$Ref: InputObjectRef<
   },
 });
 
-export const ParentMessageNestedEnum$Ref = builder.enumType(
-  "ParentMessageNestedEnum",
-  {
-    values: {
-      FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
-      BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "NestedEnum",
-        fullName: "testapis.nested.ParentMessage.NestedEnum",
-        package: "testapis.nested",
-      },
+export const ParentMessageNestedEnum$Ref: EnumRef<
+  ParentMessage_NestedEnum,
+  ParentMessage_NestedEnum
+> = builder.enumType("ParentMessageNestedEnum", {
+  values: {
+    FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
+    BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "NestedEnum",
+      fullName: "testapis.nested.ParentMessage.NestedEnum",
+      package: "testapis.nested",
     },
   },
-);
+});
 ",
     "name": "testapis/nested/nested.pb.pothos.ts",
   },
@@ -15360,7 +15421,7 @@ exports[`'testapis.nested' > generates files by plugin 'with partial inputs' 1`]
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import {
   ParentMessage,
   ParentMessage_NestedEnum,
@@ -15594,22 +15655,22 @@ export const ParentMessageNestedMessagePartialInput$Ref: InputObjectRef<
   },
 });
 
-export const ParentMessageNestedEnum$Ref = builder.enumType(
-  "ParentMessageNestedEnum",
-  {
-    values: {
-      FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
-      BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "NestedEnum",
-        fullName: "testapis.nested.ParentMessage.NestedEnum",
-        package: "testapis.nested",
-      },
+export const ParentMessageNestedEnum$Ref: EnumRef<
+  ParentMessage_NestedEnum,
+  ParentMessage_NestedEnum
+> = builder.enumType("ParentMessageNestedEnum", {
+  values: {
+    FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
+    BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "NestedEnum",
+      fullName: "testapis.nested.ParentMessage.NestedEnum",
+      package: "testapis.nested",
     },
   },
-);
+});
 ",
     "name": "testapis/nested/nested.pb.pothos.ts",
   },
@@ -15624,7 +15685,7 @@ exports[`'testapis.nested' > generates files by plugin 'without import prefix' 1
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import { builder } from "../../builder";
 import {
   ParentMessage,
@@ -15784,22 +15845,22 @@ export const ParentMessageNestedMessageInput$Ref: InputObjectRef<
   },
 });
 
-export const ParentMessageNestedEnum$Ref = builder.enumType(
-  "ParentMessageNestedEnum",
-  {
-    values: {
-      FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
-      BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "NestedEnum",
-        fullName: "testapis.nested.ParentMessage.NestedEnum",
-        package: "testapis.nested",
-      },
+export const ParentMessageNestedEnum$Ref: EnumRef<
+  ParentMessage_NestedEnum,
+  ParentMessage_NestedEnum
+> = builder.enumType("ParentMessageNestedEnum", {
+  values: {
+    FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
+    BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "NestedEnum",
+      fullName: "testapis.nested.ParentMessage.NestedEnum",
+      package: "testapis.nested",
     },
   },
-);
+});
 ",
     "name": "testapis/nested/nested.pb.pothos.ts",
   },
@@ -21280,109 +21341,6 @@ builder.objectType(Message$Ref, {
         },
       },
     }),
-    timestamps: t.expose("timestamps", {
-      type: ["DateTime"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "timestamps",
-          typeFullName: "google.protobuf.Timestamp",
-        },
-      },
-    }),
-    int32Values: t.expose("int32Values", {
-      type: ["Int"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "int32_values",
-          typeFullName: "google.protobuf.Int32Value",
-        },
-      },
-    }),
-    int64Values: t.expose("int64Values", {
-      type: ["String"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "int64_values",
-          typeFullName: "google.protobuf.Int64Value",
-        },
-      },
-    }),
-    uint32Values: t.expose("uint32Values", {
-      type: ["Int"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "uint32_values",
-          typeFullName: "google.protobuf.UInt32Value",
-        },
-      },
-    }),
-    uint64Values: t.expose("uint64Values", {
-      type: ["String"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "uint64_values",
-          typeFullName: "google.protobuf.UInt64Value",
-        },
-      },
-    }),
-    floatValues: t.expose("floatValues", {
-      type: ["Float"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "float_values",
-          typeFullName: "google.protobuf.FloatValue",
-        },
-      },
-    }),
-    doubleValues: t.expose("doubleValues", {
-      type: ["Float"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "double_values",
-          typeFullName: "google.protobuf.DoubleValue",
-        },
-      },
-    }),
-    boolValues: t.expose("boolValues", {
-      type: ["Boolean"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "bool_values",
-          typeFullName: "google.protobuf.BoolValue",
-        },
-      },
-    }),
-    stringValues: t.expose("stringValues", {
-      type: ["String"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "string_values",
-          typeFullName: "google.protobuf.StringValue",
-        },
-      },
-    }),
-    bytesValues: t.field({
-      type: ["Byte"],
-      nullable: { list: true, items: false },
-      resolve: (source) => {
-        return source.bytesValues.map((v) => Buffer.from(v));
-      },
-      extensions: {
-        protobufField: {
-          name: "bytes_values",
-          typeFullName: "google.protobuf.BytesValue",
-        },
-      },
-    }),
     requiredTimestamp: t.field({
       type: "DateTime",
       nullable: false,
@@ -21434,16 +21392,6 @@ export type MessageInput$Shape = {
   boolValue?: Message["boolValue"] | null;
   stringValue?: Message["stringValue"] | null;
   bytesValue?: Message["bytesValue"] | null;
-  timestamps?: Message["timestamps"] | null;
-  int32Values?: Message["int32Values"] | null;
-  int64Values?: Message["int64Values"] | null;
-  uint32Values?: Message["uint32Values"] | null;
-  uint64Values?: Message["uint64Values"] | null;
-  floatValues?: Message["floatValues"] | null;
-  doubleValues?: Message["doubleValues"] | null;
-  boolValues?: Message["boolValues"] | null;
-  stringValues?: Message["stringValues"] | null;
-  bytesValues?: Message["bytesValues"] | null;
   requiredTimestamp: NonNullable<Message["requiredTimestamp"]>;
 };
 
@@ -21546,106 +21494,6 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         extensions: {
           protobufField: {
             name: "bytes_value",
-            typeFullName: "google.protobuf.BytesValue",
-          },
-        },
-      }),
-      timestamps: t.field({
-        type: ["DateTime"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "timestamps",
-            typeFullName: "google.protobuf.Timestamp",
-          },
-        },
-      }),
-      int32Values: t.field({
-        type: ["Int"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "int32_values",
-            typeFullName: "google.protobuf.Int32Value",
-          },
-        },
-      }),
-      int64Values: t.field({
-        type: ["String"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "int64_values",
-            typeFullName: "google.protobuf.Int64Value",
-          },
-        },
-      }),
-      uint32Values: t.field({
-        type: ["Int"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "uint32_values",
-            typeFullName: "google.protobuf.UInt32Value",
-          },
-        },
-      }),
-      uint64Values: t.field({
-        type: ["String"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "uint64_values",
-            typeFullName: "google.protobuf.UInt64Value",
-          },
-        },
-      }),
-      floatValues: t.field({
-        type: ["Float"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "float_values",
-            typeFullName: "google.protobuf.FloatValue",
-          },
-        },
-      }),
-      doubleValues: t.field({
-        type: ["Float"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "double_values",
-            typeFullName: "google.protobuf.DoubleValue",
-          },
-        },
-      }),
-      boolValues: t.field({
-        type: ["Boolean"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "bool_values",
-            typeFullName: "google.protobuf.BoolValue",
-          },
-        },
-      }),
-      stringValues: t.field({
-        type: ["String"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "string_values",
-            typeFullName: "google.protobuf.StringValue",
-          },
-        },
-      }),
-      bytesValues: t.field({
-        type: ["Byte"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "bytes_values",
             typeFullName: "google.protobuf.BytesValue",
           },
         },
@@ -21797,109 +21645,6 @@ builder.objectType(Message$Ref, {
         },
       },
     }),
-    timestamps: t.expose("timestamps", {
-      type: ["DateTime"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "timestamps",
-          typeFullName: "google.protobuf.Timestamp",
-        },
-      },
-    }),
-    int32Values: t.expose("int32Values", {
-      type: ["Int"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "int32_values",
-          typeFullName: "google.protobuf.Int32Value",
-        },
-      },
-    }),
-    int64Values: t.expose("int64Values", {
-      type: ["String"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "int64_values",
-          typeFullName: "google.protobuf.Int64Value",
-        },
-      },
-    }),
-    uint32Values: t.expose("uint32Values", {
-      type: ["Int"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "uint32_values",
-          typeFullName: "google.protobuf.UInt32Value",
-        },
-      },
-    }),
-    uint64Values: t.expose("uint64Values", {
-      type: ["String"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "uint64_values",
-          typeFullName: "google.protobuf.UInt64Value",
-        },
-      },
-    }),
-    floatValues: t.expose("floatValues", {
-      type: ["Float"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "float_values",
-          typeFullName: "google.protobuf.FloatValue",
-        },
-      },
-    }),
-    doubleValues: t.expose("doubleValues", {
-      type: ["Float"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "double_values",
-          typeFullName: "google.protobuf.DoubleValue",
-        },
-      },
-    }),
-    boolValues: t.expose("boolValues", {
-      type: ["Boolean"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "bool_values",
-          typeFullName: "google.protobuf.BoolValue",
-        },
-      },
-    }),
-    stringValues: t.expose("stringValues", {
-      type: ["String"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "string_values",
-          typeFullName: "google.protobuf.StringValue",
-        },
-      },
-    }),
-    bytesValues: t.field({
-      type: ["Byte"],
-      nullable: { list: true, items: false },
-      resolve: (source) => {
-        return source.bytesValues.map((v) => Buffer.from(v));
-      },
-      extensions: {
-        protobufField: {
-          name: "bytes_values",
-          typeFullName: "google.protobuf.BytesValue",
-        },
-      },
-    }),
     requiredTimestamp: t.field({
       type: "DateTime",
       nullable: false,
@@ -21939,16 +21684,6 @@ export type MessageInput$Shape = {
   boolValue?: Message["boolValue"] | null;
   stringValue?: Message["stringValue"] | null;
   bytesValue?: Message["bytesValue"] | null;
-  timestamps?: Message["timestamps"] | null;
-  int32Values?: Message["int32Values"] | null;
-  int64Values?: Message["int64Values"] | null;
-  uint32Values?: Message["uint32Values"] | null;
-  uint64Values?: Message["uint64Values"] | null;
-  floatValues?: Message["floatValues"] | null;
-  doubleValues?: Message["doubleValues"] | null;
-  boolValues?: Message["boolValues"] | null;
-  stringValues?: Message["stringValues"] | null;
-  bytesValues?: Message["bytesValues"] | null;
   requiredTimestamp: NonNullable<Message["requiredTimestamp"]>;
 };
 
@@ -22051,106 +21786,6 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         extensions: {
           protobufField: {
             name: "bytes_value",
-            typeFullName: "google.protobuf.BytesValue",
-          },
-        },
-      }),
-      timestamps: t.field({
-        type: ["DateTime"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "timestamps",
-            typeFullName: "google.protobuf.Timestamp",
-          },
-        },
-      }),
-      int32Values: t.field({
-        type: ["Int"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "int32_values",
-            typeFullName: "google.protobuf.Int32Value",
-          },
-        },
-      }),
-      int64Values: t.field({
-        type: ["String"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "int64_values",
-            typeFullName: "google.protobuf.Int64Value",
-          },
-        },
-      }),
-      uint32Values: t.field({
-        type: ["Int"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "uint32_values",
-            typeFullName: "google.protobuf.UInt32Value",
-          },
-        },
-      }),
-      uint64Values: t.field({
-        type: ["String"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "uint64_values",
-            typeFullName: "google.protobuf.UInt64Value",
-          },
-        },
-      }),
-      floatValues: t.field({
-        type: ["Float"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "float_values",
-            typeFullName: "google.protobuf.FloatValue",
-          },
-        },
-      }),
-      doubleValues: t.field({
-        type: ["Float"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "double_values",
-            typeFullName: "google.protobuf.DoubleValue",
-          },
-        },
-      }),
-      boolValues: t.field({
-        type: ["Boolean"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "bool_values",
-            typeFullName: "google.protobuf.BoolValue",
-          },
-        },
-      }),
-      stringValues: t.field({
-        type: ["String"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "string_values",
-            typeFullName: "google.protobuf.StringValue",
-          },
-        },
-      }),
-      bytesValues: t.field({
-        type: ["Byte"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "bytes_values",
             typeFullName: "google.protobuf.BytesValue",
           },
         },
@@ -22302,109 +21937,6 @@ builder.objectType(Message$Ref, {
         },
       },
     }),
-    timestamps: t.expose("timestamps", {
-      type: ["DateTime"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "timestamps",
-          typeFullName: "google.protobuf.Timestamp",
-        },
-      },
-    }),
-    int32Values: t.expose("int32Values", {
-      type: ["Int"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "int32_values",
-          typeFullName: "google.protobuf.Int32Value",
-        },
-      },
-    }),
-    int64Values: t.expose("int64Values", {
-      type: ["String"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "int64_values",
-          typeFullName: "google.protobuf.Int64Value",
-        },
-      },
-    }),
-    uint32Values: t.expose("uint32Values", {
-      type: ["Int"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "uint32_values",
-          typeFullName: "google.protobuf.UInt32Value",
-        },
-      },
-    }),
-    uint64Values: t.expose("uint64Values", {
-      type: ["String"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "uint64_values",
-          typeFullName: "google.protobuf.UInt64Value",
-        },
-      },
-    }),
-    floatValues: t.expose("floatValues", {
-      type: ["Float"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "float_values",
-          typeFullName: "google.protobuf.FloatValue",
-        },
-      },
-    }),
-    doubleValues: t.expose("doubleValues", {
-      type: ["Float"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "double_values",
-          typeFullName: "google.protobuf.DoubleValue",
-        },
-      },
-    }),
-    boolValues: t.expose("boolValues", {
-      type: ["Boolean"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "bool_values",
-          typeFullName: "google.protobuf.BoolValue",
-        },
-      },
-    }),
-    stringValues: t.expose("stringValues", {
-      type: ["String"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "string_values",
-          typeFullName: "google.protobuf.StringValue",
-        },
-      },
-    }),
-    bytesValues: t.field({
-      type: ["Byte"],
-      nullable: { list: true, items: false },
-      resolve: (source) => {
-        return source.bytesValues.map((v) => Buffer.from(v));
-      },
-      extensions: {
-        protobufField: {
-          name: "bytes_values",
-          typeFullName: "google.protobuf.BytesValue",
-        },
-      },
-    }),
     requiredTimestamp: t.field({
       type: "DateTime",
       nullable: false,
@@ -22444,16 +21976,6 @@ export type MessageInput$Shape = {
   boolValue?: Message["boolValue"] | null;
   stringValue?: Message["stringValue"] | null;
   bytesValue?: Message["bytesValue"] | null;
-  timestamps?: Message["timestamps"] | null;
-  int32Values?: Message["int32Values"] | null;
-  int64Values?: Message["int64Values"] | null;
-  uint32Values?: Message["uint32Values"] | null;
-  uint64Values?: Message["uint64Values"] | null;
-  floatValues?: Message["floatValues"] | null;
-  doubleValues?: Message["doubleValues"] | null;
-  boolValues?: Message["boolValues"] | null;
-  stringValues?: Message["stringValues"] | null;
-  bytesValues?: Message["bytesValues"] | null;
   requiredTimestamp: NonNullable<Message["requiredTimestamp"]>;
 };
 
@@ -22560,106 +22082,6 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
           },
         },
       }),
-      timestamps: t.field({
-        type: ["DateTime"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "timestamps",
-            typeFullName: "google.protobuf.Timestamp",
-          },
-        },
-      }),
-      int32Values: t.field({
-        type: ["Int"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "int32_values",
-            typeFullName: "google.protobuf.Int32Value",
-          },
-        },
-      }),
-      int64Values: t.field({
-        type: ["String"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "int64_values",
-            typeFullName: "google.protobuf.Int64Value",
-          },
-        },
-      }),
-      uint32Values: t.field({
-        type: ["Int"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "uint32_values",
-            typeFullName: "google.protobuf.UInt32Value",
-          },
-        },
-      }),
-      uint64Values: t.field({
-        type: ["String"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "uint64_values",
-            typeFullName: "google.protobuf.UInt64Value",
-          },
-        },
-      }),
-      floatValues: t.field({
-        type: ["Float"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "float_values",
-            typeFullName: "google.protobuf.FloatValue",
-          },
-        },
-      }),
-      doubleValues: t.field({
-        type: ["Float"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "double_values",
-            typeFullName: "google.protobuf.DoubleValue",
-          },
-        },
-      }),
-      boolValues: t.field({
-        type: ["Boolean"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "bool_values",
-            typeFullName: "google.protobuf.BoolValue",
-          },
-        },
-      }),
-      stringValues: t.field({
-        type: ["String"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "string_values",
-            typeFullName: "google.protobuf.StringValue",
-          },
-        },
-      }),
-      bytesValues: t.field({
-        type: ["Byte"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "bytes_values",
-            typeFullName: "google.protobuf.BytesValue",
-          },
-        },
-      }),
       requiredTimestamp: t.field({
         type: "DateTime",
         required: true,
@@ -22692,16 +22114,6 @@ export type MessagePartialInput$Shape = {
   boolValue?: Message["boolValue"] | null;
   stringValue?: Message["stringValue"] | null;
   bytesValue?: Message["bytesValue"] | null;
-  timestamps?: Message["timestamps"] | null;
-  int32Values?: Message["int32Values"] | null;
-  int64Values?: Message["int64Values"] | null;
-  uint32Values?: Message["uint32Values"] | null;
-  uint64Values?: Message["uint64Values"] | null;
-  floatValues?: Message["floatValues"] | null;
-  doubleValues?: Message["doubleValues"] | null;
-  boolValues?: Message["boolValues"] | null;
-  stringValues?: Message["stringValues"] | null;
-  bytesValues?: Message["bytesValues"] | null;
   requiredTimestamp?: Message["requiredTimestamp"] | null;
 };
 
@@ -22806,106 +22218,6 @@ export const MessagePartialInput$Ref: InputObjectRef<
         extensions: {
           protobufField: {
             name: "bytes_value",
-            typeFullName: "google.protobuf.BytesValue",
-          },
-        },
-      }),
-      timestamps: t.field({
-        type: ["DateTime"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "timestamps",
-            typeFullName: "google.protobuf.Timestamp",
-          },
-        },
-      }),
-      int32Values: t.field({
-        type: ["Int"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "int32_values",
-            typeFullName: "google.protobuf.Int32Value",
-          },
-        },
-      }),
-      int64Values: t.field({
-        type: ["String"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "int64_values",
-            typeFullName: "google.protobuf.Int64Value",
-          },
-        },
-      }),
-      uint32Values: t.field({
-        type: ["Int"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "uint32_values",
-            typeFullName: "google.protobuf.UInt32Value",
-          },
-        },
-      }),
-      uint64Values: t.field({
-        type: ["String"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "uint64_values",
-            typeFullName: "google.protobuf.UInt64Value",
-          },
-        },
-      }),
-      floatValues: t.field({
-        type: ["Float"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "float_values",
-            typeFullName: "google.protobuf.FloatValue",
-          },
-        },
-      }),
-      doubleValues: t.field({
-        type: ["Float"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "double_values",
-            typeFullName: "google.protobuf.DoubleValue",
-          },
-        },
-      }),
-      boolValues: t.field({
-        type: ["Boolean"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "bool_values",
-            typeFullName: "google.protobuf.BoolValue",
-          },
-        },
-      }),
-      stringValues: t.field({
-        type: ["String"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "string_values",
-            typeFullName: "google.protobuf.StringValue",
-          },
-        },
-      }),
-      bytesValues: t.field({
-        type: ["Byte"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "bytes_values",
             typeFullName: "google.protobuf.BytesValue",
           },
         },
@@ -23057,109 +22369,6 @@ builder.objectType(Message$Ref, {
         },
       },
     }),
-    timestamps: t.expose("timestamps", {
-      type: ["DateTime"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "timestamps",
-          typeFullName: "google.protobuf.Timestamp",
-        },
-      },
-    }),
-    int32Values: t.expose("int32Values", {
-      type: ["Int"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "int32_values",
-          typeFullName: "google.protobuf.Int32Value",
-        },
-      },
-    }),
-    int64Values: t.expose("int64Values", {
-      type: ["String"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "int64_values",
-          typeFullName: "google.protobuf.Int64Value",
-        },
-      },
-    }),
-    uint32Values: t.expose("uint32Values", {
-      type: ["Int"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "uint32_values",
-          typeFullName: "google.protobuf.UInt32Value",
-        },
-      },
-    }),
-    uint64Values: t.expose("uint64Values", {
-      type: ["String"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "uint64_values",
-          typeFullName: "google.protobuf.UInt64Value",
-        },
-      },
-    }),
-    floatValues: t.expose("floatValues", {
-      type: ["Float"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "float_values",
-          typeFullName: "google.protobuf.FloatValue",
-        },
-      },
-    }),
-    doubleValues: t.expose("doubleValues", {
-      type: ["Float"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "double_values",
-          typeFullName: "google.protobuf.DoubleValue",
-        },
-      },
-    }),
-    boolValues: t.expose("boolValues", {
-      type: ["Boolean"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "bool_values",
-          typeFullName: "google.protobuf.BoolValue",
-        },
-      },
-    }),
-    stringValues: t.expose("stringValues", {
-      type: ["String"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "string_values",
-          typeFullName: "google.protobuf.StringValue",
-        },
-      },
-    }),
-    bytesValues: t.field({
-      type: ["Byte"],
-      nullable: { list: true, items: false },
-      resolve: (source) => {
-        return source.bytesValues.map((v) => Buffer.from(v));
-      },
-      extensions: {
-        protobufField: {
-          name: "bytes_values",
-          typeFullName: "google.protobuf.BytesValue",
-        },
-      },
-    }),
     requiredTimestamp: t.field({
       type: "DateTime",
       nullable: false,
@@ -23199,16 +22408,6 @@ export type MessageInput$Shape = {
   boolValue?: Message["boolValue"] | null;
   stringValue?: Message["stringValue"] | null;
   bytesValue?: Message["bytesValue"] | null;
-  timestamps?: Message["timestamps"] | null;
-  int32Values?: Message["int32Values"] | null;
-  int64Values?: Message["int64Values"] | null;
-  uint32Values?: Message["uint32Values"] | null;
-  uint64Values?: Message["uint64Values"] | null;
-  floatValues?: Message["floatValues"] | null;
-  doubleValues?: Message["doubleValues"] | null;
-  boolValues?: Message["boolValues"] | null;
-  stringValues?: Message["stringValues"] | null;
-  bytesValues?: Message["bytesValues"] | null;
   requiredTimestamp: NonNullable<Message["requiredTimestamp"]>;
 };
 
@@ -23311,106 +22510,6 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         extensions: {
           protobufField: {
             name: "bytes_value",
-            typeFullName: "google.protobuf.BytesValue",
-          },
-        },
-      }),
-      timestamps: t.field({
-        type: ["DateTime"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "timestamps",
-            typeFullName: "google.protobuf.Timestamp",
-          },
-        },
-      }),
-      int32Values: t.field({
-        type: ["Int"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "int32_values",
-            typeFullName: "google.protobuf.Int32Value",
-          },
-        },
-      }),
-      int64Values: t.field({
-        type: ["String"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "int64_values",
-            typeFullName: "google.protobuf.Int64Value",
-          },
-        },
-      }),
-      uint32Values: t.field({
-        type: ["Int"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "uint32_values",
-            typeFullName: "google.protobuf.UInt32Value",
-          },
-        },
-      }),
-      uint64Values: t.field({
-        type: ["String"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "uint64_values",
-            typeFullName: "google.protobuf.UInt64Value",
-          },
-        },
-      }),
-      floatValues: t.field({
-        type: ["Float"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "float_values",
-            typeFullName: "google.protobuf.FloatValue",
-          },
-        },
-      }),
-      doubleValues: t.field({
-        type: ["Float"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "double_values",
-            typeFullName: "google.protobuf.DoubleValue",
-          },
-        },
-      }),
-      boolValues: t.field({
-        type: ["Boolean"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "bool_values",
-            typeFullName: "google.protobuf.BoolValue",
-          },
-        },
-      }),
-      stringValues: t.field({
-        type: ["String"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "string_values",
-            typeFullName: "google.protobuf.StringValue",
-          },
-        },
-      }),
-      bytesValues: t.field({
-        type: ["Byte"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "bytes_values",
             typeFullName: "google.protobuf.BytesValue",
           },
         },
@@ -24832,9 +23931,14 @@ export const NotDeprecatedMessageDeprecatedOneof$Ref = builder.unionType(
 
 /* eslint-disable */
 
+import { EnumRef } from "@pothos/core";
+import { NotDeprecatedEnum } from "@testapis/protobuf-es/testapis/deprecation/deprecation_pb";
 import { builder } from "../../builder";
 
-export const NotDeprecatedEnum$Ref = builder.enumType("NotDeprecatedEnum", {
+export const NotDeprecatedEnum$Ref: EnumRef<
+  NotDeprecatedEnum,
+  NotDeprecatedEnum
+> = builder.enumType("NotDeprecatedEnum", {
   values: {
     NOT_DEPRECATED_FOO: {
       value: 1,
@@ -24869,32 +23973,35 @@ export const NotDeprecatedEnum$Ref = builder.enumType("NotDeprecatedEnum", {
 
 /* eslint-disable */
 
+import { EnumRef } from "@pothos/core";
+import { DeprecatedEnum } from "@testapis/protobuf-es/testapis/deprecation/deprecation_pb";
 import { builder } from "../../builder";
 
-export const DeprecatedEnum$Ref = builder.enumType("DeprecatedEnum", {
-  values: {
-    DEPRECATED_BAZ: {
-      deprecationReason:
-        "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
-      value: 1,
-      extensions: { protobufEnumValue: { name: "DEPRECATED_BAZ" } },
+export const DeprecatedEnum$Ref: EnumRef<DeprecatedEnum, DeprecatedEnum> =
+  builder.enumType("DeprecatedEnum", {
+    values: {
+      DEPRECATED_BAZ: {
+        deprecationReason:
+          "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
+        value: 1,
+        extensions: { protobufEnumValue: { name: "DEPRECATED_BAZ" } },
+      },
+      DEPRECATED_QUX: {
+        deprecationReason:
+          "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
+        value: 2,
+        extensions: { protobufEnumValue: { name: "DEPRECATED_QUX" } },
+      },
+    } as const,
+    extensions: {
+      protobufEnum: {
+        name: "DeprecatedEnum",
+        fullName: "testapis.deprecation.DeprecatedEnum",
+        package: "testapis.deprecation",
+        options: { deprecated: true },
+      },
     },
-    DEPRECATED_QUX: {
-      deprecationReason:
-        "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
-      value: 2,
-      extensions: { protobufEnumValue: { name: "DEPRECATED_QUX" } },
-    },
-  } as const,
-  extensions: {
-    protobufEnum: {
-      name: "DeprecatedEnum",
-      fullName: "testapis.deprecation.DeprecatedEnum",
-      package: "testapis.deprecation",
-      options: { deprecated: true },
-    },
-  },
-});
+  });
 ",
     "name": "testapis/deprecation/DeprecatedEnum.pothos.ts",
   },
@@ -25095,9 +24202,14 @@ export const DeprecatedFileMessageInnerMessageInput$Ref: InputObjectRef<
 
 /* eslint-disable */
 
+import { EnumRef } from "@pothos/core";
+import { DeprecatedFileEnum } from "@testapis/protobuf-es/testapis/deprecation/file_deprecation_pb";
 import { builder } from "../../builder";
 
-export const DeprecatedFileEnum$Ref = builder.enumType("DeprecatedFileEnum", {
+export const DeprecatedFileEnum$Ref: EnumRef<
+  DeprecatedFileEnum,
+  DeprecatedFileEnum
+> = builder.enumType("DeprecatedFileEnum", {
   values: {
     DEPRECATED_FILE_FOO: {
       deprecationReason:
@@ -25134,7 +24246,7 @@ exports[`protobuf-es > 'testapis.deprecation' > generates files by plugin 'with 
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import {
   DeprecatedEnum,
   DeprecatedMessage,
@@ -25606,7 +24718,10 @@ export const NotDeprecatedMessageDeprecatedOneof$Ref = builder.unionType(
   },
 );
 
-export const NotDeprecatedEnum$Ref = builder.enumType("NotDeprecatedEnum", {
+export const NotDeprecatedEnum$Ref: EnumRef<
+  NotDeprecatedEnum,
+  NotDeprecatedEnum
+> = builder.enumType("NotDeprecatedEnum", {
   values: {
     NOT_DEPRECATED_FOO: {
       value: 1,
@@ -25633,30 +24748,31 @@ export const NotDeprecatedEnum$Ref = builder.enumType("NotDeprecatedEnum", {
   },
 });
 
-export const DeprecatedEnum$Ref = builder.enumType("DeprecatedEnum", {
-  values: {
-    DEPRECATED_BAZ: {
-      deprecationReason:
-        "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
-      value: 1,
-      extensions: { protobufEnumValue: { name: "DEPRECATED_BAZ" } },
+export const DeprecatedEnum$Ref: EnumRef<DeprecatedEnum, DeprecatedEnum> =
+  builder.enumType("DeprecatedEnum", {
+    values: {
+      DEPRECATED_BAZ: {
+        deprecationReason:
+          "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
+        value: 1,
+        extensions: { protobufEnumValue: { name: "DEPRECATED_BAZ" } },
+      },
+      DEPRECATED_QUX: {
+        deprecationReason:
+          "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
+        value: 2,
+        extensions: { protobufEnumValue: { name: "DEPRECATED_QUX" } },
+      },
+    } as const,
+    extensions: {
+      protobufEnum: {
+        name: "DeprecatedEnum",
+        fullName: "testapis.deprecation.DeprecatedEnum",
+        package: "testapis.deprecation",
+        options: { deprecated: true },
+      },
     },
-    DEPRECATED_QUX: {
-      deprecationReason:
-        "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
-      value: 2,
-      extensions: { protobufEnumValue: { name: "DEPRECATED_QUX" } },
-    },
-  } as const,
-  extensions: {
-    protobufEnum: {
-      name: "DeprecatedEnum",
-      fullName: "testapis.deprecation.DeprecatedEnum",
-      package: "testapis.deprecation",
-      options: { deprecated: true },
-    },
-  },
-});
+  });
 ",
     "name": "testapis/deprecation/deprecation.pb.pothos.ts",
   },
@@ -25666,7 +24782,7 @@ export const DeprecatedEnum$Ref = builder.enumType("DeprecatedEnum", {
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import {
   DeprecatedFileEnum,
   DeprecatedFileMessage,
@@ -25814,7 +24930,10 @@ export const DeprecatedFileMessageInnerMessageInput$Ref: InputObjectRef<
   },
 });
 
-export const DeprecatedFileEnum$Ref = builder.enumType("DeprecatedFileEnum", {
+export const DeprecatedFileEnum$Ref: EnumRef<
+  DeprecatedFileEnum,
+  DeprecatedFileEnum
+> = builder.enumType("DeprecatedFileEnum", {
   values: {
     DEPRECATED_FILE_FOO: {
       deprecationReason:
@@ -25851,7 +24970,7 @@ exports[`protobuf-es > 'testapis.deprecation' > generates files by plugin 'with 
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import {
   DeprecatedEnum,
   DeprecatedMessage,
@@ -26544,7 +25663,10 @@ export const NotDeprecatedMessageDeprecatedOneof$Ref = builder.unionType(
   },
 );
 
-export const NotDeprecatedEnum$Ref = builder.enumType("NotDeprecatedEnum", {
+export const NotDeprecatedEnum$Ref: EnumRef<
+  NotDeprecatedEnum,
+  NotDeprecatedEnum
+> = builder.enumType("NotDeprecatedEnum", {
   values: {
     NOT_DEPRECATED_FOO: {
       value: 1,
@@ -26571,30 +25693,31 @@ export const NotDeprecatedEnum$Ref = builder.enumType("NotDeprecatedEnum", {
   },
 });
 
-export const DeprecatedEnum$Ref = builder.enumType("DeprecatedEnum", {
-  values: {
-    DEPRECATED_BAZ: {
-      deprecationReason:
-        "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
-      value: 1,
-      extensions: { protobufEnumValue: { name: "DEPRECATED_BAZ" } },
+export const DeprecatedEnum$Ref: EnumRef<DeprecatedEnum, DeprecatedEnum> =
+  builder.enumType("DeprecatedEnum", {
+    values: {
+      DEPRECATED_BAZ: {
+        deprecationReason:
+          "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
+        value: 1,
+        extensions: { protobufEnumValue: { name: "DEPRECATED_BAZ" } },
+      },
+      DEPRECATED_QUX: {
+        deprecationReason:
+          "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
+        value: 2,
+        extensions: { protobufEnumValue: { name: "DEPRECATED_QUX" } },
+      },
+    } as const,
+    extensions: {
+      protobufEnum: {
+        name: "DeprecatedEnum",
+        fullName: "testapis.deprecation.DeprecatedEnum",
+        package: "testapis.deprecation",
+        options: { deprecated: true },
+      },
     },
-    DEPRECATED_QUX: {
-      deprecationReason:
-        "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
-      value: 2,
-      extensions: { protobufEnumValue: { name: "DEPRECATED_QUX" } },
-    },
-  } as const,
-  extensions: {
-    protobufEnum: {
-      name: "DeprecatedEnum",
-      fullName: "testapis.deprecation.DeprecatedEnum",
-      package: "testapis.deprecation",
-      options: { deprecated: true },
-    },
-  },
-});
+  });
 ",
     "name": "testapis/deprecation/deprecation.pb.pothos.ts",
   },
@@ -26604,7 +25727,7 @@ export const DeprecatedEnum$Ref = builder.enumType("DeprecatedEnum", {
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import {
   DeprecatedFileEnum,
   DeprecatedFileMessage,
@@ -26819,7 +25942,10 @@ export const DeprecatedFileMessageInnerMessagePartialInput$Ref: InputObjectRef<
   },
 });
 
-export const DeprecatedFileEnum$Ref = builder.enumType("DeprecatedFileEnum", {
+export const DeprecatedFileEnum$Ref: EnumRef<
+  DeprecatedFileEnum,
+  DeprecatedFileEnum
+> = builder.enumType("DeprecatedFileEnum", {
   values: {
     DEPRECATED_FILE_FOO: {
       deprecationReason:
@@ -26856,7 +25982,7 @@ exports[`protobuf-es > 'testapis.deprecation' > generates files by plugin 'witho
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import { builder } from "../../builder";
 import {
   DeprecatedEnum,
@@ -27328,7 +26454,10 @@ export const NotDeprecatedMessageDeprecatedOneof$Ref = builder.unionType(
   },
 );
 
-export const NotDeprecatedEnum$Ref = builder.enumType("NotDeprecatedEnum", {
+export const NotDeprecatedEnum$Ref: EnumRef<
+  NotDeprecatedEnum,
+  NotDeprecatedEnum
+> = builder.enumType("NotDeprecatedEnum", {
   values: {
     NOT_DEPRECATED_FOO: {
       value: 1,
@@ -27355,30 +26484,31 @@ export const NotDeprecatedEnum$Ref = builder.enumType("NotDeprecatedEnum", {
   },
 });
 
-export const DeprecatedEnum$Ref = builder.enumType("DeprecatedEnum", {
-  values: {
-    DEPRECATED_BAZ: {
-      deprecationReason:
-        "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
-      value: 1,
-      extensions: { protobufEnumValue: { name: "DEPRECATED_BAZ" } },
+export const DeprecatedEnum$Ref: EnumRef<DeprecatedEnum, DeprecatedEnum> =
+  builder.enumType("DeprecatedEnum", {
+    values: {
+      DEPRECATED_BAZ: {
+        deprecationReason:
+          "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
+        value: 1,
+        extensions: { protobufEnumValue: { name: "DEPRECATED_BAZ" } },
+      },
+      DEPRECATED_QUX: {
+        deprecationReason:
+          "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
+        value: 2,
+        extensions: { protobufEnumValue: { name: "DEPRECATED_QUX" } },
+      },
+    } as const,
+    extensions: {
+      protobufEnum: {
+        name: "DeprecatedEnum",
+        fullName: "testapis.deprecation.DeprecatedEnum",
+        package: "testapis.deprecation",
+        options: { deprecated: true },
+      },
     },
-    DEPRECATED_QUX: {
-      deprecationReason:
-        "testapis.deprecation.DeprecatedEnum is mark as deprecated in a *.proto file.",
-      value: 2,
-      extensions: { protobufEnumValue: { name: "DEPRECATED_QUX" } },
-    },
-  } as const,
-  extensions: {
-    protobufEnum: {
-      name: "DeprecatedEnum",
-      fullName: "testapis.deprecation.DeprecatedEnum",
-      package: "testapis.deprecation",
-      options: { deprecated: true },
-    },
-  },
-});
+  });
 ",
     "name": "testapis/deprecation/deprecation.pb.pothos.ts",
   },
@@ -27388,7 +26518,7 @@ export const DeprecatedEnum$Ref = builder.enumType("DeprecatedEnum", {
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import { builder } from "../../builder";
 import {
   DeprecatedFileEnum,
@@ -27536,7 +26666,10 @@ export const DeprecatedFileMessageInnerMessageInput$Ref: InputObjectRef<
   },
 });
 
-export const DeprecatedFileEnum$Ref = builder.enumType("DeprecatedFileEnum", {
+export const DeprecatedFileEnum$Ref: EnumRef<
+  DeprecatedFileEnum,
+  DeprecatedFileEnum
+> = builder.enumType("DeprecatedFileEnum", {
   values: {
     DEPRECATED_FILE_FOO: {
       deprecationReason:
@@ -29644,9 +28777,11 @@ export const MessageWithEnumsInput$Ref: InputObjectRef<
 
 /* eslint-disable */
 
+import { EnumRef } from "@pothos/core";
+import { MyEnum } from "@testapis/protobuf-es/testapis/enums/enums_pb";
 import { builder } from "../../builder";
 
-export const MyEnum$Ref = builder.enumType("MyEnum", {
+export const MyEnum$Ref: EnumRef<MyEnum, MyEnum> = builder.enumType("MyEnum", {
   values: {
     FOO: {
       value: 1,
@@ -29679,40 +28814,42 @@ export const MyEnum$Ref = builder.enumType("MyEnum", {
 
 /* eslint-disable */
 
+import { EnumRef } from "@pothos/core";
+import { MyEnumWithoutUnspecified } from "@testapis/protobuf-es/testapis/enums/enums_pb";
 import { builder } from "../../builder";
 
-export const MyEnumWithoutUnspecified$Ref = builder.enumType(
-  "MyEnumWithoutUnspecified",
-  {
-    values: {
-      FOO: {
-        value: 0,
-        extensions: {
-          protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_FOO" },
-        },
-      },
-      BAR: {
-        value: 1,
-        extensions: {
-          protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAR" },
-        },
-      },
-      BAZ: {
-        value: 2,
-        extensions: {
-          protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAZ" },
-        },
-      },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "MyEnumWithoutUnspecified",
-        fullName: "testapi.enums.MyEnumWithoutUnspecified",
-        package: "testapi.enums",
+export const MyEnumWithoutUnspecified$Ref: EnumRef<
+  MyEnumWithoutUnspecified,
+  MyEnumWithoutUnspecified
+> = builder.enumType("MyEnumWithoutUnspecified", {
+  values: {
+    FOO: {
+      value: 0,
+      extensions: {
+        protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_FOO" },
       },
     },
+    BAR: {
+      value: 1,
+      extensions: {
+        protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAR" },
+      },
+    },
+    BAZ: {
+      value: 2,
+      extensions: {
+        protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAZ" },
+      },
+    },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "MyEnumWithoutUnspecified",
+      fullName: "testapi.enums.MyEnumWithoutUnspecified",
+      package: "testapi.enums",
+    },
   },
-);
+});
 ",
     "name": "testapis/enums/MyEnumWithoutUnspecified.pothos.ts",
   },
@@ -29727,10 +28864,11 @@ exports[`protobuf-es > 'testapis.enums' > generates files by plugin 'with import
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import {
   MessageWithEnums,
   MyEnum,
+  MyEnumWithoutUnspecified,
 } from "@testapis/protobuf-es/testapis/enums/enums_pb";
 import { builder } from "../../builder";
 
@@ -30011,7 +29149,7 @@ export const MessageWithEnumsInput$Ref: InputObjectRef<
     },
   });
 
-export const MyEnum$Ref = builder.enumType("MyEnum", {
+export const MyEnum$Ref: EnumRef<MyEnum, MyEnum> = builder.enumType("MyEnum", {
   values: {
     FOO: {
       value: 1,
@@ -30036,38 +29174,38 @@ export const MyEnum$Ref = builder.enumType("MyEnum", {
   },
 });
 
-export const MyEnumWithoutUnspecified$Ref = builder.enumType(
-  "MyEnumWithoutUnspecified",
-  {
-    values: {
-      FOO: {
-        value: 0,
-        extensions: {
-          protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_FOO" },
-        },
-      },
-      BAR: {
-        value: 1,
-        extensions: {
-          protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAR" },
-        },
-      },
-      BAZ: {
-        value: 2,
-        extensions: {
-          protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAZ" },
-        },
-      },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "MyEnumWithoutUnspecified",
-        fullName: "testapi.enums.MyEnumWithoutUnspecified",
-        package: "testapi.enums",
+export const MyEnumWithoutUnspecified$Ref: EnumRef<
+  MyEnumWithoutUnspecified,
+  MyEnumWithoutUnspecified
+> = builder.enumType("MyEnumWithoutUnspecified", {
+  values: {
+    FOO: {
+      value: 0,
+      extensions: {
+        protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_FOO" },
       },
     },
+    BAR: {
+      value: 1,
+      extensions: {
+        protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAR" },
+      },
+    },
+    BAZ: {
+      value: 2,
+      extensions: {
+        protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAZ" },
+      },
+    },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "MyEnumWithoutUnspecified",
+      fullName: "testapi.enums.MyEnumWithoutUnspecified",
+      package: "testapi.enums",
+    },
   },
-);
+});
 ",
     "name": "testapis/enums/enums.pb.pothos.ts",
   },
@@ -30082,10 +29220,11 @@ exports[`protobuf-es > 'testapis.enums' > generates files by plugin 'with partia
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import {
   MessageWithEnums,
   MyEnum,
+  MyEnumWithoutUnspecified,
 } from "@testapis/protobuf-es/testapis/enums/enums_pb";
 import { builder } from "../../builder";
 
@@ -30489,7 +29628,7 @@ export const MessageWithEnumsPartialInput$Ref: InputObjectRef<
   },
 });
 
-export const MyEnum$Ref = builder.enumType("MyEnum", {
+export const MyEnum$Ref: EnumRef<MyEnum, MyEnum> = builder.enumType("MyEnum", {
   values: {
     FOO: {
       value: 1,
@@ -30514,38 +29653,38 @@ export const MyEnum$Ref = builder.enumType("MyEnum", {
   },
 });
 
-export const MyEnumWithoutUnspecified$Ref = builder.enumType(
-  "MyEnumWithoutUnspecified",
-  {
-    values: {
-      FOO: {
-        value: 0,
-        extensions: {
-          protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_FOO" },
-        },
-      },
-      BAR: {
-        value: 1,
-        extensions: {
-          protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAR" },
-        },
-      },
-      BAZ: {
-        value: 2,
-        extensions: {
-          protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAZ" },
-        },
-      },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "MyEnumWithoutUnspecified",
-        fullName: "testapi.enums.MyEnumWithoutUnspecified",
-        package: "testapi.enums",
+export const MyEnumWithoutUnspecified$Ref: EnumRef<
+  MyEnumWithoutUnspecified,
+  MyEnumWithoutUnspecified
+> = builder.enumType("MyEnumWithoutUnspecified", {
+  values: {
+    FOO: {
+      value: 0,
+      extensions: {
+        protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_FOO" },
       },
     },
+    BAR: {
+      value: 1,
+      extensions: {
+        protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAR" },
+      },
+    },
+    BAZ: {
+      value: 2,
+      extensions: {
+        protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAZ" },
+      },
+    },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "MyEnumWithoutUnspecified",
+      fullName: "testapi.enums.MyEnumWithoutUnspecified",
+      package: "testapi.enums",
+    },
   },
-);
+});
 ",
     "name": "testapis/enums/enums.pb.pothos.ts",
   },
@@ -30560,9 +29699,13 @@ exports[`protobuf-es > 'testapis.enums' > generates files by plugin 'without imp
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import { builder } from "../../builder";
-import { MessageWithEnums, MyEnum } from "./testapis/enums/enums_pb";
+import {
+  MessageWithEnums,
+  MyEnum,
+  MyEnumWithoutUnspecified,
+} from "./testapis/enums/enums_pb";
 
 export const MessageWithEnums$Ref = builder.objectRef<MessageWithEnums>(
   "MessageWithEnums",
@@ -30841,7 +29984,7 @@ export const MessageWithEnumsInput$Ref: InputObjectRef<
     },
   });
 
-export const MyEnum$Ref = builder.enumType("MyEnum", {
+export const MyEnum$Ref: EnumRef<MyEnum, MyEnum> = builder.enumType("MyEnum", {
   values: {
     FOO: {
       value: 1,
@@ -30866,38 +30009,38 @@ export const MyEnum$Ref = builder.enumType("MyEnum", {
   },
 });
 
-export const MyEnumWithoutUnspecified$Ref = builder.enumType(
-  "MyEnumWithoutUnspecified",
-  {
-    values: {
-      FOO: {
-        value: 0,
-        extensions: {
-          protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_FOO" },
-        },
-      },
-      BAR: {
-        value: 1,
-        extensions: {
-          protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAR" },
-        },
-      },
-      BAZ: {
-        value: 2,
-        extensions: {
-          protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAZ" },
-        },
-      },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "MyEnumWithoutUnspecified",
-        fullName: "testapi.enums.MyEnumWithoutUnspecified",
-        package: "testapi.enums",
+export const MyEnumWithoutUnspecified$Ref: EnumRef<
+  MyEnumWithoutUnspecified,
+  MyEnumWithoutUnspecified
+> = builder.enumType("MyEnumWithoutUnspecified", {
+  values: {
+    FOO: {
+      value: 0,
+      extensions: {
+        protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_FOO" },
       },
     },
+    BAR: {
+      value: 1,
+      extensions: {
+        protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAR" },
+      },
+    },
+    BAZ: {
+      value: 2,
+      extensions: {
+        protobufEnumValue: { name: "MY_ENUM_WITHOUT_UNSPECIFIED_BAZ" },
+      },
+    },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "MyEnumWithoutUnspecified",
+      fullName: "testapi.enums.MyEnumWithoutUnspecified",
+      package: "testapi.enums",
+    },
   },
-);
+});
 ",
     "name": "testapis/enums/enums.pb.pothos.ts",
   },
@@ -31785,11 +30928,12 @@ export const TestPrefixPrefixedMessagePartialIgnoreOneof$Ref = builder
 
 /* eslint-disable */
 
+import { EnumRef } from "@pothos/core";
+import { PrefixedEnum } from "@testapis/protobuf-es/testapis/extensions/extensions_pb";
 import { builder } from "../../builder";
 
-export const TestPrefixPrefixedEnum$Ref = builder.enumType(
-  "TestPrefixPrefixedEnum",
-  {
+export const TestPrefixPrefixedEnum$Ref: EnumRef<PrefixedEnum, PrefixedEnum> =
+  builder.enumType("TestPrefixPrefixedEnum", {
     values: {
       PREFIXED_FOO: {
         value: 1,
@@ -31807,8 +30951,7 @@ export const TestPrefixPrefixedEnum$Ref = builder.enumType(
         package: "testapis.extensions",
       },
     },
-  },
-);
+  });
 ",
     "name": "testapis/extensions/TestPrefixPrefixedEnum.pothos.ts",
   },
@@ -31818,31 +30961,33 @@ export const TestPrefixPrefixedEnum$Ref = builder.enumType(
 
 /* eslint-disable */
 
+import { EnumRef } from "@pothos/core";
+import { EnumWillRename } from "@testapis/protobuf-es/testapis/extensions/extensions_pb";
 import { builder } from "../../builder";
 
-export const TestPrefixRenamedEnum$Ref = builder.enumType(
-  "TestPrefixRenamedEnum",
-  {
-    values: {
-      FOO: {
-        value: 1,
-        extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_FOO" } },
-      },
-      BAR: {
-        value: 2,
-        extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_BAR" } },
-      },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "EnumWillRename",
-        fullName: "testapis.extensions.EnumWillRename",
-        package: "testapis.extensions",
-        options: { "[graphql.enum_type]": { name: "RenamedEnum" } },
-      },
+export const TestPrefixRenamedEnum$Ref: EnumRef<
+  EnumWillRename,
+  EnumWillRename
+> = builder.enumType("TestPrefixRenamedEnum", {
+  values: {
+    FOO: {
+      value: 1,
+      extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_FOO" } },
+    },
+    BAR: {
+      value: 2,
+      extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_BAR" } },
+    },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "EnumWillRename",
+      fullName: "testapis.extensions.EnumWillRename",
+      package: "testapis.extensions",
+      options: { "[graphql.enum_type]": { name: "RenamedEnum" } },
     },
   },
-);
+});
 ",
     "name": "testapis/extensions/TestPrefixRenamedEnum.pothos.ts",
   },
@@ -31852,27 +30997,26 @@ export const TestPrefixRenamedEnum$Ref = builder.enumType(
 
 /* eslint-disable */
 
+import { EnumRef } from "@pothos/core";
+import { InterfaceMessage_Type } from "@testapis/protobuf-es/testapis/extensions/extensions_pb";
 import { builder } from "../../builder";
 
-export const TestPrefixInterfaceMessageType$Ref = builder.enumType(
-  "TestPrefixInterfaceMessageType",
-  {
-    values: {
-      INNER: { value: 1, extensions: { protobufEnumValue: { name: "INNER" } } },
-      INNER2: {
-        value: 2,
-        extensions: { protobufEnumValue: { name: "INNER2" } },
-      },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "Type",
-        fullName: "testapis.extensions.InterfaceMessage.Type",
-        package: "testapis.extensions",
-      },
+export const TestPrefixInterfaceMessageType$Ref: EnumRef<
+  InterfaceMessage_Type,
+  InterfaceMessage_Type
+> = builder.enumType("TestPrefixInterfaceMessageType", {
+  values: {
+    INNER: { value: 1, extensions: { protobufEnumValue: { name: "INNER" } } },
+    INNER2: { value: 2, extensions: { protobufEnumValue: { name: "INNER2" } } },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "Type",
+      fullName: "testapis.extensions.InterfaceMessage.Type",
+      package: "testapis.extensions",
     },
   },
-);
+});
 ",
     "name": "testapis/extensions/TestPrefixInterfaceMessageType.pothos.ts",
   },
@@ -31887,11 +31031,12 @@ exports[`protobuf-es > 'testapis.extensions' > generates files by plugin 'with i
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import {
   EnumWillRename,
   IgnoredMessage_NotIgnored,
   InterfaceMessage,
+  InterfaceMessage_Type,
   MessageOnlyOutput,
   MessageWillRename,
   PrefixedEnum,
@@ -32559,9 +31704,8 @@ export const TestPrefixPrefixedMessagePartialIgnoreOneof$Ref = builder
     },
   });
 
-export const TestPrefixPrefixedEnum$Ref = builder.enumType(
-  "TestPrefixPrefixedEnum",
-  {
+export const TestPrefixPrefixedEnum$Ref: EnumRef<PrefixedEnum, PrefixedEnum> =
+  builder.enumType("TestPrefixPrefixedEnum", {
     values: {
       PREFIXED_FOO: {
         value: 1,
@@ -32579,52 +31723,48 @@ export const TestPrefixPrefixedEnum$Ref = builder.enumType(
         package: "testapis.extensions",
       },
     },
-  },
-);
+  });
 
-export const TestPrefixRenamedEnum$Ref = builder.enumType(
-  "TestPrefixRenamedEnum",
-  {
-    values: {
-      FOO: {
-        value: 1,
-        extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_FOO" } },
-      },
-      BAR: {
-        value: 2,
-        extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_BAR" } },
-      },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "EnumWillRename",
-        fullName: "testapis.extensions.EnumWillRename",
-        package: "testapis.extensions",
-        options: { "[graphql.enum_type]": { name: "RenamedEnum" } },
-      },
+export const TestPrefixRenamedEnum$Ref: EnumRef<
+  EnumWillRename,
+  EnumWillRename
+> = builder.enumType("TestPrefixRenamedEnum", {
+  values: {
+    FOO: {
+      value: 1,
+      extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_FOO" } },
+    },
+    BAR: {
+      value: 2,
+      extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_BAR" } },
+    },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "EnumWillRename",
+      fullName: "testapis.extensions.EnumWillRename",
+      package: "testapis.extensions",
+      options: { "[graphql.enum_type]": { name: "RenamedEnum" } },
     },
   },
-);
+});
 
-export const TestPrefixInterfaceMessageType$Ref = builder.enumType(
-  "TestPrefixInterfaceMessageType",
-  {
-    values: {
-      INNER: { value: 1, extensions: { protobufEnumValue: { name: "INNER" } } },
-      INNER2: {
-        value: 2,
-        extensions: { protobufEnumValue: { name: "INNER2" } },
-      },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "Type",
-        fullName: "testapis.extensions.InterfaceMessage.Type",
-        package: "testapis.extensions",
-      },
+export const TestPrefixInterfaceMessageType$Ref: EnumRef<
+  InterfaceMessage_Type,
+  InterfaceMessage_Type
+> = builder.enumType("TestPrefixInterfaceMessageType", {
+  values: {
+    INNER: { value: 1, extensions: { protobufEnumValue: { name: "INNER" } } },
+    INNER2: { value: 2, extensions: { protobufEnumValue: { name: "INNER2" } } },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "Type",
+      fullName: "testapis.extensions.InterfaceMessage.Type",
+      package: "testapis.extensions",
     },
   },
-);
+});
 ",
     "name": "testapis/extensions/extensions.pb.pothos.ts",
   },
@@ -32649,11 +31789,12 @@ exports[`protobuf-es > 'testapis.extensions' > generates files by plugin 'with p
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import {
   EnumWillRename,
   IgnoredMessage_NotIgnored,
   InterfaceMessage,
+  InterfaceMessage_Type,
   MessageOnlyOutput,
   MessageWillRename,
   PrefixedEnum,
@@ -33642,9 +32783,8 @@ export const TestPrefixPrefixedMessagePartialIgnoreOneof$Ref = builder
     },
   });
 
-export const TestPrefixPrefixedEnum$Ref = builder.enumType(
-  "TestPrefixPrefixedEnum",
-  {
+export const TestPrefixPrefixedEnum$Ref: EnumRef<PrefixedEnum, PrefixedEnum> =
+  builder.enumType("TestPrefixPrefixedEnum", {
     values: {
       PREFIXED_FOO: {
         value: 1,
@@ -33662,52 +32802,48 @@ export const TestPrefixPrefixedEnum$Ref = builder.enumType(
         package: "testapis.extensions",
       },
     },
-  },
-);
+  });
 
-export const TestPrefixRenamedEnum$Ref = builder.enumType(
-  "TestPrefixRenamedEnum",
-  {
-    values: {
-      FOO: {
-        value: 1,
-        extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_FOO" } },
-      },
-      BAR: {
-        value: 2,
-        extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_BAR" } },
-      },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "EnumWillRename",
-        fullName: "testapis.extensions.EnumWillRename",
-        package: "testapis.extensions",
-        options: { "[graphql.enum_type]": { name: "RenamedEnum" } },
-      },
+export const TestPrefixRenamedEnum$Ref: EnumRef<
+  EnumWillRename,
+  EnumWillRename
+> = builder.enumType("TestPrefixRenamedEnum", {
+  values: {
+    FOO: {
+      value: 1,
+      extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_FOO" } },
+    },
+    BAR: {
+      value: 2,
+      extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_BAR" } },
+    },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "EnumWillRename",
+      fullName: "testapis.extensions.EnumWillRename",
+      package: "testapis.extensions",
+      options: { "[graphql.enum_type]": { name: "RenamedEnum" } },
     },
   },
-);
+});
 
-export const TestPrefixInterfaceMessageType$Ref = builder.enumType(
-  "TestPrefixInterfaceMessageType",
-  {
-    values: {
-      INNER: { value: 1, extensions: { protobufEnumValue: { name: "INNER" } } },
-      INNER2: {
-        value: 2,
-        extensions: { protobufEnumValue: { name: "INNER2" } },
-      },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "Type",
-        fullName: "testapis.extensions.InterfaceMessage.Type",
-        package: "testapis.extensions",
-      },
+export const TestPrefixInterfaceMessageType$Ref: EnumRef<
+  InterfaceMessage_Type,
+  InterfaceMessage_Type
+> = builder.enumType("TestPrefixInterfaceMessageType", {
+  values: {
+    INNER: { value: 1, extensions: { protobufEnumValue: { name: "INNER" } } },
+    INNER2: { value: 2, extensions: { protobufEnumValue: { name: "INNER2" } } },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "Type",
+      fullName: "testapis.extensions.InterfaceMessage.Type",
+      package: "testapis.extensions",
     },
   },
-);
+});
 ",
     "name": "testapis/extensions/extensions.pb.pothos.ts",
   },
@@ -33732,12 +32868,13 @@ exports[`protobuf-es > 'testapis.extensions' > generates files by plugin 'withou
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import { builder } from "../../builder";
 import {
   EnumWillRename,
   IgnoredMessage_NotIgnored,
   InterfaceMessage,
+  InterfaceMessage_Type,
   MessageOnlyOutput,
   MessageWillRename,
   PrefixedEnum,
@@ -34404,9 +33541,8 @@ export const TestPrefixPrefixedMessagePartialIgnoreOneof$Ref = builder
     },
   });
 
-export const TestPrefixPrefixedEnum$Ref = builder.enumType(
-  "TestPrefixPrefixedEnum",
-  {
+export const TestPrefixPrefixedEnum$Ref: EnumRef<PrefixedEnum, PrefixedEnum> =
+  builder.enumType("TestPrefixPrefixedEnum", {
     values: {
       PREFIXED_FOO: {
         value: 1,
@@ -34424,52 +33560,48 @@ export const TestPrefixPrefixedEnum$Ref = builder.enumType(
         package: "testapis.extensions",
       },
     },
-  },
-);
+  });
 
-export const TestPrefixRenamedEnum$Ref = builder.enumType(
-  "TestPrefixRenamedEnum",
-  {
-    values: {
-      FOO: {
-        value: 1,
-        extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_FOO" } },
-      },
-      BAR: {
-        value: 2,
-        extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_BAR" } },
-      },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "EnumWillRename",
-        fullName: "testapis.extensions.EnumWillRename",
-        package: "testapis.extensions",
-        options: { "[graphql.enum_type]": { name: "RenamedEnum" } },
-      },
+export const TestPrefixRenamedEnum$Ref: EnumRef<
+  EnumWillRename,
+  EnumWillRename
+> = builder.enumType("TestPrefixRenamedEnum", {
+  values: {
+    FOO: {
+      value: 1,
+      extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_FOO" } },
+    },
+    BAR: {
+      value: 2,
+      extensions: { protobufEnumValue: { name: "ENUM_WILL_RENAME_BAR" } },
+    },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "EnumWillRename",
+      fullName: "testapis.extensions.EnumWillRename",
+      package: "testapis.extensions",
+      options: { "[graphql.enum_type]": { name: "RenamedEnum" } },
     },
   },
-);
+});
 
-export const TestPrefixInterfaceMessageType$Ref = builder.enumType(
-  "TestPrefixInterfaceMessageType",
-  {
-    values: {
-      INNER: { value: 1, extensions: { protobufEnumValue: { name: "INNER" } } },
-      INNER2: {
-        value: 2,
-        extensions: { protobufEnumValue: { name: "INNER2" } },
-      },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "Type",
-        fullName: "testapis.extensions.InterfaceMessage.Type",
-        package: "testapis.extensions",
-      },
+export const TestPrefixInterfaceMessageType$Ref: EnumRef<
+  InterfaceMessage_Type,
+  InterfaceMessage_Type
+> = builder.enumType("TestPrefixInterfaceMessageType", {
+  values: {
+    INNER: { value: 1, extensions: { protobufEnumValue: { name: "INNER" } } },
+    INNER2: { value: 2, extensions: { protobufEnumValue: { name: "INNER2" } } },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "Type",
+      fullName: "testapis.extensions.InterfaceMessage.Type",
+      package: "testapis.extensions",
     },
   },
-);
+});
 ",
     "name": "testapis/extensions/extensions.pb.pothos.ts",
   },
@@ -34648,24 +33780,27 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
 
 /* eslint-disable */
 
+import { EnumRef } from "@pothos/core";
+import { Message_Status } from "@testapis/protobuf-es/testapis/extensions/field_nullability/nullability_pb";
 import { builder } from "../../../builder";
 
-export const MessageStatus$Ref = builder.enumType("MessageStatus", {
-  values: {
-    DRAFT: { value: 1, extensions: { protobufEnumValue: { name: "DRAFT" } } },
-    PUBLISHED: {
-      value: 2,
-      extensions: { protobufEnumValue: { name: "PUBLISHED" } },
+export const MessageStatus$Ref: EnumRef<Message_Status, Message_Status> =
+  builder.enumType("MessageStatus", {
+    values: {
+      DRAFT: { value: 1, extensions: { protobufEnumValue: { name: "DRAFT" } } },
+      PUBLISHED: {
+        value: 2,
+        extensions: { protobufEnumValue: { name: "PUBLISHED" } },
+      },
+    } as const,
+    extensions: {
+      protobufEnum: {
+        name: "Status",
+        fullName: "testapis.extensions.field_nullability.Message.Status",
+        package: "testapis.extensions.field_nullability",
+      },
     },
-  } as const,
-  extensions: {
-    protobufEnum: {
-      name: "Status",
-      fullName: "testapis.extensions.field_nullability.Message.Status",
-      package: "testapis.extensions.field_nullability",
-    },
-  },
-});
+  });
 ",
     "name": "testapis/extensions/field_nullability/MessageStatus.pothos.ts",
   },
@@ -34680,7 +33815,7 @@ exports[`protobuf-es > 'testapis.extensions.field_nullability' > generates files
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import {
   Message,
   Message_Status,
@@ -34813,22 +33948,23 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
     },
   });
 
-export const MessageStatus$Ref = builder.enumType("MessageStatus", {
-  values: {
-    DRAFT: { value: 1, extensions: { protobufEnumValue: { name: "DRAFT" } } },
-    PUBLISHED: {
-      value: 2,
-      extensions: { protobufEnumValue: { name: "PUBLISHED" } },
+export const MessageStatus$Ref: EnumRef<Message_Status, Message_Status> =
+  builder.enumType("MessageStatus", {
+    values: {
+      DRAFT: { value: 1, extensions: { protobufEnumValue: { name: "DRAFT" } } },
+      PUBLISHED: {
+        value: 2,
+        extensions: { protobufEnumValue: { name: "PUBLISHED" } },
+      },
+    } as const,
+    extensions: {
+      protobufEnum: {
+        name: "Status",
+        fullName: "testapis.extensions.field_nullability.Message.Status",
+        package: "testapis.extensions.field_nullability",
+      },
     },
-  } as const,
-  extensions: {
-    protobufEnum: {
-      name: "Status",
-      fullName: "testapis.extensions.field_nullability.Message.Status",
-      package: "testapis.extensions.field_nullability",
-    },
-  },
-});
+  });
 ",
     "name": "testapis/extensions/field_nullability/nullability.pb.pothos.ts",
   },
@@ -34843,7 +33979,7 @@ exports[`protobuf-es > 'testapis.extensions.field_nullability' > generates files
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import {
   Message,
   Message_Status,
@@ -35039,22 +34175,23 @@ export const MessagePartialInput$Ref: InputObjectRef<
     },
   });
 
-export const MessageStatus$Ref = builder.enumType("MessageStatus", {
-  values: {
-    DRAFT: { value: 1, extensions: { protobufEnumValue: { name: "DRAFT" } } },
-    PUBLISHED: {
-      value: 2,
-      extensions: { protobufEnumValue: { name: "PUBLISHED" } },
+export const MessageStatus$Ref: EnumRef<Message_Status, Message_Status> =
+  builder.enumType("MessageStatus", {
+    values: {
+      DRAFT: { value: 1, extensions: { protobufEnumValue: { name: "DRAFT" } } },
+      PUBLISHED: {
+        value: 2,
+        extensions: { protobufEnumValue: { name: "PUBLISHED" } },
+      },
+    } as const,
+    extensions: {
+      protobufEnum: {
+        name: "Status",
+        fullName: "testapis.extensions.field_nullability.Message.Status",
+        package: "testapis.extensions.field_nullability",
+      },
     },
-  } as const,
-  extensions: {
-    protobufEnum: {
-      name: "Status",
-      fullName: "testapis.extensions.field_nullability.Message.Status",
-      package: "testapis.extensions.field_nullability",
-    },
-  },
-});
+  });
 ",
     "name": "testapis/extensions/field_nullability/nullability.pb.pothos.ts",
   },
@@ -35069,7 +34206,7 @@ exports[`protobuf-es > 'testapis.extensions.field_nullability' > generates files
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import { builder } from "../../../builder";
 import {
   Message,
@@ -35202,22 +34339,23 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
     },
   });
 
-export const MessageStatus$Ref = builder.enumType("MessageStatus", {
-  values: {
-    DRAFT: { value: 1, extensions: { protobufEnumValue: { name: "DRAFT" } } },
-    PUBLISHED: {
-      value: 2,
-      extensions: { protobufEnumValue: { name: "PUBLISHED" } },
+export const MessageStatus$Ref: EnumRef<Message_Status, Message_Status> =
+  builder.enumType("MessageStatus", {
+    values: {
+      DRAFT: { value: 1, extensions: { protobufEnumValue: { name: "DRAFT" } } },
+      PUBLISHED: {
+        value: 2,
+        extensions: { protobufEnumValue: { name: "PUBLISHED" } },
+      },
+    } as const,
+    extensions: {
+      protobufEnum: {
+        name: "Status",
+        fullName: "testapis.extensions.field_nullability.Message.Status",
+        package: "testapis.extensions.field_nullability",
+      },
     },
-  } as const,
-  extensions: {
-    protobufEnum: {
-      name: "Status",
-      fullName: "testapis.extensions.field_nullability.Message.Status",
-      package: "testapis.extensions.field_nullability",
-    },
-  },
-});
+  });
 ",
     "name": "testapis/extensions/field_nullability/nullability.pb.pothos.ts",
   },
@@ -37373,21 +36511,26 @@ export const SubpkgMessageInput$Ref: InputObjectRef<SubpkgMessageInput$Shape> =
 
 /* eslint-disable */
 
+import { EnumRef } from "@pothos/core";
+import { SubpkgEnum } from "@testapis/protobuf-es/testapis/multipkgs/subpkg1/types_pb";
 import { builder } from "../../../builder";
 
-export const SubpkgEnum$Ref = builder.enumType("SubpkgEnum", {
-  values: {
-    FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
-    BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
-  } as const,
-  extensions: {
-    protobufEnum: {
-      name: "SubpkgEnum",
-      fullName: "testapis.multipkgs.subpkg1.SubpkgEnum",
-      package: "testapis.multipkgs.subpkg1",
+export const SubpkgEnum$Ref: EnumRef<SubpkgEnum, SubpkgEnum> = builder.enumType(
+  "SubpkgEnum",
+  {
+    values: {
+      FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
+      BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
+    } as const,
+    extensions: {
+      protobufEnum: {
+        name: "SubpkgEnum",
+        fullName: "testapis.multipkgs.subpkg1.SubpkgEnum",
+        package: "testapis.multipkgs.subpkg1",
+      },
     },
   },
-});
+);
 ",
     "name": "testapis/multipkgs/subpkg1/SubpkgEnum.pothos.ts",
   },
@@ -37402,8 +36545,11 @@ exports[`protobuf-es > 'testapis.multipkgs.subpkg1' > generates files by plugin 
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
-import { SubpkgMessage } from "@testapis/protobuf-es/testapis/multipkgs/subpkg1/types_pb";
+import { EnumRef, InputObjectRef } from "@pothos/core";
+import {
+  SubpkgEnum,
+  SubpkgMessage,
+} from "@testapis/protobuf-es/testapis/multipkgs/subpkg1/types_pb";
 import { builder } from "../../../builder";
 
 export const SubpkgMessage$Ref = builder.objectRef<SubpkgMessage>(
@@ -37450,19 +36596,22 @@ export const SubpkgMessageInput$Ref: InputObjectRef<SubpkgMessageInput$Shape> =
     },
   });
 
-export const SubpkgEnum$Ref = builder.enumType("SubpkgEnum", {
-  values: {
-    FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
-    BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
-  } as const,
-  extensions: {
-    protobufEnum: {
-      name: "SubpkgEnum",
-      fullName: "testapis.multipkgs.subpkg1.SubpkgEnum",
-      package: "testapis.multipkgs.subpkg1",
+export const SubpkgEnum$Ref: EnumRef<SubpkgEnum, SubpkgEnum> = builder.enumType(
+  "SubpkgEnum",
+  {
+    values: {
+      FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
+      BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
+    } as const,
+    extensions: {
+      protobufEnum: {
+        name: "SubpkgEnum",
+        fullName: "testapis.multipkgs.subpkg1.SubpkgEnum",
+        package: "testapis.multipkgs.subpkg1",
+      },
     },
   },
-});
+);
 ",
     "name": "testapis/multipkgs/subpkg1/types.pb.pothos.ts",
   },
@@ -37477,8 +36626,11 @@ exports[`protobuf-es > 'testapis.multipkgs.subpkg1' > generates files by plugin 
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
-import { SubpkgMessage } from "@testapis/protobuf-es/testapis/multipkgs/subpkg1/types_pb";
+import { EnumRef, InputObjectRef } from "@pothos/core";
+import {
+  SubpkgEnum,
+  SubpkgMessage,
+} from "@testapis/protobuf-es/testapis/multipkgs/subpkg1/types_pb";
 import { builder } from "../../../builder";
 
 export const SubpkgMessage$Ref = builder.objectRef<SubpkgMessage>(
@@ -37550,19 +36702,22 @@ export const SubpkgMessagePartialInput$Ref: InputObjectRef<
   },
 });
 
-export const SubpkgEnum$Ref = builder.enumType("SubpkgEnum", {
-  values: {
-    FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
-    BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
-  } as const,
-  extensions: {
-    protobufEnum: {
-      name: "SubpkgEnum",
-      fullName: "testapis.multipkgs.subpkg1.SubpkgEnum",
-      package: "testapis.multipkgs.subpkg1",
+export const SubpkgEnum$Ref: EnumRef<SubpkgEnum, SubpkgEnum> = builder.enumType(
+  "SubpkgEnum",
+  {
+    values: {
+      FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
+      BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
+    } as const,
+    extensions: {
+      protobufEnum: {
+        name: "SubpkgEnum",
+        fullName: "testapis.multipkgs.subpkg1.SubpkgEnum",
+        package: "testapis.multipkgs.subpkg1",
+      },
     },
   },
-});
+);
 ",
     "name": "testapis/multipkgs/subpkg1/types.pb.pothos.ts",
   },
@@ -37577,9 +36732,12 @@ exports[`protobuf-es > 'testapis.multipkgs.subpkg1' > generates files by plugin 
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import { builder } from "../../../builder";
-import { SubpkgMessage } from "./testapis/multipkgs/subpkg1/types_pb";
+import {
+  SubpkgEnum,
+  SubpkgMessage,
+} from "./testapis/multipkgs/subpkg1/types_pb";
 
 export const SubpkgMessage$Ref = builder.objectRef<SubpkgMessage>(
   "SubpkgMessage",
@@ -37625,19 +36783,22 @@ export const SubpkgMessageInput$Ref: InputObjectRef<SubpkgMessageInput$Shape> =
     },
   });
 
-export const SubpkgEnum$Ref = builder.enumType("SubpkgEnum", {
-  values: {
-    FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
-    BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
-  } as const,
-  extensions: {
-    protobufEnum: {
-      name: "SubpkgEnum",
-      fullName: "testapis.multipkgs.subpkg1.SubpkgEnum",
-      package: "testapis.multipkgs.subpkg1",
+export const SubpkgEnum$Ref: EnumRef<SubpkgEnum, SubpkgEnum> = builder.enumType(
+  "SubpkgEnum",
+  {
+    values: {
+      FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
+      BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
+    } as const,
+    extensions: {
+      protobufEnum: {
+        name: "SubpkgEnum",
+        fullName: "testapis.multipkgs.subpkg1.SubpkgEnum",
+        package: "testapis.multipkgs.subpkg1",
+      },
     },
   },
-});
+);
 ",
     "name": "testapis/multipkgs/subpkg1/types.pb.pothos.ts",
   },
@@ -38353,24 +37514,26 @@ export const ParentMessageNestedMessageInput$Ref: InputObjectRef<
 
 /* eslint-disable */
 
+import { EnumRef } from "@pothos/core";
+import { ParentMessage_NestedEnum } from "@testapis/protobuf-es/testapis/nested/nested_pb";
 import { builder } from "../../builder";
 
-export const ParentMessageNestedEnum$Ref = builder.enumType(
-  "ParentMessageNestedEnum",
-  {
-    values: {
-      FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
-      BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "NestedEnum",
-        fullName: "testapis.nested.ParentMessage.NestedEnum",
-        package: "testapis.nested",
-      },
+export const ParentMessageNestedEnum$Ref: EnumRef<
+  ParentMessage_NestedEnum,
+  ParentMessage_NestedEnum
+> = builder.enumType("ParentMessageNestedEnum", {
+  values: {
+    FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
+    BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "NestedEnum",
+      fullName: "testapis.nested.ParentMessage.NestedEnum",
+      package: "testapis.nested",
     },
   },
-);
+});
 ",
     "name": "testapis/nested/ParentMessageNestedEnum.pothos.ts",
   },
@@ -38385,7 +37548,7 @@ exports[`protobuf-es > 'testapis.nested' > generates files by plugin 'with impor
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import {
   ParentMessage,
   ParentMessage_NestedEnum,
@@ -38543,22 +37706,22 @@ export const ParentMessageNestedMessageInput$Ref: InputObjectRef<
   },
 });
 
-export const ParentMessageNestedEnum$Ref = builder.enumType(
-  "ParentMessageNestedEnum",
-  {
-    values: {
-      FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
-      BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "NestedEnum",
-        fullName: "testapis.nested.ParentMessage.NestedEnum",
-        package: "testapis.nested",
-      },
+export const ParentMessageNestedEnum$Ref: EnumRef<
+  ParentMessage_NestedEnum,
+  ParentMessage_NestedEnum
+> = builder.enumType("ParentMessageNestedEnum", {
+  values: {
+    FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
+    BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "NestedEnum",
+      fullName: "testapis.nested.ParentMessage.NestedEnum",
+      package: "testapis.nested",
     },
   },
-);
+});
 ",
     "name": "testapis/nested/nested.pb.pothos.ts",
   },
@@ -38573,7 +37736,7 @@ exports[`protobuf-es > 'testapis.nested' > generates files by plugin 'with parti
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import {
   ParentMessage,
   ParentMessage_NestedEnum,
@@ -38805,22 +37968,22 @@ export const ParentMessageNestedMessagePartialInput$Ref: InputObjectRef<
   },
 });
 
-export const ParentMessageNestedEnum$Ref = builder.enumType(
-  "ParentMessageNestedEnum",
-  {
-    values: {
-      FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
-      BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "NestedEnum",
-        fullName: "testapis.nested.ParentMessage.NestedEnum",
-        package: "testapis.nested",
-      },
+export const ParentMessageNestedEnum$Ref: EnumRef<
+  ParentMessage_NestedEnum,
+  ParentMessage_NestedEnum
+> = builder.enumType("ParentMessageNestedEnum", {
+  values: {
+    FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
+    BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "NestedEnum",
+      fullName: "testapis.nested.ParentMessage.NestedEnum",
+      package: "testapis.nested",
     },
   },
-);
+});
 ",
     "name": "testapis/nested/nested.pb.pothos.ts",
   },
@@ -38835,7 +37998,7 @@ exports[`protobuf-es > 'testapis.nested' > generates files by plugin 'without im
 
 /* eslint-disable */
 
-import { InputObjectRef } from "@pothos/core";
+import { EnumRef, InputObjectRef } from "@pothos/core";
 import { builder } from "../../builder";
 import {
   ParentMessage,
@@ -38993,22 +38156,22 @@ export const ParentMessageNestedMessageInput$Ref: InputObjectRef<
   },
 });
 
-export const ParentMessageNestedEnum$Ref = builder.enumType(
-  "ParentMessageNestedEnum",
-  {
-    values: {
-      FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
-      BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
-    } as const,
-    extensions: {
-      protobufEnum: {
-        name: "NestedEnum",
-        fullName: "testapis.nested.ParentMessage.NestedEnum",
-        package: "testapis.nested",
-      },
+export const ParentMessageNestedEnum$Ref: EnumRef<
+  ParentMessage_NestedEnum,
+  ParentMessage_NestedEnum
+> = builder.enumType("ParentMessageNestedEnum", {
+  values: {
+    FOO: { value: 1, extensions: { protobufEnumValue: { name: "FOO" } } },
+    BAR: { value: 2, extensions: { protobufEnumValue: { name: "BAR" } } },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "NestedEnum",
+      fullName: "testapis.nested.ParentMessage.NestedEnum",
+      package: "testapis.nested",
     },
   },
-);
+});
 ",
     "name": "testapis/nested/nested.pb.pothos.ts",
   },
@@ -46548,109 +45711,6 @@ builder.objectType(Message$Ref, {
         },
       },
     }),
-    timestamps: t.expose("timestamps", {
-      type: ["DateTime"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "timestamps",
-          typeFullName: "google.protobuf.Timestamp",
-        },
-      },
-    }),
-    int32Values: t.expose("int32Values", {
-      type: ["Int"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "int32_values",
-          typeFullName: "google.protobuf.Int32Value",
-        },
-      },
-    }),
-    int64Values: t.expose("int64Values", {
-      type: ["Int"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "int64_values",
-          typeFullName: "google.protobuf.Int64Value",
-        },
-      },
-    }),
-    uint32Values: t.expose("uint32Values", {
-      type: ["Int"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "uint32_values",
-          typeFullName: "google.protobuf.UInt32Value",
-        },
-      },
-    }),
-    uint64Values: t.expose("uint64Values", {
-      type: ["Int"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "uint64_values",
-          typeFullName: "google.protobuf.UInt64Value",
-        },
-      },
-    }),
-    floatValues: t.expose("floatValues", {
-      type: ["Float"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "float_values",
-          typeFullName: "google.protobuf.FloatValue",
-        },
-      },
-    }),
-    doubleValues: t.expose("doubleValues", {
-      type: ["Float"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "double_values",
-          typeFullName: "google.protobuf.DoubleValue",
-        },
-      },
-    }),
-    boolValues: t.expose("boolValues", {
-      type: ["Boolean"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "bool_values",
-          typeFullName: "google.protobuf.BoolValue",
-        },
-      },
-    }),
-    stringValues: t.expose("stringValues", {
-      type: ["String"],
-      nullable: { list: true, items: false },
-      extensions: {
-        protobufField: {
-          name: "string_values",
-          typeFullName: "google.protobuf.StringValue",
-        },
-      },
-    }),
-    bytesValues: t.field({
-      type: ["Byte"],
-      nullable: { list: true, items: false },
-      resolve: (source) => {
-        return source.bytesValues.map((v) => Buffer.from(v));
-      },
-      extensions: {
-        protobufField: {
-          name: "bytes_values",
-          typeFullName: "google.protobuf.BytesValue",
-        },
-      },
-    }),
     requiredTimestamp: t.field({
       type: "DateTime",
       nullable: false,
@@ -46690,16 +45750,6 @@ export type MessageInput$Shape = {
   boolValue?: Message["boolValue"] | null;
   stringValue?: Message["stringValue"] | null;
   bytesValue?: Message["bytesValue"] | null;
-  timestamps?: Message["timestamps"] | null;
-  int32Values?: Message["int32Values"] | null;
-  int64Values?: Message["int64Values"] | null;
-  uint32Values?: Message["uint32Values"] | null;
-  uint64Values?: Message["uint64Values"] | null;
-  floatValues?: Message["floatValues"] | null;
-  doubleValues?: Message["doubleValues"] | null;
-  boolValues?: Message["boolValues"] | null;
-  stringValues?: Message["stringValues"] | null;
-  bytesValues?: Message["bytesValues"] | null;
   requiredTimestamp: NonNullable<Message["requiredTimestamp"]>;
 };
 
@@ -46802,106 +45852,6 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         extensions: {
           protobufField: {
             name: "bytes_value",
-            typeFullName: "google.protobuf.BytesValue",
-          },
-        },
-      }),
-      timestamps: t.field({
-        type: ["DateTime"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "timestamps",
-            typeFullName: "google.protobuf.Timestamp",
-          },
-        },
-      }),
-      int32Values: t.field({
-        type: ["Int"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "int32_values",
-            typeFullName: "google.protobuf.Int32Value",
-          },
-        },
-      }),
-      int64Values: t.field({
-        type: ["Int"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "int64_values",
-            typeFullName: "google.protobuf.Int64Value",
-          },
-        },
-      }),
-      uint32Values: t.field({
-        type: ["Int"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "uint32_values",
-            typeFullName: "google.protobuf.UInt32Value",
-          },
-        },
-      }),
-      uint64Values: t.field({
-        type: ["Int"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "uint64_values",
-            typeFullName: "google.protobuf.UInt64Value",
-          },
-        },
-      }),
-      floatValues: t.field({
-        type: ["Float"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "float_values",
-            typeFullName: "google.protobuf.FloatValue",
-          },
-        },
-      }),
-      doubleValues: t.field({
-        type: ["Float"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "double_values",
-            typeFullName: "google.protobuf.DoubleValue",
-          },
-        },
-      }),
-      boolValues: t.field({
-        type: ["Boolean"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "bool_values",
-            typeFullName: "google.protobuf.BoolValue",
-          },
-        },
-      }),
-      stringValues: t.field({
-        type: ["String"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "string_values",
-            typeFullName: "google.protobuf.StringValue",
-          },
-        },
-      }),
-      bytesValues: t.field({
-        type: ["Byte"],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "bytes_values",
             typeFullName: "google.protobuf.BytesValue",
           },
         },
