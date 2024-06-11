@@ -1,5 +1,14 @@
 # @proto-nexus/google-protobuf
 
+## 0.6.1
+
+### Patch Changes
+
+- [#371](https://github.com/proto-graphql/proto-graphql-js/pull/371) [`d8be975`](https://github.com/proto-graphql/proto-graphql-js/commit/d8be975c7e716e11cbfc662ab7518020525b75d7) Thanks [@izumin5210](https://github.com/izumin5210)! - build: set `pulic` to `publishConfig.access`
+
+- Updated dependencies [[`d8be975`](https://github.com/proto-graphql/proto-graphql-js/commit/d8be975c7e716e11cbfc662ab7518020525b75d7)]:
+  - proto-nexus@0.5.5
+
 ## 0.6.0
 
 ### Minor Changes
