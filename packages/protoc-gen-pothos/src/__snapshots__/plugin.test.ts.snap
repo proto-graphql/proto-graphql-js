@@ -22629,6 +22629,16 @@ export const DateInput$Ref: InputObjectRef<DateInput$Shape> = builder.inputRef<
     },
   },
 });
+
+export function DateInput$toProto(
+  input: DateInput$Shape | null | undefined,
+): Date {
+  return new Date({
+    year: input?.year ?? undefined,
+    month: input?.month ?? undefined,
+    day: input?.day ?? undefined,
+  });
+}
 ",
     "name": "testapis/custom_types/DateInput.pothos.ts",
   },
@@ -22687,7 +22697,11 @@ builder.objectType(Post$Ref, {
 import { InputObjectRef } from "@pothos/core";
 import { Post } from "@testapis/protobuf-es/testapis/custom_types/post_pb";
 import { builder } from "../../builder";
-import { DateInput$Ref, DateInput$Shape } from "./DateInput.pothos";
+import {
+  DateInput$Ref,
+  DateInput$Shape,
+  DateInput$toProto,
+} from "./DateInput.pothos";
 
 export type PostInput$Shape = {
   title: Post["title"];
@@ -22724,6 +22738,15 @@ export const PostInput$Ref: InputObjectRef<PostInput$Shape> = builder.inputRef<
     },
   },
 });
+
+export function PostInput$toProto(
+  input: PostInput$Shape | null | undefined,
+): Post {
+  return new Post({
+    title: input?.title ?? undefined,
+    publishedDate: input ? DateInput$toProto(input.publishedDate) : undefined,
+  });
+}
 ",
     "name": "testapis/custom_types/PostInput.pothos.ts",
   },
@@ -22808,6 +22831,16 @@ export const DateInput$Ref: InputObjectRef<DateInput$Shape> = builder.inputRef<
     },
   },
 });
+
+export function DateInput$toProto(
+  input: DateInput$Shape | null | undefined,
+): Date {
+  return new Date({
+    year: input?.year ?? undefined,
+    month: input?.month ?? undefined,
+    day: input?.day ?? undefined,
+  });
+}
 ",
     "name": "testapis/custom_types/date.pb.pothos.ts",
   },
@@ -22820,7 +22853,12 @@ export const DateInput$Ref: InputObjectRef<DateInput$Shape> = builder.inputRef<
 import { InputObjectRef } from "@pothos/core";
 import { Post } from "@testapis/protobuf-es/testapis/custom_types/post_pb";
 import { builder } from "../../builder";
-import { Date$Ref, DateInput$Ref, DateInput$Shape } from "./date.pb.pothos";
+import {
+  Date$Ref,
+  DateInput$Ref,
+  DateInput$Shape,
+  DateInput$toProto,
+} from "./date.pb.pothos";
 
 export const Post$Ref = builder.objectRef<Post>("Post");
 builder.objectType(Post$Ref, {
@@ -22891,6 +22929,15 @@ export const PostInput$Ref: InputObjectRef<PostInput$Shape> = builder.inputRef<
     },
   },
 });
+
+export function PostInput$toProto(
+  input: PostInput$Shape | null | undefined,
+): Post {
+  return new Post({
+    title: input?.title ?? undefined,
+    publishedDate: input ? DateInput$toProto(input.publishedDate) : undefined,
+  });
+}
 ",
     "name": "testapis/custom_types/post.pb.pothos.ts",
   },
@@ -22976,6 +23023,16 @@ export const DateInput$Ref: InputObjectRef<DateInput$Shape> = builder.inputRef<
   },
 });
 
+export function DateInput$toProto(
+  input: DateInput$Shape | null | undefined,
+): Date {
+  return new Date({
+    year: input?.year ?? undefined,
+    month: input?.month ?? undefined,
+    day: input?.day ?? undefined,
+  });
+}
+
 export type DatePartialInput$Shape = {
   year?: Date["year"] | null;
   month?: Date["month"] | null;
@@ -23011,6 +23068,16 @@ export const DatePartialInput$Ref: InputObjectRef<DatePartialInput$Shape> =
       },
     },
   });
+
+export function DatePartialInput$toProto(
+  input: DatePartialInput$Shape | null | undefined,
+): Date {
+  return new Date({
+    year: input?.year ?? undefined,
+    month: input?.month ?? undefined,
+    day: input?.day ?? undefined,
+  });
+}
 ",
     "name": "testapis/custom_types/date.pb.pothos.ts",
   },
@@ -23027,8 +23094,10 @@ import {
   Date$Ref,
   DateInput$Ref,
   DateInput$Shape,
+  DateInput$toProto,
   DatePartialInput$Ref,
   DatePartialInput$Shape,
+  DatePartialInput$toProto,
 } from "./date.pb.pothos";
 
 export const Post$Ref = builder.objectRef<Post>("Post");
@@ -23101,6 +23170,15 @@ export const PostInput$Ref: InputObjectRef<PostInput$Shape> = builder.inputRef<
   },
 });
 
+export function PostInput$toProto(
+  input: PostInput$Shape | null | undefined,
+): Post {
+  return new Post({
+    title: input?.title ?? undefined,
+    publishedDate: input ? DateInput$toProto(input.publishedDate) : undefined,
+  });
+}
+
 export type PostPartialInput$Shape = {
   title?: Post["title"] | null;
   publishedDate?: DatePartialInput$Shape | null;
@@ -23137,6 +23215,17 @@ export const PostPartialInput$Ref: InputObjectRef<PostPartialInput$Shape> =
       },
     },
   });
+
+export function PostPartialInput$toProto(
+  input: PostPartialInput$Shape | null | undefined,
+): Post {
+  return new Post({
+    title: input?.title ?? undefined,
+    publishedDate: input
+      ? DatePartialInput$toProto(input.publishedDate)
+      : undefined,
+  });
+}
 ",
     "name": "testapis/custom_types/post.pb.pothos.ts",
   },
@@ -23221,6 +23310,16 @@ export const DateInput$Ref: InputObjectRef<DateInput$Shape> = builder.inputRef<
     },
   },
 });
+
+export function DateInput$toProto(
+  input: DateInput$Shape | null | undefined,
+): Date {
+  return new Date({
+    year: input?.year ?? undefined,
+    month: input?.month ?? undefined,
+    day: input?.day ?? undefined,
+  });
+}
 ",
     "name": "testapis/custom_types/date.pb.pothos.ts",
   },
@@ -23232,7 +23331,12 @@ export const DateInput$Ref: InputObjectRef<DateInput$Shape> = builder.inputRef<
 
 import { InputObjectRef } from "@pothos/core";
 import { builder } from "../../builder";
-import { Date$Ref, DateInput$Ref, DateInput$Shape } from "./date.pb.pothos";
+import {
+  Date$Ref,
+  DateInput$Ref,
+  DateInput$Shape,
+  DateInput$toProto,
+} from "./date.pb.pothos";
 import { Post } from "./testapis/custom_types/post_pb";
 
 export const Post$Ref = builder.objectRef<Post>("Post");
@@ -23304,6 +23408,15 @@ export const PostInput$Ref: InputObjectRef<PostInput$Shape> = builder.inputRef<
     },
   },
 });
+
+export function PostInput$toProto(
+  input: PostInput$Shape | null | undefined,
+): Post {
+  return new Post({
+    title: input?.title ?? undefined,
+    publishedDate: input ? DateInput$toProto(input.publishedDate) : undefined,
+  });
+}
 ",
     "name": "testapis/custom_types/post.pb.pothos.ts",
   },
@@ -23614,6 +23727,15 @@ export const DeprecatedMessageInput$Ref: InputObjectRef<
       },
     },
   });
+
+export function DeprecatedMessageInput$toProto(
+  input: DeprecatedMessageInput$Shape | null | undefined,
+): DeprecatedMessage {
+  return new DeprecatedMessage({
+    body: input?.body ?? undefined,
+    enum: input?.enum ?? undefined,
+  });
+}
 ",
     "name": "testapis/deprecation/DeprecatedMessageInput.pothos.ts",
   },
@@ -23630,10 +23752,12 @@ import { DeprecatedEnum$Ref } from "./DeprecatedEnum.pothos";
 import {
   NotDeprecatedMessageInnerMessage1Input$Ref,
   NotDeprecatedMessageInnerMessage1Input$Shape,
+  NotDeprecatedMessageInnerMessage1Input$toProto,
 } from "./NotDeprecatedMessageInnerMessage1Input.pothos";
 import {
   NotDeprecatedMessageInnerMessage2Input$Ref,
   NotDeprecatedMessageInnerMessage2Input$Shape,
+  NotDeprecatedMessageInnerMessage2Input$toProto,
 } from "./NotDeprecatedMessageInnerMessage2Input.pothos";
 
 export type NotDeprecatedMessageInput$Shape = {
@@ -23738,6 +23862,37 @@ export const NotDeprecatedMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function NotDeprecatedMessageInput$toProto(
+  input: NotDeprecatedMessageInput$Shape | null | undefined,
+): NotDeprecatedMessage {
+  return new NotDeprecatedMessage({
+    body: input?.body ?? undefined,
+    enum: input?.enum ?? undefined,
+    notDeprecatedOneof: input?.msg1
+      ? {
+        case: "msg1",
+        value: NotDeprecatedMessageInnerMessage1Input$toProto(input.msg1),
+      }
+      : input?.msg2
+      ? {
+        case: "msg2",
+        value: NotDeprecatedMessageInnerMessage2Input$toProto(input.msg2),
+      }
+      : undefined,
+    deprecatedOneof: input?.msg3
+      ? {
+        case: "msg3",
+        value: NotDeprecatedMessageInnerMessage1Input$toProto(input.msg3),
+      }
+      : input?.msg4
+      ? {
+        case: "msg4",
+        value: NotDeprecatedMessageInnerMessage2Input$toProto(input.msg4),
+      }
+      : undefined,
+  });
+}
 ",
     "name": "testapis/deprecation/NotDeprecatedMessageInput.pothos.ts",
   },
@@ -23777,6 +23932,12 @@ export const DeprecatedMessageInnerMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function DeprecatedMessageInnerMessageInput$toProto(
+  input: DeprecatedMessageInnerMessageInput$Shape | null | undefined,
+): DeprecatedMessage_InnerMessage {
+  return new DeprecatedMessage_InnerMessage({ body: input?.body ?? undefined });
+}
 ",
     "name": "testapis/deprecation/DeprecatedMessageInnerMessageInput.pothos.ts",
   },
@@ -23814,6 +23975,14 @@ export const NotDeprecatedMessageInnerMessage1Input$Ref: InputObjectRef<
     },
   },
 });
+
+export function NotDeprecatedMessageInnerMessage1Input$toProto(
+  input: NotDeprecatedMessageInnerMessage1Input$Shape | null | undefined,
+): NotDeprecatedMessage_InnerMessage1 {
+  return new NotDeprecatedMessage_InnerMessage1({
+    body: input?.body ?? undefined,
+  });
+}
 ",
     "name": "testapis/deprecation/NotDeprecatedMessageInnerMessage1Input.pothos.ts",
   },
@@ -23851,6 +24020,14 @@ export const NotDeprecatedMessageInnerMessage2Input$Ref: InputObjectRef<
     },
   },
 });
+
+export function NotDeprecatedMessageInnerMessage2Input$toProto(
+  input: NotDeprecatedMessageInnerMessage2Input$Shape | null | undefined,
+): NotDeprecatedMessage_InnerMessage2 {
+  return new NotDeprecatedMessage_InnerMessage2({
+    body: input?.body ?? undefined,
+  });
+}
 ",
     "name": "testapis/deprecation/NotDeprecatedMessageInnerMessage2Input.pothos.ts",
   },
@@ -24154,6 +24331,15 @@ export const DeprecatedFileMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function DeprecatedFileMessageInput$toProto(
+  input: DeprecatedFileMessageInput$Shape | null | undefined,
+): DeprecatedFileMessage {
+  return new DeprecatedFileMessage({
+    body: input?.body ?? undefined,
+    enum: input?.enum ?? undefined,
+  });
+}
 ",
     "name": "testapis/deprecation/DeprecatedFileMessageInput.pothos.ts",
   },
@@ -24193,6 +24379,14 @@ export const DeprecatedFileMessageInnerMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function DeprecatedFileMessageInnerMessageInput$toProto(
+  input: DeprecatedFileMessageInnerMessageInput$Shape | null | undefined,
+): DeprecatedFileMessage_InnerMessage {
+  return new DeprecatedFileMessage_InnerMessage({
+    body: input?.body ?? undefined,
+  });
+}
 ",
     "name": "testapis/deprecation/DeprecatedFileMessageInnerMessageInput.pothos.ts",
   },
@@ -24487,6 +24681,15 @@ export const DeprecatedMessageInput$Ref: InputObjectRef<
     },
   });
 
+export function DeprecatedMessageInput$toProto(
+  input: DeprecatedMessageInput$Shape | null | undefined,
+): DeprecatedMessage {
+  return new DeprecatedMessage({
+    body: input?.body ?? undefined,
+    enum: input?.enum ?? undefined,
+  });
+}
+
 export type NotDeprecatedMessageInput$Shape = {
   body?: NotDeprecatedMessage["body"] | null;
   enum?: NotDeprecatedMessage["enum"] | null;
@@ -24590,6 +24793,37 @@ export const NotDeprecatedMessageInput$Ref: InputObjectRef<
   },
 });
 
+export function NotDeprecatedMessageInput$toProto(
+  input: NotDeprecatedMessageInput$Shape | null | undefined,
+): NotDeprecatedMessage {
+  return new NotDeprecatedMessage({
+    body: input?.body ?? undefined,
+    enum: input?.enum ?? undefined,
+    notDeprecatedOneof: input?.msg1
+      ? {
+        case: "msg1",
+        value: NotDeprecatedMessageInnerMessage1Input$toProto(input.msg1),
+      }
+      : input?.msg2
+      ? {
+        case: "msg2",
+        value: NotDeprecatedMessageInnerMessage2Input$toProto(input.msg2),
+      }
+      : undefined,
+    deprecatedOneof: input?.msg3
+      ? {
+        case: "msg3",
+        value: NotDeprecatedMessageInnerMessage1Input$toProto(input.msg3),
+      }
+      : input?.msg4
+      ? {
+        case: "msg4",
+        value: NotDeprecatedMessageInnerMessage2Input$toProto(input.msg4),
+      }
+      : undefined,
+  });
+}
+
 export type DeprecatedMessageInnerMessageInput$Shape = {
   body?: DeprecatedMessage_InnerMessage["body"] | null;
 };
@@ -24617,6 +24851,12 @@ export const DeprecatedMessageInnerMessageInput$Ref: InputObjectRef<
   },
 });
 
+export function DeprecatedMessageInnerMessageInput$toProto(
+  input: DeprecatedMessageInnerMessageInput$Shape | null | undefined,
+): DeprecatedMessage_InnerMessage {
+  return new DeprecatedMessage_InnerMessage({ body: input?.body ?? undefined });
+}
+
 export type NotDeprecatedMessageInnerMessage1Input$Shape = {
   body: NotDeprecatedMessage_InnerMessage1["body"];
 };
@@ -24642,6 +24882,14 @@ export const NotDeprecatedMessageInnerMessage1Input$Ref: InputObjectRef<
   },
 });
 
+export function NotDeprecatedMessageInnerMessage1Input$toProto(
+  input: NotDeprecatedMessageInnerMessage1Input$Shape | null | undefined,
+): NotDeprecatedMessage_InnerMessage1 {
+  return new NotDeprecatedMessage_InnerMessage1({
+    body: input?.body ?? undefined,
+  });
+}
+
 export type NotDeprecatedMessageInnerMessage2Input$Shape = {
   body: NotDeprecatedMessage_InnerMessage2["body"];
 };
@@ -24666,6 +24914,14 @@ export const NotDeprecatedMessageInnerMessage2Input$Ref: InputObjectRef<
     },
   },
 });
+
+export function NotDeprecatedMessageInnerMessage2Input$toProto(
+  input: NotDeprecatedMessageInnerMessage2Input$Shape | null | undefined,
+): NotDeprecatedMessage_InnerMessage2 {
+  return new NotDeprecatedMessage_InnerMessage2({
+    body: input?.body ?? undefined,
+  });
+}
 
 export const NotDeprecatedMessageNotDeprecatedOneof$Ref = builder.unionType(
   "NotDeprecatedMessageNotDeprecatedOneof",
@@ -24903,6 +25159,15 @@ export const DeprecatedFileMessageInput$Ref: InputObjectRef<
   },
 });
 
+export function DeprecatedFileMessageInput$toProto(
+  input: DeprecatedFileMessageInput$Shape | null | undefined,
+): DeprecatedFileMessage {
+  return new DeprecatedFileMessage({
+    body: input?.body ?? undefined,
+    enum: input?.enum ?? undefined,
+  });
+}
+
 export type DeprecatedFileMessageInnerMessageInput$Shape = {
   body?: DeprecatedFileMessage_InnerMessage["body"] | null;
 };
@@ -24929,6 +25194,14 @@ export const DeprecatedFileMessageInnerMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function DeprecatedFileMessageInnerMessageInput$toProto(
+  input: DeprecatedFileMessageInnerMessageInput$Shape | null | undefined,
+): DeprecatedFileMessage_InnerMessage {
+  return new DeprecatedFileMessage_InnerMessage({
+    body: input?.body ?? undefined,
+  });
+}
 
 export const DeprecatedFileEnum$Ref: EnumRef<
   DeprecatedFileEnum,
@@ -25211,6 +25484,15 @@ export const DeprecatedMessageInput$Ref: InputObjectRef<
     },
   });
 
+export function DeprecatedMessageInput$toProto(
+  input: DeprecatedMessageInput$Shape | null | undefined,
+): DeprecatedMessage {
+  return new DeprecatedMessage({
+    body: input?.body ?? undefined,
+    enum: input?.enum ?? undefined,
+  });
+}
+
 export type DeprecatedMessagePartialInput$Shape = {
   body?: DeprecatedMessage["body"] | null;
   enum?: DeprecatedMessage["enum"] | null;
@@ -25251,6 +25533,15 @@ export const DeprecatedMessagePartialInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function DeprecatedMessagePartialInput$toProto(
+  input: DeprecatedMessagePartialInput$Shape | null | undefined,
+): DeprecatedMessage {
+  return new DeprecatedMessage({
+    body: input?.body ?? undefined,
+    enum: input?.enum ?? undefined,
+  });
+}
 
 export type NotDeprecatedMessageInput$Shape = {
   body?: NotDeprecatedMessage["body"] | null;
@@ -25355,6 +25646,37 @@ export const NotDeprecatedMessageInput$Ref: InputObjectRef<
   },
 });
 
+export function NotDeprecatedMessageInput$toProto(
+  input: NotDeprecatedMessageInput$Shape | null | undefined,
+): NotDeprecatedMessage {
+  return new NotDeprecatedMessage({
+    body: input?.body ?? undefined,
+    enum: input?.enum ?? undefined,
+    notDeprecatedOneof: input?.msg1
+      ? {
+        case: "msg1",
+        value: NotDeprecatedMessageInnerMessage1Input$toProto(input.msg1),
+      }
+      : input?.msg2
+      ? {
+        case: "msg2",
+        value: NotDeprecatedMessageInnerMessage2Input$toProto(input.msg2),
+      }
+      : undefined,
+    deprecatedOneof: input?.msg3
+      ? {
+        case: "msg3",
+        value: NotDeprecatedMessageInnerMessage1Input$toProto(input.msg3),
+      }
+      : input?.msg4
+      ? {
+        case: "msg4",
+        value: NotDeprecatedMessageInnerMessage2Input$toProto(input.msg4),
+      }
+      : undefined,
+  });
+}
+
 export type NotDeprecatedMessagePartialInput$Shape = {
   body?: NotDeprecatedMessage["body"] | null;
   enum?: NotDeprecatedMessage["enum"] | null;
@@ -25458,6 +25780,45 @@ export const NotDeprecatedMessagePartialInput$Ref: InputObjectRef<
   },
 });
 
+export function NotDeprecatedMessagePartialInput$toProto(
+  input: NotDeprecatedMessagePartialInput$Shape | null | undefined,
+): NotDeprecatedMessage {
+  return new NotDeprecatedMessage({
+    body: input?.body ?? undefined,
+    enum: input?.enum ?? undefined,
+    notDeprecatedOneof: input?.msg1
+      ? {
+        case: "msg1",
+        value: NotDeprecatedMessageInnerMessage1PartialInput$toProto(
+          input.msg1,
+        ),
+      }
+      : input?.msg2
+      ? {
+        case: "msg2",
+        value: NotDeprecatedMessageInnerMessage2PartialInput$toProto(
+          input.msg2,
+        ),
+      }
+      : undefined,
+    deprecatedOneof: input?.msg3
+      ? {
+        case: "msg3",
+        value: NotDeprecatedMessageInnerMessage1PartialInput$toProto(
+          input.msg3,
+        ),
+      }
+      : input?.msg4
+      ? {
+        case: "msg4",
+        value: NotDeprecatedMessageInnerMessage2PartialInput$toProto(
+          input.msg4,
+        ),
+      }
+      : undefined,
+  });
+}
+
 export type DeprecatedMessageInnerMessageInput$Shape = {
   body?: DeprecatedMessage_InnerMessage["body"] | null;
 };
@@ -25484,6 +25845,12 @@ export const DeprecatedMessageInnerMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function DeprecatedMessageInnerMessageInput$toProto(
+  input: DeprecatedMessageInnerMessageInput$Shape | null | undefined,
+): DeprecatedMessage_InnerMessage {
+  return new DeprecatedMessage_InnerMessage({ body: input?.body ?? undefined });
+}
 
 export type DeprecatedMessageInnerMessagePartialInput$Shape = {
   body?: DeprecatedMessage_InnerMessage["body"] | null;
@@ -25512,6 +25879,12 @@ export const DeprecatedMessageInnerMessagePartialInput$Ref: InputObjectRef<
   },
 });
 
+export function DeprecatedMessageInnerMessagePartialInput$toProto(
+  input: DeprecatedMessageInnerMessagePartialInput$Shape | null | undefined,
+): DeprecatedMessage_InnerMessage {
+  return new DeprecatedMessage_InnerMessage({ body: input?.body ?? undefined });
+}
+
 export type NotDeprecatedMessageInnerMessage1Input$Shape = {
   body: NotDeprecatedMessage_InnerMessage1["body"];
 };
@@ -25536,6 +25909,14 @@ export const NotDeprecatedMessageInnerMessage1Input$Ref: InputObjectRef<
     },
   },
 });
+
+export function NotDeprecatedMessageInnerMessage1Input$toProto(
+  input: NotDeprecatedMessageInnerMessage1Input$Shape | null | undefined,
+): NotDeprecatedMessage_InnerMessage1 {
+  return new NotDeprecatedMessage_InnerMessage1({
+    body: input?.body ?? undefined,
+  });
+}
 
 export type NotDeprecatedMessageInnerMessage1PartialInput$Shape = {
   body?: NotDeprecatedMessage_InnerMessage1["body"] | null;
@@ -25562,6 +25943,14 @@ export const NotDeprecatedMessageInnerMessage1PartialInput$Ref: InputObjectRef<
   },
 });
 
+export function NotDeprecatedMessageInnerMessage1PartialInput$toProto(
+  input: NotDeprecatedMessageInnerMessage1PartialInput$Shape | null | undefined,
+): NotDeprecatedMessage_InnerMessage1 {
+  return new NotDeprecatedMessage_InnerMessage1({
+    body: input?.body ?? undefined,
+  });
+}
+
 export type NotDeprecatedMessageInnerMessage2Input$Shape = {
   body: NotDeprecatedMessage_InnerMessage2["body"];
 };
@@ -25587,6 +25976,14 @@ export const NotDeprecatedMessageInnerMessage2Input$Ref: InputObjectRef<
   },
 });
 
+export function NotDeprecatedMessageInnerMessage2Input$toProto(
+  input: NotDeprecatedMessageInnerMessage2Input$Shape | null | undefined,
+): NotDeprecatedMessage_InnerMessage2 {
+  return new NotDeprecatedMessage_InnerMessage2({
+    body: input?.body ?? undefined,
+  });
+}
+
 export type NotDeprecatedMessageInnerMessage2PartialInput$Shape = {
   body?: NotDeprecatedMessage_InnerMessage2["body"] | null;
 };
@@ -25611,6 +26008,14 @@ export const NotDeprecatedMessageInnerMessage2PartialInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function NotDeprecatedMessageInnerMessage2PartialInput$toProto(
+  input: NotDeprecatedMessageInnerMessage2PartialInput$Shape | null | undefined,
+): NotDeprecatedMessage_InnerMessage2 {
+  return new NotDeprecatedMessage_InnerMessage2({
+    body: input?.body ?? undefined,
+  });
+}
 
 export const NotDeprecatedMessageNotDeprecatedOneof$Ref = builder.unionType(
   "NotDeprecatedMessageNotDeprecatedOneof",
@@ -25848,6 +26253,15 @@ export const DeprecatedFileMessageInput$Ref: InputObjectRef<
   },
 });
 
+export function DeprecatedFileMessageInput$toProto(
+  input: DeprecatedFileMessageInput$Shape | null | undefined,
+): DeprecatedFileMessage {
+  return new DeprecatedFileMessage({
+    body: input?.body ?? undefined,
+    enum: input?.enum ?? undefined,
+  });
+}
+
 export type DeprecatedFileMessagePartialInput$Shape = {
   body?: DeprecatedFileMessage["body"] | null;
   enum?: DeprecatedFileMessage["enum"] | null;
@@ -25888,6 +26302,15 @@ export const DeprecatedFileMessagePartialInput$Ref: InputObjectRef<
   },
 });
 
+export function DeprecatedFileMessagePartialInput$toProto(
+  input: DeprecatedFileMessagePartialInput$Shape | null | undefined,
+): DeprecatedFileMessage {
+  return new DeprecatedFileMessage({
+    body: input?.body ?? undefined,
+    enum: input?.enum ?? undefined,
+  });
+}
+
 export type DeprecatedFileMessageInnerMessageInput$Shape = {
   body?: DeprecatedFileMessage_InnerMessage["body"] | null;
 };
@@ -25915,6 +26338,14 @@ export const DeprecatedFileMessageInnerMessageInput$Ref: InputObjectRef<
   },
 });
 
+export function DeprecatedFileMessageInnerMessageInput$toProto(
+  input: DeprecatedFileMessageInnerMessageInput$Shape | null | undefined,
+): DeprecatedFileMessage_InnerMessage {
+  return new DeprecatedFileMessage_InnerMessage({
+    body: input?.body ?? undefined,
+  });
+}
+
 export type DeprecatedFileMessageInnerMessagePartialInput$Shape = {
   body?: DeprecatedFileMessage_InnerMessage["body"] | null;
 };
@@ -25941,6 +26372,14 @@ export const DeprecatedFileMessageInnerMessagePartialInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function DeprecatedFileMessageInnerMessagePartialInput$toProto(
+  input: DeprecatedFileMessageInnerMessagePartialInput$Shape | null | undefined,
+): DeprecatedFileMessage_InnerMessage {
+  return new DeprecatedFileMessage_InnerMessage({
+    body: input?.body ?? undefined,
+  });
+}
 
 export const DeprecatedFileEnum$Ref: EnumRef<
   DeprecatedFileEnum,
@@ -26223,6 +26662,15 @@ export const DeprecatedMessageInput$Ref: InputObjectRef<
     },
   });
 
+export function DeprecatedMessageInput$toProto(
+  input: DeprecatedMessageInput$Shape | null | undefined,
+): DeprecatedMessage {
+  return new DeprecatedMessage({
+    body: input?.body ?? undefined,
+    enum: input?.enum ?? undefined,
+  });
+}
+
 export type NotDeprecatedMessageInput$Shape = {
   body?: NotDeprecatedMessage["body"] | null;
   enum?: NotDeprecatedMessage["enum"] | null;
@@ -26326,6 +26774,37 @@ export const NotDeprecatedMessageInput$Ref: InputObjectRef<
   },
 });
 
+export function NotDeprecatedMessageInput$toProto(
+  input: NotDeprecatedMessageInput$Shape | null | undefined,
+): NotDeprecatedMessage {
+  return new NotDeprecatedMessage({
+    body: input?.body ?? undefined,
+    enum: input?.enum ?? undefined,
+    notDeprecatedOneof: input?.msg1
+      ? {
+        case: "msg1",
+        value: NotDeprecatedMessageInnerMessage1Input$toProto(input.msg1),
+      }
+      : input?.msg2
+      ? {
+        case: "msg2",
+        value: NotDeprecatedMessageInnerMessage2Input$toProto(input.msg2),
+      }
+      : undefined,
+    deprecatedOneof: input?.msg3
+      ? {
+        case: "msg3",
+        value: NotDeprecatedMessageInnerMessage1Input$toProto(input.msg3),
+      }
+      : input?.msg4
+      ? {
+        case: "msg4",
+        value: NotDeprecatedMessageInnerMessage2Input$toProto(input.msg4),
+      }
+      : undefined,
+  });
+}
+
 export type DeprecatedMessageInnerMessageInput$Shape = {
   body?: DeprecatedMessage_InnerMessage["body"] | null;
 };
@@ -26353,6 +26832,12 @@ export const DeprecatedMessageInnerMessageInput$Ref: InputObjectRef<
   },
 });
 
+export function DeprecatedMessageInnerMessageInput$toProto(
+  input: DeprecatedMessageInnerMessageInput$Shape | null | undefined,
+): DeprecatedMessage_InnerMessage {
+  return new DeprecatedMessage_InnerMessage({ body: input?.body ?? undefined });
+}
+
 export type NotDeprecatedMessageInnerMessage1Input$Shape = {
   body: NotDeprecatedMessage_InnerMessage1["body"];
 };
@@ -26378,6 +26863,14 @@ export const NotDeprecatedMessageInnerMessage1Input$Ref: InputObjectRef<
   },
 });
 
+export function NotDeprecatedMessageInnerMessage1Input$toProto(
+  input: NotDeprecatedMessageInnerMessage1Input$Shape | null | undefined,
+): NotDeprecatedMessage_InnerMessage1 {
+  return new NotDeprecatedMessage_InnerMessage1({
+    body: input?.body ?? undefined,
+  });
+}
+
 export type NotDeprecatedMessageInnerMessage2Input$Shape = {
   body: NotDeprecatedMessage_InnerMessage2["body"];
 };
@@ -26402,6 +26895,14 @@ export const NotDeprecatedMessageInnerMessage2Input$Ref: InputObjectRef<
     },
   },
 });
+
+export function NotDeprecatedMessageInnerMessage2Input$toProto(
+  input: NotDeprecatedMessageInnerMessage2Input$Shape | null | undefined,
+): NotDeprecatedMessage_InnerMessage2 {
+  return new NotDeprecatedMessage_InnerMessage2({
+    body: input?.body ?? undefined,
+  });
+}
 
 export const NotDeprecatedMessageNotDeprecatedOneof$Ref = builder.unionType(
   "NotDeprecatedMessageNotDeprecatedOneof",
@@ -26639,6 +27140,15 @@ export const DeprecatedFileMessageInput$Ref: InputObjectRef<
   },
 });
 
+export function DeprecatedFileMessageInput$toProto(
+  input: DeprecatedFileMessageInput$Shape | null | undefined,
+): DeprecatedFileMessage {
+  return new DeprecatedFileMessage({
+    body: input?.body ?? undefined,
+    enum: input?.enum ?? undefined,
+  });
+}
+
 export type DeprecatedFileMessageInnerMessageInput$Shape = {
   body?: DeprecatedFileMessage_InnerMessage["body"] | null;
 };
@@ -26665,6 +27175,14 @@ export const DeprecatedFileMessageInnerMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function DeprecatedFileMessageInnerMessageInput$toProto(
+  input: DeprecatedFileMessageInnerMessageInput$Shape | null | undefined,
+): DeprecatedFileMessage_InnerMessage {
+  return new DeprecatedFileMessage_InnerMessage({
+    body: input?.body ?? undefined,
+  });
+}
 
 export const DeprecatedFileEnum$Ref: EnumRef<
   DeprecatedFileEnum,
@@ -26762,6 +27280,12 @@ export const ChildMessageInput$Ref: InputObjectRef<ChildMessageInput$Shape> =
       },
     },
   });
+
+export function ChildMessageInput$toProto(
+  input: ChildMessageInput$Shape | null | undefined,
+): ChildMessage {
+  return new ChildMessage({ body: input?.body ?? undefined });
+}
 ",
     "name": "testapis/edgecases/import_from_same_pkg/ChildMessageInput.pothos.ts",
   },
@@ -26813,10 +27337,12 @@ builder.objectType(ParentMessage$Ref, {
 /* eslint-disable */
 
 import { InputObjectRef } from "@pothos/core";
+import { ParentMessage } from "@testapis/protobuf-es/testapis/edgecases/import_from_same_pkg/parent_pb";
 import { builder } from "../../../builder";
 import {
   ChildMessageInput$Ref,
   ChildMessageInput$Shape,
+  ChildMessageInput$toProto,
 } from "./ChildMessageInput.pothos";
 
 export type ParentMessageInput$Shape = {
@@ -26846,6 +27372,14 @@ export const ParentMessageInput$Ref: InputObjectRef<ParentMessageInput$Shape> =
       },
     },
   });
+
+export function ParentMessageInput$toProto(
+  input: ParentMessageInput$Shape | null | undefined,
+): ParentMessage {
+  return new ParentMessage({
+    child: input ? ChildMessageInput$toProto(input.child) : undefined,
+  });
+}
 ",
     "name": "testapis/edgecases/import_from_same_pkg/ParentMessageInput.pothos.ts",
   },
@@ -26905,6 +27439,12 @@ export const ChildMessageInput$Ref: InputObjectRef<ChildMessageInput$Shape> =
       },
     },
   });
+
+export function ChildMessageInput$toProto(
+  input: ChildMessageInput$Shape | null | undefined,
+): ChildMessage {
+  return new ChildMessage({ body: input?.body ?? undefined });
+}
 ",
     "name": "testapis/edgecases/import_from_same_pkg/child.pb.pothos.ts",
   },
@@ -26921,6 +27461,7 @@ import {
   ChildMessage$Ref,
   ChildMessageInput$Ref,
   ChildMessageInput$Shape,
+  ChildMessageInput$toProto,
 } from "./child.pb.pothos";
 
 export const ParentMessage$Ref = builder.objectRef<ParentMessage>(
@@ -26979,6 +27520,14 @@ export const ParentMessageInput$Ref: InputObjectRef<ParentMessageInput$Shape> =
       },
     },
   });
+
+export function ParentMessageInput$toProto(
+  input: ParentMessageInput$Shape | null | undefined,
+): ParentMessage {
+  return new ParentMessage({
+    child: input ? ChildMessageInput$toProto(input.child) : undefined,
+  });
+}
 ",
     "name": "testapis/edgecases/import_from_same_pkg/parent.pb.pothos.ts",
   },
@@ -27039,6 +27588,12 @@ export const ChildMessageInput$Ref: InputObjectRef<ChildMessageInput$Shape> =
     },
   });
 
+export function ChildMessageInput$toProto(
+  input: ChildMessageInput$Shape | null | undefined,
+): ChildMessage {
+  return new ChildMessage({ body: input?.body ?? undefined });
+}
+
 export type ChildMessagePartialInput$Shape = {
   body?: ChildMessage["body"] | null;
 };
@@ -27062,6 +27617,12 @@ export const ChildMessagePartialInput$Ref: InputObjectRef<
       },
     },
   });
+
+export function ChildMessagePartialInput$toProto(
+  input: ChildMessagePartialInput$Shape | null | undefined,
+): ChildMessage {
+  return new ChildMessage({ body: input?.body ?? undefined });
+}
 ",
     "name": "testapis/edgecases/import_from_same_pkg/child.pb.pothos.ts",
   },
@@ -27078,8 +27639,10 @@ import {
   ChildMessage$Ref,
   ChildMessageInput$Ref,
   ChildMessageInput$Shape,
+  ChildMessageInput$toProto,
   ChildMessagePartialInput$Ref,
   ChildMessagePartialInput$Shape,
+  ChildMessagePartialInput$toProto,
 } from "./child.pb.pothos";
 
 export const ParentMessage$Ref = builder.objectRef<ParentMessage>(
@@ -27139,6 +27702,14 @@ export const ParentMessageInput$Ref: InputObjectRef<ParentMessageInput$Shape> =
     },
   });
 
+export function ParentMessageInput$toProto(
+  input: ParentMessageInput$Shape | null | undefined,
+): ParentMessage {
+  return new ParentMessage({
+    child: input ? ChildMessageInput$toProto(input.child) : undefined,
+  });
+}
+
 export type ParentMessagePartialInput$Shape = {
   child?: ChildMessagePartialInput$Shape | null;
 };
@@ -27168,6 +27739,14 @@ export const ParentMessagePartialInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function ParentMessagePartialInput$toProto(
+  input: ParentMessagePartialInput$Shape | null | undefined,
+): ParentMessage {
+  return new ParentMessage({
+    child: input ? ChildMessagePartialInput$toProto(input.child) : undefined,
+  });
+}
 ",
     "name": "testapis/edgecases/import_from_same_pkg/parent.pb.pothos.ts",
   },
@@ -27227,6 +27806,12 @@ export const ChildMessageInput$Ref: InputObjectRef<ChildMessageInput$Shape> =
       },
     },
   });
+
+export function ChildMessageInput$toProto(
+  input: ChildMessageInput$Shape | null | undefined,
+): ChildMessage {
+  return new ChildMessage({ body: input?.body ?? undefined });
+}
 ",
     "name": "testapis/edgecases/import_from_same_pkg/child.pb.pothos.ts",
   },
@@ -27242,6 +27827,7 @@ import {
   ChildMessage$Ref,
   ChildMessageInput$Ref,
   ChildMessageInput$Shape,
+  ChildMessageInput$toProto,
 } from "./child.pb.pothos";
 import { ParentMessage } from "./testapis/edgecases/import_from_same_pkg/parent_pb";
 
@@ -27301,6 +27887,14 @@ export const ParentMessageInput$Ref: InputObjectRef<ParentMessageInput$Shape> =
       },
     },
   });
+
+export function ParentMessageInput$toProto(
+  input: ParentMessageInput$Shape | null | undefined,
+): ParentMessage {
+  return new ParentMessage({
+    child: input ? ChildMessageInput$toProto(input.child) : undefined,
+  });
+}
 ",
     "name": "testapis/edgecases/import_from_same_pkg/parent.pb.pothos.ts",
   },
@@ -27375,6 +27969,12 @@ export const OneofMessage1Input$Ref: InputObjectRef<OneofMessage1Input$Shape> =
       },
     },
   });
+
+export function OneofMessage1Input$toProto(
+  input: OneofMessage1Input$Shape | null | undefined,
+): OneofMessage1 {
+  return new OneofMessage1({ body: input?.body ?? undefined });
+}
 ",
     "name": "testapis/edgecases/import_squashed_union/pkg1/OneofMessage1Input.pothos.ts",
   },
@@ -27385,10 +27985,12 @@ export const OneofMessage1Input$Ref: InputObjectRef<OneofMessage1Input$Shape> =
 /* eslint-disable */
 
 import { InputObjectRef } from "@pothos/core";
+import { SquashedOneof } from "@testapis/protobuf-es/testapis/edgecases/import_squashed_union/pkg1/types_pb";
 import { builder } from "../../../../builder";
 import {
   OneofMessage1Input$Ref,
   OneofMessage1Input$Shape,
+  OneofMessage1Input$toProto,
 } from "./OneofMessage1Input.pothos";
 
 export type SquashedOneofInput$Shape = {
@@ -27419,6 +28021,16 @@ export const SquashedOneofInput$Ref: InputObjectRef<SquashedOneofInput$Shape> =
       },
     },
   });
+
+export function SquashedOneofInput$toProto(
+  input: SquashedOneofInput$Shape | null | undefined,
+): SquashedOneof {
+  return new SquashedOneof({
+    message: input?.msg1
+      ? { case: "msg1", value: OneofMessage1Input$toProto(input.msg1) }
+      : undefined,
+  });
+}
 ",
     "name": "testapis/edgecases/import_squashed_union/pkg1/SquashedOneofInput.pothos.ts",
   },
@@ -27503,10 +28115,12 @@ builder.objectType(Message$Ref, {
 /* eslint-disable */
 
 import { InputObjectRef } from "@pothos/core";
+import { Message } from "@testapis/protobuf-es/testapis/edgecases/import_squashed_union/pkg2/types_pb";
 import { builder } from "../../../../builder";
 import {
   SquashedOneofInput$Ref,
   SquashedOneofInput$Shape,
+  SquashedOneofInput$toProto,
 } from "../pkg1/SquashedOneofInput.pothos";
 
 export type MessageInput$Shape = { msg?: SquashedOneofInput$Shape | null; };
@@ -27534,6 +28148,14 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
       },
     },
   });
+
+export function MessageInput$toProto(
+  input: MessageInput$Shape | null | undefined,
+): Message {
+  return new Message({
+    msg: input ? SquashedOneofInput$toProto(input.msg) : undefined,
+  });
+}
 ",
     "name": "testapis/edgecases/import_squashed_union/pkg2/MessageInput.pothos.ts",
   },
@@ -27551,7 +28173,10 @@ exports[`protobuf-es > 'testapis.edgecases.import_squashed_un…' > generates fi
 /* eslint-disable */
 
 import { InputObjectRef } from "@pothos/core";
-import { OneofMessage1 } from "@testapis/protobuf-es/testapis/edgecases/import_squashed_union/pkg1/types_pb";
+import {
+  OneofMessage1,
+  SquashedOneof,
+} from "@testapis/protobuf-es/testapis/edgecases/import_squashed_union/pkg1/types_pb";
 import { builder } from "../../../../builder";
 
 export const OneofMessage1$Ref = builder.objectRef<OneofMessage1>(
@@ -27598,6 +28223,12 @@ export const OneofMessage1Input$Ref: InputObjectRef<OneofMessage1Input$Shape> =
     },
   });
 
+export function OneofMessage1Input$toProto(
+  input: OneofMessage1Input$Shape | null | undefined,
+): OneofMessage1 {
+  return new OneofMessage1({ body: input?.body ?? undefined });
+}
+
 export type SquashedOneofInput$Shape = {
   msg1?: OneofMessage1Input$Shape | null;
 };
@@ -27626,6 +28257,16 @@ export const SquashedOneofInput$Ref: InputObjectRef<SquashedOneofInput$Shape> =
       },
     },
   });
+
+export function SquashedOneofInput$toProto(
+  input: SquashedOneofInput$Shape | null | undefined,
+): SquashedOneof {
+  return new SquashedOneof({
+    message: input?.msg1
+      ? { case: "msg1", value: OneofMessage1Input$toProto(input.msg1) }
+      : undefined,
+  });
+}
 
 export const SquashedOneof$Ref = builder.unionType("SquashedOneof", {
   types: [OneofMessage1$Ref],
@@ -27663,6 +28304,7 @@ import {
   SquashedOneof$Ref,
   SquashedOneofInput$Ref,
   SquashedOneofInput$Shape,
+  SquashedOneofInput$toProto,
 } from "../pkg1/types.pb.pothos";
 
 export const Message$Ref = builder.objectRef<Message>("Message");
@@ -27721,6 +28363,14 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
       },
     },
   });
+
+export function MessageInput$toProto(
+  input: MessageInput$Shape | null | undefined,
+): Message {
+  return new Message({
+    msg: input ? SquashedOneofInput$toProto(input.msg) : undefined,
+  });
+}
 ",
     "name": "testapis/edgecases/import_squashed_union/pkg2/types.pb.pothos.ts",
   },
@@ -27738,7 +28388,10 @@ exports[`protobuf-es > 'testapis.edgecases.import_squashed_un…' > generates fi
 /* eslint-disable */
 
 import { InputObjectRef } from "@pothos/core";
-import { OneofMessage1 } from "@testapis/protobuf-es/testapis/edgecases/import_squashed_union/pkg1/types_pb";
+import {
+  OneofMessage1,
+  SquashedOneof,
+} from "@testapis/protobuf-es/testapis/edgecases/import_squashed_union/pkg1/types_pb";
 import { builder } from "../../../../builder";
 
 export const OneofMessage1$Ref = builder.objectRef<OneofMessage1>(
@@ -27785,6 +28438,12 @@ export const OneofMessage1Input$Ref: InputObjectRef<OneofMessage1Input$Shape> =
     },
   });
 
+export function OneofMessage1Input$toProto(
+  input: OneofMessage1Input$Shape | null | undefined,
+): OneofMessage1 {
+  return new OneofMessage1({ body: input?.body ?? undefined });
+}
+
 export type OneofMessage1PartialInput$Shape = {
   body?: OneofMessage1["body"] | null;
 };
@@ -27809,6 +28468,12 @@ export const OneofMessage1PartialInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function OneofMessage1PartialInput$toProto(
+  input: OneofMessage1PartialInput$Shape | null | undefined,
+): OneofMessage1 {
+  return new OneofMessage1({ body: input?.body ?? undefined });
+}
 
 export type SquashedOneofInput$Shape = {
   msg1?: OneofMessage1Input$Shape | null;
@@ -27838,6 +28503,16 @@ export const SquashedOneofInput$Ref: InputObjectRef<SquashedOneofInput$Shape> =
       },
     },
   });
+
+export function SquashedOneofInput$toProto(
+  input: SquashedOneofInput$Shape | null | undefined,
+): SquashedOneof {
+  return new SquashedOneof({
+    message: input?.msg1
+      ? { case: "msg1", value: OneofMessage1Input$toProto(input.msg1) }
+      : undefined,
+  });
+}
 
 export type SquashedOneofPartialInput$Shape = {
   msg1?: OneofMessage1PartialInput$Shape | null;
@@ -27870,6 +28545,16 @@ export const SquashedOneofPartialInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function SquashedOneofPartialInput$toProto(
+  input: SquashedOneofPartialInput$Shape | null | undefined,
+): SquashedOneof {
+  return new SquashedOneof({
+    message: input?.msg1
+      ? { case: "msg1", value: OneofMessage1PartialInput$toProto(input.msg1) }
+      : undefined,
+  });
+}
 
 export const SquashedOneof$Ref = builder.unionType("SquashedOneof", {
   types: [OneofMessage1$Ref],
@@ -27907,8 +28592,10 @@ import {
   SquashedOneof$Ref,
   SquashedOneofInput$Ref,
   SquashedOneofInput$Shape,
+  SquashedOneofInput$toProto,
   SquashedOneofPartialInput$Ref,
   SquashedOneofPartialInput$Shape,
+  SquashedOneofPartialInput$toProto,
 } from "../pkg1/types.pb.pothos";
 
 export const Message$Ref = builder.objectRef<Message>("Message");
@@ -27968,6 +28655,14 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
     },
   });
 
+export function MessageInput$toProto(
+  input: MessageInput$Shape | null | undefined,
+): Message {
+  return new Message({
+    msg: input ? SquashedOneofInput$toProto(input.msg) : undefined,
+  });
+}
+
 export type MessagePartialInput$Shape = {
   msg?: SquashedOneofPartialInput$Shape | null;
 };
@@ -27997,6 +28692,14 @@ export const MessagePartialInput$Ref: InputObjectRef<
       },
     },
   });
+
+export function MessagePartialInput$toProto(
+  input: MessagePartialInput$Shape | null | undefined,
+): Message {
+  return new Message({
+    msg: input ? SquashedOneofPartialInput$toProto(input.msg) : undefined,
+  });
+}
 ",
     "name": "testapis/edgecases/import_squashed_union/pkg2/types.pb.pothos.ts",
   },
@@ -28015,7 +28718,10 @@ exports[`protobuf-es > 'testapis.edgecases.import_squashed_un…' > generates fi
 
 import { InputObjectRef } from "@pothos/core";
 import { builder } from "../../../../builder";
-import { OneofMessage1 } from "./testapis/edgecases/import_squashed_union/pkg1/types_pb";
+import {
+  OneofMessage1,
+  SquashedOneof,
+} from "./testapis/edgecases/import_squashed_union/pkg1/types_pb";
 
 export const OneofMessage1$Ref = builder.objectRef<OneofMessage1>(
   "OneofMessage1",
@@ -28061,6 +28767,12 @@ export const OneofMessage1Input$Ref: InputObjectRef<OneofMessage1Input$Shape> =
     },
   });
 
+export function OneofMessage1Input$toProto(
+  input: OneofMessage1Input$Shape | null | undefined,
+): OneofMessage1 {
+  return new OneofMessage1({ body: input?.body ?? undefined });
+}
+
 export type SquashedOneofInput$Shape = {
   msg1?: OneofMessage1Input$Shape | null;
 };
@@ -28089,6 +28801,16 @@ export const SquashedOneofInput$Ref: InputObjectRef<SquashedOneofInput$Shape> =
       },
     },
   });
+
+export function SquashedOneofInput$toProto(
+  input: SquashedOneofInput$Shape | null | undefined,
+): SquashedOneof {
+  return new SquashedOneof({
+    message: input?.msg1
+      ? { case: "msg1", value: OneofMessage1Input$toProto(input.msg1) }
+      : undefined,
+  });
+}
 
 export const SquashedOneof$Ref = builder.unionType("SquashedOneof", {
   types: [OneofMessage1$Ref],
@@ -28125,6 +28847,7 @@ import {
   SquashedOneof$Ref,
   SquashedOneofInput$Ref,
   SquashedOneofInput$Shape,
+  SquashedOneofInput$toProto,
 } from "../pkg1/types.pb.pothos";
 import { Message } from "./testapis/edgecases/import_squashed_union/pkg2/types_pb";
 
@@ -28184,6 +28907,14 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
       },
     },
   });
+
+export function MessageInput$toProto(
+  input: MessageInput$Shape | null | undefined,
+): Message {
+  return new Message({
+    msg: input ? SquashedOneofInput$toProto(input.msg) : undefined,
+  });
+}
 ",
     "name": "testapis/edgecases/import_squashed_union/pkg2/types.pb.pothos.ts",
   },
@@ -28233,6 +28964,7 @@ builder.objectType(EmptyMessage$Ref, {
 /* eslint-disable */
 
 import { InputObjectRef } from "@pothos/core";
+import { EmptyMessage } from "@testapis/protobuf-es/testapis/empty_types/empty_pb";
 import { builder } from "../../builder";
 
 export type EmptyMessageInput$Shape = {};
@@ -28254,6 +28986,12 @@ export const EmptyMessageInput$Ref: InputObjectRef<EmptyMessageInput$Shape> =
       },
     },
   });
+
+export function EmptyMessageInput$toProto(
+  input: EmptyMessageInput$Shape | null | undefined,
+): EmptyMessage {
+  return new EmptyMessage({});
+}
 ",
     "name": "testapis/empty_types/EmptyMessageInput.pothos.ts",
   },
@@ -28314,6 +29052,12 @@ export const EmptyMessageInput$Ref: InputObjectRef<EmptyMessageInput$Shape> =
       },
     },
   });
+
+export function EmptyMessageInput$toProto(
+  input: EmptyMessageInput$Shape | null | undefined,
+): EmptyMessage {
+  return new EmptyMessage({});
+}
 ",
     "name": "testapis/empty_types/empty.pb.pothos.ts",
   },
@@ -28375,6 +29119,12 @@ export const EmptyMessageInput$Ref: InputObjectRef<EmptyMessageInput$Shape> =
     },
   });
 
+export function EmptyMessageInput$toProto(
+  input: EmptyMessageInput$Shape | null | undefined,
+): EmptyMessage {
+  return new EmptyMessage({});
+}
+
 export type EmptyMessagePartialInput$Shape = {};
 
 export const EmptyMessagePartialInput$Ref: InputObjectRef<
@@ -28396,6 +29146,12 @@ export const EmptyMessagePartialInput$Ref: InputObjectRef<
       },
     },
   });
+
+export function EmptyMessagePartialInput$toProto(
+  input: EmptyMessagePartialInput$Shape | null | undefined,
+): EmptyMessage {
+  return new EmptyMessage({});
+}
 ",
     "name": "testapis/empty_types/empty.pb.pothos.ts",
   },
@@ -28456,6 +29212,12 @@ export const EmptyMessageInput$Ref: InputObjectRef<EmptyMessageInput$Shape> =
       },
     },
   });
+
+export function EmptyMessageInput$toProto(
+  input: EmptyMessageInput$Shape | null | undefined,
+): EmptyMessage {
+  return new EmptyMessage({});
+}
 ",
     "name": "testapis/empty_types/empty.pb.pothos.ts",
   },
@@ -28768,6 +29530,25 @@ export const MessageWithEnumsInput$Ref: InputObjectRef<
       },
     },
   });
+
+export function MessageWithEnumsInput$toProto(
+  input: MessageWithEnumsInput$Shape | null | undefined,
+): MessageWithEnums {
+  return new MessageWithEnums({
+    requiredMyEnum: input?.requiredMyEnum ?? undefined,
+    optionalMyEnum: input?.optionalMyEnum ?? undefined,
+    requiredMyEnumWithoutUnspecified: input?.requiredMyEnumWithoutUnspecified ??
+      undefined,
+    optionalMyEnumWithoutUnspecified: input?.optionalMyEnumWithoutUnspecified ??
+      undefined,
+    requiredMyEnums: input?.requiredMyEnums ?? undefined,
+    optionalMyEnums: input?.optionalMyEnums ?? undefined,
+    requiredMyEnumWithoutUnspecifieds:
+      input?.requiredMyEnumWithoutUnspecifieds ?? undefined,
+    optionalMyEnumWithoutUnspecifieds:
+      input?.optionalMyEnumWithoutUnspecifieds ?? undefined,
+  });
+}
 ",
     "name": "testapis/enums/MessageWithEnumsInput.pothos.ts",
   },
@@ -29149,6 +29930,25 @@ export const MessageWithEnumsInput$Ref: InputObjectRef<
     },
   });
 
+export function MessageWithEnumsInput$toProto(
+  input: MessageWithEnumsInput$Shape | null | undefined,
+): MessageWithEnums {
+  return new MessageWithEnums({
+    requiredMyEnum: input?.requiredMyEnum ?? undefined,
+    optionalMyEnum: input?.optionalMyEnum ?? undefined,
+    requiredMyEnumWithoutUnspecified: input?.requiredMyEnumWithoutUnspecified ??
+      undefined,
+    optionalMyEnumWithoutUnspecified: input?.optionalMyEnumWithoutUnspecified ??
+      undefined,
+    requiredMyEnums: input?.requiredMyEnums ?? undefined,
+    optionalMyEnums: input?.optionalMyEnums ?? undefined,
+    requiredMyEnumWithoutUnspecifieds:
+      input?.requiredMyEnumWithoutUnspecifieds ?? undefined,
+    optionalMyEnumWithoutUnspecifieds:
+      input?.optionalMyEnumWithoutUnspecifieds ?? undefined,
+  });
+}
+
 export const MyEnum$Ref: EnumRef<MyEnum, MyEnum> = builder.enumType("MyEnum", {
   values: {
     FOO: {
@@ -29505,6 +30305,25 @@ export const MessageWithEnumsInput$Ref: InputObjectRef<
     },
   });
 
+export function MessageWithEnumsInput$toProto(
+  input: MessageWithEnumsInput$Shape | null | undefined,
+): MessageWithEnums {
+  return new MessageWithEnums({
+    requiredMyEnum: input?.requiredMyEnum ?? undefined,
+    optionalMyEnum: input?.optionalMyEnum ?? undefined,
+    requiredMyEnumWithoutUnspecified: input?.requiredMyEnumWithoutUnspecified ??
+      undefined,
+    optionalMyEnumWithoutUnspecified: input?.optionalMyEnumWithoutUnspecified ??
+      undefined,
+    requiredMyEnums: input?.requiredMyEnums ?? undefined,
+    optionalMyEnums: input?.optionalMyEnums ?? undefined,
+    requiredMyEnumWithoutUnspecifieds:
+      input?.requiredMyEnumWithoutUnspecifieds ?? undefined,
+    optionalMyEnumWithoutUnspecifieds:
+      input?.optionalMyEnumWithoutUnspecifieds ?? undefined,
+  });
+}
+
 export type MessageWithEnumsPartialInput$Shape = {
   requiredMyEnum?: MessageWithEnums["requiredMyEnum"] | null;
   optionalMyEnum?: MessageWithEnums["optionalMyEnum"] | null;
@@ -29627,6 +30446,25 @@ export const MessageWithEnumsPartialInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function MessageWithEnumsPartialInput$toProto(
+  input: MessageWithEnumsPartialInput$Shape | null | undefined,
+): MessageWithEnums {
+  return new MessageWithEnums({
+    requiredMyEnum: input?.requiredMyEnum ?? undefined,
+    optionalMyEnum: input?.optionalMyEnum ?? undefined,
+    requiredMyEnumWithoutUnspecified: input?.requiredMyEnumWithoutUnspecified ??
+      undefined,
+    optionalMyEnumWithoutUnspecified: input?.optionalMyEnumWithoutUnspecified ??
+      undefined,
+    requiredMyEnums: input?.requiredMyEnums ?? undefined,
+    optionalMyEnums: input?.optionalMyEnums ?? undefined,
+    requiredMyEnumWithoutUnspecifieds:
+      input?.requiredMyEnumWithoutUnspecifieds ?? undefined,
+    optionalMyEnumWithoutUnspecifieds:
+      input?.optionalMyEnumWithoutUnspecifieds ?? undefined,
+  });
+}
 
 export const MyEnum$Ref: EnumRef<MyEnum, MyEnum> = builder.enumType("MyEnum", {
   values: {
@@ -29983,6 +30821,25 @@ export const MessageWithEnumsInput$Ref: InputObjectRef<
       },
     },
   });
+
+export function MessageWithEnumsInput$toProto(
+  input: MessageWithEnumsInput$Shape | null | undefined,
+): MessageWithEnums {
+  return new MessageWithEnums({
+    requiredMyEnum: input?.requiredMyEnum ?? undefined,
+    optionalMyEnum: input?.optionalMyEnum ?? undefined,
+    requiredMyEnumWithoutUnspecified: input?.requiredMyEnumWithoutUnspecified ??
+      undefined,
+    optionalMyEnumWithoutUnspecified: input?.optionalMyEnumWithoutUnspecified ??
+      undefined,
+    requiredMyEnums: input?.requiredMyEnums ?? undefined,
+    optionalMyEnums: input?.optionalMyEnums ?? undefined,
+    requiredMyEnumWithoutUnspecifieds:
+      input?.requiredMyEnumWithoutUnspecifieds ?? undefined,
+    optionalMyEnumWithoutUnspecifieds:
+      input?.optionalMyEnumWithoutUnspecifieds ?? undefined,
+  });
+}
 
 export const MyEnum$Ref: EnumRef<MyEnum, MyEnum> = builder.enumType("MyEnum", {
   values: {
@@ -30418,20 +31275,24 @@ import { builder } from "../../builder";
 import {
   TestPrefixIgnoredMessageNotIgnoredInput$Ref,
   TestPrefixIgnoredMessageNotIgnoredInput$Shape,
+  TestPrefixIgnoredMessageNotIgnoredInput$toProto,
 } from "./TestPrefixIgnoredMessageNotIgnoredInput.pothos";
 import { TestPrefixPrefixedEnum$Ref } from "./TestPrefixPrefixedEnum.pothos";
 import {
   TestPrefixPrefixedMessageInnerMessageInput$Ref,
   TestPrefixPrefixedMessageInnerMessageInput$Shape,
+  TestPrefixPrefixedMessageInnerMessageInput$toProto,
 } from "./TestPrefixPrefixedMessageInnerMessageInput.pothos";
 import {
   TestPrefixPrefixedMessageSquashedMessageInput$Ref,
   TestPrefixPrefixedMessageSquashedMessageInput$Shape,
+  TestPrefixPrefixedMessageSquashedMessageInput$toProto,
 } from "./TestPrefixPrefixedMessageSquashedMessageInput.pothos";
 import { TestPrefixRenamedEnum$Ref } from "./TestPrefixRenamedEnum.pothos";
 import {
   TestPrefixRenamedMessageInput$Ref,
   TestPrefixRenamedMessageInput$Shape,
+  TestPrefixRenamedMessageInput$toProto,
 } from "./TestPrefixRenamedMessageInput.pothos";
 
 export type TestPrefixPrefixedMessageInput$Shape = {
@@ -30563,6 +31424,40 @@ export const TestPrefixPrefixedMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function TestPrefixPrefixedMessageInput$toProto(
+  input: TestPrefixPrefixedMessageInput$Shape | null | undefined,
+): PrefixedMessage {
+  return new PrefixedMessage({
+    body: input?.body ?? undefined,
+    prefixedEnum: input?.prefixedEnum ?? undefined,
+    notIgnoredMessage: input
+      ? TestPrefixIgnoredMessageNotIgnoredInput$toProto(input.notIgnoredMessage)
+      : undefined,
+    squashedMessage: input
+      ? TestPrefixPrefixedMessageSquashedMessageInput$toProto(
+        input.squashedMessage,
+      )
+      : undefined,
+    thisFieldWillBeRenamed: input?.thisFieldWasRenamed ?? undefined,
+    skipResolver: input?.skipResolver ?? undefined,
+    squashedMessages: input?.squashedMessages?.map((v) =>
+      TestPrefixPrefixedMessageSquashedMessageInput$toProto(v)
+    ),
+    renamedMessage: input
+      ? TestPrefixRenamedMessageInput$toProto(input.renamedMessage)
+      : undefined,
+    renamedEnum: input?.renamedEnum ?? undefined,
+    partialIgnoreOneof: input?.oneofNotIgnoredField
+      ? {
+        case: "oneofNotIgnoredField",
+        value: TestPrefixPrefixedMessageInnerMessageInput$toProto(
+          input.oneofNotIgnoredField,
+        ),
+      }
+      : undefined,
+  });
+}
 ",
     "name": "testapis/extensions/TestPrefixPrefixedMessageInput.pothos.ts",
   },
@@ -30601,6 +31496,12 @@ export const TestPrefixRenamedMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function TestPrefixRenamedMessageInput$toProto(
+  input: TestPrefixRenamedMessageInput$Shape | null | undefined,
+): MessageWillRename {
+  return new MessageWillRename({ body: input?.body ?? undefined });
+}
 ",
     "name": "testapis/extensions/TestPrefixRenamedMessageInput.pothos.ts",
   },
@@ -30639,6 +31540,12 @@ export const TestPrefixInterfaceMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function TestPrefixInterfaceMessageInput$toProto(
+  input: TestPrefixInterfaceMessageInput$Shape | null | undefined,
+): InterfaceMessage {
+  return new InterfaceMessage({ id: input?.id ?? undefined });
+}
 ",
     "name": "testapis/extensions/TestPrefixInterfaceMessageInput.pothos.ts",
   },
@@ -30682,6 +31589,15 @@ export const TestPrefixPrefixedMessageInnerMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function TestPrefixPrefixedMessageInnerMessageInput$toProto(
+  input: TestPrefixPrefixedMessageInnerMessageInput$Shape | null | undefined,
+): PrefixedMessage_InnerMessage {
+  return new PrefixedMessage_InnerMessage({
+    id: input?.id ?? undefined,
+    body: input?.body ?? undefined,
+  });
+}
 ",
     "name": "testapis/extensions/TestPrefixPrefixedMessageInnerMessageInput.pothos.ts",
   },
@@ -30725,6 +31641,15 @@ export const TestPrefixPrefixedMessageInnerMessage2Input$Ref: InputObjectRef<
     },
   },
 });
+
+export function TestPrefixPrefixedMessageInnerMessage2Input$toProto(
+  input: TestPrefixPrefixedMessageInnerMessage2Input$Shape | null | undefined,
+): PrefixedMessage_InnerMessage2 {
+  return new PrefixedMessage_InnerMessage2({
+    id: input?.id ?? undefined,
+    body: input?.body ?? undefined,
+  });
+}
 ",
     "name": "testapis/extensions/TestPrefixPrefixedMessageInnerMessage2Input.pothos.ts",
   },
@@ -30735,14 +31660,17 @@ export const TestPrefixPrefixedMessageInnerMessage2Input$Ref: InputObjectRef<
 /* eslint-disable */
 
 import { InputObjectRef } from "@pothos/core";
+import { PrefixedMessage_SquashedMessage } from "@testapis/protobuf-es/testapis/extensions/extensions_pb";
 import { builder } from "../../builder";
 import {
   TestPrefixPrefixedMessageInnerMessage2Input$Ref,
   TestPrefixPrefixedMessageInnerMessage2Input$Shape,
+  TestPrefixPrefixedMessageInnerMessage2Input$toProto,
 } from "./TestPrefixPrefixedMessageInnerMessage2Input.pothos";
 import {
   TestPrefixPrefixedMessageInnerMessageInput$Ref,
   TestPrefixPrefixedMessageInnerMessageInput$Shape,
+  TestPrefixPrefixedMessageInnerMessageInput$toProto,
 } from "./TestPrefixPrefixedMessageInnerMessageInput.pothos";
 
 export type TestPrefixPrefixedMessageSquashedMessageInput$Shape = {
@@ -30786,6 +31714,28 @@ export const TestPrefixPrefixedMessageSquashedMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function TestPrefixPrefixedMessageSquashedMessageInput$toProto(
+  input: TestPrefixPrefixedMessageSquashedMessageInput$Shape | null | undefined,
+): PrefixedMessage_SquashedMessage {
+  return new PrefixedMessage_SquashedMessage({
+    squashedMessage: input?.oneofField
+      ? {
+        case: "oneofField",
+        value: TestPrefixPrefixedMessageInnerMessageInput$toProto(
+          input.oneofField,
+        ),
+      }
+      : input?.oneofField2
+      ? {
+        case: "oneofField2",
+        value: TestPrefixPrefixedMessageInnerMessage2Input$toProto(
+          input.oneofField2,
+        ),
+      }
+      : undefined,
+  });
+}
 ",
     "name": "testapis/extensions/TestPrefixPrefixedMessageSquashedMessageInput.pothos.ts",
   },
@@ -30823,6 +31773,12 @@ export const TestPrefixIgnoredMessageNotIgnoredInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function TestPrefixIgnoredMessageNotIgnoredInput$toProto(
+  input: TestPrefixIgnoredMessageNotIgnoredInput$Shape | null | undefined,
+): IgnoredMessage_NotIgnored {
+  return new IgnoredMessage_NotIgnored({ body: input?.body ?? undefined });
+}
 ",
     "name": "testapis/extensions/TestPrefixIgnoredMessageNotIgnoredInput.pothos.ts",
   },
@@ -31043,6 +31999,7 @@ import {
   PrefixedMessage,
   PrefixedMessage_InnerMessage,
   PrefixedMessage_InnerMessage2,
+  PrefixedMessage_SquashedMessage,
 } from "@testapis/protobuf-es/testapis/extensions/extensions_pb";
 import { builder } from "../../builder";
 
@@ -31458,6 +32415,40 @@ export const TestPrefixPrefixedMessageInput$Ref: InputObjectRef<
   },
 });
 
+export function TestPrefixPrefixedMessageInput$toProto(
+  input: TestPrefixPrefixedMessageInput$Shape | null | undefined,
+): PrefixedMessage {
+  return new PrefixedMessage({
+    body: input?.body ?? undefined,
+    prefixedEnum: input?.prefixedEnum ?? undefined,
+    notIgnoredMessage: input
+      ? TestPrefixIgnoredMessageNotIgnoredInput$toProto(input.notIgnoredMessage)
+      : undefined,
+    squashedMessage: input
+      ? TestPrefixPrefixedMessageSquashedMessageInput$toProto(
+        input.squashedMessage,
+      )
+      : undefined,
+    thisFieldWillBeRenamed: input?.thisFieldWasRenamed ?? undefined,
+    skipResolver: input?.skipResolver ?? undefined,
+    squashedMessages: input?.squashedMessages?.map((v) =>
+      TestPrefixPrefixedMessageSquashedMessageInput$toProto(v)
+    ),
+    renamedMessage: input
+      ? TestPrefixRenamedMessageInput$toProto(input.renamedMessage)
+      : undefined,
+    renamedEnum: input?.renamedEnum ?? undefined,
+    partialIgnoreOneof: input?.oneofNotIgnoredField
+      ? {
+        case: "oneofNotIgnoredField",
+        value: TestPrefixPrefixedMessageInnerMessageInput$toProto(
+          input.oneofNotIgnoredField,
+        ),
+      }
+      : undefined,
+  });
+}
+
 export type TestPrefixRenamedMessageInput$Shape = {
   body: MessageWillRename["body"];
 };
@@ -31484,6 +32475,12 @@ export const TestPrefixRenamedMessageInput$Ref: InputObjectRef<
   },
 });
 
+export function TestPrefixRenamedMessageInput$toProto(
+  input: TestPrefixRenamedMessageInput$Shape | null | undefined,
+): MessageWillRename {
+  return new MessageWillRename({ body: input?.body ?? undefined });
+}
+
 export type TestPrefixInterfaceMessageInput$Shape = {
   id: InterfaceMessage["id"];
 };
@@ -31509,6 +32506,12 @@ export const TestPrefixInterfaceMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function TestPrefixInterfaceMessageInput$toProto(
+  input: TestPrefixInterfaceMessageInput$Shape | null | undefined,
+): InterfaceMessage {
+  return new InterfaceMessage({ id: input?.id ?? undefined });
+}
 
 export type TestPrefixPrefixedMessageInnerMessageInput$Shape = {
   id: PrefixedMessage_InnerMessage["id"];
@@ -31541,6 +32544,15 @@ export const TestPrefixPrefixedMessageInnerMessageInput$Ref: InputObjectRef<
   },
 });
 
+export function TestPrefixPrefixedMessageInnerMessageInput$toProto(
+  input: TestPrefixPrefixedMessageInnerMessageInput$Shape | null | undefined,
+): PrefixedMessage_InnerMessage {
+  return new PrefixedMessage_InnerMessage({
+    id: input?.id ?? undefined,
+    body: input?.body ?? undefined,
+  });
+}
+
 export type TestPrefixPrefixedMessageInnerMessage2Input$Shape = {
   id: PrefixedMessage_InnerMessage2["id"];
   body: PrefixedMessage_InnerMessage2["body"];
@@ -31571,6 +32583,15 @@ export const TestPrefixPrefixedMessageInnerMessage2Input$Ref: InputObjectRef<
     },
   },
 });
+
+export function TestPrefixPrefixedMessageInnerMessage2Input$toProto(
+  input: TestPrefixPrefixedMessageInnerMessage2Input$Shape | null | undefined,
+): PrefixedMessage_InnerMessage2 {
+  return new PrefixedMessage_InnerMessage2({
+    id: input?.id ?? undefined,
+    body: input?.body ?? undefined,
+  });
+}
 
 export type TestPrefixPrefixedMessageSquashedMessageInput$Shape = {
   oneofField?: TestPrefixPrefixedMessageInnerMessageInput$Shape | null;
@@ -31614,6 +32635,28 @@ export const TestPrefixPrefixedMessageSquashedMessageInput$Ref: InputObjectRef<
   },
 });
 
+export function TestPrefixPrefixedMessageSquashedMessageInput$toProto(
+  input: TestPrefixPrefixedMessageSquashedMessageInput$Shape | null | undefined,
+): PrefixedMessage_SquashedMessage {
+  return new PrefixedMessage_SquashedMessage({
+    squashedMessage: input?.oneofField
+      ? {
+        case: "oneofField",
+        value: TestPrefixPrefixedMessageInnerMessageInput$toProto(
+          input.oneofField,
+        ),
+      }
+      : input?.oneofField2
+      ? {
+        case: "oneofField2",
+        value: TestPrefixPrefixedMessageInnerMessage2Input$toProto(
+          input.oneofField2,
+        ),
+      }
+      : undefined,
+  });
+}
+
 export type TestPrefixIgnoredMessageNotIgnoredInput$Shape = {
   body: IgnoredMessage_NotIgnored["body"];
 };
@@ -31638,6 +32681,12 @@ export const TestPrefixIgnoredMessageNotIgnoredInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function TestPrefixIgnoredMessageNotIgnoredInput$toProto(
+  input: TestPrefixIgnoredMessageNotIgnoredInput$Shape | null | undefined,
+): IgnoredMessage_NotIgnored {
+  return new IgnoredMessage_NotIgnored({ body: input?.body ?? undefined });
+}
 
 export const TestPrefixInterfaceMessage$Ref = builder.interfaceRef<
   Pick<InterfaceMessage, "id">
@@ -31801,6 +32850,7 @@ import {
   PrefixedMessage,
   PrefixedMessage_InnerMessage,
   PrefixedMessage_InnerMessage2,
+  PrefixedMessage_SquashedMessage,
 } from "@testapis/protobuf-es/testapis/extensions/extensions_pb";
 import { builder } from "../../builder";
 
@@ -32216,6 +33266,40 @@ export const TestPrefixPrefixedMessageInput$Ref: InputObjectRef<
   },
 });
 
+export function TestPrefixPrefixedMessageInput$toProto(
+  input: TestPrefixPrefixedMessageInput$Shape | null | undefined,
+): PrefixedMessage {
+  return new PrefixedMessage({
+    body: input?.body ?? undefined,
+    prefixedEnum: input?.prefixedEnum ?? undefined,
+    notIgnoredMessage: input
+      ? TestPrefixIgnoredMessageNotIgnoredInput$toProto(input.notIgnoredMessage)
+      : undefined,
+    squashedMessage: input
+      ? TestPrefixPrefixedMessageSquashedMessageInput$toProto(
+        input.squashedMessage,
+      )
+      : undefined,
+    thisFieldWillBeRenamed: input?.thisFieldWasRenamed ?? undefined,
+    skipResolver: input?.skipResolver ?? undefined,
+    squashedMessages: input?.squashedMessages?.map((v) =>
+      TestPrefixPrefixedMessageSquashedMessageInput$toProto(v)
+    ),
+    renamedMessage: input
+      ? TestPrefixRenamedMessageInput$toProto(input.renamedMessage)
+      : undefined,
+    renamedEnum: input?.renamedEnum ?? undefined,
+    partialIgnoreOneof: input?.oneofNotIgnoredField
+      ? {
+        case: "oneofNotIgnoredField",
+        value: TestPrefixPrefixedMessageInnerMessageInput$toProto(
+          input.oneofNotIgnoredField,
+        ),
+      }
+      : undefined,
+  });
+}
+
 export type TestPrefixPrefixedMessagePartialInput$Shape = {
   body?: PrefixedMessage["body"] | null;
   prefixedEnum?: PrefixedMessage["prefixedEnum"] | null;
@@ -32350,6 +33434,42 @@ export const TestPrefixPrefixedMessagePartialInput$Ref: InputObjectRef<
   },
 });
 
+export function TestPrefixPrefixedMessagePartialInput$toProto(
+  input: TestPrefixPrefixedMessagePartialInput$Shape | null | undefined,
+): PrefixedMessage {
+  return new PrefixedMessage({
+    body: input?.body ?? undefined,
+    prefixedEnum: input?.prefixedEnum ?? undefined,
+    notIgnoredMessage: input
+      ? TestPrefixIgnoredMessageNotIgnoredPartialInput$toProto(
+        input.notIgnoredMessage,
+      )
+      : undefined,
+    squashedMessage: input
+      ? TestPrefixPrefixedMessageSquashedMessagePartialInput$toProto(
+        input.squashedMessage,
+      )
+      : undefined,
+    thisFieldWillBeRenamed: input?.thisFieldWasRenamed ?? undefined,
+    skipResolver: input?.skipResolver ?? undefined,
+    squashedMessages: input?.squashedMessages?.map((v) =>
+      TestPrefixPrefixedMessageSquashedMessagePartialInput$toProto(v)
+    ),
+    renamedMessage: input
+      ? TestPrefixRenamedMessagePartialInput$toProto(input.renamedMessage)
+      : undefined,
+    renamedEnum: input?.renamedEnum ?? undefined,
+    partialIgnoreOneof: input?.oneofNotIgnoredField
+      ? {
+        case: "oneofNotIgnoredField",
+        value: TestPrefixPrefixedMessageInnerMessagePartialInput$toProto(
+          input.oneofNotIgnoredField,
+        ),
+      }
+      : undefined,
+  });
+}
+
 export type TestPrefixRenamedMessageInput$Shape = {
   body: MessageWillRename["body"];
 };
@@ -32375,6 +33495,12 @@ export const TestPrefixRenamedMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function TestPrefixRenamedMessageInput$toProto(
+  input: TestPrefixRenamedMessageInput$Shape | null | undefined,
+): MessageWillRename {
+  return new MessageWillRename({ body: input?.body ?? undefined });
+}
 
 export type TestPrefixRenamedMessagePartialInput$Shape = {
   body?: MessageWillRename["body"] | null;
@@ -32402,6 +33528,12 @@ export const TestPrefixRenamedMessagePartialInput$Ref: InputObjectRef<
   },
 });
 
+export function TestPrefixRenamedMessagePartialInput$toProto(
+  input: TestPrefixRenamedMessagePartialInput$Shape | null | undefined,
+): MessageWillRename {
+  return new MessageWillRename({ body: input?.body ?? undefined });
+}
+
 export type TestPrefixInterfaceMessageInput$Shape = {
   id: InterfaceMessage["id"];
 };
@@ -32428,6 +33560,12 @@ export const TestPrefixInterfaceMessageInput$Ref: InputObjectRef<
   },
 });
 
+export function TestPrefixInterfaceMessageInput$toProto(
+  input: TestPrefixInterfaceMessageInput$Shape | null | undefined,
+): InterfaceMessage {
+  return new InterfaceMessage({ id: input?.id ?? undefined });
+}
+
 export type TestPrefixInterfaceMessagePartialInput$Shape = {
   id?: InterfaceMessage["id"] | null;
 };
@@ -32453,6 +33591,12 @@ export const TestPrefixInterfaceMessagePartialInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function TestPrefixInterfaceMessagePartialInput$toProto(
+  input: TestPrefixInterfaceMessagePartialInput$Shape | null | undefined,
+): InterfaceMessage {
+  return new InterfaceMessage({ id: input?.id ?? undefined });
+}
 
 export type TestPrefixPrefixedMessageInnerMessageInput$Shape = {
   id: PrefixedMessage_InnerMessage["id"];
@@ -32484,6 +33628,15 @@ export const TestPrefixPrefixedMessageInnerMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function TestPrefixPrefixedMessageInnerMessageInput$toProto(
+  input: TestPrefixPrefixedMessageInnerMessageInput$Shape | null | undefined,
+): PrefixedMessage_InnerMessage {
+  return new PrefixedMessage_InnerMessage({
+    id: input?.id ?? undefined,
+    body: input?.body ?? undefined,
+  });
+}
 
 export type TestPrefixPrefixedMessageInnerMessagePartialInput$Shape = {
   id?: PrefixedMessage_InnerMessage["id"] | null;
@@ -32518,6 +33671,18 @@ export const TestPrefixPrefixedMessageInnerMessagePartialInput$Ref:
       },
     });
 
+export function TestPrefixPrefixedMessageInnerMessagePartialInput$toProto(
+  input:
+    | TestPrefixPrefixedMessageInnerMessagePartialInput$Shape
+    | null
+    | undefined,
+): PrefixedMessage_InnerMessage {
+  return new PrefixedMessage_InnerMessage({
+    id: input?.id ?? undefined,
+    body: input?.body ?? undefined,
+  });
+}
+
 export type TestPrefixPrefixedMessageInnerMessage2Input$Shape = {
   id: PrefixedMessage_InnerMessage2["id"];
   body: PrefixedMessage_InnerMessage2["body"];
@@ -32548,6 +33713,15 @@ export const TestPrefixPrefixedMessageInnerMessage2Input$Ref: InputObjectRef<
     },
   },
 });
+
+export function TestPrefixPrefixedMessageInnerMessage2Input$toProto(
+  input: TestPrefixPrefixedMessageInnerMessage2Input$Shape | null | undefined,
+): PrefixedMessage_InnerMessage2 {
+  return new PrefixedMessage_InnerMessage2({
+    id: input?.id ?? undefined,
+    body: input?.body ?? undefined,
+  });
+}
 
 export type TestPrefixPrefixedMessageInnerMessage2PartialInput$Shape = {
   id?: PrefixedMessage_InnerMessage2["id"] | null;
@@ -32581,6 +33755,18 @@ export const TestPrefixPrefixedMessageInnerMessage2PartialInput$Ref:
         },
       },
     });
+
+export function TestPrefixPrefixedMessageInnerMessage2PartialInput$toProto(
+  input:
+    | TestPrefixPrefixedMessageInnerMessage2PartialInput$Shape
+    | null
+    | undefined,
+): PrefixedMessage_InnerMessage2 {
+  return new PrefixedMessage_InnerMessage2({
+    id: input?.id ?? undefined,
+    body: input?.body ?? undefined,
+  });
+}
 
 export type TestPrefixPrefixedMessageSquashedMessageInput$Shape = {
   oneofField?: TestPrefixPrefixedMessageInnerMessageInput$Shape | null;
@@ -32623,6 +33809,28 @@ export const TestPrefixPrefixedMessageSquashedMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function TestPrefixPrefixedMessageSquashedMessageInput$toProto(
+  input: TestPrefixPrefixedMessageSquashedMessageInput$Shape | null | undefined,
+): PrefixedMessage_SquashedMessage {
+  return new PrefixedMessage_SquashedMessage({
+    squashedMessage: input?.oneofField
+      ? {
+        case: "oneofField",
+        value: TestPrefixPrefixedMessageInnerMessageInput$toProto(
+          input.oneofField,
+        ),
+      }
+      : input?.oneofField2
+      ? {
+        case: "oneofField2",
+        value: TestPrefixPrefixedMessageInnerMessage2Input$toProto(
+          input.oneofField2,
+        ),
+      }
+      : undefined,
+  });
+}
 
 export type TestPrefixPrefixedMessageSquashedMessagePartialInput$Shape = {
   oneofField?: TestPrefixPrefixedMessageInnerMessagePartialInput$Shape | null;
@@ -32668,6 +33876,31 @@ export const TestPrefixPrefixedMessageSquashedMessagePartialInput$Ref:
       },
     });
 
+export function TestPrefixPrefixedMessageSquashedMessagePartialInput$toProto(
+  input:
+    | TestPrefixPrefixedMessageSquashedMessagePartialInput$Shape
+    | null
+    | undefined,
+): PrefixedMessage_SquashedMessage {
+  return new PrefixedMessage_SquashedMessage({
+    squashedMessage: input?.oneofField
+      ? {
+        case: "oneofField",
+        value: TestPrefixPrefixedMessageInnerMessagePartialInput$toProto(
+          input.oneofField,
+        ),
+      }
+      : input?.oneofField2
+      ? {
+        case: "oneofField2",
+        value: TestPrefixPrefixedMessageInnerMessage2PartialInput$toProto(
+          input.oneofField2,
+        ),
+      }
+      : undefined,
+  });
+}
+
 export type TestPrefixIgnoredMessageNotIgnoredInput$Shape = {
   body: IgnoredMessage_NotIgnored["body"];
 };
@@ -32693,6 +33926,12 @@ export const TestPrefixIgnoredMessageNotIgnoredInput$Ref: InputObjectRef<
   },
 });
 
+export function TestPrefixIgnoredMessageNotIgnoredInput$toProto(
+  input: TestPrefixIgnoredMessageNotIgnoredInput$Shape | null | undefined,
+): IgnoredMessage_NotIgnored {
+  return new IgnoredMessage_NotIgnored({ body: input?.body ?? undefined });
+}
+
 export type TestPrefixIgnoredMessageNotIgnoredPartialInput$Shape = {
   body?: IgnoredMessage_NotIgnored["body"] | null;
 };
@@ -32717,6 +33956,15 @@ export const TestPrefixIgnoredMessageNotIgnoredPartialInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function TestPrefixIgnoredMessageNotIgnoredPartialInput$toProto(
+  input:
+    | TestPrefixIgnoredMessageNotIgnoredPartialInput$Shape
+    | null
+    | undefined,
+): IgnoredMessage_NotIgnored {
+  return new IgnoredMessage_NotIgnored({ body: input?.body ?? undefined });
+}
 
 export const TestPrefixInterfaceMessage$Ref = builder.interfaceRef<
   Pick<InterfaceMessage, "id">
@@ -32881,6 +34129,7 @@ import {
   PrefixedMessage,
   PrefixedMessage_InnerMessage,
   PrefixedMessage_InnerMessage2,
+  PrefixedMessage_SquashedMessage,
 } from "./testapis/extensions/extensions_pb";
 
 export const TestPrefixPrefixedMessage$Ref = builder.objectRef<PrefixedMessage>(
@@ -33295,6 +34544,40 @@ export const TestPrefixPrefixedMessageInput$Ref: InputObjectRef<
   },
 });
 
+export function TestPrefixPrefixedMessageInput$toProto(
+  input: TestPrefixPrefixedMessageInput$Shape | null | undefined,
+): PrefixedMessage {
+  return new PrefixedMessage({
+    body: input?.body ?? undefined,
+    prefixedEnum: input?.prefixedEnum ?? undefined,
+    notIgnoredMessage: input
+      ? TestPrefixIgnoredMessageNotIgnoredInput$toProto(input.notIgnoredMessage)
+      : undefined,
+    squashedMessage: input
+      ? TestPrefixPrefixedMessageSquashedMessageInput$toProto(
+        input.squashedMessage,
+      )
+      : undefined,
+    thisFieldWillBeRenamed: input?.thisFieldWasRenamed ?? undefined,
+    skipResolver: input?.skipResolver ?? undefined,
+    squashedMessages: input?.squashedMessages?.map((v) =>
+      TestPrefixPrefixedMessageSquashedMessageInput$toProto(v)
+    ),
+    renamedMessage: input
+      ? TestPrefixRenamedMessageInput$toProto(input.renamedMessage)
+      : undefined,
+    renamedEnum: input?.renamedEnum ?? undefined,
+    partialIgnoreOneof: input?.oneofNotIgnoredField
+      ? {
+        case: "oneofNotIgnoredField",
+        value: TestPrefixPrefixedMessageInnerMessageInput$toProto(
+          input.oneofNotIgnoredField,
+        ),
+      }
+      : undefined,
+  });
+}
+
 export type TestPrefixRenamedMessageInput$Shape = {
   body: MessageWillRename["body"];
 };
@@ -33321,6 +34604,12 @@ export const TestPrefixRenamedMessageInput$Ref: InputObjectRef<
   },
 });
 
+export function TestPrefixRenamedMessageInput$toProto(
+  input: TestPrefixRenamedMessageInput$Shape | null | undefined,
+): MessageWillRename {
+  return new MessageWillRename({ body: input?.body ?? undefined });
+}
+
 export type TestPrefixInterfaceMessageInput$Shape = {
   id: InterfaceMessage["id"];
 };
@@ -33346,6 +34635,12 @@ export const TestPrefixInterfaceMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function TestPrefixInterfaceMessageInput$toProto(
+  input: TestPrefixInterfaceMessageInput$Shape | null | undefined,
+): InterfaceMessage {
+  return new InterfaceMessage({ id: input?.id ?? undefined });
+}
 
 export type TestPrefixPrefixedMessageInnerMessageInput$Shape = {
   id: PrefixedMessage_InnerMessage["id"];
@@ -33378,6 +34673,15 @@ export const TestPrefixPrefixedMessageInnerMessageInput$Ref: InputObjectRef<
   },
 });
 
+export function TestPrefixPrefixedMessageInnerMessageInput$toProto(
+  input: TestPrefixPrefixedMessageInnerMessageInput$Shape | null | undefined,
+): PrefixedMessage_InnerMessage {
+  return new PrefixedMessage_InnerMessage({
+    id: input?.id ?? undefined,
+    body: input?.body ?? undefined,
+  });
+}
+
 export type TestPrefixPrefixedMessageInnerMessage2Input$Shape = {
   id: PrefixedMessage_InnerMessage2["id"];
   body: PrefixedMessage_InnerMessage2["body"];
@@ -33408,6 +34712,15 @@ export const TestPrefixPrefixedMessageInnerMessage2Input$Ref: InputObjectRef<
     },
   },
 });
+
+export function TestPrefixPrefixedMessageInnerMessage2Input$toProto(
+  input: TestPrefixPrefixedMessageInnerMessage2Input$Shape | null | undefined,
+): PrefixedMessage_InnerMessage2 {
+  return new PrefixedMessage_InnerMessage2({
+    id: input?.id ?? undefined,
+    body: input?.body ?? undefined,
+  });
+}
 
 export type TestPrefixPrefixedMessageSquashedMessageInput$Shape = {
   oneofField?: TestPrefixPrefixedMessageInnerMessageInput$Shape | null;
@@ -33451,6 +34764,28 @@ export const TestPrefixPrefixedMessageSquashedMessageInput$Ref: InputObjectRef<
   },
 });
 
+export function TestPrefixPrefixedMessageSquashedMessageInput$toProto(
+  input: TestPrefixPrefixedMessageSquashedMessageInput$Shape | null | undefined,
+): PrefixedMessage_SquashedMessage {
+  return new PrefixedMessage_SquashedMessage({
+    squashedMessage: input?.oneofField
+      ? {
+        case: "oneofField",
+        value: TestPrefixPrefixedMessageInnerMessageInput$toProto(
+          input.oneofField,
+        ),
+      }
+      : input?.oneofField2
+      ? {
+        case: "oneofField2",
+        value: TestPrefixPrefixedMessageInnerMessage2Input$toProto(
+          input.oneofField2,
+        ),
+      }
+      : undefined,
+  });
+}
+
 export type TestPrefixIgnoredMessageNotIgnoredInput$Shape = {
   body: IgnoredMessage_NotIgnored["body"];
 };
@@ -33475,6 +34810,12 @@ export const TestPrefixIgnoredMessageNotIgnoredInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function TestPrefixIgnoredMessageNotIgnoredInput$toProto(
+  input: TestPrefixIgnoredMessageNotIgnoredInput$Shape | null | undefined,
+): IgnoredMessage_NotIgnored {
+  return new IgnoredMessage_NotIgnored({ body: input?.body ?? undefined });
+}
 
 export const TestPrefixInterfaceMessage$Ref = builder.interfaceRef<
   Pick<InterfaceMessage, "id">
@@ -33771,6 +35112,16 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
       },
     },
   });
+
+export function MessageInput$toProto(
+  input: MessageInput$Shape | null | undefined,
+): Message {
+  return new Message({
+    userId: input?.userId ?? undefined,
+    body: input?.body ?? undefined,
+    status: input?.status ?? undefined,
+  });
+}
 ",
     "name": "testapis/extensions/field_nullability/MessageInput.pothos.ts",
   },
@@ -33948,6 +35299,16 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
     },
   });
 
+export function MessageInput$toProto(
+  input: MessageInput$Shape | null | undefined,
+): Message {
+  return new Message({
+    userId: input?.userId ?? undefined,
+    body: input?.body ?? undefined,
+    status: input?.status ?? undefined,
+  });
+}
+
 export const MessageStatus$Ref: EnumRef<Message_Status, Message_Status> =
   builder.enumType("MessageStatus", {
     values: {
@@ -34112,6 +35473,16 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
     },
   });
 
+export function MessageInput$toProto(
+  input: MessageInput$Shape | null | undefined,
+): Message {
+  return new Message({
+    userId: input?.userId ?? undefined,
+    body: input?.body ?? undefined,
+    status: input?.status ?? undefined,
+  });
+}
+
 export type MessagePartialInput$Shape = {
   userId: Message["userId"];
   body?: Message["body"] | null;
@@ -34174,6 +35545,16 @@ export const MessagePartialInput$Ref: InputObjectRef<
       },
     },
   });
+
+export function MessagePartialInput$toProto(
+  input: MessagePartialInput$Shape | null | undefined,
+): Message {
+  return new Message({
+    userId: input?.userId ?? undefined,
+    body: input?.body ?? undefined,
+    status: input?.status ?? undefined,
+  });
+}
 
 export const MessageStatus$Ref: EnumRef<Message_Status, Message_Status> =
   builder.enumType("MessageStatus", {
@@ -34338,6 +35719,16 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
       },
     },
   });
+
+export function MessageInput$toProto(
+  input: MessageInput$Shape | null | undefined,
+): Message {
+  return new Message({
+    userId: input?.userId ?? undefined,
+    body: input?.body ?? undefined,
+    status: input?.status ?? undefined,
+  });
+}
 
 export const MessageStatus$Ref: EnumRef<Message_Status, Message_Status> =
   builder.enumType("MessageStatus", {
@@ -34517,14 +35908,17 @@ builder.objectType(NoPartialInputMessage$Ref, {
 /* eslint-disable */
 
 import { InputObjectRef } from "@pothos/core";
+import { ParentMessage } from "@testapis/protobuf-es/testapis/extensions/no_partial/no_partial_pb";
 import { builder } from "../../../builder";
 import {
   NoPartialInputMessageInput$Ref,
   NoPartialInputMessageInput$Shape,
+  NoPartialInputMessageInput$toProto,
 } from "./NoPartialInputMessageInput.pothos";
 import {
   PartialableInputMessageInput$Ref,
   PartialableInputMessageInput$Shape,
+  PartialableInputMessageInput$toProto,
 } from "./PartialableInputMessageInput.pothos";
 
 export type ParentMessageInput$Shape = {
@@ -34568,6 +35962,19 @@ export const ParentMessageInput$Ref: InputObjectRef<ParentMessageInput$Shape> =
       },
     },
   });
+
+export function ParentMessageInput$toProto(
+  input: ParentMessageInput$Shape | null | undefined,
+): ParentMessage {
+  return new ParentMessage({
+    partialableInputMessage: input
+      ? PartialableInputMessageInput$toProto(input.partialableInputMessage)
+      : undefined,
+    noPartialInputMessage: input
+      ? NoPartialInputMessageInput$toProto(input.noPartialInputMessage)
+      : undefined,
+  });
+}
 ",
     "name": "testapis/extensions/no_partial/ParentMessageInput.pothos.ts",
   },
@@ -34613,6 +36020,15 @@ export const PartialableInputMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function PartialableInputMessageInput$toProto(
+  input: PartialableInputMessageInput$Shape | null | undefined,
+): PartialableInputMessage {
+  return new PartialableInputMessage({
+    id: input?.id ?? undefined,
+    body: input?.body ?? undefined,
+  });
+}
 ",
     "name": "testapis/extensions/no_partial/PartialableInputMessageInput.pothos.ts",
   },
@@ -34659,6 +36075,15 @@ export const NoPartialInputMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function NoPartialInputMessageInput$toProto(
+  input: NoPartialInputMessageInput$Shape | null | undefined,
+): NoPartialInputMessage {
+  return new NoPartialInputMessage({
+    id: input?.id ?? undefined,
+    body: input?.body ?? undefined,
+  });
+}
 ",
     "name": "testapis/extensions/no_partial/NoPartialInputMessageInput.pothos.ts",
   },
@@ -34834,6 +36259,19 @@ export const ParentMessageInput$Ref: InputObjectRef<ParentMessageInput$Shape> =
     },
   });
 
+export function ParentMessageInput$toProto(
+  input: ParentMessageInput$Shape | null | undefined,
+): ParentMessage {
+  return new ParentMessage({
+    partialableInputMessage: input
+      ? PartialableInputMessageInput$toProto(input.partialableInputMessage)
+      : undefined,
+    noPartialInputMessage: input
+      ? NoPartialInputMessageInput$toProto(input.noPartialInputMessage)
+      : undefined,
+  });
+}
+
 export type PartialableInputMessageInput$Shape = {
   id: PartialableInputMessage["id"];
   body: PartialableInputMessage["body"];
@@ -34866,6 +36304,15 @@ export const PartialableInputMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function PartialableInputMessageInput$toProto(
+  input: PartialableInputMessageInput$Shape | null | undefined,
+): PartialableInputMessage {
+  return new PartialableInputMessage({
+    id: input?.id ?? undefined,
+    body: input?.body ?? undefined,
+  });
+}
 
 export type NoPartialInputMessageInput$Shape = {
   id: NoPartialInputMessage["id"];
@@ -34900,6 +36347,15 @@ export const NoPartialInputMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function NoPartialInputMessageInput$toProto(
+  input: NoPartialInputMessageInput$Shape | null | undefined,
+): NoPartialInputMessage {
+  return new NoPartialInputMessage({
+    id: input?.id ?? undefined,
+    body: input?.body ?? undefined,
+  });
+}
 ",
     "name": "testapis/extensions/no_partial/no_partial.pb.pothos.ts",
   },
@@ -35075,6 +36531,19 @@ export const ParentMessageInput$Ref: InputObjectRef<ParentMessageInput$Shape> =
     },
   });
 
+export function ParentMessageInput$toProto(
+  input: ParentMessageInput$Shape | null | undefined,
+): ParentMessage {
+  return new ParentMessage({
+    partialableInputMessage: input
+      ? PartialableInputMessageInput$toProto(input.partialableInputMessage)
+      : undefined,
+    noPartialInputMessage: input
+      ? NoPartialInputMessageInput$toProto(input.noPartialInputMessage)
+      : undefined,
+  });
+}
+
 export type ParentMessagePartialInput$Shape = {
   partialableInputMessage?: PartialableInputMessagePartialInput$Shape | null;
   noPartialInputMessage?: NoPartialInputMessageInput$Shape | null;
@@ -35119,6 +36588,21 @@ export const ParentMessagePartialInput$Ref: InputObjectRef<
   },
 });
 
+export function ParentMessagePartialInput$toProto(
+  input: ParentMessagePartialInput$Shape | null | undefined,
+): ParentMessage {
+  return new ParentMessage({
+    partialableInputMessage: input
+      ? PartialableInputMessagePartialInput$toProto(
+        input.partialableInputMessage,
+      )
+      : undefined,
+    noPartialInputMessage: input
+      ? NoPartialInputMessageInput$toProto(input.noPartialInputMessage)
+      : undefined,
+  });
+}
+
 export type PartialableInputMessageInput$Shape = {
   id: PartialableInputMessage["id"];
   body: PartialableInputMessage["body"];
@@ -35151,6 +36635,15 @@ export const PartialableInputMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function PartialableInputMessageInput$toProto(
+  input: PartialableInputMessageInput$Shape | null | undefined,
+): PartialableInputMessage {
+  return new PartialableInputMessage({
+    id: input?.id ?? undefined,
+    body: input?.body ?? undefined,
+  });
+}
 
 export type PartialableInputMessagePartialInput$Shape = {
   id?: PartialableInputMessage["id"] | null;
@@ -35185,6 +36678,15 @@ export const PartialableInputMessagePartialInput$Ref: InputObjectRef<
   },
 });
 
+export function PartialableInputMessagePartialInput$toProto(
+  input: PartialableInputMessagePartialInput$Shape | null | undefined,
+): PartialableInputMessage {
+  return new PartialableInputMessage({
+    id: input?.id ?? undefined,
+    body: input?.body ?? undefined,
+  });
+}
+
 export type NoPartialInputMessageInput$Shape = {
   id: NoPartialInputMessage["id"];
   body: NoPartialInputMessage["body"];
@@ -35218,6 +36720,15 @@ export const NoPartialInputMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function NoPartialInputMessageInput$toProto(
+  input: NoPartialInputMessageInput$Shape | null | undefined,
+): NoPartialInputMessage {
+  return new NoPartialInputMessage({
+    id: input?.id ?? undefined,
+    body: input?.body ?? undefined,
+  });
+}
 ",
     "name": "testapis/extensions/no_partial/no_partial.pb.pothos.ts",
   },
@@ -35393,6 +36904,19 @@ export const ParentMessageInput$Ref: InputObjectRef<ParentMessageInput$Shape> =
     },
   });
 
+export function ParentMessageInput$toProto(
+  input: ParentMessageInput$Shape | null | undefined,
+): ParentMessage {
+  return new ParentMessage({
+    partialableInputMessage: input
+      ? PartialableInputMessageInput$toProto(input.partialableInputMessage)
+      : undefined,
+    noPartialInputMessage: input
+      ? NoPartialInputMessageInput$toProto(input.noPartialInputMessage)
+      : undefined,
+  });
+}
+
 export type PartialableInputMessageInput$Shape = {
   id: PartialableInputMessage["id"];
   body: PartialableInputMessage["body"];
@@ -35425,6 +36949,15 @@ export const PartialableInputMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function PartialableInputMessageInput$toProto(
+  input: PartialableInputMessageInput$Shape | null | undefined,
+): PartialableInputMessage {
+  return new PartialableInputMessage({
+    id: input?.id ?? undefined,
+    body: input?.body ?? undefined,
+  });
+}
 
 export type NoPartialInputMessageInput$Shape = {
   id: NoPartialInputMessage["id"];
@@ -35459,6 +36992,15 @@ export const NoPartialInputMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function NoPartialInputMessageInput$toProto(
+  input: NoPartialInputMessageInput$Shape | null | undefined,
+): NoPartialInputMessage {
+  return new NoPartialInputMessage({
+    id: input?.id ?? undefined,
+    body: input?.body ?? undefined,
+  });
+}
 ",
     "name": "testapis/extensions/no_partial/no_partial.pb.pothos.ts",
   },
@@ -35593,10 +37135,12 @@ builder.objectType(FieldBehaviorComentsMessagePost$Ref, {
 /* eslint-disable */
 
 import { InputObjectRef } from "@pothos/core";
+import { FieldBehaviorComentsMessage } from "@testapis/protobuf-es/testapis/field_behavior/comments_pb";
 import { builder } from "../../builder";
 import {
   FieldBehaviorComentsMessagePostInput$Ref,
   FieldBehaviorComentsMessagePostInput$Shape,
+  FieldBehaviorComentsMessagePostInput$toProto,
 } from "./FieldBehaviorComentsMessagePostInput.pothos";
 
 export type FieldBehaviorComentsMessageInput$Shape = {
@@ -35665,6 +37209,29 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function FieldBehaviorComentsMessageInput$toProto(
+  input: FieldBehaviorComentsMessageInput$Shape | null | undefined,
+): FieldBehaviorComentsMessage {
+  return new FieldBehaviorComentsMessage({
+    requiredField: input
+      ? FieldBehaviorComentsMessagePostInput$toProto(input.requiredField)
+      : undefined,
+    requiredInputOnlyField: input
+      ? FieldBehaviorComentsMessagePostInput$toProto(
+        input.requiredInputOnlyField,
+      )
+      : undefined,
+    inputOnlyRequiredField: input
+      ? FieldBehaviorComentsMessagePostInput$toProto(
+        input.inputOnlyRequiredField,
+      )
+      : undefined,
+    inputOnlyField: input
+      ? FieldBehaviorComentsMessagePostInput$toProto(input.inputOnlyField)
+      : undefined,
+  });
+}
 ",
     "name": "testapis/field_behavior/FieldBehaviorComentsMessageInput.pothos.ts",
   },
@@ -35702,6 +37269,14 @@ export const FieldBehaviorComentsMessagePostInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function FieldBehaviorComentsMessagePostInput$toProto(
+  input: FieldBehaviorComentsMessagePostInput$Shape | null | undefined,
+): FieldBehaviorComentsMessage_Post {
+  return new FieldBehaviorComentsMessage_Post({
+    body: input?.body ?? undefined,
+  });
+}
 ",
     "name": "testapis/field_behavior/FieldBehaviorComentsMessagePostInput.pothos.ts",
   },
@@ -35886,6 +37461,29 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
   },
 });
 
+export function FieldBehaviorComentsMessageInput$toProto(
+  input: FieldBehaviorComentsMessageInput$Shape | null | undefined,
+): FieldBehaviorComentsMessage {
+  return new FieldBehaviorComentsMessage({
+    requiredField: input
+      ? FieldBehaviorComentsMessagePostInput$toProto(input.requiredField)
+      : undefined,
+    requiredInputOnlyField: input
+      ? FieldBehaviorComentsMessagePostInput$toProto(
+        input.requiredInputOnlyField,
+      )
+      : undefined,
+    inputOnlyRequiredField: input
+      ? FieldBehaviorComentsMessagePostInput$toProto(
+        input.inputOnlyRequiredField,
+      )
+      : undefined,
+    inputOnlyField: input
+      ? FieldBehaviorComentsMessagePostInput$toProto(input.inputOnlyField)
+      : undefined,
+  });
+}
+
 export type FieldBehaviorComentsMessagePostInput$Shape = {
   body: FieldBehaviorComentsMessage_Post["body"];
 };
@@ -35910,6 +37508,14 @@ export const FieldBehaviorComentsMessagePostInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function FieldBehaviorComentsMessagePostInput$toProto(
+  input: FieldBehaviorComentsMessagePostInput$Shape | null | undefined,
+): FieldBehaviorComentsMessage_Post {
+  return new FieldBehaviorComentsMessage_Post({
+    body: input?.body ?? undefined,
+  });
+}
 ",
     "name": "testapis/field_behavior/comments.pb.pothos.ts",
   },
@@ -36094,6 +37700,29 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
   },
 });
 
+export function FieldBehaviorComentsMessageInput$toProto(
+  input: FieldBehaviorComentsMessageInput$Shape | null | undefined,
+): FieldBehaviorComentsMessage {
+  return new FieldBehaviorComentsMessage({
+    requiredField: input
+      ? FieldBehaviorComentsMessagePostInput$toProto(input.requiredField)
+      : undefined,
+    requiredInputOnlyField: input
+      ? FieldBehaviorComentsMessagePostInput$toProto(
+        input.requiredInputOnlyField,
+      )
+      : undefined,
+    inputOnlyRequiredField: input
+      ? FieldBehaviorComentsMessagePostInput$toProto(
+        input.inputOnlyRequiredField,
+      )
+      : undefined,
+    inputOnlyField: input
+      ? FieldBehaviorComentsMessagePostInput$toProto(input.inputOnlyField)
+      : undefined,
+  });
+}
+
 export type FieldBehaviorComentsMessagePartialInput$Shape = {
   requiredField?: FieldBehaviorComentsMessagePostPartialInput$Shape | null;
   requiredInputOnlyField?:
@@ -36165,6 +37794,31 @@ export const FieldBehaviorComentsMessagePartialInput$Ref: InputObjectRef<
   },
 });
 
+export function FieldBehaviorComentsMessagePartialInput$toProto(
+  input: FieldBehaviorComentsMessagePartialInput$Shape | null | undefined,
+): FieldBehaviorComentsMessage {
+  return new FieldBehaviorComentsMessage({
+    requiredField: input
+      ? FieldBehaviorComentsMessagePostPartialInput$toProto(input.requiredField)
+      : undefined,
+    requiredInputOnlyField: input
+      ? FieldBehaviorComentsMessagePostPartialInput$toProto(
+        input.requiredInputOnlyField,
+      )
+      : undefined,
+    inputOnlyRequiredField: input
+      ? FieldBehaviorComentsMessagePostPartialInput$toProto(
+        input.inputOnlyRequiredField,
+      )
+      : undefined,
+    inputOnlyField: input
+      ? FieldBehaviorComentsMessagePostPartialInput$toProto(
+        input.inputOnlyField,
+      )
+      : undefined,
+  });
+}
+
 export type FieldBehaviorComentsMessagePostInput$Shape = {
   body: FieldBehaviorComentsMessage_Post["body"];
 };
@@ -36190,6 +37844,14 @@ export const FieldBehaviorComentsMessagePostInput$Ref: InputObjectRef<
   },
 });
 
+export function FieldBehaviorComentsMessagePostInput$toProto(
+  input: FieldBehaviorComentsMessagePostInput$Shape | null | undefined,
+): FieldBehaviorComentsMessage_Post {
+  return new FieldBehaviorComentsMessage_Post({
+    body: input?.body ?? undefined,
+  });
+}
+
 export type FieldBehaviorComentsMessagePostPartialInput$Shape = {
   body?: FieldBehaviorComentsMessage_Post["body"] | null;
 };
@@ -36214,6 +37876,14 @@ export const FieldBehaviorComentsMessagePostPartialInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function FieldBehaviorComentsMessagePostPartialInput$toProto(
+  input: FieldBehaviorComentsMessagePostPartialInput$Shape | null | undefined,
+): FieldBehaviorComentsMessage_Post {
+  return new FieldBehaviorComentsMessage_Post({
+    body: input?.body ?? undefined,
+  });
+}
 ",
     "name": "testapis/field_behavior/comments.pb.pothos.ts",
   },
@@ -36398,6 +38068,29 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
   },
 });
 
+export function FieldBehaviorComentsMessageInput$toProto(
+  input: FieldBehaviorComentsMessageInput$Shape | null | undefined,
+): FieldBehaviorComentsMessage {
+  return new FieldBehaviorComentsMessage({
+    requiredField: input
+      ? FieldBehaviorComentsMessagePostInput$toProto(input.requiredField)
+      : undefined,
+    requiredInputOnlyField: input
+      ? FieldBehaviorComentsMessagePostInput$toProto(
+        input.requiredInputOnlyField,
+      )
+      : undefined,
+    inputOnlyRequiredField: input
+      ? FieldBehaviorComentsMessagePostInput$toProto(
+        input.inputOnlyRequiredField,
+      )
+      : undefined,
+    inputOnlyField: input
+      ? FieldBehaviorComentsMessagePostInput$toProto(input.inputOnlyField)
+      : undefined,
+  });
+}
+
 export type FieldBehaviorComentsMessagePostInput$Shape = {
   body: FieldBehaviorComentsMessage_Post["body"];
 };
@@ -36422,6 +38115,14 @@ export const FieldBehaviorComentsMessagePostInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function FieldBehaviorComentsMessagePostInput$toProto(
+  input: FieldBehaviorComentsMessagePostInput$Shape | null | undefined,
+): FieldBehaviorComentsMessage_Post {
+  return new FieldBehaviorComentsMessage_Post({
+    body: input?.body ?? undefined,
+  });
+}
 ",
     "name": "testapis/field_behavior/comments.pb.pothos.ts",
   },
@@ -36502,6 +38203,12 @@ export const SubpkgMessageInput$Ref: InputObjectRef<SubpkgMessageInput$Shape> =
       },
     },
   });
+
+export function SubpkgMessageInput$toProto(
+  input: SubpkgMessageInput$Shape | null | undefined,
+): SubpkgMessage {
+  return new SubpkgMessage({ body: input?.body ?? undefined });
+}
 ",
     "name": "testapis/multipkgs/subpkg1/SubpkgMessageInput.pothos.ts",
   },
@@ -36596,6 +38303,12 @@ export const SubpkgMessageInput$Ref: InputObjectRef<SubpkgMessageInput$Shape> =
     },
   });
 
+export function SubpkgMessageInput$toProto(
+  input: SubpkgMessageInput$Shape | null | undefined,
+): SubpkgMessage {
+  return new SubpkgMessage({ body: input?.body ?? undefined });
+}
+
 export const SubpkgEnum$Ref: EnumRef<SubpkgEnum, SubpkgEnum> = builder.enumType(
   "SubpkgEnum",
   {
@@ -36677,6 +38390,12 @@ export const SubpkgMessageInput$Ref: InputObjectRef<SubpkgMessageInput$Shape> =
     },
   });
 
+export function SubpkgMessageInput$toProto(
+  input: SubpkgMessageInput$Shape | null | undefined,
+): SubpkgMessage {
+  return new SubpkgMessage({ body: input?.body ?? undefined });
+}
+
 export type SubpkgMessagePartialInput$Shape = {
   body?: SubpkgMessage["body"] | null;
 };
@@ -36701,6 +38420,12 @@ export const SubpkgMessagePartialInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function SubpkgMessagePartialInput$toProto(
+  input: SubpkgMessagePartialInput$Shape | null | undefined,
+): SubpkgMessage {
+  return new SubpkgMessage({ body: input?.body ?? undefined });
+}
 
 export const SubpkgEnum$Ref: EnumRef<SubpkgEnum, SubpkgEnum> = builder.enumType(
   "SubpkgEnum",
@@ -36782,6 +38507,12 @@ export const SubpkgMessageInput$Ref: InputObjectRef<SubpkgMessageInput$Shape> =
       },
     },
   });
+
+export function SubpkgMessageInput$toProto(
+  input: SubpkgMessageInput$Shape | null | undefined,
+): SubpkgMessage {
+  return new SubpkgMessage({ body: input?.body ?? undefined });
+}
 
 export const SubpkgEnum$Ref: EnumRef<SubpkgEnum, SubpkgEnum> = builder.enumType(
   "SubpkgEnum",
@@ -36880,6 +38611,7 @@ import { SubpkgEnum$Ref } from "../subpkg1/SubpkgEnum.pothos";
 import {
   SubpkgMessageInput$Ref,
   SubpkgMessageInput$Shape,
+  SubpkgMessageInput$toProto,
 } from "../subpkg1/SubpkgMessageInput.pothos";
 
 export type MessageWithSubpkgInput$Shape = {
@@ -36921,6 +38653,15 @@ export const MessageWithSubpkgInput$Ref: InputObjectRef<
       },
     },
   });
+
+export function MessageWithSubpkgInput$toProto(
+  input: MessageWithSubpkgInput$Shape | null | undefined,
+): MessageWithSubpkg {
+  return new MessageWithSubpkg({
+    message: input ? SubpkgMessageInput$toProto(input.message) : undefined,
+    enum: input?.enum ?? undefined,
+  });
+}
 ",
     "name": "testapis/multipkgs/subpkg2/MessageWithSubpkgInput.pothos.ts",
   },
@@ -36944,6 +38685,7 @@ import {
   SubpkgMessage$Ref,
   SubpkgMessageInput$Ref,
   SubpkgMessageInput$Shape,
+  SubpkgMessageInput$toProto,
 } from "../subpkg1/types.pb.pothos";
 
 export const MessageWithSubpkg$Ref = builder.objectRef<MessageWithSubpkg>(
@@ -37031,6 +38773,15 @@ export const MessageWithSubpkgInput$Ref: InputObjectRef<
       },
     },
   });
+
+export function MessageWithSubpkgInput$toProto(
+  input: MessageWithSubpkgInput$Shape | null | undefined,
+): MessageWithSubpkg {
+  return new MessageWithSubpkg({
+    message: input ? SubpkgMessageInput$toProto(input.message) : undefined,
+    enum: input?.enum ?? undefined,
+  });
+}
 ",
     "name": "testapis/multipkgs/subpkg2/types.pb.pothos.ts",
   },
@@ -37054,8 +38805,10 @@ import {
   SubpkgMessage$Ref,
   SubpkgMessageInput$Ref,
   SubpkgMessageInput$Shape,
+  SubpkgMessageInput$toProto,
   SubpkgMessagePartialInput$Ref,
   SubpkgMessagePartialInput$Shape,
+  SubpkgMessagePartialInput$toProto,
 } from "../subpkg1/types.pb.pothos";
 
 export const MessageWithSubpkg$Ref = builder.objectRef<MessageWithSubpkg>(
@@ -37143,6 +38896,15 @@ export const MessageWithSubpkgInput$Ref: InputObjectRef<
       },
     },
   });
+
+export function MessageWithSubpkgInput$toProto(
+  input: MessageWithSubpkgInput$Shape | null | undefined,
+): MessageWithSubpkg {
+  return new MessageWithSubpkg({
+    message: input ? SubpkgMessageInput$toProto(input.message) : undefined,
+    enum: input?.enum ?? undefined,
+  });
+}
 
 export type MessageWithSubpkgPartialInput$Shape = {
   message?: SubpkgMessagePartialInput$Shape | null;
@@ -37184,6 +38946,17 @@ export const MessageWithSubpkgPartialInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function MessageWithSubpkgPartialInput$toProto(
+  input: MessageWithSubpkgPartialInput$Shape | null | undefined,
+): MessageWithSubpkg {
+  return new MessageWithSubpkg({
+    message: input
+      ? SubpkgMessagePartialInput$toProto(input.message)
+      : undefined,
+    enum: input?.enum ?? undefined,
+  });
+}
 ",
     "name": "testapis/multipkgs/subpkg2/types.pb.pothos.ts",
   },
@@ -37205,6 +38978,7 @@ import {
   SubpkgMessage$Ref,
   SubpkgMessageInput$Ref,
   SubpkgMessageInput$Shape,
+  SubpkgMessageInput$toProto,
 } from "../subpkg1/types.pb.pothos";
 import { SubpkgEnum } from "./testapis/multipkgs/subpkg1/types_pb";
 import { MessageWithSubpkg } from "./testapis/multipkgs/subpkg2/types_pb";
@@ -37294,6 +39068,15 @@ export const MessageWithSubpkgInput$Ref: InputObjectRef<
       },
     },
   });
+
+export function MessageWithSubpkgInput$toProto(
+  input: MessageWithSubpkgInput$Shape | null | undefined,
+): MessageWithSubpkg {
+  return new MessageWithSubpkg({
+    message: input ? SubpkgMessageInput$toProto(input.message) : undefined,
+    enum: input?.enum ?? undefined,
+  });
+}
 ",
     "name": "testapis/multipkgs/subpkg2/types.pb.pothos.ts",
   },
@@ -37421,6 +39204,7 @@ import { ParentMessageNestedEnum$Ref } from "./ParentMessageNestedEnum.pothos";
 import {
   ParentMessageNestedMessageInput$Ref,
   ParentMessageNestedMessageInput$Shape,
+  ParentMessageNestedMessageInput$toProto,
 } from "./ParentMessageNestedMessageInput.pothos";
 
 export type ParentMessageInput$Shape = {
@@ -37466,6 +39250,18 @@ export const ParentMessageInput$Ref: InputObjectRef<ParentMessageInput$Shape> =
       },
     },
   });
+
+export function ParentMessageInput$toProto(
+  input: ParentMessageInput$Shape | null | undefined,
+): ParentMessage {
+  return new ParentMessage({
+    body: input?.body ?? undefined,
+    nested: input
+      ? ParentMessageNestedMessageInput$toProto(input.nested)
+      : undefined,
+    nestedEnum: input?.nestedEnum ?? undefined,
+  });
+}
 ",
     "name": "testapis/nested/ParentMessageInput.pothos.ts",
   },
@@ -37505,6 +39301,14 @@ export const ParentMessageNestedMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function ParentMessageNestedMessageInput$toProto(
+  input: ParentMessageNestedMessageInput$Shape | null | undefined,
+): ParentMessage_NestedMessage {
+  return new ParentMessage_NestedMessage({
+    nestedBody: input?.nestedBody ?? undefined,
+  });
+}
 ",
     "name": "testapis/nested/ParentMessageNestedMessageInput.pothos.ts",
   },
@@ -37679,6 +39483,18 @@ export const ParentMessageInput$Ref: InputObjectRef<ParentMessageInput$Shape> =
     },
   });
 
+export function ParentMessageInput$toProto(
+  input: ParentMessageInput$Shape | null | undefined,
+): ParentMessage {
+  return new ParentMessage({
+    body: input?.body ?? undefined,
+    nested: input
+      ? ParentMessageNestedMessageInput$toProto(input.nested)
+      : undefined,
+    nestedEnum: input?.nestedEnum ?? undefined,
+  });
+}
+
 export type ParentMessageNestedMessageInput$Shape = {
   nestedBody: ParentMessage_NestedMessage["nestedBody"];
 };
@@ -37705,6 +39521,14 @@ export const ParentMessageNestedMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function ParentMessageNestedMessageInput$toProto(
+  input: ParentMessageNestedMessageInput$Shape | null | undefined,
+): ParentMessage_NestedMessage {
+  return new ParentMessage_NestedMessage({
+    nestedBody: input?.nestedBody ?? undefined,
+  });
+}
 
 export const ParentMessageNestedEnum$Ref: EnumRef<
   ParentMessage_NestedEnum,
@@ -37867,6 +39691,18 @@ export const ParentMessageInput$Ref: InputObjectRef<ParentMessageInput$Shape> =
     },
   });
 
+export function ParentMessageInput$toProto(
+  input: ParentMessageInput$Shape | null | undefined,
+): ParentMessage {
+  return new ParentMessage({
+    body: input?.body ?? undefined,
+    nested: input
+      ? ParentMessageNestedMessageInput$toProto(input.nested)
+      : undefined,
+    nestedEnum: input?.nestedEnum ?? undefined,
+  });
+}
+
 export type ParentMessagePartialInput$Shape = {
   body?: ParentMessage["body"] | null;
   nested?: ParentMessageNestedMessagePartialInput$Shape | null;
@@ -37914,6 +39750,18 @@ export const ParentMessagePartialInput$Ref: InputObjectRef<
   },
 });
 
+export function ParentMessagePartialInput$toProto(
+  input: ParentMessagePartialInput$Shape | null | undefined,
+): ParentMessage {
+  return new ParentMessage({
+    body: input?.body ?? undefined,
+    nested: input
+      ? ParentMessageNestedMessagePartialInput$toProto(input.nested)
+      : undefined,
+    nestedEnum: input?.nestedEnum ?? undefined,
+  });
+}
+
 export type ParentMessageNestedMessageInput$Shape = {
   nestedBody: ParentMessage_NestedMessage["nestedBody"];
 };
@@ -37941,6 +39789,14 @@ export const ParentMessageNestedMessageInput$Ref: InputObjectRef<
   },
 });
 
+export function ParentMessageNestedMessageInput$toProto(
+  input: ParentMessageNestedMessageInput$Shape | null | undefined,
+): ParentMessage_NestedMessage {
+  return new ParentMessage_NestedMessage({
+    nestedBody: input?.nestedBody ?? undefined,
+  });
+}
+
 export type ParentMessageNestedMessagePartialInput$Shape = {
   nestedBody?: ParentMessage_NestedMessage["nestedBody"] | null;
 };
@@ -37967,6 +39823,14 @@ export const ParentMessageNestedMessagePartialInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function ParentMessageNestedMessagePartialInput$toProto(
+  input: ParentMessageNestedMessagePartialInput$Shape | null | undefined,
+): ParentMessage_NestedMessage {
+  return new ParentMessage_NestedMessage({
+    nestedBody: input?.nestedBody ?? undefined,
+  });
+}
 
 export const ParentMessageNestedEnum$Ref: EnumRef<
   ParentMessage_NestedEnum,
@@ -38129,6 +39993,18 @@ export const ParentMessageInput$Ref: InputObjectRef<ParentMessageInput$Shape> =
     },
   });
 
+export function ParentMessageInput$toProto(
+  input: ParentMessageInput$Shape | null | undefined,
+): ParentMessage {
+  return new ParentMessage({
+    body: input?.body ?? undefined,
+    nested: input
+      ? ParentMessageNestedMessageInput$toProto(input.nested)
+      : undefined,
+    nestedEnum: input?.nestedEnum ?? undefined,
+  });
+}
+
 export type ParentMessageNestedMessageInput$Shape = {
   nestedBody: ParentMessage_NestedMessage["nestedBody"];
 };
@@ -38155,6 +40031,14 @@ export const ParentMessageNestedMessageInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function ParentMessageNestedMessageInput$toProto(
+  input: ParentMessageNestedMessageInput$Shape | null | undefined,
+): ParentMessage_NestedMessage {
+  return new ParentMessage_NestedMessage({
+    nestedBody: input?.nestedBody ?? undefined,
+  });
+}
 
 export const ParentMessageNestedEnum$Ref: EnumRef<
   ParentMessage_NestedEnum,
@@ -38320,10 +40204,12 @@ import { builder } from "../../builder";
 import {
   OneofMemberMessage1Input$Ref,
   OneofMemberMessage1Input$Shape,
+  OneofMemberMessage1Input$toProto,
 } from "./OneofMemberMessage1Input.pothos";
 import {
   OneofMemberMessage2Input$Ref,
   OneofMemberMessage2Input$Shape,
+  OneofMemberMessage2Input$toProto,
 } from "./OneofMemberMessage2Input.pothos";
 
 export type OneofParentInput$Shape = {
@@ -38393,6 +40279,36 @@ export const OneofParentInput$Ref: InputObjectRef<OneofParentInput$Shape> =
       },
     },
   });
+
+export function OneofParentInput$toProto(
+  input: OneofParentInput$Shape | null | undefined,
+): OneofParent {
+  return new OneofParent({
+    normalField: input?.normalField ?? undefined,
+    requiredOneofMembers: input?.requiredMessage1
+      ? {
+        case: "requiredMessage1",
+        value: OneofMemberMessage1Input$toProto(input.requiredMessage1),
+      }
+      : input?.requiredMessage2
+      ? {
+        case: "requiredMessage2",
+        value: OneofMemberMessage2Input$toProto(input.requiredMessage2),
+      }
+      : undefined,
+    optionalOneofMembers: input?.optoinalMessage1
+      ? {
+        case: "optoinalMessage1",
+        value: OneofMemberMessage1Input$toProto(input.optoinalMessage1),
+      }
+      : input?.optoinalMessage2
+      ? {
+        case: "optoinalMessage2",
+        value: OneofMemberMessage2Input$toProto(input.optoinalMessage2),
+      }
+      : undefined,
+  });
+}
 ",
     "name": "testapis/oneof/OneofParentInput.pothos.ts",
   },
@@ -38429,6 +40345,12 @@ export const OneofMemberMessage1Input$Ref: InputObjectRef<
       },
     },
   });
+
+export function OneofMemberMessage1Input$toProto(
+  input: OneofMemberMessage1Input$Shape | null | undefined,
+): OneofMemberMessage1 {
+  return new OneofMemberMessage1({ body: input?.body ?? undefined });
+}
 ",
     "name": "testapis/oneof/OneofMemberMessage1Input.pothos.ts",
   },
@@ -38467,6 +40389,12 @@ export const OneofMemberMessage2Input$Ref: InputObjectRef<
       },
     },
   });
+
+export function OneofMemberMessage2Input$toProto(
+  input: OneofMemberMessage2Input$Shape | null | undefined,
+): OneofMemberMessage2 {
+  return new OneofMemberMessage2({ imageUrl: input?.imageUrl ?? undefined });
+}
 ",
     "name": "testapis/oneof/OneofMemberMessage2Input.pothos.ts",
   },
@@ -38717,6 +40645,36 @@ export const OneofParentInput$Ref: InputObjectRef<OneofParentInput$Shape> =
     },
   });
 
+export function OneofParentInput$toProto(
+  input: OneofParentInput$Shape | null | undefined,
+): OneofParent {
+  return new OneofParent({
+    normalField: input?.normalField ?? undefined,
+    requiredOneofMembers: input?.requiredMessage1
+      ? {
+        case: "requiredMessage1",
+        value: OneofMemberMessage1Input$toProto(input.requiredMessage1),
+      }
+      : input?.requiredMessage2
+      ? {
+        case: "requiredMessage2",
+        value: OneofMemberMessage2Input$toProto(input.requiredMessage2),
+      }
+      : undefined,
+    optionalOneofMembers: input?.optoinalMessage1
+      ? {
+        case: "optoinalMessage1",
+        value: OneofMemberMessage1Input$toProto(input.optoinalMessage1),
+      }
+      : input?.optoinalMessage2
+      ? {
+        case: "optoinalMessage2",
+        value: OneofMemberMessage2Input$toProto(input.optoinalMessage2),
+      }
+      : undefined,
+  });
+}
+
 export type OneofMemberMessage1Input$Shape = {
   body: OneofMemberMessage1["body"];
 };
@@ -38740,6 +40698,12 @@ export const OneofMemberMessage1Input$Ref: InputObjectRef<
       },
     },
   });
+
+export function OneofMemberMessage1Input$toProto(
+  input: OneofMemberMessage1Input$Shape | null | undefined,
+): OneofMemberMessage1 {
+  return new OneofMemberMessage1({ body: input?.body ?? undefined });
+}
 
 export type OneofMemberMessage2Input$Shape = {
   imageUrl: OneofMemberMessage2["imageUrl"];
@@ -38766,6 +40730,12 @@ export const OneofMemberMessage2Input$Ref: InputObjectRef<
       },
     },
   });
+
+export function OneofMemberMessage2Input$toProto(
+  input: OneofMemberMessage2Input$Shape | null | undefined,
+): OneofMemberMessage2 {
+  return new OneofMemberMessage2({ imageUrl: input?.imageUrl ?? undefined });
+}
 
 export const OneofParentRequiredOneofMembers$Ref = builder.unionType(
   "OneofParentRequiredOneofMembers",
@@ -38996,6 +40966,36 @@ export const OneofParentInput$Ref: InputObjectRef<OneofParentInput$Shape> =
     },
   });
 
+export function OneofParentInput$toProto(
+  input: OneofParentInput$Shape | null | undefined,
+): OneofParent {
+  return new OneofParent({
+    normalField: input?.normalField ?? undefined,
+    requiredOneofMembers: input?.requiredMessage1
+      ? {
+        case: "requiredMessage1",
+        value: OneofMemberMessage1Input$toProto(input.requiredMessage1),
+      }
+      : input?.requiredMessage2
+      ? {
+        case: "requiredMessage2",
+        value: OneofMemberMessage2Input$toProto(input.requiredMessage2),
+      }
+      : undefined,
+    optionalOneofMembers: input?.optoinalMessage1
+      ? {
+        case: "optoinalMessage1",
+        value: OneofMemberMessage1Input$toProto(input.optoinalMessage1),
+      }
+      : input?.optoinalMessage2
+      ? {
+        case: "optoinalMessage2",
+        value: OneofMemberMessage2Input$toProto(input.optoinalMessage2),
+      }
+      : undefined,
+  });
+}
+
 export type OneofParentPartialInput$Shape = {
   normalField?: OneofParent["normalField"] | null;
   requiredMessage1?: OneofMemberMessage1PartialInput$Shape | null;
@@ -39066,6 +41066,36 @@ export const OneofParentPartialInput$Ref: InputObjectRef<
     },
   });
 
+export function OneofParentPartialInput$toProto(
+  input: OneofParentPartialInput$Shape | null | undefined,
+): OneofParent {
+  return new OneofParent({
+    normalField: input?.normalField ?? undefined,
+    requiredOneofMembers: input?.requiredMessage1
+      ? {
+        case: "requiredMessage1",
+        value: OneofMemberMessage1PartialInput$toProto(input.requiredMessage1),
+      }
+      : input?.requiredMessage2
+      ? {
+        case: "requiredMessage2",
+        value: OneofMemberMessage2PartialInput$toProto(input.requiredMessage2),
+      }
+      : undefined,
+    optionalOneofMembers: input?.optoinalMessage1
+      ? {
+        case: "optoinalMessage1",
+        value: OneofMemberMessage1PartialInput$toProto(input.optoinalMessage1),
+      }
+      : input?.optoinalMessage2
+      ? {
+        case: "optoinalMessage2",
+        value: OneofMemberMessage2PartialInput$toProto(input.optoinalMessage2),
+      }
+      : undefined,
+  });
+}
+
 export type OneofMemberMessage1Input$Shape = {
   body: OneofMemberMessage1["body"];
 };
@@ -39089,6 +41119,12 @@ export const OneofMemberMessage1Input$Ref: InputObjectRef<
       },
     },
   });
+
+export function OneofMemberMessage1Input$toProto(
+  input: OneofMemberMessage1Input$Shape | null | undefined,
+): OneofMemberMessage1 {
+  return new OneofMemberMessage1({ body: input?.body ?? undefined });
+}
 
 export type OneofMemberMessage1PartialInput$Shape = {
   body?: OneofMemberMessage1["body"] | null;
@@ -39114,6 +41150,12 @@ export const OneofMemberMessage1PartialInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function OneofMemberMessage1PartialInput$toProto(
+  input: OneofMemberMessage1PartialInput$Shape | null | undefined,
+): OneofMemberMessage1 {
+  return new OneofMemberMessage1({ body: input?.body ?? undefined });
+}
 
 export type OneofMemberMessage2Input$Shape = {
   imageUrl: OneofMemberMessage2["imageUrl"];
@@ -39141,6 +41183,12 @@ export const OneofMemberMessage2Input$Ref: InputObjectRef<
     },
   });
 
+export function OneofMemberMessage2Input$toProto(
+  input: OneofMemberMessage2Input$Shape | null | undefined,
+): OneofMemberMessage2 {
+  return new OneofMemberMessage2({ imageUrl: input?.imageUrl ?? undefined });
+}
+
 export type OneofMemberMessage2PartialInput$Shape = {
   imageUrl?: OneofMemberMessage2["imageUrl"] | null;
 };
@@ -39167,6 +41215,12 @@ export const OneofMemberMessage2PartialInput$Ref: InputObjectRef<
     },
   },
 });
+
+export function OneofMemberMessage2PartialInput$toProto(
+  input: OneofMemberMessage2PartialInput$Shape | null | undefined,
+): OneofMemberMessage2 {
+  return new OneofMemberMessage2({ imageUrl: input?.imageUrl ?? undefined });
+}
 
 export const OneofParentRequiredOneofMembers$Ref = builder.unionType(
   "OneofParentRequiredOneofMembers",
@@ -39397,6 +41451,36 @@ export const OneofParentInput$Ref: InputObjectRef<OneofParentInput$Shape> =
     },
   });
 
+export function OneofParentInput$toProto(
+  input: OneofParentInput$Shape | null | undefined,
+): OneofParent {
+  return new OneofParent({
+    normalField: input?.normalField ?? undefined,
+    requiredOneofMembers: input?.requiredMessage1
+      ? {
+        case: "requiredMessage1",
+        value: OneofMemberMessage1Input$toProto(input.requiredMessage1),
+      }
+      : input?.requiredMessage2
+      ? {
+        case: "requiredMessage2",
+        value: OneofMemberMessage2Input$toProto(input.requiredMessage2),
+      }
+      : undefined,
+    optionalOneofMembers: input?.optoinalMessage1
+      ? {
+        case: "optoinalMessage1",
+        value: OneofMemberMessage1Input$toProto(input.optoinalMessage1),
+      }
+      : input?.optoinalMessage2
+      ? {
+        case: "optoinalMessage2",
+        value: OneofMemberMessage2Input$toProto(input.optoinalMessage2),
+      }
+      : undefined,
+  });
+}
+
 export type OneofMemberMessage1Input$Shape = {
   body: OneofMemberMessage1["body"];
 };
@@ -39420,6 +41504,12 @@ export const OneofMemberMessage1Input$Ref: InputObjectRef<
       },
     },
   });
+
+export function OneofMemberMessage1Input$toProto(
+  input: OneofMemberMessage1Input$Shape | null | undefined,
+): OneofMemberMessage1 {
+  return new OneofMemberMessage1({ body: input?.body ?? undefined });
+}
 
 export type OneofMemberMessage2Input$Shape = {
   imageUrl: OneofMemberMessage2["imageUrl"];
@@ -39446,6 +41536,12 @@ export const OneofMemberMessage2Input$Ref: InputObjectRef<
       },
     },
   });
+
+export function OneofMemberMessage2Input$toProto(
+  input: OneofMemberMessage2Input$Shape | null | undefined,
+): OneofMemberMessage2 {
+  return new OneofMemberMessage2({ imageUrl: input?.imageUrl ?? undefined });
+}
 
 export const OneofParentRequiredOneofMembers$Ref = builder.unionType(
   "OneofParentRequiredOneofMembers",
@@ -39889,10 +41985,12 @@ builder.objectType(Primitives$Ref, {
 /* eslint-disable */
 
 import { InputObjectRef } from "@pothos/core";
+import { Message } from "@testapis/protobuf-es/testapis/primitives/primitives_pb";
 import { builder } from "../../builder";
 import {
   PrimitivesInput$Ref,
   PrimitivesInput$Shape,
+  PrimitivesInput$toProto,
 } from "./PrimitivesInput.pothos";
 
 export type MessageInput$Shape = {
@@ -39958,6 +42056,25 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
       },
     },
   });
+
+export function MessageInput$toProto(
+  input: MessageInput$Shape | null | undefined,
+): Message {
+  return new Message({
+    requiredPrimitives: input
+      ? PrimitivesInput$toProto(input.requiredPrimitives)
+      : undefined,
+    optionalPrimitives: input
+      ? PrimitivesInput$toProto(input.optionalPrimitives)
+      : undefined,
+    requiredPrimitivesList: input?.requiredPrimitivesList?.map((v) =>
+      PrimitivesInput$toProto(v)
+    ),
+    optionalPrimitivesList: input?.optionalPrimitivesList?.map((v) =>
+      PrimitivesInput$toProto(v)
+    ),
+  });
+}
 ",
     "name": "testapis/primitives/MessageInput.pothos.ts",
   },
@@ -40310,6 +42427,43 @@ export const PrimitivesInput$Ref: InputObjectRef<PrimitivesInput$Shape> =
       },
     },
   });
+
+export function PrimitivesInput$toProto(
+  input: PrimitivesInput$Shape | null | undefined,
+): Primitives {
+  return new Primitives({
+    requiredDoubleValue: input?.requiredDoubleValue ?? undefined,
+    requiredFloatValue: input?.requiredFloatValue ?? undefined,
+    requiredInt32Value: input?.requiredInt32Value ?? undefined,
+    requiredInt64Value: input?.requiredInt64Value ?? undefined,
+    requiredUint32Value: input?.requiredUint32Value ?? undefined,
+    requiredUint64Value: input?.requiredUint64Value ?? undefined,
+    requiredSint32Value: input?.requiredSint32Value ?? undefined,
+    requiredSint64Value: input?.requiredSint64Value ?? undefined,
+    requiredFixed32Value: input?.requiredFixed32Value ?? undefined,
+    requiredFixed64Value: input?.requiredFixed64Value ?? undefined,
+    requiredSfixed32Value: input?.requiredSfixed32Value ?? undefined,
+    requiredSfixed64Value: input?.requiredSfixed64Value ?? undefined,
+    requiredBoolValue: input?.requiredBoolValue ?? undefined,
+    requiredStringValue: input?.requiredStringValue ?? undefined,
+    requiredBytesValue: input?.requiredBytesValue ?? undefined,
+    requiredDoubleValues: input?.requiredDoubleValues ?? undefined,
+    requiredFloatValues: input?.requiredFloatValues ?? undefined,
+    requiredInt32Values: input?.requiredInt32Values ?? undefined,
+    requiredInt64Values: input?.requiredInt64Values ?? undefined,
+    requiredUint32Values: input?.requiredUint32Values ?? undefined,
+    requiredUint64Values: input?.requiredUint64Values ?? undefined,
+    requiredSint32Values: input?.requiredSint32Values ?? undefined,
+    requiredSint64Values: input?.requiredSint64Values ?? undefined,
+    requiredFixed32Values: input?.requiredFixed32Values ?? undefined,
+    requiredFixed64Values: input?.requiredFixed64Values ?? undefined,
+    requiredSfixed32Values: input?.requiredSfixed32Values ?? undefined,
+    requiredSfixed64Values: input?.requiredSfixed64Values ?? undefined,
+    requiredBoolValues: input?.requiredBoolValues ?? undefined,
+    requiredStringValues: input?.requiredStringValues ?? undefined,
+    requiredBytesValues: input?.requiredBytesValues ?? undefined,
+  });
+}
 ",
     "name": "testapis/primitives/PrimitivesInput.pothos.ts",
   },
@@ -40755,6 +42909,25 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
     },
   });
 
+export function MessageInput$toProto(
+  input: MessageInput$Shape | null | undefined,
+): Message {
+  return new Message({
+    requiredPrimitives: input
+      ? PrimitivesInput$toProto(input.requiredPrimitives)
+      : undefined,
+    optionalPrimitives: input
+      ? PrimitivesInput$toProto(input.optionalPrimitives)
+      : undefined,
+    requiredPrimitivesList: input?.requiredPrimitivesList?.map((v) =>
+      PrimitivesInput$toProto(v)
+    ),
+    optionalPrimitivesList: input?.optionalPrimitivesList?.map((v) =>
+      PrimitivesInput$toProto(v)
+    ),
+  });
+}
+
 export type PrimitivesInput$Shape = {
   requiredDoubleValue: Primitives["requiredDoubleValue"];
   requiredFloatValue: Primitives["requiredFloatValue"];
@@ -41094,6 +43267,43 @@ export const PrimitivesInput$Ref: InputObjectRef<PrimitivesInput$Shape> =
       },
     },
   });
+
+export function PrimitivesInput$toProto(
+  input: PrimitivesInput$Shape | null | undefined,
+): Primitives {
+  return new Primitives({
+    requiredDoubleValue: input?.requiredDoubleValue ?? undefined,
+    requiredFloatValue: input?.requiredFloatValue ?? undefined,
+    requiredInt32Value: input?.requiredInt32Value ?? undefined,
+    requiredInt64Value: input?.requiredInt64Value ?? undefined,
+    requiredUint32Value: input?.requiredUint32Value ?? undefined,
+    requiredUint64Value: input?.requiredUint64Value ?? undefined,
+    requiredSint32Value: input?.requiredSint32Value ?? undefined,
+    requiredSint64Value: input?.requiredSint64Value ?? undefined,
+    requiredFixed32Value: input?.requiredFixed32Value ?? undefined,
+    requiredFixed64Value: input?.requiredFixed64Value ?? undefined,
+    requiredSfixed32Value: input?.requiredSfixed32Value ?? undefined,
+    requiredSfixed64Value: input?.requiredSfixed64Value ?? undefined,
+    requiredBoolValue: input?.requiredBoolValue ?? undefined,
+    requiredStringValue: input?.requiredStringValue ?? undefined,
+    requiredBytesValue: input?.requiredBytesValue ?? undefined,
+    requiredDoubleValues: input?.requiredDoubleValues ?? undefined,
+    requiredFloatValues: input?.requiredFloatValues ?? undefined,
+    requiredInt32Values: input?.requiredInt32Values ?? undefined,
+    requiredInt64Values: input?.requiredInt64Values ?? undefined,
+    requiredUint32Values: input?.requiredUint32Values ?? undefined,
+    requiredUint64Values: input?.requiredUint64Values ?? undefined,
+    requiredSint32Values: input?.requiredSint32Values ?? undefined,
+    requiredSint64Values: input?.requiredSint64Values ?? undefined,
+    requiredFixed32Values: input?.requiredFixed32Values ?? undefined,
+    requiredFixed64Values: input?.requiredFixed64Values ?? undefined,
+    requiredSfixed32Values: input?.requiredSfixed32Values ?? undefined,
+    requiredSfixed64Values: input?.requiredSfixed64Values ?? undefined,
+    requiredBoolValues: input?.requiredBoolValues ?? undefined,
+    requiredStringValues: input?.requiredStringValues ?? undefined,
+    requiredBytesValues: input?.requiredBytesValues ?? undefined,
+  });
+}
 ",
     "name": "testapis/primitives/primitives.pb.pothos.ts",
   },
@@ -41539,6 +43749,25 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
     },
   });
 
+export function MessageInput$toProto(
+  input: MessageInput$Shape | null | undefined,
+): Message {
+  return new Message({
+    requiredPrimitives: input
+      ? PrimitivesInput$toProto(input.requiredPrimitives)
+      : undefined,
+    optionalPrimitives: input
+      ? PrimitivesInput$toProto(input.optionalPrimitives)
+      : undefined,
+    requiredPrimitivesList: input?.requiredPrimitivesList?.map((v) =>
+      PrimitivesInput$toProto(v)
+    ),
+    optionalPrimitivesList: input?.optionalPrimitivesList?.map((v) =>
+      PrimitivesInput$toProto(v)
+    ),
+  });
+}
+
 export type MessagePartialInput$Shape = {
   requiredPrimitives?: PrimitivesPartialInput$Shape | null;
   optionalPrimitives?: PrimitivesPartialInput$Shape | null;
@@ -41604,6 +43833,25 @@ export const MessagePartialInput$Ref: InputObjectRef<
       },
     },
   });
+
+export function MessagePartialInput$toProto(
+  input: MessagePartialInput$Shape | null | undefined,
+): Message {
+  return new Message({
+    requiredPrimitives: input
+      ? PrimitivesPartialInput$toProto(input.requiredPrimitives)
+      : undefined,
+    optionalPrimitives: input
+      ? PrimitivesPartialInput$toProto(input.optionalPrimitives)
+      : undefined,
+    requiredPrimitivesList: input?.requiredPrimitivesList?.map((v) =>
+      PrimitivesPartialInput$toProto(v)
+    ),
+    optionalPrimitivesList: input?.optionalPrimitivesList?.map((v) =>
+      PrimitivesPartialInput$toProto(v)
+    ),
+  });
+}
 
 export type PrimitivesInput$Shape = {
   requiredDoubleValue: Primitives["requiredDoubleValue"];
@@ -41944,6 +44192,43 @@ export const PrimitivesInput$Ref: InputObjectRef<PrimitivesInput$Shape> =
       },
     },
   });
+
+export function PrimitivesInput$toProto(
+  input: PrimitivesInput$Shape | null | undefined,
+): Primitives {
+  return new Primitives({
+    requiredDoubleValue: input?.requiredDoubleValue ?? undefined,
+    requiredFloatValue: input?.requiredFloatValue ?? undefined,
+    requiredInt32Value: input?.requiredInt32Value ?? undefined,
+    requiredInt64Value: input?.requiredInt64Value ?? undefined,
+    requiredUint32Value: input?.requiredUint32Value ?? undefined,
+    requiredUint64Value: input?.requiredUint64Value ?? undefined,
+    requiredSint32Value: input?.requiredSint32Value ?? undefined,
+    requiredSint64Value: input?.requiredSint64Value ?? undefined,
+    requiredFixed32Value: input?.requiredFixed32Value ?? undefined,
+    requiredFixed64Value: input?.requiredFixed64Value ?? undefined,
+    requiredSfixed32Value: input?.requiredSfixed32Value ?? undefined,
+    requiredSfixed64Value: input?.requiredSfixed64Value ?? undefined,
+    requiredBoolValue: input?.requiredBoolValue ?? undefined,
+    requiredStringValue: input?.requiredStringValue ?? undefined,
+    requiredBytesValue: input?.requiredBytesValue ?? undefined,
+    requiredDoubleValues: input?.requiredDoubleValues ?? undefined,
+    requiredFloatValues: input?.requiredFloatValues ?? undefined,
+    requiredInt32Values: input?.requiredInt32Values ?? undefined,
+    requiredInt64Values: input?.requiredInt64Values ?? undefined,
+    requiredUint32Values: input?.requiredUint32Values ?? undefined,
+    requiredUint64Values: input?.requiredUint64Values ?? undefined,
+    requiredSint32Values: input?.requiredSint32Values ?? undefined,
+    requiredSint64Values: input?.requiredSint64Values ?? undefined,
+    requiredFixed32Values: input?.requiredFixed32Values ?? undefined,
+    requiredFixed64Values: input?.requiredFixed64Values ?? undefined,
+    requiredSfixed32Values: input?.requiredSfixed32Values ?? undefined,
+    requiredSfixed64Values: input?.requiredSfixed64Values ?? undefined,
+    requiredBoolValues: input?.requiredBoolValues ?? undefined,
+    requiredStringValues: input?.requiredStringValues ?? undefined,
+    requiredBytesValues: input?.requiredBytesValues ?? undefined,
+  });
+}
 
 export type PrimitivesPartialInput$Shape = {
   requiredDoubleValue?: Primitives["requiredDoubleValue"] | null;
@@ -42286,6 +44571,43 @@ export const PrimitivesPartialInput$Ref: InputObjectRef<
       },
     },
   });
+
+export function PrimitivesPartialInput$toProto(
+  input: PrimitivesPartialInput$Shape | null | undefined,
+): Primitives {
+  return new Primitives({
+    requiredDoubleValue: input?.requiredDoubleValue ?? undefined,
+    requiredFloatValue: input?.requiredFloatValue ?? undefined,
+    requiredInt32Value: input?.requiredInt32Value ?? undefined,
+    requiredInt64Value: input?.requiredInt64Value ?? undefined,
+    requiredUint32Value: input?.requiredUint32Value ?? undefined,
+    requiredUint64Value: input?.requiredUint64Value ?? undefined,
+    requiredSint32Value: input?.requiredSint32Value ?? undefined,
+    requiredSint64Value: input?.requiredSint64Value ?? undefined,
+    requiredFixed32Value: input?.requiredFixed32Value ?? undefined,
+    requiredFixed64Value: input?.requiredFixed64Value ?? undefined,
+    requiredSfixed32Value: input?.requiredSfixed32Value ?? undefined,
+    requiredSfixed64Value: input?.requiredSfixed64Value ?? undefined,
+    requiredBoolValue: input?.requiredBoolValue ?? undefined,
+    requiredStringValue: input?.requiredStringValue ?? undefined,
+    requiredBytesValue: input?.requiredBytesValue ?? undefined,
+    requiredDoubleValues: input?.requiredDoubleValues ?? undefined,
+    requiredFloatValues: input?.requiredFloatValues ?? undefined,
+    requiredInt32Values: input?.requiredInt32Values ?? undefined,
+    requiredInt64Values: input?.requiredInt64Values ?? undefined,
+    requiredUint32Values: input?.requiredUint32Values ?? undefined,
+    requiredUint64Values: input?.requiredUint64Values ?? undefined,
+    requiredSint32Values: input?.requiredSint32Values ?? undefined,
+    requiredSint64Values: input?.requiredSint64Values ?? undefined,
+    requiredFixed32Values: input?.requiredFixed32Values ?? undefined,
+    requiredFixed64Values: input?.requiredFixed64Values ?? undefined,
+    requiredSfixed32Values: input?.requiredSfixed32Values ?? undefined,
+    requiredSfixed64Values: input?.requiredSfixed64Values ?? undefined,
+    requiredBoolValues: input?.requiredBoolValues ?? undefined,
+    requiredStringValues: input?.requiredStringValues ?? undefined,
+    requiredBytesValues: input?.requiredBytesValues ?? undefined,
+  });
+}
 ",
     "name": "testapis/primitives/primitives.pb.pothos.ts",
   },
@@ -42728,6 +45050,25 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
     },
   });
 
+export function MessageInput$toProto(
+  input: MessageInput$Shape | null | undefined,
+): Message {
+  return new Message({
+    requiredPrimitives: input
+      ? PrimitivesInput$toProto(input.requiredPrimitives)
+      : undefined,
+    optionalPrimitives: input
+      ? PrimitivesInput$toProto(input.optionalPrimitives)
+      : undefined,
+    requiredPrimitivesList: input?.requiredPrimitivesList?.map((v) =>
+      PrimitivesInput$toProto(v)
+    ),
+    optionalPrimitivesList: input?.optionalPrimitivesList?.map((v) =>
+      PrimitivesInput$toProto(v)
+    ),
+  });
+}
+
 export type PrimitivesInput$Shape = {
   requiredDoubleValue: Primitives["requiredDoubleValue"];
   requiredFloatValue: Primitives["requiredFloatValue"];
@@ -43067,6 +45408,43 @@ export const PrimitivesInput$Ref: InputObjectRef<PrimitivesInput$Shape> =
       },
     },
   });
+
+export function PrimitivesInput$toProto(
+  input: PrimitivesInput$Shape | null | undefined,
+): Primitives {
+  return new Primitives({
+    requiredDoubleValue: input?.requiredDoubleValue ?? undefined,
+    requiredFloatValue: input?.requiredFloatValue ?? undefined,
+    requiredInt32Value: input?.requiredInt32Value ?? undefined,
+    requiredInt64Value: input?.requiredInt64Value ?? undefined,
+    requiredUint32Value: input?.requiredUint32Value ?? undefined,
+    requiredUint64Value: input?.requiredUint64Value ?? undefined,
+    requiredSint32Value: input?.requiredSint32Value ?? undefined,
+    requiredSint64Value: input?.requiredSint64Value ?? undefined,
+    requiredFixed32Value: input?.requiredFixed32Value ?? undefined,
+    requiredFixed64Value: input?.requiredFixed64Value ?? undefined,
+    requiredSfixed32Value: input?.requiredSfixed32Value ?? undefined,
+    requiredSfixed64Value: input?.requiredSfixed64Value ?? undefined,
+    requiredBoolValue: input?.requiredBoolValue ?? undefined,
+    requiredStringValue: input?.requiredStringValue ?? undefined,
+    requiredBytesValue: input?.requiredBytesValue ?? undefined,
+    requiredDoubleValues: input?.requiredDoubleValues ?? undefined,
+    requiredFloatValues: input?.requiredFloatValues ?? undefined,
+    requiredInt32Values: input?.requiredInt32Values ?? undefined,
+    requiredInt64Values: input?.requiredInt64Values ?? undefined,
+    requiredUint32Values: input?.requiredUint32Values ?? undefined,
+    requiredUint64Values: input?.requiredUint64Values ?? undefined,
+    requiredSint32Values: input?.requiredSint32Values ?? undefined,
+    requiredSint64Values: input?.requiredSint64Values ?? undefined,
+    requiredFixed32Values: input?.requiredFixed32Values ?? undefined,
+    requiredFixed64Values: input?.requiredFixed64Values ?? undefined,
+    requiredSfixed32Values: input?.requiredSfixed32Values ?? undefined,
+    requiredSfixed64Values: input?.requiredSfixed64Values ?? undefined,
+    requiredBoolValues: input?.requiredBoolValues ?? undefined,
+    requiredStringValues: input?.requiredStringValues ?? undefined,
+    requiredBytesValues: input?.requiredBytesValues ?? undefined,
+  });
+}
 ",
     "name": "testapis/primitives/primitives.pb.pothos.ts",
   },
@@ -43170,6 +45548,15 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
       },
     },
   });
+
+export function MessageInput$toProto(
+  input: MessageInput$Shape | null | undefined,
+): Message {
+  return new Message({
+    requiredStringValue: input?.requiredStringValue ?? undefined,
+    optionalStringValue: input?.optionalStringValue ?? undefined,
+  });
+}
 ",
     "name": "testapis/proto3_optional/MessageInput.pothos.ts",
   },
@@ -43262,6 +45649,15 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
       },
     },
   });
+
+export function MessageInput$toProto(
+  input: MessageInput$Shape | null | undefined,
+): Message {
+  return new Message({
+    requiredStringValue: input?.requiredStringValue ?? undefined,
+    optionalStringValue: input?.optionalStringValue ?? undefined,
+  });
+}
 ",
     "name": "testapis/proto3_optional/proto3_optional.pb.pothos.ts",
   },
@@ -43355,6 +45751,15 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
     },
   });
 
+export function MessageInput$toProto(
+  input: MessageInput$Shape | null | undefined,
+): Message {
+  return new Message({
+    requiredStringValue: input?.requiredStringValue ?? undefined,
+    optionalStringValue: input?.optionalStringValue ?? undefined,
+  });
+}
+
 export type MessagePartialInput$Shape = {
   requiredStringValue?: Message["requiredStringValue"] | null;
   optionalStringValue?: Message["optionalStringValue"] | null;
@@ -43394,6 +45799,15 @@ export const MessagePartialInput$Ref: InputObjectRef<
       },
     },
   });
+
+export function MessagePartialInput$toProto(
+  input: MessagePartialInput$Shape | null | undefined,
+): Message {
+  return new Message({
+    requiredStringValue: input?.requiredStringValue ?? undefined,
+    optionalStringValue: input?.optionalStringValue ?? undefined,
+  });
+}
 ",
     "name": "testapis/proto3_optional/proto3_optional.pb.pothos.ts",
   },
@@ -43486,6 +45900,15 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
       },
     },
   });
+
+export function MessageInput$toProto(
+  input: MessageInput$Shape | null | undefined,
+): Message {
+  return new Message({
+    requiredStringValue: input?.requiredStringValue ?? undefined,
+    optionalStringValue: input?.optionalStringValue ?? undefined,
+  });
+}
 ",
     "name": "testapis/proto3_optional/proto3_optional.pb.pothos.ts",
   },
@@ -43788,6 +46211,24 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
       },
     },
   });
+
+export function MessageInput$toProto(
+  input: MessageInput$Shape | null | undefined,
+): Message {
+  return new Message({
+    timestamp: input?.timestamp ?? undefined,
+    int32Value: input?.int32Value ?? undefined,
+    int64Value: input?.int64Value ?? undefined,
+    uint32Value: input?.uint32Value ?? undefined,
+    uint64Value: input?.uint64Value ?? undefined,
+    floatValue: input?.floatValue ?? undefined,
+    doubleValue: input?.doubleValue ?? undefined,
+    boolValue: input?.boolValue ?? undefined,
+    stringValue: input?.stringValue ?? undefined,
+    bytesValue: input?.bytesValue ?? undefined,
+    requiredTimestamp: input?.requiredTimestamp ?? undefined,
+  });
+}
 ",
     "name": "testapis/wktypes/MessageInput.pothos.ts",
   },
@@ -44079,6 +46520,24 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
       },
     },
   });
+
+export function MessageInput$toProto(
+  input: MessageInput$Shape | null | undefined,
+): Message {
+  return new Message({
+    timestamp: input?.timestamp ?? undefined,
+    int32Value: input?.int32Value ?? undefined,
+    int64Value: input?.int64Value ?? undefined,
+    uint32Value: input?.uint32Value ?? undefined,
+    uint64Value: input?.uint64Value ?? undefined,
+    floatValue: input?.floatValue ?? undefined,
+    doubleValue: input?.doubleValue ?? undefined,
+    boolValue: input?.boolValue ?? undefined,
+    stringValue: input?.stringValue ?? undefined,
+    bytesValue: input?.bytesValue ?? undefined,
+    requiredTimestamp: input?.requiredTimestamp ?? undefined,
+  });
+}
 ",
     "name": "testapis/wktypes/well_known_types.pb.pothos.ts",
   },
@@ -44371,6 +46830,24 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
     },
   });
 
+export function MessageInput$toProto(
+  input: MessageInput$Shape | null | undefined,
+): Message {
+  return new Message({
+    timestamp: input?.timestamp ?? undefined,
+    int32Value: input?.int32Value ?? undefined,
+    int64Value: input?.int64Value ?? undefined,
+    uint32Value: input?.uint32Value ?? undefined,
+    uint64Value: input?.uint64Value ?? undefined,
+    floatValue: input?.floatValue ?? undefined,
+    doubleValue: input?.doubleValue ?? undefined,
+    boolValue: input?.boolValue ?? undefined,
+    stringValue: input?.stringValue ?? undefined,
+    bytesValue: input?.bytesValue ?? undefined,
+    requiredTimestamp: input?.requiredTimestamp ?? undefined,
+  });
+}
+
 export type MessagePartialInput$Shape = {
   timestamp?: Message["timestamp"] | null;
   int32Value?: Message["int32Value"] | null;
@@ -44510,6 +46987,24 @@ export const MessagePartialInput$Ref: InputObjectRef<
       },
     },
   });
+
+export function MessagePartialInput$toProto(
+  input: MessagePartialInput$Shape | null | undefined,
+): Message {
+  return new Message({
+    timestamp: input?.timestamp ?? undefined,
+    int32Value: input?.int32Value ?? undefined,
+    int64Value: input?.int64Value ?? undefined,
+    uint32Value: input?.uint32Value ?? undefined,
+    uint64Value: input?.uint64Value ?? undefined,
+    floatValue: input?.floatValue ?? undefined,
+    doubleValue: input?.doubleValue ?? undefined,
+    boolValue: input?.boolValue ?? undefined,
+    stringValue: input?.stringValue ?? undefined,
+    bytesValue: input?.bytesValue ?? undefined,
+    requiredTimestamp: input?.requiredTimestamp ?? undefined,
+  });
+}
 ",
     "name": "testapis/wktypes/well_known_types.pb.pothos.ts",
   },
@@ -44801,6 +47296,24 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
       },
     },
   });
+
+export function MessageInput$toProto(
+  input: MessageInput$Shape | null | undefined,
+): Message {
+  return new Message({
+    timestamp: input?.timestamp ?? undefined,
+    int32Value: input?.int32Value ?? undefined,
+    int64Value: input?.int64Value ?? undefined,
+    uint32Value: input?.uint32Value ?? undefined,
+    uint64Value: input?.uint64Value ?? undefined,
+    floatValue: input?.floatValue ?? undefined,
+    doubleValue: input?.doubleValue ?? undefined,
+    boolValue: input?.boolValue ?? undefined,
+    stringValue: input?.stringValue ?? undefined,
+    bytesValue: input?.bytesValue ?? undefined,
+    requiredTimestamp: input?.requiredTimestamp ?? undefined,
+  });
+}
 ",
     "name": "testapis/wktypes/well_known_types.pb.pothos.ts",
   },

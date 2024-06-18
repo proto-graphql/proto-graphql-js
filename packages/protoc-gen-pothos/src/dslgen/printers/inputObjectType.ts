@@ -6,6 +6,9 @@ import {
   protoType,
   protobufGraphQLExtensions,
   tsFieldName,
+  EnumType,
+  InputObjectField,
+  generatedGraphQLTypeImportPath,
 } from "@proto-graphql/codegen-core";
 import { type Code, code, imp, joinCode, literalOf } from "ts-poet";
 
@@ -30,6 +33,13 @@ import {
  *     // ...
  *   }),
  * })
+ *
+ * export function HelloInput$toProto () {
+ *   return {
+ *     // ...
+ *   }
+ * }
+ *
  * ```
  */
 export function createInputObjectTypeCode(
@@ -91,8 +101,87 @@ export function createInputObjectTypeCode(
       );
   `;
 
-  return code`
-    ${shapeTypeCode}
-    ${refCode}
+  const oneofFields: Record<string, InputObjectField<InputObjectType>[]> = {};
+  for (const f of type.fields) {
+    if (f.proto.oneof == null) continue;
+    if (!(f.type instanceof InputObjectType)) {
+      throw new Error("Oneof fields must be of message");
+    }
+
+    oneofFields[f.proto.oneof.name] = [
+      ...(oneofFields[f.proto.oneof.name] || []),
+      f as InputObjectField<InputObjectType>,
+    ];
+  }
+
+  const codes = [shapeTypeCode, refCode];
+
+  if (opts.protobuf === "protobuf-es") {
+    const toProtoCode = code`
+    export function ${toProtoFuncName(type)} (input: ${shapeType(
+      type,
+    )} | null | undefined): ${protoType(type.proto, opts)} {
+      return new ${protoType(type.proto, opts)}({
+        ${type.fields
+          .filter((f) => f.proto.oneof == null)
+          .map((f) => {
+            switch (true) {
+              case f.type instanceof InputObjectType: {
+                const localName = tsFieldName(f.proto, opts);
+                const toProtoFunc = fieldToProtoFunc(
+                  f as InputObjectField<InputObjectType>,
+                  opts,
+                );
+                if (f.isList()) {
+                  return code`${localName}: input?.${f.name}?.map(v => ${toProtoFunc}(v)),`;
+                }
+                return code`${localName}: input ? ${toProtoFunc}(input.${f.name}) : undefined,`;
+              }
+              case f.type instanceof ScalarType:
+              case f.type instanceof EnumType: {
+                const localName = tsFieldName(f.proto, opts);
+                return code`${localName}: input?.${f.name} ?? undefined,`;
+              }
+              default: {
+                f.type satisfies never;
+                throw "unreachable";
+              }
+            }
+          })}
+        ${Object.values(oneofFields).map((fields) => {
+          return code`${tsFieldName(
+            fields[0]!.proto.oneof!,
+            opts,
+          )}:${fields.map(
+            (f) =>
+              code`input?.${f.name} ? { case: "${tsFieldName(
+                f.proto,
+                opts,
+              )}", value: ${fieldToProtoFunc(f, opts)}(input.${f.name}) } :`,
+          )} undefined,`;
+        })}
+      });
+    }
   `;
+
+    codes.push(toProtoCode);
+  }
+
+  return code` ${codes} `;
+}
+
+function toProtoFuncName(type: InputObjectType): string {
+  return `${type.typeName}$toProto`;
+}
+
+function fieldToProtoFunc(
+  field: InputObjectField<InputObjectType>,
+  opts: PothosPrinterOptions,
+): Code {
+  const importPath = generatedGraphQLTypeImportPath(field, opts);
+  if (importPath == null) return code`${toProtoFuncName(field.type)}`;
+
+  const imported = imp(`IMPORTED_PLACEHOLDER@${importPath}`);
+  imported.symbol = toProtoFuncName(field.type); // NOTE: Workaround for ts-poet not recognizing "$" as an identifier
+  return code`${imported}`;
 }
