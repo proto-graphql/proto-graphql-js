@@ -1,14 +1,14 @@
 import {
+  EnumType,
+  type InputObjectField,
   InputObjectType,
   type Registry,
   ScalarType,
   compact,
+  generatedGraphQLTypeImportPath,
   protoType,
   protobufGraphQLExtensions,
   tsFieldName,
-  EnumType,
-  InputObjectField,
-  generatedGraphQLTypeImportPath,
 } from "@proto-graphql/codegen-core";
 import { type Code, code, imp, joinCode, literalOf } from "ts-poet";
 
@@ -150,6 +150,7 @@ export function createInputObjectTypeCode(
           })}
         ${Object.values(oneofFields).map((fields) => {
           return code`${tsFieldName(
+            // biome-ignore lint/style/noNonNullAssertion: we know it's not null
             fields[0]!.proto.oneof!,
             opts,
           )}:${fields.map(
