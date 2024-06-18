@@ -101,6 +101,19 @@ export function createInputObjectTypeCode(
       );
   `;
 
+  const codes = [shapeTypeCode, refCode];
+
+  if (opts.protobuf === "protobuf-es") {
+    codes.push(createToProtoFuncCode(type, opts));
+  }
+
+  return code` ${codes} `;
+}
+
+function createToProtoFuncCode(
+  type: InputObjectType,
+  opts: PothosPrinterOptions,
+): Code {
   const oneofFields: Record<string, InputObjectField<InputObjectType>[]> = {};
   for (const f of type.fields) {
     if (f.proto.oneof == null) continue;
@@ -114,10 +127,7 @@ export function createInputObjectTypeCode(
     ];
   }
 
-  const codes = [shapeTypeCode, refCode];
-
-  if (opts.protobuf === "protobuf-es") {
-    const toProtoCode = code`
+  return code`
     export function ${toProtoFuncName(type)} (input: ${shapeType(
       type,
     )} | null | undefined): ${protoType(type.proto, opts)} {
@@ -164,11 +174,6 @@ export function createInputObjectTypeCode(
       });
     }
   `;
-
-    codes.push(toProtoCode);
-  }
-
-  return code` ${codes} `;
 }
 
 function toProtoFuncName(type: InputObjectType): string {
