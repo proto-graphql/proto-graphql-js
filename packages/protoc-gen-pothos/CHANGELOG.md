@@ -1,5 +1,11 @@
 # protoc-gen-pothos
 
+## 0.6.0
+
+### Minor Changes
+
+- [#376](https://github.com/proto-graphql/proto-graphql-js/pull/376) [`4f2ce24`](https://github.com/proto-graphql/proto-graphql-js/commit/4f2ce2451e6f53255c89c14a30940cd5e4178858) Thanks [@izumin5210](https://github.com/izumin5210)! - generate `toProto` function for input types
+
 ## 0.5.1
 
 ### Patch Changes
