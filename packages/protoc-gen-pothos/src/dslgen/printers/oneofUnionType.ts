@@ -9,9 +9,9 @@ import { type Code, code, literalOf } from "ts-poet";
 
 import {
   type PothosPrinterOptions,
+  fieldTypeRef,
   pothosBuilder,
   pothosRef,
-  fieldTypeRef,
 } from "./util";
 
 /**
