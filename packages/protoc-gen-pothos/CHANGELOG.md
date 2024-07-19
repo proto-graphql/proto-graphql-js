@@ -1,5 +1,11 @@
 # protoc-gen-pothos
 
+## 0.6.1
+
+### Patch Changes
+
+- [#379](https://github.com/proto-graphql/proto-graphql-js/pull/379) [`c41a5d1`](https://github.com/proto-graphql/proto-graphql-js/commit/c41a5d1bccb24cf4542309842be86c1c7ae5fdc5) Thanks [@izumin5210](https://github.com/izumin5210)! - import oneof member's type defined in a separate file
+
 ## 0.6.0
 
 ### Minor Changes
