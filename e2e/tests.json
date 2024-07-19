@@ -184,6 +184,13 @@
     {
       "target": "pothos",
       "proto": {
+        "package": "edgecases/import_oneof_member_from_other_file",
+        "lib": "protobuf-es"
+      }
+    },
+    {
+      "target": "pothos",
+      "proto": {
         "package": "edgecases/import_squashed_union",
         "lib": "protobuf-es"
       }
