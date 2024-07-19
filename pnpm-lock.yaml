@@ -766,6 +766,28 @@ importers:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
 
+  e2e/tests/pothos--edgecases-import_oneof_member_from_other_file--protobuf-es:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: '*'
+        version: 1.8.0
+    devDependencies:
+      '@proto-graphql/e2e-helper':
+        specifier: workspace:*
+        version: link:../../helper
+      '@proto-graphql/e2e-testapis-protobuf-es':
+        specifier: workspace:*
+        version: link:../../testapis/protobuf-es
+      '@proto-graphql/scalars-protobuf-es':
+        specifier: workspace:*
+        version: link:../../../packages/@proto-graphql/scalars-protobuf-es
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../devPackages/tsconfig
+      protoc-gen-pothos:
+        specifier: workspace:*
+        version: link:../../../packages/protoc-gen-pothos
+
   e2e/tests/pothos--edgecases-import_squashed_union--protobuf-es:
     dependencies:
       '@bufbuild/protobuf':

@@ -7,7 +7,12 @@ import {
 } from "@proto-graphql/codegen-core";
 import { type Code, code, literalOf } from "ts-poet";
 
-import { type PothosPrinterOptions, pothosBuilder, pothosRef } from "./util";
+import {
+  type PothosPrinterOptions,
+  pothosBuilder,
+  pothosRef,
+  fieldTypeRef,
+} from "./util";
 
 /**
  * @example
@@ -24,7 +29,7 @@ export function createOneofUnionTypeCode(
   opts: PothosPrinterOptions,
 ): Code {
   const typeOpts = {
-    types: type.fields.map((f) => pothosRef(f.type)),
+    types: type.fields.map((f) => fieldTypeRef(f, opts)),
     description: type.description,
     extensions: protobufGraphQLExtensions(type, registry),
   };
