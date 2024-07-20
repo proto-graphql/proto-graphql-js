@@ -14,6 +14,8 @@ plugins:
       - unrecognizedEnum=false
       - outputTypeRegistry=true
       - esModuleInterop=true
+      # https://github.com/stephenh/ts-proto/issues/449
+      - useExactTypes=false
     out: ./e2e/testapis/ts-proto/src
     strategy: all
   - local: protoc-gen-ts_proto
@@ -23,6 +25,8 @@ plugins:
       - unrecognizedEnum=false
       - outputTypeRegistry=true
       - esModuleInterop=true
+      # https://github.com/stephenh/ts-proto/issues/449
+      - useExactTypes=false
     out: ./e2e/testapis/ts-proto-with-forcelong-long/src
     strategy: all
   - local: protoc-gen-ts_proto
@@ -32,6 +36,8 @@ plugins:
       - unrecognizedEnum=false
       - outputTypeRegistry=true
       - esModuleInterop=true
+      # https://github.com/stephenh/ts-proto/issues/449
+      - useExactTypes=false
     out: ./e2e/testapis/ts-proto-with-forcelong-number/src
     strategy: all
   - local: protoc-gen-es
