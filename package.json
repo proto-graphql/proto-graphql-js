@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.7.1",
-    "@bufbuild/buf": "1.27.0",
+    "@bufbuild/buf": "1.34.0",
     "@bufbuild/protobuf": "1.8.0",
     "@bufbuild/protoc-gen-es": "1.8.0",
     "@changesets/changelog-github": "0.5.0",
@@ -44,7 +44,7 @@
   "changelog": {
     "repo": "proto-graphql/proto-graphql-js",
     "labels": {
-      "codegen - breaking changes :warning:": "⚠️ Breaking Changes - Code Generation",
+      "codegen - breaking changes :warning:": "! Breaking Changes - Code Generation",
       "codegen - feature :genie_woman:": "Features - Code Generation",
       "codegen - improvement :vulcan_salute:": "Improvements - Code Generation",
       "runtime - improvement :running_man:": "Improvements - Runtime",

@@ -1,15 +1,13 @@
-version: v1
-managed:
-  enabled: true
+version: v2
 plugins:
-  - plugin: buf.build/protocolbuffers/js:v3.21.2
+  - remote: buf.build/protocolbuffers/js:v3.21.2
     opt:
       - import_style=commonjs
       - binary
     out: ./e2e/testapis/google-protobuf/lib
-  - plugin: ts
+  - local: protoc-gen-ts
     out: ./e2e/testapis/google-protobuf/lib
-  - plugin: ts_proto
+  - local: protoc-gen-ts_proto
     opt:
       - enumsAsLiterals=true
       - forceLong=string
@@ -18,7 +16,7 @@ plugins:
       - esModuleInterop=true
     out: ./e2e/testapis/ts-proto/src
     strategy: all
-  - plugin: ts_proto
+  - local: protoc-gen-ts_proto
     opt:
       - enumsAsLiterals=true
       - forceLong=long
@@ -27,7 +25,7 @@ plugins:
       - esModuleInterop=true
     out: ./e2e/testapis/ts-proto-with-forcelong-long/src
     strategy: all
-  - plugin: ts_proto
+  - local: protoc-gen-ts_proto
     opt:
       - enumsAsLiterals=true
       - forceLong=number
@@ -36,8 +34,10 @@ plugins:
       - esModuleInterop=true
     out: ./e2e/testapis/ts-proto-with-forcelong-number/src
     strategy: all
-  - plugin: es
+  - local: protoc-gen-es
     opt:
       - target=ts
     out: ./e2e/testapis/protobuf-es/src
     strategy: all
+inputs:
+  - directory: ./devPackages/testapis-proto/proto

@@ -1,13 +1,20 @@
 {
-  "version": "v1",
+  "version": "v2",
   "plugins": [
     {
-      "name": "nexus",
-      "path": "../../../packages/protoc-gen-nexus/bin/protoc-gen-nexus",
+      "local": "../../../packages/protoc-gen-nexus/bin/protoc-gen-nexus",
       "out": "__generated__/schema",
       "opt": [
         "use_protobufjs",
         "import_prefix=@proto-graphql/e2e-testapis-protobufjs/lib/"
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "directory": "../../../devPackages/testapis-proto/proto",
+      "paths": [
+        "../../../devPackages/testapis-proto/proto/testapis/edgecases/import_squashed_union"
       ]
     }
   ]

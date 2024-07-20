@@ -1,15 +1,20 @@
 {
-  "version": "v1",
+  "version": "v2",
   "plugins": [
     {
-      "name": "pothos",
-      "path": "../../../packages/protoc-gen-pothos/bin/protoc-gen-pothos",
+      "local": "../../../packages/protoc-gen-pothos/bin/protoc-gen-pothos",
       "out": "__generated__/schema",
       "opt": [
         "import_prefix=@proto-graphql/e2e-testapis-protobuf-es/lib/",
         "pothos_builder_path=../../builder",
         "protobuf_lib=protobuf-es"
       ]
+    }
+  ],
+  "inputs": [
+    {
+      "directory": "../../../devPackages/testapis-proto/proto",
+      "paths": ["../../../devPackages/testapis-proto/proto/testapis/oneof"]
     }
   ]
 }

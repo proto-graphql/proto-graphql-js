@@ -1,6 +1,7 @@
-version: v1
+version: v2
 plugins:
-  - plugin: es
+  - local: protoc-gen-es
     out: ./packages/@proto-graphql/codegen-core/src/__generated__/extensions
-    opt:
-      - target=ts
+    opt: target=ts
+inputs:
+  - directory: ./proto-graphql/proto

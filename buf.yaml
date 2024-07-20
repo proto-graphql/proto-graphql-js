@@ -1,0 +1,4 @@
+version: v2
+modules:
+  - path: ./devPackages/testapis-proto/proto
+  - path: ./proto-graphql/proto
