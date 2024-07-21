@@ -1,4 +1,4 @@
-import { defineConfig, defineWorkspace } from "vitest/config";
+import { defineConfig } from "vitest/config";
 
 // biome-ignore lint/style/noDefaultExport: allow on external tools configs
 export default defineConfig({
