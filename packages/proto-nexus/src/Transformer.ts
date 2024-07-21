@@ -21,7 +21,6 @@ type TransformerWrapper<T extends Transformer<any, any>> =
 export const transformers: Record<string, Transformer<any, any>> = {};
 
 declare global {
-  // biome-ignore lint/suspicious/noEmptyInterface: use interface that package users can add own transformers
   interface ProtoNexusTransformers {}
 }
 
