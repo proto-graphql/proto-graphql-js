@@ -6,6 +6,7 @@ plugins:
       - binary
     out: ./e2e/testapis/google-protobuf/lib
   - local: protoc-gen-ts
+    include_imports: true
     out: ./e2e/testapis/google-protobuf/lib
   - local: protoc-gen-ts_proto
     opt:
