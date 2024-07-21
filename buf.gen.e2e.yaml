@@ -5,6 +5,7 @@ plugins:
       - import_style=commonjs
       - binary
     out: ./e2e/testapis/google-protobuf/lib
+    include_imports: true
   - local: protoc-gen-ts
     include_imports: true
     out: ./e2e/testapis/google-protobuf/lib
