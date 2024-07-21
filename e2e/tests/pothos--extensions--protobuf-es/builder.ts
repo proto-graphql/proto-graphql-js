@@ -1,5 +1,5 @@
 import SchemaBuilder from "@pothos/core";
-import { GraphQLBigInt, GraphQLByte } from "graphql-scalars";
+import { GraphQLBigInt } from "graphql-scalars";
 
 export const builder = new SchemaBuilder<{
   Scalars: {
