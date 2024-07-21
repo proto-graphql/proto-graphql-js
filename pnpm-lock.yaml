@@ -54,8 +54,8 @@ importers:
         specifier: 1.23.0
         version: 1.23.0(graphql@16.8.1)
       minimatch:
-        specifier: 5.1.2
-        version: 5.1.2
+        specifier: 5.1.6
+        version: 5.1.6
       nexus:
         specifier: 1.3.0
         version: 1.3.0(graphql@16.8.1)
@@ -3283,6 +3283,10 @@ packages:
     resolution: {integrity: sha512-bNH9mmM9qsJ2X4r2Nat1B//1dJVcn3+iBLa3IgqJ7EbGaDNepL9QSHOxN4ng33s52VMMhhIfgCYDk3C4ZmlDAg==}
     engines: {node: '>=10'}
 
+  minimatch@5.1.6:
+    resolution: {integrity: sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g==}
+    engines: {node: '>=10'}
+
   minimatch@9.0.4:
     resolution: {integrity: sha512-KqWh+VchfxcMNRAJjj2tnsSJdNbHsVgnkBhTNrW7AjVo6OvLtxw8zfT9oLw1JSohlFzJ8jCoTgaoXvJ+kHt6fw==}
     engines: {node: '>=16 || 14 >=14.17'}
@@ -6057,6 +6061,10 @@ snapshots:
       brace-expansion: 1.1.11
 
   minimatch@5.1.2:
+    dependencies:
+      brace-expansion: 2.0.1
+
+  minimatch@5.1.6:
     dependencies:
       brace-expansion: 2.0.1
 
