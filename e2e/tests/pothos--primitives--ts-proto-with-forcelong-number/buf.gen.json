@@ -1,9 +1,8 @@
 {
-  "version": "v1",
+  "version": "v2",
   "plugins": [
     {
-      "name": "pothos",
-      "path": "../../../packages/protoc-gen-pothos/bin/protoc-gen-pothos",
+      "local": "../../../packages/protoc-gen-pothos/bin/protoc-gen-pothos",
       "out": "__generated__/schema",
       "opt": [
         "import_prefix=@proto-graphql/e2e-testapis-ts-proto-with-forcelong-number/lib/",
@@ -19,6 +18,12 @@
         "scalar=google.protobuf.Fixed64Value=Int",
         "scalar=google.protobuf.SFixed64Value=Int"
       ]
+    }
+  ],
+  "inputs": [
+    {
+      "directory": "../../../devPackages/testapis-proto/proto",
+      "paths": ["../../../devPackages/testapis-proto/proto/testapis/primitives"]
     }
   ]
 }

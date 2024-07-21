@@ -12,8 +12,8 @@ importers:
         specifier: 1.7.1
         version: 1.7.1
       '@bufbuild/buf':
-        specifier: 1.27.0
-        version: 1.27.0
+        specifier: 1.34.0
+        version: 1.34.0
       '@bufbuild/protobuf':
         specifier: 1.8.0
         version: 1.8.0
@@ -1480,44 +1480,44 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@bufbuild/buf-darwin-arm64@1.27.0':
-    resolution: {integrity: sha512-Bsdo9BkkIlIgBpQJ2jyIXl9ggSqDdSJ12euxgU1y4pbT5iD11mdiUA7eq5/ssxLJilUrUGj2Gk1h1KbYG/JfVA==}
+  '@bufbuild/buf-darwin-arm64@1.34.0':
+    resolution: {integrity: sha512-3+h/jSAr7H+KT8MWWRMbN/gQ87KlGLkTGwm4/mpry1ap9Thw/UdOrk5MfmbK3CRM/rlw4mAn1Egu/Q7R5eO98g==}
     engines: {node: '>=12'}
     cpu: [arm64]
     os: [darwin]
 
-  '@bufbuild/buf-darwin-x64@1.27.0':
-    resolution: {integrity: sha512-aJmSZvO6uNxHST8+kN5cukv7/ZLgDnvklp+r6uyokocg5sk1rgWQVBqiVtGmoDWwPbotpMhb3EuqtwN9hdNrOg==}
+  '@bufbuild/buf-darwin-x64@1.34.0':
+    resolution: {integrity: sha512-Jdm0COuA2CMKoef2H8rBsRnc16mJUmCQ2KvJH5otvFrMhzPmr1MUyicCybY26HXFD/6DcnbWZvf6W8LfDMMyGQ==}
     engines: {node: '>=12'}
     cpu: [x64]
     os: [darwin]
 
-  '@bufbuild/buf-linux-aarch64@1.27.0':
-    resolution: {integrity: sha512-1NPHARYENNVWOK3bQxbnYsMLU09em4/kdyAnCwyGkNhr+pWUlWdCBu3X5tdrRW+mnhjeagIcomTMhgVjxIAS7g==}
+  '@bufbuild/buf-linux-aarch64@1.34.0':
+    resolution: {integrity: sha512-utSspJlPmVPh4Ugvn9k7MEEMHDZMI13jvwHkBE6wNSkYxxYTRR5zLHtmysaYQo51Fx+3ar6mL4HnhTqLrgO5GA==}
     engines: {node: '>=12'}
     cpu: [arm64]
     os: [linux]
 
-  '@bufbuild/buf-linux-x64@1.27.0':
-    resolution: {integrity: sha512-3LMTSJlwJAeOfjPuB0NBK+1Yfg1Bybadt+c1X/vF8XSXut1u0Ju1/fbRDz75BF4AlMidMQPdGS+vPWmPcb51hA==}
+  '@bufbuild/buf-linux-x64@1.34.0':
+    resolution: {integrity: sha512-INCGsPLBL4aK2jHBMdZzEJUPv7f6f8skIUMMip7YdJl1nsIh27C/Dl7Q6A6/sv9IhYibWKAoxP7SuiOv2iTdEw==}
     engines: {node: '>=12'}
     cpu: [x64]
     os: [linux]
 
-  '@bufbuild/buf-win32-arm64@1.27.0':
-    resolution: {integrity: sha512-Za5d3obNvSfLZAlQW8IAWtv1Yv0gQTFDVMPyYiOh70rKIfKIxrWZxT4E4nzFLZZ54VQDFoUl81bAjOYLOgaspQ==}
+  '@bufbuild/buf-win32-arm64@1.34.0':
+    resolution: {integrity: sha512-g1EogebjJ93bzmyn/fEi47tTz57M+7WYZ7/vX+DFXgLLYIxTWHDK4YN+3Hs+K7Sbx7KaVdsdEqof8xZ4WoVFnQ==}
     engines: {node: '>=12'}
     cpu: [arm64]
     os: [win32]
 
-  '@bufbuild/buf-win32-x64@1.27.0':
-    resolution: {integrity: sha512-OzVK4Fz162Z6fFHAAZhHPW2GiCXjweCG/hwjOtFt2gza1t3ImYp0CwxJI6ePGY+th3Y9yu8rY0iHiI59ezMa4Q==}
+  '@bufbuild/buf-win32-x64@1.34.0':
+    resolution: {integrity: sha512-0rPXP7pV7+2twhcpN8hDdgV68UCiazLRcMBjWKubwcSJhAP8jRLqSJv3VGnXmpdYPbYGDQ0htfcgLNUvzllRhQ==}
     engines: {node: '>=12'}
     cpu: [x64]
     os: [win32]
 
-  '@bufbuild/buf@1.27.0':
-    resolution: {integrity: sha512-vR/ke6gUNgGSC3z7WkHLcbO+ur+zvGTC4ohHsLo2dZqEWysWySjNpcU70SKdIN3G5M4fSS1ki6MkZPes3E+83w==}
+  '@bufbuild/buf@1.34.0':
+    resolution: {integrity: sha512-DR0P746bYiY7ziQTui0bKAvPa7ihCNxONWLtW54HQXvTkGnTc6C1keVaSz4UhNdSsBu/Xsj69GO9SizodfjUtQ==}
     engines: {node: '>=12'}
     hasBin: true
 
@@ -4274,32 +4274,32 @@ snapshots:
   '@biomejs/cli-win32-x64@1.7.1':
     optional: true
 
-  '@bufbuild/buf-darwin-arm64@1.27.0':
+  '@bufbuild/buf-darwin-arm64@1.34.0':
     optional: true
 
-  '@bufbuild/buf-darwin-x64@1.27.0':
+  '@bufbuild/buf-darwin-x64@1.34.0':
     optional: true
 
-  '@bufbuild/buf-linux-aarch64@1.27.0':
+  '@bufbuild/buf-linux-aarch64@1.34.0':
     optional: true
 
-  '@bufbuild/buf-linux-x64@1.27.0':
+  '@bufbuild/buf-linux-x64@1.34.0':
     optional: true
 
-  '@bufbuild/buf-win32-arm64@1.27.0':
+  '@bufbuild/buf-win32-arm64@1.34.0':
     optional: true
 
-  '@bufbuild/buf-win32-x64@1.27.0':
+  '@bufbuild/buf-win32-x64@1.34.0':
     optional: true
 
-  '@bufbuild/buf@1.27.0':
+  '@bufbuild/buf@1.34.0':
     optionalDependencies:
-      '@bufbuild/buf-darwin-arm64': 1.27.0
-      '@bufbuild/buf-darwin-x64': 1.27.0
-      '@bufbuild/buf-linux-aarch64': 1.27.0
-      '@bufbuild/buf-linux-x64': 1.27.0
-      '@bufbuild/buf-win32-arm64': 1.27.0
-      '@bufbuild/buf-win32-x64': 1.27.0
+      '@bufbuild/buf-darwin-arm64': 1.34.0
+      '@bufbuild/buf-darwin-x64': 1.34.0
+      '@bufbuild/buf-linux-aarch64': 1.34.0
+      '@bufbuild/buf-linux-x64': 1.34.0
+      '@bufbuild/buf-win32-arm64': 1.34.0
+      '@bufbuild/buf-win32-x64': 1.34.0
 
   '@bufbuild/protobuf@1.8.0': {}
 

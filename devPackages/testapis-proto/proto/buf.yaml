@@ -1,9 +1,0 @@
-version: v1
-deps:
-  - buf.build/proto-graphql/proto-graphql
-breaking:
-  use:
-    - FILE
-lint:
-  use:
-    - DEFAULT

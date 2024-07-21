@@ -37,6 +37,9 @@ function getTestPath(test: TestCase): string {
   return `${testsDir}/${getTestName(test)}`;
 }
 
+const rootDir = join("..", "..", "..");
+const bufDir = join(rootDir, "devPackages", "testapis-proto", "proto");
+
 async function genPackageJson(test: TestCase): Promise<void> {
   const protoPackages = {
     "google-protobuf": [
@@ -62,8 +65,6 @@ async function genPackageJson(test: TestCase): Promise<void> {
       "protoc-gen-pothos",
     ],
   };
-  const rootDir = join("..", "..", "..");
-  const bufDir = join(rootDir, "devPackages", "testapis-proto", "proto");
   const protoPath = join(bufDir, "testapis", test.proto.package);
 
   const deps =
@@ -85,7 +86,7 @@ async function genPackageJson(test: TestCase): Promise<void> {
         ...["proto", "gql"].map((t) => `pnpm run test:e2e:gen:${t}`),
       ].join(" && "),
       "test:e2e:gen:gql": "tsx schema.ts",
-      "test:e2e:gen:proto": `buf generate --template buf.gen.json --path ${protoPath} ${bufDir}`,
+      "test:e2e:gen:proto": "buf generate --template buf.gen.json",
       "test:e2e:vitest":
         "vitest run --passWithNoTests --config ../../vitest.config.ts",
       "test:e2e:schema": "git diff --exit-code __generated__/schema.graphql",
@@ -165,15 +166,20 @@ async function genBufGemTemplate(test: TestCase): Promise<void> {
   };
 
   const tmpl = {
-    version: "v1",
+    version: "v2",
     plugins: [
       {
-        name: test.target,
-        path: `../../../packages/protoc-gen-${test.target}/bin/protoc-gen-${test.target}`,
+        local: `../../../packages/protoc-gen-${test.target}/bin/protoc-gen-${test.target}`,
         out: genDir,
         opt: (pluginOpts[test.target] as Record<string, string[]>)[
           test.proto.lib
         ],
+      },
+    ],
+    inputs: [
+      {
+        directory: bufDir,
+        paths: [join(bufDir, "testapis", test.proto.package)],
       },
     ],
   };
