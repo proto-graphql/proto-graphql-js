@@ -45,8 +45,8 @@ importers:
         specifier: 20.14.11
         version: 20.14.11
       google-protobuf:
-        specifier: 3.21.2
-        version: 3.21.2
+        specifier: 3.21.4
+        version: 3.21.4
       graphql:
         specifier: 16.9.0
         version: 16.9.0
@@ -2906,6 +2906,9 @@ packages:
   google-protobuf@3.21.2:
     resolution: {integrity: sha512-3MSOYFO5U9mPGikIYCzK0SaThypfGgS6bHqrUGXG3DPHCrb+txNqeEcns1W0lkGfk0rCyNXm7xB9rMxnCiZOoA==}
 
+  google-protobuf@3.21.4:
+    resolution: {integrity: sha512-MnG7N936zcKTco4Jd2PX2U96Kf9PxygAPKBug+74LHzmHXmceN16MmRcdgZv+DGef/S9YvQAfRsNCn4cjf9yyQ==}
+
   gopd@1.0.1:
     resolution: {integrity: sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==}
 
@@ -5720,6 +5723,8 @@ snapshots:
 
   google-protobuf@3.21.2: {}
 
+  google-protobuf@3.21.4: {}
+
   gopd@1.0.1:
     dependencies:
       get-intrinsic: 1.2.4
@@ -6729,7 +6734,7 @@ snapshots:
 
   ts-protoc-gen@0.15.0:
     dependencies:
-      google-protobuf: 3.21.2
+      google-protobuf: 3.21.4
 
   tslib@2.4.1: {}
 
