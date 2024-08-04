@@ -12,8 +12,7 @@
   },
   "devDependencies": {
     "@proto-graphql/tsconfig": "workspace:*",
-    "@types/glob": "^8.0.0",
-    "glob": "^8.0.3"
+    "glob": "^10.4.5"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
