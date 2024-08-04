@@ -25,8 +25,8 @@
     "node": ">= 14.0.0"
   },
   "dependencies": {
-    "@bufbuild/protobuf": "^1.8.0",
-    "@bufbuild/protoplugin": "^1.8.0",
+    "@bufbuild/protobuf": "catalog:",
+    "@bufbuild/protoplugin": "catalog:",
     "@proto-graphql/codegen-core": "workspace:*"
   },
   "devDependencies": {

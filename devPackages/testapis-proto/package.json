@@ -8,7 +8,7 @@
     "prebuild": "./scripts/build-proto.ts"
   },
   "dependencies": {
-    "@bufbuild/protobuf": "^1.8.0"
+    "@bufbuild/protobuf": "catalog:"
   },
   "devDependencies": {
     "@proto-graphql/tsconfig": "workspace:*",

@@ -69,7 +69,7 @@ async function genPackageJson(test: TestCase): Promise<void> {
 
   const deps =
     test.proto.lib === "protobuf-es"
-      ? { "@bufbuild/protobuf": "*" }
+      ? { "@bufbuild/protobuf": "catalog:protobuf-es-v1" }
       : undefined;
 
   const packageJson = {

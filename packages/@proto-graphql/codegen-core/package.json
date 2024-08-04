@@ -25,11 +25,11 @@
     "node": ">= 14.0.0"
   },
   "dependencies": {
-    "@bufbuild/protobuf": "^1.8.0",
-    "@bufbuild/protoplugin": "^1.8.0",
-    "case-anything": "^2.1.13",
-    "change-case": "^4.1.2",
-    "ts-poet": "^6.3.0"
+    "@bufbuild/protobuf": "catalog:",
+    "@bufbuild/protoplugin": "catalog:",
+    "case-anything": "catalog:",
+    "change-case": "catalog:",
+    "ts-poet": "catalog:"
   },
   "devDependencies": {
     "@proto-graphql/tsconfig": "workspace:*"

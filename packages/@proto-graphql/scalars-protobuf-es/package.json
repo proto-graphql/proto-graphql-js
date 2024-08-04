@@ -25,7 +25,7 @@
     "node": ">= 14.0.0"
   },
   "peerDependencies": {
-    "@bufbuild/protobuf": "^1.8.0",
+    "@bufbuild/protobuf": "catalog:",
     "graphql": "^16.0.0",
     "graphql-scalars": "^1.23.0"
   },
