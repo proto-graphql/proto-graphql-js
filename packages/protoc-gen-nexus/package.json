@@ -28,14 +28,12 @@
     "node": ">= 14.0.0"
   },
   "dependencies": {
-    "@bufbuild/protobuf": "^1.8.0",
-    "@bufbuild/protoplugin": "^1.8.0",
+    "@bufbuild/protobuf": "catalog:",
+    "@bufbuild/protoplugin": "catalog:",
     "@proto-graphql/codegen-core": "workspace:*",
-    "@proto-graphql/proto-descriptors": "workspace:*",
     "@proto-graphql/protoc-plugin-helpers": "workspace:*",
-    "change-case": "^4.1.2",
-    "google-protobuf": "^3.20.1",
-    "ts-poet": "^6.3.0"
+    "change-case": "catalog:",
+    "ts-poet": "catalog:"
   },
   "files": ["bin/", "src/", "dist/", "!src/**/*.test.ts", "!src/**/__tests__/"],
   "scripts": {

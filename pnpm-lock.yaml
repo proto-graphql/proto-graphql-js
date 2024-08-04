@@ -4,6 +4,31 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    '@bufbuild/protobuf':
+      specifier: ^1.8.0
+      version: 1.8.0
+    '@bufbuild/protoc-gen-es':
+      specifier: ^1.8.0
+      version: 1.8.0
+    '@bufbuild/protoplugin':
+      specifier: ^1.8.0
+      version: 1.8.0
+    case-anything:
+      specifier: ^2.1.13
+      version: 2.1.13
+    change-case:
+      specifier: ^4.1.2
+      version: 4.1.2
+    ts-poet:
+      specifier: ^6.3.0
+      version: 6.3.0
+  protobuf-es-v1:
+    '@bufbuild/protobuf':
+      specifier: ^1.8.0
+      version: 1.8.0
+
 importers:
 
   .:
@@ -14,11 +39,8 @@ importers:
       '@bufbuild/buf':
         specifier: 1.34.0
         version: 1.34.0
-      '@bufbuild/protobuf':
-        specifier: 1.8.0
-        version: 1.8.0
       '@bufbuild/protoc-gen-es':
-        specifier: 1.8.0
+        specifier: 'catalog:'
         version: 1.8.0(@bufbuild/protobuf@1.8.0)
       '@changesets/changelog-github':
         specifier: 0.5.0
@@ -90,7 +112,7 @@ importers:
   devPackages/testapis-proto:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: ^1.8.0
+        specifier: 'catalog:'
         version: 1.8.0
     devDependencies:
       '@proto-graphql/tsconfig':
@@ -123,7 +145,7 @@ importers:
   e2e/testapis/protobuf-es:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: ^1.8.0
+        specifier: 'catalog:'
         version: 1.8.0
 
   e2e/testapis/protobufjs: {}
@@ -695,7 +717,7 @@ importers:
   e2e/tests/pothos--deprecation--protobuf-es:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: '*'
+        specifier: catalog:protobuf-es-v1
         version: 1.8.0
     devDependencies:
       '@proto-graphql/e2e-helper':
@@ -732,7 +754,7 @@ importers:
   e2e/tests/pothos--edgecases-import_from_same_pkg--protobuf-es:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: '*'
+        specifier: catalog:protobuf-es-v1
         version: 1.8.0
     devDependencies:
       '@proto-graphql/e2e-helper':
@@ -769,7 +791,7 @@ importers:
   e2e/tests/pothos--edgecases-import_oneof_member_from_other_file--protobuf-es:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: '*'
+        specifier: catalog:protobuf-es-v1
         version: 1.8.0
     devDependencies:
       '@proto-graphql/e2e-helper':
@@ -791,7 +813,7 @@ importers:
   e2e/tests/pothos--edgecases-import_squashed_union--protobuf-es:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: '*'
+        specifier: catalog:protobuf-es-v1
         version: 1.8.0
     devDependencies:
       '@proto-graphql/e2e-helper':
@@ -828,7 +850,7 @@ importers:
   e2e/tests/pothos--empty_types--protobuf-es:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: '*'
+        specifier: catalog:protobuf-es-v1
         version: 1.8.0
     devDependencies:
       '@proto-graphql/e2e-helper':
@@ -865,7 +887,7 @@ importers:
   e2e/tests/pothos--enums--protobuf-es:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: '*'
+        specifier: catalog:protobuf-es-v1
         version: 1.8.0
     devDependencies:
       '@proto-graphql/e2e-helper':
@@ -902,7 +924,7 @@ importers:
   e2e/tests/pothos--extensions--protobuf-es:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: '*'
+        specifier: catalog:protobuf-es-v1
         version: 1.8.0
     devDependencies:
       '@proto-graphql/e2e-helper':
@@ -939,7 +961,7 @@ importers:
   e2e/tests/pothos--field_behavior--protobuf-es:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: '*'
+        specifier: catalog:protobuf-es-v1
         version: 1.8.0
     devDependencies:
       '@proto-graphql/e2e-helper':
@@ -976,7 +998,7 @@ importers:
   e2e/tests/pothos--multipkgs--protobuf-es:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: '*'
+        specifier: catalog:protobuf-es-v1
         version: 1.8.0
     devDependencies:
       '@proto-graphql/e2e-helper':
@@ -1013,7 +1035,7 @@ importers:
   e2e/tests/pothos--nested--protobuf-es:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: '*'
+        specifier: catalog:protobuf-es-v1
         version: 1.8.0
     devDependencies:
       '@proto-graphql/e2e-helper':
@@ -1050,7 +1072,7 @@ importers:
   e2e/tests/pothos--oneof--protobuf-es:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: '*'
+        specifier: catalog:protobuf-es-v1
         version: 1.8.0
     devDependencies:
       '@proto-graphql/e2e-helper':
@@ -1087,7 +1109,7 @@ importers:
   e2e/tests/pothos--primitives--protobuf-es:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: '*'
+        specifier: catalog:protobuf-es-v1
         version: 1.8.0
     devDependencies:
       '@proto-graphql/e2e-helper':
@@ -1139,7 +1161,7 @@ importers:
   e2e/tests/pothos--proto3_optional--protobuf-es:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: '*'
+        specifier: catalog:protobuf-es-v1
         version: 1.8.0
     devDependencies:
       '@proto-graphql/e2e-helper':
@@ -1176,7 +1198,7 @@ importers:
   e2e/tests/pothos--wktypes--protobuf-es:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: '*'
+        specifier: catalog:protobuf-es-v1
         version: 1.8.0
     devDependencies:
       '@proto-graphql/e2e-helper':
@@ -1228,19 +1250,19 @@ importers:
   packages/@proto-graphql/codegen-core:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: ^1.8.0
+        specifier: 'catalog:'
         version: 1.8.0
       '@bufbuild/protoplugin':
-        specifier: ^1.8.0
+        specifier: 'catalog:'
         version: 1.8.0
       case-anything:
-        specifier: ^2.1.13
+        specifier: 'catalog:'
         version: 2.1.13
       change-case:
-        specifier: ^4.1.2
+        specifier: 'catalog:'
         version: 4.1.2
       ts-poet:
-        specifier: ^6.3.0
+        specifier: 'catalog:'
         version: 6.3.0
     devDependencies:
       '@proto-graphql/tsconfig':
@@ -1260,10 +1282,10 @@ importers:
   packages/@proto-graphql/protoc-plugin-helpers:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: ^1.8.0
+        specifier: 'catalog:'
         version: 1.8.0
       '@bufbuild/protoplugin':
-        specifier: ^1.8.0
+        specifier: 'catalog:'
         version: 1.8.0
       '@proto-graphql/codegen-core':
         specifier: workspace:*
@@ -1276,7 +1298,7 @@ importers:
   packages/@proto-graphql/scalars-protobuf-es:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: ^1.8.0
+        specifier: 'catalog:'
         version: 1.8.0
       graphql:
         specifier: ^16.0.0
@@ -1334,28 +1356,22 @@ importers:
   packages/protoc-gen-nexus:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: ^1.8.0
+        specifier: 'catalog:'
         version: 1.8.0
       '@bufbuild/protoplugin':
-        specifier: ^1.8.0
+        specifier: 'catalog:'
         version: 1.8.0
       '@proto-graphql/codegen-core':
         specifier: workspace:*
         version: link:../@proto-graphql/codegen-core
-      '@proto-graphql/proto-descriptors':
-        specifier: workspace:*
-        version: link:../@proto-graphql/proto-descriptors
       '@proto-graphql/protoc-plugin-helpers':
         specifier: workspace:*
         version: link:../@proto-graphql/protoc-plugin-helpers
       change-case:
-        specifier: ^4.1.2
+        specifier: 'catalog:'
         version: 4.1.2
-      google-protobuf:
-        specifier: ^3.20.1
-        version: 3.21.2
       ts-poet:
-        specifier: ^6.3.0
+        specifier: 'catalog:'
         version: 6.3.0
     devDependencies:
       '@proto-graphql/testapis-proto':
@@ -1368,10 +1384,10 @@ importers:
   packages/protoc-gen-pothos:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: ^1.8.0
+        specifier: 'catalog:'
         version: 1.8.0
       '@bufbuild/protoplugin':
-        specifier: ^1.8.0
+        specifier: 'catalog:'
         version: 1.8.0
       '@proto-graphql/codegen-core':
         specifier: workspace:*
@@ -1382,11 +1398,8 @@ importers:
       '@proto-graphql/protoc-plugin-helpers':
         specifier: workspace:*
         version: link:../@proto-graphql/protoc-plugin-helpers
-      google-protobuf:
-        specifier: ^3.21.2
-        version: 3.21.2
       ts-poet:
-        specifier: ^6.3.0
+        specifier: 'catalog:'
         version: 6.3.0
     devDependencies:
       '@proto-graphql/testapis-proto':
@@ -5181,7 +5194,7 @@ snapshots:
       path-case: 3.0.4
       sentence-case: 3.0.4
       snake-case: 3.0.4
-      tslib: 2.4.1
+      tslib: 2.6.2
 
   chardet@0.7.0: {}
 
