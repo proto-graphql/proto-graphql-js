@@ -5,15 +5,14 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join, relative } from "node:path";
 import { promisify } from "node:util";
 
-import { glob as _glob } from "glob";
+import { glob } from "glob";
 
 const exec = promisify(_exec);
-const glob = promisify(_glob);
 
 const rootDir = dirname(__dirname);
 const protoDir = join(rootDir, "proto");
 
-const ignoredDirs = new Set(["testapis/", "testapis/edgecases/"]);
+const ignoredDirs = new Set([".", "testapis", "testapis/edgecases"]);
 
 async function main() {
   const protoPaths = await glob("**/", { cwd: protoDir });
@@ -21,6 +20,7 @@ async function main() {
   const fdSets = await Promise.all(
     protoPaths
       .filter((p) => !ignoredDirs.has(p))
+      .sort()
       .map(async (protoPath) => {
         const bin = await exec(
           `buf build --as-file-descriptor-set --path ${protoPath} --output -`,
