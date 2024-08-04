@@ -30,7 +30,9 @@
     "graphql-scalars": "^1.23.0"
   },
   "devDependencies": {
-    "@proto-graphql/tsconfig": "workspace:*"
+    "@proto-graphql/tsconfig": "workspace:*",
+    "graphql": "catalog:test",
+    "graphql-scalars": "catalog:test"
   },
   "files": ["src/", "dist/", "!src/**/*.test.ts", "!src/**/__tests__/"],
   "scripts": {

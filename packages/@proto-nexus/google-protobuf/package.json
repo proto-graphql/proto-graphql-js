@@ -32,7 +32,8 @@
     "google-protobuf": "^3.12.2"
   },
   "devDependencies": {
-    "@proto-graphql/tsconfig": "workspace:*"
+    "@proto-graphql/tsconfig": "workspace:*",
+    "@types/google-protobuf": "catalog:"
   },
   "scripts": {
     "build": "tsup",

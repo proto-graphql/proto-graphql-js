@@ -12,6 +12,12 @@
     "test:e2e:schema": "git diff --exit-code __generated__/schema.graphql",
     "test:e2e:typecheck": "tsc --build tsconfig.json"
   },
+  "dependencies": {
+    "nexus": "catalog:test",
+    "protobufjs": "catalog:test",
+    "graphql": "catalog:test",
+    "graphql-scalars": "catalog:test"
+  },
   "devDependencies": {
     "@proto-graphql/e2e-helper": "workspace:*",
     "@proto-graphql/e2e-testapis-protobufjs": "workspace:*",

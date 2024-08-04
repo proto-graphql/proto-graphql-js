@@ -65,12 +65,29 @@ async function genPackageJson(test: TestCase): Promise<void> {
       "protoc-gen-pothos",
     ],
   };
-  const protoPath = join(bufDir, "testapis", test.proto.package);
 
-  const deps =
-    test.proto.lib === "protobuf-es"
-      ? { "@bufbuild/protobuf": "catalog:protobuf-es-v1" }
-      : undefined;
+  const depsByTarget: Record<Plugin, Record<string, string>> = {
+    nexus: { nexus: "catalog:test" },
+    pothos: { "@pothos/core": "catalog:test" },
+  };
+
+  const depsByLib: Record<ProtoLib, Record<string, string>> = {
+    "google-protobuf": {
+      "@types/google-protobuf": "catalog:",
+      "google-protobuf": "catalog:test",
+    },
+    protobufjs: { protobufjs: "catalog:test" },
+    "protobuf-es": { "@bufbuild/protobuf": "catalog:protobuf-es-v1" },
+    "ts-proto": {},
+    "ts-proto-with-forcelong-number": {},
+  };
+
+  const deps = {
+    ...depsByTarget[test.target],
+    ...depsByLib[test.proto.lib],
+    graphql: "catalog:test",
+    "graphql-scalars": "catalog:test",
+  };
 
   const packageJson = {
     name: `@proto-graphql/e2e-${getTestName(test)}`,

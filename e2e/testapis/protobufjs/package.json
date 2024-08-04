@@ -2,5 +2,8 @@
   "name": "@proto-graphql/e2e-testapis-protobufjs",
   "version": "0.0.0",
   "description": "Generated codes with protobufjs",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "protobufjs": "catalog:test"
+  }
 }

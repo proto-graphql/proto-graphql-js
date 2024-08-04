@@ -2,5 +2,11 @@
   "name": "@proto-graphql/e2e-testapis-google-protobuf",
   "version": "0.0.0",
   "description": "Generated codes with protocolbuffers/protobuf's js_out",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "google-protobuf": "catalog:test"
+  },
+  "devDependencies": {
+    "@types/google-protobuf": "catalog:"
+  }
 }
