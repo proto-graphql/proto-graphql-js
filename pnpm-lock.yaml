@@ -85,8 +85,8 @@ importers:
         specifier: 1.1.2
         version: 1.1.2(protobufjs@7.2.5)
       ts-proto:
-        specifier: 1.129.0
-        version: 1.129.0
+        specifier: 1.181.2
+        version: 1.181.2
       ts-protoc-gen:
         specifier: 0.15.0
         version: 0.15.0
@@ -2307,9 +2307,6 @@ packages:
   '@types/node@20.14.14':
     resolution: {integrity: sha512-d64f00982fS9YoOgJkAMolK7MN8Iq3TDdVjchbYHdEmjth/DHowx82GnoA+tVUAN+7vxfYUgAzi+JXbKNd2SDQ==}
 
-  '@types/object-hash@1.3.4':
-    resolution: {integrity: sha512-xFdpkAkikBgqBdG9vIlsqffDV8GpvnPEzs0IUtr1v3BEB97ijsFQ4RXVbUZwjFThhB4MDSTUfvmxUD5PGx0wXA==}
-
   '@types/semver@7.5.8':
     resolution: {integrity: sha512-I8EUhyrgfLrcTkzV3TSsGyl1tSuPrEDzr0yd5m90UgNxQkyDXULk3b6MlQqTCpZpNtWe1K0hzclnZkTcLBe2UQ==}
 
@@ -2551,6 +2548,9 @@ packages:
 
   dprint-node@1.0.7:
     resolution: {integrity: sha512-NTZOW9A7ipb0n7z7nC3wftvsbceircwVHSgzobJsEQa+7RnOMbhrfX5IflA6CtC4GA63DSAiHYXa4JKEy9F7cA==}
+
+  dprint-node@1.0.8:
+    resolution: {integrity: sha512-iVKnUtYfGrYcW1ZAlfR/F59cUVL8QIhWoBJoSjkkdua/dkWIgjZfiLMeTjiB06X0ZLkQ0M2C1VbUj/CxkIf1zg==}
 
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
@@ -2891,6 +2891,9 @@ packages:
   long@5.2.1:
     resolution: {integrity: sha512-GKSNGeNAtw8IryjjkhZxuKB3JzlcLTwjtiQCHKvqQet81I93kXslhDQruGI/QsddO83mcDToBVy7GqGS/zYf/A==}
 
+  long@5.2.3:
+    resolution: {integrity: sha512-lcHwpNoggQTObv5apGNCTdJrO69eHOZMi4BNC+rTLER8iHAqGrUVeLh/irVIM7zTw2bOXA8T6uNPeujwOLg/2Q==}
+
   loupe@3.1.1:
     resolution: {integrity: sha512-edNu/8D5MKVfGVFRhFf8aAxiTM6Wumfz5XsaatSxlD3w4R1d/WEKUTydCdPGbl9K7QG/Ca3GnDV2sIKIpXRQcw==}
 
@@ -3022,10 +3025,6 @@ packages:
   object-assign@4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
     engines: {node: '>=0.10.0'}
-
-  object-hash@1.3.1:
-    resolution: {integrity: sha512-OSuu/pU4ENM9kmREg0BdNrUDIl1heYa4mBZacJc+vVWz4GtAwu7jO8s4AIt2aGRUTqxykpWzI3Oqnsm13tTMDA==}
-    engines: {node: '>= 0.10.0'}
 
   once@1.4.0:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
@@ -3405,11 +3404,14 @@ packages:
   ts-poet@6.3.0:
     resolution: {integrity: sha512-RjS37SnXMa9En8xvQf//+rvNNNCB7x2TKP/ZfsiQFidtfN3A6FYgPDESe4r7YA3F663XO2ozx+2buQItGOLMxg==}
 
-  ts-proto-descriptors@1.7.1:
-    resolution: {integrity: sha512-oIKUh3K4Xts4v29USGLfUG+2mEk32MsqpgZAOUyUlkrcIdv34yE+k2oZ2Nzngm6cV/JgFdOxRCqeyvmWHuYAyw==}
+  ts-poet@6.9.0:
+    resolution: {integrity: sha512-roe6W6MeZmCjRmppyfOURklO5tQFQ6Sg7swURKkwYJvV7dbGCrK28um5+51iW3twdPRKtwarqFAVMU6G1mvnuQ==}
 
-  ts-proto@1.129.0:
-    resolution: {integrity: sha512-BpEaceKO1dblM4TpaeIUcmHcm0F78zTXO3Ys1qtIr4Jcsk5KPZJAUo14arDYzwI6FiLWJ6K4vsy/KpxU5+OvAg==}
+  ts-proto-descriptors@1.16.0:
+    resolution: {integrity: sha512-3yKuzMLpltdpcyQji1PJZRfoo4OJjNieKTYkQY8pF7xGKsYz/RHe3aEe4KiRxcinoBmnEhmuI+yJTxLb922ULA==}
+
+  ts-proto@1.181.2:
+    resolution: {integrity: sha512-knJ8dtjn2Pd0c5ZGZG8z9DMiD4PUY8iGI9T9tb8DvGdWRMkLpf0WcPO7G+7cmbZyxvNTAG6ci3fybEaFgMZIvg==}
     hasBin: true
 
   ts-protoc-gen@0.15.0:
@@ -4355,8 +4357,6 @@ snapshots:
     dependencies:
       undici-types: 5.26.5
 
-  '@types/object-hash@1.3.4': {}
-
   '@types/semver@7.5.8': {}
 
   '@typescript/vfs@1.5.0':
@@ -4602,6 +4602,10 @@ snapshots:
   dotenv@8.6.0: {}
 
   dprint-node@1.0.7:
+    dependencies:
+      detect-libc: 1.0.3
+
+  dprint-node@1.0.8:
     dependencies:
       detect-libc: 1.0.3
 
@@ -5025,6 +5029,8 @@ snapshots:
 
   long@5.2.1: {}
 
+  long@5.2.3: {}
+
   loupe@3.1.1:
     dependencies:
       get-func-name: 2.0.2
@@ -5138,8 +5144,6 @@ snapshots:
       path-key: 4.0.0
 
   object-assign@4.1.1: {}
-
-  object-hash@1.3.1: {}
 
   once@1.4.0:
     dependencies:
@@ -5511,19 +5515,21 @@ snapshots:
     dependencies:
       dprint-node: 1.0.7
 
-  ts-proto-descriptors@1.7.1:
+  ts-poet@6.9.0:
     dependencies:
-      long: 4.0.0
-      protobufjs: 6.11.3
+      dprint-node: 1.0.8
 
-  ts-proto@1.129.0:
+  ts-proto-descriptors@1.16.0:
     dependencies:
-      '@types/object-hash': 1.3.4
-      dataloader: 1.4.0
-      object-hash: 1.3.1
-      protobufjs: 6.11.3
-      ts-poet: 6.3.0
-      ts-proto-descriptors: 1.7.1
+      long: 5.2.3
+      protobufjs: 7.2.5
+
+  ts-proto@1.181.2:
+    dependencies:
+      case-anything: 2.1.13
+      protobufjs: 7.2.5
+      ts-poet: 6.9.0
+      ts-proto-descriptors: 1.16.0
 
   ts-protoc-gen@0.15.0:
     dependencies:
