@@ -12,7 +12,7 @@ export function makeTestSchema({
   const schema = makeSchema({
     types,
     outputs: {
-      schema: path.join(rootDir, "__generated__", "schema.graphql"),
+      schema: false,
       typegen: path.join(rootDir, "__generated__", "typings.ts"),
     },
     shouldGenerateArtifacts: true,

@@ -1,4 +1,3 @@
-import { printGraphqlSchema } from "@proto-graphql/e2e-helper";
 import { DeprecatedMessage } from "@proto-graphql/e2e-testapis-protobuf-es/lib/testapis/deprecation/deprecation_pb";
 import { DeprecatedFileMessage } from "@proto-graphql/e2e-testapis-protobuf-es/lib/testapis/deprecation/file_deprecation_pb";
 
@@ -29,5 +28,3 @@ builder.queryField("test2", (t) =>
 );
 
 export const schema = builder.toSchema();
-
-printGraphqlSchema({ schema, rootDir: __dirname });

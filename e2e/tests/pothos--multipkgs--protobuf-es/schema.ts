@@ -1,4 +1,3 @@
-import { printGraphqlSchema } from "@proto-graphql/e2e-helper";
 import { SubpkgEnum } from "@proto-graphql/e2e-testapis-protobuf-es/lib/testapis/multipkgs/subpkg1/types_pb";
 import { MessageWithSubpkg } from "@proto-graphql/e2e-testapis-protobuf-es/lib/testapis/multipkgs/subpkg2/types_pb";
 
@@ -20,5 +19,3 @@ builder.queryField("test", (t) =>
 );
 
 export const schema = builder.toSchema();
-
-printGraphqlSchema({ schema, rootDir: __dirname });

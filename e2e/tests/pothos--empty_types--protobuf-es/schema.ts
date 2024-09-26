@@ -1,4 +1,3 @@
-import { printGraphqlSchema } from "@proto-graphql/e2e-helper";
 import { EmptyMessage } from "@proto-graphql/e2e-testapis-protobuf-es/lib/testapis/empty_types/empty_pb";
 
 import { EmptyMessage$Ref } from "./__generated__/schema/testapis/empty_types/empty.pb.pothos";
@@ -14,5 +13,3 @@ builder.queryField("test", (t) =>
 );
 
 export const schema = builder.toSchema();
-
-printGraphqlSchema({ schema, rootDir: __dirname });

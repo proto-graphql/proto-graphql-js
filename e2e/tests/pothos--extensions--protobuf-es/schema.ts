@@ -1,4 +1,3 @@
-import { printGraphqlSchema } from "@proto-graphql/e2e-helper";
 import { PrefixedMessage } from "@proto-graphql/e2e-testapis-protobuf-es/lib/testapis/extensions/extensions_pb";
 
 import {
@@ -80,5 +79,3 @@ builder.queryField("testSkipResolver", (t) =>
 );
 
 export const schema = builder.toSchema();
-
-printGraphqlSchema({ schema, rootDir: __dirname });

@@ -1,4 +1,3 @@
-import { printGraphqlSchema } from "@proto-graphql/e2e-helper";
 import { OneofParent } from "@proto-graphql/e2e-testapis-protobuf-es/lib/testapis/edgecases/import_oneof_member_from_other_file/parent_pb";
 
 import { OneofParent$Ref } from "./__generated__/schema/testapis/edgecases/import_oneof_member_from_other_file/parent.pb.pothos";
@@ -19,5 +18,3 @@ builder.queryField("test", (t) =>
 );
 
 export const schema = builder.toSchema();
-
-printGraphqlSchema({ schema, rootDir: __dirname });

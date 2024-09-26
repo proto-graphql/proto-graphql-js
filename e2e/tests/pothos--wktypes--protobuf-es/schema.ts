@@ -1,4 +1,3 @@
-import { printGraphqlSchema } from "@proto-graphql/e2e-helper";
 import { Message } from "@proto-graphql/e2e-testapis-protobuf-es/lib/testapis/wktypes/well_known_types_pb";
 
 import { Timestamp } from "@bufbuild/protobuf";
@@ -34,5 +33,3 @@ builder.queryField("valuesAreBlank", (f) =>
 );
 
 export const schema = builder.toSchema();
-
-printGraphqlSchema({ schema, rootDir: __dirname });

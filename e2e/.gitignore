@@ -1,3 +1,4 @@
 /tests/__generated__/*
 /tests/*/__generated__/*
 !/tests/*/__generated__/schema.graphql
+!/tests/*/__generated__/schema.test.ts

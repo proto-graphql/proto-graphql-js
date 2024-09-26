@@ -1,4 +1,3 @@
-import { printGraphqlSchema } from "@proto-graphql/e2e-helper";
 import { Message } from "@proto-graphql/e2e-testapis-ts-proto/lib/testapis/edgecases/import_squashed_union/pkg2/types";
 
 import { Message$Ref } from "./__generated__/schema/testapis/edgecases/import_squashed_union/pkg2/types.pb.pothos";
@@ -18,5 +17,3 @@ builder.queryField("test", (t) =>
 );
 
 export const schema = builder.toSchema();
-
-printGraphqlSchema({ schema, rootDir: __dirname });

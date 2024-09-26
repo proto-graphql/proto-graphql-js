@@ -1,4 +1,3 @@
-import { printGraphqlSchema } from "@proto-graphql/e2e-helper";
 import {
   ParentMessage,
   ParentMessage_NestedEnum,
@@ -23,5 +22,3 @@ builder.queryField("test", (t) =>
 );
 
 export const schema = builder.toSchema();
-
-printGraphqlSchema({ schema, rootDir: __dirname });

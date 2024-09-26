@@ -95,26 +95,32 @@ async function genPackageJson(test: TestCase): Promise<void> {
     description: `E2E tests for protoc-gen-${test.target}`,
     private: true,
     scripts: {
-      "test:e2e": ["gen", "vitest", "schema", "typecheck"]
+      "test:e2e": ["gen", "vitest", "typecheck"]
         .map((t) => `pnpm run test:e2e:${t}`)
         .join(" && "),
-      "test:e2e:gen": [
-        "rm -rf __generated__",
-        ...["proto", "gql"].map((t) => `pnpm run test:e2e:gen:${t}`),
-      ].join(" && "),
-      "test:e2e:gen:gql": "tsx schema.ts",
-      "test:e2e:gen:proto": "buf generate --template buf.gen.json",
+      ...(test.target === "nexus"
+        ? {
+            "test:e2e:gen":
+              "pnpm run test:e2e:gen:proto && pnpm run test:e2e:gen:types",
+            "test:e2e:gen:proto":
+              "rm -rf __generated__/schema && buf generate --template buf.gen.json",
+            "test:e2e:gen:types":
+              "rm -rf __generated__/typings.ts && tsx schema.ts",
+          }
+        : {
+            "test:e2e:gen":
+              "rm -rf __generated__/schema && buf generate --template buf.gen.json",
+          }),
       "test:e2e:vitest":
         "vitest run --passWithNoTests --config ../../vitest.config.ts",
-      "test:e2e:schema": "git diff --exit-code __generated__/schema.graphql",
       "test:e2e:typecheck": "tsc --build tsconfig.json",
     },
     dependencies: deps,
     devDependencies: Object.fromEntries(
       [
-        "@proto-graphql/e2e-helper",
         "@proto-graphql/tsconfig",
         ...protoPackages[test.proto.lib],
+        ...(test.target === "nexus" ? ["@proto-graphql/e2e-helper"] : []),
       ]
         .sort()
         .map((pkg) => [pkg, "workspace:*"]),
@@ -208,6 +214,23 @@ async function genBufGemTemplate(test: TestCase): Promise<void> {
   );
 }
 
+async function genSchemaTest(test: TestCase) {
+  const body = `import { printSchema } from "graphql";
+import { expect, it } from "vitest";
+
+import { schema } from "../schema";
+
+it("bulids graphql schema", () => {
+  expect(printSchema(schema)).toMatchFileSnapshot("./schema.graphql");
+});
+`;
+  await writeFile(
+    join(getTestPath(test), "__generated__", "schema.test.ts"),
+    body,
+    "utf-8",
+  );
+}
+
 async function main() {
   /** @type {TestCase[]} */
   const config = JSON.parse(await readFile("e2e/tests.json", "utf-8"));
@@ -215,6 +238,7 @@ async function main() {
   await Promise.all([
     ...config.tests.map(genPackageJson),
     ...config.tests.map(genBufGemTemplate),
+    ...config.tests.map(genSchemaTest),
   ]);
 }
 

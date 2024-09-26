@@ -1,4 +1,3 @@
-import { printGraphqlSchema } from "@proto-graphql/e2e-helper";
 import { Message } from "@proto-graphql/e2e-testapis-ts-proto/lib/testapis/proto3_optional/proto3_optional";
 
 import { Message$Ref } from "./__generated__/schema/testapis/proto3_optional/proto3_optional.pb.pothos";
@@ -26,5 +25,3 @@ builder.queryField("valuesAreBlank", (f) =>
 );
 
 export const schema = builder.toSchema();
-
-printGraphqlSchema({ schema, rootDir: __dirname });
