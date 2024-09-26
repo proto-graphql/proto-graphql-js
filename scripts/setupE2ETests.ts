@@ -100,7 +100,8 @@ async function genPackageJson(test: TestCase): Promise<void> {
         .join(" && "),
       ...(test.target === "nexus"
         ? {
-            "test:e2e:gen": "pnpm run test:e2e:gen:proto && test:e2e:gen:types",
+            "test:e2e:gen":
+              "pnpm run test:e2e:gen:proto && pnpm run test:e2e:gen:types",
             "test:e2e:gen:proto":
               "rm -rf __generated__/schema && buf generate --template buf.gen.json",
             "test:e2e:gen:types":
