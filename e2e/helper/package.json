@@ -8,6 +8,14 @@
     "build:e2e": "tsc --build tsconfig.cjs.json",
     "clean": "pnpm run build:e2e --clean"
   },
+  "peerDependencies": {
+    "graphql": "catalog:test",
+    "nexus": "catalog:test"
+  },
+  "peerDependenciesMeta": {
+    "graphql": { "optional": true },
+    "nexus": { "optional": true }
+  },
   "devDependencies": {
     "@proto-graphql/tsconfig": "workspace:*"
   },

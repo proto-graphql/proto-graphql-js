@@ -13,7 +13,10 @@
     "test:e2e:typecheck": "tsc --build tsconfig.json"
   },
   "dependencies": {
-    "@bufbuild/protobuf": "catalog:protobuf-es-v1"
+    "@pothos/core": "catalog:test",
+    "@bufbuild/protobuf": "catalog:protobuf-es-v1",
+    "graphql": "catalog:test",
+    "graphql-scalars": "catalog:test"
   },
   "devDependencies": {
     "@proto-graphql/e2e-helper": "workspace:*",

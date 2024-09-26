@@ -11,6 +11,6 @@
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "dependencies": {
-    "@bufbuild/protobuf": "catalog:"
+    "@bufbuild/protobuf": "catalog:protobuf-es-v1"
   }
 }
