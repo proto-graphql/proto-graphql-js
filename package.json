@@ -27,7 +27,7 @@
     "protobufjs-cli": "1.1.2",
     "ts-proto": "1.181.2",
     "ts-protoc-gen": "0.15.0",
-    "tsup": "8.2.4",
+    "tsup": "8.3.0",
     "tsx": "4.19.1",
     "turbo": "2.0.11",
     "typescript": "5.4.5",
