@@ -1,4 +1,3 @@
-import { printGraphqlSchema } from "@proto-graphql/e2e-helper";
 import {
   MessageWithEnums,
   MyEnum,
@@ -21,5 +20,3 @@ builder.queryField("test", (f) =>
 );
 
 export const schema = builder.toSchema();
-
-printGraphqlSchema({ schema, rootDir: __dirname });
