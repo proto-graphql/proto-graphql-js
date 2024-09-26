@@ -35,7 +35,7 @@ jobs:
     name: E2E Test - Node.js v${{ matrix.node-version }}
     strategy:
       matrix:
-        node-version: ["18.x", "20.x"]
+        node-version: ["18.x", "20.x", "22.x"]
       fail-fast: false
     runs-on: ubuntu-latest
     steps:
