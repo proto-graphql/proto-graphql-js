@@ -32,10 +32,11 @@ jobs:
         run: git diff --exit-code
 
   test-e2e:
-    name: E2E Test - Node.js v${{ matrix.node-version }}
+    name: E2E Test (${{ matrix.target }}, Node.js v${{ matrix.node-version }})
     strategy:
       matrix:
         node-version: ["18.x", "20.x", "22.x"]
+        target: ["nexus", "pothos"]
       fail-fast: false
     runs-on: ubuntu-latest
     steps:
@@ -45,6 +46,8 @@ jobs:
       - uses: ./.github/actions/setup-node
         with:
           node-version: ${{ matrix.node-version }}
-      - run: pnpm test:e2e
+      - run: |
+          pnpm turbo run --filter '@proto-graphql/e2e-${{ matrix.target }}-*' test:e2e
       - name: check code is up to date
-        run: git diff --exit-code
+        run: |
+          git diff --exit-code
