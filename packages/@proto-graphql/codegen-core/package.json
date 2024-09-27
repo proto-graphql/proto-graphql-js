@@ -32,6 +32,7 @@
     "ts-poet": "catalog:"
   },
   "devDependencies": {
+    "@proto-graphql/testapis-proto": "workspace:*",
     "@proto-graphql/tsconfig": "workspace:*"
   },
   "files": ["src/", "dist/", "!src/**/*.test.ts", "!src/**/__tests__/"],
