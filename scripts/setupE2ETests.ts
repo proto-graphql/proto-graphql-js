@@ -95,12 +95,9 @@ async function genPackageJson(test: TestCase): Promise<void> {
     description: `E2E tests for protoc-gen-${test.target}`,
     private: true,
     scripts: {
-      "test:e2e": ["gen", "vitest", "typecheck"]
-        .map((t) => `pnpm run test:e2e:${t}`)
-        .join(" && "),
       ...(test.target === "nexus"
         ? {
-            "test:e2e:gen":
+            "test:e2e:prepare":
               "pnpm run test:e2e:gen:proto && pnpm run test:e2e:gen:types",
             "test:e2e:gen:proto":
               "rm -rf __generated__/schema && buf generate --template buf.gen.json",
@@ -108,12 +105,11 @@ async function genPackageJson(test: TestCase): Promise<void> {
               "rm -rf __generated__/typings.ts && tsx schema.ts",
           }
         : {
-            "test:e2e:gen":
+            "test:e2e:prepare":
               "rm -rf __generated__/schema && buf generate --template buf.gen.json",
           }),
-      "test:e2e:vitest":
-        "vitest run --passWithNoTests --config ../../vitest.config.ts",
-      "test:e2e:typecheck": "tsc --build tsconfig.json",
+      "test:e2e":
+        "vitest run --passWithNoTests --typecheck --config ../../vitest.config.ts",
     },
     dependencies: deps,
     devDependencies: Object.fromEntries(
