@@ -1,8 +1,7 @@
-import type { DescField } from "@bufbuild/protobuf";
+import type { DescField, Registry } from "@bufbuild/protobuf";
 import {
   InterfaceType,
   type ObjectType,
-  type Registry,
   compact,
   protoType,
   protobufGraphQLExtensions,

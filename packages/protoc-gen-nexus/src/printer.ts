@@ -1,7 +1,6 @@
-import type { DescFile } from "@bufbuild/protobuf";
-import type { Schema } from "@bufbuild/protoplugin/ecmascript";
+import type { DescFile, Registry } from "@bufbuild/protobuf";
+import type { Schema } from "@bufbuild/protoplugin";
 import {
-  type Registry,
   type TypeOptions,
   collectTypesFromFile,
   createRegistryFromSchema,

@@ -1,8 +1,8 @@
+import type { Registry } from "@bufbuild/protobuf";
 import {
   EnumType,
   type InputObjectField,
   InputObjectType,
-  type Registry,
   ScalarType,
   compact,
   generatedGraphQLTypeImportPath,

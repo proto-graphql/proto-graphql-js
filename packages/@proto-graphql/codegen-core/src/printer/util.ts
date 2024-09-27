@@ -12,6 +12,14 @@ import { camelCase } from "change-case";
 import { type Code, code, imp } from "ts-poet";
 
 import {
+  type DescMessageField,
+  isEnumField,
+  isListField,
+  isMapField,
+  isMessageField,
+  isScalarField,
+} from "../proto/util";
+import {
   type EnumType,
   type InputObjectField,
   type InputObjectType,
@@ -120,23 +128,17 @@ export function protoType(
       break;
     }
     case "field": {
-      switch (origProto.fieldKind) {
-        case "message": {
-          origProtoType = origProto.message;
-          break;
-        }
-        case "enum": {
-          origProtoType = origProto.enum;
-          break;
-        }
-        case "map":
-          throw new Error("cannot import protobuf map types");
-        case "scalar":
-          throw new Error("cannot import protobuf primitive types");
-        default: {
-          origProto satisfies never;
-          throw "unreachable";
-        }
+      if (isMessageField(origProto)) {
+        origProtoType = origProto.message;
+      } else if (isEnumField(origProto)) {
+        origProtoType = origProto.enum;
+      } else if (isScalarField(origProto)) {
+        throw new Error("cannot import protobuf primitive types");
+      } else if (isMapField(origProto)) {
+        throw new Error("cannot import protobuf map types");
+      } else {
+        origProto satisfies never;
+        throw "unreachable";
       }
       break;
     }
@@ -261,7 +263,7 @@ export function createSetFieldValueCode(
 function googleProtobufFieldAccessor(type: "get" | "set", proto: DescField) {
   return `${type}${upperCaseFirst(
     proto.jsonName || proto.proto.jsonName || camelCase(proto.name),
-  )}${proto.repeated ? "List" : ""}`;
+  )}${isListField(proto) ? "List" : ""}`;
 }
 
 function upperCaseFirst(s: string): string {
@@ -281,21 +283,25 @@ const longScalarWrapperTypes: ReadonlySet<string> = new Set([
 ]);
 
 export function isProtobufLong(proto: DescField): boolean {
-  switch (proto.fieldKind) {
-    case "scalar":
-      return longScalarPrimitiveTypes.has(proto.scalar);
-    case "message":
-      return longScalarWrapperTypes.has(proto.message.typeName);
-    default:
-      return false;
+  if (isMessageField(proto)) {
+    return longScalarWrapperTypes.has(proto.message.typeName);
   }
+  if (isScalarField(proto)) {
+    return longScalarPrimitiveTypes.has(proto.scalar);
+  }
+  if (isEnumField(proto) || isMapField(proto)) {
+    return false;
+  }
+
+  proto satisfies never;
+  return false;
 }
 
 export function isProtobufWellKnownTypeField(
   proto: DescField,
-): proto is Extract<DescField, { fieldKind: "message" }> {
+): proto is DescMessageField {
   return (
-    proto.fieldKind === "message" &&
+    isMessageField(proto) &&
     proto.message.file.name.startsWith("google/protobuf/")
   );
 }

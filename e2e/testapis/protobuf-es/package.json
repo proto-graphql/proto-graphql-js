@@ -12,5 +12,8 @@
   "types": "./lib/index.d.ts",
   "dependencies": {
     "@bufbuild/protobuf": "catalog:protobuf-es-v1"
+  },
+  "devDependencies": {
+    "@bufbuild/protoc-gen-es": "catalog:protobuf-es-v1"
   }
 }

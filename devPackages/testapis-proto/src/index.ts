@@ -1,5 +1,10 @@
-import { CodeGeneratorRequest, FileDescriptorSet } from "@bufbuild/protobuf";
-
+import { create, fromBinary } from "@bufbuild/protobuf";
+import {
+  type CodeGeneratorRequest,
+  CodeGeneratorRequestSchema,
+  type FileDescriptorSet,
+  FileDescriptorSetSchema,
+} from "@bufbuild/protobuf/wkt";
 import { fileDescriptorSetBins } from "./__generated__/fileDescriptorSetBins";
 
 function objectKeys<K extends string>(obj: Record<K, unknown>): K[] {
@@ -12,7 +17,8 @@ export type TestapisPackage = keyof typeof fileDescriptorSetBins;
 export function getTestapisFileDescriptorSet(
   pkg: TestapisPackage,
 ): FileDescriptorSet {
-  return FileDescriptorSet.fromBinary(
+  return fromBinary(
+    FileDescriptorSetSchema,
     Buffer.from(fileDescriptorSetBins[pkg], "base64"),
   );
 }
@@ -22,7 +28,7 @@ export function buildCodeGeneratorRequest(
   { param }: { param?: string } = {},
 ): CodeGeneratorRequest {
   const descSet = getTestapisFileDescriptorSet(pkg);
-  const req = new CodeGeneratorRequest({ parameter: param });
+  const req = create(CodeGeneratorRequestSchema, { parameter: param });
 
   for (const fd of descSet.file) {
     req.protoFile.push(fd);

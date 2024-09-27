@@ -1,5 +1,6 @@
 import type { DescField, DescOneof } from "@bufbuild/protobuf";
 
+import { isListField } from "../proto/util";
 import {
   descriptionFromProto,
   getDeprecationReason,
@@ -17,8 +18,7 @@ export abstract class FieldBase<P extends DescField | DescOneof> {
   }
 
   public isList(): boolean {
-    const proto: DescField | DescOneof = this.proto;
-    return proto.kind === "field" && proto.repeated;
+    return this.proto.kind === "field" && isListField(this.proto);
   }
 
   get deprecationReason(): string | null {

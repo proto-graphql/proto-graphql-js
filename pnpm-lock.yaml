@@ -7,14 +7,14 @@ settings:
 catalogs:
   default:
     '@bufbuild/protobuf':
-      specifier: ^1.8.0
-      version: 1.8.0
+      specifier: 2.1.0
+      version: 2.1.0
     '@bufbuild/protoc-gen-es':
-      specifier: ^1.8.0
-      version: 1.8.0
+      specifier: 2.1.0
+      version: 2.1.0
     '@bufbuild/protoplugin':
-      specifier: ^1.8.0
-      version: 1.8.0
+      specifier: 2.1.0
+      version: 2.1.0
     '@types/google-protobuf':
       specifier: 3.15.12
       version: 3.15.12
@@ -29,6 +29,9 @@ catalogs:
       version: 6.3.0
   protobuf-es-v1:
     '@bufbuild/protobuf':
+      specifier: 1.8.0
+      version: 1.8.0
+    '@bufbuild/protoc-gen-es':
       specifier: 1.8.0
       version: 1.8.0
   test:
@@ -66,7 +69,7 @@ importers:
         version: 1.42.0
       '@bufbuild/protoc-gen-es':
         specifier: 'catalog:'
-        version: 1.8.0(@bufbuild/protobuf@1.8.0)
+        version: 2.1.0(@bufbuild/protobuf@2.1.0)
       '@changesets/changelog-github':
         specifier: 0.5.0
         version: 0.5.0
@@ -117,7 +120,7 @@ importers:
     dependencies:
       '@bufbuild/protobuf':
         specifier: 'catalog:'
-        version: 1.8.0
+        version: 2.1.0
     devDependencies:
       '@proto-graphql/tsconfig':
         specifier: workspace:*
@@ -163,6 +166,10 @@ importers:
       '@bufbuild/protobuf':
         specifier: catalog:protobuf-es-v1
         version: 1.8.0
+    devDependencies:
+      '@bufbuild/protoc-gen-es':
+        specifier: catalog:protobuf-es-v1
+        version: 1.8.0(@bufbuild/protobuf@1.8.0)
 
   e2e/testapis/protobufjs:
     dependencies:
@@ -1846,10 +1853,10 @@ importers:
     dependencies:
       '@bufbuild/protobuf':
         specifier: 'catalog:'
-        version: 1.8.0
+        version: 2.1.0
       '@bufbuild/protoplugin':
         specifier: 'catalog:'
-        version: 1.8.0
+        version: 2.1.0
       case-anything:
         specifier: 'catalog:'
         version: 2.1.13
@@ -1881,10 +1888,10 @@ importers:
     dependencies:
       '@bufbuild/protobuf':
         specifier: 'catalog:'
-        version: 1.8.0
+        version: 2.1.0
       '@bufbuild/protoplugin':
         specifier: 'catalog:'
-        version: 1.8.0
+        version: 2.1.0
       '@proto-graphql/codegen-core':
         specifier: workspace:*
         version: link:../codegen-core
@@ -1896,7 +1903,7 @@ importers:
   packages/@proto-graphql/scalars-protobuf-es:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: 'catalog:'
+        specifier: catalog:protobuf-es-v1
         version: 1.8.0
     devDependencies:
       '@proto-graphql/tsconfig':
@@ -1934,6 +1941,9 @@ importers:
       '@proto-graphql/tsconfig':
         specifier: workspace:*
         version: link:../../../devPackages/tsconfig
+      graphql:
+        specifier: catalog:test
+        version: 16.9.0
 
   packages/@proto-nexus/protobufjs:
     dependencies:
@@ -1958,10 +1968,10 @@ importers:
     dependencies:
       '@bufbuild/protobuf':
         specifier: 'catalog:'
-        version: 1.8.0
+        version: 2.1.0
       '@bufbuild/protoplugin':
         specifier: 'catalog:'
-        version: 1.8.0
+        version: 2.1.0
       '@proto-graphql/codegen-core':
         specifier: workspace:*
         version: link:../@proto-graphql/codegen-core
@@ -1986,10 +1996,10 @@ importers:
     dependencies:
       '@bufbuild/protobuf':
         specifier: 'catalog:'
-        version: 1.8.0
+        version: 2.1.0
       '@bufbuild/protoplugin':
         specifier: 'catalog:'
-        version: 1.8.0
+        version: 2.1.0
       '@proto-graphql/codegen-core':
         specifier: workspace:*
         version: link:../@proto-graphql/codegen-core
@@ -2130,6 +2140,9 @@ packages:
   '@bufbuild/protobuf@1.8.0':
     resolution: {integrity: sha512-qR9FwI8QKIveDnUYutvfzbC21UZJJryYrLuZGjeZ/VGz+vXelUkK+xgkOHsvPEdYEdxtgUUq4313N8QtOehJ1Q==}
 
+  '@bufbuild/protobuf@2.1.0':
+    resolution: {integrity: sha512-+2Mx67Y3skJ4NCD/qNSdBJNWtu6x6Qr53jeNg+QcwiL6mt0wK+3jwHH2x1p7xaYH6Ve2JKOVn0OxU35WsmqI9A==}
+
   '@bufbuild/protoc-gen-es@1.8.0':
     resolution: {integrity: sha512-jnvBKwHq3o/iOgfKxaxn5Za7ay4oAs8KWgoHiDc9Fsb0g+/d1z+mHlHvmevOiCPcVZsnH6V3LImOJvGStPONpA==}
     engines: {node: '>=14'}
@@ -2140,8 +2153,21 @@ packages:
       '@bufbuild/protobuf':
         optional: true
 
+  '@bufbuild/protoc-gen-es@2.1.0':
+    resolution: {integrity: sha512-xGadPol0k8cdDNSbMdHMo0QEK0JvebxGD6KQl5hCVfLTFbpMM4dfMiubyT9gdcwqfwstRe5Tin0Us3dyOzHtag==}
+    engines: {node: '>=14'}
+    hasBin: true
+    peerDependencies:
+      '@bufbuild/protobuf': 2.1.0
+    peerDependenciesMeta:
+      '@bufbuild/protobuf':
+        optional: true
+
   '@bufbuild/protoplugin@1.8.0':
     resolution: {integrity: sha512-Pb89cTshW+I577qh27VvxGYvZEvQ3zJ8La1OfzPCKugP9d4A4P65WStkAY+aSCiDHk68m1/+mtBb6elfiLPuFg==}
+
+  '@bufbuild/protoplugin@2.1.0':
+    resolution: {integrity: sha512-8bE6/bAA0UCDa7ZplKhJq4TU/YFgIH04U4x6hhCQP1FXGuTtRk/FH5tiS7y+3kbjpM97Zlk9DwmFhW0BusF4ew==}
 
   '@changesets/apply-release-plan@7.0.5':
     resolution: {integrity: sha512-1cWCk+ZshEkSVEZrm2fSj1Gz8sYvxgUL4Q78+1ZZqeqfuevPTPk033/yUZ3df8BKMohkqqHfzj0HOOrG0KtXTw==}
@@ -2715,7 +2741,6 @@ packages:
   '@swc/core@1.5.0':
     resolution: {integrity: sha512-fjADAC5gOOX54Rpcr1lF9DHLD+nPD5H/zXLtEgK2Ez3esmogT+LfHzCZtUxqetjvaMChKhQ0Pp0ZB6Hpz/tCbw==}
     engines: {node: '>=10'}
-    deprecated: Mac OS installation is broken
     peerDependencies:
       '@swc/helpers': ^0.5.0
     peerDependenciesMeta:
@@ -2767,8 +2792,10 @@ packages:
   '@types/semver@7.5.8':
     resolution: {integrity: sha512-I8EUhyrgfLrcTkzV3TSsGyl1tSuPrEDzr0yd5m90UgNxQkyDXULk3b6MlQqTCpZpNtWe1K0hzclnZkTcLBe2UQ==}
 
-  '@typescript/vfs@1.5.0':
-    resolution: {integrity: sha512-AJS307bPgbsZZ9ggCT3wwpg3VbTKMFNHfaY/uF0ahSkYYrPF2dSSKDNIDIQAHm9qJqbLvCsSJH7yN4Vs/CsMMg==}
+  '@typescript/vfs@1.6.0':
+    resolution: {integrity: sha512-hvJUjNVeBMp77qPINuUvYXj4FyWeeMMKZkxEATEU3hqBAQ7qdTBCUFT7Sp0Zu0faeEtFf+ldXxMEDr/bk73ISg==}
+    peerDependencies:
+      typescript: '*'
 
   '@vitest/expect@2.1.1':
     resolution: {integrity: sha512-YeueunS0HiHiQxk+KEOnq/QMzlUuOzbU1Go+PgAsHvvv3tUkJPm9xWt+6ITNTlzsMXUjmgm5T+U7KBPK2qQV6w==}
@@ -4092,6 +4119,8 @@ snapshots:
 
   '@bufbuild/protobuf@1.8.0': {}
 
+  '@bufbuild/protobuf@2.1.0': {}
+
   '@bufbuild/protoc-gen-es@1.8.0(@bufbuild/protobuf@1.8.0)':
     dependencies:
       '@bufbuild/protoplugin': 1.8.0
@@ -4100,11 +4129,27 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@bufbuild/protoc-gen-es@2.1.0(@bufbuild/protobuf@2.1.0)':
+    dependencies:
+      '@bufbuild/protoplugin': 2.1.0
+    optionalDependencies:
+      '@bufbuild/protobuf': 2.1.0
+    transitivePeerDependencies:
+      - supports-color
+
   '@bufbuild/protoplugin@1.8.0':
     dependencies:
       '@bufbuild/protobuf': 1.8.0
-      '@typescript/vfs': 1.5.0
+      '@typescript/vfs': 1.6.0(typescript@4.5.2)
       typescript: 4.5.2
+    transitivePeerDependencies:
+      - supports-color
+
+  '@bufbuild/protoplugin@2.1.0':
+    dependencies:
+      '@bufbuild/protobuf': 2.1.0
+      '@typescript/vfs': 1.6.0(typescript@5.4.5)
+      typescript: 5.4.5
     transitivePeerDependencies:
       - supports-color
 
@@ -4634,9 +4679,17 @@ snapshots:
 
   '@types/semver@7.5.8': {}
 
-  '@typescript/vfs@1.5.0':
+  '@typescript/vfs@1.6.0(typescript@4.5.2)':
     dependencies:
       debug: 4.3.6
+      typescript: 4.5.2
+    transitivePeerDependencies:
+      - supports-color
+
+  '@typescript/vfs@1.6.0(typescript@5.4.5)':
+    dependencies:
+      debug: 4.3.6
+      typescript: 5.4.5
     transitivePeerDependencies:
       - supports-color
 

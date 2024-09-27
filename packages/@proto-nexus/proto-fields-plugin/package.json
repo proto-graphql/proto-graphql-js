@@ -29,7 +29,8 @@
     "nexus": "^1.0.0"
   },
   "devDependencies": {
-    "@proto-graphql/tsconfig": "workspace:*"
+    "@proto-graphql/tsconfig": "workspace:*",
+    "graphql": "catalog:test"
   },
   "scripts": {
     "build": "tsup",

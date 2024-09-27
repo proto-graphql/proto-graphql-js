@@ -11,8 +11,8 @@ export const protocGenPothos = createEcmaScriptPlugin({
     generateFiles,
     dsl: "pothos",
   }),
-  parseOption: (_key, _value) => {
-    // accept any options
+  parseOptions(rawOptions) {
+    return {};
   },
   // NOTE: force `target=ts`
   transpile: (files) => {

@@ -6,6 +6,12 @@ import {
   ScalarType as ProtoScalarType,
 } from "@bufbuild/protobuf";
 
+import {
+  isEnumField,
+  isMapField,
+  isMessageField,
+  isScalarField,
+} from "../proto/util";
 import { EnumType } from "./EnumType";
 import { InputObjectType } from "./InputObjectType";
 import { InterfaceType } from "./InterfaceType";
@@ -174,30 +180,27 @@ function detectType<
   options: TypeOptions,
   f: (msg: DescMessage, options: TypeOptions) => T,
 ): ScalarType | EnumType | T {
-  switch (desc.fieldKind) {
-    case "message": {
-      const customScalar = options.scalarMapping[desc.message.typeName];
-      if (customScalar) return new ScalarType(desc, customScalar);
-      return f(desc.message, options);
-    }
-    case "enum": {
-      return new EnumType(desc.enum, options);
-    }
-    case "scalar": {
-      return new ScalarType(
-        desc,
-        options.scalarMapping[scalarMapLabelByType[desc.scalar]],
-      );
-    }
-    case "map": {
-      throw new Error("map type is not supported");
-    }
-    /* istanbul ignore next */
-    default: {
-      const _exhaustiveCheck: never = desc;
-      throw "unreachable";
-    }
+  if (isMessageField(desc)) {
+    const customScalar = options.scalarMapping[desc.message.typeName];
+    if (customScalar) return new ScalarType(desc, customScalar);
+    return f(desc.message, options);
   }
+  if (isEnumField(desc)) {
+    return new EnumType(desc.enum, options);
+  }
+  if (isScalarField(desc)) {
+    return new ScalarType(
+      desc,
+      options.scalarMapping[scalarMapLabelByType[desc.scalar]],
+    );
+  }
+  if (isMapField(desc)) {
+    throw new Error("map type is not supported");
+  }
+
+  /* istanbul ignore next */
+  desc satisfies never;
+  throw "unreachable";
 }
 
 export const scalarMapLabelByType: Record<ProtoScalarType, string> = {
