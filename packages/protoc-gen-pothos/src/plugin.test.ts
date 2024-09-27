@@ -1,3 +1,5 @@
+import { toJson } from "@bufbuild/protobuf";
+import { CodeGeneratorResponse_FileSchema } from "@bufbuild/protobuf/wkt";
 import {
   buildCodeGeneratorRequest,
   testapisPackages,
@@ -25,7 +27,9 @@ describe.each(testGorups)("$pkg", ({ pkg, tests }) => {
   test.each(tests)("generates files by plugin $test", ({ param }) => {
     const req = buildCodeGeneratorRequest(pkg, { param });
     const resp = protocGenPothos.run(req);
-    const files = resp.file.map((f) => f.toJson());
+    const files = resp.file.map((f) =>
+      toJson(CodeGeneratorResponse_FileSchema, f),
+    );
     expect(files).toMatchSnapshot();
   });
 });
@@ -56,7 +60,9 @@ describe("protobuf-es", () => {
     test.each(tests)("generates files by plugin $test", ({ param }) => {
       const req = buildCodeGeneratorRequest(pkg, { param });
       const resp = protocGenPothos.run(req);
-      const files = resp.file.map((f) => f.toJson());
+      const files = resp.file.map((f) =>
+        toJson(CodeGeneratorResponse_FileSchema, f),
+      );
       expect(files).toMatchSnapshot();
     });
   });
@@ -68,7 +74,9 @@ describe("with scalar type override", () => {
       param: "scalar=testapis.custom_types.Date=Date",
     });
     const resp = protocGenPothos.run(req);
-    const files = resp.file.map((f) => f.toJson());
+    const files = resp.file.map((f) =>
+      toJson(CodeGeneratorResponse_FileSchema, f),
+    );
     expect(files).toMatchSnapshot();
   });
 
@@ -92,7 +100,9 @@ describe("with scalar type override", () => {
         ].join(","),
       });
       const resp = protocGenPothos.run(req);
-      const files = resp.file.map((f) => f.toJson());
+      const files = resp.file.map((f) =>
+        toJson(CodeGeneratorResponse_FileSchema, f),
+      );
       expect(files).toMatchSnapshot();
     });
   });

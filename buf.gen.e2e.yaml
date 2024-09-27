@@ -42,7 +42,7 @@ plugins:
       - useExactTypes=false
     out: ./e2e/testapis/ts-proto-with-forcelong-number/src
     strategy: all
-  - local: protoc-gen-es
+  - local: ./e2e/testapis/protobuf-es/node_modules/.bin/protoc-gen-es
     opt:
       - target=ts
     out: ./e2e/testapis/protobuf-es/src

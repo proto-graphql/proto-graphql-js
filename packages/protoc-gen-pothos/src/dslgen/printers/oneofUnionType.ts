@@ -1,6 +1,6 @@
+import type { Registry } from "@bufbuild/protobuf";
 import {
   type OneofUnionType,
-  type Registry,
   type SquashedOneofUnionType,
   compact,
   protobufGraphQLExtensions,

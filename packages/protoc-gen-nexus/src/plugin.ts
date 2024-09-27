@@ -11,8 +11,8 @@ export const protocGenNexus = createEcmaScriptPlugin({
     generateFiles,
     dsl: "nexus",
   }),
-  parseOption: (_key, _value) => {
-    // accept any options
+  parseOptions(rawOptions) {
+    return {};
   },
   // NOTE: force `target=ts`
   transpile: (files) => {

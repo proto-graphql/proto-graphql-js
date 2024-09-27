@@ -1,3 +1,4 @@
+import type { Registry } from "@bufbuild/protobuf";
 import {
   EnumType,
   InputObjectField,
@@ -6,7 +7,6 @@ import {
   ObjectField,
   ObjectOneofField,
   type ObjectType,
-  type Registry,
   ScalarType,
   SquashedOneofUnionType,
   compact,

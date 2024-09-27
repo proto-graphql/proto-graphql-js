@@ -1,6 +1,6 @@
+import type { Registry } from "@bufbuild/protobuf";
 import {
   type EnumType,
-  type Registry,
   compact,
   protoType,
   protobufGraphQLExtensions,

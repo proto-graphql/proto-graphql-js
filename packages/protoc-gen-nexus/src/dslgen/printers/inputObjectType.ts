@@ -1,7 +1,7 @@
+import type { Registry } from "@bufbuild/protobuf";
 import {
   type InputObjectField,
   InputObjectType,
-  type Registry,
   ScalarType,
   compact,
   createSetFieldValueCode,

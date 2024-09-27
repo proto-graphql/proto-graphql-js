@@ -1,7 +1,7 @@
+import type { Registry } from "@bufbuild/protobuf";
 import {
   InterfaceType,
   type ObjectType,
-  type Registry,
   compact,
   protoType,
   protobufGraphQLExtensions,

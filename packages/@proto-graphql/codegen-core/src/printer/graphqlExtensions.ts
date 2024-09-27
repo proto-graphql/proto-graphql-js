@@ -1,3 +1,17 @@
+import { type Registry, toJson } from "@bufbuild/protobuf";
+import {
+  EnumOptionsSchema,
+  EnumValueOptionsSchema,
+  FieldOptionsSchema,
+  MessageOptionsSchema,
+  OneofOptionsSchema,
+} from "@bufbuild/protobuf/wkt";
+import {
+  isEnumField,
+  isMapField,
+  isMessageField,
+  isScalarField,
+} from "../proto/util";
 import {
   EnumType,
   EnumTypeValue,
@@ -7,7 +21,6 @@ import {
   ObjectOneofField,
   ObjectType,
   OneofUnionType,
-  type Registry,
   SquashedOneofUnionType,
   scalarMapLabelByType,
 } from "../types";
@@ -24,7 +37,7 @@ export function protobufGraphQLExtensions(
     | ObjectOneofField
     | InputObjectField<any>
     | EnumTypeValue,
-  typeRegistry: Registry,
+  registry: Registry,
 ): Record<string, Record<string, unknown>> {
   if (type instanceof ObjectType || type instanceof InputObjectType) {
     return {
@@ -32,7 +45,9 @@ export function protobufGraphQLExtensions(
         fullName: type.proto.typeName,
         name: type.proto.name,
         package: type.proto.file.proto.package ?? "",
-        options: type.proto.proto.options?.toJson({ typeRegistry }),
+        options: type.proto.proto.options
+          ? toJson(MessageOptionsSchema, type.proto.proto.options, { registry })
+          : undefined,
       },
     };
   }
@@ -42,7 +57,9 @@ export function protobufGraphQLExtensions(
         name: type.proto.name,
         fullName: type.proto.typeName,
         package: type.proto.file.proto.package ?? "",
-        options: type.proto.proto.options?.toJson({ typeRegistry }),
+        options: type.proto.proto.options
+          ? toJson(EnumOptionsSchema, type.proto.proto.options, { registry })
+          : undefined,
       },
     };
   }
@@ -65,7 +82,16 @@ export function protobufGraphQLExtensions(
         fields: type.fields.map((f) => ({
           name: f.proto.name,
           type: protoFieldTypeFullName(f),
-          options: type.proto.proto.options?.toJson({ typeRegistry }),
+          options: type.proto.proto.options
+            ? toJson(
+                type.proto.proto.options.$typeName ===
+                  "google.protobuf.OneofOptions"
+                  ? OneofOptionsSchema
+                  : MessageOptionsSchema,
+                type.proto.proto.options,
+                { registry },
+              )
+            : undefined,
         })),
       }),
     };
@@ -79,7 +105,16 @@ export function protobufGraphQLExtensions(
       protobufField: compact({
         name: type.proto.name,
         typeFullName: protoFieldTypeFullName(type),
-        options: type.proto.proto.options?.toJson({ typeRegistry }),
+        options: type.proto.proto.options
+          ? toJson(
+              type.proto.proto.options.$typeName ===
+                "google.protobuf.OneofOptions"
+                ? OneofOptionsSchema
+                : FieldOptionsSchema,
+              type.proto.proto.options,
+              { registry },
+            )
+          : undefined,
       }),
     };
   }
@@ -87,7 +122,11 @@ export function protobufGraphQLExtensions(
     return {
       protobufEnumValue: {
         name: type.proto.name,
-        options: type.proto.proto.options?.toJson({ typeRegistry }),
+        options: type.proto.proto.options
+          ? toJson(EnumValueOptionsSchema, type.proto.proto.options, {
+              registry,
+            })
+          : undefined,
       },
     };
   }
@@ -101,20 +140,20 @@ function protoFieldTypeFullName(
   field: ObjectField<any> | ObjectOneofField | InputObjectField<any>,
 ): string | undefined {
   if (field instanceof ObjectField || field instanceof InputObjectField) {
-    switch (field.proto.fieldKind) {
-      case "message":
-        return field.proto.message.typeName;
-      case "enum":
-        return field.proto.enum.typeName;
-      case "scalar":
-        return scalarMapLabelByType[field.proto.scalar];
-      case "map":
-        return undefined;
-      default: {
-        field.proto satisfies never;
-        return undefined;
-      }
+    if (isMessageField(field.proto)) {
+      return field.proto.message.typeName;
     }
+    if (isEnumField(field.proto)) {
+      return field.proto.enum.typeName;
+    }
+    if (isScalarField(field.proto)) {
+      return scalarMapLabelByType[field.proto.scalar];
+    }
+    if (isMapField(field.proto)) {
+      return undefined;
+    }
+    field.proto satisfies never;
+    return undefined;
   }
   return undefined;
 }
