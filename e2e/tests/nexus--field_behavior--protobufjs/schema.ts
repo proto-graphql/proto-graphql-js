@@ -7,7 +7,7 @@ import * as types1 from "./__generated__/schema/testapis/field_behavior/comments
 const testQuery = queryField("test1", {
   type: "FieldBehaviorComentsMessage",
   resolve() {
-    return new pbjs.testapis.deprecation.FieldBehaviorComentsMessage();
+    return new pbjs.testapis.field_behavior.FieldBehaviorComentsMessage();
   },
 });
 

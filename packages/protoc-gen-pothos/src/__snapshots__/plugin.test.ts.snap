@@ -14223,7 +14223,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -14237,7 +14238,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "required_output_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -14251,7 +14253,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "output_only_required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -14262,20 +14265,21 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "output_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
   }),
   isTypeOf: (source) => {
     return (source as FieldBehaviorComentsMessage | { $type: string & {}; })
-      .$type === "testapis.deprecation.FieldBehaviorComentsMessage";
+      .$type === "testapis.field_behavior.FieldBehaviorComentsMessage";
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage",
       name: "FieldBehaviorComentsMessage",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -14306,13 +14310,13 @@ builder.objectType(FieldBehaviorComentsMessagePost$Ref, {
   isTypeOf: (source) => {
     return (source as FieldBehaviorComentsMessage_Post | {
       $type: string & {};
-    }).$type === "testapis.deprecation.FieldBehaviorComentsMessage.Post";
+    }).$type === "testapis.field_behavior.FieldBehaviorComentsMessage.Post";
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
       name: "Post",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -14352,7 +14356,8 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -14363,7 +14368,8 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "required_input_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -14374,7 +14380,8 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "input_only_required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -14385,16 +14392,17 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "input_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
   }),
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage",
       name: "FieldBehaviorComentsMessage",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -14429,9 +14437,9 @@ export const FieldBehaviorComentsMessagePostInput$Ref: InputObjectRef<
   }),
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
       name: "Post",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -14472,7 +14480,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -14486,7 +14495,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "required_output_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -14500,7 +14510,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "output_only_required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -14511,20 +14522,21 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "output_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
   }),
   isTypeOf: (source) => {
     return (source as FieldBehaviorComentsMessage | { $type: string & {}; })
-      .$type === "testapis.deprecation.FieldBehaviorComentsMessage";
+      .$type === "testapis.field_behavior.FieldBehaviorComentsMessage";
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage",
       name: "FieldBehaviorComentsMessage",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -14544,13 +14556,13 @@ builder.objectType(FieldBehaviorComentsMessagePost$Ref, {
   isTypeOf: (source) => {
     return (source as FieldBehaviorComentsMessage_Post | {
       $type: string & {};
-    }).$type === "testapis.deprecation.FieldBehaviorComentsMessage.Post";
+    }).$type === "testapis.field_behavior.FieldBehaviorComentsMessage.Post";
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
       name: "Post",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -14575,7 +14587,8 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -14586,7 +14599,8 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "required_input_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -14597,7 +14611,8 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "input_only_required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -14608,16 +14623,17 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "input_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
   }),
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage",
       name: "FieldBehaviorComentsMessage",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -14640,9 +14656,9 @@ export const FieldBehaviorComentsMessagePostInput$Ref: InputObjectRef<
   }),
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
       name: "Post",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -14683,7 +14699,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -14697,7 +14714,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "required_output_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -14711,7 +14729,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "output_only_required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -14722,20 +14741,21 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "output_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
   }),
   isTypeOf: (source) => {
     return (source as FieldBehaviorComentsMessage | { $type: string & {}; })
-      .$type === "testapis.deprecation.FieldBehaviorComentsMessage";
+      .$type === "testapis.field_behavior.FieldBehaviorComentsMessage";
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage",
       name: "FieldBehaviorComentsMessage",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -14755,13 +14775,13 @@ builder.objectType(FieldBehaviorComentsMessagePost$Ref, {
   isTypeOf: (source) => {
     return (source as FieldBehaviorComentsMessage_Post | {
       $type: string & {};
-    }).$type === "testapis.deprecation.FieldBehaviorComentsMessage.Post";
+    }).$type === "testapis.field_behavior.FieldBehaviorComentsMessage.Post";
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
       name: "Post",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -14786,7 +14806,8 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -14797,7 +14818,8 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "required_input_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -14808,7 +14830,8 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "input_only_required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -14819,16 +14842,17 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "input_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
   }),
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage",
       name: "FieldBehaviorComentsMessage",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -14857,7 +14881,8 @@ export const FieldBehaviorComentsMessagePartialInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -14868,7 +14893,8 @@ export const FieldBehaviorComentsMessagePartialInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "required_input_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -14879,7 +14905,8 @@ export const FieldBehaviorComentsMessagePartialInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "input_only_required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -14890,16 +14917,17 @@ export const FieldBehaviorComentsMessagePartialInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "input_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
   }),
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage",
       name: "FieldBehaviorComentsMessage",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -14922,9 +14950,9 @@ export const FieldBehaviorComentsMessagePostInput$Ref: InputObjectRef<
   }),
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
       name: "Post",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -14947,9 +14975,9 @@ export const FieldBehaviorComentsMessagePostPartialInput$Ref: InputObjectRef<
   }),
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
       name: "Post",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -14990,7 +15018,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -15004,7 +15033,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "required_output_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -15018,7 +15048,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "output_only_required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -15029,20 +15060,21 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "output_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
   }),
   isTypeOf: (source) => {
     return (source as FieldBehaviorComentsMessage | { $type: string & {}; })
-      .$type === "testapis.deprecation.FieldBehaviorComentsMessage";
+      .$type === "testapis.field_behavior.FieldBehaviorComentsMessage";
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage",
       name: "FieldBehaviorComentsMessage",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -15062,13 +15094,13 @@ builder.objectType(FieldBehaviorComentsMessagePost$Ref, {
   isTypeOf: (source) => {
     return (source as FieldBehaviorComentsMessage_Post | {
       $type: string & {};
-    }).$type === "testapis.deprecation.FieldBehaviorComentsMessage.Post";
+    }).$type === "testapis.field_behavior.FieldBehaviorComentsMessage.Post";
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
       name: "Post",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -15093,7 +15125,8 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -15104,7 +15137,8 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "required_input_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -15115,7 +15149,8 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "input_only_required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -15126,16 +15161,17 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "input_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
   }),
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage",
       name: "FieldBehaviorComentsMessage",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -15158,9 +15194,9 @@ export const FieldBehaviorComentsMessagePostInput$Ref: InputObjectRef<
   }),
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
       name: "Post",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -39280,7 +39316,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -39294,7 +39331,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "required_output_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -39308,7 +39346,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "output_only_required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -39319,7 +39358,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "output_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -39329,9 +39369,9 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage",
       name: "FieldBehaviorComentsMessage",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -39364,9 +39404,9 @@ builder.objectType(FieldBehaviorComentsMessagePost$Ref, {
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
       name: "Post",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -39408,7 +39448,8 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -39419,7 +39460,8 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "required_input_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -39430,7 +39472,8 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "input_only_required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -39441,16 +39484,17 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "input_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
   }),
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage",
       name: "FieldBehaviorComentsMessage",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -39508,9 +39552,9 @@ export const FieldBehaviorComentsMessagePostInput$Ref: InputObjectRef<
   }),
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
       name: "Post",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -39559,7 +39603,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -39573,7 +39618,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "required_output_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -39587,7 +39633,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "output_only_required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -39598,7 +39645,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "output_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -39608,9 +39656,9 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage",
       name: "FieldBehaviorComentsMessage",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -39632,9 +39680,9 @@ builder.objectType(FieldBehaviorComentsMessagePost$Ref, {
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
       name: "Post",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -39659,7 +39707,8 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -39670,7 +39719,8 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "required_input_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -39681,7 +39731,8 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "input_only_required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -39692,16 +39743,17 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "input_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
   }),
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage",
       name: "FieldBehaviorComentsMessage",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -39747,9 +39799,9 @@ export const FieldBehaviorComentsMessagePostInput$Ref: InputObjectRef<
   }),
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
       name: "Post",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -39798,7 +39850,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -39812,7 +39865,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "required_output_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -39826,7 +39880,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "output_only_required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -39837,7 +39892,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "output_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -39847,9 +39903,9 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage",
       name: "FieldBehaviorComentsMessage",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -39871,9 +39927,9 @@ builder.objectType(FieldBehaviorComentsMessagePost$Ref, {
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
       name: "Post",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -39898,7 +39954,8 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -39909,7 +39966,8 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "required_input_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -39920,7 +39978,8 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "input_only_required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -39931,16 +39990,17 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "input_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
   }),
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage",
       name: "FieldBehaviorComentsMessage",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -39992,7 +40052,8 @@ export const FieldBehaviorComentsMessagePartialInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -40003,7 +40064,8 @@ export const FieldBehaviorComentsMessagePartialInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "required_input_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -40014,7 +40076,8 @@ export const FieldBehaviorComentsMessagePartialInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "input_only_required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -40025,16 +40088,17 @@ export const FieldBehaviorComentsMessagePartialInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "input_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
   }),
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage",
       name: "FieldBehaviorComentsMessage",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -40082,9 +40146,9 @@ export const FieldBehaviorComentsMessagePostInput$Ref: InputObjectRef<
   }),
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
       name: "Post",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -40115,9 +40179,9 @@ export const FieldBehaviorComentsMessagePostPartialInput$Ref: InputObjectRef<
   }),
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
       name: "Post",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -40166,7 +40230,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -40180,7 +40245,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "required_output_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -40194,7 +40260,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "output_only_required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -40205,7 +40272,8 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
       extensions: {
         protobufField: {
           name: "output_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -40215,9 +40283,9 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage",
       name: "FieldBehaviorComentsMessage",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -40239,9 +40307,9 @@ builder.objectType(FieldBehaviorComentsMessagePost$Ref, {
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
       name: "Post",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -40266,7 +40334,8 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -40277,7 +40346,8 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "required_input_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -40288,7 +40358,8 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "input_only_required_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
@@ -40299,16 +40370,17 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       extensions: {
         protobufField: {
           name: "input_only_field",
-          typeFullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+          typeFullName:
+            "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
         },
       },
     }),
   }),
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage",
       name: "FieldBehaviorComentsMessage",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
@@ -40354,9 +40426,9 @@ export const FieldBehaviorComentsMessagePostInput$Ref: InputObjectRef<
   }),
   extensions: {
     protobufMessage: {
-      fullName: "testapis.deprecation.FieldBehaviorComentsMessage.Post",
+      fullName: "testapis.field_behavior.FieldBehaviorComentsMessage.Post",
       name: "Post",
-      package: "testapis.deprecation",
+      package: "testapis.field_behavior",
     },
   },
 });
