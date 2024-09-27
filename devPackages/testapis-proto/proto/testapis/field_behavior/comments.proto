@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package testapis.deprecation;
+package testapis.field_behavior;
 
 message FieldBehaviorComentsMessage {
   message Post {
