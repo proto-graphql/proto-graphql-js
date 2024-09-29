@@ -2,6 +2,7 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@proto-graphql/tsconfig/tsconfig.e2epkg.json",
   "compilerOptions": {
+    "rootDir": "./src",
     "outDir": "./lib",
     "module": "es2022",
     "moduleResolution": "bundler"
