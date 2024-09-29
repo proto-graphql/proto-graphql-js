@@ -95,8 +95,8 @@ importers:
         specifier: 1.1.2
         version: 1.1.2(protobufjs@7.2.5)
       ts-proto:
-        specifier: 1.181.2
-        version: 1.181.2
+        specifier: 2.2.0
+        version: 2.2.0
       ts-protoc-gen:
         specifier: 0.15.0
         version: 0.15.0
@@ -182,30 +182,24 @@ importers:
 
   e2e/testapis/ts-proto:
     dependencies:
-      long:
-        specifier: catalog:test
-        version: 5.2.1
-      protobufjs:
-        specifier: catalog:test
-        version: 7.2.5
+      '@bufbuild/protobuf':
+        specifier: 'catalog:'
+        version: 2.1.0
 
   e2e/testapis/ts-proto-with-forcelong-long:
     dependencies:
+      '@bufbuild/protobuf':
+        specifier: 'catalog:'
+        version: 2.1.0
       long:
         specifier: catalog:test
         version: 5.2.1
-      protobufjs:
-        specifier: catalog:test
-        version: 7.2.5
 
   e2e/testapis/ts-proto-with-forcelong-number:
     dependencies:
-      long:
-        specifier: catalog:test
-        version: 5.2.1
-      protobufjs:
-        specifier: catalog:test
-        version: 7.2.5
+      '@bufbuild/protobuf':
+        specifier: 'catalog:'
+        version: 2.1.0
 
   e2e/tests/nexus--deprecation--google-protobuf:
     dependencies:
@@ -3827,11 +3821,11 @@ packages:
   ts-poet@6.9.0:
     resolution: {integrity: sha512-roe6W6MeZmCjRmppyfOURklO5tQFQ6Sg7swURKkwYJvV7dbGCrK28um5+51iW3twdPRKtwarqFAVMU6G1mvnuQ==}
 
-  ts-proto-descriptors@1.16.0:
-    resolution: {integrity: sha512-3yKuzMLpltdpcyQji1PJZRfoo4OJjNieKTYkQY8pF7xGKsYz/RHe3aEe4KiRxcinoBmnEhmuI+yJTxLb922ULA==}
+  ts-proto-descriptors@2.0.0:
+    resolution: {integrity: sha512-wHcTH3xIv11jxgkX5OyCSFfw27agpInAd6yh89hKG6zqIXnjW9SYqSER2CVQxdPj4czeOhGagNvZBEbJPy7qkw==}
 
-  ts-proto@1.181.2:
-    resolution: {integrity: sha512-knJ8dtjn2Pd0c5ZGZG8z9DMiD4PUY8iGI9T9tb8DvGdWRMkLpf0WcPO7G+7cmbZyxvNTAG6ci3fybEaFgMZIvg==}
+  ts-proto@2.2.0:
+    resolution: {integrity: sha512-xzmnyrarUjPnY+Py4RyTh3lYmL9w5t/oTtRTo2rKF8laAAahpGZ/ELxkXFEZns5JVbgkYke3C17HN5iNvZOs4g==}
     hasBin: true
 
   ts-protoc-gen@0.15.0:
@@ -5760,17 +5754,16 @@ snapshots:
     dependencies:
       dprint-node: 1.0.8
 
-  ts-proto-descriptors@1.16.0:
+  ts-proto-descriptors@2.0.0:
     dependencies:
-      long: 5.2.3
-      protobufjs: 7.2.5
+      '@bufbuild/protobuf': 2.1.0
 
-  ts-proto@1.181.2:
+  ts-proto@2.2.0:
     dependencies:
+      '@bufbuild/protobuf': 2.1.0
       case-anything: 2.1.13
-      protobufjs: 7.2.5
       ts-poet: 6.9.0
-      ts-proto-descriptors: 1.16.0
+      ts-proto-descriptors: 2.0.0
 
   ts-protoc-gen@0.15.0:
     dependencies:
