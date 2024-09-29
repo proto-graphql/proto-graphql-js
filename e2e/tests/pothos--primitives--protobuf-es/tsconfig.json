@@ -1,8 +1,6 @@
 {
-  "extends": "@proto-graphql/tsconfig/tsconfig.base.json",
+  "extends": "@proto-graphql/tsconfig/tsconfig.e2e.json",
   "compilerOptions": {
-    "emitDeclarationOnly": false,
-    "noEmit": true,
     "rootDir": "."
   },
   "include": ["."]
