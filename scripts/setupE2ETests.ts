@@ -192,7 +192,7 @@ async function genBufGemTemplate(test: TestCase): Promise<void> {
     version: "v2",
     plugins: [
       {
-        local: `../../../packages/protoc-gen-${test.target}/bin/protoc-gen-${test.target}`,
+        local: `protoc-gen-${test.target}`,
         out: genDir,
         opt: (pluginOpts[test.target] as Record<string, string[]>)[
           test.proto.lib

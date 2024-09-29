@@ -2,7 +2,7 @@
   "version": "v2",
   "plugins": [
     {
-      "local": "../../../packages/protoc-gen-nexus/bin/protoc-gen-nexus",
+      "local": "protoc-gen-nexus",
       "out": "__generated__/schema",
       "opt": [
         "use_protobufjs",
