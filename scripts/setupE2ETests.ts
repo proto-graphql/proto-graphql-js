@@ -231,12 +231,21 @@ it("bulids graphql schema", () => {
   );
 }
 
+async function genTsconfigJson(test: TestCase) {
+  const body = `{
+  "extends": "@proto-graphql/tsconfig/tsconfig.e2e.json",
+  "include": ["."]
+}`;
+  await writeFile(join(getTestPath(test), "tsconfig.json"), body, "utf-8");
+}
+
 async function main() {
   /** @type {TestCase[]} */
   const config = JSON.parse(await readFile("e2e/tests.json", "utf-8"));
 
   await Promise.all([
     ...config.tests.map(genPackageJson),
+    ...config.tests.map(genTsconfigJson),
     ...config.tests.map(genBufGemTemplate),
     ...config.tests.map(genSchemaTest),
   ]);

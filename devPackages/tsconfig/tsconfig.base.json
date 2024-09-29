@@ -1,11 +1,8 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "extends": ["@tsconfig/node18/tsconfig.json", "@tsconfig/strictest/tsconfig.json"],
   "compilerOptions": {
     "strict": true,
-    "declaration": true,
-    "declarationMap": true,
-    "emitDeclarationOnly": true,
-    "resolveJsonModule": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "noPropertyAccessFromIndexSignature": false,
@@ -13,7 +10,6 @@
     "noUnusedParameters": false,
     "noUncheckedIndexedAccess": false,
     "exactOptionalPropertyTypes": false,
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "noEmit": true,
   }
 }
