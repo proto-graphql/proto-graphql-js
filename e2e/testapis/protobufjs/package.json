@@ -4,6 +4,7 @@
   "description": "Generated codes with protobufjs",
   "private": true,
   "dependencies": {
+    "long": "catalog:test",
     "protobufjs": "catalog:test"
   }
 }
