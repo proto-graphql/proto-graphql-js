@@ -92,8 +92,8 @@ importers:
         specifier: 5.1.6
         version: 5.1.6
       protobufjs-cli:
-        specifier: 1.1.2
-        version: 1.1.2(protobufjs@7.2.5)
+        specifier: 1.1.3
+        version: 1.1.3(protobufjs@7.2.5)
       ts-proto:
         specifier: 2.2.0
         version: 2.2.0
@@ -3387,10 +3387,6 @@ packages:
   minimatch@3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
 
-  minimatch@5.1.2:
-    resolution: {integrity: sha512-bNH9mmM9qsJ2X4r2Nat1B//1dJVcn3+iBLa3IgqJ7EbGaDNepL9QSHOxN4ng33s52VMMhhIfgCYDk3C4ZmlDAg==}
-    engines: {node: '>=10'}
-
   minimatch@5.1.6:
     resolution: {integrity: sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g==}
     engines: {node: '>=10'}
@@ -3588,8 +3584,8 @@ packages:
     engines: {node: '>=10.13.0'}
     hasBin: true
 
-  protobufjs-cli@1.1.2:
-    resolution: {integrity: sha512-8ivXWxT39gZN4mm4ArQyJrRgnIwZqffBWoLDsE21TmMcKI3XwJMV4lEF2WU02C4JAtgYYc2SfJIltelD8to35g==}
+  protobufjs-cli@1.1.3:
+    resolution: {integrity: sha512-MqD10lqF+FMsOayFiNOdOGNlXc4iKDCf0ZQPkPR+gizYh9gqUeGTWulABUCdI+N67w5RfJ6xhgX4J8pa8qmMXQ==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     peerDependencies:
@@ -5141,7 +5137,7 @@ snapshots:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
-      minimatch: 5.1.2
+      minimatch: 5.1.6
       once: 1.4.0
 
   globby@11.1.0:
@@ -5345,10 +5341,6 @@ snapshots:
     dependencies:
       brace-expansion: 1.1.11
 
-  minimatch@5.1.2:
-    dependencies:
-      brace-expansion: 2.0.1
-
   minimatch@5.1.6:
     dependencies:
       brace-expansion: 2.0.1
@@ -5500,7 +5492,7 @@ snapshots:
 
   prettier@2.8.8: {}
 
-  protobufjs-cli@1.1.2(protobufjs@7.2.5):
+  protobufjs-cli@1.1.3(protobufjs@7.2.5):
     dependencies:
       chalk: 4.1.2
       escodegen: 1.14.3
