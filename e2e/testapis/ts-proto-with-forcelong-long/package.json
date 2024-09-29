@@ -4,8 +4,8 @@
   "description": "Generated codes with protocolbuffers/protobuf's js_out",
   "private": true,
   "dependencies": {
-    "long": "catalog:test",
-    "protobufjs": "catalog:test"
+    "@bufbuild/protobuf": "catalog:",
+    "long": "catalog:test"
   },
   "scripts": {
     "build:e2e": "tsc --build tsconfig.json",
