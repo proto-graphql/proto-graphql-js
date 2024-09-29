@@ -1,3 +1,4 @@
+import type { RawPluginOptions } from "@bufbuild/protoplugin/dist/cjs/parameter";
 import {
   type PrinterOptions,
   type TypeOptions,
@@ -7,13 +8,27 @@ import {
   protobufLibs,
 } from "@proto-graphql/codegen-core";
 
-export function parseParams<DSL extends PrinterOptions["dsl"]>(
-  input: string | undefined,
-  dsl: DSL,
-): {
+export type Options<DSL extends PrinterOptions["dsl"]> = {
   type: TypeOptions;
   printer: Extract<PrinterOptions, { dsl: DSL }>;
-} {
+};
+
+export function parsePothosOptions(
+  rawOptions: RawPluginOptions,
+): Options<"pothos"> {
+  return parseOptions(rawOptions, "pothos");
+}
+
+export function parseNexusOptions(
+  rawOptions: RawPluginOptions,
+): Options<"nexus"> {
+  return parseOptions(rawOptions, "nexus");
+}
+
+export function parseOptions<DSL extends PrinterOptions["dsl"]>(
+  rawOptions: RawPluginOptions,
+  dsl: DSL,
+): Options<DSL> {
   const params = {
     type: {
       partialInputs: false,
@@ -31,8 +46,8 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
     } as Extract<PrinterOptions, { dsl: DSL }>,
   };
 
-  const boolParam = (name: string, v: string | undefined): boolean => {
-    if (!v || v === "true") return true;
+  const boolParam = (name: string, v: string): boolean => {
+    if (v === "" || v === "true") return true;
     if (v === "false") return false;
     throw new Error(`${name} should be bool, got string: ${v}`);
   };
@@ -48,11 +63,7 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
     return whitelist.includes(v as any);
   }
 
-  const kvs = input ? input.split(",") : [];
-  for (const kv of kvs) {
-    const idx = kv.indexOf("=");
-    const [k, v] =
-      idx === -1 ? [kv, ""] : [kv.slice(0, idx), kv.slice(idx + 1)];
+  for (const { key: k, value: v } of rawOptions) {
     switch (k) {
       case "use_protobufjs": {
         if (boolParam(k, v)) params.printer.protobuf = "protobufjs";
@@ -114,7 +125,7 @@ export function parseParams<DSL extends PrinterOptions["dsl"]>(
         // no-op
         break;
       default:
-        throw new Error(`unknown param: ${kv}`);
+        throw new Error(`unknown param: ${k}=${v}`);
     }
   }
 

@@ -1,23 +1,23 @@
 import type { DescFile, Registry } from "@bufbuild/protobuf";
 import type { Schema } from "@bufbuild/protoplugin";
 import {
-  type TypeOptions,
   collectTypesFromFile,
   createRegistryFromSchema,
   filename,
   filenameFromProtoFile,
   printCodes,
 } from "@proto-graphql/codegen-core";
+import type { Options } from "@proto-graphql/protoc-plugin-helpers";
 import type { Code } from "ts-poet";
 
 import { createTypeDslCodes } from "./dslgen/index.js";
 import type { NexusPrinterOptions } from "./dslgen/printers/util.js";
 
 export function generateFiles(
-  schema: Schema,
+  schema: Schema<Options<"nexus">>,
   file: DescFile,
-  opts: { type: TypeOptions; printer: NexusPrinterOptions },
 ): void {
+  const opts = schema.options;
   const registry = createRegistryFromSchema(schema);
   const types = collectTypesFromFile(file, opts.type, schema.allFiles);
 

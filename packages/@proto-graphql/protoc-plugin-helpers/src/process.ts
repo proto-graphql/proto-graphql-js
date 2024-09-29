@@ -1,27 +1,22 @@
 import type { DescFile } from "@bufbuild/protobuf";
 import type { Schema } from "@bufbuild/protoplugin";
-import type { PrinterOptions, TypeOptions } from "@proto-graphql/codegen-core";
+import type { PrinterOptions } from "@proto-graphql/codegen-core";
 
-import { parseParams } from "./parseParams.js";
+import { type Options, parseOptions } from "./options.js";
 
 export function createTsGenerator<DSL extends PrinterOptions["dsl"]>({
   generateFiles,
   dsl,
 }: {
-  generateFiles: (
-    schema: Schema,
-    file: DescFile,
-    opts: {
-      type: TypeOptions;
-      printer: Extract<PrinterOptions, { dsl: DSL }>;
-    },
-  ) => void;
+  generateFiles: (schema: Schema<Options<DSL>>, file: DescFile) => void;
   dsl: DSL;
-}): (schema: Schema) => void {
-  return function generateTs(schema: Schema) {
-    const params = parseParams(schema.proto.parameter, dsl);
+}): (schema: Schema<Options<DSL>>) => void {
+  return function generateTs(schema: Schema<Partial<Options<DSL>>>) {
+    if (schema.options.printer?.dsl == null) {
+      Object.assign(schema.options, parseOptions([], dsl));
+    }
     for (const file of schema.files) {
-      generateFiles(schema, file, params);
+      generateFiles(schema as Schema<Options<DSL>>, file);
     }
   };
 }

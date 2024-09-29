@@ -1,13 +1,13 @@
 import type { DescFile, Registry } from "@bufbuild/protobuf";
 import type { Schema } from "@bufbuild/protoplugin";
 import {
-  type TypeOptions,
   collectTypesFromFile,
   createRegistryFromSchema,
   filename,
   filenameFromProtoFile,
   printCodes,
 } from "@proto-graphql/codegen-core";
+import type { Options } from "@proto-graphql/protoc-plugin-helpers";
 import type { Code } from "ts-poet";
 
 import { createTypeDslCodes } from "./dslgen/index.js";
@@ -16,10 +16,11 @@ import type { PothosPrinterOptions } from "./dslgen/printers/util.js";
 const allowedProtobufs = ["ts-proto", "protobuf-es"];
 
 export function generateFiles(
-  schema: Schema,
+  schema: Schema<Options<"pothos">>,
   file: DescFile,
-  opts: { type: TypeOptions; printer: PothosPrinterOptions },
 ): void {
+  const opts = schema.options;
+
   if (!allowedProtobufs.includes(opts.printer.protobuf)) {
     opts.printer.protobuf = "ts-proto"; // default
   }

@@ -1,5 +1,8 @@
 import { createEcmaScriptPlugin } from "@bufbuild/protoplugin";
-import { createTsGenerator } from "@proto-graphql/protoc-plugin-helpers";
+import {
+  createTsGenerator,
+  parsePothosOptions,
+} from "@proto-graphql/protoc-plugin-helpers";
 
 import { version } from "../package.json";
 import { generateFiles } from "./printer.js";
@@ -11,9 +14,7 @@ export const protocGenPothos = createEcmaScriptPlugin({
     generateFiles,
     dsl: "pothos",
   }),
-  parseOptions(rawOptions) {
-    return {};
-  },
+  parseOptions: parsePothosOptions,
   // NOTE: force `target=ts`
   transpile: (files) => {
     return files;

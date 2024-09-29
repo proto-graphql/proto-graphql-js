@@ -1,5 +1,8 @@
 import { createEcmaScriptPlugin } from "@bufbuild/protoplugin";
-import { createTsGenerator } from "@proto-graphql/protoc-plugin-helpers";
+import {
+  createTsGenerator,
+  parseNexusOptions,
+} from "@proto-graphql/protoc-plugin-helpers";
 
 import { version } from "../package.json";
 import { generateFiles } from "./printer.js";
@@ -11,9 +14,7 @@ export const protocGenNexus = createEcmaScriptPlugin({
     generateFiles,
     dsl: "nexus",
   }),
-  parseOptions(rawOptions) {
-    return {};
-  },
+  parseOptions: parseNexusOptions,
   // NOTE: force `target=ts`
   transpile: (files) => {
     return files;
