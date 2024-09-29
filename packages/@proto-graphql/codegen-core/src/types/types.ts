@@ -11,15 +11,15 @@ import {
   isMapField,
   isMessageField,
   isScalarField,
-} from "../proto/util";
-import { EnumType } from "./EnumType";
-import { InputObjectType } from "./InputObjectType";
-import { InterfaceType } from "./InterfaceType";
-import { ObjectType } from "./ObjectType";
-import { OneofUnionType } from "./OneofUnionType";
-import { ScalarType } from "./ScalarType";
-import { SquashedOneofUnionType } from "./SquashedOneofUnionType";
-import type { TypeOptions } from "./options";
+} from "../proto/util.js";
+import { EnumType } from "./EnumType.js";
+import { InputObjectType } from "./InputObjectType.js";
+import { InterfaceType } from "./InterfaceType.js";
+import { ObjectType } from "./ObjectType.js";
+import { OneofUnionType } from "./OneofUnionType.js";
+import { ScalarType } from "./ScalarType.js";
+import { SquashedOneofUnionType } from "./SquashedOneofUnionType.js";
+import type { TypeOptions } from "./options.js";
 import {
   exceptRequestOrResponse,
   isIgnoredField,
@@ -27,7 +27,7 @@ import {
   isIgnoredType,
   isInterface,
   isSquashedUnion,
-} from "./util";
+} from "./util.js";
 
 export type GlType =
   | ScalarType

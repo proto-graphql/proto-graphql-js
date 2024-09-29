@@ -18,7 +18,7 @@ import {
   isMapField,
   isMessageField,
   isScalarField,
-} from "../proto/util";
+} from "../proto/util.js";
 import {
   type EnumType,
   type InputObjectField,
@@ -29,8 +29,8 @@ import {
   type ObjectType,
   type OneofUnionType,
   type SquashedOneofUnionType,
-} from "../types";
-import type { PrinterOptions } from "./options";
+} from "../types/index.js";
+import type { PrinterOptions } from "./options.js";
 
 export function filename(
   type:

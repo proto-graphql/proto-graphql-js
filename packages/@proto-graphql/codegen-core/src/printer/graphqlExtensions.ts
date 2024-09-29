@@ -11,7 +11,7 @@ import {
   isMapField,
   isMessageField,
   isScalarField,
-} from "../proto/util";
+} from "../proto/util.js";
 import {
   EnumType,
   EnumTypeValue,
@@ -23,8 +23,8 @@ import {
   OneofUnionType,
   SquashedOneofUnionType,
   scalarMapLabelByType,
-} from "../types";
-import { compact } from "./util";
+} from "../types/index.js";
+import { compact } from "./util.js";
 
 export function protobufGraphQLExtensions(
   type:

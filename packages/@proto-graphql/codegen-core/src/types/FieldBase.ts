@@ -1,11 +1,11 @@
 import type { DescField, DescOneof } from "@bufbuild/protobuf";
 
-import { isListField } from "../proto/util";
+import { isListField } from "../proto/util.js";
 import {
   descriptionFromProto,
   getDeprecationReason,
   getFieldOptions,
-} from "./util";
+} from "./util.js";
 
 export abstract class FieldBase<P extends DescField | DescOneof> {
   constructor(readonly proto: P) {}

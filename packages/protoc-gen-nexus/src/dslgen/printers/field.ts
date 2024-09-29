@@ -24,7 +24,7 @@ import {
   fieldType,
   impNexus,
   impProtoNexus,
-} from "./util";
+} from "./util.js";
 
 /**
  * @

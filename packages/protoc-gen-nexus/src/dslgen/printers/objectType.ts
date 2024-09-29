@@ -11,8 +11,8 @@ import { type Code, code, joinCode, literalOf } from "ts-poet";
 import {
   createFieldDefinitionCode,
   createNoopFieldDefinitionCode,
-} from "./field";
-import { type NexusPrinterOptions, impNexus, nexusTypeDef } from "./util";
+} from "./field.js";
+import { type NexusPrinterOptions, impNexus, nexusTypeDef } from "./util.js";
 
 /**
  * @example

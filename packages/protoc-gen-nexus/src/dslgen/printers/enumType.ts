@@ -6,7 +6,7 @@ import {
 } from "@proto-graphql/codegen-core";
 import { type Code, code, literalOf } from "ts-poet";
 
-import { impNexus, nexusTypeDef } from "./util";
+import { impNexus, nexusTypeDef } from "./util.js";
 
 /**
  * @example

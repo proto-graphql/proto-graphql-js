@@ -10,8 +10,8 @@ import {
 } from "@proto-graphql/codegen-core";
 import type { Code } from "ts-poet";
 
-import { createTypeDslCodes } from "./dslgen";
-import type { NexusPrinterOptions } from "./dslgen/printers/util";
+import { createTypeDslCodes } from "./dslgen/index.js";
+import type { NexusPrinterOptions } from "./dslgen/printers/util.js";
 
 export function generateFiles(
   schema: Schema,

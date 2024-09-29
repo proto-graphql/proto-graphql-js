@@ -5,7 +5,7 @@ import {
   testapisPackages,
 } from "@proto-graphql/testapis-proto";
 import { describe, expect, test } from "vitest";
-import { protocGenPothos } from "./plugin";
+import { protocGenPothos } from "./plugin.js";
 
 const testGorups = testapisPackages.map((pkg) => ({
   pkg,

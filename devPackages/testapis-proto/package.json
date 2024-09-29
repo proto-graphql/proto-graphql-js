@@ -2,6 +2,23 @@
   "name": "@proto-graphql/testapis-proto",
   "version": "0.1.1",
   "description": "Generated codes from protobuf IDL",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "sideEffects": false,
   "private": true,
   "scripts": {
     "build": "tsup",
@@ -13,16 +30,5 @@
   "devDependencies": {
     "@proto-graphql/tsconfig": "workspace:*",
     "glob": "^10.4.5"
-  },
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    }
   }
 }

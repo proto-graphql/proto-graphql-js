@@ -5,7 +5,7 @@ import {
   type FileDescriptorSet,
   FileDescriptorSetSchema,
 } from "@bufbuild/protobuf/wkt";
-import { fileDescriptorSetBins } from "./__generated__/fileDescriptorSetBins";
+import { fileDescriptorSetBins } from "./__generated__/fileDescriptorSetBins.js";
 
 function objectKeys<K extends string>(obj: Record<K, unknown>): K[] {
   return Object.keys(obj) as K[];

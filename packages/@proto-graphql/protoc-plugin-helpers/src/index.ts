@@ -1,1 +1,1 @@
-export { createTsGenerator } from "./process";
+export { createTsGenerator } from "./process.js";

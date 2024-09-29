@@ -1,14 +1,14 @@
 import type { DescField } from "@bufbuild/protobuf";
 import { camelCase } from "change-case";
 
-import type { EnumType } from "./EnumType";
-import { FieldBase } from "./FieldBase";
-import type { InterfaceType } from "./InterfaceType";
-import type { ObjectType } from "./ObjectType";
-import type { OneofUnionType } from "./OneofUnionType";
-import type { ScalarType } from "./ScalarType";
-import type { SquashedOneofUnionType } from "./SquashedOneofUnionType";
-import { getFieldOptions, isRequiredField } from "./util";
+import type { EnumType } from "./EnumType.js";
+import { FieldBase } from "./FieldBase.js";
+import type { InterfaceType } from "./InterfaceType.js";
+import type { ObjectType } from "./ObjectType.js";
+import type { OneofUnionType } from "./OneofUnionType.js";
+import type { ScalarType } from "./ScalarType.js";
+import type { SquashedOneofUnionType } from "./SquashedOneofUnionType.js";
+import { getFieldOptions, isRequiredField } from "./util.js";
 
 export class ObjectField<
   T extends

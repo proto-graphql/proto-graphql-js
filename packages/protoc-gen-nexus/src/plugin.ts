@@ -2,7 +2,7 @@ import { createEcmaScriptPlugin } from "@bufbuild/protoplugin";
 import { createTsGenerator } from "@proto-graphql/protoc-plugin-helpers";
 
 import { version } from "../package.json";
-import { generateFiles } from "./printer";
+import { generateFiles } from "./printer.js";
 
 export const protocGenNexus = createEcmaScriptPlugin({
   name: "protoc-gen-nexus",

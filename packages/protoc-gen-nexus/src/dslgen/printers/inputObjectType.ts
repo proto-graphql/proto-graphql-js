@@ -16,14 +16,14 @@ import {
   createFieldDefinitionCode,
   createNoopFieldDefinitionCode,
   createTypeCode,
-} from "./field";
+} from "./field.js";
 import {
   type NexusPrinterOptions,
   fieldType,
   impNexus,
   impProtoNexus,
   nexusTypeDef,
-} from "./util";
+} from "./util.js";
 
 /**
  * @example

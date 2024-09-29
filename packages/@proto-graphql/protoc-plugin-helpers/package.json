@@ -6,17 +6,24 @@
   "repository": "git@github.com:proto-graphql/proto-graphql-js.git",
   "author": "izumin5210 <m@izum.in>",
   "license": "MIT",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
+  "files": ["src/", "dist/", "!src/**/*.test.ts", "!src/**/__tests__/"],
+  "sideEffects": false,
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -32,7 +39,6 @@
   "devDependencies": {
     "@proto-graphql/tsconfig": "workspace:*"
   },
-  "files": ["src/", "dist/", "!src/**/*.test.ts", "!src/**/__tests__/"],
   "scripts": {
     "build": "tsup",
     "test": "vitest run --passWithNoTests"

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseParams } from "./parseParams";
+import { parseParams } from "./parseParams.js";
 
 describe("parseParams", () => {
   it("reutrns true if value is empty", () => {

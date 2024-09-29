@@ -7,7 +7,7 @@ import {
   isMapField,
   isMessageField,
   isScalarField,
-} from "../proto/util";
+} from "../proto/util.js";
 
 export type GqlScalarType =
   | "Int"

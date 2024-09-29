@@ -7,7 +7,7 @@ import {
 } from "@proto-graphql/codegen-core";
 import { type Code, code, imp, joinCode, literalOf } from "ts-poet";
 
-import { type PothosPrinterOptions, pothosBuilder, pothosRef } from "./util";
+import { type PothosPrinterOptions, pothosBuilder, pothosRef } from "./util.js";
 
 /**
  * @example
