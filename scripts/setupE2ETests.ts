@@ -234,6 +234,9 @@ it("bulids graphql schema", () => {
 async function genTsconfigJson(test: TestCase) {
   const body = `{
   "extends": "@proto-graphql/tsconfig/tsconfig.e2e.json",
+  "compilerOptions": {
+    "rootDir": "."
+  },
   "include": ["."]
 }`;
   await writeFile(join(getTestPath(test), "tsconfig.json"), body, "utf-8");
