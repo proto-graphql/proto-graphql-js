@@ -2,7 +2,7 @@
   "version": "v2",
   "plugins": [
     {
-      "local": "../../../packages/protoc-gen-pothos/bin/protoc-gen-pothos",
+      "local": "protoc-gen-pothos",
       "out": "__generated__/schema",
       "opt": [
         "import_prefix=@proto-graphql/e2e-testapis-ts-proto/lib/",
