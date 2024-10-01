@@ -1,3 +1,4 @@
+import type { GeneratedFile, Printable } from "@bufbuild/protoplugin";
 import {
   ObjectField,
   ObjectOneofField,
@@ -5,7 +6,6 @@ import {
   type SquashedOneofUnionType,
   tsFieldName,
 } from "@proto-graphql/codegen-core";
-import { type Code, code, joinCode } from "ts-poet";
 
 /**
  * @example nullable
@@ -17,26 +17,29 @@ import { type Code, code, joinCode } from "ts-poet";
  * return value
  * ```
  */
-export function createOneofUnionResolverCode(
-  sourceExpr: Code,
+export function printOneofUnionResolverStmts(
+  g: GeneratedFile,
+  sourceExpr: Printable,
   field: ObjectOneofField | ObjectField<SquashedOneofUnionType>,
   opts: PrinterOptions,
-): Code {
-  const createBlockStmtCode = (
-    sourceExpr: Code,
+) {
+  const printBlockStmtCode = (
+    sourceExpr: Printable,
     { nullable, list }: { nullable: boolean; list: boolean },
-  ): Code => {
+  ) => {
     switch (opts.protobuf) {
       case "ts-proto": {
-        return createBlockStmtCodeForTsProto(sourceExpr, field, opts, {
+        printBlockStmtCodeForTsProto(g, sourceExpr, field, opts, {
           nullable,
         });
+        return;
       }
       case "protobuf-es": {
-        return createBlockStmtCodeForProtobufEs(sourceExpr, field, opts, {
+        printBlockStmtCodeForProtobufEs(g, sourceExpr, field, opts, {
           nullable,
           list,
         });
+        return;
       }
       case "google-protobuf":
       case "protobufjs": {
@@ -50,64 +53,66 @@ export function createOneofUnionResolverCode(
   };
 
   if (field instanceof ObjectField && field.isList()) {
-    return code`
-      return ${sourceExpr}.map(item => {
-        ${createBlockStmtCode(code`item`, { nullable: false, list: true })}
-      })
-    `;
+    g.print("return ", sourceExpr, ".map(item => {");
+    printBlockStmtCode("item", { nullable: false, list: true });
+    g.print("})");
+    return;
   }
 
-  return createBlockStmtCode(sourceExpr, {
+  printBlockStmtCode(sourceExpr, {
     nullable: field.isNullable(),
     list: false,
   });
 }
 
-function createBlockStmtCodeForTsProto(
-  sourceExpr: Code,
+function printBlockStmtCodeForTsProto(
+  g: GeneratedFile,
+  sourceExpr: Printable,
   field: ObjectOneofField | ObjectField<SquashedOneofUnionType>,
   opts: PrinterOptions,
   { nullable }: { nullable: boolean },
-): Code {
-  const createFieldExpr = (memberField: ObjectField<any>) => {
-    if (field instanceof ObjectOneofField) {
-      return code`${sourceExpr}.${tsFieldName(memberField.proto, opts)}`;
-    }
-    return code`${sourceExpr}?.${tsFieldName(memberField.proto, opts)}`;
-  };
+) {
+  g.print("const value = ");
 
-  return code`
-    const value = ${joinCode(field.type.fields.map(createFieldExpr), {
-      on: "??",
-    })};
-    if (value == null) {
-      ${
-        nullable
-          ? "return null"
-          : `throw new Error("${field.name} should not be null")`
-      };
-    }
-    return value;
-  `;
+  for (let i = 0; i < field.type.fields.length; i++) {
+    if (i > 0) g.print(" ??");
+    g.print(
+      sourceExpr,
+      field instanceof ObjectOneofField ? "." : "?.",
+      tsFieldName(field.type.fields[i].proto, opts),
+    );
+  }
+  g.print("if (value == null) {");
+  if (nullable) {
+    g.print("return null");
+  } else {
+    g.print(`throw new Error("${field.name} should not be null")`);
+  }
+  g.print("}");
+  g.print("return value");
 }
 
-function createBlockStmtCodeForProtobufEs(
-  sourceExpr: Code,
+function printBlockStmtCodeForProtobufEs(
+  g: GeneratedFile,
+  sourceExpr: Printable,
   field: ObjectOneofField | ObjectField<SquashedOneofUnionType>,
   opts: PrinterOptions,
   { nullable, list }: { nullable: boolean; list: boolean },
-): Code {
-  let valueExpr: Code;
+) {
+  g.print("const value = ");
+
   switch (true) {
     case field instanceof ObjectOneofField: {
-      valueExpr = code`${sourceExpr}.${tsFieldName(field.proto, opts)}.value`;
+      g.print(sourceExpr, ".", tsFieldName(field.proto, opts), ".value");
       break;
     }
     case field instanceof ObjectField: {
-      valueExpr = code`${sourceExpr}${list ? "" : "?"}.${tsFieldName(
-        field.type.oneofUnionType.proto,
-        opts,
-      )}.value`;
+      g.print(
+        sourceExpr,
+        list ? "." : "?.",
+        tsFieldName(field.proto, opts),
+        ".value",
+      );
       break;
     }
     default: {
@@ -115,14 +120,10 @@ function createBlockStmtCodeForProtobufEs(
       throw "unreachable";
     }
   }
-  if (nullable) {
-    return code`return ${valueExpr};`;
+  if (!nullable) {
+    g.print("if (value == null) {");
+    g.print(`throw new Error("${field.name} should not be null")`);
+    g.print("}");
   }
-  return code`
-    const value = ${valueExpr};
-    if (value == null) {
-      throw new Error("${field.name} should not be null");
-    }
-    return value;
-  `;
+  g.print("return value");
 }

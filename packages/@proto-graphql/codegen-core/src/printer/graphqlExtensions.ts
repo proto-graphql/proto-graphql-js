@@ -24,7 +24,6 @@ import {
   SquashedOneofUnionType,
   scalarMapLabelByType,
 } from "../types/index.js";
-import { compact } from "./util.js";
 
 export function protobufGraphQLExtensions(
   type:
@@ -68,7 +67,7 @@ export function protobufGraphQLExtensions(
     type instanceof SquashedOneofUnionType
   ) {
     return {
-      protobufOneof: compact({
+      protobufOneof: {
         fullName:
           type.proto.kind === "oneof"
             ? `${type.proto.parent.typeName}.${type.proto.name}`
@@ -93,7 +92,7 @@ export function protobufGraphQLExtensions(
               )
             : undefined,
         })),
-      }),
+      },
     };
   }
   if (
@@ -102,7 +101,7 @@ export function protobufGraphQLExtensions(
     type instanceof InputObjectField
   ) {
     return {
-      protobufField: compact({
+      protobufField: {
         name: type.proto.name,
         typeFullName: protoFieldTypeFullName(type),
         options: type.proto.proto.options
@@ -115,7 +114,7 @@ export function protobufGraphQLExtensions(
               { registry },
             )
           : undefined,
-      }),
+      },
     };
   }
   if (type instanceof EnumTypeValue) {

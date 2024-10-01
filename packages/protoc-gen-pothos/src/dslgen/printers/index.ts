@@ -6,15 +6,16 @@ import {
   OneofUnionType,
   SquashedOneofUnionType,
 } from "@proto-graphql/codegen-core";
-import type { Code } from "ts-poet";
 
-import { createEnumTypeCode } from "./enumType.js";
-import { createInputObjectTypeCode } from "./inputObjectType.js";
-import { createObjectTypeCode } from "./objectType.js";
-import { createOneofUnionTypeCode } from "./oneofUnionType.js";
+import type { GeneratedFile } from "@bufbuild/protoplugin";
+import { printEnumTypeCode } from "./enumType.js";
+import { printInputObjectTypeCode } from "./inputObjectType.js";
+import { printObjectTypeCode } from "./objectType.js";
+import { printOneofUnionTypeCode } from "./oneofUnionType.js";
 import type { PothosPrinterOptions } from "./util.js";
 
-export function createTypeDslCodes(
+export function printTypeDslCodes(
+  g: GeneratedFile,
   types: (
     | ObjectType
     | InputObjectType
@@ -24,25 +25,31 @@ export function createTypeDslCodes(
   )[],
   registry: ReturnType<typeof createRegistry>,
   opts: PothosPrinterOptions,
-): Code[] {
-  return types.flatMap((type) => {
-    if (type instanceof ObjectType) {
-      return createObjectTypeCode(type, registry, opts);
+): void {
+  for (const t of types) {
+    g.print();
+    switch (true) {
+      case t instanceof ObjectType: {
+        printObjectTypeCode(g, t, registry, opts);
+        break;
+      }
+      case t instanceof InputObjectType: {
+        printInputObjectTypeCode(g, t, registry, opts);
+        break;
+      }
+      case t instanceof EnumType: {
+        printEnumTypeCode(g, t, registry, opts);
+        break;
+      }
+      case t instanceof OneofUnionType:
+      case t instanceof SquashedOneofUnionType: {
+        printOneofUnionTypeCode(g, t, registry, opts);
+        break;
+      }
+      default: {
+        t satisfies never;
+        throw "unreachable";
+      }
     }
-    if (type instanceof InputObjectType) {
-      return createInputObjectTypeCode(type, registry, opts);
-    }
-    if (type instanceof EnumType) {
-      return [createEnumTypeCode(type, registry, opts)];
-    }
-    if (
-      type instanceof OneofUnionType ||
-      type instanceof SquashedOneofUnionType
-    ) {
-      return [createOneofUnionTypeCode(type, registry, opts)];
-    }
-
-    const _exhaustiveCheck: never = type;
-    throw "unreachable";
-  });
+  }
 }

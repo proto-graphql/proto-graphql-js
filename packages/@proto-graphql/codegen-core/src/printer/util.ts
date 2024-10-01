@@ -9,8 +9,12 @@ import {
   ScalarType as ProtoScalarType,
 } from "@bufbuild/protobuf";
 import { camelCase } from "change-case";
-import { type Code, code, imp } from "ts-poet";
 
+import {
+  type GeneratedFile,
+  type Printable,
+  createImportSymbol,
+} from "@bufbuild/protoplugin";
 import {
   type DescMessageField,
   isEnumField,
@@ -98,28 +102,10 @@ export function generatedGraphQLTypeImportPath(
   return importPath.match(/^[./]/) ? importPath : `./${importPath}`;
 }
 
-/** Remove nullish values recursively. */
-export function compact(v: any): any {
-  if (typeof v !== "object") return v;
-  if (Array.isArray(v)) return v.map(compact);
-  if (v == null) return v;
-  if ("toCodeString" in v) return v; // ignore nodes of ts-poet
-  return compactObj(v);
-}
-
-function compactObj<In extends Out, Out extends Record<string, unknown>>(
-  obj: In,
-): Out {
-  return Object.keys(obj).reduce((newObj, key) => {
-    const v = obj[key];
-    return v == null ? newObj : Object.assign(newObj, { [key]: compact(v) });
-  }, {} as Out);
-}
-
-export function protoType(
+export function createProtoTypeExpr(
   origProto: DescMessage | DescEnum | DescField,
   opts: PrinterOptions,
-): Code {
+): Printable {
   let origProtoType: DescMessage | DescEnum | undefined;
   switch (origProto.kind) {
     case "message":
@@ -147,9 +133,6 @@ export function protoType(
       throw "unreachable";
     }
   }
-  if (origProtoType === undefined) {
-    throw "unreachable";
-  }
   let proto = origProtoType;
   const chunks = [proto.name];
   while (proto.parent != null) {
@@ -158,10 +141,12 @@ export function protoType(
   }
   switch (opts.protobuf) {
     case "google-protobuf": {
-      return code`${imp(`${chunks[0]}@${protoImportPath(proto, opts)}`)}${chunks
-        .slice(1)
-        .map((c) => `.${c}`)
-        .join("")}`;
+      const [first, ...rest] = chunks;
+      return [
+        createImportSymbol(first, protoImportPath(proto, opts)),
+        ".",
+        rest.join("."),
+      ];
     }
     case "protobufjs": {
       chunks.unshift(...(proto.file.proto.package ?? "").split("."));
@@ -169,15 +154,14 @@ export function protoType(
         origProto.kind === "field" ? origProto.parent : origProto,
         opts,
       );
-      return code`${imp(`${chunks[0]}@${importPath}`)}.${chunks
-        .slice(1)
-        .join(".")}`;
+      const [first, ...rest] = chunks;
+      return [createImportSymbol(first, importPath), ".", rest.join(".")];
     }
     case "ts-proto":
     case "protobuf-es": {
-      return code`${imp(
-        `${chunks.join("_")}@${protoImportPath(proto, opts)}`,
-      )}`;
+      return [
+        createImportSymbol(chunks.join("_"), protoImportPath(proto, opts)),
+      ];
     }
     /* istanbul ignore next */
     default: {
@@ -187,23 +171,23 @@ export function protoType(
   }
 }
 
-export function createGetFieldValueCode(
-  parentExpr: Code,
+export function createGetFieldValueExpr(
+  parentExpr: Printable,
   proto: DescField,
   opts: PrinterOptions,
-): Code {
+): Printable {
   switch (opts.protobuf) {
     case "google-protobuf": {
-      return code`${parentExpr}.${googleProtobufFieldAccessor("get", proto)}()`;
+      return [parentExpr, ".", googleProtobufFieldAccessor("get", proto), "()"];
     }
     case "protobufjs":
     case "ts-proto":
     case "protobuf-es": {
-      return code`${parentExpr}.${tsFieldName(proto, opts)}`;
+      return [parentExpr, ".", tsFieldName(proto, opts)];
     }
     /* istanbul ignore next */
     default: {
-      const _exhaustiveCheck: never = opts;
+      opts satisfies never;
       throw "unreachable";
     }
   }
@@ -234,23 +218,30 @@ export function tsFieldName(
   }
 }
 
-export function createSetFieldValueCode(
-  parentExpr: Code,
-  valueExpr: Code,
+export function printSetFieldValueStmt(
+  g: GeneratedFile,
+  parentExpr: Printable,
+  valueExpr: Printable,
   proto: DescField,
   opts: PrinterOptions,
-): Code {
+) {
   switch (opts.protobuf) {
     case "google-protobuf": {
-      return code`${parentExpr}.${googleProtobufFieldAccessor(
-        "set",
-        proto,
-      )}(${valueExpr})`;
+      g.print(
+        parentExpr,
+        ".",
+        googleProtobufFieldAccessor("set", proto),
+        "(",
+        valueExpr,
+        ")",
+      );
+      return;
     }
     case "protobufjs":
     case "ts-proto":
     case "protobuf-es": {
-      return code`${parentExpr}.${tsFieldName(proto, opts)} = ${valueExpr}`;
+      g.print(parentExpr, ".", tsFieldName(proto, opts), " = ", valueExpr);
+      return;
     }
     /* istanbul ignore next */
     default: {

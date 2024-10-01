@@ -1,11 +1,11 @@
+import type { GeneratedFile, Printable } from "@bufbuild/protoplugin";
 import {
   type EnumType,
   type EnumTypeValue,
   type ObjectField,
   type PrinterOptions,
-  protoType,
+  createProtoTypeExpr,
 } from "@proto-graphql/codegen-core";
-import { type Code, code } from "ts-poet";
 
 /**
  * @example nullable
@@ -23,58 +23,68 @@ import { type Code, code } from "ts-poet";
  * return root.myEnum
  * ```
  */
-export function createEnumResolverCode(
-  valueExpr: Code,
+export function printEnumResolverStmts(
+  g: GeneratedFile,
+  valueExpr: Printable,
   field: ObjectField<EnumType>,
   opts: PrinterOptions,
-): Code {
-  const createBlockStmtCodes = (valueExpr: Code): Code[] => {
-    const chunks: Code[] = [];
+): void {
+  const createBlockStmts = (valueExpr: Printable): Printable[] => {
+    const lines: Printable[][] = [];
 
     if (field.type.unspecifiedValue != null) {
-      const escapeCode =
-        field.isNullable() && !field.isList()
-          ? code`return null;`
-          : code`throw new Error("${field.name} is required field. But got unspecified.");`;
-      chunks.push(code`
-        if (${valueExpr} === ${protoType(
-          field.type.proto,
-          opts,
-        )}.${enumValueJsName(field.type, field.type.unspecifiedValue, opts)}) {
-          ${escapeCode}
-        }
-      `);
-    }
-    for (const ev of field.type.valuesWithIgnored) {
-      if (!ev.isIgnored()) continue;
-      chunks.push(code`
-      if (${valueExpr} === ${protoType(
-        field.type.proto,
+      const protoTypeExpr = createProtoTypeExpr(field.type.proto, opts);
+      const evName = enumValueJsName(
+        field.type,
+        field.type.unspecifiedValue,
         opts,
-      )}.${enumValueJsName(field.type, ev, opts)}) {
-        throw new Error("${ev.name} is ignored in GraphQL schema");
+      );
+
+      lines.push(["if (", valueExpr, "===", protoTypeExpr, ".", evName, ") {"]);
+      if (field.isNullable() && !field.isList()) {
+        lines.push(["return null;"]);
+      } else {
+        lines.push([
+          `throw new Error("${field.name} is required field. But got unspecified.");`,
+        ]);
       }
-    `);
+      lines.push(["}"]);
     }
 
-    return chunks;
+    for (const ev of field.type.valuesWithIgnored) {
+      if (!ev.isIgnored()) continue;
+      const protoTypeExpr = createProtoTypeExpr(field.type.proto, opts);
+      const evName = enumValueJsName(field.type, ev, opts);
+      lines.push(["if (", valueExpr, "===", protoTypeExpr, ".", evName, ") {"]);
+      lines.push([
+        `throw new Error("${ev.name} is ignored in GraphQL schema");`,
+      ]);
+      lines.push(["}"]);
+    }
+
+    return lines;
   };
 
   if (field.isList()) {
-    const stmts = createBlockStmtCodes(code`item`);
-    if (stmts.length === 0) {
-      return code`return ${valueExpr}`;
+    const lines = createBlockStmts("item");
+    if (lines.length === 0) {
+      g.print("return ", valueExpr);
+      return;
     }
-    return code`return ${valueExpr}.map(item => {
-      ${stmts}
-      return item;
-    })`;
+    g.print("return ", valueExpr, ".map(item => {");
+    for (const line of lines) {
+      g.print(line);
+    }
+    g.print("return item;");
+    g.print("});");
+    return;
   }
 
-  return code`
-    ${createBlockStmtCodes(valueExpr)}
-    return ${valueExpr};
-  `;
+  for (const line of createBlockStmts(valueExpr)) {
+    g.print(line);
+  }
+  g.print("return ", valueExpr);
+  return;
 }
 
 function enumValueJsName(

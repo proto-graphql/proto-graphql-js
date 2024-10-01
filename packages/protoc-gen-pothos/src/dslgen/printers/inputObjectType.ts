@@ -4,15 +4,18 @@ import {
   type InputObjectField,
   InputObjectType,
   ScalarType,
-  compact,
+  createProtoTypeExpr,
   generatedGraphQLTypeImportPath,
-  protoType,
   protobufGraphQLExtensions,
   tsFieldName,
 } from "@proto-graphql/codegen-core";
-import { type Code, code, imp, joinCode, literalOf } from "ts-poet";
 
-import { createFieldRefCode, createNoopFieldRefCode } from "./field.js";
+import {
+  type GeneratedFile,
+  type Printable,
+  createImportSymbol,
+} from "@bufbuild/protoplugin";
+import { printFieldDefStmt, printNoopFieldDefStmt } from "./field.js";
 import {
   type PothosPrinterOptions,
   fieldTypeShape,
@@ -42,78 +45,87 @@ import {
  *
  * ```
  */
-export function createInputObjectTypeCode(
+export function printInputObjectTypeCode(
+  g: GeneratedFile,
   type: InputObjectType,
   registry: Registry,
   opts: PothosPrinterOptions,
-): Code {
-  const shapeTypeCode = code`
-    export type ${shapeType(type)} = {
-      ${joinCode(
-        type.fields.map((f) => {
-          let typeNode: Code;
-          if (f.type instanceof InputObjectType) {
-            // @ts-expect-error f should be inferred as InputObjectField<InputObjectType>
-            typeNode = code`${fieldTypeShape(f, opts)}`;
-            if (f.isList()) typeNode = code`Array<${typeNode}>`;
-          } else {
-            typeNode = code`${protoType(type.proto, opts)}[${literalOf(
-              tsFieldName(f.proto, opts),
-            )}]`;
-          }
-          return f.isNullable()
-            ? code`${f.name}?: ${typeNode} | null,`
-            : code`${f.name}: ${
-                f.type instanceof ScalarType && f.type.isCustomScalar()
-                  ? code`NonNullable<${typeNode}>`
-                  : typeNode
-              },`;
-        }),
-      )}
-    };
-  `;
+): void {
+  const shapeTypeIdent = shapeType(type);
+  const protoTypeExpr = createProtoTypeExpr(type.proto, opts);
 
-  const refCode = code`
-    export const ${pothosRef(type)}: ${imp(
-      "InputObjectRef@@pothos/core",
-    )}<${shapeType(type)}> =
-      ${pothosBuilder(type, opts)}.inputRef<${shapeType(type)}>(${literalOf(
-        type.typeName,
-      )}).implement(
-        ${literalOf(
-          compact({
-            description: type.description,
-            fields: code`t => ({${
-              type.fields.length > 0
-                ? type.fields.map(
-                    (f) =>
-                      code`${f.name}: ${createFieldRefCode(
-                        f,
-                        registry,
-                        opts,
-                      )},`,
-                  )
-                : code`_: ${createNoopFieldRefCode({ input: true })}`
-            }})`,
-            extensions: protobufGraphQLExtensions(type, registry),
-          }),
-        )}
-      );
-  `;
+  // shape
+  g.print("export type ", shapeTypeIdent, " = {");
+  for (const f of type.fields) {
+    let typeNode: Printable;
+    if (f.type instanceof InputObjectType) {
+      // @ts-expect-error f should be inferred as InputObjectField<InputObjectType>
+      typeNode = fieldTypeShape(f, opts);
+      if (f.isList()) typeNode = ["Array<", typeNode, ">"];
+    } else {
+      const fieldNameExpr = g.string(tsFieldName(f.proto, opts));
+      typeNode = [protoTypeExpr, "[", fieldNameExpr, "]"];
+    }
+    if (f.isNullable()) {
+      g.print(f.name, "?: ", typeNode, " | null,");
+    } else if (f.type instanceof ScalarType && f.type.isCustomScalar()) {
+      g.print(f.name, ": NonNullable<", typeNode, ">,");
+    } else {
+      g.print(f.name, ": ", typeNode, ",");
+    }
+  }
+  g.print("};");
 
-  const codes = [shapeTypeCode, refCode];
+  g.print();
 
-  if (opts.protobuf === "protobuf-es") {
-    codes.push(createToProtoFuncCode(type, opts));
+  // ref
+  const refIdent = pothosRef(type);
+  const coreRefType = createImportSymbol(
+    "InputObjectRef",
+    "@pothos/core",
+    true,
+  );
+  const refType = [coreRefType, "<", shapeTypeIdent, ">"]; // InputObjectRef<Foo$Shape>
+  const buildrExpr = pothosBuilder(type, opts);
+  const typeNameExpr = g.string(type.typeName);
+
+  g.print("export const ", refIdent, ": ", refType, " =");
+  // biome-ignore format: to make it easy generated code to read
+  g.print(buildrExpr, ".inputRef<", shapeTypeIdent, ">(", typeNameExpr, ").implement({");
+
+  if (type.description) {
+    g.print("  description: ", g.string(type.description), ",");
   }
 
-  return code` ${codes} `;
+  g.print("  fields: t => ({");
+  for (const f of type.fields) {
+    g.print(f.name, ": ");
+    printFieldDefStmt(g, f, registry, opts);
+    g.print(",");
+  }
+  if (type.fields.length === 0) {
+    g.print("_: ");
+    printNoopFieldDefStmt(g, { input: true });
+    g.print(",");
+  }
+  g.print("}),");
+
+  const extJson = JSON.stringify(protobufGraphQLExtensions(type, registry));
+  g.print("  extensions: ", extJson, ",");
+
+  g.print("})");
+
+  if (opts.protobuf === "protobuf-es") {
+    g.print();
+    printToProtoFuncDefStmt(g, type, opts);
+  }
 }
 
-function createToProtoFuncCode(
+function printToProtoFuncDefStmt(
+  g: GeneratedFile,
   type: InputObjectType,
   opts: PothosPrinterOptions,
-): Code {
+): void {
   const oneofFields: Record<string, InputObjectField<InputObjectType>[]> = {};
   for (const f of type.fields) {
     if (f.proto.oneof == null) continue;
@@ -127,53 +139,65 @@ function createToProtoFuncCode(
     ];
   }
 
-  return code`
-    export function ${toProtoFuncName(type)} (input: ${shapeType(
-      type,
-    )} | null | undefined): ${protoType(type.proto, opts)} {
-      return new ${protoType(type.proto, opts)}({
-        ${type.fields
-          .filter((f) => f.proto.oneof == null)
-          .map((f) => {
-            switch (true) {
-              case f.type instanceof InputObjectType: {
-                const localName = tsFieldName(f.proto, opts);
-                const toProtoFunc = fieldToProtoFunc(
-                  f as InputObjectField<InputObjectType>,
-                  opts,
-                );
-                if (f.isList()) {
-                  return code`${localName}: input?.${f.name}?.map(v => ${toProtoFunc}(v)),`;
-                }
-                return code`${localName}: input ? ${toProtoFunc}(input.${f.name}) : undefined,`;
-              }
-              case f.type instanceof ScalarType:
-              case f.type instanceof EnumType: {
-                const localName = tsFieldName(f.proto, opts);
-                return code`${localName}: input?.${f.name} ?? undefined,`;
-              }
-              default: {
-                f.type satisfies never;
-                throw "unreachable";
-              }
-            }
-          })}
-        ${Object.values(oneofFields).map((fields) => {
-          return code`${tsFieldName(
-            // biome-ignore lint/style/noNonNullAssertion: we know it's not null
-            fields[0]!.proto.oneof!,
-            opts,
-          )}:${fields.map(
-            (f) =>
-              code`input?.${f.name} ? { case: "${tsFieldName(
-                f.proto,
-                opts,
-              )}", value: ${fieldToProtoFunc(f, opts)}(input.${f.name}) } :`,
-          )} undefined,`;
-        })}
-      });
+  const funcNameIdent = toProtoFuncName(type);
+  const shapeTypeIdent = shapeType(type);
+  const protoTypeExpr = createProtoTypeExpr(type.proto, opts);
+
+  g.print("export function ", funcNameIdent, "(");
+  g.print("  input: ", shapeTypeIdent, " | null | undefined");
+  g.print("): ", protoTypeExpr, "{");
+
+  g.print("  return new ", protoTypeExpr, "({");
+  for (const f of type.fields) {
+    if (f.proto.oneof != null) continue;
+
+    switch (true) {
+      case f.type instanceof InputObjectType: {
+        const localName = tsFieldName(f.proto, opts);
+        const toProtoFunc = fieldToProtoFunc(
+          f as InputObjectField<InputObjectType>,
+          opts,
+        );
+        if (f.isList()) {
+          // biome-ignore format: to make it easy generated code to read
+          g.print(localName, ": input?.", f.name, "?.map(v => ", toProtoFunc, "(v)),");
+        } else {
+          // biome-ignore format: to make it easy generated code to read
+          g.print(localName, ": input ? ", toProtoFunc, "(input.", f.name, ") : undefined,");
+        }
+        break;
+      }
+      case f.type instanceof ScalarType:
+      case f.type instanceof EnumType: {
+        const localName = tsFieldName(f.proto, opts);
+        g.print(localName, ": input?.", f.name, " ?? undefined,");
+        break;
+      }
+      default: {
+        f.type satisfies never;
+        throw "unreachable";
+      }
     }
-  `;
+  }
+  for (const fields of Object.values(oneofFields)) {
+    const fieldName = tsFieldName(
+      // biome-ignore lint/style/noNonNullAssertion: we know it's not null
+      fields[0]!.proto.oneof!,
+      opts,
+    );
+    g.print(fieldName, ": ");
+    for (const f of fields) {
+      const fieldNameExpr = g.string(tsFieldName(f.proto, opts));
+      // biome-ignore format: to make it easy generated code to read
+      const valueExpr: Printable = [fieldToProtoFunc(f, opts), '(input.',f.name,')']
+      // biome-ignore format: to make it easy generated code to read
+      g.print("input?.", f.name, " ? { case: ", fieldNameExpr, ", value: ", valueExpr, ' } :');
+    }
+    g.print(" undefined,");
+  }
+
+  g.print("  })");
+  g.print("}");
 }
 
 function toProtoFuncName(type: InputObjectType): string {
@@ -183,11 +207,9 @@ function toProtoFuncName(type: InputObjectType): string {
 function fieldToProtoFunc(
   field: InputObjectField<InputObjectType>,
   opts: PothosPrinterOptions,
-): Code {
+): Printable {
   const importPath = generatedGraphQLTypeImportPath(field, opts);
-  if (importPath == null) return code`${toProtoFuncName(field.type)}`;
+  if (importPath == null) return toProtoFuncName(field.type);
 
-  const imported = imp(`IMPORTED_PLACEHOLDER@${importPath}`);
-  imported.symbol = toProtoFuncName(field.type); // NOTE: Workaround for ts-poet not recognizing "$" as an identifier
-  return code`${imported}`;
+  return createImportSymbol(toProtoFuncName(field.type), importPath);
 }

@@ -1,7 +1,8 @@
-import { type Code, code } from "ts-poet";
+import type { GeneratedFile, Printable } from "@bufbuild/protoplugin";
 
-export function createNonNullResolverCode(valueExpr: Code): Code {
-  return code`
-    return ${valueExpr}!;
-  `;
+export function printNonNullResolverStmts(
+  g: GeneratedFile,
+  valueExpr: Printable,
+) {
+  return g.print("return ", valueExpr, "!");
 }

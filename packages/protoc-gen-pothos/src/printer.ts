@@ -1,17 +1,14 @@
-import type { DescFile, Registry } from "@bufbuild/protobuf";
+import type { DescFile } from "@bufbuild/protobuf";
 import type { Schema } from "@bufbuild/protoplugin";
 import {
   collectTypesFromFile,
   createRegistryFromSchema,
   filename,
   filenameFromProtoFile,
-  printCodes,
 } from "@proto-graphql/codegen-core";
 import type { Options } from "@proto-graphql/protoc-plugin-helpers";
-import type { Code } from "ts-poet";
 
-import { createTypeDslCodes } from "./dslgen/index.js";
-import type { PothosPrinterOptions } from "./dslgen/printers/util.js";
+import { printTypeDslCodes } from "./dslgen/index.js";
 
 const allowedProtobufs = ["ts-proto", "protobuf-es"];
 
@@ -30,25 +27,20 @@ export function generateFiles(
 
   switch (opts.printer.fileLayout) {
     case "proto_file": {
-      const f = schema.generateFile(filenameFromProtoFile(file, opts.printer));
-
-      const code = printCodes(
-        createCodes(types, registry, opts.printer),
-        "protoc-gen-pothos",
-        file,
-      );
-      f.print(code.trimEnd());
+      const g = schema.generateFile(filenameFromProtoFile(file, opts.printer));
+      g.preamble(file);
+      printTypeDslCodes(g, types, registry, opts.printer);
+      g.print();
+      g.print("export {}");
       break;
     }
     case "graphql_type": {
       for (const t of types) {
-        const f = schema.generateFile(filename(t, opts.printer));
-        const code = printCodes(
-          createCodes([t], registry, opts.printer),
-          "protoc-gen-pothos",
-          file,
-        );
-        f.print(code.trimEnd());
+        const g = schema.generateFile(filename(t, opts.printer));
+        g.preamble(file);
+        printTypeDslCodes(g, [t], registry, opts.printer);
+        g.print();
+        g.print("export {}");
       }
       break;
     }
@@ -58,12 +50,4 @@ export function generateFiles(
       throw "unreachable";
     }
   }
-}
-
-function createCodes(
-  types: ReturnType<typeof collectTypesFromFile>,
-  registry: Registry,
-  opts: PothosPrinterOptions,
-): Code[] {
-  return [...createTypeDslCodes(types, registry, opts)];
 }

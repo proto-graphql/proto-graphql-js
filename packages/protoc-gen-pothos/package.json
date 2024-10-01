@@ -44,7 +44,8 @@
   },
   "devDependencies": {
     "@proto-graphql/testapis-proto": "workspace:*",
-    "@proto-graphql/tsconfig": "workspace:*"
+    "@proto-graphql/tsconfig": "workspace:*",
+    "@vitest/ui": "^2.1.1"
   },
   "scripts": {
     "build": "tsup",

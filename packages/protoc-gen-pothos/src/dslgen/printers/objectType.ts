@@ -1,15 +1,14 @@
 import type { DescField, Registry } from "@bufbuild/protobuf";
+import type { GeneratedFile } from "@bufbuild/protoplugin";
 import {
   InterfaceType,
   type ObjectType,
-  compact,
-  protoType,
+  createProtoTypeExpr,
   protobufGraphQLExtensions,
   tsFieldName,
 } from "@proto-graphql/codegen-core";
-import { type Code, code, joinCode, literalOf } from "ts-poet";
 
-import { createFieldRefCode, createNoopFieldRefCode } from "./field.js";
+import { printFieldDefStmt, printNoopFieldDefStmt } from "./field.js";
 import { type PothosPrinterOptions, pothosBuilder, pothosRef } from "./util.js";
 
 /**
@@ -22,77 +21,87 @@ import { type PothosPrinterOptions, pothosBuilder, pothosRef } from "./util.js";
  * })
  * ```
  */
-export function createObjectTypeCode(
+export function printObjectTypeCode(
+  g: GeneratedFile,
   type: ObjectType,
   registry: Registry,
   opts: PothosPrinterOptions,
-): Code {
+): void {
   const isInterface = type instanceof InterfaceType;
-  const typeOpts = {
-    name: type.typeName,
-    fields: code`t => ({${
-      type.fields.length > 0
-        ? joinCode(
-            type.fields.map(
-              (f) => code`${f.name}: ${createFieldRefCode(f, registry, opts)},`,
-            ),
-          )
-        : code`_: ${createNoopFieldRefCode({ input: false })}`
-    }})`,
-    description: type.description,
-    isTypeOf: isInterface
-      ? undefined
-      : createIsTypeOfFuncCode(type, registry, opts),
-    extensions: protobufGraphQLExtensions(type, registry),
-  };
-  const buildRefFunc = code`${pothosBuilder(type, opts)}.${
-    isInterface ? "interface" : "object"
-  }Ref`;
-  const buildTypeFunc = code`${pothosBuilder(type, opts)}.${
-    isInterface ? "interface" : "object"
-  }Type`;
-  const refFuncTypeArg = isInterface
-    ? code`
-        Pick<
-          ${protoType(type.proto, opts)},
-          ${joinCode(
-            type.fields.map(
-              (f) =>
-                code`${literalOf(tsFieldName(f.proto as DescField, opts))}`,
-            ),
-            { on: "|" },
-          )}
-        >`
-    : protoType(type.proto, opts);
+  const refIdent = pothosRef(type);
+  const builderExpr = pothosBuilder(type, opts);
+  const protoTypeExpr = createProtoTypeExpr(type.proto, opts);
+  const typeNameExpr = g.string(type.typeName);
 
-  return code`
-    export const ${pothosRef(
-      type,
-    )} = ${buildRefFunc}<${refFuncTypeArg}>(${literalOf(type.typeName)});
-    ${buildTypeFunc}(${pothosRef(type)}, ${literalOf(compact(typeOpts))});
-  `;
+  g.print("export const ", refIdent, " = ");
+  if (isInterface) {
+    g.print(builderExpr, ".interfaceRef<Pick<", protoTypeExpr, ",");
+    for (const f of type.fields) {
+      g.print("  | ", g.string(tsFieldName(f.proto as DescField, opts)));
+    }
+    g.print(">>(", typeNameExpr, ")");
+  } else {
+    g.print(builderExpr, ".objectRef<", protoTypeExpr, ">(", typeNameExpr, ")");
+  }
+
+  if (isInterface) {
+    g.print(builderExpr, ".interfaceType(", refIdent, ", {");
+  } else {
+    g.print(builderExpr, ".objectType(", refIdent, ", {");
+  }
+
+  g.print("  name: ", typeNameExpr, ",");
+
+  g.print("  fields: t => ({");
+  for (const f of type.fields) {
+    g.print(f.name, ": ");
+    printFieldDefStmt(g, f, registry, opts);
+    g.print(",");
+  }
+  if (type.fields.length === 0) {
+    g.print("_: ");
+    printNoopFieldDefStmt(g, { input: false });
+    g.print(",");
+  }
+  g.print("  }),");
+
+  if (type.description) {
+    g.print("  description: ", g.string(type.description), ",");
+  }
+  if (!isInterface) {
+    g.print("  isTypeOf: ");
+    printIsTypeOfFuncExpr(g, type, opts);
+    g.print(",");
+  }
+
+  const extJson = JSON.stringify(protobufGraphQLExtensions(type, registry));
+  g.print("  extensions: ", extJson, ",");
+  g.print("})");
 }
 
-function createIsTypeOfFuncCode(
+function printIsTypeOfFuncExpr(
+  g: GeneratedFile,
   type: ObjectType,
-  registry: Registry,
   opts: PothosPrinterOptions,
-): Code {
+): void {
+  const protoTypeExpr = createProtoTypeExpr(type.proto, opts);
   switch (opts.protobuf) {
     case "ts-proto": {
-      return code`
-        (source) => {
-          return (source as ${protoType(type.proto, opts)} | { $type: string & {} }).$type
-            === ${literalOf(type.proto.typeName)};
-        }
-      `;
+      g.print("(source) => {");
+      g.print(
+        "  return (source as ",
+        protoTypeExpr,
+        " | { $type: string & {} }).$type",
+      );
+      g.print("    === ", g.string(type.proto.typeName));
+      g.print("}");
+      return;
     }
     case "protobuf-es": {
-      return code`
-        (source) => {
-          return source instanceof ${protoType(type.proto, opts)}
-        }
-      `;
+      g.print("(source) => {");
+      g.print("  return source instanceof ", protoTypeExpr);
+      g.print("}");
+      return;
     }
     case "google-protobuf":
     case "protobufjs": {

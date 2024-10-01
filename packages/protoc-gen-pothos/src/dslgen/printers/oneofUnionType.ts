@@ -2,11 +2,10 @@ import type { Registry } from "@bufbuild/protobuf";
 import {
   type OneofUnionType,
   type SquashedOneofUnionType,
-  compact,
   protobufGraphQLExtensions,
 } from "@proto-graphql/codegen-core";
-import { type Code, code, literalOf } from "ts-poet";
 
+import type { GeneratedFile } from "@bufbuild/protoplugin";
 import {
   type PothosPrinterOptions,
   fieldTypeRef,
@@ -23,20 +22,29 @@ import {
  * })
  * ```
  */
-export function createOneofUnionTypeCode(
+export function printOneofUnionTypeCode(
+  g: GeneratedFile,
   type: OneofUnionType | SquashedOneofUnionType,
   registry: Registry,
   opts: PothosPrinterOptions,
-): Code {
-  const typeOpts = {
-    types: type.fields.map((f) => fieldTypeRef(f, opts)),
-    description: type.description,
-    extensions: protobufGraphQLExtensions(type, registry),
-  };
-  return code`
-    export const ${pothosRef(type)} =
-      ${pothosBuilder(type, opts)}.unionType(${literalOf(
-        type.typeName,
-      )}, ${literalOf(compact(typeOpts))});
-  `;
+): void {
+  g.print("export const ", pothosRef(type), " =");
+  g.print(pothosBuilder(type, opts), ".unionType(");
+  g.print(g.string(type.typeName), ", ");
+  g.print("{");
+  g.print("  types: [");
+  for (const f of type.fields) {
+    g.print(fieldTypeRef(f, opts), ",");
+  }
+  g.print("  ],");
+  if (type.description) {
+    g.print("  description: ", g.string(type.description), ",");
+  }
+
+  const extJson = JSON.stringify(protobufGraphQLExtensions(type, registry));
+  g.print("  extensions: ", extJson, ",");
+
+  g.print("},");
+
+  g.print(")");
 }

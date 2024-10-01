@@ -1,5 +1,4 @@
-import * as path from "node:path";
-
+import { type Printable, createImportSymbol } from "@bufbuild/protoplugin";
 import {
   type EnumType,
   type InputObjectField,
@@ -11,10 +10,8 @@ import {
   type OneofUnionType,
   type PrinterOptions,
   type SquashedOneofUnionType,
-  filename,
   generatedGraphQLTypeImportPath,
 } from "@proto-graphql/codegen-core";
-import { type Code, code, imp } from "ts-poet";
 
 export type PothosPrinterOptions = Extract<PrinterOptions, { dsl: "pothos" }>;
 
@@ -26,8 +23,8 @@ export function pothosRef(
     | OneofUnionType
     | SquashedOneofUnionType
     | InterfaceType,
-): Code {
-  return code`${pothosRefName(type)}`;
+): Printable {
+  return pothosRefName(type);
 }
 
 function pothosRefName(
@@ -42,8 +39,8 @@ function pothosRefName(
   return `${type.typeName}$Ref`;
 }
 
-export function shapeType(type: InputObjectType): Code {
-  return code`${shapeTypeName(type)}`;
+export function shapeType(type: InputObjectType): Printable {
+  return shapeTypeName(type);
 }
 
 export function shapeTypeName(type: InputObjectType): string {
@@ -58,25 +55,21 @@ export function fieldTypeRef(
     | InputObjectField<InputObjectType | EnumType>
     | ObjectOneofField,
   opts: PothosPrinterOptions,
-): Code {
+): Printable {
   const importPath = generatedGraphQLTypeImportPath(field, opts);
   if (importPath == null) return pothosRef(field.type);
 
-  const imported = imp(`IMPORTED_PLACEHOLDER@${importPath}`);
-  imported.symbol = pothosRefName(field.type); // NOTE: Workaround for ts-poet not recognizing "$" as an identifier
-  return code`${imported}`;
+  return createImportSymbol(pothosRefName(field.type), importPath);
 }
 
 export function fieldTypeShape(
   field: InputObjectField<InputObjectType>,
   opts: PothosPrinterOptions,
-): Code {
+): Printable {
   const importPath = generatedGraphQLTypeImportPath(field, opts);
   if (importPath == null) return shapeType(field.type);
 
-  const imported = imp(`IMPORTED_PLACEHOLDER@${importPath}`);
-  imported.symbol = shapeTypeName(field.type); // NOTE: Workaround for ts-poet not recognizing "$" as an identifier
-  return code`${imported}`;
+  return createImportSymbol(shapeTypeName(field.type), importPath);
 }
 
 export function pothosBuilder(
@@ -90,9 +83,6 @@ export function pothosBuilder(
     PothosPrinterOptions,
     "dsl" | "pothos" | "fileLayout" | "filenameSuffix"
   >,
-): Code {
-  const importPath = opts.pothos.builderPath.startsWith(".")
-    ? path.relative(path.dirname(filename(type, opts)), opts.pothos.builderPath)
-    : opts.pothos.builderPath;
-  return code`${imp(`builder@${importPath}`)}`;
+): Printable {
+  return createImportSymbol("builder", opts.pothos.builderPath);
 }

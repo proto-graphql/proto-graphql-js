@@ -34,7 +34,8 @@
   "dependencies": {
     "@bufbuild/protobuf": "catalog:",
     "@bufbuild/protoplugin": "catalog:",
-    "@proto-graphql/codegen-core": "workspace:*"
+    "@proto-graphql/codegen-core": "workspace:*",
+    "dprint-node": "^1.0.8"
   },
   "devDependencies": {
     "@proto-graphql/tsconfig": "workspace:*"

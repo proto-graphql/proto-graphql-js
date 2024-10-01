@@ -1,12 +1,15 @@
 import type { Registry } from "@bufbuild/protobuf";
 import {
   type EnumType,
-  compact,
-  protoType,
+  createProtoTypeExpr,
   protobufGraphQLExtensions,
 } from "@proto-graphql/codegen-core";
-import { type Code, code, imp, joinCode, literalOf } from "ts-poet";
 
+import {
+  type GeneratedFile,
+  type Printable,
+  createImportSymbol,
+} from "@bufbuild/protoplugin";
 import { type PothosPrinterOptions, pothosBuilder, pothosRef } from "./util.js";
 
 /**
@@ -20,41 +23,47 @@ import { type PothosPrinterOptions, pothosBuilder, pothosRef } from "./util.js";
  * })
  * ```
  */
-export function createEnumTypeCode(
+export function printEnumTypeCode(
+  g: GeneratedFile,
   type: EnumType,
   registry: Registry,
   opts: PothosPrinterOptions,
-): Code {
-  const typeOpts = {
-    description: type.description,
-    values: code`{${joinCode(
-      type.values
-        .filter((v) => !v.isIgnored() && !v.isUnespecified())
-        .map(
-          (ev) =>
-            code`${ev.name}: ${literalOf(
-              compact({
-                description: ev.description,
-                deprecationReason: ev.deprecationReason,
-                value: ev.number,
-                extensions: protobufGraphQLExtensions(ev, registry),
-              }),
-            )},`,
-        ),
-    )}} as const`,
-    extensions: protobufGraphQLExtensions(type, registry),
-  };
-
-  const protoTypeExpr = protoType(type.proto, opts);
+): void {
+  const refIdent = pothosRef(type);
+  const protoTypeExpr = createProtoTypeExpr(type.proto, opts);
+  const coreRefFuncExpr = createImportSymbol("EnumRef", "@pothos/core", true);
   // EnumRef<Hello, Hello>
-  const refTypeExpr = code`${imp(
-    "EnumRef@@pothos/core",
-  )}<${protoTypeExpr}, ${protoTypeExpr}>`;
+  // biome-ignore format: to make it easy generated code to read
+  const refTypeExpr: Printable = [coreRefFuncExpr, "<", protoTypeExpr, ",", protoTypeExpr, ">"];
 
-  return code`
-    export const ${pothosRef(type)}: ${refTypeExpr} =
-      ${pothosBuilder(type, opts)}.enumType(${literalOf(
-        type.typeName,
-      )}, ${literalOf(compact(typeOpts))});
-  `;
+  const builderExpr = pothosBuilder(type, opts);
+
+  g.print(" export const ", refIdent, ": ", refTypeExpr, " =");
+  g.print(builderExpr, ".enumType(", g.string(type.typeName), ", {");
+
+  if (type.description) {
+    g.print("  description: ", g.string(type.description), ",");
+  }
+
+  g.print("  values: {");
+  for (const ev of type.values) {
+    if (ev.isIgnored() || ev.isUnespecified()) continue;
+    g.print(ev.name, ": {");
+    if (ev.description) {
+      g.print("    description: ", g.string(ev.description), ",");
+    }
+    if (ev.deprecationReason) {
+      g.print("    deprecationReason: ", g.string(ev.deprecationReason), ",");
+    }
+    g.print("    value: ", ev.number, ",");
+    const extJson = JSON.stringify(protobufGraphQLExtensions(ev, registry));
+    g.print("    extensions: ", extJson, ",");
+    g.print("  },");
+  }
+  g.print("  } as const,");
+
+  const extJson = JSON.stringify(protobufGraphQLExtensions(type, registry));
+  g.print("    extensions: ", extJson, ",");
+
+  g.print("})");
 }

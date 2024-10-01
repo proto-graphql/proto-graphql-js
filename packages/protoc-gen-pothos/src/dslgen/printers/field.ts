@@ -7,16 +7,15 @@ import {
   ObjectType,
   ScalarType,
   SquashedOneofUnionType,
-  compact,
-  createGetFieldValueCode,
+  createGetFieldValueExpr,
   protobufGraphQLExtensions,
   tsFieldName,
 } from "@proto-graphql/codegen-core";
-import { type Code, code, literalOf } from "ts-poet";
 
-import { createEnumResolverCode } from "./fieldResolver/enumFieldResolver.js";
-import { createNonNullResolverCode } from "./fieldResolver/nonNullResolver.js";
-import { createOneofUnionResolverCode } from "./fieldResolver/oneofUnionResolver.js";
+import type { GeneratedFile } from "@bufbuild/protoplugin";
+import { printEnumResolverStmts } from "./fieldResolver/enumFieldResolver.js";
+import { printNonNullResolverStmts } from "./fieldResolver/nonNullResolver.js";
+import { printOneofUnionResolverStmts } from "./fieldResolver/oneofUnionResolver.js";
 import { type PothosPrinterOptions, fieldTypeRef } from "./util.js";
 
 /**
@@ -39,71 +38,100 @@ import { type PothosPrinterOptions, fieldTypeRef } from "./util.js";
  * })
  * ```
  */
-export function createFieldRefCode(
+export function printFieldDefStmt(
+  g: GeneratedFile,
   field: ObjectField<any> | ObjectOneofField | InputObjectField<any>,
   registry: ReturnType<typeof createRegistry>,
   opts: PothosPrinterOptions,
-): Code {
+): void {
   const isInput = field instanceof InputObjectField;
   const baseType =
     field.type instanceof ScalarType
-      ? literalOf(field.type.typeName)
+      ? g.string(field.type.typeName)
       : fieldTypeRef(field, opts);
 
-  const sourceExpr = code`source`;
-  let resolverCode: Code | undefined;
+  const sourceExpr = "source";
+  let printResolver: (() => void) | undefined;
   if (!isInput) {
     if (field instanceof ObjectOneofField) {
-      resolverCode = createOneofUnionResolverCode(sourceExpr, field, opts);
+      printResolver = () =>
+        printOneofUnionResolverStmts(g, sourceExpr, field, opts);
     } else {
-      const valueExpr = createGetFieldValueCode(sourceExpr, field.proto, opts);
+      const valueExpr = createGetFieldValueExpr(sourceExpr, field.proto, opts);
       const nullableInProto =
         field.type instanceof ObjectType ||
         (field.type instanceof ScalarType &&
           !field.type.isPrimitive() &&
           !field.type.isWrapperType());
       if (nullableInProto && !field.isNullable()) {
-        resolverCode = createNonNullResolverCode(valueExpr);
+        printResolver = () => printNonNullResolverStmts(g, valueExpr);
       }
       if (field.type instanceof EnumType && field instanceof ObjectField) {
-        resolverCode = createEnumResolverCode(valueExpr, field, opts);
+        printResolver = () => printEnumResolverStmts(g, valueExpr, field, opts);
       }
       if (
         field.type instanceof SquashedOneofUnionType &&
         field instanceof ObjectField
       ) {
-        resolverCode = createOneofUnionResolverCode(valueExpr, field, opts);
+        printResolver = () =>
+          printOneofUnionResolverStmts(g, valueExpr, field, opts);
       }
       if (field.type instanceof ScalarType && field.type.isBytes()) {
         if (field.isList()) {
-          resolverCode = code`return ${valueExpr}.map(v => Buffer.from(v));`;
+          printResolver = () =>
+            g.print("return ", valueExpr, ".map(v => Buffer.from(v));");
         } else if (field.isNullable()) {
-          resolverCode = code`return ${valueExpr} == null ? null : Buffer.from(${valueExpr});`;
+          printResolver = () => {
+            g.print("return ", valueExpr, " == null");
+            g.print("? null : Buffer.from(", valueExpr, ");");
+          };
         } else {
-          resolverCode = code`return Buffer.from(${valueExpr});`;
+          printResolver = () => g.print("return Buffer.from(", valueExpr, ");");
         }
       }
     }
   }
 
-  const nullableValue = isInput !== field.isNullable(); /* Logical XOR */
-  const fieldOpts = {
-    type: field.isList() ? code`[${baseType}]` : baseType,
-    [isInput ? "required" : "nullable"]: field.isList()
-      ? { list: nullableValue, items: isInput /* always non-null */ }
-      : nullableValue,
-    description: field.description,
-    deprecationReason: field.deprecationReason,
-    resolve: resolverCode ? code`${sourceExpr} => {${resolverCode}}` : null,
-    extensions: protobufGraphQLExtensions(field, registry),
-  };
+  const shouldUseFieldFunc = isInput || printResolver != null;
+  if (shouldUseFieldFunc) {
+    g.print("t.field({");
+  } else {
+    const fieldNameExpr = g.string(tsFieldName(field.proto as DescField, opts));
+    g.print("t.expose(", fieldNameExpr, ", {");
+  }
 
-  const shouldUseFieldFunc = isInput || resolverCode != null;
-  return shouldUseFieldFunc
-    ? code`t.field(${literalOf(compact(fieldOpts))})`
-    : code`t.expose(${literalOf(
-        tsFieldName(field.proto as DescField, opts),
-      )}, ${literalOf(compact(fieldOpts))})`;
+  g.print("  type:", field.isList() ? ["[", baseType, "]"] : baseType, ",");
+  switch (true) {
+    case !isInput && !field.isList(): // object
+      g.print("  nullable: ", field.isNullable(), ",");
+      break;
+    case !isInput && field.isList(): // object list
+      g.print("  nullable: { list: ", field.isNullable(), ", items: false },");
+      break;
+    case isInput && !field.isList(): // input
+      g.print(" required: ", !field.isNullable(), ",");
+      break;
+    case isInput && field.isList(): // input list
+      g.print(" required: { list: ", !field.isNullable(), ", items: true },");
+      break;
+  }
+
+  if (field.description) {
+    g.print("  description:", g.string(field.description), ",");
+  }
+  if (field.deprecationReason) {
+    g.print("  deprecationReason:", g.string(field.deprecationReason), ",");
+  }
+  if (printResolver) {
+    g.print("  resolve: (", sourceExpr, ") => {");
+    printResolver();
+    g.print("  },");
+  }
+
+  const extJson = JSON.stringify(protobufGraphQLExtensions(field, registry));
+  g.print("extensions: ", extJson, ",");
+
+  g.print("})");
 }
 
 /**
@@ -119,13 +147,20 @@ export function createFieldRefCode(
  * })
  * ```
  */
-export function createNoopFieldRefCode(opts: { input: boolean }): Code {
-  return code`
-    t.field({
-      type: "Boolean",
-      ${opts.input ? "required: false" : "nullable: true"},
-      description: "noop field",
-      ${opts.input ? "" : "resolve: () => true,"}
-    })
-  `;
+export function printNoopFieldDefStmt(
+  g: GeneratedFile,
+  opts: { input: boolean },
+): void {
+  g.print("t.field({");
+  g.print("  type: 'Boolean',");
+  if (opts.input) {
+    g.print("  required: false,");
+  } else {
+    g.print("  nullable: true,");
+  }
+  g.print("  description: 'noop field',");
+  if (!opts.input) {
+    g.print("  resolve: () => true,");
+  }
+  g.print("})");
 }
