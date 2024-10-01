@@ -89,6 +89,7 @@ export function generatedGraphQLTypeImportPath(
   opts: PrinterOptions,
 ): string | null {
   if (field instanceof ObjectOneofField) return null;
+
   const [fromPath, toPath] = [
     filename(field.parent, opts),
     filename(field.type, opts),
@@ -96,10 +97,25 @@ export function generatedGraphQLTypeImportPath(
 
   if (fromPath === toPath) return null;
 
-  const importPath = path
-    .relative(path.dirname(fromPath), toPath)
-    .replace(/\.ts$/, "");
-  return importPath.match(/^[./]/) ? importPath : `./${importPath}`;
+  switch (opts.fileLayout) {
+    case "proto_file":
+      return protoImportPath(field.type.proto, {
+        ...opts,
+        importPrefix: null,
+      })
+        .replace(/_pb$/, opts.filenameSuffix)
+        .replace(/\.ts$/, "");
+    case "graphql_type": {
+      const importPath = path
+        .relative(path.dirname(fromPath), toPath)
+        .replace(/\.ts$/, "");
+      return importPath.match(/^[./]/) ? importPath : `./${importPath}`;
+    }
+    default: {
+      opts.fileLayout satisfies never;
+      throw "unreachable";
+    }
+  }
 }
 
 export function createProtoTypeExpr(
