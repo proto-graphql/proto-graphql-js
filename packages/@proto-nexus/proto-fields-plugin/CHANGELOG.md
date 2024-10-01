@@ -1,5 +1,11 @@
 # @proto-nexus/proto-fields-plugin
 
+## 0.5.6
+
+### Patch Changes
+
+- [#417](https://github.com/proto-graphql/proto-graphql-js/pull/417) [`2ae48d1`](https://github.com/proto-graphql/proto-graphql-js/commit/2ae48d1576a15a47f3f1083fb78eec69507d601a) Thanks [@izumin5210](https://github.com/izumin5210)! - use protobuf-es@v2 internally
+
 ## 0.5.5
 
 ### Patch Changes
