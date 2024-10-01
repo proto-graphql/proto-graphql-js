@@ -12,7 +12,7 @@ import {
   fieldTypeRef,
   pothosBuilder,
   pothosRef,
-} from "./util";
+} from "./util.js";
 
 /**
  * @example

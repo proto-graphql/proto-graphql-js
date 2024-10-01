@@ -1,12 +1,12 @@
 import type { DescEnum, DescEnumValue } from "@bufbuild/protobuf";
 import { constantCase } from "change-case";
 
-import { TypeBase } from "./TypeBase";
+import { TypeBase } from "./TypeBase.js";
 import {
   descriptionFromProto,
   getDeprecationReason,
   isIgnoredField,
-} from "./util";
+} from "./util.js";
 
 export class EnumType extends TypeBase<DescEnum> {
   get unspecifiedValue(): EnumTypeValue | null {

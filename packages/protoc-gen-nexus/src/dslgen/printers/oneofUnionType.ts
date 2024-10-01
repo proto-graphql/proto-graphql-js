@@ -12,7 +12,7 @@ import {
   fieldType,
   impNexus,
   nexusTypeDef,
-} from "./util";
+} from "./util.js";
 
 /**
  * @example

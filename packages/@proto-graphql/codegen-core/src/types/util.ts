@@ -15,13 +15,13 @@ import {
   FieldDescriptorProto_Type,
 } from "@bufbuild/protobuf/wkt";
 import { getComments } from "@bufbuild/protoplugin";
-import * as extensions from "../__generated__/extensions/graphql/schema_pb";
+import * as extensions from "../__generated__/extensions/graphql/schema_pb.js";
 import {
   isEnumField,
   isMapField,
   isMessageField,
   isScalarField,
-} from "../proto/util";
+} from "../proto/util.js";
 
 export function gqlTypeName(typ: DescMessage | DescOneof | DescEnum): string {
   return nameWithParent(typ);

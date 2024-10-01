@@ -1,10 +1,10 @@
 import type { DescOneof } from "@bufbuild/protobuf";
 
-import { ObjectField } from "./ObjectField";
-import { ObjectType } from "./ObjectType";
-import { TypeBase } from "./TypeBase";
-import { getObjectFieldType } from "./types";
-import { isIgnoredField, isInputOnlyField } from "./util";
+import { ObjectField } from "./ObjectField.js";
+import { ObjectType } from "./ObjectType.js";
+import { TypeBase } from "./TypeBase.js";
+import { getObjectFieldType } from "./types.js";
+import { isIgnoredField, isInputOnlyField } from "./util.js";
 
 export class OneofUnionType extends TypeBase<DescOneof> {
   get fields(): ObjectField<ObjectType>[] {

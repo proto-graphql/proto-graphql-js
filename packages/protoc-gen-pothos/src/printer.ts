@@ -7,11 +7,11 @@ import {
   filenameFromProtoFile,
   printCodes,
 } from "@proto-graphql/codegen-core";
+import type { Options } from "@proto-graphql/protoc-plugin-helpers";
 import type { Code } from "ts-poet";
 
-import type { Options } from "@proto-graphql/protoc-plugin-helpers";
-import { createTypeDslCodes } from "./dslgen";
-import type { PothosPrinterOptions } from "./dslgen/printers/util";
+import { createTypeDslCodes } from "./dslgen/index.js";
+import type { PothosPrinterOptions } from "./dslgen/printers/util.js";
 
 const allowedProtobufs = ["ts-proto", "protobuf-es"];
 

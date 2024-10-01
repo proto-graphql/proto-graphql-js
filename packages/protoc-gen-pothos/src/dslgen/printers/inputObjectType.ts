@@ -12,14 +12,14 @@ import {
 } from "@proto-graphql/codegen-core";
 import { type Code, code, imp, joinCode, literalOf } from "ts-poet";
 
-import { createFieldRefCode, createNoopFieldRefCode } from "./field";
+import { createFieldRefCode, createNoopFieldRefCode } from "./field.js";
 import {
   type PothosPrinterOptions,
   fieldTypeShape,
   pothosBuilder,
   pothosRef,
   shapeType,
-} from "./util";
+} from "./util.js";
 
 /**
  * @example

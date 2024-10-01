@@ -14,10 +14,10 @@ import {
 } from "@proto-graphql/codegen-core";
 import { type Code, code, literalOf } from "ts-poet";
 
-import { createEnumResolverCode } from "./fieldResolver/enumFieldResolver";
-import { createNonNullResolverCode } from "./fieldResolver/nonNullResolver";
-import { createOneofUnionResolverCode } from "./fieldResolver/oneofUnionResolver";
-import { type PothosPrinterOptions, fieldTypeRef } from "./util";
+import { createEnumResolverCode } from "./fieldResolver/enumFieldResolver.js";
+import { createNonNullResolverCode } from "./fieldResolver/nonNullResolver.js";
+import { createOneofUnionResolverCode } from "./fieldResolver/oneofUnionResolver.js";
+import { type PothosPrinterOptions, fieldTypeRef } from "./util.js";
 
 /**
  * @example

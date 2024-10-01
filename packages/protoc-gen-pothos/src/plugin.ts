@@ -5,7 +5,7 @@ import {
 } from "@proto-graphql/protoc-plugin-helpers";
 
 import { version } from "../package.json";
-import { generateFiles } from "./printer";
+import { generateFiles } from "./printer.js";
 
 export const protocGenPothos = createEcmaScriptPlugin({
   name: "protoc-gen-pothos",

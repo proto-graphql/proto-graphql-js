@@ -1,10 +1,10 @@
 import type { DescMessage } from "@bufbuild/protobuf";
 
-import type { ObjectField } from "./ObjectField";
-import type { ObjectType } from "./ObjectType";
-import { OneofUnionType } from "./OneofUnionType";
-import { TypeBase } from "./TypeBase";
-import type { TypeOptions } from "./options";
+import type { ObjectField } from "./ObjectField.js";
+import type { ObjectType } from "./ObjectType.js";
+import { OneofUnionType } from "./OneofUnionType.js";
+import { TypeBase } from "./TypeBase.js";
+import type { TypeOptions } from "./options.js";
 
 export class SquashedOneofUnionType extends TypeBase<DescMessage> {
   readonly oneofUnionType: OneofUnionType;

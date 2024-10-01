@@ -1,16 +1,16 @@
 import type { DescMessage } from "@bufbuild/protobuf";
 
-import type { EnumType } from "./EnumType";
-import { InputObjectField } from "./InputObjectField";
-import type { ScalarType } from "./ScalarType";
-import { TypeBase } from "./TypeBase";
-import { getInputObjectFieldType } from "./types";
+import type { EnumType } from "./EnumType.js";
+import { InputObjectField } from "./InputObjectField.js";
+import type { ScalarType } from "./ScalarType.js";
+import { TypeBase } from "./TypeBase.js";
+import { getInputObjectFieldType } from "./types.js";
 import {
   getInputTypeOptions,
   gqlTypeName,
   isIgnoredField,
   isOutputOnlyField,
-} from "./util";
+} from "./util.js";
 
 export class InputObjectType extends TypeBase<DescMessage> {
   /**

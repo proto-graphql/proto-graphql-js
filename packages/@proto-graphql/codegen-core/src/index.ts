@@ -1,2 +1,2 @@
-export * from "./types";
-export * from "./printer";
+export * from "./types/index.js";
+export * from "./printer/index.js";

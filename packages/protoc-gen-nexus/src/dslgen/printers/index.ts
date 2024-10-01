@@ -8,11 +8,11 @@ import {
 } from "@proto-graphql/codegen-core";
 import type { Code } from "ts-poet";
 
-import { createEnumTypeCode } from "./enumType";
-import { createInputObjectTypeCode } from "./inputObjectType";
-import { createObjectTypeCode } from "./objectType";
-import { createOneofUnionTypeCode } from "./oneofUnionType";
-import type { NexusPrinterOptions } from "./util";
+import { createEnumTypeCode } from "./enumType.js";
+import { createInputObjectTypeCode } from "./inputObjectType.js";
+import { createObjectTypeCode } from "./objectType.js";
+import { createOneofUnionTypeCode } from "./oneofUnionType.js";
+import type { NexusPrinterOptions } from "./util.js";
 
 export function createTypeDslCodes(
   types: (

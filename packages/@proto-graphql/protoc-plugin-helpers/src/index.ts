@@ -1,3 +1,3 @@
-export { createTsGenerator } from "./process";
-export { parseNexusOptions, parsePothosOptions } from "./options";
-export type { Options } from "./options";
+export { createTsGenerator } from "./process.js";
+export { parseNexusOptions, parsePothosOptions } from "./options.js";
+export type { Options } from "./options.js";

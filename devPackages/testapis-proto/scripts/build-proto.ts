@@ -3,11 +3,14 @@
 import { exec as _exec } from "node:child_process";
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join, relative } from "node:path";
+import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
-
 import { glob } from "glob";
 
 const exec = promisify(_exec);
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const rootDir = dirname(__dirname);
 const protoDir = join(rootDir, "proto");

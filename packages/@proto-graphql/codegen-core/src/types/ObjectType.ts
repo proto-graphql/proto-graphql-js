@@ -1,10 +1,10 @@
 import type { DescMessage } from "@bufbuild/protobuf";
-import { ObjectField } from "./ObjectField";
-import { ObjectOneofField } from "./ObjectOneofField";
-import { OneofUnionType } from "./OneofUnionType";
-import { TypeBase } from "./TypeBase";
-import { getObjectFieldType } from "./types";
-import { isIgnoredField, isInputOnlyField, isSyntheticOneof } from "./util";
+import { ObjectField } from "./ObjectField.js";
+import { ObjectOneofField } from "./ObjectOneofField.js";
+import { OneofUnionType } from "./OneofUnionType.js";
+import { TypeBase } from "./TypeBase.js";
+import { getObjectFieldType } from "./types.js";
+import { isIgnoredField, isInputOnlyField, isSyntheticOneof } from "./util.js";
 
 export class ObjectType extends TypeBase<DescMessage> {
   get fields(): (ObjectField<any> | ObjectOneofField)[] {

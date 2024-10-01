@@ -1,1 +1,1 @@
-export * from "./ProtoGraphQLDateTime";
+export * from "./ProtoGraphQLDateTime.js";

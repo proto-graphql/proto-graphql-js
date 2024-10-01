@@ -9,8 +9,8 @@ import {
 } from "@proto-graphql/codegen-core";
 import { type Code, code, joinCode, literalOf } from "ts-poet";
 
-import { createFieldRefCode, createNoopFieldRefCode } from "./field";
-import { type PothosPrinterOptions, pothosBuilder, pothosRef } from "./util";
+import { createFieldRefCode, createNoopFieldRefCode } from "./field.js";
+import { type PothosPrinterOptions, pothosBuilder, pothosRef } from "./util.js";
 
 /**
  * @example

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseOptions } from "./options";
+import { parseOptions } from "./options.js";
 
 describe("parseOptions", () => {
   it("reutrns true if value is empty", () => {

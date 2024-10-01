@@ -1,11 +1,11 @@
 import type { DescField } from "@bufbuild/protobuf";
 import { camelCase } from "change-case";
 
-import type { EnumType } from "./EnumType";
-import { FieldBase } from "./FieldBase";
-import { InputObjectType } from "./InputObjectType";
-import type { ScalarType } from "./ScalarType";
-import { getFieldOptions, isRequiredField } from "./util";
+import type { EnumType } from "./EnumType.js";
+import { FieldBase } from "./FieldBase.js";
+import { InputObjectType } from "./InputObjectType.js";
+import type { ScalarType } from "./ScalarType.js";
+import { getFieldOptions, isRequiredField } from "./util.js";
 
 export class InputObjectField<
   T extends ScalarType | EnumType | InputObjectType,

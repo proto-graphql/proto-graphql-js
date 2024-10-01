@@ -1,7 +1,8 @@
 import type { DescFile } from "@bufbuild/protobuf";
 import type { Schema } from "@bufbuild/protoplugin";
 import type { PrinterOptions } from "@proto-graphql/codegen-core";
-import { type Options, parseOptions } from "./options";
+
+import { type Options, parseOptions } from "./options.js";
 
 export function createTsGenerator<DSL extends PrinterOptions["dsl"]>({
   generateFiles,
