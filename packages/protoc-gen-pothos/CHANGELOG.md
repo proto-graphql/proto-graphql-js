@@ -1,5 +1,21 @@
 # protoc-gen-pothos
 
+## 0.6.2
+
+### Patch Changes
+
+- [#417](https://github.com/proto-graphql/proto-graphql-js/pull/417) [`2ae48d1`](https://github.com/proto-graphql/proto-graphql-js/commit/2ae48d1576a15a47f3f1083fb78eec69507d601a) Thanks [@izumin5210](https://github.com/izumin5210)! - use protobuf-es@v2 internally
+
+- [#438](https://github.com/proto-graphql/proto-graphql-js/pull/438) [`bd49e47`](https://github.com/proto-graphql/proto-graphql-js/commit/bd49e473ee5d9585c96758f7940c77d7799eb73f) Thanks [@izumin5210](https://github.com/izumin5210)! - fix object null check on `toProto` func
+
+- [#427](https://github.com/proto-graphql/proto-graphql-js/pull/427) [`c681582`](https://github.com/proto-graphql/proto-graphql-js/commit/c681582431637946cebdaa82b9559bb5ab52b760) Thanks [@izumin5210](https://github.com/izumin5210)! - refactor: parse options with protoplugin api
+
+- [#428](https://github.com/proto-graphql/proto-graphql-js/pull/428) [`e3cee38`](https://github.com/proto-graphql/proto-graphql-js/commit/e3cee38438fbb4c0fbd177566aa75e83e11221ed) Thanks [@izumin5210](https://github.com/izumin5210)! - refactor: migrate protoc plugins to ESM
+
+- Updated dependencies [[`2ae48d1`](https://github.com/proto-graphql/proto-graphql-js/commit/2ae48d1576a15a47f3f1083fb78eec69507d601a), [`c681582`](https://github.com/proto-graphql/proto-graphql-js/commit/c681582431637946cebdaa82b9559bb5ab52b760), [`e3cee38`](https://github.com/proto-graphql/proto-graphql-js/commit/e3cee38438fbb4c0fbd177566aa75e83e11221ed)]:
+  - @proto-graphql/protoc-plugin-helpers@0.4.2
+  - @proto-graphql/codegen-core@0.5.2
+
 ## 0.6.1
 
 ### Patch Changes

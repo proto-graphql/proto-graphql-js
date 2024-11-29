@@ -1,5 +1,11 @@
 # @proto-graphql/scalars-protobuf-es
 
+## 0.4.2
+
+### Patch Changes
+
+- [#428](https://github.com/proto-graphql/proto-graphql-js/pull/428) [`e3cee38`](https://github.com/proto-graphql/proto-graphql-js/commit/e3cee38438fbb4c0fbd177566aa75e83e11221ed) Thanks [@izumin5210](https://github.com/izumin5210)! - refactor: migrate protoc plugins to ESM
+
 ## 0.4.1
 
 ### Patch Changes
