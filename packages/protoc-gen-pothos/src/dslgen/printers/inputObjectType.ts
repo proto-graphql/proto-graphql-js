@@ -145,7 +145,7 @@ function createToProtoFuncCode(
                 if (f.isList()) {
                   return code`${localName}: input?.${f.name}?.map(v => ${toProtoFunc}(v)),`;
                 }
-                return code`${localName}: input ? ${toProtoFunc}(input.${f.name}) : undefined,`;
+                return code`${localName}: input?.${f.name} ? ${toProtoFunc}(input.${f.name}) : undefined,`;
               }
               case f.type instanceof ScalarType:
               case f.type instanceof EnumType: {
