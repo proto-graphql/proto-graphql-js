@@ -23850,7 +23850,9 @@ export function PostInput$toProto(
 ): Post {
   return new Post({
     title: input?.title ?? undefined,
-    publishedDate: input ? DateInput$toProto(input.publishedDate) : undefined,
+    publishedDate: input?.publishedDate
+      ? DateInput$toProto(input.publishedDate)
+      : undefined,
   });
 }
 ",
@@ -24041,7 +24043,9 @@ export function PostInput$toProto(
 ): Post {
   return new Post({
     title: input?.title ?? undefined,
-    publishedDate: input ? DateInput$toProto(input.publishedDate) : undefined,
+    publishedDate: input?.publishedDate
+      ? DateInput$toProto(input.publishedDate)
+      : undefined,
   });
 }
 ",
@@ -24281,7 +24285,9 @@ export function PostInput$toProto(
 ): Post {
   return new Post({
     title: input?.title ?? undefined,
-    publishedDate: input ? DateInput$toProto(input.publishedDate) : undefined,
+    publishedDate: input?.publishedDate
+      ? DateInput$toProto(input.publishedDate)
+      : undefined,
   });
 }
 
@@ -24327,7 +24333,7 @@ export function PostPartialInput$toProto(
 ): Post {
   return new Post({
     title: input?.title ?? undefined,
-    publishedDate: input
+    publishedDate: input?.publishedDate
       ? DatePartialInput$toProto(input.publishedDate)
       : undefined,
   });
@@ -24520,7 +24526,9 @@ export function PostInput$toProto(
 ): Post {
   return new Post({
     title: input?.title ?? undefined,
-    publishedDate: input ? DateInput$toProto(input.publishedDate) : undefined,
+    publishedDate: input?.publishedDate
+      ? DateInput$toProto(input.publishedDate)
+      : undefined,
   });
 }
 ",
@@ -28487,7 +28495,7 @@ export function ParentMessageInput$toProto(
   input: ParentMessageInput$Shape | null | undefined,
 ): ParentMessage {
   return new ParentMessage({
-    child: input ? ChildMessageInput$toProto(input.child) : undefined,
+    child: input?.child ? ChildMessageInput$toProto(input.child) : undefined,
   });
 }
 ",
@@ -28635,7 +28643,7 @@ export function ParentMessageInput$toProto(
   input: ParentMessageInput$Shape | null | undefined,
 ): ParentMessage {
   return new ParentMessage({
-    child: input ? ChildMessageInput$toProto(input.child) : undefined,
+    child: input?.child ? ChildMessageInput$toProto(input.child) : undefined,
   });
 }
 ",
@@ -28816,7 +28824,7 @@ export function ParentMessageInput$toProto(
   input: ParentMessageInput$Shape | null | undefined,
 ): ParentMessage {
   return new ParentMessage({
-    child: input ? ChildMessageInput$toProto(input.child) : undefined,
+    child: input?.child ? ChildMessageInput$toProto(input.child) : undefined,
   });
 }
 
@@ -28854,7 +28862,9 @@ export function ParentMessagePartialInput$toProto(
   input: ParentMessagePartialInput$Shape | null | undefined,
 ): ParentMessage {
   return new ParentMessage({
-    child: input ? ChildMessagePartialInput$toProto(input.child) : undefined,
+    child: input?.child
+      ? ChildMessagePartialInput$toProto(input.child)
+      : undefined,
   });
 }
 ",
@@ -29002,7 +29012,7 @@ export function ParentMessageInput$toProto(
   input: ParentMessageInput$Shape | null | undefined,
 ): ParentMessage {
   return new ParentMessage({
-    child: input ? ChildMessageInput$toProto(input.child) : undefined,
+    child: input?.child ? ChildMessageInput$toProto(input.child) : undefined,
   });
 }
 ",
@@ -30431,7 +30441,7 @@ export function MessageInput$toProto(
   input: MessageInput$Shape | null | undefined,
 ): Message {
   return new Message({
-    msg: input ? SquashedOneofInput$toProto(input.msg) : undefined,
+    msg: input?.msg ? SquashedOneofInput$toProto(input.msg) : undefined,
   });
 }
 ",
@@ -30646,7 +30656,7 @@ export function MessageInput$toProto(
   input: MessageInput$Shape | null | undefined,
 ): Message {
   return new Message({
-    msg: input ? SquashedOneofInput$toProto(input.msg) : undefined,
+    msg: input?.msg ? SquashedOneofInput$toProto(input.msg) : undefined,
   });
 }
 ",
@@ -30937,7 +30947,7 @@ export function MessageInput$toProto(
   input: MessageInput$Shape | null | undefined,
 ): Message {
   return new Message({
-    msg: input ? SquashedOneofInput$toProto(input.msg) : undefined,
+    msg: input?.msg ? SquashedOneofInput$toProto(input.msg) : undefined,
   });
 }
 
@@ -30975,7 +30985,7 @@ export function MessagePartialInput$toProto(
   input: MessagePartialInput$Shape | null | undefined,
 ): Message {
   return new Message({
-    msg: input ? SquashedOneofPartialInput$toProto(input.msg) : undefined,
+    msg: input?.msg ? SquashedOneofPartialInput$toProto(input.msg) : undefined,
   });
 }
 ",
@@ -31190,7 +31200,7 @@ export function MessageInput$toProto(
   input: MessageInput$Shape | null | undefined,
 ): Message {
   return new Message({
-    msg: input ? SquashedOneofInput$toProto(input.msg) : undefined,
+    msg: input?.msg ? SquashedOneofInput$toProto(input.msg) : undefined,
   });
 }
 ",
@@ -33709,10 +33719,10 @@ export function TestPrefixPrefixedMessageInput$toProto(
   return new PrefixedMessage({
     body: input?.body ?? undefined,
     prefixedEnum: input?.prefixedEnum ?? undefined,
-    notIgnoredMessage: input
+    notIgnoredMessage: input?.notIgnoredMessage
       ? TestPrefixIgnoredMessageNotIgnoredInput$toProto(input.notIgnoredMessage)
       : undefined,
-    squashedMessage: input
+    squashedMessage: input?.squashedMessage
       ? TestPrefixPrefixedMessageSquashedMessageInput$toProto(
         input.squashedMessage,
       )
@@ -33722,7 +33732,7 @@ export function TestPrefixPrefixedMessageInput$toProto(
     squashedMessages: input?.squashedMessages?.map((v) =>
       TestPrefixPrefixedMessageSquashedMessageInput$toProto(v)
     ),
-    renamedMessage: input
+    renamedMessage: input?.renamedMessage
       ? TestPrefixRenamedMessageInput$toProto(input.renamedMessage)
       : undefined,
     renamedEnum: input?.renamedEnum ?? undefined,
@@ -34702,10 +34712,10 @@ export function TestPrefixPrefixedMessageInput$toProto(
   return new PrefixedMessage({
     body: input?.body ?? undefined,
     prefixedEnum: input?.prefixedEnum ?? undefined,
-    notIgnoredMessage: input
+    notIgnoredMessage: input?.notIgnoredMessage
       ? TestPrefixIgnoredMessageNotIgnoredInput$toProto(input.notIgnoredMessage)
       : undefined,
-    squashedMessage: input
+    squashedMessage: input?.squashedMessage
       ? TestPrefixPrefixedMessageSquashedMessageInput$toProto(
         input.squashedMessage,
       )
@@ -34715,7 +34725,7 @@ export function TestPrefixPrefixedMessageInput$toProto(
     squashedMessages: input?.squashedMessages?.map((v) =>
       TestPrefixPrefixedMessageSquashedMessageInput$toProto(v)
     ),
-    renamedMessage: input
+    renamedMessage: input?.renamedMessage
       ? TestPrefixRenamedMessageInput$toProto(input.renamedMessage)
       : undefined,
     renamedEnum: input?.renamedEnum ?? undefined,
@@ -35553,10 +35563,10 @@ export function TestPrefixPrefixedMessageInput$toProto(
   return new PrefixedMessage({
     body: input?.body ?? undefined,
     prefixedEnum: input?.prefixedEnum ?? undefined,
-    notIgnoredMessage: input
+    notIgnoredMessage: input?.notIgnoredMessage
       ? TestPrefixIgnoredMessageNotIgnoredInput$toProto(input.notIgnoredMessage)
       : undefined,
-    squashedMessage: input
+    squashedMessage: input?.squashedMessage
       ? TestPrefixPrefixedMessageSquashedMessageInput$toProto(
         input.squashedMessage,
       )
@@ -35566,7 +35576,7 @@ export function TestPrefixPrefixedMessageInput$toProto(
     squashedMessages: input?.squashedMessages?.map((v) =>
       TestPrefixPrefixedMessageSquashedMessageInput$toProto(v)
     ),
-    renamedMessage: input
+    renamedMessage: input?.renamedMessage
       ? TestPrefixRenamedMessageInput$toProto(input.renamedMessage)
       : undefined,
     renamedEnum: input?.renamedEnum ?? undefined,
@@ -35721,12 +35731,12 @@ export function TestPrefixPrefixedMessagePartialInput$toProto(
   return new PrefixedMessage({
     body: input?.body ?? undefined,
     prefixedEnum: input?.prefixedEnum ?? undefined,
-    notIgnoredMessage: input
+    notIgnoredMessage: input?.notIgnoredMessage
       ? TestPrefixIgnoredMessageNotIgnoredPartialInput$toProto(
         input.notIgnoredMessage,
       )
       : undefined,
-    squashedMessage: input
+    squashedMessage: input?.squashedMessage
       ? TestPrefixPrefixedMessageSquashedMessagePartialInput$toProto(
         input.squashedMessage,
       )
@@ -35736,7 +35746,7 @@ export function TestPrefixPrefixedMessagePartialInput$toProto(
     squashedMessages: input?.squashedMessages?.map((v) =>
       TestPrefixPrefixedMessageSquashedMessagePartialInput$toProto(v)
     ),
-    renamedMessage: input
+    renamedMessage: input?.renamedMessage
       ? TestPrefixRenamedMessagePartialInput$toProto(input.renamedMessage)
       : undefined,
     renamedEnum: input?.renamedEnum ?? undefined,
@@ -36831,10 +36841,10 @@ export function TestPrefixPrefixedMessageInput$toProto(
   return new PrefixedMessage({
     body: input?.body ?? undefined,
     prefixedEnum: input?.prefixedEnum ?? undefined,
-    notIgnoredMessage: input
+    notIgnoredMessage: input?.notIgnoredMessage
       ? TestPrefixIgnoredMessageNotIgnoredInput$toProto(input.notIgnoredMessage)
       : undefined,
-    squashedMessage: input
+    squashedMessage: input?.squashedMessage
       ? TestPrefixPrefixedMessageSquashedMessageInput$toProto(
         input.squashedMessage,
       )
@@ -36844,7 +36854,7 @@ export function TestPrefixPrefixedMessageInput$toProto(
     squashedMessages: input?.squashedMessages?.map((v) =>
       TestPrefixPrefixedMessageSquashedMessageInput$toProto(v)
     ),
-    renamedMessage: input
+    renamedMessage: input?.renamedMessage
       ? TestPrefixRenamedMessageInput$toProto(input.renamedMessage)
       : undefined,
     renamedEnum: input?.renamedEnum ?? undefined,
@@ -38248,10 +38258,10 @@ export function ParentMessageInput$toProto(
   input: ParentMessageInput$Shape | null | undefined,
 ): ParentMessage {
   return new ParentMessage({
-    partialableInputMessage: input
+    partialableInputMessage: input?.partialableInputMessage
       ? PartialableInputMessageInput$toProto(input.partialableInputMessage)
       : undefined,
-    noPartialInputMessage: input
+    noPartialInputMessage: input?.noPartialInputMessage
       ? NoPartialInputMessageInput$toProto(input.noPartialInputMessage)
       : undefined,
   });
@@ -38544,10 +38554,10 @@ export function ParentMessageInput$toProto(
   input: ParentMessageInput$Shape | null | undefined,
 ): ParentMessage {
   return new ParentMessage({
-    partialableInputMessage: input
+    partialableInputMessage: input?.partialableInputMessage
       ? PartialableInputMessageInput$toProto(input.partialableInputMessage)
       : undefined,
-    noPartialInputMessage: input
+    noPartialInputMessage: input?.noPartialInputMessage
       ? NoPartialInputMessageInput$toProto(input.noPartialInputMessage)
       : undefined,
   });
@@ -38816,10 +38826,10 @@ export function ParentMessageInput$toProto(
   input: ParentMessageInput$Shape | null | undefined,
 ): ParentMessage {
   return new ParentMessage({
-    partialableInputMessage: input
+    partialableInputMessage: input?.partialableInputMessage
       ? PartialableInputMessageInput$toProto(input.partialableInputMessage)
       : undefined,
-    noPartialInputMessage: input
+    noPartialInputMessage: input?.noPartialInputMessage
       ? NoPartialInputMessageInput$toProto(input.noPartialInputMessage)
       : undefined,
   });
@@ -38873,12 +38883,12 @@ export function ParentMessagePartialInput$toProto(
   input: ParentMessagePartialInput$Shape | null | undefined,
 ): ParentMessage {
   return new ParentMessage({
-    partialableInputMessage: input
+    partialableInputMessage: input?.partialableInputMessage
       ? PartialableInputMessagePartialInput$toProto(
         input.partialableInputMessage,
       )
       : undefined,
-    noPartialInputMessage: input
+    noPartialInputMessage: input?.noPartialInputMessage
       ? NoPartialInputMessageInput$toProto(input.noPartialInputMessage)
       : undefined,
   });
@@ -39189,10 +39199,10 @@ export function ParentMessageInput$toProto(
   input: ParentMessageInput$Shape | null | undefined,
 ): ParentMessage {
   return new ParentMessage({
-    partialableInputMessage: input
+    partialableInputMessage: input?.partialableInputMessage
       ? PartialableInputMessageInput$toProto(input.partialableInputMessage)
       : undefined,
-    noPartialInputMessage: input
+    noPartialInputMessage: input?.noPartialInputMessage
       ? NoPartialInputMessageInput$toProto(input.noPartialInputMessage)
       : undefined,
   });
@@ -39503,20 +39513,20 @@ export function FieldBehaviorComentsMessageInput$toProto(
   input: FieldBehaviorComentsMessageInput$Shape | null | undefined,
 ): FieldBehaviorComentsMessage {
   return new FieldBehaviorComentsMessage({
-    requiredField: input
+    requiredField: input?.requiredField
       ? FieldBehaviorComentsMessagePostInput$toProto(input.requiredField)
       : undefined,
-    requiredInputOnlyField: input
+    requiredInputOnlyField: input?.requiredInputOnlyField
       ? FieldBehaviorComentsMessagePostInput$toProto(
         input.requiredInputOnlyField,
       )
       : undefined,
-    inputOnlyRequiredField: input
+    inputOnlyRequiredField: input?.inputOnlyRequiredField
       ? FieldBehaviorComentsMessagePostInput$toProto(
         input.inputOnlyRequiredField,
       )
       : undefined,
-    inputOnlyField: input
+    inputOnlyField: input?.inputOnlyField
       ? FieldBehaviorComentsMessagePostInput$toProto(input.inputOnlyField)
       : undefined,
   });
@@ -39762,20 +39772,20 @@ export function FieldBehaviorComentsMessageInput$toProto(
   input: FieldBehaviorComentsMessageInput$Shape | null | undefined,
 ): FieldBehaviorComentsMessage {
   return new FieldBehaviorComentsMessage({
-    requiredField: input
+    requiredField: input?.requiredField
       ? FieldBehaviorComentsMessagePostInput$toProto(input.requiredField)
       : undefined,
-    requiredInputOnlyField: input
+    requiredInputOnlyField: input?.requiredInputOnlyField
       ? FieldBehaviorComentsMessagePostInput$toProto(
         input.requiredInputOnlyField,
       )
       : undefined,
-    inputOnlyRequiredField: input
+    inputOnlyRequiredField: input?.inputOnlyRequiredField
       ? FieldBehaviorComentsMessagePostInput$toProto(
         input.inputOnlyRequiredField,
       )
       : undefined,
-    inputOnlyField: input
+    inputOnlyField: input?.inputOnlyField
       ? FieldBehaviorComentsMessagePostInput$toProto(input.inputOnlyField)
       : undefined,
   });
@@ -40009,20 +40019,20 @@ export function FieldBehaviorComentsMessageInput$toProto(
   input: FieldBehaviorComentsMessageInput$Shape | null | undefined,
 ): FieldBehaviorComentsMessage {
   return new FieldBehaviorComentsMessage({
-    requiredField: input
+    requiredField: input?.requiredField
       ? FieldBehaviorComentsMessagePostInput$toProto(input.requiredField)
       : undefined,
-    requiredInputOnlyField: input
+    requiredInputOnlyField: input?.requiredInputOnlyField
       ? FieldBehaviorComentsMessagePostInput$toProto(
         input.requiredInputOnlyField,
       )
       : undefined,
-    inputOnlyRequiredField: input
+    inputOnlyRequiredField: input?.inputOnlyRequiredField
       ? FieldBehaviorComentsMessagePostInput$toProto(
         input.inputOnlyRequiredField,
       )
       : undefined,
-    inputOnlyField: input
+    inputOnlyField: input?.inputOnlyField
       ? FieldBehaviorComentsMessagePostInput$toProto(input.inputOnlyField)
       : undefined,
   });
@@ -40107,20 +40117,20 @@ export function FieldBehaviorComentsMessagePartialInput$toProto(
   input: FieldBehaviorComentsMessagePartialInput$Shape | null | undefined,
 ): FieldBehaviorComentsMessage {
   return new FieldBehaviorComentsMessage({
-    requiredField: input
+    requiredField: input?.requiredField
       ? FieldBehaviorComentsMessagePostPartialInput$toProto(input.requiredField)
       : undefined,
-    requiredInputOnlyField: input
+    requiredInputOnlyField: input?.requiredInputOnlyField
       ? FieldBehaviorComentsMessagePostPartialInput$toProto(
         input.requiredInputOnlyField,
       )
       : undefined,
-    inputOnlyRequiredField: input
+    inputOnlyRequiredField: input?.inputOnlyRequiredField
       ? FieldBehaviorComentsMessagePostPartialInput$toProto(
         input.inputOnlyRequiredField,
       )
       : undefined,
-    inputOnlyField: input
+    inputOnlyField: input?.inputOnlyField
       ? FieldBehaviorComentsMessagePostPartialInput$toProto(
         input.inputOnlyField,
       )
@@ -40389,20 +40399,20 @@ export function FieldBehaviorComentsMessageInput$toProto(
   input: FieldBehaviorComentsMessageInput$Shape | null | undefined,
 ): FieldBehaviorComentsMessage {
   return new FieldBehaviorComentsMessage({
-    requiredField: input
+    requiredField: input?.requiredField
       ? FieldBehaviorComentsMessagePostInput$toProto(input.requiredField)
       : undefined,
-    requiredInputOnlyField: input
+    requiredInputOnlyField: input?.requiredInputOnlyField
       ? FieldBehaviorComentsMessagePostInput$toProto(
         input.requiredInputOnlyField,
       )
       : undefined,
-    inputOnlyRequiredField: input
+    inputOnlyRequiredField: input?.inputOnlyRequiredField
       ? FieldBehaviorComentsMessagePostInput$toProto(
         input.inputOnlyRequiredField,
       )
       : undefined,
-    inputOnlyField: input
+    inputOnlyField: input?.inputOnlyField
       ? FieldBehaviorComentsMessagePostInput$toProto(input.inputOnlyField)
       : undefined,
   });
@@ -40975,7 +40985,9 @@ export function MessageWithSubpkgInput$toProto(
   input: MessageWithSubpkgInput$Shape | null | undefined,
 ): MessageWithSubpkg {
   return new MessageWithSubpkg({
-    message: input ? SubpkgMessageInput$toProto(input.message) : undefined,
+    message: input?.message
+      ? SubpkgMessageInput$toProto(input.message)
+      : undefined,
     enum: input?.enum ?? undefined,
   });
 }
@@ -41095,7 +41107,9 @@ export function MessageWithSubpkgInput$toProto(
   input: MessageWithSubpkgInput$Shape | null | undefined,
 ): MessageWithSubpkg {
   return new MessageWithSubpkg({
-    message: input ? SubpkgMessageInput$toProto(input.message) : undefined,
+    message: input?.message
+      ? SubpkgMessageInput$toProto(input.message)
+      : undefined,
     enum: input?.enum ?? undefined,
   });
 }
@@ -41218,7 +41232,9 @@ export function MessageWithSubpkgInput$toProto(
   input: MessageWithSubpkgInput$Shape | null | undefined,
 ): MessageWithSubpkg {
   return new MessageWithSubpkg({
-    message: input ? SubpkgMessageInput$toProto(input.message) : undefined,
+    message: input?.message
+      ? SubpkgMessageInput$toProto(input.message)
+      : undefined,
     enum: input?.enum ?? undefined,
   });
 }
@@ -41268,7 +41284,7 @@ export function MessageWithSubpkgPartialInput$toProto(
   input: MessageWithSubpkgPartialInput$Shape | null | undefined,
 ): MessageWithSubpkg {
   return new MessageWithSubpkg({
-    message: input
+    message: input?.message
       ? SubpkgMessagePartialInput$toProto(input.message)
       : undefined,
     enum: input?.enum ?? undefined,
@@ -41390,7 +41406,9 @@ export function MessageWithSubpkgInput$toProto(
   input: MessageWithSubpkgInput$Shape | null | undefined,
 ): MessageWithSubpkg {
   return new MessageWithSubpkg({
-    message: input ? SubpkgMessageInput$toProto(input.message) : undefined,
+    message: input?.message
+      ? SubpkgMessageInput$toProto(input.message)
+      : undefined,
     enum: input?.enum ?? undefined,
   });
 }
@@ -41573,7 +41591,7 @@ export function ParentMessageInput$toProto(
 ): ParentMessage {
   return new ParentMessage({
     body: input?.body ?? undefined,
-    nested: input
+    nested: input?.nested
       ? ParentMessageNestedMessageInput$toProto(input.nested)
       : undefined,
     nestedEnum: input?.nestedEnum ?? undefined,
@@ -41805,7 +41823,7 @@ export function ParentMessageInput$toProto(
 ): ParentMessage {
   return new ParentMessage({
     body: input?.body ?? undefined,
-    nested: input
+    nested: input?.nested
       ? ParentMessageNestedMessageInput$toProto(input.nested)
       : undefined,
     nestedEnum: input?.nestedEnum ?? undefined,
@@ -42013,7 +42031,7 @@ export function ParentMessageInput$toProto(
 ): ParentMessage {
   return new ParentMessage({
     body: input?.body ?? undefined,
-    nested: input
+    nested: input?.nested
       ? ParentMessageNestedMessageInput$toProto(input.nested)
       : undefined,
     nestedEnum: input?.nestedEnum ?? undefined,
@@ -42072,7 +42090,7 @@ export function ParentMessagePartialInput$toProto(
 ): ParentMessage {
   return new ParentMessage({
     body: input?.body ?? undefined,
-    nested: input
+    nested: input?.nested
       ? ParentMessageNestedMessagePartialInput$toProto(input.nested)
       : undefined,
     nestedEnum: input?.nestedEnum ?? undefined,
@@ -42315,7 +42333,7 @@ export function ParentMessageInput$toProto(
 ): ParentMessage {
   return new ParentMessage({
     body: input?.body ?? undefined,
-    nested: input
+    nested: input?.nested
       ? ParentMessageNestedMessageInput$toProto(input.nested)
       : undefined,
     nestedEnum: input?.nestedEnum ?? undefined,
@@ -44382,10 +44400,10 @@ export function MessageInput$toProto(
   input: MessageInput$Shape | null | undefined,
 ): Message {
   return new Message({
-    requiredPrimitives: input
+    requiredPrimitives: input?.requiredPrimitives
       ? PrimitivesInput$toProto(input.requiredPrimitives)
       : undefined,
-    optionalPrimitives: input
+    optionalPrimitives: input?.optionalPrimitives
       ? PrimitivesInput$toProto(input.optionalPrimitives)
       : undefined,
     requiredPrimitivesList: input?.requiredPrimitivesList?.map((v) =>
@@ -45234,10 +45252,10 @@ export function MessageInput$toProto(
   input: MessageInput$Shape | null | undefined,
 ): Message {
   return new Message({
-    requiredPrimitives: input
+    requiredPrimitives: input?.requiredPrimitives
       ? PrimitivesInput$toProto(input.requiredPrimitives)
       : undefined,
-    optionalPrimitives: input
+    optionalPrimitives: input?.optionalPrimitives
       ? PrimitivesInput$toProto(input.optionalPrimitives)
       : undefined,
     requiredPrimitivesList: input?.requiredPrimitivesList?.map((v) =>
@@ -46074,10 +46092,10 @@ export function MessageInput$toProto(
   input: MessageInput$Shape | null | undefined,
 ): Message {
   return new Message({
-    requiredPrimitives: input
+    requiredPrimitives: input?.requiredPrimitives
       ? PrimitivesInput$toProto(input.requiredPrimitives)
       : undefined,
-    optionalPrimitives: input
+    optionalPrimitives: input?.optionalPrimitives
       ? PrimitivesInput$toProto(input.optionalPrimitives)
       : undefined,
     requiredPrimitivesList: input?.requiredPrimitivesList?.map((v) =>
@@ -46159,10 +46177,10 @@ export function MessagePartialInput$toProto(
   input: MessagePartialInput$Shape | null | undefined,
 ): Message {
   return new Message({
-    requiredPrimitives: input
+    requiredPrimitives: input?.requiredPrimitives
       ? PrimitivesPartialInput$toProto(input.requiredPrimitives)
       : undefined,
-    optionalPrimitives: input
+    optionalPrimitives: input?.optionalPrimitives
       ? PrimitivesPartialInput$toProto(input.optionalPrimitives)
       : undefined,
     requiredPrimitivesList: input?.requiredPrimitivesList?.map((v) =>
@@ -47375,10 +47393,10 @@ export function MessageInput$toProto(
   input: MessageInput$Shape | null | undefined,
 ): Message {
   return new Message({
-    requiredPrimitives: input
+    requiredPrimitives: input?.requiredPrimitives
       ? PrimitivesInput$toProto(input.requiredPrimitives)
       : undefined,
-    optionalPrimitives: input
+    optionalPrimitives: input?.optionalPrimitives
       ? PrimitivesInput$toProto(input.optionalPrimitives)
       : undefined,
     requiredPrimitivesList: input?.requiredPrimitivesList?.map((v) =>
