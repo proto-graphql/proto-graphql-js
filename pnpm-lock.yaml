@@ -86,8 +86,8 @@ importers:
         specifier: 5.1.2
         version: 5.1.2
       '@types/node':
-        specifier: 20.16.10
-        version: 20.16.10
+        specifier: 20.19.0
+        version: 20.19.0
       minimatch:
         specifier: 5.1.6
         version: 5.1.6
@@ -114,7 +114,7 @@ importers:
         version: 5.6.2
       vitest:
         specifier: 2.1.1
-        version: 2.1.1(@types/node@20.16.10)
+        version: 2.1.1(@types/node@20.19.0)
 
   devPackages/testapis-proto:
     dependencies:
@@ -2784,14 +2784,8 @@ packages:
   '@types/node@12.20.55':
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
 
-  '@types/node@20.12.7':
-    resolution: {integrity: sha512-wq0cICSkRLVaf3UGLMGItu/PtdY7oaXaI/RVU+xliKVOtRna3PRY57ZDfztpDL0n11vfymMUnXv8QwYCO7L1wg==}
-
-  '@types/node@20.14.14':
-    resolution: {integrity: sha512-d64f00982fS9YoOgJkAMolK7MN8Iq3TDdVjchbYHdEmjth/DHowx82GnoA+tVUAN+7vxfYUgAzi+JXbKNd2SDQ==}
-
-  '@types/node@20.16.10':
-    resolution: {integrity: sha512-vQUKgWTjEIRFCvK6CyriPH3MZYiYlNy0fKiEYHWbcoWLEgs4opurGGKlebrTLqdSMIbXImH6XExNiIyNUv3WpA==}
+  '@types/node@20.19.0':
+    resolution: {integrity: sha512-hfrc+1tud1xcdVTABC2JiomZJEklMcXYNTVtZLAeqTVWD+qL5jkHKT+1lOtqDdGxt+mB53DTtiz673vfjU8D1Q==}
 
   '@types/semver@7.5.8':
     resolution: {integrity: sha512-I8EUhyrgfLrcTkzV3TSsGyl1tSuPrEDzr0yd5m90UgNxQkyDXULk3b6MlQqTCpZpNtWe1K0hzclnZkTcLBe2UQ==}
@@ -3919,11 +3913,8 @@ packages:
   underscore@1.13.6:
     resolution: {integrity: sha512-+A5Sja4HP1M08MaXya7p5LvjuM7K6q/2EaC0+iovj/wOcMsTzMvDFbasi/oSapiwOlt252IqsKqPjCl7huKS0A==}
 
-  undici-types@5.26.5:
-    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
-
-  undici-types@6.19.8:
-    resolution: {integrity: sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw==}
+  undici-types@6.21.0:
+    resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
 
   universalify@0.1.2:
     resolution: {integrity: sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==}
@@ -4677,17 +4668,9 @@ snapshots:
 
   '@types/node@12.20.55': {}
 
-  '@types/node@20.12.7':
+  '@types/node@20.19.0':
     dependencies:
-      undici-types: 5.26.5
-
-  '@types/node@20.14.14':
-    dependencies:
-      undici-types: 5.26.5
-
-  '@types/node@20.16.10':
-    dependencies:
-      undici-types: 6.19.8
+      undici-types: 6.21.0
 
   '@types/semver@7.5.8': {}
 
@@ -4712,13 +4695,13 @@ snapshots:
       chai: 5.1.1
       tinyrainbow: 1.2.0
 
-  '@vitest/mocker@2.1.1(@vitest/spy@2.1.1)(vite@5.2.10(@types/node@20.16.10))':
+  '@vitest/mocker@2.1.1(@vitest/spy@2.1.1)(vite@5.2.10(@types/node@20.19.0))':
     dependencies:
       '@vitest/spy': 2.1.1
       estree-walker: 3.0.3
       magic-string: 0.30.11
     optionalDependencies:
-      vite: 5.2.10(@types/node@20.16.10)
+      vite: 5.2.10(@types/node@20.19.0)
 
   '@vitest/pretty-format@2.1.1':
     dependencies:
@@ -5519,7 +5502,7 @@ snapshots:
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
       '@types/long': 4.0.1
-      '@types/node': 20.12.7
+      '@types/node': 20.19.0
       long: 4.0.0
 
   protobufjs@7.2.5:
@@ -5534,7 +5517,7 @@ snapshots:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 20.14.14
+      '@types/node': 20.19.0
       long: 5.2.3
 
   pseudomap@1.0.2: {}
@@ -5841,9 +5824,7 @@ snapshots:
 
   underscore@1.13.6: {}
 
-  undici-types@5.26.5: {}
-
-  undici-types@6.19.8: {}
+  undici-types@6.21.0: {}
 
   universalify@0.1.2: {}
 
@@ -5855,12 +5836,12 @@ snapshots:
     dependencies:
       tslib: 2.6.2
 
-  vite-node@2.1.1(@types/node@20.16.10):
+  vite-node@2.1.1(@types/node@20.19.0):
     dependencies:
       cac: 6.7.14
       debug: 4.3.6
       pathe: 1.1.2
-      vite: 5.2.10(@types/node@20.16.10)
+      vite: 5.2.10(@types/node@20.19.0)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -5871,19 +5852,19 @@ snapshots:
       - supports-color
       - terser
 
-  vite@5.2.10(@types/node@20.16.10):
+  vite@5.2.10(@types/node@20.19.0):
     dependencies:
       esbuild: 0.20.2
       postcss: 8.4.38
       rollup: 4.19.2
     optionalDependencies:
-      '@types/node': 20.16.10
+      '@types/node': 20.19.0
       fsevents: 2.3.3
 
-  vitest@2.1.1(@types/node@20.16.10):
+  vitest@2.1.1(@types/node@20.19.0):
     dependencies:
       '@vitest/expect': 2.1.1
-      '@vitest/mocker': 2.1.1(@vitest/spy@2.1.1)(vite@5.2.10(@types/node@20.16.10))
+      '@vitest/mocker': 2.1.1(@vitest/spy@2.1.1)(vite@5.2.10(@types/node@20.19.0))
       '@vitest/pretty-format': 2.1.1
       '@vitest/runner': 2.1.1
       '@vitest/snapshot': 2.1.1
@@ -5898,11 +5879,11 @@ snapshots:
       tinyexec: 0.3.0
       tinypool: 1.0.0
       tinyrainbow: 1.2.0
-      vite: 5.2.10(@types/node@20.16.10)
-      vite-node: 2.1.1(@types/node@20.16.10)
+      vite: 5.2.10(@types/node@20.19.0)
+      vite-node: 2.1.1(@types/node@20.19.0)
       why-is-node-running: 2.3.0
     optionalDependencies:
-      '@types/node': 20.16.10
+      '@types/node': 20.19.0
     transitivePeerDependencies:
       - less
       - lightningcss
