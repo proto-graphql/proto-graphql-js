@@ -1,0 +1,1216 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`createInputObjectTypeCode > google-protobuf > generates code for a simple input object 1`] = `
+"import { Primitives } from "@testapis/google-protobuf/testapis/primitives/primitives_pb";
+import { inputObjectType, list, nonNull } from "nexus";
+import { stringToNumber } from "proto-nexus";
+
+export const PrimitivesInput = Object.assign(
+  inputObjectType({
+    "name": "PrimitivesInput",
+    "definition": (t) => {
+      t.field("requiredDoubleValue", {
+        "type": nonNull("Float"),
+        "extensions": { "protobufField": { "name": "required_double_value", "typeFullName": "double" } },
+      });
+      t.field("requiredFloatValue", {
+        "type": nonNull("Float"),
+        "extensions": { "protobufField": { "name": "required_float_value", "typeFullName": "float" } },
+      });
+      t.field("requiredInt32Value", {
+        "type": nonNull("Int"),
+        "extensions": { "protobufField": { "name": "required_int32_value", "typeFullName": "int32" } },
+      });
+      t.field("requiredInt64Value", {
+        "type": nonNull("Int64"),
+        "extensions": { "protobufField": { "name": "required_int64_value", "typeFullName": "int64" } },
+      });
+      t.field("requiredUint32Value", {
+        "type": nonNull("Int"),
+        "extensions": { "protobufField": { "name": "required_uint32_value", "typeFullName": "uint32" } },
+      });
+      t.field("requiredUint64Value", {
+        "type": nonNull("Int64"),
+        "extensions": { "protobufField": { "name": "required_uint64_value", "typeFullName": "uint64" } },
+      });
+      t.field("requiredSint32Value", {
+        "type": nonNull("Int"),
+        "extensions": { "protobufField": { "name": "required_sint32_value", "typeFullName": "sint32" } },
+      });
+      t.field("requiredSint64Value", {
+        "type": nonNull("Int64"),
+        "extensions": { "protobufField": { "name": "required_sint64_value", "typeFullName": "sint64" } },
+      });
+      t.field("requiredFixed32Value", {
+        "type": nonNull("Int"),
+        "extensions": { "protobufField": { "name": "required_fixed32_value", "typeFullName": "fixed32" } },
+      });
+      t.field("requiredFixed64Value", {
+        "type": nonNull("Int64"),
+        "extensions": { "protobufField": { "name": "required_fixed64_value", "typeFullName": "fixed64" } },
+      });
+      t.field("requiredSfixed32Value", {
+        "type": nonNull("Int"),
+        "extensions": { "protobufField": { "name": "required_sfixed32_value", "typeFullName": "sfixed32" } },
+      });
+      t.field("requiredSfixed64Value", {
+        "type": nonNull("Int64"),
+        "extensions": { "protobufField": { "name": "required_sfixed64_value", "typeFullName": "sfixed64" } },
+      });
+      t.field("requiredBoolValue", {
+        "type": nonNull("Boolean"),
+        "extensions": { "protobufField": { "name": "required_bool_value", "typeFullName": "bool" } },
+      });
+      t.field("requiredStringValue", {
+        "type": nonNull("String"),
+        "extensions": { "protobufField": { "name": "required_string_value", "typeFullName": "string" } },
+      });
+      t.field("requiredBytesValue", {
+        "type": nonNull("Byte"),
+        "extensions": { "protobufField": { "name": "required_bytes_value", "typeFullName": "bytes" } },
+      });
+      t.field("requiredDoubleValues", {
+        "type": nonNull(list(nonNull("Float"))),
+        "extensions": { "protobufField": { "name": "required_double_values", "typeFullName": "double" } },
+      });
+      t.field("requiredFloatValues", {
+        "type": nonNull(list(nonNull("Float"))),
+        "extensions": { "protobufField": { "name": "required_float_values", "typeFullName": "float" } },
+      });
+      t.field("requiredInt32Values", {
+        "type": nonNull(list(nonNull("Int"))),
+        "extensions": { "protobufField": { "name": "required_int32_values", "typeFullName": "int32" } },
+      });
+      t.field("requiredInt64Values", {
+        "type": nonNull(list(nonNull("Int64"))),
+        "extensions": { "protobufField": { "name": "required_int64_values", "typeFullName": "int64" } },
+      });
+      t.field("requiredUint32Values", {
+        "type": nonNull(list(nonNull("Int"))),
+        "extensions": { "protobufField": { "name": "required_uint32_values", "typeFullName": "uint32" } },
+      });
+      t.field("requiredUint64Values", {
+        "type": nonNull(list(nonNull("Int64"))),
+        "extensions": { "protobufField": { "name": "required_uint64_values", "typeFullName": "uint64" } },
+      });
+      t.field("requiredSint32Values", {
+        "type": nonNull(list(nonNull("Int"))),
+        "extensions": { "protobufField": { "name": "required_sint32_values", "typeFullName": "sint32" } },
+      });
+      t.field("requiredSint64Values", {
+        "type": nonNull(list(nonNull("Int64"))),
+        "extensions": { "protobufField": { "name": "required_sint64_values", "typeFullName": "sint64" } },
+      });
+      t.field("requiredFixed32Values", {
+        "type": nonNull(list(nonNull("Int"))),
+        "extensions": { "protobufField": { "name": "required_fixed32_values", "typeFullName": "fixed32" } },
+      });
+      t.field("requiredFixed64Values", {
+        "type": nonNull(list(nonNull("Int64"))),
+        "extensions": { "protobufField": { "name": "required_fixed64_values", "typeFullName": "fixed64" } },
+      });
+      t.field("requiredSfixed32Values", {
+        "type": nonNull(list(nonNull("Int"))),
+        "extensions": { "protobufField": { "name": "required_sfixed32_values", "typeFullName": "sfixed32" } },
+      });
+      t.field("requiredSfixed64Values", {
+        "type": nonNull(list(nonNull("Int64"))),
+        "extensions": { "protobufField": { "name": "required_sfixed64_values", "typeFullName": "sfixed64" } },
+      });
+      t.field("requiredBoolValues", {
+        "type": nonNull(list(nonNull("Boolean"))),
+        "extensions": { "protobufField": { "name": "required_bool_values", "typeFullName": "bool" } },
+      });
+      t.field("requiredStringValues", {
+        "type": nonNull(list(nonNull("String"))),
+        "extensions": { "protobufField": { "name": "required_string_values", "typeFullName": "string" } },
+      });
+      t.field("requiredBytesValues", {
+        "type": nonNull(list(nonNull("Byte"))),
+        "extensions": { "protobufField": { "name": "required_bytes_values", "typeFullName": "bytes" } },
+      });
+    },
+    "extensions": {
+      "protobufMessage": {
+        "fullName": "testapis.primitives.Primitives",
+        "name": "Primitives",
+        "package": "testapis.primitives",
+      },
+    },
+  }),
+  {
+    toProto: (input: NexusGen["inputTypes"]["PrimitivesInput"]): Primitives => {
+      const output = new Primitives();
+      output.setRequiredDoubleValue(input.requiredDoubleValue);
+      output.setRequiredFloatValue(input.requiredFloatValue);
+      output.setRequiredInt32Value(input.requiredInt32Value);
+      output.setRequiredInt64Value(stringToNumber(input.requiredInt64Value));
+      output.setRequiredUint32Value(input.requiredUint32Value);
+      output.setRequiredUint64Value(stringToNumber(input.requiredUint64Value));
+      output.setRequiredSint32Value(input.requiredSint32Value);
+      output.setRequiredSint64Value(stringToNumber(input.requiredSint64Value));
+      output.setRequiredFixed32Value(input.requiredFixed32Value);
+      output.setRequiredFixed64Value(stringToNumber(input.requiredFixed64Value));
+      output.setRequiredSfixed32Value(input.requiredSfixed32Value);
+      output.setRequiredSfixed64Value(stringToNumber(input.requiredSfixed64Value));
+      output.setRequiredBoolValue(input.requiredBoolValue);
+      output.setRequiredStringValue(input.requiredStringValue);
+      output.setRequiredBytesValue(input.requiredBytesValue);
+      output.setRequiredDoubleValuesList(input.requiredDoubleValues.map((v) => v));
+      output.setRequiredFloatValuesList(input.requiredFloatValues.map((v) => v));
+      output.setRequiredInt32ValuesList(input.requiredInt32Values.map((v) => v));
+      output.setRequiredInt64ValuesList(input.requiredInt64Values.map((v) => stringToNumber(v)));
+      output.setRequiredUint32ValuesList(input.requiredUint32Values.map((v) => v));
+      output.setRequiredUint64ValuesList(input.requiredUint64Values.map((v) => stringToNumber(v)));
+      output.setRequiredSint32ValuesList(input.requiredSint32Values.map((v) => v));
+      output.setRequiredSint64ValuesList(input.requiredSint64Values.map((v) => stringToNumber(v)));
+      output.setRequiredFixed32ValuesList(input.requiredFixed32Values.map((v) => v));
+      output.setRequiredFixed64ValuesList(input.requiredFixed64Values.map((v) => stringToNumber(v)));
+      output.setRequiredSfixed32ValuesList(input.requiredSfixed32Values.map((v) => v));
+      output.setRequiredSfixed64ValuesList(input.requiredSfixed64Values.map((v) => stringToNumber(v)));
+      output.setRequiredBoolValuesList(input.requiredBoolValues.map((v) => v));
+      output.setRequiredStringValuesList(input.requiredStringValues.map((v) => v));
+      output.setRequiredBytesValuesList(input.requiredBytesValues.map((v) => v));
+      return output;
+    },
+    _protoNexus: {
+      fields: {
+        requiredDoubleValue: {
+          "type": nonNull("Float"),
+          "extensions": { "protobufField": { "name": "required_double_value", "typeFullName": "double" } },
+        },
+        requiredFloatValue: {
+          "type": nonNull("Float"),
+          "extensions": { "protobufField": { "name": "required_float_value", "typeFullName": "float" } },
+        },
+        requiredInt32Value: {
+          "type": nonNull("Int"),
+          "extensions": { "protobufField": { "name": "required_int32_value", "typeFullName": "int32" } },
+        },
+        requiredInt64Value: {
+          "type": nonNull("Int64"),
+          "extensions": { "protobufField": { "name": "required_int64_value", "typeFullName": "int64" } },
+        },
+        requiredUint32Value: {
+          "type": nonNull("Int"),
+          "extensions": { "protobufField": { "name": "required_uint32_value", "typeFullName": "uint32" } },
+        },
+        requiredUint64Value: {
+          "type": nonNull("Int64"),
+          "extensions": { "protobufField": { "name": "required_uint64_value", "typeFullName": "uint64" } },
+        },
+        requiredSint32Value: {
+          "type": nonNull("Int"),
+          "extensions": { "protobufField": { "name": "required_sint32_value", "typeFullName": "sint32" } },
+        },
+        requiredSint64Value: {
+          "type": nonNull("Int64"),
+          "extensions": { "protobufField": { "name": "required_sint64_value", "typeFullName": "sint64" } },
+        },
+        requiredFixed32Value: {
+          "type": nonNull("Int"),
+          "extensions": { "protobufField": { "name": "required_fixed32_value", "typeFullName": "fixed32" } },
+        },
+        requiredFixed64Value: {
+          "type": nonNull("Int64"),
+          "extensions": { "protobufField": { "name": "required_fixed64_value", "typeFullName": "fixed64" } },
+        },
+        requiredSfixed32Value: {
+          "type": nonNull("Int"),
+          "extensions": { "protobufField": { "name": "required_sfixed32_value", "typeFullName": "sfixed32" } },
+        },
+        requiredSfixed64Value: {
+          "type": nonNull("Int64"),
+          "extensions": { "protobufField": { "name": "required_sfixed64_value", "typeFullName": "sfixed64" } },
+        },
+        requiredBoolValue: {
+          "type": nonNull("Boolean"),
+          "extensions": { "protobufField": { "name": "required_bool_value", "typeFullName": "bool" } },
+        },
+        requiredStringValue: {
+          "type": nonNull("String"),
+          "extensions": { "protobufField": { "name": "required_string_value", "typeFullName": "string" } },
+        },
+        requiredBytesValue: {
+          "type": nonNull("Byte"),
+          "extensions": { "protobufField": { "name": "required_bytes_value", "typeFullName": "bytes" } },
+        },
+        requiredDoubleValues: {
+          "type": nonNull(list(nonNull("Float"))),
+          "extensions": { "protobufField": { "name": "required_double_values", "typeFullName": "double" } },
+        },
+        requiredFloatValues: {
+          "type": nonNull(list(nonNull("Float"))),
+          "extensions": { "protobufField": { "name": "required_float_values", "typeFullName": "float" } },
+        },
+        requiredInt32Values: {
+          "type": nonNull(list(nonNull("Int"))),
+          "extensions": { "protobufField": { "name": "required_int32_values", "typeFullName": "int32" } },
+        },
+        requiredInt64Values: {
+          "type": nonNull(list(nonNull("Int64"))),
+          "extensions": { "protobufField": { "name": "required_int64_values", "typeFullName": "int64" } },
+        },
+        requiredUint32Values: {
+          "type": nonNull(list(nonNull("Int"))),
+          "extensions": { "protobufField": { "name": "required_uint32_values", "typeFullName": "uint32" } },
+        },
+        requiredUint64Values: {
+          "type": nonNull(list(nonNull("Int64"))),
+          "extensions": { "protobufField": { "name": "required_uint64_values", "typeFullName": "uint64" } },
+        },
+        requiredSint32Values: {
+          "type": nonNull(list(nonNull("Int"))),
+          "extensions": { "protobufField": { "name": "required_sint32_values", "typeFullName": "sint32" } },
+        },
+        requiredSint64Values: {
+          "type": nonNull(list(nonNull("Int64"))),
+          "extensions": { "protobufField": { "name": "required_sint64_values", "typeFullName": "sint64" } },
+        },
+        requiredFixed32Values: {
+          "type": nonNull(list(nonNull("Int"))),
+          "extensions": { "protobufField": { "name": "required_fixed32_values", "typeFullName": "fixed32" } },
+        },
+        requiredFixed64Values: {
+          "type": nonNull(list(nonNull("Int64"))),
+          "extensions": { "protobufField": { "name": "required_fixed64_values", "typeFullName": "fixed64" } },
+        },
+        requiredSfixed32Values: {
+          "type": nonNull(list(nonNull("Int"))),
+          "extensions": { "protobufField": { "name": "required_sfixed32_values", "typeFullName": "sfixed32" } },
+        },
+        requiredSfixed64Values: {
+          "type": nonNull(list(nonNull("Int64"))),
+          "extensions": { "protobufField": { "name": "required_sfixed64_values", "typeFullName": "sfixed64" } },
+        },
+        requiredBoolValues: {
+          "type": nonNull(list(nonNull("Boolean"))),
+          "extensions": { "protobufField": { "name": "required_bool_values", "typeFullName": "bool" } },
+        },
+        requiredStringValues: {
+          "type": nonNull(list(nonNull("String"))),
+          "extensions": { "protobufField": { "name": "required_string_values", "typeFullName": "string" } },
+        },
+        requiredBytesValues: {
+          "type": nonNull(list(nonNull("Byte"))),
+          "extensions": { "protobufField": { "name": "required_bytes_values", "typeFullName": "bytes" } },
+        },
+      },
+    },
+  },
+);
+"
+`;
+
+exports[`createInputObjectTypeCode > google-protobuf > generates code for an input object with nested fields 1`] = `
+"import { Message } from "@testapis/google-protobuf/testapis/primitives/primitives_pb";
+import { inputObjectType, list, nonNull, nullable } from "nexus";
+
+export const MessageInput = Object.assign(
+  inputObjectType({
+    "name": "MessageInput",
+    "definition": (t) => {
+      t.field("requiredPrimitives", {
+        "type": nonNull("PrimitivesInput"),
+        "description": "Required.",
+        "extensions": {
+          "protobufField": { "name": "required_primitives", "typeFullName": "testapis.primitives.Primitives" },
+        },
+      });
+      t.field("optionalPrimitives", {
+        "type": nullable("PrimitivesInput"),
+        "description": "Optional.",
+        "extensions": {
+          "protobufField": { "name": "optional_primitives", "typeFullName": "testapis.primitives.Primitives" },
+        },
+      });
+      t.field("requiredPrimitivesList", {
+        "type": nonNull(list(nonNull("PrimitivesInput"))),
+        "description": "Required.",
+        "extensions": {
+          "protobufField": { "name": "required_primitives_list", "typeFullName": "testapis.primitives.Primitives" },
+        },
+      });
+      t.field("optionalPrimitivesList", {
+        "type": nullable(list(nonNull("PrimitivesInput"))),
+        "description": "Optional.",
+        "extensions": {
+          "protobufField": { "name": "optional_primitives_list", "typeFullName": "testapis.primitives.Primitives" },
+        },
+      });
+    },
+    "extensions": {
+      "protobufMessage": {
+        "fullName": "testapis.primitives.Message",
+        "name": "Message",
+        "package": "testapis.primitives",
+      },
+    },
+  }),
+  {
+    toProto: (input: NexusGen["inputTypes"]["MessageInput"]): Message => {
+      const output = new Message();
+      output.setRequiredPrimitives(PrimitivesInput.toProto(input.requiredPrimitives));
+      if (input.optionalPrimitives != null) {
+        output.setOptionalPrimitives(PrimitivesInput.toProto(input.optionalPrimitives));
+      }
+      output.setRequiredPrimitivesListList(input.requiredPrimitivesList.map((v) => PrimitivesInput.toProto(v)));
+      if (input.optionalPrimitivesList != null) {
+        output.setOptionalPrimitivesListList(input.optionalPrimitivesList.map((v) => PrimitivesInput.toProto(v)));
+      }
+      return output;
+    },
+    _protoNexus: {
+      fields: {
+        requiredPrimitives: {
+          "type": nonNull("PrimitivesInput"),
+          "extensions": {
+            "protobufField": { "name": "required_primitives", "typeFullName": "testapis.primitives.Primitives" },
+          },
+        },
+        optionalPrimitives: {
+          "type": nullable("PrimitivesInput"),
+          "extensions": {
+            "protobufField": { "name": "optional_primitives", "typeFullName": "testapis.primitives.Primitives" },
+          },
+        },
+        requiredPrimitivesList: {
+          "type": nonNull(list(nonNull("PrimitivesInput"))),
+          "extensions": {
+            "protobufField": { "name": "required_primitives_list", "typeFullName": "testapis.primitives.Primitives" },
+          },
+        },
+        optionalPrimitivesList: {
+          "type": nullable(list(nonNull("PrimitivesInput"))),
+          "extensions": {
+            "protobufField": { "name": "optional_primitives_list", "typeFullName": "testapis.primitives.Primitives" },
+          },
+        },
+      },
+    },
+  },
+);
+"
+`;
+
+exports[`createInputObjectTypeCode > google-protobuf > generates code for an input object with oneof fields 1`] = `
+"import { OneofParent } from "@testapis/google-protobuf/testapis/oneof/oneof_pb";
+import { inputObjectType, nonNull, nullable } from "nexus";
+
+export const OneofParentInput = Object.assign(
+  inputObjectType({
+    "name": "OneofParentInput",
+    "definition": (t) => {
+      t.field("normalField", {
+        "type": nonNull("String"),
+        "extensions": { "protobufField": { "name": "normal_field", "typeFullName": "string" } },
+      });
+      t.field("requiredMessage1", {
+        "type": nullable("OneofMemberMessage1Input"),
+        "extensions": {
+          "protobufField": { "name": "required_message1", "typeFullName": "testapis.oneof.OneofMemberMessage1" },
+        },
+      });
+      t.field("requiredMessage2", {
+        "type": nullable("OneofMemberMessage2Input"),
+        "extensions": {
+          "protobufField": { "name": "required_message2", "typeFullName": "testapis.oneof.OneofMemberMessage2" },
+        },
+      });
+      t.field("optoinalMessage1", {
+        "type": nullable("OneofMemberMessage1Input"),
+        "extensions": {
+          "protobufField": { "name": "optoinal_message1", "typeFullName": "testapis.oneof.OneofMemberMessage1" },
+        },
+      });
+      t.field("optoinalMessage2", {
+        "type": nullable("OneofMemberMessage2Input"),
+        "extensions": {
+          "protobufField": { "name": "optoinal_message2", "typeFullName": "testapis.oneof.OneofMemberMessage2" },
+        },
+      });
+    },
+    "extensions": {
+      "protobufMessage": {
+        "fullName": "testapis.oneof.OneofParent",
+        "name": "OneofParent",
+        "package": "testapis.oneof",
+      },
+    },
+  }),
+  {
+    toProto: (input: NexusGen["inputTypes"]["OneofParentInput"]): OneofParent => {
+      const output = new OneofParent();
+      output.setNormalField(input.normalField);
+      if (input.requiredMessage1 != null) {
+        output.setRequiredMessage1(OneofMemberMessage1Input.toProto(input.requiredMessage1));
+      }
+      if (input.requiredMessage2 != null) {
+        output.setRequiredMessage2(OneofMemberMessage2Input.toProto(input.requiredMessage2));
+      }
+      if (input.optoinalMessage1 != null) {
+        output.setOptoinalMessage1(OneofMemberMessage1Input.toProto(input.optoinalMessage1));
+      }
+      if (input.optoinalMessage2 != null) {
+        output.setOptoinalMessage2(OneofMemberMessage2Input.toProto(input.optoinalMessage2));
+      }
+      return output;
+    },
+    _protoNexus: {
+      fields: {
+        normalField: {
+          "type": nonNull("String"),
+          "extensions": { "protobufField": { "name": "normal_field", "typeFullName": "string" } },
+        },
+        requiredMessage1: {
+          "type": nullable("OneofMemberMessage1Input"),
+          "extensions": {
+            "protobufField": { "name": "required_message1", "typeFullName": "testapis.oneof.OneofMemberMessage1" },
+          },
+        },
+        requiredMessage2: {
+          "type": nullable("OneofMemberMessage2Input"),
+          "extensions": {
+            "protobufField": { "name": "required_message2", "typeFullName": "testapis.oneof.OneofMemberMessage2" },
+          },
+        },
+        optoinalMessage1: {
+          "type": nullable("OneofMemberMessage1Input"),
+          "extensions": {
+            "protobufField": { "name": "optoinal_message1", "typeFullName": "testapis.oneof.OneofMemberMessage1" },
+          },
+        },
+        optoinalMessage2: {
+          "type": nullable("OneofMemberMessage2Input"),
+          "extensions": {
+            "protobufField": { "name": "optoinal_message2", "typeFullName": "testapis.oneof.OneofMemberMessage2" },
+          },
+        },
+      },
+    },
+  },
+);
+"
+`;
+
+exports[`createInputObjectTypeCode > google-protobuf > generates code for empty input object 1`] = `
+"import { EmptyMessage } from "@testapis/google-protobuf/testapis/empty_types/empty_pb";
+import { inputObjectType } from "nexus";
+
+export const EmptyMessageInput = Object.assign(
+  inputObjectType({
+    "name": "EmptyMessageInput",
+    "definition": (t) => {
+      t.field("_", { type: "Boolean", description: "noop field" });
+    },
+    "extensions": {
+      "protobufMessage": {
+        "fullName": "testapis.empty_types.EmptyMessage",
+        "name": "EmptyMessage",
+        "package": "testapis.empty_types",
+      },
+    },
+  }),
+  {
+    toProto: (input: NexusGen["inputTypes"]["EmptyMessageInput"]): EmptyMessage => {
+      const output = new EmptyMessage();
+
+      return output;
+    },
+    _protoNexus: { fields: {} },
+  },
+);
+"
+`;
+
+exports[`createInputObjectTypeCode > google-protobuf > generates code for nested input types 1`] = `
+"import { ParentMessage } from "@testapis/google-protobuf/testapis/nested/nested_pb";
+import { inputObjectType, nonNull, nullable } from "nexus";
+
+export const ParentMessageInput = Object.assign(
+  inputObjectType({
+    "name": "ParentMessageInput",
+    "definition": (t) => {
+      t.field("body", {
+        "type": nonNull("String"),
+        "extensions": { "protobufField": { "name": "body", "typeFullName": "string" } },
+      });
+      t.field("nested", {
+        "type": nullable("ParentMessageNestedMessageInput"),
+        "extensions": {
+          "protobufField": { "name": "nested", "typeFullName": "testapis.nested.ParentMessage.NestedMessage" },
+        },
+      });
+      t.field("nestedEnum", {
+        "type": nullable("ParentMessageNestedEnum"),
+        "extensions": {
+          "protobufField": { "name": "nested_enum", "typeFullName": "testapis.nested.ParentMessage.NestedEnum" },
+        },
+      });
+    },
+    "extensions": {
+      "protobufMessage": {
+        "fullName": "testapis.nested.ParentMessage",
+        "name": "ParentMessage",
+        "package": "testapis.nested",
+      },
+    },
+  }),
+  {
+    toProto: (input: NexusGen["inputTypes"]["ParentMessageInput"]): ParentMessage => {
+      const output = new ParentMessage();
+      output.setBody(input.body);
+      if (input.nested != null) {
+        output.setNested(ParentMessageNestedMessageInput.toProto(input.nested));
+      }
+      if (input.nestedEnum != null) {
+        output.setNestedEnum(input.nestedEnum);
+      }
+      return output;
+    },
+    _protoNexus: {
+      fields: {
+        body: {
+          "type": nonNull("String"),
+          "extensions": { "protobufField": { "name": "body", "typeFullName": "string" } },
+        },
+        nested: {
+          "type": nullable("ParentMessageNestedMessageInput"),
+          "extensions": {
+            "protobufField": { "name": "nested", "typeFullName": "testapis.nested.ParentMessage.NestedMessage" },
+          },
+        },
+        nestedEnum: {
+          "type": nullable("ParentMessageNestedEnum"),
+          "extensions": {
+            "protobufField": { "name": "nested_enum", "typeFullName": "testapis.nested.ParentMessage.NestedEnum" },
+          },
+        },
+      },
+    },
+  },
+);
+"
+`;
+
+exports[`createInputObjectTypeCode > protobufjs > generates code for a simple input object 1`] = `
+"import { testapis } from "@testapis/protobufjs/testapis/primitives";
+import { inputObjectType, list, nonNull } from "nexus";
+import { stringToNumber } from "proto-nexus";
+
+export const PrimitivesInput = Object.assign(
+  inputObjectType({
+    "name": "PrimitivesInput",
+    "definition": (t) => {
+      t.field("requiredDoubleValue", {
+        "type": nonNull("Float"),
+        "extensions": { "protobufField": { "name": "required_double_value", "typeFullName": "double" } },
+      });
+      t.field("requiredFloatValue", {
+        "type": nonNull("Float"),
+        "extensions": { "protobufField": { "name": "required_float_value", "typeFullName": "float" } },
+      });
+      t.field("requiredInt32Value", {
+        "type": nonNull("Int"),
+        "extensions": { "protobufField": { "name": "required_int32_value", "typeFullName": "int32" } },
+      });
+      t.field("requiredInt64Value", {
+        "type": nonNull("Int64"),
+        "extensions": { "protobufField": { "name": "required_int64_value", "typeFullName": "int64" } },
+      });
+      t.field("requiredUint32Value", {
+        "type": nonNull("Int"),
+        "extensions": { "protobufField": { "name": "required_uint32_value", "typeFullName": "uint32" } },
+      });
+      t.field("requiredUint64Value", {
+        "type": nonNull("Int64"),
+        "extensions": { "protobufField": { "name": "required_uint64_value", "typeFullName": "uint64" } },
+      });
+      t.field("requiredSint32Value", {
+        "type": nonNull("Int"),
+        "extensions": { "protobufField": { "name": "required_sint32_value", "typeFullName": "sint32" } },
+      });
+      t.field("requiredSint64Value", {
+        "type": nonNull("Int64"),
+        "extensions": { "protobufField": { "name": "required_sint64_value", "typeFullName": "sint64" } },
+      });
+      t.field("requiredFixed32Value", {
+        "type": nonNull("Int"),
+        "extensions": { "protobufField": { "name": "required_fixed32_value", "typeFullName": "fixed32" } },
+      });
+      t.field("requiredFixed64Value", {
+        "type": nonNull("Int64"),
+        "extensions": { "protobufField": { "name": "required_fixed64_value", "typeFullName": "fixed64" } },
+      });
+      t.field("requiredSfixed32Value", {
+        "type": nonNull("Int"),
+        "extensions": { "protobufField": { "name": "required_sfixed32_value", "typeFullName": "sfixed32" } },
+      });
+      t.field("requiredSfixed64Value", {
+        "type": nonNull("Int64"),
+        "extensions": { "protobufField": { "name": "required_sfixed64_value", "typeFullName": "sfixed64" } },
+      });
+      t.field("requiredBoolValue", {
+        "type": nonNull("Boolean"),
+        "extensions": { "protobufField": { "name": "required_bool_value", "typeFullName": "bool" } },
+      });
+      t.field("requiredStringValue", {
+        "type": nonNull("String"),
+        "extensions": { "protobufField": { "name": "required_string_value", "typeFullName": "string" } },
+      });
+      t.field("requiredBytesValue", {
+        "type": nonNull("Byte"),
+        "extensions": { "protobufField": { "name": "required_bytes_value", "typeFullName": "bytes" } },
+      });
+      t.field("requiredDoubleValues", {
+        "type": nonNull(list(nonNull("Float"))),
+        "extensions": { "protobufField": { "name": "required_double_values", "typeFullName": "double" } },
+      });
+      t.field("requiredFloatValues", {
+        "type": nonNull(list(nonNull("Float"))),
+        "extensions": { "protobufField": { "name": "required_float_values", "typeFullName": "float" } },
+      });
+      t.field("requiredInt32Values", {
+        "type": nonNull(list(nonNull("Int"))),
+        "extensions": { "protobufField": { "name": "required_int32_values", "typeFullName": "int32" } },
+      });
+      t.field("requiredInt64Values", {
+        "type": nonNull(list(nonNull("Int64"))),
+        "extensions": { "protobufField": { "name": "required_int64_values", "typeFullName": "int64" } },
+      });
+      t.field("requiredUint32Values", {
+        "type": nonNull(list(nonNull("Int"))),
+        "extensions": { "protobufField": { "name": "required_uint32_values", "typeFullName": "uint32" } },
+      });
+      t.field("requiredUint64Values", {
+        "type": nonNull(list(nonNull("Int64"))),
+        "extensions": { "protobufField": { "name": "required_uint64_values", "typeFullName": "uint64" } },
+      });
+      t.field("requiredSint32Values", {
+        "type": nonNull(list(nonNull("Int"))),
+        "extensions": { "protobufField": { "name": "required_sint32_values", "typeFullName": "sint32" } },
+      });
+      t.field("requiredSint64Values", {
+        "type": nonNull(list(nonNull("Int64"))),
+        "extensions": { "protobufField": { "name": "required_sint64_values", "typeFullName": "sint64" } },
+      });
+      t.field("requiredFixed32Values", {
+        "type": nonNull(list(nonNull("Int"))),
+        "extensions": { "protobufField": { "name": "required_fixed32_values", "typeFullName": "fixed32" } },
+      });
+      t.field("requiredFixed64Values", {
+        "type": nonNull(list(nonNull("Int64"))),
+        "extensions": { "protobufField": { "name": "required_fixed64_values", "typeFullName": "fixed64" } },
+      });
+      t.field("requiredSfixed32Values", {
+        "type": nonNull(list(nonNull("Int"))),
+        "extensions": { "protobufField": { "name": "required_sfixed32_values", "typeFullName": "sfixed32" } },
+      });
+      t.field("requiredSfixed64Values", {
+        "type": nonNull(list(nonNull("Int64"))),
+        "extensions": { "protobufField": { "name": "required_sfixed64_values", "typeFullName": "sfixed64" } },
+      });
+      t.field("requiredBoolValues", {
+        "type": nonNull(list(nonNull("Boolean"))),
+        "extensions": { "protobufField": { "name": "required_bool_values", "typeFullName": "bool" } },
+      });
+      t.field("requiredStringValues", {
+        "type": nonNull(list(nonNull("String"))),
+        "extensions": { "protobufField": { "name": "required_string_values", "typeFullName": "string" } },
+      });
+      t.field("requiredBytesValues", {
+        "type": nonNull(list(nonNull("Byte"))),
+        "extensions": { "protobufField": { "name": "required_bytes_values", "typeFullName": "bytes" } },
+      });
+    },
+    "extensions": {
+      "protobufMessage": {
+        "fullName": "testapis.primitives.Primitives",
+        "name": "Primitives",
+        "package": "testapis.primitives",
+      },
+    },
+  }),
+  {
+    toProto: (input: NexusGen["inputTypes"]["PrimitivesInput"]): testapis.primitives.Primitives => {
+      const output = new testapis.primitives.Primitives();
+      output.requiredDoubleValue = input.requiredDoubleValue;
+      output.requiredFloatValue = input.requiredFloatValue;
+      output.requiredInt32Value = input.requiredInt32Value;
+      output.requiredInt64Value = stringToNumber(input.requiredInt64Value);
+      output.requiredUint32Value = input.requiredUint32Value;
+      output.requiredUint64Value = stringToNumber(input.requiredUint64Value);
+      output.requiredSint32Value = input.requiredSint32Value;
+      output.requiredSint64Value = stringToNumber(input.requiredSint64Value);
+      output.requiredFixed32Value = input.requiredFixed32Value;
+      output.requiredFixed64Value = stringToNumber(input.requiredFixed64Value);
+      output.requiredSfixed32Value = input.requiredSfixed32Value;
+      output.requiredSfixed64Value = stringToNumber(input.requiredSfixed64Value);
+      output.requiredBoolValue = input.requiredBoolValue;
+      output.requiredStringValue = input.requiredStringValue;
+      output.requiredBytesValue = input.requiredBytesValue;
+      output.requiredDoubleValues = input.requiredDoubleValues.map((v) => v);
+      output.requiredFloatValues = input.requiredFloatValues.map((v) => v);
+      output.requiredInt32Values = input.requiredInt32Values.map((v) => v);
+      output.requiredInt64Values = input.requiredInt64Values.map((v) => stringToNumber(v));
+      output.requiredUint32Values = input.requiredUint32Values.map((v) => v);
+      output.requiredUint64Values = input.requiredUint64Values.map((v) => stringToNumber(v));
+      output.requiredSint32Values = input.requiredSint32Values.map((v) => v);
+      output.requiredSint64Values = input.requiredSint64Values.map((v) => stringToNumber(v));
+      output.requiredFixed32Values = input.requiredFixed32Values.map((v) => v);
+      output.requiredFixed64Values = input.requiredFixed64Values.map((v) => stringToNumber(v));
+      output.requiredSfixed32Values = input.requiredSfixed32Values.map((v) => v);
+      output.requiredSfixed64Values = input.requiredSfixed64Values.map((v) => stringToNumber(v));
+      output.requiredBoolValues = input.requiredBoolValues.map((v) => v);
+      output.requiredStringValues = input.requiredStringValues.map((v) => v);
+      output.requiredBytesValues = input.requiredBytesValues.map((v) => v);
+      return output;
+    },
+    _protoNexus: {
+      fields: {
+        requiredDoubleValue: {
+          "type": nonNull("Float"),
+          "extensions": { "protobufField": { "name": "required_double_value", "typeFullName": "double" } },
+        },
+        requiredFloatValue: {
+          "type": nonNull("Float"),
+          "extensions": { "protobufField": { "name": "required_float_value", "typeFullName": "float" } },
+        },
+        requiredInt32Value: {
+          "type": nonNull("Int"),
+          "extensions": { "protobufField": { "name": "required_int32_value", "typeFullName": "int32" } },
+        },
+        requiredInt64Value: {
+          "type": nonNull("Int64"),
+          "extensions": { "protobufField": { "name": "required_int64_value", "typeFullName": "int64" } },
+        },
+        requiredUint32Value: {
+          "type": nonNull("Int"),
+          "extensions": { "protobufField": { "name": "required_uint32_value", "typeFullName": "uint32" } },
+        },
+        requiredUint64Value: {
+          "type": nonNull("Int64"),
+          "extensions": { "protobufField": { "name": "required_uint64_value", "typeFullName": "uint64" } },
+        },
+        requiredSint32Value: {
+          "type": nonNull("Int"),
+          "extensions": { "protobufField": { "name": "required_sint32_value", "typeFullName": "sint32" } },
+        },
+        requiredSint64Value: {
+          "type": nonNull("Int64"),
+          "extensions": { "protobufField": { "name": "required_sint64_value", "typeFullName": "sint64" } },
+        },
+        requiredFixed32Value: {
+          "type": nonNull("Int"),
+          "extensions": { "protobufField": { "name": "required_fixed32_value", "typeFullName": "fixed32" } },
+        },
+        requiredFixed64Value: {
+          "type": nonNull("Int64"),
+          "extensions": { "protobufField": { "name": "required_fixed64_value", "typeFullName": "fixed64" } },
+        },
+        requiredSfixed32Value: {
+          "type": nonNull("Int"),
+          "extensions": { "protobufField": { "name": "required_sfixed32_value", "typeFullName": "sfixed32" } },
+        },
+        requiredSfixed64Value: {
+          "type": nonNull("Int64"),
+          "extensions": { "protobufField": { "name": "required_sfixed64_value", "typeFullName": "sfixed64" } },
+        },
+        requiredBoolValue: {
+          "type": nonNull("Boolean"),
+          "extensions": { "protobufField": { "name": "required_bool_value", "typeFullName": "bool" } },
+        },
+        requiredStringValue: {
+          "type": nonNull("String"),
+          "extensions": { "protobufField": { "name": "required_string_value", "typeFullName": "string" } },
+        },
+        requiredBytesValue: {
+          "type": nonNull("Byte"),
+          "extensions": { "protobufField": { "name": "required_bytes_value", "typeFullName": "bytes" } },
+        },
+        requiredDoubleValues: {
+          "type": nonNull(list(nonNull("Float"))),
+          "extensions": { "protobufField": { "name": "required_double_values", "typeFullName": "double" } },
+        },
+        requiredFloatValues: {
+          "type": nonNull(list(nonNull("Float"))),
+          "extensions": { "protobufField": { "name": "required_float_values", "typeFullName": "float" } },
+        },
+        requiredInt32Values: {
+          "type": nonNull(list(nonNull("Int"))),
+          "extensions": { "protobufField": { "name": "required_int32_values", "typeFullName": "int32" } },
+        },
+        requiredInt64Values: {
+          "type": nonNull(list(nonNull("Int64"))),
+          "extensions": { "protobufField": { "name": "required_int64_values", "typeFullName": "int64" } },
+        },
+        requiredUint32Values: {
+          "type": nonNull(list(nonNull("Int"))),
+          "extensions": { "protobufField": { "name": "required_uint32_values", "typeFullName": "uint32" } },
+        },
+        requiredUint64Values: {
+          "type": nonNull(list(nonNull("Int64"))),
+          "extensions": { "protobufField": { "name": "required_uint64_values", "typeFullName": "uint64" } },
+        },
+        requiredSint32Values: {
+          "type": nonNull(list(nonNull("Int"))),
+          "extensions": { "protobufField": { "name": "required_sint32_values", "typeFullName": "sint32" } },
+        },
+        requiredSint64Values: {
+          "type": nonNull(list(nonNull("Int64"))),
+          "extensions": { "protobufField": { "name": "required_sint64_values", "typeFullName": "sint64" } },
+        },
+        requiredFixed32Values: {
+          "type": nonNull(list(nonNull("Int"))),
+          "extensions": { "protobufField": { "name": "required_fixed32_values", "typeFullName": "fixed32" } },
+        },
+        requiredFixed64Values: {
+          "type": nonNull(list(nonNull("Int64"))),
+          "extensions": { "protobufField": { "name": "required_fixed64_values", "typeFullName": "fixed64" } },
+        },
+        requiredSfixed32Values: {
+          "type": nonNull(list(nonNull("Int"))),
+          "extensions": { "protobufField": { "name": "required_sfixed32_values", "typeFullName": "sfixed32" } },
+        },
+        requiredSfixed64Values: {
+          "type": nonNull(list(nonNull("Int64"))),
+          "extensions": { "protobufField": { "name": "required_sfixed64_values", "typeFullName": "sfixed64" } },
+        },
+        requiredBoolValues: {
+          "type": nonNull(list(nonNull("Boolean"))),
+          "extensions": { "protobufField": { "name": "required_bool_values", "typeFullName": "bool" } },
+        },
+        requiredStringValues: {
+          "type": nonNull(list(nonNull("String"))),
+          "extensions": { "protobufField": { "name": "required_string_values", "typeFullName": "string" } },
+        },
+        requiredBytesValues: {
+          "type": nonNull(list(nonNull("Byte"))),
+          "extensions": { "protobufField": { "name": "required_bytes_values", "typeFullName": "bytes" } },
+        },
+      },
+    },
+  },
+);
+"
+`;
+
+exports[`createInputObjectTypeCode > protobufjs > generates code for an input object with nested fields 1`] = `
+"import { testapis } from "@testapis/protobufjs/testapis/primitives";
+import { inputObjectType, list, nonNull, nullable } from "nexus";
+
+export const MessageInput = Object.assign(
+  inputObjectType({
+    "name": "MessageInput",
+    "definition": (t) => {
+      t.field("requiredPrimitives", {
+        "type": nonNull("PrimitivesInput"),
+        "description": "Required.",
+        "extensions": {
+          "protobufField": { "name": "required_primitives", "typeFullName": "testapis.primitives.Primitives" },
+        },
+      });
+      t.field("optionalPrimitives", {
+        "type": nullable("PrimitivesInput"),
+        "description": "Optional.",
+        "extensions": {
+          "protobufField": { "name": "optional_primitives", "typeFullName": "testapis.primitives.Primitives" },
+        },
+      });
+      t.field("requiredPrimitivesList", {
+        "type": nonNull(list(nonNull("PrimitivesInput"))),
+        "description": "Required.",
+        "extensions": {
+          "protobufField": { "name": "required_primitives_list", "typeFullName": "testapis.primitives.Primitives" },
+        },
+      });
+      t.field("optionalPrimitivesList", {
+        "type": nullable(list(nonNull("PrimitivesInput"))),
+        "description": "Optional.",
+        "extensions": {
+          "protobufField": { "name": "optional_primitives_list", "typeFullName": "testapis.primitives.Primitives" },
+        },
+      });
+    },
+    "extensions": {
+      "protobufMessage": {
+        "fullName": "testapis.primitives.Message",
+        "name": "Message",
+        "package": "testapis.primitives",
+      },
+    },
+  }),
+  {
+    toProto: (input: NexusGen["inputTypes"]["MessageInput"]): testapis.primitives.Message => {
+      const output = new testapis.primitives.Message();
+      output.requiredPrimitives = PrimitivesInput.toProto(input.requiredPrimitives);
+      if (input.optionalPrimitives != null) {
+        output.optionalPrimitives = PrimitivesInput.toProto(input.optionalPrimitives);
+      }
+      output.requiredPrimitivesList = input.requiredPrimitivesList.map((v) => PrimitivesInput.toProto(v));
+      if (input.optionalPrimitivesList != null) {
+        output.optionalPrimitivesList = input.optionalPrimitivesList.map((v) => PrimitivesInput.toProto(v));
+      }
+      return output;
+    },
+    _protoNexus: {
+      fields: {
+        requiredPrimitives: {
+          "type": nonNull("PrimitivesInput"),
+          "extensions": {
+            "protobufField": { "name": "required_primitives", "typeFullName": "testapis.primitives.Primitives" },
+          },
+        },
+        optionalPrimitives: {
+          "type": nullable("PrimitivesInput"),
+          "extensions": {
+            "protobufField": { "name": "optional_primitives", "typeFullName": "testapis.primitives.Primitives" },
+          },
+        },
+        requiredPrimitivesList: {
+          "type": nonNull(list(nonNull("PrimitivesInput"))),
+          "extensions": {
+            "protobufField": { "name": "required_primitives_list", "typeFullName": "testapis.primitives.Primitives" },
+          },
+        },
+        optionalPrimitivesList: {
+          "type": nullable(list(nonNull("PrimitivesInput"))),
+          "extensions": {
+            "protobufField": { "name": "optional_primitives_list", "typeFullName": "testapis.primitives.Primitives" },
+          },
+        },
+      },
+    },
+  },
+);
+"
+`;
+
+exports[`createInputObjectTypeCode > protobufjs > generates code for an input object with oneof fields 1`] = `
+"import { testapis } from "@testapis/protobufjs/testapis/oneof";
+import { inputObjectType, nonNull, nullable } from "nexus";
+
+export const OneofParentInput = Object.assign(
+  inputObjectType({
+    "name": "OneofParentInput",
+    "definition": (t) => {
+      t.field("normalField", {
+        "type": nonNull("String"),
+        "extensions": { "protobufField": { "name": "normal_field", "typeFullName": "string" } },
+      });
+      t.field("requiredMessage1", {
+        "type": nullable("OneofMemberMessage1Input"),
+        "extensions": {
+          "protobufField": { "name": "required_message1", "typeFullName": "testapis.oneof.OneofMemberMessage1" },
+        },
+      });
+      t.field("requiredMessage2", {
+        "type": nullable("OneofMemberMessage2Input"),
+        "extensions": {
+          "protobufField": { "name": "required_message2", "typeFullName": "testapis.oneof.OneofMemberMessage2" },
+        },
+      });
+      t.field("optoinalMessage1", {
+        "type": nullable("OneofMemberMessage1Input"),
+        "extensions": {
+          "protobufField": { "name": "optoinal_message1", "typeFullName": "testapis.oneof.OneofMemberMessage1" },
+        },
+      });
+      t.field("optoinalMessage2", {
+        "type": nullable("OneofMemberMessage2Input"),
+        "extensions": {
+          "protobufField": { "name": "optoinal_message2", "typeFullName": "testapis.oneof.OneofMemberMessage2" },
+        },
+      });
+    },
+    "extensions": {
+      "protobufMessage": {
+        "fullName": "testapis.oneof.OneofParent",
+        "name": "OneofParent",
+        "package": "testapis.oneof",
+      },
+    },
+  }),
+  {
+    toProto: (input: NexusGen["inputTypes"]["OneofParentInput"]): testapis.oneof.OneofParent => {
+      const output = new testapis.oneof.OneofParent();
+      output.normalField = input.normalField;
+      if (input.requiredMessage1 != null) {
+        output.requiredMessage1 = OneofMemberMessage1Input.toProto(input.requiredMessage1);
+      }
+      if (input.requiredMessage2 != null) {
+        output.requiredMessage2 = OneofMemberMessage2Input.toProto(input.requiredMessage2);
+      }
+      if (input.optoinalMessage1 != null) {
+        output.optoinalMessage1 = OneofMemberMessage1Input.toProto(input.optoinalMessage1);
+      }
+      if (input.optoinalMessage2 != null) {
+        output.optoinalMessage2 = OneofMemberMessage2Input.toProto(input.optoinalMessage2);
+      }
+      return output;
+    },
+    _protoNexus: {
+      fields: {
+        normalField: {
+          "type": nonNull("String"),
+          "extensions": { "protobufField": { "name": "normal_field", "typeFullName": "string" } },
+        },
+        requiredMessage1: {
+          "type": nullable("OneofMemberMessage1Input"),
+          "extensions": {
+            "protobufField": { "name": "required_message1", "typeFullName": "testapis.oneof.OneofMemberMessage1" },
+          },
+        },
+        requiredMessage2: {
+          "type": nullable("OneofMemberMessage2Input"),
+          "extensions": {
+            "protobufField": { "name": "required_message2", "typeFullName": "testapis.oneof.OneofMemberMessage2" },
+          },
+        },
+        optoinalMessage1: {
+          "type": nullable("OneofMemberMessage1Input"),
+          "extensions": {
+            "protobufField": { "name": "optoinal_message1", "typeFullName": "testapis.oneof.OneofMemberMessage1" },
+          },
+        },
+        optoinalMessage2: {
+          "type": nullable("OneofMemberMessage2Input"),
+          "extensions": {
+            "protobufField": { "name": "optoinal_message2", "typeFullName": "testapis.oneof.OneofMemberMessage2" },
+          },
+        },
+      },
+    },
+  },
+);
+"
+`;
+
+exports[`createInputObjectTypeCode > protobufjs > generates code for empty input object 1`] = `
+"import { testapis } from "@testapis/protobufjs/testapis/empty_types";
+import { inputObjectType } from "nexus";
+
+export const EmptyMessageInput = Object.assign(
+  inputObjectType({
+    "name": "EmptyMessageInput",
+    "definition": (t) => {
+      t.field("_", { type: "Boolean", description: "noop field" });
+    },
+    "extensions": {
+      "protobufMessage": {
+        "fullName": "testapis.empty_types.EmptyMessage",
+        "name": "EmptyMessage",
+        "package": "testapis.empty_types",
+      },
+    },
+  }),
+  {
+    toProto: (input: NexusGen["inputTypes"]["EmptyMessageInput"]): testapis.empty_types.EmptyMessage => {
+      const output = new testapis.empty_types.EmptyMessage();
+
+      return output;
+    },
+    _protoNexus: { fields: {} },
+  },
+);
+"
+`;
+
+exports[`createInputObjectTypeCode > with partial inputs > generates code for partial input types 1`] = `
+"import { Message } from "@testapis/google-protobuf/testapis/primitives/primitives_pb";
+import { inputObjectType, list, nonNull, nullable } from "nexus";
+
+export const MessagePartialInput = Object.assign(
+  inputObjectType({
+    "name": "MessagePartialInput",
+    "definition": (t) => {
+      t.field("requiredPrimitives", {
+        "type": nullable("PrimitivesPartialInput"),
+        "description": "Required.",
+        "extensions": {
+          "protobufField": { "name": "required_primitives", "typeFullName": "testapis.primitives.Primitives" },
+        },
+      });
+      t.field("optionalPrimitives", {
+        "type": nullable("PrimitivesPartialInput"),
+        "description": "Optional.",
+        "extensions": {
+          "protobufField": { "name": "optional_primitives", "typeFullName": "testapis.primitives.Primitives" },
+        },
+      });
+      t.field("requiredPrimitivesList", {
+        "type": nullable(list(nonNull("PrimitivesPartialInput"))),
+        "description": "Required.",
+        "extensions": {
+          "protobufField": { "name": "required_primitives_list", "typeFullName": "testapis.primitives.Primitives" },
+        },
+      });
+      t.field("optionalPrimitivesList", {
+        "type": nullable(list(nonNull("PrimitivesPartialInput"))),
+        "description": "Optional.",
+        "extensions": {
+          "protobufField": { "name": "optional_primitives_list", "typeFullName": "testapis.primitives.Primitives" },
+        },
+      });
+    },
+    "extensions": {
+      "protobufMessage": {
+        "fullName": "testapis.primitives.Message",
+        "name": "Message",
+        "package": "testapis.primitives",
+      },
+    },
+  }),
+  {
+    toProto: (input: NexusGen["inputTypes"]["MessagePartialInput"]): Message => {
+      const output = new Message();
+      if (input.requiredPrimitives != null) {
+        output.setRequiredPrimitives(PrimitivesPartialInput.toProto(input.requiredPrimitives));
+      }
+      if (input.optionalPrimitives != null) {
+        output.setOptionalPrimitives(PrimitivesPartialInput.toProto(input.optionalPrimitives));
+      }
+      if (input.requiredPrimitivesList != null) {
+        output.setRequiredPrimitivesListList(
+          input.requiredPrimitivesList.map((v) => PrimitivesPartialInput.toProto(v)),
+        );
+      }
+      if (input.optionalPrimitivesList != null) {
+        output.setOptionalPrimitivesListList(
+          input.optionalPrimitivesList.map((v) => PrimitivesPartialInput.toProto(v)),
+        );
+      }
+      return output;
+    },
+    _protoNexus: {
+      fields: {
+        requiredPrimitives: {
+          "type": nullable("PrimitivesPartialInput"),
+          "extensions": {
+            "protobufField": { "name": "required_primitives", "typeFullName": "testapis.primitives.Primitives" },
+          },
+        },
+        optionalPrimitives: {
+          "type": nullable("PrimitivesPartialInput"),
+          "extensions": {
+            "protobufField": { "name": "optional_primitives", "typeFullName": "testapis.primitives.Primitives" },
+          },
+        },
+        requiredPrimitivesList: {
+          "type": nullable(list(nonNull("PrimitivesPartialInput"))),
+          "extensions": {
+            "protobufField": { "name": "required_primitives_list", "typeFullName": "testapis.primitives.Primitives" },
+          },
+        },
+        optionalPrimitivesList: {
+          "type": nullable(list(nonNull("PrimitivesPartialInput"))),
+          "extensions": {
+            "protobufField": { "name": "optional_primitives_list", "typeFullName": "testapis.primitives.Primitives" },
+          },
+        },
+      },
+    },
+  },
+);
+"
+`;
