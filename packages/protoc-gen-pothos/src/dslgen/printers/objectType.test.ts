@@ -1,73 +1,39 @@
 import { createEcmaScriptPlugin } from "@bufbuild/protoplugin";
-import { buildCodeGeneratorRequest } from "@proto-graphql/testapis-proto";
-import { 
-  ObjectType, 
+import { buildCodeGeneratorRequest, getTestapisFileDescriptorSet, TestapisPackage } from "@proto-graphql/testapis-proto";
+import {
+  ObjectType,
   collectTypesFromFile,
   createRegistryFromSchema,
   defaultScalarMappingForTsProto,
-  defaultScalarMapping
+  defaultScalarMapping,
+  TypeOptions
 } from "@proto-graphql/codegen-core";
 import { createTsGenerator, parsePothosOptions } from "@proto-graphql/protoc-plugin-helpers";
 import { code } from "ts-poet";
 import { describe, expect, test } from "vitest";
 import { createObjectTypeCode } from "./objectType.js";
 import type { PothosPrinterOptions } from "./util.js";
+import { createFileRegistry, createRegistry } from "@bufbuild/protobuf";
 
-// Helper to extract ObjectType instances and generate code
-function generateObjectTypeCode(packageName: string, messageTypeName: string, options: PothosPrinterOptions) {
-  const req = buildCodeGeneratorRequest(packageName);
-  
-  // Default type options
-  const typeOptions = {
+function generateObjectTypeCode(packageName: TestapisPackage, messageTypeName: string, options: PothosPrinterOptions): string {
+  const typeOptions: TypeOptions = {
     partialInputs: false,
     scalarMapping: options.protobuf === "ts-proto" ? defaultScalarMappingForTsProto : defaultScalarMapping,
     ignoreNonMessageOneofFields: false,
   };
-  
-  // Create a minimal plugin to get Schema
-  const plugin = createEcmaScriptPlugin({
-    name: "test-plugin",
-    version: "v1.0.0",
-    generateTs: createTsGenerator({
-      generateFiles: (schema, file) => {
-        // Just return, we only need the schema
-      },
-      dsl: "pothos",
-    }),
-    parseOptions: parsePothosOptions,
-  });
-  
-  // Run the plugin to get the transformed schema
-  const resp = plugin.run(req);
-  
-  // Now we need to recreate the schema to access its internals
-  const testPlugin = createEcmaScriptPlugin({
-    name: "test-plugin",
-    version: "v1.0.0",
-    generateTs: (schema) => {
-      const registry = createRegistryFromSchema(schema);
-      
-      // Find the target file
-      const targetFile = schema.allFiles.find(f => f.name.includes(packageName.split('.')[1]));
-      if (!targetFile) throw new Error(`File for ${packageName} not found`);
-      
-      const types = collectTypesFromFile(targetFile, typeOptions, schema.allFiles);
-      const objectType = types.find(t => t.typeName === messageTypeName && t instanceof ObjectType) as ObjectType;
-      if (!objectType) throw new Error(`${messageTypeName} type not found`);
-      
-      const generatedCode = createObjectTypeCode(objectType, registry, options);
-      
-      // Store the result for testing
-      (global as any).testResult = generatedCode.toString();
-    },
-    parseOptions: parsePothosOptions,
-  });
-  
-  testPlugin.run(req);
-  
-  const result = (global as any).testResult;
-  delete (global as any).testResult;
-  return result;
+
+  const descSet = getTestapisFileDescriptorSet(packageName);
+  const registry = createFileRegistry(descSet)
+  const descMsg = registry.getMessage(`${packageName}.${messageTypeName}`);
+  if (descMsg === undefined) {
+    throw new Error(`Message ${messageTypeName} not found in package ${packageName}`);
+  }
+
+  const objType = new ObjectType(descMsg!, typeOptions)
+
+  const code = createObjectTypeCode(objType, registry, options)
+
+  return code.toString()
 }
 
 describe("createObjectTypeCode", () => {
@@ -153,7 +119,7 @@ describe("createObjectTypeCode", () => {
     };
 
     test("generates code for message with field extensions", () => {
-      const code = generateObjectTypeCode("testapis.extensions", "TestPrefixPrefixedMessage", options);
+      const code = generateObjectTypeCode("testapis.extensions", "PrefixedMessage", options);
       expect(code).toMatchSnapshot();
     });
   });
