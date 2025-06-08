@@ -2,13 +2,7 @@
   "name": "@proto-graphql/codegen-core",
   "version": "0.5.2",
   "description": "",
-  "keywords": [
-    "graphql",
-    "grpc",
-    "nexus",
-    "protobuf",
-    "typescript"
-  ],
+  "keywords": ["graphql", "grpc", "nexus", "protobuf", "typescript"],
   "repository": "git@github.com:proto-graphql/proto-graphql-js.git",
   "author": "izumin5210 <m@izum.in>",
   "license": "MIT",
@@ -28,12 +22,7 @@
       }
     }
   },
-  "files": [
-    "src/",
-    "dist/",
-    "!src/**/*.test.ts",
-    "!src/**/__tests__/"
-  ],
+  "files": ["src/", "dist/", "!src/**/*.test.ts", "!src/**/__tests__/"],
   "sideEffects": false,
   "private": false,
   "publishConfig": {

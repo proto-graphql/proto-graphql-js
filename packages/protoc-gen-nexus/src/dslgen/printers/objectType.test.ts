@@ -1,15 +1,22 @@
-import { getTestapisFileDescriptorSet, TestapisPackage } from "@proto-graphql/testapis-proto";
-import { 
-  ObjectType,
-  TypeOptions,
-  defaultScalarMapping
-} from "@proto-graphql/codegen-core";
 import { createFileRegistry } from "@bufbuild/protobuf";
+import {
+  ObjectType,
+  type TypeOptions,
+  defaultScalarMapping,
+} from "@proto-graphql/codegen-core";
+import {
+  type TestapisPackage,
+  getTestapisFileDescriptorSet,
+} from "@proto-graphql/testapis-proto";
 import { describe, expect, test } from "vitest";
 import { createObjectTypeCode } from "./objectType.js";
 import type { NexusPrinterOptions } from "./util.js";
 
-function generateObjectTypeCode(packageName: TestapisPackage, messageTypeName: string, options: NexusPrinterOptions): string {
+function generateObjectTypeCode(
+  packageName: TestapisPackage,
+  messageTypeName: string,
+  options: NexusPrinterOptions,
+): string {
   const typeOptions: TypeOptions = {
     partialInputs: false,
     scalarMapping: defaultScalarMapping,
@@ -20,7 +27,9 @@ function generateObjectTypeCode(packageName: TestapisPackage, messageTypeName: s
   const registry = createFileRegistry(descSet);
   const descMsg = registry.getMessage(`${packageName}.${messageTypeName}`);
   if (descMsg === undefined) {
-    throw new Error(`Message ${messageTypeName} not found in package ${packageName}`);
+    throw new Error(
+      `Message ${messageTypeName} not found in package ${packageName}`,
+    );
   }
 
   const objType = new ObjectType(descMsg, typeOptions);
@@ -42,12 +51,20 @@ describe("createObjectTypeCode", () => {
     };
 
     test("generates code for a simple message", () => {
-      const code = generateObjectTypeCode("testapis.primitives", "Primitives", options);
+      const code = generateObjectTypeCode(
+        "testapis.primitives",
+        "Primitives",
+        options,
+      );
       expect(code).toMatchSnapshot();
     });
 
     test("generates code for a message with nested fields", () => {
-      const code = generateObjectTypeCode("testapis.primitives", "Message", options);
+      const code = generateObjectTypeCode(
+        "testapis.primitives",
+        "Message",
+        options,
+      );
       expect(code).toMatchSnapshot();
     });
   });
@@ -63,17 +80,29 @@ describe("createObjectTypeCode", () => {
     };
 
     test("generates code for a simple message", () => {
-      const code = generateObjectTypeCode("testapis.primitives", "Primitives", options);
+      const code = generateObjectTypeCode(
+        "testapis.primitives",
+        "Primitives",
+        options,
+      );
       expect(code).toMatchSnapshot();
     });
 
     test("generates code for a message with nested fields", () => {
-      const code = generateObjectTypeCode("testapis.primitives", "Message", options);
+      const code = generateObjectTypeCode(
+        "testapis.primitives",
+        "Message",
+        options,
+      );
       expect(code).toMatchSnapshot();
     });
 
     test("generates code for a message with oneofs", () => {
-      const code = generateObjectTypeCode("testapis.oneof", "OneofParent", options);
+      const code = generateObjectTypeCode(
+        "testapis.oneof",
+        "OneofParent",
+        options,
+      );
       expect(code).toMatchSnapshot();
     });
   });
@@ -89,7 +118,11 @@ describe("createObjectTypeCode", () => {
     };
 
     test("generates code for message with field extensions", () => {
-      const code = generateObjectTypeCode("testapis.extensions", "PrefixedMessage", options);
+      const code = generateObjectTypeCode(
+        "testapis.extensions",
+        "PrefixedMessage",
+        options,
+      );
       expect(code).toMatchSnapshot();
     });
   });

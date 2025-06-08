@@ -1,16 +1,24 @@
-import { getTestapisFileDescriptorSet, TestapisPackage } from "@proto-graphql/testapis-proto";
-import { 
+import { createFileRegistry } from "@bufbuild/protobuf";
+import {
   OneofUnionType,
   SquashedOneofUnionType,
-  TypeOptions,
-  defaultScalarMapping
+  type TypeOptions,
+  defaultScalarMapping,
 } from "@proto-graphql/codegen-core";
-import { createFileRegistry } from "@bufbuild/protobuf";
+import {
+  type TestapisPackage,
+  getTestapisFileDescriptorSet,
+} from "@proto-graphql/testapis-proto";
 import { describe, expect, test } from "vitest";
 import { createOneofUnionTypeCode } from "./oneofUnionType.js";
 import type { NexusPrinterOptions } from "./util.js";
 
-function generateOneofUnionTypeCode(packageName: TestapisPackage, typeNameInProto: string, oneofFieldName: string, options: NexusPrinterOptions): string {
+function generateOneofUnionTypeCode(
+  packageName: TestapisPackage,
+  typeNameInProto: string,
+  oneofFieldName: string,
+  options: NexusPrinterOptions,
+): string {
   const typeOptions: TypeOptions = {
     partialInputs: false,
     scalarMapping: defaultScalarMapping,
@@ -18,25 +26,37 @@ function generateOneofUnionTypeCode(packageName: TestapisPackage, typeNameInProt
   };
 
   const descSet = getTestapisFileDescriptorSet(packageName);
-  const registry = createFileRegistry(descSet)
+  const registry = createFileRegistry(descSet);
   const descMsg = registry.getMessage(`${packageName}.${typeNameInProto}`);
   if (descMsg === undefined) {
-    throw new Error(`Message ${typeNameInProto} not found in package ${packageName}`);
+    throw new Error(
+      `Message ${typeNameInProto} not found in package ${packageName}`,
+    );
   }
 
-  const descOneof = descMsg.oneofs.find(d => d.name === oneofFieldName)
+  const descOneof = descMsg.oneofs.find((d) => d.name === oneofFieldName);
   if (descOneof === undefined) {
-    throw new Error(`Oneof field ${oneofFieldName} not found in message ${typeNameInProto} in package ${packageName}`);
+    throw new Error(
+      `Oneof field ${oneofFieldName} not found in message ${typeNameInProto} in package ${packageName}`,
+    );
   }
 
   const oneofType = new OneofUnionType(descOneof, typeOptions);
 
-  const code = createOneofUnionTypeCode(oneofType, registry, options).toString();
+  const code = createOneofUnionTypeCode(
+    oneofType,
+    registry,
+    options,
+  ).toString();
 
   return code.toString();
 }
 
-function generateSquashedOneofUnionTypeCode(packageName: TestapisPackage, typeNameInProto: string, options: NexusPrinterOptions): string {
+function generateSquashedOneofUnionTypeCode(
+  packageName: TestapisPackage,
+  typeNameInProto: string,
+  options: NexusPrinterOptions,
+): string {
   const typeOptions: TypeOptions = {
     partialInputs: false,
     scalarMapping: defaultScalarMapping,
@@ -44,15 +64,21 @@ function generateSquashedOneofUnionTypeCode(packageName: TestapisPackage, typeNa
   };
 
   const descSet = getTestapisFileDescriptorSet(packageName);
-  const registry = createFileRegistry(descSet)
+  const registry = createFileRegistry(descSet);
   const descMsg = registry.getMessage(`${packageName}.${typeNameInProto}`);
   if (descMsg === undefined) {
-    throw new Error(`Message ${typeNameInProto} not found in package ${packageName}`);
+    throw new Error(
+      `Message ${typeNameInProto} not found in package ${packageName}`,
+    );
   }
 
   const oneofType = new SquashedOneofUnionType(descMsg, typeOptions);
 
-  const code = createOneofUnionTypeCode(oneofType, registry, options).toString();
+  const code = createOneofUnionTypeCode(
+    oneofType,
+    registry,
+    options,
+  ).toString();
 
   return code.toString();
 }
@@ -69,17 +95,31 @@ describe("createOneofUnionTypeCode", () => {
     };
 
     test("generates code for a simple oneof union", () => {
-      const code = generateOneofUnionTypeCode("testapis.oneof", "OneofParent", "required_oneof_members", options);
+      const code = generateOneofUnionTypeCode(
+        "testapis.oneof",
+        "OneofParent",
+        "required_oneof_members",
+        options,
+      );
       expect(code).toMatchSnapshot();
     });
 
     test("generates code for optional oneof union", () => {
-      const code = generateOneofUnionTypeCode("testapis.oneof", "OneofParent", "optional_oneof_members", options);
+      const code = generateOneofUnionTypeCode(
+        "testapis.oneof",
+        "OneofParent",
+        "optional_oneof_members",
+        options,
+      );
       expect(code).toMatchSnapshot();
     });
 
     test("generates code for import squashed union", () => {
-      const code = generateSquashedOneofUnionTypeCode("testapis.edgecases.import_squashed_union.pkg1", "SquashedOneof", options);
+      const code = generateSquashedOneofUnionTypeCode(
+        "testapis.edgecases.import_squashed_union.pkg1",
+        "SquashedOneof",
+        options,
+      );
       expect(code).toMatchSnapshot();
     });
   });
@@ -95,17 +135,31 @@ describe("createOneofUnionTypeCode", () => {
     };
 
     test("generates code for a simple oneof union", () => {
-      const code = generateOneofUnionTypeCode("testapis.oneof", "OneofParent", "required_oneof_members", options);
+      const code = generateOneofUnionTypeCode(
+        "testapis.oneof",
+        "OneofParent",
+        "required_oneof_members",
+        options,
+      );
       expect(code).toMatchSnapshot();
     });
 
     test("generates code for optional oneof union", () => {
-      const code = generateOneofUnionTypeCode("testapis.oneof", "OneofParent", "optional_oneof_members", options);
+      const code = generateOneofUnionTypeCode(
+        "testapis.oneof",
+        "OneofParent",
+        "optional_oneof_members",
+        options,
+      );
       expect(code).toMatchSnapshot();
     });
 
     test("generates code for import squashed union", () => {
-      const code = generateSquashedOneofUnionTypeCode("testapis.edgecases.import_squashed_union.pkg1", "SquashedOneof", options);
+      const code = generateSquashedOneofUnionTypeCode(
+        "testapis.edgecases.import_squashed_union.pkg1",
+        "SquashedOneof",
+        options,
+      );
       expect(code).toMatchSnapshot();
     });
   });
