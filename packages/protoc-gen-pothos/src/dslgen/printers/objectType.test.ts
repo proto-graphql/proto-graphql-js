@@ -29,7 +29,7 @@ function generateObjectTypeCode(packageName: TestapisPackage, messageTypeName: s
     throw new Error(`Message ${messageTypeName} not found in package ${packageName}`);
   }
 
-  const objType = new ObjectType(descMsg!, typeOptions)
+  const objType = new ObjectType(descMsg, typeOptions);
 
   const code = createObjectTypeCode(objType, registry, options)
 
