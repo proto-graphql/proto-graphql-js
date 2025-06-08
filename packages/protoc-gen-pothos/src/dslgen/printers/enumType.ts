@@ -1,4 +1,4 @@
-import type { Registry } from "@bufbuild/protobuf";
+import type { DescEnum, DescMessage, GeneratedFile, Registry } from "@bufbuild/protobuf";
 import {
   type EnumType,
   compact,
@@ -57,4 +57,89 @@ export function createEnumTypeCode(
         type.typeName,
       )}, ${literalOf(compact(typeOpts))});
   `;
+}
+
+/**
+ * Prints enum type definition using protoplugin's GeneratedFile API
+ */
+export function printEnumType(
+  f: GeneratedFile,
+  type: EnumType,
+  registry: Registry,
+  opts: PothosPrinterOptions,
+): void {
+  // Import EnumRef from @pothos/core
+  const enumRefImport = f.import("EnumRef", "@pothos/core");
+  
+  // Generate the proto type import
+  const { importName, importPath } = getProtoTypeImport(type.proto, opts);
+  const protoTypeImport = f.import(importName, importPath);
+  
+  // Build the values object
+  const filteredValues = type.values
+    .filter((v) => !v.isIgnored() && !v.isUnespecified());
+
+  const typeOpts = compact({
+    description: type.description,
+    extensions: protobufGraphQLExtensions(type, registry),
+  });
+
+  // Generate the export statement
+  f.print(`export const ${pothosRef(type)}: ${enumRefImport}<${protoTypeImport}, ${protoTypeImport}> =`);
+  f.print(`  ${pothosBuilder(type, opts)}.enumType(${JSON.stringify(type.typeName)}, {`);
+  
+  // Print description if exists
+  if (typeOpts.description) {
+    f.print(`    description: ${JSON.stringify(typeOpts.description)},`);
+  }
+  
+  // Print values object
+  if (filteredValues.length > 0) {
+    f.print(`    values: {`);
+    filteredValues.forEach((ev) => {
+      const valueOpts = compact({
+        description: ev.description,
+        deprecationReason: ev.deprecationReason,
+        value: ev.number,
+        extensions: protobufGraphQLExtensions(ev, registry),
+      });
+      f.print(`      ${ev.name}: ${JSON.stringify(valueOpts)},`);
+    });
+    f.print(`    } as const,`);
+  }
+  
+  // Print extensions if exists
+  if (typeOpts.extensions) {
+    f.print(`    extensions: ${JSON.stringify(typeOpts.extensions)},`);
+  }
+  
+  f.print(`  });`);
+}
+
+/**
+ * Helper function to extract import info for proto types
+ */
+function getProtoTypeImport(
+  proto: DescEnum,
+  opts: PothosPrinterOptions,
+): { importName: string; importPath: string } {
+  // Get the proto type chunks (namespace hierarchy)
+  let p: DescEnum | DescMessage = proto;
+  const chunks = [p.name];
+  while (p.parent != null) {
+    p = p.parent;
+    chunks.unshift(p.name);
+  }
+
+  // Determine import based on protobuf library
+  switch (opts.protobuf) {
+    case "ts-proto":
+    case "protobuf-es": {
+      const importName = chunks.join("_");
+      const importPath = `${opts.importPrefix || "./"}${proto.file.name}`;
+      return { importName, importPath };
+    }
+    default:
+      throw new Error(`Unsupported protobuf library for protoplugin: ${opts.protobuf}`);
+  }
 }

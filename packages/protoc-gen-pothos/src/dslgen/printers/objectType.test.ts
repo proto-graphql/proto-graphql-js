@@ -1,16 +1,19 @@
 import { createFileRegistry } from "@bufbuild/protobuf";
+import { createEcmaScriptPlugin } from "@bufbuild/protoplugin";
 import {
   ObjectType,
   type TypeOptions,
+  createRegistryFromSchema,
   defaultScalarMapping,
   defaultScalarMappingForTsProto,
 } from "@proto-graphql/codegen-core";
 import {
   type TestapisPackage,
   getTestapisFileDescriptorSet,
+  buildCodeGeneratorRequest,
 } from "@proto-graphql/testapis-proto";
 import { describe, expect, test } from "vitest";
-import { createObjectTypeCode } from "./objectType.js";
+import { createObjectTypeCode, printObjectType } from "./objectType.js";
 import type { PothosPrinterOptions } from "./util.js";
 
 function generateObjectTypeCode(
@@ -171,11 +174,82 @@ const testSuites: TestSuite[] = [
   },
 ];
 
+function generateObjectTypeWithPrintFunction(
+  packageName: TestapisPackage,
+  messageTypeName: string,
+  options: PothosPrinterOptions,
+): string {
+  const typeOptions: TypeOptions = {
+    partialInputs: false,
+    scalarMapping:
+      options.protobuf === "ts-proto"
+        ? defaultScalarMappingForTsProto
+        : defaultScalarMapping,
+    ignoreNonMessageOneofFields: false,
+  };
+
+  // const descSet = getTestapisFileDescriptorSet(packageName);
+  // const registry = createFileRegistry(descSet);
+  // const descMsg = registry.getMessage(`${packageName}.${messageTypeName}`);
+  // if (descMsg === undefined) {
+  //   throw new Error(
+  //     `Message ${messageTypeName} not found in package ${packageName}`,
+  //   );
+  // }
+
+  const plugin = createEcmaScriptPlugin({
+    name: 'test',
+    version: '0.0.0',
+    generateTs: (schema) => {
+      const registry = createRegistryFromSchema(schema);
+      const descMsg = registry.getMessage(`${packageName}.${messageTypeName}`);
+      if (descMsg === undefined) {
+        throw new Error(
+          `Message ${messageTypeName} not found in package ${packageName}`,
+        );
+      }
+      const objType = new ObjectType(descMsg, typeOptions);
+
+      const f = schema.generateFile('generated.ts')
+      printObjectType(f, objType, registry, options);
+    },
+  })
+
+  const req = buildCodeGeneratorRequest(packageName)
+  req.parameter = 'target=ts'
+
+  const resp = plugin.run(req)
+
+  console.error(JSON.stringify(resp.file.map(f => f.name)))
+
+  const file = resp.file.find((f) => f.name === "generated.ts");
+  if (!file) {
+    throw new Error("Generated file not found");
+  }
+
+  return file.content
+}
+
 describe("createObjectTypeCode", () => {
+//   for (const { suite, options, cases } of testSuites) {
+//     describe(suite, () => {
+//       test.each(cases)("$test", ({ args }) => {
+//         const code = generateObjectTypeCode(
+//           args.packageName,
+//           args.messageTypeName,
+//           options,
+//         );
+//         expect(code).toMatchSnapshot();
+//       });
+//     });
+//   }
+// });
+//
+// describe("printObjectType", () => {
   for (const { suite, options, cases } of testSuites) {
     describe(suite, () => {
       test.each(cases)("$test", ({ args }) => {
-        const code = generateObjectTypeCode(
+        const code = generateObjectTypeWithPrintFunction(
           args.packageName,
           args.messageTypeName,
           options,
