@@ -8,7 +8,7 @@ import { createFileRegistry } from "@bufbuild/protobuf";
 import { describe, expect, test } from "vitest";
 import { createEnumTypeCode } from "./enumType.js";
 
-function generateEnumTypeCode(packageName: TestapisPackage, enumTypeName: string): string {
+function generateEnumTypeCode(packageName: TestapisPackage, enumTypeNameInProto: string): string {
   const typeOptions: TypeOptions = {
     partialInputs: false,
     scalarMapping: defaultScalarMapping,
@@ -18,23 +18,17 @@ function generateEnumTypeCode(packageName: TestapisPackage, enumTypeName: string
   const descSet = getTestapisFileDescriptorSet(packageName);
   const registry = createFileRegistry(descSet);
   
-  // For nested enums, we need to check the parent message
-  let descEnum = registry.getEnum(`${packageName}.${enumTypeName}`);
+  // The actual proto package might differ from the TestapisPackage key
+  // For example: "testapis.enums" key but "testapi.enums" proto package
+  let descEnum = registry.getEnum(`${packageName}.${enumTypeNameInProto}`);
   
-  // If not found directly, it might be a nested enum
-  if (descEnum === undefined && enumTypeName.includes("NestedEnum")) {
-    const parentMessageName = enumTypeName.replace("NestedEnum", "");
-    descEnum = registry.getEnum(`${packageName}.${parentMessageName}.NestedEnum`);
+  if (descEnum === undefined && packageName === "testapis.enums") {
+    // Try with the actual proto package name
+    descEnum = registry.getEnum(`testapi.enums.${enumTypeNameInProto}`);
   }
   
   if (descEnum === undefined) {
-    // Try with the actual proto package name (testapi instead of testapis)
-    const actualPackageName = packageName.replace("testapis", "testapi");
-    descEnum = registry.getEnum(`${actualPackageName}.${enumTypeName}`);
-  }
-  
-  if (descEnum === undefined) {
-    throw new Error(`Enum ${enumTypeName} not found in package ${packageName}`);
+    throw new Error(`Enum ${enumTypeNameInProto} not found in package ${packageName}`);
   }
 
   const enumType = new EnumType(descEnum, typeOptions);
@@ -57,7 +51,7 @@ describe("createEnumTypeCode", () => {
     });
 
     test("generates code for nested enum", () => {
-      const code = generateEnumTypeCode("testapis.nested", "ParentMessageNestedEnum");
+      const code = generateEnumTypeCode("testapis.nested", "ParentMessage.NestedEnum");
       expect(code).toMatchSnapshot();
     });
 
@@ -79,7 +73,7 @@ describe("createEnumTypeCode", () => {
     });
 
     test("generates code for nested enum", () => {
-      const code = generateEnumTypeCode("testapis.nested", "ParentMessageNestedEnum");
+      const code = generateEnumTypeCode("testapis.nested", "ParentMessage.NestedEnum");
       expect(code).toMatchSnapshot();
     });
   });
