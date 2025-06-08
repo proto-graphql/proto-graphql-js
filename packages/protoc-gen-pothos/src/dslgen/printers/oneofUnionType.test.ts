@@ -1,48 +1,30 @@
 import { createEcmaScriptPlugin } from "@bufbuild/protoplugin";
-import { buildCodeGeneratorRequest } from "@proto-graphql/testapis-proto";
+import { buildCodeGeneratorRequest, TestapisPackage } from "@proto-graphql/testapis-proto";
 import { 
   OneofUnionType,
   SquashedOneofUnionType,
+  TypeOptions,
   collectTypesFromFile,
   createRegistryFromSchema,
   defaultScalarMappingForTsProto,
   defaultScalarMapping
 } from "@proto-graphql/codegen-core";
 import { createTsGenerator, parsePothosOptions } from "@proto-graphql/protoc-plugin-helpers";
-import { code } from "ts-poet";
 import { describe, expect, test } from "vitest";
 import { createOneofUnionTypeCode } from "./oneofUnionType.js";
 import type { PothosPrinterOptions } from "./util.js";
 
-// Helper to extract OneofUnionType instances and generate code
-function generateOneofUnionTypeCode(packageName: string, typeName: string, options: PothosPrinterOptions) {
-  const req = buildCodeGeneratorRequest(packageName);
-  
-  // Default type options
-  const typeOptions = {
+function generateOneofUnionTypeCode(packageName: TestapisPackage, typeName: string, options: PothosPrinterOptions): string {
+  const typeOptions: TypeOptions = {
     partialInputs: false,
     scalarMapping: options.protobuf === "ts-proto" ? defaultScalarMappingForTsProto : defaultScalarMapping,
     ignoreNonMessageOneofFields: false,
   };
   
-  // Create a minimal plugin to get Schema
+  const req = buildCodeGeneratorRequest(packageName);
+  
+  let result = "";
   const plugin = createEcmaScriptPlugin({
-    name: "test-plugin",
-    version: "v1.0.0",
-    generateTs: createTsGenerator({
-      generateFiles: (schema, file) => {
-        // Just return, we only need the schema
-      },
-      dsl: "pothos",
-    }),
-    parseOptions: parsePothosOptions,
-  });
-  
-  // Run the plugin to get the transformed schema
-  const resp = plugin.run(req);
-  
-  // Now we need to recreate the schema to access its internals
-  const testPlugin = createEcmaScriptPlugin({
     name: "test-plugin",
     version: "v1.0.0",
     generateTs: (schema) => {
@@ -64,18 +46,12 @@ function generateOneofUnionTypeCode(packageName: string, typeName: string, optio
       const oneofType = types.find(t => t.typeName === typeName && (t instanceof OneofUnionType || t instanceof SquashedOneofUnionType));
       if (!oneofType) throw new Error(`${typeName} type not found`);
       
-      const generatedCode = createOneofUnionTypeCode(oneofType as OneofUnionType | SquashedOneofUnionType, registry, options);
-      
-      // Store the result for testing
-      (global as any).testResult = generatedCode.toString();
+      result = createOneofUnionTypeCode(oneofType as OneofUnionType | SquashedOneofUnionType, registry, options).toString();
     },
     parseOptions: parsePothosOptions,
   });
   
-  testPlugin.run(req);
-  
-  const result = (global as any).testResult;
-  delete (global as any).testResult;
+  plugin.run(req);
   return result;
 }
 
