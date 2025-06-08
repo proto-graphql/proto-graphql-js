@@ -46,55 +46,91 @@ function generateEnumTypeCode(
   return code.toString();
 }
 
+type TestCase = {
+  test: string;
+  args: {
+    packageName: TestapisPackage;
+    enumTypeNameInProto: string;
+  };
+};
+
+type TestSuite = {
+  suite: string;
+  cases: TestCase[];
+};
+
+const testSuites: TestSuite[] = [
+  {
+    suite: "google-protobuf",
+    cases: [
+      {
+        test: "generates code for a simple enum",
+        args: {
+          packageName: "testapis.enums",
+          enumTypeNameInProto: "MyEnum",
+        },
+      },
+      {
+        test: "generates code for an enum without unspecified",
+        args: {
+          packageName: "testapis.enums",
+          enumTypeNameInProto: "MyEnumWithoutUnspecified",
+        },
+      },
+      {
+        test: "generates code for nested enum",
+        args: {
+          packageName: "testapis.nested",
+          enumTypeNameInProto: "ParentMessage.NestedEnum",
+        },
+      },
+      {
+        test: "generates code for enum with extensions",
+        args: {
+          packageName: "testapis.extensions",
+          enumTypeNameInProto: "PrefixedEnum",
+        },
+      },
+    ],
+  },
+  {
+    suite: "protobufjs",
+    cases: [
+      {
+        test: "generates code for a simple enum",
+        args: {
+          packageName: "testapis.enums",
+          enumTypeNameInProto: "MyEnum",
+        },
+      },
+      {
+        test: "generates code for an enum without unspecified",
+        args: {
+          packageName: "testapis.enums",
+          enumTypeNameInProto: "MyEnumWithoutUnspecified",
+        },
+      },
+      {
+        test: "generates code for nested enum",
+        args: {
+          packageName: "testapis.nested",
+          enumTypeNameInProto: "ParentMessage.NestedEnum",
+        },
+      },
+    ],
+  },
+];
+
 describe("createEnumTypeCode", () => {
-  describe("google-protobuf", () => {
-    test("generates code for a simple enum", () => {
-      const code = generateEnumTypeCode("testapis.enums", "MyEnum");
-      expect(code).toMatchSnapshot();
+  for (const { suite, cases } of testSuites) {
+    describe(suite, () => {
+      test.each(cases)("$test", ({ args }) => {
+        const code = generateEnumTypeCode(
+          args.packageName,
+          args.enumTypeNameInProto,
+        );
+        expect(code).toMatchSnapshot();
+      });
     });
-
-    test("generates code for an enum without unspecified", () => {
-      const code = generateEnumTypeCode(
-        "testapis.enums",
-        "MyEnumWithoutUnspecified",
-      );
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for nested enum", () => {
-      const code = generateEnumTypeCode(
-        "testapis.nested",
-        "ParentMessage.NestedEnum",
-      );
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for enum with extensions", () => {
-      const code = generateEnumTypeCode("testapis.extensions", "PrefixedEnum");
-      expect(code).toMatchSnapshot();
-    });
-  });
-
-  describe("protobufjs", () => {
-    test("generates code for a simple enum", () => {
-      const code = generateEnumTypeCode("testapis.enums", "MyEnum");
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for an enum without unspecified", () => {
-      const code = generateEnumTypeCode(
-        "testapis.enums",
-        "MyEnumWithoutUnspecified",
-      );
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for nested enum", () => {
-      const code = generateEnumTypeCode(
-        "testapis.nested",
-        "ParentMessage.NestedEnum",
-      );
-      expect(code).toMatchSnapshot();
-    });
-  });
+  }
 });

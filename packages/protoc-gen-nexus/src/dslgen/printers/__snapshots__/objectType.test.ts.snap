@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`createObjectTypeCode > google-protobuf > generates code for a message with nested fields 1`] = `
+exports[`createObjectTypeCode > google-protobuf > 'generates code for a message with nes…' 1`] = `
 "import { Message as Message1 } from "@testapis/google-protobuf/testapis/primitives/primitives_pb";
 import { list, nonNull, nullable, objectType } from "nexus";
 
@@ -76,7 +76,7 @@ export const Message = objectType({
 "
 `;
 
-exports[`createObjectTypeCode > google-protobuf > generates code for a simple message 1`] = `
+exports[`createObjectTypeCode > google-protobuf > 'generates code for a simple message' 1`] = `
 "import { Primitives as Primitives1 } from "@testapis/google-protobuf/testapis/primitives/primitives_pb";
 import { list, nonNull, objectType } from "nexus";
 
@@ -355,7 +355,7 @@ export const Primitives = objectType({
 "
 `;
 
-exports[`createObjectTypeCode > protobufjs > generates code for a message with nested fields 1`] = `
+exports[`createObjectTypeCode > protobufjs > 'generates code for a message with nes…' 1`] = `
 "import { testapis } from "@testapis/protobufjs/testapis/primitives";
 import { list, nonNull, nullable, objectType } from "nexus";
 
@@ -431,7 +431,7 @@ export const Message = objectType({
 "
 `;
 
-exports[`createObjectTypeCode > protobufjs > generates code for a message with oneofs 1`] = `
+exports[`createObjectTypeCode > protobufjs > 'generates code for a message with one…' 1`] = `
 "import { testapis } from "@testapis/protobufjs/testapis/oneof";
 import { nonNull, nullable, objectType } from "nexus";
 
@@ -491,7 +491,7 @@ export const OneofParent = objectType({
 "
 `;
 
-exports[`createObjectTypeCode > protobufjs > generates code for a simple message 1`] = `
+exports[`createObjectTypeCode > protobufjs > 'generates code for a simple message' 1`] = `
 "import { testapis } from "@testapis/protobufjs/testapis/primitives";
 import { list, nonNull, objectType } from "nexus";
 
@@ -815,7 +815,7 @@ export const Primitives = objectType({
 "
 `;
 
-exports[`createObjectTypeCode > with extensions > generates code for message with field extensions 1`] = `
+exports[`createObjectTypeCode > with extensions > 'generates code for message with field…' 1`] = `
 "import {
   EnumWillRename,
   PrefixedEnum,

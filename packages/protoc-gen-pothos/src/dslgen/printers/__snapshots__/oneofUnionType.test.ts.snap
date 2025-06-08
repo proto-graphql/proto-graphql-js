@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`createOneofUnionTypeCode > protobuf-es > generates code for a required oneof union 1`] = `
+exports[`createOneofUnionTypeCode > protobuf-es > 'generates code for a required oneof u…' 1`] = `
 "import { builder } from "../../../../builder";
 
 export const OneofParentRequiredOneofMembers$Ref = builder.unionType("OneofParentRequiredOneofMembers", {
@@ -22,7 +22,7 @@ export const OneofParentRequiredOneofMembers$Ref = builder.unionType("OneofParen
 "
 `;
 
-exports[`createOneofUnionTypeCode > protobuf-es > generates code for a squashed oneof union 1`] = `
+exports[`createOneofUnionTypeCode > protobuf-es > 'generates code for a squashed oneof u…' 1`] = `
 "import { builder } from "../../../../builder";
 
 export const TestPrefixPrefixedMessageSquashedMessage$Ref = builder.unionType(
@@ -50,7 +50,7 @@ export const TestPrefixPrefixedMessageSquashedMessage$Ref = builder.unionType(
 "
 `;
 
-exports[`createOneofUnionTypeCode > protobuf-es > generates code for an optional oneof union 1`] = `
+exports[`createOneofUnionTypeCode > protobuf-es > 'generates code for an optional oneof …' 1`] = `
 "import { builder } from "../../../../builder";
 
 export const OneofParentOptionalOneofMembers$Ref = builder.unionType("OneofParentOptionalOneofMembers", {
@@ -71,7 +71,7 @@ export const OneofParentOptionalOneofMembers$Ref = builder.unionType("OneofParen
 "
 `;
 
-exports[`createOneofUnionTypeCode > ts-proto > generates code for a required oneof union 1`] = `
+exports[`createOneofUnionTypeCode > ts-proto > 'generates code for a required oneof u…' 1`] = `
 "import { builder } from "../../../../builder";
 
 export const OneofParentRequiredOneofMembers$Ref = builder.unionType("OneofParentRequiredOneofMembers", {
@@ -93,7 +93,7 @@ export const OneofParentRequiredOneofMembers$Ref = builder.unionType("OneofParen
 "
 `;
 
-exports[`createOneofUnionTypeCode > ts-proto > generates code for a squashed oneof union 1`] = `
+exports[`createOneofUnionTypeCode > ts-proto > 'generates code for a squashed oneof u…' 1`] = `
 "import { builder } from "../../../../builder";
 
 export const TestPrefixPrefixedMessageSquashedMessage$Ref = builder.unionType(
@@ -121,7 +121,7 @@ export const TestPrefixPrefixedMessageSquashedMessage$Ref = builder.unionType(
 "
 `;
 
-exports[`createOneofUnionTypeCode > ts-proto > generates code for an optional oneof union 1`] = `
+exports[`createOneofUnionTypeCode > ts-proto > 'generates code for an optional oneof …' 1`] = `
 "import { builder } from "../../../../builder";
 
 export const OneofParentOptionalOneofMembers$Ref = builder.unionType("OneofParentOptionalOneofMembers", {
@@ -142,7 +142,7 @@ export const OneofParentOptionalOneofMembers$Ref = builder.unionType("OneofParen
 "
 `;
 
-exports[`createOneofUnionTypeCode > ts-proto > generates code for imported oneof member 1`] = `
+exports[`createOneofUnionTypeCode > ts-proto > 'generates code for imported oneof mem…' 1`] = `
 "import { builder } from "../../../../../builder";
 import { OneofMember1$Ref, OneofMember2$Ref } from "./member.pothos";
 
@@ -164,7 +164,7 @@ export const OneofParentOneofField$Ref = builder.unionType("OneofParentOneofFiel
 "
 `;
 
-exports[`createOneofUnionTypeCode > with file layout graphql_type > generates code with correct imports for graphql_type layout 1`] = `
+exports[`createOneofUnionTypeCode > with file layout graphql_type > 'generates code with correct imports f…' 1`] = `
 "import { builder } from "../../../../builder";
 import { OneofMemberMessage1$Ref } from "./OneofMemberMessage1.pothos";
 import { OneofMemberMessage2$Ref } from "./OneofMemberMessage2.pothos";

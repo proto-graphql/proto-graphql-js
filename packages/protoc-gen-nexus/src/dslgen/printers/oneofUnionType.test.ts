@@ -1,9 +1,9 @@
 import { createFileRegistry } from "@bufbuild/protobuf";
-import {
+import { 
   OneofUnionType,
   SquashedOneofUnionType,
   type TypeOptions,
-  defaultScalarMapping,
+  defaultScalarMapping
 } from "@proto-graphql/codegen-core";
 import {
   type TestapisPackage,
@@ -26,7 +26,7 @@ function generateOneofUnionTypeCode(
   };
 
   const descSet = getTestapisFileDescriptorSet(packageName);
-  const registry = createFileRegistry(descSet);
+  const registry = createFileRegistry(descSet)
   const descMsg = registry.getMessage(`${packageName}.${typeNameInProto}`);
   if (descMsg === undefined) {
     throw new Error(
@@ -64,7 +64,7 @@ function generateSquashedOneofUnionTypeCode(
   };
 
   const descSet = getTestapisFileDescriptorSet(packageName);
-  const registry = createFileRegistry(descSet);
+  const registry = createFileRegistry(descSet)
   const descMsg = registry.getMessage(`${packageName}.${typeNameInProto}`);
   if (descMsg === undefined) {
     throw new Error(
@@ -83,84 +83,127 @@ function generateSquashedOneofUnionTypeCode(
   return code.toString();
 }
 
-describe("createOneofUnionTypeCode", () => {
-  describe("google-protobuf", () => {
-    const options: NexusPrinterOptions = {
+type OneofTestCase = {
+  test: string;
+  args: {
+    packageName: TestapisPackage;
+    typeNameInProto: string;
+    oneofFieldName: string;
+  };
+};
+
+type SquashedTestCase = {
+  test: string;
+  args: {
+    packageName: TestapisPackage;
+    typeNameInProto: string;
+  };
+};
+
+type TestCase = OneofTestCase | SquashedTestCase;
+
+type TestSuite = {
+  suite: string;
+  options: NexusPrinterOptions;
+  cases: TestCase[];
+};
+
+const testSuites: TestSuite[] = [
+  {
+    suite: "google-protobuf",
+    options: {
       dsl: "nexus",
       protobuf: "google-protobuf" as const,
       importPrefix: "@testapis/google-protobuf",
       emitImportedFiles: false,
       fileLayout: "proto_file",
       filenameSuffix: ".nexus",
-    };
-
-    test("generates code for a simple oneof union", () => {
-      const code = generateOneofUnionTypeCode(
-        "testapis.oneof",
-        "OneofParent",
-        "required_oneof_members",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for optional oneof union", () => {
-      const code = generateOneofUnionTypeCode(
-        "testapis.oneof",
-        "OneofParent",
-        "optional_oneof_members",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for import squashed union", () => {
-      const code = generateSquashedOneofUnionTypeCode(
-        "testapis.edgecases.import_squashed_union.pkg1",
-        "SquashedOneof",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-  });
-
-  describe("protobufjs", () => {
-    const options: NexusPrinterOptions = {
+    },
+    cases: [
+      {
+        test: "generates code for a simple oneof union",
+        args: {
+          packageName: "testapis.oneof",
+          typeNameInProto: "OneofParent",
+          oneofFieldName: "required_oneof_members",
+        },
+      } as OneofTestCase,
+      {
+        test: "generates code for optional oneof union",
+        args: {
+          packageName: "testapis.oneof",
+          typeNameInProto: "OneofParent",
+          oneofFieldName: "optional_oneof_members",
+        },
+      } as OneofTestCase,
+      {
+        test: "generates code for import squashed union",
+        args: {
+          packageName: "testapis.edgecases.import_squashed_union.pkg1",
+          typeNameInProto: "SquashedOneof",
+        },
+      } as SquashedTestCase,
+    ],
+  },
+  {
+    suite: "protobufjs",
+    options: {
       dsl: "nexus",
       protobuf: "protobufjs" as const,
       importPrefix: "@testapis/protobufjs",
       emitImportedFiles: false,
       fileLayout: "proto_file",
       filenameSuffix: ".nexus",
-    };
+    },
+    cases: [
+      {
+        test: "generates code for a simple oneof union",
+        args: {
+          packageName: "testapis.oneof",
+          typeNameInProto: "OneofParent",
+          oneofFieldName: "required_oneof_members",
+        },
+      } as OneofTestCase,
+      {
+        test: "generates code for optional oneof union",
+        args: {
+          packageName: "testapis.oneof",
+          typeNameInProto: "OneofParent",
+          oneofFieldName: "optional_oneof_members",
+        },
+      } as OneofTestCase,
+      {
+        test: "generates code for import squashed union",
+        args: {
+          packageName: "testapis.edgecases.import_squashed_union.pkg1",
+          typeNameInProto: "SquashedOneof",
+        },
+      } as SquashedTestCase,
+    ],
+  },
+];
 
-    test("generates code for a simple oneof union", () => {
-      const code = generateOneofUnionTypeCode(
-        "testapis.oneof",
-        "OneofParent",
-        "required_oneof_members",
-        options,
-      );
-      expect(code).toMatchSnapshot();
+describe("createOneofUnionTypeCode", () => {
+  for (const { suite, options, cases } of testSuites) {
+    describe(suite, () => {
+      test.each(cases)("$test", ({ args }) => {
+        if ("oneofFieldName" in args) {
+          const code = generateOneofUnionTypeCode(
+            args.packageName,
+            args.typeNameInProto,
+            args.oneofFieldName,
+            options,
+          );
+          expect(code).toMatchSnapshot();
+        } else {
+          const code = generateSquashedOneofUnionTypeCode(
+            args.packageName,
+            args.typeNameInProto,
+            options,
+          );
+          expect(code).toMatchSnapshot();
+        }
+      });
     });
-
-    test("generates code for optional oneof union", () => {
-      const code = generateOneofUnionTypeCode(
-        "testapis.oneof",
-        "OneofParent",
-        "optional_oneof_members",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for import squashed union", () => {
-      const code = generateSquashedOneofUnionTypeCode(
-        "testapis.edgecases.import_squashed_union.pkg1",
-        "SquashedOneof",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-  });
+  }
 });

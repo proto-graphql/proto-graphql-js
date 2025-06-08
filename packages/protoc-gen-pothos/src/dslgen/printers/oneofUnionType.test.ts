@@ -90,9 +90,35 @@ function generateSquashedOneofUnionTypeCode(
   return code.toString();
 }
 
-describe("createOneofUnionTypeCode", () => {
-  describe("ts-proto", () => {
-    const options: PothosPrinterOptions = {
+type OneofTestCase = {
+  test: string;
+  args: {
+    packageName: TestapisPackage;
+    typeNameInProto: string;
+    oneofFieldName: string;
+  };
+};
+
+type SquashedTestCase = {
+  test: string;
+  args: {
+    packageName: TestapisPackage;
+    typeNameInProto: string;
+  };
+};
+
+type TestCase = OneofTestCase | SquashedTestCase;
+
+type TestSuite = {
+  suite: string;
+  options: PothosPrinterOptions;
+  cases: TestCase[];
+};
+
+const testSuites: TestSuite[] = [
+  {
+    suite: "ts-proto",
+    options: {
       dsl: "pothos",
       protobuf: "ts-proto" as const,
       importPrefix: "@testapis/ts-proto",
@@ -102,50 +128,44 @@ describe("createOneofUnionTypeCode", () => {
       pothos: {
         builderPath: "../../builder",
       },
-    };
-
-    test("generates code for a required oneof union", () => {
-      const code = generateOneofUnionTypeCode(
-        "testapis.oneof",
-        "OneofParent",
-        "required_oneof_members",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for an optional oneof union", () => {
-      const code = generateOneofUnionTypeCode(
-        "testapis.oneof",
-        "OneofParent",
-        "optional_oneof_members",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for a squashed oneof union", () => {
-      const code = generateSquashedOneofUnionTypeCode(
-        "testapis.extensions",
-        "PrefixedMessage.SquashedMessage",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for imported oneof member", () => {
-      const code = generateOneofUnionTypeCode(
-        "testapis.edgecases.import_oneof_member_from_other_file",
-        "OneofParent",
-        "oneof_field",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-  });
-
-  describe("protobuf-es", () => {
-    const options: PothosPrinterOptions = {
+    },
+    cases: [
+      {
+        test: "generates code for a required oneof union",
+        args: {
+          packageName: "testapis.oneof",
+          typeNameInProto: "OneofParent",
+          oneofFieldName: "required_oneof_members",
+        },
+      } as OneofTestCase,
+      {
+        test: "generates code for an optional oneof union",
+        args: {
+          packageName: "testapis.oneof",
+          typeNameInProto: "OneofParent",
+          oneofFieldName: "optional_oneof_members",
+        },
+      } as OneofTestCase,
+      {
+        test: "generates code for a squashed oneof union",
+        args: {
+          packageName: "testapis.extensions",
+          typeNameInProto: "PrefixedMessage.SquashedMessage",
+        },
+      } as SquashedTestCase,
+      {
+        test: "generates code for imported oneof member",
+        args: {
+          packageName: "testapis.edgecases.import_oneof_member_from_other_file",
+          typeNameInProto: "OneofParent",
+          oneofFieldName: "oneof_field",
+        },
+      } as OneofTestCase,
+    ],
+  },
+  {
+    suite: "protobuf-es",
+    options: {
       dsl: "pothos",
       protobuf: "protobuf-es" as const,
       importPrefix: "@testapis/protobuf-es",
@@ -155,40 +175,36 @@ describe("createOneofUnionTypeCode", () => {
       pothos: {
         builderPath: "../../builder",
       },
-    };
-
-    test("generates code for a required oneof union", () => {
-      const code = generateOneofUnionTypeCode(
-        "testapis.oneof",
-        "OneofParent",
-        "required_oneof_members",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for an optional oneof union", () => {
-      const code = generateOneofUnionTypeCode(
-        "testapis.oneof",
-        "OneofParent",
-        "optional_oneof_members",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for a squashed oneof union", () => {
-      const code = generateSquashedOneofUnionTypeCode(
-        "testapis.extensions",
-        "PrefixedMessage.SquashedMessage",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-  });
-
-  describe("with file layout graphql_type", () => {
-    const options: PothosPrinterOptions = {
+    },
+    cases: [
+      {
+        test: "generates code for a required oneof union",
+        args: {
+          packageName: "testapis.oneof",
+          typeNameInProto: "OneofParent",
+          oneofFieldName: "required_oneof_members",
+        },
+      } as OneofTestCase,
+      {
+        test: "generates code for an optional oneof union",
+        args: {
+          packageName: "testapis.oneof",
+          typeNameInProto: "OneofParent",
+          oneofFieldName: "optional_oneof_members",
+        },
+      } as OneofTestCase,
+      {
+        test: "generates code for a squashed oneof union",
+        args: {
+          packageName: "testapis.extensions",
+          typeNameInProto: "PrefixedMessage.SquashedMessage",
+        },
+      } as SquashedTestCase,
+    ],
+  },
+  {
+    suite: "with file layout graphql_type",
+    options: {
       dsl: "pothos",
       protobuf: "ts-proto" as const,
       importPrefix: "@testapis/ts-proto",
@@ -198,16 +214,41 @@ describe("createOneofUnionTypeCode", () => {
       pothos: {
         builderPath: "../../builder",
       },
-    };
+    },
+    cases: [
+      {
+        test: "generates code with correct imports for graphql_type layout",
+        args: {
+          packageName: "testapis.oneof",
+          typeNameInProto: "OneofParent",
+          oneofFieldName: "required_oneof_members",
+        },
+      } as OneofTestCase,
+    ],
+  },
+];
 
-    test("generates code with correct imports for graphql_type layout", () => {
-      const code = generateOneofUnionTypeCode(
-        "testapis.oneof",
-        "OneofParent",
-        "required_oneof_members",
-        options,
-      );
-      expect(code).toMatchSnapshot();
+describe("createOneofUnionTypeCode", () => {
+  for (const { suite, options, cases } of testSuites) {
+    describe(suite, () => {
+      test.each(cases)("$test", ({ args }) => {
+        if ("oneofFieldName" in args) {
+          const code = generateOneofUnionTypeCode(
+            args.packageName,
+            args.typeNameInProto,
+            args.oneofFieldName,
+            options,
+          );
+          expect(code).toMatchSnapshot();
+        } else {
+          const code = generateSquashedOneofUnionTypeCode(
+            args.packageName,
+            args.typeNameInProto,
+            options,
+          );
+          expect(code).toMatchSnapshot();
+        }
+      });
     });
-  });
+  }
 });

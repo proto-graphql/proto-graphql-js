@@ -43,9 +43,24 @@ function generateObjectTypeCode(
   return code.toString();
 }
 
-describe("createObjectTypeCode", () => {
-  describe("ts-proto", () => {
-    const options: PothosPrinterOptions = {
+type TestCase = {
+  test: string;
+  args: {
+    packageName: TestapisPackage;
+    messageTypeName: string;
+  };
+};
+
+type TestSuite = {
+  suite: string;
+  options: PothosPrinterOptions;
+  cases: TestCase[];
+};
+
+const testSuites: TestSuite[] = [
+  {
+    suite: "ts-proto",
+    options: {
       dsl: "pothos",
       protobuf: "ts-proto" as const,
       importPrefix: "@testapis/ts-proto",
@@ -55,56 +70,48 @@ describe("createObjectTypeCode", () => {
       pothos: {
         builderPath: "../../builder",
       },
-    };
-
-    test("generates code for a simple message", () => {
-      const code = generateObjectTypeCode(
-        "testapis.primitives",
-        "Primitives",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for a message with nested fields", () => {
-      const code = generateObjectTypeCode(
-        "testapis.primitives",
-        "Message",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for a message with oneofs", () => {
-      const code = generateObjectTypeCode(
-        "testapis.oneof",
-        "OneofParent",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for empty message", () => {
-      const code = generateObjectTypeCode(
-        "testapis.empty_types",
-        "EmptyMessage",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for nested types", () => {
-      const code = generateObjectTypeCode(
-        "testapis.nested",
-        "ParentMessage",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-  });
-
-  describe("protobuf-es", () => {
-    const options: PothosPrinterOptions = {
+    },
+    cases: [
+      {
+        test: "generates code for a simple message",
+        args: {
+          packageName: "testapis.primitives",
+          messageTypeName: "Primitives",
+        },
+      },
+      {
+        test: "generates code for a message with nested fields",
+        args: {
+          packageName: "testapis.primitives",
+          messageTypeName: "Message",
+        },
+      },
+      {
+        test: "generates code for a message with oneofs",
+        args: {
+          packageName: "testapis.oneof",
+          messageTypeName: "OneofParent",
+        },
+      },
+      {
+        test: "generates code for empty message",
+        args: {
+          packageName: "testapis.empty_types",
+          messageTypeName: "EmptyMessage",
+        },
+      },
+      {
+        test: "generates code for nested types",
+        args: {
+          packageName: "testapis.nested",
+          messageTypeName: "ParentMessage",
+        },
+      },
+    ],
+  },
+  {
+    suite: "protobuf-es",
+    options: {
       dsl: "pothos",
       protobuf: "protobuf-es" as const,
       importPrefix: "@testapis/protobuf-es",
@@ -114,38 +121,34 @@ describe("createObjectTypeCode", () => {
       pothos: {
         builderPath: "../../builder",
       },
-    };
-
-    test("generates code for a simple message", () => {
-      const code = generateObjectTypeCode(
-        "testapis.primitives",
-        "Primitives",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for a message with nested fields", () => {
-      const code = generateObjectTypeCode(
-        "testapis.primitives",
-        "Message",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for a message with oneofs", () => {
-      const code = generateObjectTypeCode(
-        "testapis.oneof",
-        "OneofParent",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-  });
-
-  describe("with extensions", () => {
-    const options: PothosPrinterOptions = {
+    },
+    cases: [
+      {
+        test: "generates code for a simple message",
+        args: {
+          packageName: "testapis.primitives",
+          messageTypeName: "Primitives",
+        },
+      },
+      {
+        test: "generates code for a message with nested fields",
+        args: {
+          packageName: "testapis.primitives",
+          messageTypeName: "Message",
+        },
+      },
+      {
+        test: "generates code for a message with oneofs",
+        args: {
+          packageName: "testapis.oneof",
+          messageTypeName: "OneofParent",
+        },
+      },
+    ],
+  },
+  {
+    suite: "with extensions",
+    options: {
       dsl: "pothos",
       protobuf: "ts-proto" as const,
       importPrefix: "@testapis/ts-proto",
@@ -155,15 +158,30 @@ describe("createObjectTypeCode", () => {
       pothos: {
         builderPath: "../../builder",
       },
-    };
+    },
+    cases: [
+      {
+        test: "generates code for message with field extensions",
+        args: {
+          packageName: "testapis.extensions",
+          messageTypeName: "PrefixedMessage",
+        },
+      },
+    ],
+  },
+];
 
-    test("generates code for message with field extensions", () => {
-      const code = generateObjectTypeCode(
-        "testapis.extensions",
-        "PrefixedMessage",
-        options,
-      );
-      expect(code).toMatchSnapshot();
+describe("createObjectTypeCode", () => {
+  for (const { suite, options, cases } of testSuites) {
+    describe(suite, () => {
+      test.each(cases)("$test", ({ args }) => {
+        const code = generateObjectTypeCode(
+          args.packageName,
+          args.messageTypeName,
+          options,
+        );
+        expect(code).toMatchSnapshot();
+      });
     });
-  });
+  }
 });

@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`createOneofUnionTypeCode > google-protobuf > generates code for a simple oneof union 1`] = `
+exports[`createOneofUnionTypeCode > google-protobuf > 'generates code for a simple oneof uni…' 1`] = `
 "import { unionType } from "nexus";
 
 export const OneofParentRequiredOneofMembers = unionType({
@@ -25,7 +25,7 @@ export const OneofParentRequiredOneofMembers = unionType({
 "
 `;
 
-exports[`createOneofUnionTypeCode > google-protobuf > generates code for import squashed union 1`] = `
+exports[`createOneofUnionTypeCode > google-protobuf > 'generates code for import squashed un…' 1`] = `
 "import { unionType } from "nexus";
 
 export const SquashedOneof = unionType({
@@ -49,7 +49,7 @@ export const SquashedOneof = unionType({
 "
 `;
 
-exports[`createOneofUnionTypeCode > google-protobuf > generates code for optional oneof union 1`] = `
+exports[`createOneofUnionTypeCode > google-protobuf > 'generates code for optional oneof uni…' 1`] = `
 "import { unionType } from "nexus";
 
 export const OneofParentOptionalOneofMembers = unionType({
@@ -73,7 +73,7 @@ export const OneofParentOptionalOneofMembers = unionType({
 "
 `;
 
-exports[`createOneofUnionTypeCode > protobufjs > generates code for a simple oneof union 1`] = `
+exports[`createOneofUnionTypeCode > protobufjs > 'generates code for a simple oneof uni…' 1`] = `
 "import { unionType } from "nexus";
 
 export const OneofParentRequiredOneofMembers = unionType({
@@ -98,7 +98,7 @@ export const OneofParentRequiredOneofMembers = unionType({
 "
 `;
 
-exports[`createOneofUnionTypeCode > protobufjs > generates code for import squashed union 1`] = `
+exports[`createOneofUnionTypeCode > protobufjs > 'generates code for import squashed un…' 1`] = `
 "import { unionType } from "nexus";
 
 export const SquashedOneof = unionType({
@@ -122,7 +122,7 @@ export const SquashedOneof = unionType({
 "
 `;
 
-exports[`createOneofUnionTypeCode > protobufjs > generates code for optional oneof union 1`] = `
+exports[`createOneofUnionTypeCode > protobufjs > 'generates code for optional oneof uni…' 1`] = `
 "import { unionType } from "nexus";
 
 export const OneofParentOptionalOneofMembers = unionType({

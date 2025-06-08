@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`createInputObjectTypeCode > google-protobuf > generates code for a simple input object 1`] = `
+exports[`createInputObjectTypeCode > google-protobuf > 'generates code for a simple input obj…' 1`] = `
 "import { Primitives } from "@testapis/google-protobuf/testapis/primitives/primitives_pb";
 import { inputObjectType, list, nonNull } from "nexus";
 import { stringToNumber } from "proto-nexus";
@@ -302,7 +302,7 @@ export const PrimitivesInput = Object.assign(
 "
 `;
 
-exports[`createInputObjectTypeCode > google-protobuf > generates code for an input object with nested fields 1`] = `
+exports[`createInputObjectTypeCode > google-protobuf > 'generates code for an input object wi…' 1`] = `
 "import { Message } from "@testapis/google-protobuf/testapis/primitives/primitives_pb";
 import { inputObjectType, list, nonNull, nullable } from "nexus";
 
@@ -393,7 +393,7 @@ export const MessageInput = Object.assign(
 "
 `;
 
-exports[`createInputObjectTypeCode > google-protobuf > generates code for an input object with oneof fields 1`] = `
+exports[`createInputObjectTypeCode > google-protobuf > 'generates code for an input object wi…' 2`] = `
 "import { OneofParent } from "@testapis/google-protobuf/testapis/oneof/oneof_pb";
 import { inputObjectType, nonNull, nullable } from "nexus";
 
@@ -493,7 +493,7 @@ export const OneofParentInput = Object.assign(
 "
 `;
 
-exports[`createInputObjectTypeCode > google-protobuf > generates code for empty input object 1`] = `
+exports[`createInputObjectTypeCode > google-protobuf > 'generates code for empty input object' 1`] = `
 "import { EmptyMessage } from "@testapis/google-protobuf/testapis/empty_types/empty_pb";
 import { inputObjectType } from "nexus";
 
@@ -523,7 +523,7 @@ export const EmptyMessageInput = Object.assign(
 "
 `;
 
-exports[`createInputObjectTypeCode > google-protobuf > generates code for nested input types 1`] = `
+exports[`createInputObjectTypeCode > google-protobuf > 'generates code for nested input types' 1`] = `
 "import { ParentMessage } from "@testapis/google-protobuf/testapis/nested/nested_pb";
 import { inputObjectType, nonNull, nullable } from "nexus";
 
@@ -593,7 +593,7 @@ export const ParentMessageInput = Object.assign(
 "
 `;
 
-exports[`createInputObjectTypeCode > protobufjs > generates code for a simple input object 1`] = `
+exports[`createInputObjectTypeCode > protobufjs > 'generates code for a simple input obj…' 1`] = `
 "import { testapis } from "@testapis/protobufjs/testapis/primitives";
 import { inputObjectType, list, nonNull } from "nexus";
 import { stringToNumber } from "proto-nexus";
@@ -895,7 +895,7 @@ export const PrimitivesInput = Object.assign(
 "
 `;
 
-exports[`createInputObjectTypeCode > protobufjs > generates code for an input object with nested fields 1`] = `
+exports[`createInputObjectTypeCode > protobufjs > 'generates code for an input object wi…' 1`] = `
 "import { testapis } from "@testapis/protobufjs/testapis/primitives";
 import { inputObjectType, list, nonNull, nullable } from "nexus";
 
@@ -986,7 +986,7 @@ export const MessageInput = Object.assign(
 "
 `;
 
-exports[`createInputObjectTypeCode > protobufjs > generates code for an input object with oneof fields 1`] = `
+exports[`createInputObjectTypeCode > protobufjs > 'generates code for an input object wi…' 2`] = `
 "import { testapis } from "@testapis/protobufjs/testapis/oneof";
 import { inputObjectType, nonNull, nullable } from "nexus";
 
@@ -1086,7 +1086,7 @@ export const OneofParentInput = Object.assign(
 "
 `;
 
-exports[`createInputObjectTypeCode > protobufjs > generates code for empty input object 1`] = `
+exports[`createInputObjectTypeCode > protobufjs > 'generates code for empty input object' 1`] = `
 "import { testapis } from "@testapis/protobufjs/testapis/empty_types";
 import { inputObjectType } from "nexus";
 
@@ -1116,7 +1116,7 @@ export const EmptyMessageInput = Object.assign(
 "
 `;
 
-exports[`createInputObjectTypeCode > with partial inputs > generates code for partial input types 1`] = `
+exports[`createInputObjectTypeCode > with partial inputs > 'generates code for partial input types' 1`] = `
 "import { Message } from "@testapis/google-protobuf/testapis/primitives/primitives_pb";
 import { inputObjectType, list, nonNull, nullable } from "nexus";
 

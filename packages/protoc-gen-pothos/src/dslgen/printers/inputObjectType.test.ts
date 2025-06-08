@@ -48,9 +48,25 @@ function generateInputObjectTypeCode(
   return code.toString();
 }
 
-describe("createInputObjectTypeCode", () => {
-  describe("ts-proto", () => {
-    const options: PothosPrinterOptions = {
+type TestCase = {
+  test: string;
+  args: {
+    packageName: TestapisPackage;
+    typeNameInProto: string;
+    partialInputs?: boolean;
+  };
+};
+
+type TestSuite = {
+  suite: string;
+  options: PothosPrinterOptions;
+  cases: TestCase[];
+};
+
+const testSuites: TestSuite[] = [
+  {
+    suite: "ts-proto",
+    options: {
       dsl: "pothos",
       protobuf: "ts-proto" as const,
       importPrefix: "@testapis/ts-proto",
@@ -60,56 +76,48 @@ describe("createInputObjectTypeCode", () => {
       pothos: {
         builderPath: "../../builder",
       },
-    };
-
-    test("generates code for a simple input object", () => {
-      const code = generateInputObjectTypeCode(
-        "testapis.primitives",
-        "Primitives",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for an input object with nested fields", () => {
-      const code = generateInputObjectTypeCode(
-        "testapis.primitives",
-        "Message",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for an input object with oneof fields", () => {
-      const code = generateInputObjectTypeCode(
-        "testapis.oneof",
-        "OneofParent",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for empty input object", () => {
-      const code = generateInputObjectTypeCode(
-        "testapis.empty_types",
-        "EmptyMessage",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for nested input types", () => {
-      const code = generateInputObjectTypeCode(
-        "testapis.nested",
-        "ParentMessage",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-  });
-
-  describe("protobuf-es", () => {
-    const options: PothosPrinterOptions = {
+    },
+    cases: [
+      {
+        test: "generates code for a simple input object",
+        args: {
+          packageName: "testapis.primitives",
+          typeNameInProto: "Primitives",
+        },
+      },
+      {
+        test: "generates code for an input object with nested fields",
+        args: {
+          packageName: "testapis.primitives",
+          typeNameInProto: "Message",
+        },
+      },
+      {
+        test: "generates code for an input object with oneof fields",
+        args: {
+          packageName: "testapis.oneof",
+          typeNameInProto: "OneofParent",
+        },
+      },
+      {
+        test: "generates code for empty input object",
+        args: {
+          packageName: "testapis.empty_types",
+          typeNameInProto: "EmptyMessage",
+        },
+      },
+      {
+        test: "generates code for nested input types",
+        args: {
+          packageName: "testapis.nested",
+          typeNameInProto: "ParentMessage",
+        },
+      },
+    ],
+  },
+  {
+    suite: "protobuf-es",
+    options: {
       dsl: "pothos",
       protobuf: "protobuf-es" as const,
       importPrefix: "@testapis/protobuf-es",
@@ -119,47 +127,41 @@ describe("createInputObjectTypeCode", () => {
       pothos: {
         builderPath: "../../builder",
       },
-    };
-
-    test("generates code for a simple input object", () => {
-      const code = generateInputObjectTypeCode(
-        "testapis.primitives",
-        "Primitives",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for an input object with nested fields", () => {
-      const code = generateInputObjectTypeCode(
-        "testapis.primitives",
-        "Message",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for an input object with oneof fields", () => {
-      const code = generateInputObjectTypeCode(
-        "testapis.oneof",
-        "OneofParent",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for empty input object", () => {
-      const code = generateInputObjectTypeCode(
-        "testapis.empty_types",
-        "EmptyMessage",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-  });
-
-  describe("with partial inputs", () => {
-    const options: PothosPrinterOptions = {
+    },
+    cases: [
+      {
+        test: "generates code for a simple input object",
+        args: {
+          packageName: "testapis.primitives",
+          typeNameInProto: "Primitives",
+        },
+      },
+      {
+        test: "generates code for an input object with nested fields",
+        args: {
+          packageName: "testapis.primitives",
+          typeNameInProto: "Message",
+        },
+      },
+      {
+        test: "generates code for an input object with oneof fields",
+        args: {
+          packageName: "testapis.oneof",
+          typeNameInProto: "OneofParent",
+        },
+      },
+      {
+        test: "generates code for empty input object",
+        args: {
+          packageName: "testapis.empty_types",
+          typeNameInProto: "EmptyMessage",
+        },
+      },
+    ],
+  },
+  {
+    suite: "with partial inputs",
+    options: {
       dsl: "pothos",
       protobuf: "ts-proto" as const,
       importPrefix: "@testapis/ts-proto",
@@ -169,16 +171,32 @@ describe("createInputObjectTypeCode", () => {
       pothos: {
         builderPath: "../../builder",
       },
-    };
+    },
+    cases: [
+      {
+        test: "generates code for partial input types",
+        args: {
+          packageName: "testapis.primitives",
+          typeNameInProto: "Message",
+          partialInputs: true,
+        },
+      },
+    ],
+  },
+];
 
-    test("generates code for partial input types", () => {
-      const code = generateInputObjectTypeCode(
-        "testapis.primitives",
-        "Message",
-        options,
-        true,
-      );
-      expect(code).toMatchSnapshot();
+describe("createInputObjectTypeCode", () => {
+  for (const { suite, options, cases } of testSuites) {
+    describe(suite, () => {
+      test.each(cases)("$test", ({ args }) => {
+        const code = generateInputObjectTypeCode(
+          args.packageName,
+          args.typeNameInProto,
+          options,
+          args.partialInputs ?? false,
+        );
+        expect(code).toMatchSnapshot();
+      });
     });
-  });
+  }
 });

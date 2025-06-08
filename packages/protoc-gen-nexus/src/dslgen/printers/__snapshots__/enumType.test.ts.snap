@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`createEnumTypeCode > google-protobuf > generates code for a simple enum 1`] = `
+exports[`createEnumTypeCode > google-protobuf > 'generates code for a simple enum' 1`] = `
 "import { enumType } from "nexus";
 
 export const MyEnum = enumType({
@@ -18,7 +18,7 @@ export const MyEnum = enumType({
 "
 `;
 
-exports[`createEnumTypeCode > google-protobuf > generates code for an enum without unspecified 1`] = `
+exports[`createEnumTypeCode > google-protobuf > 'generates code for an enum without un…' 1`] = `
 "import { enumType } from "nexus";
 
 export const MyEnumWithoutUnspecified = enumType({
@@ -47,7 +47,7 @@ export const MyEnumWithoutUnspecified = enumType({
 "
 `;
 
-exports[`createEnumTypeCode > google-protobuf > generates code for enum with extensions 1`] = `
+exports[`createEnumTypeCode > google-protobuf > 'generates code for enum with extensio…' 1`] = `
 "import { enumType } from "nexus";
 
 export const TestPrefixPrefixedEnum = enumType({
@@ -67,7 +67,7 @@ export const TestPrefixPrefixedEnum = enumType({
 "
 `;
 
-exports[`createEnumTypeCode > google-protobuf > generates code for nested enum 1`] = `
+exports[`createEnumTypeCode > google-protobuf > 'generates code for nested enum' 1`] = `
 "import { enumType } from "nexus";
 
 export const ParentMessageNestedEnum = enumType({
@@ -88,7 +88,7 @@ export const ParentMessageNestedEnum = enumType({
 "
 `;
 
-exports[`createEnumTypeCode > protobufjs > generates code for a simple enum 1`] = `
+exports[`createEnumTypeCode > protobufjs > 'generates code for a simple enum' 1`] = `
 "import { enumType } from "nexus";
 
 export const MyEnum = enumType({
@@ -106,7 +106,7 @@ export const MyEnum = enumType({
 "
 `;
 
-exports[`createEnumTypeCode > protobufjs > generates code for an enum without unspecified 1`] = `
+exports[`createEnumTypeCode > protobufjs > 'generates code for an enum without un…' 1`] = `
 "import { enumType } from "nexus";
 
 export const MyEnumWithoutUnspecified = enumType({
@@ -135,7 +135,7 @@ export const MyEnumWithoutUnspecified = enumType({
 "
 `;
 
-exports[`createEnumTypeCode > protobufjs > generates code for nested enum 1`] = `
+exports[`createEnumTypeCode > protobufjs > 'generates code for nested enum' 1`] = `
 "import { enumType } from "nexus";
 
 export const ParentMessageNestedEnum = enumType({

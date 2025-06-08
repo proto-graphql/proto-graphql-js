@@ -39,91 +39,115 @@ function generateObjectTypeCode(
   return code.toString();
 }
 
-describe("createObjectTypeCode", () => {
-  describe("google-protobuf", () => {
-    const options: NexusPrinterOptions = {
+type TestCase = {
+  test: string;
+  args: {
+    packageName: TestapisPackage;
+    messageTypeName: string;
+  };
+};
+
+type TestSuite = {
+  suite: string;
+  options: NexusPrinterOptions;
+  cases: TestCase[];
+};
+
+const testSuites: TestSuite[] = [
+  {
+    suite: "google-protobuf",
+    options: {
       dsl: "nexus",
       protobuf: "google-protobuf" as const,
       importPrefix: "@testapis/google-protobuf",
       emitImportedFiles: false,
       fileLayout: "proto_file",
       filenameSuffix: ".nexus",
-    };
-
-    test("generates code for a simple message", () => {
-      const code = generateObjectTypeCode(
-        "testapis.primitives",
-        "Primitives",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for a message with nested fields", () => {
-      const code = generateObjectTypeCode(
-        "testapis.primitives",
-        "Message",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-  });
-
-  describe("protobufjs", () => {
-    const options: NexusPrinterOptions = {
+    },
+    cases: [
+      {
+        test: "generates code for a simple message",
+        args: {
+          packageName: "testapis.primitives",
+          messageTypeName: "Primitives",
+        },
+      },
+      {
+        test: "generates code for a message with nested fields",
+        args: {
+          packageName: "testapis.primitives",
+          messageTypeName: "Message",
+        },
+      },
+    ],
+  },
+  {
+    suite: "protobufjs",
+    options: {
       dsl: "nexus",
       protobuf: "protobufjs" as const,
       importPrefix: "@testapis/protobufjs",
       emitImportedFiles: false,
       fileLayout: "proto_file",
       filenameSuffix: ".nexus",
-    };
-
-    test("generates code for a simple message", () => {
-      const code = generateObjectTypeCode(
-        "testapis.primitives",
-        "Primitives",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for a message with nested fields", () => {
-      const code = generateObjectTypeCode(
-        "testapis.primitives",
-        "Message",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-
-    test("generates code for a message with oneofs", () => {
-      const code = generateObjectTypeCode(
-        "testapis.oneof",
-        "OneofParent",
-        options,
-      );
-      expect(code).toMatchSnapshot();
-    });
-  });
-
-  describe("with extensions", () => {
-    const options: NexusPrinterOptions = {
+    },
+    cases: [
+      {
+        test: "generates code for a simple message",
+        args: {
+          packageName: "testapis.primitives",
+          messageTypeName: "Primitives",
+        },
+      },
+      {
+        test: "generates code for a message with nested fields",
+        args: {
+          packageName: "testapis.primitives",
+          messageTypeName: "Message",
+        },
+      },
+      {
+        test: "generates code for a message with oneofs",
+        args: {
+          packageName: "testapis.oneof",
+          messageTypeName: "OneofParent",
+        },
+      },
+    ],
+  },
+  {
+    suite: "with extensions",
+    options: {
       dsl: "nexus",
       protobuf: "google-protobuf" as const,
       importPrefix: "@testapis/google-protobuf",
       emitImportedFiles: false,
       fileLayout: "proto_file",
       filenameSuffix: ".nexus",
-    };
+    },
+    cases: [
+      {
+        test: "generates code for message with field extensions",
+        args: {
+          packageName: "testapis.extensions",
+          messageTypeName: "PrefixedMessage",
+        },
+      },
+    ],
+  },
+];
 
-    test("generates code for message with field extensions", () => {
-      const code = generateObjectTypeCode(
-        "testapis.extensions",
-        "PrefixedMessage",
-        options,
-      );
-      expect(code).toMatchSnapshot();
+describe("createObjectTypeCode", () => {
+  for (const { suite, options, cases } of testSuites) {
+    describe(suite, () => {
+      test.each(cases)("$test", ({ args }) => {
+        const code = generateObjectTypeCode(
+          args.packageName,
+          args.messageTypeName,
+          options,
+        );
+        expect(code).toMatchSnapshot();
+      });
     });
-  });
+  }
 });
