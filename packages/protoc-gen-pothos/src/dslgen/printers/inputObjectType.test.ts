@@ -1,47 +1,32 @@
-import { createEcmaScriptPlugin } from "@bufbuild/protoplugin";
-import { buildCodeGeneratorRequest } from "@proto-graphql/testapis-proto";
+import { getTestapisFileDescriptorSet, TestapisPackage, buildCodeGeneratorRequest } from "@proto-graphql/testapis-proto";
 import { 
-  InputObjectType, 
-  collectTypesFromFile,
-  createRegistryFromSchema,
+  InputObjectType,
+  ObjectType,
+  TypeOptions,
   defaultScalarMappingForTsProto,
-  defaultScalarMapping
+  defaultScalarMapping,
+  collectTypesFromFile,
+  createRegistryFromSchema
 } from "@proto-graphql/codegen-core";
+import { createFileRegistry } from "@bufbuild/protobuf";
+import { createEcmaScriptPlugin } from "@bufbuild/protoplugin";
 import { createTsGenerator, parsePothosOptions } from "@proto-graphql/protoc-plugin-helpers";
-import { code } from "ts-poet";
 import { describe, expect, test } from "vitest";
 import { createInputObjectTypeCode } from "./inputObjectType.js";
 import type { PothosPrinterOptions } from "./util.js";
 
-// Helper to extract InputObjectType instances and generate code
-function generateInputObjectTypeCode(packageName: string, typeName: string, options: PothosPrinterOptions) {
-  const req = buildCodeGeneratorRequest(packageName);
-  
-  // Default type options
-  const typeOptions = {
-    partialInputs: false,
+function generateInputObjectTypeCode(packageName: TestapisPackage, typeName: string, options: PothosPrinterOptions, partialInputs = false): string {
+  const typeOptions: TypeOptions = {
+    partialInputs,
     scalarMapping: options.protobuf === "ts-proto" ? defaultScalarMappingForTsProto : defaultScalarMapping,
     ignoreNonMessageOneofFields: false,
   };
+
+  const req = buildCodeGeneratorRequest(packageName);
   
-  // Create a minimal plugin to get Schema
+  // We need to run through the plugin to get a proper Schema
+  let result = "";
   const plugin = createEcmaScriptPlugin({
-    name: "test-plugin",
-    version: "v1.0.0",
-    generateTs: createTsGenerator({
-      generateFiles: (schema, file) => {
-        // Just return, we only need the schema
-      },
-      dsl: "pothos",
-    }),
-    parseOptions: parsePothosOptions,
-  });
-  
-  // Run the plugin to get the transformed schema
-  const resp = plugin.run(req);
-  
-  // Now we need to recreate the schema to access its internals
-  const testPlugin = createEcmaScriptPlugin({
     name: "test-plugin",
     version: "v1.0.0",
     generateTs: (schema) => {
@@ -51,22 +36,18 @@ function generateInputObjectTypeCode(packageName: string, typeName: string, opti
       const targetFile = schema.allFiles.find(f => f.name.includes(packageName.split('.')[1]));
       if (!targetFile) throw new Error(`File for ${packageName} not found`);
       
+      // Collect types from the file
       const types = collectTypesFromFile(targetFile, typeOptions, schema.allFiles);
+      
       const inputType = types.find(t => t.typeName === typeName && t instanceof InputObjectType) as InputObjectType;
       if (!inputType) throw new Error(`${typeName} type not found`);
-      
-      const generatedCode = createInputObjectTypeCode(inputType, registry, options);
-      
-      // Store the result for testing
-      (global as any).testResult = generatedCode.toString();
+
+      result = createInputObjectTypeCode(inputType, registry, options).toString();
     },
     parseOptions: parsePothosOptions,
   });
   
-  testPlugin.run(req);
-  
-  const result = (global as any).testResult;
-  delete (global as any).testResult;
+  plugin.run(req);
   return result;
 }
 
@@ -158,42 +139,8 @@ describe("createInputObjectTypeCode", () => {
     };
 
     test("generates code for partial input types", () => {
-      const req = buildCodeGeneratorRequest("testapis.primitives");
-      
-      // Create type options with partialInputs enabled
-      const typeOptions = {
-        partialInputs: true,
-        scalarMapping: defaultScalarMappingForTsProto,
-        ignoreNonMessageOneofFields: false,
-      };
-      
-      const testPlugin = createEcmaScriptPlugin({
-        name: "test-plugin",
-        version: "v1.0.0",
-        generateTs: (schema) => {
-          const registry = createRegistryFromSchema(schema);
-          
-          const targetFile = schema.allFiles.find(f => f.name.includes("primitives"));
-          if (!targetFile) throw new Error(`File for primitives not found`);
-          
-          const types = collectTypesFromFile(targetFile, typeOptions, schema.allFiles);
-          const partialInputType = types.find(t => t.typeName === "MessagePartialInput" && t instanceof InputObjectType) as InputObjectType;
-          if (!partialInputType) throw new Error(`MessagePartialInput type not found`);
-          
-          const generatedCode = createInputObjectTypeCode(partialInputType, registry, options);
-          
-          // Store the result for testing
-          (global as any).testResult = generatedCode.toString();
-        },
-        parseOptions: parsePothosOptions,
-      });
-      
-      testPlugin.run(req);
-      
-      const result = (global as any).testResult;
-      delete (global as any).testResult;
-      
-      expect(result).toMatchSnapshot();
+      const code = generateInputObjectTypeCode("testapis.primitives", "MessagePartialInput", options, true);
+      expect(code).toMatchSnapshot();
     });
   });
 });
