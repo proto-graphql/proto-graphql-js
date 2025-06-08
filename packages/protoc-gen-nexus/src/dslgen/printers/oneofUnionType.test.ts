@@ -1,9 +1,9 @@
 import { createFileRegistry } from "@bufbuild/protobuf";
-import { 
+import {
   OneofUnionType,
   SquashedOneofUnionType,
   type TypeOptions,
-  defaultScalarMapping
+  defaultScalarMapping,
 } from "@proto-graphql/codegen-core";
 import {
   type TestapisPackage,
@@ -26,7 +26,7 @@ function generateOneofUnionTypeCode(
   };
 
   const descSet = getTestapisFileDescriptorSet(packageName);
-  const registry = createFileRegistry(descSet)
+  const registry = createFileRegistry(descSet);
   const descMsg = registry.getMessage(`${packageName}.${typeNameInProto}`);
   if (descMsg === undefined) {
     throw new Error(
@@ -64,7 +64,7 @@ function generateSquashedOneofUnionTypeCode(
   };
 
   const descSet = getTestapisFileDescriptorSet(packageName);
-  const registry = createFileRegistry(descSet)
+  const registry = createFileRegistry(descSet);
   const descMsg = registry.getMessage(`${packageName}.${typeNameInProto}`);
   if (descMsg === undefined) {
     throw new Error(
