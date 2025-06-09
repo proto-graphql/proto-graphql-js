@@ -3,7 +3,6 @@ import type {
   DescEnum,
   DescField,
   DescMessage,
-  GeneratedFile,
   Registry,
 } from "@bufbuild/protobuf";
 import {
@@ -25,6 +24,7 @@ import { type Code, code, joinCode, literalOf } from "ts-poet";
 
 import { createFieldRefCode, createNoopFieldRefCode } from "./field.js";
 import { type PothosPrinterOptions, pothosBuilder, pothosRef } from "./util.js";
+import { GeneratedFile } from "@bufbuild/protoplugin";
 
 /**
  * @example

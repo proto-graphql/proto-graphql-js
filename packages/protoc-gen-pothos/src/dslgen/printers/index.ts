@@ -1,4 +1,4 @@
-import type { GeneratedFile, createRegistry } from "@bufbuild/protobuf";
+import type { createRegistry } from "@bufbuild/protobuf";
 import {
   EnumType,
   InputObjectType,
@@ -19,6 +19,7 @@ import {
   printOneofUnionType,
 } from "./oneofUnionType.js";
 import type { PothosPrinterOptions } from "./util.js";
+import { GeneratedFile } from "@bufbuild/protoplugin";
 
 export function createTypeDslCodes(
   types: (
