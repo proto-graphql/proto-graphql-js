@@ -1,4 +1,5 @@
-import type { DescEnum, DescMessage, GeneratedFile, Registry } from "@bufbuild/protobuf";
+import type { DescEnum, DescMessage, Registry } from "@bufbuild/protobuf";
+import type { GeneratedFile } from "@bufbuild/protoplugin";
 import {
   type EnumType,
   compact,
@@ -84,9 +85,16 @@ export function printEnumType(
     extensions: protobufGraphQLExtensions(type, registry),
   });
 
+  // Import builder
+  const builderPath = opts.pothos?.builderPath || "../builder";
+  const builderImport = f.import("builder", builderPath);
+  
+  f.print("");  // Blank line after imports
+  
   // Generate the export statement
-  f.print(`export const ${pothosRef(type)}: ${enumRefImport}<${protoTypeImport}, ${protoTypeImport}> =`);
-  f.print(`  ${pothosBuilder(type, opts)}.enumType(${JSON.stringify(type.typeName)}, {`);
+  const refName = `${type.typeName}$Ref`;
+  f.print("export const ", refName, ": ", enumRefImport, "<", protoTypeImport, ", ", protoTypeImport, "> =");
+  f.print("  ", builderImport, ".enumType(", JSON.stringify(type.typeName), ", {");
   
   // Print description if exists
   if (typeOpts.description) {
@@ -94,19 +102,17 @@ export function printEnumType(
   }
   
   // Print values object
-  if (filteredValues.length > 0) {
-    f.print(`    values: {`);
-    filteredValues.forEach((ev) => {
-      const valueOpts = compact({
-        description: ev.description,
-        deprecationReason: ev.deprecationReason,
-        value: ev.number,
-        extensions: protobufGraphQLExtensions(ev, registry),
-      });
-      f.print(`      ${ev.name}: ${JSON.stringify(valueOpts)},`);
+  f.print(`    values: {`);
+  filteredValues.forEach((ev) => {
+    const valueOpts = compact({
+      description: ev.description,
+      deprecationReason: ev.deprecationReason,
+      value: ev.number,
+      extensions: protobufGraphQLExtensions(ev, registry),
     });
-    f.print(`    } as const,`);
-  }
+    f.print(`      ${ev.name}: ${JSON.stringify(valueOpts)},`);
+  });
+  f.print(`    } as const,`);
   
   // Print extensions if exists
   if (typeOpts.extensions) {
@@ -133,10 +139,15 @@ function getProtoTypeImport(
 
   // Determine import based on protobuf library
   switch (opts.protobuf) {
-    case "ts-proto":
+    case "ts-proto": {
+      const importName = chunks.join("_");
+      const importPath = `${opts.importPrefix || "."}/${proto.file.name}`;
+      return { importName, importPath };
+    }
     case "protobuf-es": {
       const importName = chunks.join("_");
-      const importPath = `${opts.importPrefix || "./"}${proto.file.name}`;
+      const protoFileName = proto.file.name.replace(/\.proto$/, "_pb");
+      const importPath = `${opts.importPrefix || "."}/${protoFileName}`;
       return { importName, importPath };
     }
     default:
