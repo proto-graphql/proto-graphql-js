@@ -231,31 +231,6 @@ const testSuites: TestSuite[] = [
   },
 ];
 
-describe("createOneofUnionTypeCode", () => {
-  for (const { suite, options, cases } of testSuites) {
-    describe(suite, () => {
-      test.each(cases)("$test", ({ args }) => {
-        if ("oneofFieldName" in args) {
-          const code = generateOneofUnionTypeCode(
-            args.packageName,
-            args.typeNameInProto,
-            args.oneofFieldName,
-            options,
-          );
-          expect(code).toMatchSnapshot();
-        } else {
-          const code = generateSquashedOneofUnionTypeCode(
-            args.packageName,
-            args.typeNameInProto,
-            options,
-          );
-          expect(code).toMatchSnapshot();
-        }
-      });
-    });
-  }
-});
-
 // New function to generate code using protoplugin
 function generateOneofUnionTypeWithPrintFunction(
   packageName: TestapisPackage,
@@ -278,22 +253,22 @@ function generateOneofUnionTypeWithPrintFunction(
     generateTs: (schema) => {
       const registry = createRegistryFromSchema(schema);
       const descMsg = registry.getMessage(`${packageName}.${typeNameInProto}`);
-      
+
       if (descMsg === undefined) {
         throw new Error(
           `Message ${typeNameInProto} not found in package ${packageName}`,
         );
       }
-      
+
       const descOneof = descMsg.oneofs.find((d) => d.name === oneofFieldName);
       if (descOneof === undefined) {
         throw new Error(
           `Oneof field ${oneofFieldName} not found in message ${typeNameInProto} in package ${packageName}`,
         );
       }
-      
+
       const oneofType = new OneofUnionType(descOneof, typeOptions);
-      
+
       const f = schema.generateFile('generated.ts')
       printOneofUnionType(f, oneofType, registry, options);
     },
@@ -332,15 +307,15 @@ function generateSquashedOneofUnionTypeWithPrintFunction(
     generateTs: (schema) => {
       const registry = createRegistryFromSchema(schema);
       const descMsg = registry.getMessage(`${packageName}.${typeNameInProto}`);
-      
+
       if (descMsg === undefined) {
         throw new Error(
           `Message ${typeNameInProto} not found in package ${packageName}`,
         );
       }
-      
+
       const oneofType = new SquashedOneofUnionType(descMsg, typeOptions);
-      
+
       const f = schema.generateFile('generated.ts')
       printOneofUnionType(f, oneofType, registry, options);
     },
@@ -359,13 +334,32 @@ function generateSquashedOneofUnionTypeWithPrintFunction(
   return file.content
 }
 
-describe("printOneofUnionType", () => {
-  const shouldUsePrintFunction = process.env.USE_PROTOPLUGIN_PRINTER === "1";
-  
-  if (!shouldUsePrintFunction) {
-    test.skip("printOneofUnionType tests skipped", () => {});
-    return;
-  }
+describe("createOneofUnionTypeCode", () => {
+//   for (const { suite, options, cases } of testSuites) {
+//     describe(suite, () => {
+//       test.each(cases)("$test", ({ args }) => {
+//         if ("oneofFieldName" in args) {
+//           const code = generateOneofUnionTypeCode(
+//             args.packageName,
+//             args.typeNameInProto,
+//             args.oneofFieldName,
+//             options,
+//           );
+//           expect(code).toMatchSnapshot();
+//         } else {
+//           const code = generateSquashedOneofUnionTypeCode(
+//             args.packageName,
+//             args.typeNameInProto,
+//             options,
+//           );
+//           expect(code).toMatchSnapshot();
+//         }
+//       });
+//     });
+//   }
+// });
+//
+// describe("printOneofUnionType", () => {
 
   for (const { suite, options, cases } of testSuites) {
     describe(suite, () => {
