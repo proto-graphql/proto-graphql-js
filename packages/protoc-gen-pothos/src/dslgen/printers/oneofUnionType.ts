@@ -1,9 +1,11 @@
-import type { GeneratedFile, Registry } from "@bufbuild/protobuf";
+import type { Registry } from "@bufbuild/protobuf";
+import type { GeneratedFile } from "@bufbuild/protoplugin";
 import {
   type OneofUnionType,
   type SquashedOneofUnionType,
   compact,
   protobufGraphQLExtensions,
+  generatedGraphQLTypeImportPath,
 } from "@proto-graphql/codegen-core";
 import { type Code, code, literalOf } from "ts-poet";
 
@@ -50,52 +52,47 @@ export function printOneofUnionType(
   registry: Registry,
   opts: PothosPrinterOptions,
 ): void {
-  // Generate type refs for union members
-  const typeRefs = type.fields.map((field) => {
-    const typeRefCode = fieldTypeRef(field, opts);
-    return handleFieldTypeRef(f, typeRefCode, opts);
-  });
+  // Import builder
+  const builderPath = opts.pothos?.builderPath || "../builder";
+  const builderImport = f.import("builder", builderPath);
   
-  const typeOpts = compact({
-    types: typeRefs,
-    description: type.description,
-    extensions: protobufGraphQLExtensions(type, registry),
-  });
+  // Get ref name  
+  const refName = `${type.typeName}$Ref`;
   
-  // Generate the union type
-  f.print(`export const ${pothosRef(type)} =`);
-  f.print(`  ${pothosBuilder(type, opts)}.unionType(${JSON.stringify(type.typeName)}, {`);
+  // Collect type refs and handle imports
+  const typeRefSymbols: any[] = [];
+  for (const field of type.fields) {
+    const importPath = generatedGraphQLTypeImportPath(field, opts);
+    const fieldRefName = `${field.type.typeName}$Ref`;
+    
+    if (importPath) {
+      const importSym = f.import(fieldRefName, importPath);
+      typeRefSymbols.push(importSym);
+    } else {
+      typeRefSymbols.push(fieldRefName);
+    }
+  }
+  
+  // Get extensions
+  const extensions = protobufGraphQLExtensions(type, registry);
+  
+  // Print the union type
+  f.print("export const ", refName, " = ", builderImport, ".unionType(", JSON.stringify(type.typeName), ", {");
   
   // Print types array
-  if (typeRefs.length > 0) {
-    f.print(`    types: [${typeRefs.join(", ")}],`);
+  if (typeRefSymbols.length > 0) {
+    f.print("  types: [", ...typeRefSymbols.flatMap((ref, i) => i === 0 ? [ref] : [", ", ref]), "],");
   }
   
   // Print description if exists
-  if (typeOpts.description) {
-    f.print(`    description: ${JSON.stringify(typeOpts.description)},`);
+  if (type.description) {
+    f.print(`  description: ${JSON.stringify(type.description)},`);
   }
   
   // Print extensions if exists
-  if (typeOpts.extensions) {
-    f.print(`    extensions: ${JSON.stringify(typeOpts.extensions)},`);
+  if (extensions) {
+    f.print(`  extensions: ${JSON.stringify(extensions)},`);
   }
   
-  f.print(`  });`);
-}
-
-/**
- * Helper function to handle field type refs and imports
- */
-function handleFieldTypeRef(
-  f: GeneratedFile,
-  typeRefCode: Code,
-  opts: PothosPrinterOptions,
-): string {
-  // Convert ts-poet Code to string and handle imports
-  const codeStr = typeRefCode.toString();
-  
-  // For now, return the string representation
-  // In a complete implementation, we would parse and register imports
-  return codeStr;
+  f.print("});");
 }
