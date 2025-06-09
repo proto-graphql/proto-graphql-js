@@ -24,6 +24,32 @@ import type { PothosPrinterOptions } from "./util.js";
 
 /**
  * Prints object type definition using protoplugin's GeneratedFile API
+ *
+ * @example
+ * ```ts
+ * export const User$Ref = builder.objectRef<User>("User");
+ * builder.objectType(User$Ref, {
+ *   name: "User",
+ *   fields: t => ({
+ *     id: t.expose("id", {
+ *       type: "String",
+ *       nullable: false,
+ *     }),
+ *     name: t.expose("name", {
+ *       type: "String",
+ *       nullable: false,
+ *     }),
+ *     posts: t.expose("posts", {
+ *       type: [Post$Ref],
+ *       nullable: { list: false, items: false },
+ *     }),
+ *   }),
+ *   isTypeOf: (source) => {
+ *     return (source as User | { $type: string & {} }).$type
+ *       === "example.User";
+ *   },
+ * });
+ * ```
  */
 export function printObjectType(
   f: GeneratedFile,
@@ -130,6 +156,22 @@ export function printObjectType(
 
 /**
  * Helper function to print isTypeOf function
+ *
+ * @example
+ * For ts-proto:
+ * ```ts
+ * isTypeOf: (source) => {
+ *   return (source as User | { $type: string & {} }).$type
+ *     === "example.User";
+ * },
+ * ```
+ *
+ * For protobuf-es:
+ * ```ts
+ * isTypeOf: (source) => {
+ *   return source instanceof User;
+ * },
+ * ```
  */
 function printIsTypeOfFunc(
   f: GeneratedFile,
@@ -164,6 +206,35 @@ function printIsTypeOfFunc(
 
 /**
  * Helper function to print field definition
+ *
+ * @example
+ * For scalar field (exposed):
+ * ```ts
+ * name: t.expose("name", {
+ *   type: "String",
+ *   nullable: false,
+ *   description: "User's name",
+ * }),
+ * ```
+ *
+ * For object field with resolver:
+ * ```ts
+ * profile: t.field({
+ *   type: Profile$Ref,
+ *   nullable: false,
+ *   resolve: (source) => {
+ *     return source.profile!;
+ *   },
+ * }),
+ * ```
+ *
+ * For list field:
+ * ```ts
+ * tags: t.expose("tags", {
+ *   type: ["String"],
+ *   nullable: { list: false, items: false },
+ * }),
+ * ```
  */
 function printFieldDefinition(
   f: GeneratedFile,
@@ -540,6 +611,11 @@ function printFieldDefinition(
 
 /**
  * Helper function to get enum import name
+ *
+ * @example
+ * For enum "Status" in package "example.v1":
+ * - ts-proto: returns "example_v1_Status"
+ * - protobuf-es: returns "example_v1_Status"
  */
 function getEnumImportName(
   enumProto: DescEnum,
@@ -566,6 +642,11 @@ function getEnumImportName(
 
 /**
  * Helper function to extract import info for proto types
+ *
+ * @example
+ * For message "User" in package "example.v1":
+ * - ts-proto: { importName: "example_v1_User", importPath: "./example/v1/user.proto" }
+ * - protobuf-es: { importName: "example_v1_User", importPath: "./example/v1/user.proto" }
  */
 function getProtoTypeImport(
   proto: DescMessage | DescEnum,
@@ -596,6 +677,16 @@ function getProtoTypeImport(
 
 /**
  * Helper function to get import path for generated GraphQL types
+ *
+ * @example
+ * If field type is in the same file as parent type:
+ * Returns: null
+ *
+ * If field type is in different file but same directory:
+ * Returns: "./otherfile.graphql"
+ *
+ * If field type is in different directory:
+ * Returns: "./other/path/file.graphql"
  */
 function getGeneratedGraphQLTypeImportPath(
   field: ObjectField<any> | ObjectOneofField,

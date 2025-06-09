@@ -11,12 +11,51 @@ import {
 } from "@proto-graphql/codegen-core";
 import type { PothosPrinterOptions } from "./util.js";
 
+/**
+ * Helper function to generate toProto function name
+ *
+ * @example
+ * For type "CreateUserInput":
+ * Returns: "CreateUserInput$toProto"
+ */
 function toProtoFuncName(type: InputObjectType): string {
   return `${type.typeName}$toProto`;
 }
 
 /**
  * Prints input object type definition using protoplugin's GeneratedFile API
+ *
+ * @example
+ * ```ts
+ * export type CreateUserInput$Shape = {
+ *   name: string,
+ *   email?: string | null | undefined,
+ * };
+ *
+ * export const CreateUserInput$Ref: InputObjectRef<CreateUserInput$Shape> =
+ *   builder.inputRef<CreateUserInput$Shape>("CreateUserInput").implement({
+ *     fields: t => ({
+ *       name: t.field({
+ *         type: "String",
+ *         required: true,
+ *       }),
+ *       email: t.field({
+ *         type: "String",
+ *         required: false,
+ *       }),
+ *     }),
+ *   });
+ *
+ * // For protobuf-es only
+ * CreateUserInput$Ref.toProto = (input: CreateUserInput$Shape): CreateUser => {
+ *   const output = new CreateUser();
+ *   output.name = input.name;
+ *   if (input.email != null) {
+ *     output.email = input.email;
+ *   }
+ *   return output;
+ * }
+ * ```
  */
 export function printInputObjectType(
   f: GeneratedFile,
@@ -243,6 +282,11 @@ function printToProtoFunc(
 
 /**
  * Helper function to get toProto function string
+ *
+ * @example
+ * Returns the function name that converts GraphQL input to protobuf:
+ * - Same file: "ProfileInput$toProto"
+ * - Different file: imports and returns "ProfileInput$toProto"
  */
 function getToProtoFuncString(
   f: GeneratedFile,
@@ -261,6 +305,32 @@ function getToProtoFuncString(
 
 /**
  * Helper function to print input field definition
+ *
+ * @example
+ * For scalar field:
+ * ```ts
+ * name: t.field({
+ *   type: "String",
+ *   required: true,
+ *   description: "User's name",
+ * }),
+ * ```
+ *
+ * For input object field:
+ * ```ts
+ * profile: t.field({
+ *   type: ProfileInput$Ref,
+ *   required: false,
+ * }),
+ * ```
+ *
+ * For list field:
+ * ```ts
+ * tags: t.field({
+ *   type: ["String"],
+ *   required: { list: true, items: true },
+ * }),
+ * ```
  */
 function printInputFieldDefinition(
   f: GeneratedFile,
@@ -338,6 +408,11 @@ function printInputFieldDefinition(
 
 /**
  * Helper function to extract import info for proto types
+ *
+ * @example
+ * For message "CreateUserInput" in package "example.v1":
+ * - ts-proto: { importName: "example_v1_CreateUserInput", importPath: "./example/v1/user.proto" }
+ * - protobuf-es: { importName: "example_v1_CreateUserInput", importPath: "./example/v1/user_pb" }
  */
 function getProtoTypeImport(
   proto: DescMessage,

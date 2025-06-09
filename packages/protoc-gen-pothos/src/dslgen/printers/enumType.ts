@@ -10,6 +10,17 @@ import type { PothosPrinterOptions } from "./util.js";
 
 /**
  * Prints enum type definition using protoplugin's GeneratedFile API
+ *
+ * @example
+ * ```ts
+ * export const Status$Ref: EnumRef<Status, Status> = builder.enumType("Status", {
+ *   values: {
+ *     PENDING: { value: 0 },
+ *     ACTIVE: { value: 1 },
+ *     INACTIVE: { value: 2 },
+ *   } as const,
+ * });
+ * ```
  */
 export function printEnumType(
   f: GeneratedFile,
@@ -89,6 +100,13 @@ export function printEnumType(
 
 /**
  * Helper function to extract import info for proto types
+ *
+ * @example
+ * For ts-proto with enum "Status" in package "example.v1":
+ * Returns: { importName: "example_v1_Status", importPath: "./example/v1/status.proto" }
+ *
+ * For protobuf-es with same enum:
+ * Returns: { importName: "example_v1_Status", importPath: "./example/v1/status_pb" }
  */
 function getProtoTypeImport(
   proto: DescEnum,

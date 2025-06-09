@@ -16,6 +16,38 @@ import type { NexusPrinterOptions } from "./util.js";
 
 /**
  * Prints input object type definition using protoplugin's GeneratedFile API
+ *
+ * @example
+ * ```ts
+ * export const CreateUserInput = inputObjectType({
+ *   name: "CreateUserInput",
+ *   definition: (t) => {
+ *     t.field("name", {
+ *       type: "String",
+ *       required: true,
+ *     });
+ *     t.field("email", {
+ *       type: "String",
+ *       required: false,
+ *     });
+ *   },
+ * }, {
+ *   toProto: (input: NexusGen["inputTypes"]["CreateUserInput"]): CreateUser => {
+ *     const output = new CreateUser();
+ *     output.name = input.name;
+ *     if (input.email != null) {
+ *       output.email = input.email;
+ *     }
+ *     return output;
+ *   },
+ *   _protoNexus: {
+ *     fields: {
+ *       name: { type: "String" },
+ *       email: { type: "String" },
+ *     }
+ *   },
+ * });
+ * ```
  */
 export function printInputObjectType(
   f: GeneratedFile,
@@ -88,6 +120,22 @@ export function printInputObjectType(
 
 /**
  * Helper function to print field definition
+ *
+ * @example
+ * For scalar field:
+ * ```ts
+ * t.field("name", {
+ *   type: "String",
+ *   nullable: false,
+ * })
+ * ```
+ *
+ * For input object field with list:
+ * ```ts
+ * t.field("profiles", {
+ *   type: list(ProfileInput),
+ * })
+ * ```
  */
 function printFieldDefinition(
   f: GeneratedFile,
@@ -157,6 +205,19 @@ function printFieldDefinition(
 
 /**
  * Helper function to print toProto function inline
+ *
+ * @example
+ * Generates:
+ * ```ts
+ * (input: NexusGen["inputTypes"]["CreateUserInput"]): CreateUser => {
+ *   const output = new CreateUser();
+ *   output.name = input.name;
+ *   if (input.email != null) {
+ *     output.email = input.email;
+ *   }
+ *   return output;
+ * }
+ * ```
  */
 function printToProtoFunction(
   f: GeneratedFile,
@@ -192,6 +253,17 @@ function printToProtoFunction(
 
 /**
  * Helper function to generate field assignment code
+ *
+ * @example
+ * For scalar field:
+ * - google-protobuf: "output.setName(input.name);"
+ * - protobufjs: "output.name = input.name;"
+ *
+ * For input object field:
+ * "output.profile = ProfileInput.toProto(input.profile);"
+ *
+ * For list field:
+ * "output.tags = input.tags.map(v => v);"
  */
 function generateFieldAssignment(
   f: GeneratedFile,
@@ -268,6 +340,11 @@ function generateFieldAssignment(
 
 /**
  * Helper function to get scalar type name for Nexus
+ *
+ * @example
+ * For field with ScalarType:
+ * - Returns the mapped type name from ScalarType instance
+ * - e.g., "String", "Int", "Float", "Boolean", "ID"
  */
 function getScalarTypeName(
   field: InputObjectField<ScalarType>,
@@ -279,6 +356,15 @@ function getScalarTypeName(
 
 /**
  * Helper function to get field type string for _protoNexus metadata
+ *
+ * @example
+ * For scalar field:
+ * - Non-list: returns '"String"'
+ * - List: returns '["String"]'
+ *
+ * For input/enum field:
+ * - Non-list: returns 'ProfileInput' (as reference)
+ * - List: returns '[ProfileInput]'
  */
 function getFieldTypeString(
   field: InputObjectField<any>,
@@ -305,6 +391,11 @@ function getFieldTypeString(
 
 /**
  * Helper function to extract import info for proto types
+ *
+ * @example
+ * For message "CreateUser" in package "example.v1":
+ * - google-protobuf: { importName: "example.v1.CreateUser", importPath: "./example/v1/user_pb" }
+ * - protobufjs: { importName: "example.v1.CreateUser", importPath: "./example/v1/user.proto" }
  */
 function getProtoTypeImport(
   proto: DescMessage | DescEnum,

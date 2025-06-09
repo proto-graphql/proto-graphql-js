@@ -11,6 +11,24 @@ import type { PothosPrinterOptions } from "./util.js";
 
 /**
  * Prints oneof union type definition using protoplugin's GeneratedFile API
+ *
+ * @example
+ * ```ts
+ * export const SearchResult$Ref: UnionRef<SearchResult, SearchResult> =
+ *   builder.unionType("SearchResult", {
+ *     types: [UserResult$Ref, PostResult$Ref],
+ *     resolveType: (source) => {
+ *       switch (source.oneofKind) {
+ *         case "user":
+ *           return UserResult$Ref;
+ *         case "post":
+ *           return PostResult$Ref;
+ *         default:
+ *           throw new Error("Invalid SearchResult");
+ *       }
+ *     },
+ *   });
+ * ```
  */
 export function printOneofUnionType(
   f: GeneratedFile,
