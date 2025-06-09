@@ -273,14 +273,8 @@ function getScalarTypeName(
   field: InputObjectField<ScalarType>,
   opts: NexusPrinterOptions,
 ): string {
-  switch (field.type.typeName) {
-    case "Int64":
-      return opts.protobuf === "ts-proto" ? "String" : "Int64";
-    case "Byte":
-      return "Byte";
-    default:
-      return field.type.typeName;
-  }
+  // Use the mapped scalar type name from the ScalarType instance
+  return field.type.typeName;
 }
 
 /**

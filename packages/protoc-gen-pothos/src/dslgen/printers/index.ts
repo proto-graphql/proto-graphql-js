@@ -33,7 +33,8 @@ export function printTypeDsl(
   f.print("");
 
   // Print each type
-  types.forEach((type, index) => {
+  let index = 0;
+  for (const type of types) {
     if (index > 0) {
       f.print("");
     }
@@ -53,5 +54,7 @@ export function printTypeDsl(
       const _exhaustiveCheck: never = type;
       throw "unreachable";
     }
-  });
+
+    index++;
+  }
 }

@@ -19,6 +19,7 @@ type TestCase = {
   args: {
     packageName: TestapisPackage;
     messageTypeName: string;
+    scalarMapping?: Record<string, string>;
   };
 };
 
@@ -140,19 +141,49 @@ const testSuites: TestSuite[] = [
       },
     ],
   },
+  {
+    suite: "with custom scalar mapping",
+    options: {
+      dsl: "pothos",
+      protobuf: "ts-proto" as const,
+      importPrefix: "@testapis/ts-proto",
+      emitImportedFiles: false,
+      fileLayout: "proto_file",
+      filenameSuffix: ".pothos",
+      pothos: {
+        builderPath: "../../builder",
+      },
+    },
+    cases: [
+      {
+        test: "uses custom scalar mapping for Int64",
+        args: {
+          packageName: "testapis.primitives",
+          messageTypeName: "Primitives",
+          scalarMapping: {
+            ...defaultScalarMappingForTsProto,
+            int64: "BigInt",
+            uint64: "BigInt",
+          },
+        },
+      },
+    ],
+  },
 ];
 
 function generateObjectTypeWithPrintFunction(
   packageName: TestapisPackage,
   messageTypeName: string,
   options: PothosPrinterOptions,
+  customScalarMapping?: Record<string, string>,
 ): string {
   const typeOptions: TypeOptions = {
     partialInputs: false,
     scalarMapping:
-      options.protobuf === "ts-proto"
+      customScalarMapping ||
+      (options.protobuf === "ts-proto"
         ? defaultScalarMappingForTsProto
-        : defaultScalarMapping,
+        : defaultScalarMapping),
     ignoreNonMessageOneofFields: false,
   };
 
@@ -204,6 +235,7 @@ describe("printObjectType", () => {
           args.packageName,
           args.messageTypeName,
           options,
+          args.scalarMapping,
         );
         expect(code).toMatchSnapshot();
       });

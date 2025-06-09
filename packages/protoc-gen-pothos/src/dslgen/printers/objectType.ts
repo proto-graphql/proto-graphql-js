@@ -179,18 +179,8 @@ function printFieldDefinition(
   let isRef = false;
 
   if (field.type instanceof ScalarType) {
-    // Map scalar types to GraphQL types
-    switch (field.type.typeName) {
-      case "Int64":
-        // For ts-proto, Int64 fields are strings
-        fieldTypeStr = opts.protobuf === "ts-proto" ? "String" : "Int64";
-        break;
-      case "Byte":
-        fieldTypeStr = "Byte";
-        break;
-      default:
-        fieldTypeStr = field.type.typeName;
-    }
+    // Use the mapped scalar type name from the ScalarType instance
+    fieldTypeStr = field.type.typeName;
   } else if (
     field.type instanceof ObjectType ||
     field.type instanceof EnumType ||

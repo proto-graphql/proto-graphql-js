@@ -277,17 +277,8 @@ function printInputFieldDefinition(
   let fieldTypeStr: string;
 
   if (field.type instanceof ScalarType) {
-    // Map scalar types to GraphQL types
-    switch (field.type.typeName) {
-      case "Int64":
-        fieldTypeStr = opts.protobuf === "ts-proto" ? "String" : "Int64";
-        break;
-      case "Byte":
-        fieldTypeStr = "Byte";
-        break;
-      default:
-        fieldTypeStr = field.type.typeName;
-    }
+    // Use the mapped scalar type name from the ScalarType instance
+    fieldTypeStr = field.type.typeName;
 
     if (field.isList()) {
       f.print('        type: ["', fieldTypeStr, '"],');
