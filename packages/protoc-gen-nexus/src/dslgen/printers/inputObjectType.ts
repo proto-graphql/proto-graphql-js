@@ -1,5 +1,5 @@
 import type { DescEnum, DescMessage, Registry } from "@bufbuild/protobuf";
-import type { GeneratedFile, ImportSymbol } from "@bufbuild/protoplugin";
+import type { GeneratedFile } from "@bufbuild/protoplugin";
 import {
   EnumType,
   type InputObjectField,
@@ -43,7 +43,7 @@ export function printInputObjectType(
   }
 
   // Print definition
-  f.print(`    definition: (t) => {`);
+  f.print("    definition: (t) => {");
   if (type.fields.length > 0) {
     for (const field of type.fields) {
       printFieldDefinition(f, field, registry, opts);
@@ -52,11 +52,11 @@ export function printInputObjectType(
     // Noop field for empty types
     f.print(`      t.field("_", {`);
     f.print(`        type: "Boolean",`);
-    f.print(`        nullable: true,`);
+    f.print("        nullable: true,");
     f.print(`        description: "noop field",`);
-    f.print(`      });`);
+    f.print("      });");
   }
-  f.print(`    },`);
+  f.print("    },");
 
   // Add extensions if exists
   const extensions = protobufGraphQLExtensions(type, registry);
@@ -64,13 +64,13 @@ export function printInputObjectType(
     f.print(`    extensions: ${JSON.stringify(extensions)},`);
   }
 
-  f.print(`  }),`);
+  f.print("  }),");
 
   // Add toProto function and _protoNexus metadata
-  f.print(`  {`);
+  f.print("  {");
   f.print(`    toProto: ${printToProtoFunction(f, type, registry, opts)},`);
-  f.print(`    _protoNexus: {`);
-  f.print(`      fields: {`);
+  f.print("    _protoNexus: {");
+  f.print("      fields: {");
   for (const field of type.fields) {
     const fieldExtensions = protobufGraphQLExtensions(field, registry);
     f.print(`        ${field.name}: {`);
@@ -78,12 +78,12 @@ export function printInputObjectType(
     if (fieldExtensions) {
       f.print(`          extensions: ${JSON.stringify(fieldExtensions)},`);
     }
-    f.print(`        },`);
+    f.print("        },");
   }
-  f.print(`      }`);
-  f.print(`    },`);
-  f.print(`  }`);
-  f.print(`);`);
+  f.print("      }");
+  f.print("    },");
+  f.print("  }");
+  f.print(");");
 }
 
 /**
@@ -109,11 +109,11 @@ function printFieldDefinition(
   } else if (field.type instanceof InputObjectType) {
     const importPath = generatedGraphQLTypeImportPath(field, opts);
     const refName = field.type.typeName;
-    
+
     if (importPath) {
       f.import(refName, importPath);
     }
-    
+
     if (field.isList()) {
       f.print(`        type: list(${refName}),`);
       f.import("list", "nexus");
@@ -123,11 +123,11 @@ function printFieldDefinition(
   } else if (field.type instanceof EnumType) {
     const importPath = generatedGraphQLTypeImportPath(field, opts);
     const refName = field.type.typeName;
-    
+
     if (importPath) {
       f.import(refName, importPath);
     }
-    
+
     if (field.isList()) {
       f.print(`        type: list(${refName}),`);
       f.import("list", "nexus");
@@ -138,7 +138,7 @@ function printFieldDefinition(
 
   // Handle nullable
   if (field.isNullable()) {
-    f.print(`        nullable: true,`);
+    f.print("        nullable: true,");
   }
 
   // Add description
@@ -152,7 +152,7 @@ function printFieldDefinition(
     f.print(`        extensions: ${JSON.stringify(extensions)},`);
   }
 
-  f.print(`      });`);
+  f.print("      });");
 }
 
 /**
@@ -168,7 +168,9 @@ function printToProtoFunction(
   const protoType = f.import(importName, importPath);
 
   const lines: string[] = [];
-  lines.push(`(input: NexusGen["inputTypes"]["${type.typeName}"]): ${protoType} => {`);
+  lines.push(
+    `(input: NexusGen["inputTypes"]["${type.typeName}"]): ${protoType} => {`,
+  );
   lines.push(`      const output = new ${protoType}();`);
 
   for (const field of type.fields) {
@@ -176,14 +178,14 @@ function printToProtoFunction(
     if (field.isNullable()) {
       lines.push(`      if (input.${field.name} != null) {`);
       lines.push(`        ${fieldAssignment}`);
-      lines.push(`      }`);
+      lines.push("      }");
     } else {
       lines.push(`      ${fieldAssignment}`);
     }
   }
 
-  lines.push(`      return output;`);
-  lines.push(`    }`);
+  lines.push("      return output;");
+  lines.push("    }");
 
   return lines.join("\n");
 }
@@ -203,15 +205,21 @@ function generateFieldAssignment(
   if (field.type instanceof ScalarType) {
     if (isProtobufWellKnownTypeField(field.proto)) {
       const protoFullName = field.proto.message.typeName;
-      const transformerImport = f.import("getTransformer", "@proto-graphql/nexus");
+      const transformerImport = f.import(
+        "getTransformer",
+        "@proto-graphql/nexus",
+      );
       const transformer = `${transformerImport}("${protoFullName}")`;
-      
+
       switch (opts.protobuf) {
         case "google-protobuf":
           valueExpr = `${transformer}.gqlToProto(${valueExpr})`;
           break;
         case "protobufjs": {
-          const { importName, importPath } = getProtoTypeImport(field.proto.message, opts);
+          const { importName, importPath } = getProtoTypeImport(
+            field.proto.message,
+            opts,
+          );
           const wktype = f.import(importName, importPath);
           const needsAsAny =
             opts.protobuf === "protobufjs" &&
@@ -223,17 +231,23 @@ function generateFieldAssignment(
         }
       }
     } else if (isProtobufLong(field.proto)) {
-      const stringToNumberImport = f.import("stringToNumber", "@proto-graphql/nexus");
+      const stringToNumberImport = f.import(
+        "stringToNumber",
+        "@proto-graphql/nexus",
+      );
       valueExpr = `${stringToNumberImport}(${valueExpr})`;
     }
   } else if (field.type instanceof InputObjectType) {
-    const importPath = generatedGraphQLTypeImportPath(field as InputObjectField<InputObjectType>, opts);
+    const importPath = generatedGraphQLTypeImportPath(
+      field as InputObjectField<InputObjectType>,
+      opts,
+    );
     const typeName = field.type.typeName;
-    
+
     if (importPath) {
       f.import(typeName, importPath);
     }
-    
+
     valueExpr = `${typeName}.toProto(${valueExpr})`;
   }
 
@@ -280,17 +294,18 @@ function getFieldTypeString(
   if (field.type instanceof ScalarType) {
     const typeName = getScalarTypeName(field, opts);
     return field.isList() ? `["${typeName}"]` : `"${typeName}"`;
-  } else if (field.type instanceof InputObjectType || field.type instanceof EnumType) {
+  }
+  if (field.type instanceof InputObjectType || field.type instanceof EnumType) {
     const importPath = generatedGraphQLTypeImportPath(field, opts);
     const refName = field.type.typeName;
-    
+
     if (importPath) {
       f.import(refName, importPath);
     }
-    
+
     return field.isList() ? `[${refName}]` : refName;
   }
-  
+
   return '"String"';
 }
 
