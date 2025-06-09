@@ -24,7 +24,7 @@ import { type Code, code, joinCode, literalOf } from "ts-poet";
 
 import { createFieldRefCode, createNoopFieldRefCode } from "./field.js";
 import { type PothosPrinterOptions, pothosBuilder, pothosRef } from "./util.js";
-import { GeneratedFile } from "@bufbuild/protoplugin";
+import { GeneratedFile, Printable } from "@bufbuild/protoplugin";
 
 /**
  * @example
@@ -231,7 +231,7 @@ export function printObjectType(
 function printIsTypeOfFunc(
   f: GeneratedFile,
   type: ObjectType,
-  protoTypeImport: string,
+  protoTypeImport: Printable,
   opts: PothosPrinterOptions,
 ): void {
   switch (opts.protobuf) {
@@ -272,7 +272,7 @@ function printFieldDefinition(
   const extensions = protobufGraphQLExtensions(field, registry);
 
   // Determine field type string and whether it's a reference
-  let fieldTypeStr: string;
+  let fieldTypeStr: Printable;
   let isRef = false;
 
   if (field.type instanceof ScalarType) {
