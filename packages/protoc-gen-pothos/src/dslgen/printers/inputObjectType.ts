@@ -204,26 +204,32 @@ export function printInputObjectType(
 ): void {
   // Import necessary types
   const inputObjectRefImport = f.import("InputObjectRef", "@pothos/core");
-  
+
   // Generate proto type import
   const { importName, importPath } = getProtoTypeImport(type.proto, opts);
   const protoTypeImport = f.import(importName, importPath);
-  
+
   // Print the shape type
   const shapeTypeName = `${type.typeName}$Shape`;
   f.print(`export type ${shapeTypeName} = {`);
   type.fields.forEach((field) => {
     const optional = field.isNullable() ? "?" : "";
     const nullable = field.isNullable() ? " | null" : "";
-    
+
     if (field.type instanceof InputObjectType) {
-      const importPath = field.type instanceof InputObjectType ? generatedGraphQLTypeImportPath(field as InputObjectField<InputObjectType>, opts) : null;
+      const importPath =
+        field.type instanceof InputObjectType
+          ? generatedGraphQLTypeImportPath(
+              field as InputObjectField<InputObjectType>,
+              opts,
+            )
+          : null;
       const shapeTypeStr = `${field.type.typeName}$Shape`;
-      
+
       if (importPath) {
         f.import(shapeTypeStr, importPath);
       }
-      
+
       const typeStr = field.isList() ? `Array<${shapeTypeStr}>` : shapeTypeStr;
       f.print(`  ${field.name}${optional}: ${typeStr}${nullable},`);
     } else {
@@ -231,33 +237,75 @@ export function printInputObjectType(
       const { importName, importPath } = getProtoTypeImport(type.proto, opts);
       const protoTypeImportSym = f.import(importName, importPath);
       const fieldName = tsFieldName(field.proto, opts);
-      
-      if (field.type instanceof ScalarType && field.type.isCustomScalar() && !field.isNullable()) {
-        f.print("  ", field.name, optional, ": NonNullable<", protoTypeImportSym, "[\"", fieldName, "\"]>", nullable, ",");
+
+      if (
+        field.type instanceof ScalarType &&
+        field.type.isCustomScalar() &&
+        !field.isNullable()
+      ) {
+        f.print(
+          "  ",
+          field.name,
+          optional,
+          ": NonNullable<",
+          protoTypeImportSym,
+          '["',
+          fieldName,
+          '"]>',
+          nullable,
+          ",",
+        );
       } else {
-        f.print("  ", field.name, optional, ": ", protoTypeImportSym, "[\"", fieldName, "\"]", nullable, ",");
+        f.print(
+          "  ",
+          field.name,
+          optional,
+          ": ",
+          protoTypeImportSym,
+          '["',
+          fieldName,
+          '"]',
+          nullable,
+          ",",
+        );
       }
     }
   });
   f.print(`};`);
   f.print("");
-  
+
   // Get the ref name
   const refName = `${type.typeName}$Ref`;
-  
+
   // Import builder
   const builderPath = opts.pothos?.builderPath || "../builder";
   const builderImport = f.import("builder", builderPath);
-  
+
   // Print the ref and implementation
-  f.print("export const ", refName, ": ", inputObjectRefImport, "<", shapeTypeName, "> =");
-  f.print("  ", builderImport, ".inputRef<", shapeTypeName, ">(", JSON.stringify(type.typeName), ").implement({");
-  
+  f.print(
+    "export const ",
+    refName,
+    ": ",
+    inputObjectRefImport,
+    "<",
+    shapeTypeName,
+    "> =",
+  );
+  f.print(
+    "  ",
+    builderImport,
+    ".inputRef<",
+    shapeTypeName,
+    ">(",
+    JSON.stringify(type.typeName),
+    ").implement({",
+  );
+
   // Print description if exists
   if (type.description) {
     f.print(`    description: ${JSON.stringify(type.description)},`);
   }
-  
+
   // Print fields
   f.print(`    fields: t => ({`);
   if (type.fields.length > 0) {
@@ -265,18 +313,20 @@ export function printInputObjectType(
       printInputFieldDefinition(f, field, type, registry, opts);
     });
   } else {
-    f.print(`      _: t.field({ type: "Boolean", required: false, description: "noop field" }),`);
+    f.print(
+      `      _: t.field({ type: "Boolean", required: false, description: "noop field" }),`,
+    );
   }
   f.print(`    }),`);
-  
+
   // Print extensions if exists
   const extensions = protobufGraphQLExtensions(type, registry);
   if (extensions) {
     f.print(`    extensions: ${JSON.stringify(extensions)},`);
   }
-  
+
   f.print(`  });`);
-  
+
   // Print toProto function for protobuf-es
   if (opts.protobuf === "protobuf-es") {
     f.print("");
@@ -285,7 +335,6 @@ export function printInputObjectType(
     // For ts-proto, we don't generate toProto function
   }
 }
-
 
 /**
  * Helper function to print toProto function
@@ -303,51 +352,69 @@ function printToProtoFunc(
     if (!(field.type instanceof InputObjectType)) {
       throw new Error("Oneof fields must be of message");
     }
-    
+
     oneofFields[field.proto.oneof.name] = [
       ...(oneofFields[field.proto.oneof.name] || []),
       field as InputObjectField<InputObjectType>,
     ];
   }
-  
+
   const shapeTypeName = `${type.typeName}$Shape`;
   const funcName = toProtoFuncName(type);
-  
-  f.print("export function ", funcName, "(input: ", shapeTypeName, " | null | undefined): ", protoTypeImport, " {");
+
+  f.print(
+    "export function ",
+    funcName,
+    "(input: ",
+    shapeTypeName,
+    " | null | undefined): ",
+    protoTypeImport,
+    " {",
+  );
   f.print("  return new ", protoTypeImport, "({");
-  
+
   // Regular fields
   type.fields
     .filter((field) => field.proto.oneof == null)
     .forEach((field) => {
       const localName = tsFieldName(field.proto, opts);
-      
+
       if (field.type instanceof InputObjectType) {
-        const toProtoFuncStr = getToProtoFuncString(f, field as InputObjectField<InputObjectType>, opts);
+        const toProtoFuncStr = getToProtoFuncString(
+          f,
+          field as InputObjectField<InputObjectType>,
+          opts,
+        );
         if (field.isList()) {
-          f.print(`    ${localName}: input?.${field.name}?.map(v => ${toProtoFuncStr}(v)),`);
+          f.print(
+            `    ${localName}: input?.${field.name}?.map(v => ${toProtoFuncStr}(v)),`,
+          );
         } else {
-          f.print(`    ${localName}: input?.${field.name} ? ${toProtoFuncStr}(input.${field.name}) : undefined,`);
+          f.print(
+            `    ${localName}: input?.${field.name} ? ${toProtoFuncStr}(input.${field.name}) : undefined,`,
+          );
         }
       } else {
         f.print(`    ${localName}: input?.${field.name} ?? undefined,`);
       }
     });
-  
+
   // Oneof fields
   Object.entries(oneofFields).forEach(([oneofName, fields]) => {
     const oneofLocalName = tsFieldName(fields[0]!.proto.oneof!, opts);
     f.print(`    ${oneofLocalName}:`);
-    
+
     fields.forEach((field) => {
       const fieldLocalName = tsFieldName(field.proto, opts);
       const toProtoFuncStr = getToProtoFuncString(f, field, opts);
-      f.print(`      input?.${field.name} ? { case: "${fieldLocalName}", value: ${toProtoFuncStr}(input.${field.name}) } :`);
+      f.print(
+        `      input?.${field.name} ? { case: "${fieldLocalName}", value: ${toProtoFuncStr}(input.${field.name}) } :`,
+      );
     });
-    
+
     f.print(`      undefined,`);
   });
-  
+
   f.print(`  });`);
   f.print(`}`);
 }
@@ -362,11 +429,11 @@ function getToProtoFuncString(
 ): string {
   const importPath = generatedGraphQLTypeImportPath(field, opts);
   const funcName = toProtoFuncName(field.type);
-  
+
   if (importPath) {
     f.import(funcName, importPath);
   }
-  
+
   return funcName;
 }
 
@@ -381,12 +448,12 @@ function printInputFieldDefinition(
   opts: PothosPrinterOptions,
 ): void {
   const extensions = protobufGraphQLExtensions(field, registry);
-  
+
   f.print(`      ${field.name}: t.field({`);
-  
+
   // Determine field type
   let fieldTypeStr: string;
-  
+
   if (field.type instanceof ScalarType) {
     // Map scalar types to GraphQL types
     switch (field.type.typeName) {
@@ -399,24 +466,27 @@ function printInputFieldDefinition(
       default:
         fieldTypeStr = field.type.typeName;
     }
-    
+
     if (field.isList()) {
       f.print(`        type: ["${fieldTypeStr}"],`);
     } else {
       f.print(`        type: "${fieldTypeStr}",`);
     }
-  } else if (field.type instanceof InputObjectType || field.type instanceof EnumType) {
+  } else if (
+    field.type instanceof InputObjectType ||
+    field.type instanceof EnumType
+  ) {
     // For object/enum types, we need to generate the ref import
     const importPath = generatedGraphQLTypeImportPath(field, opts);
     let refName: string;
-    
+
     if (importPath) {
       refName = `${field.type.typeName}$Ref`;
       f.import(refName, importPath);
     } else {
       refName = `${field.type.typeName}$Ref`;
     }
-    
+
     if (field.isList()) {
       f.print("        type: [", refName, "],");
     } else {
@@ -426,7 +496,7 @@ function printInputFieldDefinition(
     // Fallback
     f.print(`        type: "String",`);
   }
-  
+
   // Handle required/nullable
   if (field.isNullable()) {
     // Field is nullable (optional)
@@ -439,17 +509,17 @@ function printInputFieldDefinition(
       f.print(`        required: true,`);
     }
   }
-  
+
   // Add description
   if (field.description) {
     f.print(`        description: ${JSON.stringify(field.description)},`);
   }
-  
+
   // Add extensions
   if (extensions) {
     f.print(`        extensions: ${JSON.stringify(extensions)},`);
   }
-  
+
   f.print(`      }),`);
 }
 
@@ -482,6 +552,8 @@ function getProtoTypeImport(
       return { importName, importPath };
     }
     default:
-      throw new Error(`Unsupported protobuf library for protoplugin: ${opts.protobuf}`);
+      throw new Error(
+        `Unsupported protobuf library for protoplugin: ${opts.protobuf}`,
+      );
   }
 }

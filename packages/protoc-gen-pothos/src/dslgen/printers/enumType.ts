@@ -71,14 +71,15 @@ export function printEnumType(
 ): void {
   // Import EnumRef from @pothos/core
   const enumRefImport = f.import("EnumRef", "@pothos/core");
-  
+
   // Generate the proto type import
   const { importName, importPath } = getProtoTypeImport(type.proto, opts);
   const protoTypeImport = f.import(importName, importPath);
-  
+
   // Build the values object
-  const filteredValues = type.values
-    .filter((v) => !v.isIgnored() && !v.isUnespecified());
+  const filteredValues = type.values.filter(
+    (v) => !v.isIgnored() && !v.isUnespecified(),
+  );
 
   const typeOpts = compact({
     description: type.description,
@@ -88,19 +89,35 @@ export function printEnumType(
   // Import builder
   const builderPath = opts.pothos?.builderPath || "../builder";
   const builderImport = f.import("builder", builderPath);
-  
-  f.print("");  // Blank line after imports
-  
+
+  f.print(""); // Blank line after imports
+
   // Generate the export statement
   const refName = `${type.typeName}$Ref`;
-  f.print("export const ", refName, ": ", enumRefImport, "<", protoTypeImport, ", ", protoTypeImport, "> =");
-  f.print("  ", builderImport, ".enumType(", JSON.stringify(type.typeName), ", {");
-  
+  f.print(
+    "export const ",
+    refName,
+    ": ",
+    enumRefImport,
+    "<",
+    protoTypeImport,
+    ", ",
+    protoTypeImport,
+    "> =",
+  );
+  f.print(
+    "  ",
+    builderImport,
+    ".enumType(",
+    JSON.stringify(type.typeName),
+    ", {",
+  );
+
   // Print description if exists
   if (typeOpts.description) {
     f.print(`    description: ${JSON.stringify(typeOpts.description)},`);
   }
-  
+
   // Print values object
   f.print(`    values: {`);
   filteredValues.forEach((ev) => {
@@ -113,12 +130,12 @@ export function printEnumType(
     f.print(`      ${ev.name}: ${JSON.stringify(valueOpts)},`);
   });
   f.print(`    } as const,`);
-  
+
   // Print extensions if exists
   if (typeOpts.extensions) {
     f.print(`    extensions: ${JSON.stringify(typeOpts.extensions)},`);
   }
-  
+
   f.print(`  });`);
 }
 
@@ -151,6 +168,8 @@ function getProtoTypeImport(
       return { importName, importPath };
     }
     default:
-      throw new Error(`Unsupported protobuf library for protoplugin: ${opts.protobuf}`);
+      throw new Error(
+        `Unsupported protobuf library for protoplugin: ${opts.protobuf}`,
+      );
   }
 }

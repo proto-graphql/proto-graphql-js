@@ -50,7 +50,7 @@ export function generateFiles(
     case "graphql_type": {
       for (const t of types) {
         const f = schema.generateFile(filename(t, opts.printer));
-        
+
         if (useProtopluginPrinter) {
           printTypeDsl(f, [t], registry, opts.printer);
         } else {

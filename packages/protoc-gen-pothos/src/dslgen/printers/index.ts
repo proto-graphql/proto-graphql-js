@@ -9,9 +9,15 @@ import {
 import type { Code } from "ts-poet";
 
 import { createEnumTypeCode, printEnumType } from "./enumType.js";
-import { createInputObjectTypeCode, printInputObjectType } from "./inputObjectType.js";
+import {
+  createInputObjectTypeCode,
+  printInputObjectType,
+} from "./inputObjectType.js";
 import { createObjectTypeCode, printObjectType } from "./objectType.js";
-import { createOneofUnionTypeCode, printOneofUnionType } from "./oneofUnionType.js";
+import {
+  createOneofUnionTypeCode,
+  printOneofUnionType,
+} from "./oneofUnionType.js";
 import type { PothosPrinterOptions } from "./util.js";
 
 export function createTypeDslCodes(
@@ -64,13 +70,13 @@ export function printTypeDsl(
   f.print("");
   f.print("/* eslint-disable */");
   f.print("");
-  
+
   // Print each type
   types.forEach((type, index) => {
     if (index > 0) {
       f.print("");
     }
-    
+
     if (type instanceof ObjectType) {
       printObjectType(f, type, registry, opts);
     } else if (type instanceof InputObjectType) {

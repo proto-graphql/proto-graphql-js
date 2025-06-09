@@ -4,17 +4,20 @@ import {
   OneofUnionType,
   SquashedOneofUnionType,
   type TypeOptions,
+  createRegistryFromSchema,
   defaultScalarMapping,
   defaultScalarMappingForTsProto,
-  createRegistryFromSchema,
 } from "@proto-graphql/codegen-core";
 import {
   type TestapisPackage,
-  getTestapisFileDescriptorSet,
   buildCodeGeneratorRequest,
+  getTestapisFileDescriptorSet,
 } from "@proto-graphql/testapis-proto";
 import { describe, expect, test } from "vitest";
-import { createOneofUnionTypeCode, printOneofUnionType } from "./oneofUnionType.js";
+import {
+  createOneofUnionTypeCode,
+  printOneofUnionType,
+} from "./oneofUnionType.js";
 import type { PothosPrinterOptions } from "./util.js";
 
 function generateOneofUnionTypeCode(
@@ -248,8 +251,8 @@ function generateOneofUnionTypeWithPrintFunction(
   };
 
   const plugin = createEcmaScriptPlugin({
-    name: 'test',
-    version: '0.0.0',
+    name: "test",
+    version: "0.0.0",
     generateTs: (schema) => {
       const registry = createRegistryFromSchema(schema);
       const descMsg = registry.getMessage(`${packageName}.${typeNameInProto}`);
@@ -269,22 +272,22 @@ function generateOneofUnionTypeWithPrintFunction(
 
       const oneofType = new OneofUnionType(descOneof, typeOptions);
 
-      const f = schema.generateFile('generated.ts')
+      const f = schema.generateFile("generated.ts");
       printOneofUnionType(f, oneofType, registry, options);
     },
-  })
+  });
 
-  const req = buildCodeGeneratorRequest(packageName)
-  req.parameter = 'target=ts'
+  const req = buildCodeGeneratorRequest(packageName);
+  req.parameter = "target=ts";
 
-  const resp = plugin.run(req)
+  const resp = plugin.run(req);
 
   const file = resp.file.find((f) => f.name === "generated.ts");
   if (!file) {
     throw new Error("Generated file not found");
   }
 
-  return file.content
+  return file.content;
 }
 
 function generateSquashedOneofUnionTypeWithPrintFunction(
@@ -302,8 +305,8 @@ function generateSquashedOneofUnionTypeWithPrintFunction(
   };
 
   const plugin = createEcmaScriptPlugin({
-    name: 'test',
-    version: '0.0.0',
+    name: "test",
+    version: "0.0.0",
     generateTs: (schema) => {
       const registry = createRegistryFromSchema(schema);
       const descMsg = registry.getMessage(`${packageName}.${typeNameInProto}`);
@@ -316,50 +319,50 @@ function generateSquashedOneofUnionTypeWithPrintFunction(
 
       const oneofType = new SquashedOneofUnionType(descMsg, typeOptions);
 
-      const f = schema.generateFile('generated.ts')
+      const f = schema.generateFile("generated.ts");
       printOneofUnionType(f, oneofType, registry, options);
     },
-  })
+  });
 
-  const req = buildCodeGeneratorRequest(packageName)
-  req.parameter = 'target=ts'
+  const req = buildCodeGeneratorRequest(packageName);
+  req.parameter = "target=ts";
 
-  const resp = plugin.run(req)
+  const resp = plugin.run(req);
 
   const file = resp.file.find((f) => f.name === "generated.ts");
   if (!file) {
     throw new Error("Generated file not found");
   }
 
-  return file.content
+  return file.content;
 }
 
 describe("createOneofUnionTypeCode", () => {
-//   for (const { suite, options, cases } of testSuites) {
-//     describe(suite, () => {
-//       test.each(cases)("$test", ({ args }) => {
-//         if ("oneofFieldName" in args) {
-//           const code = generateOneofUnionTypeCode(
-//             args.packageName,
-//             args.typeNameInProto,
-//             args.oneofFieldName,
-//             options,
-//           );
-//           expect(code).toMatchSnapshot();
-//         } else {
-//           const code = generateSquashedOneofUnionTypeCode(
-//             args.packageName,
-//             args.typeNameInProto,
-//             options,
-//           );
-//           expect(code).toMatchSnapshot();
-//         }
-//       });
-//     });
-//   }
-// });
-//
-// describe("printOneofUnionType", () => {
+  //   for (const { suite, options, cases } of testSuites) {
+  //     describe(suite, () => {
+  //       test.each(cases)("$test", ({ args }) => {
+  //         if ("oneofFieldName" in args) {
+  //           const code = generateOneofUnionTypeCode(
+  //             args.packageName,
+  //             args.typeNameInProto,
+  //             args.oneofFieldName,
+  //             options,
+  //           );
+  //           expect(code).toMatchSnapshot();
+  //         } else {
+  //           const code = generateSquashedOneofUnionTypeCode(
+  //             args.packageName,
+  //             args.typeNameInProto,
+  //             options,
+  //           );
+  //           expect(code).toMatchSnapshot();
+  //         }
+  //       });
+  //     });
+  //   }
+  // });
+  //
+  // describe("printOneofUnionType", () => {
 
   for (const { suite, options, cases } of testSuites) {
     describe(suite, () => {

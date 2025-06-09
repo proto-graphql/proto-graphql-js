@@ -9,8 +9,8 @@ import {
 } from "@proto-graphql/codegen-core";
 import {
   type TestapisPackage,
-  getTestapisFileDescriptorSet,
   buildCodeGeneratorRequest,
+  getTestapisFileDescriptorSet,
 } from "@proto-graphql/testapis-proto";
 import { describe, expect, test } from "vitest";
 import { createObjectTypeCode, printObjectType } from "./objectType.js";
@@ -198,8 +198,8 @@ function generateObjectTypeWithPrintFunction(
   // }
 
   const plugin = createEcmaScriptPlugin({
-    name: 'test',
-    version: '0.0.0',
+    name: "test",
+    version: "0.0.0",
     generateTs: (schema) => {
       const registry = createRegistryFromSchema(schema);
       const descMsg = registry.getMessage(`${packageName}.${messageTypeName}`);
@@ -210,42 +210,42 @@ function generateObjectTypeWithPrintFunction(
       }
       const objType = new ObjectType(descMsg, typeOptions);
 
-      const f = schema.generateFile('generated.ts')
+      const f = schema.generateFile("generated.ts");
       printObjectType(f, objType, registry, options);
     },
-  })
+  });
 
-  const req = buildCodeGeneratorRequest(packageName)
-  req.parameter = 'target=ts'
+  const req = buildCodeGeneratorRequest(packageName);
+  req.parameter = "target=ts";
 
-  const resp = plugin.run(req)
+  const resp = plugin.run(req);
 
-  console.error(JSON.stringify(resp.file.map(f => f.name)))
+  console.error(JSON.stringify(resp.file.map((f) => f.name)));
 
   const file = resp.file.find((f) => f.name === "generated.ts");
   if (!file) {
     throw new Error("Generated file not found");
   }
 
-  return file.content
+  return file.content;
 }
 
 describe("createObjectTypeCode", () => {
-//   for (const { suite, options, cases } of testSuites) {
-//     describe(suite, () => {
-//       test.each(cases)("$test", ({ args }) => {
-//         const code = generateObjectTypeCode(
-//           args.packageName,
-//           args.messageTypeName,
-//           options,
-//         );
-//         expect(code).toMatchSnapshot();
-//       });
-//     });
-//   }
-// });
-//
-// describe("printObjectType", () => {
+  //   for (const { suite, options, cases } of testSuites) {
+  //     describe(suite, () => {
+  //       test.each(cases)("$test", ({ args }) => {
+  //         const code = generateObjectTypeCode(
+  //           args.packageName,
+  //           args.messageTypeName,
+  //           options,
+  //         );
+  //         expect(code).toMatchSnapshot();
+  //       });
+  //     });
+  //   }
+  // });
+  //
+  // describe("printObjectType", () => {
   for (const { suite, options, cases } of testSuites) {
     describe(suite, () => {
       test.each(cases)("$test", ({ args }) => {

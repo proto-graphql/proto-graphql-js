@@ -1,20 +1,25 @@
-import type { DescEnum, DescField, DescMessage, GeneratedFile, Registry } from "@bufbuild/protobuf";
 import * as path from "node:path";
+import type {
+  DescEnum,
+  DescField,
+  DescMessage,
+  GeneratedFile,
+  Registry,
+} from "@bufbuild/protobuf";
 import {
+  EnumType,
   InterfaceType,
-  ObjectType,
   ObjectField,
   ObjectOneofField,
-  EnumType,
+  ObjectType,
+  OneofUnionType,
   ScalarType,
   SquashedOneofUnionType,
-  OneofUnionType,
   compact,
+  filename,
   protoType,
   protobufGraphQLExtensions,
   tsFieldName,
-  createGetFieldValueCode,
-  filename,
 } from "@proto-graphql/codegen-core";
 import { type Code, code, joinCode, literalOf } from "ts-poet";
 
@@ -124,17 +129,17 @@ export function printObjectType(
   opts: PothosPrinterOptions,
 ): void {
   const isInterface = type instanceof InterfaceType;
-  
+
   // First get import paths but don't import yet
   const { importName, importPath } = getProtoTypeImport(type.proto, opts);
-  
+
   // Calculate builder path
   const builderPath = opts.pothos?.builderPath || "../builder";
-  
+
   // Calculate the actual file path for this type based on fileLayout
   const typeFilePath = filename(type, opts);
   const typeFileDir = path.dirname(typeFilePath);
-  
+
   // Calculate relative path from the generated file to the builder
   let normalizedBuilderPath: string;
   if (builderPath.startsWith(".")) {
@@ -147,64 +152,76 @@ export function printObjectType(
     // If builder path is absolute (module path), use as-is
     normalizedBuilderPath = builderPath;
   }
-  
+
   // Now import in correct order: proto type first, then builder
   const builderImport = f.import("builder", normalizedBuilderPath);
   const protoTypeImport = f.import(importName, importPath);
-  
+
   // Get the ref name
   const refName = `${type.typeName}$Ref`;
-  
-  f.print("");  // Blank line after imports
-  
+
+  f.print(""); // Blank line after imports
+
   // Generate the ref declaration
   if (isInterface) {
     // For interfaces, we need a Pick type with the fields
     const fieldNames = type.fields
       .map((f) => `"${tsFieldName(f.proto as DescField, opts)}"`)
       .join(" | ");
-    
+
     f.print("export const ", refName, " = ", builderImport, ".interfaceRef<");
     f.print("  Pick<", protoTypeImport, ", ", fieldNames, ">");
     f.print(">(", JSON.stringify(type.typeName), ");");
   } else {
-    f.print("export const ", refName, " = ", builderImport, ".objectRef<", protoTypeImport, ">(", JSON.stringify(type.typeName), ");");
+    f.print(
+      "export const ",
+      refName,
+      " = ",
+      builderImport,
+      ".objectRef<",
+      protoTypeImport,
+      ">(",
+      JSON.stringify(type.typeName),
+      ");",
+    );
   }
-  
+
   // Generate the type definition
   const buildTypeFunc = isInterface ? "interfaceType" : "objectType";
   f.print(builderImport, ".", buildTypeFunc, "(", refName, ", {");
   f.print(`  name: ${JSON.stringify(type.typeName)},`);
-  
+
   // Print description if exists
   if (type.description) {
     f.print(`  description: ${JSON.stringify(type.description)},`);
   }
-  
+
   // Print fields
   f.print(`  fields: t => ({`);
-  
+
   if (type.fields.length > 0) {
     type.fields.forEach((field) => {
       printFieldDefinition(f, field, type, registry, opts);
     });
   } else {
-    f.print(`    _: t.field({ type: "Boolean", nullable: true, description: "noop field", resolve: () => true }),`);
+    f.print(
+      `    _: t.field({ type: "Boolean", nullable: true, description: "noop field", resolve: () => true }),`,
+    );
   }
-  
+
   f.print(`  }),`);
-  
+
   // Print isTypeOf for non-interface types
   if (!isInterface) {
     printIsTypeOfFunc(f, type, protoTypeImport, opts);
   }
-  
+
   // Print extensions if exists
   const extensions = protobufGraphQLExtensions(type, registry);
   if (extensions) {
     f.print(`  extensions: ${JSON.stringify(extensions)},`);
   }
-  
+
   f.print(`});`);
 }
 
@@ -220,7 +237,11 @@ function printIsTypeOfFunc(
   switch (opts.protobuf) {
     case "ts-proto": {
       f.print(`  isTypeOf: (source) => {`);
-      f.print("    return (source as ", protoTypeImport, " | { $type: string & {} }).$type");
+      f.print(
+        "    return (source as ",
+        protoTypeImport,
+        " | { $type: string & {} }).$type",
+      );
       f.print(`      === ${JSON.stringify(type.proto.typeName)};`);
       f.print(`  },`);
       break;
@@ -232,7 +253,9 @@ function printIsTypeOfFunc(
       break;
     }
     default:
-      throw new Error(`Unsupported protobuf lib for protoplugin: ${opts.protobuf}`);
+      throw new Error(
+        `Unsupported protobuf lib for protoplugin: ${opts.protobuf}`,
+      );
   }
 }
 
@@ -247,11 +270,11 @@ function printFieldDefinition(
   opts: PothosPrinterOptions,
 ): void {
   const extensions = protobufGraphQLExtensions(field, registry);
-  
+
   // Determine field type string and whether it's a reference
   let fieldTypeStr: string;
   let isRef = false;
-  
+
   if (field.type instanceof ScalarType) {
     // Map scalar types to GraphQL types
     switch (field.type.typeName) {
@@ -265,13 +288,19 @@ function printFieldDefinition(
       default:
         fieldTypeStr = field.type.typeName;
     }
-  } else if (field.type instanceof ObjectType || 
-             field.type instanceof EnumType || 
-             field.type instanceof SquashedOneofUnionType ||
-             field.type instanceof OneofUnionType) {
+  } else if (
+    field.type instanceof ObjectType ||
+    field.type instanceof EnumType ||
+    field.type instanceof SquashedOneofUnionType ||
+    field.type instanceof OneofUnionType
+  ) {
     // For object/enum/union types, we need to generate the ref import
     // Import the generated GraphQL file for this type
-    const importPath = getGeneratedGraphQLTypeImportPath(field, parentType, opts);
+    const importPath = getGeneratedGraphQLTypeImportPath(
+      field,
+      parentType,
+      opts,
+    );
     if (importPath) {
       const refName = `${field.type.typeName}$Ref`;
       fieldTypeStr = f.import(refName, importPath);
@@ -283,23 +312,24 @@ function printFieldDefinition(
   } else {
     fieldTypeStr = "String"; // fallback
   }
-  
+
   // Determine if we should use t.expose or t.field
-  const needsResolver = field instanceof ObjectOneofField ||
-                        field.type instanceof EnumType ||
-                        field.type instanceof SquashedOneofUnionType ||
-                        field.type instanceof OneofUnionType ||
-                        (field.type instanceof ScalarType && field.type.isBytes()) ||
-                        (!field.isNullable() && field.type instanceof ObjectType);
-  
+  const needsResolver =
+    field instanceof ObjectOneofField ||
+    field.type instanceof EnumType ||
+    field.type instanceof SquashedOneofUnionType ||
+    field.type instanceof OneofUnionType ||
+    (field.type instanceof ScalarType && field.type.isBytes()) ||
+    (!field.isNullable() && field.type instanceof ObjectType);
+
   const shouldUseExpose = field instanceof ObjectField && !needsResolver;
-  
+
   const fieldName = field.name;
   const protoFieldName = tsFieldName(field.proto as DescField, opts);
-  
+
   if (shouldUseExpose) {
     f.print(`    ${fieldName}: t.expose("${protoFieldName}", {`);
-    
+
     // Print type - handle arrays and refs
     if (field.isList()) {
       if (isRef) {
@@ -314,7 +344,7 @@ function printFieldDefinition(
         f.print(`      type: "${fieldTypeStr}",`);
       }
     }
-    
+
     // Handle nullable
     if (field.isList()) {
       f.print(`      nullable: { list: ${field.isNullable()}, items: false },`);
@@ -323,7 +353,7 @@ function printFieldDefinition(
     }
   } else {
     f.print(`    ${fieldName}: t.field({`);
-    
+
     // Print type - handle arrays and refs
     if (field.isList()) {
       if (isRef) {
@@ -338,17 +368,17 @@ function printFieldDefinition(
         f.print(`      type: "${fieldTypeStr}",`);
       }
     }
-    
+
     // Handle nullable
     if (field.isList()) {
       f.print(`      nullable: { list: ${field.isNullable()}, items: false },`);
     } else {
       f.print(`      nullable: ${field.isNullable()},`);
     }
-    
+
     // Add resolver
     f.print(`      resolve: (source) => {`);
-    
+
     if (field instanceof ObjectOneofField) {
       // Handle oneof fields
       if (opts.protobuf === "protobuf-es") {
@@ -362,25 +392,34 @@ function printFieldDefinition(
           f.print(`        return value;`);
         } else {
           f.print(`        if (value == null) {`);
-          f.print(`          throw new Error("${fieldName} should not be null");`);
+          f.print(
+            `          throw new Error("${fieldName} should not be null");`,
+          );
           f.print(`        }`);
           f.print(`        return value;`);
         }
       } else {
         // For ts-proto, access oneof fields directly
-        const oneofMembers = field.type.fields
-          .map(f => tsFieldName(f.proto, opts));
-        
+        const oneofMembers = field.type.fields.map((f) =>
+          tsFieldName(f.proto, opts),
+        );
+
         if (field.isNullable()) {
-          f.print(`        const value = ${oneofMembers.map(m => `source.${m}`).join(' ?? ')};`);
+          f.print(
+            `        const value = ${oneofMembers.map((m) => `source.${m}`).join(" ?? ")};`,
+          );
           f.print(`        if (value == null) {`);
           f.print(`          return null;`);
           f.print(`        }`);
           f.print(`        return value;`);
         } else {
-          f.print(`        const value = ${oneofMembers.map(m => `source.${m}`).join(' ?? ')};`);
+          f.print(
+            `        const value = ${oneofMembers.map((m) => `source.${m}`).join(" ?? ")};`,
+          );
           f.print(`        if (value == null) {`);
-          f.print(`          throw new Error("${fieldName} should not be null");`);
+          f.print(
+            `          throw new Error("${fieldName} should not be null");`,
+          );
           f.print(`        }`);
           f.print(`        return value;`);
         }
@@ -388,34 +427,55 @@ function printFieldDefinition(
     } else if (field.type instanceof EnumType) {
       // Handle enum fields
       const enumProto = field.type.proto;
-      const { importName: enumImportName, importPath: enumImportPath } = getProtoTypeImport(enumProto, opts);
+      const { importName: enumImportName, importPath: enumImportPath } =
+        getProtoTypeImport(enumProto, opts);
       const enumImport = f.import(enumImportName, enumImportPath);
-      
-      const unspecifiedValueName = opts.protobuf === "protobuf-es" 
-        ? enumProto.values[0].localName 
-        : enumProto.values[0].name;
-      
+
+      const unspecifiedValueName =
+        opts.protobuf === "protobuf-es"
+          ? enumProto.values[0].localName
+          : enumProto.values[0].name;
+
       if (field.isList()) {
         // List of enums - need to handle each item
-        const ignoredValues = field.type.valuesWithIgnored.filter(v => v.isIgnored());
+        const ignoredValues = field.type.valuesWithIgnored.filter((v) =>
+          v.isIgnored(),
+        );
         if (field.type.unspecifiedValue || ignoredValues.length > 0) {
           f.print(`        return source.${protoFieldName}.map(item => {`);
-          
+
           if (field.type.unspecifiedValue) {
-            f.print("          if (item === ", enumImport, ".", unspecifiedValueName, ") {");
-            f.print(`            throw new Error("${field.name} is required field. But got unspecified.");`);
+            f.print(
+              "          if (item === ",
+              enumImport,
+              ".",
+              unspecifiedValueName,
+              ") {",
+            );
+            f.print(
+              `            throw new Error("${field.name} is required field. But got unspecified.");`,
+            );
             f.print(`          }`);
           }
-          
+
           for (const ignoredValue of ignoredValues) {
-            const ignoredValueName = opts.protobuf === "protobuf-es"
-              ? ignoredValue.proto.localName
-              : ignoredValue.proto.name;
-            f.print("          if (item === ", enumImport, ".", ignoredValueName, ") {");
-            f.print(`            throw new Error("${ignoredValue.name} is ignored in GraphQL schema");`);
+            const ignoredValueName =
+              opts.protobuf === "protobuf-es"
+                ? ignoredValue.proto.localName
+                : ignoredValue.proto.name;
+            f.print(
+              "          if (item === ",
+              enumImport,
+              ".",
+              ignoredValueName,
+              ") {",
+            );
+            f.print(
+              `            throw new Error("${ignoredValue.name} is ignored in GraphQL schema");`,
+            );
             f.print(`          }`);
           }
-          
+
           f.print(`          return item;`);
           f.print(`        });`);
         } else {
@@ -423,35 +483,62 @@ function printFieldDefinition(
         }
       } else {
         if (field.type.unspecifiedValue) {
-          f.print("        if (source.", protoFieldName, " === ", enumImport, ".", unspecifiedValueName, ") {");
+          f.print(
+            "        if (source.",
+            protoFieldName,
+            " === ",
+            enumImport,
+            ".",
+            unspecifiedValueName,
+            ") {",
+          );
           if (field.isNullable()) {
             f.print(`          return null;`);
           } else {
-            f.print(`          throw new Error("${field.name} is required field. But got unspecified.");`);
+            f.print(
+              `          throw new Error("${field.name} is required field. But got unspecified.");`,
+            );
           }
           f.print(`        }`);
         }
-        
+
         // Check for ignored enum values
-        const ignoredValues = field.type.valuesWithIgnored.filter(v => v.isIgnored());
+        const ignoredValues = field.type.valuesWithIgnored.filter((v) =>
+          v.isIgnored(),
+        );
         for (const ignoredValue of ignoredValues) {
-          const ignoredValueName = opts.protobuf === "protobuf-es"
-            ? ignoredValue.proto.localName
-            : ignoredValue.proto.name;
-          f.print("        if (source.", protoFieldName, " === ", enumImport, ".", ignoredValueName, ") {");
-          f.print(`          throw new Error("${ignoredValue.name} is ignored in GraphQL schema");`);
+          const ignoredValueName =
+            opts.protobuf === "protobuf-es"
+              ? ignoredValue.proto.localName
+              : ignoredValue.proto.name;
+          f.print(
+            "        if (source.",
+            protoFieldName,
+            " === ",
+            enumImport,
+            ".",
+            ignoredValueName,
+            ") {",
+          );
+          f.print(
+            `          throw new Error("${ignoredValue.name} is ignored in GraphQL schema");`,
+          );
           f.print(`        }`);
         }
-        
+
         f.print(`        return source.${protoFieldName};`);
       }
     } else if (field.type instanceof ScalarType && field.type.isBytes()) {
       // Handle bytes fields
       if (field.isList()) {
-        f.print(`        return source.${protoFieldName}.map(v => Buffer.from(v));`);
+        f.print(
+          `        return source.${protoFieldName}.map(v => Buffer.from(v));`,
+        );
       } else {
         if (field.isNullable()) {
-          f.print(`        return source.${protoFieldName} == null ? null : Buffer.from(source.${protoFieldName});`);
+          f.print(
+            `        return source.${protoFieldName} == null ? null : Buffer.from(source.${protoFieldName});`,
+          );
         } else {
           f.print(`        return Buffer.from(source.${protoFieldName});`);
         }
@@ -461,13 +548,15 @@ function printFieldDefinition(
       if (opts.protobuf === "protobuf-es") {
         // For protobuf-es, squashed oneof values are accessed via the oneof name
         const oneofName = tsFieldName(field.type.oneofUnionType.proto, opts);
-        
+
         if (field.isList()) {
           f.print(`        return source.${protoFieldName}.map(item => {`);
           f.print(`          const value = item.${oneofName}.value;`);
           if (!field.isNullable()) {
             f.print(`          if (value == null) {`);
-            f.print(`            throw new Error("${fieldName} should not be null");`);
+            f.print(
+              `            throw new Error("${fieldName} should not be null");`,
+            );
             f.print(`          }`);
           }
           f.print(`          return value;`);
@@ -480,35 +569,46 @@ function printFieldDefinition(
             f.print(`        }`);
           } else {
             f.print(`        if (value == null) {`);
-            f.print(`          throw new Error("${fieldName} should not be null");`);
+            f.print(
+              `          throw new Error("${fieldName} should not be null");`,
+            );
             f.print(`        }`);
           }
           f.print(`        return value;`);
         }
       } else {
         // For ts-proto, access fields directly
-        const oneofMembers = field.type.fields
-          .map(f => tsFieldName(f.proto, opts));
-        
+        const oneofMembers = field.type.fields.map((f) =>
+          tsFieldName(f.proto, opts),
+        );
+
         if (field.isList()) {
           f.print(`        return source.${protoFieldName}.map(item => {`);
-          f.print(`          const value = ${oneofMembers.map(m => `item?.${m}`).join(' ?? ')};`);
+          f.print(
+            `          const value = ${oneofMembers.map((m) => `item?.${m}`).join(" ?? ")};`,
+          );
           if (!field.isNullable()) {
             f.print(`          if (value == null) {`);
-            f.print(`            throw new Error("${fieldName} should not be null");`);
+            f.print(
+              `            throw new Error("${fieldName} should not be null");`,
+            );
             f.print(`          }`);
           }
           f.print(`          return value;`);
           f.print(`        });`);
         } else {
-          f.print(`        const value = ${oneofMembers.map(m => `source.${m}`).join(' ?? ')};`);
+          f.print(
+            `        const value = ${oneofMembers.map((m) => `source.${m}`).join(" ?? ")};`,
+          );
           if (field.isNullable()) {
             f.print(`        if (value == null) {`);
             f.print(`          return null;`);
             f.print(`        }`);
           } else {
             f.print(`        if (value == null) {`);
-            f.print(`          throw new Error("${fieldName} should not be null");`);
+            f.print(
+              `          throw new Error("${fieldName} should not be null");`,
+            );
             f.print(`        }`);
           }
           f.print(`        return value;`);
@@ -521,39 +621,44 @@ function printFieldDefinition(
       // Default case
       f.print(`        return source.${protoFieldName};`);
     }
-    
+
     f.print(`      },`);
   }
-  
+
   // Add description
   if (field.description) {
     f.print(`      description: ${JSON.stringify(field.description)},`);
   }
-  
+
   // Add deprecation reason
   if (field.deprecationReason) {
-    f.print(`      deprecationReason: ${JSON.stringify(field.deprecationReason)},`);
+    f.print(
+      `      deprecationReason: ${JSON.stringify(field.deprecationReason)},`,
+    );
   }
-  
+
   // Add extensions
   if (extensions) {
     f.print(`      extensions: ${JSON.stringify(extensions)},`);
   }
-  
+
   f.print(`    }),`);
 }
 
 /**
  * Helper function to get enum import name
  */
-function getEnumImportName(enumProto: DescEnum, opts: PothosPrinterOptions): string {
+function getEnumImportName(
+  enumProto: DescEnum,
+  opts: PothosPrinterOptions,
+): string {
   let p: DescEnum | DescMessage = enumProto;
   const chunks = [p.name];
   while (p.parent != null) {
     p = p.parent;
     chunks.unshift(p.name);
   }
-  
+
   switch (opts.protobuf) {
     case "ts-proto":
       // For ts-proto, nested enums use underscore separation
@@ -590,7 +695,9 @@ function getProtoTypeImport(
       return { importName, importPath };
     }
     default:
-      throw new Error(`Unsupported protobuf library for protoplugin: ${opts.protobuf}`);
+      throw new Error(
+        `Unsupported protobuf library for protoplugin: ${opts.protobuf}`,
+      );
   }
 }
 
@@ -603,36 +710,41 @@ function getGeneratedGraphQLTypeImportPath(
   opts: PothosPrinterOptions,
 ): string | null {
   // For ObjectOneofField, the proto is a DescOneof which has a parent message
-  const fieldProto = field instanceof ObjectOneofField 
-    ? field.proto.parent 
-    : field.type.proto;
-    
+  const fieldProto =
+    field instanceof ObjectOneofField ? field.proto.parent : field.type.proto;
+
   // Check if the field type is from the same file as the parent type
   if (fieldProto.file === parentType.proto.file) {
     return null; // Same file, no import needed
   }
-  
+
   // Calculate the relative import path
   const fieldTypeFile = fieldProto.file.name;
   const parentTypeFile = parentType.proto.file.name;
-  
+
   // Use the fileLayout to determine where the generated files are
   const suffix = opts.filenameSuffix || "";
-  
+
   // For now, assume both files are in the same directory structure
   // This is a simplified implementation - you may need to adjust based on your actual file layout
   const fieldTypePath = fieldTypeFile.replace(/\.proto$/, suffix);
   const parentTypePath = parentTypeFile.replace(/\.proto$/, suffix);
-  
+
   // Calculate relative path from parent to field type
-  const parentDir = parentTypePath.substring(0, parentTypePath.lastIndexOf('/'));
-  const fieldTypeRelative = fieldTypePath.substring(0, fieldTypePath.lastIndexOf('/'));
-  
+  const parentDir = parentTypePath.substring(
+    0,
+    parentTypePath.lastIndexOf("/"),
+  );
+  const fieldTypeRelative = fieldTypePath.substring(
+    0,
+    fieldTypePath.lastIndexOf("/"),
+  );
+
   if (parentDir === fieldTypeRelative) {
     // Same directory
-    return `./${fieldTypePath.substring(fieldTypePath.lastIndexOf('/') + 1)}`;
+    return `./${fieldTypePath.substring(fieldTypePath.lastIndexOf("/") + 1)}`;
   }
-  
+
   // For more complex paths, you'd need a proper relative path calculation
   // For now, use a simple approach
   return `./${fieldTypePath}`;

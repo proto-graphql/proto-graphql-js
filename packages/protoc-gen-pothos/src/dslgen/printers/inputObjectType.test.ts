@@ -3,17 +3,20 @@ import { createEcmaScriptPlugin } from "@bufbuild/protoplugin";
 import {
   InputObjectType,
   type TypeOptions,
+  createRegistryFromSchema,
   defaultScalarMapping,
   defaultScalarMappingForTsProto,
-  createRegistryFromSchema,
 } from "@proto-graphql/codegen-core";
 import {
   type TestapisPackage,
-  getTestapisFileDescriptorSet,
   buildCodeGeneratorRequest,
+  getTestapisFileDescriptorSet,
 } from "@proto-graphql/testapis-proto";
 import { describe, expect, test } from "vitest";
-import { createInputObjectTypeCode, printInputObjectType } from "./inputObjectType.js";
+import {
+  createInputObjectTypeCode,
+  printInputObjectType,
+} from "./inputObjectType.js";
 import type { PothosPrinterOptions } from "./util.js";
 
 function generateInputObjectTypeCode(
@@ -205,8 +208,8 @@ function generateInputObjectTypeWithPrintFunction(
   };
 
   const plugin = createEcmaScriptPlugin({
-    name: 'test',
-    version: '0.0.0',
+    name: "test",
+    version: "0.0.0",
     generateTs: (schema) => {
       const registry = createRegistryFromSchema(schema);
       const descMsg = registry.getMessage(`${packageName}.${typeNameInProto}`);
@@ -218,43 +221,45 @@ function generateInputObjectTypeWithPrintFunction(
       }
 
       const inputType = new InputObjectType(descMsg, typeOptions);
-      const typeToGenerate = partialInputs ? inputType.toPartialInput() : inputType;
+      const typeToGenerate = partialInputs
+        ? inputType.toPartialInput()
+        : inputType;
 
-      const f = schema.generateFile('generated.ts')
+      const f = schema.generateFile("generated.ts");
       printInputObjectType(f, typeToGenerate, registry, options);
     },
-  })
+  });
 
-  const req = buildCodeGeneratorRequest(packageName)
-  req.parameter = 'target=ts'
+  const req = buildCodeGeneratorRequest(packageName);
+  req.parameter = "target=ts";
 
-  const resp = plugin.run(req)
+  const resp = plugin.run(req);
 
   const file = resp.file.find((f) => f.name === "generated.ts");
   if (!file) {
     throw new Error("Generated file not found");
   }
 
-  return file.content
+  return file.content;
 }
 
 describe("createInputObjectTypeCode", () => {
-//   for (const { suite, options, cases } of testSuites) {
-//     describe(suite, () => {
-//       test.each(cases)("$test", ({ args }) => {
-//         const code = generateInputObjectTypeCode(
-//           args.packageName,
-//           args.typeNameInProto,
-//           options,
-//           args.partialInputs ?? false,
-//         );
-//         expect(code).toMatchSnapshot();
-//       });
-//     });
-//   }
-// });
-//
-// describe("printInputObjectType", () => {
+  //   for (const { suite, options, cases } of testSuites) {
+  //     describe(suite, () => {
+  //       test.each(cases)("$test", ({ args }) => {
+  //         const code = generateInputObjectTypeCode(
+  //           args.packageName,
+  //           args.typeNameInProto,
+  //           options,
+  //           args.partialInputs ?? false,
+  //         );
+  //         expect(code).toMatchSnapshot();
+  //       });
+  //     });
+  //   }
+  // });
+  //
+  // describe("printInputObjectType", () => {
   const shouldUsePrintFunction = process.env.USE_PROTOPLUGIN_PRINTER === "1";
 
   if (!shouldUsePrintFunction) {
