@@ -1,4 +1,5 @@
-import type { DescEnum, DescMessage, GeneratedFile, Registry } from "@bufbuild/protobuf";
+import type { DescEnum, DescMessage, Registry } from "@bufbuild/protobuf";
+import type { GeneratedFile, ImportSymbol } from "@bufbuild/protoplugin";
 import {
   EnumType,
   type InputObjectField,
@@ -209,24 +210,48 @@ export function printInputObjectType(
   const protoTypeImport = f.import(importName, importPath);
   
   // Print the shape type
-  f.print(`export type ${shapeType(type)} = {`);
+  const shapeTypeName = `${type.typeName}$Shape`;
+  f.print(`export type ${shapeTypeName} = {`);
   type.fields.forEach((field) => {
-    const fieldTypeStr = getFieldTypeString(f, field, type, opts);
     const optional = field.isNullable() ? "?" : "";
     const nullable = field.isNullable() ? " | null" : "";
     
-    if (field.type instanceof ScalarType && field.type.isCustomScalar() && !field.isNullable()) {
-      f.print(`  ${field.name}${optional}: NonNullable<${fieldTypeStr}>${nullable},`);
+    if (field.type instanceof InputObjectType) {
+      const importPath = field.type instanceof InputObjectType ? generatedGraphQLTypeImportPath(field as InputObjectField<InputObjectType>, opts) : null;
+      const shapeTypeStr = `${field.type.typeName}$Shape`;
+      
+      if (importPath) {
+        f.import(shapeTypeStr, importPath);
+      }
+      
+      const typeStr = field.isList() ? `Array<${shapeTypeStr}>` : shapeTypeStr;
+      f.print(`  ${field.name}${optional}: ${typeStr}${nullable},`);
     } else {
-      f.print(`  ${field.name}${optional}: ${fieldTypeStr}${nullable},`);
+      // For scalar/enum types, use the proto type's field
+      const { importName, importPath } = getProtoTypeImport(type.proto, opts);
+      const protoTypeImportSym = f.import(importName, importPath);
+      const fieldName = tsFieldName(field.proto, opts);
+      
+      if (field.type instanceof ScalarType && field.type.isCustomScalar() && !field.isNullable()) {
+        f.print("  ", field.name, optional, ": NonNullable<", protoTypeImportSym, "[\"", fieldName, "\"]>", nullable, ",");
+      } else {
+        f.print("  ", field.name, optional, ": ", protoTypeImportSym, "[\"", fieldName, "\"]", nullable, ",");
+      }
     }
   });
   f.print(`};`);
   f.print("");
   
+  // Get the ref name
+  const refName = `${type.typeName}$Ref`;
+  
+  // Import builder
+  const builderPath = opts.pothos?.builderPath || "../builder";
+  const builderImport = f.import("builder", builderPath);
+  
   // Print the ref and implementation
-  f.print(`export const ${pothosRef(type)}: ${inputObjectRefImport}<${shapeType(type)}> =`);
-  f.print(`  ${pothosBuilder(type, opts)}.inputRef<${shapeType(type)}>(${JSON.stringify(type.typeName)}).implement({`);
+  f.print("export const ", refName, ": ", inputObjectRefImport, "<", shapeTypeName, "> =");
+  f.print("  ", builderImport, ".inputRef<", shapeTypeName, ">(", JSON.stringify(type.typeName), ").implement({");
   
   // Print description if exists
   if (type.description) {
@@ -237,12 +262,10 @@ export function printInputObjectType(
   f.print(`    fields: t => ({`);
   if (type.fields.length > 0) {
     type.fields.forEach((field) => {
-      // TODO: Convert field definition properly
-      f.print(`      // TODO: Convert field ${field.name} definition`);
-      f.print(`      ${field.name}: t.field({ type: "String" }),`);
+      printInputFieldDefinition(f, field, type, registry, opts);
     });
   } else {
-    f.print(`      _: t.field({ type: "String" }),`);
+    f.print(`      _: t.field({ type: "Boolean", required: false, description: "noop field" }),`);
   }
   f.print(`    }),`);
   
@@ -258,35 +281,11 @@ export function printInputObjectType(
   if (opts.protobuf === "protobuf-es") {
     f.print("");
     printToProtoFunc(f, type, protoTypeImport, opts);
+  } else if (opts.protobuf === "ts-proto") {
+    // For ts-proto, we don't generate toProto function
   }
 }
 
-/**
- * Helper function to get field type string
- */
-function getFieldTypeString(
-  f: GeneratedFile,
-  field: InputObjectField<any>,
-  parentType: InputObjectType,
-  opts: PothosPrinterOptions,
-): string {
-  if (field.type instanceof InputObjectType) {
-    const importPath = generatedGraphQLTypeImportPath(field, opts);
-    if (importPath) {
-      const shapeTypeName = shapeType(field.type);
-      f.import(shapeTypeName, importPath);
-      return field.isList() ? `Array<${shapeTypeName}>` : shapeTypeName;
-    } else {
-      const typeStr = shapeType(field.type);
-      return field.isList() ? `Array<${typeStr}>` : typeStr;
-    }
-  } else {
-    // For scalar/enum types, use the proto type's field
-    const { importName } = getProtoTypeImport(parentType.proto, opts);
-    const fieldName = tsFieldName(field.proto, opts);
-    return `${importName}["${fieldName}"]`;
-  }
-}
 
 /**
  * Helper function to print toProto function
@@ -294,7 +293,7 @@ function getFieldTypeString(
 function printToProtoFunc(
   f: GeneratedFile,
   type: InputObjectType,
-  protoTypeImport: string,
+  protoTypeImport: ImportSymbol,
   opts: PothosPrinterOptions,
 ): void {
   // Group oneof fields
@@ -311,8 +310,11 @@ function printToProtoFunc(
     ];
   }
   
-  f.print(`export function ${toProtoFuncName(type)}(input: ${shapeType(type)} | null | undefined): ${protoTypeImport} {`);
-  f.print(`  return new ${protoTypeImport}({`);
+  const shapeTypeName = `${type.typeName}$Shape`;
+  const funcName = toProtoFuncName(type);
+  
+  f.print("export function ", funcName, "(input: ", shapeTypeName, " | null | undefined): ", protoTypeImport, " {");
+  f.print("  return new ", protoTypeImport, "({");
   
   // Regular fields
   type.fields
@@ -321,7 +323,7 @@ function printToProtoFunc(
       const localName = tsFieldName(field.proto, opts);
       
       if (field.type instanceof InputObjectType) {
-        const toProtoFuncStr = getToProtoFuncString(f, field, opts);
+        const toProtoFuncStr = getToProtoFuncString(f, field as InputObjectField<InputObjectType>, opts);
         if (field.isList()) {
           f.print(`    ${localName}: input?.${field.name}?.map(v => ${toProtoFuncStr}(v)),`);
         } else {
@@ -369,6 +371,89 @@ function getToProtoFuncString(
 }
 
 /**
+ * Helper function to print input field definition
+ */
+function printInputFieldDefinition(
+  f: GeneratedFile,
+  field: InputObjectField<any>,
+  parentType: InputObjectType,
+  registry: Registry,
+  opts: PothosPrinterOptions,
+): void {
+  const extensions = protobufGraphQLExtensions(field, registry);
+  
+  f.print(`      ${field.name}: t.field({`);
+  
+  // Determine field type
+  let fieldTypeStr: string;
+  
+  if (field.type instanceof ScalarType) {
+    // Map scalar types to GraphQL types
+    switch (field.type.typeName) {
+      case "Int64":
+        fieldTypeStr = opts.protobuf === "ts-proto" ? "String" : "Int64";
+        break;
+      case "Byte":
+        fieldTypeStr = "Byte";
+        break;
+      default:
+        fieldTypeStr = field.type.typeName;
+    }
+    
+    if (field.isList()) {
+      f.print(`        type: ["${fieldTypeStr}"],`);
+    } else {
+      f.print(`        type: "${fieldTypeStr}",`);
+    }
+  } else if (field.type instanceof InputObjectType || field.type instanceof EnumType) {
+    // For object/enum types, we need to generate the ref import
+    const importPath = generatedGraphQLTypeImportPath(field, opts);
+    let refName: string;
+    
+    if (importPath) {
+      refName = `${field.type.typeName}$Ref`;
+      f.import(refName, importPath);
+    } else {
+      refName = `${field.type.typeName}$Ref`;
+    }
+    
+    if (field.isList()) {
+      f.print("        type: [", refName, "],");
+    } else {
+      f.print("        type: ", refName, ",");
+    }
+  } else {
+    // Fallback
+    f.print(`        type: "String",`);
+  }
+  
+  // Handle required/nullable
+  if (field.isNullable()) {
+    // Field is nullable (optional)
+    f.print(`        required: false,`);
+  } else {
+    // Field is required
+    if (field.isList()) {
+      f.print(`        required: { list: true, items: true },`);
+    } else {
+      f.print(`        required: true,`);
+    }
+  }
+  
+  // Add description
+  if (field.description) {
+    f.print(`        description: ${JSON.stringify(field.description)},`);
+  }
+  
+  // Add extensions
+  if (extensions) {
+    f.print(`        extensions: ${JSON.stringify(extensions)},`);
+  }
+  
+  f.print(`      }),`);
+}
+
+/**
  * Helper function to extract import info for proto types
  */
 function getProtoTypeImport(
@@ -385,10 +470,15 @@ function getProtoTypeImport(
 
   // Determine import based on protobuf library
   switch (opts.protobuf) {
-    case "ts-proto":
+    case "ts-proto": {
+      const importName = chunks.join("_");
+      const importPath = `${opts.importPrefix || "."}/${proto.file.name}`;
+      return { importName, importPath };
+    }
     case "protobuf-es": {
       const importName = chunks.join("_");
-      const importPath = `${opts.importPrefix || "./"}${proto.file.name}`;
+      const protoFileName = proto.file.name.replace(/\.proto$/, "_pb");
+      const importPath = `${opts.importPrefix || "."}/${protoFileName}`;
       return { importName, importPath };
     }
     default:

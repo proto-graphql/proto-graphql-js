@@ -1,16 +1,19 @@
 import { createFileRegistry } from "@bufbuild/protobuf";
+import { createEcmaScriptPlugin } from "@bufbuild/protoplugin";
 import {
   InputObjectType,
   type TypeOptions,
   defaultScalarMapping,
   defaultScalarMappingForTsProto,
+  createRegistryFromSchema,
 } from "@proto-graphql/codegen-core";
 import {
   type TestapisPackage,
   getTestapisFileDescriptorSet,
+  buildCodeGeneratorRequest,
 } from "@proto-graphql/testapis-proto";
 import { describe, expect, test } from "vitest";
-import { createInputObjectTypeCode } from "./inputObjectType.js";
+import { createInputObjectTypeCode, printInputObjectType } from "./inputObjectType.js";
 import type { PothosPrinterOptions } from "./util.js";
 
 function generateInputObjectTypeCode(
@@ -185,11 +188,84 @@ const testSuites: TestSuite[] = [
   },
 ];
 
+// New function to generate code using protoplugin
+function generateInputObjectTypeWithPrintFunction(
+  packageName: TestapisPackage,
+  typeNameInProto: string,
+  options: PothosPrinterOptions,
+  partialInputs = false,
+): string {
+  const typeOptions: TypeOptions = {
+    partialInputs,
+    scalarMapping:
+      options.protobuf === "ts-proto"
+        ? defaultScalarMappingForTsProto
+        : defaultScalarMapping,
+    ignoreNonMessageOneofFields: false,
+  };
+
+  const plugin = createEcmaScriptPlugin({
+    name: 'test',
+    version: '0.0.0',
+    generateTs: (schema) => {
+      const registry = createRegistryFromSchema(schema);
+      const descMsg = registry.getMessage(`${packageName}.${typeNameInProto}`);
+      
+      if (descMsg === undefined) {
+        throw new Error(
+          `Message ${typeNameInProto} not found in package ${packageName}`,
+        );
+      }
+      
+      const inputType = new InputObjectType(descMsg, typeOptions);
+      const typeToGenerate = partialInputs ? inputType.toPartialInput() : inputType;
+      
+      const f = schema.generateFile('generated.ts')
+      printInputObjectType(f, typeToGenerate, registry, options);
+    },
+  })
+
+  const req = buildCodeGeneratorRequest(packageName)
+  req.parameter = 'target=ts'
+
+  const resp = plugin.run(req)
+
+  const file = resp.file.find((f) => f.name === "generated.ts");
+  if (!file) {
+    throw new Error("Generated file not found");
+  }
+
+  return file.content
+}
+
 describe("createInputObjectTypeCode", () => {
   for (const { suite, options, cases } of testSuites) {
     describe(suite, () => {
       test.each(cases)("$test", ({ args }) => {
         const code = generateInputObjectTypeCode(
+          args.packageName,
+          args.typeNameInProto,
+          options,
+          args.partialInputs ?? false,
+        );
+        expect(code).toMatchSnapshot();
+      });
+    });
+  }
+});
+
+describe("printInputObjectType", () => {
+  const shouldUsePrintFunction = process.env.USE_PROTOPLUGIN_PRINTER === "1";
+  
+  if (!shouldUsePrintFunction) {
+    test.skip("printInputObjectType tests skipped", () => {});
+    return;
+  }
+
+  for (const { suite, options, cases } of testSuites) {
+    describe(suite, () => {
+      test.each(cases)("$test", ({ args }) => {
+        const code = generateInputObjectTypeWithPrintFunction(
           args.packageName,
           args.typeNameInProto,
           options,
