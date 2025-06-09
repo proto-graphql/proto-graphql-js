@@ -22,9 +22,9 @@ import {
 } from "@proto-graphql/codegen-core";
 import { type Code, code, joinCode, literalOf } from "ts-poet";
 
+import type { GeneratedFile, Printable } from "@bufbuild/protoplugin";
 import { createFieldRefCode, createNoopFieldRefCode } from "./field.js";
 import { type PothosPrinterOptions, pothosBuilder, pothosRef } from "./util.js";
-import { GeneratedFile, Printable } from "@bufbuild/protoplugin";
 
 /**
  * @example

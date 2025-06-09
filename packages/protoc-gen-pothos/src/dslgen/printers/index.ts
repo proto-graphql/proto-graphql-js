@@ -8,6 +8,7 @@ import {
 } from "@proto-graphql/codegen-core";
 import type { Code } from "ts-poet";
 
+import type { GeneratedFile } from "@bufbuild/protoplugin";
 import { createEnumTypeCode, printEnumType } from "./enumType.js";
 import {
   createInputObjectTypeCode,
@@ -19,7 +20,6 @@ import {
   printOneofUnionType,
 } from "./oneofUnionType.js";
 import type { PothosPrinterOptions } from "./util.js";
-import { GeneratedFile } from "@bufbuild/protoplugin";
 
 export function createTypeDslCodes(
   types: (
