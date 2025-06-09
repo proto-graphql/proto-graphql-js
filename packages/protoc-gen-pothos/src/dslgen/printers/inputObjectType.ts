@@ -211,8 +211,8 @@ export function printInputObjectType(
 
   // Print the shape type
   const shapeTypeName = `${type.typeName}$Shape`;
-  f.print(`export type ${shapeTypeName} = {`);
-  type.fields.forEach((field) => {
+  f.print("export type ", shapeTypeName, " = {");
+  for (const field of type.fields) {
     const optional = field.isNullable() ? "?" : "";
     const nullable = field.isNullable() ? " | null" : "";
 
@@ -231,7 +231,7 @@ export function printInputObjectType(
       }
 
       const typeStr = field.isList() ? `Array<${shapeTypeStr}>` : shapeTypeStr;
-      f.print(`  ${field.name}${optional}: ${typeStr}${nullable},`);
+      f.print("  ", field.name, optional, ": ", typeStr, nullable, ",");
     } else {
       // For scalar/enum types, use the proto type's field
       const { importName, importPath } = getProtoTypeImport(type.proto, opts);
@@ -270,9 +270,8 @@ export function printInputObjectType(
         );
       }
     }
-  });
-  f.print(`};`);
-  f.print("");
+  }
+  f.print("};\n");
 
   // Get the ref name
   const refName = `${type.typeName}$Ref`;
@@ -303,36 +302,34 @@ export function printInputObjectType(
 
   // Print description if exists
   if (type.description) {
-    f.print(`    description: ${JSON.stringify(type.description)},`);
+    f.print("    description: ", JSON.stringify(type.description), ",");
   }
 
   // Print fields
-  f.print(`    fields: t => ({`);
+  f.print("    fields: t => ({");
   if (type.fields.length > 0) {
-    type.fields.forEach((field) => {
+    for (const field of type.fields) {
       printInputFieldDefinition(f, field, type, registry, opts);
-    });
+    }
   } else {
     f.print(
-      `      _: t.field({ type: "Boolean", required: false, description: "noop field" }),`,
+      '      _: t.field({ type: "Boolean", required: false, description: "noop field" }),',
     );
   }
-  f.print(`    }),`);
+  f.print("    }),");
 
   // Print extensions if exists
   const extensions = protobufGraphQLExtensions(type, registry);
   if (extensions) {
-    f.print(`    extensions: ${JSON.stringify(extensions)},`);
+    f.print("    extensions: ", JSON.stringify(extensions), ",");
   }
 
-  f.print(`  });`);
+  f.print("  });");
 
   // Print toProto function for protobuf-es
   if (opts.protobuf === "protobuf-es") {
     f.print("");
     printToProtoFunc(f, type, protoTypeImport, opts);
-  } else if (opts.protobuf === "ts-proto") {
-    // For ts-proto, we don't generate toProto function
   }
 }
 
@@ -374,49 +371,52 @@ function printToProtoFunc(
   f.print("  return new ", protoTypeImport, "({");
 
   // Regular fields
-  type.fields
-    .filter((field) => field.proto.oneof == null)
-    .forEach((field) => {
-      const localName = tsFieldName(field.proto, opts);
+  for (const field of type.fields.filter(
+    (field) => field.proto.oneof == null,
+  )) {
+    const localName = tsFieldName(field.proto, opts);
 
-      if (field.type instanceof InputObjectType) {
-        const toProtoFuncStr = getToProtoFuncString(
-          f,
-          field as InputObjectField<InputObjectType>,
-          opts,
+    if (field.type instanceof InputObjectType) {
+      const toProtoFuncStr = getToProtoFuncString(
+        f,
+        field as InputObjectField<InputObjectType>,
+        opts,
+      );
+      if (field.isList()) {
+        f.print(
+          `    ${localName}: input?.${field.name}?.map(v => ${toProtoFuncStr}(v)),`,
         );
-        if (field.isList()) {
-          f.print(
-            `    ${localName}: input?.${field.name}?.map(v => ${toProtoFuncStr}(v)),`,
-          );
-        } else {
-          f.print(
-            `    ${localName}: input?.${field.name} ? ${toProtoFuncStr}(input.${field.name}) : undefined,`,
-          );
-        }
       } else {
-        f.print(`    ${localName}: input?.${field.name} ?? undefined,`);
+        f.print(
+          `    ${localName}: input?.${field.name} ? ${toProtoFuncStr}(input.${field.name}) : undefined,`,
+        );
       }
-    });
+    } else {
+      f.print("    ", localName, ": input?.", field.name, " ?? undefined,");
+    }
+  }
 
   // Oneof fields
-  Object.entries(oneofFields).forEach(([oneofName, fields]) => {
-    const oneofLocalName = tsFieldName(fields[0]!.proto.oneof!, opts);
-    f.print(`    ${oneofLocalName}:`);
+  for (const [oneofName, fields] of Object.entries(oneofFields)) {
+    if (fields.length === 0) continue;
+    const firstField = fields[0];
+    if (!firstField.proto.oneof) continue;
+    const oneofLocalName = tsFieldName(firstField.proto.oneof, opts);
+    f.print("    ", oneofLocalName, ":");
 
-    fields.forEach((field) => {
+    for (const field of fields) {
       const fieldLocalName = tsFieldName(field.proto, opts);
       const toProtoFuncStr = getToProtoFuncString(f, field, opts);
       f.print(
         `      input?.${field.name} ? { case: "${fieldLocalName}", value: ${toProtoFuncStr}(input.${field.name}) } :`,
       );
-    });
+    }
 
-    f.print(`      undefined,`);
-  });
+    f.print("      undefined,");
+  }
 
-  f.print(`  });`);
-  f.print(`}`);
+  f.print("  });");
+  f.print("}");
 }
 
 /**
@@ -449,7 +449,7 @@ function printInputFieldDefinition(
 ): void {
   const extensions = protobufGraphQLExtensions(field, registry);
 
-  f.print(`      ${field.name}: t.field({`);
+  f.print("      ", field.name, ": t.field({");
 
   // Determine field type
   let fieldTypeStr: string;
@@ -468,9 +468,9 @@ function printInputFieldDefinition(
     }
 
     if (field.isList()) {
-      f.print(`        type: ["${fieldTypeStr}"],`);
+      f.print('        type: ["', fieldTypeStr, '"],');
     } else {
-      f.print(`        type: "${fieldTypeStr}",`);
+      f.print('        type: "', fieldTypeStr, '",');
     }
   } else if (
     field.type instanceof InputObjectType ||
@@ -494,33 +494,33 @@ function printInputFieldDefinition(
     }
   } else {
     // Fallback
-    f.print(`        type: "String",`);
+    f.print('        type: "String",');
   }
 
   // Handle required/nullable
   if (field.isNullable()) {
     // Field is nullable (optional)
-    f.print(`        required: false,`);
+    f.print("        required: false,");
   } else {
     // Field is required
     if (field.isList()) {
-      f.print(`        required: { list: true, items: true },`);
+      f.print("        required: { list: true, items: true },");
     } else {
-      f.print(`        required: true,`);
+      f.print("        required: true,");
     }
   }
 
   // Add description
   if (field.description) {
-    f.print(`        description: ${JSON.stringify(field.description)},`);
+    f.print("        description: ", JSON.stringify(field.description), ",");
   }
 
   // Add extensions
   if (extensions) {
-    f.print(`        extensions: ${JSON.stringify(extensions)},`);
+    f.print("        extensions: ", JSON.stringify(extensions), ",");
   }
 
-  f.print(`      }),`);
+  f.print("      }),");
 }
 
 /**

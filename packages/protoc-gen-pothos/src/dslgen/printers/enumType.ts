@@ -115,28 +115,28 @@ export function printEnumType(
 
   // Print description if exists
   if (typeOpts.description) {
-    f.print(`    description: ${JSON.stringify(typeOpts.description)},`);
+    f.print("    description: ", JSON.stringify(typeOpts.description), ",");
   }
 
   // Print values object
-  f.print(`    values: {`);
-  filteredValues.forEach((ev) => {
+  f.print("    values: {");
+  for (const ev of filteredValues) {
     const valueOpts = compact({
       description: ev.description,
       deprecationReason: ev.deprecationReason,
       value: ev.number,
       extensions: protobufGraphQLExtensions(ev, registry),
     });
-    f.print(`      ${ev.name}: ${JSON.stringify(valueOpts)},`);
-  });
-  f.print(`    } as const,`);
+    f.print("      ", ev.name, ": ", JSON.stringify(valueOpts), ",");
+  }
+  f.print("    } as const,");
 
   // Print extensions if exists
   if (typeOpts.extensions) {
-    f.print(`    extensions: ${JSON.stringify(typeOpts.extensions)},`);
+    f.print("    extensions: ", JSON.stringify(typeOpts.extensions), ",");
   }
 
-  f.print(`  });`);
+  f.print("  });");
 }
 
 /**

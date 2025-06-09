@@ -193,23 +193,23 @@ export function printObjectType(
 
   // Print description if exists
   if (type.description) {
-    f.print(`  description: ${JSON.stringify(type.description)},`);
+    f.print("  description: ", JSON.stringify(type.description), ",");
   }
 
   // Print fields
-  f.print(`  fields: t => ({`);
+  f.print("  fields: t => ({");
 
   if (type.fields.length > 0) {
-    type.fields.forEach((field) => {
+    for (const field of type.fields) {
       printFieldDefinition(f, field, type, registry, opts);
-    });
+    }
   } else {
     f.print(
-      `    _: t.field({ type: "Boolean", nullable: true, description: "noop field", resolve: () => true }),`,
+      '    _: t.field({ type: "Boolean", nullable: true, description: "noop field", resolve: () => true }),',
     );
   }
 
-  f.print(`  }),`);
+  f.print("  }),");
 
   // Print isTypeOf for non-interface types
   if (!isInterface) {
@@ -219,10 +219,10 @@ export function printObjectType(
   // Print extensions if exists
   const extensions = protobufGraphQLExtensions(type, registry);
   if (extensions) {
-    f.print(`  extensions: ${JSON.stringify(extensions)},`);
+    f.print("  extensions: ", JSON.stringify(extensions), ",");
   }
 
-  f.print(`});`);
+  f.print("});");
 }
 
 /**
@@ -236,20 +236,20 @@ function printIsTypeOfFunc(
 ): void {
   switch (opts.protobuf) {
     case "ts-proto": {
-      f.print(`  isTypeOf: (source) => {`);
+      f.print("  isTypeOf: (source) => {");
       f.print(
         "    return (source as ",
         protoTypeImport,
         " | { $type: string & {} }).$type",
       );
-      f.print(`      === ${JSON.stringify(type.proto.typeName)};`);
-      f.print(`  },`);
+      f.print("      === ", JSON.stringify(type.proto.typeName), ";");
+      f.print("  },");
       break;
     }
     case "protobuf-es": {
-      f.print(`  isTypeOf: (source) => {`);
+      f.print("  isTypeOf: (source) => {");
       f.print("    return source instanceof ", protoTypeImport, ";");
-      f.print(`  },`);
+      f.print("  },");
       break;
     }
     default:
@@ -377,7 +377,7 @@ function printFieldDefinition(
     }
 
     // Add resolver
-    f.print(`      resolve: (source) => {`);
+    f.print("      resolve: (source) => {");
 
     if (field instanceof ObjectOneofField) {
       // Handle oneof fields
@@ -386,17 +386,17 @@ function printFieldDefinition(
         const oneofFieldName = tsFieldName(field.proto, opts);
         f.print(`        const value = source.${oneofFieldName}.value;`);
         if (field.isNullable()) {
-          f.print(`        if (value == null) {`);
-          f.print(`          return null;`);
-          f.print(`        }`);
-          f.print(`        return value;`);
+          f.print("        if (value == null) {");
+          f.print("          return null;");
+          f.print("        }");
+          f.print("        return value;");
         } else {
-          f.print(`        if (value == null) {`);
+          f.print("        if (value == null) {");
           f.print(
             `          throw new Error("${fieldName} should not be null");`,
           );
-          f.print(`        }`);
-          f.print(`        return value;`);
+          f.print("        }");
+          f.print("        return value;");
         }
       } else {
         // For ts-proto, access oneof fields directly
@@ -408,20 +408,20 @@ function printFieldDefinition(
           f.print(
             `        const value = ${oneofMembers.map((m) => `source.${m}`).join(" ?? ")};`,
           );
-          f.print(`        if (value == null) {`);
-          f.print(`          return null;`);
-          f.print(`        }`);
-          f.print(`        return value;`);
+          f.print("        if (value == null) {");
+          f.print("          return null;");
+          f.print("        }");
+          f.print("        return value;");
         } else {
           f.print(
             `        const value = ${oneofMembers.map((m) => `source.${m}`).join(" ?? ")};`,
           );
-          f.print(`        if (value == null) {`);
+          f.print("        if (value == null) {");
           f.print(
             `          throw new Error("${fieldName} should not be null");`,
           );
-          f.print(`        }`);
-          f.print(`        return value;`);
+          f.print("        }");
+          f.print("        return value;");
         }
       }
     } else if (field.type instanceof EnumType) {
@@ -455,7 +455,7 @@ function printFieldDefinition(
             f.print(
               `            throw new Error("${field.name} is required field. But got unspecified.");`,
             );
-            f.print(`          }`);
+            f.print("          }");
           }
 
           for (const ignoredValue of ignoredValues) {
@@ -473,11 +473,11 @@ function printFieldDefinition(
             f.print(
               `            throw new Error("${ignoredValue.name} is ignored in GraphQL schema");`,
             );
-            f.print(`          }`);
+            f.print("          }");
           }
 
-          f.print(`          return item;`);
-          f.print(`        });`);
+          f.print("          return item;");
+          f.print("        });");
         } else {
           f.print(`        return source.${protoFieldName};`);
         }
@@ -493,13 +493,13 @@ function printFieldDefinition(
             ") {",
           );
           if (field.isNullable()) {
-            f.print(`          return null;`);
+            f.print("          return null;");
           } else {
             f.print(
               `          throw new Error("${field.name} is required field. But got unspecified.");`,
             );
           }
-          f.print(`        }`);
+          f.print("        }");
         }
 
         // Check for ignored enum values
@@ -523,7 +523,7 @@ function printFieldDefinition(
           f.print(
             `          throw new Error("${ignoredValue.name} is ignored in GraphQL schema");`,
           );
-          f.print(`        }`);
+          f.print("        }");
         }
 
         f.print(`        return source.${protoFieldName};`);
@@ -553,28 +553,28 @@ function printFieldDefinition(
           f.print(`        return source.${protoFieldName}.map(item => {`);
           f.print(`          const value = item.${oneofName}.value;`);
           if (!field.isNullable()) {
-            f.print(`          if (value == null) {`);
+            f.print("          if (value == null) {");
             f.print(
               `            throw new Error("${fieldName} should not be null");`,
             );
-            f.print(`          }`);
+            f.print("          }");
           }
-          f.print(`          return value;`);
-          f.print(`        });`);
+          f.print("          return value;");
+          f.print("        });");
         } else {
           f.print(`        const value = source.${oneofName}.value;`);
           if (field.isNullable()) {
-            f.print(`        if (value == null) {`);
-            f.print(`          return null;`);
-            f.print(`        }`);
+            f.print("        if (value == null) {");
+            f.print("          return null;");
+            f.print("        }");
           } else {
-            f.print(`        if (value == null) {`);
+            f.print("        if (value == null) {");
             f.print(
               `          throw new Error("${fieldName} should not be null");`,
             );
-            f.print(`        }`);
+            f.print("        }");
           }
-          f.print(`        return value;`);
+          f.print("        return value;");
         }
       } else {
         // For ts-proto, access fields directly
@@ -588,30 +588,30 @@ function printFieldDefinition(
             `          const value = ${oneofMembers.map((m) => `item?.${m}`).join(" ?? ")};`,
           );
           if (!field.isNullable()) {
-            f.print(`          if (value == null) {`);
+            f.print("          if (value == null) {");
             f.print(
               `            throw new Error("${fieldName} should not be null");`,
             );
-            f.print(`          }`);
+            f.print("          }");
           }
-          f.print(`          return value;`);
-          f.print(`        });`);
+          f.print("          return value;");
+          f.print("        });");
         } else {
           f.print(
             `        const value = ${oneofMembers.map((m) => `source.${m}`).join(" ?? ")};`,
           );
           if (field.isNullable()) {
-            f.print(`        if (value == null) {`);
-            f.print(`          return null;`);
-            f.print(`        }`);
+            f.print("        if (value == null) {");
+            f.print("          return null;");
+            f.print("        }");
           } else {
-            f.print(`        if (value == null) {`);
+            f.print("        if (value == null) {");
             f.print(
               `          throw new Error("${fieldName} should not be null");`,
             );
-            f.print(`        }`);
+            f.print("        }");
           }
-          f.print(`        return value;`);
+          f.print("        return value;");
         }
       }
     } else if (!field.isNullable() && field.type instanceof ObjectType) {
@@ -622,7 +622,7 @@ function printFieldDefinition(
       f.print(`        return source.${protoFieldName};`);
     }
 
-    f.print(`      },`);
+    f.print("      },");
   }
 
   // Add description
@@ -642,7 +642,7 @@ function printFieldDefinition(
     f.print(`      extensions: ${JSON.stringify(extensions)},`);
   }
 
-  f.print(`    }),`);
+  f.print("    }),");
 }
 
 /**

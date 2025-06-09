@@ -98,12 +98,12 @@ export function printOneofUnionType(
 
   // Print description if exists
   if (type.description) {
-    f.print(`  description: ${JSON.stringify(type.description)},`);
+    f.print("  description: ", JSON.stringify(type.description), ",");
   }
 
   // Print extensions if exists
   if (extensions) {
-    f.print(`  extensions: ${JSON.stringify(extensions)},`);
+    f.print("  extensions: ", JSON.stringify(extensions), ",");
   }
 
   f.print("});");
