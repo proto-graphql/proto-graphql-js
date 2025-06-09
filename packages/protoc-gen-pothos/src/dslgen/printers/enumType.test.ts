@@ -160,8 +160,6 @@ function generateEnumTypeWithPrintFunction(
 
   const resp = plugin.run(req);
 
-  console.error(JSON.stringify(resp.file.map((f) => f.name)));
-
   const file = resp.file.find((f) => f.name === "generated.ts");
   if (!file) {
     throw new Error("Generated file not found");
