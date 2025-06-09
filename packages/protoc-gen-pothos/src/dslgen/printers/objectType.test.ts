@@ -1,4 +1,3 @@
-import { createFileRegistry } from "@bufbuild/protobuf";
 import { createEcmaScriptPlugin } from "@bufbuild/protoplugin";
 import {
   ObjectType,
@@ -10,41 +9,10 @@ import {
 import {
   type TestapisPackage,
   buildCodeGeneratorRequest,
-  getTestapisFileDescriptorSet,
 } from "@proto-graphql/testapis-proto";
 import { describe, expect, test } from "vitest";
-import { createObjectTypeCode, printObjectType } from "./objectType.js";
+import { printObjectType } from "./objectType.js";
 import type { PothosPrinterOptions } from "./util.js";
-
-function generateObjectTypeCode(
-  packageName: TestapisPackage,
-  messageTypeName: string,
-  options: PothosPrinterOptions,
-): string {
-  const typeOptions: TypeOptions = {
-    partialInputs: false,
-    scalarMapping:
-      options.protobuf === "ts-proto"
-        ? defaultScalarMappingForTsProto
-        : defaultScalarMapping,
-    ignoreNonMessageOneofFields: false,
-  };
-
-  const descSet = getTestapisFileDescriptorSet(packageName);
-  const registry = createFileRegistry(descSet);
-  const descMsg = registry.getMessage(`${packageName}.${messageTypeName}`);
-  if (descMsg === undefined) {
-    throw new Error(
-      `Message ${messageTypeName} not found in package ${packageName}`,
-    );
-  }
-
-  const objType = new ObjectType(descMsg, typeOptions);
-
-  const code = createObjectTypeCode(objType, registry, options);
-
-  return code.toString();
-}
 
 type TestCase = {
   test: string;
@@ -230,22 +198,7 @@ function generateObjectTypeWithPrintFunction(
   return file.content;
 }
 
-describe("createObjectTypeCode", () => {
-  //   for (const { suite, options, cases } of testSuites) {
-  //     describe(suite, () => {
-  //       test.each(cases)("$test", ({ args }) => {
-  //         const code = generateObjectTypeCode(
-  //           args.packageName,
-  //           args.messageTypeName,
-  //           options,
-  //         );
-  //         expect(code).toMatchSnapshot();
-  //       });
-  //     });
-  //   }
-  // });
-  //
-  // describe("printObjectType", () => {
+describe("printObjectType", () => {
   for (const { suite, options, cases } of testSuites) {
     describe(suite, () => {
       test.each(cases)("$test", ({ args }) => {

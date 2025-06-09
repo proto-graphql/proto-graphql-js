@@ -1,4 +1,3 @@
-import { createFileRegistry } from "@bufbuild/protobuf";
 import { createEcmaScriptPlugin } from "@bufbuild/protoplugin";
 import {
   OneofUnionType,
@@ -11,90 +10,10 @@ import {
 import {
   type TestapisPackage,
   buildCodeGeneratorRequest,
-  getTestapisFileDescriptorSet,
 } from "@proto-graphql/testapis-proto";
 import { describe, expect, test } from "vitest";
-import {
-  createOneofUnionTypeCode,
-  printOneofUnionType,
-} from "./oneofUnionType.js";
+import { printOneofUnionType } from "./oneofUnionType.js";
 import type { PothosPrinterOptions } from "./util.js";
-
-function generateOneofUnionTypeCode(
-  packageName: TestapisPackage,
-  typeNameInProto: string,
-  oneofFieldName: string,
-  options: PothosPrinterOptions,
-): string {
-  const typeOptions: TypeOptions = {
-    partialInputs: false,
-    scalarMapping:
-      options.protobuf === "ts-proto"
-        ? defaultScalarMappingForTsProto
-        : defaultScalarMapping,
-    ignoreNonMessageOneofFields: false,
-  };
-
-  const descSet = getTestapisFileDescriptorSet(packageName);
-  const registry = createFileRegistry(descSet);
-  const descMsg = registry.getMessage(`${packageName}.${typeNameInProto}`);
-  if (descMsg === undefined) {
-    throw new Error(
-      `Message ${typeNameInProto} not found in package ${packageName}`,
-    );
-  }
-
-  const descOneof = descMsg.oneofs.find((d) => d.name === oneofFieldName);
-  if (descOneof === undefined) {
-    throw new Error(
-      `Oneof field ${oneofFieldName} not found in message ${typeNameInProto} in package ${packageName}`,
-    );
-  }
-
-  const oneofType = new OneofUnionType(descOneof, typeOptions);
-
-  const code = createOneofUnionTypeCode(
-    oneofType,
-    registry,
-    options,
-  ).toString();
-
-  return code.toString();
-}
-
-function generateSquashedOneofUnionTypeCode(
-  packageName: TestapisPackage,
-  typeNameInProto: string,
-  options: PothosPrinterOptions,
-): string {
-  const typeOptions: TypeOptions = {
-    partialInputs: false,
-    scalarMapping:
-      options.protobuf === "ts-proto"
-        ? defaultScalarMappingForTsProto
-        : defaultScalarMapping,
-    ignoreNonMessageOneofFields: false,
-  };
-
-  const descSet = getTestapisFileDescriptorSet(packageName);
-  const registry = createFileRegistry(descSet);
-  const descMsg = registry.getMessage(`${packageName}.${typeNameInProto}`);
-  if (descMsg === undefined) {
-    throw new Error(
-      `Message ${typeNameInProto} not found in package ${packageName}`,
-    );
-  }
-
-  const oneofType = new SquashedOneofUnionType(descMsg, typeOptions);
-
-  const code = createOneofUnionTypeCode(
-    oneofType,
-    registry,
-    options,
-  ).toString();
-
-  return code.toString();
-}
 
 type OneofTestCase = {
   test: string;

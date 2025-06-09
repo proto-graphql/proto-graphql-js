@@ -1,4 +1,3 @@
-import { createFileRegistry } from "@bufbuild/protobuf";
 import { createEcmaScriptPlugin } from "@bufbuild/protoplugin";
 import {
   EnumType,
@@ -10,50 +9,10 @@ import {
 import {
   type TestapisPackage,
   buildCodeGeneratorRequest,
-  getTestapisFileDescriptorSet,
 } from "@proto-graphql/testapis-proto";
 import { describe, expect, test } from "vitest";
-import { createEnumTypeCode, printEnumType } from "./enumType.js";
+import { printEnumType } from "./enumType.js";
 import type { PothosPrinterOptions } from "./util.js";
-
-function generateEnumTypeCode(
-  packageName: TestapisPackage,
-  enumTypeNameInProto: string,
-  options: PothosPrinterOptions,
-): string {
-  const typeOptions: TypeOptions = {
-    partialInputs: false,
-    scalarMapping:
-      options.protobuf === "ts-proto"
-        ? defaultScalarMappingForTsProto
-        : defaultScalarMapping,
-    ignoreNonMessageOneofFields: false,
-  };
-
-  const descSet = getTestapisFileDescriptorSet(packageName);
-  const registry = createFileRegistry(descSet);
-
-  // The actual proto package might differ from the TestapisPackage key
-  // For example: "testapis.enums" key but "testapi.enums" proto package
-  let descEnum = registry.getEnum(`${packageName}.${enumTypeNameInProto}`);
-
-  if (descEnum === undefined && packageName === "testapis.enums") {
-    // Try with the actual proto package name
-    descEnum = registry.getEnum(`testapi.enums.${enumTypeNameInProto}`);
-  }
-
-  if (descEnum === undefined) {
-    throw new Error(
-      `Enum ${enumTypeNameInProto} not found in package ${packageName}`,
-    );
-  }
-
-  const enumType = new EnumType(descEnum, typeOptions);
-
-  const code = createEnumTypeCode(enumType, registry, options);
-
-  return code.toString();
-}
 
 type TestCase = {
   test: string;

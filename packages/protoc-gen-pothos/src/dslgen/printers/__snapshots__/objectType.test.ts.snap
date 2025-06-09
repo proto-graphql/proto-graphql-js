@@ -1,1064 +1,554 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`createObjectTypeCode > protobuf-es > 'generates code for a message with nes…' 1`] = `
-"import { Message } from "@testapis/protobuf-es/testapis/primitives/primitives_pb";
-import { builder } from "../../../../builder";
+exports[`printObjectType > protobuf-es > 'generates code for a message with nes…' 1`] = `
+"import { builder } from "../../../../builder";
+import { Message } from "@testapis/protobuf-es/testapis/primitives/primitives";
+
 
 export const Message$Ref = builder.objectRef<Message>("Message");
 builder.objectType(Message$Ref, {
-  "name": "Message",
-  "fields": (t) => ({
+  name: "Message",
+  fields: t => ({
     requiredPrimitives: t.field({
-      "type": Primitives$Ref,
-      "nullable": false,
-      "description": "Required.",
-      "resolve": (source) => {
+      type: Primitives$Ref,
+      nullable: false,
+      resolve: (source) => {
         return source.requiredPrimitives!;
       },
-      "extensions": {
-        "protobufField": { "name": "required_primitives", "typeFullName": "testapis.primitives.Primitives" },
-      },
+      description: "Required.",
+      extensions: {"protobufField":{"name":"required_primitives","typeFullName":"testapis.primitives.Primitives"}},
     }),
     optionalPrimitives: t.expose("optionalPrimitives", {
-      "type": Primitives$Ref,
-      "nullable": true,
-      "description": "Optional.",
-      "extensions": {
-        "protobufField": { "name": "optional_primitives", "typeFullName": "testapis.primitives.Primitives" },
-      },
+      type: Primitives$Ref,
+      nullable: true,
+      description: "Optional.",
+      extensions: {"protobufField":{"name":"optional_primitives","typeFullName":"testapis.primitives.Primitives"}},
     }),
     requiredPrimitivesList: t.field({
-      "type": [Primitives$Ref],
-      "nullable": { "list": false, "items": false },
-      "description": "Required.",
-      "resolve": (source) => {
+      type: [Primitives$Ref],
+      nullable: { list: false, items: false },
+      resolve: (source) => {
         return source.requiredPrimitivesList!;
       },
-      "extensions": {
-        "protobufField": { "name": "required_primitives_list", "typeFullName": "testapis.primitives.Primitives" },
-      },
+      description: "Required.",
+      extensions: {"protobufField":{"name":"required_primitives_list","typeFullName":"testapis.primitives.Primitives"}},
     }),
     optionalPrimitivesList: t.expose("optionalPrimitivesList", {
-      "type": [Primitives$Ref],
-      "nullable": { "list": true, "items": false },
-      "description": "Optional.",
-      "extensions": {
-        "protobufField": { "name": "optional_primitives_list", "typeFullName": "testapis.primitives.Primitives" },
-      },
+      type: [Primitives$Ref],
+      nullable: { list: true, items: false },
+      description: "Optional.",
+      extensions: {"protobufField":{"name":"optional_primitives_list","typeFullName":"testapis.primitives.Primitives"}},
     }),
   }),
-  "isTypeOf": (source) => {
+  isTypeOf: (source) => {
     return source instanceof Message;
   },
-  "extensions": {
-    "protobufMessage": {
-      "fullName": "testapis.primitives.Message",
-      "name": "Message",
-      "package": "testapis.primitives",
-    },
-  },
+  extensions: {"protobufMessage":{"fullName":"testapis.primitives.Message","name":"Message","package":"testapis.primitives"}},
 });
 "
 `;
 
-exports[`createObjectTypeCode > protobuf-es > 'generates code for a message with one…' 1`] = `
-"import { OneofParent } from "@testapis/protobuf-es/testapis/oneof/oneof_pb";
-import { builder } from "../../../../builder";
+exports[`printObjectType > protobuf-es > 'generates code for a message with one…' 1`] = `
+"import { builder } from "../../../../builder";
+import { OneofParent } from "@testapis/protobuf-es/testapis/oneof/oneof";
+
 
 export const OneofParent$Ref = builder.objectRef<OneofParent>("OneofParent");
 builder.objectType(OneofParent$Ref, {
-  "name": "OneofParent",
-  "fields": (t) => ({
+  name: "OneofParent",
+  fields: t => ({
     normalField: t.expose("normalField", {
-      "type": "String",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "normal_field", "typeFullName": "string" } },
+      type: "String",
+      nullable: false,
+      extensions: {"protobufField":{"name":"normal_field","typeFullName":"string"}},
     }),
     requiredOneofMembers: t.field({
-      "type": OneofParentRequiredOneofMembers$Ref,
-      "nullable": false,
-      "description": "Required. disallow not_set.",
-      "resolve": (source) => {
+      type: OneofParentRequiredOneofMembers$Ref,
+      nullable: false,
+      resolve: (source) => {
         const value = source.requiredOneofMembers.value;
         if (value == null) {
           throw new Error("requiredOneofMembers should not be null");
         }
         return value;
       },
-      "extensions": { "protobufField": { "name": "required_oneof_members" } },
+      description: "Required. disallow not_set.",
+      extensions: {"protobufField":{"name":"required_oneof_members"}},
     }),
     optionalOneofMembers: t.field({
-      "type": OneofParentOptionalOneofMembers$Ref,
-      "nullable": true,
-      "resolve": (source) => {
-        return source.optionalOneofMembers.value;
-      },
-      "extensions": { "protobufField": { "name": "optional_oneof_members" } },
-    }),
-  }),
-  "isTypeOf": (source) => {
-    return source instanceof OneofParent;
-  },
-  "extensions": {
-    "protobufMessage": { "fullName": "testapis.oneof.OneofParent", "name": "OneofParent", "package": "testapis.oneof" },
-  },
-});
-"
-`;
-
-exports[`createObjectTypeCode > protobuf-es > 'generates code for a simple message' 1`] = `
-"import { Primitives } from "@testapis/protobuf-es/testapis/primitives/primitives_pb";
-import { builder } from "../../../../builder";
-
-export const Primitives$Ref = builder.objectRef<Primitives>("Primitives");
-builder.objectType(Primitives$Ref, {
-  "name": "Primitives",
-  "fields": (t) => ({
-    requiredDoubleValue: t.expose("requiredDoubleValue", {
-      "type": "Float",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_double_value", "typeFullName": "double" } },
-    }),
-    requiredFloatValue: t.expose("requiredFloatValue", {
-      "type": "Float",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_float_value", "typeFullName": "float" } },
-    }),
-    requiredInt32Value: t.expose("requiredInt32Value", {
-      "type": "Int",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_int32_value", "typeFullName": "int32" } },
-    }),
-    requiredInt64Value: t.expose("requiredInt64Value", {
-      "type": "Int64",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_int64_value", "typeFullName": "int64" } },
-    }),
-    requiredUint32Value: t.expose("requiredUint32Value", {
-      "type": "Int",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_uint32_value", "typeFullName": "uint32" } },
-    }),
-    requiredUint64Value: t.expose("requiredUint64Value", {
-      "type": "Int64",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_uint64_value", "typeFullName": "uint64" } },
-    }),
-    requiredSint32Value: t.expose("requiredSint32Value", {
-      "type": "Int",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_sint32_value", "typeFullName": "sint32" } },
-    }),
-    requiredSint64Value: t.expose("requiredSint64Value", {
-      "type": "Int64",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_sint64_value", "typeFullName": "sint64" } },
-    }),
-    requiredFixed32Value: t.expose("requiredFixed32Value", {
-      "type": "Int",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_fixed32_value", "typeFullName": "fixed32" } },
-    }),
-    requiredFixed64Value: t.expose("requiredFixed64Value", {
-      "type": "Int64",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_fixed64_value", "typeFullName": "fixed64" } },
-    }),
-    requiredSfixed32Value: t.expose("requiredSfixed32Value", {
-      "type": "Int",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_sfixed32_value", "typeFullName": "sfixed32" } },
-    }),
-    requiredSfixed64Value: t.expose("requiredSfixed64Value", {
-      "type": "Int64",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_sfixed64_value", "typeFullName": "sfixed64" } },
-    }),
-    requiredBoolValue: t.expose("requiredBoolValue", {
-      "type": "Boolean",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_bool_value", "typeFullName": "bool" } },
-    }),
-    requiredStringValue: t.expose("requiredStringValue", {
-      "type": "String",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_string_value", "typeFullName": "string" } },
-    }),
-    requiredBytesValue: t.field({
-      "type": "Byte",
-      "nullable": false,
-      "resolve": (source) => {
-        return Buffer.from(source.requiredBytesValue);
-      },
-      "extensions": { "protobufField": { "name": "required_bytes_value", "typeFullName": "bytes" } },
-    }),
-    requiredDoubleValues: t.expose("requiredDoubleValues", {
-      "type": ["Float"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_double_values", "typeFullName": "double" } },
-    }),
-    requiredFloatValues: t.expose("requiredFloatValues", {
-      "type": ["Float"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_float_values", "typeFullName": "float" } },
-    }),
-    requiredInt32Values: t.expose("requiredInt32Values", {
-      "type": ["Int"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_int32_values", "typeFullName": "int32" } },
-    }),
-    requiredInt64Values: t.expose("requiredInt64Values", {
-      "type": ["Int64"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_int64_values", "typeFullName": "int64" } },
-    }),
-    requiredUint32Values: t.expose("requiredUint32Values", {
-      "type": ["Int"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_uint32_values", "typeFullName": "uint32" } },
-    }),
-    requiredUint64Values: t.expose("requiredUint64Values", {
-      "type": ["Int64"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_uint64_values", "typeFullName": "uint64" } },
-    }),
-    requiredSint32Values: t.expose("requiredSint32Values", {
-      "type": ["Int"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_sint32_values", "typeFullName": "sint32" } },
-    }),
-    requiredSint64Values: t.expose("requiredSint64Values", {
-      "type": ["Int64"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_sint64_values", "typeFullName": "sint64" } },
-    }),
-    requiredFixed32Values: t.expose("requiredFixed32Values", {
-      "type": ["Int"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_fixed32_values", "typeFullName": "fixed32" } },
-    }),
-    requiredFixed64Values: t.expose("requiredFixed64Values", {
-      "type": ["Int64"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_fixed64_values", "typeFullName": "fixed64" } },
-    }),
-    requiredSfixed32Values: t.expose("requiredSfixed32Values", {
-      "type": ["Int"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_sfixed32_values", "typeFullName": "sfixed32" } },
-    }),
-    requiredSfixed64Values: t.expose("requiredSfixed64Values", {
-      "type": ["Int64"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_sfixed64_values", "typeFullName": "sfixed64" } },
-    }),
-    requiredBoolValues: t.expose("requiredBoolValues", {
-      "type": ["Boolean"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_bool_values", "typeFullName": "bool" } },
-    }),
-    requiredStringValues: t.expose("requiredStringValues", {
-      "type": ["String"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_string_values", "typeFullName": "string" } },
-    }),
-    requiredBytesValues: t.field({
-      "type": ["Byte"],
-      "nullable": { "list": false, "items": false },
-      "resolve": (source) => {
-        return source.requiredBytesValues.map((v) => Buffer.from(v));
-      },
-      "extensions": { "protobufField": { "name": "required_bytes_values", "typeFullName": "bytes" } },
-    }),
-  }),
-  "isTypeOf": (source) => {
-    return source instanceof Primitives;
-  },
-  "extensions": {
-    "protobufMessage": {
-      "fullName": "testapis.primitives.Primitives",
-      "name": "Primitives",
-      "package": "testapis.primitives",
-    },
-  },
-});
-"
-`;
-
-exports[`createObjectTypeCode > ts-proto > 'generates code for a message with nes…' 1`] = `
-"import { Message } from "@testapis/ts-proto/testapis/primitives/primitives";
-import { builder } from "../../../../builder";
-
-export const Message$Ref = builder.objectRef<Message>("Message");
-builder.objectType(Message$Ref, {
-  "name": "Message",
-  "fields": (t) => ({
-    requiredPrimitives: t.field({
-      "type": Primitives$Ref,
-      "nullable": false,
-      "description": "Required.",
-      "resolve": (source) => {
-        return source.requiredPrimitives!;
-      },
-      "extensions": {
-        "protobufField": { "name": "required_primitives", "typeFullName": "testapis.primitives.Primitives" },
-      },
-    }),
-    optionalPrimitives: t.expose("optionalPrimitives", {
-      "type": Primitives$Ref,
-      "nullable": true,
-      "description": "Optional.",
-      "extensions": {
-        "protobufField": { "name": "optional_primitives", "typeFullName": "testapis.primitives.Primitives" },
-      },
-    }),
-    requiredPrimitivesList: t.field({
-      "type": [Primitives$Ref],
-      "nullable": { "list": false, "items": false },
-      "description": "Required.",
-      "resolve": (source) => {
-        return source.requiredPrimitivesList!;
-      },
-      "extensions": {
-        "protobufField": { "name": "required_primitives_list", "typeFullName": "testapis.primitives.Primitives" },
-      },
-    }),
-    optionalPrimitivesList: t.expose("optionalPrimitivesList", {
-      "type": [Primitives$Ref],
-      "nullable": { "list": true, "items": false },
-      "description": "Optional.",
-      "extensions": {
-        "protobufField": { "name": "optional_primitives_list", "typeFullName": "testapis.primitives.Primitives" },
-      },
-    }),
-  }),
-  "isTypeOf": (source) => {
-    return (source as Message | { $type: string & {} }).$type === "testapis.primitives.Message";
-  },
-  "extensions": {
-    "protobufMessage": {
-      "fullName": "testapis.primitives.Message",
-      "name": "Message",
-      "package": "testapis.primitives",
-    },
-  },
-});
-"
-`;
-
-exports[`createObjectTypeCode > ts-proto > 'generates code for a message with one…' 1`] = `
-"import { OneofParent } from "@testapis/ts-proto/testapis/oneof/oneof";
-import { builder } from "../../../../builder";
-
-export const OneofParent$Ref = builder.objectRef<OneofParent>("OneofParent");
-builder.objectType(OneofParent$Ref, {
-  "name": "OneofParent",
-  "fields": (t) => ({
-    normalField: t.expose("normalField", {
-      "type": "String",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "normal_field", "typeFullName": "string" } },
-    }),
-    requiredOneofMembers: t.field({
-      "type": OneofParentRequiredOneofMembers$Ref,
-      "nullable": false,
-      "description": "Required. disallow not_set.",
-      "resolve": (source) => {
-        const value = source.requiredMessage1 ?? source.requiredMessage2;
-        if (value == null) {
-          throw new Error("requiredOneofMembers should not be null");
-        }
-        return value;
-      },
-      "extensions": { "protobufField": { "name": "required_oneof_members" } },
-    }),
-    optionalOneofMembers: t.field({
-      "type": OneofParentOptionalOneofMembers$Ref,
-      "nullable": true,
-      "resolve": (source) => {
-        const value = source.optoinalMessage1 ?? source.optoinalMessage2;
+      type: OneofParentOptionalOneofMembers$Ref,
+      nullable: true,
+      resolve: (source) => {
+        const value = source.optionalOneofMembers.value;
         if (value == null) {
           return null;
         }
         return value;
       },
-      "extensions": { "protobufField": { "name": "optional_oneof_members" } },
+      extensions: {"protobufField":{"name":"optional_oneof_members"}},
     }),
-  }),
-  "isTypeOf": (source) => {
-    return (source as OneofParent | { $type: string & {} }).$type === "testapis.oneof.OneofParent";
-  },
-  "extensions": {
-    "protobufMessage": { "fullName": "testapis.oneof.OneofParent", "name": "OneofParent", "package": "testapis.oneof" },
-  },
-});
-"
-`;
-
-exports[`createObjectTypeCode > ts-proto > 'generates code for a simple message' 1`] = `
-"import { Primitives } from "@testapis/ts-proto/testapis/primitives/primitives";
-import { builder } from "../../../../builder";
-
-export const Primitives$Ref = builder.objectRef<Primitives>("Primitives");
-builder.objectType(Primitives$Ref, {
-  "name": "Primitives",
-  "fields": (t) => ({
-    requiredDoubleValue: t.expose("requiredDoubleValue", {
-      "type": "Float",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_double_value", "typeFullName": "double" } },
-    }),
-    requiredFloatValue: t.expose("requiredFloatValue", {
-      "type": "Float",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_float_value", "typeFullName": "float" } },
-    }),
-    requiredInt32Value: t.expose("requiredInt32Value", {
-      "type": "Int",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_int32_value", "typeFullName": "int32" } },
-    }),
-    requiredInt64Value: t.expose("requiredInt64Value", {
-      "type": "String",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_int64_value", "typeFullName": "int64" } },
-    }),
-    requiredUint32Value: t.expose("requiredUint32Value", {
-      "type": "Int",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_uint32_value", "typeFullName": "uint32" } },
-    }),
-    requiredUint64Value: t.expose("requiredUint64Value", {
-      "type": "String",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_uint64_value", "typeFullName": "uint64" } },
-    }),
-    requiredSint32Value: t.expose("requiredSint32Value", {
-      "type": "Int",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_sint32_value", "typeFullName": "sint32" } },
-    }),
-    requiredSint64Value: t.expose("requiredSint64Value", {
-      "type": "String",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_sint64_value", "typeFullName": "sint64" } },
-    }),
-    requiredFixed32Value: t.expose("requiredFixed32Value", {
-      "type": "Int",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_fixed32_value", "typeFullName": "fixed32" } },
-    }),
-    requiredFixed64Value: t.expose("requiredFixed64Value", {
-      "type": "String",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_fixed64_value", "typeFullName": "fixed64" } },
-    }),
-    requiredSfixed32Value: t.expose("requiredSfixed32Value", {
-      "type": "Int",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_sfixed32_value", "typeFullName": "sfixed32" } },
-    }),
-    requiredSfixed64Value: t.expose("requiredSfixed64Value", {
-      "type": "String",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_sfixed64_value", "typeFullName": "sfixed64" } },
-    }),
-    requiredBoolValue: t.expose("requiredBoolValue", {
-      "type": "Boolean",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_bool_value", "typeFullName": "bool" } },
-    }),
-    requiredStringValue: t.expose("requiredStringValue", {
-      "type": "String",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "required_string_value", "typeFullName": "string" } },
-    }),
-    requiredBytesValue: t.field({
-      "type": "Byte",
-      "nullable": false,
-      "resolve": (source) => {
-        return Buffer.from(source.requiredBytesValue);
-      },
-      "extensions": { "protobufField": { "name": "required_bytes_value", "typeFullName": "bytes" } },
-    }),
-    requiredDoubleValues: t.expose("requiredDoubleValues", {
-      "type": ["Float"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_double_values", "typeFullName": "double" } },
-    }),
-    requiredFloatValues: t.expose("requiredFloatValues", {
-      "type": ["Float"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_float_values", "typeFullName": "float" } },
-    }),
-    requiredInt32Values: t.expose("requiredInt32Values", {
-      "type": ["Int"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_int32_values", "typeFullName": "int32" } },
-    }),
-    requiredInt64Values: t.expose("requiredInt64Values", {
-      "type": ["String"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_int64_values", "typeFullName": "int64" } },
-    }),
-    requiredUint32Values: t.expose("requiredUint32Values", {
-      "type": ["Int"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_uint32_values", "typeFullName": "uint32" } },
-    }),
-    requiredUint64Values: t.expose("requiredUint64Values", {
-      "type": ["String"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_uint64_values", "typeFullName": "uint64" } },
-    }),
-    requiredSint32Values: t.expose("requiredSint32Values", {
-      "type": ["Int"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_sint32_values", "typeFullName": "sint32" } },
-    }),
-    requiredSint64Values: t.expose("requiredSint64Values", {
-      "type": ["String"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_sint64_values", "typeFullName": "sint64" } },
-    }),
-    requiredFixed32Values: t.expose("requiredFixed32Values", {
-      "type": ["Int"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_fixed32_values", "typeFullName": "fixed32" } },
-    }),
-    requiredFixed64Values: t.expose("requiredFixed64Values", {
-      "type": ["String"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_fixed64_values", "typeFullName": "fixed64" } },
-    }),
-    requiredSfixed32Values: t.expose("requiredSfixed32Values", {
-      "type": ["Int"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_sfixed32_values", "typeFullName": "sfixed32" } },
-    }),
-    requiredSfixed64Values: t.expose("requiredSfixed64Values", {
-      "type": ["String"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_sfixed64_values", "typeFullName": "sfixed64" } },
-    }),
-    requiredBoolValues: t.expose("requiredBoolValues", {
-      "type": ["Boolean"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_bool_values", "typeFullName": "bool" } },
-    }),
-    requiredStringValues: t.expose("requiredStringValues", {
-      "type": ["String"],
-      "nullable": { "list": false, "items": false },
-      "extensions": { "protobufField": { "name": "required_string_values", "typeFullName": "string" } },
-    }),
-    requiredBytesValues: t.field({
-      "type": ["Byte"],
-      "nullable": { "list": false, "items": false },
-      "resolve": (source) => {
-        return source.requiredBytesValues.map((v) => Buffer.from(v));
-      },
-      "extensions": { "protobufField": { "name": "required_bytes_values", "typeFullName": "bytes" } },
-    }),
-  }),
-  "isTypeOf": (source) => {
-    return (source as Primitives | { $type: string & {} }).$type === "testapis.primitives.Primitives";
-  },
-  "extensions": {
-    "protobufMessage": {
-      "fullName": "testapis.primitives.Primitives",
-      "name": "Primitives",
-      "package": "testapis.primitives",
-    },
-  },
-});
-"
-`;
-
-exports[`createObjectTypeCode > ts-proto > 'generates code for empty message' 1`] = `
-"import { EmptyMessage } from "@testapis/ts-proto/testapis/empty_types/empty";
-import { builder } from "../../../../builder";
-
-export const EmptyMessage$Ref = builder.objectRef<EmptyMessage>("EmptyMessage");
-builder.objectType(EmptyMessage$Ref, {
-  "name": "EmptyMessage",
-  "fields": (t) => ({
-    _: t.field({ type: "Boolean", nullable: true, description: "noop field", resolve: () => true }),
-  }),
-  "isTypeOf": (source) => {
-    return (source as EmptyMessage | { $type: string & {} }).$type === "testapis.empty_types.EmptyMessage";
-  },
-  "extensions": {
-    "protobufMessage": {
-      "fullName": "testapis.empty_types.EmptyMessage",
-      "name": "EmptyMessage",
-      "package": "testapis.empty_types",
-    },
-  },
-});
-"
-`;
-
-exports[`createObjectTypeCode > ts-proto > 'generates code for nested types' 1`] = `
-"import { ParentMessage, ParentMessage_NestedEnum } from "@testapis/ts-proto/testapis/nested/nested";
-import { builder } from "../../../../builder";
-
-export const ParentMessage$Ref = builder.objectRef<ParentMessage>("ParentMessage");
-builder.objectType(ParentMessage$Ref, {
-  "name": "ParentMessage",
-  "fields": (t) => ({
-    body: t.expose("body", {
-      "type": "String",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "body", "typeFullName": "string" } },
-    }),
-    nested: t.expose("nested", {
-      "type": ParentMessageNestedMessage$Ref,
-      "nullable": true,
-      "extensions": {
-        "protobufField": { "name": "nested", "typeFullName": "testapis.nested.ParentMessage.NestedMessage" },
-      },
-    }),
-    nestedEnum: t.field({
-      "type": ParentMessageNestedEnum$Ref,
-      "nullable": true,
-      "resolve": (source) => {
-        if (source.nestedEnum === ParentMessage_NestedEnum.NESTED_ENUM_UNSPECIFIED) {
-          return null;
-        }
-
-        return source.nestedEnum;
-      },
-      "extensions": {
-        "protobufField": { "name": "nested_enum", "typeFullName": "testapis.nested.ParentMessage.NestedEnum" },
-      },
-    }),
-  }),
-  "isTypeOf": (source) => {
-    return (source as ParentMessage | { $type: string & {} }).$type === "testapis.nested.ParentMessage";
-  },
-  "extensions": {
-    "protobufMessage": {
-      "fullName": "testapis.nested.ParentMessage",
-      "name": "ParentMessage",
-      "package": "testapis.nested",
-    },
-  },
-});
-"
-`;
-
-exports[`createObjectTypeCode > with extensions > 'generates code for message with field…' 1`] = `
-"import { EnumWillRename, PrefixedEnum, PrefixedMessage } from "@testapis/ts-proto/testapis/extensions/extensions";
-import { builder } from "../../../../builder";
-
-export const TestPrefixPrefixedMessage$Ref = builder.objectRef<PrefixedMessage>("TestPrefixPrefixedMessage");
-builder.objectType(TestPrefixPrefixedMessage$Ref, {
-  "name": "TestPrefixPrefixedMessage",
-  "fields": (t) => ({
-    id: t.expose("id", {
-      "type": "String",
-      "nullable": false,
-      "description": "Output only.",
-      "extensions": { "protobufField": { "name": "id", "typeFullName": "uint64" } },
-    }),
-    body: t.expose("body", {
-      "type": "String",
-      "nullable": false,
-      "extensions": { "protobufField": { "name": "body", "typeFullName": "string" } },
-    }),
-    prefixedEnum: t.field({
-      "type": TestPrefixPrefixedEnum$Ref,
-      "nullable": true,
-      "resolve": (source) => {
-        if (source.prefixedEnum === PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
-          return null;
-        }
-
-        if (source.prefixedEnum === PrefixedEnum.PREFIXED_IGNORED) {
-          throw new Error("PREFIXED_IGNORED is ignored in GraphQL schema");
-        }
-
-        return source.prefixedEnum;
-      },
-      "extensions": {
-        "protobufField": { "name": "prefixed_enum", "typeFullName": "testapis.extensions.PrefixedEnum" },
-      },
-    }),
-    notIgnoredMessage: t.expose("notIgnoredMessage", {
-      "type": TestPrefixIgnoredMessageNotIgnored$Ref,
-      "nullable": true,
-      "extensions": {
-        "protobufField": {
-          "name": "not_ignored_message",
-          "typeFullName": "testapis.extensions.IgnoredMessage.NotIgnored",
-        },
-      },
-    }),
-    squashedMessage: t.field({
-      "type": TestPrefixPrefixedMessageSquashedMessage$Ref,
-      "nullable": true,
-      "resolve": (source) => {
-        const value = source.squashedMessage?.oneofField ?? source.squashedMessage?.oneofField2;
-        if (value == null) {
-          return null;
-        }
-        return value;
-      },
-      "extensions": {
-        "protobufField": {
-          "name": "squashed_message",
-          "typeFullName": "testapis.extensions.PrefixedMessage.SquashedMessage",
-        },
-      },
-    }),
-    thisFieldWasRenamed: t.expose("thisFieldWillBeRenamed", {
-      "type": "String",
-      "nullable": false,
-      "extensions": {
-        "protobufField": {
-          "name": "this_field_will_be_renamed",
-          "typeFullName": "string",
-          "options": { "[graphql.field]": { "name": "thisFieldWasRenamed" } },
-        },
-      },
-    }),
-    skipResolver: t.expose("skipResolver", {
-      "type": "String",
-      "nullable": false,
-      "extensions": {
-        "protobufField": {
-          "name": "skip_resolver",
-          "typeFullName": "string",
-          "options": { "[graphql.field]": { "skipResolver": true } },
-        },
-      },
-    }),
-    squashedMessages: t.field({
-      "type": [TestPrefixPrefixedMessageSquashedMessage$Ref],
-      "nullable": { "list": true, "items": false },
-      "resolve": (source) => {
-        return source.squashedMessages.map((item) => {
-          const value = item?.oneofField ?? item?.oneofField2;
-          if (value == null) {
-            throw new Error("squashedMessages should not be null");
-          }
-          return value;
-        });
-      },
-      "extensions": {
-        "protobufField": {
-          "name": "squashed_messages",
-          "typeFullName": "testapis.extensions.PrefixedMessage.SquashedMessage",
-        },
-      },
-    }),
-    renamedMessage: t.expose("renamedMessage", {
-      "type": TestPrefixRenamedMessage$Ref,
-      "nullable": true,
-      "extensions": {
-        "protobufField": { "name": "renamed_message", "typeFullName": "testapis.extensions.MessageWillRename" },
-      },
-    }),
-    renamedEnum: t.field({
-      "type": TestPrefixRenamedEnum$Ref,
-      "nullable": true,
-      "resolve": (source) => {
-        if (source.renamedEnum === EnumWillRename.ENUM_WILL_RENAME_UNSPECIFIED) {
-          return null;
-        }
-
-        return source.renamedEnum;
-      },
-      "extensions": {
-        "protobufField": { "name": "renamed_enum", "typeFullName": "testapis.extensions.EnumWillRename" },
-      },
-    }),
-    partialIgnoreOneof: t.field({
-      "type": TestPrefixPrefixedMessagePartialIgnoreOneof$Ref,
-      "nullable": true,
-      "resolve": (source) => {
-        const value = source.oneofNotIgnoredField;
-        if (value == null) {
-          return null;
-        }
-        return value;
-      },
-      "extensions": { "protobufField": { "name": "partial_ignore_oneof" } },
-    }),
-  }),
-  "isTypeOf": (source) => {
-    return (source as PrefixedMessage | { $type: string & {} }).$type === "testapis.extensions.PrefixedMessage";
-  },
-  "extensions": {
-    "protobufMessage": {
-      "fullName": "testapis.extensions.PrefixedMessage",
-      "name": "PrefixedMessage",
-      "package": "testapis.extensions",
-    },
-  },
-});
-"
-`;
-
-exports[`printObjectType > protobuf-es > 'generates code for a message with nes…' 1`] = `
-"import { Message } from "@testapis/protobuf-es/testapis/primitives/primitives";
-import { builder } from "../../builder";
-
-export const Message$Ref = builder.objectRef<Message>("Message");
-
-builder.objectType(Message$Ref, {
-  name: "Message",
-  fields: t => ({
-    // TODO: Convert field requiredPrimitives definition
-    requiredPrimitives: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field optionalPrimitives definition
-    optionalPrimitives: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredPrimitivesList definition
-    requiredPrimitivesList: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field optionalPrimitivesList definition
-    optionalPrimitivesList: t.field({ type: "String", resolve: () => "TODO" }),
-  }),
-  isTypeOf: (source) => {
-    return source instanceof Message;
-  },
-  extensions: {"protobufMessage":{"fullName":"testapis.primitives.Message","name":"Message","package":"testapis.primitives"}},
-});"
-`;
-
-exports[`printObjectType > protobuf-es > 'generates code for a message with one…' 1`] = `
-"import { OneofParent } from "@testapis/protobuf-es/testapis/oneof/oneof";
-import { builder } from "../../builder";
-
-export const OneofParent$Ref = builder.objectRef<OneofParent>("OneofParent");
-
-builder.objectType(OneofParent$Ref, {
-  name: "OneofParent",
-  fields: t => ({
-    // TODO: Convert field normalField definition
-    normalField: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredOneofMembers definition
-    requiredOneofMembers: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field optionalOneofMembers definition
-    optionalOneofMembers: t.field({ type: "String", resolve: () => "TODO" }),
   }),
   isTypeOf: (source) => {
     return source instanceof OneofParent;
   },
   extensions: {"protobufMessage":{"fullName":"testapis.oneof.OneofParent","name":"OneofParent","package":"testapis.oneof"}},
-});"
+});
+"
 `;
 
 exports[`printObjectType > protobuf-es > 'generates code for a simple message' 1`] = `
-"import { Primitives } from "@testapis/protobuf-es/testapis/primitives/primitives";
-import { builder } from "../../builder";
+"import { builder } from "../../../../builder";
+import { Primitives } from "@testapis/protobuf-es/testapis/primitives/primitives";
+
 
 export const Primitives$Ref = builder.objectRef<Primitives>("Primitives");
-
 builder.objectType(Primitives$Ref, {
   name: "Primitives",
   fields: t => ({
-    // TODO: Convert field requiredDoubleValue definition
-    requiredDoubleValue: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredFloatValue definition
-    requiredFloatValue: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredInt32Value definition
-    requiredInt32Value: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredInt64Value definition
-    requiredInt64Value: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredUint32Value definition
-    requiredUint32Value: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredUint64Value definition
-    requiredUint64Value: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredSint32Value definition
-    requiredSint32Value: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredSint64Value definition
-    requiredSint64Value: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredFixed32Value definition
-    requiredFixed32Value: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredFixed64Value definition
-    requiredFixed64Value: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredSfixed32Value definition
-    requiredSfixed32Value: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredSfixed64Value definition
-    requiredSfixed64Value: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredBoolValue definition
-    requiredBoolValue: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredStringValue definition
-    requiredStringValue: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredBytesValue definition
-    requiredBytesValue: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredDoubleValues definition
-    requiredDoubleValues: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredFloatValues definition
-    requiredFloatValues: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredInt32Values definition
-    requiredInt32Values: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredInt64Values definition
-    requiredInt64Values: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredUint32Values definition
-    requiredUint32Values: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredUint64Values definition
-    requiredUint64Values: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredSint32Values definition
-    requiredSint32Values: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredSint64Values definition
-    requiredSint64Values: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredFixed32Values definition
-    requiredFixed32Values: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredFixed64Values definition
-    requiredFixed64Values: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredSfixed32Values definition
-    requiredSfixed32Values: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredSfixed64Values definition
-    requiredSfixed64Values: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredBoolValues definition
-    requiredBoolValues: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredStringValues definition
-    requiredStringValues: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredBytesValues definition
-    requiredBytesValues: t.field({ type: "String", resolve: () => "TODO" }),
+    requiredDoubleValue: t.expose("requiredDoubleValue", {
+      type: "Float",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_double_value","typeFullName":"double"}},
+    }),
+    requiredFloatValue: t.expose("requiredFloatValue", {
+      type: "Float",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_float_value","typeFullName":"float"}},
+    }),
+    requiredInt32Value: t.expose("requiredInt32Value", {
+      type: "Int",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_int32_value","typeFullName":"int32"}},
+    }),
+    requiredInt64Value: t.expose("requiredInt64Value", {
+      type: "Int64",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_int64_value","typeFullName":"int64"}},
+    }),
+    requiredUint32Value: t.expose("requiredUint32Value", {
+      type: "Int",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_uint32_value","typeFullName":"uint32"}},
+    }),
+    requiredUint64Value: t.expose("requiredUint64Value", {
+      type: "Int64",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_uint64_value","typeFullName":"uint64"}},
+    }),
+    requiredSint32Value: t.expose("requiredSint32Value", {
+      type: "Int",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_sint32_value","typeFullName":"sint32"}},
+    }),
+    requiredSint64Value: t.expose("requiredSint64Value", {
+      type: "Int64",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_sint64_value","typeFullName":"sint64"}},
+    }),
+    requiredFixed32Value: t.expose("requiredFixed32Value", {
+      type: "Int",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_fixed32_value","typeFullName":"fixed32"}},
+    }),
+    requiredFixed64Value: t.expose("requiredFixed64Value", {
+      type: "Int64",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_fixed64_value","typeFullName":"fixed64"}},
+    }),
+    requiredSfixed32Value: t.expose("requiredSfixed32Value", {
+      type: "Int",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_sfixed32_value","typeFullName":"sfixed32"}},
+    }),
+    requiredSfixed64Value: t.expose("requiredSfixed64Value", {
+      type: "Int64",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_sfixed64_value","typeFullName":"sfixed64"}},
+    }),
+    requiredBoolValue: t.expose("requiredBoolValue", {
+      type: "Boolean",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_bool_value","typeFullName":"bool"}},
+    }),
+    requiredStringValue: t.expose("requiredStringValue", {
+      type: "String",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_string_value","typeFullName":"string"}},
+    }),
+    requiredBytesValue: t.field({
+      type: "Byte",
+      nullable: false,
+      resolve: (source) => {
+        return Buffer.from(source.requiredBytesValue);
+      },
+      extensions: {"protobufField":{"name":"required_bytes_value","typeFullName":"bytes"}},
+    }),
+    requiredDoubleValues: t.expose("requiredDoubleValues", {
+      type: ["Float"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_double_values","typeFullName":"double"}},
+    }),
+    requiredFloatValues: t.expose("requiredFloatValues", {
+      type: ["Float"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_float_values","typeFullName":"float"}},
+    }),
+    requiredInt32Values: t.expose("requiredInt32Values", {
+      type: ["Int"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_int32_values","typeFullName":"int32"}},
+    }),
+    requiredInt64Values: t.expose("requiredInt64Values", {
+      type: ["Int64"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_int64_values","typeFullName":"int64"}},
+    }),
+    requiredUint32Values: t.expose("requiredUint32Values", {
+      type: ["Int"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_uint32_values","typeFullName":"uint32"}},
+    }),
+    requiredUint64Values: t.expose("requiredUint64Values", {
+      type: ["Int64"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_uint64_values","typeFullName":"uint64"}},
+    }),
+    requiredSint32Values: t.expose("requiredSint32Values", {
+      type: ["Int"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_sint32_values","typeFullName":"sint32"}},
+    }),
+    requiredSint64Values: t.expose("requiredSint64Values", {
+      type: ["Int64"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_sint64_values","typeFullName":"sint64"}},
+    }),
+    requiredFixed32Values: t.expose("requiredFixed32Values", {
+      type: ["Int"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_fixed32_values","typeFullName":"fixed32"}},
+    }),
+    requiredFixed64Values: t.expose("requiredFixed64Values", {
+      type: ["Int64"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_fixed64_values","typeFullName":"fixed64"}},
+    }),
+    requiredSfixed32Values: t.expose("requiredSfixed32Values", {
+      type: ["Int"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_sfixed32_values","typeFullName":"sfixed32"}},
+    }),
+    requiredSfixed64Values: t.expose("requiredSfixed64Values", {
+      type: ["Int64"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_sfixed64_values","typeFullName":"sfixed64"}},
+    }),
+    requiredBoolValues: t.expose("requiredBoolValues", {
+      type: ["Boolean"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_bool_values","typeFullName":"bool"}},
+    }),
+    requiredStringValues: t.expose("requiredStringValues", {
+      type: ["String"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_string_values","typeFullName":"string"}},
+    }),
+    requiredBytesValues: t.field({
+      type: ["Byte"],
+      nullable: { list: false, items: false },
+      resolve: (source) => {
+        return source.requiredBytesValues.map(v => Buffer.from(v));
+      },
+      extensions: {"protobufField":{"name":"required_bytes_values","typeFullName":"bytes"}},
+    }),
   }),
   isTypeOf: (source) => {
     return source instanceof Primitives;
   },
   extensions: {"protobufMessage":{"fullName":"testapis.primitives.Primitives","name":"Primitives","package":"testapis.primitives"}},
-});"
+});
+"
 `;
 
 exports[`printObjectType > ts-proto > 'generates code for a message with nes…' 1`] = `
-"import { Message } from "@testapis/ts-proto/testapis/primitives/primitives";
-import { builder } from "../../builder";
+"import { builder } from "../../../../builder";
+import { Message } from "@testapis/ts-proto/testapis/primitives/primitives";
+
 
 export const Message$Ref = builder.objectRef<Message>("Message");
-
 builder.objectType(Message$Ref, {
   name: "Message",
   fields: t => ({
-    // TODO: Convert field requiredPrimitives definition
-    requiredPrimitives: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field optionalPrimitives definition
-    optionalPrimitives: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredPrimitivesList definition
-    requiredPrimitivesList: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field optionalPrimitivesList definition
-    optionalPrimitivesList: t.field({ type: "String", resolve: () => "TODO" }),
+    requiredPrimitives: t.field({
+      type: Primitives$Ref,
+      nullable: false,
+      resolve: (source) => {
+        return source.requiredPrimitives!;
+      },
+      description: "Required.",
+      extensions: {"protobufField":{"name":"required_primitives","typeFullName":"testapis.primitives.Primitives"}},
+    }),
+    optionalPrimitives: t.expose("optionalPrimitives", {
+      type: Primitives$Ref,
+      nullable: true,
+      description: "Optional.",
+      extensions: {"protobufField":{"name":"optional_primitives","typeFullName":"testapis.primitives.Primitives"}},
+    }),
+    requiredPrimitivesList: t.field({
+      type: [Primitives$Ref],
+      nullable: { list: false, items: false },
+      resolve: (source) => {
+        return source.requiredPrimitivesList!;
+      },
+      description: "Required.",
+      extensions: {"protobufField":{"name":"required_primitives_list","typeFullName":"testapis.primitives.Primitives"}},
+    }),
+    optionalPrimitivesList: t.expose("optionalPrimitivesList", {
+      type: [Primitives$Ref],
+      nullable: { list: true, items: false },
+      description: "Optional.",
+      extensions: {"protobufField":{"name":"optional_primitives_list","typeFullName":"testapis.primitives.Primitives"}},
+    }),
   }),
   isTypeOf: (source) => {
     return (source as Message | { $type: string & {} }).$type
       === "testapis.primitives.Message";
   },
   extensions: {"protobufMessage":{"fullName":"testapis.primitives.Message","name":"Message","package":"testapis.primitives"}},
-});"
+});
+"
 `;
 
 exports[`printObjectType > ts-proto > 'generates code for a message with one…' 1`] = `
-"import { OneofParent } from "@testapis/ts-proto/testapis/oneof/oneof";
-import { builder } from "../../builder";
+"import { builder } from "../../../../builder";
+import { OneofParent } from "@testapis/ts-proto/testapis/oneof/oneof";
+
 
 export const OneofParent$Ref = builder.objectRef<OneofParent>("OneofParent");
-
 builder.objectType(OneofParent$Ref, {
   name: "OneofParent",
   fields: t => ({
-    // TODO: Convert field normalField definition
-    normalField: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredOneofMembers definition
-    requiredOneofMembers: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field optionalOneofMembers definition
-    optionalOneofMembers: t.field({ type: "String", resolve: () => "TODO" }),
+    normalField: t.expose("normalField", {
+      type: "String",
+      nullable: false,
+      extensions: {"protobufField":{"name":"normal_field","typeFullName":"string"}},
+    }),
+    requiredOneofMembers: t.field({
+      type: OneofParentRequiredOneofMembers$Ref,
+      nullable: false,
+      resolve: (source) => {
+        const value = source.requiredMessage1 ?? source.requiredMessage2;
+        if (value == null) {
+          throw new Error("requiredOneofMembers should not be null");
+        }
+        return value;
+      },
+      description: "Required. disallow not_set.",
+      extensions: {"protobufField":{"name":"required_oneof_members"}},
+    }),
+    optionalOneofMembers: t.field({
+      type: OneofParentOptionalOneofMembers$Ref,
+      nullable: true,
+      resolve: (source) => {
+        const value = source.optoinalMessage1 ?? source.optoinalMessage2;
+        if (value == null) {
+          return null;
+        }
+        return value;
+      },
+      extensions: {"protobufField":{"name":"optional_oneof_members"}},
+    }),
   }),
   isTypeOf: (source) => {
     return (source as OneofParent | { $type: string & {} }).$type
       === "testapis.oneof.OneofParent";
   },
   extensions: {"protobufMessage":{"fullName":"testapis.oneof.OneofParent","name":"OneofParent","package":"testapis.oneof"}},
-});"
+});
+"
 `;
 
 exports[`printObjectType > ts-proto > 'generates code for a simple message' 1`] = `
-"import { Primitives } from "@testapis/ts-proto/testapis/primitives/primitives";
-import { builder } from "../../builder";
+"import { builder } from "../../../../builder";
+import { Primitives } from "@testapis/ts-proto/testapis/primitives/primitives";
+
 
 export const Primitives$Ref = builder.objectRef<Primitives>("Primitives");
-
 builder.objectType(Primitives$Ref, {
   name: "Primitives",
   fields: t => ({
-    // TODO: Convert field requiredDoubleValue definition
-    requiredDoubleValue: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredFloatValue definition
-    requiredFloatValue: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredInt32Value definition
-    requiredInt32Value: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredInt64Value definition
-    requiredInt64Value: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredUint32Value definition
-    requiredUint32Value: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredUint64Value definition
-    requiredUint64Value: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredSint32Value definition
-    requiredSint32Value: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredSint64Value definition
-    requiredSint64Value: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredFixed32Value definition
-    requiredFixed32Value: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredFixed64Value definition
-    requiredFixed64Value: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredSfixed32Value definition
-    requiredSfixed32Value: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredSfixed64Value definition
-    requiredSfixed64Value: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredBoolValue definition
-    requiredBoolValue: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredStringValue definition
-    requiredStringValue: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredBytesValue definition
-    requiredBytesValue: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredDoubleValues definition
-    requiredDoubleValues: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredFloatValues definition
-    requiredFloatValues: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredInt32Values definition
-    requiredInt32Values: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredInt64Values definition
-    requiredInt64Values: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredUint32Values definition
-    requiredUint32Values: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredUint64Values definition
-    requiredUint64Values: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredSint32Values definition
-    requiredSint32Values: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredSint64Values definition
-    requiredSint64Values: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredFixed32Values definition
-    requiredFixed32Values: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredFixed64Values definition
-    requiredFixed64Values: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredSfixed32Values definition
-    requiredSfixed32Values: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredSfixed64Values definition
-    requiredSfixed64Values: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredBoolValues definition
-    requiredBoolValues: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredStringValues definition
-    requiredStringValues: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field requiredBytesValues definition
-    requiredBytesValues: t.field({ type: "String", resolve: () => "TODO" }),
+    requiredDoubleValue: t.expose("requiredDoubleValue", {
+      type: "Float",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_double_value","typeFullName":"double"}},
+    }),
+    requiredFloatValue: t.expose("requiredFloatValue", {
+      type: "Float",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_float_value","typeFullName":"float"}},
+    }),
+    requiredInt32Value: t.expose("requiredInt32Value", {
+      type: "Int",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_int32_value","typeFullName":"int32"}},
+    }),
+    requiredInt64Value: t.expose("requiredInt64Value", {
+      type: "String",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_int64_value","typeFullName":"int64"}},
+    }),
+    requiredUint32Value: t.expose("requiredUint32Value", {
+      type: "Int",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_uint32_value","typeFullName":"uint32"}},
+    }),
+    requiredUint64Value: t.expose("requiredUint64Value", {
+      type: "String",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_uint64_value","typeFullName":"uint64"}},
+    }),
+    requiredSint32Value: t.expose("requiredSint32Value", {
+      type: "Int",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_sint32_value","typeFullName":"sint32"}},
+    }),
+    requiredSint64Value: t.expose("requiredSint64Value", {
+      type: "String",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_sint64_value","typeFullName":"sint64"}},
+    }),
+    requiredFixed32Value: t.expose("requiredFixed32Value", {
+      type: "Int",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_fixed32_value","typeFullName":"fixed32"}},
+    }),
+    requiredFixed64Value: t.expose("requiredFixed64Value", {
+      type: "String",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_fixed64_value","typeFullName":"fixed64"}},
+    }),
+    requiredSfixed32Value: t.expose("requiredSfixed32Value", {
+      type: "Int",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_sfixed32_value","typeFullName":"sfixed32"}},
+    }),
+    requiredSfixed64Value: t.expose("requiredSfixed64Value", {
+      type: "String",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_sfixed64_value","typeFullName":"sfixed64"}},
+    }),
+    requiredBoolValue: t.expose("requiredBoolValue", {
+      type: "Boolean",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_bool_value","typeFullName":"bool"}},
+    }),
+    requiredStringValue: t.expose("requiredStringValue", {
+      type: "String",
+      nullable: false,
+      extensions: {"protobufField":{"name":"required_string_value","typeFullName":"string"}},
+    }),
+    requiredBytesValue: t.field({
+      type: "Byte",
+      nullable: false,
+      resolve: (source) => {
+        return Buffer.from(source.requiredBytesValue);
+      },
+      extensions: {"protobufField":{"name":"required_bytes_value","typeFullName":"bytes"}},
+    }),
+    requiredDoubleValues: t.expose("requiredDoubleValues", {
+      type: ["Float"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_double_values","typeFullName":"double"}},
+    }),
+    requiredFloatValues: t.expose("requiredFloatValues", {
+      type: ["Float"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_float_values","typeFullName":"float"}},
+    }),
+    requiredInt32Values: t.expose("requiredInt32Values", {
+      type: ["Int"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_int32_values","typeFullName":"int32"}},
+    }),
+    requiredInt64Values: t.expose("requiredInt64Values", {
+      type: ["String"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_int64_values","typeFullName":"int64"}},
+    }),
+    requiredUint32Values: t.expose("requiredUint32Values", {
+      type: ["Int"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_uint32_values","typeFullName":"uint32"}},
+    }),
+    requiredUint64Values: t.expose("requiredUint64Values", {
+      type: ["String"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_uint64_values","typeFullName":"uint64"}},
+    }),
+    requiredSint32Values: t.expose("requiredSint32Values", {
+      type: ["Int"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_sint32_values","typeFullName":"sint32"}},
+    }),
+    requiredSint64Values: t.expose("requiredSint64Values", {
+      type: ["String"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_sint64_values","typeFullName":"sint64"}},
+    }),
+    requiredFixed32Values: t.expose("requiredFixed32Values", {
+      type: ["Int"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_fixed32_values","typeFullName":"fixed32"}},
+    }),
+    requiredFixed64Values: t.expose("requiredFixed64Values", {
+      type: ["String"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_fixed64_values","typeFullName":"fixed64"}},
+    }),
+    requiredSfixed32Values: t.expose("requiredSfixed32Values", {
+      type: ["Int"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_sfixed32_values","typeFullName":"sfixed32"}},
+    }),
+    requiredSfixed64Values: t.expose("requiredSfixed64Values", {
+      type: ["String"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_sfixed64_values","typeFullName":"sfixed64"}},
+    }),
+    requiredBoolValues: t.expose("requiredBoolValues", {
+      type: ["Boolean"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_bool_values","typeFullName":"bool"}},
+    }),
+    requiredStringValues: t.expose("requiredStringValues", {
+      type: ["String"],
+      nullable: { list: false, items: false },
+      extensions: {"protobufField":{"name":"required_string_values","typeFullName":"string"}},
+    }),
+    requiredBytesValues: t.field({
+      type: ["Byte"],
+      nullable: { list: false, items: false },
+      resolve: (source) => {
+        return source.requiredBytesValues.map(v => Buffer.from(v));
+      },
+      extensions: {"protobufField":{"name":"required_bytes_values","typeFullName":"bytes"}},
+    }),
   }),
   isTypeOf: (source) => {
     return (source as Primitives | { $type: string & {} }).$type
       === "testapis.primitives.Primitives";
   },
   extensions: {"protobufMessage":{"fullName":"testapis.primitives.Primitives","name":"Primitives","package":"testapis.primitives"}},
-});"
+});
+"
 `;
 
 exports[`printObjectType > ts-proto > 'generates code for empty message' 1`] = `
-"import { EmptyMessage } from "@testapis/ts-proto/testapis/empty_types/empty";
-import { builder } from "../../builder";
+"import { builder } from "../../../../builder";
+import { EmptyMessage } from "@testapis/ts-proto/testapis/empty_types/empty";
+
 
 export const EmptyMessage$Ref = builder.objectRef<EmptyMessage>("EmptyMessage");
-
 builder.objectType(EmptyMessage$Ref, {
   name: "EmptyMessage",
   fields: t => ({
@@ -1069,69 +559,156 @@ builder.objectType(EmptyMessage$Ref, {
       === "testapis.empty_types.EmptyMessage";
   },
   extensions: {"protobufMessage":{"fullName":"testapis.empty_types.EmptyMessage","name":"EmptyMessage","package":"testapis.empty_types"}},
-});"
+});
+"
 `;
 
 exports[`printObjectType > ts-proto > 'generates code for nested types' 1`] = `
-"import { ParentMessage } from "@testapis/ts-proto/testapis/nested/nested";
-import { builder } from "../../builder";
+"import { builder } from "../../../../builder";
+import { ParentMessage, ParentMessage_NestedEnum } from "@testapis/ts-proto/testapis/nested/nested";
+
 
 export const ParentMessage$Ref = builder.objectRef<ParentMessage>("ParentMessage");
-
 builder.objectType(ParentMessage$Ref, {
   name: "ParentMessage",
   fields: t => ({
-    // TODO: Convert field body definition
-    body: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field nested definition
-    nested: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field nestedEnum definition
-    nestedEnum: t.field({ type: "String", resolve: () => "TODO" }),
+    body: t.expose("body", {
+      type: "String",
+      nullable: false,
+      extensions: {"protobufField":{"name":"body","typeFullName":"string"}},
+    }),
+    nested: t.expose("nested", {
+      type: ParentMessageNestedMessage$Ref,
+      nullable: true,
+      extensions: {"protobufField":{"name":"nested","typeFullName":"testapis.nested.ParentMessage.NestedMessage"}},
+    }),
+    nestedEnum: t.field({
+      type: ParentMessageNestedEnum$Ref,
+      nullable: true,
+      resolve: (source) => {
+        if (source.nestedEnum === ParentMessage_NestedEnum.NESTED_ENUM_UNSPECIFIED) {
+          return null;
+        }
+        return source.nestedEnum;
+      },
+      extensions: {"protobufField":{"name":"nested_enum","typeFullName":"testapis.nested.ParentMessage.NestedEnum"}},
+    }),
   }),
   isTypeOf: (source) => {
     return (source as ParentMessage | { $type: string & {} }).$type
       === "testapis.nested.ParentMessage";
   },
   extensions: {"protobufMessage":{"fullName":"testapis.nested.ParentMessage","name":"ParentMessage","package":"testapis.nested"}},
-});"
+});
+"
 `;
 
 exports[`printObjectType > with extensions > 'generates code for message with field…' 1`] = `
-"import { PrefixedMessage } from "@testapis/ts-proto/testapis/extensions/extensions";
-import { builder } from "../../builder";
+"import { builder } from "../../../../builder";
+import { EnumWillRename, PrefixedEnum, PrefixedMessage } from "@testapis/ts-proto/testapis/extensions/extensions";
+
 
 export const TestPrefixPrefixedMessage$Ref = builder.objectRef<PrefixedMessage>("TestPrefixPrefixedMessage");
-
 builder.objectType(TestPrefixPrefixedMessage$Ref, {
   name: "TestPrefixPrefixedMessage",
   fields: t => ({
-    // TODO: Convert field id definition
-    id: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field body definition
-    body: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field prefixedEnum definition
-    prefixedEnum: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field notIgnoredMessage definition
-    notIgnoredMessage: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field squashedMessage definition
-    squashedMessage: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field thisFieldWasRenamed definition
-    thisFieldWasRenamed: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field skipResolver definition
-    skipResolver: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field squashedMessages definition
-    squashedMessages: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field renamedMessage definition
-    renamedMessage: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field renamedEnum definition
-    renamedEnum: t.field({ type: "String", resolve: () => "TODO" }),
-    // TODO: Convert field partialIgnoreOneof definition
-    partialIgnoreOneof: t.field({ type: "String", resolve: () => "TODO" }),
+    id: t.expose("id", {
+      type: "String",
+      nullable: false,
+      description: "Output only.",
+      extensions: {"protobufField":{"name":"id","typeFullName":"uint64"}},
+    }),
+    body: t.expose("body", {
+      type: "String",
+      nullable: false,
+      extensions: {"protobufField":{"name":"body","typeFullName":"string"}},
+    }),
+    prefixedEnum: t.field({
+      type: TestPrefixPrefixedEnum$Ref,
+      nullable: true,
+      resolve: (source) => {
+        if (source.prefixedEnum === PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
+          return null;
+        }
+        if (source.prefixedEnum === PrefixedEnum.PREFIXED_IGNORED) {
+          throw new Error("PREFIXED_IGNORED is ignored in GraphQL schema");
+        }
+        return source.prefixedEnum;
+      },
+      extensions: {"protobufField":{"name":"prefixed_enum","typeFullName":"testapis.extensions.PrefixedEnum"}},
+    }),
+    notIgnoredMessage: t.expose("notIgnoredMessage", {
+      type: TestPrefixIgnoredMessageNotIgnored$Ref,
+      nullable: true,
+      extensions: {"protobufField":{"name":"not_ignored_message","typeFullName":"testapis.extensions.IgnoredMessage.NotIgnored"}},
+    }),
+    squashedMessage: t.field({
+      type: TestPrefixPrefixedMessageSquashedMessage$Ref,
+      nullable: true,
+      resolve: (source) => {
+        const value = source.oneofField ?? source.oneofField2;
+        if (value == null) {
+          return null;
+        }
+        return value;
+      },
+      extensions: {"protobufField":{"name":"squashed_message","typeFullName":"testapis.extensions.PrefixedMessage.SquashedMessage"}},
+    }),
+    thisFieldWasRenamed: t.expose("thisFieldWillBeRenamed", {
+      type: "String",
+      nullable: false,
+      extensions: {"protobufField":{"name":"this_field_will_be_renamed","typeFullName":"string","options":{"[graphql.field]":{"name":"thisFieldWasRenamed"}}}},
+    }),
+    skipResolver: t.expose("skipResolver", {
+      type: "String",
+      nullable: false,
+      extensions: {"protobufField":{"name":"skip_resolver","typeFullName":"string","options":{"[graphql.field]":{"skipResolver":true}}}},
+    }),
+    squashedMessages: t.field({
+      type: [TestPrefixPrefixedMessageSquashedMessage$Ref],
+      nullable: { list: true, items: false },
+      resolve: (source) => {
+        return source.squashedMessages.map(item => {
+          const value = item?.oneofField ?? item?.oneofField2;
+          return value;
+        });
+      },
+      extensions: {"protobufField":{"name":"squashed_messages","typeFullName":"testapis.extensions.PrefixedMessage.SquashedMessage"}},
+    }),
+    renamedMessage: t.expose("renamedMessage", {
+      type: TestPrefixRenamedMessage$Ref,
+      nullable: true,
+      extensions: {"protobufField":{"name":"renamed_message","typeFullName":"testapis.extensions.MessageWillRename"}},
+    }),
+    renamedEnum: t.field({
+      type: TestPrefixRenamedEnum$Ref,
+      nullable: true,
+      resolve: (source) => {
+        if (source.renamedEnum === EnumWillRename.ENUM_WILL_RENAME_UNSPECIFIED) {
+          return null;
+        }
+        return source.renamedEnum;
+      },
+      extensions: {"protobufField":{"name":"renamed_enum","typeFullName":"testapis.extensions.EnumWillRename"}},
+    }),
+    partialIgnoreOneof: t.field({
+      type: TestPrefixPrefixedMessagePartialIgnoreOneof$Ref,
+      nullable: true,
+      resolve: (source) => {
+        const value = source.oneofNotIgnoredField;
+        if (value == null) {
+          return null;
+        }
+        return value;
+      },
+      extensions: {"protobufField":{"name":"partial_ignore_oneof"}},
+    }),
   }),
   isTypeOf: (source) => {
     return (source as PrefixedMessage | { $type: string & {} }).$type
       === "testapis.extensions.PrefixedMessage";
   },
   extensions: {"protobufMessage":{"fullName":"testapis.extensions.PrefixedMessage","name":"PrefixedMessage","package":"testapis.extensions"}},
-});"
+});
+"
 `;

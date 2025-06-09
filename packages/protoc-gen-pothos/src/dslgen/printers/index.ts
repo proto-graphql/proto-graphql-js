@@ -6,53 +6,13 @@ import {
   OneofUnionType,
   SquashedOneofUnionType,
 } from "@proto-graphql/codegen-core";
-import type { Code } from "ts-poet";
 
 import type { GeneratedFile } from "@bufbuild/protoplugin";
-import { createEnumTypeCode, printEnumType } from "./enumType.js";
-import {
-  createInputObjectTypeCode,
-  printInputObjectType,
-} from "./inputObjectType.js";
-import { createObjectTypeCode, printObjectType } from "./objectType.js";
-import {
-  createOneofUnionTypeCode,
-  printOneofUnionType,
-} from "./oneofUnionType.js";
+import { printEnumType } from "./enumType.js";
+import { printInputObjectType } from "./inputObjectType.js";
+import { printObjectType } from "./objectType.js";
+import { printOneofUnionType } from "./oneofUnionType.js";
 import type { PothosPrinterOptions } from "./util.js";
-
-export function createTypeDslCodes(
-  types: (
-    | ObjectType
-    | InputObjectType
-    | EnumType
-    | OneofUnionType
-    | SquashedOneofUnionType
-  )[],
-  registry: ReturnType<typeof createRegistry>,
-  opts: PothosPrinterOptions,
-): Code[] {
-  return types.flatMap((type) => {
-    if (type instanceof ObjectType) {
-      return createObjectTypeCode(type, registry, opts);
-    }
-    if (type instanceof InputObjectType) {
-      return createInputObjectTypeCode(type, registry, opts);
-    }
-    if (type instanceof EnumType) {
-      return [createEnumTypeCode(type, registry, opts)];
-    }
-    if (
-      type instanceof OneofUnionType ||
-      type instanceof SquashedOneofUnionType
-    ) {
-      return [createOneofUnionTypeCode(type, registry, opts)];
-    }
-
-    const _exhaustiveCheck: never = type;
-    throw "unreachable";
-  });
-}
 
 export function printTypeDsl(
   f: GeneratedFile,

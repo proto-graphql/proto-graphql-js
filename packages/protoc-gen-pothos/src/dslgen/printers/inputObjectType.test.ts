@@ -1,4 +1,3 @@
-import { createFileRegistry } from "@bufbuild/protobuf";
 import { createEcmaScriptPlugin } from "@bufbuild/protoplugin";
 import {
   InputObjectType,
@@ -10,49 +9,10 @@ import {
 import {
   type TestapisPackage,
   buildCodeGeneratorRequest,
-  getTestapisFileDescriptorSet,
 } from "@proto-graphql/testapis-proto";
 import { describe, expect, test } from "vitest";
-import {
-  createInputObjectTypeCode,
-  printInputObjectType,
-} from "./inputObjectType.js";
+import { printInputObjectType } from "./inputObjectType.js";
 import type { PothosPrinterOptions } from "./util.js";
-
-function generateInputObjectTypeCode(
-  packageName: TestapisPackage,
-  typeNameInProto: string,
-  options: PothosPrinterOptions,
-  partialInputs = false,
-): string {
-  const typeOptions: TypeOptions = {
-    partialInputs,
-    scalarMapping:
-      options.protobuf === "ts-proto"
-        ? defaultScalarMappingForTsProto
-        : defaultScalarMapping,
-    ignoreNonMessageOneofFields: false,
-  };
-
-  const descSet = getTestapisFileDescriptorSet(packageName);
-  const registry = createFileRegistry(descSet);
-  const descMsg = registry.getMessage(`${packageName}.${typeNameInProto}`);
-  if (descMsg === undefined) {
-    throw new Error(
-      `Message ${typeNameInProto} not found in package ${packageName}`,
-    );
-  }
-
-  const inputType = new InputObjectType(descMsg, typeOptions);
-
-  const code = createInputObjectTypeCode(
-    partialInputs ? inputType.toPartialInput() : inputType,
-    registry,
-    options,
-  );
-
-  return code.toString();
-}
 
 type TestCase = {
   test: string;
