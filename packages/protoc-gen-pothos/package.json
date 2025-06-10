@@ -39,8 +39,7 @@
     "@bufbuild/protoplugin": "catalog:",
     "@proto-graphql/codegen-core": "workspace:*",
     "@proto-graphql/proto-descriptors": "workspace:*",
-    "@proto-graphql/protoc-plugin-helpers": "workspace:*",
-    "ts-poet": "catalog:"
+    "@proto-graphql/protoc-plugin-helpers": "workspace:*"
   },
   "devDependencies": {
     "@proto-graphql/testapis-proto": "workspace:*",

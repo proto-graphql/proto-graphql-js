@@ -1,4 +1,5 @@
 import type { Registry } from "@bufbuild/protobuf";
+import type { GeneratedFile } from "@bufbuild/protoplugin";
 import {
   InterfaceType,
   type ObjectType,
@@ -13,6 +14,7 @@ import {
   createNoopFieldDefinitionCode,
 } from "./field.js";
 import { type NexusPrinterOptions, impNexus, nexusTypeDef } from "./util.js";
+import { printObjectType } from "./objectType.protoplugin.js";
 
 /**
  * @example
@@ -28,42 +30,52 @@ export function createObjectTypeCode(
   registry: Registry,
   opts: NexusPrinterOptions,
 ): Code {
-  const isInterface = type instanceof InterfaceType;
-  const reExportedPbTypeName = type.proto.typeName.replace(/\./g, "$");
-  const typeOpts = {
-    name: type.typeName,
-    description: type.description,
-    definition: code`(t) => {
-      ${
-        type.fields.length > 0
-          ? joinCode(
-              type.fields.map((f) =>
-                createFieldDefinitionCode(f, registry, opts),
-              ),
-            )
-          : createNoopFieldDefinitionCode({ input: false })
-      }
-    }`,
-    isTypeOf: isInterface
-      ? null
-      : code`
-        (data: unknown) => {
-          return data instanceof ${protoType(type.proto, opts)}
+  // Create a mock GeneratedFile to capture the output
+  const outputs: string[] = [];
+  const imports = new Map<string, string>();
+  const importsByFrom = new Map<string, Set<string>>();
+  
+  const mockFile = {
+    print(...args: any[]) {
+      outputs.push(args.map(arg => {
+        // Handle import symbols - look for the special __symbolId__ property
+        if (typeof arg === 'object' && arg !== null) {
+          // Check if this is an ImportSymbol
+          const symbolId = (arg as any).__symbolId__;
+          if (symbolId && imports.has(symbolId)) {
+            return imports.get(symbolId)!;
+          }
         }
-      `,
-    sourceType: isInterface
-      ? null
-      : {
-          module: code`__filename`,
-          export: reExportedPbTypeName,
-        },
-    extensions: protobufGraphQLExtensions(type, registry),
-  };
-  return code`
-    export type ${reExportedPbTypeName} = ${protoType(type.proto, opts)};
-    export const ${nexusTypeDef(type)} =
-      ${impNexus(isInterface ? "interfaceType" : "objectType")}(${literalOf(
-        compact(typeOpts),
-      )});
-  `;
+        return String(arg);
+      }).join(''));
+    },
+    import(name: string, from: string) {
+      if (!importsByFrom.has(from)) {
+        importsByFrom.set(from, new Set());
+      }
+      importsByFrom.get(from)!.add(name);
+      
+      // Create a unique symbol ID
+      const symbolId = `${from}::${name}`;
+      imports.set(symbolId, name);
+      
+      // Return an object that mimics ImportSymbol behavior
+      return { __symbolId__: symbolId, toString() { return name; } };
+    }
+  } as any;
+
+  // Generate using the new function
+  printObjectType(mockFile, type, registry, opts);
+
+  // Build the final output with imports
+  const importLines: string[] = [];
+  for (const [from, names] of importsByFrom) {
+    const nameList = Array.from(names).join(", ");
+    importLines.push(`import { ${nameList} } from "${from}";`);
+  }
+
+  const fullOutput = [...importLines, "", ...outputs].join("\n");
+  
+  // Return as ts-poet Code object
+  return code`${fullOutput}`;
 }
