@@ -1,5 +1,16 @@
 # @proto-nexus/google-protobuf
 
+## 0.6.2
+
+### Patch Changes
+
+- [#449](https://github.com/proto-graphql/proto-graphql-js/pull/449) [`33df4ed`](https://github.com/proto-graphql/proto-graphql-js/commit/33df4eda591f8066dfb353feb1aa0607ef609391) Thanks [@izumin5210](https://github.com/izumin5210)! - Recommend migrating to protoc-gen-pothos with protobuf-es in deprecation notice
+
+- [#447](https://github.com/proto-graphql/proto-graphql-js/pull/447) [`47beb4a`](https://github.com/proto-graphql/proto-graphql-js/commit/47beb4a3cccd5e91aa5bafc2268e102acb6a8f35) Thanks [@izumin5210](https://github.com/izumin5210)! - Deprecate package - GraphQL Nexus development has stopped
+
+- Updated dependencies [[`33df4ed`](https://github.com/proto-graphql/proto-graphql-js/commit/33df4eda591f8066dfb353feb1aa0607ef609391), [`47beb4a`](https://github.com/proto-graphql/proto-graphql-js/commit/47beb4a3cccd5e91aa5bafc2268e102acb6a8f35)]:
+  - proto-nexus@0.5.6
+
 ## 0.6.1
 
 ### Patch Changes
