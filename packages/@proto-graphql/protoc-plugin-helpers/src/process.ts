@@ -1,22 +1,20 @@
 import type { DescFile } from "@bufbuild/protobuf";
 import type { Schema } from "@bufbuild/protoplugin";
-import type { PrinterOptions } from "@proto-graphql/codegen-core";
 
-import { type Options, parseOptions } from "./options.js";
+import { type Options, parsePothosOptions } from "./options.js";
 
-export function createTsGenerator<DSL extends PrinterOptions["dsl"]>({
+export function createTsGenerator({
   generateFiles,
-  dsl,
 }: {
-  generateFiles: (schema: Schema<Options<DSL>>, file: DescFile) => void;
-  dsl: DSL;
-}): (schema: Schema<Options<DSL>>) => void {
-  return function generateTs(schema: Schema<Partial<Options<DSL>>>) {
+  generateFiles: (schema: Schema<Options<"pothos">>, file: DescFile) => void;
+  dsl: "pothos";
+}): (schema: Schema<Options<"pothos">>) => void {
+  return function generateTs(schema: Schema<Partial<Options<"pothos">>>) {
     if (schema.options.printer?.dsl == null) {
-      Object.assign(schema.options, parseOptions([], dsl));
+      Object.assign(schema.options, parsePothosOptions([]));
     }
     for (const file of schema.files) {
-      generateFiles(schema as Schema<Options<DSL>>, file);
+      generateFiles(schema as Schema<Options<"pothos">>, file);
     }
   };
 }

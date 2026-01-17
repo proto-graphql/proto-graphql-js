@@ -38,7 +38,6 @@
     "@bufbuild/protobuf": "catalog:",
     "@bufbuild/protoplugin": "catalog:",
     "@proto-graphql/codegen-core": "workspace:*",
-    "@proto-graphql/proto-descriptors": "workspace:*",
     "@proto-graphql/protoc-plugin-helpers": "workspace:*",
     "ts-poet": "catalog:"
   },

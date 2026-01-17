@@ -1,23 +1,14 @@
 export const fileLayouts = ["proto_file", "graphql_type"] as const;
 type FileLayout = (typeof fileLayouts)[number];
 
-type PrinterDSLOptions =
-  | { dsl: "nexus" }
-  | {
-      dsl: "pothos";
-      pothos: { builderPath: string };
-    };
+type PrinterDSLOptions = {
+  dsl: "pothos";
+  pothos: { builderPath: string };
+};
 
-export const protobufLibs = [
-  "google-protobuf",
-  "protobufjs",
-  "ts-proto",
-  "protobuf-es",
-] as const;
+export const protobufLibs = ["ts-proto", "protobuf-es"] as const;
 
 type PrinterProtobufOptions =
-  | { protobuf: "google-protobuf" }
-  | { protobuf: "protobufjs" }
   | { protobuf: "ts-proto" }
   | { protobuf: "protobuf-es" };
 
