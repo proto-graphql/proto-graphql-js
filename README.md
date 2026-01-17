@@ -5,6 +5,10 @@
 
 [Protobuf-First GraphQL Schemas](https://github.com/proto-graphql/proto-graphql) with JavaScript(TypeScript).
 
+## Documentation
+
+See [docs](./docs) for detailed documentation.
+
 ## Supported GraphQL Libraries
 - [Pothos](https://pothos-graphql.dev/): [protoc-gen-pothos](./packages/protoc-gen-pothos)
 - [Nexus](https://nexusjs.org/): [protoc-gen-nexus](./packages/protoc-gen-nexus)
