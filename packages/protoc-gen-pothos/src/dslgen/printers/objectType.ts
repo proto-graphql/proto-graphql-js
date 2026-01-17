@@ -96,8 +96,8 @@ function createIsTypeOfFuncCode(
     }
     /* istanbul ignore next */
     default: {
-      opts.protobuf satisfies never;
-      throw "unreachable";
+      const _exhaustiveCheck: never = opts.protobuf;
+      throw new Error(`Unexpected protobuf: ${_exhaustiveCheck}`);
     }
   }
 }
