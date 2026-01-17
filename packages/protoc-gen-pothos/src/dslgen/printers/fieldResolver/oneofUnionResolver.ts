@@ -38,14 +38,6 @@ export function createOneofUnionResolverCode(
           list,
         });
       }
-      case "google-protobuf":
-      case "protobufjs": {
-        throw new Error(`Unsupported protobuf: ${opts.protobuf}`);
-      }
-      default: {
-        opts satisfies never;
-        throw "unreachable";
-      }
     }
   };
 

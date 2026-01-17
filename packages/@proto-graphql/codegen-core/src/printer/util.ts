@@ -14,7 +14,6 @@ import { type Code, code, imp } from "ts-poet";
 import {
   type DescMessageField,
   isEnumField,
-  isListField,
   isMapField,
   isMessageField,
   isScalarField,
@@ -156,35 +155,7 @@ export function protoType(
     proto = proto.parent;
     chunks.unshift(proto.name);
   }
-  switch (opts.protobuf) {
-    case "google-protobuf": {
-      return code`${imp(`${chunks[0]}@${protoImportPath(proto, opts)}`)}${chunks
-        .slice(1)
-        .map((c) => `.${c}`)
-        .join("")}`;
-    }
-    case "protobufjs": {
-      chunks.unshift(...(proto.file.proto.package ?? "").split("."));
-      const importPath = protoImportPath(
-        origProto.kind === "field" ? origProto.parent : origProto,
-        opts,
-      );
-      return code`${imp(`${chunks[0]}@${importPath}`)}.${chunks
-        .slice(1)
-        .join(".")}`;
-    }
-    case "ts-proto":
-    case "protobuf-es": {
-      return code`${imp(
-        `${chunks.join("_")}@${protoImportPath(proto, opts)}`,
-      )}`;
-    }
-    /* istanbul ignore next */
-    default: {
-      const _exhaustiveCheck: never = opts;
-      throw "unreachable";
-    }
-  }
+  return code`${imp(`${chunks.join("_")}@${protoImportPath(proto, opts)}`)}`;
 }
 
 export function createGetFieldValueCode(
@@ -192,46 +163,17 @@ export function createGetFieldValueCode(
   proto: DescField,
   opts: PrinterOptions,
 ): Code {
-  switch (opts.protobuf) {
-    case "google-protobuf": {
-      return code`${parentExpr}.${googleProtobufFieldAccessor("get", proto)}()`;
-    }
-    case "protobufjs":
-    case "ts-proto":
-    case "protobuf-es": {
-      return code`${parentExpr}.${tsFieldName(proto, opts)}`;
-    }
-    /* istanbul ignore next */
-    default: {
-      const _exhaustiveCheck: never = opts;
-      throw "unreachable";
-    }
-  }
+  return code`${parentExpr}.${tsFieldName(proto, opts)}`;
 }
 
 export function tsFieldName(
   desc: DescField | DescOneof,
-  opts: PrinterOptions,
+  _opts: PrinterOptions,
 ): string {
-  switch (opts.protobuf) {
-    case "google-protobuf": {
-      throw "unsupported";
-    }
-    case "protobufjs":
-      return camelCase(desc.name);
-    case "ts-proto":
-    case "protobuf-es": {
-      if (desc.kind === "oneof") {
-        return camelCase(desc.name);
-      }
-      return desc.proto.jsonName || camelCase(desc.name);
-    }
-    /* istanbul ignore next */
-    default: {
-      const _exhaustiveCheck: never = opts;
-      throw "unreachable";
-    }
+  if (desc.kind === "oneof") {
+    return camelCase(desc.name);
   }
+  return desc.proto.jsonName || camelCase(desc.name);
 }
 
 export function createSetFieldValueCode(
@@ -240,34 +182,7 @@ export function createSetFieldValueCode(
   proto: DescField,
   opts: PrinterOptions,
 ): Code {
-  switch (opts.protobuf) {
-    case "google-protobuf": {
-      return code`${parentExpr}.${googleProtobufFieldAccessor(
-        "set",
-        proto,
-      )}(${valueExpr})`;
-    }
-    case "protobufjs":
-    case "ts-proto":
-    case "protobuf-es": {
-      return code`${parentExpr}.${tsFieldName(proto, opts)} = ${valueExpr}`;
-    }
-    /* istanbul ignore next */
-    default: {
-      const _exhaustiveCheck: never = opts;
-      throw "unreachable";
-    }
-  }
-}
-
-function googleProtobufFieldAccessor(type: "get" | "set", proto: DescField) {
-  return `${type}${upperCaseFirst(
-    proto.jsonName || proto.proto.jsonName || camelCase(proto.name),
-  )}${isListField(proto) ? "List" : ""}`;
-}
-
-function upperCaseFirst(s: string): string {
-  return `${s.charAt(0).toUpperCase()}${s.slice(1)}`;
+  return code`${parentExpr}.${tsFieldName(proto, opts)} = ${valueExpr}`;
 }
 
 const longScalarPrimitiveTypes: ReadonlySet<ProtoScalarType> = new Set([
@@ -312,22 +227,16 @@ function protoImportPath(
 ) {
   let importPath: string;
   switch (o.protobuf) {
-    case "google-protobuf": {
-      importPath = googleProtobufImportPath(t.file);
-      break;
-    }
-    case "protobufjs": {
-      importPath = path.dirname(t.file.name);
-      break;
-    }
     case "ts-proto": {
       importPath = t.file.name;
       break;
     }
     case "protobuf-es": {
-      importPath = googleProtobufImportPath(t.file);
+      const { dir, name } = path.parse(t.file.name);
+      importPath = `${dir}/${name}_pb`;
       break;
     }
+    /* istanbul ignore next */
     default: {
       o.protobuf satisfies never;
       throw new Error(`unexpected protobuf option: ${o.protobuf}`);
@@ -337,9 +246,4 @@ function protoImportPath(
     /(?<!:)\/\//,
     "/",
   );
-}
-
-function googleProtobufImportPath(file: DescFile): string {
-  const { dir, name } = path.parse(file.name);
-  return `${dir}/${name}_pb`;
 }

@@ -15,9 +15,6 @@ catalogs:
     '@bufbuild/protoplugin':
       specifier: 2.1.0
       version: 2.1.0
-    '@types/google-protobuf':
-      specifier: 3.15.12
-      version: 3.15.12
     case-anything:
       specifier: ^2.1.13
       version: 2.1.13
@@ -901,19 +898,6 @@ importers:
         specifier: workspace:*
         version: link:../../../devPackages/tsconfig
 
-  packages/@proto-graphql/proto-descriptors:
-    dependencies:
-      google-protobuf:
-        specifier: ^3.12.2
-        version: 3.21.2
-    devDependencies:
-      '@proto-graphql/tsconfig':
-        specifier: workspace:*
-        version: link:../../../devPackages/tsconfig
-      '@types/google-protobuf':
-        specifier: 'catalog:'
-        version: 3.15.12
-
   packages/@proto-graphql/protoc-plugin-helpers:
     dependencies:
       '@bufbuild/protobuf':
@@ -957,9 +941,6 @@ importers:
       '@proto-graphql/codegen-core':
         specifier: workspace:*
         version: link:../@proto-graphql/codegen-core
-      '@proto-graphql/proto-descriptors':
-        specifier: workspace:*
-        version: link:../@proto-graphql/proto-descriptors
       '@proto-graphql/protoc-plugin-helpers':
         specifier: workspace:*
         version: link:../@proto-graphql/protoc-plugin-helpers
@@ -1984,9 +1965,6 @@ packages:
   globby@11.1.0:
     resolution: {integrity: sha512-jhIXaOzy1sb8IyocaruWSn1TjmnBVs8Ayhcy83rmxNJ8q2uWKCAj3CnJY+KpGSXCueAPc0i05kVvVKtP1t9S3g==}
     engines: {node: '>=10'}
-
-  google-protobuf@3.21.2:
-    resolution: {integrity: sha512-3MSOYFO5U9mPGikIYCzK0SaThypfGgS6bHqrUGXG3DPHCrb+txNqeEcns1W0lkGfk0rCyNXm7xB9rMxnCiZOoA==}
 
   graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
@@ -3649,8 +3627,6 @@ snapshots:
       ignore: 5.2.0
       merge2: 1.4.1
       slash: 3.0.0
-
-  google-protobuf@3.21.2: {}
 
   graceful-fs@4.2.11: {}
 

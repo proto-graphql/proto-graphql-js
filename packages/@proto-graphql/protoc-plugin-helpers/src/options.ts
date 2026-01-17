@@ -16,19 +16,6 @@ export type Options<DSL extends PrinterOptions["dsl"]> = {
 export function parsePothosOptions(
   rawOptions: RawPluginOptions,
 ): Options<"pothos"> {
-  return parseOptions(rawOptions, "pothos");
-}
-
-export function parseNexusOptions(
-  rawOptions: RawPluginOptions,
-): Options<"nexus"> {
-  return parseOptions(rawOptions, "nexus");
-}
-
-export function parseOptions<DSL extends PrinterOptions["dsl"]>(
-  rawOptions: RawPluginOptions,
-  dsl: DSL,
-): Options<DSL> {
   const params = {
     type: {
       partialInputs: false,
@@ -36,14 +23,14 @@ export function parseOptions<DSL extends PrinterOptions["dsl"]>(
       ignoreNonMessageOneofFields: false,
     } as TypeOptions,
     printer: {
-      dsl,
-      protobuf: "google-protobuf",
+      dsl: "pothos",
+      protobuf: "ts-proto",
       importPrefix: null,
       emitImportedFiles: false,
       fileLayout: "proto_file",
-      filenameSuffix: dsl === "nexus" ? "_pb_nexus.ts" : ".pb.pothos.ts",
+      filenameSuffix: ".pb.pothos.ts",
       pothos: { builderPath: "./builder" },
-    } as Extract<PrinterOptions, { dsl: DSL }>,
+    } as Extract<PrinterOptions, { dsl: "pothos" }>,
   };
 
   const boolParam = (name: string, v: string): boolean => {
@@ -65,10 +52,6 @@ export function parseOptions<DSL extends PrinterOptions["dsl"]>(
 
   for (const { key: k, value: v } of rawOptions) {
     switch (k) {
-      case "use_protobufjs": {
-        if (boolParam(k, v)) params.printer.protobuf = "protobufjs";
-        break;
-      }
       case "protobuf_lib": {
         const s = stringParam(k, v);
         if (!checkEnum(s, protobufLibs)) {

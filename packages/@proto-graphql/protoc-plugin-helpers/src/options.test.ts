@@ -1,63 +1,61 @@
 import { describe, expect, it } from "vitest";
-import { parseOptions } from "./options.js";
+import { parsePothosOptions } from "./options.js";
 
-describe("parseOptions", () => {
-  it("reutrns true if value is empty", () => {
+describe("parsePothosOptions", () => {
+  it("parses protobuf_lib option", () => {
     expect(
-      parseOptions([{ key: "use_protobufjs", value: "true" }], "nexus").printer
-        .protobuf,
-    ).toEqual("protobufjs");
+      parsePothosOptions([{ key: "protobuf_lib", value: "protobuf-es" }])
+        .printer.protobuf,
+    ).toEqual("protobuf-es");
   });
 
-  it('parses "true" string to true', () => {
-    expect(
-      parseOptions([{ key: "use_protobufjs", value: "true" }], "nexus").printer
-        .protobuf,
-    ).toEqual("protobufjs");
-  });
-
-  it('parses "true" string to false', () => {
-    expect(
-      parseOptions([{ key: "use_protobufjs", value: "false" }], "nexus").printer
-        .protobuf,
-    ).toEqual("google-protobuf");
+  it("uses ts-proto as default protobuf", () => {
+    expect(parsePothosOptions([]).printer.protobuf).toEqual("ts-proto");
   });
 
   it("parses importPrefix", () => {
     expect(
-      parseOptions([{ key: "import_prefix", value: "@foobar/baz" }], "nexus")
+      parsePothosOptions([{ key: "import_prefix", value: "@foobar/baz" }])
         .printer.importPrefix,
     ).toEqual("@foobar/baz");
   });
 
   it("parses fileLayout", () => {
     expect(
-      parseOptions([{ key: "file_layout", value: "graphql_type" }], "nexus")
+      parsePothosOptions([{ key: "file_layout", value: "graphql_type" }])
         .printer.fileLayout,
     ).toEqual("graphql_type");
   });
 
-  it("throws an erorr when useProtobufjs is string", () => {
+  it("throws an error when importPrefix is empty", () => {
     expect(() => {
-      parseOptions([{ key: "use_protobufjs", value: "foobar" }], "nexus");
+      parsePothosOptions([{ key: "import_prefix", value: "" }]);
     }).toThrow();
   });
 
-  it("throws an erorr when importString is boolean", () => {
+  it("throws an error when invalid fileLayout", () => {
     expect(() => {
-      parseOptions([{ key: "import_prefix", value: "" }], "nexus");
+      parsePothosOptions([{ key: "file_layout", value: "foobar" }]);
     }).toThrow();
   });
 
-  it("throws an erorr when invalid fileLayout", () => {
+  it("throws an error when received unknown params", () => {
     expect(() => {
-      parseOptions([{ key: "file_layout", value: "foobar" }], "nexus");
+      parsePothosOptions([{ key: "foobar", value: "qux" }]);
     }).toThrow();
   });
 
-  it("throws an erorr when received unknown params", () => {
-    expect(() => {
-      parseOptions([{ key: "foobar", value: "qux" }], "nexus");
-    }).toThrow();
+  it("parses pothos_builder_path option", () => {
+    expect(
+      parsePothosOptions([
+        { key: "pothos_builder_path", value: "./my-builder" },
+      ]).printer.pothos.builderPath,
+    ).toEqual("./my-builder");
+  });
+
+  it("uses default builder path", () => {
+    expect(parsePothosOptions([]).printer.pothos.builderPath).toEqual(
+      "./builder",
+    );
   });
 });
