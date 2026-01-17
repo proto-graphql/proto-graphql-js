@@ -3,15 +3,13 @@ description: "Setup Node.js environment"
 inputs:
   node-version:
     description: Node.js version
-    default: "20.x"
 runs:
   using: "composite"
   steps:
-    - uses: actions/setup-node@v1
+    - uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4
+    - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6
       with:
         node-version: ${{ inputs.node-version }}
         cache: "pnpm"
-    - run: corepack enable
-      shell: bash
     - run: pnpm install --frozen-lockfile
       shell: bash
