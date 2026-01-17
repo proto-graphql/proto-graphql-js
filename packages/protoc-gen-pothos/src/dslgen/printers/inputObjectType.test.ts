@@ -1,13 +1,13 @@
 import { createFileRegistry } from "@bufbuild/protobuf";
 import {
-  InputObjectType,
-  type TypeOptions,
   defaultScalarMapping,
   defaultScalarMappingForTsProto,
+  InputObjectType,
+  type TypeOptions,
 } from "@proto-graphql/codegen-core";
 import {
-  type TestapisPackage,
   getTestapisFileDescriptorSet,
+  type TestapisPackage,
 } from "@proto-graphql/testapis-proto";
 import { describe, expect, test } from "vitest";
 import { createInputObjectTypeCode } from "./inputObjectType.js";

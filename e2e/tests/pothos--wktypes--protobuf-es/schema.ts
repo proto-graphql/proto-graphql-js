@@ -1,6 +1,5 @@
-import { Message } from "@proto-graphql/e2e-testapis-protobuf-es/lib/testapis/wktypes/well_known_types_pb";
-
 import { Timestamp } from "@bufbuild/protobuf";
+import { Message } from "@proto-graphql/e2e-testapis-protobuf-es/lib/testapis/wktypes/well_known_types_pb";
 import { Message$Ref } from "./__generated__/schema/testapis/wktypes/well_known_types.pb.pothos";
 import { builder } from "./builder";
 

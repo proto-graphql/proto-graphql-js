@@ -17,9 +17,9 @@ import { InputObjectType } from "./InputObjectType.js";
 import { InterfaceType } from "./InterfaceType.js";
 import { ObjectType } from "./ObjectType.js";
 import { OneofUnionType } from "./OneofUnionType.js";
+import type { TypeOptions } from "./options.js";
 import { ScalarType } from "./ScalarType.js";
 import { SquashedOneofUnionType } from "./SquashedOneofUnionType.js";
-import type { TypeOptions } from "./options.js";
 import {
   exceptRequestOrResponse,
   isIgnoredField,
