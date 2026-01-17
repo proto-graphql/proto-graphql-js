@@ -1,6 +1,6 @@
 ---
-"@proto-graphql/codegen-core": patch
-"@proto-graphql/protoc-plugin-helpers": patch
+"@proto-graphql/codegen-core": minor
+"@proto-graphql/protoc-plugin-helpers": minor
 "protoc-gen-pothos": patch
 ---
 
