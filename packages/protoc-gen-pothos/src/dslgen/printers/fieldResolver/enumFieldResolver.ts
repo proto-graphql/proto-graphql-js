@@ -87,10 +87,5 @@ function enumValueJsName(
       return ev.proto.name;
     case "protobuf-es":
       return ev.proto.localName;
-    /* istanbul ignore next */
-    default: {
-      const _exhaustiveCheck: never = opts.protobuf;
-      throw new Error(`Unexpected protobuf: ${_exhaustiveCheck}`);
-    }
   }
 }

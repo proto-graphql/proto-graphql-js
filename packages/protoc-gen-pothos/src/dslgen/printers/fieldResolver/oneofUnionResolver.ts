@@ -38,11 +38,6 @@ export function createOneofUnionResolverCode(
           list,
         });
       }
-      /* istanbul ignore next */
-      default: {
-        const _exhaustiveCheck: never = opts.protobuf;
-        throw new Error(`Unexpected protobuf: ${_exhaustiveCheck}`);
-      }
     }
   };
 

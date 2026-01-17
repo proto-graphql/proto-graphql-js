@@ -8,9 +8,9 @@ type PrinterDSLOptions = {
 
 export const protobufLibs = ["ts-proto", "protobuf-es"] as const;
 
-type PrinterProtobufOptions =
-  | { protobuf: "ts-proto" }
-  | { protobuf: "protobuf-es" };
+type PrinterProtobufOptions = {
+  protobuf: (typeof protobufLibs)[number];
+};
 
 export interface PrinterCommonOptions {
   emitImportedFiles: boolean;
