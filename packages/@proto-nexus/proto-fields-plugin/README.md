@@ -2,7 +2,7 @@
 
 > **⚠️ DEPRECATED**: This package is no longer maintained.
 > GraphQL Nexus development has stopped.
-> Please consider migrating to [protoc-gen-pothos](https://github.com/proto-graphql/proto-graphql-js/tree/main/packages/protoc-gen-pothos).
+> Please consider migrating to [protoc-gen-pothos](https://github.com/proto-graphql/proto-graphql-js/tree/main/packages/protoc-gen-pothos) with [protobuf-es](https://github.com/bufbuild/protobuf-es).
 
 [![npm version](https://badge.fury.io/js/%40proto-nexus%2Fproto-fields-plugin.svg)](https://badge.fury.io/js/%40proto-nexus%2Fproto-fields-plugin) |
 
