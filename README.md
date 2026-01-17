@@ -7,10 +7,7 @@
 
 ## Documentation
 
-- [Getting Started](./docs/getting-started.md)
-- [Configuration](./docs/protoc-gen-pothos/configuration.md)
-- [Type Mapping](./docs/type-mapping/README.md)
-- [Proto Annotations](./docs/proto-annotations/reference.md)
+See [docs](./docs) for detailed documentation.
 
 ## Supported GraphQL Libraries
 - [Pothos](https://pothos-graphql.dev/): [protoc-gen-pothos](./packages/protoc-gen-pothos)
