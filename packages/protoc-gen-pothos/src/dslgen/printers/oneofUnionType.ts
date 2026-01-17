@@ -1,15 +1,15 @@
 import type { Registry } from "@bufbuild/protobuf";
 import {
-  compact,
   type OneofUnionType,
-  protobufGraphQLExtensions,
   type SquashedOneofUnionType,
+  compact,
+  protobufGraphQLExtensions,
 } from "@proto-graphql/codegen-core";
 import { type Code, code, literalOf } from "ts-poet";
 
 import {
-  fieldTypeRef,
   type PothosPrinterOptions,
+  fieldTypeRef,
   pothosBuilder,
   pothosRef,
 } from "./util.js";

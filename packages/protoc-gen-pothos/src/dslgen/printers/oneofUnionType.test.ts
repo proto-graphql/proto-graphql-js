@@ -1,14 +1,14 @@
 import { createFileRegistry } from "@bufbuild/protobuf";
 import {
-  defaultScalarMapping,
-  defaultScalarMappingForTsProto,
   OneofUnionType,
   SquashedOneofUnionType,
   type TypeOptions,
+  defaultScalarMapping,
+  defaultScalarMappingForTsProto,
 } from "@proto-graphql/codegen-core";
 import {
-  getTestapisFileDescriptorSet,
   type TestapisPackage,
+  getTestapisFileDescriptorSet,
 } from "@proto-graphql/testapis-proto";
 import { describe, expect, test } from "vitest";
 import { createOneofUnionTypeCode } from "./oneofUnionType.js";

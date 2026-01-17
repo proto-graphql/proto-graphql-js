@@ -8,7 +8,7 @@
     "long": "catalog:test"
   },
   "scripts": {
-    "build:e2e": "tsc --build tsconfig.cjs.json",
+    "build:e2e": "tsc --build tsconfig.json",
     "clean": "pnpm run build:e2e --clean"
   },
   "main": "./lib/index.js",

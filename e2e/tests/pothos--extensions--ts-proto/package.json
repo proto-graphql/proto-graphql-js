@@ -6,8 +6,8 @@
   "scripts": {
     "test:e2e": "pnpm run test:e2e:gen && pnpm run test:e2e:vitest && pnpm run test:e2e:typecheck",
     "test:e2e:gen": "rm -rf __generated__/schema && buf generate --template buf.gen.json",
-    "test:e2e:typecheck": "tsc --build tsconfig.json",
-    "test:e2e:vitest": "vitest run --passWithNoTests --config ../../vitest.config.ts"
+    "test:e2e:vitest": "vitest run --passWithNoTests --config ../../vitest.config.ts",
+    "test:e2e:typecheck": "tsc --build tsconfig.json"
   },
   "dependencies": {
     "@pothos/core": "catalog:test",

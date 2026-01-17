@@ -1,9 +1,9 @@
 import type { Registry } from "@bufbuild/protobuf";
 import {
-  compact,
   type EnumType,
-  protobufGraphQLExtensions,
+  compact,
   protoType,
+  protobufGraphQLExtensions,
 } from "@proto-graphql/codegen-core";
 import { type Code, code, imp, joinCode, literalOf } from "ts-poet";
 
