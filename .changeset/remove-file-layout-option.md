@@ -4,7 +4,7 @@
 "protoc-gen-pothos": minor
 ---
 
-Remove `fileLayout` option
+**BREAKING**: Remove `fileLayout` option
 
 The `fileLayout` option has been removed. Previously it allowed choosing between:
 - `proto_file`: One output file per proto file (default)
