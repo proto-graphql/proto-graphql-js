@@ -37,15 +37,13 @@ opt:
 Specifies the protobuf implementation to use.
 
 - **Type:** `string`
-- **Default:** `google-protobuf`
-- **Values:** `google-protobuf`, `protobufjs`, `ts-proto`, `protobuf-es`
+- **Default:** `ts-proto`
+- **Values:** `ts-proto`, `protobuf-es`
 
 ```yaml
 opt:
   - protobuf_lib=ts-proto
 ```
-
-> **Note:** The legacy `use_protobufjs` option is deprecated. Use `protobuf_lib=protobufjs` instead.
 
 ### emit_imported_files
 
@@ -60,24 +58,6 @@ opt:
 ```
 
 When `true`, the plugin generates GraphQL types for messages defined in imported proto files, not just the files being processed directly.
-
-### file_layout
-
-Controls how generated files are organized.
-
-- **Type:** `string`
-- **Default:** `proto_file`
-- **Values:** `proto_file`, `graphql_type`
-
-```yaml
-opt:
-  - file_layout=graphql_type
-```
-
-| Value | Description |
-|-------|-------------|
-| `proto_file` | One generated file per `.proto` file |
-| `graphql_type` | One generated file per GraphQL type |
 
 ### partial_inputs
 
@@ -156,7 +136,6 @@ plugins:
       - protobuf_lib=ts-proto
       - partial_inputs=true
       - emit_imported_files=false
-      - file_layout=proto_file
       - scalar=google.type.Date=Date
 ```
 
