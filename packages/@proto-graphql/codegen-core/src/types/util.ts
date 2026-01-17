@@ -1,20 +1,19 @@
 import {
+  create,
   type DescEnum,
   type DescEnumValue,
   type DescField,
   type DescFile,
   type DescMessage,
   type DescOneof,
-  create,
   getExtension,
 } from "@bufbuild/protobuf";
-import { pascalCase } from "change-case";
-
 import {
   FieldDescriptorProto_Label,
   FieldDescriptorProto_Type,
 } from "@bufbuild/protobuf/wkt";
 import { getComments } from "@bufbuild/protoplugin";
+import { pascalCase } from "change-case";
 import * as extensions from "../__generated__/extensions/graphql/schema_pb.js";
 import {
   isEnumField,

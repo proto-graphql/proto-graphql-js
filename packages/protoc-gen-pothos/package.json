@@ -2,7 +2,13 @@
   "name": "protoc-gen-pothos",
   "version": "0.6.2",
   "description": "Generate DSL for Pothos GraphQL from Protocol Buffers IDL",
-  "keywords": ["graphql", "grpc", "pothos", "protobuf", "typescript"],
+  "keywords": [
+    "graphql",
+    "grpc",
+    "pothos",
+    "protobuf",
+    "typescript"
+  ],
   "bin": {
     "protoc-gen-pothos": "./bin/protoc-gen-pothos.cjs"
   },
@@ -10,22 +16,24 @@
   "author": "izumin5210 <m@izum.in>",
   "license": "MIT",
   "type": "module",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
-      },
-      "require": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.cjs"
-      }
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
     }
   },
-  "files": ["bin/", "src/", "dist/", "!src/**/*.test.ts", "!src/**/__tests__/"],
+  "files": [
+    "bin/",
+    "src/",
+    "dist/",
+    "!src/**/*.test.ts",
+    "!src/**/__tests__/"
+  ],
   "sideEffects": false,
   "private": false,
   "publishConfig": {

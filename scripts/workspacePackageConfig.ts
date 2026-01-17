@@ -4,7 +4,7 @@ import { exec as _exec } from "node:child_process";
 import { copyFile, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { promisify } from "node:util";
-import minimatch from "minimatch";
+import { filter } from "minimatch";
 
 const exec = promisify(_exec);
 
@@ -73,7 +73,7 @@ function buildWorkspaceConfigAndPkgPathsPairs(
   return cfg.workspacePackageConfigs.map((wsCfg) => {
     const pkgPaths = new Set<string>();
     for (const pattern of wsCfg.files ?? []) {
-      for (const file of allPkgPaths.filter(minimatch.filter(pattern))) {
+      for (const file of allPkgPaths.filter(filter(pattern))) {
         pkgPaths.add(file);
       }
     }

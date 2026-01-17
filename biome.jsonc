@@ -1,22 +1,21 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.3.11/schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
     "useIgnoreFile": true
   },
   "files": {
-    "ignore": [
-      "tsconfig.*.json",
-      "lib",
-      "module",
-      "__generated__",
-      "e2e/testapis"
+    "includes": [
+      "**",
+      "!**/tsconfig.*.json",
+      "!**/lib",
+      "!**/module",
+      "!**/__generated__",
+      "!**/e2e/testapis"
     ]
   },
-  "organizeImports": {
-    "enabled": true
-  },
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "formatter": {
     "enabled": true,
     "indentStyle": "space"
@@ -26,15 +25,15 @@
     "rules": {
       "recommended": true,
       "correctness": {
-        "noUnusedImports": "error"
+        "noUnusedImports": "error",
+        "noSwitchDeclarations": "error"
       },
       "suspicious": {
         "noExplicitAny": "off",
         "noExportsInTest": "off"
       },
       "style": {
-        "noDefaultExport": "error",
-        "useSingleCaseStatement": "error"
+        "noDefaultExport": "error"
       }
     }
   }

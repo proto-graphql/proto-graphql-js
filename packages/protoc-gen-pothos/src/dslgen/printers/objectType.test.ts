@@ -1,13 +1,13 @@
 import { createFileRegistry } from "@bufbuild/protobuf";
 import {
-  ObjectType,
-  type TypeOptions,
   defaultScalarMapping,
   defaultScalarMappingForTsProto,
+  ObjectType,
+  type TypeOptions,
 } from "@proto-graphql/codegen-core";
 import {
-  type TestapisPackage,
   getTestapisFileDescriptorSet,
+  type TestapisPackage,
 } from "@proto-graphql/testapis-proto";
 import { describe, expect, test } from "vitest";
 import { createObjectTypeCode } from "./objectType.js";
