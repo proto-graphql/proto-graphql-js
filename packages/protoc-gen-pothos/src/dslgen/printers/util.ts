@@ -86,10 +86,7 @@ export function pothosBuilder(
     | EnumType
     | OneofUnionType
     | SquashedOneofUnionType,
-  opts: Pick<
-    PothosPrinterOptions,
-    "dsl" | "pothos" | "fileLayout" | "filenameSuffix"
-  >,
+  opts: Pick<PothosPrinterOptions, "pothos" | "filenameSuffix">,
 ): Code {
   const importPath = opts.pothos.builderPath.startsWith(".")
     ? path.relative(path.dirname(filename(type, opts)), opts.pothos.builderPath)

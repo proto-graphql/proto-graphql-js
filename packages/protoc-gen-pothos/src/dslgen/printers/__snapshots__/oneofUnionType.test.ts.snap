@@ -163,27 +163,3 @@ export const OneofParentOneofField$Ref = builder.unionType("OneofParentOneofFiel
 });
 "
 `;
-
-exports[`createOneofUnionTypeCode > with file layout graphql_type > 'generates code with correct imports f…' 1`] = `
-"import { builder } from "../../../../builder";
-import { OneofMemberMessage1$Ref } from "./OneofMemberMessage1.pothos";
-import { OneofMemberMessage2$Ref } from "./OneofMemberMessage2.pothos";
-
-export const OneofParentRequiredOneofMembers$Ref = builder.unionType("OneofParentRequiredOneofMembers", {
-  "types": [OneofMemberMessage1$Ref, OneofMemberMessage2$Ref],
-  "description": "Required. disallow not_set.",
-  "extensions": {
-    "protobufOneof": {
-      "fullName": "testapis.oneof.OneofParent.required_oneof_members",
-      "name": "required_oneof_members",
-      "messageName": "OneofParent",
-      "package": "testapis.oneof",
-      "fields": [{ "name": "required_message1", "type": "testapis.oneof.OneofMemberMessage1" }, {
-        "name": "required_message2",
-        "type": "testapis.oneof.OneofMemberMessage2",
-      }],
-    },
-  },
-});
-"
-`;

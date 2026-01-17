@@ -71,7 +71,6 @@ const testSuites: TestSuite[] = [
       protobuf: "ts-proto" as const,
       importPrefix: "@testapis/ts-proto",
       emitImportedFiles: false,
-      fileLayout: "proto_file",
       filenameSuffix: ".pothos",
       pothos: {
         builderPath: "../../builder",
@@ -122,7 +121,6 @@ const testSuites: TestSuite[] = [
       protobuf: "protobuf-es" as const,
       importPrefix: "@testapis/protobuf-es",
       emitImportedFiles: false,
-      fileLayout: "proto_file",
       filenameSuffix: ".pothos",
       pothos: {
         builderPath: "../../builder",
@@ -166,7 +164,6 @@ const testSuites: TestSuite[] = [
       protobuf: "ts-proto" as const,
       importPrefix: "@testapis/ts-proto",
       emitImportedFiles: false,
-      fileLayout: "proto_file",
       filenameSuffix: ".pothos",
       pothos: {
         builderPath: "../../builder",

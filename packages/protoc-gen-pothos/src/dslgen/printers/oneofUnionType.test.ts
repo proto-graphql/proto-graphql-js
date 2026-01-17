@@ -123,7 +123,6 @@ const testSuites: TestSuite[] = [
       protobuf: "ts-proto" as const,
       importPrefix: "@testapis/ts-proto",
       emitImportedFiles: false,
-      fileLayout: "proto_file",
       filenameSuffix: ".pothos",
       pothos: {
         builderPath: "../../builder",
@@ -170,7 +169,6 @@ const testSuites: TestSuite[] = [
       protobuf: "protobuf-es" as const,
       importPrefix: "@testapis/protobuf-es",
       emitImportedFiles: false,
-      fileLayout: "proto_file",
       filenameSuffix: ".pothos",
       pothos: {
         builderPath: "../../builder",
@@ -200,30 +198,6 @@ const testSuites: TestSuite[] = [
           typeNameInProto: "PrefixedMessage.SquashedMessage",
         },
       } as SquashedTestCase,
-    ],
-  },
-  {
-    suite: "with file layout graphql_type",
-    options: {
-      dsl: "pothos",
-      protobuf: "ts-proto" as const,
-      importPrefix: "@testapis/ts-proto",
-      emitImportedFiles: false,
-      fileLayout: "graphql_type",
-      filenameSuffix: ".pothos",
-      pothos: {
-        builderPath: "../../builder",
-      },
-    },
-    cases: [
-      {
-        test: "generates code with correct imports for graphql_type layout",
-        args: {
-          packageName: "testapis.oneof",
-          typeNameInProto: "OneofParent",
-          oneofFieldName: "required_oneof_members",
-        },
-      } as OneofTestCase,
     ],
   },
 ];

@@ -20,23 +20,16 @@ describe("parsePothosOptions", () => {
     ).toEqual("@foobar/baz");
   });
 
-  it("parses fileLayout", () => {
-    expect(
-      parsePothosOptions([{ key: "file_layout", value: "graphql_type" }])
-        .printer.fileLayout,
-    ).toEqual("graphql_type");
-  });
-
   it("throws an error when importPrefix is empty", () => {
     expect(() => {
       parsePothosOptions([{ key: "import_prefix", value: "" }]);
     }).toThrow();
   });
 
-  it("throws an error when invalid fileLayout", () => {
+  it("throws an error when file_layout is specified", () => {
     expect(() => {
-      parsePothosOptions([{ key: "file_layout", value: "foobar" }]);
-    }).toThrow();
+      parsePothosOptions([{ key: "file_layout", value: "proto_file" }]);
+    }).toThrow("unknown param: file_layout=proto_file");
   });
 
   it("throws an error when received unknown params", () => {

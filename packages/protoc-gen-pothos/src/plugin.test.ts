@@ -13,10 +13,6 @@ const testGorups = testapisPackages.map((pkg) => ({
     { test: "without import prefix", param: undefined },
     { test: "with import prefix", param: "import_prefix=@testapis/ts-proto" },
     {
-      test: "with graphql_type layout",
-      param: "import_prefix=@testapis/ts-proto,file_layout=graphql_type",
-    },
-    {
       test: "with partial inputs",
       param: "import_prefix=@testapis/ts-proto,partial_inputs",
     },
@@ -42,11 +38,6 @@ describe("protobuf-es", () => {
       {
         test: "with import prefix",
         param: "protobuf_lib=protobuf-es,import_prefix=@testapis/protobuf-es",
-      },
-      {
-        test: "with graphql_type layout",
-        param:
-          "protobuf_lib=protobuf-es,import_prefix=@testapis/protobuf-es,file_layout=graphql_type",
       },
       {
         test: "with partial inputs",

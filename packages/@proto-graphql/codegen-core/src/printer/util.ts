@@ -39,39 +39,18 @@ export function filename(
     | OneofUnionType
     | SquashedOneofUnionType
     | InterfaceType,
-  opts: Pick<PrinterOptions, "dsl" | "fileLayout" | "filenameSuffix">,
+  opts: Pick<PrinterOptions, "filenameSuffix">,
 ): string {
   const file = (type.proto.kind === "oneof" ? type.proto.parent : type.proto)
     .file;
-  switch (opts.fileLayout) {
-    case "proto_file":
-      return filenameFromProtoFile(file, opts);
-    case "graphql_type":
-      return path.join(
-        path.dirname(file.name),
-        `${type.typeName}.${opts.dsl}.ts`,
-      );
-    /* istanbul ignore next */
-    default: {
-      const _exhaustiveCheck: never = opts.fileLayout;
-      throw "unreachable";
-    }
-  }
+  return filenameFromProtoFile(file, opts);
 }
 
 export function filenameFromProtoFile(
   file: DescFile,
-  opts: Pick<PrinterOptions, "fileLayout" | "filenameSuffix">,
+  opts: Pick<PrinterOptions, "filenameSuffix">,
 ) {
-  switch (opts.fileLayout) {
-    case "proto_file":
-      return file.name + opts.filenameSuffix;
-    /* istanbul ignore next */
-    default: {
-      const _exhaustiveCheck: "graphql_type" = opts.fileLayout;
-      throw "unreachable";
-    }
-  }
+  return file.name + opts.filenameSuffix;
 }
 
 export function generatedGraphQLTypeImportPath(
