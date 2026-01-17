@@ -17,6 +17,7 @@ jobs:
             run: pnpm check
           - name: test
             run: pnpm test
+      fail-fast: false
     name: ${{ matrix.command.name }}
     runs-on: ubuntu-latest
     steps:
