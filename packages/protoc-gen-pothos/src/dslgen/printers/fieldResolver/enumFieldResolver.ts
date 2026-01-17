@@ -85,14 +85,11 @@ function enumValueJsName(
   switch (opts.protobuf) {
     case "ts-proto":
       return ev.proto.name;
-    case "protobuf-es": {
+    case "protobuf-es":
       return ev.proto.localName;
-    }
-    case "protobufjs":
-    case "google-protobuf":
-      throw new Error(`Unsupported protobuf: ${opts.protobuf}`);
+    /* istanbul ignore next */
     default: {
-      opts satisfies never;
+      opts.protobuf satisfies never;
       throw "unreachable";
     }
   }

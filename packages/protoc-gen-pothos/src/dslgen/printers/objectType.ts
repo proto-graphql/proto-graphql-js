@@ -94,12 +94,9 @@ function createIsTypeOfFuncCode(
         }
       `;
     }
-    case "google-protobuf":
-    case "protobufjs": {
-      throw new Error(`Unsupported protobuf lib: ${opts.protobuf}`);
-    }
+    /* istanbul ignore next */
     default: {
-      opts satisfies never;
+      opts.protobuf satisfies never;
       throw "unreachable";
     }
   }
