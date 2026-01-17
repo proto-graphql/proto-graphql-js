@@ -35,7 +35,7 @@ jobs:
     strategy:
       matrix:
         node-version: ["lts/-1", "lts/*"]
-        target: ["nexus", "pothos"]
+        target: ["pothos"]
       fail-fast: false
     runs-on: ubuntu-latest
     steps:

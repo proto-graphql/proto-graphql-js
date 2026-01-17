@@ -6,15 +6,13 @@ import { join } from "node:path";
 const testsDir = "e2e/tests";
 
 const protoLibs = [
-  "google-protobuf",
-  "protobufjs",
   "ts-proto",
   "ts-proto-with-forcelong-number",
   "protobuf-es",
 ] as const;
 type ProtoLib = (typeof protoLibs)[number];
 
-const plugins = ["nexus", "pothos"] as const;
+const plugins = ["pothos"] as const;
 type Plugin = (typeof plugins)[number];
 
 type TestCase = {
@@ -42,18 +40,6 @@ const bufDir = join(rootDir, "devPackages", "testapis-proto", "proto");
 
 async function genPackageJson(test: TestCase): Promise<void> {
   const protoPackages = {
-    "google-protobuf": [
-      "@proto-graphql/e2e-testapis-google-protobuf",
-      "@proto-nexus/google-protobuf",
-      "proto-nexus",
-      "protoc-gen-nexus",
-    ],
-    protobufjs: [
-      "@proto-graphql/e2e-testapis-protobufjs",
-      "@proto-nexus/protobufjs",
-      "protoc-gen-nexus",
-      "proto-nexus",
-    ],
     "ts-proto": ["@proto-graphql/e2e-testapis-ts-proto", "protoc-gen-pothos"],
     "ts-proto-with-forcelong-number": [
       "@proto-graphql/e2e-testapis-ts-proto-with-forcelong-number",
@@ -67,16 +53,10 @@ async function genPackageJson(test: TestCase): Promise<void> {
   };
 
   const depsByTarget: Record<Plugin, Record<string, string>> = {
-    nexus: { nexus: "catalog:test" },
     pothos: { "@pothos/core": "catalog:test" },
   };
 
   const depsByLib: Record<ProtoLib, Record<string, string>> = {
-    "google-protobuf": {
-      "@types/google-protobuf": "catalog:",
-      "google-protobuf": "catalog:test",
-    },
-    protobufjs: { protobufjs: "catalog:test" },
     "protobuf-es": { "@bufbuild/protobuf": "catalog:protobuf-es-v1" },
     "ts-proto": {},
     "ts-proto-with-forcelong-number": {},
@@ -98,30 +78,15 @@ async function genPackageJson(test: TestCase): Promise<void> {
       "test:e2e": ["gen", "vitest", "typecheck"]
         .map((t) => `pnpm run test:e2e:${t}`)
         .join(" && "),
-      ...(test.target === "nexus"
-        ? {
-            "test:e2e:gen":
-              "pnpm run test:e2e:gen:proto && pnpm run test:e2e:gen:types",
-            "test:e2e:gen:proto":
-              "rm -rf __generated__/schema && buf generate --template buf.gen.json",
-            "test:e2e:gen:types":
-              "rm -rf __generated__/typings.ts && tsx schema.ts",
-          }
-        : {
-            "test:e2e:gen":
-              "rm -rf __generated__/schema && buf generate --template buf.gen.json",
-          }),
+      "test:e2e:gen":
+        "rm -rf __generated__/schema && buf generate --template buf.gen.json",
       "test:e2e:vitest":
         "vitest run --passWithNoTests --config ../../vitest.config.ts",
       "test:e2e:typecheck": "tsc --build tsconfig.json",
     },
     dependencies: deps,
     devDependencies: Object.fromEntries(
-      [
-        "@proto-graphql/tsconfig",
-        ...protoPackages[test.proto.lib],
-        ...(test.target === "nexus" ? ["@proto-graphql/e2e-helper"] : []),
-      ]
+      ["@proto-graphql/tsconfig", ...protoPackages[test.proto.lib]]
         .sort()
         .map((pkg) => [pkg, "workspace:*"]),
     ),
@@ -141,16 +106,7 @@ async function genPackageJson(test: TestCase): Promise<void> {
 async function genBufGemTemplate(test: TestCase): Promise<void> {
   const genDir = join("__generated__", "schema");
 
-  const pluginOpts = {
-    nexus: {
-      protobufjs: [
-        "use_protobufjs",
-        "import_prefix=@proto-graphql/e2e-testapis-protobufjs/lib/",
-      ],
-      "google-protobuf": [
-        "import_prefix=@proto-graphql/e2e-testapis-google-protobuf/lib/",
-      ],
-    },
+  const pluginOpts: Record<Plugin, Record<ProtoLib, string[]>> = {
     pothos: {
       "ts-proto": [
         "import_prefix=@proto-graphql/e2e-testapis-ts-proto/lib/",
@@ -194,9 +150,7 @@ async function genBufGemTemplate(test: TestCase): Promise<void> {
       {
         local: `protoc-gen-${test.target}`,
         out: genDir,
-        opt: (pluginOpts[test.target] as Record<string, string[]>)[
-          test.proto.lib
-        ],
+        opt: pluginOpts[test.target][test.proto.lib],
       },
     ],
     inputs: [

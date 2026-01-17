@@ -1,14 +1,5 @@
 version: v2
 plugins:
-  - remote: buf.build/protocolbuffers/js:v3.21.2
-    opt:
-      - import_style=commonjs
-      - binary
-    out: ./e2e/testapis/google-protobuf/lib
-    include_imports: true
-  - local: protoc-gen-ts
-    include_imports: true
-    out: ./e2e/testapis/google-protobuf/lib
   - local: protoc-gen-ts_proto
     opt:
       - enumsAsLiterals=true
