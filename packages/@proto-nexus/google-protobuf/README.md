@@ -1,4 +1,8 @@
-# proto-nexus
+# @proto-nexus/google-protobuf
+
+> **⚠️ DEPRECATED**: This package is no longer maintained.
+> GraphQL Nexus development has stopped.
+> Please consider migrating to [protoc-gen-pothos](https://github.com/proto-graphql/proto-graphql-js/tree/main/packages/protoc-gen-pothos).
 
 Build GraphQL schema from Protobuf and Nexus.
 
