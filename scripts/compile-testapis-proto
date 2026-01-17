@@ -9,40 +9,19 @@ PROTO_ROOT=./devPackages/testapis-proto/proto
 OUT_ROOT=./e2e/testapis
 
 clean() {
-  rm -rf $OUT_ROOT/google-protobuf/lib
-  rm -rf $OUT_ROOT/protobufjs/lib
   rm -rf $OUT_ROOT/ts-proto/{src,lib}
   rm -rf $OUT_ROOT/ts-proto-with-forcelong-long/{src,lib}
   rm -rf $OUT_ROOT/ts-proto-with-forcelong-number/{src,lib}
 }
 
 init() {
-  mkdir -p $OUT_ROOT/google-protobuf/lib
-  mkdir -p $OUT_ROOT/protobufjs/lib
   mkdir -p $OUT_ROOT/ts-proto/{src,lib}
   mkdir -p $OUT_ROOT/ts-proto-with-forcelong-long/{src,lib}
   mkdir -p $OUT_ROOT/ts-proto-with-forcelong-number/{src,lib}
 }
 
-listPackages() {
-  find $PROTO_ROOT/testapis -name '*.proto' | xargs dirname | sort | uniq
-}
-
 execProtoc() {
   PATH=$PATH:$(pnpm bin -w) pnpm buf generate --template buf.gen.e2e.yaml
-
-  for protoDir in $(listPackages); do
-    pbjsOutDir="${protoDir/$PROTO_ROOT\//$OUT_ROOT/protobufjs/lib/}"
-    mkdir -p $pbjsOutDir
-    pnpm exec pbjs \
-      --target static-module \
-      --wrap commonjs \
-      --force-message \
-      --path $PROTO_ROOT \
-      --out "$pbjsOutDir/index.js" \
-      ${protoDir}/*.proto
-    pnpm exec pbts --out "$pbjsOutDir/index.d.ts" "$pbjsOutDir/index.js"
-  done
 }
 
 _main() {

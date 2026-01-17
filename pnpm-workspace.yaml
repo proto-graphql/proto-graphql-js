@@ -17,10 +17,7 @@ catalogs:
     graphql: "16.9.0"
     graphql-scalars: "1.23.0"
     "@pothos/core": "3.41.1"
-    "google-protobuf": "3.21.4"
     long: "5.2.1"
-    nexus: "1.3.0"
-    protobufjs: "7.2.5"
   protobuf-es-v1:
     "@bufbuild/protobuf": "1.8.0"
     "@bufbuild/protoc-gen-es": "1.8.0"
