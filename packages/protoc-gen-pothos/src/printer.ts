@@ -3,7 +3,6 @@ import type { Schema } from "@bufbuild/protoplugin";
 import {
   collectTypesFromFile,
   createRegistryFromSchema,
-  filename,
   filenameFromProtoFile,
   printCodes,
 } from "@proto-graphql/codegen-core";
@@ -28,36 +27,13 @@ export function generateFiles(
   const registry = createRegistryFromSchema(schema);
   const types = collectTypesFromFile(file, opts.type, schema.allFiles);
 
-  switch (opts.printer.fileLayout) {
-    case "proto_file": {
-      const f = schema.generateFile(filenameFromProtoFile(file, opts.printer));
-
-      const code = printCodes(
-        createCodes(types, registry, opts.printer),
-        "protoc-gen-pothos",
-        file,
-      );
-      f.print(code.trimEnd());
-      break;
-    }
-    case "graphql_type": {
-      for (const t of types) {
-        const f = schema.generateFile(filename(t, opts.printer));
-        const code = printCodes(
-          createCodes([t], registry, opts.printer),
-          "protoc-gen-pothos",
-          file,
-        );
-        f.print(code.trimEnd());
-      }
-      break;
-    }
-    /* istanbul ignore next */
-    default: {
-      const _exhaustiveCheck: never = opts.printer.fileLayout;
-      throw "unreachable";
-    }
-  }
+  const f = schema.generateFile(filenameFromProtoFile(file, opts.printer));
+  const code = printCodes(
+    createCodes(types, registry, opts.printer),
+    "protoc-gen-pothos",
+    file,
+  );
+  f.print(code.trimEnd());
 }
 
 function createCodes(

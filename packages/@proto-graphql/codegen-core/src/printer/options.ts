@@ -1,6 +1,3 @@
-export const fileLayouts = ["proto_file", "graphql_type"] as const;
-type FileLayout = (typeof fileLayouts)[number];
-
 type PrinterDSLOptions = {
   dsl: "pothos";
   pothos: { builderPath: string };
@@ -15,7 +12,6 @@ type PrinterProtobufOptions = {
 export interface PrinterCommonOptions {
   emitImportedFiles: boolean;
   importPrefix: string | null;
-  fileLayout: FileLayout;
   filenameSuffix: string;
 }
 

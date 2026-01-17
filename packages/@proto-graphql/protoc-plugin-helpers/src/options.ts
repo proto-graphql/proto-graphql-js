@@ -4,7 +4,6 @@ import {
   type TypeOptions,
   defaultScalarMapping,
   defaultScalarMappingForTsProto,
-  fileLayouts,
   protobufLibs,
 } from "@proto-graphql/codegen-core";
 
@@ -27,7 +26,6 @@ export function parsePothosOptions(
       protobuf: "ts-proto",
       importPrefix: null,
       emitImportedFiles: false,
-      fileLayout: "proto_file",
       filenameSuffix: ".pb.pothos.ts",
       pothos: { builderPath: "./builder" },
     } as Extract<PrinterOptions, { dsl: "pothos" }>,
@@ -72,18 +70,6 @@ export function parsePothosOptions(
       }
       case "emit_imported_files": {
         params.printer.emitImportedFiles = boolParam(k, v);
-        break;
-      }
-      case "file_layout": {
-        const s = stringParam(k, v);
-        if (!checkEnum(s, fileLayouts)) {
-          throw new Error(
-            `file_layout should be ${fileLayouts
-              .map((s) => `"${s}"`)
-              .join(", ")}`,
-          );
-        }
-        params.printer.fileLayout = s;
         break;
       }
       case "scalar": {
