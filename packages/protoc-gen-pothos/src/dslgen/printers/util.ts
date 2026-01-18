@@ -99,8 +99,11 @@ export function toProtoFuncPrintable(
   field: InputObjectField<InputObjectType>,
   opts: PothosPrinterOptions,
 ): Printable[] {
-  return resolveImportOrLocal(field, opts, toProtoFuncName(field.type), () =>
-    code`${toProtoFuncName(field.type)}`,
+  return resolveImportOrLocal(
+    field,
+    opts,
+    toProtoFuncName(field.type),
+    () => code`${toProtoFuncName(field.type)}`,
   );
 }
 

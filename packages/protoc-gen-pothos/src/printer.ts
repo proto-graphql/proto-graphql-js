@@ -25,7 +25,9 @@ export function generateFiles(
   const types = collectTypesFromFile(file, opts.type, schema.allFiles);
 
   const f = schema.generateFile(filenameFromProtoFile(file, opts.printer));
-  const printables = [...createTypeDslPrintables(types, registry, opts.printer)];
+  const printables = [
+    ...createTypeDslPrintables(types, registry, opts.printer),
+  ];
 
   // ヘッダー出力（preamble プロパティに格納される）
   f.preamble(file);

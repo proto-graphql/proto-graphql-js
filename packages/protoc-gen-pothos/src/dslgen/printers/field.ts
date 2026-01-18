@@ -65,7 +65,11 @@ export function createFieldRefCode(
   let resolverCode: Printable[] | undefined;
   if (!isInput) {
     if (field instanceof ObjectOneofField) {
-      resolverCode = createOneofUnionResolverCode(code`${sourceExpr}`, field, opts);
+      resolverCode = createOneofUnionResolverCode(
+        code`${sourceExpr}`,
+        field,
+        opts,
+      );
     } else {
       const valueExpr = createGetFieldValueCodePrintable(
         sourceExpr,
