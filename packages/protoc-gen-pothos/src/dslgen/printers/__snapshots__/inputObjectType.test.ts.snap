@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`createInputObjectTypeCode > protobuf-es > 'generates code for a simple input obj…' 1`] = `
+exports[`createInputObjectTypeCode > protobuf-es > 'generates code for a simple input object' 1`] = `
 "import { InputObjectRef } from "@pothos/core";
 import { Primitives } from "@testapis/protobuf-es/testapis/primitives/primitives_pb";
 import { builder } from "../../../../builder";
@@ -384,7 +384,7 @@ export function PrimitivesInput$toProto(
 "
 `;
 
-exports[`createInputObjectTypeCode > protobuf-es > 'generates code for an input object wi…' 1`] = `
+exports[`createInputObjectTypeCode > protobuf-es > 'generates code for an input object with nested fields' 1`] = `
 "import { InputObjectRef } from "@pothos/core";
 import { Message } from "@testapis/protobuf-es/testapis/primitives/primitives_pb";
 import { builder } from "../../../../builder";
@@ -474,7 +474,7 @@ export function MessageInput$toProto(
 "
 `;
 
-exports[`createInputObjectTypeCode > protobuf-es > 'generates code for an input object wi…' 2`] = `
+exports[`createInputObjectTypeCode > protobuf-es > 'generates code for an input object with oneof fields' 1`] = `
 "import { InputObjectRef } from "@pothos/core";
 import { OneofParent } from "@testapis/protobuf-es/testapis/oneof/oneof_pb";
 import { builder } from "../../../../builder";
@@ -612,7 +612,7 @@ export function EmptyMessageInput$toProto(
 "
 `;
 
-exports[`createInputObjectTypeCode > ts-proto > 'generates code for a simple input obj…' 1`] = `
+exports[`createInputObjectTypeCode > ts-proto > 'generates code for a simple input object' 1`] = `
 "import { InputObjectRef } from "@pothos/core";
 import { Primitives } from "@testapis/ts-proto/testapis/primitives/primitives";
 import { builder } from "../../../../builder";
@@ -959,7 +959,7 @@ export const PrimitivesInput$Ref: InputObjectRef<PrimitivesInput$Shape> =
 "
 `;
 
-exports[`createInputObjectTypeCode > ts-proto > 'generates code for an input object wi…' 1`] = `
+exports[`createInputObjectTypeCode > ts-proto > 'generates code for an input object with nested fields' 1`] = `
 "import { InputObjectRef } from "@pothos/core";
 import { builder } from "../../../../builder";
 
@@ -1029,7 +1029,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
 "
 `;
 
-exports[`createInputObjectTypeCode > ts-proto > 'generates code for an input object wi…' 2`] = `
+exports[`createInputObjectTypeCode > ts-proto > 'generates code for an input object with oneof fields' 1`] = `
 "import { InputObjectRef } from "@pothos/core";
 import { OneofParent } from "@testapis/ts-proto/testapis/oneof/oneof";
 import { builder } from "../../../../builder";
