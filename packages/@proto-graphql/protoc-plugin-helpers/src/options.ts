@@ -1,4 +1,3 @@
-import type { RawPluginOptions } from "@bufbuild/protoplugin/dist/cjs/parameter";
 import {
   defaultScalarMapping,
   defaultScalarMappingForTsProto,
@@ -13,7 +12,7 @@ export type Options<DSL extends PrinterOptions["dsl"]> = {
 };
 
 export function parsePothosOptions(
-  rawOptions: RawPluginOptions,
+  rawOptions: { key: string; value: string }[],
 ): Options<"pothos"> {
   const params = {
     type: {
