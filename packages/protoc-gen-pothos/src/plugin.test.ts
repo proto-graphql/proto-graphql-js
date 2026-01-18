@@ -30,19 +30,20 @@ describe.each(testGorups)("$pkg", ({ pkg, tests }) => {
   });
 });
 
-describe("protobuf-es", () => {
+describe("protobuf-es-v1", () => {
   const testGorups = testapisPackages.map((pkg) => ({
     pkg,
     tests: [
-      { test: "without import prefix", param: "protobuf_lib=protobuf-es" },
+      { test: "without import prefix", param: "protobuf_lib=protobuf-es-v1" },
       {
         test: "with import prefix",
-        param: "protobuf_lib=protobuf-es,import_prefix=@testapis/protobuf-es",
+        param:
+          "protobuf_lib=protobuf-es-v1,import_prefix=@testapis/protobuf-es",
       },
       {
         test: "with partial inputs",
         param:
-          "protobuf_lib=protobuf-es,import_prefix=@testapis/protobuf-es,partial_inputs",
+          "protobuf_lib=protobuf-es-v1,import_prefix=@testapis/protobuf-es,partial_inputs",
       },
     ],
   }));

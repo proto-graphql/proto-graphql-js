@@ -151,7 +151,7 @@ function protoImportPath(
       importPath = t.file.name;
       break;
     }
-    case "protobuf-es": {
+    case "protobuf-es-v1": {
       const { dir, name } = path.parse(t.file.name);
       importPath = `${dir}/${name}_pb`;
       break;

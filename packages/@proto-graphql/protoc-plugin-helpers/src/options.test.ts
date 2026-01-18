@@ -4,9 +4,9 @@ import { parsePothosOptions } from "./options.js";
 describe("parsePothosOptions", () => {
   it("parses protobuf_lib option", () => {
     expect(
-      parsePothosOptions([{ key: "protobuf_lib", value: "protobuf-es" }])
+      parsePothosOptions([{ key: "protobuf_lib", value: "protobuf-es-v1" }])
         .printer.protobuf,
-    ).toEqual("protobuf-es");
+    ).toEqual("protobuf-es-v1");
   });
 
   it("uses ts-proto as default protobuf", () => {

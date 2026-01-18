@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`createInputObjectTypeCode > protobuf-es > 'generates code for a simple input object' 1`] = `
+exports[`createInputObjectTypeCode > protobuf-es-v1 > 'generates code for a simple input object' 1`] = `
 "import { InputObjectRef } from "@pothos/core";
 import { Primitives } from "@testapis/protobuf-es/testapis/primitives/primitives_pb";
 import { builder } from "../../builder";
@@ -384,7 +384,7 @@ export function PrimitivesInput$toProto(
 "
 `;
 
-exports[`createInputObjectTypeCode > protobuf-es > 'generates code for an input object with nested fields' 1`] = `
+exports[`createInputObjectTypeCode > protobuf-es-v1 > 'generates code for an input object with nested fields' 1`] = `
 "import { InputObjectRef } from "@pothos/core";
 import { Message } from "@testapis/protobuf-es/testapis/primitives/primitives_pb";
 import { builder } from "../../builder";
@@ -474,7 +474,7 @@ export function MessageInput$toProto(
 "
 `;
 
-exports[`createInputObjectTypeCode > protobuf-es > 'generates code for an input object with oneof fields' 1`] = `
+exports[`createInputObjectTypeCode > protobuf-es-v1 > 'generates code for an input object with oneof fields' 1`] = `
 "import { InputObjectRef } from "@pothos/core";
 import { OneofParent } from "@testapis/protobuf-es/testapis/oneof/oneof_pb";
 import { builder } from "../../builder";
@@ -579,7 +579,7 @@ export function OneofParentInput$toProto(
 "
 `;
 
-exports[`createInputObjectTypeCode > protobuf-es > 'generates code for empty input object' 1`] = `
+exports[`createInputObjectTypeCode > protobuf-es-v1 > 'generates code for empty input object' 1`] = `
 "import { InputObjectRef } from "@pothos/core";
 import { EmptyMessage } from "@testapis/protobuf-es/testapis/empty_types/empty_pb";
 import { builder } from "../../builder";

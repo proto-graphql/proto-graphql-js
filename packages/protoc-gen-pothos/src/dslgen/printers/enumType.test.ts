@@ -119,10 +119,10 @@ const testSuites: TestSuite[] = [
     ],
   },
   {
-    suite: "protobuf-es",
+    suite: "protobuf-es-v1",
     options: {
       dsl: "pothos",
-      protobuf: "protobuf-es" as const,
+      protobuf: "protobuf-es-v1" as const,
       importPrefix: "@testapis/protobuf-es",
       emitImportedFiles: false,
       filenameSuffix: ".pothos",

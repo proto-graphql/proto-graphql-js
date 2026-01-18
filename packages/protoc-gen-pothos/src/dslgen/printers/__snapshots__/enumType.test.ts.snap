@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`createEnumTypeCode > protobuf-es > 'generates code for a simple enum' 1`] = `
+exports[`createEnumTypeCode > protobuf-es-v1 > 'generates code for a simple enum' 1`] = `
 "import { EnumRef } from "@pothos/core";
 import { MyEnum } from "@testapis/protobuf-es/testapis/enums/enums_pb";
 import { builder } from "../../builder";
@@ -32,7 +32,7 @@ export const MyEnum$Ref: EnumRef<MyEnum, MyEnum> = builder.enumType("MyEnum", {
 "
 `;
 
-exports[`createEnumTypeCode > protobuf-es > 'generates code for an enum without unspecified' 1`] = `
+exports[`createEnumTypeCode > protobuf-es-v1 > 'generates code for an enum without unspecified' 1`] = `
 "import { EnumRef } from "@pothos/core";
 import { MyEnumWithoutUnspecified } from "@testapis/protobuf-es/testapis/enums/enums_pb";
 import { builder } from "../../builder";
@@ -72,7 +72,7 @@ export const MyEnumWithoutUnspecified$Ref: EnumRef<
 "
 `;
 
-exports[`createEnumTypeCode > protobuf-es > 'generates code for nested enum' 1`] = `
+exports[`createEnumTypeCode > protobuf-es-v1 > 'generates code for nested enum' 1`] = `
 "import { EnumRef } from "@pothos/core";
 import { ParentMessage_NestedEnum } from "@testapis/protobuf-es/testapis/nested/nested_pb";
 import { builder } from "../../builder";

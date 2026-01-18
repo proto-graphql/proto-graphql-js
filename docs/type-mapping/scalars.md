@@ -6,7 +6,7 @@ Protobuf scalar types to GraphQL scalar mappings.
 
 ### Integer Types
 
-| Protobuf | GraphQL (ts-proto) | GraphQL (protobuf-es) |
+| Protobuf | GraphQL (ts-proto) | GraphQL (protobuf-es-v1) |
 |----------|-------------------|----------------------|
 | `int32` | `Int` | `Int` |
 | `uint32` | `Int` | `Int` |
@@ -42,7 +42,7 @@ Protobuf scalar types to GraphQL scalar mappings.
 
 Wrapper types are nullable versions of scalar types:
 
-| Protobuf | GraphQL (ts-proto) | GraphQL (protobuf-es) |
+| Protobuf | GraphQL (ts-proto) | GraphQL (protobuf-es-v1) |
 |----------|-------------------|----------------------|
 | `google.protobuf.Int32Value` | `Int` | `Int` |
 | `google.protobuf.UInt32Value` | `Int` | `Int` |
