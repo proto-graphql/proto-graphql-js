@@ -171,7 +171,7 @@ export const MyEnumWithoutUnspecified$Ref: EnumRef<
 exports[`createEnumTypeCode > ts-proto > 'generates code for enum with deprecated values' 1`] = `
 "import { EnumRef } from "@pothos/core";
 import { NotDeprecatedEnum } from "@testapis/ts-proto/testapis/deprecation/deprecation";
-import { builder } from "../../../../builder";
+import { builder } from "../../builder";
 
 export const NotDeprecatedEnum$Ref: EnumRef<
   NotDeprecatedEnum,
