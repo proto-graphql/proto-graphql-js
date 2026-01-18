@@ -10,5 +10,11 @@ export {
   printToString,
 } from "./helpers.js";
 export { PrintContext } from "./print-context.js";
+export {
+  collectImports,
+  generateImportStatements,
+  stringifyPrintables,
+  type StringifyOptions,
+} from "./stringify.js";
 export type { ImportSymbol, Printable } from "./types.js";
 export { createImportSymbol } from "./types.js";

@@ -1,1 +1,1 @@
-export * from "./printers/index.js";
+export { createTypeDslPrintables } from "./printers/index.js";

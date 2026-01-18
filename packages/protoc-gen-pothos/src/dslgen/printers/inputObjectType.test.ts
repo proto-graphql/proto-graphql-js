@@ -10,7 +10,7 @@ import {
   type TestapisPackage,
 } from "@proto-graphql/testapis-proto";
 import { describe, expect, test } from "vitest";
-import { printableToCode } from "./index.js";
+import { printToString } from "../../codegen/index.js";
 import { createInputObjectTypeCode } from "./inputObjectType.js";
 import type { PothosPrinterOptions } from "./util.js";
 
@@ -46,25 +46,7 @@ function generateInputObjectTypeCode(
     options,
   );
 
-  return printableToCode(printable).toString({
-    dprintOptions: {
-      lineWidth: 120,
-      indentWidth: 2,
-      useTabs: false,
-      semiColons: "always",
-      quoteStyle: "alwaysDouble",
-      quoteProps: "asNeeded",
-      newLineKind: "lf",
-      useBraces: "whenNotSingleLine",
-      bracePosition: "sameLineUnlessHanging",
-      singleBodyPosition: "maintain",
-      nextControlFlowPosition: "sameLine",
-      trailingCommas: "onlyMultiLine",
-      operatorPosition: "nextLine",
-      preferHanging: false,
-      "arrowFunction.useParentheses": "force",
-    },
-  });
+  return printToString(printable);
 }
 
 type TestCase = {
