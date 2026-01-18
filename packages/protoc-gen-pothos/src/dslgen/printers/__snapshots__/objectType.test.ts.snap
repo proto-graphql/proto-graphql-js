@@ -15,39 +15,7 @@ exports[`createObjectTypeCode > protobuf-es > 'generates code for a message with
   "
 `;
 
-exports[`createObjectTypeCode > protobuf-es > 'generates code for a message with nes…' 1`] = `
-"
-    export const Message$Ref = builder.objectRef<Message>("Message");
-    builder.objectType(Message$Ref, { "name": "Message", "fields": t => ({requiredPrimitives: t.field({ "type": Primitives$Ref, "nullable": false, "description": "Required.", "resolve": source => {
-    return source.requiredPrimitives!;
-  }, "extensions": { "protobufField": { "name": "required_primitives", "typeFullName": "testapis.primitives.Primitives" } } }),optionalPrimitives: t.expose("optionalPrimitives", { "type": Primitives$Ref, "nullable": true, "description": "Optional.", "extensions": { "protobufField": { "name": "optional_primitives", "typeFullName": "testapis.primitives.Primitives" } } }),requiredPrimitivesList: t.field({ "type": [Primitives$Ref], "nullable": { "list": false, "items": false }, "description": "Required.", "resolve": source => {
-    return source.requiredPrimitivesList!;
-  }, "extensions": { "protobufField": { "name": "required_primitives_list", "typeFullName": "testapis.primitives.Primitives" } } }),optionalPrimitivesList: t.expose("optionalPrimitivesList", { "type": [Primitives$Ref], "nullable": { "list": true, "items": false }, "description": "Optional.", "extensions": { "protobufField": { "name": "optional_primitives_list", "typeFullName": "testapis.primitives.Primitives" } } }),}), "isTypeOf": 
-        (source) => {
-          return source instanceof Message
-        }
-      , "extensions": { "protobufMessage": { "fullName": "testapis.primitives.Message", "name": "Message", "package": "testapis.primitives" } } });
-  "
-`;
-
 exports[`createObjectTypeCode > protobuf-es > 'generates code for a message with oneofs' 1`] = `
-"
-    export const OneofParent$Ref = builder.objectRef<OneofParent>("OneofParent");
-    builder.objectType(OneofParent$Ref, { "name": "OneofParent", "fields": t => ({normalField: t.expose("normalField", { "type": "String", "nullable": false, "extensions": { "protobufField": { "name": "normal_field", "typeFullName": "string" } } }),requiredOneofMembers: t.field({ "type": OneofParentRequiredOneofMembers$Ref, "nullable": false, "description": "Required. disallow not_set.", "resolve": source => {
-    const value = source.requiredOneofMembers.value;
-    if (value == null) {
-      throw new Error("requiredOneofMembers should not be null");
-    }
-    return value;
-  }, "extensions": { "protobufField": { "name": "required_oneof_members" } } }),optionalOneofMembers: t.field({ "type": OneofParentOptionalOneofMembers$Ref, "nullable": true, "resolve": source => {return source.optionalOneofMembers.value;}, "extensions": { "protobufField": { "name": "optional_oneof_members" } } }),}), "isTypeOf": 
-        (source) => {
-          return source instanceof OneofParent
-        }
-      , "extensions": { "protobufMessage": { "fullName": "testapis.oneof.OneofParent", "name": "OneofParent", "package": "testapis.oneof" } } });
-  "
-`;
-
-exports[`createObjectTypeCode > protobuf-es > 'generates code for a message with one…' 1`] = `
 "
     export const OneofParent$Ref = builder.objectRef<OneofParent>("OneofParent");
     builder.objectType(OneofParent$Ref, { "name": "OneofParent", "fields": t => ({normalField: t.expose("normalField", { "type": "String", "nullable": false, "extensions": { "protobufField": { "name": "normal_field", "typeFullName": "string" } } }),requiredOneofMembers: t.field({ "type": OneofParentRequiredOneofMembers$Ref, "nullable": false, "description": "Required. disallow not_set.", "resolve": source => {
@@ -91,47 +59,7 @@ exports[`createObjectTypeCode > ts-proto > 'generates code for a message with ne
   "
 `;
 
-exports[`createObjectTypeCode > ts-proto > 'generates code for a message with nes…' 1`] = `
-"
-    export const Message$Ref = builder.objectRef<Message>("Message");
-    builder.objectType(Message$Ref, { "name": "Message", "fields": t => ({requiredPrimitives: t.field({ "type": Primitives$Ref, "nullable": false, "description": "Required.", "resolve": source => {
-    return source.requiredPrimitives!;
-  }, "extensions": { "protobufField": { "name": "required_primitives", "typeFullName": "testapis.primitives.Primitives" } } }),optionalPrimitives: t.expose("optionalPrimitives", { "type": Primitives$Ref, "nullable": true, "description": "Optional.", "extensions": { "protobufField": { "name": "optional_primitives", "typeFullName": "testapis.primitives.Primitives" } } }),requiredPrimitivesList: t.field({ "type": [Primitives$Ref], "nullable": { "list": false, "items": false }, "description": "Required.", "resolve": source => {
-    return source.requiredPrimitivesList!;
-  }, "extensions": { "protobufField": { "name": "required_primitives_list", "typeFullName": "testapis.primitives.Primitives" } } }),optionalPrimitivesList: t.expose("optionalPrimitivesList", { "type": [Primitives$Ref], "nullable": { "list": true, "items": false }, "description": "Optional.", "extensions": { "protobufField": { "name": "optional_primitives_list", "typeFullName": "testapis.primitives.Primitives" } } }),}), "isTypeOf": 
-        (source) => {
-          return (source as Message | { $type: string & {} }).$type
-            === "testapis.primitives.Message";
-        }
-      , "extensions": { "protobufMessage": { "fullName": "testapis.primitives.Message", "name": "Message", "package": "testapis.primitives" } } });
-  "
-`;
-
 exports[`createObjectTypeCode > ts-proto > 'generates code for a message with oneofs' 1`] = `
-"
-    export const OneofParent$Ref = builder.objectRef<OneofParent>("OneofParent");
-    builder.objectType(OneofParent$Ref, { "name": "OneofParent", "fields": t => ({normalField: t.expose("normalField", { "type": "String", "nullable": false, "extensions": { "protobufField": { "name": "normal_field", "typeFullName": "string" } } }),requiredOneofMembers: t.field({ "type": OneofParentRequiredOneofMembers$Ref, "nullable": false, "description": "Required. disallow not_set.", "resolve": source => {
-    const value = source.requiredMessage1 ?? source.requiredMessage2;
-    if (value == null) {
-      throw new Error("requiredOneofMembers should not be null");
-    }
-    return value;
-  }, "extensions": { "protobufField": { "name": "required_oneof_members" } } }),optionalOneofMembers: t.field({ "type": OneofParentOptionalOneofMembers$Ref, "nullable": true, "resolve": source => {
-    const value = source.optoinalMessage1 ?? source.optoinalMessage2;
-    if (value == null) {
-      return null;
-    }
-    return value;
-  }, "extensions": { "protobufField": { "name": "optional_oneof_members" } } }),}), "isTypeOf": 
-        (source) => {
-          return (source as OneofParent | { $type: string & {} }).$type
-            === "testapis.oneof.OneofParent";
-        }
-      , "extensions": { "protobufMessage": { "fullName": "testapis.oneof.OneofParent", "name": "OneofParent", "package": "testapis.oneof" } } });
-  "
-`;
-
-exports[`createObjectTypeCode > ts-proto > 'generates code for a message with one…' 1`] = `
 "
     export const OneofParent$Ref = builder.objectRef<OneofParent>("OneofParent");
     builder.objectType(OneofParent$Ref, { "name": "OneofParent", "fields": t => ({normalField: t.expose("normalField", { "type": "String", "nullable": false, "extensions": { "protobufField": { "name": "normal_field", "typeFullName": "string" } } }),requiredOneofMembers: t.field({ "type": OneofParentRequiredOneofMembers$Ref, "nullable": false, "description": "Required. disallow not_set.", "resolve": source => {
@@ -206,58 +134,6 @@ exports[`createObjectTypeCode > ts-proto > 'generates code for nested types' 1`]
 `;
 
 exports[`createObjectTypeCode > with extensions > 'generates code for message with field extensions' 1`] = `
-"
-    export const TestPrefixPrefixedMessage$Ref = builder.objectRef<PrefixedMessage>("TestPrefixPrefixedMessage");
-    builder.objectType(TestPrefixPrefixedMessage$Ref, { "name": "TestPrefixPrefixedMessage", "fields": t => ({id: t.expose("id", { "type": "String", "nullable": false, "description": "Output only.", "extensions": { "protobufField": { "name": "id", "typeFullName": "uint64" } } }),body: t.expose("body", { "type": "String", "nullable": false, "extensions": { "protobufField": { "name": "body", "typeFullName": "string" } } }),prefixedEnum: t.field({ "type": TestPrefixPrefixedEnum$Ref, "nullable": true, "resolve": source => {
-    
-        if (source.prefixedEnum === PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
-          return null;
-        }
-      
-      if (source.prefixedEnum === PrefixedEnum.PREFIXED_IGNORED) {
-        throw new Error("PREFIXED_IGNORED is ignored in GraphQL schema");
-      }
-    
-    return source.prefixedEnum;
-  }, "extensions": { "protobufField": { "name": "prefixed_enum", "typeFullName": "testapis.extensions.PrefixedEnum" } } }),notIgnoredMessage: t.expose("notIgnoredMessage", { "type": TestPrefixIgnoredMessageNotIgnored$Ref, "nullable": true, "extensions": { "protobufField": { "name": "not_ignored_message", "typeFullName": "testapis.extensions.IgnoredMessage.NotIgnored" } } }),squashedMessage: t.field({ "type": TestPrefixPrefixedMessageSquashedMessage$Ref, "nullable": true, "resolve": source => {
-    const value = source.squashedMessage?.oneofField ?? source.squashedMessage?.oneofField2;
-    if (value == null) {
-      return null;
-    }
-    return value;
-  }, "extensions": { "protobufField": { "name": "squashed_message", "typeFullName": "testapis.extensions.PrefixedMessage.SquashedMessage" } } }),thisFieldWasRenamed: t.expose("thisFieldWillBeRenamed", { "type": "String", "nullable": false, "extensions": { "protobufField": { "name": "this_field_will_be_renamed", "typeFullName": "string", "options": { "[graphql.field]": { "name": "thisFieldWasRenamed" } } } } }),skipResolver: t.expose("skipResolver", { "type": "String", "nullable": false, "extensions": { "protobufField": { "name": "skip_resolver", "typeFullName": "string", "options": { "[graphql.field]": { "skipResolver": true } } } } }),squashedMessages: t.field({ "type": [TestPrefixPrefixedMessageSquashedMessage$Ref], "nullable": { "list": true, "items": false }, "resolve": source => {
-      return source.squashedMessages.map(item => {
-        
-    const value = item?.oneofField ?? item?.oneofField2;
-    if (value == null) {
-      throw new Error("squashedMessages should not be null");
-    }
-    return value;
-  
-      })
-    }, "extensions": { "protobufField": { "name": "squashed_messages", "typeFullName": "testapis.extensions.PrefixedMessage.SquashedMessage" } } }),renamedMessage: t.expose("renamedMessage", { "type": TestPrefixRenamedMessage$Ref, "nullable": true, "extensions": { "protobufField": { "name": "renamed_message", "typeFullName": "testapis.extensions.MessageWillRename" } } }),renamedEnum: t.field({ "type": TestPrefixRenamedEnum$Ref, "nullable": true, "resolve": source => {
-    
-        if (source.renamedEnum === EnumWillRename.ENUM_WILL_RENAME_UNSPECIFIED) {
-          return null;
-        }
-      
-    return source.renamedEnum;
-  }, "extensions": { "protobufField": { "name": "renamed_enum", "typeFullName": "testapis.extensions.EnumWillRename" } } }),partialIgnoreOneof: t.field({ "type": TestPrefixPrefixedMessagePartialIgnoreOneof$Ref, "nullable": true, "resolve": source => {
-    const value = source.oneofNotIgnoredField;
-    if (value == null) {
-      return null;
-    }
-    return value;
-  }, "extensions": { "protobufField": { "name": "partial_ignore_oneof" } } }),}), "isTypeOf": 
-        (source) => {
-          return (source as PrefixedMessage | { $type: string & {} }).$type
-            === "testapis.extensions.PrefixedMessage";
-        }
-      , "extensions": { "protobufMessage": { "fullName": "testapis.extensions.PrefixedMessage", "name": "PrefixedMessage", "package": "testapis.extensions" } } });
-  "
-`;
-
-exports[`createObjectTypeCode > with extensions > 'generates code for message with field…' 1`] = `
 "
     export const TestPrefixPrefixedMessage$Ref = builder.objectRef<PrefixedMessage>("TestPrefixPrefixedMessage");
     builder.objectType(TestPrefixPrefixedMessage$Ref, { "name": "TestPrefixPrefixedMessage", "fields": t => ({id: t.expose("id", { "type": "String", "nullable": false, "description": "Output only.", "extensions": { "protobufField": { "name": "id", "typeFullName": "uint64" } } }),body: t.expose("body", { "type": "String", "nullable": false, "extensions": { "protobufField": { "name": "body", "typeFullName": "string" } } }),prefixedEnum: t.field({ "type": TestPrefixPrefixedEnum$Ref, "nullable": true, "resolve": source => {

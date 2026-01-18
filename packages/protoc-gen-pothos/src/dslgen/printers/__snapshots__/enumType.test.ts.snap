@@ -14,13 +14,6 @@ exports[`createEnumTypeCode > protobuf-es > 'generates code for an enum without 
   "
 `;
 
-exports[`createEnumTypeCode > protobuf-es > 'generates code for an enum without un…' 1`] = `
-"
-    export const MyEnumWithoutUnspecified$Ref: EnumRef<MyEnumWithoutUnspecified, MyEnumWithoutUnspecified> =
-      builder.enumType("MyEnumWithoutUnspecified", { "values": {FOO: { "value": 0, "extensions": { "protobufEnumValue": { "name": "MY_ENUM_WITHOUT_UNSPECIFIED_FOO" } } },BAR: { "value": 1, "extensions": { "protobufEnumValue": { "name": "MY_ENUM_WITHOUT_UNSPECIFIED_BAR" } } },BAZ: { "value": 2, "extensions": { "protobufEnumValue": { "name": "MY_ENUM_WITHOUT_UNSPECIFIED_BAZ" } } },} as const, "extensions": { "protobufEnum": { "name": "MyEnumWithoutUnspecified", "fullName": "testapi.enums.MyEnumWithoutUnspecified", "package": "testapi.enums" } } });
-  "
-`;
-
 exports[`createEnumTypeCode > protobuf-es > 'generates code for nested enum' 1`] = `
 "
     export const ParentMessageNestedEnum$Ref: EnumRef<ParentMessage_NestedEnum, ParentMessage_NestedEnum> =
@@ -42,21 +35,7 @@ exports[`createEnumTypeCode > ts-proto > 'generates code for an enum without uns
   "
 `;
 
-exports[`createEnumTypeCode > ts-proto > 'generates code for an enum without un…' 1`] = `
-"
-    export const MyEnumWithoutUnspecified$Ref: EnumRef<MyEnumWithoutUnspecified, MyEnumWithoutUnspecified> =
-      builder.enumType("MyEnumWithoutUnspecified", { "values": {FOO: { "value": 0, "extensions": { "protobufEnumValue": { "name": "MY_ENUM_WITHOUT_UNSPECIFIED_FOO" } } },BAR: { "value": 1, "extensions": { "protobufEnumValue": { "name": "MY_ENUM_WITHOUT_UNSPECIFIED_BAR" } } },BAZ: { "value": 2, "extensions": { "protobufEnumValue": { "name": "MY_ENUM_WITHOUT_UNSPECIFIED_BAZ" } } },} as const, "extensions": { "protobufEnum": { "name": "MyEnumWithoutUnspecified", "fullName": "testapi.enums.MyEnumWithoutUnspecified", "package": "testapi.enums" } } });
-  "
-`;
-
 exports[`createEnumTypeCode > ts-proto > 'generates code for enum with extensions' 1`] = `
-"
-    export const TestPrefixPrefixedEnum$Ref: EnumRef<PrefixedEnum, PrefixedEnum> =
-      builder.enumType("TestPrefixPrefixedEnum", { "values": {PREFIXED_FOO: { "value": 1, "extensions": { "protobufEnumValue": { "name": "PREFIXED_FOO" } } },PREFIXED_BAR: { "value": 2, "extensions": { "protobufEnumValue": { "name": "PREFIXED_BAR" } } },} as const, "extensions": { "protobufEnum": { "name": "PrefixedEnum", "fullName": "testapis.extensions.PrefixedEnum", "package": "testapis.extensions" } } });
-  "
-`;
-
-exports[`createEnumTypeCode > ts-proto > 'generates code for enum with extensio…' 1`] = `
 "
     export const TestPrefixPrefixedEnum$Ref: EnumRef<PrefixedEnum, PrefixedEnum> =
       builder.enumType("TestPrefixPrefixedEnum", { "values": {PREFIXED_FOO: { "value": 1, "extensions": { "protobufEnumValue": { "name": "PREFIXED_FOO" } } },PREFIXED_BAR: { "value": 2, "extensions": { "protobufEnumValue": { "name": "PREFIXED_BAR" } } },} as const, "extensions": { "protobufEnum": { "name": "PrefixedEnum", "fullName": "testapis.extensions.PrefixedEnum", "package": "testapis.extensions" } } });
