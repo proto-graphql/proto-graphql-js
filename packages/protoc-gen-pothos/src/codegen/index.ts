@@ -13,8 +13,8 @@ export { PrintContext } from "./print-context.js";
 export {
   collectImports,
   generateImportStatements,
-  stringifyPrintables,
   type StringifyOptions,
+  stringifyPrintables,
 } from "./stringify.js";
 export type { ImportSymbol, Printable } from "./types.js";
-export { createImportSymbol } from "./types.js";
+export { createImportSymbol, isImportSymbol } from "./types.js";

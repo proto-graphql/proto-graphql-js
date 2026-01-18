@@ -10,6 +10,16 @@ export function isPrintableArray(value: unknown): value is PrintableArray {
   return Array.isArray(value) && PRINTABLE_ARRAY_MARKER in value;
 }
 
+export function markAsPrintableArray(arr: Printable[]): PrintableArray {
+  Object.defineProperty(arr, PRINTABLE_ARRAY_MARKER, {
+    value: true,
+    enumerable: false,
+    writable: false,
+    configurable: false,
+  });
+  return arr as PrintableArray;
+}
+
 type CodeValue =
   | string
   | number
@@ -51,12 +61,5 @@ export function code(
     result.push("");
   }
 
-  Object.defineProperty(result, PRINTABLE_ARRAY_MARKER, {
-    value: true,
-    enumerable: false,
-    writable: false,
-    configurable: false,
-  });
-
-  return result as PrintableArray;
+  return markAsPrintableArray(result);
 }

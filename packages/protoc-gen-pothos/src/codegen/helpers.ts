@@ -1,42 +1,31 @@
 import {
   isPrintableArray,
-  PRINTABLE_ARRAY_MARKER,
+  markAsPrintableArray,
   type PrintableArray,
 } from "./code-builder.js";
-import type { ImportSymbol, Printable } from "./types.js";
-
-function markAsPrintableArray(arr: Printable[]): PrintableArray {
-  Object.defineProperty(arr, PRINTABLE_ARRAY_MARKER, {
-    value: true,
-    enumerable: false,
-    writable: false,
-    configurable: false,
-  });
-  return arr as PrintableArray;
-}
-
-function isImportSymbol(value: unknown): value is ImportSymbol {
-  return (
-    typeof value === "object" &&
-    value !== null &&
-    "kind" in value &&
-    (value as Record<string, unknown>).kind === "es_symbol"
-  );
-}
+import type { Printable } from "./types.js";
+import { isImportSymbol } from "./types.js";
 
 export function printToString(printables: Printable[]): string {
-  const bodyParts: string[] = [];
+  const parts: string[] = [];
 
-  for (const part of printables) {
-    if (typeof part === "string") {
-      bodyParts.push(part);
-    } else if (isImportSymbol(part)) {
-      // Just output the symbol name; import statements are handled by ts-poet
-      bodyParts.push(part.name);
+  function visit(p: Printable) {
+    if (typeof p === "string") {
+      parts.push(p);
+    } else if (isImportSymbol(p)) {
+      parts.push(p.name);
+    } else if (Array.isArray(p)) {
+      for (const item of p) {
+        visit(item);
+      }
     }
   }
 
-  return bodyParts.join("");
+  for (const p of printables) {
+    visit(p);
+  }
+
+  return parts.join("");
 }
 
 export function joinCode(
