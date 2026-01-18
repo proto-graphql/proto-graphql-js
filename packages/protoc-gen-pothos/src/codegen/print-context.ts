@@ -2,15 +2,17 @@ import type { GeneratedFile } from "@bufbuild/protoplugin";
 import type { ImportSymbol, Printable } from "./types.js";
 
 export class PrintContext {
-  constructor(_file: GeneratedFile) {
-    throw new Error("Not implemented");
+  readonly #file: GeneratedFile;
+
+  constructor(file: GeneratedFile) {
+    this.#file = file;
   }
 
-  import(_name: string, _from: string): ImportSymbol {
-    throw new Error("Not implemented");
+  import(name: string, from: string, typeOnly?: boolean): ImportSymbol {
+    return this.#file.import(name, from, typeOnly);
   }
 
-  print(..._parts: Printable[]): void {
-    throw new Error("Not implemented");
+  print(...parts: Printable[]): void {
+    this.#file.print(...parts);
   }
 }

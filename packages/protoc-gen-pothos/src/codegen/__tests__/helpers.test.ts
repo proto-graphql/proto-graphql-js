@@ -9,8 +9,13 @@ function printableToString(printable: unknown[]): string {
       if (typeof p === "string") return p;
       if (typeof p === "number") return String(p);
       if (Array.isArray(p)) return printableToString(p);
-      if (typeof p === "object" && p !== null && "kind" in p && p.kind === "es_symbol") {
-        return (p as { name: string }).name;
+      if (
+        typeof p === "object" &&
+        p !== null &&
+        "kind" in p &&
+        p.kind === "es_symbol"
+      ) {
+        return (p as unknown as { name: string }).name;
       }
       return String(p);
     })
@@ -54,12 +59,11 @@ describe("joinCode", () => {
 
     test("joins complex code blocks", () => {
       const sym = createImportSymbol("Type", "./type.js");
-      const codes = [
-        code`const a: ${sym} = 1`,
-        code`const b: ${sym} = 2`,
-      ];
+      const codes = [code`const a: ${sym} = 1`, code`const b: ${sym} = 2`];
       const result = joinCode(codes, ";\n");
-      expect(printableToString(result)).toBe("const a: Type = 1;\nconst b: Type = 2");
+      expect(printableToString(result)).toBe(
+        "const a: Type = 1;\nconst b: Type = 2",
+      );
     });
   });
 });
@@ -162,7 +166,10 @@ describe("literalOf", () => {
     });
 
     test("returns nested array", () => {
-      const result = literalOf([[1, 2], [3, 4]]);
+      const result = literalOf([
+        [1, 2],
+        [3, 4],
+      ]);
       expect(printableToString(result)).toBe("[[1, 2], [3, 4]]");
     });
   });
@@ -208,7 +215,7 @@ describe("literalOf", () => {
         },
       });
       expect(printableToString(result)).toBe(
-        '{ level1: { level2: { level3: "deep" } } }'
+        '{ level1: { level2: { level3: "deep" } } }',
       );
     });
 
@@ -239,7 +246,7 @@ describe("literalOf", () => {
         },
       });
       expect(printableToString(result)).toBe(
-        "{ config: { handler: Handler.create() } }"
+        "{ config: { handler: Handler.create() } }",
       );
     });
 
@@ -251,7 +258,9 @@ describe("literalOf", () => {
         type: typeCode,
         count: 5,
       });
-      expect(printableToString(result)).toBe('{ name: "test", type: Type, count: 5 }');
+      expect(printableToString(result)).toBe(
+        '{ name: "test", type: Type, count: 5 }',
+      );
     });
 
     test("handles array containing Printable[]", () => {

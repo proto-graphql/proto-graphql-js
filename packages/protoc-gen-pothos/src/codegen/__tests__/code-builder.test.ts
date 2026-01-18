@@ -8,8 +8,13 @@ function printableToString(printable: unknown[]): string {
       if (typeof p === "string") return p;
       if (typeof p === "number") return String(p);
       if (Array.isArray(p)) return printableToString(p);
-      if (typeof p === "object" && p !== null && "kind" in p && p.kind === "es_symbol") {
-        return (p as { name: string }).name;
+      if (
+        typeof p === "object" &&
+        p !== null &&
+        "kind" in p &&
+        p.kind === "es_symbol"
+      ) {
+        return (p as unknown as { name: string }).name;
       }
       return String(p);
     })
