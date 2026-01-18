@@ -13,6 +13,8 @@ catalog:
   ts-poet: "^6.3.0"
 
 catalogs:
+  typescript-v5.8:
+    typescript: "5.8.3"
   test:
     graphql: "16.9.0"
     graphql-scalars: "1.23.0"
