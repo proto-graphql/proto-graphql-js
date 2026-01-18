@@ -109,6 +109,13 @@ const testSuites: TestSuite[] = [
           enumTypeNameInProto: "PrefixedEnum",
         },
       },
+      {
+        test: "generates code for enum with deprecated values",
+        args: {
+          packageName: "testapis.deprecation",
+          enumTypeNameInProto: "NotDeprecatedEnum",
+        },
+      },
     ],
   },
   {

@@ -108,10 +108,13 @@ builder.objectType(Date$Ref, {
 
 `t.expose()` is used when the field value can be accessed directly from the source object.
 
-`t.field()` is used when:
-- Custom resolver logic is required
-- Type conversion is needed (e.g., `bytes` to `Buffer`)
-- Enum unspecified value handling
+`t.field()` is used when any of the following conditions apply:
+- **Bytes fields**: Require `Buffer` conversion
+- **Enum fields with unspecified/ignored values**: Need resolver for value handling
+- **Oneof fields**: Access oneof member values
+- **Squashed oneof union fields**: Flatten nested oneof to parent type
+- **Required nested message fields**: Need non-null assertion (`!`)
+- **Required repeated fields**: Need non-null assertion for list
 
 ### isTypeOf Implementation
 
@@ -257,20 +260,47 @@ export const NotDeprecatedEnum$Ref: EnumRef<
 
 Values matching `<ENUM_NAME>_UNSPECIFIED` at position 0 are excluded from GraphQL enum values.
 
-When a field references an enum with an unspecified value, a resolver is generated:
+When a field references an enum with an unspecified value, a resolver is generated to handle the case:
 
+**Nullable enum field** (returns `null` for unspecified):
 ```typescript
-role: t.field({
-  type: MyEnum$Ref,
-  nullable: false,
+nestedEnum: t.field({
+  type: ParentMessageNestedEnum$Ref,
+  nullable: true,
   resolve: (source) => {
-    if (source.role === MyEnum.MY_ENUM_UNSPECIFIED) {
-      throw new Error("role is required field. But got unspecified.");
+    if (source.nestedEnum === ParentMessage_NestedEnum.NESTED_ENUM_UNSPECIFIED) {
+      return null;
     }
-    return source.role;
+    return source.nestedEnum;
   },
+  // ...
 }),
 ```
+
+### IGNORED Value Handling
+
+When an enum value is marked with the `ignore` option (via proto extensions), the resolver throws an error if that value is encountered:
+
+```typescript
+prefixedEnum: t.field({
+  type: TestPrefixPrefixedEnum$Ref,
+  nullable: true,
+  resolve: (source) => {
+    if (source.prefixedEnum === PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
+      return null;
+    }
+
+    if (source.prefixedEnum === PrefixedEnum.PREFIXED_IGNORED) {
+      throw new Error("PREFIXED_IGNORED is ignored in GraphQL schema");
+    }
+
+    return source.prefixedEnum;
+  },
+  // ...
+}),
+```
+
+The resolver checks for both UNSPECIFIED (returns `null`) and IGNORED (throws error) values.
 
 ## Union Type Generation (Oneofs)
 
@@ -341,16 +371,128 @@ content: t.field({
 
 When marked with `// Required.`:
 
+**ts-proto:**
 ```typescript
-content: t.field({
-  type: MediaContent$Ref,
+requiredOneofMembers: t.field({
+  type: OneofParentRequiredOneofMembers$Ref,
   nullable: false,
+  description: "Required. disallow not_set.",
   resolve: (source) => {
-    const value = source.image ?? source.video;
+    const value = source.requiredMessage1 ?? source.requiredMessage2;
     if (value == null) {
-      throw new Error("content should not be null");
+      throw new Error("requiredOneofMembers should not be null");
     }
     return value;
+  },
+  extensions: { protobufField: { name: "required_oneof_members" } },
+}),
+```
+
+**protobuf-es:**
+```typescript
+requiredOneofMembers: t.field({
+  type: OneofParentRequiredOneofMembers$Ref,
+  nullable: false,
+  description: "Required. disallow not_set.",
+  resolve: (source) => {
+    const value = source.requiredOneofMembers.value;
+    if (value == null) {
+      throw new Error("requiredOneofMembers should not be null");
+    }
+    return value;
+  },
+  extensions: { protobufField: { name: "required_oneof_members" } },
+}),
+```
+
+### Squashed Oneof Union
+
+When a message contains only a oneof field and is marked with `squashUnion: true` option, the oneof is "squashed" - the parent field directly exposes the union type instead of the wrapper message.
+
+**Proto definition:**
+```protobuf
+message PrefixedMessage {
+  message SquashedMessage {
+    oneof content {
+      option (graphql.oneof).squash_union = true;
+      InnerMessage oneof_field = 1 [(graphql.object_type).squash_union = true];
+      InnerMessage2 oneof_field_2 = 2 [(graphql.object_type).squash_union = true];
+    }
+  }
+  SquashedMessage squashed_message = 5;
+}
+```
+
+**Generated union type:**
+```typescript
+export const TestPrefixPrefixedMessageSquashedMessage$Ref = builder.unionType(
+  "TestPrefixPrefixedMessageSquashedMessage",
+  {
+    types: [
+      TestPrefixPrefixedMessageInnerMessage$Ref,
+      TestPrefixPrefixedMessageInnerMessage2$Ref,
+    ],
+    extensions: {
+      protobufOneof: {
+        fullName: "testapis.extensions.PrefixedMessage.SquashedMessage",
+        name: "SquashedMessage",
+        package: "testapis.extensions",
+        fields: [{
+          name: "oneof_field",
+          type: "testapis.extensions.PrefixedMessage.InnerMessage",
+          options: { "[graphql.object_type]": { squashUnion: true } },
+        }, {
+          name: "oneof_field_2",
+          type: "testapis.extensions.PrefixedMessage.InnerMessage2",
+          options: { "[graphql.object_type]": { squashUnion: true } },
+        }],
+      },
+    },
+  },
+);
+```
+
+**Generated field resolver (ts-proto):**
+```typescript
+squashedMessage: t.field({
+  type: TestPrefixPrefixedMessageSquashedMessage$Ref,
+  nullable: true,
+  resolve: (source) => {
+    const value = source.squashedMessage?.oneofField ??
+      source.squashedMessage?.oneofField2;
+    if (value == null) {
+      return null;
+    }
+    return value;
+  },
+  extensions: {
+    protobufField: {
+      name: "squashed_message",
+      typeFullName: "testapis.extensions.PrefixedMessage.SquashedMessage",
+    },
+  },
+}),
+```
+
+**Repeated squashed oneof field:**
+```typescript
+squashedMessages: t.field({
+  type: [TestPrefixPrefixedMessageSquashedMessage$Ref],
+  nullable: { list: true, items: false },
+  resolve: (source) => {
+    return source.squashedMessages.map((item) => {
+      const value = item?.oneofField ?? item?.oneofField2;
+      if (value == null) {
+        throw new Error("squashedMessages should not be null");
+      }
+      return value;
+    });
+  },
+  extensions: {
+    protobufField: {
+      name: "squashed_messages",
+      typeFullName: "testapis.extensions.PrefixedMessage.SquashedMessage",
+    },
   },
 }),
 ```
@@ -385,18 +527,111 @@ dataList: t.field({
 
 ### Nested Message Field
 
+Optional nested message fields use `t.expose()`:
+
 ```typescript
-publishedDate: t.expose("publishedDate", {
-  type: Date$Ref,
+optionalPrimitives: t.expose("optionalPrimitives", {
+  type: Primitives$Ref,
   nullable: true,
   description: "Optional.",
   extensions: {
     protobufField: {
-      name: "published_date",
-      typeFullName: "testapis.custom_types.Date",
+      name: "optional_primitives",
+      typeFullName: "testapis.primitives.Primitives",
     },
   },
 }),
+```
+
+### Required Nested Message Field
+
+Required nested message fields use `t.field()` with non-null assertion:
+
+```typescript
+requiredPrimitives: t.field({
+  type: Primitives$Ref,
+  nullable: false,
+  description: "Required.",
+  resolve: (source) => {
+    return source.requiredPrimitives!;
+  },
+  extensions: {
+    protobufField: {
+      name: "required_primitives",
+      typeFullName: "testapis.primitives.Primitives",
+    },
+  },
+}),
+```
+
+### Repeated Field Nullability
+
+For list (repeated) fields, the `nullable` property uses an object structure:
+
+```typescript
+// Required list - list and items are never null
+requiredPrimitivesList: t.field({
+  type: [Primitives$Ref],
+  nullable: { list: false, items: false },
+  description: "Required.",
+  resolve: (source) => {
+    return source.requiredPrimitivesList!;
+  },
+  extensions: {
+    protobufField: {
+      name: "required_primitives_list",
+      typeFullName: "testapis.primitives.Primitives",
+    },
+  },
+}),
+
+// Optional list - list can be null, but items are never null
+optionalPrimitivesList: t.expose("optionalPrimitivesList", {
+  type: [Primitives$Ref],
+  nullable: { list: true, items: false },
+  description: "Optional.",
+  extensions: {
+    protobufField: {
+      name: "optional_primitives_list",
+      typeFullName: "testapis.primitives.Primitives",
+    },
+  },
+}),
+```
+
+| Nullable Value | GraphQL Type |
+|----------------|--------------|
+| `{ list: false, items: false }` | `[Type!]!` |
+| `{ list: true, items: false }` | `[Type!]` |
+
+### Empty Message Type
+
+Messages with no fields generate a noop field to satisfy GraphQL schema requirements:
+
+```typescript
+export const EmptyMessage$Ref = builder.objectRef<EmptyMessage>("EmptyMessage");
+builder.objectType(EmptyMessage$Ref, {
+  name: "EmptyMessage",
+  fields: (t) => ({
+    _: t.field({
+      type: "Boolean",
+      nullable: true,
+      description: "noop field",
+      resolve: () => true,
+    }),
+  }),
+  isTypeOf: (source) => {
+    return (source as EmptyMessage | { $type: string & {}; }).$type ===
+      "testapis.empty_types.EmptyMessage";
+  },
+  extensions: {
+    protobufMessage: {
+      fullName: "testapis.empty_types.EmptyMessage",
+      name: "EmptyMessage",
+      package: "testapis.empty_types",
+    },
+  },
+});
 ```
 
 ## protobuf-es: toProto Functions
