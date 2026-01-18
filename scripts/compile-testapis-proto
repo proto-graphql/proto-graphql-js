@@ -12,12 +12,16 @@ clean() {
   rm -rf $OUT_ROOT/ts-proto/{src,lib}
   rm -rf $OUT_ROOT/ts-proto-with-forcelong-long/{src,lib}
   rm -rf $OUT_ROOT/ts-proto-with-forcelong-number/{src,lib}
+  rm -rf $OUT_ROOT/protobuf-es/{src,lib}
+  rm -rf $OUT_ROOT/protobuf-es-v2/{src,lib}
 }
 
 init() {
   mkdir -p $OUT_ROOT/ts-proto/{src,lib}
   mkdir -p $OUT_ROOT/ts-proto-with-forcelong-long/{src,lib}
   mkdir -p $OUT_ROOT/ts-proto-with-forcelong-number/{src,lib}
+  mkdir -p $OUT_ROOT/protobuf-es/{src,lib}
+  mkdir -p $OUT_ROOT/protobuf-es-v2/{src,lib}
 }
 
 execProtoc() {

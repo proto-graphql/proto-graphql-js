@@ -146,6 +146,63 @@ const testSuites: TestSuite[] = [
     ],
   },
   {
+    suite: "protobuf-es",
+    options: {
+      dsl: "pothos",
+      protobuf: "protobuf-es" as const,
+      importPrefix: "@testapis/protobuf-es-v2",
+      emitImportedFiles: false,
+      filenameSuffix: ".pothos",
+      pothos: {
+        builderPath: "../../builder",
+      },
+    },
+    cases: [
+      {
+        test: "generates code for a simple message with isMessage",
+        args: {
+          packageName: "testapis.primitives",
+          messageTypeName: "Primitives",
+        },
+      },
+      {
+        test: "generates code for a message with nested fields with isMessage",
+        args: {
+          packageName: "testapis.primitives",
+          messageTypeName: "Message",
+        },
+      },
+      {
+        test: "generates code for a message with oneofs with isMessage",
+        args: {
+          packageName: "testapis.oneof",
+          messageTypeName: "OneofParent",
+        },
+      },
+      {
+        test: "generates code for nested types with isMessage",
+        args: {
+          packageName: "testapis.nested",
+          messageTypeName: "ParentMessage",
+        },
+      },
+      {
+        test: "generates code for empty message with isMessage",
+        args: {
+          packageName: "testapis.empty_types",
+          messageTypeName: "EmptyMessage",
+        },
+      },
+      {
+        test: "generates code for message with squashed oneof fields with isMessage",
+        args: {
+          packageName: "testapis.extensions",
+          messageTypeName: "PrefixedMessage",
+        },
+      },
+    ],
+  },
+  {
     suite: "with extensions",
     options: {
       dsl: "pothos",

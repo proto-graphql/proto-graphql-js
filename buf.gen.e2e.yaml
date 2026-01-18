@@ -38,5 +38,13 @@ plugins:
       - target=ts
     out: ./e2e/testapis/protobuf-es/src
     strategy: all
+  - local: ./e2e/testapis/protobuf-es-v2/node_modules/.bin/protoc-gen-es
+    opt:
+      - target=ts
+    out: ./e2e/testapis/protobuf-es-v2/src
+    strategy: all
 inputs:
   - directory: ./devPackages/testapis-proto/proto
+  - directory: ./proto-graphql/proto
+    paths:
+      - ./proto-graphql/proto/graphql

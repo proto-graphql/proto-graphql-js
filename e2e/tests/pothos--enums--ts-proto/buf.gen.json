@@ -23,7 +23,9 @@
   "inputs": [
     {
       "directory": "../../../devPackages/testapis-proto/proto",
-      "paths": ["../../../devPackages/testapis-proto/proto/testapis/enums"]
+      "paths": [
+        "../../../devPackages/testapis-proto/proto/testapis/enums"
+      ]
     }
   ]
 }

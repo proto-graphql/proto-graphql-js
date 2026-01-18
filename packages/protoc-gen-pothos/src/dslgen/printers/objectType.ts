@@ -18,6 +18,8 @@ import {
   type PothosPrinterOptions,
   pothosBuilderPrintable,
   pothosRefPrintable,
+  protobufIsMessageSymbol,
+  protoSchemaSymbol,
   protoTypeSymbol,
 } from "./util.js";
 
@@ -99,6 +101,13 @@ function createIsTypeOfFuncCode(
       return code`
         (source) => {
           return source instanceof ${protoTypeSymbol(type.proto, opts)}
+        }
+      `;
+    }
+    case "protobuf-es": {
+      return code`
+        (source) => {
+          return ${protobufIsMessageSymbol()}(source, ${protoSchemaSymbol(type.proto, opts)})
         }
       `;
     }
