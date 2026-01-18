@@ -1,4 +1,4 @@
-import { type Registry, createRegistry } from "@bufbuild/protobuf";
+import { createRegistry, type Registry } from "@bufbuild/protobuf";
 import type { Schema } from "@bufbuild/protoplugin";
 
 export function createRegistryFromSchema(schema: Schema): Registry {

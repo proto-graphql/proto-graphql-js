@@ -1,10 +1,10 @@
 import type { RawPluginOptions } from "@bufbuild/protoplugin/dist/cjs/parameter";
 import {
-  type PrinterOptions,
-  type TypeOptions,
   defaultScalarMapping,
   defaultScalarMappingForTsProto,
+  type PrinterOptions,
   protobufLibs,
+  type TypeOptions,
 } from "@proto-graphql/codegen-core";
 
 export type Options<DSL extends PrinterOptions["dsl"]> = {

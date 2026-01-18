@@ -1,10 +1,10 @@
 import type { DescField, Registry } from "@bufbuild/protobuf";
 import {
+  compact,
   InterfaceType,
   type ObjectType,
-  compact,
-  protoType,
   protobufGraphQLExtensions,
+  protoType,
   tsFieldName,
 } from "@proto-graphql/codegen-core";
 import { type Code, code, joinCode, literalOf } from "ts-poet";

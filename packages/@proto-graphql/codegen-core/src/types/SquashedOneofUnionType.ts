@@ -3,8 +3,8 @@ import type { DescMessage } from "@bufbuild/protobuf";
 import type { ObjectField } from "./ObjectField.js";
 import type { ObjectType } from "./ObjectType.js";
 import { OneofUnionType } from "./OneofUnionType.js";
-import { TypeBase } from "./TypeBase.js";
 import type { TypeOptions } from "./options.js";
+import { TypeBase } from "./TypeBase.js";
 
 export class SquashedOneofUnionType extends TypeBase<DescMessage> {
   readonly oneofUnionType: OneofUnionType;

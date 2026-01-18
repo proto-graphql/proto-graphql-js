@@ -1,7 +1,7 @@
 import { createFileRegistry } from "@bufbuild/protobuf";
 import {
-  type TestapisPackage,
   getTestapisFileDescriptorSet,
+  type TestapisPackage,
 } from "@proto-graphql/testapis-proto";
 import { describe, expect, it } from "vitest";
 import { isRequiredField } from "./util";
@@ -71,22 +71,25 @@ describe("isRequiredField", () => {
       fieldType: "output",
       want: false,
     },
-  ])(
-    "returns $want for $fieldType field when $context",
-    ({ pkg, typeName, fieldName, fieldType, want }) => {
-      const fds = getTestapisFileDescriptorSet(pkg);
-      const registry = createFileRegistry(fds);
-      const qualifiedName = `${pkg}.${typeName}`;
-      const msgDesc = registry.getMessage(qualifiedName);
-      if (msgDesc == null) {
-        throw new Error(`${qualifiedName} not found`);
-      }
-      const fieldDesc = msgDesc.field[fieldName];
-      if (fieldDesc == null) {
-        throw new Error(`${qualifiedName}.${fieldName} not found`);
-      }
+  ])("returns $want for $fieldType field when $context", ({
+    pkg,
+    typeName,
+    fieldName,
+    fieldType,
+    want,
+  }) => {
+    const fds = getTestapisFileDescriptorSet(pkg);
+    const registry = createFileRegistry(fds);
+    const qualifiedName = `${pkg}.${typeName}`;
+    const msgDesc = registry.getMessage(qualifiedName);
+    if (msgDesc == null) {
+      throw new Error(`${qualifiedName} not found`);
+    }
+    const fieldDesc = msgDesc.field[fieldName];
+    if (fieldDesc == null) {
+      throw new Error(`${qualifiedName}.${fieldName} not found`);
+    }
 
-      expect(isRequiredField(fieldDesc, fieldType)).toBe(want);
-    },
-  );
+    expect(isRequiredField(fieldDesc, fieldType)).toBe(want);
+  });
 });

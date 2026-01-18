@@ -1,21 +1,21 @@
 import type { Registry } from "@bufbuild/protobuf";
 import {
+  compact,
   EnumType,
+  generatedGraphQLTypeImportPath,
   type InputObjectField,
   InputObjectType,
-  ScalarType,
-  compact,
-  generatedGraphQLTypeImportPath,
-  protoType,
   protobufGraphQLExtensions,
+  protoType,
+  ScalarType,
   tsFieldName,
 } from "@proto-graphql/codegen-core";
 import { type Code, code, imp, joinCode, literalOf } from "ts-poet";
 
 import { createFieldRefCode, createNoopFieldRefCode } from "./field.js";
 import {
-  type PothosPrinterOptions,
   fieldTypeShape,
+  type PothosPrinterOptions,
   pothosBuilder,
   pothosRef,
   shapeType,
