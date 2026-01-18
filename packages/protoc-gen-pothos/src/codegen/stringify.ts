@@ -122,7 +122,7 @@ export function stringifyPrintables(
   return formatCode(result);
 }
 
-function formatCode(code: string): string {
+export function formatCode(code: string): string {
   return dprint.format("file.ts", code, {
     lineWidth: 120,
     indentWidth: 2,

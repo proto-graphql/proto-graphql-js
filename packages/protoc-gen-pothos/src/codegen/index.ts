@@ -12,6 +12,7 @@ export {
 export { PrintContext } from "./print-context.js";
 export {
   collectImports,
+  formatCode,
   generateImportStatements,
   type StringifyOptions,
   stringifyPrintables,

@@ -1,50 +1,150 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`createOneofUnionTypeCode > protobuf-es > 'generates code for a required oneof union' 1`] = `
+exports[`createOneofUnionTypeCode > protobuf-es > 'generates code for a required oneof u…' 1`] = `
+"export const OneofParentRequiredOneofMembers$Ref = builder.unionType("OneofParentRequiredOneofMembers", {
+  "types": [OneofMemberMessage1$Ref, OneofMemberMessage2$Ref],
+  "description": "Required. disallow not_set.",
+  "extensions": {
+    "protobufOneof": {
+      "fullName": "testapis.oneof.OneofParent.required_oneof_members",
+      "name": "required_oneof_members",
+      "messageName": "OneofParent",
+      "package": "testapis.oneof",
+      "fields": [{ "name": "required_message1", "type": "testapis.oneof.OneofMemberMessage1" }, {
+        "name": "required_message2",
+        "type": "testapis.oneof.OneofMemberMessage2",
+      }],
+    },
+  },
+});
 "
-    export const OneofParentRequiredOneofMembers$Ref =
-      builder.unionType("OneofParentRequiredOneofMembers", { "types": [OneofMemberMessage1$Ref, OneofMemberMessage2$Ref], "description": "Required. disallow not_set.", "extensions": { "protobufOneof": { "fullName": "testapis.oneof.OneofParent.required_oneof_members", "name": "required_oneof_members", "messageName": "OneofParent", "package": "testapis.oneof", "fields": [{ "name": "required_message1", "type": "testapis.oneof.OneofMemberMessage1" }, { "name": "required_message2", "type": "testapis.oneof.OneofMemberMessage2" }] } } });
-  "
 `;
 
-exports[`createOneofUnionTypeCode > protobuf-es > 'generates code for a squashed oneof union' 1`] = `
+exports[`createOneofUnionTypeCode > protobuf-es > 'generates code for a squashed oneof u…' 1`] = `
+"export const TestPrefixPrefixedMessageSquashedMessage$Ref = builder.unionType(
+  "TestPrefixPrefixedMessageSquashedMessage",
+  {
+    "types": [TestPrefixPrefixedMessageInnerMessage$Ref, TestPrefixPrefixedMessageInnerMessage2$Ref],
+    "extensions": {
+      "protobufOneof": {
+        "fullName": "testapis.extensions.PrefixedMessage.SquashedMessage",
+        "name": "SquashedMessage",
+        "package": "testapis.extensions",
+        "fields": [{
+          "name": "oneof_field",
+          "type": "testapis.extensions.PrefixedMessage.InnerMessage",
+          "options": { "[graphql.object_type]": { "squashUnion": true } },
+        }, {
+          "name": "oneof_field_2",
+          "type": "testapis.extensions.PrefixedMessage.InnerMessage2",
+          "options": { "[graphql.object_type]": { "squashUnion": true } },
+        }],
+      },
+    },
+  },
+);
 "
-    export const TestPrefixPrefixedMessageSquashedMessage$Ref =
-      builder.unionType("TestPrefixPrefixedMessageSquashedMessage", { "types": [TestPrefixPrefixedMessageInnerMessage$Ref, TestPrefixPrefixedMessageInnerMessage2$Ref], "extensions": { "protobufOneof": { "fullName": "testapis.extensions.PrefixedMessage.SquashedMessage", "name": "SquashedMessage", "package": "testapis.extensions", "fields": [{ "name": "oneof_field", "type": "testapis.extensions.PrefixedMessage.InnerMessage", "options": { "[graphql.object_type]": { "squashUnion": true } } }, { "name": "oneof_field_2", "type": "testapis.extensions.PrefixedMessage.InnerMessage2", "options": { "[graphql.object_type]": { "squashUnion": true } } }] } } });
-  "
 `;
 
-exports[`createOneofUnionTypeCode > protobuf-es > 'generates code for an optional oneof union' 1`] = `
+exports[`createOneofUnionTypeCode > protobuf-es > 'generates code for an optional oneof …' 1`] = `
+"export const OneofParentOptionalOneofMembers$Ref = builder.unionType("OneofParentOptionalOneofMembers", {
+  "types": [OneofMemberMessage1$Ref, OneofMemberMessage2$Ref],
+  "extensions": {
+    "protobufOneof": {
+      "fullName": "testapis.oneof.OneofParent.optional_oneof_members",
+      "name": "optional_oneof_members",
+      "messageName": "OneofParent",
+      "package": "testapis.oneof",
+      "fields": [{ "name": "optoinal_message1", "type": "testapis.oneof.OneofMemberMessage1" }, {
+        "name": "optoinal_message2",
+        "type": "testapis.oneof.OneofMemberMessage2",
+      }],
+    },
+  },
+});
 "
-    export const OneofParentOptionalOneofMembers$Ref =
-      builder.unionType("OneofParentOptionalOneofMembers", { "types": [OneofMemberMessage1$Ref, OneofMemberMessage2$Ref], "extensions": { "protobufOneof": { "fullName": "testapis.oneof.OneofParent.optional_oneof_members", "name": "optional_oneof_members", "messageName": "OneofParent", "package": "testapis.oneof", "fields": [{ "name": "optoinal_message1", "type": "testapis.oneof.OneofMemberMessage1" }, { "name": "optoinal_message2", "type": "testapis.oneof.OneofMemberMessage2" }] } } });
-  "
 `;
 
-exports[`createOneofUnionTypeCode > ts-proto > 'generates code for a required oneof union' 1`] = `
+exports[`createOneofUnionTypeCode > ts-proto > 'generates code for a required oneof u…' 1`] = `
+"export const OneofParentRequiredOneofMembers$Ref = builder.unionType("OneofParentRequiredOneofMembers", {
+  "types": [OneofMemberMessage1$Ref, OneofMemberMessage2$Ref],
+  "description": "Required. disallow not_set.",
+  "extensions": {
+    "protobufOneof": {
+      "fullName": "testapis.oneof.OneofParent.required_oneof_members",
+      "name": "required_oneof_members",
+      "messageName": "OneofParent",
+      "package": "testapis.oneof",
+      "fields": [{ "name": "required_message1", "type": "testapis.oneof.OneofMemberMessage1" }, {
+        "name": "required_message2",
+        "type": "testapis.oneof.OneofMemberMessage2",
+      }],
+    },
+  },
+});
 "
-    export const OneofParentRequiredOneofMembers$Ref =
-      builder.unionType("OneofParentRequiredOneofMembers", { "types": [OneofMemberMessage1$Ref, OneofMemberMessage2$Ref], "description": "Required. disallow not_set.", "extensions": { "protobufOneof": { "fullName": "testapis.oneof.OneofParent.required_oneof_members", "name": "required_oneof_members", "messageName": "OneofParent", "package": "testapis.oneof", "fields": [{ "name": "required_message1", "type": "testapis.oneof.OneofMemberMessage1" }, { "name": "required_message2", "type": "testapis.oneof.OneofMemberMessage2" }] } } });
-  "
 `;
 
-exports[`createOneofUnionTypeCode > ts-proto > 'generates code for a squashed oneof union' 1`] = `
+exports[`createOneofUnionTypeCode > ts-proto > 'generates code for a squashed oneof u…' 1`] = `
+"export const TestPrefixPrefixedMessageSquashedMessage$Ref = builder.unionType(
+  "TestPrefixPrefixedMessageSquashedMessage",
+  {
+    "types": [TestPrefixPrefixedMessageInnerMessage$Ref, TestPrefixPrefixedMessageInnerMessage2$Ref],
+    "extensions": {
+      "protobufOneof": {
+        "fullName": "testapis.extensions.PrefixedMessage.SquashedMessage",
+        "name": "SquashedMessage",
+        "package": "testapis.extensions",
+        "fields": [{
+          "name": "oneof_field",
+          "type": "testapis.extensions.PrefixedMessage.InnerMessage",
+          "options": { "[graphql.object_type]": { "squashUnion": true } },
+        }, {
+          "name": "oneof_field_2",
+          "type": "testapis.extensions.PrefixedMessage.InnerMessage2",
+          "options": { "[graphql.object_type]": { "squashUnion": true } },
+        }],
+      },
+    },
+  },
+);
 "
-    export const TestPrefixPrefixedMessageSquashedMessage$Ref =
-      builder.unionType("TestPrefixPrefixedMessageSquashedMessage", { "types": [TestPrefixPrefixedMessageInnerMessage$Ref, TestPrefixPrefixedMessageInnerMessage2$Ref], "extensions": { "protobufOneof": { "fullName": "testapis.extensions.PrefixedMessage.SquashedMessage", "name": "SquashedMessage", "package": "testapis.extensions", "fields": [{ "name": "oneof_field", "type": "testapis.extensions.PrefixedMessage.InnerMessage", "options": { "[graphql.object_type]": { "squashUnion": true } } }, { "name": "oneof_field_2", "type": "testapis.extensions.PrefixedMessage.InnerMessage2", "options": { "[graphql.object_type]": { "squashUnion": true } } }] } } });
-  "
 `;
 
-exports[`createOneofUnionTypeCode > ts-proto > 'generates code for an optional oneof union' 1`] = `
+exports[`createOneofUnionTypeCode > ts-proto > 'generates code for an optional oneof …' 1`] = `
+"export const OneofParentOptionalOneofMembers$Ref = builder.unionType("OneofParentOptionalOneofMembers", {
+  "types": [OneofMemberMessage1$Ref, OneofMemberMessage2$Ref],
+  "extensions": {
+    "protobufOneof": {
+      "fullName": "testapis.oneof.OneofParent.optional_oneof_members",
+      "name": "optional_oneof_members",
+      "messageName": "OneofParent",
+      "package": "testapis.oneof",
+      "fields": [{ "name": "optoinal_message1", "type": "testapis.oneof.OneofMemberMessage1" }, {
+        "name": "optoinal_message2",
+        "type": "testapis.oneof.OneofMemberMessage2",
+      }],
+    },
+  },
+});
 "
-    export const OneofParentOptionalOneofMembers$Ref =
-      builder.unionType("OneofParentOptionalOneofMembers", { "types": [OneofMemberMessage1$Ref, OneofMemberMessage2$Ref], "extensions": { "protobufOneof": { "fullName": "testapis.oneof.OneofParent.optional_oneof_members", "name": "optional_oneof_members", "messageName": "OneofParent", "package": "testapis.oneof", "fields": [{ "name": "optoinal_message1", "type": "testapis.oneof.OneofMemberMessage1" }, { "name": "optoinal_message2", "type": "testapis.oneof.OneofMemberMessage2" }] } } });
-  "
 `;
 
-exports[`createOneofUnionTypeCode > ts-proto > 'generates code for imported oneof member' 1`] = `
+exports[`createOneofUnionTypeCode > ts-proto > 'generates code for imported oneof mem…' 1`] = `
+"export const OneofParentOneofField$Ref = builder.unionType("OneofParentOneofField", {
+  "types": [OneofMember1$Ref, OneofMember2$Ref],
+  "extensions": {
+    "protobufOneof": {
+      "fullName": "testapis.edgecases.import_oneof_member_from_other_file.OneofParent.oneof_field",
+      "name": "oneof_field",
+      "messageName": "OneofParent",
+      "package": "testapis.edgecases.import_oneof_member_from_other_file",
+      "fields": [{ "name": "member1", "type": "testapis.edgecases.import_oneof_member_from_other_file.OneofMember1" }, {
+        "name": "member2",
+        "type": "testapis.edgecases.import_oneof_member_from_other_file.OneofMember2",
+      }],
+    },
+  },
+});
 "
-    export const OneofParentOneofField$Ref =
-      builder.unionType("OneofParentOneofField", { "types": [OneofMember1$Ref, OneofMember2$Ref], "extensions": { "protobufOneof": { "fullName": "testapis.edgecases.import_oneof_member_from_other_file.OneofParent.oneof_field", "name": "oneof_field", "messageName": "OneofParent", "package": "testapis.edgecases.import_oneof_member_from_other_file", "fields": [{ "name": "member1", "type": "testapis.edgecases.import_oneof_member_from_other_file.OneofMember1" }, { "name": "member2", "type": "testapis.edgecases.import_oneof_member_from_other_file.OneofMember2" }] } } });
-  "
 `;

@@ -10,7 +10,7 @@ import {
   type TestapisPackage,
 } from "@proto-graphql/testapis-proto";
 import { describe, expect, test } from "vitest";
-import { printToString } from "../../codegen/index.js";
+import { formatCode, printToString } from "../../codegen/index.js";
 import { createEnumTypeCode } from "./enumType.js";
 import type { PothosPrinterOptions } from "./util.js";
 
@@ -50,7 +50,7 @@ function generateEnumTypeCode(
 
   const printables = createEnumTypeCode(enumType, registry, options);
 
-  return printToString(printables);
+  return formatCode(printToString(printables));
 }
 
 type TestCase = {
