@@ -1,3 +1,4 @@
+import dprint from "dprint-node";
 import { printToString } from "./helpers.js";
 import type { Printable } from "./types.js";
 import { isImportSymbol } from "./types.js";
@@ -118,5 +119,15 @@ export function stringifyPrintables(
     result += "\n";
   }
 
-  return result;
+  return formatCode(result);
+}
+
+function formatCode(code: string): string {
+  return dprint.format("file.ts", code, {
+    lineWidth: 120,
+    indentWidth: 2,
+    useTabs: false,
+    semiColons: "always",
+    quoteStyle: "preferDouble",
+  });
 }

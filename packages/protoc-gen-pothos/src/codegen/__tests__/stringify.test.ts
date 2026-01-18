@@ -178,4 +178,32 @@ describe("stringifyPrintables", () => {
     expect(result).toContain("// source: example.proto");
     expect(result).toContain("/* eslint-disable */");
   });
+
+  it("formats code with proper indentation", () => {
+    const result = stringifyPrintables(
+      [
+        'const obj = { aaaa: 1, bbbb: 2, cccc: 3, dddd: 4, eeee: 5, ffff: 6, gggg: 7, hhhh: 8, iiii: 9, jjjj: 10, kkkk: 11, llll: 12, mmmm: 13 };',
+      ],
+      {
+        programName: "test",
+        fileName: "test.proto",
+      },
+    );
+    expect(result).toContain("const obj = {");
+    expect(result).toMatch(/\n\s+aaaa: 1,/);
+  });
+
+  it("formats long lines by breaking them", () => {
+    const result = stringifyPrintables(
+      [
+        'builder.objectType(Ref, { "name": "Foo", "fields": t => ({field1: t.expose("field1", { "type": "String" }),field2: t.expose("field2", { "type": "Int" }),}) });',
+      ],
+      {
+        programName: "test",
+        fileName: "test.proto",
+      },
+    );
+    expect(result).toMatch(/\n\s+"name":/);
+    expect(result).toMatch(/\n\s+"fields":/);
+  });
 });
