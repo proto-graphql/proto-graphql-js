@@ -203,7 +203,7 @@ describe("stringifyPrintables", () => {
         fileName: "test.proto",
       },
     );
-    expect(result).toMatch(/\n\s+"name":/);
-    expect(result).toMatch(/\n\s+"fields":/);
+    expect(result).toMatch(/\n\s+name:/);
+    expect(result).toMatch(/\n\s+fields:/);
   });
 });

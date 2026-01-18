@@ -124,10 +124,20 @@ export function stringifyPrintables(
 
 export function formatCode(code: string): string {
   return dprint.format("file.ts", code, {
-    lineWidth: 120,
+    lineWidth: 80,
     indentWidth: 2,
     useTabs: false,
     semiColons: "always",
     quoteStyle: "preferDouble",
+    quoteProps: "asNeeded",
+    newLineKind: "lf",
+    useBraces: "whenNotSingleLine",
+    bracePosition: "sameLineUnlessHanging",
+    singleBodyPosition: "maintain",
+    nextControlFlowPosition: "sameLine",
+    trailingCommas: "onlyMultiLine",
+    operatorPosition: "nextLine",
+    preferHanging: false,
+    "arrowFunction.useParentheses": "force",
   });
 }
