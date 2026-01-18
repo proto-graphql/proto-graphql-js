@@ -28,7 +28,7 @@ exports[`createEnumTypeCode > protobuf-es > 'generates code for a simple enum' 1
 "
 `;
 
-exports[`createEnumTypeCode > protobuf-es > 'generates code for an enum without unspecified' 1`] = `
+exports[`createEnumTypeCode > protobuf-es > 'generates code for an enum without un…' 1`] = `
 "export const MyEnumWithoutUnspecified$Ref: EnumRef<
   MyEnumWithoutUnspecified,
   MyEnumWithoutUnspecified
@@ -112,7 +112,7 @@ exports[`createEnumTypeCode > ts-proto > 'generates code for a simple enum' 1`] 
 "
 `;
 
-exports[`createEnumTypeCode > ts-proto > 'generates code for an enum without unspecified' 1`] = `
+exports[`createEnumTypeCode > ts-proto > 'generates code for an enum without un…' 1`] = `
 "export const MyEnumWithoutUnspecified$Ref: EnumRef<
   MyEnumWithoutUnspecified,
   MyEnumWithoutUnspecified
@@ -148,7 +148,7 @@ exports[`createEnumTypeCode > ts-proto > 'generates code for an enum without uns
 "
 `;
 
-exports[`createEnumTypeCode > ts-proto > 'generates code for enum with extensions' 1`] = `
+exports[`createEnumTypeCode > ts-proto > 'generates code for enum with extensio…' 1`] = `
 "export const TestPrefixPrefixedEnum$Ref: EnumRef<PrefixedEnum, PrefixedEnum> =
   builder.enumType("TestPrefixPrefixedEnum", {
     values: {

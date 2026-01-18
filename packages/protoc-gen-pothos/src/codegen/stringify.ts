@@ -128,7 +128,7 @@ export function formatCode(code: string): string {
     indentWidth: 2,
     useTabs: false,
     semiColons: "always",
-    quoteStyle: "preferDouble",
+    quoteStyle: "alwaysDouble",
     quoteProps: "asNeeded",
     newLineKind: "lf",
     useBraces: "whenNotSingleLine",
@@ -138,6 +138,7 @@ export function formatCode(code: string): string {
     trailingCommas: "onlyMultiLine",
     operatorPosition: "nextLine",
     preferHanging: false,
+    preferSingleLine: true,
     "arrowFunction.useParentheses": "force",
   });
 }
