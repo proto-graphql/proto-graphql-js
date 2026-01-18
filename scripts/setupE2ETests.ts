@@ -8,7 +8,7 @@ const testsDir = "e2e/tests";
 const protoLibs = [
   "ts-proto",
   "ts-proto-with-forcelong-number",
-  "protobuf-es",
+  "protobuf-es-v1",
 ] as const;
 type ProtoLib = (typeof protoLibs)[number];
 
@@ -45,7 +45,7 @@ async function genPackageJson(test: TestCase): Promise<void> {
       "@proto-graphql/e2e-testapis-ts-proto-with-forcelong-number",
       "protoc-gen-pothos",
     ],
-    "protobuf-es": [
+    "protobuf-es-v1": [
       "@proto-graphql/e2e-testapis-protobuf-es",
       "@proto-graphql/scalars-protobuf-es",
       "protoc-gen-pothos",
@@ -57,7 +57,7 @@ async function genPackageJson(test: TestCase): Promise<void> {
   };
 
   const depsByLib: Record<ProtoLib, Record<string, string>> = {
-    "protobuf-es": { "@bufbuild/protobuf": "catalog:protobuf-es-v1" },
+    "protobuf-es-v1": { "@bufbuild/protobuf": "catalog:protobuf-es-v1" },
     "ts-proto": {},
     "ts-proto-with-forcelong-number": {},
   };
@@ -136,10 +136,10 @@ async function genBufGemTemplate(test: TestCase): Promise<void> {
         "scalar=google.protobuf.Fixed64Value=Int",
         "scalar=google.protobuf.SFixed64Value=Int",
       ],
-      "protobuf-es": [
+      "protobuf-es-v1": [
         "import_prefix=@proto-graphql/e2e-testapis-protobuf-es/lib/",
         "pothos_builder_path=../../builder",
-        "protobuf_lib=protobuf-es",
+        "protobuf_lib=protobuf-es-v1",
       ],
     },
   };

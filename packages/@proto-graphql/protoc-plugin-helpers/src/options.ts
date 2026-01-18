@@ -98,7 +98,7 @@ export function parsePothosOptions(
   }
 
   params.type.scalarMapping = {
-    ...(params.printer.protobuf === "protobuf-es"
+    ...(params.printer.protobuf === "protobuf-es-v1"
       ? defaultScalarMapping
       : defaultScalarMappingForTsProto),
     ...params.type.scalarMapping,

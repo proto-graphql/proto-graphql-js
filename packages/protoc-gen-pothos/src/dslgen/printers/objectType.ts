@@ -95,7 +95,7 @@ function createIsTypeOfFuncCode(
         }
       `;
     }
-    case "protobuf-es": {
+    case "protobuf-es-v1": {
       return code`
         (source) => {
           return source instanceof ${protoTypeSymbol(type.proto, opts)}

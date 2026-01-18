@@ -33,7 +33,7 @@ export function createOneofUnionResolverCode(
           nullable,
         });
       }
-      case "protobuf-es": {
+      case "protobuf-es-v1": {
         return createBlockStmtCodeForProtobufEs(sourceExpr, field, opts, {
           nullable,
           list,

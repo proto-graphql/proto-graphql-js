@@ -51,9 +51,9 @@ plugins:
 | `unrecognizedEnum=false` | Prevents unrecognized enum handling |
 | `outputTypeRegistry=true` | Enables type registry for runtime type resolution |
 
-## buf.gen.yaml with protobuf-es
+## buf.gen.yaml with protobuf-es-v1
 
-Configuration for protobuf-es:
+Configuration for protobuf-es-v1:
 
 ```yaml
 # proto/buf.gen.yaml
@@ -71,7 +71,7 @@ plugins:
     opt:
       - pothos_builder_path=../../builder
       - import_prefix=../proto
-      - protobuf_lib=protobuf-es
+      - protobuf_lib=protobuf-es-v1
 ```
 
 ## Recommended Project Structure

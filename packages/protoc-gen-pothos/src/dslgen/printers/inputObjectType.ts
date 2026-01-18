@@ -116,7 +116,7 @@ export function createInputObjectTypeCode(
 
   const codes: Printable[][] = [shapeTypeCode, refCode];
 
-  if (opts.protobuf === "protobuf-es") {
+  if (opts.protobuf === "protobuf-es-v1") {
     codes.push(createToProtoFuncCode(type, opts));
   }
 

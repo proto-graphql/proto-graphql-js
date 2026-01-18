@@ -62,68 +62,68 @@
     },
     {
       "target": "pothos",
-      "proto": { "package": "deprecation", "lib": "protobuf-es" }
+      "proto": { "package": "deprecation", "lib": "protobuf-es-v1" }
     },
     {
       "target": "pothos",
       "proto": {
         "package": "edgecases/import_from_same_pkg",
-        "lib": "protobuf-es"
+        "lib": "protobuf-es-v1"
       }
     },
     {
       "target": "pothos",
       "proto": {
         "package": "edgecases/import_oneof_member_from_other_file",
-        "lib": "protobuf-es"
+        "lib": "protobuf-es-v1"
       }
     },
     {
       "target": "pothos",
       "proto": {
         "package": "edgecases/import_squashed_union",
-        "lib": "protobuf-es"
+        "lib": "protobuf-es-v1"
       }
     },
     {
       "target": "pothos",
-      "proto": { "package": "empty_types", "lib": "protobuf-es" }
+      "proto": { "package": "empty_types", "lib": "protobuf-es-v1" }
     },
     {
       "target": "pothos",
-      "proto": { "package": "enums", "lib": "protobuf-es" }
+      "proto": { "package": "enums", "lib": "protobuf-es-v1" }
     },
     {
       "target": "pothos",
-      "proto": { "package": "extensions", "lib": "protobuf-es" }
+      "proto": { "package": "extensions", "lib": "protobuf-es-v1" }
     },
     {
       "target": "pothos",
-      "proto": { "package": "field_behavior", "lib": "protobuf-es" }
+      "proto": { "package": "field_behavior", "lib": "protobuf-es-v1" }
     },
     {
       "target": "pothos",
-      "proto": { "package": "multipkgs", "lib": "protobuf-es" }
+      "proto": { "package": "multipkgs", "lib": "protobuf-es-v1" }
     },
     {
       "target": "pothos",
-      "proto": { "package": "nested", "lib": "protobuf-es" }
+      "proto": { "package": "nested", "lib": "protobuf-es-v1" }
     },
     {
       "target": "pothos",
-      "proto": { "package": "oneof", "lib": "protobuf-es" }
+      "proto": { "package": "oneof", "lib": "protobuf-es-v1" }
     },
     {
       "target": "pothos",
-      "proto": { "package": "primitives", "lib": "protobuf-es" }
+      "proto": { "package": "primitives", "lib": "protobuf-es-v1" }
     },
     {
       "target": "pothos",
-      "proto": { "package": "proto3_optional", "lib": "protobuf-es" }
+      "proto": { "package": "proto3_optional", "lib": "protobuf-es-v1" }
     },
     {
       "target": "pothos",
-      "proto": { "package": "wktypes", "lib": "protobuf-es" }
+      "proto": { "package": "wktypes", "lib": "protobuf-es-v1" }
     }
   ]
 }

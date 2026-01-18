@@ -86,7 +86,7 @@ function enumValueJsName(
   switch (opts.protobuf) {
     case "ts-proto":
       return ev.proto.name;
-    case "protobuf-es":
+    case "protobuf-es-v1":
       return ev.proto.localName;
   }
 }

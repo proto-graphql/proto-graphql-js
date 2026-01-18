@@ -38,7 +38,7 @@ Specifies the protobuf implementation to use.
 
 - **Type:** `string`
 - **Default:** `ts-proto`
-- **Values:** `ts-proto`, `protobuf-es`
+- **Values:** `ts-proto`, `protobuf-es-v1`
 
 ```yaml
 opt:
