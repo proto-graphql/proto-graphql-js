@@ -182,7 +182,7 @@ describe("stringifyPrintables", () => {
   it("formats code with proper indentation", () => {
     const result = stringifyPrintables(
       [
-        'const obj = { aaaa: 1, bbbb: 2, cccc: 3, dddd: 4, eeee: 5, ffff: 6, gggg: 7, hhhh: 8, iiii: 9, jjjj: 10, kkkk: 11, llll: 12, mmmm: 13 };',
+        "const obj = { aaaa: 1, bbbb: 2, cccc: 3, dddd: 4, eeee: 5, ffff: 6, gggg: 7, hhhh: 8, iiii: 9, jjjj: 10, kkkk: 11, llll: 12, mmmm: 13 };",
       ],
       {
         programName: "test",
