@@ -54,10 +54,10 @@ export function createObjectTypeCode(
       : createIsTypeOfFuncCode(type, registry, opts),
     extensions: protobufGraphQLExtensions(type, registry),
   };
-  const buildRefFunc = code`${pothosBuilderPrintable(type, opts)}.${
+  const buildRefFunc = code`${pothosBuilderPrintable(opts)}.${
     isInterface ? "interface" : "object"
   }Ref`;
-  const buildTypeFunc = code`${pothosBuilderPrintable(type, opts)}.${
+  const buildTypeFunc = code`${pothosBuilderPrintable(opts)}.${
     isInterface ? "interface" : "object"
   }Type`;
   const refFuncTypeArg = isInterface

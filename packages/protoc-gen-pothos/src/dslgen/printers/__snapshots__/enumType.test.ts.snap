@@ -3,7 +3,7 @@
 exports[`createEnumTypeCode > protobuf-es > 'generates code for a simple enum' 1`] = `
 "import { EnumRef } from "@pothos/core";
 import { MyEnum } from "@testapis/protobuf-es/testapis/enums/enums_pb";
-import { builder } from "../../../../builder";
+import { builder } from "../../builder";
 
 export const MyEnum$Ref: EnumRef<MyEnum, MyEnum> = builder.enumType("MyEnum", {
   values: {
@@ -35,7 +35,7 @@ export const MyEnum$Ref: EnumRef<MyEnum, MyEnum> = builder.enumType("MyEnum", {
 exports[`createEnumTypeCode > protobuf-es > 'generates code for an enum without unspecified' 1`] = `
 "import { EnumRef } from "@pothos/core";
 import { MyEnumWithoutUnspecified } from "@testapis/protobuf-es/testapis/enums/enums_pb";
-import { builder } from "../../../../builder";
+import { builder } from "../../builder";
 
 export const MyEnumWithoutUnspecified$Ref: EnumRef<
   MyEnumWithoutUnspecified,
@@ -75,7 +75,7 @@ export const MyEnumWithoutUnspecified$Ref: EnumRef<
 exports[`createEnumTypeCode > protobuf-es > 'generates code for nested enum' 1`] = `
 "import { EnumRef } from "@pothos/core";
 import { ParentMessage_NestedEnum } from "@testapis/protobuf-es/testapis/nested/nested_pb";
-import { builder } from "../../../../builder";
+import { builder } from "../../builder";
 
 export const ParentMessageNestedEnum$Ref: EnumRef<
   ParentMessage_NestedEnum,
@@ -99,7 +99,7 @@ export const ParentMessageNestedEnum$Ref: EnumRef<
 exports[`createEnumTypeCode > ts-proto > 'generates code for a simple enum' 1`] = `
 "import { EnumRef } from "@pothos/core";
 import { MyEnum } from "@testapis/ts-proto/testapis/enums/enums";
-import { builder } from "../../../../builder";
+import { builder } from "../../builder";
 
 export const MyEnum$Ref: EnumRef<MyEnum, MyEnum> = builder.enumType("MyEnum", {
   values: {
@@ -131,7 +131,7 @@ export const MyEnum$Ref: EnumRef<MyEnum, MyEnum> = builder.enumType("MyEnum", {
 exports[`createEnumTypeCode > ts-proto > 'generates code for an enum without unspecified' 1`] = `
 "import { EnumRef } from "@pothos/core";
 import { MyEnumWithoutUnspecified } from "@testapis/ts-proto/testapis/enums/enums";
-import { builder } from "../../../../builder";
+import { builder } from "../../builder";
 
 export const MyEnumWithoutUnspecified$Ref: EnumRef<
   MyEnumWithoutUnspecified,
@@ -171,7 +171,7 @@ export const MyEnumWithoutUnspecified$Ref: EnumRef<
 exports[`createEnumTypeCode > ts-proto > 'generates code for enum with extensions' 1`] = `
 "import { EnumRef } from "@pothos/core";
 import { PrefixedEnum } from "@testapis/ts-proto/testapis/extensions/extensions";
-import { builder } from "../../../../builder";
+import { builder } from "../../builder";
 
 export const TestPrefixPrefixedEnum$Ref: EnumRef<PrefixedEnum, PrefixedEnum> =
   builder.enumType("TestPrefixPrefixedEnum", {
@@ -199,7 +199,7 @@ export const TestPrefixPrefixedEnum$Ref: EnumRef<PrefixedEnum, PrefixedEnum> =
 exports[`createEnumTypeCode > ts-proto > 'generates code for nested enum' 1`] = `
 "import { EnumRef } from "@pothos/core";
 import { ParentMessage_NestedEnum } from "@testapis/ts-proto/testapis/nested/nested";
-import { builder } from "../../../../builder";
+import { builder } from "../../builder";
 
 export const ParentMessageNestedEnum$Ref: EnumRef<
   ParentMessage_NestedEnum,

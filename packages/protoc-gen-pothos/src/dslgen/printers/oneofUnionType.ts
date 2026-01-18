@@ -39,7 +39,7 @@ export function createOneofUnionTypeCode(
   };
   return code`
     export const ${pothosRefPrintable(type)} =
-      ${pothosBuilderPrintable(type, opts)}.unionType(${literalOf(
+      ${pothosBuilderPrintable(opts)}.unionType(${literalOf(
         type.typeName,
       )}, ${literalOf(compactForCodegen(typeOpts))});
   `;

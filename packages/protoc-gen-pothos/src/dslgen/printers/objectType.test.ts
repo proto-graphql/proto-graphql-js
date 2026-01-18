@@ -10,7 +10,7 @@ import {
   type TestapisPackage,
 } from "@proto-graphql/testapis-proto";
 import { describe, expect, test } from "vitest";
-import { stringifyWithImports } from "../../codegen/index.js";
+import { printablesToStringWithImports } from "./__tests__/test-utils.js";
 import { createObjectTypeCode } from "./objectType.js";
 import type { PothosPrinterOptions } from "./util.js";
 
@@ -41,7 +41,7 @@ function generateObjectTypeCode(
 
   const printable = createObjectTypeCode(objType, registry, options);
 
-  return stringifyWithImports(printable);
+  return printablesToStringWithImports(printable);
 }
 
 type TestCase = {

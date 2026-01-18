@@ -87,7 +87,7 @@ export function createInputObjectTypeCode(
       "InputObjectRef",
       "@pothos/core",
     )}<${shapeTypePrintable(type)}> =
-      ${pothosBuilderPrintable(type, opts)}.inputRef<${shapeTypePrintable(
+      ${pothosBuilderPrintable(opts)}.inputRef<${shapeTypePrintable(
         type,
       )}>(${literalOf(type.typeName)}).implement(
         ${literalOf(

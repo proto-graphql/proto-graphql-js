@@ -8,7 +8,6 @@ import {
 import type { Options } from "@proto-graphql/protoc-plugin-helpers";
 
 import type { Printable } from "./codegen/index.js";
-import { stringifyPrintables } from "./codegen/index.js";
 import { createTypeDslPrintables } from "./dslgen/index.js";
 import type { PothosPrinterOptions } from "./dslgen/printers/util.js";
 
@@ -29,11 +28,20 @@ export function generateFiles(
 
   const f = schema.generateFile(filenameFromProtoFile(file, opts.printer));
   const printables = createPrintables(types, registry, opts.printer);
-  const code = stringifyPrintables(printables.flat(), {
-    programName: "protoc-gen-pothos",
-    fileName: `${file.name}.proto`,
-  });
-  f.print(code.trimEnd());
+
+  // ヘッダー出力（preamble プロパティに格納される）
+  f.preamble(file);
+
+  if (printables.length === 0) {
+    f.print("export {};");
+    return;
+  }
+
+  // 各型の Printable を直接出力
+  for (const p of printables) {
+    f.print(...p);
+    f.print(); // 空行で区切り
+  }
 }
 
 function createPrintables(

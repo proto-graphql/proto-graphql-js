@@ -5,6 +5,7 @@ import {
 } from "@proto-graphql/protoc-plugin-helpers";
 
 import { version } from "../package.json";
+import { formatCode } from "./codegen/stringify.js";
 import { generateFiles } from "./printer.js";
 
 export const protocGenPothos = createEcmaScriptPlugin({
@@ -15,8 +16,11 @@ export const protocGenPothos = createEcmaScriptPlugin({
     dsl: "pothos",
   }),
   parseOptions: parsePothosOptions,
-  // NOTE: force `target=ts`
+  // NOTE: force `target=ts` and apply formatting
   transpile: (files) => {
-    return files;
+    return files.map((f) => ({
+      ...f,
+      content: formatCode(f.content),
+    }));
   },
 });
