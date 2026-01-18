@@ -16,6 +16,7 @@ export {
   generateImportStatements,
   type StringifyOptions,
   stringifyPrintables,
+  stringifyWithImports,
 } from "./stringify.js";
 export type { ImportSymbol, Printable } from "./types.js";
 export { createImportSymbol, isImportSymbol } from "./types.js";

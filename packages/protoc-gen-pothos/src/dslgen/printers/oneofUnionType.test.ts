@@ -11,7 +11,7 @@ import {
   type TestapisPackage,
 } from "@proto-graphql/testapis-proto";
 import { describe, expect, test } from "vitest";
-import { formatCode, printToString } from "../../codegen/index.js";
+import { stringifyWithImports } from "../../codegen/index.js";
 import { createOneofUnionTypeCode } from "./oneofUnionType.js";
 import type { PothosPrinterOptions } from "./util.js";
 
@@ -50,7 +50,7 @@ function generateOneofUnionTypeCode(
 
   const printable = createOneofUnionTypeCode(oneofType, registry, options);
 
-  return formatCode(printToString(printable));
+  return stringifyWithImports(printable);
 }
 
 function generateSquashedOneofUnionTypeCode(
@@ -80,7 +80,7 @@ function generateSquashedOneofUnionTypeCode(
 
   const printable = createOneofUnionTypeCode(oneofType, registry, options);
 
-  return formatCode(printToString(printable));
+  return stringifyWithImports(printable);
 }
 
 type OneofTestCase = {

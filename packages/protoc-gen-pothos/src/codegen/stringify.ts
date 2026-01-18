@@ -122,6 +122,37 @@ export function stringifyPrintables(
   return formatCode(result);
 }
 
+/**
+ * Convert Printable[] to formatted TypeScript code string with imports.
+ * Similar to stringifyPrintables but without the header comment.
+ * Used for testing individual printer outputs.
+ */
+export function stringifyWithImports(printables: Printable[]): string {
+  if (printables.length === 0) {
+    return "";
+  }
+
+  const imports = collectImports(printables);
+  const importStatements = generateImportStatements(imports);
+  const body = printToString(printables);
+
+  const parts: string[] = [];
+
+  if (importStatements) {
+    parts.push(importStatements);
+    parts.push("\n\n");
+  }
+
+  parts.push(body);
+
+  let result = parts.join("");
+  if (!result.endsWith("\n")) {
+    result += "\n";
+  }
+
+  return formatCode(result);
+}
+
 export function formatCode(code: string): string {
   return dprint.format("file.ts", code, {
     lineWidth: 80,

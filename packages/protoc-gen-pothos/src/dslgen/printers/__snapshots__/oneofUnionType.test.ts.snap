@@ -1,7 +1,9 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`createOneofUnionTypeCode > protobuf-es > 'generates code for a required oneof union' 1`] = `
-"export const OneofParentRequiredOneofMembers$Ref = builder.unionType(
+exports[`createOneofUnionTypeCode > protobuf-es > 'generates code for a required oneof u…' 1`] = `
+"import { builder } from "../../../../builder";
+
+export const OneofParentRequiredOneofMembers$Ref = builder.unionType(
   "OneofParentRequiredOneofMembers",
   {
     types: [OneofMemberMessage1$Ref, OneofMemberMessage2$Ref],
@@ -26,8 +28,10 @@ exports[`createOneofUnionTypeCode > protobuf-es > 'generates code for a required
 "
 `;
 
-exports[`createOneofUnionTypeCode > protobuf-es > 'generates code for a squashed oneof union' 1`] = `
-"export const TestPrefixPrefixedMessageSquashedMessage$Ref = builder.unionType(
+exports[`createOneofUnionTypeCode > protobuf-es > 'generates code for a squashed oneof u…' 1`] = `
+"import { builder } from "../../../../builder";
+
+export const TestPrefixPrefixedMessageSquashedMessage$Ref = builder.unionType(
   "TestPrefixPrefixedMessageSquashedMessage",
   {
     types: [
@@ -55,8 +59,10 @@ exports[`createOneofUnionTypeCode > protobuf-es > 'generates code for a squashed
 "
 `;
 
-exports[`createOneofUnionTypeCode > protobuf-es > 'generates code for an optional oneof union' 1`] = `
-"export const OneofParentOptionalOneofMembers$Ref = builder.unionType(
+exports[`createOneofUnionTypeCode > protobuf-es > 'generates code for an optional oneof …' 1`] = `
+"import { builder } from "../../../../builder";
+
+export const OneofParentOptionalOneofMembers$Ref = builder.unionType(
   "OneofParentOptionalOneofMembers",
   {
     types: [OneofMemberMessage1$Ref, OneofMemberMessage2$Ref],
@@ -80,8 +86,10 @@ exports[`createOneofUnionTypeCode > protobuf-es > 'generates code for an optiona
 "
 `;
 
-exports[`createOneofUnionTypeCode > ts-proto > 'generates code for a required oneof union' 1`] = `
-"export const OneofParentRequiredOneofMembers$Ref = builder.unionType(
+exports[`createOneofUnionTypeCode > ts-proto > 'generates code for a required oneof u…' 1`] = `
+"import { builder } from "../../../../builder";
+
+export const OneofParentRequiredOneofMembers$Ref = builder.unionType(
   "OneofParentRequiredOneofMembers",
   {
     types: [OneofMemberMessage1$Ref, OneofMemberMessage2$Ref],
@@ -106,8 +114,10 @@ exports[`createOneofUnionTypeCode > ts-proto > 'generates code for a required on
 "
 `;
 
-exports[`createOneofUnionTypeCode > ts-proto > 'generates code for a squashed oneof union' 1`] = `
-"export const TestPrefixPrefixedMessageSquashedMessage$Ref = builder.unionType(
+exports[`createOneofUnionTypeCode > ts-proto > 'generates code for a squashed oneof u…' 1`] = `
+"import { builder } from "../../../../builder";
+
+export const TestPrefixPrefixedMessageSquashedMessage$Ref = builder.unionType(
   "TestPrefixPrefixedMessageSquashedMessage",
   {
     types: [
@@ -135,8 +145,10 @@ exports[`createOneofUnionTypeCode > ts-proto > 'generates code for a squashed on
 "
 `;
 
-exports[`createOneofUnionTypeCode > ts-proto > 'generates code for an optional oneof union' 1`] = `
-"export const OneofParentOptionalOneofMembers$Ref = builder.unionType(
+exports[`createOneofUnionTypeCode > ts-proto > 'generates code for an optional oneof …' 1`] = `
+"import { builder } from "../../../../builder";
+
+export const OneofParentOptionalOneofMembers$Ref = builder.unionType(
   "OneofParentOptionalOneofMembers",
   {
     types: [OneofMemberMessage1$Ref, OneofMemberMessage2$Ref],
@@ -160,8 +172,11 @@ exports[`createOneofUnionTypeCode > ts-proto > 'generates code for an optional o
 "
 `;
 
-exports[`createOneofUnionTypeCode > ts-proto > 'generates code for imported oneof member' 1`] = `
-"export const OneofParentOneofField$Ref = builder.unionType(
+exports[`createOneofUnionTypeCode > ts-proto > 'generates code for imported oneof mem…' 1`] = `
+"import { builder } from "../../../../../builder";
+import { OneofMember1$Ref, OneofMember2$Ref } from "./member.pothos";
+
+export const OneofParentOneofField$Ref = builder.unionType(
   "OneofParentOneofField",
   {
     types: [OneofMember1$Ref, OneofMember2$Ref],
