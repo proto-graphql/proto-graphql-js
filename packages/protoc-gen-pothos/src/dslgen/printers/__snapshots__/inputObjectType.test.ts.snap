@@ -3,7 +3,7 @@
 exports[`createInputObjectTypeCode > protobuf-es > 'generates code for a simple input object' 1`] = `
 "import { InputObjectRef } from "@pothos/core";
 import { Primitives } from "@testapis/protobuf-es/testapis/primitives/primitives_pb";
-import { builder } from "../../../../builder";
+import { builder } from "../../builder";
 
 export type PrimitivesInput$Shape = {
   requiredDoubleValue: Primitives["requiredDoubleValue"];
@@ -387,7 +387,7 @@ export function PrimitivesInput$toProto(
 exports[`createInputObjectTypeCode > protobuf-es > 'generates code for an input object with nested fields' 1`] = `
 "import { InputObjectRef } from "@pothos/core";
 import { Message } from "@testapis/protobuf-es/testapis/primitives/primitives_pb";
-import { builder } from "../../../../builder";
+import { builder } from "../../builder";
 
 export type MessageInput$Shape = {
   requiredPrimitives: PrimitivesInput$Shape;
@@ -477,7 +477,7 @@ export function MessageInput$toProto(
 exports[`createInputObjectTypeCode > protobuf-es > 'generates code for an input object with oneof fields' 1`] = `
 "import { InputObjectRef } from "@pothos/core";
 import { OneofParent } from "@testapis/protobuf-es/testapis/oneof/oneof_pb";
-import { builder } from "../../../../builder";
+import { builder } from "../../builder";
 
 export type OneofParentInput$Shape = {
   normalField: OneofParent["normalField"];
@@ -582,7 +582,7 @@ export function OneofParentInput$toProto(
 exports[`createInputObjectTypeCode > protobuf-es > 'generates code for empty input object' 1`] = `
 "import { InputObjectRef } from "@pothos/core";
 import { EmptyMessage } from "@testapis/protobuf-es/testapis/empty_types/empty_pb";
-import { builder } from "../../../../builder";
+import { builder } from "../../builder";
 
 export type EmptyMessageInput$Shape = {};
 
@@ -615,7 +615,7 @@ export function EmptyMessageInput$toProto(
 exports[`createInputObjectTypeCode > ts-proto > 'generates code for a simple input object' 1`] = `
 "import { InputObjectRef } from "@pothos/core";
 import { Primitives } from "@testapis/ts-proto/testapis/primitives/primitives";
-import { builder } from "../../../../builder";
+import { builder } from "../../builder";
 
 export type PrimitivesInput$Shape = {
   requiredDoubleValue: Primitives["requiredDoubleValue"];
@@ -961,7 +961,7 @@ export const PrimitivesInput$Ref: InputObjectRef<PrimitivesInput$Shape> =
 
 exports[`createInputObjectTypeCode > ts-proto > 'generates code for an input object with nested fields' 1`] = `
 "import { InputObjectRef } from "@pothos/core";
-import { builder } from "../../../../builder";
+import { builder } from "../../builder";
 
 export type MessageInput$Shape = {
   requiredPrimitives: PrimitivesInput$Shape;
@@ -1032,7 +1032,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
 exports[`createInputObjectTypeCode > ts-proto > 'generates code for an input object with oneof fields' 1`] = `
 "import { InputObjectRef } from "@pothos/core";
 import { OneofParent } from "@testapis/ts-proto/testapis/oneof/oneof";
-import { builder } from "../../../../builder";
+import { builder } from "../../builder";
 
 export type OneofParentInput$Shape = {
   normalField: OneofParent["normalField"];
@@ -1106,7 +1106,7 @@ export const OneofParentInput$Ref: InputObjectRef<OneofParentInput$Shape> =
 
 exports[`createInputObjectTypeCode > ts-proto > 'generates code for empty input object' 1`] = `
 "import { InputObjectRef } from "@pothos/core";
-import { builder } from "../../../../builder";
+import { builder } from "../../builder";
 
 export type EmptyMessageInput$Shape = {};
 
@@ -1133,7 +1133,7 @@ export const EmptyMessageInput$Ref: InputObjectRef<EmptyMessageInput$Shape> =
 exports[`createInputObjectTypeCode > ts-proto > 'generates code for nested input types' 1`] = `
 "import { InputObjectRef } from "@pothos/core";
 import { ParentMessage } from "@testapis/ts-proto/testapis/nested/nested";
-import { builder } from "../../../../builder";
+import { builder } from "../../builder";
 
 export type ParentMessageInput$Shape = {
   body: ParentMessage["body"];
@@ -1183,7 +1183,7 @@ export const ParentMessageInput$Ref: InputObjectRef<ParentMessageInput$Shape> =
 
 exports[`createInputObjectTypeCode > with partial inputs > 'generates code for partial input types' 1`] = `
 "import { InputObjectRef } from "@pothos/core";
-import { builder } from "../../../../builder";
+import { builder } from "../../builder";
 
 export type MessagePartialInput$Shape = {
   requiredPrimitives?: PrimitivesPartialInput$Shape | null;

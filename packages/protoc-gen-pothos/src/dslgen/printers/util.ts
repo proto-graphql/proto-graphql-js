@@ -4,12 +4,11 @@ import type { DescEnum, DescMessage } from "@bufbuild/protobuf";
 import {
   type EnumType,
   filename,
-  generatedGraphQLTypeImportPath,
   type InputObjectField,
   type InputObjectType,
   type InterfaceType,
   type ObjectField,
-  type ObjectOneofField,
+  ObjectOneofField,
   type ObjectType,
   type OneofUnionType,
   type PrinterOptions,
@@ -41,6 +40,28 @@ export function shapeTypeName(type: InputObjectType): string {
   return `${type.typeName}$Shape`;
 }
 
+type TypeWithFilename =
+  | ObjectType
+  | InputObjectType
+  | EnumType
+  | OneofUnionType
+  | SquashedOneofUnionType
+  | InterfaceType;
+
+function resolveImportOrLocal(
+  field: { parent: TypeWithFilename; type: TypeWithFilename },
+  opts: PothosPrinterOptions,
+  symbolName: string,
+  localPrintable: () => Printable[],
+): Printable[] {
+  const fromFile = filename(field.parent, opts);
+  const toFile = filename(field.type, opts);
+  if (fromFile === toFile) return localPrintable();
+
+  const importPath = `./${toFile.replace(/\.ts$/, "")}`;
+  return code`${createImportSymbol(symbolName, importPath)}`;
+}
+
 export function fieldTypeRefPrintable(
   field:
     | ObjectField<
@@ -50,10 +71,11 @@ export function fieldTypeRefPrintable(
     | ObjectOneofField,
   opts: PothosPrinterOptions,
 ): Printable[] {
-  const importPath = generatedGraphQLTypeImportPath(field, opts);
-  if (importPath == null) return pothosRefPrintable(field.type);
+  if (field instanceof ObjectOneofField) return pothosRefPrintable(field.type);
 
-  return code`${createImportSymbol(pothosRefName(field.type), importPath)}`;
+  return resolveImportOrLocal(field, opts, pothosRefName(field.type), () =>
+    pothosRefPrintable(field.type),
+  );
 }
 
 export function shapeTypePrintable(type: InputObjectType): Printable[] {
@@ -64,10 +86,9 @@ export function fieldTypeShapePrintable(
   field: InputObjectField<InputObjectType>,
   opts: PothosPrinterOptions,
 ): Printable[] {
-  const importPath = generatedGraphQLTypeImportPath(field, opts);
-  if (importPath == null) return shapeTypePrintable(field.type);
-
-  return code`${createImportSymbol(shapeTypeName(field.type), importPath)}`;
+  return resolveImportOrLocal(field, opts, shapeTypeName(field.type), () =>
+    shapeTypePrintable(field.type),
+  );
 }
 
 export function toProtoFuncName(type: InputObjectType): string {
@@ -78,10 +99,12 @@ export function toProtoFuncPrintable(
   field: InputObjectField<InputObjectType>,
   opts: PothosPrinterOptions,
 ): Printable[] {
-  const importPath = generatedGraphQLTypeImportPath(field, opts);
-  if (importPath == null) return code`${toProtoFuncName(field.type)}`;
-
-  return code`${createImportSymbol(toProtoFuncName(field.type), importPath)}`;
+  return resolveImportOrLocal(
+    field,
+    opts,
+    toProtoFuncName(field.type),
+    () => code`${toProtoFuncName(field.type)}`,
+  );
 }
 
 export function pothosRefPrintable(
@@ -97,18 +120,10 @@ export function pothosRefPrintable(
 }
 
 export function pothosBuilderPrintable(
-  type:
-    | ObjectType
-    | InputObjectType
-    | EnumType
-    | OneofUnionType
-    | SquashedOneofUnionType,
-  opts: Pick<PothosPrinterOptions, "pothos" | "filenameSuffix">,
+  opts: Pick<PothosPrinterOptions, "pothos">,
 ): Printable[] {
-  const importPath = opts.pothos.builderPath.startsWith(".")
-    ? path.relative(path.dirname(filename(type, opts)), opts.pothos.builderPath)
-    : opts.pothos.builderPath;
-  return code`${createImportSymbol("builder", importPath)}`;
+  // protoplugin が自動的に相対パスを計算するため、builderPath をそのまま使用
+  return code`${createImportSymbol("builder", opts.pothos.builderPath)}`;
 }
 
 export function protoTypeSymbol(

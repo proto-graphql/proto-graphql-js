@@ -89,22 +89,16 @@ function createBlockStmtCodeForProtobufEs(
   { nullable, list }: { nullable: boolean; list: boolean },
 ): Printable[] {
   let valueExpr: Printable[];
-  switch (true) {
-    case field instanceof ObjectOneofField: {
-      valueExpr = code`${sourceExpr}.${tsFieldName(field.proto, opts).toString()}.value`;
-      break;
-    }
-    case field instanceof ObjectField: {
-      valueExpr = code`${sourceExpr}${list ? "" : "?"}.${tsFieldName(
-        field.type.oneofUnionType.proto,
-        opts,
-      ).toString()}.value`;
-      break;
-    }
-    default: {
-      field satisfies never;
-      throw "unreachable";
-    }
+  if (field instanceof ObjectOneofField) {
+    valueExpr = code`${sourceExpr}.${tsFieldName(field.proto, opts).toString()}.value`;
+  } else if (field instanceof ObjectField) {
+    valueExpr = code`${sourceExpr}${list ? "" : "?"}.${tsFieldName(
+      field.type.oneofUnionType.proto,
+      opts,
+    ).toString()}.value`;
+  } else {
+    field satisfies never;
+    throw new Error("unreachable");
   }
   if (nullable) {
     return code`return ${valueExpr};`;

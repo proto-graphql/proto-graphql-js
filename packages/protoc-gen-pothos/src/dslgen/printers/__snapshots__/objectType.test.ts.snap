@@ -2,7 +2,7 @@
 
 exports[`createObjectTypeCode > protobuf-es > 'generates code for a message with nested fields' 1`] = `
 "import { Message } from "@testapis/protobuf-es/testapis/primitives/primitives_pb";
-import { builder } from "../../../../builder";
+import { builder } from "../../builder";
 
 export const Message$Ref = builder.objectRef<Message>("Message");
 builder.objectType(Message$Ref, {
@@ -75,7 +75,7 @@ builder.objectType(Message$Ref, {
 
 exports[`createObjectTypeCode > protobuf-es > 'generates code for a message with oneofs' 1`] = `
 "import { OneofParent } from "@testapis/protobuf-es/testapis/oneof/oneof_pb";
-import { builder } from "../../../../builder";
+import { builder } from "../../builder";
 
 export const OneofParent$Ref = builder.objectRef<OneofParent>("OneofParent");
 builder.objectType(OneofParent$Ref, {
@@ -126,7 +126,7 @@ builder.objectType(OneofParent$Ref, {
 
 exports[`createObjectTypeCode > protobuf-es > 'generates code for a simple message' 1`] = `
 "import { Primitives } from "@testapis/protobuf-es/testapis/primitives/primitives_pb";
-import { builder } from "../../../../builder";
+import { builder } from "../../builder";
 
 export const Primitives$Ref = builder.objectRef<Primitives>("Primitives");
 builder.objectType(Primitives$Ref, {
@@ -425,7 +425,7 @@ builder.objectType(Primitives$Ref, {
 
 exports[`createObjectTypeCode > ts-proto > 'generates code for a message with nested fields' 1`] = `
 "import { Message } from "@testapis/ts-proto/testapis/primitives/primitives";
-import { builder } from "../../../../builder";
+import { builder } from "../../builder";
 
 export const Message$Ref = builder.objectRef<Message>("Message");
 builder.objectType(Message$Ref, {
@@ -499,7 +499,7 @@ builder.objectType(Message$Ref, {
 
 exports[`createObjectTypeCode > ts-proto > 'generates code for a message with oneofs' 1`] = `
 "import { OneofParent } from "@testapis/ts-proto/testapis/oneof/oneof";
-import { builder } from "../../../../builder";
+import { builder } from "../../builder";
 
 export const OneofParent$Ref = builder.objectRef<OneofParent>("OneofParent");
 builder.objectType(OneofParent$Ref, {
@@ -555,7 +555,7 @@ builder.objectType(OneofParent$Ref, {
 
 exports[`createObjectTypeCode > ts-proto > 'generates code for a simple message' 1`] = `
 "import { Primitives } from "@testapis/ts-proto/testapis/primitives/primitives";
-import { builder } from "../../../../builder";
+import { builder } from "../../builder";
 
 export const Primitives$Ref = builder.objectRef<Primitives>("Primitives");
 builder.objectType(Primitives$Ref, {
@@ -855,7 +855,7 @@ builder.objectType(Primitives$Ref, {
 
 exports[`createObjectTypeCode > ts-proto > 'generates code for empty message' 1`] = `
 "import { EmptyMessage } from "@testapis/ts-proto/testapis/empty_types/empty";
-import { builder } from "../../../../builder";
+import { builder } from "../../builder";
 
 export const EmptyMessage$Ref = builder.objectRef<EmptyMessage>("EmptyMessage");
 builder.objectType(EmptyMessage$Ref, {
@@ -888,7 +888,7 @@ exports[`createObjectTypeCode > ts-proto > 'generates code for nested types' 1`]
   ParentMessage,
   ParentMessage_NestedEnum,
 } from "@testapis/ts-proto/testapis/nested/nested";
-import { builder } from "../../../../builder";
+import { builder } from "../../builder";
 
 export const ParentMessage$Ref = builder.objectRef<ParentMessage>(
   "ParentMessage",
@@ -952,7 +952,7 @@ exports[`createObjectTypeCode > with extensions > 'generates code for message wi
   PrefixedEnum,
   PrefixedMessage,
 } from "@testapis/ts-proto/testapis/extensions/extensions";
-import { builder } from "../../../../builder";
+import { builder } from "../../builder";
 
 export const TestPrefixPrefixedMessage$Ref = builder.objectRef<PrefixedMessage>(
   "TestPrefixPrefixedMessage",

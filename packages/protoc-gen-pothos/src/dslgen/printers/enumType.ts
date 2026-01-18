@@ -62,7 +62,7 @@ export function createEnumTypeCode(
 
   return code`
     export const ${pothosRefPrintable(type)}: ${refTypeExpr} =
-      ${pothosBuilderPrintable(type, opts)}.enumType(${literalOf(
+      ${pothosBuilderPrintable(opts)}.enumType(${literalOf(
         type.typeName,
       )}, ${literalOf(compactForCodegen(typeOpts))});
   `;

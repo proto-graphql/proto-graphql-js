@@ -6,28 +6,6 @@ import {
 import type { Printable } from "./types.js";
 import { isImportSymbol } from "./types.js";
 
-export function printToString(printables: Printable[]): string {
-  const parts: string[] = [];
-
-  function visit(p: Printable) {
-    if (typeof p === "string") {
-      parts.push(p);
-    } else if (isImportSymbol(p)) {
-      parts.push(p.name);
-    } else if (Array.isArray(p)) {
-      for (const item of p) {
-        visit(item);
-      }
-    }
-  }
-
-  for (const p of printables) {
-    visit(p);
-  }
-
-  return parts.join("");
-}
-
 export function joinCode(
   codes: Printable[][],
   separator?: string,
@@ -68,7 +46,6 @@ export function compactForCodegen(v: unknown): unknown {
     }
     return v.map(compactForCodegen);
   }
-  if ("toCodeString" in v) return v;
   return compactObjForCodegen(v as Record<string, unknown>);
 }
 
