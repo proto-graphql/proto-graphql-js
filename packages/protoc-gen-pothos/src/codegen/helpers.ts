@@ -1,5 +1,43 @@
-import { isPrintableArray } from "./code-builder.js";
-import type { Printable } from "./types.js";
+import {
+  isPrintableArray,
+  PRINTABLE_ARRAY_MARKER,
+  type PrintableArray,
+} from "./code-builder.js";
+import type { ImportSymbol, Printable } from "./types.js";
+
+function markAsPrintableArray(arr: Printable[]): PrintableArray {
+  Object.defineProperty(arr, PRINTABLE_ARRAY_MARKER, {
+    value: true,
+    enumerable: false,
+    writable: false,
+    configurable: false,
+  });
+  return arr as PrintableArray;
+}
+
+function isImportSymbol(value: unknown): value is ImportSymbol {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    "kind" in value &&
+    (value as Record<string, unknown>).kind === "es_symbol"
+  );
+}
+
+export function printToString(printables: Printable[]): string {
+  const bodyParts: string[] = [];
+
+  for (const part of printables) {
+    if (typeof part === "string") {
+      bodyParts.push(part);
+    } else if (isImportSymbol(part)) {
+      // Just output the symbol name; import statements are handled by ts-poet
+      bodyParts.push(part.name);
+    }
+  }
+
+  return bodyParts.join("");
+}
 
 export function joinCode(
   codes: Printable[][],
@@ -28,25 +66,55 @@ function escapeString(str: string): string {
     .replace(/\t/g, "\\t");
 }
 
-export function literalOf(value: unknown): Printable[] {
+/**
+ * Remove nullish values recursively, preserving PrintableArrays.
+ * This is a variant of compact() from codegen-core that doesn't lose the PrintableArray marker.
+ */
+export function compactForCodegen(v: unknown): unknown {
+  if (typeof v !== "object") return v;
+  if (v == null) return v;
+  if (Array.isArray(v)) {
+    if (isPrintableArray(v)) {
+      return v;
+    }
+    return v.map(compactForCodegen);
+  }
+  if ("toCodeString" in v) return v;
+  return compactObjForCodegen(v as Record<string, unknown>);
+}
+
+function compactObjForCodegen(
+  obj: Record<string, unknown>,
+): Record<string, unknown> {
+  const result: Record<string, unknown> = {};
+  for (const key of Object.keys(obj)) {
+    const v = obj[key];
+    if (v != null) {
+      result[key] = compactForCodegen(v);
+    }
+  }
+  return result;
+}
+
+export function literalOf(value: unknown): PrintableArray {
   if (value === null) {
-    return ["null"];
+    return markAsPrintableArray(["null"]);
   }
 
   if (value === undefined) {
-    return ["undefined"];
+    return markAsPrintableArray(["undefined"]);
   }
 
   if (typeof value === "string") {
-    return [`"${escapeString(value)}"`];
+    return markAsPrintableArray([`"${escapeString(value)}"`]);
   }
 
   if (typeof value === "number") {
-    return [String(value)];
+    return markAsPrintableArray([String(value)]);
   }
 
   if (typeof value === "boolean") {
-    return [String(value)];
+    return markAsPrintableArray([String(value)]);
   }
 
   if (Array.isArray(value)) {
@@ -55,7 +123,7 @@ export function literalOf(value: unknown): Printable[] {
     }
 
     if (value.length === 0) {
-      return ["[]"];
+      return markAsPrintableArray(["[]"]);
     }
 
     const elements: Printable[] = ["["];
@@ -66,15 +134,20 @@ export function literalOf(value: unknown): Printable[] {
       elements.push(...literalOf(value[i]));
     }
     elements.push("]");
-    return elements;
+    return markAsPrintableArray(elements);
   }
 
   if (typeof value === "object") {
+    // ImportSymbol should be returned as-is (wrapped in PrintableArray)
+    if (isImportSymbol(value)) {
+      return markAsPrintableArray([value]);
+    }
+
     const obj = value as Record<string, unknown>;
     const keys = Object.keys(obj);
 
     if (keys.length === 0) {
-      return ["{}"];
+      return markAsPrintableArray(["{}"]);
     }
 
     const elements: Printable[] = ["{ "];
@@ -83,12 +156,13 @@ export function literalOf(value: unknown): Printable[] {
         elements.push(", ");
       }
       const key = keys[i];
-      elements.push(`${key}: `);
+      // Always quote keys to match ts-poet literalOf behavior
+      elements.push(`"${escapeString(key)}": `);
       elements.push(...literalOf(obj[key]));
     }
     elements.push(" }");
-    return elements;
+    return markAsPrintableArray(elements);
   }
 
-  return [String(value)];
+  return markAsPrintableArray([String(value)]);
 }

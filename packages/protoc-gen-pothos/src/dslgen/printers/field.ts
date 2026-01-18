@@ -1,7 +1,5 @@
 import type { createRegistry, DescField } from "@bufbuild/protobuf";
 import {
-  compact,
-  createGetFieldValueCode,
   EnumType,
   InputObjectField,
   ObjectField,
@@ -12,12 +10,26 @@ import {
   SquashedOneofUnionType,
   tsFieldName,
 } from "@proto-graphql/codegen-core";
-import { type Code, code, literalOf } from "ts-poet";
 
+import {
+  code,
+  compactForCodegen,
+  literalOf,
+  type Printable,
+} from "../../codegen/index.js";
 import { createEnumResolverCode } from "./fieldResolver/enumFieldResolver.js";
 import { createNonNullResolverCode } from "./fieldResolver/nonNullResolver.js";
 import { createOneofUnionResolverCode } from "./fieldResolver/oneofUnionResolver.js";
-import { fieldTypeRef, type PothosPrinterOptions } from "./util.js";
+import { fieldTypeRefPrintable, type PothosPrinterOptions } from "./util.js";
+
+function createGetFieldValueCodePrintable(
+  sourceExpr: Printable[],
+  proto: DescField,
+  opts: PothosPrinterOptions,
+): Printable[] {
+  const source = sourceExpr.filter((p) => typeof p === "string").join("");
+  return code`${source}.${tsFieldName(proto, opts)}`;
+}
 
 /**
  * @example
@@ -43,20 +55,24 @@ export function createFieldRefCode(
   field: ObjectField<any> | ObjectOneofField | InputObjectField<any>,
   registry: ReturnType<typeof createRegistry>,
   opts: PothosPrinterOptions,
-): Code {
+): Printable[] {
   const isInput = field instanceof InputObjectField;
   const baseType =
     field.type instanceof ScalarType
       ? literalOf(field.type.typeName)
-      : fieldTypeRef(field, opts);
+      : fieldTypeRefPrintable(field, opts);
 
   const sourceExpr = code`source`;
-  let resolverCode: Code | undefined;
+  let resolverCode: Printable[] | undefined;
   if (!isInput) {
     if (field instanceof ObjectOneofField) {
       resolverCode = createOneofUnionResolverCode(sourceExpr, field, opts);
     } else {
-      const valueExpr = createGetFieldValueCode(sourceExpr, field.proto, opts);
+      const valueExpr = createGetFieldValueCodePrintable(
+        sourceExpr,
+        field.proto,
+        opts,
+      );
       const nullableInProto =
         field.type instanceof ObjectType ||
         (field.type instanceof ScalarType &&
@@ -100,10 +116,10 @@ export function createFieldRefCode(
 
   const shouldUseFieldFunc = isInput || resolverCode != null;
   return shouldUseFieldFunc
-    ? code`t.field(${literalOf(compact(fieldOpts))})`
+    ? code`t.field(${literalOf(compactForCodegen(fieldOpts))})`
     : code`t.expose(${literalOf(
         tsFieldName(field.proto as DescField, opts),
-      )}, ${literalOf(compact(fieldOpts))})`;
+      )}, ${literalOf(compactForCodegen(fieldOpts))})`;
 }
 
 /**
@@ -119,7 +135,7 @@ export function createFieldRefCode(
  * })
  * ```
  */
-export function createNoopFieldRefCode(opts: { input: boolean }): Code {
+export function createNoopFieldRefCode(opts: { input: boolean }): Printable[] {
   return code`
     t.field({
       type: "Boolean",

@@ -11,6 +11,7 @@ import {
   type TestapisPackage,
 } from "@proto-graphql/testapis-proto";
 import { describe, expect, test } from "vitest";
+import { printableToCode } from "./index.js";
 import { createOneofUnionTypeCode } from "./oneofUnionType.js";
 import type { PothosPrinterOptions } from "./util.js";
 
@@ -47,13 +48,27 @@ function generateOneofUnionTypeCode(
 
   const oneofType = new OneofUnionType(descOneof, typeOptions);
 
-  const code = createOneofUnionTypeCode(
-    oneofType,
-    registry,
-    options,
-  ).toString();
+  const printable = createOneofUnionTypeCode(oneofType, registry, options);
 
-  return code.toString();
+  return printableToCode(printable).toString({
+    dprintOptions: {
+      lineWidth: 80,
+      indentWidth: 2,
+      useTabs: false,
+      semiColons: "always",
+      quoteStyle: "alwaysDouble",
+      quoteProps: "asNeeded",
+      newLineKind: "lf",
+      useBraces: "whenNotSingleLine",
+      bracePosition: "sameLineUnlessHanging",
+      singleBodyPosition: "maintain",
+      nextControlFlowPosition: "sameLine",
+      trailingCommas: "onlyMultiLine",
+      operatorPosition: "nextLine",
+      preferHanging: false,
+      "arrowFunction.useParentheses": "force",
+    },
+  });
 }
 
 function generateSquashedOneofUnionTypeCode(
@@ -81,13 +96,27 @@ function generateSquashedOneofUnionTypeCode(
 
   const oneofType = new SquashedOneofUnionType(descMsg, typeOptions);
 
-  const code = createOneofUnionTypeCode(
-    oneofType,
-    registry,
-    options,
-  ).toString();
+  const printable = createOneofUnionTypeCode(oneofType, registry, options);
 
-  return code.toString();
+  return printableToCode(printable).toString({
+    dprintOptions: {
+      lineWidth: 80,
+      indentWidth: 2,
+      useTabs: false,
+      semiColons: "always",
+      quoteStyle: "alwaysDouble",
+      quoteProps: "asNeeded",
+      newLineKind: "lf",
+      useBraces: "whenNotSingleLine",
+      bracePosition: "sameLineUnlessHanging",
+      singleBodyPosition: "maintain",
+      nextControlFlowPosition: "sameLine",
+      trailingCommas: "onlyMultiLine",
+      operatorPosition: "nextLine",
+      preferHanging: false,
+      "arrowFunction.useParentheses": "force",
+    },
+  });
 }
 
 type OneofTestCase = {

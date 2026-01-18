@@ -1,6 +1,6 @@
-import { type Code, code } from "ts-poet";
+import { code, type Printable } from "../../../codegen/index.js";
 
-export function createNonNullResolverCode(valueExpr: Code): Code {
+export function createNonNullResolverCode(valueExpr: Printable[]): Printable[] {
   return code`
     return ${valueExpr}!;
   `;

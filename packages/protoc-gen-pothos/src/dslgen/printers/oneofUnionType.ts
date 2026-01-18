@@ -1,17 +1,21 @@
 import type { Registry } from "@bufbuild/protobuf";
 import {
-  compact,
   type OneofUnionType,
   protobufGraphQLExtensions,
   type SquashedOneofUnionType,
 } from "@proto-graphql/codegen-core";
-import { type Code, code, literalOf } from "ts-poet";
 
 import {
-  fieldTypeRef,
+  code,
+  compactForCodegen,
+  literalOf,
+  type Printable,
+} from "../../codegen/index.js";
+import {
+  fieldTypeRefPrintable,
   type PothosPrinterOptions,
-  pothosBuilder,
-  pothosRef,
+  pothosBuilderPrintable,
+  pothosRefPrintable,
 } from "./util.js";
 
 /**
@@ -27,16 +31,16 @@ export function createOneofUnionTypeCode(
   type: OneofUnionType | SquashedOneofUnionType,
   registry: Registry,
   opts: PothosPrinterOptions,
-): Code {
+): Printable[] {
   const typeOpts = {
-    types: type.fields.map((f) => fieldTypeRef(f, opts)),
+    types: type.fields.map((f) => fieldTypeRefPrintable(f, opts)),
     description: type.description,
     extensions: protobufGraphQLExtensions(type, registry),
   };
   return code`
-    export const ${pothosRef(type)} =
-      ${pothosBuilder(type, opts)}.unionType(${literalOf(
+    export const ${pothosRefPrintable(type)} =
+      ${pothosBuilderPrintable(type, opts)}.unionType(${literalOf(
         type.typeName,
-      )}, ${literalOf(compact(typeOpts))});
+      )}, ${literalOf(compactForCodegen(typeOpts))});
   `;
 }

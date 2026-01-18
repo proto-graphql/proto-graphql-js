@@ -182,17 +182,17 @@ describe("literalOf", () => {
 
     test("returns object with single property", () => {
       const result = literalOf({ name: "foo" });
-      expect(printableToString(result)).toBe('{ name: "foo" }');
+      expect(printableToString(result)).toBe('{ "name": "foo" }');
     });
 
     test("returns object with multiple properties", () => {
       const result = literalOf({ name: "foo", value: 42 });
-      expect(printableToString(result)).toBe('{ name: "foo", value: 42 }');
+      expect(printableToString(result)).toBe('{ "name": "foo", "value": 42 }');
     });
 
     test("returns object with boolean property", () => {
       const result = literalOf({ enabled: true });
-      expect(printableToString(result)).toBe("{ enabled: true }");
+      expect(printableToString(result)).toBe('{ "enabled": true }');
     });
   });
 
@@ -203,7 +203,9 @@ describe("literalOf", () => {
           inner: "value",
         },
       });
-      expect(printableToString(result)).toBe('{ outer: { inner: "value" } }');
+      expect(printableToString(result)).toBe(
+        '{ "outer": { "inner": "value" } }',
+      );
     });
 
     test("returns deeply nested object literal", () => {
@@ -215,7 +217,7 @@ describe("literalOf", () => {
         },
       });
       expect(printableToString(result)).toBe(
-        '{ level1: { level2: { level3: "deep" } } }',
+        '{ "level1": { "level2": { "level3": "deep" } } }',
       );
     });
 
@@ -223,7 +225,7 @@ describe("literalOf", () => {
       const result = literalOf({
         items: [1, 2, 3],
       });
-      expect(printableToString(result)).toBe("{ items: [1, 2, 3] }");
+      expect(printableToString(result)).toBe('{ "items": [1, 2, 3] }');
     });
   });
 
@@ -234,7 +236,7 @@ describe("literalOf", () => {
       const result = literalOf({
         type: printableValue,
       });
-      expect(printableToString(result)).toBe("{ type: MyType }");
+      expect(printableToString(result)).toBe('{ "type": MyType }');
     });
 
     test("embeds nested Printable[] in object", () => {
@@ -246,7 +248,7 @@ describe("literalOf", () => {
         },
       });
       expect(printableToString(result)).toBe(
-        "{ config: { handler: Handler.create() } }",
+        '{ "config": { "handler": Handler.create() } }',
       );
     });
 
@@ -259,7 +261,7 @@ describe("literalOf", () => {
         count: 5,
       });
       expect(printableToString(result)).toBe(
-        '{ name: "test", type: Type, count: 5 }',
+        '{ "name": "test", "type": Type, "count": 5 }',
       );
     });
 
@@ -269,7 +271,7 @@ describe("literalOf", () => {
       const result = literalOf({
         types: [code`${sym1}`, code`${sym2}`],
       });
-      expect(printableToString(result)).toBe("{ types: [TypeA, TypeB] }");
+      expect(printableToString(result)).toBe('{ "types": [TypeA, TypeB] }');
     });
   });
 });

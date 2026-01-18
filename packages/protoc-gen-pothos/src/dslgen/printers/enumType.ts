@@ -1,13 +1,23 @@
 import type { Registry } from "@bufbuild/protobuf";
 import {
-  compact,
   type EnumType,
   protobufGraphQLExtensions,
-  protoType,
 } from "@proto-graphql/codegen-core";
-import { type Code, code, imp, joinCode, literalOf } from "ts-poet";
 
-import { type PothosPrinterOptions, pothosBuilder, pothosRef } from "./util.js";
+import {
+  code,
+  compactForCodegen,
+  createImportSymbol,
+  joinCode,
+  literalOf,
+  type Printable,
+} from "../../codegen/index.js";
+import {
+  type PothosPrinterOptions,
+  pothosBuilderPrintable,
+  pothosRefPrintable,
+  protoTypeSymbol,
+} from "./util.js";
 
 /**
  * @example
@@ -24,7 +34,7 @@ export function createEnumTypeCode(
   type: EnumType,
   registry: Registry,
   opts: PothosPrinterOptions,
-): Code {
+): Printable[] {
   const typeOpts = {
     description: type.description,
     values: code`{${joinCode(
@@ -33,7 +43,7 @@ export function createEnumTypeCode(
         .map(
           (ev) =>
             code`${ev.name}: ${literalOf(
-              compact({
+              compactForCodegen({
                 description: ev.description,
                 deprecationReason: ev.deprecationReason,
                 value: ev.number,
@@ -45,16 +55,15 @@ export function createEnumTypeCode(
     extensions: protobufGraphQLExtensions(type, registry),
   };
 
-  const protoTypeExpr = protoType(type.proto, opts);
+  const protoTypeExpr = protoTypeSymbol(type.proto, opts);
+  const enumRefSymbol = createImportSymbol("EnumRef", "@pothos/core");
   // EnumRef<Hello, Hello>
-  const refTypeExpr = code`${imp(
-    "EnumRef@@pothos/core",
-  )}<${protoTypeExpr}, ${protoTypeExpr}>`;
+  const refTypeExpr = code`${enumRefSymbol}<${protoTypeExpr}, ${protoTypeExpr}>`;
 
   return code`
-    export const ${pothosRef(type)}: ${refTypeExpr} =
-      ${pothosBuilder(type, opts)}.enumType(${literalOf(
+    export const ${pothosRefPrintable(type)}: ${refTypeExpr} =
+      ${pothosBuilderPrintable(type, opts)}.enumType(${literalOf(
         type.typeName,
-      )}, ${literalOf(compact(typeOpts))});
+      )}, ${literalOf(compactForCodegen(typeOpts))});
   `;
 }
