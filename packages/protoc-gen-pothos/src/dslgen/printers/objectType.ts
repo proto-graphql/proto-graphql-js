@@ -1,16 +1,25 @@
 import type { DescField, Registry } from "@bufbuild/protobuf";
 import {
-  compact,
   InterfaceType,
   type ObjectType,
   protobufGraphQLExtensions,
-  protoType,
   tsFieldName,
 } from "@proto-graphql/codegen-core";
-import { type Code, code, joinCode, literalOf } from "ts-poet";
 
+import {
+  code,
+  compactForCodegen,
+  joinCode,
+  literalOf,
+  type Printable,
+} from "../../codegen/index.js";
 import { createFieldRefCode, createNoopFieldRefCode } from "./field.js";
-import { type PothosPrinterOptions, pothosBuilder, pothosRef } from "./util.js";
+import {
+  type PothosPrinterOptions,
+  pothosBuilderPrintable,
+  pothosRefPrintable,
+  protoTypeSymbol,
+} from "./util.js";
 
 /**
  * @example
@@ -26,7 +35,7 @@ export function createObjectTypeCode(
   type: ObjectType,
   registry: Registry,
   opts: PothosPrinterOptions,
-): Code {
+): Printable[] {
   const isInterface = type instanceof InterfaceType;
   const typeOpts = {
     name: type.typeName,
@@ -45,44 +54,43 @@ export function createObjectTypeCode(
       : createIsTypeOfFuncCode(type, registry, opts),
     extensions: protobufGraphQLExtensions(type, registry),
   };
-  const buildRefFunc = code`${pothosBuilder(type, opts)}.${
+  const buildRefFunc = code`${pothosBuilderPrintable(type, opts)}.${
     isInterface ? "interface" : "object"
   }Ref`;
-  const buildTypeFunc = code`${pothosBuilder(type, opts)}.${
+  const buildTypeFunc = code`${pothosBuilderPrintable(type, opts)}.${
     isInterface ? "interface" : "object"
   }Type`;
   const refFuncTypeArg = isInterface
     ? code`
         Pick<
-          ${protoType(type.proto, opts)},
+          ${protoTypeSymbol(type.proto, opts)},
           ${joinCode(
-            type.fields.map(
-              (f) =>
-                code`${literalOf(tsFieldName(f.proto as DescField, opts))}`,
+            type.fields.map((f) =>
+              literalOf(tsFieldName(f.proto as DescField, opts)),
             ),
-            { on: "|" },
+            "|",
           )}
         >`
-    : protoType(type.proto, opts);
+    : code`${protoTypeSymbol(type.proto, opts)}`;
 
   return code`
-    export const ${pothosRef(
+    export const ${pothosRefPrintable(
       type,
     )} = ${buildRefFunc}<${refFuncTypeArg}>(${literalOf(type.typeName)});
-    ${buildTypeFunc}(${pothosRef(type)}, ${literalOf(compact(typeOpts))});
+    ${buildTypeFunc}(${pothosRefPrintable(type)}, ${literalOf(compactForCodegen(typeOpts))});
   `;
 }
 
 function createIsTypeOfFuncCode(
   type: ObjectType,
-  registry: Registry,
+  _registry: Registry,
   opts: PothosPrinterOptions,
-): Code {
+): Printable[] {
   switch (opts.protobuf) {
     case "ts-proto": {
       return code`
         (source) => {
-          return (source as ${protoType(type.proto, opts)} | { $type: string & {} }).$type
+          return (source as ${protoTypeSymbol(type.proto, opts)} | { $type: string & {} }).$type
             === ${literalOf(type.proto.typeName)};
         }
       `;
@@ -90,7 +98,7 @@ function createIsTypeOfFuncCode(
     case "protobuf-es": {
       return code`
         (source) => {
-          return source instanceof ${protoType(type.proto, opts)}
+          return source instanceof ${protoTypeSymbol(type.proto, opts)}
         }
       `;
     }

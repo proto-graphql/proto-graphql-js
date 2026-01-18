@@ -1,15 +1,12 @@
 import * as path from "node:path";
 
 import {
-  type DescEnum,
   type DescField,
   type DescFile,
-  type DescMessage,
   type DescOneof,
   ScalarType as ProtoScalarType,
 } from "@bufbuild/protobuf";
 import { camelCase } from "change-case";
-import { type Code, code, imp } from "ts-poet";
 
 import {
   type DescMessageField,
@@ -81,7 +78,6 @@ export function compact(v: any): any {
   if (typeof v !== "object") return v;
   if (Array.isArray(v)) return v.map(compact);
   if (v == null) return v;
-  if ("toCodeString" in v) return v; // ignore nodes of ts-poet
   return compactObj(v);
 }
 
@@ -94,57 +90,6 @@ function compactObj<In extends Out, Out extends Record<string, unknown>>(
   }, {} as Out);
 }
 
-export function protoType(
-  origProto: DescMessage | DescEnum | DescField,
-  opts: PrinterOptions,
-): Code {
-  let origProtoType: DescMessage | DescEnum | undefined;
-  switch (origProto.kind) {
-    case "message":
-    case "enum": {
-      origProtoType = origProto;
-      break;
-    }
-    case "field": {
-      if (isMessageField(origProto)) {
-        origProtoType = origProto.message;
-      } else if (isEnumField(origProto)) {
-        origProtoType = origProto.enum;
-      } else if (isScalarField(origProto)) {
-        throw new Error("cannot import protobuf primitive types");
-      } else if (isMapField(origProto)) {
-        throw new Error("cannot import protobuf map types");
-      } else {
-        origProto satisfies never;
-        throw "unreachable";
-      }
-      break;
-    }
-    default: {
-      origProto satisfies never;
-      throw "unreachable";
-    }
-  }
-  if (origProtoType === undefined) {
-    throw "unreachable";
-  }
-  let proto = origProtoType;
-  const chunks = [proto.name];
-  while (proto.parent != null) {
-    proto = proto.parent;
-    chunks.unshift(proto.name);
-  }
-  return code`${imp(`${chunks.join("_")}@${protoImportPath(proto, opts)}`)}`;
-}
-
-export function createGetFieldValueCode(
-  parentExpr: Code,
-  proto: DescField,
-  opts: PrinterOptions,
-): Code {
-  return code`${parentExpr}.${tsFieldName(proto, opts)}`;
-}
-
 export function tsFieldName(
   desc: DescField | DescOneof,
   _opts: PrinterOptions,
@@ -153,15 +98,6 @@ export function tsFieldName(
     return camelCase(desc.name);
   }
   return desc.proto.jsonName || camelCase(desc.name);
-}
-
-export function createSetFieldValueCode(
-  parentExpr: Code,
-  valueExpr: Code,
-  proto: DescField,
-  opts: PrinterOptions,
-): Code {
-  return code`${parentExpr}.${tsFieldName(proto, opts)} = ${valueExpr}`;
 }
 
 const longScalarPrimitiveTypes: ReadonlySet<ProtoScalarType> = new Set([
@@ -197,32 +133,5 @@ export function isProtobufWellKnownTypeField(
   return (
     isMessageField(proto) &&
     proto.message.file.name.startsWith("google/protobuf/")
-  );
-}
-
-function protoImportPath(
-  t: DescMessage | DescEnum,
-  o: Pick<PrinterOptions, "protobuf" | "importPrefix">,
-) {
-  let importPath: string;
-  switch (o.protobuf) {
-    case "ts-proto": {
-      importPath = t.file.name;
-      break;
-    }
-    case "protobuf-es": {
-      const { dir, name } = path.parse(t.file.name);
-      importPath = `${dir}/${name}_pb`;
-      break;
-    }
-    /* istanbul ignore next */
-    default: {
-      o.protobuf satisfies never;
-      throw new Error(`unexpected protobuf option: ${o.protobuf}`);
-    }
-  }
-  return `${o.importPrefix ? `${o.importPrefix}/` : "./"}${importPath}`.replace(
-    /(?<!:)\/\//,
-    "/",
   );
 }

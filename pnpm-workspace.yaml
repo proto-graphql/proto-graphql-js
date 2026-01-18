@@ -9,6 +9,7 @@ catalog:
   "@bufbuild/protoc-gen-es": "2.10.2"
   case-anything: "^2.1.13"
   change-case: "^4.1.2"
+  dprint-node: "^1.0.8"
   ts-poet: "^6.3.0"
 
 catalogs:

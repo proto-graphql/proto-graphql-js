@@ -6,15 +6,15 @@ import {
   OneofUnionType,
   SquashedOneofUnionType,
 } from "@proto-graphql/codegen-core";
-import type { Code } from "ts-poet";
 
+import type { Printable } from "../../codegen/index.js";
 import { createEnumTypeCode } from "./enumType.js";
 import { createInputObjectTypeCode } from "./inputObjectType.js";
 import { createObjectTypeCode } from "./objectType.js";
 import { createOneofUnionTypeCode } from "./oneofUnionType.js";
 import type { PothosPrinterOptions } from "./util.js";
 
-export function createTypeDslCodes(
+export function createTypeDslPrintables(
   types: (
     | ObjectType
     | InputObjectType
@@ -24,13 +24,13 @@ export function createTypeDslCodes(
   )[],
   registry: ReturnType<typeof createRegistry>,
   opts: PothosPrinterOptions,
-): Code[] {
+): Printable[][] {
   return types.flatMap((type) => {
     if (type instanceof ObjectType) {
-      return createObjectTypeCode(type, registry, opts);
+      return [createObjectTypeCode(type, registry, opts)];
     }
     if (type instanceof InputObjectType) {
-      return createInputObjectTypeCode(type, registry, opts);
+      return [createInputObjectTypeCode(type, registry, opts)];
     }
     if (type instanceof EnumType) {
       return [createEnumTypeCode(type, registry, opts)];

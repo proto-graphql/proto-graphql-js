@@ -5,7 +5,8 @@ import {
   type SquashedOneofUnionType,
   tsFieldName,
 } from "@proto-graphql/codegen-core";
-import { type Code, code, joinCode } from "ts-poet";
+
+import { code, joinCode, type Printable } from "../../../codegen/index.js";
 
 /**
  * @example nullable
@@ -18,14 +19,14 @@ import { type Code, code, joinCode } from "ts-poet";
  * ```
  */
 export function createOneofUnionResolverCode(
-  sourceExpr: Code,
+  sourceExpr: Printable[],
   field: ObjectOneofField | ObjectField<SquashedOneofUnionType>,
   opts: PrinterOptions,
-): Code {
+): Printable[] {
   const createBlockStmtCode = (
-    sourceExpr: Code,
+    sourceExpr: Printable[],
     { nullable, list }: { nullable: boolean; list: boolean },
-  ): Code => {
+  ): Printable[] => {
     switch (opts.protobuf) {
       case "ts-proto": {
         return createBlockStmtCodeForTsProto(sourceExpr, field, opts, {
@@ -56,22 +57,20 @@ export function createOneofUnionResolverCode(
 }
 
 function createBlockStmtCodeForTsProto(
-  sourceExpr: Code,
+  sourceExpr: Printable[],
   field: ObjectOneofField | ObjectField<SquashedOneofUnionType>,
   opts: PrinterOptions,
   { nullable }: { nullable: boolean },
-): Code {
-  const createFieldExpr = (memberField: ObjectField<any>) => {
+): Printable[] {
+  const createFieldExpr = (memberField: ObjectField<any>): Printable[] => {
     if (field instanceof ObjectOneofField) {
-      return code`${sourceExpr}.${tsFieldName(memberField.proto, opts)}`;
+      return code`${sourceExpr}.${tsFieldName(memberField.proto, opts).toString()}`;
     }
-    return code`${sourceExpr}?.${tsFieldName(memberField.proto, opts)}`;
+    return code`${sourceExpr}?.${tsFieldName(memberField.proto, opts).toString()}`;
   };
 
   return code`
-    const value = ${joinCode(field.type.fields.map(createFieldExpr), {
-      on: "??",
-    })};
+    const value = ${joinCode(field.type.fields.map(createFieldExpr), " ?? ")};
     if (value == null) {
       ${
         nullable
@@ -84,22 +83,22 @@ function createBlockStmtCodeForTsProto(
 }
 
 function createBlockStmtCodeForProtobufEs(
-  sourceExpr: Code,
+  sourceExpr: Printable[],
   field: ObjectOneofField | ObjectField<SquashedOneofUnionType>,
   opts: PrinterOptions,
   { nullable, list }: { nullable: boolean; list: boolean },
-): Code {
-  let valueExpr: Code;
+): Printable[] {
+  let valueExpr: Printable[];
   switch (true) {
     case field instanceof ObjectOneofField: {
-      valueExpr = code`${sourceExpr}.${tsFieldName(field.proto, opts)}.value`;
+      valueExpr = code`${sourceExpr}.${tsFieldName(field.proto, opts).toString()}.value`;
       break;
     }
     case field instanceof ObjectField: {
       valueExpr = code`${sourceExpr}${list ? "" : "?"}.${tsFieldName(
         field.type.oneofUnionType.proto,
         opts,
-      )}.value`;
+      ).toString()}.value`;
       break;
     }
     default: {

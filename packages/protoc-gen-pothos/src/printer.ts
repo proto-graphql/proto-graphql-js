@@ -4,12 +4,12 @@ import {
   collectTypesFromFile,
   createRegistryFromSchema,
   filenameFromProtoFile,
-  printCodes,
 } from "@proto-graphql/codegen-core";
 import type { Options } from "@proto-graphql/protoc-plugin-helpers";
-import type { Code } from "ts-poet";
 
-import { createTypeDslCodes } from "./dslgen/index.js";
+import type { Printable } from "./codegen/index.js";
+import { stringifyPrintables } from "./codegen/index.js";
+import { createTypeDslPrintables } from "./dslgen/index.js";
 import type { PothosPrinterOptions } from "./dslgen/printers/util.js";
 
 const allowedProtobufs = ["ts-proto", "protobuf-es"];
@@ -28,18 +28,18 @@ export function generateFiles(
   const types = collectTypesFromFile(file, opts.type, schema.allFiles);
 
   const f = schema.generateFile(filenameFromProtoFile(file, opts.printer));
-  const code = printCodes(
-    createCodes(types, registry, opts.printer),
-    "protoc-gen-pothos",
-    file,
-  );
+  const printables = createPrintables(types, registry, opts.printer);
+  const code = stringifyPrintables(printables.flat(), {
+    programName: "protoc-gen-pothos",
+    fileName: `${file.name}.proto`,
+  });
   f.print(code.trimEnd());
 }
 
-function createCodes(
+function createPrintables(
   types: ReturnType<typeof collectTypesFromFile>,
   registry: Registry,
   opts: PothosPrinterOptions,
-): Code[] {
-  return [...createTypeDslCodes(types, registry, opts)];
+): Printable[][] {
+  return [...createTypeDslPrintables(types, registry, opts)];
 }

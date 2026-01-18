@@ -10,6 +10,7 @@ import {
   type TestapisPackage,
 } from "@proto-graphql/testapis-proto";
 import { describe, expect, test } from "vitest";
+import { stringifyWithImports } from "../../codegen/index.js";
 import { createInputObjectTypeCode } from "./inputObjectType.js";
 import type { PothosPrinterOptions } from "./util.js";
 
@@ -39,13 +40,13 @@ function generateInputObjectTypeCode(
 
   const inputType = new InputObjectType(descMsg, typeOptions);
 
-  const code = createInputObjectTypeCode(
+  const printable = createInputObjectTypeCode(
     partialInputs ? inputType.toPartialInput() : inputType,
     registry,
     options,
   );
 
-  return code.toString();
+  return stringifyWithImports(printable);
 }
 
 type TestCase = {
