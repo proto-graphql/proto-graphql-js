@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`createObjectTypeCode > protobuf-es > 'generates code for a message with nes…' 1`] = `
+exports[`createObjectTypeCode > protobuf-es > 'generates code for a message with nested fields' 1`] = `
 "export const Message$Ref = builder.objectRef<Message>("Message");
 builder.objectType(Message$Ref, {
   name: "Message",
@@ -70,7 +70,7 @@ builder.objectType(Message$Ref, {
 "
 `;
 
-exports[`createObjectTypeCode > protobuf-es > 'generates code for a message with one…' 1`] = `
+exports[`createObjectTypeCode > protobuf-es > 'generates code for a message with oneofs' 1`] = `
 "export const OneofParent$Ref = builder.objectRef<OneofParent>("OneofParent");
 builder.objectType(OneofParent$Ref, {
   name: "OneofParent",
@@ -414,7 +414,7 @@ builder.objectType(Primitives$Ref, {
 "
 `;
 
-exports[`createObjectTypeCode > ts-proto > 'generates code for a message with nes…' 1`] = `
+exports[`createObjectTypeCode > ts-proto > 'generates code for a message with nested fields' 1`] = `
 "export const Message$Ref = builder.objectRef<Message>("Message");
 builder.objectType(Message$Ref, {
   name: "Message",
@@ -485,7 +485,7 @@ builder.objectType(Message$Ref, {
 "
 `;
 
-exports[`createObjectTypeCode > ts-proto > 'generates code for a message with one…' 1`] = `
+exports[`createObjectTypeCode > ts-proto > 'generates code for a message with oneofs' 1`] = `
 "export const OneofParent$Ref = builder.objectRef<OneofParent>("OneofParent");
 builder.objectType(OneofParent$Ref, {
   name: "OneofParent",
@@ -919,7 +919,7 @@ builder.objectType(ParentMessage$Ref, {
 "
 `;
 
-exports[`createObjectTypeCode > with extensions > 'generates code for message with field…' 1`] = `
+exports[`createObjectTypeCode > with extensions > 'generates code for message with field extensions' 1`] = `
 "export const TestPrefixPrefixedMessage$Ref = builder.objectRef<PrefixedMessage>(
   "TestPrefixPrefixedMessage",
 );
