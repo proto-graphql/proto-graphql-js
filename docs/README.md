@@ -13,6 +13,7 @@ Generate GraphQL schema definitions from Protocol Buffer definitions.
 - [Overview](./protoc-gen-pothos/README.md) - What the plugin generates
 - [Configuration](./protoc-gen-pothos/configuration.md) - Complete options reference
 - [Buf Setup](./protoc-gen-pothos/buf-setup.md) - Configuration with Buf
+- [Generated Code Reference](./protoc-gen-pothos/generated-code-reference.md) - Detailed generated code examples
 
 ### Type Mapping Rules
 
@@ -37,6 +38,7 @@ Generate GraphQL schema definitions from Protocol Buffer definitions.
 | Control field nullability | [Fields](./type-mapping/fields.md) |
 | Create union types | [Oneofs](./type-mapping/oneofs.md) |
 | All proto annotations | [Proto Annotations](./proto-annotations/reference.md) |
+| Understand generated code | [Generated Code Reference](./protoc-gen-pothos/generated-code-reference.md) |
 
 ## External Resources
 

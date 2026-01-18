@@ -168,6 +168,43 @@ export const MyEnumWithoutUnspecified$Ref: EnumRef<
 "
 `;
 
+exports[`createEnumTypeCode > ts-proto > 'generates code for enum with deprecated values' 1`] = `
+"import { EnumRef } from "@pothos/core";
+import { NotDeprecatedEnum } from "@testapis/ts-proto/testapis/deprecation/deprecation";
+import { builder } from "../../../../builder";
+
+export const NotDeprecatedEnum$Ref: EnumRef<
+  NotDeprecatedEnum,
+  NotDeprecatedEnum
+> = builder.enumType("NotDeprecatedEnum", {
+  values: {
+    NOT_DEPRECATED_FOO: {
+      value: 1,
+      extensions: { protobufEnumValue: { name: "NOT_DEPRECATED_FOO" } },
+    },
+    DEPRECATED_BAR: {
+      deprecationReason:
+        "testapis.deprecation.NotDeprecatedEnum.DEPRECATED_BAR is mark as deprecated in a *.proto file.",
+      value: 2,
+      extensions: {
+        protobufEnumValue: {
+          name: "DEPRECATED_BAR",
+          options: { deprecated: true },
+        },
+      },
+    },
+  } as const,
+  extensions: {
+    protobufEnum: {
+      name: "NotDeprecatedEnum",
+      fullName: "testapis.deprecation.NotDeprecatedEnum",
+      package: "testapis.deprecation",
+    },
+  },
+});
+"
+`;
+
 exports[`createEnumTypeCode > ts-proto > 'generates code for enum with extensions' 1`] = `
 "import { EnumRef } from "@pothos/core";
 import { PrefixedEnum } from "@testapis/ts-proto/testapis/extensions/extensions";
