@@ -179,6 +179,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--deprecation--ts-proto:
     dependencies:
@@ -229,6 +232,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--edgecases-import_from_same_pkg--ts-proto:
     dependencies:
@@ -279,6 +285,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--edgecases-import_squashed_union--protobuf-es-v1:
     dependencies:
@@ -307,6 +316,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--edgecases-import_squashed_union--ts-proto:
     dependencies:
@@ -357,6 +369,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--empty_types--ts-proto:
     dependencies:
@@ -407,6 +422,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--enums--ts-proto:
     dependencies:
@@ -457,6 +475,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--extensions--ts-proto:
     dependencies:
@@ -507,6 +528,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--field_behavior--ts-proto:
     dependencies:
@@ -557,6 +581,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--multipkgs--ts-proto:
     dependencies:
@@ -607,6 +634,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--nested--ts-proto:
     dependencies:
@@ -657,6 +687,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--oneof--ts-proto:
     dependencies:
@@ -707,6 +740,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--primitives--ts-proto:
     dependencies:
@@ -779,6 +815,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--proto3_optional--ts-proto:
     dependencies:
@@ -829,6 +868,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--wktypes--ts-proto:
     dependencies:

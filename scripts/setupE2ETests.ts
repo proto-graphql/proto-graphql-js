@@ -85,11 +85,16 @@ async function genPackageJson(test: TestCase): Promise<void> {
       "test:e2e:typecheck": "tsc --build tsconfig.json",
     },
     dependencies: deps,
-    devDependencies: Object.fromEntries(
-      ["@proto-graphql/tsconfig", ...protoPackages[test.proto.lib]]
-        .sort()
-        .map((pkg) => [pkg, "workspace:*"]),
-    ),
+    devDependencies: {
+      ...Object.fromEntries(
+        ["@proto-graphql/tsconfig", ...protoPackages[test.proto.lib]]
+          .sort()
+          .map((pkg) => [pkg, "workspace:*"]),
+      ),
+      ...(test.proto.lib === "protobuf-es-v1"
+        ? { typescript: "catalog:typescript-v5.8" }
+        : {}),
+    },
   };
 
   const testPath = getTestPath(test);
