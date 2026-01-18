@@ -44,6 +44,10 @@ catalogs:
     long:
       specifier: 5.2.1
       version: 5.2.1
+  typescript-v5.8:
+    typescript:
+      specifier: 5.8.3
+      version: 5.8.3
 
 importers:
 
@@ -81,7 +85,7 @@ importers:
         version: 2.2.0
       tsup:
         specifier: 8.5.1
-        version: 8.5.1(@swc/core@1.5.0)(postcss@8.5.6)(tsx@4.21.0)(typescript@5.8.3)
+        version: 8.5.1(@swc/core@1.5.0)(postcss@8.5.6)(tsx@4.21.0)(typescript@5.9.3)
       tsx:
         specifier: 4.21.0
         version: 4.21.0
@@ -89,8 +93,8 @@ importers:
         specifier: 2.7.5
         version: 2.7.5
       typescript:
-        specifier: 5.8.3
-        version: 5.8.3
+        specifier: 5.9.3
+        version: 5.9.3
       vitest:
         specifier: 4.0.17
         version: 4.0.17(@types/node@20.16.10)(tsx@4.21.0)
@@ -126,6 +130,9 @@ importers:
       '@bufbuild/protoc-gen-es':
         specifier: catalog:protobuf-es-v1
         version: 1.8.0(@bufbuild/protobuf@1.8.0)
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/testapis/ts-proto:
     dependencies:
@@ -175,6 +182,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--deprecation--ts-proto:
     dependencies:
@@ -225,6 +235,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--edgecases-import_from_same_pkg--ts-proto:
     dependencies:
@@ -275,6 +288,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--edgecases-import_squashed_union--protobuf-es:
     dependencies:
@@ -303,6 +319,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--edgecases-import_squashed_union--ts-proto:
     dependencies:
@@ -353,6 +372,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--empty_types--ts-proto:
     dependencies:
@@ -403,6 +425,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--enums--ts-proto:
     dependencies:
@@ -453,6 +478,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--extensions--ts-proto:
     dependencies:
@@ -503,6 +531,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--field_behavior--ts-proto:
     dependencies:
@@ -553,6 +584,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--multipkgs--ts-proto:
     dependencies:
@@ -603,6 +637,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--nested--ts-proto:
     dependencies:
@@ -653,6 +690,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--oneof--ts-proto:
     dependencies:
@@ -703,6 +743,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--primitives--ts-proto:
     dependencies:
@@ -775,6 +818,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--proto3_optional--ts-proto:
     dependencies:
@@ -825,6 +871,9 @@ importers:
       protoc-gen-pothos:
         specifier: workspace:*
         version: link:../../../packages/protoc-gen-pothos
+      typescript:
+        specifier: catalog:typescript-v5.8
+        version: 5.8.3
 
   e2e/tests/pothos--wktypes--ts-proto:
     dependencies:
@@ -2426,6 +2475,11 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
+  typescript@5.9.3:
+    resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+
   ufo@1.6.3:
     resolution: {integrity: sha512-yDJTmhydvl5lJzBmy/hyOAA0d+aqCBuwl818haVdYCRrWV84o7YyeVm4QlVHStqNrrJSTb6jKuFAVqAFsr+K3Q==}
 
@@ -3859,7 +3913,7 @@ snapshots:
 
   tslib@2.6.2: {}
 
-  tsup@8.5.1(@swc/core@1.5.0)(postcss@8.5.6)(tsx@4.21.0)(typescript@5.8.3):
+  tsup@8.5.1(@swc/core@1.5.0)(postcss@8.5.6)(tsx@4.21.0)(typescript@5.9.3):
     dependencies:
       bundle-require: 5.1.0(esbuild@0.27.2)
       cac: 6.7.14
@@ -3881,7 +3935,7 @@ snapshots:
     optionalDependencies:
       '@swc/core': 1.5.0
       postcss: 8.5.6
-      typescript: 5.8.3
+      typescript: 5.9.3
     transitivePeerDependencies:
       - jiti
       - supports-color
@@ -3927,6 +3981,8 @@ snapshots:
   typescript@5.4.5: {}
 
   typescript@5.8.3: {}
+
+  typescript@5.9.3: {}
 
   ufo@1.6.3: {}
 

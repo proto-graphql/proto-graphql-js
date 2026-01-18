@@ -19,6 +19,7 @@
     "@proto-graphql/e2e-testapis-protobuf-es": "workspace:*",
     "@proto-graphql/scalars-protobuf-es": "workspace:*",
     "@proto-graphql/tsconfig": "workspace:*",
-    "protoc-gen-pothos": "workspace:*"
+    "protoc-gen-pothos": "workspace:*",
+    "typescript": "catalog:typescript-v5.8"
   }
 }
