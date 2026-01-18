@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`createInputObjectTypeCode > protobuf-es > 'generates code for a simple input obj…' 1`] = `
+exports[`createInputObjectTypeCode > protobuf-es > 'generates code for a simple input object' 1`] = `
 "export type PrimitivesInput$Shape = {
   requiredDoubleValue: Primitives["requiredDoubleValue"];
   requiredFloatValue: Primitives["requiredFloatValue"];
@@ -388,7 +388,7 @@ export function PrimitivesInput$toProto(
 "
 `;
 
-exports[`createInputObjectTypeCode > protobuf-es > 'generates code for an input object wi…' 1`] = `
+exports[`createInputObjectTypeCode > protobuf-es > 'generates code for an input object with nested fields' 1`] = `
 "export type MessageInput$Shape = {
   requiredPrimitives: PrimitivesInput$Shape;
   optionalPrimitives?: PrimitivesInput$Shape | null;
@@ -476,7 +476,7 @@ export function MessageInput$toProto(
 "
 `;
 
-exports[`createInputObjectTypeCode > protobuf-es > 'generates code for an input object wi…' 2`] = `
+exports[`createInputObjectTypeCode > protobuf-es > 'generates code for an input object with oneof fields' 1`] = `
 "export type OneofParentInput$Shape = {
   normalField: OneofParent["normalField"];
   requiredMessage1?: OneofMemberMessage1Input$Shape | null;
@@ -610,7 +610,7 @@ export function EmptyMessageInput$toProto(
 "
 `;
 
-exports[`createInputObjectTypeCode > ts-proto > 'generates code for a simple input obj…' 1`] = `
+exports[`createInputObjectTypeCode > ts-proto > 'generates code for a simple input object' 1`] = `
 "export type PrimitivesInput$Shape = {
   requiredDoubleValue: Primitives["requiredDoubleValue"];
   requiredFloatValue: Primitives["requiredFloatValue"];
@@ -961,7 +961,7 @@ export const PrimitivesInput$Ref: InputObjectRef<PrimitivesInput$Shape> =
 "
 `;
 
-exports[`createInputObjectTypeCode > ts-proto > 'generates code for an input object wi…' 1`] = `
+exports[`createInputObjectTypeCode > ts-proto > 'generates code for an input object with nested fields' 1`] = `
 "export type MessageInput$Shape = {
   requiredPrimitives: PrimitivesInput$Shape;
   optionalPrimitives?: PrimitivesInput$Shape | null;
@@ -1030,7 +1030,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
 "
 `;
 
-exports[`createInputObjectTypeCode > ts-proto > 'generates code for an input object wi…' 2`] = `
+exports[`createInputObjectTypeCode > ts-proto > 'generates code for an input object with oneof fields' 1`] = `
 "export type OneofParentInput$Shape = {
   normalField: OneofParent["normalField"];
   requiredMessage1?: OneofMemberMessage1Input$Shape | null;
