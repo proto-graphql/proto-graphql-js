@@ -40,6 +40,28 @@ export function shapeTypeName(type: InputObjectType): string {
   return `${type.typeName}$Shape`;
 }
 
+type TypeWithFilename =
+  | ObjectType
+  | InputObjectType
+  | EnumType
+  | OneofUnionType
+  | SquashedOneofUnionType
+  | InterfaceType;
+
+function resolveImportOrLocal(
+  field: { parent: TypeWithFilename; type: TypeWithFilename },
+  opts: PothosPrinterOptions,
+  symbolName: string,
+  localPrintable: () => Printable[],
+): Printable[] {
+  const fromFile = filename(field.parent, opts);
+  const toFile = filename(field.type, opts);
+  if (fromFile === toFile) return localPrintable();
+
+  const importPath = `./${toFile.replace(/\.ts$/, "")}`;
+  return code`${createImportSymbol(symbolName, importPath)}`;
+}
+
 export function fieldTypeRefPrintable(
   field:
     | ObjectField<
@@ -51,13 +73,9 @@ export function fieldTypeRefPrintable(
 ): Printable[] {
   if (field instanceof ObjectOneofField) return pothosRefPrintable(field.type);
 
-  const fromFile = filename(field.parent, opts);
-  const toFile = filename(field.type, opts);
-  if (fromFile === toFile) return pothosRefPrintable(field.type);
-
-  // protoplugin が相対パスを計算するため、./付きの出力ルートからのパスを渡す
-  const importPath = `./${toFile.replace(/\.ts$/, "")}`;
-  return code`${createImportSymbol(pothosRefName(field.type), importPath)}`;
+  return resolveImportOrLocal(field, opts, pothosRefName(field.type), () =>
+    pothosRefPrintable(field.type),
+  );
 }
 
 export function shapeTypePrintable(type: InputObjectType): Printable[] {
@@ -68,12 +86,9 @@ export function fieldTypeShapePrintable(
   field: InputObjectField<InputObjectType>,
   opts: PothosPrinterOptions,
 ): Printable[] {
-  const fromFile = filename(field.parent, opts);
-  const toFile = filename(field.type, opts);
-  if (fromFile === toFile) return shapeTypePrintable(field.type);
-
-  const importPath = `./${toFile.replace(/\.ts$/, "")}`;
-  return code`${createImportSymbol(shapeTypeName(field.type), importPath)}`;
+  return resolveImportOrLocal(field, opts, shapeTypeName(field.type), () =>
+    shapeTypePrintable(field.type),
+  );
 }
 
 export function toProtoFuncName(type: InputObjectType): string {
@@ -84,12 +99,9 @@ export function toProtoFuncPrintable(
   field: InputObjectField<InputObjectType>,
   opts: PothosPrinterOptions,
 ): Printable[] {
-  const fromFile = filename(field.parent, opts);
-  const toFile = filename(field.type, opts);
-  if (fromFile === toFile) return code`${toProtoFuncName(field.type)}`;
-
-  const importPath = `./${toFile.replace(/\.ts$/, "")}`;
-  return code`${createImportSymbol(toProtoFuncName(field.type), importPath)}`;
+  return resolveImportOrLocal(field, opts, toProtoFuncName(field.type), () =>
+    code`${toProtoFuncName(field.type)}`,
+  );
 }
 
 export function pothosRefPrintable(

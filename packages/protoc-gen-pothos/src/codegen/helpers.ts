@@ -46,7 +46,6 @@ export function compactForCodegen(v: unknown): unknown {
     }
     return v.map(compactForCodegen);
   }
-  if ("toCodeString" in v) return v;
   return compactObjForCodegen(v as Record<string, unknown>);
 }
 

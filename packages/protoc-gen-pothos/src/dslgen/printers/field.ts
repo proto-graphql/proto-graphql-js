@@ -23,11 +23,10 @@ import { createOneofUnionResolverCode } from "./fieldResolver/oneofUnionResolver
 import { fieldTypeRefPrintable, type PothosPrinterOptions } from "./util.js";
 
 function createGetFieldValueCodePrintable(
-  sourceExpr: Printable[],
+  source: string,
   proto: DescField,
   opts: PothosPrinterOptions,
 ): Printable[] {
-  const source = sourceExpr.filter((p) => typeof p === "string").join("");
   return code`${source}.${tsFieldName(proto, opts)}`;
 }
 
@@ -62,11 +61,11 @@ export function createFieldRefCode(
       ? literalOf(field.type.typeName)
       : fieldTypeRefPrintable(field, opts);
 
-  const sourceExpr = code`source`;
+  const sourceExpr = "source";
   let resolverCode: Printable[] | undefined;
   if (!isInput) {
     if (field instanceof ObjectOneofField) {
-      resolverCode = createOneofUnionResolverCode(sourceExpr, field, opts);
+      resolverCode = createOneofUnionResolverCode(code`${sourceExpr}`, field, opts);
     } else {
       const valueExpr = createGetFieldValueCodePrintable(
         sourceExpr,

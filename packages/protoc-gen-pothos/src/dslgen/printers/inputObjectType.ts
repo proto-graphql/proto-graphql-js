@@ -151,28 +151,22 @@ function createToProtoFuncCode(
           type.fields
             .filter((f) => f.proto.oneof == null)
             .map((f) => {
-              switch (true) {
-                case f.type instanceof InputObjectType: {
-                  const localName = tsFieldName(f.proto, opts).toString();
-                  const toProtoFunc = toProtoFuncPrintable(
-                    f as InputObjectField<InputObjectType>,
-                    opts,
-                  );
-                  if (f.isList()) {
-                    return code`${localName}: input?.${f.name}?.map(v => ${toProtoFunc}(v)),`;
-                  }
-                  return code`${localName}: input?.${f.name} ? ${toProtoFunc}(input.${f.name}) : undefined,`;
+              const localName = tsFieldName(f.proto, opts).toString();
+              if (f.type instanceof InputObjectType) {
+                const toProtoFunc = toProtoFuncPrintable(
+                  f as InputObjectField<InputObjectType>,
+                  opts,
+                );
+                if (f.isList()) {
+                  return code`${localName}: input?.${f.name}?.map(v => ${toProtoFunc}(v)),`;
                 }
-                case f.type instanceof ScalarType:
-                case f.type instanceof EnumType: {
-                  const localName = tsFieldName(f.proto, opts).toString();
-                  return code`${localName}: input?.${f.name} ?? undefined,`;
-                }
-                default: {
-                  f.type satisfies never;
-                  throw "unreachable";
-                }
+                return code`${localName}: input?.${f.name} ? ${toProtoFunc}(input.${f.name}) : undefined,`;
               }
+              if (f.type instanceof ScalarType || f.type instanceof EnumType) {
+                return code`${localName}: input?.${f.name} ?? undefined,`;
+              }
+              f.type satisfies never;
+              throw new Error("unreachable");
             }),
           "\n",
         )}
