@@ -4,7 +4,7 @@
 "protoc-gen-pothos": patch
 ---
 
-Upgrade @bufbuild packages to latest versions
+chore: upgrade @bufbuild packages to latest versions
 
 - `@bufbuild/protobuf`: 2.1.0 → 2.10.2
 - `@bufbuild/protoplugin`: 2.1.0 → 2.10.2
