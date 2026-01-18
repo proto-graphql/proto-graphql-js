@@ -4,9 +4,9 @@ packages:
   - "e2e/**"
 
 catalog:
-  "@bufbuild/protobuf": "2.1.0"
-  "@bufbuild/protoplugin": "2.1.0"
-  "@bufbuild/protoc-gen-es": "2.1.0"
+  "@bufbuild/protobuf": "2.10.2"
+  "@bufbuild/protoplugin": "2.10.2"
+  "@bufbuild/protoc-gen-es": "2.10.2"
   case-anything: "^2.1.13"
   change-case: "^4.1.2"
   ts-poet: "^6.3.0"
