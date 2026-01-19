@@ -33,6 +33,7 @@
   },
   "files": [
     "bin/",
+    "docs/",
     "src/",
     "dist/",
     "!src/**/*.test.ts",
@@ -58,7 +59,8 @@
     "@proto-graphql/tsconfig": "workspace:*"
   },
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && cp -r ../../docs/protoc-gen-pothos docs",
+    "clean": "rm -rf dist docs",
     "test": "vitest run --passWithNoTests"
   }
 }
