@@ -17542,7 +17542,7 @@ export const DateInput$Ref: InputObjectRef<DateInput$Shape> = builder.inputRef<
       package: "testapis.custom_types",
     },
   },
-});
+}) as InputObjectRef<DateInput$Shape>;
 
 export function DateInput$toProto(
   input: DateInput$Shape | null | undefined,
@@ -17643,7 +17643,7 @@ export const PostInput$Ref: InputObjectRef<PostInput$Shape> = builder.inputRef<
       package: "testapis.custom_types",
     },
   },
-});
+}) as InputObjectRef<PostInput$Shape>;
 
 export function PostInput$toProto(
   input: PostInput$Shape | null | undefined,
@@ -17741,7 +17741,7 @@ export const DateInput$Ref: InputObjectRef<DateInput$Shape> = builder.inputRef<
       package: "testapis.custom_types",
     },
   },
-});
+}) as InputObjectRef<DateInput$Shape>;
 
 export function DateInput$toProto(
   input: DateInput$Shape | null | undefined,
@@ -17787,7 +17787,7 @@ export const DatePartialInput$Ref: InputObjectRef<DatePartialInput$Shape> =
         package: "testapis.custom_types",
       },
     },
-  });
+  }) as InputObjectRef<DatePartialInput$Shape>;
 
 export function DatePartialInput$toProto(
   input: DatePartialInput$Shape | null | undefined,
@@ -17891,7 +17891,7 @@ export const PostInput$Ref: InputObjectRef<PostInput$Shape> = builder.inputRef<
       package: "testapis.custom_types",
     },
   },
-});
+}) as InputObjectRef<PostInput$Shape>;
 
 export function PostInput$toProto(
   input: PostInput$Shape | null | undefined,
@@ -17939,7 +17939,7 @@ export const PostPartialInput$Ref: InputObjectRef<PostPartialInput$Shape> =
         package: "testapis.custom_types",
       },
     },
-  });
+  }) as InputObjectRef<PostPartialInput$Shape>;
 
 export function PostPartialInput$toProto(
   input: PostPartialInput$Shape | null | undefined,
@@ -18034,7 +18034,7 @@ export const DateInput$Ref: InputObjectRef<DateInput$Shape> = builder.inputRef<
       package: "testapis.custom_types",
     },
   },
-});
+}) as InputObjectRef<DateInput$Shape>;
 
 export function DateInput$toProto(
   input: DateInput$Shape | null | undefined,
@@ -18132,7 +18132,7 @@ export const PostInput$Ref: InputObjectRef<PostInput$Shape> = builder.inputRef<
       package: "testapis.custom_types",
     },
   },
-});
+}) as InputObjectRef<PostInput$Shape>;
 
 export function PostInput$toProto(
   input: PostInput$Shape | null | undefined,
@@ -18263,7 +18263,11 @@ builder.objectType(NotDeprecatedMessage$Ref, {
       type: NotDeprecatedMessageNotDeprecatedOneof$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.notDeprecatedOneof.value;
+        return (source.notDeprecatedOneof.value ?? null) as
+          | NotDeprecatedMessage_InnerMessage1
+          | NotDeprecatedMessage_InnerMessage2
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "not_deprecated_oneof" } },
     }),
@@ -18273,7 +18277,11 @@ builder.objectType(NotDeprecatedMessage$Ref, {
       deprecationReason:
         "testapis.deprecation.NotDeprecatedMessage.deprecated_oneof is mark as deprecated in a *.proto file.",
       resolve: (source) => {
-        return source.deprecatedOneof.value;
+        return (source.deprecatedOneof.value ?? null) as
+          | NotDeprecatedMessage_InnerMessage1
+          | NotDeprecatedMessage_InnerMessage2
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "deprecated_oneof" } },
     }),
@@ -18402,7 +18410,7 @@ export const DeprecatedMessageInput$Ref: InputObjectRef<
         options: { deprecated: true },
       },
     },
-  });
+  }) as InputObjectRef<DeprecatedMessageInput$Shape>;
 
 export function DeprecatedMessageInput$toProto(
   input: DeprecatedMessageInput$Shape | null | undefined,
@@ -18514,7 +18522,7 @@ export const NotDeprecatedMessageInput$Ref: InputObjectRef<
       package: "testapis.deprecation",
     },
   },
-});
+}) as InputObjectRef<NotDeprecatedMessageInput$Shape>;
 
 export function NotDeprecatedMessageInput$toProto(
   input: NotDeprecatedMessageInput$Shape | null | undefined,
@@ -18572,7 +18580,7 @@ export const DeprecatedMessageInnerMessageInput$Ref: InputObjectRef<
       package: "testapis.deprecation",
     },
   },
-});
+}) as InputObjectRef<DeprecatedMessageInnerMessageInput$Shape>;
 
 export function DeprecatedMessageInnerMessageInput$toProto(
   input: DeprecatedMessageInnerMessageInput$Shape | null | undefined,
@@ -18605,7 +18613,7 @@ export const NotDeprecatedMessageInnerMessage1Input$Ref: InputObjectRef<
       package: "testapis.deprecation",
     },
   },
-});
+}) as InputObjectRef<NotDeprecatedMessageInnerMessage1Input$Shape>;
 
 export function NotDeprecatedMessageInnerMessage1Input$toProto(
   input: NotDeprecatedMessageInnerMessage1Input$Shape | null | undefined,
@@ -18638,7 +18646,7 @@ export const NotDeprecatedMessageInnerMessage2Input$Ref: InputObjectRef<
       package: "testapis.deprecation",
     },
   },
-});
+}) as InputObjectRef<NotDeprecatedMessageInnerMessage2Input$Shape>;
 
 export function NotDeprecatedMessageInnerMessage2Input$toProto(
   input: NotDeprecatedMessageInnerMessage2Input$Shape | null | undefined,
@@ -18884,7 +18892,7 @@ export const DeprecatedFileMessageInput$Ref: InputObjectRef<
       package: "testapis.deprecation",
     },
   },
-});
+}) as InputObjectRef<DeprecatedFileMessageInput$Shape>;
 
 export function DeprecatedFileMessageInput$toProto(
   input: DeprecatedFileMessageInput$Shape | null | undefined,
@@ -18920,7 +18928,7 @@ export const DeprecatedFileMessageInnerMessageInput$Ref: InputObjectRef<
       package: "testapis.deprecation",
     },
   },
-});
+}) as InputObjectRef<DeprecatedFileMessageInnerMessageInput$Shape>;
 
 export function DeprecatedFileMessageInnerMessageInput$toProto(
   input: DeprecatedFileMessageInnerMessageInput$Shape | null | undefined,
@@ -19075,7 +19083,11 @@ builder.objectType(NotDeprecatedMessage$Ref, {
       type: NotDeprecatedMessageNotDeprecatedOneof$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.notDeprecatedOneof.value;
+        return (source.notDeprecatedOneof.value ?? null) as
+          | NotDeprecatedMessage_InnerMessage1
+          | NotDeprecatedMessage_InnerMessage2
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "not_deprecated_oneof" } },
     }),
@@ -19085,7 +19097,11 @@ builder.objectType(NotDeprecatedMessage$Ref, {
       deprecationReason:
         "testapis.deprecation.NotDeprecatedMessage.deprecated_oneof is mark as deprecated in a *.proto file.",
       resolve: (source) => {
-        return source.deprecatedOneof.value;
+        return (source.deprecatedOneof.value ?? null) as
+          | NotDeprecatedMessage_InnerMessage1
+          | NotDeprecatedMessage_InnerMessage2
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "deprecated_oneof" } },
     }),
@@ -19214,7 +19230,7 @@ export const DeprecatedMessageInput$Ref: InputObjectRef<
         options: { deprecated: true },
       },
     },
-  });
+  }) as InputObjectRef<DeprecatedMessageInput$Shape>;
 
 export function DeprecatedMessageInput$toProto(
   input: DeprecatedMessageInput$Shape | null | undefined,
@@ -19264,7 +19280,7 @@ export const DeprecatedMessagePartialInput$Ref: InputObjectRef<
       options: { deprecated: true },
     },
   },
-});
+}) as InputObjectRef<DeprecatedMessagePartialInput$Shape>;
 
 export function DeprecatedMessagePartialInput$toProto(
   input: DeprecatedMessagePartialInput$Shape | null | undefined,
@@ -19376,7 +19392,7 @@ export const NotDeprecatedMessageInput$Ref: InputObjectRef<
       package: "testapis.deprecation",
     },
   },
-});
+}) as InputObjectRef<NotDeprecatedMessageInput$Shape>;
 
 export function NotDeprecatedMessageInput$toProto(
   input: NotDeprecatedMessageInput$Shape | null | undefined,
@@ -19510,7 +19526,7 @@ export const NotDeprecatedMessagePartialInput$Ref: InputObjectRef<
       package: "testapis.deprecation",
     },
   },
-});
+}) as InputObjectRef<NotDeprecatedMessagePartialInput$Shape>;
 
 export function NotDeprecatedMessagePartialInput$toProto(
   input: NotDeprecatedMessagePartialInput$Shape | null | undefined,
@@ -19576,7 +19592,7 @@ export const DeprecatedMessageInnerMessageInput$Ref: InputObjectRef<
       package: "testapis.deprecation",
     },
   },
-});
+}) as InputObjectRef<DeprecatedMessageInnerMessageInput$Shape>;
 
 export function DeprecatedMessageInnerMessageInput$toProto(
   input: DeprecatedMessageInnerMessageInput$Shape | null | undefined,
@@ -19611,7 +19627,7 @@ export const DeprecatedMessageInnerMessagePartialInput$Ref: InputObjectRef<
       package: "testapis.deprecation",
     },
   },
-});
+}) as InputObjectRef<DeprecatedMessageInnerMessagePartialInput$Shape>;
 
 export function DeprecatedMessageInnerMessagePartialInput$toProto(
   input: DeprecatedMessageInnerMessagePartialInput$Shape | null | undefined,
@@ -19644,7 +19660,7 @@ export const NotDeprecatedMessageInnerMessage1Input$Ref: InputObjectRef<
       package: "testapis.deprecation",
     },
   },
-});
+}) as InputObjectRef<NotDeprecatedMessageInnerMessage1Input$Shape>;
 
 export function NotDeprecatedMessageInnerMessage1Input$toProto(
   input: NotDeprecatedMessageInnerMessage1Input$Shape | null | undefined,
@@ -19677,7 +19693,7 @@ export const NotDeprecatedMessageInnerMessage1PartialInput$Ref: InputObjectRef<
       package: "testapis.deprecation",
     },
   },
-});
+}) as InputObjectRef<NotDeprecatedMessageInnerMessage1PartialInput$Shape>;
 
 export function NotDeprecatedMessageInnerMessage1PartialInput$toProto(
   input: NotDeprecatedMessageInnerMessage1PartialInput$Shape | null | undefined,
@@ -19710,7 +19726,7 @@ export const NotDeprecatedMessageInnerMessage2Input$Ref: InputObjectRef<
       package: "testapis.deprecation",
     },
   },
-});
+}) as InputObjectRef<NotDeprecatedMessageInnerMessage2Input$Shape>;
 
 export function NotDeprecatedMessageInnerMessage2Input$toProto(
   input: NotDeprecatedMessageInnerMessage2Input$Shape | null | undefined,
@@ -19743,7 +19759,7 @@ export const NotDeprecatedMessageInnerMessage2PartialInput$Ref: InputObjectRef<
       package: "testapis.deprecation",
     },
   },
-});
+}) as InputObjectRef<NotDeprecatedMessageInnerMessage2PartialInput$Shape>;
 
 export function NotDeprecatedMessageInnerMessage2PartialInput$toProto(
   input: NotDeprecatedMessageInnerMessage2PartialInput$Shape | null | undefined,
@@ -19989,7 +20005,7 @@ export const DeprecatedFileMessageInput$Ref: InputObjectRef<
       package: "testapis.deprecation",
     },
   },
-});
+}) as InputObjectRef<DeprecatedFileMessageInput$Shape>;
 
 export function DeprecatedFileMessageInput$toProto(
   input: DeprecatedFileMessageInput$Shape | null | undefined,
@@ -20038,7 +20054,7 @@ export const DeprecatedFileMessagePartialInput$Ref: InputObjectRef<
       package: "testapis.deprecation",
     },
   },
-});
+}) as InputObjectRef<DeprecatedFileMessagePartialInput$Shape>;
 
 export function DeprecatedFileMessagePartialInput$toProto(
   input: DeprecatedFileMessagePartialInput$Shape | null | undefined,
@@ -20074,7 +20090,7 @@ export const DeprecatedFileMessageInnerMessageInput$Ref: InputObjectRef<
       package: "testapis.deprecation",
     },
   },
-});
+}) as InputObjectRef<DeprecatedFileMessageInnerMessageInput$Shape>;
 
 export function DeprecatedFileMessageInnerMessageInput$toProto(
   input: DeprecatedFileMessageInnerMessageInput$Shape | null | undefined,
@@ -20109,7 +20125,7 @@ export const DeprecatedFileMessageInnerMessagePartialInput$Ref: InputObjectRef<
       package: "testapis.deprecation",
     },
   },
-});
+}) as InputObjectRef<DeprecatedFileMessageInnerMessagePartialInput$Shape>;
 
 export function DeprecatedFileMessageInnerMessagePartialInput$toProto(
   input: DeprecatedFileMessageInnerMessagePartialInput$Shape | null | undefined,
@@ -20264,7 +20280,11 @@ builder.objectType(NotDeprecatedMessage$Ref, {
       type: NotDeprecatedMessageNotDeprecatedOneof$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.notDeprecatedOneof.value;
+        return (source.notDeprecatedOneof.value ?? null) as
+          | NotDeprecatedMessage_InnerMessage1
+          | NotDeprecatedMessage_InnerMessage2
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "not_deprecated_oneof" } },
     }),
@@ -20274,7 +20294,11 @@ builder.objectType(NotDeprecatedMessage$Ref, {
       deprecationReason:
         "testapis.deprecation.NotDeprecatedMessage.deprecated_oneof is mark as deprecated in a *.proto file.",
       resolve: (source) => {
-        return source.deprecatedOneof.value;
+        return (source.deprecatedOneof.value ?? null) as
+          | NotDeprecatedMessage_InnerMessage1
+          | NotDeprecatedMessage_InnerMessage2
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "deprecated_oneof" } },
     }),
@@ -20403,7 +20427,7 @@ export const DeprecatedMessageInput$Ref: InputObjectRef<
         options: { deprecated: true },
       },
     },
-  });
+  }) as InputObjectRef<DeprecatedMessageInput$Shape>;
 
 export function DeprecatedMessageInput$toProto(
   input: DeprecatedMessageInput$Shape | null | undefined,
@@ -20515,7 +20539,7 @@ export const NotDeprecatedMessageInput$Ref: InputObjectRef<
       package: "testapis.deprecation",
     },
   },
-});
+}) as InputObjectRef<NotDeprecatedMessageInput$Shape>;
 
 export function NotDeprecatedMessageInput$toProto(
   input: NotDeprecatedMessageInput$Shape | null | undefined,
@@ -20573,7 +20597,7 @@ export const DeprecatedMessageInnerMessageInput$Ref: InputObjectRef<
       package: "testapis.deprecation",
     },
   },
-});
+}) as InputObjectRef<DeprecatedMessageInnerMessageInput$Shape>;
 
 export function DeprecatedMessageInnerMessageInput$toProto(
   input: DeprecatedMessageInnerMessageInput$Shape | null | undefined,
@@ -20606,7 +20630,7 @@ export const NotDeprecatedMessageInnerMessage1Input$Ref: InputObjectRef<
       package: "testapis.deprecation",
     },
   },
-});
+}) as InputObjectRef<NotDeprecatedMessageInnerMessage1Input$Shape>;
 
 export function NotDeprecatedMessageInnerMessage1Input$toProto(
   input: NotDeprecatedMessageInnerMessage1Input$Shape | null | undefined,
@@ -20639,7 +20663,7 @@ export const NotDeprecatedMessageInnerMessage2Input$Ref: InputObjectRef<
       package: "testapis.deprecation",
     },
   },
-});
+}) as InputObjectRef<NotDeprecatedMessageInnerMessage2Input$Shape>;
 
 export function NotDeprecatedMessageInnerMessage2Input$toProto(
   input: NotDeprecatedMessageInnerMessage2Input$Shape | null | undefined,
@@ -20885,7 +20909,7 @@ export const DeprecatedFileMessageInput$Ref: InputObjectRef<
       package: "testapis.deprecation",
     },
   },
-});
+}) as InputObjectRef<DeprecatedFileMessageInput$Shape>;
 
 export function DeprecatedFileMessageInput$toProto(
   input: DeprecatedFileMessageInput$Shape | null | undefined,
@@ -20921,7 +20945,7 @@ export const DeprecatedFileMessageInnerMessageInput$Ref: InputObjectRef<
       package: "testapis.deprecation",
     },
   },
-});
+}) as InputObjectRef<DeprecatedFileMessageInnerMessageInput$Shape>;
 
 export function DeprecatedFileMessageInnerMessageInput$toProto(
   input: DeprecatedFileMessageInnerMessageInput$Shape | null | undefined,
@@ -21018,7 +21042,7 @@ export const ChildMessageInput$Ref: InputObjectRef<ChildMessageInput$Shape> =
         package: "testapis.edgecases.import_from_same_pkg",
       },
     },
-  });
+  }) as InputObjectRef<ChildMessageInput$Shape>;
 
 export function ChildMessageInput$toProto(
   input: ChildMessageInput$Shape | null | undefined,
@@ -21102,7 +21126,7 @@ export const ParentMessageInput$Ref: InputObjectRef<ParentMessageInput$Shape> =
         package: "testapis.edgecases.import_from_same_pkg",
       },
     },
-  });
+  }) as InputObjectRef<ParentMessageInput$Shape>;
 
 export function ParentMessageInput$toProto(
   input: ParentMessageInput$Shape | null | undefined,
@@ -21172,7 +21196,7 @@ export const ChildMessageInput$Ref: InputObjectRef<ChildMessageInput$Shape> =
         package: "testapis.edgecases.import_from_same_pkg",
       },
     },
-  });
+  }) as InputObjectRef<ChildMessageInput$Shape>;
 
 export function ChildMessageInput$toProto(
   input: ChildMessageInput$Shape | null | undefined,
@@ -21202,7 +21226,7 @@ export const ChildMessagePartialInput$Ref: InputObjectRef<
         package: "testapis.edgecases.import_from_same_pkg",
       },
     },
-  });
+  }) as InputObjectRef<ChildMessagePartialInput$Shape>;
 
 export function ChildMessagePartialInput$toProto(
   input: ChildMessagePartialInput$Shape | null | undefined,
@@ -21289,7 +21313,7 @@ export const ParentMessageInput$Ref: InputObjectRef<ParentMessageInput$Shape> =
         package: "testapis.edgecases.import_from_same_pkg",
       },
     },
-  });
+  }) as InputObjectRef<ParentMessageInput$Shape>;
 
 export function ParentMessageInput$toProto(
   input: ParentMessageInput$Shape | null | undefined,
@@ -21327,7 +21351,7 @@ export const ParentMessagePartialInput$Ref: InputObjectRef<
       package: "testapis.edgecases.import_from_same_pkg",
     },
   },
-});
+}) as InputObjectRef<ParentMessagePartialInput$Shape>;
 
 export function ParentMessagePartialInput$toProto(
   input: ParentMessagePartialInput$Shape | null | undefined,
@@ -21396,7 +21420,7 @@ export const ChildMessageInput$Ref: InputObjectRef<ChildMessageInput$Shape> =
         package: "testapis.edgecases.import_from_same_pkg",
       },
     },
-  });
+  }) as InputObjectRef<ChildMessageInput$Shape>;
 
 export function ChildMessageInput$toProto(
   input: ChildMessageInput$Shape | null | undefined,
@@ -21477,7 +21501,7 @@ export const ParentMessageInput$Ref: InputObjectRef<ParentMessageInput$Shape> =
         package: "testapis.edgecases.import_from_same_pkg",
       },
     },
-  });
+  }) as InputObjectRef<ParentMessageInput$Shape>;
 
 export function ParentMessageInput$toProto(
   input: ParentMessageInput$Shape | null | undefined,
@@ -21574,7 +21598,7 @@ export const OneofMember1Input$Ref: InputObjectRef<OneofMember1Input$Shape> =
         package: "testapis.edgecases.import_oneof_member_from_other_file",
       },
     },
-  });
+  }) as InputObjectRef<OneofMember1Input$Shape>;
 
 export function OneofMember1Input$toProto(
   input: OneofMember1Input$Shape | null | undefined,
@@ -21601,7 +21625,7 @@ export const OneofMember2Input$Ref: InputObjectRef<OneofMember2Input$Shape> =
         package: "testapis.edgecases.import_oneof_member_from_other_file",
       },
     },
-  });
+  }) as InputObjectRef<OneofMember2Input$Shape>;
 
 export function OneofMember2Input$toProto(
   input: OneofMember2Input$Shape | null | undefined,
@@ -21621,6 +21645,10 @@ import {
   OneofParent,
   OneofParentSchema,
 } from "@testapis/protobuf-es-v2/testapis/edgecases/import_oneof_member_from_other_file/parent_pb";
+import {
+  OneofMember1,
+  OneofMember2,
+} from "@testapis/protobuf-es-v2/testapis/edgecases/import_oneof_member_from_other_file/member_pb";
 import { create, isMessage } from "@bufbuild/protobuf";
 import {
   OneofMember1$Ref,
@@ -21642,7 +21670,11 @@ builder.objectType(OneofParent$Ref, {
       type: OneofParentOneofField$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.oneofField.value;
+        return (source.oneofField.value ?? null) as
+          | OneofMember1
+          | OneofMember2
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "oneof_field" } },
     }),
@@ -21699,7 +21731,7 @@ export const OneofParentInput$Ref: InputObjectRef<OneofParentInput$Shape> =
         package: "testapis.edgecases.import_oneof_member_from_other_file",
       },
     },
-  });
+  }) as InputObjectRef<OneofParentInput$Shape>;
 
 export function OneofParentInput$toProto(
   input: OneofParentInput$Shape | null | undefined,
@@ -21825,7 +21857,7 @@ export const OneofMember1Input$Ref: InputObjectRef<OneofMember1Input$Shape> =
         package: "testapis.edgecases.import_oneof_member_from_other_file",
       },
     },
-  });
+  }) as InputObjectRef<OneofMember1Input$Shape>;
 
 export function OneofMember1Input$toProto(
   input: OneofMember1Input$Shape | null | undefined,
@@ -21856,7 +21888,7 @@ export const OneofMember1PartialInput$Ref: InputObjectRef<
         package: "testapis.edgecases.import_oneof_member_from_other_file",
       },
     },
-  });
+  }) as InputObjectRef<OneofMember1PartialInput$Shape>;
 
 export function OneofMember1PartialInput$toProto(
   input: OneofMember1PartialInput$Shape | null | undefined,
@@ -21883,7 +21915,7 @@ export const OneofMember2Input$Ref: InputObjectRef<OneofMember2Input$Shape> =
         package: "testapis.edgecases.import_oneof_member_from_other_file",
       },
     },
-  });
+  }) as InputObjectRef<OneofMember2Input$Shape>;
 
 export function OneofMember2Input$toProto(
   input: OneofMember2Input$Shape | null | undefined,
@@ -21914,7 +21946,7 @@ export const OneofMember2PartialInput$Ref: InputObjectRef<
         package: "testapis.edgecases.import_oneof_member_from_other_file",
       },
     },
-  });
+  }) as InputObjectRef<OneofMember2PartialInput$Shape>;
 
 export function OneofMember2PartialInput$toProto(
   input: OneofMember2PartialInput$Shape | null | undefined,
@@ -21934,6 +21966,10 @@ import {
   OneofParent,
   OneofParentSchema,
 } from "@testapis/protobuf-es-v2/testapis/edgecases/import_oneof_member_from_other_file/parent_pb";
+import {
+  OneofMember1,
+  OneofMember2,
+} from "@testapis/protobuf-es-v2/testapis/edgecases/import_oneof_member_from_other_file/member_pb";
 import { create, isMessage } from "@bufbuild/protobuf";
 import {
   OneofMember1$Ref,
@@ -21961,7 +21997,11 @@ builder.objectType(OneofParent$Ref, {
       type: OneofParentOneofField$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.oneofField.value;
+        return (source.oneofField.value ?? null) as
+          | OneofMember1
+          | OneofMember2
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "oneof_field" } },
     }),
@@ -22018,7 +22058,7 @@ export const OneofParentInput$Ref: InputObjectRef<OneofParentInput$Shape> =
         package: "testapis.edgecases.import_oneof_member_from_other_file",
       },
     },
-  });
+  }) as InputObjectRef<OneofParentInput$Shape>;
 
 export function OneofParentInput$toProto(
   input: OneofParentInput$Shape | null | undefined,
@@ -22073,7 +22113,7 @@ export const OneofParentPartialInput$Ref: InputObjectRef<
         package: "testapis.edgecases.import_oneof_member_from_other_file",
       },
     },
-  });
+  }) as InputObjectRef<OneofParentPartialInput$Shape>;
 
 export function OneofParentPartialInput$toProto(
   input: OneofParentPartialInput$Shape | null | undefined,
@@ -22205,7 +22245,7 @@ export const OneofMember1Input$Ref: InputObjectRef<OneofMember1Input$Shape> =
         package: "testapis.edgecases.import_oneof_member_from_other_file",
       },
     },
-  });
+  }) as InputObjectRef<OneofMember1Input$Shape>;
 
 export function OneofMember1Input$toProto(
   input: OneofMember1Input$Shape | null | undefined,
@@ -22232,7 +22272,7 @@ export const OneofMember2Input$Ref: InputObjectRef<OneofMember2Input$Shape> =
         package: "testapis.edgecases.import_oneof_member_from_other_file",
       },
     },
-  });
+  }) as InputObjectRef<OneofMember2Input$Shape>;
 
 export function OneofMember2Input$toProto(
   input: OneofMember2Input$Shape | null | undefined,
@@ -22249,6 +22289,7 @@ export function OneofMember2Input$toProto(
 
 import { builder } from "../../../builder";
 import { OneofParent, OneofParentSchema } from "./parent_pb";
+import { OneofMember1, OneofMember2 } from "./member_pb";
 import { create, isMessage } from "@bufbuild/protobuf";
 import {
   OneofMember1$Ref,
@@ -22270,7 +22311,11 @@ builder.objectType(OneofParent$Ref, {
       type: OneofParentOneofField$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.oneofField.value;
+        return (source.oneofField.value ?? null) as
+          | OneofMember1
+          | OneofMember2
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "oneof_field" } },
     }),
@@ -22327,7 +22372,7 @@ export const OneofParentInput$Ref: InputObjectRef<OneofParentInput$Shape> =
         package: "testapis.edgecases.import_oneof_member_from_other_file",
       },
     },
-  });
+  }) as InputObjectRef<OneofParentInput$Shape>;
 
 export function OneofParentInput$toProto(
   input: OneofParentInput$Shape | null | undefined,
@@ -22436,7 +22481,7 @@ export const OneofMessage1Input$Ref: InputObjectRef<OneofMessage1Input$Shape> =
         package: "testapis.edgecases.import_squashed_union.pkg1",
       },
     },
-  });
+  }) as InputObjectRef<OneofMessage1Input$Shape>;
 
 export function OneofMessage1Input$toProto(
   input: OneofMessage1Input$Shape | null | undefined,
@@ -22471,7 +22516,7 @@ export const SquashedOneofInput$Ref: InputObjectRef<SquashedOneofInput$Shape> =
         options: { "[graphql.object_type]": { squashUnion: true } },
       },
     },
-  });
+  }) as InputObjectRef<SquashedOneofInput$Shape>;
 
 export function SquashedOneofInput$toProto(
   input: SquashedOneofInput$Shape | null | undefined,
@@ -22563,7 +22608,7 @@ export const OneofMessage1Input$Ref: InputObjectRef<OneofMessage1Input$Shape> =
         package: "testapis.edgecases.import_squashed_union.pkg1",
       },
     },
-  });
+  }) as InputObjectRef<OneofMessage1Input$Shape>;
 
 export function OneofMessage1Input$toProto(
   input: OneofMessage1Input$Shape | null | undefined,
@@ -22594,7 +22639,7 @@ export const OneofMessage1PartialInput$Ref: InputObjectRef<
       package: "testapis.edgecases.import_squashed_union.pkg1",
     },
   },
-});
+}) as InputObjectRef<OneofMessage1PartialInput$Shape>;
 
 export function OneofMessage1PartialInput$toProto(
   input: OneofMessage1PartialInput$Shape | null | undefined,
@@ -22629,7 +22674,7 @@ export const SquashedOneofInput$Ref: InputObjectRef<SquashedOneofInput$Shape> =
         options: { "[graphql.object_type]": { squashUnion: true } },
       },
     },
-  });
+  }) as InputObjectRef<SquashedOneofInput$Shape>;
 
 export function SquashedOneofInput$toProto(
   input: SquashedOneofInput$Shape | null | undefined,
@@ -22671,7 +22716,7 @@ export const SquashedOneofPartialInput$Ref: InputObjectRef<
       options: { "[graphql.object_type]": { squashUnion: true } },
     },
   },
-});
+}) as InputObjectRef<SquashedOneofPartialInput$Shape>;
 
 export function SquashedOneofPartialInput$toProto(
   input: SquashedOneofPartialInput$Shape | null | undefined,
@@ -22763,7 +22808,7 @@ export const OneofMessage1Input$Ref: InputObjectRef<OneofMessage1Input$Shape> =
         package: "testapis.edgecases.import_squashed_union.pkg1",
       },
     },
-  });
+  }) as InputObjectRef<OneofMessage1Input$Shape>;
 
 export function OneofMessage1Input$toProto(
   input: OneofMessage1Input$Shape | null | undefined,
@@ -22798,7 +22843,7 @@ export const SquashedOneofInput$Ref: InputObjectRef<SquashedOneofInput$Shape> =
         options: { "[graphql.object_type]": { squashUnion: true } },
       },
     },
-  });
+  }) as InputObjectRef<SquashedOneofInput$Shape>;
 
 export function SquashedOneofInput$toProto(
   input: SquashedOneofInput$Shape | null | undefined,
@@ -22849,6 +22894,7 @@ import {
   SquashedOneofInput$Shape,
   SquashedOneofInput$toProto,
 } from "../pkg1/types.pb.pothos";
+import { OneofMessage1 } from "@testapis/protobuf-es-v2/testapis/edgecases/import_squashed_union/pkg1/types_pb";
 import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
@@ -22860,7 +22906,10 @@ builder.objectType(Message$Ref, {
       type: SquashedOneof$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.msg?.message.value;
+        return (source.msg?.message.value ?? null) as
+          | OneofMessage1
+          | undefined
+          | null;
       },
       extensions: {
         protobufField: {
@@ -22907,7 +22956,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         package: "testapis.edgecases.import_squashed_union.pkg2",
       },
     },
-  });
+  }) as InputObjectRef<MessageInput$Shape>;
 
 export function MessageInput$toProto(
   input: MessageInput$Shape | null | undefined,
@@ -22943,6 +22992,7 @@ import {
   SquashedOneofPartialInput$Shape,
   SquashedOneofPartialInput$toProto,
 } from "../pkg1/types.pb.pothos";
+import { OneofMessage1 } from "@testapis/protobuf-es-v2/testapis/edgecases/import_squashed_union/pkg1/types_pb";
 import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
@@ -22954,7 +23004,10 @@ builder.objectType(Message$Ref, {
       type: SquashedOneof$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.msg?.message.value;
+        return (source.msg?.message.value ?? null) as
+          | OneofMessage1
+          | undefined
+          | null;
       },
       extensions: {
         protobufField: {
@@ -23001,7 +23054,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         package: "testapis.edgecases.import_squashed_union.pkg2",
       },
     },
-  });
+  }) as InputObjectRef<MessageInput$Shape>;
 
 export function MessageInput$toProto(
   input: MessageInput$Shape | null | undefined,
@@ -23039,7 +23092,7 @@ export const MessagePartialInput$Ref: InputObjectRef<
         package: "testapis.edgecases.import_squashed_union.pkg2",
       },
     },
-  });
+  }) as InputObjectRef<MessagePartialInput$Shape>;
 
 export function MessagePartialInput$toProto(
   input: MessagePartialInput$Shape | null | undefined,
@@ -23069,6 +23122,7 @@ import {
   SquashedOneofInput$Shape,
   SquashedOneofInput$toProto,
 } from "../pkg1/types.pb.pothos";
+import { OneofMessage1 } from "../pkg1/types_pb";
 import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
@@ -23080,7 +23134,10 @@ builder.objectType(Message$Ref, {
       type: SquashedOneof$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.msg?.message.value;
+        return (source.msg?.message.value ?? null) as
+          | OneofMessage1
+          | undefined
+          | null;
       },
       extensions: {
         protobufField: {
@@ -23127,7 +23184,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         package: "testapis.edgecases.import_squashed_union.pkg2",
       },
     },
-  });
+  }) as InputObjectRef<MessageInput$Shape>;
 
 export function MessageInput$toProto(
   input: MessageInput$Shape | null | undefined,
@@ -23198,7 +23255,7 @@ export const EmptyMessageInput$Ref: InputObjectRef<EmptyMessageInput$Shape> =
         package: "testapis.empty_types",
       },
     },
-  });
+  }) as InputObjectRef<EmptyMessageInput$Shape>;
 
 export function EmptyMessageInput$toProto(
   input: EmptyMessageInput$Shape | null | undefined,
@@ -23267,7 +23324,7 @@ export const EmptyMessageInput$Ref: InputObjectRef<EmptyMessageInput$Shape> =
         package: "testapis.empty_types",
       },
     },
-  });
+  }) as InputObjectRef<EmptyMessageInput$Shape>;
 
 export function EmptyMessageInput$toProto(
   input: EmptyMessageInput$Shape | null | undefined,
@@ -23295,7 +23352,7 @@ export const EmptyMessagePartialInput$Ref: InputObjectRef<
         package: "testapis.empty_types",
       },
     },
-  });
+  }) as InputObjectRef<EmptyMessagePartialInput$Shape>;
 
 export function EmptyMessagePartialInput$toProto(
   input: EmptyMessagePartialInput$Shape | null | undefined,
@@ -23361,7 +23418,7 @@ export const EmptyMessageInput$Ref: InputObjectRef<EmptyMessageInput$Shape> =
         package: "testapis.empty_types",
       },
     },
-  });
+  }) as InputObjectRef<EmptyMessageInput$Shape>;
 
 export function EmptyMessageInput$toProto(
   input: EmptyMessageInput$Shape | null | undefined,
@@ -23666,7 +23723,7 @@ export const MessageWithEnumsInput$Ref: InputObjectRef<
         package: "testapi.enums",
       },
     },
-  });
+  }) as InputObjectRef<MessageWithEnumsInput$Shape>;
 
 export function MessageWithEnumsInput$toProto(
   input: MessageWithEnumsInput$Shape | null | undefined,
@@ -24042,7 +24099,7 @@ export const MessageWithEnumsInput$Ref: InputObjectRef<
         package: "testapi.enums",
       },
     },
-  });
+  }) as InputObjectRef<MessageWithEnumsInput$Shape>;
 
 export function MessageWithEnumsInput$toProto(
   input: MessageWithEnumsInput$Shape | null | undefined,
@@ -24184,7 +24241,7 @@ export const MessageWithEnumsPartialInput$Ref: InputObjectRef<
       package: "testapi.enums",
     },
   },
-});
+}) as InputObjectRef<MessageWithEnumsPartialInput$Shape>;
 
 export function MessageWithEnumsPartialInput$toProto(
   input: MessageWithEnumsPartialInput$Shape | null | undefined,
@@ -24560,7 +24617,7 @@ export const MessageWithEnumsInput$Ref: InputObjectRef<
         package: "testapi.enums",
       },
     },
-  });
+  }) as InputObjectRef<MessageWithEnumsInput$Shape>;
 
 export function MessageWithEnumsInput$toProto(
   input: MessageWithEnumsInput$Shape | null | undefined,
@@ -24728,7 +24785,11 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
       type: TestPrefixPrefixedMessageSquashedMessage$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.squashedMessage?.squashedMessage.value;
+        return (source.squashedMessage?.squashedMessage.value ?? null) as
+          | PrefixedMessage_InnerMessage
+          | PrefixedMessage_InnerMessage2
+          | undefined
+          | null;
       },
       extensions: {
         protobufField: {
@@ -24764,7 +24825,10 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
       nullable: { list: true, items: false },
       resolve: (source) => {
         return source.squashedMessages.map((item) => {
-          const value = item.squashedMessage.value;
+          const value = item.squashedMessage.value as
+            | PrefixedMessage_InnerMessage
+            | PrefixedMessage_InnerMessage2
+            | undefined;
           if (value == null) {
             throw new Error("squashedMessages should not be null");
           }
@@ -24809,7 +24873,10 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
       type: TestPrefixPrefixedMessagePartialIgnoreOneof$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.partialIgnoreOneof.value;
+        return (source.partialIgnoreOneof.value ?? null) as
+          | PrefixedMessage_InnerMessage
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "partial_ignore_oneof" } },
     }),
@@ -25086,7 +25153,7 @@ export const TestPrefixPrefixedMessageInput$Ref: InputObjectRef<
       package: "testapis.extensions",
     },
   },
-});
+}) as InputObjectRef<TestPrefixPrefixedMessageInput$Shape>;
 
 export function TestPrefixPrefixedMessageInput$toProto(
   input: TestPrefixPrefixedMessageInput$Shape | null | undefined,
@@ -25146,7 +25213,7 @@ export const TestPrefixRenamedMessageInput$Ref: InputObjectRef<
       options: { "[graphql.object_type]": { name: "RenamedMessage" } },
     },
   },
-});
+}) as InputObjectRef<TestPrefixRenamedMessageInput$Shape>;
 
 export function TestPrefixRenamedMessageInput$toProto(
   input: TestPrefixRenamedMessageInput$Shape | null | undefined,
@@ -25178,7 +25245,7 @@ export const TestPrefixInterfaceMessageInput$Ref: InputObjectRef<
       options: { "[graphql.object_type]": { interface: true } },
     },
   },
-});
+}) as InputObjectRef<TestPrefixInterfaceMessageInput$Shape>;
 
 export function TestPrefixInterfaceMessageInput$toProto(
   input: TestPrefixInterfaceMessageInput$Shape | null | undefined,
@@ -25215,7 +25282,7 @@ export const TestPrefixPrefixedMessageInnerMessageInput$Ref: InputObjectRef<
       package: "testapis.extensions",
     },
   },
-});
+}) as InputObjectRef<TestPrefixPrefixedMessageInnerMessageInput$Shape>;
 
 export function TestPrefixPrefixedMessageInnerMessageInput$toProto(
   input: TestPrefixPrefixedMessageInnerMessageInput$Shape | null | undefined,
@@ -25255,7 +25322,7 @@ export const TestPrefixPrefixedMessageInnerMessage2Input$Ref: InputObjectRef<
       package: "testapis.extensions",
     },
   },
-});
+}) as InputObjectRef<TestPrefixPrefixedMessageInnerMessage2Input$Shape>;
 
 export function TestPrefixPrefixedMessageInnerMessage2Input$toProto(
   input: TestPrefixPrefixedMessageInnerMessage2Input$Shape | null | undefined,
@@ -25306,7 +25373,7 @@ export const TestPrefixPrefixedMessageSquashedMessageInput$Ref: InputObjectRef<
       options: { "[graphql.object_type]": { squashUnion: true } },
     },
   },
-});
+}) as InputObjectRef<TestPrefixPrefixedMessageSquashedMessageInput$Shape>;
 
 export function TestPrefixPrefixedMessageSquashedMessageInput$toProto(
   input: TestPrefixPrefixedMessageSquashedMessageInput$Shape | null | undefined,
@@ -25353,7 +25420,7 @@ export const TestPrefixIgnoredMessageNotIgnoredInput$Ref: InputObjectRef<
       package: "testapis.extensions",
     },
   },
-});
+}) as InputObjectRef<TestPrefixIgnoredMessageNotIgnoredInput$Shape>;
 
 export function TestPrefixIgnoredMessageNotIgnoredInput$toProto(
   input: TestPrefixIgnoredMessageNotIgnoredInput$Shape | null | undefined,
@@ -25588,7 +25655,11 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
       type: TestPrefixPrefixedMessageSquashedMessage$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.squashedMessage?.squashedMessage.value;
+        return (source.squashedMessage?.squashedMessage.value ?? null) as
+          | PrefixedMessage_InnerMessage
+          | PrefixedMessage_InnerMessage2
+          | undefined
+          | null;
       },
       extensions: {
         protobufField: {
@@ -25624,7 +25695,10 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
       nullable: { list: true, items: false },
       resolve: (source) => {
         return source.squashedMessages.map((item) => {
-          const value = item.squashedMessage.value;
+          const value = item.squashedMessage.value as
+            | PrefixedMessage_InnerMessage
+            | PrefixedMessage_InnerMessage2
+            | undefined;
           if (value == null) {
             throw new Error("squashedMessages should not be null");
           }
@@ -25669,7 +25743,10 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
       type: TestPrefixPrefixedMessagePartialIgnoreOneof$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.partialIgnoreOneof.value;
+        return (source.partialIgnoreOneof.value ?? null) as
+          | PrefixedMessage_InnerMessage
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "partial_ignore_oneof" } },
     }),
@@ -25946,7 +26023,7 @@ export const TestPrefixPrefixedMessageInput$Ref: InputObjectRef<
       package: "testapis.extensions",
     },
   },
-});
+}) as InputObjectRef<TestPrefixPrefixedMessageInput$Shape>;
 
 export function TestPrefixPrefixedMessageInput$toProto(
   input: TestPrefixPrefixedMessageInput$Shape | null | undefined,
@@ -26114,7 +26191,7 @@ export const TestPrefixPrefixedMessagePartialInput$Ref: InputObjectRef<
       package: "testapis.extensions",
     },
   },
-});
+}) as InputObjectRef<TestPrefixPrefixedMessagePartialInput$Shape>;
 
 export function TestPrefixPrefixedMessagePartialInput$toProto(
   input: TestPrefixPrefixedMessagePartialInput$Shape | null | undefined,
@@ -26176,7 +26253,7 @@ export const TestPrefixRenamedMessageInput$Ref: InputObjectRef<
       options: { "[graphql.object_type]": { name: "RenamedMessage" } },
     },
   },
-});
+}) as InputObjectRef<TestPrefixRenamedMessageInput$Shape>;
 
 export function TestPrefixRenamedMessageInput$toProto(
   input: TestPrefixRenamedMessageInput$Shape | null | undefined,
@@ -26208,7 +26285,7 @@ export const TestPrefixRenamedMessagePartialInput$Ref: InputObjectRef<
       options: { "[graphql.object_type]": { name: "RenamedMessage" } },
     },
   },
-});
+}) as InputObjectRef<TestPrefixRenamedMessagePartialInput$Shape>;
 
 export function TestPrefixRenamedMessagePartialInput$toProto(
   input: TestPrefixRenamedMessagePartialInput$Shape | null | undefined,
@@ -26240,7 +26317,7 @@ export const TestPrefixInterfaceMessageInput$Ref: InputObjectRef<
       options: { "[graphql.object_type]": { interface: true } },
     },
   },
-});
+}) as InputObjectRef<TestPrefixInterfaceMessageInput$Shape>;
 
 export function TestPrefixInterfaceMessageInput$toProto(
   input: TestPrefixInterfaceMessageInput$Shape | null | undefined,
@@ -26272,7 +26349,7 @@ export const TestPrefixInterfaceMessagePartialInput$Ref: InputObjectRef<
       options: { "[graphql.object_type]": { interface: true } },
     },
   },
-});
+}) as InputObjectRef<TestPrefixInterfaceMessagePartialInput$Shape>;
 
 export function TestPrefixInterfaceMessagePartialInput$toProto(
   input: TestPrefixInterfaceMessagePartialInput$Shape | null | undefined,
@@ -26309,7 +26386,7 @@ export const TestPrefixPrefixedMessageInnerMessageInput$Ref: InputObjectRef<
       package: "testapis.extensions",
     },
   },
-});
+}) as InputObjectRef<TestPrefixPrefixedMessageInnerMessageInput$Shape>;
 
 export function TestPrefixPrefixedMessageInnerMessageInput$toProto(
   input: TestPrefixPrefixedMessageInnerMessageInput$Shape | null | undefined,
@@ -26351,7 +26428,9 @@ export const TestPrefixPrefixedMessageInnerMessagePartialInput$Ref:
           package: "testapis.extensions",
         },
       },
-    });
+    }) as InputObjectRef<
+      TestPrefixPrefixedMessageInnerMessagePartialInput$Shape
+    >;
 
 export function TestPrefixPrefixedMessageInnerMessagePartialInput$toProto(
   input:
@@ -26394,7 +26473,7 @@ export const TestPrefixPrefixedMessageInnerMessage2Input$Ref: InputObjectRef<
       package: "testapis.extensions",
     },
   },
-});
+}) as InputObjectRef<TestPrefixPrefixedMessageInnerMessage2Input$Shape>;
 
 export function TestPrefixPrefixedMessageInnerMessage2Input$toProto(
   input: TestPrefixPrefixedMessageInnerMessage2Input$Shape | null | undefined,
@@ -26436,7 +26515,9 @@ export const TestPrefixPrefixedMessageInnerMessage2PartialInput$Ref:
           package: "testapis.extensions",
         },
       },
-    });
+    }) as InputObjectRef<
+      TestPrefixPrefixedMessageInnerMessage2PartialInput$Shape
+    >;
 
 export function TestPrefixPrefixedMessageInnerMessage2PartialInput$toProto(
   input:
@@ -26490,7 +26571,7 @@ export const TestPrefixPrefixedMessageSquashedMessageInput$Ref: InputObjectRef<
       options: { "[graphql.object_type]": { squashUnion: true } },
     },
   },
-});
+}) as InputObjectRef<TestPrefixPrefixedMessageSquashedMessageInput$Shape>;
 
 export function TestPrefixPrefixedMessageSquashedMessageInput$toProto(
   input: TestPrefixPrefixedMessageSquashedMessageInput$Shape | null | undefined,
@@ -26556,7 +26637,9 @@ export const TestPrefixPrefixedMessageSquashedMessagePartialInput$Ref:
           options: { "[graphql.object_type]": { squashUnion: true } },
         },
       },
-    });
+    }) as InputObjectRef<
+      TestPrefixPrefixedMessageSquashedMessagePartialInput$Shape
+    >;
 
 export function TestPrefixPrefixedMessageSquashedMessagePartialInput$toProto(
   input:
@@ -26606,7 +26689,7 @@ export const TestPrefixIgnoredMessageNotIgnoredInput$Ref: InputObjectRef<
       package: "testapis.extensions",
     },
   },
-});
+}) as InputObjectRef<TestPrefixIgnoredMessageNotIgnoredInput$Shape>;
 
 export function TestPrefixIgnoredMessageNotIgnoredInput$toProto(
   input: TestPrefixIgnoredMessageNotIgnoredInput$Shape | null | undefined,
@@ -26639,7 +26722,7 @@ export const TestPrefixIgnoredMessageNotIgnoredPartialInput$Ref: InputObjectRef<
       package: "testapis.extensions",
     },
   },
-});
+}) as InputObjectRef<TestPrefixIgnoredMessageNotIgnoredPartialInput$Shape>;
 
 export function TestPrefixIgnoredMessageNotIgnoredPartialInput$toProto(
   input:
@@ -26877,7 +26960,11 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
       type: TestPrefixPrefixedMessageSquashedMessage$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.squashedMessage?.squashedMessage.value;
+        return (source.squashedMessage?.squashedMessage.value ?? null) as
+          | PrefixedMessage_InnerMessage
+          | PrefixedMessage_InnerMessage2
+          | undefined
+          | null;
       },
       extensions: {
         protobufField: {
@@ -26913,7 +27000,10 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
       nullable: { list: true, items: false },
       resolve: (source) => {
         return source.squashedMessages.map((item) => {
-          const value = item.squashedMessage.value;
+          const value = item.squashedMessage.value as
+            | PrefixedMessage_InnerMessage
+            | PrefixedMessage_InnerMessage2
+            | undefined;
           if (value == null) {
             throw new Error("squashedMessages should not be null");
           }
@@ -26958,7 +27048,10 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
       type: TestPrefixPrefixedMessagePartialIgnoreOneof$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.partialIgnoreOneof.value;
+        return (source.partialIgnoreOneof.value ?? null) as
+          | PrefixedMessage_InnerMessage
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "partial_ignore_oneof" } },
     }),
@@ -27235,7 +27328,7 @@ export const TestPrefixPrefixedMessageInput$Ref: InputObjectRef<
       package: "testapis.extensions",
     },
   },
-});
+}) as InputObjectRef<TestPrefixPrefixedMessageInput$Shape>;
 
 export function TestPrefixPrefixedMessageInput$toProto(
   input: TestPrefixPrefixedMessageInput$Shape | null | undefined,
@@ -27295,7 +27388,7 @@ export const TestPrefixRenamedMessageInput$Ref: InputObjectRef<
       options: { "[graphql.object_type]": { name: "RenamedMessage" } },
     },
   },
-});
+}) as InputObjectRef<TestPrefixRenamedMessageInput$Shape>;
 
 export function TestPrefixRenamedMessageInput$toProto(
   input: TestPrefixRenamedMessageInput$Shape | null | undefined,
@@ -27327,7 +27420,7 @@ export const TestPrefixInterfaceMessageInput$Ref: InputObjectRef<
       options: { "[graphql.object_type]": { interface: true } },
     },
   },
-});
+}) as InputObjectRef<TestPrefixInterfaceMessageInput$Shape>;
 
 export function TestPrefixInterfaceMessageInput$toProto(
   input: TestPrefixInterfaceMessageInput$Shape | null | undefined,
@@ -27364,7 +27457,7 @@ export const TestPrefixPrefixedMessageInnerMessageInput$Ref: InputObjectRef<
       package: "testapis.extensions",
     },
   },
-});
+}) as InputObjectRef<TestPrefixPrefixedMessageInnerMessageInput$Shape>;
 
 export function TestPrefixPrefixedMessageInnerMessageInput$toProto(
   input: TestPrefixPrefixedMessageInnerMessageInput$Shape | null | undefined,
@@ -27404,7 +27497,7 @@ export const TestPrefixPrefixedMessageInnerMessage2Input$Ref: InputObjectRef<
       package: "testapis.extensions",
     },
   },
-});
+}) as InputObjectRef<TestPrefixPrefixedMessageInnerMessage2Input$Shape>;
 
 export function TestPrefixPrefixedMessageInnerMessage2Input$toProto(
   input: TestPrefixPrefixedMessageInnerMessage2Input$Shape | null | undefined,
@@ -27455,7 +27548,7 @@ export const TestPrefixPrefixedMessageSquashedMessageInput$Ref: InputObjectRef<
       options: { "[graphql.object_type]": { squashUnion: true } },
     },
   },
-});
+}) as InputObjectRef<TestPrefixPrefixedMessageSquashedMessageInput$Shape>;
 
 export function TestPrefixPrefixedMessageSquashedMessageInput$toProto(
   input: TestPrefixPrefixedMessageSquashedMessageInput$Shape | null | undefined,
@@ -27502,7 +27595,7 @@ export const TestPrefixIgnoredMessageNotIgnoredInput$Ref: InputObjectRef<
       package: "testapis.extensions",
     },
   },
-});
+}) as InputObjectRef<TestPrefixIgnoredMessageNotIgnoredInput$Shape>;
 
 export function TestPrefixIgnoredMessageNotIgnoredInput$toProto(
   input: TestPrefixIgnoredMessageNotIgnoredInput$Shape | null | undefined,
@@ -27793,7 +27886,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         package: "testapis.extensions.field_nullability",
       },
     },
-  });
+  }) as InputObjectRef<MessageInput$Shape>;
 
 export function MessageInput$toProto(
   input: MessageInput$Shape | null | undefined,
@@ -27968,7 +28061,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         package: "testapis.extensions.field_nullability",
       },
     },
-  });
+  }) as InputObjectRef<MessageInput$Shape>;
 
 export function MessageInput$toProto(
   input: MessageInput$Shape | null | undefined,
@@ -28041,7 +28134,7 @@ export const MessagePartialInput$Ref: InputObjectRef<
         package: "testapis.extensions.field_nullability",
       },
     },
-  });
+  }) as InputObjectRef<MessagePartialInput$Shape>;
 
 export function MessagePartialInput$toProto(
   input: MessagePartialInput$Shape | null | undefined,
@@ -28212,7 +28305,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         package: "testapis.extensions.field_nullability",
       },
     },
-  });
+  }) as InputObjectRef<MessageInput$Shape>;
 
 export function MessageInput$toProto(
   input: MessageInput$Shape | null | undefined,
@@ -28417,7 +28510,7 @@ export const ParentMessageInput$Ref: InputObjectRef<ParentMessageInput$Shape> =
         package: "testapis.extensions.no_partial",
       },
     },
-  });
+  }) as InputObjectRef<ParentMessageInput$Shape>;
 
 export function ParentMessageInput$toProto(
   input: ParentMessageInput$Shape | null | undefined,
@@ -28463,7 +28556,7 @@ export const PartialableInputMessageInput$Ref: InputObjectRef<
       package: "testapis.extensions.no_partial",
     },
   },
-});
+}) as InputObjectRef<PartialableInputMessageInput$Shape>;
 
 export function PartialableInputMessageInput$toProto(
   input: PartialableInputMessageInput$Shape | null | undefined,
@@ -28506,7 +28599,7 @@ export const NoPartialInputMessageInput$Ref: InputObjectRef<
       options: { "[graphql.input_type]": { noPartial: true } },
     },
   },
-});
+}) as InputObjectRef<NoPartialInputMessageInput$Shape>;
 
 export function NoPartialInputMessageInput$toProto(
   input: NoPartialInputMessageInput$Shape | null | undefined,
@@ -28692,7 +28785,7 @@ export const ParentMessageInput$Ref: InputObjectRef<ParentMessageInput$Shape> =
         package: "testapis.extensions.no_partial",
       },
     },
-  });
+  }) as InputObjectRef<ParentMessageInput$Shape>;
 
 export function ParentMessageInput$toProto(
   input: ParentMessageInput$Shape | null | undefined,
@@ -28749,7 +28842,7 @@ export const ParentMessagePartialInput$Ref: InputObjectRef<
       package: "testapis.extensions.no_partial",
     },
   },
-});
+}) as InputObjectRef<ParentMessagePartialInput$Shape>;
 
 export function ParentMessagePartialInput$toProto(
   input: ParentMessagePartialInput$Shape | null | undefined,
@@ -28797,7 +28890,7 @@ export const PartialableInputMessageInput$Ref: InputObjectRef<
       package: "testapis.extensions.no_partial",
     },
   },
-});
+}) as InputObjectRef<PartialableInputMessageInput$Shape>;
 
 export function PartialableInputMessageInput$toProto(
   input: PartialableInputMessageInput$Shape | null | undefined,
@@ -28839,7 +28932,7 @@ export const PartialableInputMessagePartialInput$Ref: InputObjectRef<
       package: "testapis.extensions.no_partial",
     },
   },
-});
+}) as InputObjectRef<PartialableInputMessagePartialInput$Shape>;
 
 export function PartialableInputMessagePartialInput$toProto(
   input: PartialableInputMessagePartialInput$Shape | null | undefined,
@@ -28882,7 +28975,7 @@ export const NoPartialInputMessageInput$Ref: InputObjectRef<
       options: { "[graphql.input_type]": { noPartial: true } },
     },
   },
-});
+}) as InputObjectRef<NoPartialInputMessageInput$Shape>;
 
 export function NoPartialInputMessageInput$toProto(
   input: NoPartialInputMessageInput$Shape | null | undefined,
@@ -29068,7 +29161,7 @@ export const ParentMessageInput$Ref: InputObjectRef<ParentMessageInput$Shape> =
         package: "testapis.extensions.no_partial",
       },
     },
-  });
+  }) as InputObjectRef<ParentMessageInput$Shape>;
 
 export function ParentMessageInput$toProto(
   input: ParentMessageInput$Shape | null | undefined,
@@ -29114,7 +29207,7 @@ export const PartialableInputMessageInput$Ref: InputObjectRef<
       package: "testapis.extensions.no_partial",
     },
   },
-});
+}) as InputObjectRef<PartialableInputMessageInput$Shape>;
 
 export function PartialableInputMessageInput$toProto(
   input: PartialableInputMessageInput$Shape | null | undefined,
@@ -29157,7 +29250,7 @@ export const NoPartialInputMessageInput$Ref: InputObjectRef<
       options: { "[graphql.input_type]": { noPartial: true } },
     },
   },
-});
+}) as InputObjectRef<NoPartialInputMessageInput$Shape>;
 
 export function NoPartialInputMessageInput$toProto(
   input: NoPartialInputMessageInput$Shape | null | undefined,
@@ -29359,7 +29452,7 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       package: "testapis.field_behavior",
     },
   },
-});
+}) as InputObjectRef<FieldBehaviorComentsMessageInput$Shape>;
 
 export function FieldBehaviorComentsMessageInput$toProto(
   input: FieldBehaviorComentsMessageInput$Shape | null | undefined,
@@ -29407,7 +29500,7 @@ export const FieldBehaviorComentsMessagePostInput$Ref: InputObjectRef<
       package: "testapis.field_behavior",
     },
   },
-});
+}) as InputObjectRef<FieldBehaviorComentsMessagePostInput$Shape>;
 
 export function FieldBehaviorComentsMessagePostInput$toProto(
   input: FieldBehaviorComentsMessagePostInput$Shape | null | undefined,
@@ -29608,7 +29701,7 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       package: "testapis.field_behavior",
     },
   },
-});
+}) as InputObjectRef<FieldBehaviorComentsMessageInput$Shape>;
 
 export function FieldBehaviorComentsMessageInput$toProto(
   input: FieldBehaviorComentsMessageInput$Shape | null | undefined,
@@ -29706,7 +29799,7 @@ export const FieldBehaviorComentsMessagePartialInput$Ref: InputObjectRef<
       package: "testapis.field_behavior",
     },
   },
-});
+}) as InputObjectRef<FieldBehaviorComentsMessagePartialInput$Shape>;
 
 export function FieldBehaviorComentsMessagePartialInput$toProto(
   input: FieldBehaviorComentsMessagePartialInput$Shape | null | undefined,
@@ -29756,7 +29849,7 @@ export const FieldBehaviorComentsMessagePostInput$Ref: InputObjectRef<
       package: "testapis.field_behavior",
     },
   },
-});
+}) as InputObjectRef<FieldBehaviorComentsMessagePostInput$Shape>;
 
 export function FieldBehaviorComentsMessagePostInput$toProto(
   input: FieldBehaviorComentsMessagePostInput$Shape | null | undefined,
@@ -29789,7 +29882,7 @@ export const FieldBehaviorComentsMessagePostPartialInput$Ref: InputObjectRef<
       package: "testapis.field_behavior",
     },
   },
-});
+}) as InputObjectRef<FieldBehaviorComentsMessagePostPartialInput$Shape>;
 
 export function FieldBehaviorComentsMessagePostPartialInput$toProto(
   input: FieldBehaviorComentsMessagePostPartialInput$Shape | null | undefined,
@@ -29990,7 +30083,7 @@ export const FieldBehaviorComentsMessageInput$Ref: InputObjectRef<
       package: "testapis.field_behavior",
     },
   },
-});
+}) as InputObjectRef<FieldBehaviorComentsMessageInput$Shape>;
 
 export function FieldBehaviorComentsMessageInput$toProto(
   input: FieldBehaviorComentsMessageInput$Shape | null | undefined,
@@ -30038,7 +30131,7 @@ export const FieldBehaviorComentsMessagePostInput$Ref: InputObjectRef<
       package: "testapis.field_behavior",
     },
   },
-});
+}) as InputObjectRef<FieldBehaviorComentsMessagePostInput$Shape>;
 
 export function FieldBehaviorComentsMessagePostInput$toProto(
   input: FieldBehaviorComentsMessagePostInput$Shape | null | undefined,
@@ -30117,7 +30210,7 @@ export const SubpkgMessageInput$Ref: InputObjectRef<SubpkgMessageInput$Shape> =
         package: "testapis.multipkgs.subpkg1",
       },
     },
-  });
+  }) as InputObjectRef<SubpkgMessageInput$Shape>;
 
 export function SubpkgMessageInput$toProto(
   input: SubpkgMessageInput$Shape | null | undefined,
@@ -30205,7 +30298,7 @@ export const SubpkgMessageInput$Ref: InputObjectRef<SubpkgMessageInput$Shape> =
         package: "testapis.multipkgs.subpkg1",
       },
     },
-  });
+  }) as InputObjectRef<SubpkgMessageInput$Shape>;
 
 export function SubpkgMessageInput$toProto(
   input: SubpkgMessageInput$Shape | null | undefined,
@@ -30236,7 +30329,7 @@ export const SubpkgMessagePartialInput$Ref: InputObjectRef<
       package: "testapis.multipkgs.subpkg1",
     },
   },
-});
+}) as InputObjectRef<SubpkgMessagePartialInput$Shape>;
 
 export function SubpkgMessagePartialInput$toProto(
   input: SubpkgMessagePartialInput$Shape | null | undefined,
@@ -30320,7 +30413,7 @@ export const SubpkgMessageInput$Ref: InputObjectRef<SubpkgMessageInput$Shape> =
         package: "testapis.multipkgs.subpkg1",
       },
     },
-  });
+  }) as InputObjectRef<SubpkgMessageInput$Shape>;
 
 export function SubpkgMessageInput$toProto(
   input: SubpkgMessageInput$Shape | null | undefined,
@@ -30457,7 +30550,7 @@ export const MessageWithSubpkgInput$Ref: InputObjectRef<
         package: "testapis.multipkgs.subpkg1",
       },
     },
-  });
+  }) as InputObjectRef<MessageWithSubpkgInput$Shape>;
 
 export function MessageWithSubpkgInput$toProto(
   input: MessageWithSubpkgInput$Shape | null | undefined,
@@ -30585,7 +30678,7 @@ export const MessageWithSubpkgInput$Ref: InputObjectRef<
         package: "testapis.multipkgs.subpkg1",
       },
     },
-  });
+  }) as InputObjectRef<MessageWithSubpkgInput$Shape>;
 
 export function MessageWithSubpkgInput$toProto(
   input: MessageWithSubpkgInput$Shape | null | undefined,
@@ -30637,7 +30730,7 @@ export const MessageWithSubpkgPartialInput$Ref: InputObjectRef<
       package: "testapis.multipkgs.subpkg1",
     },
   },
-});
+}) as InputObjectRef<MessageWithSubpkgPartialInput$Shape>;
 
 export function MessageWithSubpkgPartialInput$toProto(
   input: MessageWithSubpkgPartialInput$Shape | null | undefined,
@@ -30759,7 +30852,7 @@ export const MessageWithSubpkgInput$Ref: InputObjectRef<
         package: "testapis.multipkgs.subpkg1",
       },
     },
-  });
+  }) as InputObjectRef<MessageWithSubpkgInput$Shape>;
 
 export function MessageWithSubpkgInput$toProto(
   input: MessageWithSubpkgInput$Shape | null | undefined,
@@ -30916,7 +31009,7 @@ export const ParentMessageInput$Ref: InputObjectRef<ParentMessageInput$Shape> =
         package: "testapis.nested",
       },
     },
-  });
+  }) as InputObjectRef<ParentMessageInput$Shape>;
 
 export function ParentMessageInput$toProto(
   input: ParentMessageInput$Shape | null | undefined,
@@ -30955,7 +31048,7 @@ export const ParentMessageNestedMessageInput$Ref: InputObjectRef<
       package: "testapis.nested",
     },
   },
-});
+}) as InputObjectRef<ParentMessageNestedMessageInput$Shape>;
 
 export function ParentMessageNestedMessageInput$toProto(
   input: ParentMessageNestedMessageInput$Shape | null | undefined,
@@ -31126,7 +31219,7 @@ export const ParentMessageInput$Ref: InputObjectRef<ParentMessageInput$Shape> =
         package: "testapis.nested",
       },
     },
-  });
+  }) as InputObjectRef<ParentMessageInput$Shape>;
 
 export function ParentMessageInput$toProto(
   input: ParentMessageInput$Shape | null | undefined,
@@ -31185,7 +31278,7 @@ export const ParentMessagePartialInput$Ref: InputObjectRef<
       package: "testapis.nested",
     },
   },
-});
+}) as InputObjectRef<ParentMessagePartialInput$Shape>;
 
 export function ParentMessagePartialInput$toProto(
   input: ParentMessagePartialInput$Shape | null | undefined,
@@ -31224,7 +31317,7 @@ export const ParentMessageNestedMessageInput$Ref: InputObjectRef<
       package: "testapis.nested",
     },
   },
-});
+}) as InputObjectRef<ParentMessageNestedMessageInput$Shape>;
 
 export function ParentMessageNestedMessageInput$toProto(
   input: ParentMessageNestedMessageInput$Shape | null | undefined,
@@ -31259,7 +31352,7 @@ export const ParentMessageNestedMessagePartialInput$Ref: InputObjectRef<
       package: "testapis.nested",
     },
   },
-});
+}) as InputObjectRef<ParentMessageNestedMessagePartialInput$Shape>;
 
 export function ParentMessageNestedMessagePartialInput$toProto(
   input: ParentMessageNestedMessagePartialInput$Shape | null | undefined,
@@ -31430,7 +31523,7 @@ export const ParentMessageInput$Ref: InputObjectRef<ParentMessageInput$Shape> =
         package: "testapis.nested",
       },
     },
-  });
+  }) as InputObjectRef<ParentMessageInput$Shape>;
 
 export function ParentMessageInput$toProto(
   input: ParentMessageInput$Shape | null | undefined,
@@ -31469,7 +31562,7 @@ export const ParentMessageNestedMessageInput$Ref: InputObjectRef<
       package: "testapis.nested",
     },
   },
-});
+}) as InputObjectRef<ParentMessageNestedMessageInput$Shape>;
 
 export function ParentMessageNestedMessageInput$toProto(
   input: ParentMessageNestedMessageInput$Shape | null | undefined,
@@ -31536,7 +31629,10 @@ builder.objectType(OneofParent$Ref, {
       nullable: false,
       description: "Required. disallow not_set.",
       resolve: (source) => {
-        const value = source.requiredOneofMembers.value;
+        const value = source.requiredOneofMembers.value as
+          | OneofMemberMessage1
+          | OneofMemberMessage2
+          | undefined;
         if (value == null) {
           throw new Error("requiredOneofMembers should not be null");
         }
@@ -31548,7 +31644,11 @@ builder.objectType(OneofParent$Ref, {
       type: OneofParentOptionalOneofMembers$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.optionalOneofMembers.value;
+        return (source.optionalOneofMembers.value ?? null) as
+          | OneofMemberMessage1
+          | OneofMemberMessage2
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "optional_oneof_members" } },
     }),
@@ -31681,7 +31781,7 @@ export const OneofParentInput$Ref: InputObjectRef<OneofParentInput$Shape> =
         package: "testapis.oneof",
       },
     },
-  });
+  }) as InputObjectRef<OneofParentInput$Shape>;
 
 export function OneofParentInput$toProto(
   input: OneofParentInput$Shape | null | undefined,
@@ -31735,7 +31835,7 @@ export const OneofMemberMessage1Input$Ref: InputObjectRef<
         package: "testapis.oneof",
       },
     },
-  });
+  }) as InputObjectRef<OneofMemberMessage1Input$Shape>;
 
 export function OneofMemberMessage1Input$toProto(
   input: OneofMemberMessage1Input$Shape | null | undefined,
@@ -31767,7 +31867,7 @@ export const OneofMemberMessage2Input$Ref: InputObjectRef<
         package: "testapis.oneof",
       },
     },
-  });
+  }) as InputObjectRef<OneofMemberMessage2Input$Shape>;
 
 export function OneofMemberMessage2Input$toProto(
   input: OneofMemberMessage2Input$Shape | null | undefined,
@@ -31862,7 +31962,10 @@ builder.objectType(OneofParent$Ref, {
       nullable: false,
       description: "Required. disallow not_set.",
       resolve: (source) => {
-        const value = source.requiredOneofMembers.value;
+        const value = source.requiredOneofMembers.value as
+          | OneofMemberMessage1
+          | OneofMemberMessage2
+          | undefined;
         if (value == null) {
           throw new Error("requiredOneofMembers should not be null");
         }
@@ -31874,7 +31977,11 @@ builder.objectType(OneofParent$Ref, {
       type: OneofParentOptionalOneofMembers$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.optionalOneofMembers.value;
+        return (source.optionalOneofMembers.value ?? null) as
+          | OneofMemberMessage1
+          | OneofMemberMessage2
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "optional_oneof_members" } },
     }),
@@ -32007,7 +32114,7 @@ export const OneofParentInput$Ref: InputObjectRef<OneofParentInput$Shape> =
         package: "testapis.oneof",
       },
     },
-  });
+  }) as InputObjectRef<OneofParentInput$Shape>;
 
 export function OneofParentInput$toProto(
   input: OneofParentInput$Shape | null | undefined,
@@ -32107,7 +32214,7 @@ export const OneofParentPartialInput$Ref: InputObjectRef<
         package: "testapis.oneof",
       },
     },
-  });
+  }) as InputObjectRef<OneofParentPartialInput$Shape>;
 
 export function OneofParentPartialInput$toProto(
   input: OneofParentPartialInput$Shape | null | undefined,
@@ -32161,7 +32268,7 @@ export const OneofMemberMessage1Input$Ref: InputObjectRef<
         package: "testapis.oneof",
       },
     },
-  });
+  }) as InputObjectRef<OneofMemberMessage1Input$Shape>;
 
 export function OneofMemberMessage1Input$toProto(
   input: OneofMemberMessage1Input$Shape | null | undefined,
@@ -32192,7 +32299,7 @@ export const OneofMemberMessage1PartialInput$Ref: InputObjectRef<
       package: "testapis.oneof",
     },
   },
-});
+}) as InputObjectRef<OneofMemberMessage1PartialInput$Shape>;
 
 export function OneofMemberMessage1PartialInput$toProto(
   input: OneofMemberMessage1PartialInput$Shape | null | undefined,
@@ -32224,7 +32331,7 @@ export const OneofMemberMessage2Input$Ref: InputObjectRef<
         package: "testapis.oneof",
       },
     },
-  });
+  }) as InputObjectRef<OneofMemberMessage2Input$Shape>;
 
 export function OneofMemberMessage2Input$toProto(
   input: OneofMemberMessage2Input$Shape | null | undefined,
@@ -32259,7 +32366,7 @@ export const OneofMemberMessage2PartialInput$Ref: InputObjectRef<
       package: "testapis.oneof",
     },
   },
-});
+}) as InputObjectRef<OneofMemberMessage2PartialInput$Shape>;
 
 export function OneofMemberMessage2PartialInput$toProto(
   input: OneofMemberMessage2PartialInput$Shape | null | undefined,
@@ -32354,7 +32461,10 @@ builder.objectType(OneofParent$Ref, {
       nullable: false,
       description: "Required. disallow not_set.",
       resolve: (source) => {
-        const value = source.requiredOneofMembers.value;
+        const value = source.requiredOneofMembers.value as
+          | OneofMemberMessage1
+          | OneofMemberMessage2
+          | undefined;
         if (value == null) {
           throw new Error("requiredOneofMembers should not be null");
         }
@@ -32366,7 +32476,11 @@ builder.objectType(OneofParent$Ref, {
       type: OneofParentOptionalOneofMembers$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.optionalOneofMembers.value;
+        return (source.optionalOneofMembers.value ?? null) as
+          | OneofMemberMessage1
+          | OneofMemberMessage2
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "optional_oneof_members" } },
     }),
@@ -32499,7 +32613,7 @@ export const OneofParentInput$Ref: InputObjectRef<OneofParentInput$Shape> =
         package: "testapis.oneof",
       },
     },
-  });
+  }) as InputObjectRef<OneofParentInput$Shape>;
 
 export function OneofParentInput$toProto(
   input: OneofParentInput$Shape | null | undefined,
@@ -32553,7 +32667,7 @@ export const OneofMemberMessage1Input$Ref: InputObjectRef<
         package: "testapis.oneof",
       },
     },
-  });
+  }) as InputObjectRef<OneofMemberMessage1Input$Shape>;
 
 export function OneofMemberMessage1Input$toProto(
   input: OneofMemberMessage1Input$Shape | null | undefined,
@@ -32585,7 +32699,7 @@ export const OneofMemberMessage2Input$Ref: InputObjectRef<
         package: "testapis.oneof",
       },
     },
-  });
+  }) as InputObjectRef<OneofMemberMessage2Input$Shape>;
 
 export function OneofMemberMessage2Input$toProto(
   input: OneofMemberMessage2Input$Shape | null | undefined,
@@ -33084,7 +33198,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         package: "testapis.primitives",
       },
     },
-  });
+  }) as InputObjectRef<MessageInput$Shape>;
 
 export function MessageInput$toProto(
   input: MessageInput$Shape | null | undefined,
@@ -33443,7 +33557,7 @@ export const PrimitivesInput$Ref: InputObjectRef<PrimitivesInput$Shape> =
         package: "testapis.primitives",
       },
     },
-  });
+  }) as InputObjectRef<PrimitivesInput$Shape>;
 
 export function PrimitivesInput$toProto(
   input: PrimitivesInput$Shape | null | undefined,
@@ -33926,7 +34040,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         package: "testapis.primitives",
       },
     },
-  });
+  }) as InputObjectRef<MessageInput$Shape>;
 
 export function MessageInput$toProto(
   input: MessageInput$Shape | null | undefined,
@@ -34011,7 +34125,7 @@ export const MessagePartialInput$Ref: InputObjectRef<
         package: "testapis.primitives",
       },
     },
-  });
+  }) as InputObjectRef<MessagePartialInput$Shape>;
 
 export function MessagePartialInput$toProto(
   input: MessagePartialInput$Shape | null | undefined,
@@ -34370,7 +34484,7 @@ export const PrimitivesInput$Ref: InputObjectRef<PrimitivesInput$Shape> =
         package: "testapis.primitives",
       },
     },
-  });
+  }) as InputObjectRef<PrimitivesInput$Shape>;
 
 export function PrimitivesInput$toProto(
   input: PrimitivesInput$Shape | null | undefined,
@@ -34749,7 +34863,7 @@ export const PrimitivesPartialInput$Ref: InputObjectRef<
         package: "testapis.primitives",
       },
     },
-  });
+  }) as InputObjectRef<PrimitivesPartialInput$Shape>;
 
 export function PrimitivesPartialInput$toProto(
   input: PrimitivesPartialInput$Shape | null | undefined,
@@ -35232,7 +35346,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         package: "testapis.primitives",
       },
     },
-  });
+  }) as InputObjectRef<MessageInput$Shape>;
 
 export function MessageInput$toProto(
   input: MessageInput$Shape | null | undefined,
@@ -35591,7 +35705,7 @@ export const PrimitivesInput$Ref: InputObjectRef<PrimitivesInput$Shape> =
         package: "testapis.primitives",
       },
     },
-  });
+  }) as InputObjectRef<PrimitivesInput$Shape>;
 
 export function PrimitivesInput$toProto(
   input: PrimitivesInput$Shape | null | undefined,
@@ -35723,7 +35837,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         package: "testapis.proto3_optional",
       },
     },
-  });
+  }) as InputObjectRef<MessageInput$Shape>;
 
 export function MessageInput$toProto(
   input: MessageInput$Shape | null | undefined,
@@ -35827,7 +35941,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         package: "testapis.proto3_optional",
       },
     },
-  });
+  }) as InputObjectRef<MessageInput$Shape>;
 
 export function MessageInput$toProto(
   input: MessageInput$Shape | null | undefined,
@@ -35876,7 +35990,7 @@ export const MessagePartialInput$Ref: InputObjectRef<
         package: "testapis.proto3_optional",
       },
     },
-  });
+  }) as InputObjectRef<MessagePartialInput$Shape>;
 
 export function MessagePartialInput$toProto(
   input: MessagePartialInput$Shape | null | undefined,
@@ -35977,7 +36091,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         package: "testapis.proto3_optional",
       },
     },
-  });
+  }) as InputObjectRef<MessageInput$Shape>;
 
 export function MessageInput$toProto(
   input: MessageInput$Shape | null | undefined,
@@ -36280,7 +36394,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         package: "testapis.wktypes",
       },
     },
-  });
+  }) as InputObjectRef<MessageInput$Shape>;
 
 export function MessageInput$toProto(
   input: MessageInput$Shape | null | undefined,
@@ -36592,7 +36706,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         package: "testapis.wktypes",
       },
     },
-  });
+  }) as InputObjectRef<MessageInput$Shape>;
 
 export function MessageInput$toProto(
   input: MessageInput$Shape | null | undefined,
@@ -36750,7 +36864,7 @@ export const MessagePartialInput$Ref: InputObjectRef<
         package: "testapis.wktypes",
       },
     },
-  });
+  }) as InputObjectRef<MessagePartialInput$Shape>;
 
 export function MessagePartialInput$toProto(
   input: MessagePartialInput$Shape | null | undefined,
@@ -37059,7 +37173,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         package: "testapis.wktypes",
       },
     },
-  });
+  }) as InputObjectRef<MessageInput$Shape>;
 
 export function MessageInput$toProto(
   input: MessageInput$Shape | null | undefined,
@@ -37861,7 +37975,11 @@ builder.objectType(NotDeprecatedMessage$Ref, {
       type: NotDeprecatedMessageNotDeprecatedOneof$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.notDeprecatedOneof.value;
+        return (source.notDeprecatedOneof.value ?? null) as
+          | NotDeprecatedMessage_InnerMessage1
+          | NotDeprecatedMessage_InnerMessage2
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "not_deprecated_oneof" } },
     }),
@@ -37871,7 +37989,11 @@ builder.objectType(NotDeprecatedMessage$Ref, {
       deprecationReason:
         "testapis.deprecation.NotDeprecatedMessage.deprecated_oneof is mark as deprecated in a *.proto file.",
       resolve: (source) => {
-        return source.deprecatedOneof.value;
+        return (source.deprecatedOneof.value ?? null) as
+          | NotDeprecatedMessage_InnerMessage1
+          | NotDeprecatedMessage_InnerMessage2
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "deprecated_oneof" } },
     }),
@@ -38662,7 +38784,11 @@ builder.objectType(NotDeprecatedMessage$Ref, {
       type: NotDeprecatedMessageNotDeprecatedOneof$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.notDeprecatedOneof.value;
+        return (source.notDeprecatedOneof.value ?? null) as
+          | NotDeprecatedMessage_InnerMessage1
+          | NotDeprecatedMessage_InnerMessage2
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "not_deprecated_oneof" } },
     }),
@@ -38672,7 +38798,11 @@ builder.objectType(NotDeprecatedMessage$Ref, {
       deprecationReason:
         "testapis.deprecation.NotDeprecatedMessage.deprecated_oneof is mark as deprecated in a *.proto file.",
       resolve: (source) => {
-        return source.deprecatedOneof.value;
+        return (source.deprecatedOneof.value ?? null) as
+          | NotDeprecatedMessage_InnerMessage1
+          | NotDeprecatedMessage_InnerMessage2
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "deprecated_oneof" } },
     }),
@@ -39838,7 +39968,11 @@ builder.objectType(NotDeprecatedMessage$Ref, {
       type: NotDeprecatedMessageNotDeprecatedOneof$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.notDeprecatedOneof.value;
+        return (source.notDeprecatedOneof.value ?? null) as
+          | NotDeprecatedMessage_InnerMessage1
+          | NotDeprecatedMessage_InnerMessage2
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "not_deprecated_oneof" } },
     }),
@@ -39848,7 +39982,11 @@ builder.objectType(NotDeprecatedMessage$Ref, {
       deprecationReason:
         "testapis.deprecation.NotDeprecatedMessage.deprecated_oneof is mark as deprecated in a *.proto file.",
       resolve: (source) => {
-        return source.deprecatedOneof.value;
+        return (source.deprecatedOneof.value ?? null) as
+          | NotDeprecatedMessage_InnerMessage1
+          | NotDeprecatedMessage_InnerMessage2
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "deprecated_oneof" } },
     }),
@@ -41167,6 +41305,10 @@ export function OneofMember2Input$toProto(
 import { builder } from "../../../builder";
 import { OneofParent } from "@testapis/protobuf-es/testapis/edgecases/import_oneof_member_from_other_file/parent_pb";
 import {
+  OneofMember1,
+  OneofMember2,
+} from "@testapis/protobuf-es/testapis/edgecases/import_oneof_member_from_other_file/member_pb";
+import {
   OneofMember1$Ref,
   OneofMember1Input$Ref,
   OneofMember1Input$Shape,
@@ -41186,7 +41328,11 @@ builder.objectType(OneofParent$Ref, {
       type: OneofParentOneofField$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.oneofField.value;
+        return (source.oneofField.value ?? null) as
+          | OneofMember1
+          | OneofMember2
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "oneof_field" } },
     }),
@@ -41473,6 +41619,10 @@ export function OneofMember2PartialInput$toProto(
 import { builder } from "../../../builder";
 import { OneofParent } from "@testapis/protobuf-es/testapis/edgecases/import_oneof_member_from_other_file/parent_pb";
 import {
+  OneofMember1,
+  OneofMember2,
+} from "@testapis/protobuf-es/testapis/edgecases/import_oneof_member_from_other_file/member_pb";
+import {
   OneofMember1$Ref,
   OneofMember1Input$Ref,
   OneofMember1Input$Shape,
@@ -41498,7 +41648,11 @@ builder.objectType(OneofParent$Ref, {
       type: OneofParentOneofField$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.oneofField.value;
+        return (source.oneofField.value ?? null) as
+          | OneofMember1
+          | OneofMember2
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "oneof_field" } },
     }),
@@ -41780,6 +41934,7 @@ export function OneofMember2Input$toProto(
 
 import { builder } from "../../../builder";
 import { OneofParent } from "./parent_pb";
+import { OneofMember1, OneofMember2 } from "./member_pb";
 import {
   OneofMember1$Ref,
   OneofMember1Input$Ref,
@@ -41800,7 +41955,11 @@ builder.objectType(OneofParent$Ref, {
       type: OneofParentOneofField$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.oneofField.value;
+        return (source.oneofField.value ?? null) as
+          | OneofMember1
+          | OneofMember2
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "oneof_field" } },
     }),
@@ -42364,6 +42523,7 @@ import {
   SquashedOneofInput$Shape,
   SquashedOneofInput$toProto,
 } from "../pkg1/types.pb.pothos";
+import { OneofMessage1 } from "@testapis/protobuf-es/testapis/edgecases/import_squashed_union/pkg1/types_pb";
 import { InputObjectRef } from "@pothos/core";
 
 export const Message$Ref = builder.objectRef<Message>("Message");
@@ -42374,7 +42534,10 @@ builder.objectType(Message$Ref, {
       type: SquashedOneof$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.msg?.message.value;
+        return (source.msg?.message.value ?? null) as
+          | OneofMessage1
+          | undefined
+          | null;
       },
       extensions: {
         protobufField: {
@@ -42454,6 +42617,7 @@ import {
   SquashedOneofPartialInput$Shape,
   SquashedOneofPartialInput$toProto,
 } from "../pkg1/types.pb.pothos";
+import { OneofMessage1 } from "@testapis/protobuf-es/testapis/edgecases/import_squashed_union/pkg1/types_pb";
 import { InputObjectRef } from "@pothos/core";
 
 export const Message$Ref = builder.objectRef<Message>("Message");
@@ -42464,7 +42628,10 @@ builder.objectType(Message$Ref, {
       type: SquashedOneof$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.msg?.message.value;
+        return (source.msg?.message.value ?? null) as
+          | OneofMessage1
+          | undefined
+          | null;
       },
       extensions: {
         protobufField: {
@@ -42579,6 +42746,7 @@ import {
   SquashedOneofInput$Shape,
   SquashedOneofInput$toProto,
 } from "../pkg1/types.pb.pothos";
+import { OneofMessage1 } from "../pkg1/types_pb";
 import { InputObjectRef } from "@pothos/core";
 
 export const Message$Ref = builder.objectRef<Message>("Message");
@@ -42589,7 +42757,10 @@ builder.objectType(Message$Ref, {
       type: SquashedOneof$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.msg?.message.value;
+        return (source.msg?.message.value ?? null) as
+          | OneofMessage1
+          | undefined
+          | null;
       },
       extensions: {
         protobufField: {
@@ -44209,7 +44380,11 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
       type: TestPrefixPrefixedMessageSquashedMessage$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.squashedMessage?.squashedMessage.value;
+        return (source.squashedMessage?.squashedMessage.value ?? null) as
+          | PrefixedMessage_InnerMessage
+          | PrefixedMessage_InnerMessage2
+          | undefined
+          | null;
       },
       extensions: {
         protobufField: {
@@ -44245,7 +44420,10 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
       nullable: { list: true, items: false },
       resolve: (source) => {
         return source.squashedMessages.map((item) => {
-          const value = item.squashedMessage.value;
+          const value = item.squashedMessage.value as
+            | PrefixedMessage_InnerMessage
+            | PrefixedMessage_InnerMessage2
+            | undefined;
           if (value == null) {
             throw new Error("squashedMessages should not be null");
           }
@@ -44290,7 +44468,10 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
       type: TestPrefixPrefixedMessagePartialIgnoreOneof$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.partialIgnoreOneof.value;
+        return (source.partialIgnoreOneof.value ?? null) as
+          | PrefixedMessage_InnerMessage
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "partial_ignore_oneof" } },
     }),
@@ -45058,7 +45239,11 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
       type: TestPrefixPrefixedMessageSquashedMessage$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.squashedMessage?.squashedMessage.value;
+        return (source.squashedMessage?.squashedMessage.value ?? null) as
+          | PrefixedMessage_InnerMessage
+          | PrefixedMessage_InnerMessage2
+          | undefined
+          | null;
       },
       extensions: {
         protobufField: {
@@ -45094,7 +45279,10 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
       nullable: { list: true, items: false },
       resolve: (source) => {
         return source.squashedMessages.map((item) => {
-          const value = item.squashedMessage.value;
+          const value = item.squashedMessage.value as
+            | PrefixedMessage_InnerMessage
+            | PrefixedMessage_InnerMessage2
+            | undefined;
           if (value == null) {
             throw new Error("squashedMessages should not be null");
           }
@@ -45139,7 +45327,10 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
       type: TestPrefixPrefixedMessagePartialIgnoreOneof$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.partialIgnoreOneof.value;
+        return (source.partialIgnoreOneof.value ?? null) as
+          | PrefixedMessage_InnerMessage
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "partial_ignore_oneof" } },
     }),
@@ -46334,7 +46525,11 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
       type: TestPrefixPrefixedMessageSquashedMessage$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.squashedMessage?.squashedMessage.value;
+        return (source.squashedMessage?.squashedMessage.value ?? null) as
+          | PrefixedMessage_InnerMessage
+          | PrefixedMessage_InnerMessage2
+          | undefined
+          | null;
       },
       extensions: {
         protobufField: {
@@ -46370,7 +46565,10 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
       nullable: { list: true, items: false },
       resolve: (source) => {
         return source.squashedMessages.map((item) => {
-          const value = item.squashedMessage.value;
+          const value = item.squashedMessage.value as
+            | PrefixedMessage_InnerMessage
+            | PrefixedMessage_InnerMessage2
+            | undefined;
           if (value == null) {
             throw new Error("squashedMessages should not be null");
           }
@@ -46415,7 +46613,10 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
       type: TestPrefixPrefixedMessagePartialIgnoreOneof$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.partialIgnoreOneof.value;
+        return (source.partialIgnoreOneof.value ?? null) as
+          | PrefixedMessage_InnerMessage
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "partial_ignore_oneof" } },
     }),
@@ -50938,7 +51139,10 @@ builder.objectType(OneofParent$Ref, {
       nullable: false,
       description: "Required. disallow not_set.",
       resolve: (source) => {
-        const value = source.requiredOneofMembers.value;
+        const value = source.requiredOneofMembers.value as
+          | OneofMemberMessage1
+          | OneofMemberMessage2
+          | undefined;
         if (value == null) {
           throw new Error("requiredOneofMembers should not be null");
         }
@@ -50950,7 +51154,11 @@ builder.objectType(OneofParent$Ref, {
       type: OneofParentOptionalOneofMembers$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.optionalOneofMembers.value;
+        return (source.optionalOneofMembers.value ?? null) as
+          | OneofMemberMessage1
+          | OneofMemberMessage2
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "optional_oneof_members" } },
     }),
@@ -51258,7 +51466,10 @@ builder.objectType(OneofParent$Ref, {
       nullable: false,
       description: "Required. disallow not_set.",
       resolve: (source) => {
-        const value = source.requiredOneofMembers.value;
+        const value = source.requiredOneofMembers.value as
+          | OneofMemberMessage1
+          | OneofMemberMessage2
+          | undefined;
         if (value == null) {
           throw new Error("requiredOneofMembers should not be null");
         }
@@ -51270,7 +51481,11 @@ builder.objectType(OneofParent$Ref, {
       type: OneofParentOptionalOneofMembers$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.optionalOneofMembers.value;
+        return (source.optionalOneofMembers.value ?? null) as
+          | OneofMemberMessage1
+          | OneofMemberMessage2
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "optional_oneof_members" } },
     }),
@@ -51742,7 +51957,10 @@ builder.objectType(OneofParent$Ref, {
       nullable: false,
       description: "Required. disallow not_set.",
       resolve: (source) => {
-        const value = source.requiredOneofMembers.value;
+        const value = source.requiredOneofMembers.value as
+          | OneofMemberMessage1
+          | OneofMemberMessage2
+          | undefined;
         if (value == null) {
           throw new Error("requiredOneofMembers should not be null");
         }
@@ -51754,7 +51972,11 @@ builder.objectType(OneofParent$Ref, {
       type: OneofParentOptionalOneofMembers$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.optionalOneofMembers.value;
+        return (source.optionalOneofMembers.value ?? null) as
+          | OneofMemberMessage1
+          | OneofMemberMessage2
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "optional_oneof_members" } },
     }),

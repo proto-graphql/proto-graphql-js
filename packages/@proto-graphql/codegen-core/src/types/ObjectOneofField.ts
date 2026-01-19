@@ -9,7 +9,7 @@ import { isRequiredField } from "./util.js";
 export class ObjectOneofField extends FieldBase<DescOneof> {
   constructor(
     readonly type: OneofUnionType,
-    private readonly parent: ObjectType,
+    readonly _parent: ObjectType,
     proto: DescOneof,
   ) {
     super(proto);

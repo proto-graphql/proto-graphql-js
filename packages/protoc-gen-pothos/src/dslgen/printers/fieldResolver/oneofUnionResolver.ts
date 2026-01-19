@@ -1,12 +1,14 @@
 import {
   ObjectField,
   ObjectOneofField,
+  type ObjectType,
   type PrinterOptions,
   type SquashedOneofUnionType,
   tsFieldName,
 } from "@proto-graphql/codegen-core";
 
 import { code, joinCode, type Printable } from "../../../codegen/index.js";
+import { protoTypeSymbol } from "../util.js";
 
 /**
  * @example nullable
@@ -101,11 +103,26 @@ function createBlockStmtCodeForProtobufEs(
     field satisfies never;
     throw new Error("unreachable");
   }
+
+  // In protobuf-es, accessing .value on a oneof returns a union of all member types.
+  // However, some members may be ignored in the GraphQL Union type,
+  // so we need to assert to the expected type containing only non-ignored members.
+  const memberTypeSymbols = field.type.fields.map((f) =>
+    protoTypeSymbol((f.type as ObjectType).proto, opts),
+  );
+  const typeAssertion =
+    memberTypeSymbols.length > 0
+      ? code`${joinCode(
+          memberTypeSymbols.map((s) => code`${s}`),
+          " | ",
+        )} | undefined`
+      : code`undefined`;
+
   if (nullable) {
-    return code`return ${valueExpr};`;
+    return code`return (${valueExpr} ?? null) as ${typeAssertion} | null;`;
   }
   return code`
-    const value = ${valueExpr};
+    const value = ${valueExpr} as ${typeAssertion};
     if (value == null) {
       throw new Error("${field.name} should not be null");
     }

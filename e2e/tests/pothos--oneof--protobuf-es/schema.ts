@@ -1,8 +1,5 @@
 import { create } from "@bufbuild/protobuf";
-import {
-  OneofParent,
-  OneofParentSchema,
-} from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/oneof/oneof_pb";
+import { OneofParentSchema } from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/oneof/oneof_pb";
 
 import { OneofParent$Ref } from "./__generated__/schema/testapis/oneof/oneof.pb.pothos";
 import { builder } from "./builder";

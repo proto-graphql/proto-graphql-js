@@ -347,7 +347,7 @@ export const PrimitivesInput$Ref: InputObjectRef<PrimitivesInput$Shape> =
         package: "testapis.primitives",
       },
     },
-  });
+  }) as InputObjectRef<PrimitivesInput$Shape>;
 
 export function PrimitivesInput$toProto(
   input: PrimitivesInput$Shape | null | undefined,
@@ -459,7 +459,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         package: "testapis.primitives",
       },
     },
-  });
+  }) as InputObjectRef<MessageInput$Shape>;
 
 export function MessageInput$toProto(
   input: MessageInput$Shape | null | undefined,
@@ -557,7 +557,7 @@ export const OneofParentInput$Ref: InputObjectRef<OneofParentInput$Shape> =
         package: "testapis.oneof",
       },
     },
-  });
+  }) as InputObjectRef<OneofParentInput$Shape>;
 
 export function OneofParentInput$toProto(
   input: OneofParentInput$Shape | null | undefined,
@@ -618,7 +618,7 @@ export const EmptyMessageInput$Ref: InputObjectRef<EmptyMessageInput$Shape> =
         package: "testapis.empty_types",
       },
     },
-  });
+  }) as InputObjectRef<EmptyMessageInput$Shape>;
 
 export function EmptyMessageInput$toProto(
   input: EmptyMessageInput$Shape | null | undefined,

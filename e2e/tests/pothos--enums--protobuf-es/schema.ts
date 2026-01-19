@@ -1,6 +1,5 @@
 import { create } from "@bufbuild/protobuf";
 import {
-  MessageWithEnums,
   MessageWithEnumsSchema,
   MyEnum,
   MyEnumWithoutUnspecified,

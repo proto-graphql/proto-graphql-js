@@ -1,6 +1,5 @@
 import { create } from "@bufbuild/protobuf";
 import {
-  ParentMessage,
   ParentMessage_NestedEnum,
   ParentMessageSchema,
 } from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/nested/nested_pb";

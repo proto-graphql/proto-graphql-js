@@ -14,9 +14,7 @@
   "inputs": [
     {
       "directory": "../../../devPackages/testapis-proto/proto",
-      "paths": [
-        "../../../devPackages/testapis-proto/proto/testapis/primitives"
-      ]
+      "paths": ["../../../devPackages/testapis-proto/proto/testapis/primitives"]
     }
   ]
 }

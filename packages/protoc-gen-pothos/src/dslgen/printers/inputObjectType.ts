@@ -84,11 +84,17 @@ export function createInputObjectTypeCode(
     };
   `;
 
+  // In protobuf-es v2, Message types have internal properties like $unknown and $typeName,
+  // which can cause type mismatches between Pothos's inferred types and the InputShape type.
+  // To work around this, we use a type assertion for protobuf-es v2.
+  const needsTypeAssertion = opts.protobuf === "protobuf-es";
+  const inputObjectRefType = code`${createImportSymbol(
+    "InputObjectRef",
+    "@pothos/core",
+  )}<${shapeTypePrintable(type)}>`;
+
   const refCode = code`
-    export const ${pothosRefPrintable(type)}: ${createImportSymbol(
-      "InputObjectRef",
-      "@pothos/core",
-    )}<${shapeTypePrintable(type)}> =
+    export const ${pothosRefPrintable(type)}: ${inputObjectRefType} =
       ${pothosBuilderPrintable(opts)}.inputRef<${shapeTypePrintable(
         type,
       )}>(${literalOf(type.typeName)}).implement(
@@ -113,7 +119,7 @@ export function createInputObjectTypeCode(
             description: type.description,
           }),
         )}
-      );
+      )${needsTypeAssertion ? code` as ${inputObjectRefType}` : ""};
   `;
 
   const codes: Printable[][] = [shapeTypeCode, refCode];

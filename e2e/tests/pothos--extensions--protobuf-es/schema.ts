@@ -1,8 +1,5 @@
 import { create } from "@bufbuild/protobuf";
-import {
-  PrefixedMessage,
-  PrefixedMessageSchema,
-} from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/extensions/extensions_pb";
+import { PrefixedMessageSchema } from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/extensions/extensions_pb";
 
 import {
   TestPrefixInterfaceMessage$Ref,

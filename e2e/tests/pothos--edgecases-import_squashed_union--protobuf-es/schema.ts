@@ -1,8 +1,5 @@
 import { create } from "@bufbuild/protobuf";
-import {
-  Message,
-  MessageSchema,
-} from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/edgecases/import_squashed_union/pkg2/types_pb";
+import { MessageSchema } from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/edgecases/import_squashed_union/pkg2/types_pb";
 
 import { Message$Ref } from "./__generated__/schema/testapis/edgecases/import_squashed_union/pkg2/types.pb.pothos";
 import { builder } from "./builder";

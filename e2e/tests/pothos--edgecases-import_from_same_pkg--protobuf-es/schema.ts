@@ -1,8 +1,5 @@
 import { create } from "@bufbuild/protobuf";
-import {
-  ParentMessage,
-  ParentMessageSchema,
-} from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/edgecases/import_from_same_pkg/parent_pb";
+import { ParentMessageSchema } from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/edgecases/import_from_same_pkg/parent_pb";
 
 import { ParentMessage$Ref } from "./__generated__/schema/testapis/edgecases/import_from_same_pkg/parent.pb.pothos";
 import { builder } from "./builder";

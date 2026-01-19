@@ -80,6 +80,8 @@ builder.objectType(Message$Ref, {
 exports[`createObjectTypeCode > protobuf-es > 'generates code for a message with oneofs with isMessage' 1`] = `
 "import { isMessage } from "@bufbuild/protobuf";
 import {
+  OneofMemberMessage1,
+  OneofMemberMessage2,
   OneofParent,
   OneofParentSchema,
 } from "@testapis/protobuf-es-v2/testapis/oneof/oneof_pb";
@@ -101,7 +103,10 @@ builder.objectType(OneofParent$Ref, {
       nullable: false,
       description: "Required. disallow not_set.",
       resolve: (source) => {
-        const value = source.requiredOneofMembers.value;
+        const value = source.requiredOneofMembers.value as
+          | OneofMemberMessage1
+          | OneofMemberMessage2
+          | undefined;
         if (value == null) {
           throw new Error("requiredOneofMembers should not be null");
         }
@@ -113,7 +118,11 @@ builder.objectType(OneofParent$Ref, {
       type: OneofParentOptionalOneofMembers$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.optionalOneofMembers.value;
+        return (source.optionalOneofMembers.value ?? null) as
+          | OneofMemberMessage1
+          | OneofMemberMessage2
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "optional_oneof_members" } },
     }),
@@ -474,6 +483,8 @@ import {
   EnumWillRename,
   PrefixedEnum,
   PrefixedMessage,
+  PrefixedMessage_InnerMessage,
+  PrefixedMessage_InnerMessage2,
   PrefixedMessageSchema,
 } from "@testapis/protobuf-es-v2/testapis/extensions/extensions_pb";
 import { builder } from "../../builder";
@@ -530,7 +541,11 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
       type: TestPrefixPrefixedMessageSquashedMessage$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.squashedMessage?.squashedMessage.value;
+        return (source.squashedMessage?.squashedMessage.value ?? null) as
+          | PrefixedMessage_InnerMessage
+          | PrefixedMessage_InnerMessage2
+          | undefined
+          | null;
       },
       extensions: {
         protobufField: {
@@ -566,7 +581,10 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
       nullable: { list: true, items: false },
       resolve: (source) => {
         return source.squashedMessages.map((item) => {
-          const value = item.squashedMessage.value;
+          const value = item.squashedMessage.value as
+            | PrefixedMessage_InnerMessage
+            | PrefixedMessage_InnerMessage2
+            | undefined;
           if (value == null) {
             throw new Error("squashedMessages should not be null");
           }
@@ -611,7 +629,10 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
       type: TestPrefixPrefixedMessagePartialIgnoreOneof$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.partialIgnoreOneof.value;
+        return (source.partialIgnoreOneof.value ?? null) as
+          | PrefixedMessage_InnerMessage
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "partial_ignore_oneof" } },
     }),
@@ -768,7 +789,11 @@ builder.objectType(Message$Ref, {
 `;
 
 exports[`createObjectTypeCode > protobuf-es-v1 > 'generates code for a message with oneofs' 1`] = `
-"import { OneofParent } from "@testapis/protobuf-es/testapis/oneof/oneof_pb";
+"import {
+  OneofMemberMessage1,
+  OneofMemberMessage2,
+  OneofParent,
+} from "@testapis/protobuf-es/testapis/oneof/oneof_pb";
 import { builder } from "../../builder";
 
 export const OneofParent$Ref = builder.objectRef<OneofParent>("OneofParent");
@@ -787,7 +812,10 @@ builder.objectType(OneofParent$Ref, {
       nullable: false,
       description: "Required. disallow not_set.",
       resolve: (source) => {
-        const value = source.requiredOneofMembers.value;
+        const value = source.requiredOneofMembers.value as
+          | OneofMemberMessage1
+          | OneofMemberMessage2
+          | undefined;
         if (value == null) {
           throw new Error("requiredOneofMembers should not be null");
         }
@@ -799,7 +827,11 @@ builder.objectType(OneofParent$Ref, {
       type: OneofParentOptionalOneofMembers$Ref,
       nullable: true,
       resolve: (source) => {
-        return source.optionalOneofMembers.value;
+        return (source.optionalOneofMembers.value ?? null) as
+          | OneofMemberMessage1
+          | OneofMemberMessage2
+          | undefined
+          | null;
       },
       extensions: { protobufField: { name: "optional_oneof_members" } },
     }),

@@ -1,8 +1,5 @@
 import { create } from "@bufbuild/protobuf";
-import {
-  Message,
-  MessageSchema,
-} from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/primitives/primitives_pb";
+import { MessageSchema } from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/primitives/primitives_pb";
 
 import { Message$Ref } from "./__generated__/schema/testapis/primitives/primitives.pb.pothos";
 import { builder } from "./builder";

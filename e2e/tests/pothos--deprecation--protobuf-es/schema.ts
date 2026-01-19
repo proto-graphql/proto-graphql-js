@@ -1,12 +1,6 @@
 import { create } from "@bufbuild/protobuf";
-import {
-  DeprecatedMessage,
-  DeprecatedMessageSchema,
-} from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/deprecation/deprecation_pb";
-import {
-  DeprecatedFileMessage,
-  DeprecatedFileMessageSchema,
-} from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/deprecation/file_deprecation_pb";
+import { DeprecatedMessageSchema } from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/deprecation/deprecation_pb";
+import { DeprecatedFileMessageSchema } from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/deprecation/file_deprecation_pb";
 
 import { DeprecatedMessage$Ref } from "./__generated__/schema/testapis/deprecation/deprecation.pb.pothos";
 import { DeprecatedFileMessage$Ref } from "./__generated__/schema/testapis/deprecation/file_deprecation.pb.pothos";
