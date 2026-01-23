@@ -187,7 +187,9 @@ describe("protoRefTypePrintable", () => {
     const result = printablesToStringWithImports(printable);
 
     expect(result).toContain("MessageShape<typeof PrimitivesSchema>");
-    expect(result).toContain('import { MessageShape } from "@bufbuild/protobuf"');
+    expect(result).toContain(
+      'import { MessageShape } from "@bufbuild/protobuf"',
+    );
     expect(result).toContain("PrimitivesSchema");
   });
 
@@ -227,6 +229,8 @@ describe("protoRefTypePrintable", () => {
     const printable = protoRefTypePrintable(nestedMsg, v2Opts);
     const result = printablesToStringWithImports(printable);
 
-    expect(result).toContain("MessageShape<typeof ParentMessage_NestedMessageSchema>");
+    expect(result).toContain(
+      "MessageShape<typeof ParentMessage_NestedMessageSchema>",
+    );
   });
 });
