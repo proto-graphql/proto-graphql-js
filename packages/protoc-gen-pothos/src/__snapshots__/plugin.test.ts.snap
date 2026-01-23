@@ -17470,14 +17470,16 @@ exports[`protobuf-es > 'testapis.custom_types' > generates files by plugin 'with
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   Date,
   DateSchema,
 } from "@testapis/protobuf-es-v2/testapis/custom_types/date_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const Date$Ref = builder.objectRef<Date>("Date");
+export const Date$Ref = builder.objectRef<MessageShape<typeof DateSchema>>(
+  "Date",
+);
 builder.objectType(Date$Ref, {
   name: "Date",
   fields: (t) => ({
@@ -17562,6 +17564,7 @@ export function DateInput$toProto(
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   Post,
   PostSchema,
@@ -17572,10 +17575,11 @@ import {
   DateInput$Shape,
   DateInput$toProto,
 } from "./date.pb.pothos";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const Post$Ref = builder.objectRef<Post>("Post");
+export const Post$Ref = builder.objectRef<MessageShape<typeof PostSchema>>(
+  "Post",
+);
 builder.objectType(Post$Ref, {
   name: "Post",
   fields: (t) => ({
@@ -17669,14 +17673,16 @@ exports[`protobuf-es > 'testapis.custom_types' > generates files by plugin 'with
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   Date,
   DateSchema,
 } from "@testapis/protobuf-es-v2/testapis/custom_types/date_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const Date$Ref = builder.objectRef<Date>("Date");
+export const Date$Ref = builder.objectRef<MessageShape<typeof DateSchema>>(
+  "Date",
+);
 builder.objectType(Date$Ref, {
   name: "Date",
   fields: (t) => ({
@@ -17807,6 +17813,7 @@ export function DatePartialInput$toProto(
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   Post,
   PostSchema,
@@ -17820,10 +17827,11 @@ import {
   DatePartialInput$Shape,
   DatePartialInput$toProto,
 } from "./date.pb.pothos";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const Post$Ref = builder.objectRef<Post>("Post");
+export const Post$Ref = builder.objectRef<MessageShape<typeof PostSchema>>(
+  "Post",
+);
 builder.objectType(Post$Ref, {
   name: "Post",
   fields: (t) => ({
@@ -17965,11 +17973,13 @@ exports[`protobuf-es > 'testapis.custom_types' > generates files by plugin 'with
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import { Date, DateSchema } from "./date_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const Date$Ref = builder.objectRef<Date>("Date");
+export const Date$Ref = builder.objectRef<MessageShape<typeof DateSchema>>(
+  "Date",
+);
 builder.objectType(Date$Ref, {
   name: "Date",
   fields: (t) => ({
@@ -18054,6 +18064,7 @@ export function DateInput$toProto(
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import { Post, PostSchema } from "./post_pb";
 import {
   Date$Ref,
@@ -18061,10 +18072,11 @@ import {
   DateInput$Shape,
   DateInput$toProto,
 } from "./date.pb.pothos";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const Post$Ref = builder.objectRef<Post>("Post");
+export const Post$Ref = builder.objectRef<MessageShape<typeof PostSchema>>(
+  "Post",
+);
 builder.objectType(Post$Ref, {
   name: "Post",
   fields: (t) => ({
@@ -18158,6 +18170,7 @@ exports[`protobuf-es > 'testapis.deprecation' > generates files by plugin 'with 
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   DeprecatedEnum,
   DeprecatedMessage,
@@ -18172,12 +18185,11 @@ import {
   NotDeprecatedMessage_InnerMessage2Schema,
   NotDeprecatedMessageSchema,
 } from "@testapis/protobuf-es-v2/testapis/deprecation/deprecation_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 
-export const DeprecatedMessage$Ref = builder.objectRef<DeprecatedMessage>(
-  "DeprecatedMessage",
-);
+export const DeprecatedMessage$Ref = builder.objectRef<
+  MessageShape<typeof DeprecatedMessageSchema>
+>("DeprecatedMessage");
 builder.objectType(DeprecatedMessage$Ref, {
   name: "DeprecatedMessage",
   fields: (t) => ({
@@ -18221,9 +18233,9 @@ builder.objectType(DeprecatedMessage$Ref, {
   },
 });
 
-export const NotDeprecatedMessage$Ref = builder.objectRef<NotDeprecatedMessage>(
-  "NotDeprecatedMessage",
-);
+export const NotDeprecatedMessage$Ref = builder.objectRef<
+  MessageShape<typeof NotDeprecatedMessageSchema>
+>("NotDeprecatedMessage");
 builder.objectType(NotDeprecatedMessage$Ref, {
   name: "NotDeprecatedMessage",
   fields: (t) => ({
@@ -18299,7 +18311,7 @@ builder.objectType(NotDeprecatedMessage$Ref, {
 });
 
 export const DeprecatedMessageInnerMessage$Ref = builder.objectRef<
-  DeprecatedMessage_InnerMessage
+  MessageShape<typeof DeprecatedMessage_InnerMessageSchema>
 >("DeprecatedMessageInnerMessage");
 builder.objectType(DeprecatedMessageInnerMessage$Ref, {
   name: "DeprecatedMessageInnerMessage",
@@ -18325,7 +18337,7 @@ builder.objectType(DeprecatedMessageInnerMessage$Ref, {
 });
 
 export const NotDeprecatedMessageInnerMessage1$Ref = builder.objectRef<
-  NotDeprecatedMessage_InnerMessage1
+  MessageShape<typeof NotDeprecatedMessage_InnerMessage1Schema>
 >("NotDeprecatedMessageInnerMessage1");
 builder.objectType(NotDeprecatedMessageInnerMessage1$Ref, {
   name: "NotDeprecatedMessageInnerMessage1",
@@ -18349,7 +18361,7 @@ builder.objectType(NotDeprecatedMessageInnerMessage1$Ref, {
 });
 
 export const NotDeprecatedMessageInnerMessage2$Ref = builder.objectRef<
-  NotDeprecatedMessage_InnerMessage2
+  MessageShape<typeof NotDeprecatedMessage_InnerMessage2Schema>
 >("NotDeprecatedMessageInnerMessage2");
 builder.objectType(NotDeprecatedMessageInnerMessage2$Ref, {
   name: "NotDeprecatedMessageInnerMessage2",
@@ -18771,6 +18783,7 @@ export const DeprecatedEnum$Ref: EnumRef<DeprecatedEnum, DeprecatedEnum> =
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   DeprecatedFileEnum,
   DeprecatedFileMessage,
@@ -18778,11 +18791,10 @@ import {
   DeprecatedFileMessage_InnerMessageSchema,
   DeprecatedFileMessageSchema,
 } from "@testapis/protobuf-es-v2/testapis/deprecation/file_deprecation_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 
 export const DeprecatedFileMessage$Ref = builder.objectRef<
-  DeprecatedFileMessage
+  MessageShape<typeof DeprecatedFileMessageSchema>
 >("DeprecatedFileMessage");
 builder.objectType(DeprecatedFileMessage$Ref, {
   name: "DeprecatedFileMessage",
@@ -18829,7 +18841,7 @@ builder.objectType(DeprecatedFileMessage$Ref, {
 });
 
 export const DeprecatedFileMessageInnerMessage$Ref = builder.objectRef<
-  DeprecatedFileMessage_InnerMessage
+  MessageShape<typeof DeprecatedFileMessage_InnerMessageSchema>
 >("DeprecatedFileMessageInnerMessage");
 builder.objectType(DeprecatedFileMessageInnerMessage$Ref, {
   name: "DeprecatedFileMessageInnerMessage",
@@ -18978,6 +18990,7 @@ exports[`protobuf-es > 'testapis.deprecation' > generates files by plugin 'with 
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   DeprecatedEnum,
   DeprecatedMessage,
@@ -18992,12 +19005,11 @@ import {
   NotDeprecatedMessage_InnerMessage2Schema,
   NotDeprecatedMessageSchema,
 } from "@testapis/protobuf-es-v2/testapis/deprecation/deprecation_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 
-export const DeprecatedMessage$Ref = builder.objectRef<DeprecatedMessage>(
-  "DeprecatedMessage",
-);
+export const DeprecatedMessage$Ref = builder.objectRef<
+  MessageShape<typeof DeprecatedMessageSchema>
+>("DeprecatedMessage");
 builder.objectType(DeprecatedMessage$Ref, {
   name: "DeprecatedMessage",
   fields: (t) => ({
@@ -19041,9 +19053,9 @@ builder.objectType(DeprecatedMessage$Ref, {
   },
 });
 
-export const NotDeprecatedMessage$Ref = builder.objectRef<NotDeprecatedMessage>(
-  "NotDeprecatedMessage",
-);
+export const NotDeprecatedMessage$Ref = builder.objectRef<
+  MessageShape<typeof NotDeprecatedMessageSchema>
+>("NotDeprecatedMessage");
 builder.objectType(NotDeprecatedMessage$Ref, {
   name: "NotDeprecatedMessage",
   fields: (t) => ({
@@ -19119,7 +19131,7 @@ builder.objectType(NotDeprecatedMessage$Ref, {
 });
 
 export const DeprecatedMessageInnerMessage$Ref = builder.objectRef<
-  DeprecatedMessage_InnerMessage
+  MessageShape<typeof DeprecatedMessage_InnerMessageSchema>
 >("DeprecatedMessageInnerMessage");
 builder.objectType(DeprecatedMessageInnerMessage$Ref, {
   name: "DeprecatedMessageInnerMessage",
@@ -19145,7 +19157,7 @@ builder.objectType(DeprecatedMessageInnerMessage$Ref, {
 });
 
 export const NotDeprecatedMessageInnerMessage1$Ref = builder.objectRef<
-  NotDeprecatedMessage_InnerMessage1
+  MessageShape<typeof NotDeprecatedMessage_InnerMessage1Schema>
 >("NotDeprecatedMessageInnerMessage1");
 builder.objectType(NotDeprecatedMessageInnerMessage1$Ref, {
   name: "NotDeprecatedMessageInnerMessage1",
@@ -19169,7 +19181,7 @@ builder.objectType(NotDeprecatedMessageInnerMessage1$Ref, {
 });
 
 export const NotDeprecatedMessageInnerMessage2$Ref = builder.objectRef<
-  NotDeprecatedMessage_InnerMessage2
+  MessageShape<typeof NotDeprecatedMessage_InnerMessage2Schema>
 >("NotDeprecatedMessageInnerMessage2");
 builder.objectType(NotDeprecatedMessageInnerMessage2$Ref, {
   name: "NotDeprecatedMessageInnerMessage2",
@@ -19884,6 +19896,7 @@ export const DeprecatedEnum$Ref: EnumRef<DeprecatedEnum, DeprecatedEnum> =
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   DeprecatedFileEnum,
   DeprecatedFileMessage,
@@ -19891,11 +19904,10 @@ import {
   DeprecatedFileMessage_InnerMessageSchema,
   DeprecatedFileMessageSchema,
 } from "@testapis/protobuf-es-v2/testapis/deprecation/file_deprecation_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 
 export const DeprecatedFileMessage$Ref = builder.objectRef<
-  DeprecatedFileMessage
+  MessageShape<typeof DeprecatedFileMessageSchema>
 >("DeprecatedFileMessage");
 builder.objectType(DeprecatedFileMessage$Ref, {
   name: "DeprecatedFileMessage",
@@ -19942,7 +19954,7 @@ builder.objectType(DeprecatedFileMessage$Ref, {
 });
 
 export const DeprecatedFileMessageInnerMessage$Ref = builder.objectRef<
-  DeprecatedFileMessage_InnerMessage
+  MessageShape<typeof DeprecatedFileMessage_InnerMessageSchema>
 >("DeprecatedFileMessageInnerMessage");
 builder.objectType(DeprecatedFileMessageInnerMessage$Ref, {
   name: "DeprecatedFileMessageInnerMessage",
@@ -20175,6 +20187,7 @@ exports[`protobuf-es > 'testapis.deprecation' > generates files by plugin 'witho
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   DeprecatedEnum,
   DeprecatedMessage,
@@ -20189,12 +20202,11 @@ import {
   NotDeprecatedMessage_InnerMessage2Schema,
   NotDeprecatedMessageSchema,
 } from "./deprecation_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 
-export const DeprecatedMessage$Ref = builder.objectRef<DeprecatedMessage>(
-  "DeprecatedMessage",
-);
+export const DeprecatedMessage$Ref = builder.objectRef<
+  MessageShape<typeof DeprecatedMessageSchema>
+>("DeprecatedMessage");
 builder.objectType(DeprecatedMessage$Ref, {
   name: "DeprecatedMessage",
   fields: (t) => ({
@@ -20238,9 +20250,9 @@ builder.objectType(DeprecatedMessage$Ref, {
   },
 });
 
-export const NotDeprecatedMessage$Ref = builder.objectRef<NotDeprecatedMessage>(
-  "NotDeprecatedMessage",
-);
+export const NotDeprecatedMessage$Ref = builder.objectRef<
+  MessageShape<typeof NotDeprecatedMessageSchema>
+>("NotDeprecatedMessage");
 builder.objectType(NotDeprecatedMessage$Ref, {
   name: "NotDeprecatedMessage",
   fields: (t) => ({
@@ -20316,7 +20328,7 @@ builder.objectType(NotDeprecatedMessage$Ref, {
 });
 
 export const DeprecatedMessageInnerMessage$Ref = builder.objectRef<
-  DeprecatedMessage_InnerMessage
+  MessageShape<typeof DeprecatedMessage_InnerMessageSchema>
 >("DeprecatedMessageInnerMessage");
 builder.objectType(DeprecatedMessageInnerMessage$Ref, {
   name: "DeprecatedMessageInnerMessage",
@@ -20342,7 +20354,7 @@ builder.objectType(DeprecatedMessageInnerMessage$Ref, {
 });
 
 export const NotDeprecatedMessageInnerMessage1$Ref = builder.objectRef<
-  NotDeprecatedMessage_InnerMessage1
+  MessageShape<typeof NotDeprecatedMessage_InnerMessage1Schema>
 >("NotDeprecatedMessageInnerMessage1");
 builder.objectType(NotDeprecatedMessageInnerMessage1$Ref, {
   name: "NotDeprecatedMessageInnerMessage1",
@@ -20366,7 +20378,7 @@ builder.objectType(NotDeprecatedMessageInnerMessage1$Ref, {
 });
 
 export const NotDeprecatedMessageInnerMessage2$Ref = builder.objectRef<
-  NotDeprecatedMessage_InnerMessage2
+  MessageShape<typeof NotDeprecatedMessage_InnerMessage2Schema>
 >("NotDeprecatedMessageInnerMessage2");
 builder.objectType(NotDeprecatedMessageInnerMessage2$Ref, {
   name: "NotDeprecatedMessageInnerMessage2",
@@ -20788,6 +20800,7 @@ export const DeprecatedEnum$Ref: EnumRef<DeprecatedEnum, DeprecatedEnum> =
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   DeprecatedFileEnum,
   DeprecatedFileMessage,
@@ -20795,11 +20808,10 @@ import {
   DeprecatedFileMessage_InnerMessageSchema,
   DeprecatedFileMessageSchema,
 } from "./file_deprecation_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 
 export const DeprecatedFileMessage$Ref = builder.objectRef<
-  DeprecatedFileMessage
+  MessageShape<typeof DeprecatedFileMessageSchema>
 >("DeprecatedFileMessage");
 builder.objectType(DeprecatedFileMessage$Ref, {
   name: "DeprecatedFileMessage",
@@ -20846,7 +20858,7 @@ builder.objectType(DeprecatedFileMessage$Ref, {
 });
 
 export const DeprecatedFileMessageInnerMessage$Ref = builder.objectRef<
-  DeprecatedFileMessage_InnerMessage
+  MessageShape<typeof DeprecatedFileMessage_InnerMessageSchema>
 >("DeprecatedFileMessageInnerMessage");
 builder.objectType(DeprecatedFileMessageInnerMessage$Ref, {
   name: "DeprecatedFileMessageInnerMessage",
@@ -20995,14 +21007,16 @@ exports[`protobuf-es > 'testapis.edgecases.import_from_same_pkg' > generates fil
 /* eslint-disable */
 
 import { builder } from "../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   ChildMessage,
   ChildMessageSchema,
 } from "@testapis/protobuf-es-v2/testapis/edgecases/import_from_same_pkg/child_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const ChildMessage$Ref = builder.objectRef<ChildMessage>("ChildMessage");
+export const ChildMessage$Ref = builder.objectRef<
+  MessageShape<typeof ChildMessageSchema>
+>("ChildMessage");
 builder.objectType(ChildMessage$Ref, {
   name: "ChildMessage",
   fields: (t) => ({
@@ -21058,6 +21072,7 @@ export function ChildMessageInput$toProto(
 /* eslint-disable */
 
 import { builder } from "../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   ParentMessage,
   ParentMessageSchema,
@@ -21068,12 +21083,11 @@ import {
   ChildMessageInput$Shape,
   ChildMessageInput$toProto,
 } from "./child.pb.pothos";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const ParentMessage$Ref = builder.objectRef<ParentMessage>(
-  "ParentMessage",
-);
+export const ParentMessage$Ref = builder.objectRef<
+  MessageShape<typeof ParentMessageSchema>
+>("ParentMessage");
 builder.objectType(ParentMessage$Ref, {
   name: "ParentMessage",
   fields: (t) => ({
@@ -21149,14 +21163,16 @@ exports[`protobuf-es > 'testapis.edgecases.import_from_same_pkg' > generates fil
 /* eslint-disable */
 
 import { builder } from "../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   ChildMessage,
   ChildMessageSchema,
 } from "@testapis/protobuf-es-v2/testapis/edgecases/import_from_same_pkg/child_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const ChildMessage$Ref = builder.objectRef<ChildMessage>("ChildMessage");
+export const ChildMessage$Ref = builder.objectRef<
+  MessageShape<typeof ChildMessageSchema>
+>("ChildMessage");
 builder.objectType(ChildMessage$Ref, {
   name: "ChildMessage",
   fields: (t) => ({
@@ -21242,6 +21258,7 @@ export function ChildMessagePartialInput$toProto(
 /* eslint-disable */
 
 import { builder } from "../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   ParentMessage,
   ParentMessageSchema,
@@ -21255,12 +21272,11 @@ import {
   ChildMessagePartialInput$Shape,
   ChildMessagePartialInput$toProto,
 } from "./child.pb.pothos";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const ParentMessage$Ref = builder.objectRef<ParentMessage>(
-  "ParentMessage",
-);
+export const ParentMessage$Ref = builder.objectRef<
+  MessageShape<typeof ParentMessageSchema>
+>("ParentMessage");
 builder.objectType(ParentMessage$Ref, {
   name: "ParentMessage",
   fields: (t) => ({
@@ -21376,11 +21392,13 @@ exports[`protobuf-es > 'testapis.edgecases.import_from_same_pkg' > generates fil
 /* eslint-disable */
 
 import { builder } from "../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import { ChildMessage, ChildMessageSchema } from "./child_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const ChildMessage$Ref = builder.objectRef<ChildMessage>("ChildMessage");
+export const ChildMessage$Ref = builder.objectRef<
+  MessageShape<typeof ChildMessageSchema>
+>("ChildMessage");
 builder.objectType(ChildMessage$Ref, {
   name: "ChildMessage",
   fields: (t) => ({
@@ -21436,6 +21454,7 @@ export function ChildMessageInput$toProto(
 /* eslint-disable */
 
 import { builder } from "../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import { ParentMessage, ParentMessageSchema } from "./parent_pb";
 import {
   ChildMessage$Ref,
@@ -21443,12 +21462,11 @@ import {
   ChildMessageInput$Shape,
   ChildMessageInput$toProto,
 } from "./child.pb.pothos";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const ParentMessage$Ref = builder.objectRef<ParentMessage>(
-  "ParentMessage",
-);
+export const ParentMessage$Ref = builder.objectRef<
+  MessageShape<typeof ParentMessageSchema>
+>("ParentMessage");
 builder.objectType(ParentMessage$Ref, {
   name: "ParentMessage",
   fields: (t) => ({
@@ -21524,16 +21542,18 @@ exports[`protobuf-es > 'testapis.edgecases.import_oneof_member_from_other_file' 
 /* eslint-disable */
 
 import { builder } from "../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   OneofMember1,
   OneofMember1Schema,
   OneofMember2,
   OneofMember2Schema,
 } from "@testapis/protobuf-es-v2/testapis/edgecases/import_oneof_member_from_other_file/member_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const OneofMember1$Ref = builder.objectRef<OneofMember1>("OneofMember1");
+export const OneofMember1$Ref = builder.objectRef<
+  MessageShape<typeof OneofMember1Schema>
+>("OneofMember1");
 builder.objectType(OneofMember1$Ref, {
   name: "OneofMember1",
   fields: (t) => ({
@@ -21556,7 +21576,9 @@ builder.objectType(OneofMember1$Ref, {
   },
 });
 
-export const OneofMember2$Ref = builder.objectRef<OneofMember2>("OneofMember2");
+export const OneofMember2$Ref = builder.objectRef<
+  MessageShape<typeof OneofMember2Schema>
+>("OneofMember2");
 builder.objectType(OneofMember2$Ref, {
   name: "OneofMember2",
   fields: (t) => ({
@@ -21641,6 +21663,7 @@ export function OneofMember2Input$toProto(
 /* eslint-disable */
 
 import { builder } from "../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   OneofParent,
   OneofParentSchema,
@@ -21649,7 +21672,6 @@ import {
   OneofMember1,
   OneofMember2,
 } from "@testapis/protobuf-es-v2/testapis/edgecases/import_oneof_member_from_other_file/member_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import {
   OneofMember1$Ref,
   OneofMember1Input$Ref,
@@ -21662,7 +21684,9 @@ import {
 } from "./member.pb.pothos";
 import { InputObjectRef } from "@pothos/core";
 
-export const OneofParent$Ref = builder.objectRef<OneofParent>("OneofParent");
+export const OneofParent$Ref = builder.objectRef<
+  MessageShape<typeof OneofParentSchema>
+>("OneofParent");
 builder.objectType(OneofParent$Ref, {
   name: "OneofParent",
   fields: (t) => ({
@@ -21783,16 +21807,18 @@ exports[`protobuf-es > 'testapis.edgecases.import_oneof_member_from_other_file' 
 /* eslint-disable */
 
 import { builder } from "../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   OneofMember1,
   OneofMember1Schema,
   OneofMember2,
   OneofMember2Schema,
 } from "@testapis/protobuf-es-v2/testapis/edgecases/import_oneof_member_from_other_file/member_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const OneofMember1$Ref = builder.objectRef<OneofMember1>("OneofMember1");
+export const OneofMember1$Ref = builder.objectRef<
+  MessageShape<typeof OneofMember1Schema>
+>("OneofMember1");
 builder.objectType(OneofMember1$Ref, {
   name: "OneofMember1",
   fields: (t) => ({
@@ -21815,7 +21841,9 @@ builder.objectType(OneofMember1$Ref, {
   },
 });
 
-export const OneofMember2$Ref = builder.objectRef<OneofMember2>("OneofMember2");
+export const OneofMember2$Ref = builder.objectRef<
+  MessageShape<typeof OneofMember2Schema>
+>("OneofMember2");
 builder.objectType(OneofMember2$Ref, {
   name: "OneofMember2",
   fields: (t) => ({
@@ -21962,6 +21990,7 @@ export function OneofMember2PartialInput$toProto(
 /* eslint-disable */
 
 import { builder } from "../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   OneofParent,
   OneofParentSchema,
@@ -21970,7 +21999,6 @@ import {
   OneofMember1,
   OneofMember2,
 } from "@testapis/protobuf-es-v2/testapis/edgecases/import_oneof_member_from_other_file/member_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import {
   OneofMember1$Ref,
   OneofMember1Input$Ref,
@@ -21989,7 +22017,9 @@ import {
 } from "./member.pb.pothos";
 import { InputObjectRef } from "@pothos/core";
 
-export const OneofParent$Ref = builder.objectRef<OneofParent>("OneofParent");
+export const OneofParent$Ref = builder.objectRef<
+  MessageShape<typeof OneofParentSchema>
+>("OneofParent");
 builder.objectType(OneofParent$Ref, {
   name: "OneofParent",
   fields: (t) => ({
@@ -22171,16 +22201,18 @@ exports[`protobuf-es > 'testapis.edgecases.import_oneof_member_from_other_file' 
 /* eslint-disable */
 
 import { builder } from "../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   OneofMember1,
   OneofMember1Schema,
   OneofMember2,
   OneofMember2Schema,
 } from "./member_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const OneofMember1$Ref = builder.objectRef<OneofMember1>("OneofMember1");
+export const OneofMember1$Ref = builder.objectRef<
+  MessageShape<typeof OneofMember1Schema>
+>("OneofMember1");
 builder.objectType(OneofMember1$Ref, {
   name: "OneofMember1",
   fields: (t) => ({
@@ -22203,7 +22235,9 @@ builder.objectType(OneofMember1$Ref, {
   },
 });
 
-export const OneofMember2$Ref = builder.objectRef<OneofMember2>("OneofMember2");
+export const OneofMember2$Ref = builder.objectRef<
+  MessageShape<typeof OneofMember2Schema>
+>("OneofMember2");
 builder.objectType(OneofMember2$Ref, {
   name: "OneofMember2",
   fields: (t) => ({
@@ -22288,9 +22322,9 @@ export function OneofMember2Input$toProto(
 /* eslint-disable */
 
 import { builder } from "../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import { OneofParent, OneofParentSchema } from "./parent_pb";
 import { OneofMember1, OneofMember2 } from "./member_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import {
   OneofMember1$Ref,
   OneofMember1Input$Ref,
@@ -22303,7 +22337,9 @@ import {
 } from "./member.pb.pothos";
 import { InputObjectRef } from "@pothos/core";
 
-export const OneofParent$Ref = builder.objectRef<OneofParent>("OneofParent");
+export const OneofParent$Ref = builder.objectRef<
+  MessageShape<typeof OneofParentSchema>
+>("OneofParent");
 builder.objectType(OneofParent$Ref, {
   name: "OneofParent",
   fields: (t) => ({
@@ -22430,18 +22466,18 @@ exports[`protobuf-es > 'testapis.edgecases.import_squashed_union.pkg1' > generat
 /* eslint-disable */
 
 import { builder } from "../../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   OneofMessage1,
   OneofMessage1Schema,
   SquashedOneof,
   SquashedOneofSchema,
 } from "@testapis/protobuf-es-v2/testapis/edgecases/import_squashed_union/pkg1/types_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const OneofMessage1$Ref = builder.objectRef<OneofMessage1>(
-  "OneofMessage1",
-);
+export const OneofMessage1$Ref = builder.objectRef<
+  MessageShape<typeof OneofMessage1Schema>
+>("OneofMessage1");
 builder.objectType(OneofMessage1$Ref, {
   name: "OneofMessage1",
   fields: (t) => ({
@@ -22557,18 +22593,18 @@ exports[`protobuf-es > 'testapis.edgecases.import_squashed_union.pkg1' > generat
 /* eslint-disable */
 
 import { builder } from "../../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   OneofMessage1,
   OneofMessage1Schema,
   SquashedOneof,
   SquashedOneofSchema,
 } from "@testapis/protobuf-es-v2/testapis/edgecases/import_squashed_union/pkg1/types_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const OneofMessage1$Ref = builder.objectRef<OneofMessage1>(
-  "OneofMessage1",
-);
+export const OneofMessage1$Ref = builder.objectRef<
+  MessageShape<typeof OneofMessage1Schema>
+>("OneofMessage1");
 builder.objectType(OneofMessage1$Ref, {
   name: "OneofMessage1",
   fields: (t) => ({
@@ -22757,18 +22793,18 @@ exports[`protobuf-es > 'testapis.edgecases.import_squashed_union.pkg1' > generat
 /* eslint-disable */
 
 import { builder } from "../../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   OneofMessage1,
   OneofMessage1Schema,
   SquashedOneof,
   SquashedOneofSchema,
 } from "./types_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const OneofMessage1$Ref = builder.objectRef<OneofMessage1>(
-  "OneofMessage1",
-);
+export const OneofMessage1$Ref = builder.objectRef<
+  MessageShape<typeof OneofMessage1Schema>
+>("OneofMessage1");
 builder.objectType(OneofMessage1$Ref, {
   name: "OneofMessage1",
   fields: (t) => ({
@@ -22884,6 +22920,7 @@ exports[`protobuf-es > 'testapis.edgecases.import_squashed_union.pkg2' > generat
 /* eslint-disable */
 
 import { builder } from "../../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   Message,
   MessageSchema,
@@ -22895,10 +22932,11 @@ import {
   SquashedOneofInput$toProto,
 } from "../pkg1/types.pb.pothos";
 import { OneofMessage1 } from "@testapis/protobuf-es-v2/testapis/edgecases/import_squashed_union/pkg1/types_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const Message$Ref = builder.objectRef<Message>("Message");
+export const Message$Ref = builder.objectRef<
+  MessageShape<typeof MessageSchema>
+>("Message");
 builder.objectType(Message$Ref, {
   name: "Message",
   fields: (t) => ({
@@ -22979,6 +23017,7 @@ exports[`protobuf-es > 'testapis.edgecases.import_squashed_union.pkg2' > generat
 /* eslint-disable */
 
 import { builder } from "../../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   Message,
   MessageSchema,
@@ -22993,10 +23032,11 @@ import {
   SquashedOneofPartialInput$toProto,
 } from "../pkg1/types.pb.pothos";
 import { OneofMessage1 } from "@testapis/protobuf-es-v2/testapis/edgecases/import_squashed_union/pkg1/types_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const Message$Ref = builder.objectRef<Message>("Message");
+export const Message$Ref = builder.objectRef<
+  MessageShape<typeof MessageSchema>
+>("Message");
 builder.objectType(Message$Ref, {
   name: "Message",
   fields: (t) => ({
@@ -23115,6 +23155,7 @@ exports[`protobuf-es > 'testapis.edgecases.import_squashed_union.pkg2' > generat
 /* eslint-disable */
 
 import { builder } from "../../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import { Message, MessageSchema } from "./types_pb";
 import {
   SquashedOneof$Ref,
@@ -23123,10 +23164,11 @@ import {
   SquashedOneofInput$toProto,
 } from "../pkg1/types.pb.pothos";
 import { OneofMessage1 } from "../pkg1/types_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const Message$Ref = builder.objectRef<Message>("Message");
+export const Message$Ref = builder.objectRef<
+  MessageShape<typeof MessageSchema>
+>("Message");
 builder.objectType(Message$Ref, {
   name: "Message",
   fields: (t) => ({
@@ -23207,14 +23249,16 @@ exports[`protobuf-es > 'testapis.empty_types' > generates files by plugin 'with 
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   EmptyMessage,
   EmptyMessageSchema,
 } from "@testapis/protobuf-es-v2/testapis/empty_types/empty_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const EmptyMessage$Ref = builder.objectRef<EmptyMessage>("EmptyMessage");
+export const EmptyMessage$Ref = builder.objectRef<
+  MessageShape<typeof EmptyMessageSchema>
+>("EmptyMessage");
 builder.objectType(EmptyMessage$Ref, {
   name: "EmptyMessage",
   fields: (t) => ({
@@ -23276,14 +23320,16 @@ exports[`protobuf-es > 'testapis.empty_types' > generates files by plugin 'with 
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   EmptyMessage,
   EmptyMessageSchema,
 } from "@testapis/protobuf-es-v2/testapis/empty_types/empty_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const EmptyMessage$Ref = builder.objectRef<EmptyMessage>("EmptyMessage");
+export const EmptyMessage$Ref = builder.objectRef<
+  MessageShape<typeof EmptyMessageSchema>
+>("EmptyMessage");
 builder.objectType(EmptyMessage$Ref, {
   name: "EmptyMessage",
   fields: (t) => ({
@@ -23373,11 +23419,13 @@ exports[`protobuf-es > 'testapis.empty_types' > generates files by plugin 'witho
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import { EmptyMessage, EmptyMessageSchema } from "./empty_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const EmptyMessage$Ref = builder.objectRef<EmptyMessage>("EmptyMessage");
+export const EmptyMessage$Ref = builder.objectRef<
+  MessageShape<typeof EmptyMessageSchema>
+>("EmptyMessage");
 builder.objectType(EmptyMessage$Ref, {
   name: "EmptyMessage",
   fields: (t) => ({
@@ -23439,18 +23487,18 @@ exports[`protobuf-es > 'testapis.enums' > generates files by plugin 'with import
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   MessageWithEnums,
   MessageWithEnumsSchema,
   MyEnum,
   MyEnumWithoutUnspecified,
 } from "@testapis/protobuf-es-v2/testapis/enums/enums_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 
-export const MessageWithEnums$Ref = builder.objectRef<MessageWithEnums>(
-  "MessageWithEnums",
-);
+export const MessageWithEnums$Ref = builder.objectRef<
+  MessageShape<typeof MessageWithEnumsSchema>
+>("MessageWithEnums");
 builder.objectType(MessageWithEnums$Ref, {
   name: "MessageWithEnums",
   fields: (t) => ({
@@ -23815,18 +23863,18 @@ exports[`protobuf-es > 'testapis.enums' > generates files by plugin 'with partia
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   MessageWithEnums,
   MessageWithEnumsSchema,
   MyEnum,
   MyEnumWithoutUnspecified,
 } from "@testapis/protobuf-es-v2/testapis/enums/enums_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 
-export const MessageWithEnums$Ref = builder.objectRef<MessageWithEnums>(
-  "MessageWithEnums",
-);
+export const MessageWithEnums$Ref = builder.objectRef<
+  MessageShape<typeof MessageWithEnumsSchema>
+>("MessageWithEnums");
 builder.objectType(MessageWithEnums$Ref, {
   name: "MessageWithEnums",
   fields: (t) => ({
@@ -24333,18 +24381,18 @@ exports[`protobuf-es > 'testapis.enums' > generates files by plugin 'without imp
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   MessageWithEnums,
   MessageWithEnumsSchema,
   MyEnum,
   MyEnumWithoutUnspecified,
 } from "./enums_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 
-export const MessageWithEnums$Ref = builder.objectRef<MessageWithEnums>(
-  "MessageWithEnums",
-);
+export const MessageWithEnums$Ref = builder.objectRef<
+  MessageShape<typeof MessageWithEnumsSchema>
+>("MessageWithEnums");
 builder.objectType(MessageWithEnums$Ref, {
   name: "MessageWithEnums",
   fields: (t) => ({
@@ -24709,6 +24757,7 @@ exports[`protobuf-es > 'testapis.extensions' > generates files by plugin 'with i
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   EnumWillRename,
   IgnoredMessage_NotIgnored,
@@ -24716,7 +24765,6 @@ import {
   InterfaceMessage,
   InterfaceMessage_Type,
   InterfaceMessageSchema,
-  MessageOnlyOutput,
   MessageOnlyOutputSchema,
   MessageWillRename,
   MessageWillRenameSchema,
@@ -24730,12 +24778,11 @@ import {
   PrefixedMessage_SquashedMessageSchema,
   PrefixedMessageSchema,
 } from "@testapis/protobuf-es-v2/testapis/extensions/extensions_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 
-export const TestPrefixPrefixedMessage$Ref = builder.objectRef<PrefixedMessage>(
-  "TestPrefixPrefixedMessage",
-);
+export const TestPrefixPrefixedMessage$Ref = builder.objectRef<
+  MessageShape<typeof PrefixedMessageSchema>
+>("TestPrefixPrefixedMessage");
 builder.objectType(TestPrefixPrefixedMessage$Ref, {
   name: "TestPrefixPrefixedMessage",
   fields: (t) => ({
@@ -24894,7 +24941,7 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
 });
 
 export const TestPrefixRenamedMessage$Ref = builder.objectRef<
-  MessageWillRename
+  MessageShape<typeof MessageWillRenameSchema>
 >("TestPrefixRenamedMessage");
 builder.objectType(TestPrefixRenamedMessage$Ref, {
   name: "TestPrefixRenamedMessage",
@@ -24919,7 +24966,7 @@ builder.objectType(TestPrefixRenamedMessage$Ref, {
 });
 
 export const TestPrefixMessageOnlyOutput$Ref = builder.objectRef<
-  MessageOnlyOutput
+  MessageShape<typeof MessageOnlyOutputSchema>
 >("TestPrefixMessageOnlyOutput");
 builder.objectType(TestPrefixMessageOnlyOutput$Ref, {
   name: "TestPrefixMessageOnlyOutput",
@@ -24944,7 +24991,7 @@ builder.objectType(TestPrefixMessageOnlyOutput$Ref, {
 });
 
 export const TestPrefixPrefixedMessageInnerMessage$Ref = builder.objectRef<
-  PrefixedMessage_InnerMessage
+  MessageShape<typeof PrefixedMessage_InnerMessageSchema>
 >("TestPrefixPrefixedMessageInnerMessage");
 builder.objectType(TestPrefixPrefixedMessageInnerMessage$Ref, {
   name: "TestPrefixPrefixedMessageInnerMessage",
@@ -24973,7 +25020,7 @@ builder.objectType(TestPrefixPrefixedMessageInnerMessage$Ref, {
 });
 
 export const TestPrefixPrefixedMessageInnerMessage2$Ref = builder.objectRef<
-  PrefixedMessage_InnerMessage2
+  MessageShape<typeof PrefixedMessage_InnerMessage2Schema>
 >("TestPrefixPrefixedMessageInnerMessage2");
 builder.objectType(TestPrefixPrefixedMessageInnerMessage2$Ref, {
   name: "TestPrefixPrefixedMessageInnerMessage2",
@@ -25002,7 +25049,7 @@ builder.objectType(TestPrefixPrefixedMessageInnerMessage2$Ref, {
 });
 
 export const TestPrefixIgnoredMessageNotIgnored$Ref = builder.objectRef<
-  IgnoredMessage_NotIgnored
+  MessageShape<typeof IgnoredMessage_NotIgnoredSchema>
 >("TestPrefixIgnoredMessageNotIgnored");
 builder.objectType(TestPrefixIgnoredMessageNotIgnored$Ref, {
   name: "TestPrefixIgnoredMessageNotIgnored",
@@ -25431,7 +25478,7 @@ export function TestPrefixIgnoredMessageNotIgnoredInput$toProto(
 }
 
 export const TestPrefixInterfaceMessage$Ref = builder.interfaceRef<
-  Pick<InterfaceMessage, "id">
+  Pick<MessageShape<typeof InterfaceMessageSchema>, "id">
 >("TestPrefixInterfaceMessage");
 builder.interfaceType(TestPrefixInterfaceMessage$Ref, {
   name: "TestPrefixInterfaceMessage",
@@ -25579,6 +25626,7 @@ exports[`protobuf-es > 'testapis.extensions' > generates files by plugin 'with p
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   EnumWillRename,
   IgnoredMessage_NotIgnored,
@@ -25586,7 +25634,6 @@ import {
   InterfaceMessage,
   InterfaceMessage_Type,
   InterfaceMessageSchema,
-  MessageOnlyOutput,
   MessageOnlyOutputSchema,
   MessageWillRename,
   MessageWillRenameSchema,
@@ -25600,12 +25647,11 @@ import {
   PrefixedMessage_SquashedMessageSchema,
   PrefixedMessageSchema,
 } from "@testapis/protobuf-es-v2/testapis/extensions/extensions_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 
-export const TestPrefixPrefixedMessage$Ref = builder.objectRef<PrefixedMessage>(
-  "TestPrefixPrefixedMessage",
-);
+export const TestPrefixPrefixedMessage$Ref = builder.objectRef<
+  MessageShape<typeof PrefixedMessageSchema>
+>("TestPrefixPrefixedMessage");
 builder.objectType(TestPrefixPrefixedMessage$Ref, {
   name: "TestPrefixPrefixedMessage",
   fields: (t) => ({
@@ -25764,7 +25810,7 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
 });
 
 export const TestPrefixRenamedMessage$Ref = builder.objectRef<
-  MessageWillRename
+  MessageShape<typeof MessageWillRenameSchema>
 >("TestPrefixRenamedMessage");
 builder.objectType(TestPrefixRenamedMessage$Ref, {
   name: "TestPrefixRenamedMessage",
@@ -25789,7 +25835,7 @@ builder.objectType(TestPrefixRenamedMessage$Ref, {
 });
 
 export const TestPrefixMessageOnlyOutput$Ref = builder.objectRef<
-  MessageOnlyOutput
+  MessageShape<typeof MessageOnlyOutputSchema>
 >("TestPrefixMessageOnlyOutput");
 builder.objectType(TestPrefixMessageOnlyOutput$Ref, {
   name: "TestPrefixMessageOnlyOutput",
@@ -25814,7 +25860,7 @@ builder.objectType(TestPrefixMessageOnlyOutput$Ref, {
 });
 
 export const TestPrefixPrefixedMessageInnerMessage$Ref = builder.objectRef<
-  PrefixedMessage_InnerMessage
+  MessageShape<typeof PrefixedMessage_InnerMessageSchema>
 >("TestPrefixPrefixedMessageInnerMessage");
 builder.objectType(TestPrefixPrefixedMessageInnerMessage$Ref, {
   name: "TestPrefixPrefixedMessageInnerMessage",
@@ -25843,7 +25889,7 @@ builder.objectType(TestPrefixPrefixedMessageInnerMessage$Ref, {
 });
 
 export const TestPrefixPrefixedMessageInnerMessage2$Ref = builder.objectRef<
-  PrefixedMessage_InnerMessage2
+  MessageShape<typeof PrefixedMessage_InnerMessage2Schema>
 >("TestPrefixPrefixedMessageInnerMessage2");
 builder.objectType(TestPrefixPrefixedMessageInnerMessage2$Ref, {
   name: "TestPrefixPrefixedMessageInnerMessage2",
@@ -25872,7 +25918,7 @@ builder.objectType(TestPrefixPrefixedMessageInnerMessage2$Ref, {
 });
 
 export const TestPrefixIgnoredMessageNotIgnored$Ref = builder.objectRef<
-  IgnoredMessage_NotIgnored
+  MessageShape<typeof IgnoredMessage_NotIgnoredSchema>
 >("TestPrefixIgnoredMessageNotIgnored");
 builder.objectType(TestPrefixIgnoredMessageNotIgnored$Ref, {
   name: "TestPrefixIgnoredMessageNotIgnored",
@@ -26736,7 +26782,7 @@ export function TestPrefixIgnoredMessageNotIgnoredPartialInput$toProto(
 }
 
 export const TestPrefixInterfaceMessage$Ref = builder.interfaceRef<
-  Pick<InterfaceMessage, "id">
+  Pick<MessageShape<typeof InterfaceMessageSchema>, "id">
 >("TestPrefixInterfaceMessage");
 builder.interfaceType(TestPrefixInterfaceMessage$Ref, {
   name: "TestPrefixInterfaceMessage",
@@ -26884,6 +26930,7 @@ exports[`protobuf-es > 'testapis.extensions' > generates files by plugin 'withou
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   EnumWillRename,
   IgnoredMessage_NotIgnored,
@@ -26891,7 +26938,6 @@ import {
   InterfaceMessage,
   InterfaceMessage_Type,
   InterfaceMessageSchema,
-  MessageOnlyOutput,
   MessageOnlyOutputSchema,
   MessageWillRename,
   MessageWillRenameSchema,
@@ -26905,12 +26951,11 @@ import {
   PrefixedMessage_SquashedMessageSchema,
   PrefixedMessageSchema,
 } from "./extensions_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 
-export const TestPrefixPrefixedMessage$Ref = builder.objectRef<PrefixedMessage>(
-  "TestPrefixPrefixedMessage",
-);
+export const TestPrefixPrefixedMessage$Ref = builder.objectRef<
+  MessageShape<typeof PrefixedMessageSchema>
+>("TestPrefixPrefixedMessage");
 builder.objectType(TestPrefixPrefixedMessage$Ref, {
   name: "TestPrefixPrefixedMessage",
   fields: (t) => ({
@@ -27069,7 +27114,7 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
 });
 
 export const TestPrefixRenamedMessage$Ref = builder.objectRef<
-  MessageWillRename
+  MessageShape<typeof MessageWillRenameSchema>
 >("TestPrefixRenamedMessage");
 builder.objectType(TestPrefixRenamedMessage$Ref, {
   name: "TestPrefixRenamedMessage",
@@ -27094,7 +27139,7 @@ builder.objectType(TestPrefixRenamedMessage$Ref, {
 });
 
 export const TestPrefixMessageOnlyOutput$Ref = builder.objectRef<
-  MessageOnlyOutput
+  MessageShape<typeof MessageOnlyOutputSchema>
 >("TestPrefixMessageOnlyOutput");
 builder.objectType(TestPrefixMessageOnlyOutput$Ref, {
   name: "TestPrefixMessageOnlyOutput",
@@ -27119,7 +27164,7 @@ builder.objectType(TestPrefixMessageOnlyOutput$Ref, {
 });
 
 export const TestPrefixPrefixedMessageInnerMessage$Ref = builder.objectRef<
-  PrefixedMessage_InnerMessage
+  MessageShape<typeof PrefixedMessage_InnerMessageSchema>
 >("TestPrefixPrefixedMessageInnerMessage");
 builder.objectType(TestPrefixPrefixedMessageInnerMessage$Ref, {
   name: "TestPrefixPrefixedMessageInnerMessage",
@@ -27148,7 +27193,7 @@ builder.objectType(TestPrefixPrefixedMessageInnerMessage$Ref, {
 });
 
 export const TestPrefixPrefixedMessageInnerMessage2$Ref = builder.objectRef<
-  PrefixedMessage_InnerMessage2
+  MessageShape<typeof PrefixedMessage_InnerMessage2Schema>
 >("TestPrefixPrefixedMessageInnerMessage2");
 builder.objectType(TestPrefixPrefixedMessageInnerMessage2$Ref, {
   name: "TestPrefixPrefixedMessageInnerMessage2",
@@ -27177,7 +27222,7 @@ builder.objectType(TestPrefixPrefixedMessageInnerMessage2$Ref, {
 });
 
 export const TestPrefixIgnoredMessageNotIgnored$Ref = builder.objectRef<
-  IgnoredMessage_NotIgnored
+  MessageShape<typeof IgnoredMessage_NotIgnoredSchema>
 >("TestPrefixIgnoredMessageNotIgnored");
 builder.objectType(TestPrefixIgnoredMessageNotIgnored$Ref, {
   name: "TestPrefixIgnoredMessageNotIgnored",
@@ -27606,7 +27651,7 @@ export function TestPrefixIgnoredMessageNotIgnoredInput$toProto(
 }
 
 export const TestPrefixInterfaceMessage$Ref = builder.interfaceRef<
-  Pick<InterfaceMessage, "id">
+  Pick<MessageShape<typeof InterfaceMessageSchema>, "id">
 >("TestPrefixInterfaceMessage");
 builder.interfaceType(TestPrefixInterfaceMessage$Ref, {
   name: "TestPrefixInterfaceMessage",
@@ -27754,15 +27799,17 @@ exports[`protobuf-es > 'testapis.extensions.field_nullability' > generates files
 /* eslint-disable */
 
 import { builder } from "../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   Message,
   Message_Status,
   MessageSchema,
 } from "@testapis/protobuf-es-v2/testapis/extensions/field_nullability/nullability_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 
-export const Message$Ref = builder.objectRef<Message>("Message");
+export const Message$Ref = builder.objectRef<
+  MessageShape<typeof MessageSchema>
+>("Message");
 builder.objectType(Message$Ref, {
   name: "Message",
   fields: (t) => ({
@@ -27929,15 +27976,17 @@ exports[`protobuf-es > 'testapis.extensions.field_nullability' > generates files
 /* eslint-disable */
 
 import { builder } from "../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   Message,
   Message_Status,
   MessageSchema,
 } from "@testapis/protobuf-es-v2/testapis/extensions/field_nullability/nullability_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 
-export const Message$Ref = builder.objectRef<Message>("Message");
+export const Message$Ref = builder.objectRef<
+  MessageShape<typeof MessageSchema>
+>("Message");
 builder.objectType(Message$Ref, {
   name: "Message",
   fields: (t) => ({
@@ -28177,11 +28226,13 @@ exports[`protobuf-es > 'testapis.extensions.field_nullability' > generates files
 /* eslint-disable */
 
 import { builder } from "../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import { Message, Message_Status, MessageSchema } from "./nullability_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 
-export const Message$Ref = builder.objectRef<Message>("Message");
+export const Message$Ref = builder.objectRef<
+  MessageShape<typeof MessageSchema>
+>("Message");
 builder.objectType(Message$Ref, {
   name: "Message",
   fields: (t) => ({
@@ -28348,6 +28399,7 @@ exports[`protobuf-es > 'testapis.extensions.no_partial' > generates files by plu
 /* eslint-disable */
 
 import { builder } from "../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   NoPartialInputMessage,
   NoPartialInputMessageSchema,
@@ -28356,12 +28408,11 @@ import {
   PartialableInputMessage,
   PartialableInputMessageSchema,
 } from "@testapis/protobuf-es-v2/testapis/extensions/no_partial/no_partial_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const ParentMessage$Ref = builder.objectRef<ParentMessage>(
-  "ParentMessage",
-);
+export const ParentMessage$Ref = builder.objectRef<
+  MessageShape<typeof ParentMessageSchema>
+>("ParentMessage");
 builder.objectType(ParentMessage$Ref, {
   name: "ParentMessage",
   fields: (t) => ({
@@ -28408,7 +28459,7 @@ builder.objectType(ParentMessage$Ref, {
 });
 
 export const PartialableInputMessage$Ref = builder.objectRef<
-  PartialableInputMessage
+  MessageShape<typeof PartialableInputMessageSchema>
 >("PartialableInputMessage");
 builder.objectType(PartialableInputMessage$Ref, {
   name: "PartialableInputMessage",
@@ -28439,7 +28490,7 @@ builder.objectType(PartialableInputMessage$Ref, {
 });
 
 export const NoPartialInputMessage$Ref = builder.objectRef<
-  NoPartialInputMessage
+  MessageShape<typeof NoPartialInputMessageSchema>
 >("NoPartialInputMessage");
 builder.objectType(NoPartialInputMessage$Ref, {
   name: "NoPartialInputMessage",
@@ -28623,6 +28674,7 @@ exports[`protobuf-es > 'testapis.extensions.no_partial' > generates files by plu
 /* eslint-disable */
 
 import { builder } from "../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   NoPartialInputMessage,
   NoPartialInputMessageSchema,
@@ -28631,12 +28683,11 @@ import {
   PartialableInputMessage,
   PartialableInputMessageSchema,
 } from "@testapis/protobuf-es-v2/testapis/extensions/no_partial/no_partial_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const ParentMessage$Ref = builder.objectRef<ParentMessage>(
-  "ParentMessage",
-);
+export const ParentMessage$Ref = builder.objectRef<
+  MessageShape<typeof ParentMessageSchema>
+>("ParentMessage");
 builder.objectType(ParentMessage$Ref, {
   name: "ParentMessage",
   fields: (t) => ({
@@ -28683,7 +28734,7 @@ builder.objectType(ParentMessage$Ref, {
 });
 
 export const PartialableInputMessage$Ref = builder.objectRef<
-  PartialableInputMessage
+  MessageShape<typeof PartialableInputMessageSchema>
 >("PartialableInputMessage");
 builder.objectType(PartialableInputMessage$Ref, {
   name: "PartialableInputMessage",
@@ -28714,7 +28765,7 @@ builder.objectType(PartialableInputMessage$Ref, {
 });
 
 export const NoPartialInputMessage$Ref = builder.objectRef<
-  NoPartialInputMessage
+  MessageShape<typeof NoPartialInputMessageSchema>
 >("NoPartialInputMessage");
 builder.objectType(NoPartialInputMessage$Ref, {
   name: "NoPartialInputMessage",
@@ -28999,6 +29050,7 @@ exports[`protobuf-es > 'testapis.extensions.no_partial' > generates files by plu
 /* eslint-disable */
 
 import { builder } from "../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   NoPartialInputMessage,
   NoPartialInputMessageSchema,
@@ -29007,12 +29059,11 @@ import {
   PartialableInputMessage,
   PartialableInputMessageSchema,
 } from "./no_partial_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const ParentMessage$Ref = builder.objectRef<ParentMessage>(
-  "ParentMessage",
-);
+export const ParentMessage$Ref = builder.objectRef<
+  MessageShape<typeof ParentMessageSchema>
+>("ParentMessage");
 builder.objectType(ParentMessage$Ref, {
   name: "ParentMessage",
   fields: (t) => ({
@@ -29059,7 +29110,7 @@ builder.objectType(ParentMessage$Ref, {
 });
 
 export const PartialableInputMessage$Ref = builder.objectRef<
-  PartialableInputMessage
+  MessageShape<typeof PartialableInputMessageSchema>
 >("PartialableInputMessage");
 builder.objectType(PartialableInputMessage$Ref, {
   name: "PartialableInputMessage",
@@ -29090,7 +29141,7 @@ builder.objectType(PartialableInputMessage$Ref, {
 });
 
 export const NoPartialInputMessage$Ref = builder.objectRef<
-  NoPartialInputMessage
+  MessageShape<typeof NoPartialInputMessageSchema>
 >("NoPartialInputMessage");
 builder.objectType(NoPartialInputMessage$Ref, {
   name: "NoPartialInputMessage",
@@ -29274,17 +29325,17 @@ exports[`protobuf-es > 'testapis.field_behavior' > generates files by plugin 'wi
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   FieldBehaviorComentsMessage,
   FieldBehaviorComentsMessage_Post,
   FieldBehaviorComentsMessage_PostSchema,
   FieldBehaviorComentsMessageSchema,
 } from "@testapis/protobuf-es-v2/testapis/field_behavior/comments_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
 export const FieldBehaviorComentsMessage$Ref = builder.objectRef<
-  FieldBehaviorComentsMessage
+  MessageShape<typeof FieldBehaviorComentsMessageSchema>
 >("FieldBehaviorComentsMessage");
 builder.objectType(FieldBehaviorComentsMessage$Ref, {
   name: "FieldBehaviorComentsMessage",
@@ -29360,7 +29411,7 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
 });
 
 export const FieldBehaviorComentsMessagePost$Ref = builder.objectRef<
-  FieldBehaviorComentsMessage_Post
+  MessageShape<typeof FieldBehaviorComentsMessage_PostSchema>
 >("FieldBehaviorComentsMessagePost");
 builder.objectType(FieldBehaviorComentsMessagePost$Ref, {
   name: "FieldBehaviorComentsMessagePost",
@@ -29523,17 +29574,17 @@ exports[`protobuf-es > 'testapis.field_behavior' > generates files by plugin 'wi
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   FieldBehaviorComentsMessage,
   FieldBehaviorComentsMessage_Post,
   FieldBehaviorComentsMessage_PostSchema,
   FieldBehaviorComentsMessageSchema,
 } from "@testapis/protobuf-es-v2/testapis/field_behavior/comments_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
 export const FieldBehaviorComentsMessage$Ref = builder.objectRef<
-  FieldBehaviorComentsMessage
+  MessageShape<typeof FieldBehaviorComentsMessageSchema>
 >("FieldBehaviorComentsMessage");
 builder.objectType(FieldBehaviorComentsMessage$Ref, {
   name: "FieldBehaviorComentsMessage",
@@ -29609,7 +29660,7 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
 });
 
 export const FieldBehaviorComentsMessagePost$Ref = builder.objectRef<
-  FieldBehaviorComentsMessage_Post
+  MessageShape<typeof FieldBehaviorComentsMessage_PostSchema>
 >("FieldBehaviorComentsMessagePost");
 builder.objectType(FieldBehaviorComentsMessagePost$Ref, {
   name: "FieldBehaviorComentsMessagePost",
@@ -29905,17 +29956,17 @@ exports[`protobuf-es > 'testapis.field_behavior' > generates files by plugin 'wi
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   FieldBehaviorComentsMessage,
   FieldBehaviorComentsMessage_Post,
   FieldBehaviorComentsMessage_PostSchema,
   FieldBehaviorComentsMessageSchema,
 } from "./comments_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
 export const FieldBehaviorComentsMessage$Ref = builder.objectRef<
-  FieldBehaviorComentsMessage
+  MessageShape<typeof FieldBehaviorComentsMessageSchema>
 >("FieldBehaviorComentsMessage");
 builder.objectType(FieldBehaviorComentsMessage$Ref, {
   name: "FieldBehaviorComentsMessage",
@@ -29991,7 +30042,7 @@ builder.objectType(FieldBehaviorComentsMessage$Ref, {
 });
 
 export const FieldBehaviorComentsMessagePost$Ref = builder.objectRef<
-  FieldBehaviorComentsMessage_Post
+  MessageShape<typeof FieldBehaviorComentsMessage_PostSchema>
 >("FieldBehaviorComentsMessagePost");
 builder.objectType(FieldBehaviorComentsMessagePost$Ref, {
   name: "FieldBehaviorComentsMessagePost",
@@ -30160,17 +30211,17 @@ exports[`protobuf-es > 'testapis.multipkgs.subpkg1' > generates files by plugin 
 /* eslint-disable */
 
 import { builder } from "../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   SubpkgEnum,
   SubpkgMessage,
   SubpkgMessageSchema,
 } from "@testapis/protobuf-es-v2/testapis/multipkgs/subpkg1/types_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 
-export const SubpkgMessage$Ref = builder.objectRef<SubpkgMessage>(
-  "SubpkgMessage",
-);
+export const SubpkgMessage$Ref = builder.objectRef<
+  MessageShape<typeof SubpkgMessageSchema>
+>("SubpkgMessage");
 builder.objectType(SubpkgMessage$Ref, {
   name: "SubpkgMessage",
   fields: (t) => ({
@@ -30248,17 +30299,17 @@ exports[`protobuf-es > 'testapis.multipkgs.subpkg1' > generates files by plugin 
 /* eslint-disable */
 
 import { builder } from "../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   SubpkgEnum,
   SubpkgMessage,
   SubpkgMessageSchema,
 } from "@testapis/protobuf-es-v2/testapis/multipkgs/subpkg1/types_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 
-export const SubpkgMessage$Ref = builder.objectRef<SubpkgMessage>(
-  "SubpkgMessage",
-);
+export const SubpkgMessage$Ref = builder.objectRef<
+  MessageShape<typeof SubpkgMessageSchema>
+>("SubpkgMessage");
 builder.objectType(SubpkgMessage$Ref, {
   name: "SubpkgMessage",
   fields: (t) => ({
@@ -30367,13 +30418,13 @@ exports[`protobuf-es > 'testapis.multipkgs.subpkg1' > generates files by plugin 
 /* eslint-disable */
 
 import { builder } from "../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import { SubpkgEnum, SubpkgMessage, SubpkgMessageSchema } from "./types_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 
-export const SubpkgMessage$Ref = builder.objectRef<SubpkgMessage>(
-  "SubpkgMessage",
-);
+export const SubpkgMessage$Ref = builder.objectRef<
+  MessageShape<typeof SubpkgMessageSchema>
+>("SubpkgMessage");
 builder.objectType(SubpkgMessage$Ref, {
   name: "SubpkgMessage",
   fields: (t) => ({
@@ -30451,6 +30502,7 @@ exports[`protobuf-es > 'testapis.multipkgs.subpkg2' > generates files by plugin 
 /* eslint-disable */
 
 import { builder } from "../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   MessageWithSubpkg,
   MessageWithSubpkgSchema,
@@ -30463,12 +30515,11 @@ import {
   SubpkgMessageInput$toProto,
 } from "../subpkg1/types.pb.pothos";
 import { SubpkgEnum } from "@testapis/protobuf-es-v2/testapis/multipkgs/subpkg1/types_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const MessageWithSubpkg$Ref = builder.objectRef<MessageWithSubpkg>(
-  "MessageWithSubpkg",
-);
+export const MessageWithSubpkg$Ref = builder.objectRef<
+  MessageShape<typeof MessageWithSubpkgSchema>
+>("MessageWithSubpkg");
 builder.objectType(MessageWithSubpkg$Ref, {
   name: "MessageWithSubpkg",
   fields: (t) => ({
@@ -30576,6 +30627,7 @@ exports[`protobuf-es > 'testapis.multipkgs.subpkg2' > generates files by plugin 
 /* eslint-disable */
 
 import { builder } from "../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   MessageWithSubpkg,
   MessageWithSubpkgSchema,
@@ -30591,12 +30643,11 @@ import {
   SubpkgMessagePartialInput$toProto,
 } from "../subpkg1/types.pb.pothos";
 import { SubpkgEnum } from "@testapis/protobuf-es-v2/testapis/multipkgs/subpkg1/types_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const MessageWithSubpkg$Ref = builder.objectRef<MessageWithSubpkg>(
-  "MessageWithSubpkg",
-);
+export const MessageWithSubpkg$Ref = builder.objectRef<
+  MessageShape<typeof MessageWithSubpkgSchema>
+>("MessageWithSubpkg");
 builder.objectType(MessageWithSubpkg$Ref, {
   name: "MessageWithSubpkg",
   fields: (t) => ({
@@ -30756,6 +30807,7 @@ exports[`protobuf-es > 'testapis.multipkgs.subpkg2' > generates files by plugin 
 /* eslint-disable */
 
 import { builder } from "../../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import { MessageWithSubpkg, MessageWithSubpkgSchema } from "./types_pb";
 import {
   SubpkgEnum$Ref,
@@ -30765,12 +30817,11 @@ import {
   SubpkgMessageInput$toProto,
 } from "../subpkg1/types.pb.pothos";
 import { SubpkgEnum } from "../subpkg1/types_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const MessageWithSubpkg$Ref = builder.objectRef<MessageWithSubpkg>(
-  "MessageWithSubpkg",
-);
+export const MessageWithSubpkg$Ref = builder.objectRef<
+  MessageShape<typeof MessageWithSubpkgSchema>
+>("MessageWithSubpkg");
 builder.objectType(MessageWithSubpkg$Ref, {
   name: "MessageWithSubpkg",
   fields: (t) => ({
@@ -30878,6 +30929,7 @@ exports[`protobuf-es > 'testapis.nested' > generates files by plugin 'with impor
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   ParentMessage,
   ParentMessage_NestedEnum,
@@ -30885,12 +30937,11 @@ import {
   ParentMessage_NestedMessageSchema,
   ParentMessageSchema,
 } from "@testapis/protobuf-es-v2/testapis/nested/nested_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 
-export const ParentMessage$Ref = builder.objectRef<ParentMessage>(
-  "ParentMessage",
-);
+export const ParentMessage$Ref = builder.objectRef<
+  MessageShape<typeof ParentMessageSchema>
+>("ParentMessage");
 builder.objectType(ParentMessage$Ref, {
   name: "ParentMessage",
   fields: (t) => ({
@@ -30942,7 +30993,7 @@ builder.objectType(ParentMessage$Ref, {
 });
 
 export const ParentMessageNestedMessage$Ref = builder.objectRef<
-  ParentMessage_NestedMessage
+  MessageShape<typeof ParentMessage_NestedMessageSchema>
 >("ParentMessageNestedMessage");
 builder.objectType(ParentMessageNestedMessage$Ref, {
   name: "ParentMessageNestedMessage",
@@ -31088,6 +31139,7 @@ exports[`protobuf-es > 'testapis.nested' > generates files by plugin 'with parti
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   ParentMessage,
   ParentMessage_NestedEnum,
@@ -31095,12 +31147,11 @@ import {
   ParentMessage_NestedMessageSchema,
   ParentMessageSchema,
 } from "@testapis/protobuf-es-v2/testapis/nested/nested_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 
-export const ParentMessage$Ref = builder.objectRef<ParentMessage>(
-  "ParentMessage",
-);
+export const ParentMessage$Ref = builder.objectRef<
+  MessageShape<typeof ParentMessageSchema>
+>("ParentMessage");
 builder.objectType(ParentMessage$Ref, {
   name: "ParentMessage",
   fields: (t) => ({
@@ -31152,7 +31203,7 @@ builder.objectType(ParentMessage$Ref, {
 });
 
 export const ParentMessageNestedMessage$Ref = builder.objectRef<
-  ParentMessage_NestedMessage
+  MessageShape<typeof ParentMessage_NestedMessageSchema>
 >("ParentMessageNestedMessage");
 builder.objectType(ParentMessageNestedMessage$Ref, {
   name: "ParentMessageNestedMessage",
@@ -31392,6 +31443,7 @@ exports[`protobuf-es > 'testapis.nested' > generates files by plugin 'without im
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   ParentMessage,
   ParentMessage_NestedEnum,
@@ -31399,12 +31451,11 @@ import {
   ParentMessage_NestedMessageSchema,
   ParentMessageSchema,
 } from "./nested_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 
-export const ParentMessage$Ref = builder.objectRef<ParentMessage>(
-  "ParentMessage",
-);
+export const ParentMessage$Ref = builder.objectRef<
+  MessageShape<typeof ParentMessageSchema>
+>("ParentMessage");
 builder.objectType(ParentMessage$Ref, {
   name: "ParentMessage",
   fields: (t) => ({
@@ -31456,7 +31507,7 @@ builder.objectType(ParentMessage$Ref, {
 });
 
 export const ParentMessageNestedMessage$Ref = builder.objectRef<
-  ParentMessage_NestedMessage
+  MessageShape<typeof ParentMessage_NestedMessageSchema>
 >("ParentMessageNestedMessage");
 builder.objectType(ParentMessageNestedMessage$Ref, {
   name: "ParentMessageNestedMessage",
@@ -31602,6 +31653,7 @@ exports[`protobuf-es > 'testapis.oneof' > generates files by plugin 'with import
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   OneofMemberMessage1,
   OneofMemberMessage1Schema,
@@ -31610,10 +31662,11 @@ import {
   OneofParent,
   OneofParentSchema,
 } from "@testapis/protobuf-es-v2/testapis/oneof/oneof_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const OneofParent$Ref = builder.objectRef<OneofParent>("OneofParent");
+export const OneofParent$Ref = builder.objectRef<
+  MessageShape<typeof OneofParentSchema>
+>("OneofParent");
 builder.objectType(OneofParent$Ref, {
   name: "OneofParent",
   fields: (t) => ({
@@ -31665,9 +31718,9 @@ builder.objectType(OneofParent$Ref, {
   },
 });
 
-export const OneofMemberMessage1$Ref = builder.objectRef<OneofMemberMessage1>(
-  "OneofMemberMessage1",
-);
+export const OneofMemberMessage1$Ref = builder.objectRef<
+  MessageShape<typeof OneofMemberMessage1Schema>
+>("OneofMemberMessage1");
 builder.objectType(OneofMemberMessage1$Ref, {
   name: "OneofMemberMessage1",
   fields: (t) => ({
@@ -31689,9 +31742,9 @@ builder.objectType(OneofMemberMessage1$Ref, {
   },
 });
 
-export const OneofMemberMessage2$Ref = builder.objectRef<OneofMemberMessage2>(
-  "OneofMemberMessage2",
-);
+export const OneofMemberMessage2$Ref = builder.objectRef<
+  MessageShape<typeof OneofMemberMessage2Schema>
+>("OneofMemberMessage2");
 builder.objectType(OneofMemberMessage2$Ref, {
   name: "OneofMemberMessage2",
   fields: (t) => ({
@@ -31935,6 +31988,7 @@ exports[`protobuf-es > 'testapis.oneof' > generates files by plugin 'with partia
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   OneofMemberMessage1,
   OneofMemberMessage1Schema,
@@ -31943,10 +31997,11 @@ import {
   OneofParent,
   OneofParentSchema,
 } from "@testapis/protobuf-es-v2/testapis/oneof/oneof_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const OneofParent$Ref = builder.objectRef<OneofParent>("OneofParent");
+export const OneofParent$Ref = builder.objectRef<
+  MessageShape<typeof OneofParentSchema>
+>("OneofParent");
 builder.objectType(OneofParent$Ref, {
   name: "OneofParent",
   fields: (t) => ({
@@ -31998,9 +32053,9 @@ builder.objectType(OneofParent$Ref, {
   },
 });
 
-export const OneofMemberMessage1$Ref = builder.objectRef<OneofMemberMessage1>(
-  "OneofMemberMessage1",
-);
+export const OneofMemberMessage1$Ref = builder.objectRef<
+  MessageShape<typeof OneofMemberMessage1Schema>
+>("OneofMemberMessage1");
 builder.objectType(OneofMemberMessage1$Ref, {
   name: "OneofMemberMessage1",
   fields: (t) => ({
@@ -32022,9 +32077,9 @@ builder.objectType(OneofMemberMessage1$Ref, {
   },
 });
 
-export const OneofMemberMessage2$Ref = builder.objectRef<OneofMemberMessage2>(
-  "OneofMemberMessage2",
-);
+export const OneofMemberMessage2$Ref = builder.objectRef<
+  MessageShape<typeof OneofMemberMessage2Schema>
+>("OneofMemberMessage2");
 builder.objectType(OneofMemberMessage2$Ref, {
   name: "OneofMemberMessage2",
   fields: (t) => ({
@@ -32434,6 +32489,7 @@ exports[`protobuf-es > 'testapis.oneof' > generates files by plugin 'without imp
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   OneofMemberMessage1,
   OneofMemberMessage1Schema,
@@ -32442,10 +32498,11 @@ import {
   OneofParent,
   OneofParentSchema,
 } from "./oneof_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const OneofParent$Ref = builder.objectRef<OneofParent>("OneofParent");
+export const OneofParent$Ref = builder.objectRef<
+  MessageShape<typeof OneofParentSchema>
+>("OneofParent");
 builder.objectType(OneofParent$Ref, {
   name: "OneofParent",
   fields: (t) => ({
@@ -32497,9 +32554,9 @@ builder.objectType(OneofParent$Ref, {
   },
 });
 
-export const OneofMemberMessage1$Ref = builder.objectRef<OneofMemberMessage1>(
-  "OneofMemberMessage1",
-);
+export const OneofMemberMessage1$Ref = builder.objectRef<
+  MessageShape<typeof OneofMemberMessage1Schema>
+>("OneofMemberMessage1");
 builder.objectType(OneofMemberMessage1$Ref, {
   name: "OneofMemberMessage1",
   fields: (t) => ({
@@ -32521,9 +32578,9 @@ builder.objectType(OneofMemberMessage1$Ref, {
   },
 });
 
-export const OneofMemberMessage2$Ref = builder.objectRef<OneofMemberMessage2>(
-  "OneofMemberMessage2",
-);
+export const OneofMemberMessage2$Ref = builder.objectRef<
+  MessageShape<typeof OneofMemberMessage2Schema>
+>("OneofMemberMessage2");
 builder.objectType(OneofMemberMessage2$Ref, {
   name: "OneofMemberMessage2",
   fields: (t) => ({
@@ -32767,16 +32824,18 @@ exports[`protobuf-es > 'testapis.primitives' > generates files by plugin 'with i
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   Message,
   MessageSchema,
   Primitives,
   PrimitivesSchema,
 } from "@testapis/protobuf-es-v2/testapis/primitives/primitives_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const Message$Ref = builder.objectRef<Message>("Message");
+export const Message$Ref = builder.objectRef<
+  MessageShape<typeof MessageSchema>
+>("Message");
 builder.objectType(Message$Ref, {
   name: "Message",
   fields: (t) => ({
@@ -32843,7 +32902,9 @@ builder.objectType(Message$Ref, {
   },
 });
 
-export const Primitives$Ref = builder.objectRef<Primitives>("Primitives");
+export const Primitives$Ref = builder.objectRef<
+  MessageShape<typeof PrimitivesSchema>
+>("Primitives");
 builder.objectType(Primitives$Ref, {
   name: "Primitives",
   fields: (t) => ({
@@ -33609,16 +33670,18 @@ exports[`protobuf-es > 'testapis.primitives' > generates files by plugin 'with p
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   Message,
   MessageSchema,
   Primitives,
   PrimitivesSchema,
 } from "@testapis/protobuf-es-v2/testapis/primitives/primitives_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const Message$Ref = builder.objectRef<Message>("Message");
+export const Message$Ref = builder.objectRef<
+  MessageShape<typeof MessageSchema>
+>("Message");
 builder.objectType(Message$Ref, {
   name: "Message",
   fields: (t) => ({
@@ -33685,7 +33748,9 @@ builder.objectType(Message$Ref, {
   },
 });
 
-export const Primitives$Ref = builder.objectRef<Primitives>("Primitives");
+export const Primitives$Ref = builder.objectRef<
+  MessageShape<typeof PrimitivesSchema>
+>("Primitives");
 builder.objectType(Primitives$Ref, {
   name: "Primitives",
   fields: (t) => ({
@@ -34915,16 +34980,18 @@ exports[`protobuf-es > 'testapis.primitives' > generates files by plugin 'withou
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   Message,
   MessageSchema,
   Primitives,
   PrimitivesSchema,
 } from "./primitives_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const Message$Ref = builder.objectRef<Message>("Message");
+export const Message$Ref = builder.objectRef<
+  MessageShape<typeof MessageSchema>
+>("Message");
 builder.objectType(Message$Ref, {
   name: "Message",
   fields: (t) => ({
@@ -34991,7 +35058,9 @@ builder.objectType(Message$Ref, {
   },
 });
 
-export const Primitives$Ref = builder.objectRef<Primitives>("Primitives");
+export const Primitives$Ref = builder.objectRef<
+  MessageShape<typeof PrimitivesSchema>
+>("Primitives");
 builder.objectType(Primitives$Ref, {
   name: "Primitives",
   fields: (t) => ({
@@ -35757,14 +35826,16 @@ exports[`protobuf-es > 'testapis.proto3_optional' > generates files by plugin 'w
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   Message,
   MessageSchema,
 } from "@testapis/protobuf-es-v2/testapis/proto3_optional/proto3_optional_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const Message$Ref = builder.objectRef<Message>("Message");
+export const Message$Ref = builder.objectRef<
+  MessageShape<typeof MessageSchema>
+>("Message");
 builder.objectType(Message$Ref, {
   name: "Message",
   fields: (t) => ({
@@ -35861,14 +35932,16 @@ exports[`protobuf-es > 'testapis.proto3_optional' > generates files by plugin 'w
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   Message,
   MessageSchema,
 } from "@testapis/protobuf-es-v2/testapis/proto3_optional/proto3_optional_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const Message$Ref = builder.objectRef<Message>("Message");
+export const Message$Ref = builder.objectRef<
+  MessageShape<typeof MessageSchema>
+>("Message");
 builder.objectType(Message$Ref, {
   name: "Message",
   fields: (t) => ({
@@ -36014,11 +36087,13 @@ exports[`protobuf-es > 'testapis.proto3_optional' > generates files by plugin 'w
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import { Message, MessageSchema } from "./proto3_optional_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const Message$Ref = builder.objectRef<Message>("Message");
+export const Message$Ref = builder.objectRef<
+  MessageShape<typeof MessageSchema>
+>("Message");
 builder.objectType(Message$Ref, {
   name: "Message",
   fields: (t) => ({
@@ -36115,14 +36190,16 @@ exports[`protobuf-es > 'testapis.wktypes' > generates files by plugin 'with impo
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   Message,
   MessageSchema,
 } from "@testapis/protobuf-es-v2/testapis/wktypes/well_known_types_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const Message$Ref = builder.objectRef<Message>("Message");
+export const Message$Ref = builder.objectRef<
+  MessageShape<typeof MessageSchema>
+>("Message");
 builder.objectType(Message$Ref, {
   name: "Message",
   fields: (t) => ({
@@ -36427,14 +36504,16 @@ exports[`protobuf-es > 'testapis.wktypes' > generates files by plugin 'with part
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   Message,
   MessageSchema,
 } from "@testapis/protobuf-es-v2/testapis/wktypes/well_known_types_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const Message$Ref = builder.objectRef<Message>("Message");
+export const Message$Ref = builder.objectRef<
+  MessageShape<typeof MessageSchema>
+>("Message");
 builder.objectType(Message$Ref, {
   name: "Message",
   fields: (t) => ({
@@ -36897,11 +36976,13 @@ exports[`protobuf-es > 'testapis.wktypes' > generates files by plugin 'without i
 /* eslint-disable */
 
 import { builder } from "../../builder";
+import { create, isMessage, MessageShape } from "@bufbuild/protobuf";
 import { Message, MessageSchema } from "./well_known_types_pb";
-import { create, isMessage } from "@bufbuild/protobuf";
 import { InputObjectRef } from "@pothos/core";
 
-export const Message$Ref = builder.objectRef<Message>("Message");
+export const Message$Ref = builder.objectRef<
+  MessageShape<typeof MessageSchema>
+>("Message");
 builder.objectType(Message$Ref, {
   name: "Message",
   fields: (t) => ({

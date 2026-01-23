@@ -173,6 +173,34 @@ export function protobufIsMessageSymbol(): ImportSymbol {
   return createImportSymbol("isMessage", "@bufbuild/protobuf");
 }
 
+/**
+ * @bufbuild/protobuf から MessageShape 型を import
+ */
+export function protobufMessageShapeSymbol(): ImportSymbol {
+  return createImportSymbol("MessageShape", "@bufbuild/protobuf");
+}
+
+/**
+ * v2 用: ObjectRef の型パラメータとして使用する型を生成
+ * - protobuf-es v2: MessageShape<typeof XxxSchema>
+ * - protobuf-es v1: Xxx (クラス)
+ * - ts-proto: Xxx (interface)
+ */
+export function protoRefTypePrintable(
+  proto: DescMessage,
+  opts: Pick<PrinterOptions, "protobuf" | "importPrefix">,
+): Printable[] {
+  switch (opts.protobuf) {
+    case "ts-proto":
+    case "protobuf-es-v1": {
+      return code`${protoTypeSymbol(proto, opts)}`;
+    }
+    case "protobuf-es": {
+      return code`${protobufMessageShapeSymbol()}<typeof ${protoSchemaSymbol(proto, opts)}>`;
+    }
+  }
+}
+
 function protoImportPath(
   t: DescMessage | DescEnum,
   o: Pick<PrinterOptions, "protobuf" | "importPrefix">,

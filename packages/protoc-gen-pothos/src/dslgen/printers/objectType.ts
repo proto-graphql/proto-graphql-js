@@ -19,6 +19,7 @@ import {
   pothosBuilderPrintable,
   pothosRefPrintable,
   protobufIsMessageSymbol,
+  protoRefTypePrintable,
   protoSchemaSymbol,
   protoTypeSymbol,
 } from "./util.js";
@@ -65,7 +66,7 @@ export function createObjectTypeCode(
   const refFuncTypeArg = isInterface
     ? code`
         Pick<
-          ${protoTypeSymbol(type.proto, opts)},
+          ${protoRefTypePrintable(type.proto, opts)},
           ${joinCode(
             type.fields.map((f) =>
               literalOf(tsFieldName(f.proto as DescField, opts)),
@@ -73,7 +74,7 @@ export function createObjectTypeCode(
             "|",
           )}
         >`
-    : code`${protoTypeSymbol(type.proto, opts)}`;
+    : protoRefTypePrintable(type.proto, opts);
 
   return code`
     export const ${pothosRefPrintable(

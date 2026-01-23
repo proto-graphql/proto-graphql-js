@@ -1,14 +1,13 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`createObjectTypeCode > protobuf-es > 'generates code for a message with nested fields with isMessage' 1`] = `
-"import { isMessage } from "@bufbuild/protobuf";
-import {
-  Message,
-  MessageSchema,
-} from "@testapis/protobuf-es-v2/testapis/primitives/primitives_pb";
+"import { isMessage, MessageShape } from "@bufbuild/protobuf";
+import { MessageSchema } from "@testapis/protobuf-es-v2/testapis/primitives/primitives_pb";
 import { builder } from "../../builder";
 
-export const Message$Ref = builder.objectRef<Message>("Message");
+export const Message$Ref = builder.objectRef<
+  MessageShape<typeof MessageSchema>
+>("Message");
 builder.objectType(Message$Ref, {
   name: "Message",
   fields: (t) => ({
@@ -78,16 +77,17 @@ builder.objectType(Message$Ref, {
 `;
 
 exports[`createObjectTypeCode > protobuf-es > 'generates code for a message with oneofs with isMessage' 1`] = `
-"import { isMessage } from "@bufbuild/protobuf";
+"import { isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   OneofMemberMessage1,
   OneofMemberMessage2,
-  OneofParent,
   OneofParentSchema,
 } from "@testapis/protobuf-es-v2/testapis/oneof/oneof_pb";
 import { builder } from "../../builder";
 
-export const OneofParent$Ref = builder.objectRef<OneofParent>("OneofParent");
+export const OneofParent$Ref = builder.objectRef<
+  MessageShape<typeof OneofParentSchema>
+>("OneofParent");
 builder.objectType(OneofParent$Ref, {
   name: "OneofParent",
   fields: (t) => ({
@@ -142,14 +142,13 @@ builder.objectType(OneofParent$Ref, {
 `;
 
 exports[`createObjectTypeCode > protobuf-es > 'generates code for a simple message with isMessage' 1`] = `
-"import { isMessage } from "@bufbuild/protobuf";
-import {
-  Primitives,
-  PrimitivesSchema,
-} from "@testapis/protobuf-es-v2/testapis/primitives/primitives_pb";
+"import { isMessage, MessageShape } from "@bufbuild/protobuf";
+import { PrimitivesSchema } from "@testapis/protobuf-es-v2/testapis/primitives/primitives_pb";
 import { builder } from "../../builder";
 
-export const Primitives$Ref = builder.objectRef<Primitives>("Primitives");
+export const Primitives$Ref = builder.objectRef<
+  MessageShape<typeof PrimitivesSchema>
+>("Primitives");
 builder.objectType(Primitives$Ref, {
   name: "Primitives",
   fields: (t) => ({
@@ -445,14 +444,13 @@ builder.objectType(Primitives$Ref, {
 `;
 
 exports[`createObjectTypeCode > protobuf-es > 'generates code for empty message with isMessage' 1`] = `
-"import { isMessage } from "@bufbuild/protobuf";
-import {
-  EmptyMessage,
-  EmptyMessageSchema,
-} from "@testapis/protobuf-es-v2/testapis/empty_types/empty_pb";
+"import { isMessage, MessageShape } from "@bufbuild/protobuf";
+import { EmptyMessageSchema } from "@testapis/protobuf-es-v2/testapis/empty_types/empty_pb";
 import { builder } from "../../builder";
 
-export const EmptyMessage$Ref = builder.objectRef<EmptyMessage>("EmptyMessage");
+export const EmptyMessage$Ref = builder.objectRef<
+  MessageShape<typeof EmptyMessageSchema>
+>("EmptyMessage");
 builder.objectType(EmptyMessage$Ref, {
   name: "EmptyMessage",
   fields: (t) => ({
@@ -478,20 +476,19 @@ builder.objectType(EmptyMessage$Ref, {
 `;
 
 exports[`createObjectTypeCode > protobuf-es > 'generates code for message with squashed oneof fields with isMessage' 1`] = `
-"import { isMessage } from "@bufbuild/protobuf";
+"import { isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
   EnumWillRename,
   PrefixedEnum,
-  PrefixedMessage,
   PrefixedMessage_InnerMessage,
   PrefixedMessage_InnerMessage2,
   PrefixedMessageSchema,
 } from "@testapis/protobuf-es-v2/testapis/extensions/extensions_pb";
 import { builder } from "../../builder";
 
-export const TestPrefixPrefixedMessage$Ref = builder.objectRef<PrefixedMessage>(
-  "TestPrefixPrefixedMessage",
-);
+export const TestPrefixPrefixedMessage$Ref = builder.objectRef<
+  MessageShape<typeof PrefixedMessageSchema>
+>("TestPrefixPrefixedMessage");
 builder.objectType(TestPrefixPrefixedMessage$Ref, {
   name: "TestPrefixPrefixedMessage",
   fields: (t) => ({
@@ -652,17 +649,16 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
 `;
 
 exports[`createObjectTypeCode > protobuf-es > 'generates code for nested types with isMessage' 1`] = `
-"import { isMessage } from "@bufbuild/protobuf";
+"import { isMessage, MessageShape } from "@bufbuild/protobuf";
 import {
-  ParentMessage,
   ParentMessage_NestedEnum,
   ParentMessageSchema,
 } from "@testapis/protobuf-es-v2/testapis/nested/nested_pb";
 import { builder } from "../../builder";
 
-export const ParentMessage$Ref = builder.objectRef<ParentMessage>(
-  "ParentMessage",
-);
+export const ParentMessage$Ref = builder.objectRef<
+  MessageShape<typeof ParentMessageSchema>
+>("ParentMessage");
 builder.objectType(ParentMessage$Ref, {
   name: "ParentMessage",
   fields: (t) => ({

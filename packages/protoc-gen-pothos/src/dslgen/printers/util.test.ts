@@ -5,9 +5,12 @@ import {
   type TestapisPackage,
 } from "@proto-graphql/testapis-proto";
 import { describe, expect, test } from "vitest";
+import { printablesToStringWithImports } from "./__tests__/test-utils.js";
 import {
   protobufCreateSymbol,
   protobufIsMessageSymbol,
+  protobufMessageShapeSymbol,
+  protoRefTypePrintable,
   protoSchemaSymbol,
   protoTypeSymbol,
 } from "./util.js";
@@ -151,5 +154,79 @@ describe("protobufIsMessageSymbol", () => {
 
     expect(symbol.name).toBe("isMessage");
     expect(symbol.from).toBe("@bufbuild/protobuf");
+  });
+});
+
+describe("protobufMessageShapeSymbol", () => {
+  test("generates MessageShape symbol from @bufbuild/protobuf", () => {
+    const symbol = protobufMessageShapeSymbol();
+
+    expect(symbol.name).toBe("MessageShape");
+    expect(symbol.from).toBe("@bufbuild/protobuf");
+  });
+});
+
+describe("protoRefTypePrintable", () => {
+  const v2Opts: Pick<PrinterOptions, "protobuf" | "importPrefix"> = {
+    protobuf: "protobuf-es",
+    importPrefix: "@testapis/protobuf-es-v2",
+  };
+  const v1Opts: Pick<PrinterOptions, "protobuf" | "importPrefix"> = {
+    protobuf: "protobuf-es-v1",
+    importPrefix: "@testapis/protobuf-es",
+  };
+  const tsProtoOpts: Pick<PrinterOptions, "protobuf" | "importPrefix"> = {
+    protobuf: "ts-proto",
+    importPrefix: "@testapis/ts-proto",
+  };
+
+  test("generates MessageShape<typeof XxxSchema> for protobuf-es v2", () => {
+    const descMsg = getDescMessage("testapis.primitives", "Primitives");
+    const printable = protoRefTypePrintable(descMsg, v2Opts);
+
+    const result = printablesToStringWithImports(printable);
+
+    expect(result).toContain("MessageShape<typeof PrimitivesSchema>");
+    expect(result).toContain('import { MessageShape } from "@bufbuild/protobuf"');
+    expect(result).toContain("PrimitivesSchema");
+  });
+
+  test("generates type symbol for protobuf-es v1", () => {
+    const descMsg = getDescMessage("testapis.primitives", "Primitives");
+    const printable = protoRefTypePrintable(descMsg, v1Opts);
+
+    const result = printablesToStringWithImports(printable);
+
+    expect(result).toContain("Primitives");
+    expect(result).not.toContain("MessageShape");
+    expect(result).not.toContain("Schema");
+  });
+
+  test("generates type symbol for ts-proto", () => {
+    const descMsg = getDescMessage("testapis.primitives", "Primitives");
+    const printable = protoRefTypePrintable(descMsg, tsProtoOpts);
+
+    const result = printablesToStringWithImports(printable);
+
+    expect(result).toContain("Primitives");
+    expect(result).not.toContain("MessageShape");
+    expect(result).not.toContain("Schema");
+  });
+
+  test("generates MessageShape with nested message Schema for protobuf-es v2", () => {
+    const registry = createFileRegistry(
+      getTestapisFileDescriptorSet("testapis.nested"),
+    );
+    const nestedMsg = registry.getMessage(
+      "testapis.nested.ParentMessage.NestedMessage",
+    );
+    if (nestedMsg === undefined) {
+      throw new Error("Nested message not found");
+    }
+
+    const printable = protoRefTypePrintable(nestedMsg, v2Opts);
+    const result = printablesToStringWithImports(printable);
+
+    expect(result).toContain("MessageShape<typeof ParentMessage_NestedMessageSchema>");
   });
 });
