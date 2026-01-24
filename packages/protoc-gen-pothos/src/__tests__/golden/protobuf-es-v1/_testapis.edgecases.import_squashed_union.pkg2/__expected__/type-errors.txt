@@ -1,0 +1,1 @@
+schema.ts(3,29): error TS2307: Cannot find module './__generated__/testapis/edgecases/import_squashed_union/pkg2/types.pb.pothos.js' or its corresponding type declarations.

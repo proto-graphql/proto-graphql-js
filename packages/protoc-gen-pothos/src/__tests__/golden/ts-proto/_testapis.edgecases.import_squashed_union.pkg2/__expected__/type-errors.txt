@@ -1,0 +1,1 @@
+__generated__/testapis/edgecases/import_squashed_union/pkg2/types.pb.pothos.ts(11,8): error TS2307: Cannot find module '../pkg1/types.pb.pothos' or its corresponding type declarations.

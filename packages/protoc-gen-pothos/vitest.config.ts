@@ -6,5 +6,14 @@ export default defineConfig({
     chaiConfig: {
       truncateThreshold: 0,
     },
+    coverage: {
+      provider: "v8",
+      include: ["src/**/*.ts"],
+      exclude: [
+        "src/**/*.test.ts",
+        "src/**/__tests__/**",
+      ],
+      reporter: ["text", "json", "html"],
+    },
   },
 });

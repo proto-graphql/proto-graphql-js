@@ -1,0 +1,1 @@
+__generated__/testapis/multipkgs/subpkg2/types.pb.pothos.ts(12,8): error TS2307: Cannot find module '../subpkg1/types.pb.pothos' or its corresponding type declarations.
