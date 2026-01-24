@@ -1,0 +1,27 @@
+type Message {
+  msg: SquashedOneof
+}
+
+input MessageInput {
+  msg: SquashedOneofInput
+}
+
+type OneofMessage1 {
+  body: String!
+}
+
+input OneofMessage1Input {
+  body: String!
+}
+
+type Query {
+  oneofMessage1: OneofMessage1!
+  pkg2Message: Message!
+  squashedOneof: SquashedOneof!
+}
+
+union SquashedOneof = OneofMessage1
+
+input SquashedOneofInput {
+  msg1: OneofMessage1Input
+}

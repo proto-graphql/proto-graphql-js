@@ -1,27 +1,8 @@
-__generated__/testapis/wktypes/well_known_types.pb.pothos.ts(14,7): error TS2322: Type '"DateTime"' is not assignable to type 'TypeParam<ExtendDefaultTypes<{}>>'.
-__generated__/testapis/wktypes/well_known_types.pb.pothos.ts(34,7): error TS2820: Type '"Int64"' is not assignable to type 'TypeParam<ExtendDefaultTypes<{}>>'. Did you mean '"Int"'?
-__generated__/testapis/wktypes/well_known_types.pb.pothos.ts(54,7): error TS2820: Type '"Int64"' is not assignable to type 'TypeParam<ExtendDefaultTypes<{}>>'. Did you mean '"Int"'?
-__generated__/testapis/wktypes/well_known_types.pb.pothos.ts(104,7): error TS2322: Type '"Byte"' is not assignable to type 'TypeParam<ExtendDefaultTypes<{}>>'.
-__generated__/testapis/wktypes/well_known_types.pb.pothos.ts(106,7): error TS2322: Type '(source: Message) => Buffer<ArrayBuffer> | null' is not assignable to type 'Resolver<Message, InputShapeFromFields<InputFieldMap>, {}, any, unknown>'.
-  Type 'Buffer<ArrayBuffer> | null' is not assignable to type 'MaybePromise<readonly unknown[]> | null | undefined'.
-    Type 'Buffer<ArrayBuffer>' is not assignable to type 'MaybePromise<readonly unknown[]> | null | undefined'.
-      Type 'Buffer<ArrayBuffer>' is missing the following properties from type 'readonly unknown[]': concat, flatMap, flat, toSpliced, [Symbol.unscopables]
-__generated__/testapis/wktypes/well_known_types.pb.pothos.ts(119,7): error TS2322: Type '"DateTime"' is not assignable to type 'TypeParam<ExtendDefaultTypes<{}>>'.
-__generated__/testapis/wktypes/well_known_types.pb.pothos.ts(122,7): error TS2322: Type '(source: Message) => Timestamp' is not assignable to type 'Resolver<Message, InputShapeFromFields<InputFieldMap>, {}, any, unknown>'.
-  Type 'Timestamp' is not assignable to type 'MaybePromise<readonly unknown[]> | null | undefined'.
-__generated__/testapis/wktypes/well_known_types.pb.pothos.ts(162,7): error TS2322: Type 'InputFieldRef<unknown, "InputObject">' is not assignable to type 'InputFieldRef<Timestamp | null | undefined, "InputObject">'.
-  Type 'unknown' is not assignable to type 'Timestamp | null | undefined'.
-__generated__/testapis/wktypes/well_known_types.pb.pothos.ts(163,9): error TS2322: Type '"DateTime"' is not assignable to type 'InputType<ExtendDefaultTypes<{}>> | [InputType<ExtendDefaultTypes<{}>>]'.
-__generated__/testapis/wktypes/well_known_types.pb.pothos.ts(182,7): error TS2322: Type 'InputFieldRef<unknown, "InputObject">' is not assignable to type 'InputFieldRef<bigint | null | undefined, "InputObject">'.
-  Type 'unknown' is not assignable to type 'bigint | null | undefined'.
-__generated__/testapis/wktypes/well_known_types.pb.pothos.ts(183,9): error TS2820: Type '"Int64"' is not assignable to type 'InputType<ExtendDefaultTypes<{}>> | [InputType<ExtendDefaultTypes<{}>>]'. Did you mean '"Int"'?
-__generated__/testapis/wktypes/well_known_types.pb.pothos.ts(202,7): error TS2322: Type 'InputFieldRef<unknown, "InputObject">' is not assignable to type 'InputFieldRef<bigint | null | undefined, "InputObject">'.
-  Type 'unknown' is not assignable to type 'bigint | null | undefined'.
-__generated__/testapis/wktypes/well_known_types.pb.pothos.ts(203,9): error TS2820: Type '"Int64"' is not assignable to type 'InputType<ExtendDefaultTypes<{}>> | [InputType<ExtendDefaultTypes<{}>>]'. Did you mean '"Int"'?
-__generated__/testapis/wktypes/well_known_types.pb.pothos.ts(252,7): error TS2322: Type 'InputFieldRef<unknown, "InputObject">' is not assignable to type 'InputFieldRef<Uint8Array<ArrayBufferLike> | null | undefined, "InputObject">'.
-  Type 'unknown' is not assignable to type 'Uint8Array<ArrayBufferLike> | null | undefined'.
-__generated__/testapis/wktypes/well_known_types.pb.pothos.ts(253,9): error TS2322: Type '"Byte"' is not assignable to type 'InputType<ExtendDefaultTypes<{}>> | [InputType<ExtendDefaultTypes<{}>>]'.
-__generated__/testapis/wktypes/well_known_types.pb.pothos.ts(262,7): error TS2322: Type 'InputFieldRef<unknown, "InputObject">' is not assignable to type 'InputFieldRef<Timestamp, "InputObject">'.
-  Type 'unknown' is not assignable to type 'Timestamp'.
-__generated__/testapis/wktypes/well_known_types.pb.pothos.ts(263,9): error TS2322: Type '"DateTime"' is not assignable to type 'InputType<ExtendDefaultTypes<{}>> | [InputType<ExtendDefaultTypes<{}>>]'.
-schema.ts(1,10): error TS2305: Module '"@bufbuild/protobuf"' has no exported member 'Timestamp'.
+__generated__/testapis/wktypes/well_known_types.pb.pothos.ts(13,25): error TS2345: Argument of type '"timestamp"' is not assignable to parameter of type 'never'.
+__generated__/testapis/wktypes/well_known_types.pb.pothos.ts(122,7): error TS2322: Type '(source: Message) => Timestamp' is not assignable to type 'Resolver<Message, InputShapeFromFields<InputFieldMap>, {}, Date, Timestamp>'.
+  Type 'Timestamp' is not assignable to type 'MaybePromise<Date>'.
+__generated__/testapis/wktypes/well_known_types.pb.pothos.ts(162,7): error TS2322: Type 'InputFieldRef<Date | null | undefined, "InputObject">' is not assignable to type 'InputFieldRef<Timestamp | null | undefined, "InputObject">'.
+  Type 'Date | null | undefined' is not assignable to type 'Timestamp | null | undefined'.
+    Type 'Date' is missing the following properties from type 'Timestamp': seconds, nanos, fromJson, toJson, and 8 more.
+__generated__/testapis/wktypes/well_known_types.pb.pothos.ts(262,7): error TS2322: Type 'InputFieldRef<Date, "InputObject">' is not assignable to type 'InputFieldRef<Timestamp, "InputObject">'.
+  Type 'Date' is missing the following properties from type 'Timestamp': seconds, nanos, fromJson, toJson, and 8 more.

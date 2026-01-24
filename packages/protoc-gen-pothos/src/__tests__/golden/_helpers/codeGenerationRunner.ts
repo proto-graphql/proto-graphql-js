@@ -83,11 +83,11 @@ export function buildPluginParam(testCase: TestCase): string | undefined {
 }
 
 export function executeGeneration(testCase: TestCase): CodeGenerationResult {
-  const { package: pkg } = testCase.config;
+  const { package: pkg, prefixMatch } = testCase.config;
   const param = buildPluginParam(testCase);
 
   try {
-    const req = buildCodeGeneratorRequest(pkg as TestapisPackage, { param });
+    const req = buildCodeGeneratorRequest(pkg as TestapisPackage, { param, prefixMatch });
     const resp = protocGenPothos.run(req);
 
     const files: GeneratedFile[] = resp.file.map((f) => ({

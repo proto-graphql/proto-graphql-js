@@ -9,6 +9,7 @@ export interface TestCaseConfig {
   runtime: Runtime;
   param?: string;
   builderPath: string;
+  prefixMatch?: boolean;
 }
 
 export interface TestCase {
@@ -21,6 +22,7 @@ interface GoldenTestConfigJson {
   package?: string;
   runtime?: Runtime;
   additionalParams?: string[];
+  prefixMatch?: boolean;
 }
 
 interface RuntimeVariantMapping {
@@ -118,6 +120,7 @@ export async function discoverTestCases(goldenDir: string): Promise<TestCase[]> 
       const config: TestCaseConfig = {
         ...baseConfig,
         param: mergeParams(baseConfig.param, configJson?.additionalParams),
+        prefixMatch: configJson?.prefixMatch,
       };
 
       testCases.push({
