@@ -79,7 +79,7 @@ export function createEnumResolverCode(
 }
 
 function enumValueJsName(
-  et: EnumType,
+  _et: EnumType,
   ev: EnumTypeValue,
   opts: PrinterOptions,
 ): string {
@@ -87,6 +87,7 @@ function enumValueJsName(
     case "ts-proto":
       return ev.proto.name;
     case "protobuf-es-v1":
+    case "protobuf-es":
       return ev.proto.localName;
   }
 }

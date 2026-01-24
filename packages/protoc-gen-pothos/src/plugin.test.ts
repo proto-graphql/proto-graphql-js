@@ -60,6 +60,36 @@ describe("protobuf-es-v1", () => {
   });
 });
 
+describe("protobuf-es", () => {
+  const testGorups = testapisPackages.map((pkg) => ({
+    pkg,
+    tests: [
+      { test: "without import prefix", param: "protobuf_lib=protobuf-es" },
+      {
+        test: "with import prefix",
+        param:
+          "protobuf_lib=protobuf-es,import_prefix=@testapis/protobuf-es-v2",
+      },
+      {
+        test: "with partial inputs",
+        param:
+          "protobuf_lib=protobuf-es,import_prefix=@testapis/protobuf-es-v2,partial_inputs",
+      },
+    ],
+  }));
+
+  describe.each(testGorups)("$pkg", ({ pkg, tests }) => {
+    test.each(tests)("generates files by plugin $test", ({ param }) => {
+      const req = buildCodeGeneratorRequest(pkg, { param });
+      const resp = protocGenPothos.run(req);
+      const files = resp.file.map((f) =>
+        toJson(CodeGeneratorResponse_FileSchema, f),
+      );
+      expect(files).toMatchSnapshot();
+    });
+  });
+});
+
 describe("with scalar type override", () => {
   test("maps testapis.custom_types.Date to Date scalar", () => {
     const req = buildCodeGeneratorRequest("testapis.custom_types", {

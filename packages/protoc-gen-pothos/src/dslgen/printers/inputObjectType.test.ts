@@ -159,6 +159,49 @@ const testSuites: TestSuite[] = [
     ],
   },
   {
+    suite: "protobuf-es",
+    options: {
+      dsl: "pothos",
+      protobuf: "protobuf-es" as const,
+      importPrefix: "@testapis/protobuf-es-v2",
+      emitImportedFiles: false,
+      filenameSuffix: ".pothos",
+      pothos: {
+        builderPath: "../../builder",
+      },
+    },
+    cases: [
+      {
+        test: "generates code for a simple input object with create",
+        args: {
+          packageName: "testapis.primitives",
+          typeNameInProto: "Primitives",
+        },
+      },
+      {
+        test: "generates code for an input object with nested fields with create",
+        args: {
+          packageName: "testapis.primitives",
+          typeNameInProto: "Message",
+        },
+      },
+      {
+        test: "generates code for an input object with oneof fields with create",
+        args: {
+          packageName: "testapis.oneof",
+          typeNameInProto: "OneofParent",
+        },
+      },
+      {
+        test: "generates code for empty input object with create",
+        args: {
+          packageName: "testapis.empty_types",
+          typeNameInProto: "EmptyMessage",
+        },
+      },
+    ],
+  },
+  {
     suite: "with partial inputs",
     options: {
       dsl: "pothos",

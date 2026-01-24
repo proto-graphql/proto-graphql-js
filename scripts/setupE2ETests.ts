@@ -9,6 +9,7 @@ const protoLibs = [
   "ts-proto",
   "ts-proto-with-forcelong-number",
   "protobuf-es-v1",
+  "protobuf-es",
 ] as const;
 type ProtoLib = (typeof protoLibs)[number];
 
@@ -50,6 +51,11 @@ async function genPackageJson(test: TestCase): Promise<void> {
       "@proto-graphql/scalars-protobuf-es",
       "protoc-gen-pothos",
     ],
+    "protobuf-es": [
+      "@proto-graphql/e2e-testapis-protobuf-es-v2",
+      "@proto-graphql/scalars-protobuf-es",
+      "protoc-gen-pothos",
+    ],
   };
 
   const depsByTarget: Record<Plugin, Record<string, string>> = {
@@ -58,6 +64,7 @@ async function genPackageJson(test: TestCase): Promise<void> {
 
   const depsByLib: Record<ProtoLib, Record<string, string>> = {
     "protobuf-es-v1": { "@bufbuild/protobuf": "catalog:protobuf-es-v1" },
+    "protobuf-es": { "@bufbuild/protobuf": "catalog:" },
     "ts-proto": {},
     "ts-proto-with-forcelong-number": {},
   };
@@ -91,7 +98,8 @@ async function genPackageJson(test: TestCase): Promise<void> {
           .sort()
           .map((pkg) => [pkg, "workspace:*"]),
       ),
-      ...(test.proto.lib === "protobuf-es-v1"
+      ...(test.proto.lib === "protobuf-es-v1" ||
+      test.proto.lib === "protobuf-es"
         ? { typescript: "catalog:typescript-v5.8" }
         : {}),
     },
@@ -146,6 +154,11 @@ async function genBufGemTemplate(test: TestCase): Promise<void> {
         "pothos_builder_path=../../builder",
         "protobuf_lib=protobuf-es-v1",
       ],
+      "protobuf-es": [
+        "import_prefix=@proto-graphql/e2e-testapis-protobuf-es-v2/lib/",
+        "pothos_builder_path=../../builder",
+        "protobuf_lib=protobuf-es",
+      ],
     },
   };
 
@@ -183,11 +196,9 @@ it("bulids graphql schema", () => {
   expect(printSchema(schema)).toMatchFileSnapshot("./schema.graphql");
 });
 `;
-  await writeFile(
-    join(getTestPath(test), "__generated__", "schema.test.ts"),
-    body,
-    "utf-8",
-  );
+  const genDir = join(getTestPath(test), "__generated__");
+  await mkdir(genDir, { recursive: true });
+  await writeFile(join(genDir, "schema.test.ts"), body, "utf-8");
 }
 
 async function genTsconfigJson(test: TestCase) {

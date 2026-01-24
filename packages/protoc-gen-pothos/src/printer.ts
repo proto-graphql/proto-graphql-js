@@ -9,7 +9,7 @@ import type { Options } from "@proto-graphql/protoc-plugin-helpers";
 
 import { createTypeDslPrintables } from "./dslgen/index.js";
 
-const allowedProtobufs = ["ts-proto", "protobuf-es-v1"];
+const allowedProtobufs = ["ts-proto", "protobuf-es-v1", "protobuf-es"];
 
 export function generateFiles(
   schema: Schema<Options<"pothos">>,

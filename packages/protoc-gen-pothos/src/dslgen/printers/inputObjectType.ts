@@ -22,6 +22,8 @@ import {
   type PothosPrinterOptions,
   pothosBuilderPrintable,
   pothosRefPrintable,
+  protobufCreateSymbol,
+  protoSchemaSymbol,
   protoTypeSymbol,
   shapeTypePrintable,
   toProtoFuncName,
@@ -82,11 +84,17 @@ export function createInputObjectTypeCode(
     };
   `;
 
+  // In protobuf-es v2, Message types have internal properties like $unknown and $typeName,
+  // which can cause type mismatches between Pothos's inferred types and the InputShape type.
+  // To work around this, we use a type assertion for protobuf-es v2.
+  const needsTypeAssertion = opts.protobuf === "protobuf-es";
+  const inputObjectRefType = code`${createImportSymbol(
+    "InputObjectRef",
+    "@pothos/core",
+  )}<${shapeTypePrintable(type)}>`;
+
   const refCode = code`
-    export const ${pothosRefPrintable(type)}: ${createImportSymbol(
-      "InputObjectRef",
-      "@pothos/core",
-    )}<${shapeTypePrintable(type)}> =
+    export const ${pothosRefPrintable(type)}: ${inputObjectRefType} =
       ${pothosBuilderPrintable(opts)}.inputRef<${shapeTypePrintable(
         type,
       )}>(${literalOf(type.typeName)}).implement(
@@ -111,12 +119,12 @@ export function createInputObjectTypeCode(
             description: type.description,
           }),
         )}
-      );
+      )${needsTypeAssertion ? code` as ${inputObjectRefType}` : ""};
   `;
 
   const codes: Printable[][] = [shapeTypeCode, refCode];
 
-  if (opts.protobuf === "protobuf-es-v1") {
+  if (opts.protobuf === "protobuf-es-v1" || opts.protobuf === "protobuf-es") {
     codes.push(createToProtoFuncCode(type, opts));
   }
 
@@ -142,49 +150,67 @@ function createToProtoFuncCode(
 
   const protoTypeSym = protoTypeSymbol(type.proto, opts);
 
+  const fieldAssignments = joinCode(
+    type.fields
+      .filter((f) => f.proto.oneof == null)
+      .map((f) => {
+        const localName = tsFieldName(f.proto, opts).toString();
+        if (f.type instanceof InputObjectType) {
+          const toProtoFunc = toProtoFuncPrintable(
+            f as InputObjectField<InputObjectType>,
+            opts,
+          );
+          if (f.isList()) {
+            return code`${localName}: input?.${f.name}?.map(v => ${toProtoFunc}(v)),`;
+          }
+          return code`${localName}: input?.${f.name} ? ${toProtoFunc}(input.${f.name}) : undefined,`;
+        }
+        if (f.type instanceof ScalarType || f.type instanceof EnumType) {
+          return code`${localName}: input?.${f.name} ?? undefined,`;
+        }
+        f.type satisfies never;
+        throw new Error("unreachable");
+      }),
+    "\n",
+  );
+
+  const oneofAssignments = joinCode(
+    Object.values(oneofFields).map((fields) => {
+      const oneofName = tsFieldName(
+        // biome-ignore lint/style/noNonNullAssertion: we know it's not null
+        fields[0]!.proto.oneof!,
+        opts,
+      ).toString();
+      const cases = fields.map((f) => {
+        const caseName = tsFieldName(f.proto, opts).toString();
+        return code`input?.${f.name} ? { case: "${caseName}", value: ${toProtoFuncPrintable(f, opts)}(input.${f.name}) } :`;
+      });
+      return code`${oneofName}: ${joinCode(cases, " ")} undefined,`;
+    }),
+    "\n",
+  );
+
+  if (opts.protobuf === "protobuf-es") {
+    const protoSchemaSym = protoSchemaSymbol(type.proto, opts);
+    return code`
+      export function ${toProtoFuncName(type)} (input: ${shapeTypePrintable(
+        type,
+      )} | null | undefined): ${protoTypeSym} {
+        return ${protobufCreateSymbol()}(${protoSchemaSym}, {
+          ${fieldAssignments}
+          ${oneofAssignments}
+        });
+      }
+    `;
+  }
+
   return code`
     export function ${toProtoFuncName(type)} (input: ${shapeTypePrintable(
       type,
     )} | null | undefined): ${protoTypeSym} {
       return new ${protoTypeSym}({
-        ${joinCode(
-          type.fields
-            .filter((f) => f.proto.oneof == null)
-            .map((f) => {
-              const localName = tsFieldName(f.proto, opts).toString();
-              if (f.type instanceof InputObjectType) {
-                const toProtoFunc = toProtoFuncPrintable(
-                  f as InputObjectField<InputObjectType>,
-                  opts,
-                );
-                if (f.isList()) {
-                  return code`${localName}: input?.${f.name}?.map(v => ${toProtoFunc}(v)),`;
-                }
-                return code`${localName}: input?.${f.name} ? ${toProtoFunc}(input.${f.name}) : undefined,`;
-              }
-              if (f.type instanceof ScalarType || f.type instanceof EnumType) {
-                return code`${localName}: input?.${f.name} ?? undefined,`;
-              }
-              f.type satisfies never;
-              throw new Error("unreachable");
-            }),
-          "\n",
-        )}
-        ${joinCode(
-          Object.values(oneofFields).map((fields) => {
-            const oneofName = tsFieldName(
-              // biome-ignore lint/style/noNonNullAssertion: we know it's not null
-              fields[0]!.proto.oneof!,
-              opts,
-            ).toString();
-            const cases = fields.map((f) => {
-              const caseName = tsFieldName(f.proto, opts).toString();
-              return code`input?.${f.name} ? { case: "${caseName}", value: ${toProtoFuncPrintable(f, opts)}(input.${f.name}) } :`;
-            });
-            return code`${oneofName}: ${joinCode(cases, " ")} undefined,`;
-          }),
-          "\n",
-        )}
+        ${fieldAssignments}
+        ${oneofAssignments}
       });
     }
   `;

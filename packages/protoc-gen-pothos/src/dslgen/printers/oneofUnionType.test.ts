@@ -193,6 +193,52 @@ const testSuites: TestSuite[] = [
       } as SquashedTestCase,
     ],
   },
+  {
+    suite: "protobuf-es",
+    options: {
+      dsl: "pothos",
+      protobuf: "protobuf-es" as const,
+      importPrefix: "@testapis/protobuf-es-v2",
+      emitImportedFiles: false,
+      filenameSuffix: ".pothos",
+      pothos: {
+        builderPath: "../../builder",
+      },
+    },
+    cases: [
+      {
+        test: "generates code for a required oneof union with .value accessor",
+        args: {
+          packageName: "testapis.oneof",
+          typeNameInProto: "OneofParent",
+          oneofFieldName: "required_oneof_members",
+        },
+      } as OneofTestCase,
+      {
+        test: "generates code for an optional oneof union with .value accessor",
+        args: {
+          packageName: "testapis.oneof",
+          typeNameInProto: "OneofParent",
+          oneofFieldName: "optional_oneof_members",
+        },
+      } as OneofTestCase,
+      {
+        test: "generates code for a squashed oneof union with .value accessor",
+        args: {
+          packageName: "testapis.extensions",
+          typeNameInProto: "PrefixedMessage.SquashedMessage",
+        },
+      } as SquashedTestCase,
+      {
+        test: "generates code for imported oneof member with .value accessor",
+        args: {
+          packageName: "testapis.edgecases.import_oneof_member_from_other_file",
+          typeNameInProto: "OneofParent",
+          oneofFieldName: "oneof_field",
+        },
+      } as OneofTestCase,
+    ],
+  },
 ];
 
 describe("createOneofUnionTypeCode", () => {

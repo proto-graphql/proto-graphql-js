@@ -1,0 +1,25 @@
+{
+  "name": "@proto-graphql/e2e-pothos--multipkgs--protobuf-es",
+  "version": "0.0.0",
+  "description": "E2E tests for protoc-gen-pothos",
+  "private": true,
+  "scripts": {
+    "test:e2e": "pnpm run test:e2e:gen && pnpm run test:e2e:vitest && pnpm run test:e2e:typecheck",
+    "test:e2e:gen": "rm -rf __generated__/schema && buf generate --template buf.gen.json",
+    "test:e2e:vitest": "vitest run --passWithNoTests --config ../../vitest.config.ts",
+    "test:e2e:typecheck": "tsc --build tsconfig.json"
+  },
+  "dependencies": {
+    "@pothos/core": "catalog:test",
+    "@bufbuild/protobuf": "catalog:",
+    "graphql": "catalog:test",
+    "graphql-scalars": "catalog:test"
+  },
+  "devDependencies": {
+    "@proto-graphql/e2e-testapis-protobuf-es-v2": "workspace:*",
+    "@proto-graphql/scalars-protobuf-es": "workspace:*",
+    "@proto-graphql/tsconfig": "workspace:*",
+    "protoc-gen-pothos": "workspace:*",
+    "typescript": "catalog:typescript-v5.8"
+  }
+}

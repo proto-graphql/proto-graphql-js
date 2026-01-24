@@ -154,6 +154,49 @@ const testSuites: TestSuite[] = [
       },
     ],
   },
+  {
+    suite: "protobuf-es",
+    options: {
+      dsl: "pothos",
+      protobuf: "protobuf-es" as const,
+      importPrefix: "@testapis/protobuf-es-v2",
+      emitImportedFiles: false,
+      filenameSuffix: ".pothos",
+      pothos: {
+        builderPath: "../../builder",
+      },
+    },
+    cases: [
+      {
+        test: "generates code for a simple enum with localName",
+        args: {
+          packageName: "testapis.enums",
+          enumTypeNameInProto: "MyEnum",
+        },
+      },
+      {
+        test: "generates code for an enum without unspecified with localName",
+        args: {
+          packageName: "testapis.enums",
+          enumTypeNameInProto: "MyEnumWithoutUnspecified",
+        },
+      },
+      {
+        test: "generates code for nested enum with localName",
+        args: {
+          packageName: "testapis.nested",
+          enumTypeNameInProto: "ParentMessage.NestedEnum",
+        },
+      },
+      {
+        test: "generates code for enum with extensions and ignored values",
+        args: {
+          packageName: "testapis.extensions",
+          enumTypeNameInProto: "PrefixedEnum",
+        },
+      },
+    ],
+  },
 ];
 
 describe("createEnumTypeCode", () => {

@@ -38,11 +38,23 @@ Specifies the protobuf implementation to use.
 
 - **Type:** `string`
 - **Default:** `ts-proto`
-- **Values:** `ts-proto`, `protobuf-es-v1`
+- **Values:** `ts-proto`, `protobuf-es-v1`, `protobuf-es`
 
 ```yaml
 opt:
   - protobuf_lib=ts-proto
+```
+
+| Value | Runtime | Description |
+|-------|---------|-------------|
+| `ts-proto` | ts-proto | Uses `$type` property for type discrimination |
+| `protobuf-es-v1` | @bufbuild/protobuf v1.x | Uses `instanceof` for type discrimination |
+| `protobuf-es` | @bufbuild/protobuf v2.x | Uses `isMessage()` function for type discrimination |
+
+**Note:** When using `protobuf-es`, you need to install `@bufbuild/protobuf` v2.x as a dependency:
+
+```bash
+npm install @bufbuild/protobuf@^2.0.0
 ```
 
 ### emit_imported_files

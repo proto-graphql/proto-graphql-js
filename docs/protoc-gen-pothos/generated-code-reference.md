@@ -10,6 +10,7 @@ Select your protobuf runtime for the complete generated code reference:
 |---------|-------------|
 | **[ts-proto](./generated-code-reference-ts-proto.md)** | Uses `$type` property for type discrimination, oneof fields accessed directly |
 | **[protobuf-es-v1](./generated-code-reference-protobuf-es-v1.md)** | Uses `instanceof` for type discrimination, includes `$toProto` helper functions |
+| **[protobuf-es](./generated-code-reference-protobuf-es.md)** | Uses `isMessage()` and `create()` functions, Schema-based API |
 
 ## See Also
 

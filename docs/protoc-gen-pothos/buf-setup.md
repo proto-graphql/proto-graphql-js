@@ -51,15 +51,53 @@ plugins:
 | `unrecognizedEnum=false` | Prevents unrecognized enum handling |
 | `outputTypeRegistry=true` | Enables type registry for runtime type resolution |
 
-## buf.gen.yaml with protobuf-es-v1
+## buf.gen.yaml with protobuf-es (v2)
 
-Configuration for protobuf-es-v1:
+Configuration for protobuf-es v2 (recommended for new projects using protobuf-es):
 
 ```yaml
 # proto/buf.gen.yaml
 version: v2
 plugins:
-  # protobuf-es for TypeScript message types
+  # protobuf-es v2 for TypeScript message types
+  - local: protoc-gen-es
+    out: ../src/__generated__/proto
+    opt:
+      - target=ts
+
+  # protoc-gen-pothos for GraphQL schema
+  - local: protoc-gen-pothos
+    out: ../src/__generated__/pothos
+    opt:
+      - pothos_builder_path=../../builder
+      - import_prefix=../proto
+      - protobuf_lib=protobuf-es
+```
+
+### Required Dependencies
+
+```bash
+npm install @bufbuild/protobuf@^2.0.0 @bufbuild/protoc-gen-es@^2.0.0
+```
+
+### Key Differences from protobuf-es-v1
+
+| Feature | protobuf-es-v1 | protobuf-es (v2) |
+|---------|----------------|------------------|
+| Message type | Class-based | Plain object + Schema |
+| Type check | `instanceof` | `isMessage(source, Schema)` |
+| Message creation | `new Message({...})` | `create(Schema, {...})` |
+| Runtime dependency | `@bufbuild/protobuf` v1.x | `@bufbuild/protobuf` v2.x |
+
+## buf.gen.yaml with protobuf-es-v1
+
+Configuration for protobuf-es-v1 (for legacy projects):
+
+```yaml
+# proto/buf.gen.yaml
+version: v2
+plugins:
+  # protobuf-es v1 for TypeScript message types
   - local: protoc-gen-es
     out: ../src/__generated__/proto
     opt:
