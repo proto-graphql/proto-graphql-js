@@ -7,8 +7,8 @@
     "@bufbuild/protobuf": "catalog:"
   },
   "scripts": {
-    "build:e2e": "tsc --build tsconfig.json",
-    "clean": "pnpm run build:e2e --clean"
+    "build:test": "tsc --build tsconfig.json",
+    "clean": "pnpm run build:test --clean"
   },
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts"

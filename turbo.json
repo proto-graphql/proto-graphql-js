@@ -9,9 +9,13 @@
     },
     "lint": {},
     "test": {
-      "dependsOn": ["^build", "^build:test", "^build:e2e"]
+      "dependsOn": ["^build", "^build:test"]
     },
-    "build:test": {},
-    "build:e2e": {}
+    "//#gen:testapis": {
+      "cache": false
+    },
+    "build:test": {
+      "dependsOn": ["//#gen:testapis"]
+    }
   }
 }
