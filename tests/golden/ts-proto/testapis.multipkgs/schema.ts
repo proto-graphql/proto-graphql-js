@@ -1,4 +1,7 @@
-import { SubpkgEnum, SubpkgMessage } from "@proto-graphql/e2e-testapis-ts-proto/lib/testapis/multipkgs/subpkg1/types";
+import {
+  SubpkgEnum,
+  SubpkgMessage,
+} from "@proto-graphql/e2e-testapis-ts-proto/lib/testapis/multipkgs/subpkg1/types";
 import { MessageWithSubpkg } from "@proto-graphql/e2e-testapis-ts-proto/lib/testapis/multipkgs/subpkg2/types";
 
 import { SubpkgMessage$Ref } from "./__generated__/testapis/multipkgs/subpkg1/types.pb.pothos.js";

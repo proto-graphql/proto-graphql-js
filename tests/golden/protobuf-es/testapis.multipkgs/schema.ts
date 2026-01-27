@@ -1,5 +1,8 @@
 import { create } from "@bufbuild/protobuf";
-import { SubpkgEnum, SubpkgMessageSchema } from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/multipkgs/subpkg1/types_pb.js";
+import {
+  SubpkgEnum,
+  SubpkgMessageSchema,
+} from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/multipkgs/subpkg1/types_pb.js";
 import { MessageWithSubpkgSchema } from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/multipkgs/subpkg2/types_pb.js";
 
 import { SubpkgMessage$Ref } from "./__generated__/testapis/multipkgs/subpkg1/types.pb.pothos.js";

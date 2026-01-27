@@ -1,7 +1,10 @@
 import { OneofMessage1 } from "@proto-graphql/e2e-testapis-ts-proto/lib/testapis/edgecases/import_squashed_union/pkg1/types";
 import { Message } from "@proto-graphql/e2e-testapis-ts-proto/lib/testapis/edgecases/import_squashed_union/pkg2/types";
 
-import { SquashedOneof$Ref, OneofMessage1$Ref } from "./__generated__/testapis/edgecases/import_squashed_union/pkg1/types.pb.pothos.js";
+import {
+  OneofMessage1$Ref,
+  SquashedOneof$Ref,
+} from "./__generated__/testapis/edgecases/import_squashed_union/pkg1/types.pb.pothos.js";
 import { Message$Ref } from "./__generated__/testapis/edgecases/import_squashed_union/pkg2/types.pb.pothos.js";
 import { builder } from "./builder.js";
 
