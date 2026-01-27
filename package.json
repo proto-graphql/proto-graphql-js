@@ -10,7 +10,8 @@
     "release:snapshot:version": "changeset version --snapshot next",
     "release:snapshot:publish": "changeset publish --no-git-tag --snapshot --tag next",
     "test": "turbo run test",
-    "gen:testapis": "buf generate --template buf.gen.testapis.yaml"
+    "gen:testapis": "buf generate --template buf.gen.testapis.yaml",
+    "gen:extensions": "buf generate --template buf.gen.yaml --path proto-graphql/proto/graphql"
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.11",

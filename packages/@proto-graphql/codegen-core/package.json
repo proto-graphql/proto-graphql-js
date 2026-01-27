@@ -54,7 +54,7 @@
   },
   "scripts": {
     "build": "tsup",
-    "prebuild": "../../../scripts/compile-extensions-proto",
+    "prebuild": "pnpm -w run gen:extensions",
     "test": "vitest run --passWithNoTests"
   }
 }
