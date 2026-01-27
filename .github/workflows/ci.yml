@@ -54,7 +54,7 @@ jobs:
       - uses: ./.github/actions/setup-node
         with:
           node-version: ${{ matrix.node-version }}
-      - name: name
+      - name: test
         run: pnpm test
       - name: Check for uncommitted changes
         run: git diff --exit-code
