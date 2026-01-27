@@ -10,8 +10,7 @@
     "release:snapshot:version": "changeset version --snapshot next",
     "release:snapshot:publish": "changeset publish --no-git-tag --snapshot --tag next",
     "test": "turbo run test",
-    "test:e2e": "pnpm run test:e2e:gen && turbo run test:e2e",
-    "test:e2e:gen": "./scripts/compile-testapis-proto"
+    "gen:testapis": "./scripts/compile-testapis-proto"
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.11",

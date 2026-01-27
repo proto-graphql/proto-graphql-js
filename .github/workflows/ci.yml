@@ -12,33 +12,18 @@ jobs:
   ci:
     strategy:
       matrix:
-        command:
+        include:
           - name: format-and-lint
             run: pnpm check
+            node-version: "lts/*"
           - name: test
-            run: pnpm test
+            run: pnpm gen:testapis && pnpm test
+            node-version: "lts/*"
+          - name: test
+            run: pnpm gen:testapis && pnpm test
+            node-version: "lts/-1"
       fail-fast: false
-    name: ${{ matrix.command.name }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
-        with:
-          submodules: true
-      - uses: ./.github/actions/setup-node
-        with:
-          node-version: "lts/*"
-      - name: ${{ matrix.command.name }}
-        run: ${{ matrix.command.run }}
-      - name: Check for uncommitted changes
-        run: git diff --exit-code
-
-  test-e2e:
-    name: E2E Test (${{ matrix.target }}, Node.js v${{ matrix.node-version }})
-    strategy:
-      matrix:
-        node-version: ["lts/-1", "lts/*"]
-        target: ["pothos"]
-      fail-fast: false
+    name: ${{ matrix.name }} (${{ matrix.node-version }})
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
@@ -47,21 +32,16 @@ jobs:
       - uses: ./.github/actions/setup-node
         with:
           node-version: ${{ matrix.node-version }}
-      - run: |
-          pnpm test:e2e:gen
-      - run: |
-          pnpm turbo run --filter '@proto-graphql/e2e-${{ matrix.target }}-*' test:e2e
+      - name: ${{ matrix.name }}
+        run: ${{ matrix.run }}
       - name: Check for uncommitted changes
-        run: |
-          git diff --exit-code
+        run: git diff --exit-code
 
   status-check:
     runs-on: ubuntu-latest
     needs:
       - ci
-      - test-e2e
     permissions: {}
     if: failure()
     steps:
       - run: exit 1
-

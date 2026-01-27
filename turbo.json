@@ -9,12 +9,9 @@
     },
     "lint": {},
     "test": {
-      "dependsOn": ["^build", "^build:test"]
+      "dependsOn": ["^build", "^build:test", "^build:e2e"]
     },
     "build:test": {},
-    "build:e2e": {},
-    "test:e2e": {
-      "dependsOn": ["^build", "^build:e2e"]
-    }
+    "build:e2e": {}
   }
 }
