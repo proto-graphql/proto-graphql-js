@@ -22,7 +22,7 @@
   "private": true,
   "scripts": {
     "build": "tsup",
-    "prebuild": "./scripts/build-proto.ts"
+    "prebuild": "tsx ./scripts/build-proto.ts"
   },
   "dependencies": {
     "@bufbuild/protobuf": "catalog:"
