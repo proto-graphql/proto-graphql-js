@@ -6,7 +6,6 @@ import {
   formatDiagnostics,
   runTypeCheck,
   type TypeCheckDiagnostic,
-  type TypeCheckResult,
 } from "./typeScriptChecker.js";
 
 function createTestCase(

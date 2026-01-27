@@ -1,11 +1,7 @@
 import { mkdir, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import {
-  discoverTestCases,
-  resolveConfig,
-  type TestCase,
-} from "./testCaseDiscovery.js";
+import { discoverTestCases, resolveConfig } from "./testCaseDiscovery.js";
 
 describe("testCaseDiscovery", () => {
   const testDir = join(import.meta.dirname, "__test_fixtures__");

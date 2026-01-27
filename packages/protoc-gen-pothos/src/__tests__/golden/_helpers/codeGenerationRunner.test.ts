@@ -1,10 +1,5 @@
 import { describe, expect, it } from "vitest";
-import {
-  buildPluginParam,
-  type CodeGenerationResult,
-  executeGeneration,
-  type GeneratedFile,
-} from "./codeGenerationRunner.js";
+import { buildPluginParam, executeGeneration } from "./codeGenerationRunner.js";
 import type { TestCase, TestCaseConfig } from "./testCaseDiscovery.js";
 
 function createTestCase(
