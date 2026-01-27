@@ -12,6 +12,7 @@
       "!**/lib",
       "!**/module",
       "!**/__generated__",
+      "!**/__expected__",
       "!**/tests/testapis"
     ]
   },
