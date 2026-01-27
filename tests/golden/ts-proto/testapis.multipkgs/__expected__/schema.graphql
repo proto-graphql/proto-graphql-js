@@ -1,0 +1,27 @@
+type MessageWithSubpkg {
+  enum: SubpkgEnum
+  message: SubpkgMessage
+}
+
+input MessageWithSubpkgInput {
+  enum: SubpkgEnum
+  message: SubpkgMessageInput
+}
+
+type Query {
+  subpkg1Message: SubpkgMessage!
+  subpkg2Message: MessageWithSubpkg!
+}
+
+enum SubpkgEnum {
+  BAR
+  FOO
+}
+
+type SubpkgMessage {
+  body: String!
+}
+
+input SubpkgMessageInput {
+  body: String!
+}

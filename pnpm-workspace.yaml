@@ -1,7 +1,7 @@
 packages:
   - "packages/**"
   - "devPackages/**"
-  - "e2e/**"
+  - "tests/**"
 
 catalog:
   "@bufbuild/protobuf": "2.10.2"

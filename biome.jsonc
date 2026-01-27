@@ -12,7 +12,8 @@
       "!**/lib",
       "!**/module",
       "!**/__generated__",
-      "!**/e2e/testapis"
+      "!**/__expected__",
+      "!**/tests/testapis"
     ]
   },
   "assist": { "actions": { "source": { "organizeImports": "on" } } },

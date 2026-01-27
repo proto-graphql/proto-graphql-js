@@ -1,0 +1,7 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "."
+  },
+  "include": ["builder.ts", "schema.ts", "__generated__/**/*.ts"]
+}
