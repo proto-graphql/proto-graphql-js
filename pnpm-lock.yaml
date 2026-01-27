@@ -205,9 +205,6 @@ importers:
       '@proto-graphql/e2e-testapis-ts-proto-with-forcelong-number':
         specifier: workspace:*
         version: link:../../tests/testapis/ts-proto-with-forcelong-number
-      '@proto-graphql/scalars-protobuf-es':
-        specifier: workspace:*
-        version: link:../@proto-graphql/scalars-protobuf-es
       '@proto-graphql/testapis-proto':
         specifier: workspace:*
         version: link:../../devPackages/testapis-proto
