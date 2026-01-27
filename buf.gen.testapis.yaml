@@ -33,12 +33,12 @@ plugins:
       - useExactTypes=false
     out: ./tests/testapis/ts-proto-with-forcelong-number/src
     strategy: all
-  - local: ./tests/testapis/protobuf-es/node_modules/.bin/protoc-gen-es
+  - local: ["pnpm", "-s", "--filter", "./tests/testapis/protobuf-es", "exec", "protoc-gen-es"]
     opt:
       - target=ts
     out: ./tests/testapis/protobuf-es/src
     strategy: all
-  - local: ./tests/testapis/protobuf-es-v2/node_modules/.bin/protoc-gen-es
+  - local: ["pnpm", "-s", "--filter", "./tests/testapis/protobuf-es-v2", "exec", "protoc-gen-es"]
     opt:
       - target=ts
     out: ./tests/testapis/protobuf-es-v2/src
