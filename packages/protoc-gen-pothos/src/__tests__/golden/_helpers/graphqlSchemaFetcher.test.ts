@@ -1,8 +1,8 @@
-import { mkdtemp, rm, writeFile, readdir } from "node:fs/promises";
+import { mkdtemp, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { buildGraphQLSchema } from "./graphqlSchemaFetcher.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -66,7 +66,7 @@ export const notSchema = "something";
 
       const files = await readdir(fixtureDir);
       const tempScripts = files.filter((f) =>
-        f.startsWith("__temp_schema_builder")
+        f.startsWith("__temp_schema_builder"),
       );
       expect(tempScripts).toHaveLength(0);
     });
@@ -81,7 +81,7 @@ export const schema = null;
 
       const files = await readdir(tempDir);
       const tempScripts = files.filter((f) =>
-        f.startsWith("__temp_schema_builder")
+        f.startsWith("__temp_schema_builder"),
       );
       expect(tempScripts).toHaveLength(0);
     });

@@ -3,10 +3,10 @@ import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import type { GeneratedFile } from "./codeGenerationRunner.js";
 import {
-  getExpectedDirPath,
   collectGeneratedFilesForSnapshot,
-  getExpectedTypeErrorsPath,
+  getExpectedDirPath,
   getExpectedSchemaPath,
+  getExpectedTypeErrorsPath,
 } from "./snapshotValidator.js";
 
 describe("snapshotValidator", () => {
@@ -48,11 +48,11 @@ describe("snapshotValidator", () => {
       await mkdir(join(generatedDir, "testapis/enums"), { recursive: true });
       await writeFile(
         join(generatedDir, "testapis/enums/enums.pb.pothos.ts"),
-        "content1"
+        "content1",
       );
       await writeFile(
         join(generatedDir, "testapis/enums/values.pb.pothos.ts"),
-        "content2"
+        "content2",
       );
 
       const generatedFiles: GeneratedFile[] = [
@@ -62,7 +62,7 @@ describe("snapshotValidator", () => {
 
       const result = await collectGeneratedFilesForSnapshot(
         testCaseDir,
-        generatedFiles
+        generatedFiles,
       );
 
       expect(result).toHaveLength(2);
@@ -70,14 +70,14 @@ describe("snapshotValidator", () => {
         content: "content1",
         expectedPath: join(
           testCaseDir,
-          "__expected__/testapis/enums/enums.pb.pothos.ts"
+          "__expected__/testapis/enums/enums.pb.pothos.ts",
         ),
       });
       expect(result).toContainEqual({
         content: "content2",
         expectedPath: join(
           testCaseDir,
-          "__expected__/testapis/enums/values.pb.pothos.ts"
+          "__expected__/testapis/enums/values.pb.pothos.ts",
         ),
       });
     });
@@ -97,7 +97,7 @@ describe("snapshotValidator", () => {
 
       const result = await collectGeneratedFilesForSnapshot(
         testCaseDir,
-        generatedFiles
+        generatedFiles,
       );
 
       expect(result).toHaveLength(1);
@@ -105,7 +105,7 @@ describe("snapshotValidator", () => {
         content: "nested content",
         expectedPath: join(
           testCaseDir,
-          "__expected__/testapis/edgecases/import_from_same_pkg/types.pb.pothos.ts"
+          "__expected__/testapis/edgecases/import_from_same_pkg/types.pb.pothos.ts",
         ),
       });
     });

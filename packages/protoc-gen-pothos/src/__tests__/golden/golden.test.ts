@@ -1,18 +1,21 @@
 import { join } from "node:path";
-import { describe, it, expect, beforeAll } from "vitest";
-import { discoverTestCases, type TestCase } from "./_helpers/testCaseDiscovery.js";
+import { beforeAll, describe, expect, it } from "vitest";
 import { executeGeneration } from "./_helpers/codeGenerationRunner.js";
 import {
   cleanupGeneratedDir,
   writeGeneratedFiles,
 } from "./_helpers/fileWriter.js";
-import { runTypeCheck } from "./_helpers/typeScriptChecker.js";
 import { buildGraphQLSchema } from "./_helpers/graphqlSchemaFetcher.js";
 import {
   collectGeneratedFilesForSnapshot,
-  getExpectedTypeErrorsPath,
   getExpectedSchemaPath,
+  getExpectedTypeErrorsPath,
 } from "./_helpers/snapshotValidator.js";
+import {
+  discoverTestCases,
+  type TestCase,
+} from "./_helpers/testCaseDiscovery.js";
+import { runTypeCheck } from "./_helpers/typeScriptChecker.js";
 
 const goldenDir = join(import.meta.dirname, "../../../../../tests/golden");
 
@@ -43,12 +46,12 @@ describe("Golden Tests", () => {
       const result = executeGeneration(testCase);
       const snapshotFiles = await collectGeneratedFilesForSnapshot(
         testCase.dir,
-        result.files
+        result.files,
       );
 
       for (const snapshotFile of snapshotFiles) {
         await expect(snapshotFile.content).toMatchFileSnapshot(
-          snapshotFile.expectedPath
+          snapshotFile.expectedPath,
         );
       }
     });
@@ -56,17 +59,19 @@ describe("Golden Tests", () => {
     it("should match type errors snapshot", async () => {
       const typeCheckResult = runTypeCheck(testCase);
       await expect(typeCheckResult.formattedErrors).toMatchFileSnapshot(
-        getExpectedTypeErrorsPath(testCase.dir)
+        getExpectedTypeErrorsPath(testCase.dir),
       );
     });
 
     it("should match GraphQL schema snapshot", async () => {
       const schemaResult = await buildGraphQLSchema(testCase.dir);
       if (!schemaResult.success) {
-        throw new Error(`Failed to build GraphQL schema: ${schemaResult.error}`);
+        throw new Error(
+          `Failed to build GraphQL schema: ${schemaResult.error}`,
+        );
       }
       await expect(schemaResult.schema).toMatchFileSnapshot(
-        getExpectedSchemaPath(testCase.dir)
+        getExpectedSchemaPath(testCase.dir),
       );
     });
   });

@@ -1,14 +1,14 @@
 import { describe, expect, it } from "vitest";
-import type { TestCase, TestCaseConfig } from "./testCaseDiscovery.js";
 import {
-  type GeneratedFile,
+  buildPluginParam,
   type CodeGenerationResult,
   executeGeneration,
-  buildPluginParam,
+  type GeneratedFile,
 } from "./codeGenerationRunner.js";
+import type { TestCase, TestCaseConfig } from "./testCaseDiscovery.js";
 
 function createTestCase(
-  overrides: Partial<TestCase> & { config: Partial<TestCaseConfig> }
+  overrides: Partial<TestCase> & { config: Partial<TestCaseConfig> },
 ): TestCase {
   return {
     name: overrides.name ?? "ts-proto/testapis.enums",
@@ -152,7 +152,9 @@ describe("codeGenerationRunner", () => {
 
         const param = buildPluginParam(testCase);
 
-        expect(param).toContain("import_prefix=@proto-graphql/e2e-testapis-ts-proto/lib/");
+        expect(param).toContain(
+          "import_prefix=@proto-graphql/e2e-testapis-ts-proto/lib/",
+        );
         expect(param).toContain("pothos_builder_path=../builder");
         expect(param).toContain("scalar=int64=String");
       });
@@ -167,7 +169,9 @@ describe("codeGenerationRunner", () => {
 
         const param = buildPluginParam(testCase);
 
-        expect(param).toContain("import_prefix=@proto-graphql/e2e-testapis-ts-proto/lib/");
+        expect(param).toContain(
+          "import_prefix=@proto-graphql/e2e-testapis-ts-proto/lib/",
+        );
         expect(param).toContain("partial_inputs");
       });
     });
@@ -183,7 +187,9 @@ describe("codeGenerationRunner", () => {
 
         const param = buildPluginParam(testCase);
 
-        expect(param).toContain("import_prefix=@proto-graphql/e2e-testapis-protobuf-es/lib/");
+        expect(param).toContain(
+          "import_prefix=@proto-graphql/e2e-testapis-protobuf-es/lib/",
+        );
         expect(param).toContain("pothos_builder_path=../builder");
         expect(param).toContain("protobuf_lib=protobuf-es-v1");
       });
@@ -215,7 +221,9 @@ describe("codeGenerationRunner", () => {
 
         const param = buildPluginParam(testCase);
 
-        expect(param).toContain("import_prefix=@proto-graphql/e2e-testapis-protobuf-es-v2/lib/");
+        expect(param).toContain(
+          "import_prefix=@proto-graphql/e2e-testapis-protobuf-es-v2/lib/",
+        );
         expect(param).toContain("pothos_builder_path=../builder");
         expect(param).toContain("protobuf_lib=protobuf-es");
       });
@@ -247,7 +255,9 @@ describe("codeGenerationRunner", () => {
 
         const param = buildPluginParam(testCase);
 
-        expect(param).toContain("import_prefix=@proto-graphql/e2e-testapis-ts-proto-with-forcelong-number/lib/");
+        expect(param).toContain(
+          "import_prefix=@proto-graphql/e2e-testapis-ts-proto-with-forcelong-number/lib/",
+        );
         expect(param).toContain("scalar=int64=Int");
         expect(param).not.toContain("scalar=int64=String");
       });

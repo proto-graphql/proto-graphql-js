@@ -3,14 +3,14 @@ import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import type { TestCase, TestCaseConfig } from "./testCaseDiscovery.js";
 import {
+  formatDiagnostics,
+  runTypeCheck,
   type TypeCheckDiagnostic,
   type TypeCheckResult,
-  runTypeCheck,
-  formatDiagnostics,
 } from "./typeScriptChecker.js";
 
 function createTestCase(
-  overrides: Partial<TestCase> & { config?: Partial<TestCaseConfig> }
+  overrides: Partial<TestCase> & { config?: Partial<TestCaseConfig> },
 ): TestCase {
   return {
     name: overrides.name ?? "ts-proto/testapis.enums",
@@ -53,18 +53,18 @@ describe("typeScriptChecker", () => {
             target: "ES2022",
           },
           include: ["builder.ts", "schema.ts"],
-        })
+        }),
       );
 
       await writeFile(
         join(caseDir, "builder.ts"),
-        `export const builder = { test: "valid" };`
+        `export const builder = { test: "valid" };`,
       );
 
       await writeFile(
         join(caseDir, "schema.ts"),
         `import { builder } from "./builder.js";
-export const schema = { builder };`
+export const schema = { builder };`,
       );
 
       const testCase = createTestCase({
@@ -98,13 +98,10 @@ export const schema = { builder };`
             target: "ES2022",
           },
           include: ["builder.ts"],
-        })
+        }),
       );
 
-      await writeFile(
-        join(caseDir, "builder.ts"),
-        `const x: string = 123;`
-      );
+      await writeFile(join(caseDir, "builder.ts"), `const x: string = 123;`);
 
       const testCase = createTestCase({
         name: "ts-proto/testapis.invalid",
@@ -138,12 +135,12 @@ export const schema = { builder };`
             target: "ES2022",
           },
           include: ["schema.ts"],
-        })
+        }),
       );
 
       await writeFile(
         join(caseDir, "schema.ts"),
-        `const y: number = "invalid";`
+        `const y: number = "invalid";`,
       );
 
       const testCase = createTestCase({
@@ -177,18 +174,18 @@ export const schema = { builder };`
             target: "ES2022",
           },
           include: ["builder.ts", "__generated__/**/*.ts"],
-        })
+        }),
       );
 
       await writeFile(
         join(caseDir, "__generated__", "generated.ts"),
-        `export const generated: string = 42;`
+        `export const generated: string = 42;`,
       );
 
       await writeFile(
         join(caseDir, "builder.ts"),
         `import { generated } from "./__generated__/generated.js";
-export const builder = { generated };`
+export const builder = { generated };`,
       );
 
       const testCase = createTestCase({
@@ -203,7 +200,9 @@ export const builder = { generated };`
       const result = runTypeCheck(testCase);
 
       expect(result.success).toBe(false);
-      expect(result.diagnostics.some((d) => d.file.includes("generated.ts"))).toBe(true);
+      expect(
+        result.diagnostics.some((d) => d.file.includes("generated.ts")),
+      ).toBe(true);
     });
 
     it("should return diagnostic with line and character position", async () => {
@@ -221,7 +220,7 @@ export const builder = { generated };`
             target: "ES2022",
           },
           include: ["builder.ts"],
-        })
+        }),
       );
 
       await writeFile(
@@ -229,7 +228,7 @@ export const builder = { generated };`
         `
 const valid = "ok";
 const x: string = 123;
-`
+`,
       );
 
       const testCase = createTestCase({
@@ -272,7 +271,9 @@ const x: string = 123;
       expect(result).toContain("5");
       expect(result).toContain("10");
       expect(result).toContain("TS2322");
-      expect(result).toContain("Type 'number' is not assignable to type 'string'.");
+      expect(result).toContain(
+        "Type 'number' is not assignable to type 'string'.",
+      );
     });
 
     it("should normalize path separators for cross-platform compatibility", () => {
@@ -380,7 +381,7 @@ const x: string = 123;
       const result = formatDiagnostics(diagnostics, "/test/case");
 
       expect(result).toBe(
-        "builder.ts(5,10): error TS2322: Type 'number' is not assignable to type 'string'."
+        "builder.ts(5,10): error TS2322: Type 'number' is not assignable to type 'string'.",
       );
     });
   });

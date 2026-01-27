@@ -1,8 +1,8 @@
 import { execFile } from "node:child_process";
 import { unlink, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
-import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
+import { promisify } from "node:util";
 
 const execFileAsync = promisify(execFile);
 
@@ -30,7 +30,7 @@ export interface GraphQLSchemaResult {
  * @returns The schema SDL on success, or an error message on failure
  */
 export async function buildGraphQLSchema(
-  testCaseDir: string
+  testCaseDir: string,
 ): Promise<GraphQLSchemaResult> {
   const script = `
 import { printSchema } from "graphql";

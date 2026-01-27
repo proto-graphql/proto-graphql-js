@@ -15,7 +15,7 @@ export async function cleanupGeneratedDir(testCaseDir: string): Promise<void> {
 
 export async function writeGeneratedFiles(
   testCaseDir: string,
-  files: GeneratedFile[]
+  files: GeneratedFile[],
 ): Promise<void> {
   const generatedDir = getGeneratedDirPath(testCaseDir);
 

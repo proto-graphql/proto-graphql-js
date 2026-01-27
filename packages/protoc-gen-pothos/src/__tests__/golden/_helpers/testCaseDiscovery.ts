@@ -40,13 +40,13 @@ const runtimeVariantMappings: Record<string, RuntimeVariantMapping> = {
 export function resolveConfig(
   runtimeVariant: string,
   packageName: string,
-  _caseDir: string
+  _caseDir: string,
 ): TestCaseConfig {
   const mapping = runtimeVariantMappings[runtimeVariant];
   if (!mapping) {
     const validVariants = Object.keys(runtimeVariantMappings).join(", ");
     throw new Error(
-      `Unknown runtime-variant: "${runtimeVariant}". Valid variants are: ${validVariants}`
+      `Unknown runtime-variant: "${runtimeVariant}". Valid variants are: ${validVariants}`,
     );
   }
 
@@ -60,7 +60,7 @@ export function resolveConfig(
 }
 
 async function readConfigJson(
-  caseDir: string
+  caseDir: string,
 ): Promise<GoldenTestConfigJson | null> {
   try {
     const content = await readFile(join(caseDir, "config.json"), "utf-8");
@@ -70,7 +70,10 @@ async function readConfigJson(
   }
 }
 
-function mergeParams(baseParam: string | undefined, additionalParams: string[] | undefined): string | undefined {
+function mergeParams(
+  baseParam: string | undefined,
+  additionalParams: string[] | undefined,
+): string | undefined {
   const allParams: string[] = [];
   if (baseParam) {
     allParams.push(baseParam);
@@ -81,7 +84,9 @@ function mergeParams(baseParam: string | undefined, additionalParams: string[] |
   return allParams.length > 0 ? allParams.join(",") : undefined;
 }
 
-export async function discoverTestCases(goldenDir: string): Promise<TestCase[]> {
+export async function discoverTestCases(
+  goldenDir: string,
+): Promise<TestCase[]> {
   const testCases: TestCase[] = [];
 
   const runtimeVariantEntries = await readdir(goldenDir, {
@@ -98,7 +103,7 @@ export async function discoverTestCases(goldenDir: string): Promise<TestCase[]> 
     if (!runtimeVariantMappings[runtimeVariant]) {
       const validVariants = Object.keys(runtimeVariantMappings).join(", ");
       throw new Error(
-        `Unknown runtime-variant: "${runtimeVariant}". Valid variants are: ${validVariants}`
+        `Unknown runtime-variant: "${runtimeVariant}". Valid variants are: ${validVariants}`,
       );
     }
 

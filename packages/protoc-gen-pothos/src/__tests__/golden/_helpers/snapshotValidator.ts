@@ -41,7 +41,7 @@ export function getExpectedSchemaPath(testCaseDir: string): string {
  */
 export async function collectGeneratedFilesForSnapshot(
   testCaseDir: string,
-  generatedFiles: GeneratedFile[]
+  generatedFiles: GeneratedFile[],
 ): Promise<SnapshotFile[]> {
   const expectedDir = getExpectedDirPath(testCaseDir);
 

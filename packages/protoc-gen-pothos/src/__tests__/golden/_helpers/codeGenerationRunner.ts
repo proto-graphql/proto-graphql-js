@@ -3,7 +3,7 @@ import {
   type TestapisPackage,
 } from "@proto-graphql/testapis-proto";
 import { protocGenPothos } from "../../../plugin.js";
-import type { TestCase, Runtime } from "./testCaseDiscovery.js";
+import type { Runtime, TestCase } from "./testCaseDiscovery.js";
 
 export interface GeneratedFile {
   name: string;
@@ -87,7 +87,10 @@ export function executeGeneration(testCase: TestCase): CodeGenerationResult {
   const param = buildPluginParam(testCase);
 
   try {
-    const req = buildCodeGeneratorRequest(pkg as TestapisPackage, { param, prefixMatch });
+    const req = buildCodeGeneratorRequest(pkg as TestapisPackage, {
+      param,
+      prefixMatch,
+    });
     const resp = protocGenPothos.run(req);
 
     const files: GeneratedFile[] = resp.file.map((f) => ({

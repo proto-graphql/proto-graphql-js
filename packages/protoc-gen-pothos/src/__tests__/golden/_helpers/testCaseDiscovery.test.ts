@@ -2,9 +2,9 @@ import { mkdir, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import {
-  type TestCase,
   discoverTestCases,
   resolveConfig,
+  type TestCase,
 } from "./testCaseDiscovery.js";
 
 describe("testCaseDiscovery", () => {
@@ -81,7 +81,7 @@ describe("testCaseDiscovery", () => {
       const testCases = await discoverTestCases(testDir);
 
       expect(testCases[0].dir).toBe(
-        join(testDir, "ts-proto", "testapis.enums")
+        join(testDir, "ts-proto", "testapis.enums"),
       );
     });
 
@@ -94,14 +94,14 @@ describe("testCaseDiscovery", () => {
     it("should handle edgecases package names with dots", async () => {
       await mkdir(
         join(testDir, "ts-proto", "testapis.edgecases.import_from_same_pkg"),
-        { recursive: true }
+        { recursive: true },
       );
 
       const testCases = await discoverTestCases(testDir);
 
       expect(testCases).toHaveLength(1);
       expect(testCases[0].config.package).toBe(
-        "testapis.edgecases.import_from_same_pkg"
+        "testapis.edgecases.import_from_same_pkg",
       );
     });
 
@@ -111,7 +111,7 @@ describe("testCaseDiscovery", () => {
       });
 
       await expect(discoverTestCases(testDir)).rejects.toThrow(
-        /unknown runtime-variant/i
+        /unknown runtime-variant/i,
       );
     });
   });
@@ -129,7 +129,7 @@ describe("testCaseDiscovery", () => {
         const config = resolveConfig(
           "ts-proto-forcelong",
           "testapis.primitives",
-          testDir
+          testDir,
         );
         expect(config.runtime).toBe("ts-proto");
         expect(config.runtimeVariant).toBe("ts-proto-forcelong");
@@ -140,7 +140,7 @@ describe("testCaseDiscovery", () => {
         const config = resolveConfig(
           "protobuf-es-v1",
           "testapis.enums",
-          testDir
+          testDir,
         );
         expect(config.runtime).toBe("protobuf-es-v1");
         expect(config.runtimeVariant).toBe("protobuf-es-v1");
@@ -156,7 +156,7 @@ describe("testCaseDiscovery", () => {
 
       it("should throw error for unknown runtime-variant", () => {
         expect(() =>
-          resolveConfig("unknown-runtime", "testapis.enums", testDir)
+          resolveConfig("unknown-runtime", "testapis.enums", testDir),
         ).toThrow(/unknown runtime-variant/i);
       });
     });
@@ -171,7 +171,7 @@ describe("testCaseDiscovery", () => {
         const config = resolveConfig(
           "ts-proto",
           "testapis.edgecases.import_from_same_pkg",
-          testDir
+          testDir,
         );
         expect(config.package).toBe("testapis.edgecases.import_from_same_pkg");
       });
@@ -191,7 +191,7 @@ describe("testCaseDiscovery", () => {
       await mkdir(caseDir, { recursive: true });
       await writeFile(
         join(caseDir, "config.json"),
-        JSON.stringify({ additionalParams: ["import_prefix=@/proto"] })
+        JSON.stringify({ additionalParams: ["import_prefix=@/proto"] }),
       );
 
       const testCases = await discoverTestCases(testDir);
@@ -200,11 +200,15 @@ describe("testCaseDiscovery", () => {
     });
 
     it("should combine config.json additionalParams for ts-proto-forcelong", async () => {
-      const caseDir = join(testDir, "ts-proto-forcelong", "testapis.primitives");
+      const caseDir = join(
+        testDir,
+        "ts-proto-forcelong",
+        "testapis.primitives",
+      );
       await mkdir(caseDir, { recursive: true });
       await writeFile(
         join(caseDir, "config.json"),
-        JSON.stringify({ additionalParams: ["import_prefix=@/proto"] })
+        JSON.stringify({ additionalParams: ["import_prefix=@/proto"] }),
       );
 
       const testCases = await discoverTestCases(testDir);

@@ -1,11 +1,11 @@
-import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
+import { mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import type { GeneratedFile } from "./codeGenerationRunner.js";
 import {
   cleanupGeneratedDir,
-  writeGeneratedFiles,
   getGeneratedDirPath,
+  writeGeneratedFiles,
 } from "./fileWriter.js";
 
 describe("fileWriter", () => {
@@ -38,7 +38,7 @@ describe("fileWriter", () => {
 
       const exists = await readdir(testDir).then(
         (entries) => entries.includes("__generated__"),
-        () => false
+        () => false,
       );
       expect(exists).toBe(false);
     });
@@ -51,14 +51,14 @@ describe("fileWriter", () => {
       await mkdir(join(generatedDir, "testapis", "enums"), { recursive: true });
       await writeFile(
         join(generatedDir, "testapis", "enums", "enums.pb.pothos.ts"),
-        "content"
+        "content",
       );
 
       await cleanupGeneratedDir(testDir);
 
       const exists = await readdir(testDir).then(
         (entries) => entries.includes("__generated__"),
-        () => false
+        () => false,
       );
       expect(exists).toBe(false);
     });
@@ -77,7 +77,7 @@ describe("fileWriter", () => {
 
       const content = await readFile(
         join(generatedDir, "testapis/enums/enums.pb.pothos.ts"),
-        "utf-8"
+        "utf-8",
       );
       expect(content).toBe("// generated content");
     });
@@ -93,7 +93,7 @@ describe("fileWriter", () => {
       await writeGeneratedFiles(testDir, files);
 
       const entries = await readdir(
-        join(generatedDir, "testapis", "edgecases", "import_from_same_pkg")
+        join(generatedDir, "testapis", "edgecases", "import_from_same_pkg"),
       );
       expect(entries).toContain("file.pb.pothos.ts");
     });
@@ -122,7 +122,7 @@ describe("fileWriter", () => {
 
       const exists = await readdir(generatedDir).then(
         () => true,
-        () => false
+        () => false,
       );
       expect(exists).toBe(true);
     });
@@ -131,7 +131,7 @@ describe("fileWriter", () => {
       await mkdir(join(generatedDir, "testapis", "enums"), { recursive: true });
       await writeFile(
         join(generatedDir, "testapis/enums/enums.pb.pothos.ts"),
-        "old content"
+        "old content",
       );
 
       const files: GeneratedFile[] = [
@@ -145,7 +145,7 @@ describe("fileWriter", () => {
 
       const content = await readFile(
         join(generatedDir, "testapis/enums/enums.pb.pothos.ts"),
-        "utf-8"
+        "utf-8",
       );
       expect(content).toBe("new content");
     });
