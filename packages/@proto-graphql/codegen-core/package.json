@@ -54,7 +54,6 @@
   },
   "scripts": {
     "build": "tsup",
-    "prebuild": "pnpm -w run gen:extensions",
     "test": "vitest run --passWithNoTests"
   }
 }
