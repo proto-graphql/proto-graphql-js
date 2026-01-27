@@ -12,7 +12,7 @@
       "!**/lib",
       "!**/module",
       "!**/__generated__",
-      "!**/e2e/testapis"
+      "!**/tests/testapis"
     ]
   },
   "assist": { "actions": { "source": { "organizeImports": "on" } } },

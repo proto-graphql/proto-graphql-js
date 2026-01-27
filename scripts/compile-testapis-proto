@@ -6,7 +6,7 @@ set -o pipefail
 cd $(dirname $0)/..
 
 PROTO_ROOT=./devPackages/testapis-proto/proto
-OUT_ROOT=./e2e/testapis
+OUT_ROOT=./tests/testapis
 
 clean() {
   rm -rf $OUT_ROOT/ts-proto/{src,lib}

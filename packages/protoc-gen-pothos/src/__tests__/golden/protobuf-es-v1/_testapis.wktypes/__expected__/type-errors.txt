@@ -1,8 +1,0 @@
-__generated__/testapis/wktypes/well_known_types.pb.pothos.ts(13,25): error TS2345: Argument of type '"timestamp"' is not assignable to parameter of type 'never'.
-__generated__/testapis/wktypes/well_known_types.pb.pothos.ts(122,7): error TS2322: Type '(source: Message) => Timestamp' is not assignable to type 'Resolver<Message, InputShapeFromFields<InputFieldMap>, {}, Date, Timestamp>'.
-  Type 'Timestamp' is not assignable to type 'MaybePromise<Date>'.
-__generated__/testapis/wktypes/well_known_types.pb.pothos.ts(162,7): error TS2322: Type 'InputFieldRef<Date | null | undefined, "InputObject">' is not assignable to type 'InputFieldRef<Timestamp | null | undefined, "InputObject">'.
-  Type 'Date | null | undefined' is not assignable to type 'Timestamp | null | undefined'.
-    Type 'Date' is missing the following properties from type 'Timestamp': seconds, nanos, fromJson, toJson, and 8 more.
-__generated__/testapis/wktypes/well_known_types.pb.pothos.ts(262,7): error TS2322: Type 'InputFieldRef<Date, "InputObject">' is not assignable to type 'InputFieldRef<Timestamp, "InputObject">'.
-  Type 'Date' is missing the following properties from type 'Timestamp': seconds, nanos, fromJson, toJson, and 8 more.

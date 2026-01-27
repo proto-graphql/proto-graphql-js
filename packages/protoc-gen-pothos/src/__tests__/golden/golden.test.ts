@@ -14,7 +14,7 @@ import {
   getExpectedSchemaPath,
 } from "./_helpers/snapshotValidator.js";
 
-const goldenDir = join(import.meta.dirname, ".");
+const goldenDir = join(import.meta.dirname, "../../../../../tests/golden");
 
 const testCases = await discoverTestCases(goldenDir);
 
