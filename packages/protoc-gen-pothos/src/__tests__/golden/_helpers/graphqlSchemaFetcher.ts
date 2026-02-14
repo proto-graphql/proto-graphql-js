@@ -1,14 +1,9 @@
 import { execFile } from "node:child_process";
 import { unlink, writeFile } from "node:fs/promises";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { join } from "node:path";
 import { promisify } from "node:util";
 
 const execFileAsync = promisify(execFile);
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const packageRoot = join(__dirname, "../../../../");
-const tsxPath = join(packageRoot, "node_modules/.bin/tsx");
 
 export interface GraphQLSchemaResult {
   /** Whether the schema was successfully built */
@@ -48,10 +43,14 @@ console.log(printSchema(schema));
   try {
     await writeFile(tempScript, script);
 
-    const { stdout } = await execFileAsync(tsxPath, [tempScript], {
-      cwd: testCaseDir,
-      encoding: "utf-8",
-    });
+    const { stdout } = await execFileAsync(
+      process.execPath,
+      ["--import", "tsx", tempScript],
+      {
+        cwd: testCaseDir,
+        encoding: "utf-8",
+      },
+    );
 
     return {
       success: true,
