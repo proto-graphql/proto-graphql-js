@@ -24,21 +24,25 @@ describe("snapshotValidator", () => {
   describe("getExpectedDirPath", () => {
     it("returns the __expected__ directory path", () => {
       const result = getExpectedDirPath("/path/to/test-case");
-      expect(result).toBe("/path/to/test-case/__expected__");
+      expect(result).toBe(join("/path/to/test-case", "__expected__"));
     });
   });
 
   describe("getExpectedTypeErrorsPath", () => {
     it("returns the type-errors.txt path inside __expected__", () => {
       const result = getExpectedTypeErrorsPath("/path/to/test-case");
-      expect(result).toBe("/path/to/test-case/__expected__/type-errors.txt");
+      expect(result).toBe(
+        join("/path/to/test-case", "__expected__", "type-errors.txt"),
+      );
     });
   });
 
   describe("getExpectedSchemaPath", () => {
     it("returns the schema.graphql path inside __expected__", () => {
       const result = getExpectedSchemaPath("/path/to/test-case");
-      expect(result).toBe("/path/to/test-case/__expected__/schema.graphql");
+      expect(result).toBe(
+        join("/path/to/test-case", "__expected__", "schema.graphql"),
+      );
     });
   });
 
