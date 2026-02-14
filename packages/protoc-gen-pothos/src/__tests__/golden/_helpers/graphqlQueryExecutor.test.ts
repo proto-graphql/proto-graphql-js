@@ -78,7 +78,9 @@ export const schema = new GraphQLSchema({
 
       expect(result.success).toBe(true);
       expect(result.result).toContain('"errors"');
-      expect(result.result).toContain('"Cannot query field \\"unknownField\\" on type \\"Query\\"."');
+      expect(result.result).toContain(
+        '"Cannot query field \\"unknownField\\" on type \\"Query\\"."',
+      );
     });
 
     it("should clean up temporary script after execution", async () => {

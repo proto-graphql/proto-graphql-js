@@ -1,6 +1,5 @@
-      query Test {
-        test {
-          _
-        }
-      }
-    
+query Test {
+  test {
+    _
+  }
+}

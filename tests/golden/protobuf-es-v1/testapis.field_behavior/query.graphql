@@ -1,11 +1,10 @@
-      query Test {
-        test {
-          requiredField {
-            body
-          }
-          outputOnlyField {
-            body
-          }
-        }
-      }
-    
+query Test {
+  test {
+    requiredField {
+      body
+    }
+    outputOnlyField {
+      body
+    }
+  }
+}

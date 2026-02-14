@@ -1,33 +1,32 @@
-      query Test {
-        test {
-          requiredPrimitives {
-            ...Primitives
-          }
-          optionalPrimitives {
-            ...Primitives
-          }
-          requiredPrimitivesList {
-            ...Primitives
-          }
-          optionalPrimitivesList {
-            ...Primitives
-          }
-        }
-      }
-      fragment Primitives on Primitives {
-        requiredDoubleValue
-        requiredFloatValue
-        requiredInt32Value
-        requiredInt64Value
-        requiredUint32Value
-        requiredUint64Value
-        requiredSint32Value
-        requiredSint64Value
-        requiredFixed32Value
-        requiredFixed64Value
-        requiredSfixed32Value
-        requiredSfixed64Value
-        requiredBoolValue
-        requiredStringValue
-      }
-    
+query Test {
+  test {
+    requiredPrimitives {
+      ...Primitives
+    }
+    optionalPrimitives {
+      ...Primitives
+    }
+    requiredPrimitivesList {
+      ...Primitives
+    }
+    optionalPrimitivesList {
+      ...Primitives
+    }
+  }
+}
+fragment Primitives on Primitives {
+  requiredDoubleValue
+  requiredFloatValue
+  requiredInt32Value
+  requiredInt64Value
+  requiredUint32Value
+  requiredUint64Value
+  requiredSint32Value
+  requiredSint64Value
+  requiredFixed32Value
+  requiredFixed64Value
+  requiredSfixed32Value
+  requiredSfixed64Value
+  requiredBoolValue
+  requiredStringValue
+}

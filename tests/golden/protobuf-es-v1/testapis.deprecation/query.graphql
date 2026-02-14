@@ -1,9 +1,8 @@
-      query Test {
-        test1 {
-          body
-        }
-        test2 {
-          body
-        }
-      }
-    
+query Test {
+  test1 {
+    body
+  }
+  test2 {
+    body
+  }
+}

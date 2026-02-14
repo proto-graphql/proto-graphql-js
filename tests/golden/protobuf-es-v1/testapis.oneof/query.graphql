@@ -1,21 +1,20 @@
-      query Test {
-        test {
-          requiredOneofMembers {
-            ... on OneofMemberMessage1 {
-              body
-            }
-            ... on OneofMemberMessage2 {
-              imageUrl
-            }
-          }
-          optionalOneofMembers {
-            ... on OneofMemberMessage1 {
-              body
-            }
-            ... on OneofMemberMessage2 {
-              imageUrl
-            }
-          }
-        }
+query Test {
+  test {
+    requiredOneofMembers {
+      ... on OneofMemberMessage1 {
+        body
       }
-    
+      ... on OneofMemberMessage2 {
+        imageUrl
+      }
+    }
+    optionalOneofMembers {
+      ... on OneofMemberMessage1 {
+        body
+      }
+      ... on OneofMemberMessage2 {
+        imageUrl
+      }
+    }
+  }
+}

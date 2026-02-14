@@ -1,19 +1,18 @@
-      query Test {
-        testSquashedUnion {
-          squashedMessage {
-            ... on TestPrefixPrefixedMessageInnerMessage {
-              ...Inner
-            }
-            ... on TestPrefixPrefixedMessageInnerMessage2 {
-              ...Inner2
-            }
-          }
-        }
+query Test {
+  testSquashedUnion {
+    squashedMessage {
+      ... on TestPrefixPrefixedMessageInnerMessage {
+        ...Inner
       }
-      fragment Inner on TestPrefixPrefixedMessageInnerMessage {
-        body
+      ... on TestPrefixPrefixedMessageInnerMessage2 {
+        ...Inner2
       }
-      fragment Inner2 on TestPrefixPrefixedMessageInnerMessage2 {
-        body
-      }
-    
+    }
+  }
+}
+fragment Inner on TestPrefixPrefixedMessageInnerMessage {
+  body
+}
+fragment Inner2 on TestPrefixPrefixedMessageInnerMessage2 {
+  body
+}

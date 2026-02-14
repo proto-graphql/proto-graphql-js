@@ -1,10 +1,9 @@
-      query Test {
-        valuesArePresent {
-          ...Message
-        }
-      }
-      fragment Message on Message {
-        requiredStringValue
-        optionalStringValue
-      }
-    
+query Test {
+  valuesArePresent {
+    ...Message
+  }
+}
+fragment Message on Message {
+  requiredStringValue
+  optionalStringValue
+}

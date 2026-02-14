@@ -1,8 +1,7 @@
-      query Test {
-        test {
-          child {
-            body
-          }
-        }
-      }
-    
+query Test {
+  test {
+    child {
+      body
+    }
+  }
+}
