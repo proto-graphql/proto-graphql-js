@@ -28,6 +28,10 @@ Run a single test file:
 pnpm vitest run path/to/file.test.ts
 ```
 
+## Test Strategy
+
+See `docs/development/testing-strategy.md`.
+
 ## Architecture
 
 This is a Turbo monorepo with pnpm workspaces:
