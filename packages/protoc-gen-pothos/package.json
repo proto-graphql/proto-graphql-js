@@ -34,6 +34,7 @@
   "files": [
     "bin/",
     "docs/",
+    "!docs/development/**",
     "src/",
     "dist/",
     "!src/**/*.test.ts",
