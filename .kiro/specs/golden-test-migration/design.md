@@ -6,7 +6,7 @@
 
 **Users**: proto-graphql の開発者が、コード生成ロジックの変更による意図しない出力変更を検出し、生成コードの型安全性を保証するために利用する。
 
-**Impact**: 現在の `/e2e/tests/` ディレクトリの Pothos 関連テストと `plugin.test.ts` のインラインスナップショットを、`packages/protoc-gen-pothos/src/__tests__/golden/` 配下の統一された Golden Test に置き換える。
+**Impact**: 現在の `/e2e/tests/` ディレクトリの Pothos 関連テストと `plugin.test.ts` のインラインスナップショットを、`tests/golden/` 配下の統一された Golden Test に置き換える。
 
 ### Goals
 
@@ -207,6 +207,7 @@ golden/
 **runtime-variant の例**:
 - `ts-proto` - 標準の ts-proto
 - `ts-proto-forcelong` - forceLong=number パラメータ付き ts-proto
+- `ts-proto-partial-inputs` - partial_inputs パラメータ付き ts-proto
 - `protobuf-es-v1` - protobuf-es v1
 - `protobuf-es` - protobuf-es v2
 
@@ -232,6 +233,7 @@ golden/ts-proto-forcelong/testapis.primitives/  testapis.primitives             
 |-----------------|--------------|---------------|
 | `ts-proto` | `ts-proto` | なし |
 | `ts-proto-forcelong` | `ts-proto` | `forceLong=number` |
+| `ts-proto-partial-inputs` | `ts-proto` | `partial_inputs` |
 | `protobuf-es-v1` | `protobuf-es-v1` | なし |
 | `protobuf-es` | `protobuf-es` | なし |
 
@@ -587,7 +589,7 @@ async function buildGraphQLSchema(testCaseDir: string): Promise<string> {
 #### Test Case Directory Structure
 
 ```
-packages/protoc-gen-pothos/src/__tests__/golden/
+tests/golden/
   tsconfig.base.json              # 共通 TypeScript 設定
 
   ts-proto/                       # runtime-variant ディレクトリ (標準)
@@ -611,6 +613,10 @@ packages/protoc-gen-pothos/src/__tests__/golden/
     testapis.primitives/
       ...
     testapis.wktypes/
+      ...
+
+  ts-proto-partial-inputs/        # runtime-variant ディレクトリ (partial_inputs パラメータ付き)
+    testapis.enums/
       ...
 
   protobuf-es-v1/                 # runtime-variant ディレクトリ
@@ -723,7 +729,7 @@ interface GoldenTestConfig {
 
 ### e2e/tests.json → Golden Test 対応表
 
-現在の e2e/tests.json に定義されている **43ケース** を Golden Test に 1:1 で移行する。
+現在の e2e/tests.json に定義されている **43ケース** を Golden Test に 1:1 で移行した。加えて、プラグインオプション検証用に **1ケース**（`ts-proto-partial-inputs/testapis.enums`）を追加している。
 
 **ソース**: `e2e/tests.json` (2026-01-24 時点)
 
@@ -799,9 +805,15 @@ interface GoldenTestConfig {
 jq '.tests | length' e2e/tests.json
 # → 43
 
-# Golden Test のケース数
-find packages/protoc-gen-pothos/src/__tests__/golden -mindepth 2 -maxdepth 2 -type d | wc -l
+# e2e 移行対象のケース数（43件）
+find tests/golden -mindepth 2 -maxdepth 2 -type d \
+  | grep -v 'ts-proto-partial-inputs/' \
+  | wc -l
 # → 43 (一致すること)
+
+# Golden Test 全ケース数（オプションバリエーション含む）
+find tests/golden -mindepth 2 -maxdepth 2 -type d | wc -l
+# → 44
 ```
 
 ### plugin.test.ts → Golden Test 対応
@@ -811,8 +823,8 @@ plugin.test.ts の各テストバリエーションは Golden Test に統合:
 | plugin.test.ts テスト | Golden Test への統合方法 |
 |---------------------|------------------------|
 | `without import prefix` | 各 runtime-variant の基本ケースでカバー |
-| `with import prefix` | config.json で `import_prefix` を設定 |
-| `with partial inputs` | config.json で `partial_inputs` を設定 |
+| `with import prefix` | helper unit test で `additionalParams` を付与して検証 |
+| `with partial inputs` | `ts-proto-partial-inputs/testapis.enums/config.json` で検証 |
 | `protobuf-es-v1` | `protobuf-es-v1/` runtime-variant ディレクトリ |
 | `protobuf-es` | `protobuf-es/` runtime-variant ディレクトリ |
 | `scalar type override` | 必要に応じて新規 runtime-variant を追加 |
@@ -829,42 +841,25 @@ plugin.test.ts の各テストバリエーションは Golden Test に統合:
 
 **差異の記録**: 上記の対応表と検証内容の違いは本設計書に記載。移行完了後も設計書を保持し、将来の参照用とする。
 
-### 実装結果と除外ケース
+### 実装結果
 
 移行完了時点での Golden Test 実装状況:
 
-**実装済みテストケース (31件)**:
-- ts-proto: 10件 (deprecation, edgecases.import_from_same_pkg, empty_types, enums, extensions, field_behavior, nested, oneof, primitives, proto3_optional, wktypes)
+**実装済みテストケース (44件)**:
+- ts-proto: 13件 (deprecation, edgecases.import_from_same_pkg, edgecases.import_squashed_union, empty_types, enums, extensions, field_behavior, multipkgs, nested, oneof, primitives, proto3_optional, wktypes)
 - ts-proto-forcelong: 2件 (primitives, wktypes)
-- protobuf-es-v1: 9件 (deprecation, edgecases.import_from_same_pkg, edgecases.import_oneof_member_from_other_file, empty_types, enums, field_behavior, nested, oneof, proto3_optional)
-- protobuf-es: 9件 (deprecation, edgecases.import_from_same_pkg, edgecases.import_oneof_member_from_other_file, empty_types, enums, field_behavior, nested, oneof, proto3_optional)
+- ts-proto-partial-inputs: 1件 (enums)
+- protobuf-es-v1: 14件 (deprecation, edgecases.import_from_same_pkg, edgecases.import_oneof_member_from_other_file, edgecases.import_squashed_union, empty_types, enums, extensions, field_behavior, multipkgs, nested, oneof, primitives, proto3_optional, wktypes)
+- protobuf-es: 14件 (deprecation, edgecases.import_from_same_pkg, edgecases.import_oneof_member_from_other_file, edgecases.import_squashed_union, empty_types, enums, extensions, field_behavior, multipkgs, nested, oneof, primitives, proto3_optional, wktypes)
 
-**除外ケース (`_` プレフィックス付き、12件)**:
-
-| ケース | ランタイム | 除外理由 |
-|-------|-----------|---------|
-| multipkgs.subpkg2 | ts-proto | 他パッケージへのクロス参照依存 |
-| edgecases.import_squashed_union.pkg2 | ts-proto | 他パッケージへのクロス参照依存 |
-| primitives | protobuf-es-v1 | BigInt カスタムスカラー依存 |
-| wktypes | protobuf-es-v1 | DateTime/Int64 カスタムスカラー依存 |
-| extensions | protobuf-es-v1 | Byte カスタムスカラー依存 |
-| edgecases.import_squashed_union.pkg2 | protobuf-es-v1 | 他パッケージへのクロス参照依存 |
-| primitives | protobuf-es | BigInt カスタムスカラー依存 |
-| wktypes | protobuf-es | DateTime/Int64 カスタムスカラー依存 |
-| extensions | protobuf-es | Byte カスタムスカラー依存 |
-| multipkgs.subpkg2 | protobuf-es | 他パッケージへのクロス参照依存 |
-| edgecases.import_squashed_union.pkg2 | protobuf-es | 他パッケージへのクロス参照依存 |
-
-**除外理由の詳細**:
-- **クロスパッケージ依存**: multipkgs と import_squashed_union は複数の proto package 間での相互参照を含むため、単一パッケージ単位での Golden Test では型チェックが通らない
-- **カスタムスカラー依存**: protobuf-es 系のランタイムでは BigInt, DateTime, Byte などのカスタムスカラーが builder.ts で定義される必要があるが、これらはテストケース固有の実装が必要
-
-**注意**: 除外されたケースもコード生成自体は正しく動作しており、e2e テスト時の buf CLI 経由での検証と同等の生成結果を得ている。Golden Test での検証が困難なのは、生成後の型チェックフェーズにおいてのみ。
+**補足**:
+- e2e 移行対象 43件はすべて実装済み。
+- `ts-proto-partial-inputs/testapis.enums` は Requirement 2.4 の `partial_inputs` バリエーション検証のために追加。
 
 ## Migration Strategy
 
 ### Phase 1: Golden Test Infrastructure
-1. `packages/protoc-gen-pothos/src/__tests__/golden/` ディレクトリ構造を作成
+1. `tests/golden/` ディレクトリ構造を作成
 2. テストヘルパーモジュール (`helpers/`) を実装
 3. 基本的な Golden Test スイート (`golden.test.ts`) を実装
 

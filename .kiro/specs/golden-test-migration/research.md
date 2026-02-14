@@ -18,7 +18,7 @@
 - **Context**: Requirement 6 の移行範囲を明確化するため。
 - **Sources Consulted**: `e2e/tests.json`, `e2e/tests/**`, `e2e/vitest.config.ts`
 - **Findings**:
-  - 38 件の test ケースが `tests.json` に定義され、各ケースが `pothos--{package}--{runtime}` 形式で配置されている。
+  - 43 件の test ケースが `tests.json` に定義され、各ケースが `pothos--{package}--{runtime}` 形式で配置されている。
   - GraphQL スキーマは `__generated__/schema.test.ts` で `toMatchFileSnapshot` を利用している。
   - tsconfig は `@proto-graphql/tsconfig/tsconfig.e2e.json` を継承している。
 - **Implications**: Golden Test は directory discovery と `tsconfig` 継承を維持しつつ、buf CLI 依存を除去する設計が必要。
@@ -53,7 +53,7 @@
 - **Alternatives Considered**:
   1. `tests.json` の継続利用
   2. ディレクトリ探索での自動検出
-- **Selected Approach**: `packages/protoc-gen-pothos/src/__tests__/golden/` 直下のディレクトリを探索する。
+- **Selected Approach**: `tests/golden/` 直下のディレクトリを探索する。
 - **Rationale**: テスト追加時のメンテナンスコストを下げ、vitest 実行時に自動的に検出できる。
 - **Trade-offs**: ディレクトリ名規約に依存するため、命名ミスの検出が必要。
 - **Follow-up**: ディレクトリ名検証とエラーメッセージの整備。

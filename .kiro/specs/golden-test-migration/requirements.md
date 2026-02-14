@@ -19,7 +19,7 @@ protoc-gen-pothos を利用したコード生成については testapis の fil
 **Objective:** 開発者として、protoc-gen-pothos パッケージ内に Golden Test 形式のテストケースディレクトリ構造を持ちたい。これにより、テストケースの管理が容易になり、コード生成のテストカバレッジを正確に測定できるようになる。
 
 #### Acceptance Criteria
-1. The Golden Test shall テストケースディレクトリを `packages/protoc-gen-pothos/src/__tests__/golden/` 配下に配置する
+1. The Golden Test shall テストケースディレクトリを `tests/golden/` 配下に配置する
 2. The Golden Test shall `golden/<runtime-variant>/<proto-package>/` の2階層構造を使用する。runtime-variant はランタイム種別とパラメータバリエーションを含み、proto-package は proto package 全体をそのままディレクトリ名として使用する（例: `golden/ts-proto/testapis.enums/`, `golden/ts-proto-forcelong/testapis.primitives/`, `golden/protobuf-es/testapis.primitives/`）
 3. When テストケースディレクトリが追加された場合, the Golden Test shall 自動的にそのディレクトリを検出してテスト対象に含める
 4. The Golden Test shall テストケースディレクトリ内に期待される生成コード（`__expected__/*.pb.pothos.ts`）を配置する

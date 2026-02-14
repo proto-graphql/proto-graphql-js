@@ -81,6 +81,26 @@ describe("testCaseDiscovery", () => {
       );
     });
 
+    it("should return test cases in deterministic sorted order", async () => {
+      await mkdir(join(testDir, "ts-proto", "testapis.zzz"), {
+        recursive: true,
+      });
+      await mkdir(join(testDir, "protobuf-es", "testapis.mmm"), {
+        recursive: true,
+      });
+      await mkdir(join(testDir, "ts-proto", "testapis.aaa"), {
+        recursive: true,
+      });
+
+      const testCases = await discoverTestCases(testDir);
+
+      expect(testCases.map((tc) => tc.name)).toEqual([
+        "protobuf-es/testapis.mmm",
+        "ts-proto/testapis.aaa",
+        "ts-proto/testapis.zzz",
+      ]);
+    });
+
     it("should return empty array when no test cases exist", async () => {
       const testCases = await discoverTestCases(testDir);
 
@@ -129,6 +149,17 @@ describe("testCaseDiscovery", () => {
         );
         expect(config.runtime).toBe("ts-proto");
         expect(config.runtimeVariant).toBe("ts-proto-forcelong");
+        expect(config.param).toBeUndefined();
+      });
+
+      it("should map ts-proto-partial-inputs to ts-proto runtime without param", () => {
+        const config = resolveConfig(
+          "ts-proto-partial-inputs",
+          "testapis.enums",
+          testDir,
+        );
+        expect(config.runtime).toBe("ts-proto");
+        expect(config.runtimeVariant).toBe("ts-proto-partial-inputs");
         expect(config.param).toBeUndefined();
       });
 

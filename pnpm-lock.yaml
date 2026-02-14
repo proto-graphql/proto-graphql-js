@@ -860,6 +860,24 @@ importers:
         specifier: catalog:test
         version: 5.2.1
 
+  tests/golden/ts-proto-partial-inputs/testapis.enums:
+    dependencies:
+      '@pothos/core':
+        specifier: catalog:test
+        version: 3.41.1(graphql@16.9.0)
+      '@proto-graphql/e2e-testapis-ts-proto':
+        specifier: workspace:*
+        version: link:../../../testapis/ts-proto
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../../devPackages/tsconfig
+      graphql:
+        specifier: catalog:test
+        version: 16.9.0
+      graphql-scalars:
+        specifier: catalog:test
+        version: 1.23.0(graphql@16.9.0)
+
   tests/golden/ts-proto/testapis.deprecation:
     dependencies:
       '@pothos/core':

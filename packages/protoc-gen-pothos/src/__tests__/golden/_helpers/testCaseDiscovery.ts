@@ -33,6 +33,7 @@ interface RuntimeVariantMapping {
 const runtimeVariantMappings: Record<string, RuntimeVariantMapping> = {
   "ts-proto": { runtime: "ts-proto" },
   "ts-proto-forcelong": { runtime: "ts-proto" },
+  "ts-proto-partial-inputs": { runtime: "ts-proto" },
   "protobuf-es-v1": { runtime: "protobuf-es-v1" },
   "protobuf-es": { runtime: "protobuf-es" },
 };
@@ -89,14 +90,15 @@ export async function discoverTestCases(
 ): Promise<TestCase[]> {
   const testCases: TestCase[] = [];
 
-  const runtimeVariantEntries = await readdir(goldenDir, {
-    withFileTypes: true,
-  });
+  const runtimeVariantEntries = (
+    await readdir(goldenDir, {
+      withFileTypes: true,
+    })
+  )
+    .filter((entry) => entry.isDirectory() && !entry.name.startsWith("_"))
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   for (const runtimeVariantEntry of runtimeVariantEntries) {
-    if (!runtimeVariantEntry.isDirectory()) continue;
-    if (runtimeVariantEntry.name.startsWith("_")) continue;
-
     const runtimeVariant = runtimeVariantEntry.name;
     const runtimeVariantDir = join(goldenDir, runtimeVariant);
 
@@ -107,14 +109,15 @@ export async function discoverTestCases(
       );
     }
 
-    const packageEntries = await readdir(runtimeVariantDir, {
-      withFileTypes: true,
-    });
+    const packageEntries = (
+      await readdir(runtimeVariantDir, {
+        withFileTypes: true,
+      })
+    )
+      .filter((entry) => entry.isDirectory() && !entry.name.startsWith("_"))
+      .sort((a, b) => a.name.localeCompare(b.name));
 
     for (const packageEntry of packageEntries) {
-      if (!packageEntry.isDirectory()) continue;
-      if (packageEntry.name.startsWith("_")) continue;
-
       const packageName = packageEntry.name;
       const caseDir = join(runtimeVariantDir, packageName);
       const name = `${runtimeVariant}/${packageName}`;
