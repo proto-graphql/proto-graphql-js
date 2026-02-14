@@ -1,0 +1,11 @@
+{
+  "data": {
+    "test": {
+      "body": "hello",
+      "nested": {
+        "nestedBody": "world"
+      },
+      "nestedEnum": "BAR"
+    }
+  }
+}

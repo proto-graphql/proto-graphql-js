@@ -1,0 +1,12 @@
+      query Test {
+        test {
+          ...Message
+        }
+      }
+      fragment Message on MessageWithEnums {
+        requiredMyEnum
+        requiredMyEnumWithoutUnspecified
+        optionalMyEnum
+        optionalMyEnumWithoutUnspecified
+      }
+    

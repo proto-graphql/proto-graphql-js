@@ -1,4 +1,4 @@
-import { readdir, readFile } from "node:fs/promises";
+import { access, readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 
 export type Runtime = "ts-proto" | "protobuf-es-v1" | "protobuf-es";
@@ -15,6 +15,7 @@ export interface TestCaseConfig {
 export interface TestCase {
   name: string;
   dir: string;
+  hasQuery: boolean;
   config: TestCaseConfig;
 }
 
@@ -85,6 +86,15 @@ function mergeParams(
   return allParams.length > 0 ? allParams.join(",") : undefined;
 }
 
+async function hasQueryFile(caseDir: string): Promise<boolean> {
+  try {
+    await access(join(caseDir, "query.graphql"));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export async function discoverTestCases(
   goldenDir: string,
 ): Promise<TestCase[]> {
@@ -130,10 +140,12 @@ export async function discoverTestCases(
         param: mergeParams(baseConfig.param, configJson?.additionalParams),
         prefixMatch: configJson?.prefixMatch,
       };
+      const hasQuery = await hasQueryFile(caseDir);
 
       testCases.push({
         name,
         dir: caseDir,
+        hasQuery,
         config,
       });
     }

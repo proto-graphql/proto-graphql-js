@@ -81,6 +81,26 @@ describe("testCaseDiscovery", () => {
       );
     });
 
+    it("should mark hasQuery true when query.graphql exists", async () => {
+      const caseDir = join(testDir, "ts-proto", "testapis.enums");
+      await mkdir(caseDir, { recursive: true });
+      await writeFile(join(caseDir, "query.graphql"), "query { test }");
+
+      const testCases = await discoverTestCases(testDir);
+
+      expect(testCases[0].hasQuery).toBe(true);
+    });
+
+    it("should mark hasQuery false when query.graphql does not exist", async () => {
+      await mkdir(join(testDir, "ts-proto", "testapis.enums"), {
+        recursive: true,
+      });
+
+      const testCases = await discoverTestCases(testDir);
+
+      expect(testCases[0].hasQuery).toBe(false);
+    });
+
     it("should return test cases in deterministic sorted order", async () => {
       await mkdir(join(testDir, "ts-proto", "testapis.zzz"), {
         recursive: true,

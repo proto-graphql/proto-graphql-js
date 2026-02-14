@@ -8,6 +8,7 @@ function createTestCase(
   return {
     name: overrides.name ?? "ts-proto/testapis.enums",
     dir: overrides.dir ?? "/path/to/test/case",
+    hasQuery: overrides.hasQuery ?? false,
     config: {
       package: overrides.config.package ?? "testapis.enums",
       runtimeVariant: overrides.config.runtimeVariant ?? "ts-proto",

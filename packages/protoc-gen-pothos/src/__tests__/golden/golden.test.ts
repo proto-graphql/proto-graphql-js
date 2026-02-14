@@ -5,9 +5,11 @@ import {
   cleanupGeneratedDir,
   writeGeneratedFiles,
 } from "./_helpers/fileWriter.js";
+import { executeGraphQLQuery } from "./_helpers/graphqlQueryExecutor.js";
 import { buildGraphQLSchema } from "./_helpers/graphqlSchemaFetcher.js";
 import {
   collectGeneratedFilesForSnapshot,
+  getExpectedQueryResultPath,
   getExpectedSchemaPath,
   getExpectedTypeErrorsPath,
 } from "./_helpers/snapshotValidator.js";
@@ -74,5 +76,19 @@ describe("Golden Tests", () => {
         getExpectedSchemaPath(testCase.dir),
       );
     });
+
+    if (testCase.hasQuery) {
+      it("should match GraphQL query result snapshot", async () => {
+        const queryResult = await executeGraphQLQuery(testCase.dir);
+        if (!queryResult.success) {
+          throw new Error(
+            `Failed to execute GraphQL query: ${queryResult.error}`,
+          );
+        }
+        await expect(queryResult.result).toMatchFileSnapshot(
+          getExpectedQueryResultPath(testCase.dir),
+        );
+      });
+    }
   });
 });

@@ -1,0 +1,10 @@
+      query Test {
+        test {
+          body
+          nested {
+            nestedBody
+          }
+          nestedEnum
+        }
+      }
+    

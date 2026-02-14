@@ -1,0 +1,9 @@
+      query Test {
+        test {
+          message {
+            body
+          }
+          enum
+        }
+      }
+    

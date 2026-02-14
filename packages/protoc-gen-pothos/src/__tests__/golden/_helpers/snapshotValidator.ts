@@ -4,6 +4,7 @@ import type { GeneratedFile } from "./codeGenerationRunner.js";
 const EXPECTED_DIR_NAME = "__expected__";
 const TYPE_ERRORS_FILENAME = "type-errors.txt";
 const SCHEMA_FILENAME = "schema.graphql";
+const QUERY_RESULT_FILENAME = "query-result.json";
 
 export interface SnapshotFile {
   content: string;
@@ -29,6 +30,13 @@ export function getExpectedTypeErrorsPath(testCaseDir: string): string {
  */
 export function getExpectedSchemaPath(testCaseDir: string): string {
   return join(testCaseDir, EXPECTED_DIR_NAME, SCHEMA_FILENAME);
+}
+
+/**
+ * Gets the expected query-result.json path for a test case.
+ */
+export function getExpectedQueryResultPath(testCaseDir: string): string {
+  return join(testCaseDir, EXPECTED_DIR_NAME, QUERY_RESULT_FILENAME);
 }
 
 /**

@@ -5,6 +5,7 @@ import type { GeneratedFile } from "./codeGenerationRunner.js";
 import {
   collectGeneratedFilesForSnapshot,
   getExpectedDirPath,
+  getExpectedQueryResultPath,
   getExpectedSchemaPath,
   getExpectedTypeErrorsPath,
 } from "./snapshotValidator.js";
@@ -42,6 +43,15 @@ describe("snapshotValidator", () => {
       const result = getExpectedSchemaPath("/path/to/test-case");
       expect(result).toBe(
         join("/path/to/test-case", "__expected__", "schema.graphql"),
+      );
+    });
+  });
+
+  describe("getExpectedQueryResultPath", () => {
+    it("returns the query-result.json path inside __expected__", () => {
+      const result = getExpectedQueryResultPath("/path/to/test-case");
+      expect(result).toBe(
+        join("/path/to/test-case", "__expected__", "query-result.json"),
       );
     });
   });

@@ -1,0 +1,13 @@
+{
+  "errors": [
+    {
+      "message": "Cannot query field \"valuesArePresent\" on type \"Query\". Did you mean \"valuesAreBlank\"?",
+      "locations": [
+        {
+          "line": 2,
+          "column": 9
+        }
+      ]
+    }
+  ]
+}
