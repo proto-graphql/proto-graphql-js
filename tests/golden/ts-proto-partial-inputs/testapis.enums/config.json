@@ -1,5 +1,3 @@
 {
-  "additionalParams": [
-    "partial_inputs"
-  ]
+  "additionalParams": ["partial_inputs"]
 }
