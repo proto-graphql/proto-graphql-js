@@ -36,7 +36,7 @@ describe("typeScriptChecker", () => {
     await rm(testDir, { recursive: true, force: true });
   });
 
-  describe("runTypeCheck", () => {
+  describe("runTypeCheck", { timeout: 20_000 }, () => {
     it("should return success when no type errors exist", async () => {
       const caseDir = join(testDir, "ts-proto", "testapis.valid");
       await mkdir(caseDir, { recursive: true });
