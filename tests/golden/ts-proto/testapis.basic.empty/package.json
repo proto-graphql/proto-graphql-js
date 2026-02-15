@@ -1,0 +1,11 @@
+{
+  "name": "@proto-graphql/golden-pothos--testapis.basic.empty--ts-proto",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@pothos/core": "catalog:test",
+    "@proto-graphql/tsconfig": "workspace:*",
+    "graphql": "catalog:test",
+    "@proto-graphql/e2e-testapis-ts-proto": "workspace:*"
+  }
+}

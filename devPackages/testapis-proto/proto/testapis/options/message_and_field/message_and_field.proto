@@ -1,0 +1,119 @@
+syntax = "proto3";
+
+package testapis.options.message_and_field;
+
+import "graphql/schema.proto";
+
+message PrefixedMessage {
+  message InnerMessage {
+    uint64 id = 1;
+    string body = 2;
+  }
+
+  message InnerMessage2 {
+    uint64 id = 1;
+    string body = 2;
+  }
+
+  message SquashedMessage {
+    option (graphql.object_type).squash_union = true;
+
+    oneof squashed_message {
+      InnerMessage oneof_field = 1;
+      InnerMessage2 oneof_field_2 = 2;
+    }
+  }
+
+  uint64 id = 1 [(graphql.field).id = true];
+  string body = 2;
+  PrefixedEnum prefixed_enum = 3;
+  InnerMessage ignored_field = 4 [(graphql.field).ignore = true];
+
+  oneof ignored_oneof {
+    option (graphql.oneof).ignore = true;
+
+    PrefixedEnum ignored_oneof_prefixed_enum = 5;
+    InnerMessage ignored_oneof_field = 6;
+  }
+
+  string this_field_will_be_renamed = 7 [(graphql.field).name = "thisFieldWasRenamed"];
+  string skip_resolver = 8 [(graphql.field).skip_resolver = true];
+
+  SquashedMessage squashed_message = 9;
+  InterfaceMessage interface_message = 10 [(graphql.field).ignore = true];
+  MessageWillRename renamed_message = 11;
+  EnumWillRename renamed_enum = 12;
+  IgnoredMessage ignored_message = 13;
+  IgnoredMessage.NotIgnored not_ignored_message = 14;
+  IgnoredEnum ignored_enum = 15;
+
+  oneof partial_ignore_oneof {
+    InnerMessage oneof_not_ignored_field = 16;
+    InnerMessage2 oneof_ignored_field = 17 [(graphql.field).ignore = true];
+  }
+
+  repeated SquashedMessage squashed_messages = 18;
+}
+
+message MessageWillRename {
+  option (graphql.object_type).name = "RenamedMessage";
+
+  string body = 1;
+}
+
+enum EnumWillRename {
+  option (graphql.enum_type).name = "RenamedEnum";
+
+  ENUM_WILL_RENAME_UNSPECIFIED = 0;
+  ENUM_WILL_RENAME_FOO = 1;
+  ENUM_WILL_RENAME_BAR = 2;
+}
+
+message IgnoredMessage {
+  option (graphql.object_type).ignore = true;
+
+  string body = 1;
+  PrefixedEnum prefixed_enum = 2;
+
+  message NotIgnored {
+    string body = 1;
+  }
+
+  oneof ignored_oneof {
+    PrefixedMessage.InnerMessage ignored_oneof_field = 3;
+    PrefixedMessage.InnerMessage2 ignored_oneof_field_2 = 4;
+  }
+}
+
+message InterfaceMessage {
+  option (graphql.object_type).interface = true;
+
+  enum Type {
+    TYPE_UNSPECIFIED = 0;
+    INNER = 1;
+    INNER2 = 2;
+  }
+
+  uint64 id = 1;
+  Type type = 2 [(graphql.field).ignore = true];
+}
+
+message MessageOnlyOutput {
+  option (graphql.input_type).ignore = true;
+
+  string body = 1;
+}
+
+enum PrefixedEnum {
+  PREFIXED_ENUM_UNSPECIFIED = 0;
+  PREFIXED_FOO = 1;
+  PREFIXED_BAR = 2;
+  PREFIXED_IGNORED = 3 [(graphql.enum_value).ignore = true];
+}
+
+enum IgnoredEnum {
+  option (graphql.enum_type).ignore = true;
+
+  IGNORED_ENUM_UNSPECIFIED = 0;
+  IGNORED_FOO = 1;
+}

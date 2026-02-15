@@ -30,15 +30,7 @@ function generateEnumTypeCode(
 
   const descSet = getTestapisFileDescriptorSet(packageName);
   const registry = createFileRegistry(descSet);
-
-  // The actual proto package might differ from the TestapisPackage key
-  // For example: "testapis.enums" key but "testapi.enums" proto package
-  let descEnum = registry.getEnum(`${packageName}.${enumTypeNameInProto}`);
-
-  if (descEnum === undefined && packageName === "testapis.enums") {
-    // Try with the actual proto package name
-    descEnum = registry.getEnum(`testapi.enums.${enumTypeNameInProto}`);
-  }
+  const descEnum = registry.getEnum(`${packageName}.${enumTypeNameInProto}`);
 
   if (descEnum === undefined) {
     throw new Error(
@@ -84,35 +76,35 @@ const testSuites: TestSuite[] = [
       {
         test: "generates code for a simple enum",
         args: {
-          packageName: "testapis.enums",
+          packageName: "testapis.basic.enums",
           enumTypeNameInProto: "MyEnum",
         },
       },
       {
         test: "generates code for an enum without unspecified",
         args: {
-          packageName: "testapis.enums",
+          packageName: "testapis.basic.enums",
           enumTypeNameInProto: "MyEnumWithoutUnspecified",
         },
       },
       {
         test: "generates code for nested enum",
         args: {
-          packageName: "testapis.nested",
+          packageName: "testapis.basic.nested",
           enumTypeNameInProto: "ParentMessage.NestedEnum",
         },
       },
       {
         test: "generates code for enum with extensions",
         args: {
-          packageName: "testapis.extensions",
+          packageName: "testapis.options.message_and_field",
           enumTypeNameInProto: "PrefixedEnum",
         },
       },
       {
         test: "generates code for enum with deprecated values",
         args: {
-          packageName: "testapis.deprecation",
+          packageName: "testapis.options.deprecation",
           enumTypeNameInProto: "NotDeprecatedEnum",
         },
       },
@@ -134,21 +126,21 @@ const testSuites: TestSuite[] = [
       {
         test: "generates code for a simple enum",
         args: {
-          packageName: "testapis.enums",
+          packageName: "testapis.basic.enums",
           enumTypeNameInProto: "MyEnum",
         },
       },
       {
         test: "generates code for an enum without unspecified",
         args: {
-          packageName: "testapis.enums",
+          packageName: "testapis.basic.enums",
           enumTypeNameInProto: "MyEnumWithoutUnspecified",
         },
       },
       {
         test: "generates code for nested enum",
         args: {
-          packageName: "testapis.nested",
+          packageName: "testapis.basic.nested",
           enumTypeNameInProto: "ParentMessage.NestedEnum",
         },
       },
@@ -170,28 +162,28 @@ const testSuites: TestSuite[] = [
       {
         test: "generates code for a simple enum with localName",
         args: {
-          packageName: "testapis.enums",
+          packageName: "testapis.basic.enums",
           enumTypeNameInProto: "MyEnum",
         },
       },
       {
         test: "generates code for an enum without unspecified with localName",
         args: {
-          packageName: "testapis.enums",
+          packageName: "testapis.basic.enums",
           enumTypeNameInProto: "MyEnumWithoutUnspecified",
         },
       },
       {
         test: "generates code for nested enum with localName",
         args: {
-          packageName: "testapis.nested",
+          packageName: "testapis.basic.nested",
           enumTypeNameInProto: "ParentMessage.NestedEnum",
         },
       },
       {
         test: "generates code for enum with extensions and ignored values",
         args: {
-          packageName: "testapis.extensions",
+          packageName: "testapis.options.message_and_field",
           enumTypeNameInProto: "PrefixedEnum",
         },
       },

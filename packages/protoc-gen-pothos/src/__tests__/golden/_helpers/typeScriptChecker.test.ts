@@ -12,11 +12,11 @@ function createTestCase(
   overrides: Partial<TestCase> & { config?: Partial<TestCaseConfig> },
 ): TestCase {
   return {
-    name: overrides.name ?? "ts-proto/testapis.enums",
+    name: overrides.name ?? "ts-proto/testapis.basic.enums",
     dir: overrides.dir ?? "/path/to/test/case",
     hasQuery: overrides.hasQuery ?? false,
     config: {
-      package: overrides.config?.package ?? "testapis.enums",
+      package: overrides.config?.package ?? "testapis.basic.enums",
       runtimeVariant: overrides.config?.runtimeVariant ?? "ts-proto",
       runtime: overrides.config?.runtime ?? "ts-proto",
       param: overrides.config?.param,

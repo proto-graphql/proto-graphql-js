@@ -1,0 +1,12 @@
+{
+  "name": "@proto-graphql/golden-pothos--testapis.behavior.field_comments--protobuf-es",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@pothos/core": "catalog:test",
+    "@proto-graphql/tsconfig": "workspace:*",
+    "graphql": "catalog:test",
+    "@proto-graphql/e2e-testapis-protobuf-es-v2": "workspace:*",
+    "@bufbuild/protobuf": "catalog:"
+  }
+}

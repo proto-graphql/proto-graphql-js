@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package testapis.imports.symbol_collision.a;
+
+message CollisionType {
+  string body = 1;
+}

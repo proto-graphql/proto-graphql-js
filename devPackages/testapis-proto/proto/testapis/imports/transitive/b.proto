@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package testapis.imports.transitive;
+
+import "testapis/imports/transitive/c.proto";
+
+message B {
+  C c = 1;
+}

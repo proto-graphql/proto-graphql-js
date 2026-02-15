@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package testapis.imports.oneof_cross_file;
+
+message OneofMember1 {
+  string body = 1;
+}
+
+message OneofMember2 {
+  int32 count = 1;
+}

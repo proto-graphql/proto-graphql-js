@@ -29,6 +29,15 @@ export function buildCodeGeneratorRequest(
 ): CodeGeneratorRequest {
   const descSet = getTestapisFileDescriptorSet(pkg);
   const req = create(CodeGeneratorRequestSchema, { parameter: param });
+  const shouldEmitImportedFiles = parseEmitImportedFiles(param);
+  const filesByName = new Map(
+    descSet.file
+      .map((fd) => [fd.name, fd] as const)
+      .filter((entry): entry is [string, (typeof descSet.file)[number]] =>
+        Boolean(entry[0]),
+      ),
+  );
+  const matchedFilenames = new Set<string>();
 
   for (const fd of descSet.file) {
     req.protoFile.push(fd);
@@ -39,9 +48,48 @@ export function buildCodeGeneratorRequest(
       ? new RegExp(`^${pkgPath}/.+\\.proto$`)
       : new RegExp(`^${pkgPath}/[^/]+\\.proto$`);
     if (filename && pat.test(filename)) {
-      req.fileToGenerate.push(filename);
+      matchedFilenames.add(filename);
     }
   }
 
+  if (shouldEmitImportedFiles) {
+    const queue = [...matchedFilenames];
+    for (let i = 0; i < queue.length; i++) {
+      const current = filesByName.get(queue[i]);
+      if (!current) continue;
+      for (const dependency of current.dependency) {
+        if (matchedFilenames.has(dependency)) continue;
+        if (!filesByName.has(dependency)) continue;
+        matchedFilenames.add(dependency);
+        queue.push(dependency);
+      }
+    }
+  }
+
+  req.fileToGenerate.push(...matchedFilenames);
   return req;
+}
+
+function parseEmitImportedFiles(param: string | undefined): boolean {
+  if (!param) return false;
+
+  for (const rawPart of param.split(",")) {
+    const part = rawPart.trim();
+    if (!part) continue;
+
+    const eqIndex = part.indexOf("=");
+    if (eqIndex === -1) {
+      if (part === "emit_imported_files") return true;
+      continue;
+    }
+
+    const key = part.slice(0, eqIndex);
+    if (key !== "emit_imported_files") continue;
+
+    const value = part.slice(eqIndex + 1);
+    if (value === "" || value === "true") return true;
+    if (value === "false") return false;
+  }
+
+  return false;
 }
