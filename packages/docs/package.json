@@ -6,7 +6,7 @@
   "scripts": {
     "build": "pnpm sync:content && next build",
     "dev": "pnpm sync:content && next dev",
-    "sync:content": "node ./scripts/sync-content.mjs",
+    "sync:content": "bash ./scripts/sync-content.sh",
     "start": "next start"
   },
   "dependencies": {
