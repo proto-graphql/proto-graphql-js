@@ -121,9 +121,3 @@ builder.queryType({
 export const schema = builder.toSchema();
 ```
 
-## Next Steps
-
-- [Configuration](./configuration.md) - All available plugin options
-- [Buf Setup](./buf-setup.md) - Detailed Buf configuration
-- [Type Mapping](../type-mapping/README.md) - How Protobuf types map to GraphQL
-- [Proto Annotations](../proto-annotations/reference.md) - Customize generated schema

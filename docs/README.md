@@ -25,18 +25,6 @@ Generate GraphQL schema definitions from Protocol Buffer definitions.
 
 - [Proto Annotations](./proto-annotations/reference.md) - Complete proto options reference
 
-## Quick Links
-
-| Goal | Document |
-|------|----------|
-| Set up a new project | [Getting Started](./protoc-gen-pothos/getting-started.md) |
-| Configure plugin options | [Configuration](./protoc-gen-pothos/configuration.md) |
-| Customize scalar mappings | [Scalars](./type-mapping/scalars.md) |
-| Control field nullability | [Fields](./type-mapping/fields.md) |
-| Create union types | [Oneofs](./type-mapping/oneofs.md) |
-| All proto annotations | [Proto Annotations](./proto-annotations/reference.md) |
-| Understand generated code | [Generated Code Reference](./protoc-gen-pothos/generated-code-reference.md) |
-
 ## External Resources
 
 - [GitHub Repository](https://github.com/proto-graphql/proto-graphql-js)

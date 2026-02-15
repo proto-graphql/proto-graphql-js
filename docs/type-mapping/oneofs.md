@@ -187,8 +187,3 @@ opt:
 
 This is useful when you only want message types in unions.
 
-## See Also
-
-- [Messages](./messages.md) - Squashed union details
-- [Configuration](../protoc-gen-pothos/configuration.md) - ignore_non_message_oneof_fields option
-- [Proto Annotations](../proto-annotations/reference.md) - Oneof options

@@ -151,8 +151,3 @@ plugins:
       - scalar=google.type.Date=Date
 ```
 
-## See Also
-
-- [Buf Setup](./buf-setup.md) - Detailed Buf configuration
-- [Scalars](../type-mapping/scalars.md) - Scalar type mappings
-- [Proto Annotations](../proto-annotations/reference.md) - Proto-level customization

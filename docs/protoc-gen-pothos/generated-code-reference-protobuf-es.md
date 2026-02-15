@@ -791,9 +791,3 @@ extensions: {
 }
 ```
 
-## See Also
-
-- [Generated Code Reference (ts-proto)](./generated-code-reference-ts-proto.md)
-- [Generated Code Reference (protobuf-es-v1)](./generated-code-reference-protobuf-es-v1.md)
-- [Configuration](./configuration.md) - Plugin options
-- [Buf Setup](./buf-setup.md) - Configuration with Buf

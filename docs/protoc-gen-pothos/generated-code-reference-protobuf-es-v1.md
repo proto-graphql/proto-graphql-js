@@ -689,7 +689,3 @@ extensions: {
 }
 ```
 
-## See Also
-
-- [Generated Code Reference (ts-proto)](./generated-code-reference-ts-proto.md)
-- [Configuration](./configuration.md) - Plugin options
