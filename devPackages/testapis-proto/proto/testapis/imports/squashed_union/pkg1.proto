@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package testapis.imports.squashed_union.pkg1;
+
+import "graphql/schema.proto";
+
+message OneofMessage1 {
+  string body = 1;
+}
+
+message SquashedOneof {
+  option (graphql.object_type).squash_union = true;
+
+  oneof message {
+    OneofMessage1 msg1 = 1;
+  }
+}

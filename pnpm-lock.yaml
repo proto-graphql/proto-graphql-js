@@ -224,11 +224,11 @@ importers:
         specifier: ^4.21.0
         version: 4.21.0
 
-  tests/golden/protobuf-es-v1/testapis.deprecation:
+  tests/golden/protobuf-es-v1/testapis.basic.empty:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: catalog:protobuf-es-v1
-        version: 1.8.0
+        specifier: 'catalog:'
+        version: 2.10.2
       '@pothos/core':
         specifier: catalog:test
         version: 3.41.1(graphql@16.9.0)
@@ -241,15 +241,12 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/protobuf-es-v1/testapis.edgecases.import_from_same_pkg:
+  tests/golden/protobuf-es-v1/testapis.basic.enums:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: catalog:protobuf-es-v1
-        version: 1.8.0
+        specifier: 'catalog:'
+        version: 2.10.2
       '@pothos/core':
         specifier: catalog:test
         version: 3.41.1(graphql@16.9.0)
@@ -262,15 +259,12 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/protobuf-es-v1/testapis.edgecases.import_oneof_member_from_other_file:
+  tests/golden/protobuf-es-v1/testapis.basic.nested:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: catalog:protobuf-es-v1
-        version: 1.8.0
+        specifier: 'catalog:'
+        version: 2.10.2
       '@pothos/core':
         specifier: catalog:test
         version: 3.41.1(graphql@16.9.0)
@@ -283,15 +277,12 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/protobuf-es-v1/testapis.edgecases.import_squashed_union:
+  tests/golden/protobuf-es-v1/testapis.basic.presence:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: catalog:protobuf-es-v1
-        version: 1.8.0
+        specifier: 'catalog:'
+        version: 2.10.2
       '@pothos/core':
         specifier: catalog:test
         version: 3.41.1(graphql@16.9.0)
@@ -304,15 +295,12 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/protobuf-es-v1/testapis.empty_types:
+  tests/golden/protobuf-es-v1/testapis.basic.scalars:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: catalog:protobuf-es-v1
-        version: 1.8.0
+        specifier: 'catalog:'
+        version: 2.10.2
       '@pothos/core':
         specifier: catalog:test
         version: 3.41.1(graphql@16.9.0)
@@ -325,15 +313,12 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/protobuf-es-v1/testapis.enums:
+  tests/golden/protobuf-es-v1/testapis.basic.wktypes:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: catalog:protobuf-es-v1
-        version: 1.8.0
+        specifier: 'catalog:'
+        version: 2.10.2
       '@pothos/core':
         specifier: catalog:test
         version: 3.41.1(graphql@16.9.0)
@@ -346,15 +331,12 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/protobuf-es-v1/testapis.extensions:
+  tests/golden/protobuf-es-v1/testapis.behavior.field_comments:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: catalog:protobuf-es-v1
-        version: 1.8.0
+        specifier: 'catalog:'
+        version: 2.10.2
       '@pothos/core':
         specifier: catalog:test
         version: 3.41.1(graphql@16.9.0)
@@ -367,15 +349,12 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/protobuf-es-v1/testapis.field_behavior:
+  tests/golden/protobuf-es-v1/testapis.imports.cross_pkg_b:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: catalog:protobuf-es-v1
-        version: 1.8.0
+        specifier: 'catalog:'
+        version: 2.10.2
       '@pothos/core':
         specifier: catalog:test
         version: 3.41.1(graphql@16.9.0)
@@ -388,15 +367,12 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/protobuf-es-v1/testapis.multipkgs:
+  tests/golden/protobuf-es-v1/testapis.imports.oneof_cross_file:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: catalog:protobuf-es-v1
-        version: 1.8.0
+        specifier: 'catalog:'
+        version: 2.10.2
       '@pothos/core':
         specifier: catalog:test
         version: 3.41.1(graphql@16.9.0)
@@ -409,15 +385,12 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/protobuf-es-v1/testapis.nested:
+  tests/golden/protobuf-es-v1/testapis.imports.same_dir:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: catalog:protobuf-es-v1
-        version: 1.8.0
+        specifier: 'catalog:'
+        version: 2.10.2
       '@pothos/core':
         specifier: catalog:test
         version: 3.41.1(graphql@16.9.0)
@@ -430,15 +403,12 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/protobuf-es-v1/testapis.oneof:
+  tests/golden/protobuf-es-v1/testapis.imports.squashed_union:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: catalog:protobuf-es-v1
-        version: 1.8.0
+        specifier: 'catalog:'
+        version: 2.10.2
       '@pothos/core':
         specifier: catalog:test
         version: 3.41.1(graphql@16.9.0)
@@ -451,15 +421,12 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/protobuf-es-v1/testapis.primitives:
+  tests/golden/protobuf-es-v1/testapis.imports.transitive:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: catalog:protobuf-es-v1
-        version: 1.8.0
+        specifier: 'catalog:'
+        version: 2.10.2
       '@pothos/core':
         specifier: catalog:test
         version: 3.41.1(graphql@16.9.0)
@@ -472,15 +439,12 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/protobuf-es-v1/testapis.proto3_optional:
+  tests/golden/protobuf-es-v1/testapis.oneof.message_only:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: catalog:protobuf-es-v1
-        version: 1.8.0
+        specifier: 'catalog:'
+        version: 2.10.2
       '@pothos/core':
         specifier: catalog:test
         version: 3.41.1(graphql@16.9.0)
@@ -493,35 +457,116 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/protobuf-es-v1/testapis.wktypes:
+  tests/golden/protobuf-es-v1/testapis.oneof.non_message:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: catalog:protobuf-es-v1
-        version: 1.8.0
+        specifier: 'catalog:'
+        version: 2.10.2
       '@pothos/core':
         specifier: catalog:test
         version: 3.41.1(graphql@16.9.0)
       '@proto-graphql/e2e-testapis-protobuf-es':
         specifier: workspace:*
         version: link:../../../testapis/protobuf-es
-      '@proto-graphql/scalars-protobuf-es':
-        specifier: workspace:*
-        version: link:../../../../packages/@proto-graphql/scalars-protobuf-es
       '@proto-graphql/tsconfig':
         specifier: workspace:*
         version: link:../../../../devPackages/tsconfig
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/protobuf-es/testapis.deprecation:
+  tests/golden/protobuf-es-v1/testapis.options.deprecation:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: 'catalog:'
+        version: 2.10.2
+      '@pothos/core':
+        specifier: catalog:test
+        version: 3.41.1(graphql@16.9.0)
+      '@proto-graphql/e2e-testapis-protobuf-es':
+        specifier: workspace:*
+        version: link:../../../testapis/protobuf-es
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../../devPackages/tsconfig
+      graphql:
+        specifier: catalog:test
+        version: 16.9.0
+
+  tests/golden/protobuf-es-v1/testapis.options.field_nullability:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: 'catalog:'
+        version: 2.10.2
+      '@pothos/core':
+        specifier: catalog:test
+        version: 3.41.1(graphql@16.9.0)
+      '@proto-graphql/e2e-testapis-protobuf-es':
+        specifier: workspace:*
+        version: link:../../../testapis/protobuf-es
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../../devPackages/tsconfig
+      graphql:
+        specifier: catalog:test
+        version: 16.9.0
+
+  tests/golden/protobuf-es-v1/testapis.options.input_no_partial:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: 'catalog:'
+        version: 2.10.2
+      '@pothos/core':
+        specifier: catalog:test
+        version: 3.41.1(graphql@16.9.0)
+      '@proto-graphql/e2e-testapis-protobuf-es':
+        specifier: workspace:*
+        version: link:../../../testapis/protobuf-es
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../../devPackages/tsconfig
+      graphql:
+        specifier: catalog:test
+        version: 16.9.0
+
+  tests/golden/protobuf-es-v1/testapis.options.message_and_field:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: 'catalog:'
+        version: 2.10.2
+      '@pothos/core':
+        specifier: catalog:test
+        version: 3.41.1(graphql@16.9.0)
+      '@proto-graphql/e2e-testapis-protobuf-es':
+        specifier: workspace:*
+        version: link:../../../testapis/protobuf-es
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../../devPackages/tsconfig
+      graphql:
+        specifier: catalog:test
+        version: 16.9.0
+
+  tests/golden/protobuf-es-v1/testapis.options.schema:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: 'catalog:'
+        version: 2.10.2
+      '@pothos/core':
+        specifier: catalog:test
+        version: 3.41.1(graphql@16.9.0)
+      '@proto-graphql/e2e-testapis-protobuf-es':
+        specifier: workspace:*
+        version: link:../../../testapis/protobuf-es
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../../devPackages/tsconfig
+      graphql:
+        specifier: catalog:test
+        version: 16.9.0
+
+  tests/golden/protobuf-es/testapis.basic.empty:
     dependencies:
       '@bufbuild/protobuf':
         specifier: 'catalog:'
@@ -538,11 +583,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/protobuf-es/testapis.edgecases.import_from_same_pkg:
+  tests/golden/protobuf-es/testapis.basic.enums:
     dependencies:
       '@bufbuild/protobuf':
         specifier: 'catalog:'
@@ -559,11 +601,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/protobuf-es/testapis.edgecases.import_oneof_member_from_other_file:
+  tests/golden/protobuf-es/testapis.basic.nested:
     dependencies:
       '@bufbuild/protobuf':
         specifier: 'catalog:'
@@ -580,11 +619,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/protobuf-es/testapis.edgecases.import_squashed_union:
+  tests/golden/protobuf-es/testapis.basic.presence:
     dependencies:
       '@bufbuild/protobuf':
         specifier: 'catalog:'
@@ -601,11 +637,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/protobuf-es/testapis.empty_types:
+  tests/golden/protobuf-es/testapis.basic.scalars:
     dependencies:
       '@bufbuild/protobuf':
         specifier: 'catalog:'
@@ -622,11 +655,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/protobuf-es/testapis.enums:
+  tests/golden/protobuf-es/testapis.basic.wktypes:
     dependencies:
       '@bufbuild/protobuf':
         specifier: 'catalog:'
@@ -643,11 +673,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/protobuf-es/testapis.extensions:
+  tests/golden/protobuf-es/testapis.behavior.field_comments:
     dependencies:
       '@bufbuild/protobuf':
         specifier: 'catalog:'
@@ -664,11 +691,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/protobuf-es/testapis.field_behavior:
+  tests/golden/protobuf-es/testapis.imports.cross_pkg_b:
     dependencies:
       '@bufbuild/protobuf':
         specifier: 'catalog:'
@@ -685,11 +709,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/protobuf-es/testapis.multipkgs:
+  tests/golden/protobuf-es/testapis.imports.oneof_cross_file:
     dependencies:
       '@bufbuild/protobuf':
         specifier: 'catalog:'
@@ -706,11 +727,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/protobuf-es/testapis.nested:
+  tests/golden/protobuf-es/testapis.imports.same_dir:
     dependencies:
       '@bufbuild/protobuf':
         specifier: 'catalog:'
@@ -727,11 +745,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/protobuf-es/testapis.oneof:
+  tests/golden/protobuf-es/testapis.imports.squashed_union:
     dependencies:
       '@bufbuild/protobuf':
         specifier: 'catalog:'
@@ -748,11 +763,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/protobuf-es/testapis.primitives:
+  tests/golden/protobuf-es/testapis.imports.transitive:
     dependencies:
       '@bufbuild/protobuf':
         specifier: 'catalog:'
@@ -769,11 +781,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/protobuf-es/testapis.proto3_optional:
+  tests/golden/protobuf-es/testapis.oneof.message_only:
     dependencies:
       '@bufbuild/protobuf':
         specifier: 'catalog:'
@@ -790,11 +799,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/protobuf-es/testapis.wktypes:
+  tests/golden/protobuf-es/testapis.oneof.non_message:
     dependencies:
       '@bufbuild/protobuf':
         specifier: 'catalog:'
@@ -805,20 +811,104 @@ importers:
       '@proto-graphql/e2e-testapis-protobuf-es-v2':
         specifier: workspace:*
         version: link:../../../testapis/protobuf-es-v2
-      '@proto-graphql/scalars-protobuf-es':
-        specifier: workspace:*
-        version: link:../../../../packages/@proto-graphql/scalars-protobuf-es
       '@proto-graphql/tsconfig':
         specifier: workspace:*
         version: link:../../../../devPackages/tsconfig
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/ts-proto-forcelong/testapis.primitives:
+  tests/golden/protobuf-es/testapis.options.deprecation:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: 'catalog:'
+        version: 2.10.2
+      '@pothos/core':
+        specifier: catalog:test
+        version: 3.41.1(graphql@16.9.0)
+      '@proto-graphql/e2e-testapis-protobuf-es-v2':
+        specifier: workspace:*
+        version: link:../../../testapis/protobuf-es-v2
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../../devPackages/tsconfig
+      graphql:
+        specifier: catalog:test
+        version: 16.9.0
+
+  tests/golden/protobuf-es/testapis.options.field_nullability:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: 'catalog:'
+        version: 2.10.2
+      '@pothos/core':
+        specifier: catalog:test
+        version: 3.41.1(graphql@16.9.0)
+      '@proto-graphql/e2e-testapis-protobuf-es-v2':
+        specifier: workspace:*
+        version: link:../../../testapis/protobuf-es-v2
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../../devPackages/tsconfig
+      graphql:
+        specifier: catalog:test
+        version: 16.9.0
+
+  tests/golden/protobuf-es/testapis.options.input_no_partial:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: 'catalog:'
+        version: 2.10.2
+      '@pothos/core':
+        specifier: catalog:test
+        version: 3.41.1(graphql@16.9.0)
+      '@proto-graphql/e2e-testapis-protobuf-es-v2':
+        specifier: workspace:*
+        version: link:../../../testapis/protobuf-es-v2
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../../devPackages/tsconfig
+      graphql:
+        specifier: catalog:test
+        version: 16.9.0
+
+  tests/golden/protobuf-es/testapis.options.message_and_field:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: 'catalog:'
+        version: 2.10.2
+      '@pothos/core':
+        specifier: catalog:test
+        version: 3.41.1(graphql@16.9.0)
+      '@proto-graphql/e2e-testapis-protobuf-es-v2':
+        specifier: workspace:*
+        version: link:../../../testapis/protobuf-es-v2
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../../devPackages/tsconfig
+      graphql:
+        specifier: catalog:test
+        version: 16.9.0
+
+  tests/golden/protobuf-es/testapis.options.schema:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: 'catalog:'
+        version: 2.10.2
+      '@pothos/core':
+        specifier: catalog:test
+        version: 3.41.1(graphql@16.9.0)
+      '@proto-graphql/e2e-testapis-protobuf-es-v2':
+        specifier: workspace:*
+        version: link:../../../testapis/protobuf-es-v2
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../../devPackages/tsconfig
+      graphql:
+        specifier: catalog:test
+        version: 16.9.0
+
+  tests/golden/ts-proto-forcelong/testapis.basic.scalars:
     dependencies:
       '@pothos/core':
         specifier: catalog:test
@@ -832,14 +922,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
-      long:
-        specifier: catalog:test
-        version: 5.2.1
 
-  tests/golden/ts-proto-forcelong/testapis.wktypes:
+  tests/golden/ts-proto-forcelong/testapis.basic.wktypes:
     dependencies:
       '@pothos/core':
         specifier: catalog:test
@@ -853,14 +937,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
-      long:
-        specifier: catalog:test
-        version: 5.2.1
 
-  tests/golden/ts-proto-partial-inputs/testapis.enums:
+  tests/golden/ts-proto-partial-inputs/testapis.options.message_and_field:
     dependencies:
       '@pothos/core':
         specifier: catalog:test
@@ -874,11 +952,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/ts-proto/testapis.deprecation:
+  tests/golden/ts-proto/testapis.basic.empty:
     dependencies:
       '@pothos/core':
         specifier: catalog:test
@@ -892,11 +967,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/ts-proto/testapis.edgecases.import_from_same_pkg:
+  tests/golden/ts-proto/testapis.basic.enums:
     dependencies:
       '@pothos/core':
         specifier: catalog:test
@@ -910,11 +982,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/ts-proto/testapis.edgecases.import_squashed_union:
+  tests/golden/ts-proto/testapis.basic.nested:
     dependencies:
       '@pothos/core':
         specifier: catalog:test
@@ -928,11 +997,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/ts-proto/testapis.empty_types:
+  tests/golden/ts-proto/testapis.basic.presence:
     dependencies:
       '@pothos/core':
         specifier: catalog:test
@@ -946,11 +1012,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/ts-proto/testapis.enums:
+  tests/golden/ts-proto/testapis.basic.scalars:
     dependencies:
       '@pothos/core':
         specifier: catalog:test
@@ -964,11 +1027,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/ts-proto/testapis.extensions:
+  tests/golden/ts-proto/testapis.basic.wktypes:
     dependencies:
       '@pothos/core':
         specifier: catalog:test
@@ -982,11 +1042,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/ts-proto/testapis.field_behavior:
+  tests/golden/ts-proto/testapis.behavior.field_comments:
     dependencies:
       '@pothos/core':
         specifier: catalog:test
@@ -1000,11 +1057,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/ts-proto/testapis.multipkgs:
+  tests/golden/ts-proto/testapis.imports.cross_pkg_b:
     dependencies:
       '@pothos/core':
         specifier: catalog:test
@@ -1018,11 +1072,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/ts-proto/testapis.nested:
+  tests/golden/ts-proto/testapis.imports.oneof_cross_file:
     dependencies:
       '@pothos/core':
         specifier: catalog:test
@@ -1036,11 +1087,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/ts-proto/testapis.oneof:
+  tests/golden/ts-proto/testapis.imports.same_dir:
     dependencies:
       '@pothos/core':
         specifier: catalog:test
@@ -1054,11 +1102,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/ts-proto/testapis.primitives:
+  tests/golden/ts-proto/testapis.imports.squashed_union:
     dependencies:
       '@pothos/core':
         specifier: catalog:test
@@ -1072,11 +1117,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/ts-proto/testapis.proto3_optional:
+  tests/golden/ts-proto/testapis.imports.transitive:
     dependencies:
       '@pothos/core':
         specifier: catalog:test
@@ -1090,11 +1132,8 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
-        specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
 
-  tests/golden/ts-proto/testapis.wktypes:
+  tests/golden/ts-proto/testapis.oneof.message_only:
     dependencies:
       '@pothos/core':
         specifier: catalog:test
@@ -1108,9 +1147,81 @@ importers:
       graphql:
         specifier: catalog:test
         version: 16.9.0
-      graphql-scalars:
+
+  tests/golden/ts-proto/testapis.options.deprecation:
+    dependencies:
+      '@pothos/core':
         specifier: catalog:test
-        version: 1.23.0(graphql@16.9.0)
+        version: 3.41.1(graphql@16.9.0)
+      '@proto-graphql/e2e-testapis-ts-proto':
+        specifier: workspace:*
+        version: link:../../../testapis/ts-proto
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../../devPackages/tsconfig
+      graphql:
+        specifier: catalog:test
+        version: 16.9.0
+
+  tests/golden/ts-proto/testapis.options.field_nullability:
+    dependencies:
+      '@pothos/core':
+        specifier: catalog:test
+        version: 3.41.1(graphql@16.9.0)
+      '@proto-graphql/e2e-testapis-ts-proto':
+        specifier: workspace:*
+        version: link:../../../testapis/ts-proto
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../../devPackages/tsconfig
+      graphql:
+        specifier: catalog:test
+        version: 16.9.0
+
+  tests/golden/ts-proto/testapis.options.input_no_partial:
+    dependencies:
+      '@pothos/core':
+        specifier: catalog:test
+        version: 3.41.1(graphql@16.9.0)
+      '@proto-graphql/e2e-testapis-ts-proto':
+        specifier: workspace:*
+        version: link:../../../testapis/ts-proto
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../../devPackages/tsconfig
+      graphql:
+        specifier: catalog:test
+        version: 16.9.0
+
+  tests/golden/ts-proto/testapis.options.message_and_field:
+    dependencies:
+      '@pothos/core':
+        specifier: catalog:test
+        version: 3.41.1(graphql@16.9.0)
+      '@proto-graphql/e2e-testapis-ts-proto':
+        specifier: workspace:*
+        version: link:../../../testapis/ts-proto
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../../devPackages/tsconfig
+      graphql:
+        specifier: catalog:test
+        version: 16.9.0
+
+  tests/golden/ts-proto/testapis.options.schema:
+    dependencies:
+      '@pothos/core':
+        specifier: catalog:test
+        version: 3.41.1(graphql@16.9.0)
+      '@proto-graphql/e2e-testapis-ts-proto':
+        specifier: workspace:*
+        version: link:../../../testapis/ts-proto
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../../devPackages/tsconfig
+      graphql:
+        specifier: catalog:test
+        version: 16.9.0
 
   tests/testapis/protobuf-es:
     dependencies:

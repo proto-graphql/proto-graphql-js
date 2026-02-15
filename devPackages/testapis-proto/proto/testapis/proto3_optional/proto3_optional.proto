@@ -1,8 +1,0 @@
-syntax = "proto3";
-
-package testapis.proto3_optional;
-
-message Message {
-  string required_string_value = 1;
-  optional string optional_string_value = 2;
-}

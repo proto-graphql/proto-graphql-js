@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package testapis.imports.cross_pkg_a;
+
+message BaseMessage {
+  string body = 1;
+}
+
+enum BaseEnum {
+  BASE_ENUM_UNSPECIFIED = 0;
+  BASE_ENUM_FOO = 1;
+}
+
+message Parent {
+  message Child {
+    string body = 1;
+  }
+
+  enum ChildEnum {
+    CHILD_ENUM_UNSPECIFIED = 0;
+    CHILD_ENUM_FOO = 1;
+  }
+}

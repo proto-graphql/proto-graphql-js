@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package testapis.behavior.field_comments;
+
+message FieldBehaviorCommentsMessage {
+  message Post {
+    string body = 1;
+  }
+
+  // Required.
+  Post required_field = 1;
+  // Required. Output only.
+  Post required_output_only_field = 2;
+  // Output only. Required.
+  Post output_only_required_field = 3;
+  // Output only.
+  Post output_only_field = 4;
+  // Required. Input only.
+  Post required_input_only_field = 5;
+  // Input only. Required.
+  Post input_only_required_field = 6;
+  // Input only.
+  Post input_only_field = 7;
+}

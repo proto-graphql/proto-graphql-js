@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package testapis.imports.symbol_collision;
+
+import "testapis/imports/symbol_collision/a.proto";
+import "testapis/imports/symbol_collision/b.proto";
+
+message Consumer {
+  testapis.imports.symbol_collision.a.CollisionType from_a = 1;
+  testapis.imports.symbol_collision.b.CollisionType from_b = 2;
+}

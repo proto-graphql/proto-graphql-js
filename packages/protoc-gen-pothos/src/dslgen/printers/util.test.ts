@@ -33,21 +33,21 @@ describe("protoTypeSymbol", () => {
     };
 
     test("generates correct import path with _pb suffix for message", () => {
-      const descMsg = getDescMessage("testapis.primitives", "Primitives");
+      const descMsg = getDescMessage("testapis.basic.scalars", "Primitives");
       const symbol = protoTypeSymbol(descMsg, opts);
 
       expect(symbol.name).toBe("Primitives");
       expect(symbol.from).toBe(
-        "@testapis/protobuf-es-v2/testapis/primitives/primitives_pb",
+        "@testapis/protobuf-es-v2/testapis/basic/scalars/scalars_pb",
       );
     });
 
     test("generates correct import path with _pb suffix for nested message", () => {
       const registry = createFileRegistry(
-        getTestapisFileDescriptorSet("testapis.nested"),
+        getTestapisFileDescriptorSet("testapis.basic.nested"),
       );
       const nestedMsg = registry.getMessage(
-        "testapis.nested.ParentMessage.NestedMessage",
+        "testapis.basic.nested.ParentMessage.NestedMessage",
       );
       if (nestedMsg === undefined) {
         throw new Error("Nested message not found");
@@ -56,7 +56,7 @@ describe("protoTypeSymbol", () => {
 
       expect(symbol.name).toBe("ParentMessage_NestedMessage");
       expect(symbol.from).toBe(
-        "@testapis/protobuf-es-v2/testapis/nested/nested_pb",
+        "@testapis/protobuf-es-v2/testapis/basic/nested/nested_pb",
       );
     });
 
@@ -65,15 +65,15 @@ describe("protoTypeSymbol", () => {
         protobuf: "protobuf-es",
         importPrefix: null,
       };
-      const descMsg = getDescMessage("testapis.primitives", "Primitives");
+      const descMsg = getDescMessage("testapis.basic.scalars", "Primitives");
       const symbol = protoTypeSymbol(descMsg, optsNoPrefix);
 
       expect(symbol.name).toBe("Primitives");
-      expect(symbol.from).toBe("./testapis/primitives/primitives_pb");
+      expect(symbol.from).toBe("./testapis/basic/scalars/scalars_pb");
     });
 
     test("generates same import path as protobuf-es-v1", () => {
-      const descMsg = getDescMessage("testapis.primitives", "Primitives");
+      const descMsg = getDescMessage("testapis.basic.scalars", "Primitives");
 
       const v1Opts: Pick<PrinterOptions, "protobuf" | "importPrefix"> = {
         protobuf: "protobuf-es-v1",
@@ -99,21 +99,21 @@ describe("protoSchemaSymbol", () => {
   };
 
   test("generates Schema symbol with Schema suffix for message", () => {
-    const descMsg = getDescMessage("testapis.primitives", "Primitives");
+    const descMsg = getDescMessage("testapis.basic.scalars", "Primitives");
     const symbol = protoSchemaSymbol(descMsg, opts);
 
     expect(symbol.name).toBe("PrimitivesSchema");
     expect(symbol.from).toBe(
-      "@testapis/protobuf-es-v2/testapis/primitives/primitives_pb",
+      "@testapis/protobuf-es-v2/testapis/basic/scalars/scalars_pb",
     );
   });
 
   test("generates Schema symbol for nested message with underscore separator", () => {
     const registry = createFileRegistry(
-      getTestapisFileDescriptorSet("testapis.nested"),
+      getTestapisFileDescriptorSet("testapis.basic.nested"),
     );
     const nestedMsg = registry.getMessage(
-      "testapis.nested.ParentMessage.NestedMessage",
+      "testapis.basic.nested.ParentMessage.NestedMessage",
     );
     if (nestedMsg === undefined) {
       throw new Error("Nested message not found");
@@ -122,7 +122,7 @@ describe("protoSchemaSymbol", () => {
 
     expect(symbol.name).toBe("ParentMessage_NestedMessageSchema");
     expect(symbol.from).toBe(
-      "@testapis/protobuf-es-v2/testapis/nested/nested_pb",
+      "@testapis/protobuf-es-v2/testapis/basic/nested/nested_pb",
     );
   });
 
@@ -131,11 +131,11 @@ describe("protoSchemaSymbol", () => {
       protobuf: "protobuf-es",
       importPrefix: null,
     };
-    const descMsg = getDescMessage("testapis.primitives", "Primitives");
+    const descMsg = getDescMessage("testapis.basic.scalars", "Primitives");
     const symbol = protoSchemaSymbol(descMsg, optsNoPrefix);
 
     expect(symbol.name).toBe("PrimitivesSchema");
-    expect(symbol.from).toBe("./testapis/primitives/primitives_pb");
+    expect(symbol.from).toBe("./testapis/basic/scalars/scalars_pb");
   });
 });
 
@@ -181,7 +181,7 @@ describe("protoRefTypePrintable", () => {
   };
 
   test("generates MessageShape<typeof XxxSchema> for protobuf-es v2", () => {
-    const descMsg = getDescMessage("testapis.primitives", "Primitives");
+    const descMsg = getDescMessage("testapis.basic.scalars", "Primitives");
     const printable = protoRefTypePrintable(descMsg, v2Opts);
 
     const result = printablesToStringWithImports(printable);
@@ -194,7 +194,7 @@ describe("protoRefTypePrintable", () => {
   });
 
   test("generates type symbol for protobuf-es v1", () => {
-    const descMsg = getDescMessage("testapis.primitives", "Primitives");
+    const descMsg = getDescMessage("testapis.basic.scalars", "Primitives");
     const printable = protoRefTypePrintable(descMsg, v1Opts);
 
     const result = printablesToStringWithImports(printable);
@@ -205,7 +205,7 @@ describe("protoRefTypePrintable", () => {
   });
 
   test("generates type symbol for ts-proto", () => {
-    const descMsg = getDescMessage("testapis.primitives", "Primitives");
+    const descMsg = getDescMessage("testapis.basic.scalars", "Primitives");
     const printable = protoRefTypePrintable(descMsg, tsProtoOpts);
 
     const result = printablesToStringWithImports(printable);
@@ -217,10 +217,10 @@ describe("protoRefTypePrintable", () => {
 
   test("generates MessageShape with nested message Schema for protobuf-es v2", () => {
     const registry = createFileRegistry(
-      getTestapisFileDescriptorSet("testapis.nested"),
+      getTestapisFileDescriptorSet("testapis.basic.nested"),
     );
     const nestedMsg = registry.getMessage(
-      "testapis.nested.ParentMessage.NestedMessage",
+      "testapis.basic.nested.ParentMessage.NestedMessage",
     );
     if (nestedMsg === undefined) {
       throw new Error("Nested message not found");

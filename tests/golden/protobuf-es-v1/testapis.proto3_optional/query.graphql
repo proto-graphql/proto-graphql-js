@@ -1,9 +1,0 @@
-query Test {
-  valuesArePresent {
-    ...Message
-  }
-}
-fragment Message on Message {
-  requiredStringValue
-  optionalStringValue
-}
