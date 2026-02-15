@@ -10,7 +10,7 @@ Generate GraphQL schema definitions from Protocol Buffer definitions.
 - [Getting Started](./protoc-gen-pothos/getting-started.md) - Quick start guide for new users
 - [Configuration](./protoc-gen-pothos/configuration.md) - Complete options reference
 - [Buf Setup](./protoc-gen-pothos/buf-setup.md) - Configuration with Buf
-- [Generated Code Reference](./protoc-gen-pothos/generated-code-reference.md) - Detailed generated code examples
+- [Generated Code Reference](./protoc-gen-pothos/generated-code-reference/README.md) - Detailed generated code examples
 
 ### Type Mapping Rules
 
