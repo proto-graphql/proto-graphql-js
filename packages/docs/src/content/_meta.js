@@ -9,5 +9,4 @@ export default {
   "protoc-gen-pothos": "protoc-gen-pothos",
   "type-mapping": "Type Mapping",
   "proto-annotations": "Proto Annotations",
-  development: "Development",
 };
