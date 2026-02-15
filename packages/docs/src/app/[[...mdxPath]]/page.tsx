@@ -15,6 +15,7 @@ type PageProps = {
   }>;
 };
 
+// biome-ignore lint/style/noDefaultExport: Next.js app route page entrypoint requires a default export.
 export default async function Page(props: PageProps) {
   const params = await props.params;
   const {

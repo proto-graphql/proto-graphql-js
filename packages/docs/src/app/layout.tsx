@@ -38,6 +38,7 @@ const navbar = (
   />
 );
 
+// biome-ignore lint/style/noDefaultExport: Next.js app layout entrypoint requires a default export.
 export default async function RootLayout({
   children,
 }: {
