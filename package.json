@@ -4,6 +4,8 @@
     "build": "turbo run build",
     "clean": "turbo run clean",
     "check": "biome check --write .",
+    "docs:build": "pnpm --filter @proto-graphql/docs build",
+    "docs:dev": "pnpm --filter @proto-graphql/docs dev",
     "release:stable": "pnpm release:prepare && pnpm publish -r",
     "release:prepare": "pnpm clean && pnpm build",
     "release:snapshot": "pnpm release:prepare && pnpm release:snapshot:version && pnpm release:snapshot:publish",

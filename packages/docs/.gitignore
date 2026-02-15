@@ -1,0 +1,3 @@
+src/content/**/*.md
+src/content/**/*.mdx
+!src/content/**/_meta.js

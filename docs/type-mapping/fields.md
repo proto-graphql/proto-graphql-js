@@ -193,7 +193,3 @@ message User {
 
 This generates the field type but skips the resolver, allowing you to implement it manually.
 
-## See Also
-
-- [Scalars](./scalars.md) - Field type mappings
-- [Proto Annotations](../proto-annotations/reference.md) - All field options

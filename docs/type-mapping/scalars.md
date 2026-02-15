@@ -126,7 +126,3 @@ type User {
 }
 ```
 
-## See Also
-
-- [Configuration](../protoc-gen-pothos/configuration.md) - Plugin options
-- [Proto Annotations](../proto-annotations/reference.md) - Field options

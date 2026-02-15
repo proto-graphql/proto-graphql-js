@@ -155,6 +155,3 @@ type User {
 }
 ```
 
-## See Also
-
-- [Proto Annotations](../proto-annotations/reference.md) - Enum options

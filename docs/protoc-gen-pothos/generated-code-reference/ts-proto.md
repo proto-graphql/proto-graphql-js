@@ -676,7 +676,3 @@ extensions: {
 }
 ```
 
-## See Also
-
-- [Generated Code Reference (protobuf-es-v1)](./generated-code-reference-protobuf-es-v1.md)
-- [Configuration](./configuration.md) - Plugin options

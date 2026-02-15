@@ -40,10 +40,3 @@ See [Scalars](./scalars.md) for complete mappings and customization.
 
 See [Fields](./fields.md) for detailed nullability control.
 
-## Detailed Guides
-
-- [Messages](./messages.md) - ObjectType, InputType, Interface, Union
-- [Fields](./fields.md) - Field behaviors and nullability control
-- [Scalars](./scalars.md) - Scalar type mappings and customization
-- [Enums](./enums.md) - Enum conversion rules
-- [Oneofs](./oneofs.md) - Oneof and union types

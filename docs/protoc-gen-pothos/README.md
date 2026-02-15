@@ -78,7 +78,3 @@ User$Ref.implement({
 });
 ```
 
-## Next Steps
-
-- [Configuration](./configuration.md) - All available plugin options
-- [Buf Setup](./buf-setup.md) - Configuration with Buf
