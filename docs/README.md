@@ -4,13 +4,10 @@ Generate GraphQL schema definitions from Protocol Buffer definitions.
 
 ## Documentation Index
 
-### Getting Started
-
-- [Getting Started](./getting-started.md) - Quick start guide for new users
-
 ### protoc-gen-pothos
 
 - [Overview](./protoc-gen-pothos/README.md) - What the plugin generates
+- [Getting Started](./protoc-gen-pothos/getting-started.md) - Quick start guide for new users
 - [Configuration](./protoc-gen-pothos/configuration.md) - Complete options reference
 - [Buf Setup](./protoc-gen-pothos/buf-setup.md) - Configuration with Buf
 - [Generated Code Reference](./protoc-gen-pothos/generated-code-reference.md) - Detailed generated code examples
@@ -32,7 +29,7 @@ Generate GraphQL schema definitions from Protocol Buffer definitions.
 
 | Goal | Document |
 |------|----------|
-| Set up a new project | [Getting Started](./getting-started.md) |
+| Set up a new project | [Getting Started](./protoc-gen-pothos/getting-started.md) |
 | Configure plugin options | [Configuration](./protoc-gen-pothos/configuration.md) |
 | Customize scalar mappings | [Scalars](./type-mapping/scalars.md) |
 | Control field nullability | [Fields](./type-mapping/fields.md) |
