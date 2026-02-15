@@ -10,14 +10,14 @@ Generate GraphQL schema definitions from Protocol Buffer definitions.
 
 ### protoc-gen-pothos
 
-- [Overview](./protoc-gen-pothos/index.md) - What the plugin generates
+- [Overview](./protoc-gen-pothos/README.md) - What the plugin generates
 - [Configuration](./protoc-gen-pothos/configuration.md) - Complete options reference
 - [Buf Setup](./protoc-gen-pothos/buf-setup.md) - Configuration with Buf
 - [Generated Code Reference](./protoc-gen-pothos/generated-code-reference.md) - Detailed generated code examples
 
 ### Type Mapping Rules
 
-- [Overview](./type-mapping/index.md) - How Protobuf types map to GraphQL
+- [Overview](./type-mapping/README.md) - How Protobuf types map to GraphQL
 - [Messages](./type-mapping/messages.md) - ObjectType, InputType, Interface, Union
 - [Fields](./type-mapping/fields.md) - Field behaviors and nullability
 - [Scalars](./type-mapping/scalars.md) - Scalar type mappings

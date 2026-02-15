@@ -50,7 +50,7 @@ export default async function RootLayout({
         <Layout
           navbar={navbar}
           pageMap={await getPageMap()}
-          docsRepositoryBase="https://github.com/proto-graphql/proto-graphql-js/tree/main/packages/docs"
+          docsRepositoryBase="https://github.com/proto-graphql/proto-graphql-js/tree/main/docs"
           editLink="Edit this page on GitHub"
           sidebar={{ autoCollapse: false, defaultMenuCollapseLevel: 1 }}
         >
