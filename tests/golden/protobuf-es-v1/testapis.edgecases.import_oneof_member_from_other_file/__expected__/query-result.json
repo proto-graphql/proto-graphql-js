@@ -5,7 +5,7 @@
       "locations": [
         {
           "line": 3,
-          "column": 11
+          "column": 5
         }
       ]
     },
@@ -14,7 +14,7 @@
       "locations": [
         {
           "line": 4,
-          "column": 13
+          "column": 7
         }
       ]
     },
@@ -23,7 +23,7 @@
       "locations": [
         {
           "line": 6,
-          "column": 11
+          "column": 5
         }
       ]
     },
@@ -32,7 +32,7 @@
       "locations": [
         {
           "line": 7,
-          "column": 13
+          "column": 7
         }
       ]
     }

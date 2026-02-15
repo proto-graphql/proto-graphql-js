@@ -36,7 +36,8 @@ async function main() {
     throw new Error("schema is not exported or is null/undefined");
   }
 
-  const query = await readFile(new URL("./query.graphql", import.meta.url), "utf-8");
+  const rawQuery = await readFile(new URL("./query.graphql", import.meta.url), "utf-8");
+  const query = normalizeQuery(rawQuery);
 
   if (typeof query !== "string" || query.trim().length === 0) {
     throw new Error("query.graphql is empty");
@@ -48,6 +49,26 @@ async function main() {
   });
 
   console.log(JSON.stringify(result, null, 2));
+}
+
+function normalizeQuery(raw: string): string {
+  const query = raw.replace(/^\\uFEFF/, "").replace(/\\r\\n/g, "\\n");
+  const lines = query.split("\\n");
+
+  let minIndent = Number.POSITIVE_INFINITY;
+  for (const line of lines) {
+    if (line.trim() === "") {
+      continue;
+    }
+    const leading = line.match(/^\\s*/) ?? [""];
+    minIndent = Math.min(minIndent, leading[0].length);
+  }
+
+  if (!Number.isFinite(minIndent) || minIndent === 0) {
+    return query;
+  }
+
+  return lines.map((line) => line.slice(minIndent)).join("\\n");
 }
 
 void main();
