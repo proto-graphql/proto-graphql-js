@@ -21,7 +21,7 @@
     "@changesets/cli": "2.29.8",
     "@proto-graphql/tsconfig": "workspace:*",
     "@types/node": "24.10.13",
-    "minimatch": "10.1.1",
+    "minimatch": "10.2.0",
     "ts-proto": "2.2.0",
     "tsup": "8.5.1",
     "tsx": "4.21.0",
