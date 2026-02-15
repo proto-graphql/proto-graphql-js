@@ -1,0 +1,15 @@
+{
+  "name": "@proto-graphql/e2e-testapis-ts-proto-with-forcelong-number",
+  "version": "0.0.0",
+  "description": "Generated codes with protocolbuffers/protobuf's js_out",
+  "private": true,
+  "dependencies": {
+    "@bufbuild/protobuf": "catalog:"
+  },
+  "scripts": {
+    "build:test": "tsc --build tsconfig.json",
+    "clean": "pnpm run build:test --clean"
+  },
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts"
+}

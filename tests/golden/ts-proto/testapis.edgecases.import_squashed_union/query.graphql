@@ -1,0 +1,10 @@
+query Test {
+  test {
+    msg {
+      ... on OneofMessage1 {
+        __typename
+        body
+      }
+    }
+  }
+}

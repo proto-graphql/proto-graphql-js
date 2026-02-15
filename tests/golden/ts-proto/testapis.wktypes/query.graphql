@@ -1,0 +1,16 @@
+query Test {
+  valuesArePresent {
+    ...Message
+  }
+}
+fragment Message on Message {
+  timestamp
+  int32Value
+  int64Value
+  uint32Value
+  uint64Value
+  floatValue
+  doubleValue
+  boolValue
+  stringValue
+}

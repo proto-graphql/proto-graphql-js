@@ -34,6 +34,7 @@
   "files": [
     "bin/",
     "docs/",
+    "!docs/development/**",
     "src/",
     "dist/",
     "!src/**/*.test.ts",
@@ -55,12 +56,22 @@
     "dprint-node": "catalog:"
   },
   "devDependencies": {
+    "@pothos/core": "catalog:test",
+    "@proto-graphql/e2e-testapis-protobuf-es": "workspace:*",
+    "@proto-graphql/e2e-testapis-protobuf-es-v2": "workspace:*",
+    "@proto-graphql/e2e-testapis-ts-proto": "workspace:*",
+    "@proto-graphql/e2e-testapis-ts-proto-with-forcelong-number": "workspace:*",
     "@proto-graphql/testapis-proto": "workspace:*",
-    "@proto-graphql/tsconfig": "workspace:*"
+    "@proto-graphql/tsconfig": "workspace:*",
+    "@vitest/coverage-v8": "^4.0.0",
+    "graphql": "catalog:test",
+    "graphql-scalars": "^1.24.0",
+    "tsx": "^4.21.0"
   },
   "scripts": {
     "build": "tsup && cp -r ../../docs/protoc-gen-pothos docs",
     "clean": "rm -rf dist docs",
-    "test": "vitest run --passWithNoTests"
+    "test": "vitest run --passWithNoTests",
+    "test:coverage": "vitest run --coverage"
   }
 }

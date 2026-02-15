@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@proto-graphql/tsconfig/tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "preserveSymlinks": true,
+    "esModuleInterop": true,
+    "moduleResolution": "bundler",
+    "module": "ESNext",
+    "target": "ES2022"
+  }
+}

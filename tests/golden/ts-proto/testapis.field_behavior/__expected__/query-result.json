@@ -1,0 +1,10 @@
+{
+  "data": {
+    "test": {
+      "requiredField": {
+        "body": "hello"
+      },
+      "outputOnlyField": null
+    }
+  }
+}

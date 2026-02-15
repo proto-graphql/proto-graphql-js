@@ -1,0 +1,10 @@
+{
+  "data": {
+    "test": {
+      "requiredMyEnum": "BAR",
+      "requiredMyEnumWithoutUnspecified": "FOO",
+      "optionalMyEnum": null,
+      "optionalMyEnumWithoutUnspecified": "FOO"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "data": {
+    "test": {
+      "requiredOneofMembers": {
+        "body": "hello"
+      },
+      "optionalOneofMembers": null
+    }
+  }
+}

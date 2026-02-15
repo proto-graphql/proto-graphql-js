@@ -25,7 +25,7 @@ export function getTestapisFileDescriptorSet(
 
 export function buildCodeGeneratorRequest(
   pkg: TestapisPackage,
-  { param }: { param?: string } = {},
+  { param, prefixMatch }: { param?: string; prefixMatch?: boolean } = {},
 ): CodeGeneratorRequest {
   const descSet = getTestapisFileDescriptorSet(pkg);
   const req = create(CodeGeneratorRequestSchema, { parameter: param });
@@ -34,7 +34,10 @@ export function buildCodeGeneratorRequest(
     req.protoFile.push(fd);
 
     const filename = fd.name;
-    const pat = new RegExp(`^${pkg.replace(/\./g, "/")}/[^/]+\\.proto$`);
+    const pkgPath = pkg.replace(/\./g, "/");
+    const pat = prefixMatch
+      ? new RegExp(`^${pkgPath}/.+\\.proto$`)
+      : new RegExp(`^${pkgPath}/[^/]+\\.proto$`);
     if (filename && pat.test(filename)) {
       req.fileToGenerate.push(filename);
     }

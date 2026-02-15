@@ -1,0 +1,10 @@
+query Test {
+  test {
+    ... on OneofMember1 {
+      title
+    }
+    ... on OneofMember1 {
+      count
+    }
+  }
+}

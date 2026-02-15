@@ -1,0 +1,50 @@
+version: v2
+plugins:
+  - local: protoc-gen-ts_proto
+    opt:
+      - enumsAsLiterals=true
+      - forceLong=string
+      - unrecognizedEnum=false
+      - outputTypeRegistry=true
+      - esModuleInterop=true
+      # https://github.com/stephenh/ts-proto/issues/449
+      - useExactTypes=false
+    out: ./tests/testapis/ts-proto/src
+    strategy: all
+  - local: protoc-gen-ts_proto
+    opt:
+      - enumsAsLiterals=true
+      - forceLong=long
+      - unrecognizedEnum=false
+      - outputTypeRegistry=true
+      - esModuleInterop=true
+      # https://github.com/stephenh/ts-proto/issues/449
+      - useExactTypes=false
+    out: ./tests/testapis/ts-proto-with-forcelong-long/src
+    strategy: all
+  - local: protoc-gen-ts_proto
+    opt:
+      - enumsAsLiterals=true
+      - forceLong=number
+      - unrecognizedEnum=false
+      - outputTypeRegistry=true
+      - esModuleInterop=true
+      # https://github.com/stephenh/ts-proto/issues/449
+      - useExactTypes=false
+    out: ./tests/testapis/ts-proto-with-forcelong-number/src
+    strategy: all
+  - local: ["pnpm", "-s", "--filter", "./tests/testapis/protobuf-es", "exec", "protoc-gen-es"]
+    opt:
+      - target=ts
+    out: ./tests/testapis/protobuf-es/src
+    strategy: all
+  - local: ["pnpm", "-s", "--filter", "./tests/testapis/protobuf-es-v2", "exec", "protoc-gen-es"]
+    opt:
+      - target=ts
+    out: ./tests/testapis/protobuf-es-v2/src
+    strategy: all
+inputs:
+  - directory: ./devPackages/testapis-proto/proto
+  - directory: ./proto-graphql/proto
+    paths:
+      - ./proto-graphql/proto/graphql
