@@ -228,8 +228,3 @@ message Config {
 }
 ```
 
-## See Also
-
-- [Fields](./fields.md) - Field nullability and behavior
-- [Oneofs](./oneofs.md) - Union type generation
-- [Proto Annotations](../proto-annotations/reference.md) - All message options
