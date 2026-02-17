@@ -11,5 +11,8 @@
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "bumpVersionsWithWorkspaceProtocolOnly": true,
-  "ignore": ["@proto-graphql/e2e-*"]
+  "ignore": [
+    "@proto-graphql/e2e-*",
+    "@proto-graphql/golden-pothos--*"
+  ]
 }
