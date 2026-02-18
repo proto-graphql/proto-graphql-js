@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package testapis.imports.same_dir;
+
+message SharedMessage {
+  string body = 1;
+}
+
+enum SharedEnum {
+  SHARED_ENUM_UNSPECIFIED = 0;
+  SHARED_ENUM_FOO = 1;
+}

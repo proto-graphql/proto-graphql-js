@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package testapis.oneof.non_message;
+
+message OneofParent {
+  oneof mixed_oneof_members {
+    int32 count = 1;
+    MessageMember member = 2;
+    Status status = 3;
+  }
+}
+
+message MessageMember {
+  string body = 1;
+}
+
+enum Status {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_OPEN = 1;
+}

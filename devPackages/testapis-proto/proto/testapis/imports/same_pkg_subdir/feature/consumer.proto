@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package testapis.imports.same_pkg_subdir;
+
+import "testapis/imports/same_pkg_subdir/common/types.proto";
+
+message SubdirConsumer {
+  SubdirSharedMessage message = 1;
+  SubdirSharedEnum enum = 2;
+}

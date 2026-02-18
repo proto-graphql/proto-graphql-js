@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package testapis.imports.transitive;
+
+message C {
+  string body = 1;
+}

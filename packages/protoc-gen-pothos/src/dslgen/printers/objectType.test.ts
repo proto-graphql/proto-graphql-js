@@ -75,35 +75,35 @@ const testSuites: TestSuite[] = [
       {
         test: "generates code for a simple message",
         args: {
-          packageName: "testapis.primitives",
+          packageName: "testapis.basic.scalars",
           messageTypeName: "Primitives",
         },
       },
       {
         test: "generates code for a message with nested fields",
         args: {
-          packageName: "testapis.primitives",
+          packageName: "testapis.basic.scalars",
           messageTypeName: "Message",
         },
       },
       {
         test: "generates code for a message with oneofs",
         args: {
-          packageName: "testapis.oneof",
+          packageName: "testapis.oneof.message_only",
           messageTypeName: "OneofParent",
         },
       },
       {
         test: "generates code for empty message",
         args: {
-          packageName: "testapis.empty_types",
+          packageName: "testapis.basic.empty",
           messageTypeName: "EmptyMessage",
         },
       },
       {
         test: "generates code for nested types",
         args: {
-          packageName: "testapis.nested",
+          packageName: "testapis.basic.nested",
           messageTypeName: "ParentMessage",
         },
       },
@@ -125,21 +125,21 @@ const testSuites: TestSuite[] = [
       {
         test: "generates code for a simple message",
         args: {
-          packageName: "testapis.primitives",
+          packageName: "testapis.basic.scalars",
           messageTypeName: "Primitives",
         },
       },
       {
         test: "generates code for a message with nested fields",
         args: {
-          packageName: "testapis.primitives",
+          packageName: "testapis.basic.scalars",
           messageTypeName: "Message",
         },
       },
       {
         test: "generates code for a message with oneofs",
         args: {
-          packageName: "testapis.oneof",
+          packageName: "testapis.oneof.message_only",
           messageTypeName: "OneofParent",
         },
       },
@@ -161,42 +161,42 @@ const testSuites: TestSuite[] = [
       {
         test: "generates code for a simple message with isMessage",
         args: {
-          packageName: "testapis.primitives",
+          packageName: "testapis.basic.scalars",
           messageTypeName: "Primitives",
         },
       },
       {
         test: "generates code for a message with nested fields with isMessage",
         args: {
-          packageName: "testapis.primitives",
+          packageName: "testapis.basic.scalars",
           messageTypeName: "Message",
         },
       },
       {
         test: "generates code for a message with oneofs with isMessage",
         args: {
-          packageName: "testapis.oneof",
+          packageName: "testapis.oneof.message_only",
           messageTypeName: "OneofParent",
         },
       },
       {
         test: "generates code for nested types with isMessage",
         args: {
-          packageName: "testapis.nested",
+          packageName: "testapis.basic.nested",
           messageTypeName: "ParentMessage",
         },
       },
       {
         test: "generates code for empty message with isMessage",
         args: {
-          packageName: "testapis.empty_types",
+          packageName: "testapis.basic.empty",
           messageTypeName: "EmptyMessage",
         },
       },
       {
         test: "generates code for message with squashed oneof fields with isMessage",
         args: {
-          packageName: "testapis.extensions",
+          packageName: "testapis.options.message_and_field",
           messageTypeName: "PrefixedMessage",
         },
       },
@@ -218,7 +218,7 @@ const testSuites: TestSuite[] = [
       {
         test: "generates code for message with field extensions",
         args: {
-          packageName: "testapis.extensions",
+          packageName: "testapis.options.message_and_field",
           messageTypeName: "PrefixedMessage",
         },
       },

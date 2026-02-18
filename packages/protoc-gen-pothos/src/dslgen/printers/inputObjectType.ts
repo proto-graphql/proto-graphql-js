@@ -56,10 +56,19 @@ export function createInputObjectTypeCode(
   registry: Registry,
   opts: PothosPrinterOptions,
 ): Printable[] {
+  const fields = type.fields.filter(
+    (f) =>
+      !(
+        type.options.ignoreNonMessageOneofFields &&
+        f.proto.oneof != null &&
+        !(f.type instanceof InputObjectType)
+      ),
+  );
+
   const shapeTypeCode = code`
     export type ${shapeTypePrintable(type)} = {
       ${joinCode(
-        type.fields.map((f) => {
+        fields.map((f) => {
           let typeNode: Printable[];
           if (f.type instanceof InputObjectType) {
             typeNode = fieldTypeShapePrintable(
@@ -101,9 +110,9 @@ export function createInputObjectTypeCode(
         ${literalOf(
           compactForCodegen({
             fields: code`t => ({${
-              type.fields.length > 0
+              fields.length > 0
                 ? joinCode(
-                    type.fields.map(
+                    fields.map(
                       (f) =>
                         code`${f.name}: ${createFieldRefCode(
                           f,
@@ -125,7 +134,7 @@ export function createInputObjectTypeCode(
   const codes: Printable[][] = [shapeTypeCode, refCode];
 
   if (opts.protobuf === "protobuf-es-v1" || opts.protobuf === "protobuf-es") {
-    codes.push(createToProtoFuncCode(type, opts));
+    codes.push(createToProtoFuncCode(type, fields, opts));
   }
 
   return joinCode(codes, "\n\n");
@@ -133,13 +142,16 @@ export function createInputObjectTypeCode(
 
 function createToProtoFuncCode(
   type: InputObjectType,
+  fields: InputObjectField<ScalarType | EnumType | InputObjectType>[],
   opts: PothosPrinterOptions,
 ): Printable[] {
   const oneofFields: Record<string, InputObjectField<InputObjectType>[]> = {};
-  for (const f of type.fields) {
+  for (const f of fields) {
     if (f.proto.oneof == null) continue;
     if (!(f.type instanceof InputObjectType)) {
-      throw new Error("Oneof fields must be of message");
+      // Non-message oneof members are ignored in toProto generation.
+      // The strict validation path is handled in type construction.
+      continue;
     }
 
     oneofFields[f.proto.oneof.name] = [
@@ -151,7 +163,7 @@ function createToProtoFuncCode(
   const protoTypeSym = protoTypeSymbol(type.proto, opts);
 
   const fieldAssignments = joinCode(
-    type.fields
+    fields
       .filter((f) => f.proto.oneof == null)
       .map((f) => {
         const localName = tsFieldName(f.proto, opts).toString();

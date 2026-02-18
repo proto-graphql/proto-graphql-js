@@ -14,16 +14,16 @@ Testing in this repository is designed to continuously guarantee the following:
 | Layer | Primary Target | Main Location |
 |---|---|---|
 | Unit Test | String generation, printers, helper logic | `packages/**/src/**/*.test.ts`, `packages/**/src/**/__tests__/` |
-| Golden Test | `protoc-gen-pothos` generation output, types, and GraphQL behavior | `packages/protoc-gen-pothos/src/__tests__/golden/`, `tests/golden/` |
+| Golden Test | `protoc-gen-pothos` generation output, type checks, GraphQL behavior | `packages/protoc-gen-pothos/src/__tests__/golden/`, `tests/golden/` |
 | Workspace Test Orchestration | Full monorepo test execution | `pnpm test` (`turbo run test`) |
 
 ## Code Generation CLI Testing Principles
 
 For code generation CLIs such as `protoc-gen-pothos`, tests should use **golden file tests as the default strategy**.
 
-- Test cases must be designed to be **MECE** (mutually exclusive, collectively exhaustive)
+- Test cases should be designed to be as MECE as practical (single concern per package, minimal overlap)
 - Non-golden unit tests should be kept to a minimum
-- Add unit tests only for logic that cannot be directly covered by golden file tests (for example: path normalization, error formatting, helper boundary behavior)
+- Add unit tests only for logic that cannot be directly covered by golden tests (for example: path normalization, error formatting, helper boundary behavior)
 
 ## Execution Policy
 
@@ -33,13 +33,13 @@ For code generation CLIs such as `protoc-gen-pothos`, tests should use **golden 
 - Update snapshots: `pnpm --dir packages/protoc-gen-pothos vitest run src/__tests__/golden/golden.test.ts -u`
 
 In `turbo.json`, the `test` task depends on `^build` and `^build:test`.
-This ensures that tests run against properly built dependency packages and generated test API artifacts.
+This ensures tests run against built dependency packages and generated test API artifacts.
 
 ## Golden Test Specification (`protoc-gen-pothos`)
 
 ### Directory Convention
 
-Test cases are managed in the following two-level structure:
+Test cases are managed in this two-level structure:
 
 ```text
 tests/golden/<runtime-variant>/<proto-package>/
@@ -47,13 +47,13 @@ tests/golden/<runtime-variant>/<proto-package>/
 
 Examples:
 
-- `tests/golden/ts-proto/testapis.enums/`
-- `tests/golden/ts-proto-forcelong/testapis.primitives/`
-- `tests/golden/protobuf-es-v1/testapis.wktypes/`
+- `tests/golden/ts-proto/testapis.basic.enums/`
+- `tests/golden/ts-proto-forcelong/testapis.basic.scalars/`
+- `tests/golden/protobuf-es-v1/testapis.options.deprecation/`
 
 ### What Each Test Case Validates
 
-`packages/protoc-gen-pothos/src/__tests__/golden/golden.test.ts` runs the following checks for each discovered test case:
+`packages/protoc-gen-pothos/src/__tests__/golden/golden.test.ts` runs the following checks per discovered case:
 
 1. Code generation (`protocGenPothos.run`) and generated file snapshot comparison
 2. Type checking with per-case `tsconfig.json` (TypeScript Compiler API)
@@ -77,17 +77,89 @@ This keeps query definitions data-oriented and separate from TypeScript test imp
 - `__expected__/schema.graphql`: expected GraphQL SDL
 - `__expected__/query-result.json`: expected GraphQL execution result (only for cases with `query.graphql`)
 
+## `testapis-proto` Fixture Strategy
+
+All golden test fixture protos live under:
+
+```text
+devPackages/testapis-proto/proto/testapis/
+```
+
+Current package groups:
+
+- `basic`: scalars, enums, nested, empty, proto3 presence, well-known types
+- `behavior`: comment-derived behavior (`Required`, `Input only`, `Output only`)
+- `options`: graphql extension options (schema/message/field/oneof/enum, nullability, deprecation, no_partial)
+- `oneof`: message-only oneof and non-message oneof
+- `imports`: same-dir, cross-package, oneof cross-file, squashed union, transitive import, symbol collision
+
+Design rules:
+
+- One concern per package
+- Imports are explicit test axes (do not hide import behavior in unrelated cases)
+- Runtime-sensitive behavior must have dedicated cases
+- Keep packages minimal but complete for the scenario they target
+- Use stable names that clearly describe test intent
+
+## Golden Matrix
+
+Default runtime variants (`ts-proto`, `protobuf-es-v1`, `protobuf-es`) include:
+
+- `testapis.basic.empty`
+- `testapis.basic.enums`
+- `testapis.basic.nested`
+- `testapis.basic.presence`
+- `testapis.basic.scalars`
+- `testapis.basic.wktypes`
+- `testapis.behavior.field_comments`
+- `testapis.imports.cross_pkg_b`
+- `testapis.imports.oneof_cross_file`
+- `testapis.imports.same_dir`
+- `testapis.imports.squashed_union`
+- `testapis.imports.transitive`
+- `testapis.oneof.message_only`
+- `testapis.options.deprecation`
+- `testapis.options.field_nullability`
+- `testapis.options.input_no_partial`
+- `testapis.options.message_and_field`
+- `testapis.options.schema`
+
+Runtime-specific variants:
+
+- `ts-proto-partial-inputs`: `testapis.options.message_and_field` with `partial_inputs`
+- `ts-proto-forcelong`: `testapis.basic.scalars`, `testapis.basic.wktypes`
+- `protobuf-es-v1` and `protobuf-es`: `testapis.oneof.non_message` with `ignore_non_message_oneof_fields`
+
+## Per-Case Config (`config.json`)
+
+Optional `config.json` in each case directory is used to control discovery-time behavior.
+
+Supported keys:
+
+- `additionalParams: string[]` (appended to plugin parameter string)
+- `prefixMatch: boolean` (select nested proto paths under package prefix)
+
+Examples:
+
+- `additionalParams: ["emit_imported_files"]` for cross-package import emission cases
+- `additionalParams: ["ignore_non_message_oneof_fields"]` for non-message oneof cases
+- `prefixMatch: true` for packages where nested directory matching is required
+
 ## How To Add a New Case
 
-1. Create `tests/golden/<runtime-variant>/<proto-package>/`
-2. Add at minimum `builder.ts`, `schema.ts`, and `tsconfig.json`
-3. Add `query.graphql` if response-level validation is required
-4. Generate/update expected files with: `pnpm --dir packages/protoc-gen-pothos vitest run src/__tests__/golden/golden.test.ts -u`
-5. Review snapshot diffs to ensure no unintended behavior changes are included
+1. Add or update fixture protos under `devPackages/testapis-proto/proto/testapis/...`
+2. Run fixture generation if needed: `pnpm gen:testapis`
+3. Create `tests/golden/<runtime-variant>/<proto-package>/`
+4. Add at minimum `builder.ts`, `schema.ts`, and `tsconfig.json`
+5. Add `config.json` when runtime parameters or `prefixMatch` are required
+6. Add `query.graphql` if response-level validation is required
+7. Generate/update expected files with `pnpm --dir packages/protoc-gen-pothos vitest run src/__tests__/golden/golden.test.ts -u`
+8. Review snapshot diffs to ensure no unintended behavior changes are included
 
 ## PR Review Checklist
 
 - No unintended snapshot changes
-- `query-result.json` line/column changes are understood (formatting-driven vs behavior-driven)
 - Type error snapshot changes are intentional
-- New test cases follow the runtime-variant and package naming conventions
+- `schema.graphql` and `query-result.json` diffs are behaviorally understood
+- New cases follow runtime-variant and package naming conventions
+- New fixture packages are single-purpose and do not mix unrelated concerns

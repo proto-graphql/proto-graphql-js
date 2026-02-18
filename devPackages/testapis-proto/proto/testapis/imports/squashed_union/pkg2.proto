@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package testapis.imports.squashed_union.pkg2;
+
+import "testapis/imports/squashed_union/pkg1.proto";
+
+message Message {
+  testapis.imports.squashed_union.pkg1.SquashedOneof msg = 1;
+}

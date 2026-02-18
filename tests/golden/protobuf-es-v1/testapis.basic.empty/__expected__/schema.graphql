@@ -1,0 +1,7 @@
+scalar Byte
+
+scalar DateTime
+
+scalar Int64
+
+type Query

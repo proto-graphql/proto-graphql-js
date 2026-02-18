@@ -81,35 +81,35 @@ const testSuites: TestSuite[] = [
       {
         test: "generates code for a simple input object",
         args: {
-          packageName: "testapis.primitives",
+          packageName: "testapis.basic.scalars",
           typeNameInProto: "Primitives",
         },
       },
       {
         test: "generates code for an input object with nested fields",
         args: {
-          packageName: "testapis.primitives",
+          packageName: "testapis.basic.scalars",
           typeNameInProto: "Message",
         },
       },
       {
         test: "generates code for an input object with oneof fields",
         args: {
-          packageName: "testapis.oneof",
+          packageName: "testapis.oneof.message_only",
           typeNameInProto: "OneofParent",
         },
       },
       {
         test: "generates code for empty input object",
         args: {
-          packageName: "testapis.empty_types",
+          packageName: "testapis.basic.empty",
           typeNameInProto: "EmptyMessage",
         },
       },
       {
         test: "generates code for nested input types",
         args: {
-          packageName: "testapis.nested",
+          packageName: "testapis.basic.nested",
           typeNameInProto: "ParentMessage",
         },
       },
@@ -131,28 +131,28 @@ const testSuites: TestSuite[] = [
       {
         test: "generates code for a simple input object",
         args: {
-          packageName: "testapis.primitives",
+          packageName: "testapis.basic.scalars",
           typeNameInProto: "Primitives",
         },
       },
       {
         test: "generates code for an input object with nested fields",
         args: {
-          packageName: "testapis.primitives",
+          packageName: "testapis.basic.scalars",
           typeNameInProto: "Message",
         },
       },
       {
         test: "generates code for an input object with oneof fields",
         args: {
-          packageName: "testapis.oneof",
+          packageName: "testapis.oneof.message_only",
           typeNameInProto: "OneofParent",
         },
       },
       {
         test: "generates code for empty input object",
         args: {
-          packageName: "testapis.empty_types",
+          packageName: "testapis.basic.empty",
           typeNameInProto: "EmptyMessage",
         },
       },
@@ -174,28 +174,28 @@ const testSuites: TestSuite[] = [
       {
         test: "generates code for a simple input object with create",
         args: {
-          packageName: "testapis.primitives",
+          packageName: "testapis.basic.scalars",
           typeNameInProto: "Primitives",
         },
       },
       {
         test: "generates code for an input object with nested fields with create",
         args: {
-          packageName: "testapis.primitives",
+          packageName: "testapis.basic.scalars",
           typeNameInProto: "Message",
         },
       },
       {
         test: "generates code for an input object with oneof fields with create",
         args: {
-          packageName: "testapis.oneof",
+          packageName: "testapis.oneof.message_only",
           typeNameInProto: "OneofParent",
         },
       },
       {
         test: "generates code for empty input object with create",
         args: {
-          packageName: "testapis.empty_types",
+          packageName: "testapis.basic.empty",
           typeNameInProto: "EmptyMessage",
         },
       },
@@ -217,7 +217,7 @@ const testSuites: TestSuite[] = [
       {
         test: "generates code for partial input types",
         args: {
-          packageName: "testapis.primitives",
+          packageName: "testapis.basic.scalars",
           typeNameInProto: "Message",
           partialInputs: true,
         },

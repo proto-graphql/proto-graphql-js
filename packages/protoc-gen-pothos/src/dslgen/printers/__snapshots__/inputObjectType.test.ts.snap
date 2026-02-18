@@ -6,7 +6,7 @@ import { InputObjectRef } from "@pothos/core";
 import {
   Primitives,
   PrimitivesSchema,
-} from "@testapis/protobuf-es-v2/testapis/primitives/primitives_pb";
+} from "@testapis/protobuf-es-v2/testapis/basic/scalars/scalars_pb";
 import { builder } from "../../builder";
 
 export type PrimitivesInput$Shape = {
@@ -342,9 +342,9 @@ export const PrimitivesInput$Ref: InputObjectRef<PrimitivesInput$Shape> =
     }),
     extensions: {
       protobufMessage: {
-        fullName: "testapis.primitives.Primitives",
+        fullName: "testapis.basic.scalars.Primitives",
         name: "Primitives",
-        package: "testapis.primitives",
+        package: "testapis.basic.scalars",
       },
     },
   }) as InputObjectRef<PrimitivesInput$Shape>;
@@ -394,7 +394,7 @@ import { InputObjectRef } from "@pothos/core";
 import {
   Message,
   MessageSchema,
-} from "@testapis/protobuf-es-v2/testapis/primitives/primitives_pb";
+} from "@testapis/protobuf-es-v2/testapis/basic/scalars/scalars_pb";
 import { builder } from "../../builder";
 
 export type MessageInput$Shape = {
@@ -414,7 +414,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         extensions: {
           protobufField: {
             name: "required_primitives",
-            typeFullName: "testapis.primitives.Primitives",
+            typeFullName: "testapis.basic.scalars.Primitives",
           },
         },
       }),
@@ -425,7 +425,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         extensions: {
           protobufField: {
             name: "optional_primitives",
-            typeFullName: "testapis.primitives.Primitives",
+            typeFullName: "testapis.basic.scalars.Primitives",
           },
         },
       }),
@@ -436,7 +436,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         extensions: {
           protobufField: {
             name: "required_primitives_list",
-            typeFullName: "testapis.primitives.Primitives",
+            typeFullName: "testapis.basic.scalars.Primitives",
           },
         },
       }),
@@ -447,16 +447,16 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         extensions: {
           protobufField: {
             name: "optional_primitives_list",
-            typeFullName: "testapis.primitives.Primitives",
+            typeFullName: "testapis.basic.scalars.Primitives",
           },
         },
       }),
     }),
     extensions: {
       protobufMessage: {
-        fullName: "testapis.primitives.Message",
+        fullName: "testapis.basic.scalars.Message",
         name: "Message",
-        package: "testapis.primitives",
+        package: "testapis.basic.scalars",
       },
     },
   }) as InputObjectRef<MessageInput$Shape>;
@@ -488,15 +488,15 @@ import { InputObjectRef } from "@pothos/core";
 import {
   OneofParent,
   OneofParentSchema,
-} from "@testapis/protobuf-es-v2/testapis/oneof/oneof_pb";
+} from "@testapis/protobuf-es-v2/testapis/oneof/message_only/message_only_pb";
 import { builder } from "../../builder";
 
 export type OneofParentInput$Shape = {
   normalField: OneofParent["normalField"];
   requiredMessage1?: OneofMemberMessage1Input$Shape | null;
   requiredMessage2?: OneofMemberMessage2Input$Shape | null;
-  optoinalMessage1?: OneofMemberMessage1Input$Shape | null;
-  optoinalMessage2?: OneofMemberMessage2Input$Shape | null;
+  optionalMessage1?: OneofMemberMessage1Input$Shape | null;
+  optionalMessage2?: OneofMemberMessage2Input$Shape | null;
 };
 
 export const OneofParentInput$Ref: InputObjectRef<OneofParentInput$Shape> =
@@ -515,7 +515,7 @@ export const OneofParentInput$Ref: InputObjectRef<OneofParentInput$Shape> =
         extensions: {
           protobufField: {
             name: "required_message1",
-            typeFullName: "testapis.oneof.OneofMemberMessage1",
+            typeFullName: "testapis.oneof.message_only.OneofMemberMessage1",
           },
         },
       }),
@@ -525,36 +525,36 @@ export const OneofParentInput$Ref: InputObjectRef<OneofParentInput$Shape> =
         extensions: {
           protobufField: {
             name: "required_message2",
-            typeFullName: "testapis.oneof.OneofMemberMessage2",
+            typeFullName: "testapis.oneof.message_only.OneofMemberMessage2",
           },
         },
       }),
-      optoinalMessage1: t.field({
+      optionalMessage1: t.field({
         type: OneofMemberMessage1Input$Ref,
         required: false,
         extensions: {
           protobufField: {
-            name: "optoinal_message1",
-            typeFullName: "testapis.oneof.OneofMemberMessage1",
+            name: "optional_message1",
+            typeFullName: "testapis.oneof.message_only.OneofMemberMessage1",
           },
         },
       }),
-      optoinalMessage2: t.field({
+      optionalMessage2: t.field({
         type: OneofMemberMessage2Input$Ref,
         required: false,
         extensions: {
           protobufField: {
-            name: "optoinal_message2",
-            typeFullName: "testapis.oneof.OneofMemberMessage2",
+            name: "optional_message2",
+            typeFullName: "testapis.oneof.message_only.OneofMemberMessage2",
           },
         },
       }),
     }),
     extensions: {
       protobufMessage: {
-        fullName: "testapis.oneof.OneofParent",
+        fullName: "testapis.oneof.message_only.OneofParent",
         name: "OneofParent",
-        package: "testapis.oneof",
+        package: "testapis.oneof.message_only",
       },
     },
   }) as InputObjectRef<OneofParentInput$Shape>;
@@ -575,15 +575,15 @@ export function OneofParentInput$toProto(
         value: OneofMemberMessage2Input$toProto(input.requiredMessage2),
       }
       : undefined,
-    optionalOneofMembers: input?.optoinalMessage1
+    optionalOneofMembers: input?.optionalMessage1
       ? {
-        case: "optoinalMessage1",
-        value: OneofMemberMessage1Input$toProto(input.optoinalMessage1),
+        case: "optionalMessage1",
+        value: OneofMemberMessage1Input$toProto(input.optionalMessage1),
       }
-      : input?.optoinalMessage2
+      : input?.optionalMessage2
       ? {
-        case: "optoinalMessage2",
-        value: OneofMemberMessage2Input$toProto(input.optoinalMessage2),
+        case: "optionalMessage2",
+        value: OneofMemberMessage2Input$toProto(input.optionalMessage2),
       }
       : undefined,
   });
@@ -597,7 +597,7 @@ import { InputObjectRef } from "@pothos/core";
 import {
   EmptyMessage,
   EmptyMessageSchema,
-} from "@testapis/protobuf-es-v2/testapis/empty_types/empty_pb";
+} from "@testapis/protobuf-es-v2/testapis/basic/empty/empty_pb";
 import { builder } from "../../builder";
 
 export type EmptyMessageInput$Shape = {};
@@ -613,9 +613,9 @@ export const EmptyMessageInput$Ref: InputObjectRef<EmptyMessageInput$Shape> =
     }),
     extensions: {
       protobufMessage: {
-        fullName: "testapis.empty_types.EmptyMessage",
+        fullName: "testapis.basic.empty.EmptyMessage",
         name: "EmptyMessage",
-        package: "testapis.empty_types",
+        package: "testapis.basic.empty",
       },
     },
   }) as InputObjectRef<EmptyMessageInput$Shape>;
@@ -630,7 +630,7 @@ export function EmptyMessageInput$toProto(
 
 exports[`createInputObjectTypeCode > protobuf-es-v1 > 'generates code for a simple input object' 1`] = `
 "import { InputObjectRef } from "@pothos/core";
-import { Primitives } from "@testapis/protobuf-es/testapis/primitives/primitives_pb";
+import { Primitives } from "@testapis/protobuf-es/testapis/basic/scalars/scalars_pb";
 import { builder } from "../../builder";
 
 export type PrimitivesInput$Shape = {
@@ -966,9 +966,9 @@ export const PrimitivesInput$Ref: InputObjectRef<PrimitivesInput$Shape> =
     }),
     extensions: {
       protobufMessage: {
-        fullName: "testapis.primitives.Primitives",
+        fullName: "testapis.basic.scalars.Primitives",
         name: "Primitives",
-        package: "testapis.primitives",
+        package: "testapis.basic.scalars",
       },
     },
   });
@@ -1014,7 +1014,7 @@ export function PrimitivesInput$toProto(
 
 exports[`createInputObjectTypeCode > protobuf-es-v1 > 'generates code for an input object with nested fields' 1`] = `
 "import { InputObjectRef } from "@pothos/core";
-import { Message } from "@testapis/protobuf-es/testapis/primitives/primitives_pb";
+import { Message } from "@testapis/protobuf-es/testapis/basic/scalars/scalars_pb";
 import { builder } from "../../builder";
 
 export type MessageInput$Shape = {
@@ -1034,7 +1034,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         extensions: {
           protobufField: {
             name: "required_primitives",
-            typeFullName: "testapis.primitives.Primitives",
+            typeFullName: "testapis.basic.scalars.Primitives",
           },
         },
       }),
@@ -1045,7 +1045,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         extensions: {
           protobufField: {
             name: "optional_primitives",
-            typeFullName: "testapis.primitives.Primitives",
+            typeFullName: "testapis.basic.scalars.Primitives",
           },
         },
       }),
@@ -1056,7 +1056,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         extensions: {
           protobufField: {
             name: "required_primitives_list",
-            typeFullName: "testapis.primitives.Primitives",
+            typeFullName: "testapis.basic.scalars.Primitives",
           },
         },
       }),
@@ -1067,16 +1067,16 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         extensions: {
           protobufField: {
             name: "optional_primitives_list",
-            typeFullName: "testapis.primitives.Primitives",
+            typeFullName: "testapis.basic.scalars.Primitives",
           },
         },
       }),
     }),
     extensions: {
       protobufMessage: {
-        fullName: "testapis.primitives.Message",
+        fullName: "testapis.basic.scalars.Message",
         name: "Message",
-        package: "testapis.primitives",
+        package: "testapis.basic.scalars",
       },
     },
   });
@@ -1104,15 +1104,15 @@ export function MessageInput$toProto(
 
 exports[`createInputObjectTypeCode > protobuf-es-v1 > 'generates code for an input object with oneof fields' 1`] = `
 "import { InputObjectRef } from "@pothos/core";
-import { OneofParent } from "@testapis/protobuf-es/testapis/oneof/oneof_pb";
+import { OneofParent } from "@testapis/protobuf-es/testapis/oneof/message_only/message_only_pb";
 import { builder } from "../../builder";
 
 export type OneofParentInput$Shape = {
   normalField: OneofParent["normalField"];
   requiredMessage1?: OneofMemberMessage1Input$Shape | null;
   requiredMessage2?: OneofMemberMessage2Input$Shape | null;
-  optoinalMessage1?: OneofMemberMessage1Input$Shape | null;
-  optoinalMessage2?: OneofMemberMessage2Input$Shape | null;
+  optionalMessage1?: OneofMemberMessage1Input$Shape | null;
+  optionalMessage2?: OneofMemberMessage2Input$Shape | null;
 };
 
 export const OneofParentInput$Ref: InputObjectRef<OneofParentInput$Shape> =
@@ -1131,7 +1131,7 @@ export const OneofParentInput$Ref: InputObjectRef<OneofParentInput$Shape> =
         extensions: {
           protobufField: {
             name: "required_message1",
-            typeFullName: "testapis.oneof.OneofMemberMessage1",
+            typeFullName: "testapis.oneof.message_only.OneofMemberMessage1",
           },
         },
       }),
@@ -1141,36 +1141,36 @@ export const OneofParentInput$Ref: InputObjectRef<OneofParentInput$Shape> =
         extensions: {
           protobufField: {
             name: "required_message2",
-            typeFullName: "testapis.oneof.OneofMemberMessage2",
+            typeFullName: "testapis.oneof.message_only.OneofMemberMessage2",
           },
         },
       }),
-      optoinalMessage1: t.field({
+      optionalMessage1: t.field({
         type: OneofMemberMessage1Input$Ref,
         required: false,
         extensions: {
           protobufField: {
-            name: "optoinal_message1",
-            typeFullName: "testapis.oneof.OneofMemberMessage1",
+            name: "optional_message1",
+            typeFullName: "testapis.oneof.message_only.OneofMemberMessage1",
           },
         },
       }),
-      optoinalMessage2: t.field({
+      optionalMessage2: t.field({
         type: OneofMemberMessage2Input$Ref,
         required: false,
         extensions: {
           protobufField: {
-            name: "optoinal_message2",
-            typeFullName: "testapis.oneof.OneofMemberMessage2",
+            name: "optional_message2",
+            typeFullName: "testapis.oneof.message_only.OneofMemberMessage2",
           },
         },
       }),
     }),
     extensions: {
       protobufMessage: {
-        fullName: "testapis.oneof.OneofParent",
+        fullName: "testapis.oneof.message_only.OneofParent",
         name: "OneofParent",
-        package: "testapis.oneof",
+        package: "testapis.oneof.message_only",
       },
     },
   });
@@ -1191,15 +1191,15 @@ export function OneofParentInput$toProto(
         value: OneofMemberMessage2Input$toProto(input.requiredMessage2),
       }
       : undefined,
-    optionalOneofMembers: input?.optoinalMessage1
+    optionalOneofMembers: input?.optionalMessage1
       ? {
-        case: "optoinalMessage1",
-        value: OneofMemberMessage1Input$toProto(input.optoinalMessage1),
+        case: "optionalMessage1",
+        value: OneofMemberMessage1Input$toProto(input.optionalMessage1),
       }
-      : input?.optoinalMessage2
+      : input?.optionalMessage2
       ? {
-        case: "optoinalMessage2",
-        value: OneofMemberMessage2Input$toProto(input.optoinalMessage2),
+        case: "optionalMessage2",
+        value: OneofMemberMessage2Input$toProto(input.optionalMessage2),
       }
       : undefined,
   });
@@ -1209,7 +1209,7 @@ export function OneofParentInput$toProto(
 
 exports[`createInputObjectTypeCode > protobuf-es-v1 > 'generates code for empty input object' 1`] = `
 "import { InputObjectRef } from "@pothos/core";
-import { EmptyMessage } from "@testapis/protobuf-es/testapis/empty_types/empty_pb";
+import { EmptyMessage } from "@testapis/protobuf-es/testapis/basic/empty/empty_pb";
 import { builder } from "../../builder";
 
 export type EmptyMessageInput$Shape = {};
@@ -1225,9 +1225,9 @@ export const EmptyMessageInput$Ref: InputObjectRef<EmptyMessageInput$Shape> =
     }),
     extensions: {
       protobufMessage: {
-        fullName: "testapis.empty_types.EmptyMessage",
+        fullName: "testapis.basic.empty.EmptyMessage",
         name: "EmptyMessage",
-        package: "testapis.empty_types",
+        package: "testapis.basic.empty",
       },
     },
   });
@@ -1242,7 +1242,7 @@ export function EmptyMessageInput$toProto(
 
 exports[`createInputObjectTypeCode > ts-proto > 'generates code for a simple input object' 1`] = `
 "import { InputObjectRef } from "@pothos/core";
-import { Primitives } from "@testapis/ts-proto/testapis/primitives/primitives";
+import { Primitives } from "@testapis/ts-proto/testapis/basic/scalars/scalars";
 import { builder } from "../../builder";
 
 export type PrimitivesInput$Shape = {
@@ -1578,9 +1578,9 @@ export const PrimitivesInput$Ref: InputObjectRef<PrimitivesInput$Shape> =
     }),
     extensions: {
       protobufMessage: {
-        fullName: "testapis.primitives.Primitives",
+        fullName: "testapis.basic.scalars.Primitives",
         name: "Primitives",
-        package: "testapis.primitives",
+        package: "testapis.basic.scalars",
       },
     },
   });
@@ -1608,7 +1608,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         extensions: {
           protobufField: {
             name: "required_primitives",
-            typeFullName: "testapis.primitives.Primitives",
+            typeFullName: "testapis.basic.scalars.Primitives",
           },
         },
       }),
@@ -1619,7 +1619,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         extensions: {
           protobufField: {
             name: "optional_primitives",
-            typeFullName: "testapis.primitives.Primitives",
+            typeFullName: "testapis.basic.scalars.Primitives",
           },
         },
       }),
@@ -1630,7 +1630,7 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         extensions: {
           protobufField: {
             name: "required_primitives_list",
-            typeFullName: "testapis.primitives.Primitives",
+            typeFullName: "testapis.basic.scalars.Primitives",
           },
         },
       }),
@@ -1641,16 +1641,16 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
         extensions: {
           protobufField: {
             name: "optional_primitives_list",
-            typeFullName: "testapis.primitives.Primitives",
+            typeFullName: "testapis.basic.scalars.Primitives",
           },
         },
       }),
     }),
     extensions: {
       protobufMessage: {
-        fullName: "testapis.primitives.Message",
+        fullName: "testapis.basic.scalars.Message",
         name: "Message",
-        package: "testapis.primitives",
+        package: "testapis.basic.scalars",
       },
     },
   });
@@ -1659,15 +1659,15 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
 
 exports[`createInputObjectTypeCode > ts-proto > 'generates code for an input object with oneof fields' 1`] = `
 "import { InputObjectRef } from "@pothos/core";
-import { OneofParent } from "@testapis/ts-proto/testapis/oneof/oneof";
+import { OneofParent } from "@testapis/ts-proto/testapis/oneof/message_only/message_only";
 import { builder } from "../../builder";
 
 export type OneofParentInput$Shape = {
   normalField: OneofParent["normalField"];
   requiredMessage1?: OneofMemberMessage1Input$Shape | null;
   requiredMessage2?: OneofMemberMessage2Input$Shape | null;
-  optoinalMessage1?: OneofMemberMessage1Input$Shape | null;
-  optoinalMessage2?: OneofMemberMessage2Input$Shape | null;
+  optionalMessage1?: OneofMemberMessage1Input$Shape | null;
+  optionalMessage2?: OneofMemberMessage2Input$Shape | null;
 };
 
 export const OneofParentInput$Ref: InputObjectRef<OneofParentInput$Shape> =
@@ -1686,7 +1686,7 @@ export const OneofParentInput$Ref: InputObjectRef<OneofParentInput$Shape> =
         extensions: {
           protobufField: {
             name: "required_message1",
-            typeFullName: "testapis.oneof.OneofMemberMessage1",
+            typeFullName: "testapis.oneof.message_only.OneofMemberMessage1",
           },
         },
       }),
@@ -1696,36 +1696,36 @@ export const OneofParentInput$Ref: InputObjectRef<OneofParentInput$Shape> =
         extensions: {
           protobufField: {
             name: "required_message2",
-            typeFullName: "testapis.oneof.OneofMemberMessage2",
+            typeFullName: "testapis.oneof.message_only.OneofMemberMessage2",
           },
         },
       }),
-      optoinalMessage1: t.field({
+      optionalMessage1: t.field({
         type: OneofMemberMessage1Input$Ref,
         required: false,
         extensions: {
           protobufField: {
-            name: "optoinal_message1",
-            typeFullName: "testapis.oneof.OneofMemberMessage1",
+            name: "optional_message1",
+            typeFullName: "testapis.oneof.message_only.OneofMemberMessage1",
           },
         },
       }),
-      optoinalMessage2: t.field({
+      optionalMessage2: t.field({
         type: OneofMemberMessage2Input$Ref,
         required: false,
         extensions: {
           protobufField: {
-            name: "optoinal_message2",
-            typeFullName: "testapis.oneof.OneofMemberMessage2",
+            name: "optional_message2",
+            typeFullName: "testapis.oneof.message_only.OneofMemberMessage2",
           },
         },
       }),
     }),
     extensions: {
       protobufMessage: {
-        fullName: "testapis.oneof.OneofParent",
+        fullName: "testapis.oneof.message_only.OneofParent",
         name: "OneofParent",
-        package: "testapis.oneof",
+        package: "testapis.oneof.message_only",
       },
     },
   });
@@ -1749,9 +1749,9 @@ export const EmptyMessageInput$Ref: InputObjectRef<EmptyMessageInput$Shape> =
     }),
     extensions: {
       protobufMessage: {
-        fullName: "testapis.empty_types.EmptyMessage",
+        fullName: "testapis.basic.empty.EmptyMessage",
         name: "EmptyMessage",
-        package: "testapis.empty_types",
+        package: "testapis.basic.empty",
       },
     },
   });
@@ -1760,7 +1760,7 @@ export const EmptyMessageInput$Ref: InputObjectRef<EmptyMessageInput$Shape> =
 
 exports[`createInputObjectTypeCode > ts-proto > 'generates code for nested input types' 1`] = `
 "import { InputObjectRef } from "@pothos/core";
-import { ParentMessage } from "@testapis/ts-proto/testapis/nested/nested";
+import { ParentMessage } from "@testapis/ts-proto/testapis/basic/nested/nested";
 import { builder } from "../../builder";
 
 export type ParentMessageInput$Shape = {
@@ -1783,7 +1783,7 @@ export const ParentMessageInput$Ref: InputObjectRef<ParentMessageInput$Shape> =
         extensions: {
           protobufField: {
             name: "nested",
-            typeFullName: "testapis.nested.ParentMessage.NestedMessage",
+            typeFullName: "testapis.basic.nested.ParentMessage.NestedMessage",
           },
         },
       }),
@@ -1793,16 +1793,16 @@ export const ParentMessageInput$Ref: InputObjectRef<ParentMessageInput$Shape> =
         extensions: {
           protobufField: {
             name: "nested_enum",
-            typeFullName: "testapis.nested.ParentMessage.NestedEnum",
+            typeFullName: "testapis.basic.nested.ParentMessage.NestedEnum",
           },
         },
       }),
     }),
     extensions: {
       protobufMessage: {
-        fullName: "testapis.nested.ParentMessage",
+        fullName: "testapis.basic.nested.ParentMessage",
         name: "ParentMessage",
-        package: "testapis.nested",
+        package: "testapis.basic.nested",
       },
     },
   });
@@ -1832,7 +1832,7 @@ export const MessagePartialInput$Ref: InputObjectRef<
         extensions: {
           protobufField: {
             name: "required_primitives",
-            typeFullName: "testapis.primitives.Primitives",
+            typeFullName: "testapis.basic.scalars.Primitives",
           },
         },
       }),
@@ -1843,7 +1843,7 @@ export const MessagePartialInput$Ref: InputObjectRef<
         extensions: {
           protobufField: {
             name: "optional_primitives",
-            typeFullName: "testapis.primitives.Primitives",
+            typeFullName: "testapis.basic.scalars.Primitives",
           },
         },
       }),
@@ -1854,7 +1854,7 @@ export const MessagePartialInput$Ref: InputObjectRef<
         extensions: {
           protobufField: {
             name: "required_primitives_list",
-            typeFullName: "testapis.primitives.Primitives",
+            typeFullName: "testapis.basic.scalars.Primitives",
           },
         },
       }),
@@ -1865,16 +1865,16 @@ export const MessagePartialInput$Ref: InputObjectRef<
         extensions: {
           protobufField: {
             name: "optional_primitives_list",
-            typeFullName: "testapis.primitives.Primitives",
+            typeFullName: "testapis.basic.scalars.Primitives",
           },
         },
       }),
     }),
     extensions: {
       protobufMessage: {
-        fullName: "testapis.primitives.Message",
+        fullName: "testapis.basic.scalars.Message",
         name: "Message",
-        package: "testapis.primitives",
+        package: "testapis.basic.scalars",
       },
     },
   });

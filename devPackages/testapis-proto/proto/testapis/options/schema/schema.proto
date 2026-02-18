@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package testapis.options.schema;
+
+import "graphql/schema.proto";
+
+option (graphql.schema) = {
+  type_prefix: "SchemaPrefix"
+  ignore_requests: true
+  ignore_responses: true
+};
+
+service PostsService {
+  rpc BatchGetPosts(BatchGetPostsRequest) returns (BatchGetPostsResponse);
+  rpc CreatePost(CreatePostRequest) returns (PostResponse);
+}
+
+message BatchGetPostsRequest {
+  repeated uint64 id = 1;
+}
+
+message BatchGetPostsResponse {
+  repeated PostResponse posts = 1;
+}
+
+message CreatePostRequest {
+  string body = 1;
+}
+
+message PostResponse {
+  uint64 id = 1;
+  string body = 2;
+}
