@@ -1,6 +1,6 @@
 {
   "name": "protoc-gen-pothos",
-  "version": "0.7.0",
+  "version": "0.6.2",
   "description": "Generate DSL for Pothos GraphQL from Protocol Buffers IDL",
   "keywords": [
     "graphql",

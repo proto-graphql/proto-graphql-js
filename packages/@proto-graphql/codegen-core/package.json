@@ -1,6 +1,6 @@
 {
   "name": "@proto-graphql/codegen-core",
-  "version": "0.6.0",
+  "version": "0.5.2",
   "description": "",
   "keywords": [
     "graphql",
