@@ -52,8 +52,8 @@
       "files": ["tests/testapis/ts-proto*"],
       "package.json": {
         "scripts": {
-          "build:test": "tsc --build tsconfig.cjs.json",
-          "clean": "pnpm run build:test --clean"
+          "build": "tsc --build tsconfig.cjs.json",
+          "clean": "pnpm run build --clean"
         }
       },
       "copy": [{ "src": "configs/.gitignore.test", "dest": ".gitignore" }]

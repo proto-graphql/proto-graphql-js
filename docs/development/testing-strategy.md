@@ -32,7 +32,7 @@ For code generation CLIs such as `protoc-gen-pothos`, tests should use **golden 
 - Run only Golden Tests: `pnpm --dir packages/protoc-gen-pothos vitest run src/__tests__/golden/golden.test.ts`
 - Update snapshots: `pnpm --dir packages/protoc-gen-pothos vitest run src/__tests__/golden/golden.test.ts -u`
 
-In `turbo.json`, the `test` task depends on `^build` and `^build:test`.
+In `turbo.json`, the `test` task depends on `^build`.
 This ensures tests run against built dependency packages and generated test API artifacts.
 
 ## Golden Test Specification (`protoc-gen-pothos`)
