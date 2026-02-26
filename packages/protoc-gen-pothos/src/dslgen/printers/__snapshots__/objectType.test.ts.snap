@@ -2,7 +2,7 @@
 
 exports[`createObjectTypeCode > protobuf-es > 'generates code for a message with nested fields with isMessage' 1`] = `
 "import { isMessage, MessageShape } from "@bufbuild/protobuf";
-import { MessageSchema } from "@testapis/protobuf-es-v2/testapis/primitives/primitives_pb";
+import { MessageSchema } from "@testapis/protobuf-es-v2/testapis/basic/scalars/scalars_pb";
 import { builder } from "../../builder";
 
 export const Message$Ref = builder.objectRef<
@@ -21,7 +21,7 @@ builder.objectType(Message$Ref, {
       extensions: {
         protobufField: {
           name: "required_primitives",
-          typeFullName: "testapis.primitives.Primitives",
+          typeFullName: "testapis.basic.scalars.Primitives",
         },
       },
     }),
@@ -32,7 +32,7 @@ builder.objectType(Message$Ref, {
       extensions: {
         protobufField: {
           name: "optional_primitives",
-          typeFullName: "testapis.primitives.Primitives",
+          typeFullName: "testapis.basic.scalars.Primitives",
         },
       },
     }),
@@ -46,7 +46,7 @@ builder.objectType(Message$Ref, {
       extensions: {
         protobufField: {
           name: "required_primitives_list",
-          typeFullName: "testapis.primitives.Primitives",
+          typeFullName: "testapis.basic.scalars.Primitives",
         },
       },
     }),
@@ -57,7 +57,7 @@ builder.objectType(Message$Ref, {
       extensions: {
         protobufField: {
           name: "optional_primitives_list",
-          typeFullName: "testapis.primitives.Primitives",
+          typeFullName: "testapis.basic.scalars.Primitives",
         },
       },
     }),
@@ -67,9 +67,9 @@ builder.objectType(Message$Ref, {
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.primitives.Message",
+      fullName: "testapis.basic.scalars.Message",
       name: "Message",
-      package: "testapis.primitives",
+      package: "testapis.basic.scalars",
     },
   },
 });
@@ -82,7 +82,7 @@ import {
   OneofMemberMessage1,
   OneofMemberMessage2,
   OneofParentSchema,
-} from "@testapis/protobuf-es-v2/testapis/oneof/oneof_pb";
+} from "@testapis/protobuf-es-v2/testapis/oneof/message_only/message_only_pb";
 import { builder } from "../../builder";
 
 export const OneofParent$Ref = builder.objectRef<
@@ -132,9 +132,9 @@ builder.objectType(OneofParent$Ref, {
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.oneof.OneofParent",
+      fullName: "testapis.oneof.message_only.OneofParent",
       name: "OneofParent",
-      package: "testapis.oneof",
+      package: "testapis.oneof.message_only",
     },
   },
 });
@@ -143,7 +143,7 @@ builder.objectType(OneofParent$Ref, {
 
 exports[`createObjectTypeCode > protobuf-es > 'generates code for a simple message with isMessage' 1`] = `
 "import { isMessage, MessageShape } from "@bufbuild/protobuf";
-import { PrimitivesSchema } from "@testapis/protobuf-es-v2/testapis/primitives/primitives_pb";
+import { PrimitivesSchema } from "@testapis/protobuf-es-v2/testapis/basic/scalars/scalars_pb";
 import { builder } from "../../builder";
 
 export const Primitives$Ref = builder.objectRef<
@@ -434,9 +434,9 @@ builder.objectType(Primitives$Ref, {
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.primitives.Primitives",
+      fullName: "testapis.basic.scalars.Primitives",
       name: "Primitives",
-      package: "testapis.primitives",
+      package: "testapis.basic.scalars",
     },
   },
 });
@@ -445,7 +445,7 @@ builder.objectType(Primitives$Ref, {
 
 exports[`createObjectTypeCode > protobuf-es > 'generates code for empty message with isMessage' 1`] = `
 "import { isMessage, MessageShape } from "@bufbuild/protobuf";
-import { EmptyMessageSchema } from "@testapis/protobuf-es-v2/testapis/empty_types/empty_pb";
+import { EmptyMessageSchema } from "@testapis/protobuf-es-v2/testapis/basic/empty/empty_pb";
 import { builder } from "../../builder";
 
 export const EmptyMessage$Ref = builder.objectRef<
@@ -466,9 +466,9 @@ builder.objectType(EmptyMessage$Ref, {
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.empty_types.EmptyMessage",
+      fullName: "testapis.basic.empty.EmptyMessage",
       name: "EmptyMessage",
-      package: "testapis.empty_types",
+      package: "testapis.basic.empty",
     },
   },
 });
@@ -483,20 +483,25 @@ import {
   PrefixedMessage_InnerMessage,
   PrefixedMessage_InnerMessage2,
   PrefixedMessageSchema,
-} from "@testapis/protobuf-es-v2/testapis/extensions/extensions_pb";
+} from "@testapis/protobuf-es-v2/testapis/options/message_and_field/message_and_field_pb";
 import { builder } from "../../builder";
 
-export const TestPrefixPrefixedMessage$Ref = builder.objectRef<
+export const PrefixedMessage$Ref = builder.objectRef<
   MessageShape<typeof PrefixedMessageSchema>
->("TestPrefixPrefixedMessage");
-builder.objectType(TestPrefixPrefixedMessage$Ref, {
-  name: "TestPrefixPrefixedMessage",
+>("PrefixedMessage");
+builder.objectType(PrefixedMessage$Ref, {
+  name: "PrefixedMessage",
   fields: (t) => ({
     id: t.expose("id", {
       type: "Int64",
       nullable: false,
-      description: "Output only.",
-      extensions: { protobufField: { name: "id", typeFullName: "uint64" } },
+      extensions: {
+        protobufField: {
+          name: "id",
+          typeFullName: "uint64",
+          options: { "[graphql.field]": { id: true } },
+        },
+      },
     }),
     body: t.expose("body", {
       type: "String",
@@ -504,7 +509,7 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
       extensions: { protobufField: { name: "body", typeFullName: "string" } },
     }),
     prefixedEnum: t.field({
-      type: TestPrefixPrefixedEnum$Ref,
+      type: PrefixedEnum$Ref,
       nullable: true,
       resolve: (source) => {
         if (source.prefixedEnum === PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
@@ -520,34 +525,7 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
       extensions: {
         protobufField: {
           name: "prefixed_enum",
-          typeFullName: "testapis.extensions.PrefixedEnum",
-        },
-      },
-    }),
-    notIgnoredMessage: t.expose("notIgnoredMessage", {
-      type: TestPrefixIgnoredMessageNotIgnored$Ref,
-      nullable: true,
-      extensions: {
-        protobufField: {
-          name: "not_ignored_message",
-          typeFullName: "testapis.extensions.IgnoredMessage.NotIgnored",
-        },
-      },
-    }),
-    squashedMessage: t.field({
-      type: TestPrefixPrefixedMessageSquashedMessage$Ref,
-      nullable: true,
-      resolve: (source) => {
-        return (source.squashedMessage?.squashedMessage.value ?? null) as
-          | PrefixedMessage_InnerMessage
-          | PrefixedMessage_InnerMessage2
-          | undefined
-          | null;
-      },
-      extensions: {
-        protobufField: {
-          name: "squashed_message",
-          typeFullName: "testapis.extensions.PrefixedMessage.SquashedMessage",
+          typeFullName: "testapis.options.message_and_field.PrefixedEnum",
         },
       },
     }),
@@ -573,8 +551,64 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
         },
       },
     }),
+    squashedMessage: t.field({
+      type: PrefixedMessageSquashedMessage$Ref,
+      nullable: true,
+      resolve: (source) => {
+        return (source.squashedMessage?.squashedMessage.value ?? null) as
+          | PrefixedMessage_InnerMessage
+          | PrefixedMessage_InnerMessage2
+          | undefined
+          | null;
+      },
+      extensions: {
+        protobufField: {
+          name: "squashed_message",
+          typeFullName:
+            "testapis.options.message_and_field.PrefixedMessage.SquashedMessage",
+        },
+      },
+    }),
+    renamedMessage: t.expose("renamedMessage", {
+      type: RenamedMessage$Ref,
+      nullable: true,
+      extensions: {
+        protobufField: {
+          name: "renamed_message",
+          typeFullName: "testapis.options.message_and_field.MessageWillRename",
+        },
+      },
+    }),
+    renamedEnum: t.field({
+      type: RenamedEnum$Ref,
+      nullable: true,
+      resolve: (source) => {
+        if (source.renamedEnum === EnumWillRename.UNSPECIFIED) {
+          return null;
+        }
+
+        return source.renamedEnum;
+      },
+      extensions: {
+        protobufField: {
+          name: "renamed_enum",
+          typeFullName: "testapis.options.message_and_field.EnumWillRename",
+        },
+      },
+    }),
+    notIgnoredMessage: t.expose("notIgnoredMessage", {
+      type: IgnoredMessageNotIgnored$Ref,
+      nullable: true,
+      extensions: {
+        protobufField: {
+          name: "not_ignored_message",
+          typeFullName:
+            "testapis.options.message_and_field.IgnoredMessage.NotIgnored",
+        },
+      },
+    }),
     squashedMessages: t.field({
-      type: [TestPrefixPrefixedMessageSquashedMessage$Ref],
+      type: [PrefixedMessageSquashedMessage$Ref],
       nullable: { list: true, items: false },
       resolve: (source) => {
         return source.squashedMessages.map((item) => {
@@ -591,39 +625,13 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
       extensions: {
         protobufField: {
           name: "squashed_messages",
-          typeFullName: "testapis.extensions.PrefixedMessage.SquashedMessage",
-        },
-      },
-    }),
-    renamedMessage: t.expose("renamedMessage", {
-      type: TestPrefixRenamedMessage$Ref,
-      nullable: true,
-      extensions: {
-        protobufField: {
-          name: "renamed_message",
-          typeFullName: "testapis.extensions.MessageWillRename",
-        },
-      },
-    }),
-    renamedEnum: t.field({
-      type: TestPrefixRenamedEnum$Ref,
-      nullable: true,
-      resolve: (source) => {
-        if (source.renamedEnum === EnumWillRename.UNSPECIFIED) {
-          return null;
-        }
-
-        return source.renamedEnum;
-      },
-      extensions: {
-        protobufField: {
-          name: "renamed_enum",
-          typeFullName: "testapis.extensions.EnumWillRename",
+          typeFullName:
+            "testapis.options.message_and_field.PrefixedMessage.SquashedMessage",
         },
       },
     }),
     partialIgnoreOneof: t.field({
-      type: TestPrefixPrefixedMessagePartialIgnoreOneof$Ref,
+      type: PrefixedMessagePartialIgnoreOneof$Ref,
       nullable: true,
       resolve: (source) => {
         return (source.partialIgnoreOneof.value ?? null) as
@@ -639,9 +647,9 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.extensions.PrefixedMessage",
+      fullName: "testapis.options.message_and_field.PrefixedMessage",
       name: "PrefixedMessage",
-      package: "testapis.extensions",
+      package: "testapis.options.message_and_field",
     },
   },
 });
@@ -653,7 +661,7 @@ exports[`createObjectTypeCode > protobuf-es > 'generates code for nested types w
 import {
   ParentMessage_NestedEnum,
   ParentMessageSchema,
-} from "@testapis/protobuf-es-v2/testapis/nested/nested_pb";
+} from "@testapis/protobuf-es-v2/testapis/basic/nested/nested_pb";
 import { builder } from "../../builder";
 
 export const ParentMessage$Ref = builder.objectRef<
@@ -673,7 +681,7 @@ builder.objectType(ParentMessage$Ref, {
       extensions: {
         protobufField: {
           name: "nested",
-          typeFullName: "testapis.nested.ParentMessage.NestedMessage",
+          typeFullName: "testapis.basic.nested.ParentMessage.NestedMessage",
         },
       },
     }),
@@ -692,7 +700,7 @@ builder.objectType(ParentMessage$Ref, {
       extensions: {
         protobufField: {
           name: "nested_enum",
-          typeFullName: "testapis.nested.ParentMessage.NestedEnum",
+          typeFullName: "testapis.basic.nested.ParentMessage.NestedEnum",
         },
       },
     }),
@@ -702,9 +710,9 @@ builder.objectType(ParentMessage$Ref, {
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.nested.ParentMessage",
+      fullName: "testapis.basic.nested.ParentMessage",
       name: "ParentMessage",
-      package: "testapis.nested",
+      package: "testapis.basic.nested",
     },
   },
 });
@@ -712,7 +720,7 @@ builder.objectType(ParentMessage$Ref, {
 `;
 
 exports[`createObjectTypeCode > protobuf-es-v1 > 'generates code for a message with nested fields' 1`] = `
-"import { Message } from "@testapis/protobuf-es/testapis/primitives/primitives_pb";
+"import { Message } from "@testapis/protobuf-es/testapis/basic/scalars/scalars_pb";
 import { builder } from "../../builder";
 
 export const Message$Ref = builder.objectRef<Message>("Message");
@@ -729,7 +737,7 @@ builder.objectType(Message$Ref, {
       extensions: {
         protobufField: {
           name: "required_primitives",
-          typeFullName: "testapis.primitives.Primitives",
+          typeFullName: "testapis.basic.scalars.Primitives",
         },
       },
     }),
@@ -740,7 +748,7 @@ builder.objectType(Message$Ref, {
       extensions: {
         protobufField: {
           name: "optional_primitives",
-          typeFullName: "testapis.primitives.Primitives",
+          typeFullName: "testapis.basic.scalars.Primitives",
         },
       },
     }),
@@ -754,7 +762,7 @@ builder.objectType(Message$Ref, {
       extensions: {
         protobufField: {
           name: "required_primitives_list",
-          typeFullName: "testapis.primitives.Primitives",
+          typeFullName: "testapis.basic.scalars.Primitives",
         },
       },
     }),
@@ -765,7 +773,7 @@ builder.objectType(Message$Ref, {
       extensions: {
         protobufField: {
           name: "optional_primitives_list",
-          typeFullName: "testapis.primitives.Primitives",
+          typeFullName: "testapis.basic.scalars.Primitives",
         },
       },
     }),
@@ -775,9 +783,9 @@ builder.objectType(Message$Ref, {
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.primitives.Message",
+      fullName: "testapis.basic.scalars.Message",
       name: "Message",
-      package: "testapis.primitives",
+      package: "testapis.basic.scalars",
     },
   },
 });
@@ -789,7 +797,7 @@ exports[`createObjectTypeCode > protobuf-es-v1 > 'generates code for a message w
   OneofMemberMessage1,
   OneofMemberMessage2,
   OneofParent,
-} from "@testapis/protobuf-es/testapis/oneof/oneof_pb";
+} from "@testapis/protobuf-es/testapis/oneof/message_only/message_only_pb";
 import { builder } from "../../builder";
 
 export const OneofParent$Ref = builder.objectRef<OneofParent>("OneofParent");
@@ -837,9 +845,9 @@ builder.objectType(OneofParent$Ref, {
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.oneof.OneofParent",
+      fullName: "testapis.oneof.message_only.OneofParent",
       name: "OneofParent",
-      package: "testapis.oneof",
+      package: "testapis.oneof.message_only",
     },
   },
 });
@@ -847,7 +855,7 @@ builder.objectType(OneofParent$Ref, {
 `;
 
 exports[`createObjectTypeCode > protobuf-es-v1 > 'generates code for a simple message' 1`] = `
-"import { Primitives } from "@testapis/protobuf-es/testapis/primitives/primitives_pb";
+"import { Primitives } from "@testapis/protobuf-es/testapis/basic/scalars/scalars_pb";
 import { builder } from "../../builder";
 
 export const Primitives$Ref = builder.objectRef<Primitives>("Primitives");
@@ -1136,9 +1144,9 @@ builder.objectType(Primitives$Ref, {
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.primitives.Primitives",
+      fullName: "testapis.basic.scalars.Primitives",
       name: "Primitives",
-      package: "testapis.primitives",
+      package: "testapis.basic.scalars",
     },
   },
 });
@@ -1146,7 +1154,7 @@ builder.objectType(Primitives$Ref, {
 `;
 
 exports[`createObjectTypeCode > ts-proto > 'generates code for a message with nested fields' 1`] = `
-"import { Message } from "@testapis/ts-proto/testapis/primitives/primitives";
+"import { Message } from "@testapis/ts-proto/testapis/basic/scalars/scalars";
 import { builder } from "../../builder";
 
 export const Message$Ref = builder.objectRef<Message>("Message");
@@ -1163,7 +1171,7 @@ builder.objectType(Message$Ref, {
       extensions: {
         protobufField: {
           name: "required_primitives",
-          typeFullName: "testapis.primitives.Primitives",
+          typeFullName: "testapis.basic.scalars.Primitives",
         },
       },
     }),
@@ -1174,7 +1182,7 @@ builder.objectType(Message$Ref, {
       extensions: {
         protobufField: {
           name: "optional_primitives",
-          typeFullName: "testapis.primitives.Primitives",
+          typeFullName: "testapis.basic.scalars.Primitives",
         },
       },
     }),
@@ -1188,7 +1196,7 @@ builder.objectType(Message$Ref, {
       extensions: {
         protobufField: {
           name: "required_primitives_list",
-          typeFullName: "testapis.primitives.Primitives",
+          typeFullName: "testapis.basic.scalars.Primitives",
         },
       },
     }),
@@ -1199,20 +1207,20 @@ builder.objectType(Message$Ref, {
       extensions: {
         protobufField: {
           name: "optional_primitives_list",
-          typeFullName: "testapis.primitives.Primitives",
+          typeFullName: "testapis.basic.scalars.Primitives",
         },
       },
     }),
   }),
   isTypeOf: (source) => {
     return (source as Message | { $type: string & {}; }).$type ===
-      "testapis.primitives.Message";
+      "testapis.basic.scalars.Message";
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.primitives.Message",
+      fullName: "testapis.basic.scalars.Message",
       name: "Message",
-      package: "testapis.primitives",
+      package: "testapis.basic.scalars",
     },
   },
 });
@@ -1220,7 +1228,7 @@ builder.objectType(Message$Ref, {
 `;
 
 exports[`createObjectTypeCode > ts-proto > 'generates code for a message with oneofs' 1`] = `
-"import { OneofParent } from "@testapis/ts-proto/testapis/oneof/oneof";
+"import { OneofParent } from "@testapis/ts-proto/testapis/oneof/message_only/message_only";
 import { builder } from "../../builder";
 
 export const OneofParent$Ref = builder.objectRef<OneofParent>("OneofParent");
@@ -1251,7 +1259,7 @@ builder.objectType(OneofParent$Ref, {
       type: OneofParentOptionalOneofMembers$Ref,
       nullable: true,
       resolve: (source) => {
-        const value = source.optoinalMessage1 ?? source.optoinalMessage2;
+        const value = source.optionalMessage1 ?? source.optionalMessage2;
         if (value == null) {
           return null;
         }
@@ -1262,13 +1270,13 @@ builder.objectType(OneofParent$Ref, {
   }),
   isTypeOf: (source) => {
     return (source as OneofParent | { $type: string & {}; }).$type ===
-      "testapis.oneof.OneofParent";
+      "testapis.oneof.message_only.OneofParent";
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.oneof.OneofParent",
+      fullName: "testapis.oneof.message_only.OneofParent",
       name: "OneofParent",
-      package: "testapis.oneof",
+      package: "testapis.oneof.message_only",
     },
   },
 });
@@ -1276,7 +1284,7 @@ builder.objectType(OneofParent$Ref, {
 `;
 
 exports[`createObjectTypeCode > ts-proto > 'generates code for a simple message' 1`] = `
-"import { Primitives } from "@testapis/ts-proto/testapis/primitives/primitives";
+"import { Primitives } from "@testapis/ts-proto/testapis/basic/scalars/scalars";
 import { builder } from "../../builder";
 
 export const Primitives$Ref = builder.objectRef<Primitives>("Primitives");
@@ -1562,13 +1570,13 @@ builder.objectType(Primitives$Ref, {
   }),
   isTypeOf: (source) => {
     return (source as Primitives | { $type: string & {}; }).$type ===
-      "testapis.primitives.Primitives";
+      "testapis.basic.scalars.Primitives";
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.primitives.Primitives",
+      fullName: "testapis.basic.scalars.Primitives",
       name: "Primitives",
-      package: "testapis.primitives",
+      package: "testapis.basic.scalars",
     },
   },
 });
@@ -1576,7 +1584,7 @@ builder.objectType(Primitives$Ref, {
 `;
 
 exports[`createObjectTypeCode > ts-proto > 'generates code for empty message' 1`] = `
-"import { EmptyMessage } from "@testapis/ts-proto/testapis/empty_types/empty";
+"import { EmptyMessage } from "@testapis/ts-proto/testapis/basic/empty/empty";
 import { builder } from "../../builder";
 
 export const EmptyMessage$Ref = builder.objectRef<EmptyMessage>("EmptyMessage");
@@ -1592,13 +1600,13 @@ builder.objectType(EmptyMessage$Ref, {
   }),
   isTypeOf: (source) => {
     return (source as EmptyMessage | { $type: string & {}; }).$type ===
-      "testapis.empty_types.EmptyMessage";
+      "testapis.basic.empty.EmptyMessage";
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.empty_types.EmptyMessage",
+      fullName: "testapis.basic.empty.EmptyMessage",
       name: "EmptyMessage",
-      package: "testapis.empty_types",
+      package: "testapis.basic.empty",
     },
   },
 });
@@ -1609,7 +1617,7 @@ exports[`createObjectTypeCode > ts-proto > 'generates code for nested types' 1`]
 "import {
   ParentMessage,
   ParentMessage_NestedEnum,
-} from "@testapis/ts-proto/testapis/nested/nested";
+} from "@testapis/ts-proto/testapis/basic/nested/nested";
 import { builder } from "../../builder";
 
 export const ParentMessage$Ref = builder.objectRef<ParentMessage>(
@@ -1629,7 +1637,7 @@ builder.objectType(ParentMessage$Ref, {
       extensions: {
         protobufField: {
           name: "nested",
-          typeFullName: "testapis.nested.ParentMessage.NestedMessage",
+          typeFullName: "testapis.basic.nested.ParentMessage.NestedMessage",
         },
       },
     }),
@@ -1648,20 +1656,20 @@ builder.objectType(ParentMessage$Ref, {
       extensions: {
         protobufField: {
           name: "nested_enum",
-          typeFullName: "testapis.nested.ParentMessage.NestedEnum",
+          typeFullName: "testapis.basic.nested.ParentMessage.NestedEnum",
         },
       },
     }),
   }),
   isTypeOf: (source) => {
     return (source as ParentMessage | { $type: string & {}; }).$type ===
-      "testapis.nested.ParentMessage";
+      "testapis.basic.nested.ParentMessage";
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.nested.ParentMessage",
+      fullName: "testapis.basic.nested.ParentMessage",
       name: "ParentMessage",
-      package: "testapis.nested",
+      package: "testapis.basic.nested",
     },
   },
 });
@@ -1673,20 +1681,25 @@ exports[`createObjectTypeCode > with extensions > 'generates code for message wi
   EnumWillRename,
   PrefixedEnum,
   PrefixedMessage,
-} from "@testapis/ts-proto/testapis/extensions/extensions";
+} from "@testapis/ts-proto/testapis/options/message_and_field/message_and_field";
 import { builder } from "../../builder";
 
-export const TestPrefixPrefixedMessage$Ref = builder.objectRef<PrefixedMessage>(
-  "TestPrefixPrefixedMessage",
+export const PrefixedMessage$Ref = builder.objectRef<PrefixedMessage>(
+  "PrefixedMessage",
 );
-builder.objectType(TestPrefixPrefixedMessage$Ref, {
-  name: "TestPrefixPrefixedMessage",
+builder.objectType(PrefixedMessage$Ref, {
+  name: "PrefixedMessage",
   fields: (t) => ({
     id: t.expose("id", {
       type: "String",
       nullable: false,
-      description: "Output only.",
-      extensions: { protobufField: { name: "id", typeFullName: "uint64" } },
+      extensions: {
+        protobufField: {
+          name: "id",
+          typeFullName: "uint64",
+          options: { "[graphql.field]": { id: true } },
+        },
+      },
     }),
     body: t.expose("body", {
       type: "String",
@@ -1694,7 +1707,7 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
       extensions: { protobufField: { name: "body", typeFullName: "string" } },
     }),
     prefixedEnum: t.field({
-      type: TestPrefixPrefixedEnum$Ref,
+      type: PrefixedEnum$Ref,
       nullable: true,
       resolve: (source) => {
         if (source.prefixedEnum === PrefixedEnum.PREFIXED_ENUM_UNSPECIFIED) {
@@ -1710,35 +1723,7 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
       extensions: {
         protobufField: {
           name: "prefixed_enum",
-          typeFullName: "testapis.extensions.PrefixedEnum",
-        },
-      },
-    }),
-    notIgnoredMessage: t.expose("notIgnoredMessage", {
-      type: TestPrefixIgnoredMessageNotIgnored$Ref,
-      nullable: true,
-      extensions: {
-        protobufField: {
-          name: "not_ignored_message",
-          typeFullName: "testapis.extensions.IgnoredMessage.NotIgnored",
-        },
-      },
-    }),
-    squashedMessage: t.field({
-      type: TestPrefixPrefixedMessageSquashedMessage$Ref,
-      nullable: true,
-      resolve: (source) => {
-        const value = source.squashedMessage?.oneofField ??
-          source.squashedMessage?.oneofField2;
-        if (value == null) {
-          return null;
-        }
-        return value;
-      },
-      extensions: {
-        protobufField: {
-          name: "squashed_message",
-          typeFullName: "testapis.extensions.PrefixedMessage.SquashedMessage",
+          typeFullName: "testapis.options.message_and_field.PrefixedEnum",
         },
       },
     }),
@@ -1764,37 +1749,37 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
         },
       },
     }),
-    squashedMessages: t.field({
-      type: [TestPrefixPrefixedMessageSquashedMessage$Ref],
-      nullable: { list: true, items: false },
+    squashedMessage: t.field({
+      type: PrefixedMessageSquashedMessage$Ref,
+      nullable: true,
       resolve: (source) => {
-        return source.squashedMessages.map((item) => {
-          const value = item?.oneofField ?? item?.oneofField2;
-          if (value == null) {
-            throw new Error("squashedMessages should not be null");
-          }
-          return value;
-        });
+        const value = source.squashedMessage?.oneofField ??
+          source.squashedMessage?.oneofField2;
+        if (value == null) {
+          return null;
+        }
+        return value;
       },
       extensions: {
         protobufField: {
-          name: "squashed_messages",
-          typeFullName: "testapis.extensions.PrefixedMessage.SquashedMessage",
+          name: "squashed_message",
+          typeFullName:
+            "testapis.options.message_and_field.PrefixedMessage.SquashedMessage",
         },
       },
     }),
     renamedMessage: t.expose("renamedMessage", {
-      type: TestPrefixRenamedMessage$Ref,
+      type: RenamedMessage$Ref,
       nullable: true,
       extensions: {
         protobufField: {
           name: "renamed_message",
-          typeFullName: "testapis.extensions.MessageWillRename",
+          typeFullName: "testapis.options.message_and_field.MessageWillRename",
         },
       },
     }),
     renamedEnum: t.field({
-      type: TestPrefixRenamedEnum$Ref,
+      type: RenamedEnum$Ref,
       nullable: true,
       resolve: (source) => {
         if (
@@ -1808,12 +1793,43 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
       extensions: {
         protobufField: {
           name: "renamed_enum",
-          typeFullName: "testapis.extensions.EnumWillRename",
+          typeFullName: "testapis.options.message_and_field.EnumWillRename",
+        },
+      },
+    }),
+    notIgnoredMessage: t.expose("notIgnoredMessage", {
+      type: IgnoredMessageNotIgnored$Ref,
+      nullable: true,
+      extensions: {
+        protobufField: {
+          name: "not_ignored_message",
+          typeFullName:
+            "testapis.options.message_and_field.IgnoredMessage.NotIgnored",
+        },
+      },
+    }),
+    squashedMessages: t.field({
+      type: [PrefixedMessageSquashedMessage$Ref],
+      nullable: { list: true, items: false },
+      resolve: (source) => {
+        return source.squashedMessages.map((item) => {
+          const value = item?.oneofField ?? item?.oneofField2;
+          if (value == null) {
+            throw new Error("squashedMessages should not be null");
+          }
+          return value;
+        });
+      },
+      extensions: {
+        protobufField: {
+          name: "squashed_messages",
+          typeFullName:
+            "testapis.options.message_and_field.PrefixedMessage.SquashedMessage",
         },
       },
     }),
     partialIgnoreOneof: t.field({
-      type: TestPrefixPrefixedMessagePartialIgnoreOneof$Ref,
+      type: PrefixedMessagePartialIgnoreOneof$Ref,
       nullable: true,
       resolve: (source) => {
         const value = source.oneofNotIgnoredField;
@@ -1827,13 +1843,13 @@ builder.objectType(TestPrefixPrefixedMessage$Ref, {
   }),
   isTypeOf: (source) => {
     return (source as PrefixedMessage | { $type: string & {}; }).$type ===
-      "testapis.extensions.PrefixedMessage";
+      "testapis.options.message_and_field.PrefixedMessage";
   },
   extensions: {
     protobufMessage: {
-      fullName: "testapis.extensions.PrefixedMessage",
+      fullName: "testapis.options.message_and_field.PrefixedMessage",
       name: "PrefixedMessage",
-      package: "testapis.extensions",
+      package: "testapis.options.message_and_field",
     },
   },
 });

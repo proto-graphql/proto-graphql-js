@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package testapis.imports.same_pkg_subdir;
+
+message SubdirSharedMessage {
+  string body = 1;
+}
+
+enum SubdirSharedEnum {
+  SUBDIR_SHARED_ENUM_UNSPECIFIED = 0;
+  SUBDIR_SHARED_ENUM_FOO = 1;
+}

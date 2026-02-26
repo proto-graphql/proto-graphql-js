@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-package testapis.edgecases.import_squashed_union.pkg2;
-
-import "testapis/edgecases/import_squashed_union/pkg1/types.proto";
-
-message Message {
-  testapis.edgecases.import_squashed_union.pkg1.SquashedOneof msg = 1;
-}

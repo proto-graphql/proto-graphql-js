@@ -6,11 +6,11 @@ function createTestCase(
   overrides: Partial<TestCase> & { config: Partial<TestCaseConfig> },
 ): TestCase {
   return {
-    name: overrides.name ?? "ts-proto/testapis.enums",
+    name: overrides.name ?? "ts-proto/testapis.basic.enums",
     dir: overrides.dir ?? "/path/to/test/case",
     hasQuery: overrides.hasQuery ?? false,
     config: {
-      package: overrides.config.package ?? "testapis.enums",
+      package: overrides.config.package ?? "testapis.basic.enums",
       runtimeVariant: overrides.config.runtimeVariant ?? "ts-proto",
       runtime: overrides.config.runtime ?? "ts-proto",
       param: overrides.config.param,
@@ -24,7 +24,7 @@ describe("codeGenerationRunner", () => {
     it("should generate files for ts-proto runtime", () => {
       const testCase = createTestCase({
         config: {
-          package: "testapis.enums",
+          package: "testapis.basic.enums",
           runtime: "ts-proto",
         },
       });
@@ -40,7 +40,7 @@ describe("codeGenerationRunner", () => {
     it("should generate files for protobuf-es-v1 runtime", () => {
       const testCase = createTestCase({
         config: {
-          package: "testapis.enums",
+          package: "testapis.basic.enums",
           runtime: "protobuf-es-v1",
         },
       });
@@ -54,7 +54,7 @@ describe("codeGenerationRunner", () => {
     it("should generate files for protobuf-es runtime", () => {
       const testCase = createTestCase({
         config: {
-          package: "testapis.enums",
+          package: "testapis.basic.enums",
           runtime: "protobuf-es",
         },
       });
@@ -68,7 +68,7 @@ describe("codeGenerationRunner", () => {
     it("should apply custom param when provided", () => {
       const testCase = createTestCase({
         config: {
-          package: "testapis.enums",
+          package: "testapis.basic.enums",
           runtime: "ts-proto",
           param: "partial_inputs",
         },
@@ -83,7 +83,7 @@ describe("codeGenerationRunner", () => {
     it("should apply import_prefix param", () => {
       const testCase = createTestCase({
         config: {
-          package: "testapis.enums",
+          package: "testapis.basic.enums",
           runtime: "ts-proto",
           param: "import_prefix=@testapis/ts-proto",
         },
@@ -99,7 +99,7 @@ describe("codeGenerationRunner", () => {
     it("should generate files with correct content including imports", () => {
       const testCase = createTestCase({
         config: {
-          package: "testapis.enums",
+          package: "testapis.basic.enums",
           runtime: "ts-proto",
         },
       });
@@ -112,7 +112,7 @@ describe("codeGenerationRunner", () => {
     it("should generate multiple files for packages with multiple proto files", () => {
       const testCase = createTestCase({
         config: {
-          package: "testapis.primitives",
+          package: "testapis.basic.scalars",
           runtime: "ts-proto",
         },
       });
@@ -126,14 +126,28 @@ describe("codeGenerationRunner", () => {
     it("should return file paths relative to package", () => {
       const testCase = createTestCase({
         config: {
-          package: "testapis.enums",
+          package: "testapis.basic.enums",
           runtime: "ts-proto",
         },
       });
 
       const result = executeGeneration(testCase);
 
-      expect(result.files[0].name).toMatch(/^testapis\/enums\//);
+      expect(result.files[0].name).toMatch(/^testapis\/basic\/enums\//);
+    });
+
+    it("should fail for non-message oneof members without ignore option", () => {
+      const testCase = createTestCase({
+        config: {
+          package: "testapis.oneof.non_message",
+          runtime: "ts-proto",
+        },
+      });
+
+      const result = executeGeneration(testCase);
+
+      expect(result.files).toHaveLength(0);
+      expect(result.error).toBeTruthy();
     });
   });
 

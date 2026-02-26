@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package testapis.options.field_nullability;
+
+import "graphql/schema.proto";
+
+message Message {
+  // Required.
+  uint64 user_id = 1
+    [(graphql.field) = {
+      output_nullability: NON_NULL,
+      input_nullability: NULLABLE,
+      partial_input_nullability: NON_NULL,
+    }];
+  // Required.
+  string body = 2;
+  // Required.
+  Status status = 3
+    [(graphql.field) = {
+      output_nullability: NULLABLE,
+      input_nullability: NULLABLE
+    }];
+
+  enum Status {
+    STATUS_UNSPECIFIED = 0;
+    DRAFT = 1;
+    PUBLISHED = 2;
+  }
+}

@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package testapis.oneof.message_only;
+
+message OneofParent {
+  string normal_field = 1;
+
+  // Required. disallow not_set.
+  oneof required_oneof_members {
+    OneofMemberMessage1 required_message1 = 2;
+    OneofMemberMessage2 required_message2 = 3;
+  }
+
+  oneof optional_oneof_members {
+    OneofMemberMessage1 optional_message1 = 4;
+    OneofMemberMessage2 optional_message2 = 5;
+  }
+}
+
+message OneofMemberMessage1 {
+  string body = 1;
+}
+
+message OneofMemberMessage2 {
+  string image_url = 1;
+}

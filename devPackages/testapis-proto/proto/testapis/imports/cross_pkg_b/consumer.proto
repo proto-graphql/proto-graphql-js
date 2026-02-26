@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package testapis.imports.cross_pkg_b;
+
+import "testapis/imports/cross_pkg_a/types.proto";
+
+message Consumer {
+  testapis.imports.cross_pkg_a.BaseMessage message = 1;
+  testapis.imports.cross_pkg_a.BaseEnum enum = 2;
+  testapis.imports.cross_pkg_a.Parent.Child nested_message = 3;
+  testapis.imports.cross_pkg_a.Parent.ChildEnum nested_enum = 4;
+}

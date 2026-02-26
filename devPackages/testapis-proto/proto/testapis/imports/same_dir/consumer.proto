@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package testapis.imports.same_dir;
+
+import "testapis/imports/same_dir/base.proto";
+
+message Consumer {
+  SharedMessage message = 1;
+  SharedEnum enum = 2;
+}

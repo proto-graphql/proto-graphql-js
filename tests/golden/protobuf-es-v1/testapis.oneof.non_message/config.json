@@ -1,0 +1,3 @@
+{
+  "additionalParams": ["ignore_non_message_oneof_fields"]
+}

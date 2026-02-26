@@ -10,16 +10,17 @@ export const OneofParentRequiredOneofMembers$Ref = builder.unionType(
     description: "Required. disallow not_set.",
     extensions: {
       protobufOneof: {
-        fullName: "testapis.oneof.OneofParent.required_oneof_members",
+        fullName:
+          "testapis.oneof.message_only.OneofParent.required_oneof_members",
         name: "required_oneof_members",
         messageName: "OneofParent",
-        package: "testapis.oneof",
+        package: "testapis.oneof.message_only",
         fields: [{
           name: "required_message1",
-          type: "testapis.oneof.OneofMemberMessage1",
+          type: "testapis.oneof.message_only.OneofMemberMessage1",
         }, {
           name: "required_message2",
-          type: "testapis.oneof.OneofMemberMessage2",
+          type: "testapis.oneof.message_only.OneofMemberMessage2",
         }],
       },
     },
@@ -31,25 +32,25 @@ export const OneofParentRequiredOneofMembers$Ref = builder.unionType(
 exports[`createOneofUnionTypeCode > protobuf-es > 'generates code for a squashed oneof union with .value accessor' 1`] = `
 "import { builder } from "../../builder";
 
-export const TestPrefixPrefixedMessageSquashedMessage$Ref = builder.unionType(
-  "TestPrefixPrefixedMessageSquashedMessage",
+export const PrefixedMessageSquashedMessage$Ref = builder.unionType(
+  "PrefixedMessageSquashedMessage",
   {
-    types: [
-      TestPrefixPrefixedMessageInnerMessage$Ref,
-      TestPrefixPrefixedMessageInnerMessage2$Ref,
-    ],
+    types: [PrefixedMessageInnerMessage$Ref, PrefixedMessageInnerMessage2$Ref],
     extensions: {
       protobufOneof: {
-        fullName: "testapis.extensions.PrefixedMessage.SquashedMessage",
+        fullName:
+          "testapis.options.message_and_field.PrefixedMessage.SquashedMessage",
         name: "SquashedMessage",
-        package: "testapis.extensions",
+        package: "testapis.options.message_and_field",
         fields: [{
           name: "oneof_field",
-          type: "testapis.extensions.PrefixedMessage.InnerMessage",
+          type:
+            "testapis.options.message_and_field.PrefixedMessage.InnerMessage",
           options: { "[graphql.object_type]": { squashUnion: true } },
         }, {
           name: "oneof_field_2",
-          type: "testapis.extensions.PrefixedMessage.InnerMessage2",
+          type:
+            "testapis.options.message_and_field.PrefixedMessage.InnerMessage2",
           options: { "[graphql.object_type]": { squashUnion: true } },
         }],
       },
@@ -68,16 +69,17 @@ export const OneofParentOptionalOneofMembers$Ref = builder.unionType(
     types: [OneofMemberMessage1$Ref, OneofMemberMessage2$Ref],
     extensions: {
       protobufOneof: {
-        fullName: "testapis.oneof.OneofParent.optional_oneof_members",
+        fullName:
+          "testapis.oneof.message_only.OneofParent.optional_oneof_members",
         name: "optional_oneof_members",
         messageName: "OneofParent",
-        package: "testapis.oneof",
+        package: "testapis.oneof.message_only",
         fields: [{
-          name: "optoinal_message1",
-          type: "testapis.oneof.OneofMemberMessage1",
+          name: "optional_message1",
+          type: "testapis.oneof.message_only.OneofMemberMessage1",
         }, {
-          name: "optoinal_message2",
-          type: "testapis.oneof.OneofMemberMessage2",
+          name: "optional_message2",
+          type: "testapis.oneof.message_only.OneofMemberMessage2",
         }],
       },
     },
@@ -91,7 +93,7 @@ exports[`createOneofUnionTypeCode > protobuf-es > 'generates code for imported o
 import {
   OneofMember1$Ref,
   OneofMember2$Ref,
-} from "./testapis/edgecases/import_oneof_member_from_other_file/member.pothos";
+} from "./testapis/imports/oneof_cross_file/member.pothos";
 
 export const OneofParentOneofField$Ref = builder.unionType(
   "OneofParentOneofField",
@@ -99,19 +101,16 @@ export const OneofParentOneofField$Ref = builder.unionType(
     types: [OneofMember1$Ref, OneofMember2$Ref],
     extensions: {
       protobufOneof: {
-        fullName:
-          "testapis.edgecases.import_oneof_member_from_other_file.OneofParent.oneof_field",
+        fullName: "testapis.imports.oneof_cross_file.OneofParent.oneof_field",
         name: "oneof_field",
         messageName: "OneofParent",
-        package: "testapis.edgecases.import_oneof_member_from_other_file",
+        package: "testapis.imports.oneof_cross_file",
         fields: [{
           name: "member1",
-          type:
-            "testapis.edgecases.import_oneof_member_from_other_file.OneofMember1",
+          type: "testapis.imports.oneof_cross_file.OneofMember1",
         }, {
           name: "member2",
-          type:
-            "testapis.edgecases.import_oneof_member_from_other_file.OneofMember2",
+          type: "testapis.imports.oneof_cross_file.OneofMember2",
         }],
       },
     },
@@ -130,16 +129,17 @@ export const OneofParentRequiredOneofMembers$Ref = builder.unionType(
     description: "Required. disallow not_set.",
     extensions: {
       protobufOneof: {
-        fullName: "testapis.oneof.OneofParent.required_oneof_members",
+        fullName:
+          "testapis.oneof.message_only.OneofParent.required_oneof_members",
         name: "required_oneof_members",
         messageName: "OneofParent",
-        package: "testapis.oneof",
+        package: "testapis.oneof.message_only",
         fields: [{
           name: "required_message1",
-          type: "testapis.oneof.OneofMemberMessage1",
+          type: "testapis.oneof.message_only.OneofMemberMessage1",
         }, {
           name: "required_message2",
-          type: "testapis.oneof.OneofMemberMessage2",
+          type: "testapis.oneof.message_only.OneofMemberMessage2",
         }],
       },
     },
@@ -151,25 +151,25 @@ export const OneofParentRequiredOneofMembers$Ref = builder.unionType(
 exports[`createOneofUnionTypeCode > protobuf-es-v1 > 'generates code for a squashed oneof union' 1`] = `
 "import { builder } from "../../builder";
 
-export const TestPrefixPrefixedMessageSquashedMessage$Ref = builder.unionType(
-  "TestPrefixPrefixedMessageSquashedMessage",
+export const PrefixedMessageSquashedMessage$Ref = builder.unionType(
+  "PrefixedMessageSquashedMessage",
   {
-    types: [
-      TestPrefixPrefixedMessageInnerMessage$Ref,
-      TestPrefixPrefixedMessageInnerMessage2$Ref,
-    ],
+    types: [PrefixedMessageInnerMessage$Ref, PrefixedMessageInnerMessage2$Ref],
     extensions: {
       protobufOneof: {
-        fullName: "testapis.extensions.PrefixedMessage.SquashedMessage",
+        fullName:
+          "testapis.options.message_and_field.PrefixedMessage.SquashedMessage",
         name: "SquashedMessage",
-        package: "testapis.extensions",
+        package: "testapis.options.message_and_field",
         fields: [{
           name: "oneof_field",
-          type: "testapis.extensions.PrefixedMessage.InnerMessage",
+          type:
+            "testapis.options.message_and_field.PrefixedMessage.InnerMessage",
           options: { "[graphql.object_type]": { squashUnion: true } },
         }, {
           name: "oneof_field_2",
-          type: "testapis.extensions.PrefixedMessage.InnerMessage2",
+          type:
+            "testapis.options.message_and_field.PrefixedMessage.InnerMessage2",
           options: { "[graphql.object_type]": { squashUnion: true } },
         }],
       },
@@ -188,16 +188,17 @@ export const OneofParentOptionalOneofMembers$Ref = builder.unionType(
     types: [OneofMemberMessage1$Ref, OneofMemberMessage2$Ref],
     extensions: {
       protobufOneof: {
-        fullName: "testapis.oneof.OneofParent.optional_oneof_members",
+        fullName:
+          "testapis.oneof.message_only.OneofParent.optional_oneof_members",
         name: "optional_oneof_members",
         messageName: "OneofParent",
-        package: "testapis.oneof",
+        package: "testapis.oneof.message_only",
         fields: [{
-          name: "optoinal_message1",
-          type: "testapis.oneof.OneofMemberMessage1",
+          name: "optional_message1",
+          type: "testapis.oneof.message_only.OneofMemberMessage1",
         }, {
-          name: "optoinal_message2",
-          type: "testapis.oneof.OneofMemberMessage2",
+          name: "optional_message2",
+          type: "testapis.oneof.message_only.OneofMemberMessage2",
         }],
       },
     },
@@ -216,16 +217,17 @@ export const OneofParentRequiredOneofMembers$Ref = builder.unionType(
     description: "Required. disallow not_set.",
     extensions: {
       protobufOneof: {
-        fullName: "testapis.oneof.OneofParent.required_oneof_members",
+        fullName:
+          "testapis.oneof.message_only.OneofParent.required_oneof_members",
         name: "required_oneof_members",
         messageName: "OneofParent",
-        package: "testapis.oneof",
+        package: "testapis.oneof.message_only",
         fields: [{
           name: "required_message1",
-          type: "testapis.oneof.OneofMemberMessage1",
+          type: "testapis.oneof.message_only.OneofMemberMessage1",
         }, {
           name: "required_message2",
-          type: "testapis.oneof.OneofMemberMessage2",
+          type: "testapis.oneof.message_only.OneofMemberMessage2",
         }],
       },
     },
@@ -237,25 +239,25 @@ export const OneofParentRequiredOneofMembers$Ref = builder.unionType(
 exports[`createOneofUnionTypeCode > ts-proto > 'generates code for a squashed oneof union' 1`] = `
 "import { builder } from "../../builder";
 
-export const TestPrefixPrefixedMessageSquashedMessage$Ref = builder.unionType(
-  "TestPrefixPrefixedMessageSquashedMessage",
+export const PrefixedMessageSquashedMessage$Ref = builder.unionType(
+  "PrefixedMessageSquashedMessage",
   {
-    types: [
-      TestPrefixPrefixedMessageInnerMessage$Ref,
-      TestPrefixPrefixedMessageInnerMessage2$Ref,
-    ],
+    types: [PrefixedMessageInnerMessage$Ref, PrefixedMessageInnerMessage2$Ref],
     extensions: {
       protobufOneof: {
-        fullName: "testapis.extensions.PrefixedMessage.SquashedMessage",
+        fullName:
+          "testapis.options.message_and_field.PrefixedMessage.SquashedMessage",
         name: "SquashedMessage",
-        package: "testapis.extensions",
+        package: "testapis.options.message_and_field",
         fields: [{
           name: "oneof_field",
-          type: "testapis.extensions.PrefixedMessage.InnerMessage",
+          type:
+            "testapis.options.message_and_field.PrefixedMessage.InnerMessage",
           options: { "[graphql.object_type]": { squashUnion: true } },
         }, {
           name: "oneof_field_2",
-          type: "testapis.extensions.PrefixedMessage.InnerMessage2",
+          type:
+            "testapis.options.message_and_field.PrefixedMessage.InnerMessage2",
           options: { "[graphql.object_type]": { squashUnion: true } },
         }],
       },
@@ -274,16 +276,17 @@ export const OneofParentOptionalOneofMembers$Ref = builder.unionType(
     types: [OneofMemberMessage1$Ref, OneofMemberMessage2$Ref],
     extensions: {
       protobufOneof: {
-        fullName: "testapis.oneof.OneofParent.optional_oneof_members",
+        fullName:
+          "testapis.oneof.message_only.OneofParent.optional_oneof_members",
         name: "optional_oneof_members",
         messageName: "OneofParent",
-        package: "testapis.oneof",
+        package: "testapis.oneof.message_only",
         fields: [{
-          name: "optoinal_message1",
-          type: "testapis.oneof.OneofMemberMessage1",
+          name: "optional_message1",
+          type: "testapis.oneof.message_only.OneofMemberMessage1",
         }, {
-          name: "optoinal_message2",
-          type: "testapis.oneof.OneofMemberMessage2",
+          name: "optional_message2",
+          type: "testapis.oneof.message_only.OneofMemberMessage2",
         }],
       },
     },
@@ -297,7 +300,7 @@ exports[`createOneofUnionTypeCode > ts-proto > 'generates code for imported oneo
 import {
   OneofMember1$Ref,
   OneofMember2$Ref,
-} from "./testapis/edgecases/import_oneof_member_from_other_file/member.pothos";
+} from "./testapis/imports/oneof_cross_file/member.pothos";
 
 export const OneofParentOneofField$Ref = builder.unionType(
   "OneofParentOneofField",
@@ -305,19 +308,16 @@ export const OneofParentOneofField$Ref = builder.unionType(
     types: [OneofMember1$Ref, OneofMember2$Ref],
     extensions: {
       protobufOneof: {
-        fullName:
-          "testapis.edgecases.import_oneof_member_from_other_file.OneofParent.oneof_field",
+        fullName: "testapis.imports.oneof_cross_file.OneofParent.oneof_field",
         name: "oneof_field",
         messageName: "OneofParent",
-        package: "testapis.edgecases.import_oneof_member_from_other_file",
+        package: "testapis.imports.oneof_cross_file",
         fields: [{
           name: "member1",
-          type:
-            "testapis.edgecases.import_oneof_member_from_other_file.OneofMember1",
+          type: "testapis.imports.oneof_cross_file.OneofMember1",
         }, {
           name: "member2",
-          type:
-            "testapis.edgecases.import_oneof_member_from_other_file.OneofMember2",
+          type: "testapis.imports.oneof_cross_file.OneofMember2",
         }],
       },
     },

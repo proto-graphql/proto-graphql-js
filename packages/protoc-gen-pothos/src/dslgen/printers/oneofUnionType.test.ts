@@ -125,7 +125,7 @@ const testSuites: TestSuite[] = [
       {
         test: "generates code for a required oneof union",
         args: {
-          packageName: "testapis.oneof",
+          packageName: "testapis.oneof.message_only",
           typeNameInProto: "OneofParent",
           oneofFieldName: "required_oneof_members",
         },
@@ -133,7 +133,7 @@ const testSuites: TestSuite[] = [
       {
         test: "generates code for an optional oneof union",
         args: {
-          packageName: "testapis.oneof",
+          packageName: "testapis.oneof.message_only",
           typeNameInProto: "OneofParent",
           oneofFieldName: "optional_oneof_members",
         },
@@ -141,14 +141,14 @@ const testSuites: TestSuite[] = [
       {
         test: "generates code for a squashed oneof union",
         args: {
-          packageName: "testapis.extensions",
+          packageName: "testapis.options.message_and_field",
           typeNameInProto: "PrefixedMessage.SquashedMessage",
         },
       } as SquashedTestCase,
       {
         test: "generates code for imported oneof member",
         args: {
-          packageName: "testapis.edgecases.import_oneof_member_from_other_file",
+          packageName: "testapis.imports.oneof_cross_file",
           typeNameInProto: "OneofParent",
           oneofFieldName: "oneof_field",
         },
@@ -171,7 +171,7 @@ const testSuites: TestSuite[] = [
       {
         test: "generates code for a required oneof union",
         args: {
-          packageName: "testapis.oneof",
+          packageName: "testapis.oneof.message_only",
           typeNameInProto: "OneofParent",
           oneofFieldName: "required_oneof_members",
         },
@@ -179,7 +179,7 @@ const testSuites: TestSuite[] = [
       {
         test: "generates code for an optional oneof union",
         args: {
-          packageName: "testapis.oneof",
+          packageName: "testapis.oneof.message_only",
           typeNameInProto: "OneofParent",
           oneofFieldName: "optional_oneof_members",
         },
@@ -187,7 +187,7 @@ const testSuites: TestSuite[] = [
       {
         test: "generates code for a squashed oneof union",
         args: {
-          packageName: "testapis.extensions",
+          packageName: "testapis.options.message_and_field",
           typeNameInProto: "PrefixedMessage.SquashedMessage",
         },
       } as SquashedTestCase,
@@ -209,7 +209,7 @@ const testSuites: TestSuite[] = [
       {
         test: "generates code for a required oneof union with .value accessor",
         args: {
-          packageName: "testapis.oneof",
+          packageName: "testapis.oneof.message_only",
           typeNameInProto: "OneofParent",
           oneofFieldName: "required_oneof_members",
         },
@@ -217,7 +217,7 @@ const testSuites: TestSuite[] = [
       {
         test: "generates code for an optional oneof union with .value accessor",
         args: {
-          packageName: "testapis.oneof",
+          packageName: "testapis.oneof.message_only",
           typeNameInProto: "OneofParent",
           oneofFieldName: "optional_oneof_members",
         },
@@ -225,14 +225,14 @@ const testSuites: TestSuite[] = [
       {
         test: "generates code for a squashed oneof union with .value accessor",
         args: {
-          packageName: "testapis.extensions",
+          packageName: "testapis.options.message_and_field",
           typeNameInProto: "PrefixedMessage.SquashedMessage",
         },
       } as SquashedTestCase,
       {
         test: "generates code for imported oneof member with .value accessor",
         args: {
-          packageName: "testapis.edgecases.import_oneof_member_from_other_file",
+          packageName: "testapis.imports.oneof_cross_file",
           typeNameInProto: "OneofParent",
           oneofFieldName: "oneof_field",
         },
