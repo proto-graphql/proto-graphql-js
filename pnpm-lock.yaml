@@ -159,8 +159,8 @@ importers:
   packages/@proto-graphql/scalars-protobuf-es:
     dependencies:
       '@bufbuild/protobuf':
-        specifier: catalog:protobuf-es-v1
-        version: 1.8.0
+        specifier: 'catalog:'
+        version: 2.10.2
     devDependencies:
       '@proto-graphql/tsconfig':
         specifier: workspace:*

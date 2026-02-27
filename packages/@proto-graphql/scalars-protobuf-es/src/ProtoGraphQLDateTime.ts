@@ -1,4 +1,10 @@
-import { Timestamp } from "@bufbuild/protobuf";
+import { isMessage } from "@bufbuild/protobuf";
+import {
+  type Timestamp,
+  TimestampSchema,
+  timestampDate,
+  timestampFromDate,
+} from "@bufbuild/protobuf/wkt";
 import { GraphQLScalarType } from "graphql";
 import { GraphQLDateTime } from "graphql-scalars";
 
@@ -11,15 +17,15 @@ export const ProtoGraphQLDateTime = /*#__PURE__*/ new GraphQLScalarType<
   name: dateTimeConfig.name,
   description: dateTimeConfig.description,
   serialize(value) {
-    if (value instanceof Timestamp) {
-      return dateTimeConfig.serialize(value.toDate());
+    if (isMessage(value, TimestampSchema)) {
+      return dateTimeConfig.serialize(timestampDate(value));
     }
     return dateTimeConfig.serialize(value);
   },
   parseValue(value) {
-    return Timestamp.fromDate(dateTimeConfig.parseValue(value));
+    return timestampFromDate(dateTimeConfig.parseValue(value));
   },
   parseLiteral(value) {
-    return Timestamp.fromDate(dateTimeConfig.parseLiteral(value));
+    return timestampFromDate(dateTimeConfig.parseLiteral(value));
   },
 });
