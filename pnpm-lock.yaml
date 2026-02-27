@@ -78,8 +78,8 @@ importers:
         specifier: 10.2.4
         version: 10.2.4
       ts-proto:
-        specifier: 2.2.0
-        version: 2.2.0
+        specifier: 2.11.4
+        version: 2.11.4
       tsup:
         specifier: 8.5.1
         version: 8.5.1(@swc/core@1.5.0(@swc/helpers@0.5.18))(postcss@8.5.6)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.2)
@@ -4342,14 +4342,14 @@ packages:
   ts-morph@27.0.2:
     resolution: {integrity: sha512-fhUhgeljcrdZ+9DZND1De1029PrE+cMkIP7ooqkLRTrRLTqcki2AstsyJm0vRNbTbVCNJ0idGlbBrfqc7/nA8w==}
 
-  ts-poet@6.9.0:
-    resolution: {integrity: sha512-roe6W6MeZmCjRmppyfOURklO5tQFQ6Sg7swURKkwYJvV7dbGCrK28um5+51iW3twdPRKtwarqFAVMU6G1mvnuQ==}
+  ts-poet@6.12.0:
+    resolution: {integrity: sha512-xo+iRNMWqyvXpFTaOAvLPA5QAWO6TZrSUs5s4Odaya3epqofBu/fMLHEWl8jPmjhA0s9sgj9sNvF1BmaQlmQkA==}
 
-  ts-proto-descriptors@2.0.0:
-    resolution: {integrity: sha512-wHcTH3xIv11jxgkX5OyCSFfw27agpInAd6yh89hKG6zqIXnjW9SYqSER2CVQxdPj4czeOhGagNvZBEbJPy7qkw==}
+  ts-proto-descriptors@2.1.0:
+    resolution: {integrity: sha512-S5EZYEQ6L9KLFfjSRpZWDIXDV/W7tAj8uW7pLsihIxyr62EAVSiKuVPwE8iWnr849Bqa53enex1jhDUcpgquzA==}
 
-  ts-proto@2.2.0:
-    resolution: {integrity: sha512-xzmnyrarUjPnY+Py4RyTh3lYmL9w5t/oTtRTo2rKF8laAAahpGZ/ELxkXFEZns5JVbgkYke3C17HN5iNvZOs4g==}
+  ts-proto@2.11.4:
+    resolution: {integrity: sha512-LGf1llYT/YsZRIzz3nzBei5mR8Sq0xmrL0cI36Pdiuok2V4PHiDuXQGP+D9i3NzChuwURPo8KAmGV1HLH0xHyw==}
     hasBin: true
 
   tslib@2.6.2:
@@ -8199,20 +8199,20 @@ snapshots:
       '@ts-morph/common': 0.28.1
       code-block-writer: 13.0.3
 
-  ts-poet@6.9.0:
+  ts-poet@6.12.0:
     dependencies:
       dprint-node: 1.0.8
 
-  ts-proto-descriptors@2.0.0:
+  ts-proto-descriptors@2.1.0:
     dependencies:
       '@bufbuild/protobuf': 2.10.2
 
-  ts-proto@2.2.0:
+  ts-proto@2.11.4:
     dependencies:
       '@bufbuild/protobuf': 2.10.2
       case-anything: 2.1.13
-      ts-poet: 6.9.0
-      ts-proto-descriptors: 2.0.0
+      ts-poet: 6.12.0
+      ts-proto-descriptors: 2.1.0
 
   tslib@2.6.2: {}
 

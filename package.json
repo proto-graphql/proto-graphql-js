@@ -24,7 +24,7 @@
     "@proto-graphql/tsconfig": "workspace:*",
     "@types/node": "24.10.13",
     "minimatch": "10.2.4",
-    "ts-proto": "2.2.0",
+    "ts-proto": "2.11.4",
     "tsup": "8.5.1",
     "tsx": "4.21.0",
     "turbo": "2.8.11",
