@@ -1,5 +1,11 @@
 # @proto-graphql/scalars-protobuf-es
 
+## 0.5.0
+
+### Minor Changes
+
+- [#491](https://github.com/proto-graphql/proto-graphql-js/pull/491) [`4b548f4`](https://github.com/proto-graphql/proto-graphql-js/commit/4b548f4b82304fea69e1c9cc4b58167edc6f8cca) Thanks [@izumin5210](https://github.com/izumin5210)! - Migrate to protobuf-es v2. Drop support for protobuf-es v1.
+
 ## 0.4.2
 
 ### Patch Changes
