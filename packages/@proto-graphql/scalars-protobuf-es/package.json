@@ -42,7 +42,7 @@
     "node": ">= 14.0.0"
   },
   "peerDependencies": {
-    "@bufbuild/protobuf": "catalog:protobuf-es-v1",
+    "@bufbuild/protobuf": "catalog:",
     "graphql": "^16.0.0",
     "graphql-scalars": "^1.23.0"
   },
