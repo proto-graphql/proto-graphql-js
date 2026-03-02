@@ -172,7 +172,9 @@ function protobufEsSalt(i: number): string {
 }
 
 function idealShapeName(desc: DescMessage | DescEnum, i: number): string {
-  return safeIdentifier(protobufEsIdentifierForNested(desc) + protobufEsSalt(i));
+  return safeIdentifier(
+    protobufEsIdentifierForNested(desc) + protobufEsSalt(i),
+  );
 }
 
 type NestedDesc = DescMessage | DescEnum | DescExtension | DescService;
@@ -217,7 +219,7 @@ const descNameCache = new WeakMap<
 function resolveProtobufEsDescName(proto: DescMessage | DescEnum): string {
   const file = proto.file;
 
-  let cached = descNameCache.get(file);
+  const cached = descNameCache.get(file);
   if (cached) {
     const name = cached.get(proto);
     if (name !== undefined) return name;
