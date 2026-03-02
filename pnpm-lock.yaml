@@ -687,6 +687,24 @@ importers:
         specifier: catalog:test
         version: 16.9.0
 
+  tests/golden/protobuf-es/testapis.basic.schema_name_collision:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: 'catalog:'
+        version: 2.10.2
+      '@pothos/core':
+        specifier: catalog:test
+        version: 3.41.1(graphql@16.9.0)
+      '@proto-graphql/e2e-testapis-protobuf-es-v2':
+        specifier: workspace:*
+        version: link:../../../testapis/protobuf-es-v2
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../../devPackages/tsconfig
+      graphql:
+        specifier: catalog:test
+        version: 16.9.0
+
   tests/golden/protobuf-es/testapis.basic.wktypes:
     dependencies:
       '@bufbuild/protobuf':

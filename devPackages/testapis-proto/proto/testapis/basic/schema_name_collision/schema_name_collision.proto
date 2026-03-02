@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package testapis.basic.schema_name_collision;
+
+message Foo {
+  string name = 1;
+}
+
+message FooSchema {
+  string value = 1;
+}

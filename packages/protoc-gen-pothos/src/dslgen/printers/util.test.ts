@@ -137,6 +137,31 @@ describe("protoSchemaSymbol", () => {
     expect(symbol.name).toBe("PrimitivesSchema");
     expect(symbol.from).toBe("./testapis/basic/scalars/scalars_pb");
   });
+
+  describe("schema name collision", () => {
+    test("adds salt suffix when Schema name collides with existing type name", () => {
+      // message Foo と message FooSchema が同一ファイルに存在する場合、
+      // protobuf-es は Foo の desc 名を FooSchema$ にリネームする
+      const descMsg = getDescMessage(
+        "testapis.basic.schema_name_collision",
+        "Foo",
+      );
+      const symbol = protoSchemaSymbol(descMsg, opts);
+
+      expect(symbol.name).toBe("FooSchema$");
+    });
+
+    test("generates normal Schema suffix when the type itself has Schema in its name", () => {
+      // FooSchema の desc 名は FooSchemaSchema（衝突しない）
+      const descMsg = getDescMessage(
+        "testapis.basic.schema_name_collision",
+        "FooSchema",
+      );
+      const symbol = protoSchemaSymbol(descMsg, opts);
+
+      expect(symbol.name).toBe("FooSchemaSchema");
+    });
+  });
 });
 
 describe("protobufCreateSymbol", () => {
