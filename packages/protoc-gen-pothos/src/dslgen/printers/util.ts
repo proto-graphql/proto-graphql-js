@@ -155,6 +155,8 @@ export function protoTypeSymbol(
  * protobuf-es の @bufbuild/protoplugin が行う名前衝突回避ロジックを再実装。
  * 同一ファイル内で shape 名 (型名) と desc 名 (Schema 定数名) が衝突する場合、
  * protobuf-es は salt suffix ($, $1, $2, ...) を付与する。
+ *
+ * @see {@link https://github.com/bufbuild/protobuf-es/blob/v2.10.2/packages/protoplugin/src/names.ts | @bufbuild/protoplugin names.ts}
  */
 export function protoSchemaSymbol(
   proto: DescMessage | DescEnum,
