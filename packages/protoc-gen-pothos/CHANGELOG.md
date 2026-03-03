@@ -1,5 +1,11 @@
 # protoc-gen-pothos
 
+## 0.7.1
+
+### Patch Changes
+
+- [#497](https://github.com/proto-graphql/proto-graphql-js/pull/497) [`7dbe41d`](https://github.com/proto-graphql/proto-graphql-js/commit/7dbe41d050f5f6335a4cd28a511f9f53f45999ae) Thanks [@izumin5210](https://github.com/izumin5210)! - fix: handle protobuf-es v2 Schema name collisions
+
 ## 0.7.0
 
 ### Minor Changes
