@@ -10,7 +10,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "^15.3.5",
+    "next": "^15.5.14",
     "nextra": "^4.4.0",
     "nextra-theme-docs": "^4.4.0",
     "react": "^19.1.0",
