@@ -57,8 +57,8 @@ importers:
         specifier: 2.4.4
         version: 2.4.4
       '@bufbuild/buf':
-        specifier: 1.66.0
-        version: 1.66.0
+        specifier: 1.68.4
+        version: 1.68.4
       '@bufbuild/protoc-gen-es':
         specifier: 'catalog:'
         version: 2.10.2(@bufbuild/protobuf@2.10.2)
@@ -1409,50 +1409,50 @@ packages:
   '@braintree/sanitize-url@7.1.2':
     resolution: {integrity: sha512-jigsZK+sMF/cuiB7sERuo9V7N9jx+dhmHHnQyDSVdpZwVutaBu7WvNYqMDLSgFgfB30n452TP3vjDAvFC973mA==}
 
-  '@bufbuild/buf-darwin-arm64@1.66.0':
-    resolution: {integrity: sha512-C9orXX4SSVYKEumWFEO2T6xKrXsrvij0uS8kR20sHt9MYuFke14y6DfnAvXINPZrNpDiyOTldG7BPQtR40poRw==}
+  '@bufbuild/buf-darwin-arm64@1.68.4':
+    resolution: {integrity: sha512-57VDmK/U8ysWLsydDy/UzQ4gxS8LZyBiAnq1WWk33aUCkHr1poDgAqdOSzjIlBqoe/Mx/+pbVk2/OuaiY8T6aQ==}
     engines: {node: '>=12'}
     cpu: [arm64]
     os: [darwin]
 
-  '@bufbuild/buf-darwin-x64@1.66.0':
-    resolution: {integrity: sha512-5I33S9UbimoBNCpOdMsmJHcW9NfxzKW5PsVrSyajpo+LL22Lfyha2ZO3JNhT/k3ZlGVvtpDAS9pRS0ouNKmGgA==}
+  '@bufbuild/buf-darwin-x64@1.68.4':
+    resolution: {integrity: sha512-B552Ke9CMDOIyCZGXqSeEej2+13B1PlesZj3j9DCQml86vVEJLVNw9JIUBRE47S31h0qx/Qzptm1N898gaaXTw==}
     engines: {node: '>=12'}
     cpu: [x64]
     os: [darwin]
 
-  '@bufbuild/buf-linux-aarch64@1.66.0':
-    resolution: {integrity: sha512-KFz9HukP3ACKfSe0fo+XbxndQR0kKCVLVfUkoc6qPUTrKn9lACnah6HlUtBlwanK95vg+MIMvy0DWoLYUX9cuA==}
+  '@bufbuild/buf-linux-aarch64@1.68.4':
+    resolution: {integrity: sha512-bbe/EQ6vr5ytdoE/llICbp2jPzMDPnT0F0RwlE2rm1sU6crYNJQPOg+QG/NVabL8XimLooRZ1WgPEeZFyAW/hw==}
     engines: {node: '>=12'}
     cpu: [arm64]
     os: [linux]
 
-  '@bufbuild/buf-linux-armv7@1.66.0':
-    resolution: {integrity: sha512-W56iEZtnqB4ww9JCyhIipPrwZVe/zQ5I0pmWrJF8Daw67qvRYtvP3NSxtF5f0yAoB0tQAXDoqIiB/Ypl1UOz0g==}
+  '@bufbuild/buf-linux-armv7@1.68.4':
+    resolution: {integrity: sha512-Q1SHNEYYiEpz/IwIfBrdVvgd8VCQlPue6J6IzMWNPCjwhhZViQNAMXIo4Huvz0Xhrwe3shYbdEx6uj/tu49dug==}
     engines: {node: '>=12'}
     cpu: [arm]
     os: [linux]
 
-  '@bufbuild/buf-linux-x64@1.66.0':
-    resolution: {integrity: sha512-6AYYyc2O32jnDjjHbyW9Oqcehd+PMw+34qVo+wGfaEgGwC+fyoL2oxcEmzsPyEvhY4mkYJRXaCb8p90Ndzd2vQ==}
+  '@bufbuild/buf-linux-x64@1.68.4':
+    resolution: {integrity: sha512-Bo8OaMc76+s23xDZ96LhHunBJYdwTyDOdLOvjiebMQ6MTkcPU/B+ecIwJtRj1FGh9NWWRpT/YaroTpOPVNXG/Q==}
     engines: {node: '>=12'}
     cpu: [x64]
     os: [linux]
 
-  '@bufbuild/buf-win32-arm64@1.66.0':
-    resolution: {integrity: sha512-S+CD5NZ6q0HCI0g0PTVypjSQ63LsLm1Svd7yG1MjKz9mQ83Vl6rYXuzmYYVi2cww7w5tDew8sYASZETewvEuxg==}
+  '@bufbuild/buf-win32-arm64@1.68.4':
+    resolution: {integrity: sha512-knbrAF8maJ+7GbsZ9Wp7GuZ72SEiBv/1/0vgZSgdzPn2VytciTM7HRGlsglk9sPTX18WlKZeOY/+pkJpC/RGRQ==}
     engines: {node: '>=12'}
     cpu: [arm64]
     os: [win32]
 
-  '@bufbuild/buf-win32-x64@1.66.0':
-    resolution: {integrity: sha512-uSPoWRaX8Qd5pHZt6zzRuZXr4Sdbqe4Pm1PmMax/SGUPacVpH1v9AGX1/BTgx+g+b4vLS5T4SGxTl9ngkQaY3Q==}
+  '@bufbuild/buf-win32-x64@1.68.4':
+    resolution: {integrity: sha512-JnUSCPNtmdSWaj9mA7ioLC2y8kpvX91FEYwxk3VrNukWtctiMTbhbS9CwbUdZuHjJSvWDLdKIS75Iyj16ufplg==}
     engines: {node: '>=12'}
     cpu: [x64]
     os: [win32]
 
-  '@bufbuild/buf@1.66.0':
-    resolution: {integrity: sha512-JSZT6OT8uKG2frScYNOS3Y4E+7wg1KSPQMKfLlbZZFnBoXwMqDdsxQF7O5ucameU+3DKRs+yQFI8tNQjFJ5T2g==}
+  '@bufbuild/buf@1.68.4':
+    resolution: {integrity: sha512-r+QG3mlQ1h4agDwYxnPz1AdVLubgt09sRLnnlLMj0MVUOWjdV92i/20ZmSxn6+thouGlpr2A+VKPgy8NShchrA==}
     engines: {node: '>=12'}
     hasBin: true
 
@@ -2659,6 +2659,7 @@ packages:
   '@xmldom/xmldom@0.9.8':
     resolution: {integrity: sha512-p96FSY54r+WJ50FIOsCOjyj/wavs8921hG5+kVMmZgKcvIKxMXHTrjNJvRgWa/zuX3B6t2lijLNFaOyuxUH+2A==}
     engines: {node: '>=14.6'}
+    deprecated: this version has critical issues, please update to the latest version
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -4763,36 +4764,36 @@ snapshots:
 
   '@braintree/sanitize-url@7.1.2': {}
 
-  '@bufbuild/buf-darwin-arm64@1.66.0':
+  '@bufbuild/buf-darwin-arm64@1.68.4':
     optional: true
 
-  '@bufbuild/buf-darwin-x64@1.66.0':
+  '@bufbuild/buf-darwin-x64@1.68.4':
     optional: true
 
-  '@bufbuild/buf-linux-aarch64@1.66.0':
+  '@bufbuild/buf-linux-aarch64@1.68.4':
     optional: true
 
-  '@bufbuild/buf-linux-armv7@1.66.0':
+  '@bufbuild/buf-linux-armv7@1.68.4':
     optional: true
 
-  '@bufbuild/buf-linux-x64@1.66.0':
+  '@bufbuild/buf-linux-x64@1.68.4':
     optional: true
 
-  '@bufbuild/buf-win32-arm64@1.66.0':
+  '@bufbuild/buf-win32-arm64@1.68.4':
     optional: true
 
-  '@bufbuild/buf-win32-x64@1.66.0':
+  '@bufbuild/buf-win32-x64@1.68.4':
     optional: true
 
-  '@bufbuild/buf@1.66.0':
+  '@bufbuild/buf@1.68.4':
     optionalDependencies:
-      '@bufbuild/buf-darwin-arm64': 1.66.0
-      '@bufbuild/buf-darwin-x64': 1.66.0
-      '@bufbuild/buf-linux-aarch64': 1.66.0
-      '@bufbuild/buf-linux-armv7': 1.66.0
-      '@bufbuild/buf-linux-x64': 1.66.0
-      '@bufbuild/buf-win32-arm64': 1.66.0
-      '@bufbuild/buf-win32-x64': 1.66.0
+      '@bufbuild/buf-darwin-arm64': 1.68.4
+      '@bufbuild/buf-darwin-x64': 1.68.4
+      '@bufbuild/buf-linux-aarch64': 1.68.4
+      '@bufbuild/buf-linux-armv7': 1.68.4
+      '@bufbuild/buf-linux-x64': 1.68.4
+      '@bufbuild/buf-win32-arm64': 1.68.4
+      '@bufbuild/buf-win32-x64': 1.68.4
 
   '@bufbuild/protobuf@1.8.0': {}
 
