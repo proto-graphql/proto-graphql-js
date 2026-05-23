@@ -42,8 +42,8 @@ function descLabel(desc: CommentedDesc): string {
     case "enum_value":
       return `enum_value ${desc.parent.typeName}.${desc.name}`;
     default: {
-      const _exhaustive: never = desc;
-      return `${(_exhaustive as { kind: string }).kind}`;
+      desc satisfies never;
+      throw "unreachable";
     }
   }
 }
