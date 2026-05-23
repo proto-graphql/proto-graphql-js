@@ -67,7 +67,9 @@ describe("getCommentsFor", () => {
       const registry = createFileRegistry(fds);
       // Pick the file whose package matches `pkg` so we exercise the actual
       // .proto under test rather than well-known transitively included files.
-      const targetFile = [...registry.files].find((f) => f.proto.package === pkg);
+      const targetFile = [...registry.files].find(
+        (f) => f.proto.package === pkg,
+      );
       if (!targetFile) {
         throw new Error(`could not find DescFile for ${pkg}`);
       }
@@ -77,16 +79,15 @@ describe("getCommentsFor", () => {
         expect(descs.length).toBeGreaterThan(0);
       });
 
-      it.each(descs.map((d) => [descLabel(d), d] as const))(
-        "matches @bufbuild/protoplugin.getComments for %s",
-        (_label, desc) => {
-          const expected = getComments(desc);
-          const actual = getCommentsFor(desc);
-          expect(actual.leading).toBe(expected.leading);
-          expect(actual.trailing).toBe(expected.trailing);
-          expect(actual.leadingDetached).toEqual(expected.leadingDetached);
-        },
-      );
+      it.each(
+        descs.map((d) => [descLabel(d), d] as const),
+      )("matches @bufbuild/protoplugin.getComments for %s", (_label, desc) => {
+        const expected = getComments(desc);
+        const actual = getCommentsFor(desc);
+        expect(actual.leading).toBe(expected.leading);
+        expect(actual.trailing).toBe(expected.trailing);
+        expect(actual.leadingDetached).toEqual(expected.leadingDetached);
+      });
     });
   }
 

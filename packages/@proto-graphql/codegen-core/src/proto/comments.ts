@@ -55,7 +55,10 @@ export function getCommentsFor(desc: CommentedDesc): Comments {
   const loc = ensureIndex(file).get(desc);
   if (!loc) return EMPTY;
   return {
-    leading: isFieldSet(loc, SourceCodeInfo_LocationSchema.field.leadingComments)
+    leading: isFieldSet(
+      loc,
+      SourceCodeInfo_LocationSchema.field.leadingComments,
+    )
       ? loc.leadingComments
       : undefined,
     trailing: isFieldSet(
