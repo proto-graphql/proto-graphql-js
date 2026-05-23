@@ -12,9 +12,9 @@ import {
   FieldDescriptorProto_Label,
   FieldDescriptorProto_Type,
 } from "@bufbuild/protobuf/wkt";
-import { getComments } from "@bufbuild/protoplugin";
 import { pascalCase } from "change-case";
 import * as extensions from "../__generated__/extensions/graphql/schema_pb.js";
+import { type CommentedDesc, getCommentsFor } from "../proto/comments.js";
 import {
   isEnumField,
   isMapField,
@@ -317,7 +317,7 @@ const behaviorComments = ["Required", "Input only", "Output only"] as const;
 function extractBehaviorComments(
   field: DescField | DescOneof,
 ): (typeof behaviorComments)[number][] {
-  return (getComments(field).leading?.trim() ?? "")
+  return (getCommentsFor(field).leading?.trim() ?? "")
     .split(/\.\s+/, 3)
     .slice(0, 2)
     .map((c) => c.replace(/\.\s*$/, ""))
@@ -326,10 +326,8 @@ function extractBehaviorComments(
     );
 }
 
-export function descriptionFromProto(
-  proto: Parameters<typeof getComments>[0],
-): string | null {
-  return getComments(proto).leading?.trim() || null;
+export function descriptionFromProto(proto: CommentedDesc): string | null {
+  return getCommentsFor(proto).leading?.trim() || null;
 }
 
 function getSchemaOptions(
