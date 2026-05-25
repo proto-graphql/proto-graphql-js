@@ -57,15 +57,15 @@ describe("parsePothosOptions", () => {
   });
 
   it("parses format=false", () => {
-    expect(
-      parsePothosOptions([{ key: "format", value: "false" }]).format,
-    ).toBe(false);
+    expect(parsePothosOptions([{ key: "format", value: "false" }]).format).toBe(
+      false,
+    );
   });
 
   it("parses format=true explicitly", () => {
-    expect(
-      parsePothosOptions([{ key: "format", value: "true" }]).format,
-    ).toBe(true);
+    expect(parsePothosOptions([{ key: "format", value: "true" }]).format).toBe(
+      true,
+    );
   });
 
   it("throws on non-bool format value", () => {
