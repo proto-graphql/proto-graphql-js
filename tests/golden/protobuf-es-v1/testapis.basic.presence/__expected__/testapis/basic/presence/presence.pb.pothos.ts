@@ -56,9 +56,8 @@ builder.objectType(Message$Ref, {
   },
 });
 
-export const NestedMessage$Ref = builder.objectRef<NestedMessage>(
-  "NestedMessage",
-);
+export const NestedMessage$Ref =
+  builder.objectRef<NestedMessage>("NestedMessage");
 builder.objectType(NestedMessage$Ref, {
   name: "NestedMessage",
   fields: (t) => ({
@@ -87,7 +86,8 @@ export type MessageInput$Shape = {
 };
 
 export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
-  .inputRef<MessageInput$Shape>("MessageInput").implement({
+  .inputRef<MessageInput$Shape>("MessageInput")
+  .implement({
     fields: (t) => ({
       requiredStringValue: t.field({
         type: "String",
@@ -141,28 +141,36 @@ export function MessageInput$toProto(
   });
 }
 
-export type NestedMessageInput$Shape = { body: NestedMessage["body"]; };
+export type NestedMessageInput$Shape = {
+  body: NestedMessage["body"];
+};
 
 export const NestedMessageInput$Ref: InputObjectRef<NestedMessageInput$Shape> =
-  builder.inputRef<NestedMessageInput$Shape>("NestedMessageInput").implement({
-    fields: (t) => ({
-      body: t.field({
-        type: "String",
-        required: true,
-        extensions: { protobufField: { name: "body", typeFullName: "string" } },
+  builder
+    .inputRef<NestedMessageInput$Shape>("NestedMessageInput")
+    .implement({
+      fields: (t) => ({
+        body: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: { name: "body", typeFullName: "string" },
+          },
+        }),
       }),
-    }),
-    extensions: {
-      protobufMessage: {
-        fullName: "testapis.basic.presence.NestedMessage",
-        name: "NestedMessage",
-        package: "testapis.basic.presence",
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.basic.presence.NestedMessage",
+          name: "NestedMessage",
+          package: "testapis.basic.presence",
+        },
       },
-    },
-  });
+    });
 
 export function NestedMessageInput$toProto(
   input: NestedMessageInput$Shape | null | undefined,
 ): NestedMessage {
-  return new NestedMessage({ body: input?.body ?? undefined });
+  return new NestedMessage({
+    body: input?.body ?? undefined,
+  });
 }

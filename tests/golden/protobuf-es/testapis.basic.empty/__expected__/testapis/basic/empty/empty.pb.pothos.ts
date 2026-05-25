@@ -10,9 +10,8 @@ import {
 } from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/basic/empty/empty_pb";
 import { InputObjectRef } from "@pothos/core";
 
-export const EmptyMessage$Ref = builder.objectRef<
-  MessageShape<typeof EmptyMessageSchema>
->("EmptyMessage");
+export const EmptyMessage$Ref =
+  builder.objectRef<MessageShape<typeof EmptyMessageSchema>>("EmptyMessage");
 builder.objectType(EmptyMessage$Ref, {
   name: "EmptyMessage",
   fields: (t) => ({

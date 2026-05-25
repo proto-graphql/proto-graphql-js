@@ -23,8 +23,10 @@ builder.objectType(A$Ref, {
     }),
   }),
   isTypeOf: (source) => {
-    return (source as A | { $type: string & {}; }).$type ===
-      "testapis.imports.transitive.A";
+    return (
+      (source as A | { $type: string & {} }).$type ===
+      "testapis.imports.transitive.A"
+    );
   },
   extensions: {
     protobufMessage: {
@@ -35,28 +37,30 @@ builder.objectType(A$Ref, {
   },
 });
 
-export type AInput$Shape = { b?: BInput$Shape | null; };
+export type AInput$Shape = {
+  b?: BInput$Shape | null;
+};
 
-export const AInput$Ref: InputObjectRef<AInput$Shape> = builder.inputRef<
-  AInput$Shape
->("AInput").implement({
-  fields: (t) => ({
-    b: t.field({
-      type: BInput$Ref,
-      required: false,
-      extensions: {
-        protobufField: {
-          name: "b",
-          typeFullName: "testapis.imports.transitive.B",
+export const AInput$Ref: InputObjectRef<AInput$Shape> = builder
+  .inputRef<AInput$Shape>("AInput")
+  .implement({
+    fields: (t) => ({
+      b: t.field({
+        type: BInput$Ref,
+        required: false,
+        extensions: {
+          protobufField: {
+            name: "b",
+            typeFullName: "testapis.imports.transitive.B",
+          },
         },
-      },
+      }),
     }),
-  }),
-  extensions: {
-    protobufMessage: {
-      fullName: "testapis.imports.transitive.A",
-      name: "A",
-      package: "testapis.imports.transitive",
+    extensions: {
+      protobufMessage: {
+        fullName: "testapis.imports.transitive.A",
+        name: "A",
+        package: "testapis.imports.transitive",
+      },
     },
-  },
-});
+  });

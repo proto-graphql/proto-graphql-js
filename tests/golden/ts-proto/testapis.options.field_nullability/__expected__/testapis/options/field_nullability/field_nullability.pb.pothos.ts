@@ -63,8 +63,10 @@ builder.objectType(Message$Ref, {
     }),
   }),
   isTypeOf: (source) => {
-    return (source as Message | { $type: string & {}; }).$type ===
-      "testapis.options.field_nullability.Message";
+    return (
+      (source as Message | { $type: string & {} }).$type ===
+      "testapis.options.field_nullability.Message"
+    );
   },
   extensions: {
     protobufMessage: {
@@ -82,7 +84,8 @@ export type MessageInput$Shape = {
 };
 
 export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
-  .inputRef<MessageInput$Shape>("MessageInput").implement({
+  .inputRef<MessageInput$Shape>("MessageInput")
+  .implement({
     fields: (t) => ({
       userId: t.field({
         type: "String",

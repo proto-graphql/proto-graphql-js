@@ -80,8 +80,10 @@ builder.objectType(Consumer$Ref, {
     }),
   }),
   isTypeOf: (source) => {
-    return (source as Consumer | { $type: string & {}; }).$type ===
-      "testapis.imports.cross_pkg_b.Consumer";
+    return (
+      (source as Consumer | { $type: string & {} }).$type ===
+      "testapis.imports.cross_pkg_b.Consumer"
+    );
   },
   extensions: {
     protobufMessage: {
@@ -100,7 +102,8 @@ export type ConsumerInput$Shape = {
 };
 
 export const ConsumerInput$Ref: InputObjectRef<ConsumerInput$Shape> = builder
-  .inputRef<ConsumerInput$Shape>("ConsumerInput").implement({
+  .inputRef<ConsumerInput$Shape>("ConsumerInput")
+  .implement({
     fields: (t) => ({
       message: t.field({
         type: BaseMessageInput$Ref,

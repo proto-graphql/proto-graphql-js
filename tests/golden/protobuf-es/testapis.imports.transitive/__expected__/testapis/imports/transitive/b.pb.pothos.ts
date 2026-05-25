@@ -38,32 +38,36 @@ builder.objectType(B$Ref, {
   },
 });
 
-export type BInput$Shape = { c?: CInput$Shape | null; };
+export type BInput$Shape = {
+  c?: CInput$Shape | null;
+};
 
-export const BInput$Ref: InputObjectRef<BInput$Shape> = builder.inputRef<
-  BInput$Shape
->("BInput").implement({
-  fields: (t) => ({
-    c: t.field({
-      type: CInput$Ref,
-      required: false,
-      extensions: {
-        protobufField: {
-          name: "c",
-          typeFullName: "testapis.imports.transitive.C",
+export const BInput$Ref: InputObjectRef<BInput$Shape> = builder
+  .inputRef<BInput$Shape>("BInput")
+  .implement({
+    fields: (t) => ({
+      c: t.field({
+        type: CInput$Ref,
+        required: false,
+        extensions: {
+          protobufField: {
+            name: "c",
+            typeFullName: "testapis.imports.transitive.C",
+          },
         },
-      },
+      }),
     }),
-  }),
-  extensions: {
-    protobufMessage: {
-      fullName: "testapis.imports.transitive.B",
-      name: "B",
-      package: "testapis.imports.transitive",
+    extensions: {
+      protobufMessage: {
+        fullName: "testapis.imports.transitive.B",
+        name: "B",
+        package: "testapis.imports.transitive",
+      },
     },
-  },
-}) as InputObjectRef<BInput$Shape>;
+  }) as InputObjectRef<BInput$Shape>;
 
 export function BInput$toProto(input: BInput$Shape | null | undefined): B {
-  return create(BSchema, { c: input?.c ? CInput$toProto(input.c) : undefined });
+  return create(BSchema, {
+    c: input?.c ? CInput$toProto(input.c) : undefined,
+  });
 }

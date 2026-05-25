@@ -13,9 +13,8 @@ import {
 } from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/basic/nested/nested_pb";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 
-export const ParentMessage$Ref = builder.objectRef<
-  MessageShape<typeof ParentMessageSchema>
->("ParentMessage");
+export const ParentMessage$Ref =
+  builder.objectRef<MessageShape<typeof ParentMessageSchema>>("ParentMessage");
 builder.objectType(ParentMessage$Ref, {
   name: "ParentMessage",
   fields: (t) => ({
@@ -99,42 +98,46 @@ export type ParentMessageInput$Shape = {
 };
 
 export const ParentMessageInput$Ref: InputObjectRef<ParentMessageInput$Shape> =
-  builder.inputRef<ParentMessageInput$Shape>("ParentMessageInput").implement({
-    fields: (t) => ({
-      body: t.field({
-        type: "String",
-        required: true,
-        extensions: { protobufField: { name: "body", typeFullName: "string" } },
-      }),
-      nested: t.field({
-        type: ParentMessageNestedMessageInput$Ref,
-        required: false,
-        extensions: {
-          protobufField: {
-            name: "nested",
-            typeFullName: "testapis.basic.nested.ParentMessage.NestedMessage",
+  builder
+    .inputRef<ParentMessageInput$Shape>("ParentMessageInput")
+    .implement({
+      fields: (t) => ({
+        body: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: { name: "body", typeFullName: "string" },
           },
-        },
-      }),
-      nestedEnum: t.field({
-        type: ParentMessageNestedEnum$Ref,
-        required: false,
-        extensions: {
-          protobufField: {
-            name: "nested_enum",
-            typeFullName: "testapis.basic.nested.ParentMessage.NestedEnum",
+        }),
+        nested: t.field({
+          type: ParentMessageNestedMessageInput$Ref,
+          required: false,
+          extensions: {
+            protobufField: {
+              name: "nested",
+              typeFullName: "testapis.basic.nested.ParentMessage.NestedMessage",
+            },
           },
-        },
+        }),
+        nestedEnum: t.field({
+          type: ParentMessageNestedEnum$Ref,
+          required: false,
+          extensions: {
+            protobufField: {
+              name: "nested_enum",
+              typeFullName: "testapis.basic.nested.ParentMessage.NestedEnum",
+            },
+          },
+        }),
       }),
-    }),
-    extensions: {
-      protobufMessage: {
-        fullName: "testapis.basic.nested.ParentMessage",
-        name: "ParentMessage",
-        package: "testapis.basic.nested",
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.basic.nested.ParentMessage",
+          name: "ParentMessage",
+          package: "testapis.basic.nested",
+        },
       },
-    },
-  }) as InputObjectRef<ParentMessageInput$Shape>;
+    }) as InputObjectRef<ParentMessageInput$Shape>;
 
 export function ParentMessageInput$toProto(
   input: ParentMessageInput$Shape | null | undefined,
@@ -152,28 +155,29 @@ export type ParentMessageNestedMessageInput$Shape = {
   nestedBody: ParentMessage_NestedMessage["nestedBody"];
 };
 
-export const ParentMessageNestedMessageInput$Ref: InputObjectRef<
-  ParentMessageNestedMessageInput$Shape
-> = builder.inputRef<ParentMessageNestedMessageInput$Shape>(
-  "ParentMessageNestedMessageInput",
-).implement({
-  fields: (t) => ({
-    nestedBody: t.field({
-      type: "String",
-      required: true,
+export const ParentMessageNestedMessageInput$Ref: InputObjectRef<ParentMessageNestedMessageInput$Shape> =
+  builder
+    .inputRef<ParentMessageNestedMessageInput$Shape>(
+      "ParentMessageNestedMessageInput",
+    )
+    .implement({
+      fields: (t) => ({
+        nestedBody: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: { name: "nested_body", typeFullName: "string" },
+          },
+        }),
+      }),
       extensions: {
-        protobufField: { name: "nested_body", typeFullName: "string" },
+        protobufMessage: {
+          fullName: "testapis.basic.nested.ParentMessage.NestedMessage",
+          name: "NestedMessage",
+          package: "testapis.basic.nested",
+        },
       },
-    }),
-  }),
-  extensions: {
-    protobufMessage: {
-      fullName: "testapis.basic.nested.ParentMessage.NestedMessage",
-      name: "NestedMessage",
-      package: "testapis.basic.nested",
-    },
-  },
-}) as InputObjectRef<ParentMessageNestedMessageInput$Shape>;
+    }) as InputObjectRef<ParentMessageNestedMessageInput$Shape>;
 
 export function ParentMessageNestedMessageInput$toProto(
   input: ParentMessageNestedMessageInput$Shape | null | undefined,

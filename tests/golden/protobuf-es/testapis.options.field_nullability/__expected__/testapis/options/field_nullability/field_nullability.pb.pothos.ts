@@ -11,9 +11,8 @@ import {
 } from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/options/field_nullability/field_nullability_pb";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 
-export const Message$Ref = builder.objectRef<
-  MessageShape<typeof MessageSchema>
->("Message");
+export const Message$Ref =
+  builder.objectRef<MessageShape<typeof MessageSchema>>("Message");
 builder.objectType(Message$Ref, {
   name: "Message",
   fields: (t) => ({
@@ -85,7 +84,8 @@ export type MessageInput$Shape = {
 };
 
 export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
-  .inputRef<MessageInput$Shape>("MessageInput").implement({
+  .inputRef<MessageInput$Shape>("MessageInput")
+  .implement({
     fields: (t) => ({
       userId: t.field({
         type: "Int64",

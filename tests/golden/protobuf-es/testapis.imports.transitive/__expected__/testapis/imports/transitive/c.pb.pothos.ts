@@ -32,27 +32,31 @@ builder.objectType(C$Ref, {
   },
 });
 
-export type CInput$Shape = { body: C["body"]; };
+export type CInput$Shape = {
+  body: C["body"];
+};
 
-export const CInput$Ref: InputObjectRef<CInput$Shape> = builder.inputRef<
-  CInput$Shape
->("CInput").implement({
-  fields: (t) => ({
-    body: t.field({
-      type: "String",
-      required: true,
-      extensions: { protobufField: { name: "body", typeFullName: "string" } },
+export const CInput$Ref: InputObjectRef<CInput$Shape> = builder
+  .inputRef<CInput$Shape>("CInput")
+  .implement({
+    fields: (t) => ({
+      body: t.field({
+        type: "String",
+        required: true,
+        extensions: { protobufField: { name: "body", typeFullName: "string" } },
+      }),
     }),
-  }),
-  extensions: {
-    protobufMessage: {
-      fullName: "testapis.imports.transitive.C",
-      name: "C",
-      package: "testapis.imports.transitive",
+    extensions: {
+      protobufMessage: {
+        fullName: "testapis.imports.transitive.C",
+        name: "C",
+        package: "testapis.imports.transitive",
+      },
     },
-  },
-}) as InputObjectRef<CInput$Shape>;
+  }) as InputObjectRef<CInput$Shape>;
 
 export function CInput$toProto(input: CInput$Shape | null | undefined): C {
-  return create(CSchema, { body: input?.body ?? undefined });
+  return create(CSchema, {
+    body: input?.body ?? undefined,
+  });
 }

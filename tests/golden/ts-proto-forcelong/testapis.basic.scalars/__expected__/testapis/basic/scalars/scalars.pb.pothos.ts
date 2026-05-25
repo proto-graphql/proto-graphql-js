@@ -65,8 +65,10 @@ builder.objectType(Message$Ref, {
     }),
   }),
   isTypeOf: (source) => {
-    return (source as Message | { $type: string & {}; }).$type ===
-      "testapis.basic.scalars.Message";
+    return (
+      (source as Message | { $type: string & {} }).$type ===
+      "testapis.basic.scalars.Message"
+    );
   },
   extensions: {
     protobufMessage: {
@@ -359,8 +361,10 @@ builder.objectType(Primitives$Ref, {
     }),
   }),
   isTypeOf: (source) => {
-    return (source as Primitives | { $type: string & {}; }).$type ===
-      "testapis.basic.scalars.Primitives";
+    return (
+      (source as Primitives | { $type: string & {} }).$type ===
+      "testapis.basic.scalars.Primitives"
+    );
   },
   extensions: {
     protobufMessage: {
@@ -379,7 +383,8 @@ export type MessageInput$Shape = {
 };
 
 export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
-  .inputRef<MessageInput$Shape>("MessageInput").implement({
+  .inputRef<MessageInput$Shape>("MessageInput")
+  .implement({
     fields: (t) => ({
       requiredPrimitives: t.field({
         type: PrimitivesInput$Ref,
@@ -469,308 +474,316 @@ export type PrimitivesInput$Shape = {
 };
 
 export const PrimitivesInput$Ref: InputObjectRef<PrimitivesInput$Shape> =
-  builder.inputRef<PrimitivesInput$Shape>("PrimitivesInput").implement({
-    fields: (t) => ({
-      requiredDoubleValue: t.field({
-        type: "Float",
-        required: true,
-        extensions: {
-          protobufField: {
-            name: "required_double_value",
-            typeFullName: "double",
+  builder
+    .inputRef<PrimitivesInput$Shape>("PrimitivesInput")
+    .implement({
+      fields: (t) => ({
+        requiredDoubleValue: t.field({
+          type: "Float",
+          required: true,
+          extensions: {
+            protobufField: {
+              name: "required_double_value",
+              typeFullName: "double",
+            },
           },
-        },
-      }),
-      requiredFloatValue: t.field({
-        type: "Float",
-        required: true,
-        extensions: {
-          protobufField: {
-            name: "required_float_value",
-            typeFullName: "float",
+        }),
+        requiredFloatValue: t.field({
+          type: "Float",
+          required: true,
+          extensions: {
+            protobufField: {
+              name: "required_float_value",
+              typeFullName: "float",
+            },
           },
-        },
-      }),
-      requiredInt32Value: t.field({
-        type: "Int",
-        required: true,
-        extensions: {
-          protobufField: {
-            name: "required_int32_value",
-            typeFullName: "int32",
+        }),
+        requiredInt32Value: t.field({
+          type: "Int",
+          required: true,
+          extensions: {
+            protobufField: {
+              name: "required_int32_value",
+              typeFullName: "int32",
+            },
           },
-        },
-      }),
-      requiredInt64Value: t.field({
-        type: "Int",
-        required: true,
-        extensions: {
-          protobufField: {
-            name: "required_int64_value",
-            typeFullName: "int64",
+        }),
+        requiredInt64Value: t.field({
+          type: "Int",
+          required: true,
+          extensions: {
+            protobufField: {
+              name: "required_int64_value",
+              typeFullName: "int64",
+            },
           },
-        },
-      }),
-      requiredUint32Value: t.field({
-        type: "Int",
-        required: true,
-        extensions: {
-          protobufField: {
-            name: "required_uint32_value",
-            typeFullName: "uint32",
+        }),
+        requiredUint32Value: t.field({
+          type: "Int",
+          required: true,
+          extensions: {
+            protobufField: {
+              name: "required_uint32_value",
+              typeFullName: "uint32",
+            },
           },
-        },
-      }),
-      requiredUint64Value: t.field({
-        type: "Int",
-        required: true,
-        extensions: {
-          protobufField: {
-            name: "required_uint64_value",
-            typeFullName: "uint64",
+        }),
+        requiredUint64Value: t.field({
+          type: "Int",
+          required: true,
+          extensions: {
+            protobufField: {
+              name: "required_uint64_value",
+              typeFullName: "uint64",
+            },
           },
-        },
-      }),
-      requiredSint32Value: t.field({
-        type: "Int",
-        required: true,
-        extensions: {
-          protobufField: {
-            name: "required_sint32_value",
-            typeFullName: "sint32",
+        }),
+        requiredSint32Value: t.field({
+          type: "Int",
+          required: true,
+          extensions: {
+            protobufField: {
+              name: "required_sint32_value",
+              typeFullName: "sint32",
+            },
           },
-        },
-      }),
-      requiredSint64Value: t.field({
-        type: "Int",
-        required: true,
-        extensions: {
-          protobufField: {
-            name: "required_sint64_value",
-            typeFullName: "sint64",
+        }),
+        requiredSint64Value: t.field({
+          type: "Int",
+          required: true,
+          extensions: {
+            protobufField: {
+              name: "required_sint64_value",
+              typeFullName: "sint64",
+            },
           },
-        },
-      }),
-      requiredFixed32Value: t.field({
-        type: "Int",
-        required: true,
-        extensions: {
-          protobufField: {
-            name: "required_fixed32_value",
-            typeFullName: "fixed32",
+        }),
+        requiredFixed32Value: t.field({
+          type: "Int",
+          required: true,
+          extensions: {
+            protobufField: {
+              name: "required_fixed32_value",
+              typeFullName: "fixed32",
+            },
           },
-        },
-      }),
-      requiredFixed64Value: t.field({
-        type: "Int",
-        required: true,
-        extensions: {
-          protobufField: {
-            name: "required_fixed64_value",
-            typeFullName: "fixed64",
+        }),
+        requiredFixed64Value: t.field({
+          type: "Int",
+          required: true,
+          extensions: {
+            protobufField: {
+              name: "required_fixed64_value",
+              typeFullName: "fixed64",
+            },
           },
-        },
-      }),
-      requiredSfixed32Value: t.field({
-        type: "Int",
-        required: true,
-        extensions: {
-          protobufField: {
-            name: "required_sfixed32_value",
-            typeFullName: "sfixed32",
+        }),
+        requiredSfixed32Value: t.field({
+          type: "Int",
+          required: true,
+          extensions: {
+            protobufField: {
+              name: "required_sfixed32_value",
+              typeFullName: "sfixed32",
+            },
           },
-        },
-      }),
-      requiredSfixed64Value: t.field({
-        type: "Int",
-        required: true,
-        extensions: {
-          protobufField: {
-            name: "required_sfixed64_value",
-            typeFullName: "sfixed64",
+        }),
+        requiredSfixed64Value: t.field({
+          type: "Int",
+          required: true,
+          extensions: {
+            protobufField: {
+              name: "required_sfixed64_value",
+              typeFullName: "sfixed64",
+            },
           },
-        },
-      }),
-      requiredBoolValue: t.field({
-        type: "Boolean",
-        required: true,
-        extensions: {
-          protobufField: { name: "required_bool_value", typeFullName: "bool" },
-        },
-      }),
-      requiredStringValue: t.field({
-        type: "String",
-        required: true,
-        extensions: {
-          protobufField: {
-            name: "required_string_value",
-            typeFullName: "string",
+        }),
+        requiredBoolValue: t.field({
+          type: "Boolean",
+          required: true,
+          extensions: {
+            protobufField: {
+              name: "required_bool_value",
+              typeFullName: "bool",
+            },
           },
-        },
-      }),
-      requiredBytesValue: t.field({
-        type: "Byte",
-        required: true,
-        extensions: {
-          protobufField: {
-            name: "required_bytes_value",
-            typeFullName: "bytes",
+        }),
+        requiredStringValue: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: {
+              name: "required_string_value",
+              typeFullName: "string",
+            },
           },
-        },
-      }),
-      requiredDoubleValues: t.field({
-        type: ["Float"],
-        required: { list: true, items: true },
-        extensions: {
-          protobufField: {
-            name: "required_double_values",
-            typeFullName: "double",
+        }),
+        requiredBytesValue: t.field({
+          type: "Byte",
+          required: true,
+          extensions: {
+            protobufField: {
+              name: "required_bytes_value",
+              typeFullName: "bytes",
+            },
           },
-        },
-      }),
-      requiredFloatValues: t.field({
-        type: ["Float"],
-        required: { list: true, items: true },
-        extensions: {
-          protobufField: {
-            name: "required_float_values",
-            typeFullName: "float",
+        }),
+        requiredDoubleValues: t.field({
+          type: ["Float"],
+          required: { list: true, items: true },
+          extensions: {
+            protobufField: {
+              name: "required_double_values",
+              typeFullName: "double",
+            },
           },
-        },
-      }),
-      requiredInt32Values: t.field({
-        type: ["Int"],
-        required: { list: true, items: true },
-        extensions: {
-          protobufField: {
-            name: "required_int32_values",
-            typeFullName: "int32",
+        }),
+        requiredFloatValues: t.field({
+          type: ["Float"],
+          required: { list: true, items: true },
+          extensions: {
+            protobufField: {
+              name: "required_float_values",
+              typeFullName: "float",
+            },
           },
-        },
-      }),
-      requiredInt64Values: t.field({
-        type: ["Int"],
-        required: { list: true, items: true },
-        extensions: {
-          protobufField: {
-            name: "required_int64_values",
-            typeFullName: "int64",
+        }),
+        requiredInt32Values: t.field({
+          type: ["Int"],
+          required: { list: true, items: true },
+          extensions: {
+            protobufField: {
+              name: "required_int32_values",
+              typeFullName: "int32",
+            },
           },
-        },
-      }),
-      requiredUint32Values: t.field({
-        type: ["Int"],
-        required: { list: true, items: true },
-        extensions: {
-          protobufField: {
-            name: "required_uint32_values",
-            typeFullName: "uint32",
+        }),
+        requiredInt64Values: t.field({
+          type: ["Int"],
+          required: { list: true, items: true },
+          extensions: {
+            protobufField: {
+              name: "required_int64_values",
+              typeFullName: "int64",
+            },
           },
-        },
-      }),
-      requiredUint64Values: t.field({
-        type: ["Int"],
-        required: { list: true, items: true },
-        extensions: {
-          protobufField: {
-            name: "required_uint64_values",
-            typeFullName: "uint64",
+        }),
+        requiredUint32Values: t.field({
+          type: ["Int"],
+          required: { list: true, items: true },
+          extensions: {
+            protobufField: {
+              name: "required_uint32_values",
+              typeFullName: "uint32",
+            },
           },
-        },
-      }),
-      requiredSint32Values: t.field({
-        type: ["Int"],
-        required: { list: true, items: true },
-        extensions: {
-          protobufField: {
-            name: "required_sint32_values",
-            typeFullName: "sint32",
+        }),
+        requiredUint64Values: t.field({
+          type: ["Int"],
+          required: { list: true, items: true },
+          extensions: {
+            protobufField: {
+              name: "required_uint64_values",
+              typeFullName: "uint64",
+            },
           },
-        },
-      }),
-      requiredSint64Values: t.field({
-        type: ["Int"],
-        required: { list: true, items: true },
-        extensions: {
-          protobufField: {
-            name: "required_sint64_values",
-            typeFullName: "sint64",
+        }),
+        requiredSint32Values: t.field({
+          type: ["Int"],
+          required: { list: true, items: true },
+          extensions: {
+            protobufField: {
+              name: "required_sint32_values",
+              typeFullName: "sint32",
+            },
           },
-        },
-      }),
-      requiredFixed32Values: t.field({
-        type: ["Int"],
-        required: { list: true, items: true },
-        extensions: {
-          protobufField: {
-            name: "required_fixed32_values",
-            typeFullName: "fixed32",
+        }),
+        requiredSint64Values: t.field({
+          type: ["Int"],
+          required: { list: true, items: true },
+          extensions: {
+            protobufField: {
+              name: "required_sint64_values",
+              typeFullName: "sint64",
+            },
           },
-        },
-      }),
-      requiredFixed64Values: t.field({
-        type: ["Int"],
-        required: { list: true, items: true },
-        extensions: {
-          protobufField: {
-            name: "required_fixed64_values",
-            typeFullName: "fixed64",
+        }),
+        requiredFixed32Values: t.field({
+          type: ["Int"],
+          required: { list: true, items: true },
+          extensions: {
+            protobufField: {
+              name: "required_fixed32_values",
+              typeFullName: "fixed32",
+            },
           },
-        },
-      }),
-      requiredSfixed32Values: t.field({
-        type: ["Int"],
-        required: { list: true, items: true },
-        extensions: {
-          protobufField: {
-            name: "required_sfixed32_values",
-            typeFullName: "sfixed32",
+        }),
+        requiredFixed64Values: t.field({
+          type: ["Int"],
+          required: { list: true, items: true },
+          extensions: {
+            protobufField: {
+              name: "required_fixed64_values",
+              typeFullName: "fixed64",
+            },
           },
-        },
-      }),
-      requiredSfixed64Values: t.field({
-        type: ["Int"],
-        required: { list: true, items: true },
-        extensions: {
-          protobufField: {
-            name: "required_sfixed64_values",
-            typeFullName: "sfixed64",
+        }),
+        requiredSfixed32Values: t.field({
+          type: ["Int"],
+          required: { list: true, items: true },
+          extensions: {
+            protobufField: {
+              name: "required_sfixed32_values",
+              typeFullName: "sfixed32",
+            },
           },
-        },
-      }),
-      requiredBoolValues: t.field({
-        type: ["Boolean"],
-        required: { list: true, items: true },
-        extensions: {
-          protobufField: { name: "required_bool_values", typeFullName: "bool" },
-        },
-      }),
-      requiredStringValues: t.field({
-        type: ["String"],
-        required: { list: true, items: true },
-        extensions: {
-          protobufField: {
-            name: "required_string_values",
-            typeFullName: "string",
+        }),
+        requiredSfixed64Values: t.field({
+          type: ["Int"],
+          required: { list: true, items: true },
+          extensions: {
+            protobufField: {
+              name: "required_sfixed64_values",
+              typeFullName: "sfixed64",
+            },
           },
-        },
-      }),
-      requiredBytesValues: t.field({
-        type: ["Byte"],
-        required: { list: true, items: true },
-        extensions: {
-          protobufField: {
-            name: "required_bytes_values",
-            typeFullName: "bytes",
+        }),
+        requiredBoolValues: t.field({
+          type: ["Boolean"],
+          required: { list: true, items: true },
+          extensions: {
+            protobufField: {
+              name: "required_bool_values",
+              typeFullName: "bool",
+            },
           },
-        },
+        }),
+        requiredStringValues: t.field({
+          type: ["String"],
+          required: { list: true, items: true },
+          extensions: {
+            protobufField: {
+              name: "required_string_values",
+              typeFullName: "string",
+            },
+          },
+        }),
+        requiredBytesValues: t.field({
+          type: ["Byte"],
+          required: { list: true, items: true },
+          extensions: {
+            protobufField: {
+              name: "required_bytes_values",
+              typeFullName: "bytes",
+            },
+          },
+        }),
       }),
-    }),
-    extensions: {
-      protobufMessage: {
-        fullName: "testapis.basic.scalars.Primitives",
-        name: "Primitives",
-        package: "testapis.basic.scalars",
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.basic.scalars.Primitives",
+          name: "Primitives",
+          package: "testapis.basic.scalars",
+        },
       },
-    },
-  });
+    });

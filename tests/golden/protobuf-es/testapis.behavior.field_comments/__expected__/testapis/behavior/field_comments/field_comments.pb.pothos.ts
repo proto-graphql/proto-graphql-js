@@ -120,69 +120,71 @@ export type FieldBehaviorCommentsMessageInput$Shape = {
   inputOnlyField?: FieldBehaviorCommentsMessagePostInput$Shape | null;
 };
 
-export const FieldBehaviorCommentsMessageInput$Ref: InputObjectRef<
-  FieldBehaviorCommentsMessageInput$Shape
-> = builder.inputRef<FieldBehaviorCommentsMessageInput$Shape>(
-  "FieldBehaviorCommentsMessageInput",
-).implement({
-  fields: (t) => ({
-    requiredField: t.field({
-      type: FieldBehaviorCommentsMessagePostInput$Ref,
-      required: true,
-      description: "Required.",
+export const FieldBehaviorCommentsMessageInput$Ref: InputObjectRef<FieldBehaviorCommentsMessageInput$Shape> =
+  builder
+    .inputRef<FieldBehaviorCommentsMessageInput$Shape>(
+      "FieldBehaviorCommentsMessageInput",
+    )
+    .implement({
+      fields: (t) => ({
+        requiredField: t.field({
+          type: FieldBehaviorCommentsMessagePostInput$Ref,
+          required: true,
+          description: "Required.",
+          extensions: {
+            protobufField: {
+              name: "required_field",
+              typeFullName:
+                "testapis.behavior.field_comments.FieldBehaviorCommentsMessage.Post",
+            },
+          },
+        }),
+        requiredInputOnlyField: t.field({
+          type: FieldBehaviorCommentsMessagePostInput$Ref,
+          required: true,
+          description: "Required. Input only.",
+          extensions: {
+            protobufField: {
+              name: "required_input_only_field",
+              typeFullName:
+                "testapis.behavior.field_comments.FieldBehaviorCommentsMessage.Post",
+            },
+          },
+        }),
+        inputOnlyRequiredField: t.field({
+          type: FieldBehaviorCommentsMessagePostInput$Ref,
+          required: true,
+          description: "Input only. Required.",
+          extensions: {
+            protobufField: {
+              name: "input_only_required_field",
+              typeFullName:
+                "testapis.behavior.field_comments.FieldBehaviorCommentsMessage.Post",
+            },
+          },
+        }),
+        inputOnlyField: t.field({
+          type: FieldBehaviorCommentsMessagePostInput$Ref,
+          required: false,
+          description: "Input only.",
+          extensions: {
+            protobufField: {
+              name: "input_only_field",
+              typeFullName:
+                "testapis.behavior.field_comments.FieldBehaviorCommentsMessage.Post",
+            },
+          },
+        }),
+      }),
       extensions: {
-        protobufField: {
-          name: "required_field",
-          typeFullName:
-            "testapis.behavior.field_comments.FieldBehaviorCommentsMessage.Post",
+        protobufMessage: {
+          fullName:
+            "testapis.behavior.field_comments.FieldBehaviorCommentsMessage",
+          name: "FieldBehaviorCommentsMessage",
+          package: "testapis.behavior.field_comments",
         },
       },
-    }),
-    requiredInputOnlyField: t.field({
-      type: FieldBehaviorCommentsMessagePostInput$Ref,
-      required: true,
-      description: "Required. Input only.",
-      extensions: {
-        protobufField: {
-          name: "required_input_only_field",
-          typeFullName:
-            "testapis.behavior.field_comments.FieldBehaviorCommentsMessage.Post",
-        },
-      },
-    }),
-    inputOnlyRequiredField: t.field({
-      type: FieldBehaviorCommentsMessagePostInput$Ref,
-      required: true,
-      description: "Input only. Required.",
-      extensions: {
-        protobufField: {
-          name: "input_only_required_field",
-          typeFullName:
-            "testapis.behavior.field_comments.FieldBehaviorCommentsMessage.Post",
-        },
-      },
-    }),
-    inputOnlyField: t.field({
-      type: FieldBehaviorCommentsMessagePostInput$Ref,
-      required: false,
-      description: "Input only.",
-      extensions: {
-        protobufField: {
-          name: "input_only_field",
-          typeFullName:
-            "testapis.behavior.field_comments.FieldBehaviorCommentsMessage.Post",
-        },
-      },
-    }),
-  }),
-  extensions: {
-    protobufMessage: {
-      fullName: "testapis.behavior.field_comments.FieldBehaviorCommentsMessage",
-      name: "FieldBehaviorCommentsMessage",
-      package: "testapis.behavior.field_comments",
-    },
-  },
-}) as InputObjectRef<FieldBehaviorCommentsMessageInput$Shape>;
+    }) as InputObjectRef<FieldBehaviorCommentsMessageInput$Shape>;
 
 export function FieldBehaviorCommentsMessageInput$toProto(
   input: FieldBehaviorCommentsMessageInput$Shape | null | undefined,
@@ -193,13 +195,13 @@ export function FieldBehaviorCommentsMessageInput$toProto(
       : undefined,
     requiredInputOnlyField: input?.requiredInputOnlyField
       ? FieldBehaviorCommentsMessagePostInput$toProto(
-        input.requiredInputOnlyField,
-      )
+          input.requiredInputOnlyField,
+        )
       : undefined,
     inputOnlyRequiredField: input?.inputOnlyRequiredField
       ? FieldBehaviorCommentsMessagePostInput$toProto(
-        input.inputOnlyRequiredField,
-      )
+          input.inputOnlyRequiredField,
+        )
       : undefined,
     inputOnlyField: input?.inputOnlyField
       ? FieldBehaviorCommentsMessagePostInput$toProto(input.inputOnlyField)
@@ -211,27 +213,30 @@ export type FieldBehaviorCommentsMessagePostInput$Shape = {
   body: FieldBehaviorCommentsMessage_Post["body"];
 };
 
-export const FieldBehaviorCommentsMessagePostInput$Ref: InputObjectRef<
-  FieldBehaviorCommentsMessagePostInput$Shape
-> = builder.inputRef<FieldBehaviorCommentsMessagePostInput$Shape>(
-  "FieldBehaviorCommentsMessagePostInput",
-).implement({
-  fields: (t) => ({
-    body: t.field({
-      type: "String",
-      required: true,
-      extensions: { protobufField: { name: "body", typeFullName: "string" } },
-    }),
-  }),
-  extensions: {
-    protobufMessage: {
-      fullName:
-        "testapis.behavior.field_comments.FieldBehaviorCommentsMessage.Post",
-      name: "Post",
-      package: "testapis.behavior.field_comments",
-    },
-  },
-}) as InputObjectRef<FieldBehaviorCommentsMessagePostInput$Shape>;
+export const FieldBehaviorCommentsMessagePostInput$Ref: InputObjectRef<FieldBehaviorCommentsMessagePostInput$Shape> =
+  builder
+    .inputRef<FieldBehaviorCommentsMessagePostInput$Shape>(
+      "FieldBehaviorCommentsMessagePostInput",
+    )
+    .implement({
+      fields: (t) => ({
+        body: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: { name: "body", typeFullName: "string" },
+          },
+        }),
+      }),
+      extensions: {
+        protobufMessage: {
+          fullName:
+            "testapis.behavior.field_comments.FieldBehaviorCommentsMessage.Post",
+          name: "Post",
+          package: "testapis.behavior.field_comments",
+        },
+      },
+    }) as InputObjectRef<FieldBehaviorCommentsMessagePostInput$Shape>;
 
 export function FieldBehaviorCommentsMessagePostInput$toProto(
   input: FieldBehaviorCommentsMessagePostInput$Shape | null | undefined,

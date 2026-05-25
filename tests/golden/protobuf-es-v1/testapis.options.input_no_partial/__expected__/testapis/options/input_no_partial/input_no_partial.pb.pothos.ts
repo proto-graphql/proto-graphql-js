@@ -10,9 +10,8 @@ import {
 } from "@proto-graphql/e2e-testapis-protobuf-es/lib/testapis/options/input_no_partial/input_no_partial_pb";
 import { InputObjectRef } from "@pothos/core";
 
-export const ParentMessage$Ref = builder.objectRef<ParentMessage>(
-  "ParentMessage",
-);
+export const ParentMessage$Ref =
+  builder.objectRef<ParentMessage>("ParentMessage");
 builder.objectType(ParentMessage$Ref, {
   name: "ParentMessage",
   fields: (t) => ({
@@ -59,9 +58,8 @@ builder.objectType(ParentMessage$Ref, {
   },
 });
 
-export const PartialableInputMessage$Ref = builder.objectRef<
-  PartialableInputMessage
->("PartialableInputMessage");
+export const PartialableInputMessage$Ref =
+  builder.objectRef<PartialableInputMessage>("PartialableInputMessage");
 builder.objectType(PartialableInputMessage$Ref, {
   name: "PartialableInputMessage",
   fields: (t) => ({
@@ -90,9 +88,8 @@ builder.objectType(PartialableInputMessage$Ref, {
   },
 });
 
-export const NoPartialInputMessage$Ref = builder.objectRef<
-  NoPartialInputMessage
->("NoPartialInputMessage");
+export const NoPartialInputMessage$Ref =
+  builder.objectRef<NoPartialInputMessage>("NoPartialInputMessage");
 builder.objectType(NoPartialInputMessage$Ref, {
   name: "NoPartialInputMessage",
   fields: (t) => ({
@@ -128,41 +125,43 @@ export type ParentMessageInput$Shape = {
 };
 
 export const ParentMessageInput$Ref: InputObjectRef<ParentMessageInput$Shape> =
-  builder.inputRef<ParentMessageInput$Shape>("ParentMessageInput").implement({
-    fields: (t) => ({
-      partialableInputMessage: t.field({
-        type: PartialableInputMessageInput$Ref,
-        required: true,
-        description: "Required.",
-        extensions: {
-          protobufField: {
-            name: "partialable_input_message",
-            typeFullName:
-              "testapis.options.input_no_partial.PartialableInputMessage",
+  builder
+    .inputRef<ParentMessageInput$Shape>("ParentMessageInput")
+    .implement({
+      fields: (t) => ({
+        partialableInputMessage: t.field({
+          type: PartialableInputMessageInput$Ref,
+          required: true,
+          description: "Required.",
+          extensions: {
+            protobufField: {
+              name: "partialable_input_message",
+              typeFullName:
+                "testapis.options.input_no_partial.PartialableInputMessage",
+            },
           },
-        },
-      }),
-      noPartialInputMessage: t.field({
-        type: NoPartialInputMessageInput$Ref,
-        required: true,
-        description: "Required.",
-        extensions: {
-          protobufField: {
-            name: "no_partial_input_message",
-            typeFullName:
-              "testapis.options.input_no_partial.NoPartialInputMessage",
+        }),
+        noPartialInputMessage: t.field({
+          type: NoPartialInputMessageInput$Ref,
+          required: true,
+          description: "Required.",
+          extensions: {
+            protobufField: {
+              name: "no_partial_input_message",
+              typeFullName:
+                "testapis.options.input_no_partial.NoPartialInputMessage",
+            },
           },
-        },
+        }),
       }),
-    }),
-    extensions: {
-      protobufMessage: {
-        fullName: "testapis.options.input_no_partial.ParentMessage",
-        name: "ParentMessage",
-        package: "testapis.options.input_no_partial",
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.options.input_no_partial.ParentMessage",
+          name: "ParentMessage",
+          package: "testapis.options.input_no_partial",
+        },
       },
-    },
-  });
+    });
 
 export function ParentMessageInput$toProto(
   input: ParentMessageInput$Shape | null | undefined,
@@ -182,33 +181,36 @@ export type PartialableInputMessageInput$Shape = {
   body: PartialableInputMessage["body"];
 };
 
-export const PartialableInputMessageInput$Ref: InputObjectRef<
-  PartialableInputMessageInput$Shape
-> = builder.inputRef<PartialableInputMessageInput$Shape>(
-  "PartialableInputMessageInput",
-).implement({
-  fields: (t) => ({
-    id: t.field({
-      type: "Int64",
-      required: true,
-      description: "Required.",
-      extensions: { protobufField: { name: "id", typeFullName: "uint64" } },
-    }),
-    body: t.field({
-      type: "String",
-      required: true,
-      description: "Required.",
-      extensions: { protobufField: { name: "body", typeFullName: "string" } },
-    }),
-  }),
-  extensions: {
-    protobufMessage: {
-      fullName: "testapis.options.input_no_partial.PartialableInputMessage",
-      name: "PartialableInputMessage",
-      package: "testapis.options.input_no_partial",
-    },
-  },
-});
+export const PartialableInputMessageInput$Ref: InputObjectRef<PartialableInputMessageInput$Shape> =
+  builder
+    .inputRef<PartialableInputMessageInput$Shape>(
+      "PartialableInputMessageInput",
+    )
+    .implement({
+      fields: (t) => ({
+        id: t.field({
+          type: "Int64",
+          required: true,
+          description: "Required.",
+          extensions: { protobufField: { name: "id", typeFullName: "uint64" } },
+        }),
+        body: t.field({
+          type: "String",
+          required: true,
+          description: "Required.",
+          extensions: {
+            protobufField: { name: "body", typeFullName: "string" },
+          },
+        }),
+      }),
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.options.input_no_partial.PartialableInputMessage",
+          name: "PartialableInputMessage",
+          package: "testapis.options.input_no_partial",
+        },
+      },
+    });
 
 export function PartialableInputMessageInput$toProto(
   input: PartialableInputMessageInput$Shape | null | undefined,
@@ -224,34 +226,35 @@ export type NoPartialInputMessageInput$Shape = {
   body: NoPartialInputMessage["body"];
 };
 
-export const NoPartialInputMessageInput$Ref: InputObjectRef<
-  NoPartialInputMessageInput$Shape
-> = builder.inputRef<NoPartialInputMessageInput$Shape>(
-  "NoPartialInputMessageInput",
-).implement({
-  fields: (t) => ({
-    id: t.field({
-      type: "Int64",
-      required: true,
-      description: "Required.",
-      extensions: { protobufField: { name: "id", typeFullName: "uint64" } },
-    }),
-    body: t.field({
-      type: "String",
-      required: true,
-      description: "Required.",
-      extensions: { protobufField: { name: "body", typeFullName: "string" } },
-    }),
-  }),
-  extensions: {
-    protobufMessage: {
-      fullName: "testapis.options.input_no_partial.NoPartialInputMessage",
-      name: "NoPartialInputMessage",
-      package: "testapis.options.input_no_partial",
-      options: { "[graphql.input_type]": { noPartial: true } },
-    },
-  },
-});
+export const NoPartialInputMessageInput$Ref: InputObjectRef<NoPartialInputMessageInput$Shape> =
+  builder
+    .inputRef<NoPartialInputMessageInput$Shape>("NoPartialInputMessageInput")
+    .implement({
+      fields: (t) => ({
+        id: t.field({
+          type: "Int64",
+          required: true,
+          description: "Required.",
+          extensions: { protobufField: { name: "id", typeFullName: "uint64" } },
+        }),
+        body: t.field({
+          type: "String",
+          required: true,
+          description: "Required.",
+          extensions: {
+            protobufField: { name: "body", typeFullName: "string" },
+          },
+        }),
+      }),
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.options.input_no_partial.NoPartialInputMessage",
+          name: "NoPartialInputMessage",
+          package: "testapis.options.input_no_partial",
+          options: { "[graphql.input_type]": { noPartial: true } },
+        },
+      },
+    });
 
 export function NoPartialInputMessageInput$toProto(
   input: NoPartialInputMessageInput$Shape | null | undefined,

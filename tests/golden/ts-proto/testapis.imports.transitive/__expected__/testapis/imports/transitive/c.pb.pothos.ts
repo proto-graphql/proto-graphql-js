@@ -17,8 +17,10 @@ builder.objectType(C$Ref, {
     }),
   }),
   isTypeOf: (source) => {
-    return (source as C | { $type: string & {}; }).$type ===
-      "testapis.imports.transitive.C";
+    return (
+      (source as C | { $type: string & {} }).$type ===
+      "testapis.imports.transitive.C"
+    );
   },
   extensions: {
     protobufMessage: {
@@ -29,23 +31,25 @@ builder.objectType(C$Ref, {
   },
 });
 
-export type CInput$Shape = { body: C["body"]; };
+export type CInput$Shape = {
+  body: C["body"];
+};
 
-export const CInput$Ref: InputObjectRef<CInput$Shape> = builder.inputRef<
-  CInput$Shape
->("CInput").implement({
-  fields: (t) => ({
-    body: t.field({
-      type: "String",
-      required: true,
-      extensions: { protobufField: { name: "body", typeFullName: "string" } },
+export const CInput$Ref: InputObjectRef<CInput$Shape> = builder
+  .inputRef<CInput$Shape>("CInput")
+  .implement({
+    fields: (t) => ({
+      body: t.field({
+        type: "String",
+        required: true,
+        extensions: { protobufField: { name: "body", typeFullName: "string" } },
+      }),
     }),
-  }),
-  extensions: {
-    protobufMessage: {
-      fullName: "testapis.imports.transitive.C",
-      name: "C",
-      package: "testapis.imports.transitive",
+    extensions: {
+      protobufMessage: {
+        fullName: "testapis.imports.transitive.C",
+        name: "C",
+        package: "testapis.imports.transitive",
+      },
     },
-  },
-});
+  });

@@ -76,8 +76,8 @@ exports[`createEnumTypeCode > protobuf-es > 'generates code for enum with extens
 import { PrefixedEnum } from "@testapis/protobuf-es-v2/testapis/options/message_and_field/message_and_field_pb";
 import { builder } from "../../builder";
 
-export const PrefixedEnum$Ref: EnumRef<PrefixedEnum, PrefixedEnum> = builder
-  .enumType("PrefixedEnum", {
+export const PrefixedEnum$Ref: EnumRef<PrefixedEnum, PrefixedEnum> =
+  builder.enumType("PrefixedEnum", {
     values: {
       PREFIXED_FOO: {
         value: 1,
@@ -333,8 +333,8 @@ exports[`createEnumTypeCode > ts-proto > 'generates code for enum with extension
 import { PrefixedEnum } from "@testapis/ts-proto/testapis/options/message_and_field/message_and_field";
 import { builder } from "../../builder";
 
-export const PrefixedEnum$Ref: EnumRef<PrefixedEnum, PrefixedEnum> = builder
-  .enumType("PrefixedEnum", {
+export const PrefixedEnum$Ref: EnumRef<PrefixedEnum, PrefixedEnum> =
+  builder.enumType("PrefixedEnum", {
     values: {
       PREFIXED_FOO: {
         value: 1,

@@ -38,9 +38,8 @@ builder.objectType(OneofParent$Ref, {
   },
 });
 
-export const MessageMember$Ref = builder.objectRef<MessageMember>(
-  "MessageMember",
-);
+export const MessageMember$Ref =
+  builder.objectRef<MessageMember>("MessageMember");
 builder.objectType(MessageMember$Ref, {
   name: "MessageMember",
   fields: (t) => ({
@@ -67,27 +66,29 @@ export type OneofParentInput$Shape = {
 };
 
 export const OneofParentInput$Ref: InputObjectRef<OneofParentInput$Shape> =
-  builder.inputRef<OneofParentInput$Shape>("OneofParentInput").implement({
-    fields: (t) => ({
-      member: t.field({
-        type: MessageMemberInput$Ref,
-        required: false,
-        extensions: {
-          protobufField: {
-            name: "member",
-            typeFullName: "testapis.oneof.non_message.MessageMember",
+  builder
+    .inputRef<OneofParentInput$Shape>("OneofParentInput")
+    .implement({
+      fields: (t) => ({
+        member: t.field({
+          type: MessageMemberInput$Ref,
+          required: false,
+          extensions: {
+            protobufField: {
+              name: "member",
+              typeFullName: "testapis.oneof.non_message.MessageMember",
+            },
           },
-        },
+        }),
       }),
-    }),
-    extensions: {
-      protobufMessage: {
-        fullName: "testapis.oneof.non_message.OneofParent",
-        name: "OneofParent",
-        package: "testapis.oneof.non_message",
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.oneof.non_message.OneofParent",
+          name: "OneofParent",
+          package: "testapis.oneof.non_message",
+        },
       },
-    },
-  });
+    });
 
 export function OneofParentInput$toProto(
   input: OneofParentInput$Shape | null | undefined,
@@ -99,30 +100,38 @@ export function OneofParentInput$toProto(
   });
 }
 
-export type MessageMemberInput$Shape = { body: MessageMember["body"]; };
+export type MessageMemberInput$Shape = {
+  body: MessageMember["body"];
+};
 
 export const MessageMemberInput$Ref: InputObjectRef<MessageMemberInput$Shape> =
-  builder.inputRef<MessageMemberInput$Shape>("MessageMemberInput").implement({
-    fields: (t) => ({
-      body: t.field({
-        type: "String",
-        required: true,
-        extensions: { protobufField: { name: "body", typeFullName: "string" } },
+  builder
+    .inputRef<MessageMemberInput$Shape>("MessageMemberInput")
+    .implement({
+      fields: (t) => ({
+        body: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: { name: "body", typeFullName: "string" },
+          },
+        }),
       }),
-    }),
-    extensions: {
-      protobufMessage: {
-        fullName: "testapis.oneof.non_message.MessageMember",
-        name: "MessageMember",
-        package: "testapis.oneof.non_message",
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.oneof.non_message.MessageMember",
+          name: "MessageMember",
+          package: "testapis.oneof.non_message",
+        },
       },
-    },
-  });
+    });
 
 export function MessageMemberInput$toProto(
   input: MessageMemberInput$Shape | null | undefined,
 ): MessageMember {
-  return new MessageMember({ body: input?.body ?? undefined });
+  return new MessageMember({
+    body: input?.body ?? undefined,
+  });
 }
 
 export const OneofParentMixedOneofMembers$Ref = builder.unionType(
@@ -135,10 +144,9 @@ export const OneofParentMixedOneofMembers$Ref = builder.unionType(
         name: "mixed_oneof_members",
         messageName: "OneofParent",
         package: "testapis.oneof.non_message",
-        fields: [{
-          name: "member",
-          type: "testapis.oneof.non_message.MessageMember",
-        }],
+        fields: [
+          { name: "member", type: "testapis.oneof.non_message.MessageMember" },
+        ],
       },
     },
   },

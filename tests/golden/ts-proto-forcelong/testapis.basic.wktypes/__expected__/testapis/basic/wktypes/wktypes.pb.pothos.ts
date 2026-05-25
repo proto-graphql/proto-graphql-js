@@ -131,8 +131,10 @@ builder.objectType(Message$Ref, {
     }),
   }),
   isTypeOf: (source) => {
-    return (source as Message | { $type: string & {}; }).$type ===
-      "testapis.basic.wktypes.Message";
+    return (
+      (source as Message | { $type: string & {} }).$type ===
+      "testapis.basic.wktypes.Message"
+    );
   },
   extensions: {
     protobufMessage: {
@@ -158,7 +160,8 @@ export type MessageInput$Shape = {
 };
 
 export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
-  .inputRef<MessageInput$Shape>("MessageInput").implement({
+  .inputRef<MessageInput$Shape>("MessageInput")
+  .implement({
     fields: (t) => ({
       timestamp: t.field({
         type: "DateTime",

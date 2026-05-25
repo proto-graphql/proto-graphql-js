@@ -34,8 +34,10 @@ builder.objectType(Message$Ref, {
     }),
   }),
   isTypeOf: (source) => {
-    return (source as Message | { $type: string & {}; }).$type ===
-      "testapis.imports.squashed_union.pkg2.Message";
+    return (
+      (source as Message | { $type: string & {} }).$type ===
+      "testapis.imports.squashed_union.pkg2.Message"
+    );
   },
   extensions: {
     protobufMessage: {
@@ -46,10 +48,13 @@ builder.objectType(Message$Ref, {
   },
 });
 
-export type MessageInput$Shape = { msg?: SquashedOneofInput$Shape | null; };
+export type MessageInput$Shape = {
+  msg?: SquashedOneofInput$Shape | null;
+};
 
 export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
-  .inputRef<MessageInput$Shape>("MessageInput").implement({
+  .inputRef<MessageInput$Shape>("MessageInput")
+  .implement({
     fields: (t) => ({
       msg: t.field({
         type: SquashedOneofInput$Ref,

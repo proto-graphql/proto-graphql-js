@@ -53,54 +53,70 @@ builder.objectType(OneofMember2$Ref, {
   },
 });
 
-export type OneofMember1Input$Shape = { body: OneofMember1["body"]; };
+export type OneofMember1Input$Shape = {
+  body: OneofMember1["body"];
+};
 
 export const OneofMember1Input$Ref: InputObjectRef<OneofMember1Input$Shape> =
-  builder.inputRef<OneofMember1Input$Shape>("OneofMember1Input").implement({
-    fields: (t) => ({
-      body: t.field({
-        type: "String",
-        required: true,
-        extensions: { protobufField: { name: "body", typeFullName: "string" } },
+  builder
+    .inputRef<OneofMember1Input$Shape>("OneofMember1Input")
+    .implement({
+      fields: (t) => ({
+        body: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: { name: "body", typeFullName: "string" },
+          },
+        }),
       }),
-    }),
-    extensions: {
-      protobufMessage: {
-        fullName: "testapis.imports.oneof_cross_file.OneofMember1",
-        name: "OneofMember1",
-        package: "testapis.imports.oneof_cross_file",
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.imports.oneof_cross_file.OneofMember1",
+          name: "OneofMember1",
+          package: "testapis.imports.oneof_cross_file",
+        },
       },
-    },
-  });
+    });
 
 export function OneofMember1Input$toProto(
   input: OneofMember1Input$Shape | null | undefined,
 ): OneofMember1 {
-  return new OneofMember1({ body: input?.body ?? undefined });
+  return new OneofMember1({
+    body: input?.body ?? undefined,
+  });
 }
 
-export type OneofMember2Input$Shape = { count: OneofMember2["count"]; };
+export type OneofMember2Input$Shape = {
+  count: OneofMember2["count"];
+};
 
 export const OneofMember2Input$Ref: InputObjectRef<OneofMember2Input$Shape> =
-  builder.inputRef<OneofMember2Input$Shape>("OneofMember2Input").implement({
-    fields: (t) => ({
-      count: t.field({
-        type: "Int",
-        required: true,
-        extensions: { protobufField: { name: "count", typeFullName: "int32" } },
+  builder
+    .inputRef<OneofMember2Input$Shape>("OneofMember2Input")
+    .implement({
+      fields: (t) => ({
+        count: t.field({
+          type: "Int",
+          required: true,
+          extensions: {
+            protobufField: { name: "count", typeFullName: "int32" },
+          },
+        }),
       }),
-    }),
-    extensions: {
-      protobufMessage: {
-        fullName: "testapis.imports.oneof_cross_file.OneofMember2",
-        name: "OneofMember2",
-        package: "testapis.imports.oneof_cross_file",
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.imports.oneof_cross_file.OneofMember2",
+          name: "OneofMember2",
+          package: "testapis.imports.oneof_cross_file",
+        },
       },
-    },
-  });
+    });
 
 export function OneofMember2Input$toProto(
   input: OneofMember2Input$Shape | null | undefined,
 ): OneofMember2 {
-  return new OneofMember2({ count: input?.count ?? undefined });
+  return new OneofMember2({
+    count: input?.count ?? undefined,
+  });
 }

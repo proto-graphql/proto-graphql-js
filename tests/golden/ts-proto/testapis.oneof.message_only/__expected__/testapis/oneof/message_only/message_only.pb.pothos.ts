@@ -48,8 +48,10 @@ builder.objectType(OneofParent$Ref, {
     }),
   }),
   isTypeOf: (source) => {
-    return (source as OneofParent | { $type: string & {}; }).$type ===
-      "testapis.oneof.message_only.OneofParent";
+    return (
+      (source as OneofParent | { $type: string & {} }).$type ===
+      "testapis.oneof.message_only.OneofParent"
+    );
   },
   extensions: {
     protobufMessage: {
@@ -73,8 +75,10 @@ builder.objectType(OneofMemberMessage1$Ref, {
     }),
   }),
   isTypeOf: (source) => {
-    return (source as OneofMemberMessage1 | { $type: string & {}; }).$type ===
-      "testapis.oneof.message_only.OneofMemberMessage1";
+    return (
+      (source as OneofMemberMessage1 | { $type: string & {} }).$type ===
+      "testapis.oneof.message_only.OneofMemberMessage1"
+    );
   },
   extensions: {
     protobufMessage: {
@@ -100,8 +104,10 @@ builder.objectType(OneofMemberMessage2$Ref, {
     }),
   }),
   isTypeOf: (source) => {
-    return (source as OneofMemberMessage2 | { $type: string & {}; }).$type ===
-      "testapis.oneof.message_only.OneofMemberMessage2";
+    return (
+      (source as OneofMemberMessage2 | { $type: string & {} }).$type ===
+      "testapis.oneof.message_only.OneofMemberMessage2"
+    );
   },
   extensions: {
     protobufMessage: {
@@ -121,114 +127,118 @@ export type OneofParentInput$Shape = {
 };
 
 export const OneofParentInput$Ref: InputObjectRef<OneofParentInput$Shape> =
-  builder.inputRef<OneofParentInput$Shape>("OneofParentInput").implement({
-    fields: (t) => ({
-      normalField: t.field({
-        type: "String",
-        required: true,
-        extensions: {
-          protobufField: { name: "normal_field", typeFullName: "string" },
-        },
-      }),
-      requiredMessage1: t.field({
-        type: OneofMemberMessage1Input$Ref,
-        required: false,
-        extensions: {
-          protobufField: {
-            name: "required_message1",
-            typeFullName: "testapis.oneof.message_only.OneofMemberMessage1",
+  builder
+    .inputRef<OneofParentInput$Shape>("OneofParentInput")
+    .implement({
+      fields: (t) => ({
+        normalField: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: { name: "normal_field", typeFullName: "string" },
           },
-        },
-      }),
-      requiredMessage2: t.field({
-        type: OneofMemberMessage2Input$Ref,
-        required: false,
-        extensions: {
-          protobufField: {
-            name: "required_message2",
-            typeFullName: "testapis.oneof.message_only.OneofMemberMessage2",
+        }),
+        requiredMessage1: t.field({
+          type: OneofMemberMessage1Input$Ref,
+          required: false,
+          extensions: {
+            protobufField: {
+              name: "required_message1",
+              typeFullName: "testapis.oneof.message_only.OneofMemberMessage1",
+            },
           },
-        },
-      }),
-      optionalMessage1: t.field({
-        type: OneofMemberMessage1Input$Ref,
-        required: false,
-        extensions: {
-          protobufField: {
-            name: "optional_message1",
-            typeFullName: "testapis.oneof.message_only.OneofMemberMessage1",
+        }),
+        requiredMessage2: t.field({
+          type: OneofMemberMessage2Input$Ref,
+          required: false,
+          extensions: {
+            protobufField: {
+              name: "required_message2",
+              typeFullName: "testapis.oneof.message_only.OneofMemberMessage2",
+            },
           },
-        },
-      }),
-      optionalMessage2: t.field({
-        type: OneofMemberMessage2Input$Ref,
-        required: false,
-        extensions: {
-          protobufField: {
-            name: "optional_message2",
-            typeFullName: "testapis.oneof.message_only.OneofMemberMessage2",
+        }),
+        optionalMessage1: t.field({
+          type: OneofMemberMessage1Input$Ref,
+          required: false,
+          extensions: {
+            protobufField: {
+              name: "optional_message1",
+              typeFullName: "testapis.oneof.message_only.OneofMemberMessage1",
+            },
           },
-        },
+        }),
+        optionalMessage2: t.field({
+          type: OneofMemberMessage2Input$Ref,
+          required: false,
+          extensions: {
+            protobufField: {
+              name: "optional_message2",
+              typeFullName: "testapis.oneof.message_only.OneofMemberMessage2",
+            },
+          },
+        }),
       }),
-    }),
-    extensions: {
-      protobufMessage: {
-        fullName: "testapis.oneof.message_only.OneofParent",
-        name: "OneofParent",
-        package: "testapis.oneof.message_only",
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.oneof.message_only.OneofParent",
+          name: "OneofParent",
+          package: "testapis.oneof.message_only",
+        },
       },
-    },
-  });
+    });
 
 export type OneofMemberMessage1Input$Shape = {
   body: OneofMemberMessage1["body"];
 };
 
-export const OneofMemberMessage1Input$Ref: InputObjectRef<
-  OneofMemberMessage1Input$Shape
-> = builder.inputRef<OneofMemberMessage1Input$Shape>("OneofMemberMessage1Input")
-  .implement({
-    fields: (t) => ({
-      body: t.field({
-        type: "String",
-        required: true,
-        extensions: { protobufField: { name: "body", typeFullName: "string" } },
+export const OneofMemberMessage1Input$Ref: InputObjectRef<OneofMemberMessage1Input$Shape> =
+  builder
+    .inputRef<OneofMemberMessage1Input$Shape>("OneofMemberMessage1Input")
+    .implement({
+      fields: (t) => ({
+        body: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: { name: "body", typeFullName: "string" },
+          },
+        }),
       }),
-    }),
-    extensions: {
-      protobufMessage: {
-        fullName: "testapis.oneof.message_only.OneofMemberMessage1",
-        name: "OneofMemberMessage1",
-        package: "testapis.oneof.message_only",
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.oneof.message_only.OneofMemberMessage1",
+          name: "OneofMemberMessage1",
+          package: "testapis.oneof.message_only",
+        },
       },
-    },
-  });
+    });
 
 export type OneofMemberMessage2Input$Shape = {
   imageUrl: OneofMemberMessage2["imageUrl"];
 };
 
-export const OneofMemberMessage2Input$Ref: InputObjectRef<
-  OneofMemberMessage2Input$Shape
-> = builder.inputRef<OneofMemberMessage2Input$Shape>("OneofMemberMessage2Input")
-  .implement({
-    fields: (t) => ({
-      imageUrl: t.field({
-        type: "String",
-        required: true,
-        extensions: {
-          protobufField: { name: "image_url", typeFullName: "string" },
-        },
+export const OneofMemberMessage2Input$Ref: InputObjectRef<OneofMemberMessage2Input$Shape> =
+  builder
+    .inputRef<OneofMemberMessage2Input$Shape>("OneofMemberMessage2Input")
+    .implement({
+      fields: (t) => ({
+        imageUrl: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: { name: "image_url", typeFullName: "string" },
+          },
+        }),
       }),
-    }),
-    extensions: {
-      protobufMessage: {
-        fullName: "testapis.oneof.message_only.OneofMemberMessage2",
-        name: "OneofMemberMessage2",
-        package: "testapis.oneof.message_only",
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.oneof.message_only.OneofMemberMessage2",
+          name: "OneofMemberMessage2",
+          package: "testapis.oneof.message_only",
+        },
       },
-    },
-  });
+    });
 
 export const OneofParentRequiredOneofMembers$Ref = builder.unionType(
   "OneofParentRequiredOneofMembers",
@@ -242,13 +252,16 @@ export const OneofParentRequiredOneofMembers$Ref = builder.unionType(
         name: "required_oneof_members",
         messageName: "OneofParent",
         package: "testapis.oneof.message_only",
-        fields: [{
-          name: "required_message1",
-          type: "testapis.oneof.message_only.OneofMemberMessage1",
-        }, {
-          name: "required_message2",
-          type: "testapis.oneof.message_only.OneofMemberMessage2",
-        }],
+        fields: [
+          {
+            name: "required_message1",
+            type: "testapis.oneof.message_only.OneofMemberMessage1",
+          },
+          {
+            name: "required_message2",
+            type: "testapis.oneof.message_only.OneofMemberMessage2",
+          },
+        ],
       },
     },
   },
@@ -265,13 +278,16 @@ export const OneofParentOptionalOneofMembers$Ref = builder.unionType(
         name: "optional_oneof_members",
         messageName: "OneofParent",
         package: "testapis.oneof.message_only",
-        fields: [{
-          name: "optional_message1",
-          type: "testapis.oneof.message_only.OneofMemberMessage1",
-        }, {
-          name: "optional_message2",
-          type: "testapis.oneof.message_only.OneofMemberMessage2",
-        }],
+        fields: [
+          {
+            name: "optional_message1",
+            type: "testapis.oneof.message_only.OneofMemberMessage1",
+          },
+          {
+            name: "optional_message2",
+            type: "testapis.oneof.message_only.OneofMemberMessage2",
+          },
+        ],
       },
     },
   },

@@ -12,9 +12,8 @@ import {
 } from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/basic/schema_name_collision/schema_name_collision_pb";
 import { InputObjectRef } from "@pothos/core";
 
-export const Foo$Ref = builder.objectRef<MessageShape<typeof FooSchema$>>(
-  "Foo",
-);
+export const Foo$Ref =
+  builder.objectRef<MessageShape<typeof FooSchema$>>("Foo");
 builder.objectType(Foo$Ref, {
   name: "Foo",
   fields: (t) => ({
@@ -36,9 +35,8 @@ builder.objectType(Foo$Ref, {
   },
 });
 
-export const FooSchema$Ref = builder.objectRef<
-  MessageShape<typeof FooSchemaSchema>
->("FooSchema");
+export const FooSchema$Ref =
+  builder.objectRef<MessageShape<typeof FooSchemaSchema>>("FooSchema");
 builder.objectType(FooSchema$Ref, {
   name: "FooSchema",
   fields: (t) => ({
@@ -60,37 +58,44 @@ builder.objectType(FooSchema$Ref, {
   },
 });
 
-export type FooInput$Shape = { name: Foo["name"]; };
+export type FooInput$Shape = {
+  name: Foo["name"];
+};
 
-export const FooInput$Ref: InputObjectRef<FooInput$Shape> = builder.inputRef<
-  FooInput$Shape
->("FooInput").implement({
-  fields: (t) => ({
-    name: t.field({
-      type: "String",
-      required: true,
-      extensions: { protobufField: { name: "name", typeFullName: "string" } },
+export const FooInput$Ref: InputObjectRef<FooInput$Shape> = builder
+  .inputRef<FooInput$Shape>("FooInput")
+  .implement({
+    fields: (t) => ({
+      name: t.field({
+        type: "String",
+        required: true,
+        extensions: { protobufField: { name: "name", typeFullName: "string" } },
+      }),
     }),
-  }),
-  extensions: {
-    protobufMessage: {
-      fullName: "testapis.basic.schema_name_collision.Foo",
-      name: "Foo",
-      package: "testapis.basic.schema_name_collision",
+    extensions: {
+      protobufMessage: {
+        fullName: "testapis.basic.schema_name_collision.Foo",
+        name: "Foo",
+        package: "testapis.basic.schema_name_collision",
+      },
     },
-  },
-}) as InputObjectRef<FooInput$Shape>;
+  }) as InputObjectRef<FooInput$Shape>;
 
 export function FooInput$toProto(
   input: FooInput$Shape | null | undefined,
 ): Foo {
-  return create(FooSchema$, { name: input?.name ?? undefined });
+  return create(FooSchema$, {
+    name: input?.name ?? undefined,
+  });
 }
 
-export type FooSchemaInput$Shape = { value: FooSchema["value"]; };
+export type FooSchemaInput$Shape = {
+  value: FooSchema["value"];
+};
 
 export const FooSchemaInput$Ref: InputObjectRef<FooSchemaInput$Shape> = builder
-  .inputRef<FooSchemaInput$Shape>("FooSchemaInput").implement({
+  .inputRef<FooSchemaInput$Shape>("FooSchemaInput")
+  .implement({
     fields: (t) => ({
       value: t.field({
         type: "String",
@@ -112,5 +117,7 @@ export const FooSchemaInput$Ref: InputObjectRef<FooSchemaInput$Shape> = builder
 export function FooSchemaInput$toProto(
   input: FooSchemaInput$Shape | null | undefined,
 ): FooSchema {
-  return create(FooSchemaSchema, { value: input?.value ?? undefined });
+  return create(FooSchemaSchema, {
+    value: input?.value ?? undefined,
+  });
 }

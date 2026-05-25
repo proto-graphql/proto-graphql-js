@@ -24,8 +24,10 @@ builder.objectType(SchemaPrefixPostResponse$Ref, {
     }),
   }),
   isTypeOf: (source) => {
-    return (source as PostResponse | { $type: string & {}; }).$type ===
-      "testapis.options.schema.PostResponse";
+    return (
+      (source as PostResponse | { $type: string & {} }).$type ===
+      "testapis.options.schema.PostResponse"
+    );
   },
   extensions: {
     protobufMessage: {
@@ -41,28 +43,31 @@ export type SchemaPrefixPostResponseInput$Shape = {
   body: PostResponse["body"];
 };
 
-export const SchemaPrefixPostResponseInput$Ref: InputObjectRef<
-  SchemaPrefixPostResponseInput$Shape
-> = builder.inputRef<SchemaPrefixPostResponseInput$Shape>(
-  "SchemaPrefixPostResponseInput",
-).implement({
-  fields: (t) => ({
-    id: t.field({
-      type: "String",
-      required: true,
-      extensions: { protobufField: { name: "id", typeFullName: "uint64" } },
-    }),
-    body: t.field({
-      type: "String",
-      required: true,
-      extensions: { protobufField: { name: "body", typeFullName: "string" } },
-    }),
-  }),
-  extensions: {
-    protobufMessage: {
-      fullName: "testapis.options.schema.PostResponse",
-      name: "PostResponse",
-      package: "testapis.options.schema",
-    },
-  },
-});
+export const SchemaPrefixPostResponseInput$Ref: InputObjectRef<SchemaPrefixPostResponseInput$Shape> =
+  builder
+    .inputRef<SchemaPrefixPostResponseInput$Shape>(
+      "SchemaPrefixPostResponseInput",
+    )
+    .implement({
+      fields: (t) => ({
+        id: t.field({
+          type: "String",
+          required: true,
+          extensions: { protobufField: { name: "id", typeFullName: "uint64" } },
+        }),
+        body: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: { name: "body", typeFullName: "string" },
+          },
+        }),
+      }),
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.options.schema.PostResponse",
+          name: "PostResponse",
+          package: "testapis.options.schema",
+        },
+      },
+    });
