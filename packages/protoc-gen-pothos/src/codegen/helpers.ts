@@ -24,14 +24,12 @@ export function joinCode(
   return result;
 }
 
-function escapeString(str: string): string {
-  return str
-    .replace(/\\/g, "\\\\")
-    .replace(/"/g, '\\"')
-    .replace(/\n/g, "\\n")
-    .replace(/\r/g, "\\r")
-    .replace(/\t/g, "\\t");
-}
+// Re-exported below so existing imports of the protoc-gen-pothos local codegen
+// module keep working; the implementation lives in `@proto-graphql/codegen-core`
+// to be shareable.
+import { jsStringLit } from "@proto-graphql/codegen-core";
+
+export { jsStringLit } from "@proto-graphql/codegen-core";
 
 /**
  * Remove nullish values recursively, preserving PrintableArrays.
@@ -72,7 +70,7 @@ export function literalOf(value: unknown): PrintableArray {
   }
 
   if (typeof value === "string") {
-    return markAsPrintableArray([`"${escapeString(value)}"`]);
+    return markAsPrintableArray([jsStringLit(value)]);
   }
 
   if (typeof value === "number") {
@@ -122,8 +120,9 @@ export function literalOf(value: unknown): PrintableArray {
         elements.push(", ");
       }
       const key = keys[i];
-      // Always quote keys to match ts-poet literalOf behavior
-      elements.push(`"${escapeString(key)}": `);
+      // Always quote keys for safety; dprint/oxfmt will unquote valid
+      // identifiers in the post-format pass.
+      elements.push(`${jsStringLit(key)}: `);
       elements.push(...literalOf(obj[key]));
     }
     elements.push(" }");

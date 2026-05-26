@@ -24,8 +24,16 @@ import {
   SquashedOneofUnionType,
   scalarMapLabelByType,
 } from "../types/index.js";
-import { compact } from "./util.js";
+import { jsStringLit } from "./util.js";
 
+/**
+ * Emit the GraphQL `extensions: { ... }` block for a given Pothos type/field as
+ * a pre-built JS expression string. Returned by-string (rather than as a JS
+ * object that the caller would then run through `literalOf`) so the hot path
+ * skips the recursive generic literal serialisation in `helpers.literalOf`
+ * — that recursion was the dominant remaining JS hot path after #517 disabled
+ * the in-plugin formatter.
+ */
 export function protobufGraphQLExtensions(
   type:
     | ObjectType
@@ -38,102 +46,102 @@ export function protobufGraphQLExtensions(
     | InputObjectField<any>
     | EnumTypeValue,
   registry: Registry,
-): Record<string, Record<string, unknown>> {
+): string {
   if (type instanceof ObjectType || type instanceof InputObjectType) {
-    return {
-      protobufMessage: {
-        fullName: type.proto.typeName,
-        name: type.proto.name,
-        package: type.proto.file.proto.package ?? "",
-        options: type.proto.proto.options
-          ? toJson(MessageOptionsSchema, type.proto.proto.options, { registry })
-          : undefined,
-      },
-    };
+    const pkg = type.proto.file.proto.package ?? "";
+    const optionsEntry = type.proto.proto.options
+      ? `,options:${JSON.stringify(
+          toJson(MessageOptionsSchema, type.proto.proto.options, { registry }),
+        )}`
+      : "";
+    return `{protobufMessage:{fullName:${jsStringLit(type.proto.typeName)},name:${jsStringLit(type.proto.name)},package:${jsStringLit(pkg)}${optionsEntry}}}`;
   }
   if (type instanceof EnumType) {
-    return {
-      protobufEnum: {
-        name: type.proto.name,
-        fullName: type.proto.typeName,
-        package: type.proto.file.proto.package ?? "",
-        options: type.proto.proto.options
-          ? toJson(EnumOptionsSchema, type.proto.proto.options, { registry })
-          : undefined,
-      },
-    };
+    const pkg = type.proto.file.proto.package ?? "";
+    const optionsEntry = type.proto.proto.options
+      ? `,options:${JSON.stringify(
+          toJson(EnumOptionsSchema, type.proto.proto.options, { registry }),
+        )}`
+      : "";
+    return `{protobufEnum:{name:${jsStringLit(type.proto.name)},fullName:${jsStringLit(type.proto.typeName)},package:${jsStringLit(pkg)}${optionsEntry}}}`;
   }
   if (
     type instanceof OneofUnionType ||
     type instanceof SquashedOneofUnionType
   ) {
-    return {
-      protobufOneof: compact({
-        fullName:
-          type.proto.kind === "oneof"
-            ? `${type.proto.parent.typeName}.${type.proto.name}`
-            : type.proto.typeName,
-        name: type.proto.name,
-        messageName:
-          type.proto.kind === "oneof" ? type.proto.parent.name : undefined,
-        package:
-          (type.proto.kind === "message" ? type.proto : type.proto.parent).file
-            .proto.package ?? "",
-        fields: type.fields.map((f) => ({
-          name: f.proto.name,
-          type: protoFieldTypeFullName(f),
-          options: type.proto.proto.options
-            ? toJson(
+    const fullName =
+      type.proto.kind === "oneof"
+        ? `${type.proto.parent.typeName}.${type.proto.name}`
+        : type.proto.typeName;
+    const messageNameEntry =
+      type.proto.kind === "oneof"
+        ? `,messageName:${jsStringLit(type.proto.parent.name)}`
+        : "";
+    const pkg =
+      (type.proto.kind === "message" ? type.proto : type.proto.parent).file
+        .proto.package ?? "";
+    const fields = type.fields
+      .map((f) => {
+        const typeFullName = protoFieldTypeFullName(f);
+        const typeEntry =
+          typeFullName !== undefined
+            ? `,type:${jsStringLit(typeFullName)}`
+            : "";
+        const optionsEntry = type.proto.proto.options
+          ? `,options:${JSON.stringify(
+              toJson(
                 type.proto.proto.options.$typeName ===
                   "google.protobuf.OneofOptions"
                   ? OneofOptionsSchema
                   : MessageOptionsSchema,
                 type.proto.proto.options,
                 { registry },
-              )
-            : undefined,
-        })),
-      }),
-    };
+              ),
+            )}`
+          : "";
+        return `{name:${jsStringLit(f.proto.name)}${typeEntry}${optionsEntry}}`;
+      })
+      .join(",");
+    return `{protobufOneof:{fullName:${jsStringLit(fullName)},name:${jsStringLit(type.proto.name)}${messageNameEntry},package:${jsStringLit(pkg)},fields:[${fields}]}}`;
   }
   if (
     type instanceof ObjectField ||
     type instanceof ObjectOneofField ||
     type instanceof InputObjectField
   ) {
-    return {
-      protobufField: compact({
-        name: type.proto.name,
-        typeFullName: protoFieldTypeFullName(type),
-        options: type.proto.proto.options
-          ? toJson(
-              type.proto.proto.options.$typeName ===
-                "google.protobuf.OneofOptions"
-                ? OneofOptionsSchema
-                : FieldOptionsSchema,
-              type.proto.proto.options,
-              { registry },
-            )
-          : undefined,
-      }),
-    };
+    const typeFullName = protoFieldTypeFullName(type);
+    const typeFullNameEntry =
+      typeFullName !== undefined
+        ? `,typeFullName:${jsStringLit(typeFullName)}`
+        : "";
+    const optionsEntry = type.proto.proto.options
+      ? `,options:${JSON.stringify(
+          toJson(
+            type.proto.proto.options.$typeName ===
+              "google.protobuf.OneofOptions"
+              ? OneofOptionsSchema
+              : FieldOptionsSchema,
+            type.proto.proto.options,
+            { registry },
+          ),
+        )}`
+      : "";
+    return `{protobufField:{name:${jsStringLit(type.proto.name)}${typeFullNameEntry}${optionsEntry}}}`;
   }
   if (type instanceof EnumTypeValue) {
-    return {
-      protobufEnumValue: {
-        name: type.proto.name,
-        options: type.proto.proto.options
-          ? toJson(EnumValueOptionsSchema, type.proto.proto.options, {
-              registry,
-            })
-          : undefined,
-      },
-    };
+    const optionsEntry = type.proto.proto.options
+      ? `,options:${JSON.stringify(
+          toJson(EnumValueOptionsSchema, type.proto.proto.options, {
+            registry,
+          }),
+        )}`
+      : "";
+    return `{protobufEnumValue:{name:${jsStringLit(type.proto.name)}${optionsEntry}}}`;
   }
 
   /* istanbul ignore next */
   const _exhaustiveCheck: never = type;
-  return {};
+  return "{}";
 }
 
 function protoFieldTypeFullName(

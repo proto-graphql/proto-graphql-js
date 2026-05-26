@@ -1,18 +1,13 @@
 import type { DescField, Registry } from "@bufbuild/protobuf";
 import {
   InterfaceType,
+  jsStringLit,
   type ObjectType,
   protobufGraphQLExtensions,
   tsFieldName,
 } from "@proto-graphql/codegen-core";
 
-import {
-  code,
-  compactForCodegen,
-  joinCode,
-  literalOf,
-  type Printable,
-} from "../../codegen/index.js";
+import { code, joinCode, type Printable } from "../../codegen/index.js";
 import { createFieldRefCode, createNoopFieldRefCode } from "./field.js";
 import {
   type PothosPrinterOptions,
@@ -40,23 +35,18 @@ export function createObjectTypeCode(
   opts: PothosPrinterOptions,
 ): Printable[] {
   const isInterface = type instanceof InterfaceType;
-  const typeOpts = {
-    name: type.typeName,
-    fields: code`t => ({${
-      type.fields.length > 0
-        ? joinCode(
-            type.fields.map(
-              (f) => code`${f.name}: ${createFieldRefCode(f, registry, opts)},`,
-            ),
-          )
-        : code`_: ${createNoopFieldRefCode({ input: false })}`
-    }})`,
-    description: type.description,
-    isTypeOf: isInterface
-      ? undefined
-      : createIsTypeOfFuncCode(type, registry, opts),
-    extensions: protobufGraphQLExtensions(type, registry),
-  };
+  const fieldsBody =
+    type.fields.length > 0
+      ? joinCode(
+          type.fields.map(
+            (f) => code`${f.name}: ${createFieldRefCode(f, registry, opts)},`,
+          ),
+        )
+      : code`_: ${createNoopFieldRefCode({ input: false })}`;
+  const isTypeOf = isInterface
+    ? undefined
+    : createIsTypeOfFuncCode(type, registry, opts);
+
   const buildRefFunc = code`${pothosBuilderPrintable(opts)}.${
     isInterface ? "interface" : "object"
   }Ref`;
@@ -67,20 +57,25 @@ export function createObjectTypeCode(
     ? code`
         Pick<
           ${protoRefTypePrintable(type.proto, opts)},
-          ${joinCode(
-            type.fields.map((f) =>
-              literalOf(tsFieldName(f.proto as DescField, opts)),
-            ),
-            "|",
-          )}
+          ${type.fields
+            .map((f) => jsStringLit(tsFieldName(f.proto as DescField, opts)))
+            .join(" | ")}
         >`
     : protoRefTypePrintable(type.proto, opts);
 
   return code`
     export const ${pothosRefPrintable(
       type,
-    )} = ${buildRefFunc}<${refFuncTypeArg}>(${literalOf(type.typeName)});
-    ${buildTypeFunc}(${pothosRefPrintable(type)}, ${literalOf(compactForCodegen(typeOpts))});
+    )} = ${buildRefFunc}<${refFuncTypeArg}>(${jsStringLit(type.typeName)});
+    ${buildTypeFunc}(${pothosRefPrintable(type)}, {
+      "name": ${jsStringLit(type.typeName)},
+      "fields": t => ({${fieldsBody}}),${
+        type.description != null
+          ? code`\n      "description": ${jsStringLit(type.description)},`
+          : ""
+      }${isTypeOf ? code`\n      "isTypeOf": ${isTypeOf},` : ""}
+      "extensions": ${protobufGraphQLExtensions(type, registry)},
+    });
   `;
 }
 
@@ -94,7 +89,7 @@ function createIsTypeOfFuncCode(
       return code`
         (source) => {
           return (source as ${protoTypeSymbol(type.proto, opts)} | { $type: string & {} }).$type
-            === ${literalOf(type.proto.typeName)};
+            === ${jsStringLit(type.proto.typeName)};
         }
       `;
     }
