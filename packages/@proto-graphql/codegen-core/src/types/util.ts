@@ -330,54 +330,77 @@ export function descriptionFromProto(proto: CommentedDesc): string | null {
   return getCommentsFor(proto).leading?.trim() || null;
 }
 
+// Frozen, shared "no options set" defaults for each extension type. The
+// `proto.options == null` branch fires on every descriptor that doesn't carry
+// any `[graphql.*]` option in its `.proto` source — i.e. the common case —
+// and each call site below would otherwise allocate a fresh empty message via
+// `create(...)`. On a synthetic 400-message x 20-field fixture that path
+// dominated CPU profiles (`createZeroMessage` 9.3% self time). All call sites
+// read the returned object; nothing mutates it, so a single frozen instance
+// is safe to share across the entire plugin run.
+const EMPTY_SCHEMA_OPTIONS = Object.freeze(
+  create(extensions.GraphqlSchemaOptionsSchema, {}),
+);
+const EMPTY_OBJECT_TYPE_OPTIONS = Object.freeze(
+  create(extensions.GraphqlObjectTypeOptionsSchema, {}),
+);
+const EMPTY_INPUT_TYPE_OPTIONS = Object.freeze(
+  create(extensions.GraphqlInputTypeOptionsSchema, {}),
+);
+const EMPTY_FIELD_OPTIONS = Object.freeze(
+  create(extensions.GraphqlFieldOptionsSchema, {}),
+);
+const EMPTY_ONEOF_OPTIONS = Object.freeze(
+  create(extensions.GraphqlOneofOptionsSchema, {}),
+);
+const EMPTY_ENUM_OPTIONS = Object.freeze(
+  create(extensions.GraphqlEnumOptionsSchema, {}),
+);
+const EMPTY_ENUM_VALUE_OPTIONS = Object.freeze(
+  create(extensions.GraphqlEnumValueOptionsSchema, {}),
+);
+
 function getSchemaOptions(
   desc: DescMessage | DescEnum,
 ): extensions.GraphqlSchemaOptions {
-  if (desc.file.proto.options == null)
-    return create(extensions.GraphqlSchemaOptionsSchema, {});
+  if (desc.file.proto.options == null) return EMPTY_SCHEMA_OPTIONS;
   return getExtension(desc.file.proto.options, extensions.schema);
 }
 
 function getObjectTypeOptions(
   desc: DescMessage,
 ): extensions.GraphqlObjectTypeOptions {
-  if (desc.proto.options == null)
-    return create(extensions.GraphqlObjectTypeOptionsSchema, {});
+  if (desc.proto.options == null) return EMPTY_OBJECT_TYPE_OPTIONS;
   return getExtension(desc.proto.options, extensions.object_type);
 }
 
 export function getInputTypeOptions(
   desc: DescMessage,
 ): extensions.GraphqlInputTypeOptions {
-  if (desc.proto.options == null)
-    return create(extensions.GraphqlInputTypeOptionsSchema, {});
+  if (desc.proto.options == null) return EMPTY_INPUT_TYPE_OPTIONS;
   return getExtension(desc.proto.options, extensions.input_type);
 }
 
 export function getFieldOptions(
   desc: DescField,
 ): extensions.GraphqlFieldOptions {
-  if (desc.proto.options == null)
-    return create(extensions.GraphqlFieldOptionsSchema, {});
+  if (desc.proto.options == null) return EMPTY_FIELD_OPTIONS;
   return getExtension(desc.proto.options, extensions.field);
 }
 
 function getOneofOptions(desc: DescOneof): extensions.GraphqlOneofOptions {
-  if (desc.proto.options == null)
-    return create(extensions.GraphqlOneofOptionsSchema, {});
+  if (desc.proto.options == null) return EMPTY_ONEOF_OPTIONS;
   return getExtension(desc.proto.options, extensions.oneof);
 }
 
 function getEnumTypeOptions(desc: DescEnum): extensions.GraphqlEnumOptions {
-  if (desc.proto.options == null)
-    return create(extensions.GraphqlEnumOptionsSchema, {});
+  if (desc.proto.options == null) return EMPTY_ENUM_OPTIONS;
   return getExtension(desc.proto.options, extensions.enum_type);
 }
 
 function getEnumValueOptions(
   desc: DescEnumValue,
 ): extensions.GraphqlEnumValueOptions {
-  if (desc.proto.options == null)
-    return create(extensions.GraphqlEnumValueOptionsSchema, {});
+  if (desc.proto.options == null) return EMPTY_ENUM_VALUE_OPTIONS;
   return getExtension(desc.proto.options, extensions.enum_value);
 }
