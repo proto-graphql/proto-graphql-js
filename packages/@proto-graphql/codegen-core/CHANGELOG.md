@@ -1,5 +1,17 @@
 # @proto-graphql/codegen-core
 
+## 0.7.0
+
+### Minor Changes
+
+- [#518](https://github.com/proto-graphql/proto-graphql-js/pull/518) [`34e3217`](https://github.com/proto-graphql/proto-graphql-js/commit/34e32177059a4e27629225c3c6396ccf306dbc1c) Thanks [@izumin5210](https://github.com/izumin5210)! - perf: emit Pothos type opts as direct templates instead of through `literalOf(JsObject)`, ~1.6x faster plugin runs with `format=false`
+
+### Patch Changes
+
+- [#520](https://github.com/proto-graphql/proto-graphql-js/pull/520) [`a16ad6c`](https://github.com/proto-graphql/proto-graphql-js/commit/a16ad6c8eaba7df7289f3c2a657b9fdc9edc1eb6) Thanks [@izumin5210](https://github.com/izumin5210)! - perf: cache frozen empty-default `[graphql.*]` option messages to remove `createZeroMessage` allocations on every descriptor lookup, ~27% faster `protoc-gen-pothos` runs with `format=false`
+
+- [#512](https://github.com/proto-graphql/proto-graphql-js/pull/512) [`2a4bd61`](https://github.com/proto-graphql/proto-graphql-js/commit/2a4bd6183e8176659e295736a716064a3be7379d) Thanks [@izumin5210](https://github.com/izumin5210)! - perf: index source-code comments per file to remove O(N²) lookup cost
+
 ## 0.6.0
 
 ### Minor Changes

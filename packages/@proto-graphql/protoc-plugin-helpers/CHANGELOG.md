@@ -1,5 +1,12 @@
 # @proto-graphql/protoc-plugin-helpers
 
+## 0.5.1
+
+### Patch Changes
+
+- Updated dependencies [[`a16ad6c`](https://github.com/proto-graphql/proto-graphql-js/commit/a16ad6c8eaba7df7289f3c2a657b9fdc9edc1eb6), [`2a4bd61`](https://github.com/proto-graphql/proto-graphql-js/commit/2a4bd6183e8176659e295736a716064a3be7379d), [`34e3217`](https://github.com/proto-graphql/proto-graphql-js/commit/34e32177059a4e27629225c3c6396ccf306dbc1c)]:
+  - @proto-graphql/codegen-core@0.7.0
+
 ## 0.5.0
 
 ### Minor Changes

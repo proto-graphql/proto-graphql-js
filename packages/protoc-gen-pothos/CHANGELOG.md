@@ -1,5 +1,21 @@
 # protoc-gen-pothos
 
+## 0.8.0
+
+### Minor Changes
+
+- [#517](https://github.com/proto-graphql/proto-graphql-js/pull/517) [`8bc05eb`](https://github.com/proto-graphql/proto-graphql-js/commit/8bc05eb6c809c08948648dec4004a0668a04251c) Thanks [@izumin5210](https://github.com/izumin5210)! - feat: add `format` plugin option (default true) to skip the in-plugin formatter pass
+
+### Patch Changes
+
+- [#519](https://github.com/proto-graphql/proto-graphql-js/pull/519) [`4fa6a2d`](https://github.com/proto-graphql/proto-graphql-js/commit/4fa6a2d443910a697d321e6a527a21c67d353638) Thanks [@izumin5210](https://github.com/izumin5210)! - perf: shrink `code` template-tag output (merge adjacent strings) and switch `markAsPrintableArray` to direct symbol assignment, ~10% faster plugin runs with `format=false`
+
+- [#518](https://github.com/proto-graphql/proto-graphql-js/pull/518) [`34e3217`](https://github.com/proto-graphql/proto-graphql-js/commit/34e32177059a4e27629225c3c6396ccf306dbc1c) Thanks [@izumin5210](https://github.com/izumin5210)! - perf: emit Pothos type opts as direct templates instead of through `literalOf(JsObject)`, ~1.6x faster plugin runs with `format=false`
+
+- Updated dependencies [[`a16ad6c`](https://github.com/proto-graphql/proto-graphql-js/commit/a16ad6c8eaba7df7289f3c2a657b9fdc9edc1eb6), [`2a4bd61`](https://github.com/proto-graphql/proto-graphql-js/commit/2a4bd6183e8176659e295736a716064a3be7379d), [`34e3217`](https://github.com/proto-graphql/proto-graphql-js/commit/34e32177059a4e27629225c3c6396ccf306dbc1c)]:
+  - @proto-graphql/codegen-core@0.7.0
+  - @proto-graphql/protoc-plugin-helpers@0.5.1
+
 ## 0.7.1
 
 ### Patch Changes
