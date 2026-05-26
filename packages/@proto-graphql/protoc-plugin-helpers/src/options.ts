@@ -9,6 +9,12 @@ import {
 export type Options<DSL extends PrinterOptions["dsl"]> = {
   type: TypeOptions;
   printer: Extract<PrinterOptions, { dsl: DSL }>;
+  /**
+   * When false, skip the in-plugin formatter pass over the generated
+   * TypeScript. Useful when downstream tooling (Biome / Prettier) will format
+   * the output anyway. Defaults to true.
+   */
+  format: boolean;
 };
 
 export function parsePothosOptions(
@@ -28,6 +34,7 @@ export function parsePothosOptions(
       filenameSuffix: ".pb.pothos.ts",
       pothos: { builderPath: "./builder" },
     } as Extract<PrinterOptions, { dsl: "pothos" }>,
+    format: true,
   };
 
   const boolParam = (name: string, v: string): boolean => {
@@ -86,6 +93,10 @@ export function parsePothosOptions(
       }
       case "ignore_non_message_oneof_fields": {
         params.type.ignoreNonMessageOneofFields = true;
+        break;
+      }
+      case "format": {
+        params.format = boolParam(k, v);
         break;
       }
       case "target":

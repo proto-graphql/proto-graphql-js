@@ -51,4 +51,26 @@ describe("parsePothosOptions", () => {
       "./builder",
     );
   });
+
+  it("defaults format to true", () => {
+    expect(parsePothosOptions([]).format).toBe(true);
+  });
+
+  it("parses format=false", () => {
+    expect(parsePothosOptions([{ key: "format", value: "false" }]).format).toBe(
+      false,
+    );
+  });
+
+  it("parses format=true explicitly", () => {
+    expect(parsePothosOptions([{ key: "format", value: "true" }]).format).toBe(
+      true,
+    );
+  });
+
+  it("throws on non-bool format value", () => {
+    expect(() =>
+      parsePothosOptions([{ key: "format", value: "maybe" }]),
+    ).toThrow(/format should be bool/);
+  });
 });
