@@ -25,12 +25,12 @@ describe("code template tag", () => {
   describe("basic usage", () => {
     test("returns empty array for empty template", () => {
       const result = code``;
-      expect(result).toEqual([""]);
+      expect(printableToString(result)).toBe("");
     });
 
     test("returns string content for template without interpolation", () => {
       const result = code`const x = 1`;
-      expect(result).toEqual(["const x = 1"]);
+      expect(printableToString(result)).toBe("const x = 1");
     });
   });
 
