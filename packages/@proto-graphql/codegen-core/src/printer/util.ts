@@ -73,6 +73,26 @@ export function generatedGraphQLTypeImportPath(
   return importPath.match(/^[./]/) ? importPath : `./${importPath}`;
 }
 
+const ESCAPE_PATTERN = /[\\"\n\r\t]/;
+const ESCAPE_REPLACE = /[\\"\n\r\t]/g;
+const ESCAPE_MAP: Record<string, string> = {
+  "\\": "\\\\",
+  '"': '\\"',
+  "\n": "\\n",
+  "\r": "\\r",
+  "\t": "\\t",
+};
+
+/**
+ * Emit a quoted JS/TS string literal for direct concatenation into generated
+ * code. Skips the `.replace()` traversal for the (very common) case of a
+ * string with no characters needing JS-source escaping.
+ */
+export function jsStringLit(s: string): string {
+  if (!ESCAPE_PATTERN.test(s)) return `"${s}"`;
+  return `"${s.replace(ESCAPE_REPLACE, (c) => ESCAPE_MAP[c]!)}"`;
+}
+
 /** Remove nullish values recursively. */
 export function compact(v: any): any {
   if (typeof v !== "object") return v;

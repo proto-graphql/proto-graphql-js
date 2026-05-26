@@ -3,6 +3,7 @@ import {
   EnumType,
   type InputObjectField,
   InputObjectType,
+  jsStringLit,
   protobufGraphQLExtensions,
   ScalarType,
   tsFieldName,
@@ -10,10 +11,8 @@ import {
 
 import {
   code,
-  compactForCodegen,
   createImportSymbol,
   joinCode,
-  literalOf,
   type Printable,
 } from "../../codegen/index.js";
 import { createFieldRefCode, createNoopFieldRefCode } from "./field.js";
@@ -77,7 +76,7 @@ export function createInputObjectTypeCode(
             );
             if (f.isList()) typeNode = code`Array<${typeNode}>`;
           } else {
-            typeNode = code`${protoTypeSymbol(type.proto, opts)}[${literalOf(
+            typeNode = code`${protoTypeSymbol(type.proto, opts)}[${jsStringLit(
               tsFieldName(f.proto, opts).toString(),
             )}]`;
           }
@@ -102,32 +101,29 @@ export function createInputObjectTypeCode(
     "@pothos/core",
   )}<${shapeTypePrintable(type)}>`;
 
+  const fieldsBody =
+    fields.length > 0
+      ? joinCode(
+          fields.map(
+            (f) => code`${f.name}: ${createFieldRefCode(f, registry, opts)}`,
+          ),
+          ", ",
+        )
+      : code`_: ${createNoopFieldRefCode({ input: true })}`;
+  const descriptionEntry =
+    type.description != null
+      ? code`\n      "description": ${jsStringLit(type.description)},`
+      : "";
+
   const refCode = code`
     export const ${pothosRefPrintable(type)}: ${inputObjectRefType} =
       ${pothosBuilderPrintable(opts)}.inputRef<${shapeTypePrintable(
         type,
-      )}>(${literalOf(type.typeName)}).implement(
-        ${literalOf(
-          compactForCodegen({
-            fields: code`t => ({${
-              fields.length > 0
-                ? joinCode(
-                    fields.map(
-                      (f) =>
-                        code`${f.name}: ${createFieldRefCode(
-                          f,
-                          registry,
-                          opts,
-                        )}`,
-                    ),
-                    ", ",
-                  )
-                : code`_: ${createNoopFieldRefCode({ input: true })}`
-            }})`,
-            extensions: protobufGraphQLExtensions(type, registry),
-            description: type.description,
-          }),
-        )}
+      )}>(${jsStringLit(type.typeName)}).implement(
+        {
+      "fields": t => ({${fieldsBody}}),
+      "extensions": ${protobufGraphQLExtensions(type, registry)},${descriptionEntry}
+    }
       )${needsTypeAssertion ? code` as ${inputObjectRefType}` : ""};
   `;
 

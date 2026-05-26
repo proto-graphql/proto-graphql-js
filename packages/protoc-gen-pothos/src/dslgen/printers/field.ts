@@ -2,6 +2,7 @@ import type { createRegistry, DescField } from "@bufbuild/protobuf";
 import {
   EnumType,
   InputObjectField,
+  jsStringLit,
   ObjectField,
   ObjectOneofField,
   ObjectType,
@@ -11,12 +12,7 @@ import {
   tsFieldName,
 } from "@proto-graphql/codegen-core";
 
-import {
-  code,
-  compactForCodegen,
-  literalOf,
-  type Printable,
-} from "../../codegen/index.js";
+import { code, type Printable } from "../../codegen/index.js";
 import { createEnumResolverCode } from "./fieldResolver/enumFieldResolver.js";
 import { createNonNullResolverCode } from "./fieldResolver/nonNullResolver.js";
 import { createOneofUnionResolverCode } from "./fieldResolver/oneofUnionResolver.js";
@@ -56,9 +52,9 @@ export function createFieldRefCode(
   opts: PothosPrinterOptions,
 ): Printable[] {
   const isInput = field instanceof InputObjectField;
-  const baseType =
+  const baseType: string | Printable[] =
     field.type instanceof ScalarType
-      ? literalOf(field.type.typeName)
+      ? jsStringLit(field.type.typeName)
       : fieldTypeRefPrintable(field, opts);
 
   const sourceExpr = "source";
@@ -106,23 +102,39 @@ export function createFieldRefCode(
   }
 
   const nullableValue = isInput !== field.isNullable(); /* Logical XOR */
-  const fieldOpts = {
-    type: field.isList() ? code`[${baseType}]` : baseType,
-    [isInput ? "required" : "nullable"]: field.isList()
-      ? { list: nullableValue, items: isInput /* always non-null */ }
-      : nullableValue,
-    description: field.description,
-    deprecationReason: field.deprecationReason,
-    resolve: resolverCode ? code`${sourceExpr} => {${resolverCode}}` : null,
-    extensions: protobufGraphQLExtensions(field, registry),
-  };
+  const typeExpr: Printable[] = field.isList()
+    ? code`[${baseType}]`
+    : typeof baseType === "string"
+      ? code`${baseType}`
+      : baseType;
+  const nullabilityKey = isInput ? "required" : "nullable";
+  const nullabilityVal = field.isList()
+    ? `{ "list": ${String(nullableValue)}, "items": ${String(isInput) /* always non-null */} }`
+    : String(nullableValue);
+  const resolveEntry = resolverCode
+    ? code`\n      "resolve": ${sourceExpr} => {${resolverCode}},`
+    : "";
+  const descriptionEntry =
+    field.description != null
+      ? code`\n      "description": ${jsStringLit(field.description)},`
+      : "";
+  const deprecationEntry =
+    field.deprecationReason != null
+      ? code`\n      "deprecationReason": ${jsStringLit(field.deprecationReason)},`
+      : "";
+
+  const fieldOptsCode = code`{
+      "type": ${typeExpr},
+      "${nullabilityKey}": ${nullabilityVal},${descriptionEntry}${deprecationEntry}${resolveEntry}
+      "extensions": ${protobufGraphQLExtensions(field, registry)},
+    }`;
 
   const shouldUseFieldFunc = isInput || resolverCode != null;
   return shouldUseFieldFunc
-    ? code`t.field(${literalOf(compactForCodegen(fieldOpts))})`
-    : code`t.expose(${literalOf(
-        tsFieldName(field.proto as DescField, opts),
-      )}, ${literalOf(compactForCodegen(fieldOpts))})`;
+    ? code`t.field(${fieldOptsCode})`
+    : code`t.expose(${jsStringLit(
+        tsFieldName(field.proto as DescField, opts).toString(),
+      )}, ${fieldOptsCode})`;
 }
 
 /**
