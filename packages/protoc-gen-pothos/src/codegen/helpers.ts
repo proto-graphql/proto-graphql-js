@@ -28,6 +28,7 @@ export function joinCode(
 // module keep working; the implementation lives in `@proto-graphql/codegen-core`
 // to be shareable.
 import { jsStringLit } from "@proto-graphql/codegen-core";
+
 export { jsStringLit } from "@proto-graphql/codegen-core";
 
 /**

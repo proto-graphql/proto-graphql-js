@@ -38,9 +38,7 @@ export function createOneofUnionTypeCode(
       : "";
   return code`
     export const ${pothosRefPrintable(type)} =
-      ${pothosBuilderPrintable(opts)}.unionType(${jsStringLit(
-        type.typeName,
-      )}, {
+      ${pothosBuilderPrintable(opts)}.unionType(${jsStringLit(type.typeName)}, {
       "types": [${typesArrayBody}],${descriptionEntry}
       "extensions": ${protobufGraphQLExtensions(type, registry)},
     });
