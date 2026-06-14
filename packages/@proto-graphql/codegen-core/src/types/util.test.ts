@@ -4,7 +4,7 @@ import {
   type TestapisPackage,
 } from "@proto-graphql/testapis-proto";
 import { describe, expect, it } from "vitest";
-import { isRequiredField } from "./util";
+import { exceptRequestOrResponse, isRequiredField } from "./util";
 
 describe("isRequiredField", () => {
   it.each<{
@@ -91,5 +91,34 @@ describe("isRequiredField", () => {
     }
 
     expect(isRequiredField(fieldDesc, fieldType)).toBe(want);
+  });
+});
+
+describe("exceptRequestOrResponse", () => {
+  const files = [
+    ...createFileRegistry(
+      getTestapisFileDescriptorSet("testapis.basic.presence"),
+    ).files,
+  ];
+
+  it("returns the same predicate instance for the same files array (memoized)", () => {
+    expect(exceptRequestOrResponse(files)).toBe(exceptRequestOrResponse(files));
+  });
+
+  it("builds a separate predicate for a different files array", () => {
+    expect(exceptRequestOrResponse([...files])).not.toBe(
+      exceptRequestOrResponse([...files]),
+    );
+  });
+
+  it("keeps messages that are not ignored request/response types", () => {
+    const registry = createFileRegistry(
+      getTestapisFileDescriptorSet("testapis.basic.presence"),
+    );
+    const msg = registry.getMessage("testapis.basic.presence.Message");
+    if (msg == null) {
+      throw new Error("testapis.basic.presence.Message not found");
+    }
+    expect(exceptRequestOrResponse(files)(msg)).toBe(true);
   });
 });

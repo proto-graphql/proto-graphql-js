@@ -142,11 +142,26 @@ function getDeprecationReasonType(
   }
 }
 
+// `exceptRequestOrResponse` is called three times per file (the object, input,
+// and interface builders), and `collectTypesFromFile` runs once per generated
+// file with `schema.allFiles` — so the request/response set scan ran
+// files²·3 times on large schemas (the set-building loop was ~22% of self time
+// on a 538-file schema). Both the sets and the returned predicate depend only
+// on the `files` array, which is a stable reference for the whole run, so
+// memoize by it and build the predicate exactly once.
+const reqRespPredicateCache = new WeakMap<
+  readonly DescFile[],
+  (m: DescMessage) => boolean
+>();
+
 export function exceptRequestOrResponse(
   files: readonly DescFile[],
 ): (m: DescMessage) => boolean {
-  const reqSet = new Set();
-  const respSet = new Set();
+  const cached = reqRespPredicateCache.get(files);
+  if (cached !== undefined) return cached;
+
+  const reqSet = new Set<string>();
+  const respSet = new Set<string>();
   for (const f of files) {
     for (const s of f.services) {
       for (const m of s.methods) {
@@ -160,7 +175,7 @@ export function exceptRequestOrResponse(
     }
   }
 
-  return (m) => {
+  const predicate = (m: DescMessage): boolean => {
     const ext = getSchemaOptions(m);
 
     if (ext.ignoreRequests && reqSet.has(m.typeName)) return false;
@@ -168,6 +183,8 @@ export function exceptRequestOrResponse(
 
     return true;
   };
+  reqRespPredicateCache.set(files, predicate);
+  return predicate;
 }
 
 export function isIgnoredType(type: DescMessage | DescEnum): boolean {
