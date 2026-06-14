@@ -1,5 +1,13 @@
 # protoc-gen-pothos
 
+## 0.8.1
+
+### Patch Changes
+
+- Updated dependencies [[`d1c1170`](https://github.com/proto-graphql/proto-graphql-js/commit/d1c11702336b9bf496e488725feace534a277890), [`d1c1170`](https://github.com/proto-graphql/proto-graphql-js/commit/d1c11702336b9bf496e488725feace534a277890)]:
+  - @proto-graphql/codegen-core@0.7.1
+  - @proto-graphql/protoc-plugin-helpers@0.5.2
+
 ## 0.8.0
 
 ### Minor Changes

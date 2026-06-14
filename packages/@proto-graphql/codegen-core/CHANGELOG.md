@@ -1,5 +1,28 @@
 # @proto-graphql/codegen-core
 
+## 0.7.1
+
+### Patch Changes
+
+- [#523](https://github.com/proto-graphql/proto-graphql-js/pull/523) [`d1c1170`](https://github.com/proto-graphql/proto-graphql-js/commit/d1c11702336b9bf496e488725feace534a277890) Thanks [@izumin5210](https://github.com/izumin5210)! - perf(codegen-core): memoize the protobuf registry per schema
+
+  `createRegistryFromSchema` is called once per generated file, but the registry
+  only depends on `schema.allFiles`, which is constant for the whole plugin run.
+  Building it per file made registry construction scale with files² and dominated
+  CPU profiles on large schemas. Memoizing by the schema object builds the
+  registry exactly once per run (~23% faster end-to-end with `format=false` on a
+  538-file schema).
+
+- [#523](https://github.com/proto-graphql/proto-graphql-js/pull/523) [`d1c1170`](https://github.com/proto-graphql/proto-graphql-js/commit/d1c11702336b9bf496e488725feace534a277890) Thanks [@izumin5210](https://github.com/izumin5210)! - perf(codegen-core): memoize request/response type sets per file set
+
+  `exceptRequestOrResponse` rebuilt its request/response type sets by scanning
+  every service method of every file, and it was invoked three times per file by
+  the object/input/interface builders in `collectTypesFromFile` (which itself runs
+  once per generated file). On large schemas this scan dominated CPU profiles
+  (~22% of self time on a 538-file schema). The sets depend only on the `files`
+  array, which is stable for the whole run, so memoize the predicate by it and
+  build the sets exactly once.
+
 ## 0.7.0
 
 ### Minor Changes
