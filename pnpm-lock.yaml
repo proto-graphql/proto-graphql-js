@@ -82,7 +82,7 @@ importers:
         version: 2.2.0
       tsup:
         specifier: 8.5.1
-        version: 8.5.1(@swc/core@1.5.0(@swc/helpers@0.5.18))(postcss@8.5.6)(tsx@4.22.4)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.5.1(@swc/core@1.5.0(@swc/helpers@0.5.18))(postcss@8.5.6)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.8.2)
       tsx:
         specifier: 4.22.4
         version: 4.22.4
@@ -90,8 +90,8 @@ importers:
         specifier: 2.9.14
         version: 2.9.14
       typescript:
-        specifier: 5.9.3
-        version: 5.9.3
+        specifier: 6.0.3
+        version: 6.0.3
       vitest:
         specifier: 4.1.0
         version: 4.1.0(@types/node@24.13.2)(vite@7.3.1(@types/node@24.13.2)(tsx@4.22.4)(yaml@2.8.2))
@@ -4628,6 +4628,11 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
+  typescript@6.0.3:
+    resolution: {integrity: sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+
   ufo@1.6.3:
     resolution: {integrity: sha512-yDJTmhydvl5lJzBmy/hyOAA0d+aqCBuwl818haVdYCRrWV84o7YyeVm4QlVHStqNrrJSTb6jKuFAVqAFsr+K3Q==}
 
@@ -8535,7 +8540,7 @@ snapshots:
 
   tslib@2.8.1: {}
 
-  tsup@8.5.1(@swc/core@1.5.0(@swc/helpers@0.5.18))(postcss@8.5.6)(tsx@4.22.4)(typescript@5.9.3)(yaml@2.8.2):
+  tsup@8.5.1(@swc/core@1.5.0(@swc/helpers@0.5.18))(postcss@8.5.6)(tsx@4.22.4)(typescript@6.0.3)(yaml@2.8.2):
     dependencies:
       bundle-require: 5.1.0(esbuild@0.27.2)
       cac: 6.7.14
@@ -8557,7 +8562,7 @@ snapshots:
     optionalDependencies:
       '@swc/core': 1.5.0(@swc/helpers@0.5.18)
       postcss: 8.5.6
-      typescript: 5.9.3
+      typescript: 6.0.3
     transitivePeerDependencies:
       - jiti
       - supports-color
@@ -8603,6 +8608,8 @@ snapshots:
   typescript@5.8.3: {}
 
   typescript@5.9.3: {}
+
+  typescript@6.0.3: {}
 
   ufo@1.6.3: {}
 
