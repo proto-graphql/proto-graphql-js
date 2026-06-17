@@ -23,8 +23,10 @@ builder.objectType(BaseMessage$Ref, {
     }),
   }),
   isTypeOf: (source) => {
-    return (source as BaseMessage | { $type: string & {}; }).$type ===
-      "testapis.imports.cross_pkg_a.BaseMessage";
+    return (
+      (source as BaseMessage | { $type: string & {} }).$type ===
+      "testapis.imports.cross_pkg_a.BaseMessage"
+    );
   },
   extensions: {
     protobufMessage: {
@@ -47,8 +49,10 @@ builder.objectType(Parent$Ref, {
     }),
   }),
   isTypeOf: (source) => {
-    return (source as Parent | { $type: string & {}; }).$type ===
-      "testapis.imports.cross_pkg_a.Parent";
+    return (
+      (source as Parent | { $type: string & {} }).$type ===
+      "testapis.imports.cross_pkg_a.Parent"
+    );
   },
   extensions: {
     protobufMessage: {
@@ -70,8 +74,10 @@ builder.objectType(ParentChild$Ref, {
     }),
   }),
   isTypeOf: (source) => {
-    return (source as Parent_Child | { $type: string & {}; }).$type ===
-      "testapis.imports.cross_pkg_a.Parent.Child";
+    return (
+      (source as Parent_Child | { $type: string & {} }).$type ===
+      "testapis.imports.cross_pkg_a.Parent.Child"
+    );
   },
   extensions: {
     protobufMessage: {
@@ -82,30 +88,37 @@ builder.objectType(ParentChild$Ref, {
   },
 });
 
-export type BaseMessageInput$Shape = { body: BaseMessage["body"]; };
+export type BaseMessageInput$Shape = {
+  body: BaseMessage["body"];
+};
 
 export const BaseMessageInput$Ref: InputObjectRef<BaseMessageInput$Shape> =
-  builder.inputRef<BaseMessageInput$Shape>("BaseMessageInput").implement({
-    fields: (t) => ({
-      body: t.field({
-        type: "String",
-        required: true,
-        extensions: { protobufField: { name: "body", typeFullName: "string" } },
+  builder
+    .inputRef<BaseMessageInput$Shape>("BaseMessageInput")
+    .implement({
+      fields: (t) => ({
+        body: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: { name: "body", typeFullName: "string" },
+          },
+        }),
       }),
-    }),
-    extensions: {
-      protobufMessage: {
-        fullName: "testapis.imports.cross_pkg_a.BaseMessage",
-        name: "BaseMessage",
-        package: "testapis.imports.cross_pkg_a",
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.imports.cross_pkg_a.BaseMessage",
+          name: "BaseMessage",
+          package: "testapis.imports.cross_pkg_a",
+        },
       },
-    },
-  });
+    });
 
 export type ParentInput$Shape = {};
 
 export const ParentInput$Ref: InputObjectRef<ParentInput$Shape> = builder
-  .inputRef<ParentInput$Shape>("ParentInput").implement({
+  .inputRef<ParentInput$Shape>("ParentInput")
+  .implement({
     fields: (t) => ({
       _: t.field({
         type: "Boolean",
@@ -122,25 +135,31 @@ export const ParentInput$Ref: InputObjectRef<ParentInput$Shape> = builder
     },
   });
 
-export type ParentChildInput$Shape = { body: Parent_Child["body"]; };
+export type ParentChildInput$Shape = {
+  body: Parent_Child["body"];
+};
 
 export const ParentChildInput$Ref: InputObjectRef<ParentChildInput$Shape> =
-  builder.inputRef<ParentChildInput$Shape>("ParentChildInput").implement({
-    fields: (t) => ({
-      body: t.field({
-        type: "String",
-        required: true,
-        extensions: { protobufField: { name: "body", typeFullName: "string" } },
+  builder
+    .inputRef<ParentChildInput$Shape>("ParentChildInput")
+    .implement({
+      fields: (t) => ({
+        body: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: { name: "body", typeFullName: "string" },
+          },
+        }),
       }),
-    }),
-    extensions: {
-      protobufMessage: {
-        fullName: "testapis.imports.cross_pkg_a.Parent.Child",
-        name: "Child",
-        package: "testapis.imports.cross_pkg_a",
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.imports.cross_pkg_a.Parent.Child",
+          name: "Child",
+          package: "testapis.imports.cross_pkg_a",
+        },
       },
-    },
-  });
+    });
 
 export const BaseEnum$Ref: EnumRef<BaseEnum, BaseEnum> = builder.enumType(
   "BaseEnum",

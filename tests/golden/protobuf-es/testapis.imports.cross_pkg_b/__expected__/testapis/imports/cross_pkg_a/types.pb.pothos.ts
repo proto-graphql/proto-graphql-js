@@ -16,9 +16,8 @@ import {
 } from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/imports/cross_pkg_a/types_pb";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 
-export const BaseMessage$Ref = builder.objectRef<
-  MessageShape<typeof BaseMessageSchema>
->("BaseMessage");
+export const BaseMessage$Ref =
+  builder.objectRef<MessageShape<typeof BaseMessageSchema>>("BaseMessage");
 builder.objectType(BaseMessage$Ref, {
   name: "BaseMessage",
   fields: (t) => ({
@@ -40,9 +39,8 @@ builder.objectType(BaseMessage$Ref, {
   },
 });
 
-export const Parent$Ref = builder.objectRef<MessageShape<typeof ParentSchema>>(
-  "Parent",
-);
+export const Parent$Ref =
+  builder.objectRef<MessageShape<typeof ParentSchema>>("Parent");
 builder.objectType(Parent$Ref, {
   name: "Parent",
   fields: (t) => ({
@@ -65,9 +63,8 @@ builder.objectType(Parent$Ref, {
   },
 });
 
-export const ParentChild$Ref = builder.objectRef<
-  MessageShape<typeof Parent_ChildSchema>
->("ParentChild");
+export const ParentChild$Ref =
+  builder.objectRef<MessageShape<typeof Parent_ChildSchema>>("ParentChild");
 builder.objectType(ParentChild$Ref, {
   name: "ParentChild",
   fields: (t) => ({
@@ -89,36 +86,45 @@ builder.objectType(ParentChild$Ref, {
   },
 });
 
-export type BaseMessageInput$Shape = { body: BaseMessage["body"]; };
+export type BaseMessageInput$Shape = {
+  body: BaseMessage["body"];
+};
 
 export const BaseMessageInput$Ref: InputObjectRef<BaseMessageInput$Shape> =
-  builder.inputRef<BaseMessageInput$Shape>("BaseMessageInput").implement({
-    fields: (t) => ({
-      body: t.field({
-        type: "String",
-        required: true,
-        extensions: { protobufField: { name: "body", typeFullName: "string" } },
+  builder
+    .inputRef<BaseMessageInput$Shape>("BaseMessageInput")
+    .implement({
+      fields: (t) => ({
+        body: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: { name: "body", typeFullName: "string" },
+          },
+        }),
       }),
-    }),
-    extensions: {
-      protobufMessage: {
-        fullName: "testapis.imports.cross_pkg_a.BaseMessage",
-        name: "BaseMessage",
-        package: "testapis.imports.cross_pkg_a",
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.imports.cross_pkg_a.BaseMessage",
+          name: "BaseMessage",
+          package: "testapis.imports.cross_pkg_a",
+        },
       },
-    },
-  }) as InputObjectRef<BaseMessageInput$Shape>;
+    }) as InputObjectRef<BaseMessageInput$Shape>;
 
 export function BaseMessageInput$toProto(
   input: BaseMessageInput$Shape | null | undefined,
 ): BaseMessage {
-  return create(BaseMessageSchema, { body: input?.body ?? undefined });
+  return create(BaseMessageSchema, {
+    body: input?.body ?? undefined,
+  });
 }
 
 export type ParentInput$Shape = {};
 
 export const ParentInput$Ref: InputObjectRef<ParentInput$Shape> = builder
-  .inputRef<ParentInput$Shape>("ParentInput").implement({
+  .inputRef<ParentInput$Shape>("ParentInput")
+  .implement({
     fields: (t) => ({
       _: t.field({
         type: "Boolean",
@@ -141,30 +147,38 @@ export function ParentInput$toProto(
   return create(ParentSchema, {});
 }
 
-export type ParentChildInput$Shape = { body: Parent_Child["body"]; };
+export type ParentChildInput$Shape = {
+  body: Parent_Child["body"];
+};
 
 export const ParentChildInput$Ref: InputObjectRef<ParentChildInput$Shape> =
-  builder.inputRef<ParentChildInput$Shape>("ParentChildInput").implement({
-    fields: (t) => ({
-      body: t.field({
-        type: "String",
-        required: true,
-        extensions: { protobufField: { name: "body", typeFullName: "string" } },
+  builder
+    .inputRef<ParentChildInput$Shape>("ParentChildInput")
+    .implement({
+      fields: (t) => ({
+        body: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: { name: "body", typeFullName: "string" },
+          },
+        }),
       }),
-    }),
-    extensions: {
-      protobufMessage: {
-        fullName: "testapis.imports.cross_pkg_a.Parent.Child",
-        name: "Child",
-        package: "testapis.imports.cross_pkg_a",
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.imports.cross_pkg_a.Parent.Child",
+          name: "Child",
+          package: "testapis.imports.cross_pkg_a",
+        },
       },
-    },
-  }) as InputObjectRef<ParentChildInput$Shape>;
+    }) as InputObjectRef<ParentChildInput$Shape>;
 
 export function ParentChildInput$toProto(
   input: ParentChildInput$Shape | null | undefined,
 ): Parent_Child {
-  return create(Parent_ChildSchema, { body: input?.body ?? undefined });
+  return create(Parent_ChildSchema, {
+    body: input?.body ?? undefined,
+  });
 }
 
 export const BaseEnum$Ref: EnumRef<BaseEnum, BaseEnum> = builder.enumType(

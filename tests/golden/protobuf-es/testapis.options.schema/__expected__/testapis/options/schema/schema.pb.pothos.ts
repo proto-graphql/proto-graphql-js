@@ -44,31 +44,34 @@ export type SchemaPrefixPostResponseInput$Shape = {
   body: PostResponse["body"];
 };
 
-export const SchemaPrefixPostResponseInput$Ref: InputObjectRef<
-  SchemaPrefixPostResponseInput$Shape
-> = builder.inputRef<SchemaPrefixPostResponseInput$Shape>(
-  "SchemaPrefixPostResponseInput",
-).implement({
-  fields: (t) => ({
-    id: t.field({
-      type: "Int64",
-      required: true,
-      extensions: { protobufField: { name: "id", typeFullName: "uint64" } },
-    }),
-    body: t.field({
-      type: "String",
-      required: true,
-      extensions: { protobufField: { name: "body", typeFullName: "string" } },
-    }),
-  }),
-  extensions: {
-    protobufMessage: {
-      fullName: "testapis.options.schema.PostResponse",
-      name: "PostResponse",
-      package: "testapis.options.schema",
-    },
-  },
-}) as InputObjectRef<SchemaPrefixPostResponseInput$Shape>;
+export const SchemaPrefixPostResponseInput$Ref: InputObjectRef<SchemaPrefixPostResponseInput$Shape> =
+  builder
+    .inputRef<SchemaPrefixPostResponseInput$Shape>(
+      "SchemaPrefixPostResponseInput",
+    )
+    .implement({
+      fields: (t) => ({
+        id: t.field({
+          type: "Int64",
+          required: true,
+          extensions: { protobufField: { name: "id", typeFullName: "uint64" } },
+        }),
+        body: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: { name: "body", typeFullName: "string" },
+          },
+        }),
+      }),
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.options.schema.PostResponse",
+          name: "PostResponse",
+          package: "testapis.options.schema",
+        },
+      },
+    }) as InputObjectRef<SchemaPrefixPostResponseInput$Shape>;
 
 export function SchemaPrefixPostResponseInput$toProto(
   input: SchemaPrefixPostResponseInput$Shape | null | undefined,

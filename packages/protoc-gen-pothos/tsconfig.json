@@ -2,5 +2,5 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@proto-graphql/tsconfig/tsconfig.pkg.json",
   "include": ["./src"],
-  "exclude": ["src/__tests__"]
+  "exclude": ["src/__tests__", "src/**/*.mjs"]
 }

@@ -32,8 +32,10 @@ builder.objectType(OneofParent$Ref, {
     }),
   }),
   isTypeOf: (source) => {
-    return (source as OneofParent | { $type: string & {}; }).$type ===
-      "testapis.imports.oneof_cross_file.OneofParent";
+    return (
+      (source as OneofParent | { $type: string & {} }).$type ===
+      "testapis.imports.oneof_cross_file.OneofParent"
+    );
   },
   extensions: {
     protobufMessage: {
@@ -50,37 +52,39 @@ export type OneofParentInput$Shape = {
 };
 
 export const OneofParentInput$Ref: InputObjectRef<OneofParentInput$Shape> =
-  builder.inputRef<OneofParentInput$Shape>("OneofParentInput").implement({
-    fields: (t) => ({
-      member1: t.field({
-        type: OneofMember1Input$Ref,
-        required: false,
-        extensions: {
-          protobufField: {
-            name: "member1",
-            typeFullName: "testapis.imports.oneof_cross_file.OneofMember1",
+  builder
+    .inputRef<OneofParentInput$Shape>("OneofParentInput")
+    .implement({
+      fields: (t) => ({
+        member1: t.field({
+          type: OneofMember1Input$Ref,
+          required: false,
+          extensions: {
+            protobufField: {
+              name: "member1",
+              typeFullName: "testapis.imports.oneof_cross_file.OneofMember1",
+            },
           },
-        },
-      }),
-      member2: t.field({
-        type: OneofMember2Input$Ref,
-        required: false,
-        extensions: {
-          protobufField: {
-            name: "member2",
-            typeFullName: "testapis.imports.oneof_cross_file.OneofMember2",
+        }),
+        member2: t.field({
+          type: OneofMember2Input$Ref,
+          required: false,
+          extensions: {
+            protobufField: {
+              name: "member2",
+              typeFullName: "testapis.imports.oneof_cross_file.OneofMember2",
+            },
           },
-        },
+        }),
       }),
-    }),
-    extensions: {
-      protobufMessage: {
-        fullName: "testapis.imports.oneof_cross_file.OneofParent",
-        name: "OneofParent",
-        package: "testapis.imports.oneof_cross_file",
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.imports.oneof_cross_file.OneofParent",
+          name: "OneofParent",
+          package: "testapis.imports.oneof_cross_file",
+        },
       },
-    },
-  });
+    });
 
 export const OneofParentOneofField$Ref = builder.unionType(
   "OneofParentOneofField",
@@ -92,13 +96,16 @@ export const OneofParentOneofField$Ref = builder.unionType(
         name: "oneof_field",
         messageName: "OneofParent",
         package: "testapis.imports.oneof_cross_file",
-        fields: [{
-          name: "member1",
-          type: "testapis.imports.oneof_cross_file.OneofMember1",
-        }, {
-          name: "member2",
-          type: "testapis.imports.oneof_cross_file.OneofMember2",
-        }],
+        fields: [
+          {
+            name: "member1",
+            type: "testapis.imports.oneof_cross_file.OneofMember1",
+          },
+          {
+            name: "member2",
+            type: "testapis.imports.oneof_cross_file.OneofMember2",
+          },
+        ],
       },
     },
   },

@@ -53,7 +53,8 @@
     "@bufbuild/protoplugin": "catalog:",
     "@proto-graphql/codegen-core": "workspace:*",
     "@proto-graphql/protoc-plugin-helpers": "workspace:*",
-    "dprint-node": "catalog:"
+    "oxfmt": "^0.51.0",
+    "synckit": "^0.11.12"
   },
   "devDependencies": {
     "@pothos/core": "catalog:test",

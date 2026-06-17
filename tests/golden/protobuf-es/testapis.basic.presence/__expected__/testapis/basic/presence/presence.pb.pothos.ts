@@ -12,9 +12,8 @@ import {
 } from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/basic/presence/presence_pb";
 import { InputObjectRef } from "@pothos/core";
 
-export const Message$Ref = builder.objectRef<
-  MessageShape<typeof MessageSchema>
->("Message");
+export const Message$Ref =
+  builder.objectRef<MessageShape<typeof MessageSchema>>("Message");
 builder.objectType(Message$Ref, {
   name: "Message",
   fields: (t) => ({
@@ -61,9 +60,8 @@ builder.objectType(Message$Ref, {
   },
 });
 
-export const NestedMessage$Ref = builder.objectRef<
-  MessageShape<typeof NestedMessageSchema>
->("NestedMessage");
+export const NestedMessage$Ref =
+  builder.objectRef<MessageShape<typeof NestedMessageSchema>>("NestedMessage");
 builder.objectType(NestedMessage$Ref, {
   name: "NestedMessage",
   fields: (t) => ({
@@ -92,7 +90,8 @@ export type MessageInput$Shape = {
 };
 
 export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
-  .inputRef<MessageInput$Shape>("MessageInput").implement({
+  .inputRef<MessageInput$Shape>("MessageInput")
+  .implement({
     fields: (t) => ({
       requiredStringValue: t.field({
         type: "String",
@@ -146,28 +145,36 @@ export function MessageInput$toProto(
   });
 }
 
-export type NestedMessageInput$Shape = { body: NestedMessage["body"]; };
+export type NestedMessageInput$Shape = {
+  body: NestedMessage["body"];
+};
 
 export const NestedMessageInput$Ref: InputObjectRef<NestedMessageInput$Shape> =
-  builder.inputRef<NestedMessageInput$Shape>("NestedMessageInput").implement({
-    fields: (t) => ({
-      body: t.field({
-        type: "String",
-        required: true,
-        extensions: { protobufField: { name: "body", typeFullName: "string" } },
+  builder
+    .inputRef<NestedMessageInput$Shape>("NestedMessageInput")
+    .implement({
+      fields: (t) => ({
+        body: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: { name: "body", typeFullName: "string" },
+          },
+        }),
       }),
-    }),
-    extensions: {
-      protobufMessage: {
-        fullName: "testapis.basic.presence.NestedMessage",
-        name: "NestedMessage",
-        package: "testapis.basic.presence",
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.basic.presence.NestedMessage",
+          name: "NestedMessage",
+          package: "testapis.basic.presence",
+        },
       },
-    },
-  }) as InputObjectRef<NestedMessageInput$Shape>;
+    }) as InputObjectRef<NestedMessageInput$Shape>;
 
 export function NestedMessageInput$toProto(
   input: NestedMessageInput$Shape | null | undefined,
 ): NestedMessage {
-  return create(NestedMessageSchema, { body: input?.body ?? undefined });
+  return create(NestedMessageSchema, {
+    body: input?.body ?? undefined,
+  });
 }

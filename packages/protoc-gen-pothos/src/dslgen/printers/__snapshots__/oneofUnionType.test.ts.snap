@@ -15,13 +15,16 @@ export const OneofParentRequiredOneofMembers$Ref = builder.unionType(
         name: "required_oneof_members",
         messageName: "OneofParent",
         package: "testapis.oneof.message_only",
-        fields: [{
-          name: "required_message1",
-          type: "testapis.oneof.message_only.OneofMemberMessage1",
-        }, {
-          name: "required_message2",
-          type: "testapis.oneof.message_only.OneofMemberMessage2",
-        }],
+        fields: [
+          {
+            name: "required_message1",
+            type: "testapis.oneof.message_only.OneofMemberMessage1",
+          },
+          {
+            name: "required_message2",
+            type: "testapis.oneof.message_only.OneofMemberMessage2",
+          },
+        ],
       },
     },
   },
@@ -42,17 +45,18 @@ export const PrefixedMessageSquashedMessage$Ref = builder.unionType(
           "testapis.options.message_and_field.PrefixedMessage.SquashedMessage",
         name: "SquashedMessage",
         package: "testapis.options.message_and_field",
-        fields: [{
-          name: "oneof_field",
-          type:
-            "testapis.options.message_and_field.PrefixedMessage.InnerMessage",
-          options: { "[graphql.object_type]": { squashUnion: true } },
-        }, {
-          name: "oneof_field_2",
-          type:
-            "testapis.options.message_and_field.PrefixedMessage.InnerMessage2",
-          options: { "[graphql.object_type]": { squashUnion: true } },
-        }],
+        fields: [
+          {
+            name: "oneof_field",
+            type: "testapis.options.message_and_field.PrefixedMessage.InnerMessage",
+            options: { "[graphql.object_type]": { squashUnion: true } },
+          },
+          {
+            name: "oneof_field_2",
+            type: "testapis.options.message_and_field.PrefixedMessage.InnerMessage2",
+            options: { "[graphql.object_type]": { squashUnion: true } },
+          },
+        ],
       },
     },
   },
@@ -74,13 +78,16 @@ export const OneofParentOptionalOneofMembers$Ref = builder.unionType(
         name: "optional_oneof_members",
         messageName: "OneofParent",
         package: "testapis.oneof.message_only",
-        fields: [{
-          name: "optional_message1",
-          type: "testapis.oneof.message_only.OneofMemberMessage1",
-        }, {
-          name: "optional_message2",
-          type: "testapis.oneof.message_only.OneofMemberMessage2",
-        }],
+        fields: [
+          {
+            name: "optional_message1",
+            type: "testapis.oneof.message_only.OneofMemberMessage1",
+          },
+          {
+            name: "optional_message2",
+            type: "testapis.oneof.message_only.OneofMemberMessage2",
+          },
+        ],
       },
     },
   },
@@ -105,13 +112,16 @@ export const OneofParentOneofField$Ref = builder.unionType(
         name: "oneof_field",
         messageName: "OneofParent",
         package: "testapis.imports.oneof_cross_file",
-        fields: [{
-          name: "member1",
-          type: "testapis.imports.oneof_cross_file.OneofMember1",
-        }, {
-          name: "member2",
-          type: "testapis.imports.oneof_cross_file.OneofMember2",
-        }],
+        fields: [
+          {
+            name: "member1",
+            type: "testapis.imports.oneof_cross_file.OneofMember1",
+          },
+          {
+            name: "member2",
+            type: "testapis.imports.oneof_cross_file.OneofMember2",
+          },
+        ],
       },
     },
   },
@@ -134,13 +144,16 @@ export const OneofParentRequiredOneofMembers$Ref = builder.unionType(
         name: "required_oneof_members",
         messageName: "OneofParent",
         package: "testapis.oneof.message_only",
-        fields: [{
-          name: "required_message1",
-          type: "testapis.oneof.message_only.OneofMemberMessage1",
-        }, {
-          name: "required_message2",
-          type: "testapis.oneof.message_only.OneofMemberMessage2",
-        }],
+        fields: [
+          {
+            name: "required_message1",
+            type: "testapis.oneof.message_only.OneofMemberMessage1",
+          },
+          {
+            name: "required_message2",
+            type: "testapis.oneof.message_only.OneofMemberMessage2",
+          },
+        ],
       },
     },
   },
@@ -161,17 +174,18 @@ export const PrefixedMessageSquashedMessage$Ref = builder.unionType(
           "testapis.options.message_and_field.PrefixedMessage.SquashedMessage",
         name: "SquashedMessage",
         package: "testapis.options.message_and_field",
-        fields: [{
-          name: "oneof_field",
-          type:
-            "testapis.options.message_and_field.PrefixedMessage.InnerMessage",
-          options: { "[graphql.object_type]": { squashUnion: true } },
-        }, {
-          name: "oneof_field_2",
-          type:
-            "testapis.options.message_and_field.PrefixedMessage.InnerMessage2",
-          options: { "[graphql.object_type]": { squashUnion: true } },
-        }],
+        fields: [
+          {
+            name: "oneof_field",
+            type: "testapis.options.message_and_field.PrefixedMessage.InnerMessage",
+            options: { "[graphql.object_type]": { squashUnion: true } },
+          },
+          {
+            name: "oneof_field_2",
+            type: "testapis.options.message_and_field.PrefixedMessage.InnerMessage2",
+            options: { "[graphql.object_type]": { squashUnion: true } },
+          },
+        ],
       },
     },
   },
@@ -193,13 +207,16 @@ export const OneofParentOptionalOneofMembers$Ref = builder.unionType(
         name: "optional_oneof_members",
         messageName: "OneofParent",
         package: "testapis.oneof.message_only",
-        fields: [{
-          name: "optional_message1",
-          type: "testapis.oneof.message_only.OneofMemberMessage1",
-        }, {
-          name: "optional_message2",
-          type: "testapis.oneof.message_only.OneofMemberMessage2",
-        }],
+        fields: [
+          {
+            name: "optional_message1",
+            type: "testapis.oneof.message_only.OneofMemberMessage1",
+          },
+          {
+            name: "optional_message2",
+            type: "testapis.oneof.message_only.OneofMemberMessage2",
+          },
+        ],
       },
     },
   },
@@ -222,13 +239,16 @@ export const OneofParentRequiredOneofMembers$Ref = builder.unionType(
         name: "required_oneof_members",
         messageName: "OneofParent",
         package: "testapis.oneof.message_only",
-        fields: [{
-          name: "required_message1",
-          type: "testapis.oneof.message_only.OneofMemberMessage1",
-        }, {
-          name: "required_message2",
-          type: "testapis.oneof.message_only.OneofMemberMessage2",
-        }],
+        fields: [
+          {
+            name: "required_message1",
+            type: "testapis.oneof.message_only.OneofMemberMessage1",
+          },
+          {
+            name: "required_message2",
+            type: "testapis.oneof.message_only.OneofMemberMessage2",
+          },
+        ],
       },
     },
   },
@@ -249,17 +269,18 @@ export const PrefixedMessageSquashedMessage$Ref = builder.unionType(
           "testapis.options.message_and_field.PrefixedMessage.SquashedMessage",
         name: "SquashedMessage",
         package: "testapis.options.message_and_field",
-        fields: [{
-          name: "oneof_field",
-          type:
-            "testapis.options.message_and_field.PrefixedMessage.InnerMessage",
-          options: { "[graphql.object_type]": { squashUnion: true } },
-        }, {
-          name: "oneof_field_2",
-          type:
-            "testapis.options.message_and_field.PrefixedMessage.InnerMessage2",
-          options: { "[graphql.object_type]": { squashUnion: true } },
-        }],
+        fields: [
+          {
+            name: "oneof_field",
+            type: "testapis.options.message_and_field.PrefixedMessage.InnerMessage",
+            options: { "[graphql.object_type]": { squashUnion: true } },
+          },
+          {
+            name: "oneof_field_2",
+            type: "testapis.options.message_and_field.PrefixedMessage.InnerMessage2",
+            options: { "[graphql.object_type]": { squashUnion: true } },
+          },
+        ],
       },
     },
   },
@@ -281,13 +302,16 @@ export const OneofParentOptionalOneofMembers$Ref = builder.unionType(
         name: "optional_oneof_members",
         messageName: "OneofParent",
         package: "testapis.oneof.message_only",
-        fields: [{
-          name: "optional_message1",
-          type: "testapis.oneof.message_only.OneofMemberMessage1",
-        }, {
-          name: "optional_message2",
-          type: "testapis.oneof.message_only.OneofMemberMessage2",
-        }],
+        fields: [
+          {
+            name: "optional_message1",
+            type: "testapis.oneof.message_only.OneofMemberMessage1",
+          },
+          {
+            name: "optional_message2",
+            type: "testapis.oneof.message_only.OneofMemberMessage2",
+          },
+        ],
       },
     },
   },
@@ -312,13 +336,16 @@ export const OneofParentOneofField$Ref = builder.unionType(
         name: "oneof_field",
         messageName: "OneofParent",
         package: "testapis.imports.oneof_cross_file",
-        fields: [{
-          name: "member1",
-          type: "testapis.imports.oneof_cross_file.OneofMember1",
-        }, {
-          name: "member2",
-          type: "testapis.imports.oneof_cross_file.OneofMember2",
-        }],
+        fields: [
+          {
+            name: "member1",
+            type: "testapis.imports.oneof_cross_file.OneofMember1",
+          },
+          {
+            name: "member2",
+            type: "testapis.imports.oneof_cross_file.OneofMember2",
+          },
+        ],
       },
     },
   },

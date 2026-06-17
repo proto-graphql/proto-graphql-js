@@ -169,7 +169,10 @@ export const PrimitivesInput$Ref: InputObjectRef<PrimitivesInput$Shape> =
         type: "Boolean",
         required: true,
         extensions: {
-          protobufField: { name: "required_bool_value", typeFullName: "bool" },
+          protobufField: {
+            name: "required_bool_value",
+            typeFullName: "bool",
+          },
         },
       }),
       requiredStringValue: t.field({
@@ -316,7 +319,10 @@ export const PrimitivesInput$Ref: InputObjectRef<PrimitivesInput$Shape> =
         type: ["Boolean"],
         required: { list: true, items: true },
         extensions: {
-          protobufField: { name: "required_bool_values", typeFullName: "bool" },
+          protobufField: {
+            name: "required_bool_values",
+            typeFullName: "bool",
+          },
         },
       }),
       requiredStringValues: t.field({
@@ -405,7 +411,8 @@ export type MessageInput$Shape = {
 };
 
 export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
-  .inputRef<MessageInput$Shape>("MessageInput").implement({
+  .inputRef<MessageInput$Shape>("MessageInput")
+  .implement({
     fields: (t) => ({
       requiredPrimitives: t.field({
         type: PrimitivesInput$Ref,
@@ -472,10 +479,10 @@ export function MessageInput$toProto(
       ? PrimitivesInput$toProto(input.optionalPrimitives)
       : undefined,
     requiredPrimitivesList: input?.requiredPrimitivesList?.map((v) =>
-      PrimitivesInput$toProto(v)
+      PrimitivesInput$toProto(v),
     ),
     optionalPrimitivesList: input?.optionalPrimitivesList?.map((v) =>
-      PrimitivesInput$toProto(v)
+      PrimitivesInput$toProto(v),
     ),
   });
 }
@@ -566,26 +573,26 @@ export function OneofParentInput$toProto(
     normalField: input?.normalField ?? undefined,
     requiredOneofMembers: input?.requiredMessage1
       ? {
-        case: "requiredMessage1",
-        value: OneofMemberMessage1Input$toProto(input.requiredMessage1),
-      }
+          case: "requiredMessage1",
+          value: OneofMemberMessage1Input$toProto(input.requiredMessage1),
+        }
       : input?.requiredMessage2
-      ? {
-        case: "requiredMessage2",
-        value: OneofMemberMessage2Input$toProto(input.requiredMessage2),
-      }
-      : undefined,
+        ? {
+            case: "requiredMessage2",
+            value: OneofMemberMessage2Input$toProto(input.requiredMessage2),
+          }
+        : undefined,
     optionalOneofMembers: input?.optionalMessage1
       ? {
-        case: "optionalMessage1",
-        value: OneofMemberMessage1Input$toProto(input.optionalMessage1),
-      }
+          case: "optionalMessage1",
+          value: OneofMemberMessage1Input$toProto(input.optionalMessage1),
+        }
       : input?.optionalMessage2
-      ? {
-        case: "optionalMessage2",
-        value: OneofMemberMessage2Input$toProto(input.optionalMessage2),
-      }
-      : undefined,
+        ? {
+            case: "optionalMessage2",
+            value: OneofMemberMessage2Input$toProto(input.optionalMessage2),
+          }
+        : undefined,
   });
 }
 "
@@ -793,7 +800,10 @@ export const PrimitivesInput$Ref: InputObjectRef<PrimitivesInput$Shape> =
         type: "Boolean",
         required: true,
         extensions: {
-          protobufField: { name: "required_bool_value", typeFullName: "bool" },
+          protobufField: {
+            name: "required_bool_value",
+            typeFullName: "bool",
+          },
         },
       }),
       requiredStringValue: t.field({
@@ -940,7 +950,10 @@ export const PrimitivesInput$Ref: InputObjectRef<PrimitivesInput$Shape> =
         type: ["Boolean"],
         required: { list: true, items: true },
         extensions: {
-          protobufField: { name: "required_bool_values", typeFullName: "bool" },
+          protobufField: {
+            name: "required_bool_values",
+            typeFullName: "bool",
+          },
         },
       }),
       requiredStringValues: t.field({
@@ -1025,7 +1038,8 @@ export type MessageInput$Shape = {
 };
 
 export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
-  .inputRef<MessageInput$Shape>("MessageInput").implement({
+  .inputRef<MessageInput$Shape>("MessageInput")
+  .implement({
     fields: (t) => ({
       requiredPrimitives: t.field({
         type: PrimitivesInput$Ref,
@@ -1092,10 +1106,10 @@ export function MessageInput$toProto(
       ? PrimitivesInput$toProto(input.optionalPrimitives)
       : undefined,
     requiredPrimitivesList: input?.requiredPrimitivesList?.map((v) =>
-      PrimitivesInput$toProto(v)
+      PrimitivesInput$toProto(v),
     ),
     optionalPrimitivesList: input?.optionalPrimitivesList?.map((v) =>
-      PrimitivesInput$toProto(v)
+      PrimitivesInput$toProto(v),
     ),
   });
 }
@@ -1182,26 +1196,26 @@ export function OneofParentInput$toProto(
     normalField: input?.normalField ?? undefined,
     requiredOneofMembers: input?.requiredMessage1
       ? {
-        case: "requiredMessage1",
-        value: OneofMemberMessage1Input$toProto(input.requiredMessage1),
-      }
+          case: "requiredMessage1",
+          value: OneofMemberMessage1Input$toProto(input.requiredMessage1),
+        }
       : input?.requiredMessage2
-      ? {
-        case: "requiredMessage2",
-        value: OneofMemberMessage2Input$toProto(input.requiredMessage2),
-      }
-      : undefined,
+        ? {
+            case: "requiredMessage2",
+            value: OneofMemberMessage2Input$toProto(input.requiredMessage2),
+          }
+        : undefined,
     optionalOneofMembers: input?.optionalMessage1
       ? {
-        case: "optionalMessage1",
-        value: OneofMemberMessage1Input$toProto(input.optionalMessage1),
-      }
+          case: "optionalMessage1",
+          value: OneofMemberMessage1Input$toProto(input.optionalMessage1),
+        }
       : input?.optionalMessage2
-      ? {
-        case: "optionalMessage2",
-        value: OneofMemberMessage2Input$toProto(input.optionalMessage2),
-      }
-      : undefined,
+        ? {
+            case: "optionalMessage2",
+            value: OneofMemberMessage2Input$toProto(input.optionalMessage2),
+          }
+        : undefined,
   });
 }
 "
@@ -1405,7 +1419,10 @@ export const PrimitivesInput$Ref: InputObjectRef<PrimitivesInput$Shape> =
         type: "Boolean",
         required: true,
         extensions: {
-          protobufField: { name: "required_bool_value", typeFullName: "bool" },
+          protobufField: {
+            name: "required_bool_value",
+            typeFullName: "bool",
+          },
         },
       }),
       requiredStringValue: t.field({
@@ -1552,7 +1569,10 @@ export const PrimitivesInput$Ref: InputObjectRef<PrimitivesInput$Shape> =
         type: ["Boolean"],
         required: { list: true, items: true },
         extensions: {
-          protobufField: { name: "required_bool_values", typeFullName: "bool" },
+          protobufField: {
+            name: "required_bool_values",
+            typeFullName: "bool",
+          },
         },
       }),
       requiredStringValues: t.field({
@@ -1599,7 +1619,8 @@ export type MessageInput$Shape = {
 };
 
 export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
-  .inputRef<MessageInput$Shape>("MessageInput").implement({
+  .inputRef<MessageInput$Shape>("MessageInput")
+  .implement({
     fields: (t) => ({
       requiredPrimitives: t.field({
         type: PrimitivesInput$Ref,
@@ -1775,7 +1796,9 @@ export const ParentMessageInput$Ref: InputObjectRef<ParentMessageInput$Shape> =
       body: t.field({
         type: "String",
         required: true,
-        extensions: { protobufField: { name: "body", typeFullName: "string" } },
+        extensions: {
+          protobufField: { name: "body", typeFullName: "string" },
+        },
       }),
       nested: t.field({
         type: ParentMessageNestedMessageInput$Ref,
@@ -1820,10 +1843,8 @@ export type MessagePartialInput$Shape = {
   optionalPrimitivesList?: Array<PrimitivesPartialInput$Shape> | null;
 };
 
-export const MessagePartialInput$Ref: InputObjectRef<
-  MessagePartialInput$Shape
-> = builder.inputRef<MessagePartialInput$Shape>("MessagePartialInput")
-  .implement({
+export const MessagePartialInput$Ref: InputObjectRef<MessagePartialInput$Shape> =
+  builder.inputRef<MessagePartialInput$Shape>("MessagePartialInput").implement({
     fields: (t) => ({
       requiredPrimitives: t.field({
         type: PrimitivesPartialInput$Ref,

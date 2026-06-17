@@ -18,9 +18,8 @@ import {
 } from "@proto-graphql/e2e-testapis-protobuf-es/lib/testapis/options/message_and_field/message_and_field_pb";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 
-export const PrefixedMessage$Ref = builder.objectRef<PrefixedMessage>(
-  "PrefixedMessage",
-);
+export const PrefixedMessage$Ref =
+  builder.objectRef<PrefixedMessage>("PrefixedMessage");
 builder.objectType(PrefixedMessage$Ref, {
   name: "PrefixedMessage",
   fields: (t) => ({
@@ -186,9 +185,8 @@ builder.objectType(PrefixedMessage$Ref, {
   },
 });
 
-export const RenamedMessage$Ref = builder.objectRef<MessageWillRename>(
-  "RenamedMessage",
-);
+export const RenamedMessage$Ref =
+  builder.objectRef<MessageWillRename>("RenamedMessage");
 builder.objectType(RenamedMessage$Ref, {
   name: "RenamedMessage",
   fields: (t) => ({
@@ -211,9 +209,8 @@ builder.objectType(RenamedMessage$Ref, {
   },
 });
 
-export const MessageOnlyOutput$Ref = builder.objectRef<MessageOnlyOutput>(
-  "MessageOnlyOutput",
-);
+export const MessageOnlyOutput$Ref =
+  builder.objectRef<MessageOnlyOutput>("MessageOnlyOutput");
 builder.objectType(MessageOnlyOutput$Ref, {
   name: "MessageOnlyOutput",
   fields: (t) => ({
@@ -236,9 +233,10 @@ builder.objectType(MessageOnlyOutput$Ref, {
   },
 });
 
-export const PrefixedMessageInnerMessage$Ref = builder.objectRef<
-  PrefixedMessage_InnerMessage
->("PrefixedMessageInnerMessage");
+export const PrefixedMessageInnerMessage$Ref =
+  builder.objectRef<PrefixedMessage_InnerMessage>(
+    "PrefixedMessageInnerMessage",
+  );
 builder.objectType(PrefixedMessageInnerMessage$Ref, {
   name: "PrefixedMessageInnerMessage",
   fields: (t) => ({
@@ -266,9 +264,10 @@ builder.objectType(PrefixedMessageInnerMessage$Ref, {
   },
 });
 
-export const PrefixedMessageInnerMessage2$Ref = builder.objectRef<
-  PrefixedMessage_InnerMessage2
->("PrefixedMessageInnerMessage2");
+export const PrefixedMessageInnerMessage2$Ref =
+  builder.objectRef<PrefixedMessage_InnerMessage2>(
+    "PrefixedMessageInnerMessage2",
+  );
 builder.objectType(PrefixedMessageInnerMessage2$Ref, {
   name: "PrefixedMessageInnerMessage2",
   fields: (t) => ({
@@ -296,9 +295,8 @@ builder.objectType(PrefixedMessageInnerMessage2$Ref, {
   },
 });
 
-export const IgnoredMessageNotIgnored$Ref = builder.objectRef<
-  IgnoredMessage_NotIgnored
->("IgnoredMessageNotIgnored");
+export const IgnoredMessageNotIgnored$Ref =
+  builder.objectRef<IgnoredMessage_NotIgnored>("IgnoredMessageNotIgnored");
 builder.objectType(IgnoredMessageNotIgnored$Ref, {
   name: "IgnoredMessageNotIgnored",
   fields: (t) => ({
@@ -334,133 +332,135 @@ export type PrefixedMessageInput$Shape = {
   squashedMessages?: Array<PrefixedMessageSquashedMessageInput$Shape> | null;
 };
 
-export const PrefixedMessageInput$Ref: InputObjectRef<
-  PrefixedMessageInput$Shape
-> = builder.inputRef<PrefixedMessageInput$Shape>("PrefixedMessageInput")
-  .implement({
-    fields: (t) => ({
-      id: t.field({
-        type: "Int64",
-        required: true,
-        extensions: {
-          protobufField: {
-            name: "id",
-            typeFullName: "uint64",
-            options: { "[graphql.field]": { id: true } },
+export const PrefixedMessageInput$Ref: InputObjectRef<PrefixedMessageInput$Shape> =
+  builder
+    .inputRef<PrefixedMessageInput$Shape>("PrefixedMessageInput")
+    .implement({
+      fields: (t) => ({
+        id: t.field({
+          type: "Int64",
+          required: true,
+          extensions: {
+            protobufField: {
+              name: "id",
+              typeFullName: "uint64",
+              options: { "[graphql.field]": { id: true } },
+            },
           },
-        },
-      }),
-      body: t.field({
-        type: "String",
-        required: true,
-        extensions: { protobufField: { name: "body", typeFullName: "string" } },
-      }),
-      prefixedEnum: t.field({
-        type: PrefixedEnum$Ref,
-        required: false,
-        extensions: {
-          protobufField: {
-            name: "prefixed_enum",
-            typeFullName: "testapis.options.message_and_field.PrefixedEnum",
+        }),
+        body: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: { name: "body", typeFullName: "string" },
           },
-        },
-      }),
-      thisFieldWasRenamed: t.field({
-        type: "String",
-        required: true,
-        extensions: {
-          protobufField: {
-            name: "this_field_will_be_renamed",
-            typeFullName: "string",
-            options: { "[graphql.field]": { name: "thisFieldWasRenamed" } },
+        }),
+        prefixedEnum: t.field({
+          type: PrefixedEnum$Ref,
+          required: false,
+          extensions: {
+            protobufField: {
+              name: "prefixed_enum",
+              typeFullName: "testapis.options.message_and_field.PrefixedEnum",
+            },
           },
-        },
-      }),
-      skipResolver: t.field({
-        type: "String",
-        required: true,
-        extensions: {
-          protobufField: {
-            name: "skip_resolver",
-            typeFullName: "string",
-            options: { "[graphql.field]": { skipResolver: true } },
+        }),
+        thisFieldWasRenamed: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: {
+              name: "this_field_will_be_renamed",
+              typeFullName: "string",
+              options: { "[graphql.field]": { name: "thisFieldWasRenamed" } },
+            },
           },
-        },
-      }),
-      squashedMessage: t.field({
-        type: PrefixedMessageSquashedMessageInput$Ref,
-        required: false,
-        extensions: {
-          protobufField: {
-            name: "squashed_message",
-            typeFullName:
-              "testapis.options.message_and_field.PrefixedMessage.SquashedMessage",
+        }),
+        skipResolver: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: {
+              name: "skip_resolver",
+              typeFullName: "string",
+              options: { "[graphql.field]": { skipResolver: true } },
+            },
           },
-        },
-      }),
-      renamedMessage: t.field({
-        type: RenamedMessageInput$Ref,
-        required: false,
-        extensions: {
-          protobufField: {
-            name: "renamed_message",
-            typeFullName:
-              "testapis.options.message_and_field.MessageWillRename",
+        }),
+        squashedMessage: t.field({
+          type: PrefixedMessageSquashedMessageInput$Ref,
+          required: false,
+          extensions: {
+            protobufField: {
+              name: "squashed_message",
+              typeFullName:
+                "testapis.options.message_and_field.PrefixedMessage.SquashedMessage",
+            },
           },
-        },
-      }),
-      renamedEnum: t.field({
-        type: RenamedEnum$Ref,
-        required: false,
-        extensions: {
-          protobufField: {
-            name: "renamed_enum",
-            typeFullName: "testapis.options.message_and_field.EnumWillRename",
+        }),
+        renamedMessage: t.field({
+          type: RenamedMessageInput$Ref,
+          required: false,
+          extensions: {
+            protobufField: {
+              name: "renamed_message",
+              typeFullName:
+                "testapis.options.message_and_field.MessageWillRename",
+            },
           },
-        },
-      }),
-      notIgnoredMessage: t.field({
-        type: IgnoredMessageNotIgnoredInput$Ref,
-        required: false,
-        extensions: {
-          protobufField: {
-            name: "not_ignored_message",
-            typeFullName:
-              "testapis.options.message_and_field.IgnoredMessage.NotIgnored",
+        }),
+        renamedEnum: t.field({
+          type: RenamedEnum$Ref,
+          required: false,
+          extensions: {
+            protobufField: {
+              name: "renamed_enum",
+              typeFullName: "testapis.options.message_and_field.EnumWillRename",
+            },
           },
-        },
-      }),
-      oneofNotIgnoredField: t.field({
-        type: PrefixedMessageInnerMessageInput$Ref,
-        required: false,
-        extensions: {
-          protobufField: {
-            name: "oneof_not_ignored_field",
-            typeFullName:
-              "testapis.options.message_and_field.PrefixedMessage.InnerMessage",
+        }),
+        notIgnoredMessage: t.field({
+          type: IgnoredMessageNotIgnoredInput$Ref,
+          required: false,
+          extensions: {
+            protobufField: {
+              name: "not_ignored_message",
+              typeFullName:
+                "testapis.options.message_and_field.IgnoredMessage.NotIgnored",
+            },
           },
-        },
-      }),
-      squashedMessages: t.field({
-        type: [PrefixedMessageSquashedMessageInput$Ref],
-        required: { list: false, items: true },
-        extensions: {
-          protobufField: {
-            name: "squashed_messages",
-            typeFullName:
-              "testapis.options.message_and_field.PrefixedMessage.SquashedMessage",
+        }),
+        oneofNotIgnoredField: t.field({
+          type: PrefixedMessageInnerMessageInput$Ref,
+          required: false,
+          extensions: {
+            protobufField: {
+              name: "oneof_not_ignored_field",
+              typeFullName:
+                "testapis.options.message_and_field.PrefixedMessage.InnerMessage",
+            },
           },
-        },
+        }),
+        squashedMessages: t.field({
+          type: [PrefixedMessageSquashedMessageInput$Ref],
+          required: { list: false, items: true },
+          extensions: {
+            protobufField: {
+              name: "squashed_messages",
+              typeFullName:
+                "testapis.options.message_and_field.PrefixedMessage.SquashedMessage",
+            },
+          },
+        }),
       }),
-    }),
-    extensions: {
-      protobufMessage: {
-        fullName: "testapis.options.message_and_field.PrefixedMessage",
-        name: "PrefixedMessage",
-        package: "testapis.options.message_and_field",
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.options.message_and_field.PrefixedMessage",
+          name: "PrefixedMessage",
+          package: "testapis.options.message_and_field",
+        },
       },
-    },
-  });
+    });
 
 export function PrefixedMessageInput$toProto(
   input: PrefixedMessageInput$Shape | null | undefined,
@@ -482,75 +482,85 @@ export function PrefixedMessageInput$toProto(
       ? IgnoredMessageNotIgnoredInput$toProto(input.notIgnoredMessage)
       : undefined,
     squashedMessages: input?.squashedMessages?.map((v) =>
-      PrefixedMessageSquashedMessageInput$toProto(v)
+      PrefixedMessageSquashedMessageInput$toProto(v),
     ),
     partialIgnoreOneof: input?.oneofNotIgnoredField
       ? {
-        case: "oneofNotIgnoredField",
-        value: PrefixedMessageInnerMessageInput$toProto(
-          input.oneofNotIgnoredField,
-        ),
-      }
+          case: "oneofNotIgnoredField",
+          value: PrefixedMessageInnerMessageInput$toProto(
+            input.oneofNotIgnoredField,
+          ),
+        }
       : undefined,
   });
 }
 
-export type RenamedMessageInput$Shape = { body: MessageWillRename["body"]; };
+export type RenamedMessageInput$Shape = {
+  body: MessageWillRename["body"];
+};
 
-export const RenamedMessageInput$Ref: InputObjectRef<
-  RenamedMessageInput$Shape
-> = builder.inputRef<RenamedMessageInput$Shape>("RenamedMessageInput")
-  .implement({
-    fields: (t) => ({
-      body: t.field({
-        type: "String",
-        required: true,
-        extensions: { protobufField: { name: "body", typeFullName: "string" } },
+export const RenamedMessageInput$Ref: InputObjectRef<RenamedMessageInput$Shape> =
+  builder
+    .inputRef<RenamedMessageInput$Shape>("RenamedMessageInput")
+    .implement({
+      fields: (t) => ({
+        body: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: { name: "body", typeFullName: "string" },
+          },
+        }),
       }),
-    }),
-    extensions: {
-      protobufMessage: {
-        fullName: "testapis.options.message_and_field.MessageWillRename",
-        name: "MessageWillRename",
-        package: "testapis.options.message_and_field",
-        options: { "[graphql.object_type]": { name: "RenamedMessage" } },
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.options.message_and_field.MessageWillRename",
+          name: "MessageWillRename",
+          package: "testapis.options.message_and_field",
+          options: { "[graphql.object_type]": { name: "RenamedMessage" } },
+        },
       },
-    },
-  });
+    });
 
 export function RenamedMessageInput$toProto(
   input: RenamedMessageInput$Shape | null | undefined,
 ): MessageWillRename {
-  return new MessageWillRename({ body: input?.body ?? undefined });
+  return new MessageWillRename({
+    body: input?.body ?? undefined,
+  });
 }
 
-export type InterfaceMessageInput$Shape = { id: InterfaceMessage["id"]; };
+export type InterfaceMessageInput$Shape = {
+  id: InterfaceMessage["id"];
+};
 
-export const InterfaceMessageInput$Ref: InputObjectRef<
-  InterfaceMessageInput$Shape
-> = builder.inputRef<InterfaceMessageInput$Shape>("InterfaceMessageInput")
-  .implement({
-    fields: (t) => ({
-      id: t.field({
-        type: "Int64",
-        required: true,
-        extensions: { protobufField: { name: "id", typeFullName: "uint64" } },
+export const InterfaceMessageInput$Ref: InputObjectRef<InterfaceMessageInput$Shape> =
+  builder
+    .inputRef<InterfaceMessageInput$Shape>("InterfaceMessageInput")
+    .implement({
+      fields: (t) => ({
+        id: t.field({
+          type: "Int64",
+          required: true,
+          extensions: { protobufField: { name: "id", typeFullName: "uint64" } },
+        }),
       }),
-    }),
-    extensions: {
-      protobufMessage: {
-        fullName: "testapis.options.message_and_field.InterfaceMessage",
-        name: "InterfaceMessage",
-        package: "testapis.options.message_and_field",
-        options: { "[graphql.object_type]": { interface: true } },
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.options.message_and_field.InterfaceMessage",
+          name: "InterfaceMessage",
+          package: "testapis.options.message_and_field",
+          options: { "[graphql.object_type]": { interface: true } },
+        },
       },
-    },
-  });
+    });
 
 export function InterfaceMessageInput$toProto(
   input: InterfaceMessageInput$Shape | null | undefined,
 ): InterfaceMessage {
-  return new InterfaceMessage({ id: input?.id ?? undefined });
+  return new InterfaceMessage({
+    id: input?.id ?? undefined,
+  });
 }
 
 export type PrefixedMessageInnerMessageInput$Shape = {
@@ -558,32 +568,35 @@ export type PrefixedMessageInnerMessageInput$Shape = {
   body: PrefixedMessage_InnerMessage["body"];
 };
 
-export const PrefixedMessageInnerMessageInput$Ref: InputObjectRef<
-  PrefixedMessageInnerMessageInput$Shape
-> = builder.inputRef<PrefixedMessageInnerMessageInput$Shape>(
-  "PrefixedMessageInnerMessageInput",
-).implement({
-  fields: (t) => ({
-    id: t.field({
-      type: "Int64",
-      required: true,
-      extensions: { protobufField: { name: "id", typeFullName: "uint64" } },
-    }),
-    body: t.field({
-      type: "String",
-      required: true,
-      extensions: { protobufField: { name: "body", typeFullName: "string" } },
-    }),
-  }),
-  extensions: {
-    protobufMessage: {
-      fullName:
-        "testapis.options.message_and_field.PrefixedMessage.InnerMessage",
-      name: "InnerMessage",
-      package: "testapis.options.message_and_field",
-    },
-  },
-});
+export const PrefixedMessageInnerMessageInput$Ref: InputObjectRef<PrefixedMessageInnerMessageInput$Shape> =
+  builder
+    .inputRef<PrefixedMessageInnerMessageInput$Shape>(
+      "PrefixedMessageInnerMessageInput",
+    )
+    .implement({
+      fields: (t) => ({
+        id: t.field({
+          type: "Int64",
+          required: true,
+          extensions: { protobufField: { name: "id", typeFullName: "uint64" } },
+        }),
+        body: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: { name: "body", typeFullName: "string" },
+          },
+        }),
+      }),
+      extensions: {
+        protobufMessage: {
+          fullName:
+            "testapis.options.message_and_field.PrefixedMessage.InnerMessage",
+          name: "InnerMessage",
+          package: "testapis.options.message_and_field",
+        },
+      },
+    });
 
 export function PrefixedMessageInnerMessageInput$toProto(
   input: PrefixedMessageInnerMessageInput$Shape | null | undefined,
@@ -599,32 +612,35 @@ export type PrefixedMessageInnerMessage2Input$Shape = {
   body: PrefixedMessage_InnerMessage2["body"];
 };
 
-export const PrefixedMessageInnerMessage2Input$Ref: InputObjectRef<
-  PrefixedMessageInnerMessage2Input$Shape
-> = builder.inputRef<PrefixedMessageInnerMessage2Input$Shape>(
-  "PrefixedMessageInnerMessage2Input",
-).implement({
-  fields: (t) => ({
-    id: t.field({
-      type: "Int64",
-      required: true,
-      extensions: { protobufField: { name: "id", typeFullName: "uint64" } },
-    }),
-    body: t.field({
-      type: "String",
-      required: true,
-      extensions: { protobufField: { name: "body", typeFullName: "string" } },
-    }),
-  }),
-  extensions: {
-    protobufMessage: {
-      fullName:
-        "testapis.options.message_and_field.PrefixedMessage.InnerMessage2",
-      name: "InnerMessage2",
-      package: "testapis.options.message_and_field",
-    },
-  },
-});
+export const PrefixedMessageInnerMessage2Input$Ref: InputObjectRef<PrefixedMessageInnerMessage2Input$Shape> =
+  builder
+    .inputRef<PrefixedMessageInnerMessage2Input$Shape>(
+      "PrefixedMessageInnerMessage2Input",
+    )
+    .implement({
+      fields: (t) => ({
+        id: t.field({
+          type: "Int64",
+          required: true,
+          extensions: { protobufField: { name: "id", typeFullName: "uint64" } },
+        }),
+        body: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: { name: "body", typeFullName: "string" },
+          },
+        }),
+      }),
+      extensions: {
+        protobufMessage: {
+          fullName:
+            "testapis.options.message_and_field.PrefixedMessage.InnerMessage2",
+          name: "InnerMessage2",
+          package: "testapis.options.message_and_field",
+        },
+      },
+    });
 
 export function PrefixedMessageInnerMessage2Input$toProto(
   input: PrefixedMessageInnerMessage2Input$Shape | null | undefined,
@@ -640,45 +656,46 @@ export type PrefixedMessageSquashedMessageInput$Shape = {
   oneofField2?: PrefixedMessageInnerMessage2Input$Shape | null;
 };
 
-export const PrefixedMessageSquashedMessageInput$Ref: InputObjectRef<
-  PrefixedMessageSquashedMessageInput$Shape
-> = builder.inputRef<PrefixedMessageSquashedMessageInput$Shape>(
-  "PrefixedMessageSquashedMessageInput",
-).implement({
-  fields: (t) => ({
-    oneofField: t.field({
-      type: PrefixedMessageInnerMessageInput$Ref,
-      required: false,
+export const PrefixedMessageSquashedMessageInput$Ref: InputObjectRef<PrefixedMessageSquashedMessageInput$Shape> =
+  builder
+    .inputRef<PrefixedMessageSquashedMessageInput$Shape>(
+      "PrefixedMessageSquashedMessageInput",
+    )
+    .implement({
+      fields: (t) => ({
+        oneofField: t.field({
+          type: PrefixedMessageInnerMessageInput$Ref,
+          required: false,
+          extensions: {
+            protobufField: {
+              name: "oneof_field",
+              typeFullName:
+                "testapis.options.message_and_field.PrefixedMessage.InnerMessage",
+            },
+          },
+        }),
+        oneofField2: t.field({
+          type: PrefixedMessageInnerMessage2Input$Ref,
+          required: false,
+          extensions: {
+            protobufField: {
+              name: "oneof_field_2",
+              typeFullName:
+                "testapis.options.message_and_field.PrefixedMessage.InnerMessage2",
+            },
+          },
+        }),
+      }),
       extensions: {
-        protobufField: {
-          name: "oneof_field",
-          typeFullName:
-            "testapis.options.message_and_field.PrefixedMessage.InnerMessage",
+        protobufMessage: {
+          fullName:
+            "testapis.options.message_and_field.PrefixedMessage.SquashedMessage",
+          name: "SquashedMessage",
+          package: "testapis.options.message_and_field",
+          options: { "[graphql.object_type]": { squashUnion: true } },
         },
       },
-    }),
-    oneofField2: t.field({
-      type: PrefixedMessageInnerMessage2Input$Ref,
-      required: false,
-      extensions: {
-        protobufField: {
-          name: "oneof_field_2",
-          typeFullName:
-            "testapis.options.message_and_field.PrefixedMessage.InnerMessage2",
-        },
-      },
-    }),
-  }),
-  extensions: {
-    protobufMessage: {
-      fullName:
-        "testapis.options.message_and_field.PrefixedMessage.SquashedMessage",
-      name: "SquashedMessage",
-      package: "testapis.options.message_and_field",
-      options: { "[graphql.object_type]": { squashUnion: true } },
-    },
-  },
-});
+    });
 
 export function PrefixedMessageSquashedMessageInput$toProto(
   input: PrefixedMessageSquashedMessageInput$Shape | null | undefined,
@@ -686,15 +703,15 @@ export function PrefixedMessageSquashedMessageInput$toProto(
   return new PrefixedMessage_SquashedMessage({
     squashedMessage: input?.oneofField
       ? {
-        case: "oneofField",
-        value: PrefixedMessageInnerMessageInput$toProto(input.oneofField),
-      }
+          case: "oneofField",
+          value: PrefixedMessageInnerMessageInput$toProto(input.oneofField),
+        }
       : input?.oneofField2
-      ? {
-        case: "oneofField2",
-        value: PrefixedMessageInnerMessage2Input$toProto(input.oneofField2),
-      }
-      : undefined,
+        ? {
+            case: "oneofField2",
+            value: PrefixedMessageInnerMessage2Input$toProto(input.oneofField2),
+          }
+        : undefined,
   });
 }
 
@@ -702,36 +719,41 @@ export type IgnoredMessageNotIgnoredInput$Shape = {
   body: IgnoredMessage_NotIgnored["body"];
 };
 
-export const IgnoredMessageNotIgnoredInput$Ref: InputObjectRef<
-  IgnoredMessageNotIgnoredInput$Shape
-> = builder.inputRef<IgnoredMessageNotIgnoredInput$Shape>(
-  "IgnoredMessageNotIgnoredInput",
-).implement({
-  fields: (t) => ({
-    body: t.field({
-      type: "String",
-      required: true,
-      extensions: { protobufField: { name: "body", typeFullName: "string" } },
-    }),
-  }),
-  extensions: {
-    protobufMessage: {
-      fullName: "testapis.options.message_and_field.IgnoredMessage.NotIgnored",
-      name: "NotIgnored",
-      package: "testapis.options.message_and_field",
-    },
-  },
-});
+export const IgnoredMessageNotIgnoredInput$Ref: InputObjectRef<IgnoredMessageNotIgnoredInput$Shape> =
+  builder
+    .inputRef<IgnoredMessageNotIgnoredInput$Shape>(
+      "IgnoredMessageNotIgnoredInput",
+    )
+    .implement({
+      fields: (t) => ({
+        body: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: { name: "body", typeFullName: "string" },
+          },
+        }),
+      }),
+      extensions: {
+        protobufMessage: {
+          fullName:
+            "testapis.options.message_and_field.IgnoredMessage.NotIgnored",
+          name: "NotIgnored",
+          package: "testapis.options.message_and_field",
+        },
+      },
+    });
 
 export function IgnoredMessageNotIgnoredInput$toProto(
   input: IgnoredMessageNotIgnoredInput$Shape | null | undefined,
 ): IgnoredMessage_NotIgnored {
-  return new IgnoredMessage_NotIgnored({ body: input?.body ?? undefined });
+  return new IgnoredMessage_NotIgnored({
+    body: input?.body ?? undefined,
+  });
 }
 
-export const InterfaceMessage$Ref = builder.interfaceRef<
-  Pick<InterfaceMessage, "id">
->("InterfaceMessage");
+export const InterfaceMessage$Ref =
+  builder.interfaceRef<Pick<InterfaceMessage, "id">>("InterfaceMessage");
 builder.interfaceType(InterfaceMessage$Ref, {
   name: "InterfaceMessage",
   fields: (t) => ({
@@ -761,17 +783,18 @@ export const PrefixedMessageSquashedMessage$Ref = builder.unionType(
           "testapis.options.message_and_field.PrefixedMessage.SquashedMessage",
         name: "SquashedMessage",
         package: "testapis.options.message_and_field",
-        fields: [{
-          name: "oneof_field",
-          type:
-            "testapis.options.message_and_field.PrefixedMessage.InnerMessage",
-          options: { "[graphql.object_type]": { squashUnion: true } },
-        }, {
-          name: "oneof_field_2",
-          type:
-            "testapis.options.message_and_field.PrefixedMessage.InnerMessage2",
-          options: { "[graphql.object_type]": { squashUnion: true } },
-        }],
+        fields: [
+          {
+            name: "oneof_field",
+            type: "testapis.options.message_and_field.PrefixedMessage.InnerMessage",
+            options: { "[graphql.object_type]": { squashUnion: true } },
+          },
+          {
+            name: "oneof_field_2",
+            type: "testapis.options.message_and_field.PrefixedMessage.InnerMessage2",
+            options: { "[graphql.object_type]": { squashUnion: true } },
+          },
+        ],
       },
     },
   },
@@ -788,18 +811,19 @@ export const PrefixedMessagePartialIgnoreOneof$Ref = builder.unionType(
         name: "partial_ignore_oneof",
         messageName: "PrefixedMessage",
         package: "testapis.options.message_and_field",
-        fields: [{
-          name: "oneof_not_ignored_field",
-          type:
-            "testapis.options.message_and_field.PrefixedMessage.InnerMessage",
-        }],
+        fields: [
+          {
+            name: "oneof_not_ignored_field",
+            type: "testapis.options.message_and_field.PrefixedMessage.InnerMessage",
+          },
+        ],
       },
     },
   },
 );
 
-export const RenamedEnum$Ref: EnumRef<EnumWillRename, EnumWillRename> = builder
-  .enumType("RenamedEnum", {
+export const RenamedEnum$Ref: EnumRef<EnumWillRename, EnumWillRename> =
+  builder.enumType("RenamedEnum", {
     values: {
       FOO: {
         value: 1,
@@ -820,8 +844,8 @@ export const RenamedEnum$Ref: EnumRef<EnumWillRename, EnumWillRename> = builder
     },
   });
 
-export const PrefixedEnum$Ref: EnumRef<PrefixedEnum, PrefixedEnum> = builder
-  .enumType("PrefixedEnum", {
+export const PrefixedEnum$Ref: EnumRef<PrefixedEnum, PrefixedEnum> =
+  builder.enumType("PrefixedEnum", {
     values: {
       PREFIXED_FOO: {
         value: 1,

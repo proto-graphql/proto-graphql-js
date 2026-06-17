@@ -12,9 +12,8 @@ import {
 } from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/imports/oneof_cross_file/member_pb";
 import { InputObjectRef } from "@pothos/core";
 
-export const OneofMember1$Ref = builder.objectRef<
-  MessageShape<typeof OneofMember1Schema>
->("OneofMember1");
+export const OneofMember1$Ref =
+  builder.objectRef<MessageShape<typeof OneofMember1Schema>>("OneofMember1");
 builder.objectType(OneofMember1$Ref, {
   name: "OneofMember1",
   fields: (t) => ({
@@ -36,9 +35,8 @@ builder.objectType(OneofMember1$Ref, {
   },
 });
 
-export const OneofMember2$Ref = builder.objectRef<
-  MessageShape<typeof OneofMember2Schema>
->("OneofMember2");
+export const OneofMember2$Ref =
+  builder.objectRef<MessageShape<typeof OneofMember2Schema>>("OneofMember2");
 builder.objectType(OneofMember2$Ref, {
   name: "OneofMember2",
   fields: (t) => ({
@@ -60,54 +58,70 @@ builder.objectType(OneofMember2$Ref, {
   },
 });
 
-export type OneofMember1Input$Shape = { body: OneofMember1["body"]; };
+export type OneofMember1Input$Shape = {
+  body: OneofMember1["body"];
+};
 
 export const OneofMember1Input$Ref: InputObjectRef<OneofMember1Input$Shape> =
-  builder.inputRef<OneofMember1Input$Shape>("OneofMember1Input").implement({
-    fields: (t) => ({
-      body: t.field({
-        type: "String",
-        required: true,
-        extensions: { protobufField: { name: "body", typeFullName: "string" } },
+  builder
+    .inputRef<OneofMember1Input$Shape>("OneofMember1Input")
+    .implement({
+      fields: (t) => ({
+        body: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: { name: "body", typeFullName: "string" },
+          },
+        }),
       }),
-    }),
-    extensions: {
-      protobufMessage: {
-        fullName: "testapis.imports.oneof_cross_file.OneofMember1",
-        name: "OneofMember1",
-        package: "testapis.imports.oneof_cross_file",
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.imports.oneof_cross_file.OneofMember1",
+          name: "OneofMember1",
+          package: "testapis.imports.oneof_cross_file",
+        },
       },
-    },
-  }) as InputObjectRef<OneofMember1Input$Shape>;
+    }) as InputObjectRef<OneofMember1Input$Shape>;
 
 export function OneofMember1Input$toProto(
   input: OneofMember1Input$Shape | null | undefined,
 ): OneofMember1 {
-  return create(OneofMember1Schema, { body: input?.body ?? undefined });
+  return create(OneofMember1Schema, {
+    body: input?.body ?? undefined,
+  });
 }
 
-export type OneofMember2Input$Shape = { count: OneofMember2["count"]; };
+export type OneofMember2Input$Shape = {
+  count: OneofMember2["count"];
+};
 
 export const OneofMember2Input$Ref: InputObjectRef<OneofMember2Input$Shape> =
-  builder.inputRef<OneofMember2Input$Shape>("OneofMember2Input").implement({
-    fields: (t) => ({
-      count: t.field({
-        type: "Int",
-        required: true,
-        extensions: { protobufField: { name: "count", typeFullName: "int32" } },
+  builder
+    .inputRef<OneofMember2Input$Shape>("OneofMember2Input")
+    .implement({
+      fields: (t) => ({
+        count: t.field({
+          type: "Int",
+          required: true,
+          extensions: {
+            protobufField: { name: "count", typeFullName: "int32" },
+          },
+        }),
       }),
-    }),
-    extensions: {
-      protobufMessage: {
-        fullName: "testapis.imports.oneof_cross_file.OneofMember2",
-        name: "OneofMember2",
-        package: "testapis.imports.oneof_cross_file",
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.imports.oneof_cross_file.OneofMember2",
+          name: "OneofMember2",
+          package: "testapis.imports.oneof_cross_file",
+        },
       },
-    },
-  }) as InputObjectRef<OneofMember2Input$Shape>;
+    }) as InputObjectRef<OneofMember2Input$Shape>;
 
 export function OneofMember2Input$toProto(
   input: OneofMember2Input$Shape | null | undefined,
 ): OneofMember2 {
-  return create(OneofMember2Schema, { count: input?.count ?? undefined });
+  return create(OneofMember2Schema, {
+    count: input?.count ?? undefined,
+  });
 }
