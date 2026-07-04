@@ -3,6 +3,12 @@ packages:
   - "devPackages/**"
   - "tests/**"
 
+allowBuilds:
+  '@bufbuild/buf': true
+  '@swc/core': true
+  esbuild: true
+  sharp: true
+
 catalog:
   "@bufbuild/protobuf": "2.10.2"
   "@bufbuild/protoplugin": "2.10.2"
