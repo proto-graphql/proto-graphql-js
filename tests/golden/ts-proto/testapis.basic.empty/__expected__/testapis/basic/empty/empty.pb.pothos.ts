@@ -18,8 +18,10 @@ builder.objectType(EmptyMessage$Ref, {
     }),
   }),
   isTypeOf: (source) => {
-    return (source as EmptyMessage | { $type: string & {}; }).$type ===
-      "testapis.basic.empty.EmptyMessage";
+    return (
+      (source as EmptyMessage | { $type: string & {} }).$type ===
+      "testapis.basic.empty.EmptyMessage"
+    );
   },
   extensions: {
     protobufMessage: {

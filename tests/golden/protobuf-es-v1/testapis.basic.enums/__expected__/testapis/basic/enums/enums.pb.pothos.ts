@@ -10,9 +10,8 @@ import {
 } from "@proto-graphql/e2e-testapis-protobuf-es/lib/testapis/basic/enums/enums_pb";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 
-export const MessageWithEnums$Ref = builder.objectRef<MessageWithEnums>(
-  "MessageWithEnums",
-);
+export const MessageWithEnums$Ref =
+  builder.objectRef<MessageWithEnums>("MessageWithEnums");
 builder.objectType(MessageWithEnums$Ref, {
   name: "MessageWithEnums",
   fields: (t) => ({
@@ -170,122 +169,120 @@ builder.objectType(MessageWithEnums$Ref, {
 export type MessageWithEnumsInput$Shape = {
   requiredMyEnum: MessageWithEnums["requiredMyEnum"];
   optionalMyEnum?: MessageWithEnums["optionalMyEnum"] | null;
-  requiredMyEnumWithoutUnspecified:
-    MessageWithEnums["requiredMyEnumWithoutUnspecified"];
+  requiredMyEnumWithoutUnspecified: MessageWithEnums["requiredMyEnumWithoutUnspecified"];
   optionalMyEnumWithoutUnspecified?:
     | MessageWithEnums["optionalMyEnumWithoutUnspecified"]
     | null;
   requiredMyEnums: MessageWithEnums["requiredMyEnums"];
   optionalMyEnums?: MessageWithEnums["optionalMyEnums"] | null;
-  requiredMyEnumWithoutUnspecifieds:
-    MessageWithEnums["requiredMyEnumWithoutUnspecifieds"];
+  requiredMyEnumWithoutUnspecifieds: MessageWithEnums["requiredMyEnumWithoutUnspecifieds"];
   optionalMyEnumWithoutUnspecifieds?:
     | MessageWithEnums["optionalMyEnumWithoutUnspecifieds"]
     | null;
 };
 
-export const MessageWithEnumsInput$Ref: InputObjectRef<
-  MessageWithEnumsInput$Shape
-> = builder.inputRef<MessageWithEnumsInput$Shape>("MessageWithEnumsInput")
-  .implement({
-    fields: (t) => ({
-      requiredMyEnum: t.field({
-        type: MyEnum$Ref,
-        required: true,
-        description: "Required.",
-        extensions: {
-          protobufField: {
-            name: "required_my_enum",
-            typeFullName: "testapis.basic.enums.MyEnum",
+export const MessageWithEnumsInput$Ref: InputObjectRef<MessageWithEnumsInput$Shape> =
+  builder
+    .inputRef<MessageWithEnumsInput$Shape>("MessageWithEnumsInput")
+    .implement({
+      fields: (t) => ({
+        requiredMyEnum: t.field({
+          type: MyEnum$Ref,
+          required: true,
+          description: "Required.",
+          extensions: {
+            protobufField: {
+              name: "required_my_enum",
+              typeFullName: "testapis.basic.enums.MyEnum",
+            },
           },
-        },
-      }),
-      optionalMyEnum: t.field({
-        type: MyEnum$Ref,
-        required: false,
-        description: "Optional.",
-        extensions: {
-          protobufField: {
-            name: "optional_my_enum",
-            typeFullName: "testapis.basic.enums.MyEnum",
+        }),
+        optionalMyEnum: t.field({
+          type: MyEnum$Ref,
+          required: false,
+          description: "Optional.",
+          extensions: {
+            protobufField: {
+              name: "optional_my_enum",
+              typeFullName: "testapis.basic.enums.MyEnum",
+            },
           },
-        },
-      }),
-      requiredMyEnumWithoutUnspecified: t.field({
-        type: MyEnumWithoutUnspecified$Ref,
-        required: true,
-        description: "Required.",
-        extensions: {
-          protobufField: {
-            name: "required_my_enum_without_unspecified",
-            typeFullName: "testapis.basic.enums.MyEnumWithoutUnspecified",
+        }),
+        requiredMyEnumWithoutUnspecified: t.field({
+          type: MyEnumWithoutUnspecified$Ref,
+          required: true,
+          description: "Required.",
+          extensions: {
+            protobufField: {
+              name: "required_my_enum_without_unspecified",
+              typeFullName: "testapis.basic.enums.MyEnumWithoutUnspecified",
+            },
           },
-        },
-      }),
-      optionalMyEnumWithoutUnspecified: t.field({
-        type: MyEnumWithoutUnspecified$Ref,
-        required: false,
-        description: "Optional.",
-        extensions: {
-          protobufField: {
-            name: "optional_my_enum_without_unspecified",
-            typeFullName: "testapis.basic.enums.MyEnumWithoutUnspecified",
+        }),
+        optionalMyEnumWithoutUnspecified: t.field({
+          type: MyEnumWithoutUnspecified$Ref,
+          required: false,
+          description: "Optional.",
+          extensions: {
+            protobufField: {
+              name: "optional_my_enum_without_unspecified",
+              typeFullName: "testapis.basic.enums.MyEnumWithoutUnspecified",
+            },
           },
-        },
-      }),
-      requiredMyEnums: t.field({
-        type: [MyEnum$Ref],
-        required: { list: true, items: true },
-        description: "Required.",
-        extensions: {
-          protobufField: {
-            name: "required_my_enums",
-            typeFullName: "testapis.basic.enums.MyEnum",
+        }),
+        requiredMyEnums: t.field({
+          type: [MyEnum$Ref],
+          required: { list: true, items: true },
+          description: "Required.",
+          extensions: {
+            protobufField: {
+              name: "required_my_enums",
+              typeFullName: "testapis.basic.enums.MyEnum",
+            },
           },
-        },
-      }),
-      optionalMyEnums: t.field({
-        type: [MyEnum$Ref],
-        required: { list: false, items: true },
-        description: "Optional.",
-        extensions: {
-          protobufField: {
-            name: "optional_my_enums",
-            typeFullName: "testapis.basic.enums.MyEnum",
+        }),
+        optionalMyEnums: t.field({
+          type: [MyEnum$Ref],
+          required: { list: false, items: true },
+          description: "Optional.",
+          extensions: {
+            protobufField: {
+              name: "optional_my_enums",
+              typeFullName: "testapis.basic.enums.MyEnum",
+            },
           },
-        },
-      }),
-      requiredMyEnumWithoutUnspecifieds: t.field({
-        type: [MyEnumWithoutUnspecified$Ref],
-        required: { list: true, items: true },
-        description: "Required.",
-        extensions: {
-          protobufField: {
-            name: "required_my_enum_without_unspecifieds",
-            typeFullName: "testapis.basic.enums.MyEnumWithoutUnspecified",
+        }),
+        requiredMyEnumWithoutUnspecifieds: t.field({
+          type: [MyEnumWithoutUnspecified$Ref],
+          required: { list: true, items: true },
+          description: "Required.",
+          extensions: {
+            protobufField: {
+              name: "required_my_enum_without_unspecifieds",
+              typeFullName: "testapis.basic.enums.MyEnumWithoutUnspecified",
+            },
           },
-        },
-      }),
-      optionalMyEnumWithoutUnspecifieds: t.field({
-        type: [MyEnumWithoutUnspecified$Ref],
-        required: { list: false, items: true },
-        description: "Optional.",
-        extensions: {
-          protobufField: {
-            name: "optional_my_enum_without_unspecifieds",
-            typeFullName: "testapis.basic.enums.MyEnumWithoutUnspecified",
+        }),
+        optionalMyEnumWithoutUnspecifieds: t.field({
+          type: [MyEnumWithoutUnspecified$Ref],
+          required: { list: false, items: true },
+          description: "Optional.",
+          extensions: {
+            protobufField: {
+              name: "optional_my_enum_without_unspecifieds",
+              typeFullName: "testapis.basic.enums.MyEnumWithoutUnspecified",
+            },
           },
-        },
+        }),
       }),
-    }),
-    extensions: {
-      protobufMessage: {
-        fullName: "testapis.basic.enums.MessageWithEnums",
-        name: "MessageWithEnums",
-        package: "testapis.basic.enums",
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.basic.enums.MessageWithEnums",
+          name: "MessageWithEnums",
+          package: "testapis.basic.enums",
+        },
       },
-    },
-  });
+    });
 
 export function MessageWithEnumsInput$toProto(
   input: MessageWithEnumsInput$Shape | null | undefined,
@@ -293,10 +290,10 @@ export function MessageWithEnumsInput$toProto(
   return new MessageWithEnums({
     requiredMyEnum: input?.requiredMyEnum ?? undefined,
     optionalMyEnum: input?.optionalMyEnum ?? undefined,
-    requiredMyEnumWithoutUnspecified: input?.requiredMyEnumWithoutUnspecified ??
-      undefined,
-    optionalMyEnumWithoutUnspecified: input?.optionalMyEnumWithoutUnspecified ??
-      undefined,
+    requiredMyEnumWithoutUnspecified:
+      input?.requiredMyEnumWithoutUnspecified ?? undefined,
+    optionalMyEnumWithoutUnspecified:
+      input?.optionalMyEnumWithoutUnspecified ?? undefined,
     requiredMyEnums: input?.requiredMyEnums ?? undefined,
     optionalMyEnums: input?.optionalMyEnums ?? undefined,
     requiredMyEnumWithoutUnspecifieds:

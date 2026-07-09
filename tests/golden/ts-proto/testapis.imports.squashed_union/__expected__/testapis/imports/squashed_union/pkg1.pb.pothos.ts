@@ -6,9 +6,8 @@ import { builder } from "../../../../builder";
 import { OneofMessage1 } from "@proto-graphql/e2e-testapis-ts-proto/lib/testapis/imports/squashed_union/pkg1";
 import { InputObjectRef } from "@pothos/core";
 
-export const OneofMessage1$Ref = builder.objectRef<OneofMessage1>(
-  "OneofMessage1",
-);
+export const OneofMessage1$Ref =
+  builder.objectRef<OneofMessage1>("OneofMessage1");
 builder.objectType(OneofMessage1$Ref, {
   name: "OneofMessage1",
   fields: (t) => ({
@@ -19,8 +18,10 @@ builder.objectType(OneofMessage1$Ref, {
     }),
   }),
   isTypeOf: (source) => {
-    return (source as OneofMessage1 | { $type: string & {}; }).$type ===
-      "testapis.imports.squashed_union.pkg1.OneofMessage1";
+    return (
+      (source as OneofMessage1 | { $type: string & {} }).$type ===
+      "testapis.imports.squashed_union.pkg1.OneofMessage1"
+    );
   },
   extensions: {
     protobufMessage: {
@@ -31,53 +32,62 @@ builder.objectType(OneofMessage1$Ref, {
   },
 });
 
-export type OneofMessage1Input$Shape = { body: OneofMessage1["body"]; };
+export type OneofMessage1Input$Shape = {
+  body: OneofMessage1["body"];
+};
 
 export const OneofMessage1Input$Ref: InputObjectRef<OneofMessage1Input$Shape> =
-  builder.inputRef<OneofMessage1Input$Shape>("OneofMessage1Input").implement({
-    fields: (t) => ({
-      body: t.field({
-        type: "String",
-        required: true,
-        extensions: { protobufField: { name: "body", typeFullName: "string" } },
+  builder
+    .inputRef<OneofMessage1Input$Shape>("OneofMessage1Input")
+    .implement({
+      fields: (t) => ({
+        body: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: { name: "body", typeFullName: "string" },
+          },
+        }),
       }),
-    }),
-    extensions: {
-      protobufMessage: {
-        fullName: "testapis.imports.squashed_union.pkg1.OneofMessage1",
-        name: "OneofMessage1",
-        package: "testapis.imports.squashed_union.pkg1",
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.imports.squashed_union.pkg1.OneofMessage1",
+          name: "OneofMessage1",
+          package: "testapis.imports.squashed_union.pkg1",
+        },
       },
-    },
-  });
+    });
 
 export type SquashedOneofInput$Shape = {
   msg1?: OneofMessage1Input$Shape | null;
 };
 
 export const SquashedOneofInput$Ref: InputObjectRef<SquashedOneofInput$Shape> =
-  builder.inputRef<SquashedOneofInput$Shape>("SquashedOneofInput").implement({
-    fields: (t) => ({
-      msg1: t.field({
-        type: OneofMessage1Input$Ref,
-        required: false,
-        extensions: {
-          protobufField: {
-            name: "msg1",
-            typeFullName: "testapis.imports.squashed_union.pkg1.OneofMessage1",
+  builder
+    .inputRef<SquashedOneofInput$Shape>("SquashedOneofInput")
+    .implement({
+      fields: (t) => ({
+        msg1: t.field({
+          type: OneofMessage1Input$Ref,
+          required: false,
+          extensions: {
+            protobufField: {
+              name: "msg1",
+              typeFullName:
+                "testapis.imports.squashed_union.pkg1.OneofMessage1",
+            },
           },
-        },
+        }),
       }),
-    }),
-    extensions: {
-      protobufMessage: {
-        fullName: "testapis.imports.squashed_union.pkg1.SquashedOneof",
-        name: "SquashedOneof",
-        package: "testapis.imports.squashed_union.pkg1",
-        options: { "[graphql.object_type]": { squashUnion: true } },
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.imports.squashed_union.pkg1.SquashedOneof",
+          name: "SquashedOneof",
+          package: "testapis.imports.squashed_union.pkg1",
+          options: { "[graphql.object_type]": { squashUnion: true } },
+        },
       },
-    },
-  });
+    });
 
 export const SquashedOneof$Ref = builder.unionType("SquashedOneof", {
   types: [OneofMessage1$Ref],
@@ -86,11 +96,13 @@ export const SquashedOneof$Ref = builder.unionType("SquashedOneof", {
       fullName: "testapis.imports.squashed_union.pkg1.SquashedOneof",
       name: "SquashedOneof",
       package: "testapis.imports.squashed_union.pkg1",
-      fields: [{
-        name: "msg1",
-        type: "testapis.imports.squashed_union.pkg1.OneofMessage1",
-        options: { "[graphql.object_type]": { squashUnion: true } },
-      }],
+      fields: [
+        {
+          name: "msg1",
+          type: "testapis.imports.squashed_union.pkg1.OneofMessage1",
+          options: { "[graphql.object_type]": { squashUnion: true } },
+        },
+      ],
     },
   },
 });

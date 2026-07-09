@@ -11,9 +11,8 @@ import {
 } from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/imports/same_dir/base_pb";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 
-export const SharedMessage$Ref = builder.objectRef<
-  MessageShape<typeof SharedMessageSchema>
->("SharedMessage");
+export const SharedMessage$Ref =
+  builder.objectRef<MessageShape<typeof SharedMessageSchema>>("SharedMessage");
 builder.objectType(SharedMessage$Ref, {
   name: "SharedMessage",
   fields: (t) => ({
@@ -35,30 +34,38 @@ builder.objectType(SharedMessage$Ref, {
   },
 });
 
-export type SharedMessageInput$Shape = { body: SharedMessage["body"]; };
+export type SharedMessageInput$Shape = {
+  body: SharedMessage["body"];
+};
 
 export const SharedMessageInput$Ref: InputObjectRef<SharedMessageInput$Shape> =
-  builder.inputRef<SharedMessageInput$Shape>("SharedMessageInput").implement({
-    fields: (t) => ({
-      body: t.field({
-        type: "String",
-        required: true,
-        extensions: { protobufField: { name: "body", typeFullName: "string" } },
+  builder
+    .inputRef<SharedMessageInput$Shape>("SharedMessageInput")
+    .implement({
+      fields: (t) => ({
+        body: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: { name: "body", typeFullName: "string" },
+          },
+        }),
       }),
-    }),
-    extensions: {
-      protobufMessage: {
-        fullName: "testapis.imports.same_dir.SharedMessage",
-        name: "SharedMessage",
-        package: "testapis.imports.same_dir",
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.imports.same_dir.SharedMessage",
+          name: "SharedMessage",
+          package: "testapis.imports.same_dir",
+        },
       },
-    },
-  }) as InputObjectRef<SharedMessageInput$Shape>;
+    }) as InputObjectRef<SharedMessageInput$Shape>;
 
 export function SharedMessageInput$toProto(
   input: SharedMessageInput$Shape | null | undefined,
 ): SharedMessage {
-  return create(SharedMessageSchema, { body: input?.body ?? undefined });
+  return create(SharedMessageSchema, {
+    body: input?.body ?? undefined,
+  });
 }
 
 export const SharedEnum$Ref: EnumRef<SharedEnum, SharedEnum> = builder.enumType(

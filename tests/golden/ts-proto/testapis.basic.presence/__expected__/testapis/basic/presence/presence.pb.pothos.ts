@@ -45,8 +45,10 @@ builder.objectType(Message$Ref, {
     }),
   }),
   isTypeOf: (source) => {
-    return (source as Message | { $type: string & {}; }).$type ===
-      "testapis.basic.presence.Message";
+    return (
+      (source as Message | { $type: string & {} }).$type ===
+      "testapis.basic.presence.Message"
+    );
   },
   extensions: {
     protobufMessage: {
@@ -57,9 +59,8 @@ builder.objectType(Message$Ref, {
   },
 });
 
-export const NestedMessage$Ref = builder.objectRef<NestedMessage>(
-  "NestedMessage",
-);
+export const NestedMessage$Ref =
+  builder.objectRef<NestedMessage>("NestedMessage");
 builder.objectType(NestedMessage$Ref, {
   name: "NestedMessage",
   fields: (t) => ({
@@ -70,8 +71,10 @@ builder.objectType(NestedMessage$Ref, {
     }),
   }),
   isTypeOf: (source) => {
-    return (source as NestedMessage | { $type: string & {}; }).$type ===
-      "testapis.basic.presence.NestedMessage";
+    return (
+      (source as NestedMessage | { $type: string & {} }).$type ===
+      "testapis.basic.presence.NestedMessage"
+    );
   },
   extensions: {
     protobufMessage: {
@@ -89,7 +92,8 @@ export type MessageInput$Shape = {
 };
 
 export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
-  .inputRef<MessageInput$Shape>("MessageInput").implement({
+  .inputRef<MessageInput$Shape>("MessageInput")
+  .implement({
     fields: (t) => ({
       requiredStringValue: t.field({
         type: "String",
@@ -131,22 +135,28 @@ export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
     },
   });
 
-export type NestedMessageInput$Shape = { body: NestedMessage["body"]; };
+export type NestedMessageInput$Shape = {
+  body: NestedMessage["body"];
+};
 
 export const NestedMessageInput$Ref: InputObjectRef<NestedMessageInput$Shape> =
-  builder.inputRef<NestedMessageInput$Shape>("NestedMessageInput").implement({
-    fields: (t) => ({
-      body: t.field({
-        type: "String",
-        required: true,
-        extensions: { protobufField: { name: "body", typeFullName: "string" } },
+  builder
+    .inputRef<NestedMessageInput$Shape>("NestedMessageInput")
+    .implement({
+      fields: (t) => ({
+        body: t.field({
+          type: "String",
+          required: true,
+          extensions: {
+            protobufField: { name: "body", typeFullName: "string" },
+          },
+        }),
       }),
-    }),
-    extensions: {
-      protobufMessage: {
-        fullName: "testapis.basic.presence.NestedMessage",
-        name: "NestedMessage",
-        package: "testapis.basic.presence",
+      extensions: {
+        protobufMessage: {
+          fullName: "testapis.basic.presence.NestedMessage",
+          name: "NestedMessage",
+          package: "testapis.basic.presence",
+        },
       },
-    },
-  });
+    });

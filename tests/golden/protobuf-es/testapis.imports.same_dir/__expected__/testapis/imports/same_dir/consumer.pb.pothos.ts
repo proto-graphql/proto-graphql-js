@@ -18,9 +18,8 @@ import {
 import { SharedEnum } from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/imports/same_dir/base_pb";
 import { InputObjectRef } from "@pothos/core";
 
-export const Consumer$Ref = builder.objectRef<
-  MessageShape<typeof ConsumerSchema>
->("Consumer");
+export const Consumer$Ref =
+  builder.objectRef<MessageShape<typeof ConsumerSchema>>("Consumer");
 builder.objectType(Consumer$Ref, {
   name: "Consumer",
   fields: (t) => ({
@@ -70,7 +69,8 @@ export type ConsumerInput$Shape = {
 };
 
 export const ConsumerInput$Ref: InputObjectRef<ConsumerInput$Shape> = builder
-  .inputRef<ConsumerInput$Shape>("ConsumerInput").implement({
+  .inputRef<ConsumerInput$Shape>("ConsumerInput")
+  .implement({
     fields: (t) => ({
       message: t.field({
         type: SharedMessageInput$Ref,

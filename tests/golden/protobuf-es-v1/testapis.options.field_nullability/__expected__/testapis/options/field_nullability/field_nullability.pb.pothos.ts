@@ -81,7 +81,8 @@ export type MessageInput$Shape = {
 };
 
 export const MessageInput$Ref: InputObjectRef<MessageInput$Shape> = builder
-  .inputRef<MessageInput$Shape>("MessageInput").implement({
+  .inputRef<MessageInput$Shape>("MessageInput")
+  .implement({
     fields: (t) => ({
       userId: t.field({
         type: "Int64",
