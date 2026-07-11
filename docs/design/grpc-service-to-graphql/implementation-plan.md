@@ -155,7 +155,7 @@ Phase 3: Federation(T1.3 + D3 後)           ▼
 - **推奨モデル**: sonnet
 - **依存**: T1.5
 - **成果物**: `docs/protoc-gen-pothos/`(service→operation ガイド、builder/context セットアップ、configuration 追記)、`docs/proto-annotations/reference.md` 追記((graphql.service) / (graphql.rpc))、runtime パッケージ README。**experimental であることを明記**
-- **受け入れ基準**: リンク切れなし、`pnpm lint` 成功
+- **受け入れ基準**: リンク切れなし、`pnpm exec biome check`(変更ファイル限定。root の `lint` スクリプトは存在しない) 成功
 
 ---
 
@@ -207,7 +207,7 @@ Phase 3: Federation(T1.3 + D3 後)           ▼
 - **推奨モデル**: sonnet
 - **依存**: T3.3
 - **成果物**: federation ガイド(builder セットアップ(plugins 順 / graphql@16 固定 / toSubGraphSchema)、@key・entity_resolver・extend の書き方、dataloader との併用、router との接続例)、annotations reference 追記
-- **受け入れ基準**: リンク切れなし、`pnpm lint` 成功
+- **受け入れ基準**: リンク切れなし、`pnpm exec biome check`(変更ファイル限定。root の `lint` スクリプトは存在しない) 成功
 
 ---
 
@@ -219,5 +219,5 @@ Phase 3: Federation(T1.3 + D3 後)           ▼
 | `extends` フィールド名が protoc で使えない | T0.1 冒頭の spike で検証。NG 時は `external` へ(design.md 更新) |
 | Pothos / Apollo のバージョン変動 | federation-design.md §5 の検証済み範囲に依存 API を限定し、golden + composition テストで検知 |
 | golden ハーネス汎用化(D4)が既存テストを壊す | 受け入れ基準に「既存スナップショット変更ゼロ」を明記(純リファクタ強制) |
-| subagent 生成コードの規約逸脱・設計乖離 | 依頼票に設計ドキュメント必読指定 + メインセッションの code-review ゲート + `pnpm lint`/typecheck |
+| subagent 生成コードの規約逸脱・設計乖離 | 依頼票に設計ドキュメント必読指定 + メインセッションの code-review ゲート + `pnpm exec biome check`(変更ファイル限定。root の `lint` スクリプトは存在しない)/typecheck |
 | graphql 17 系との非互換(Apollo peer 制約) | docs に graphql@16 固定を明記(T1.6 / T3.4)。将来 Apollo 側の 17 対応を追従 |

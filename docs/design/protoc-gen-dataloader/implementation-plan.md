@@ -103,13 +103,13 @@ D1 / D2 / D4 は相互に独立(並行可)。
   - `docs/protoc-gen-dataloader/`(利用者向け: getting-started、buf 設定、オプションリファレンス、生成コードリファレンス)
   - `docs/proto-annotations/reference.md` に `(graphql.rpc).batch` 追記
   - npm パッケージ名の空き確認(`@proto-graphql/protoc-gen-dataloader` + bin `protoc-gen-dataloader` を第一候補として検証)と package.json への反映。buf plugin(BSR)公開の要否メモ
-- **受け入れ基準**: docs のリンク切れなし、`pnpm lint` 成功
+- **受け入れ基準**: docs のリンク切れなし、`pnpm exec biome check`(変更ファイル限定) 成功
 
 ---
 
 ## 進め方の共通規約(全タスク)
 
 - タスク毎に feature ブランチ + worktree で分離し、Conventional Commits(`feat(protoc-gen-dataloader): ...` 等)で小さくコミット
-- 受け入れ基準のコマンドは subagent 自身が実行して結果を報告する(`pnpm build` / `pnpm test` / `pnpm lint`)
+- 受け入れ基準のコマンドは subagent 自身が実行して結果を報告する(`pnpm build` / `pnpm test` / `pnpm exec biome check`(変更ファイル限定))
 - golden snapshot の更新(`vitest -u`)は「意図した出力変更」の場合のみ。意図しない差分が出たら停止して報告
 - 各タスク完了後、メインセッションで code-review(正しさ + 既存規約との整合)を実施してからマージ
