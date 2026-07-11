@@ -1,19 +1,9 @@
 import {
-  buildCodeGeneratorRequest,
-  type TestapisPackage,
-} from "@proto-graphql/testapis-proto";
+  type CodeGenerationResult,
+  executeGeneration as runGeneration,
+} from "@proto-graphql/golden-test-harness";
 import { protocGenPothos } from "../../../plugin.js";
 import type { Runtime, TestCase } from "./testCaseDiscovery.js";
-
-export interface GeneratedFile {
-  name: string;
-  content: string;
-}
-
-export interface CodeGenerationResult {
-  files: GeneratedFile[];
-  error?: string;
-}
 
 function getImportPrefix(runtime: Runtime, runtimeVariant: string): string {
   if (runtimeVariant === "ts-proto-forcelong") {
@@ -86,23 +76,10 @@ export function executeGeneration(testCase: TestCase): CodeGenerationResult {
   const { package: pkg, prefixMatch } = testCase.config;
   const param = buildPluginParam(testCase);
 
-  try {
-    const req = buildCodeGeneratorRequest(pkg as TestapisPackage, {
-      param,
-      prefixMatch,
-    });
-    const resp = protocGenPothos.run(req);
-
-    const files: GeneratedFile[] = resp.file.map((f) => ({
-      name: f.name ?? "",
-      content: f.content ?? "",
-    }));
-
-    return { files };
-  } catch (error) {
-    return {
-      files: [],
-      error: error instanceof Error ? error.message : String(error),
-    };
-  }
+  return runGeneration({
+    plugin: protocGenPothos,
+    package: pkg,
+    param,
+    prefixMatch,
+  });
 }

@@ -96,6 +96,25 @@ importers:
         specifier: 4.1.0
         version: 4.1.0(@types/node@24.13.2)(vite@7.3.1(@types/node@24.13.2)(tsx@4.22.4)(yaml@2.8.2))
 
+  devPackages/golden-test-harness:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: 'catalog:'
+        version: 2.10.2
+      '@bufbuild/protoplugin':
+        specifier: 'catalog:'
+        version: 2.10.2
+      '@proto-graphql/testapis-proto':
+        specifier: workspace:*
+        version: link:../testapis-proto
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+    devDependencies:
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+
   devPackages/testapis-proto:
     dependencies:
       '@bufbuild/protobuf':
@@ -236,6 +255,9 @@ importers:
       '@proto-graphql/e2e-testapis-ts-proto-with-forcelong-number':
         specifier: workspace:*
         version: link:../../tests/testapis/ts-proto-with-forcelong-number
+      '@proto-graphql/golden-test-harness':
+        specifier: workspace:*
+        version: link:../../devPackages/golden-test-harness
       '@proto-graphql/testapis-proto':
         specifier: workspace:*
         version: link:../../devPackages/testapis-proto

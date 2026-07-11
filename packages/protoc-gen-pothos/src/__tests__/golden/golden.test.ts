@@ -1,23 +1,21 @@
 import { join } from "node:path";
-import { beforeAll, describe, expect, it } from "vitest";
-import { executeGeneration } from "./_helpers/codeGenerationRunner.js";
 import {
   cleanupGeneratedDir,
-  writeGeneratedFiles,
-} from "./_helpers/fileWriter.js";
-import { executeGraphQLQuery } from "./_helpers/graphqlQueryExecutor.js";
-import { buildGraphQLSchema } from "./_helpers/graphqlSchemaFetcher.js";
-import {
   collectGeneratedFilesForSnapshot,
   getExpectedQueryResultPath,
   getExpectedSchemaPath,
   getExpectedTypeErrorsPath,
-} from "./_helpers/snapshotValidator.js";
+  runTypeCheck,
+  writeGeneratedFiles,
+} from "@proto-graphql/golden-test-harness";
+import { beforeAll, describe, expect, it } from "vitest";
+import { executeGeneration } from "./_helpers/codeGenerationRunner.js";
+import { executeGraphQLQuery } from "./_helpers/graphqlQueryExecutor.js";
+import { buildGraphQLSchema } from "./_helpers/graphqlSchemaFetcher.js";
 import {
   discoverTestCases,
   type TestCase,
 } from "./_helpers/testCaseDiscovery.js";
-import { runTypeCheck } from "./_helpers/typeScriptChecker.js";
 
 const goldenDir = join(import.meta.dirname, "../../../../../tests/golden");
 
@@ -39,7 +37,7 @@ describe("Golden Tests", () => {
     });
 
     it("should generate code that passes type checking", () => {
-      const typeCheckResult = runTypeCheck(testCase);
+      const typeCheckResult = runTypeCheck(testCase.dir);
       expect(typeCheckResult.formattedErrors).toBe("");
       expect(typeCheckResult.success).toBe(true);
     });
@@ -49,6 +47,7 @@ describe("Golden Tests", () => {
       const snapshotFiles = await collectGeneratedFilesForSnapshot(
         testCase.dir,
         result.files,
+        { pluginName: "protoc-gen-pothos" },
       );
 
       for (const snapshotFile of snapshotFiles) {
@@ -59,7 +58,7 @@ describe("Golden Tests", () => {
     });
 
     it("should match type errors snapshot", async () => {
-      const typeCheckResult = runTypeCheck(testCase);
+      const typeCheckResult = runTypeCheck(testCase.dir);
       await expect(typeCheckResult.formattedErrors).toMatchFileSnapshot(
         getExpectedTypeErrorsPath(testCase.dir),
       );

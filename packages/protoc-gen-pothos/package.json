@@ -61,6 +61,7 @@
     "@proto-graphql/e2e-testapis-protobuf-es-v2": "workspace:*",
     "@proto-graphql/e2e-testapis-ts-proto": "workspace:*",
     "@proto-graphql/e2e-testapis-ts-proto-with-forcelong-number": "workspace:*",
+    "@proto-graphql/golden-test-harness": "workspace:*",
     "@proto-graphql/testapis-proto": "workspace:*",
     "@proto-graphql/tsconfig": "workspace:*",
     "@vitest/coverage-v8": "^4.0.0",
