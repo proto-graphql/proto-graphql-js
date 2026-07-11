@@ -15,12 +15,18 @@ catalogs:
     '@bufbuild/protoplugin':
       specifier: 2.10.2
       version: 2.10.2
+    '@connectrpc/connect':
+      specifier: 2.1.2
+      version: 2.1.2
     case-anything:
       specifier: ^2.1.13
       version: 2.1.13
     change-case:
       specifier: ^4.1.2
       version: 4.1.2
+    dataloader:
+      specifier: 2.2.3
+      version: 2.2.3
     dprint-node:
       specifier: ^1.0.8
       version: 1.0.8
@@ -155,6 +161,25 @@ importers:
       '@proto-graphql/testapis-proto':
         specifier: workspace:*
         version: link:../../../devPackages/testapis-proto
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../devPackages/tsconfig
+
+  packages/@proto-graphql/connect-runtime:
+    dependencies:
+      dataloader:
+        specifier: 'catalog:'
+        version: 2.2.3
+    devDependencies:
+      '@bufbuild/protobuf':
+        specifier: 'catalog:'
+        version: 2.10.2
+      '@connectrpc/connect':
+        specifier: 'catalog:'
+        version: 2.1.2(@bufbuild/protobuf@2.10.2)
+      '@proto-graphql/e2e-testapis-protobuf-es-v2':
+        specifier: workspace:*
+        version: link:../../../tests/testapis/protobuf-es-v2
       '@proto-graphql/tsconfig':
         specifier: workspace:*
         version: link:../../../devPackages/tsconfig
@@ -1585,6 +1610,11 @@ packages:
 
   '@chevrotain/utils@11.0.3':
     resolution: {integrity: sha512-YslZMgtJUyuMbZ+aKvfF3x1f5liK4mWNxghFRv7jqRR9C3R3fAOGTTKvxXDa2Y1s9zSbcpuO0cAxDYsc9SrXoQ==}
+
+  '@connectrpc/connect@2.1.2':
+    resolution: {integrity: sha512-MXkBijtcX09R10Eb6sFeIetc6w6746eio6xtfuyVOH7oQAacT1X0GzMIQFux6Qy8cq3W/T5qX5Bei8YbFtmRGA==}
+    peerDependencies:
+      '@bufbuild/protobuf': ^2.7.0
 
   '@emnapi/runtime@1.8.1':
     resolution: {integrity: sha512-mehfKSMWjjNol8659Z8KxEMrdSJDDot5SXMq00dM8BN4o+CLNXQ0xH2V7EchNHV4RmbZLmmPdEaXZc5H2FXmDg==}
@@ -3260,6 +3290,9 @@ packages:
 
   dataloader@1.4.0:
     resolution: {integrity: sha512-68s5jYdlvasItOJnCuI2Q9s4q98g0pCyL3HrcKJu8KNugUl8ahgmZYg38ysLTgQjjXX3H8CJLkAvWrclWfcalw==}
+
+  dataloader@2.2.3:
+    resolution: {integrity: sha512-y2krtASINtPFS1rSDjacrFgn1dcUuoREVabwlOGOe4SdxenREqwjwjElAdwvbGM7kgZz9a3KVicWR7vcz8rnzA==}
 
   dayjs@1.11.19:
     resolution: {integrity: sha512-t5EcLVS6QPBNqM2z8fakk/NKel+Xzshgt8FFKAn+qwlD1pzZWxh0nVCrvFK7ZDb6XucZeF9z8C7CBWTRIVApAw==}
@@ -5191,6 +5224,10 @@ snapshots:
 
   '@chevrotain/utils@11.0.3': {}
 
+  '@connectrpc/connect@2.1.2(@bufbuild/protobuf@2.10.2)':
+    dependencies:
+      '@bufbuild/protobuf': 2.10.2
+
   '@emnapi/runtime@1.8.1':
     dependencies:
       tslib: 2.6.2
@@ -6636,6 +6673,8 @@ snapshots:
       lodash-es: 4.17.23
 
   dataloader@1.4.0: {}
+
+  dataloader@2.2.3: {}
 
   dayjs@1.11.19: {}
 
