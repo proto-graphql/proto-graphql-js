@@ -399,6 +399,19 @@ function getObjectTypeOptions(
   return getExtension(desc.proto.options, extensions.object_type);
 }
 
+/**
+ * Returns the federation key fieldsets declared on a message via
+ * `(graphql.object_type).federation.key`, or an empty array when none is set.
+ * Each entry is a fieldset written with protobuf field names (e.g. `"id"`,
+ * `"org_id id"`). Shared by the batch-spec `@key` fallback (design.md §3 V5)
+ * and, later, the protoc-gen-pothos federation wiring.
+ */
+export function getFederationKeyFieldsets(
+  desc: DescMessage,
+): readonly string[] {
+  return getObjectTypeOptions(desc).federation?.key ?? [];
+}
+
 export function getInputTypeOptions(
   desc: DescMessage,
 ): extensions.GraphqlInputTypeOptions {
