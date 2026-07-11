@@ -1,29 +1,11 @@
 import { mkdir, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import type { TestCase, TestCaseConfig } from "./testCaseDiscovery.js";
 import {
   formatDiagnostics,
   runTypeCheck,
   type TypeCheckDiagnostic,
 } from "./typeScriptChecker.js";
-
-function createTestCase(
-  overrides: Partial<TestCase> & { config?: Partial<TestCaseConfig> },
-): TestCase {
-  return {
-    name: overrides.name ?? "ts-proto/testapis.basic.enums",
-    dir: overrides.dir ?? "/path/to/test/case",
-    hasQuery: overrides.hasQuery ?? false,
-    config: {
-      package: overrides.config?.package ?? "testapis.basic.enums",
-      runtimeVariant: overrides.config?.runtimeVariant ?? "ts-proto",
-      runtime: overrides.config?.runtime ?? "ts-proto",
-      param: overrides.config?.param,
-      builderPath: overrides.config?.builderPath ?? "builder.ts",
-    },
-  };
-}
 
 describe("typeScriptChecker", () => {
   const testDir = join(import.meta.dirname, "__test_fixtures_tsc__");
@@ -67,16 +49,7 @@ describe("typeScriptChecker", () => {
 export const schema = { builder };`,
       );
 
-      const testCase = createTestCase({
-        name: "ts-proto/testapis.valid",
-        dir: caseDir,
-        config: {
-          package: "testapis.valid",
-          runtime: "ts-proto",
-        },
-      });
-
-      const result = runTypeCheck(testCase);
+      const result = runTypeCheck(caseDir);
 
       expect(result.success).toBe(true);
       expect(result.diagnostics).toHaveLength(0);
@@ -103,16 +76,7 @@ export const schema = { builder };`,
 
       await writeFile(join(caseDir, "builder.ts"), `const x: string = 123;`);
 
-      const testCase = createTestCase({
-        name: "ts-proto/testapis.invalid",
-        dir: caseDir,
-        config: {
-          package: "testapis.invalid",
-          runtime: "ts-proto",
-        },
-      });
-
-      const result = runTypeCheck(testCase);
+      const result = runTypeCheck(caseDir);
 
       expect(result.success).toBe(false);
       expect(result.diagnostics.length).toBeGreaterThan(0);
@@ -143,16 +107,7 @@ export const schema = { builder };`,
         `const y: number = "invalid";`,
       );
 
-      const testCase = createTestCase({
-        name: "ts-proto/testapis.schema-error",
-        dir: caseDir,
-        config: {
-          package: "testapis.schema-error",
-          runtime: "ts-proto",
-        },
-      });
-
-      const result = runTypeCheck(testCase);
+      const result = runTypeCheck(caseDir);
 
       expect(result.success).toBe(false);
       expect(result.diagnostics.length).toBeGreaterThan(0);
@@ -188,16 +143,7 @@ export const schema = { builder };`,
 export const builder = { generated };`,
       );
 
-      const testCase = createTestCase({
-        name: "ts-proto/testapis.generated",
-        dir: caseDir,
-        config: {
-          package: "testapis.generated",
-          runtime: "ts-proto",
-        },
-      });
-
-      const result = runTypeCheck(testCase);
+      const result = runTypeCheck(caseDir);
 
       expect(result.success).toBe(false);
       expect(
@@ -231,16 +177,7 @@ const x: string = 123;
 `,
       );
 
-      const testCase = createTestCase({
-        name: "ts-proto/testapis.position",
-        dir: caseDir,
-        config: {
-          package: "testapis.position",
-          runtime: "ts-proto",
-        },
-      });
-
-      const result = runTypeCheck(testCase);
+      const result = runTypeCheck(caseDir);
 
       expect(result.success).toBe(false);
       expect(result.diagnostics[0].line).toBe(3);
