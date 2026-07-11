@@ -25,6 +25,11 @@ Generate GraphQL schema definitions from Protocol Buffer definitions.
 
 - [Proto Annotations](./proto-annotations/reference.md) - Complete proto options reference
 
+### Design Docs (internal)
+
+- [gRPC Service → GraphQL Operations + Federation Subgraph](./design/grpc-service-to-graphql/README.md)
+- [protoc-gen-dataloader](./design/protoc-gen-dataloader/design.md)
+
 ## External Resources
 
 - [GitHub Repository](https://github.com/proto-graphql/proto-graphql-js)
