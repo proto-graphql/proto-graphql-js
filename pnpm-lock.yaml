@@ -247,6 +247,31 @@ importers:
         specifier: 5.9.3
         version: 5.9.3
 
+  packages/protoc-gen-dataloader:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: 'catalog:'
+        version: 2.10.2
+      '@bufbuild/protoplugin':
+        specifier: 'catalog:'
+        version: 2.10.2
+      '@proto-graphql/codegen-core':
+        specifier: workspace:*
+        version: link:../@proto-graphql/codegen-core
+      '@proto-graphql/protoc-plugin-helpers':
+        specifier: workspace:*
+        version: link:../@proto-graphql/protoc-plugin-helpers
+      dprint-node:
+        specifier: 'catalog:'
+        version: 1.0.8
+    devDependencies:
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../devPackages/tsconfig
+      '@vitest/coverage-v8':
+        specifier: ^4.0.0
+        version: 4.0.18(vitest@4.1.0(@types/node@24.13.2)(vite@7.3.1(@types/node@24.13.2)(tsx@4.22.4)(yaml@2.8.2)))
+
   packages/protoc-gen-pothos:
     dependencies:
       '@bufbuild/protobuf':
@@ -6225,6 +6250,20 @@ snapshots:
       std-env: 3.10.0
       tinyrainbow: 3.0.3
       vitest: 4.1.0(@types/node@24.13.2)(vite@7.3.1(@types/node@24.13.2)(tsx@4.21.0)(yaml@2.8.2))
+
+  '@vitest/coverage-v8@4.0.18(vitest@4.1.0(@types/node@24.13.2)(vite@7.3.1(@types/node@24.13.2)(tsx@4.22.4)(yaml@2.8.2)))':
+    dependencies:
+      '@bcoe/v8-coverage': 1.0.2
+      '@vitest/utils': 4.0.18
+      ast-v8-to-istanbul: 0.3.10
+      istanbul-lib-coverage: 3.2.2
+      istanbul-lib-report: 3.0.1
+      istanbul-reports: 3.2.0
+      magicast: 0.5.1
+      obug: 2.1.1
+      std-env: 3.10.0
+      tinyrainbow: 3.0.3
+      vitest: 4.1.0(@types/node@24.13.2)(vite@7.3.1(@types/node@24.13.2)(tsx@4.22.4)(yaml@2.8.2))
 
   '@vitest/expect@4.1.0':
     dependencies:
