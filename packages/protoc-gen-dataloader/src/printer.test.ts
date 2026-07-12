@@ -323,7 +323,6 @@ describe("protocGenDataloader", () => {
 
       import type { ProtoGraphqlConnectContext } from "@proto-graphql/connect-runtime";
       import { createRpcLoader } from "@proto-graphql/connect-runtime";
-      import type { DataLoader } from "dataloader";
       import type { MessageInitShape, MessageShape } from "@bufbuild/protobuf";
       import { create } from "@bufbuild/protobuf";
       import {
@@ -335,6 +334,8 @@ describe("protocGenDataloader", () => {
         UserSchema,
         UserService,
       } from "./user_and_review_pb";
+
+      import type DataLoader from "dataloader";
 
       export const batchGetUsersLoader: (
         ctx: ProtoGraphqlConnectContext,
@@ -352,9 +353,8 @@ describe("protocGenDataloader", () => {
           extractKey: (user: MessageShape<typeof UserSchema>) => user.id,
         });
 
-      export type BatchGetUsersWithViewLoaderParams = Omit<
-        MessageInitShape<typeof BatchGetUsersWithViewRequestSchema>,
-        "ids"
+      export type BatchGetUsersWithViewLoaderParams = MessageInitShape<
+        typeof BatchGetUsersWithViewRequestSchema
       >;
 
       export const batchGetUsersWithViewLoader: (

@@ -1,5 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@proto-graphql/tsconfig/tsconfig.pkg.json",
-  "include": ["./src"]
+  "include": ["./src"],
+  "exclude": ["src/__tests__"]
 }

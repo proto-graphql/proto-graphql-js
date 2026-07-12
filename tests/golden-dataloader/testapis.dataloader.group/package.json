@@ -1,0 +1,16 @@
+{
+  "name": "@proto-graphql/golden-dataloader--testapis.dataloader.group",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@bufbuild/protobuf": "catalog:",
+    "@connectrpc/connect": "catalog:",
+    "@proto-graphql/connect-runtime": "workspace:*",
+    "@proto-graphql/e2e-testapis-protobuf-es-v2": "workspace:*",
+    "@proto-graphql/tsconfig": "workspace:*",
+    "dataloader": "catalog:"
+  },
+  "scripts": {
+    "test": "vitest run --passWithNoTests"
+  }
+}

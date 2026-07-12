@@ -265,6 +265,9 @@ importers:
         specifier: 'catalog:'
         version: 1.0.8
     devDependencies:
+      '@proto-graphql/golden-test-harness':
+        specifier: workspace:*
+        version: link:../../devPackages/golden-test-harness
       '@proto-graphql/tsconfig':
         specifier: workspace:*
         version: link:../../devPackages/tsconfig
@@ -326,6 +329,48 @@ importers:
       tsx:
         specifier: ^4.21.0
         version: 4.21.0
+
+  tests/golden-dataloader/testapis.dataloader.entity:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: 'catalog:'
+        version: 2.10.2
+      '@connectrpc/connect':
+        specifier: 'catalog:'
+        version: 2.1.2(@bufbuild/protobuf@2.10.2)
+      '@proto-graphql/connect-runtime':
+        specifier: workspace:*
+        version: link:../../../packages/@proto-graphql/connect-runtime
+      '@proto-graphql/e2e-testapis-protobuf-es-v2':
+        specifier: workspace:*
+        version: link:../../testapis/protobuf-es-v2
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../devPackages/tsconfig
+      dataloader:
+        specifier: 'catalog:'
+        version: 2.2.3
+
+  tests/golden-dataloader/testapis.dataloader.group:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: 'catalog:'
+        version: 2.10.2
+      '@connectrpc/connect':
+        specifier: 'catalog:'
+        version: 2.1.2(@bufbuild/protobuf@2.10.2)
+      '@proto-graphql/connect-runtime':
+        specifier: workspace:*
+        version: link:../../../packages/@proto-graphql/connect-runtime
+      '@proto-graphql/e2e-testapis-protobuf-es-v2':
+        specifier: workspace:*
+        version: link:../../testapis/protobuf-es-v2
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../devPackages/tsconfig
+      dataloader:
+        specifier: 'catalog:'
+        version: 2.2.3
 
   tests/golden/protobuf-es-v1/testapis.basic.empty:
     dependencies:

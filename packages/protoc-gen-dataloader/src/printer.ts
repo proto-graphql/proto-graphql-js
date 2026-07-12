@@ -57,6 +57,19 @@ export function generateFiles(
   const f = schema.generateFile(filenameFromProtoFile(file, opts));
   f.preamble(file);
 
+  // `dataloader`'s types are declared via `export = DataLoader` (a CJS
+  // export assignment merging the class with a same-named namespace for
+  // `DataLoader.Options` etc. — see node_modules/dataloader/index.d.ts), so
+  // there is no ES named export for `createImportSymbol` to bind: only a
+  // default import (`import DataLoader from "dataloader"`, resolved via
+  // `esModuleInterop`) works. `createImportSymbol` can only ever print a
+  // named `import { X } from "…"` (see @bufbuild/protoplugin's
+  // generated-file.js), so this one import is written by hand instead of
+  // through the symbol system; `printLoader` below refers to the type via
+  // the plain "DataLoader" string rather than an ImportSymbol.
+  f.print('import type DataLoader from "dataloader";');
+  f.print();
+
   for (const spec of specs) {
     printLoader(f, spec, opts);
     f.print();
@@ -89,7 +102,6 @@ function printLoader(
     "@bufbuild/protobuf",
     true,
   );
-  const dataLoaderType = createImportSymbol("DataLoader", "dataloader", true);
   const serviceSym = createImportSymbol(
     serviceConstName(service),
     protobufEsImportPath(service.file, opts.importPrefix),
@@ -125,15 +137,24 @@ function printLoader(
       "@bufbuild/protobuf",
       true,
     );
+    // Intentionally the *full* request init shape (including keyField), not
+    // `Omit<..., keyField>` as design.md §4.5 illustrates: `MessageInitShape`
+    // resolves to a `Req | { $typeName?: never; ...fields }` union (see
+    // @bufbuild/protobuf's `MessageInit<T>`), and `Omit`/`Pick` do not
+    // distribute over unions. Omitting a key from that union collapses it
+    // into a single object type whose `$typeName` becomes
+    // `<literal> | undefined` instead of always-`undefined`, which is no
+    // longer assignable to connect-runtime's `RpcLoaderAccessor` /
+    // `GroupRpcLoaderAccessor` params type (confirmed by the golden
+    // typecheck — see the M2 report). Passing keyField through `params` is
+    // harmless: `call` below always overwrites it with the batch's keys.
     parts.push(
       "export type ",
       paramsTypeName,
-      " = Omit<",
+      " = ",
       reqInitShapeType,
       "<typeof ",
       reqSchemaSym,
-      ">, ",
-      jsStringLit(spec.keyField.localName),
       ">;\n\n",
     );
   }
@@ -152,7 +173,7 @@ function printLoader(
       paramsTypeName,
     );
   }
-  parts.push(") => ", dataLoaderType, "<", spec.keyTsType, ", ", valueType);
+  parts.push(") => DataLoader<", spec.keyTsType, ", ", valueType);
   parts.push("> = ", createRpcLoaderSym, "({\n");
   parts.push("  service: ", serviceSym, ",\n");
   parts.push("  method: ", jsStringLit(method.localName), ",\n");

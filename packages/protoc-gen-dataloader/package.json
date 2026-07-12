@@ -54,6 +54,7 @@
     "dprint-node": "catalog:"
   },
   "devDependencies": {
+    "@proto-graphql/golden-test-harness": "workspace:*",
     "@proto-graphql/tsconfig": "workspace:*",
     "@vitest/coverage-v8": "^4.0.0"
   },
