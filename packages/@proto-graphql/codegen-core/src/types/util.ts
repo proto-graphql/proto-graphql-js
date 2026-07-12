@@ -7,7 +7,6 @@ import {
   type DescMessage,
   type DescMethod,
   type DescOneof,
-  type DescService,
   getExtension,
 } from "@bufbuild/protobuf";
 import {
@@ -378,9 +377,6 @@ const EMPTY_ENUM_OPTIONS = Object.freeze(
 const EMPTY_ENUM_VALUE_OPTIONS = Object.freeze(
   create(extensions.GraphqlEnumValueOptionsSchema, {}),
 );
-const EMPTY_SERVICE_OPTIONS = Object.freeze(
-  create(extensions.GraphqlServiceOptionsSchema, {}),
-);
 const EMPTY_RPC_OPTIONS = Object.freeze(
   create(extensions.GraphqlRpcOptionsSchema, {}),
 );
@@ -397,19 +393,6 @@ function getObjectTypeOptions(
 ): extensions.GraphqlObjectTypeOptions {
   if (desc.proto.options == null) return EMPTY_OBJECT_TYPE_OPTIONS;
   return getExtension(desc.proto.options, extensions.object_type);
-}
-
-/**
- * Returns the federation key fieldsets declared on a message via
- * `(graphql.object_type).federation.key`, or an empty array when none is set.
- * Each entry is a fieldset written with protobuf field names (e.g. `"id"`,
- * `"org_id id"`). Shared by the batch-spec `@key` fallback (design.md §3 V5)
- * and, later, the protoc-gen-pothos federation wiring.
- */
-export function getFederationKeyFieldsets(
-  desc: DescMessage,
-): readonly string[] {
-  return getObjectTypeOptions(desc).federation?.key ?? [];
 }
 
 export function getInputTypeOptions(
@@ -441,13 +424,6 @@ function getEnumValueOptions(
 ): extensions.GraphqlEnumValueOptions {
   if (desc.proto.options == null) return EMPTY_ENUM_VALUE_OPTIONS;
   return getExtension(desc.proto.options, extensions.enum_value);
-}
-
-export function getServiceOptions(
-  desc: DescService,
-): extensions.GraphqlServiceOptions {
-  if (desc.proto.options == null) return EMPTY_SERVICE_OPTIONS;
-  return getExtension(desc.proto.options, extensions.service);
 }
 
 export function getRpcOptions(desc: DescMethod): extensions.GraphqlRpcOptions {

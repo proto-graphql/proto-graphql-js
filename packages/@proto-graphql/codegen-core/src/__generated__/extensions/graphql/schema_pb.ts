@@ -4,7 +4,7 @@
 
 import type { GenEnum, GenExtension, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { enumDesc, extDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { EnumOptions, EnumValueOptions, FieldOptions, FileOptions, MessageOptions, MethodOptions, OneofOptions, ServiceOptions } from "@bufbuild/protobuf/wkt";
+import type { EnumOptions, EnumValueOptions, FieldOptions, FileOptions, MessageOptions, MethodOptions, OneofOptions } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_descriptor } from "@bufbuild/protobuf/wkt";
 import type { Message } from "@bufbuild/protobuf";
 
@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file graphql/schema.proto.
  */
 export const file_graphql_schema: GenFile = /*@__PURE__*/
-  fileDesc("ChRncmFwaHFsL3NjaGVtYS5wcm90bxIHZ3JhcGhxbCKpAQoUR3JhcGhxbFNjaGVtYU9wdGlvbnMSEwoLdHlwZV9wcmVmaXgYASABKAkSFwoPaWdub3JlX3JlcXVlc3RzGAIgASgIEhgKEGlnbm9yZV9yZXNwb25zZXMYAyABKAgSDgoGaWdub3JlGAQgASgIEhoKEnJlcXVlc3RzX2FzX2lucHV0cxgFIAEoCBIdChVyZXNwb25zZXNfYXNfcGF5bG9hZHMYBiABKAgimAEKGEdyYXBocWxPYmplY3RUeXBlT3B0aW9ucxIOCgZpZ25vcmUYASABKAgSFAoMc3F1YXNoX3VuaW9uGAIgASgIEhEKCWludGVyZmFjZRgDIAEoCBIMCgRuYW1lGAQgASgJEjUKCmZlZGVyYXRpb24YBSABKAsyIS5ncmFwaHFsLkdyYXBocWxGZWRlcmF0aW9uT3B0aW9ucyI9ChdHcmFwaHFsSW5wdXRUeXBlT3B0aW9ucxISCgpub19wYXJ0aWFsGAEgASgIEg4KBmlnbm9yZRgCIAEoCCLyAQoTR3JhcGhxbEZpZWxkT3B0aW9ucxIOCgZpZ25vcmUYASABKAgSDAoEbmFtZRgCIAEoCRIVCg1za2lwX3Jlc29sdmVyGAMgASgIEgoKAmlkGAQgASgIEjAKEm91dHB1dF9udWxsYWJpbGl0eRgLIAEoDjIULmdyYXBocWwuTnVsbGFiaWxpdHkSLwoRaW5wdXRfbnVsbGFiaWxpdHkYDCABKA4yFC5ncmFwaHFsLk51bGxhYmlsaXR5EjcKGXBhcnRpYWxfaW5wdXRfbnVsbGFiaWxpdHkYDSABKA4yFC5ncmFwaHFsLk51bGxhYmlsaXR5IiUKE0dyYXBocWxPbmVvZk9wdGlvbnMSDgoGaWdub3JlGAEgASgIIjIKEkdyYXBocWxFbnVtT3B0aW9ucxIOCgZpZ25vcmUYASABKAgSDAoEbmFtZRgEIAEoCSIpChdHcmFwaHFsRW51bVZhbHVlT3B0aW9ucxIOCgZpZ25vcmUYASABKAgiJwoVR3JhcGhxbFNlcnZpY2VPcHRpb25zEg4KBmlnbm9yZRgBIAEoCCLfAQoRR3JhcGhxbFJwY09wdGlvbnMSDgoGaWdub3JlGAEgASgIEiwKCW9wZXJhdGlvbhgCIAEoDjIZLmdyYXBocWwuR3JhcGhxbE9wZXJhdGlvbhIMCgRuYW1lGAMgASgJEhQKDGV4cG9zZV9maWVsZBgEIAEoCRIuCgViYXRjaBgFIAEoCzIfLmdyYXBocWwuR3JhcGhxbFJwY0JhdGNoT3B0aW9ucxI4CgpmZWRlcmF0aW9uGAogASgLMiQuZ3JhcGhxbC5HcmFwaHFsUnBjRmVkZXJhdGlvbk9wdGlvbnMifAoWR3JhcGhxbFJwY0JhdGNoT3B0aW9ucxIRCglrZXlfZmllbGQYASABKAkSFAoMZW50aXR5X2ZpZWxkGAIgASgJEhIKCmVudGl0eV9rZXkYAyABKAkSDQoFZ3JvdXAYBCABKAgSFgoObWF4X2JhdGNoX3NpemUYBSABKA0iZQobR3JhcGhxbFJwY0ZlZGVyYXRpb25PcHRpb25zEhcKD2VudGl0eV9yZXNvbHZlchgBIAEoCBItCgZleHRlbmQYAiABKAsyHS5ncmFwaHFsLkdyYXBocWxFeHRlbmRPcHRpb25zIl0KFEdyYXBocWxFeHRlbmRPcHRpb25zEgwKBHR5cGUYASABKAkSDQoFZmllbGQYAiABKAkSKAoEa2V5cxgDIAMoCzIaLmdyYXBocWwuR3JhcGhxbEtleU1hcHBpbmciQAoRR3JhcGhxbEtleU1hcHBpbmcSFAoMcGFyZW50X2ZpZWxkGAEgASgJEhUKDXJlcXVlc3RfZmllbGQYAiABKAkiOAoYR3JhcGhxbEZlZGVyYXRpb25PcHRpb25zEgsKA2tleRgBIAMoCRIPCgdleHRlbmRzGAIgASgIKkYKC051bGxhYmlsaXR5EhsKF05VTExBQklMSVRZX1VOU1BFQ0lGSUVEEAASDAoITlVMTEFCTEUQARIMCghOT05fTlVMTBACKk4KEEdyYXBocWxPcGVyYXRpb24SIQodR1JBUEhRTF9PUEVSQVRJT05fVU5TUEVDSUZJRUQQABIJCgVRVUVSWRABEgwKCE1VVEFUSU9OEAI6VAoGc2NoZW1hEhwuZ29vZ2xlLnByb3RvYnVmLkZpbGVPcHRpb25zGIgQIAEoCzIdLmdyYXBocWwuR3JhcGhxbFNjaGVtYU9wdGlvbnNSBnNjaGVtYTpkCgtvYmplY3RfdHlwZRIfLmdvb2dsZS5wcm90b2J1Zi5NZXNzYWdlT3B0aW9ucxiIECABKAsyIS5ncmFwaHFsLkdyYXBocWxPYmplY3RUeXBlT3B0aW9uc1IKb2JqZWN0VHlwZTphCgppbnB1dF90eXBlEh8uZ29vZ2xlLnByb3RvYnVmLk1lc3NhZ2VPcHRpb25zGIkQIAEoCzIgLmdyYXBocWwuR3JhcGhxbElucHV0VHlwZU9wdGlvbnNSCWlucHV0VHlwZTpSCgVmaWVsZBIdLmdvb2dsZS5wcm90b2J1Zi5GaWVsZE9wdGlvbnMYiBAgASgLMhwuZ3JhcGhxbC5HcmFwaHFsRmllbGRPcHRpb25zUgVmaWVsZDpSCgVvbmVvZhIdLmdvb2dsZS5wcm90b2J1Zi5PbmVvZk9wdGlvbnMYiBAgASgLMhwuZ3JhcGhxbC5HcmFwaHFsT25lb2ZPcHRpb25zUgVvbmVvZjpXCgllbnVtX3R5cGUSHC5nb29nbGUucHJvdG9idWYuRW51bU9wdGlvbnMYiBAgASgLMhsuZ3JhcGhxbC5HcmFwaHFsRW51bU9wdGlvbnNSCGVudW1UeXBlOmMKCmVudW1fdmFsdWUSIS5nb29nbGUucHJvdG9idWYuRW51bVZhbHVlT3B0aW9ucxiIECABKAsyIC5ncmFwaHFsLkdyYXBocWxFbnVtVmFsdWVPcHRpb25zUgllbnVtVmFsdWU6WgoHc2VydmljZRIfLmdvb2dsZS5wcm90b2J1Zi5TZXJ2aWNlT3B0aW9ucxiIECABKAsyHi5ncmFwaHFsLkdyYXBocWxTZXJ2aWNlT3B0aW9uc1IHc2VydmljZTpNCgNycGMSHi5nb29nbGUucHJvdG9idWYuTWV0aG9kT3B0aW9ucxiIECABKAsyGi5ncmFwaHFsLkdyYXBocWxScGNPcHRpb25zUgNycGNCNVozZ2l0aHViLmNvbS9wcm90by1ncmFwaHFsL3Byb3RvLWdyYXBocWwvZ28vZ3JhcGhxbHBiYgZwcm90bzM", [file_google_protobuf_descriptor]);
+  fileDesc("ChRncmFwaHFsL3NjaGVtYS5wcm90bxIHZ3JhcGhxbCJuChRHcmFwaHFsU2NoZW1hT3B0aW9ucxITCgt0eXBlX3ByZWZpeBgBIAEoCRIXCg9pZ25vcmVfcmVxdWVzdHMYAiABKAgSGAoQaWdub3JlX3Jlc3BvbnNlcxgDIAEoCBIOCgZpZ25vcmUYBCABKAgiYQoYR3JhcGhxbE9iamVjdFR5cGVPcHRpb25zEg4KBmlnbm9yZRgBIAEoCBIUCgxzcXVhc2hfdW5pb24YAiABKAgSEQoJaW50ZXJmYWNlGAMgASgIEgwKBG5hbWUYBCABKAkiPQoXR3JhcGhxbElucHV0VHlwZU9wdGlvbnMSEgoKbm9fcGFydGlhbBgBIAEoCBIOCgZpZ25vcmUYAiABKAgi8gEKE0dyYXBocWxGaWVsZE9wdGlvbnMSDgoGaWdub3JlGAEgASgIEgwKBG5hbWUYAiABKAkSFQoNc2tpcF9yZXNvbHZlchgDIAEoCBIKCgJpZBgEIAEoCBIwChJvdXRwdXRfbnVsbGFiaWxpdHkYCyABKA4yFC5ncmFwaHFsLk51bGxhYmlsaXR5Ei8KEWlucHV0X251bGxhYmlsaXR5GAwgASgOMhQuZ3JhcGhxbC5OdWxsYWJpbGl0eRI3ChlwYXJ0aWFsX2lucHV0X251bGxhYmlsaXR5GA0gASgOMhQuZ3JhcGhxbC5OdWxsYWJpbGl0eSIlChNHcmFwaHFsT25lb2ZPcHRpb25zEg4KBmlnbm9yZRgBIAEoCCIyChJHcmFwaHFsRW51bU9wdGlvbnMSDgoGaWdub3JlGAEgASgIEgwKBG5hbWUYBCABKAkiKQoXR3JhcGhxbEVudW1WYWx1ZU9wdGlvbnMSDgoGaWdub3JlGAEgASgIIkMKEUdyYXBocWxScGNPcHRpb25zEi4KBWJhdGNoGAUgASgLMh8uZ3JhcGhxbC5HcmFwaHFsUnBjQmF0Y2hPcHRpb25zInwKFkdyYXBocWxScGNCYXRjaE9wdGlvbnMSEQoJa2V5X2ZpZWxkGAEgASgJEhQKDGVudGl0eV9maWVsZBgCIAEoCRISCgplbnRpdHlfa2V5GAMgASgJEg0KBWdyb3VwGAQgASgIEhYKDm1heF9iYXRjaF9zaXplGAUgASgNKkYKC051bGxhYmlsaXR5EhsKF05VTExBQklMSVRZX1VOU1BFQ0lGSUVEEAASDAoITlVMTEFCTEUQARIMCghOT05fTlVMTBACOlQKBnNjaGVtYRIcLmdvb2dsZS5wcm90b2J1Zi5GaWxlT3B0aW9ucxiIECABKAsyHS5ncmFwaHFsLkdyYXBocWxTY2hlbWFPcHRpb25zUgZzY2hlbWE6ZAoLb2JqZWN0X3R5cGUSHy5nb29nbGUucHJvdG9idWYuTWVzc2FnZU9wdGlvbnMYiBAgASgLMiEuZ3JhcGhxbC5HcmFwaHFsT2JqZWN0VHlwZU9wdGlvbnNSCm9iamVjdFR5cGU6YQoKaW5wdXRfdHlwZRIfLmdvb2dsZS5wcm90b2J1Zi5NZXNzYWdlT3B0aW9ucxiJECABKAsyIC5ncmFwaHFsLkdyYXBocWxJbnB1dFR5cGVPcHRpb25zUglpbnB1dFR5cGU6UgoFZmllbGQSHS5nb29nbGUucHJvdG9idWYuRmllbGRPcHRpb25zGIgQIAEoCzIcLmdyYXBocWwuR3JhcGhxbEZpZWxkT3B0aW9uc1IFZmllbGQ6UgoFb25lb2YSHS5nb29nbGUucHJvdG9idWYuT25lb2ZPcHRpb25zGIgQIAEoCzIcLmdyYXBocWwuR3JhcGhxbE9uZW9mT3B0aW9uc1IFb25lb2Y6VwoJZW51bV90eXBlEhwuZ29vZ2xlLnByb3RvYnVmLkVudW1PcHRpb25zGIgQIAEoCzIbLmdyYXBocWwuR3JhcGhxbEVudW1PcHRpb25zUghlbnVtVHlwZTpjCgplbnVtX3ZhbHVlEiEuZ29vZ2xlLnByb3RvYnVmLkVudW1WYWx1ZU9wdGlvbnMYiBAgASgLMiAuZ3JhcGhxbC5HcmFwaHFsRW51bVZhbHVlT3B0aW9uc1IJZW51bVZhbHVlOk0KA3JwYxIeLmdvb2dsZS5wcm90b2J1Zi5NZXRob2RPcHRpb25zGIgQIAEoCzIaLmdyYXBocWwuR3JhcGhxbFJwY09wdGlvbnNSA3JwY0I1WjNnaXRodWIuY29tL3Byb3RvLWdyYXBocWwvcHJvdG8tZ3JhcGhxbC9nby9ncmFwaHFscGJiBnByb3RvMw", [file_google_protobuf_descriptor]);
 
 /**
  * @generated from message graphql.GraphqlSchemaOptions
@@ -37,24 +37,6 @@ export type GraphqlSchemaOptions = Message<"graphql.GraphqlSchemaOptions"> & {
    * @generated from field: bool ignore = 4;
    */
   ignore: boolean;
-
-  /**
-   * Renames `XxxRequest` messages to `XxxInput` and generates only the Input
-   * type for them. Experimental; naming and precedence with
-   * `ignore_requests` may change.
-   *
-   * @generated from field: bool requests_as_inputs = 5;
-   */
-  requestsAsInputs: boolean;
-
-  /**
-   * Renames `XxxResponse` messages to `XxxPayload` and generates only the
-   * Object type for them. Experimental; naming and precedence with
-   * `ignore_responses` may change.
-   *
-   * @generated from field: bool responses_as_payloads = 6;
-   */
-  responsesAsPayloads: boolean;
 };
 
 /**
@@ -122,14 +104,6 @@ export type GraphqlObjectTypeOptions = Message<"graphql.GraphqlObjectTypeOptions
    * @generated from field: string name = 4;
    */
   name: string;
-
-  /**
-   * Step 2: declares this type as a Federation subgraph entity, and related
-   * options. See `GraphqlFederationOptions`. Experimental.
-   *
-   * @generated from field: graphql.GraphqlFederationOptions federation = 5;
-   */
-  federation?: GraphqlFederationOptions;
 };
 
 /**
@@ -324,76 +298,17 @@ export const GraphqlEnumValueOptionsSchema: GenMessage<GraphqlEnumValueOptions> 
 /**
  * EXPERIMENTAL: this option is under active development and may change without notice.
  *
- * @generated from message graphql.GraphqlServiceOptions
- */
-export type GraphqlServiceOptions = Message<"graphql.GraphqlServiceOptions"> & {
-  /**
-   * Do not generate Query/Mutation fields for this service's RPCs. The
-   * option itself is kept so generation can be re-enabled later.
-   *
-   * @generated from field: bool ignore = 1;
-   */
-  ignore: boolean;
-};
-
-/**
- * Describes the message graphql.GraphqlServiceOptions.
- * Use `create(GraphqlServiceOptionsSchema)` to create a new message.
- */
-export const GraphqlServiceOptionsSchema: GenMessage<GraphqlServiceOptions> = /*@__PURE__*/
-  messageDesc(file_graphql_schema, 7);
-
-/**
- * EXPERIMENTAL: this option is under active development and may change without notice.
- *
  * @generated from message graphql.GraphqlRpcOptions
  */
 export type GraphqlRpcOptions = Message<"graphql.GraphqlRpcOptions"> & {
   /**
-   * Do not generate a Query/Mutation field for this RPC.
-   *
-   * @generated from field: bool ignore = 1;
-   */
-  ignore: boolean;
-
-  /**
-   * Overrides the operation type inferred from `idempotency_level`. See
-   * `GraphqlOperation` for the default rule when unspecified.
-   *
-   * @generated from field: graphql.GraphqlOperation operation = 2;
-   */
-  operation: GraphqlOperation;
-
-  /**
-   * Overrides the field name. Defaults to the camelCase of the RPC name.
-   *
-   * @generated from field: string name = 3;
-   */
-  name: string;
-
-  /**
-   * Unwraps the specified field of the response and uses it as the return
-   * value.
-   *
-   * @generated from field: string expose_field = 4;
-   */
-  exposeField: string;
-
-  /**
-   * Declares this RPC as a batch loader generation target, independent of
-   * federation. Consumed by protoc-gen-dataloader; see
-   * docs/design/protoc-gen-dataloader/design.md for details.
+   * Field numbers 1-4 are planned for service->operation support
+   * (ignore/operation/name/expose_field) and 10 for federation support;
+   * they are intentionally not defined yet and land with their consumers.
    *
    * @generated from field: graphql.GraphqlRpcBatchOptions batch = 5;
    */
   batch?: GraphqlRpcBatchOptions;
-
-  /**
-   * Step 2: federation wiring for this RPC.
-   *
-   * @generated from field: graphql.GraphqlRpcFederationOptions federation = 10;
-   */
-  federation?: GraphqlRpcFederationOptions;
 };
 
 /**
@@ -401,7 +316,7 @@ export type GraphqlRpcOptions = Message<"graphql.GraphqlRpcOptions"> & {
  * Use `create(GraphqlRpcOptionsSchema)` to create a new message.
  */
 export const GraphqlRpcOptionsSchema: GenMessage<GraphqlRpcOptions> = /*@__PURE__*/
-  messageDesc(file_graphql_schema, 8);
+  messageDesc(file_graphql_schema, 7);
 
 /**
  * EXPERIMENTAL: this option is under active development and may change without notice.
@@ -428,9 +343,10 @@ export type GraphqlRpcBatchOptions = Message<"graphql.GraphqlRpcBatchOptions"> &
   entityField: string;
 
   /**
-   * The key field on the entity, used for key matching. Entity mode: falls
-   * back to `(graphql.object_type).federation.key` when omitted. Group
-   * mode: required, since the parent key is not the entity's own `@key`.
+   * The key field on the entity, used for key matching. Required in both
+   * entity and group mode for now. Planned: entity mode will fall back to
+   * the entity's `(graphql.object_type).federation.key` when this is
+   * omitted, once federation support lands.
    *
    * @generated from field: string entity_key = 3;
    */
@@ -457,135 +373,7 @@ export type GraphqlRpcBatchOptions = Message<"graphql.GraphqlRpcBatchOptions"> &
  * Use `create(GraphqlRpcBatchOptionsSchema)` to create a new message.
  */
 export const GraphqlRpcBatchOptionsSchema: GenMessage<GraphqlRpcBatchOptions> = /*@__PURE__*/
-  messageDesc(file_graphql_schema, 9);
-
-/**
- * EXPERIMENTAL: this option is under active development and may change without notice.
- *
- * @generated from message graphql.GraphqlRpcFederationOptions
- */
-export type GraphqlRpcFederationOptions = Message<"graphql.GraphqlRpcFederationOptions"> & {
-  /**
-   * Uses this RPC (which must declare `batch`) as an entity resolver. The
-   * entity's `@key` and the batch key are checked for consistency at
-   * codegen time.
-   *
-   * @generated from field: bool entity_resolver = 1;
-   */
-  entityResolver: boolean;
-
-  /**
-   * Extends another type with a field backed by this RPC.
-   *
-   * @generated from field: graphql.GraphqlExtendOptions extend = 2;
-   */
-  extend?: GraphqlExtendOptions;
-};
-
-/**
- * Describes the message graphql.GraphqlRpcFederationOptions.
- * Use `create(GraphqlRpcFederationOptionsSchema)` to create a new message.
- */
-export const GraphqlRpcFederationOptionsSchema: GenMessage<GraphqlRpcFederationOptions> = /*@__PURE__*/
-  messageDesc(file_graphql_schema, 10);
-
-/**
- * EXPERIMENTAL: this option is under active development and may change without notice.
- *
- * @generated from message graphql.GraphqlExtendOptions
- */
-export type GraphqlExtendOptions = Message<"graphql.GraphqlExtendOptions"> & {
-  /**
-   * The fully-qualified name of the message to extend. Supports both stub
-   * messages and local messages.
-   *
-   * @generated from field: string type = 1;
-   */
-  type: string;
-
-  /**
-   * The name of the field to add. Defaults to the camelCase of the RPC
-   * name.
-   *
-   * @generated from field: string field = 2;
-   */
-  field: string;
-
-  /**
-   * Maps parent field values to request fields.
-   *
-   * @generated from field: repeated graphql.GraphqlKeyMapping keys = 3;
-   */
-  keys: GraphqlKeyMapping[];
-};
-
-/**
- * Describes the message graphql.GraphqlExtendOptions.
- * Use `create(GraphqlExtendOptionsSchema)` to create a new message.
- */
-export const GraphqlExtendOptionsSchema: GenMessage<GraphqlExtendOptions> = /*@__PURE__*/
-  messageDesc(file_graphql_schema, 11);
-
-/**
- * EXPERIMENTAL: this option is under active development and may change without notice.
- *
- * @generated from message graphql.GraphqlKeyMapping
- */
-export type GraphqlKeyMapping = Message<"graphql.GraphqlKeyMapping"> & {
-  /**
-   * The protobuf field name on the parent type.
-   *
-   * @generated from field: string parent_field = 1;
-   */
-  parentField: string;
-
-  /**
-   * The protobuf field name on the RPC request.
-   *
-   * @generated from field: string request_field = 2;
-   */
-  requestField: string;
-};
-
-/**
- * Describes the message graphql.GraphqlKeyMapping.
- * Use `create(GraphqlKeyMappingSchema)` to create a new message.
- */
-export const GraphqlKeyMappingSchema: GenMessage<GraphqlKeyMapping> = /*@__PURE__*/
-  messageDesc(file_graphql_schema, 12);
-
-/**
- * EXPERIMENTAL: this option is under active development and may change without notice.
- * Adds to `GraphqlObjectTypeOptions`.
- *
- * @generated from message graphql.GraphqlFederationOptions
- */
-export type GraphqlFederationOptions = Message<"graphql.GraphqlFederationOptions"> & {
-  /**
-   * Declares this type as a federation entity. Each fieldset is written
-   * using protobuf field names (e.g. "id", "org_id id") and converted to
-   * GraphQL field names at generation time, consistent with
-   * `(graphql.field).name`.
-   *
-   * @generated from field: repeated string key = 1;
-   */
-  key: string[];
-
-  /**
-   * Declares this as a stub for an entity owned by another subgraph.
-   * Generated as a Pothos `externalRef`.
-   *
-   * @generated from field: bool extends = 2;
-   */
-  extends: boolean;
-};
-
-/**
- * Describes the message graphql.GraphqlFederationOptions.
- * Use `create(GraphqlFederationOptionsSchema)` to create a new message.
- */
-export const GraphqlFederationOptionsSchema: GenMessage<GraphqlFederationOptions> = /*@__PURE__*/
-  messageDesc(file_graphql_schema, 13);
+  messageDesc(file_graphql_schema, 8);
 
 /**
  * @generated from enum graphql.Nullability
@@ -612,37 +400,6 @@ export enum Nullability {
  */
 export const NullabilitySchema: GenEnum<Nullability> = /*@__PURE__*/
   enumDesc(file_graphql_schema, 0);
-
-/**
- * EXPERIMENTAL: this option is under active development and may change without notice.
- *
- * @generated from enum graphql.GraphqlOperation
- */
-export enum GraphqlOperation {
-  /**
-   * Convention default: derived from `idempotency_level`
-   * (`NO_SIDE_EFFECTS` becomes QUERY, anything else becomes MUTATION).
-   *
-   * @generated from enum value: GRAPHQL_OPERATION_UNSPECIFIED = 0;
-   */
-  GRAPHQL_OPERATION_UNSPECIFIED = 0,
-
-  /**
-   * @generated from enum value: QUERY = 1;
-   */
-  QUERY = 1,
-
-  /**
-   * @generated from enum value: MUTATION = 2;
-   */
-  MUTATION = 2,
-}
-
-/**
- * Describes the enum graphql.GraphqlOperation.
- */
-export const GraphqlOperationSchema: GenEnum<GraphqlOperation> = /*@__PURE__*/
-  enumDesc(file_graphql_schema, 1);
 
 /**
  * @generated from extension: graphql.GraphqlSchemaOptions schema = 2056;
@@ -687,14 +444,8 @@ export const enum_value: GenExtension<EnumValueOptions, GraphqlEnumValueOptions>
   extDesc(file_graphql_schema, 6);
 
 /**
- * @generated from extension: graphql.GraphqlServiceOptions service = 2056;
- */
-export const service: GenExtension<ServiceOptions, GraphqlServiceOptions> = /*@__PURE__*/
-  extDesc(file_graphql_schema, 7);
-
-/**
  * @generated from extension: graphql.GraphqlRpcOptions rpc = 2056;
  */
 export const rpc: GenExtension<MethodOptions, GraphqlRpcOptions> = /*@__PURE__*/
-  extDesc(file_graphql_schema, 8);
+  extDesc(file_graphql_schema, 7);
 

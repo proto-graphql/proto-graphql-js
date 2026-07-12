@@ -13,8 +13,6 @@ import {
   FieldDescriptorProto_Type,
   FieldDescriptorProtoSchema,
   FileDescriptorProtoSchema,
-  type MessageOptions,
-  MessageOptionsSchema,
   MethodDescriptorProtoSchema,
   type MethodOptions,
   MethodOptionsSchema,
@@ -54,28 +52,11 @@ const singularScalar = (name: string, n: number, type = T.STRING) =>
 const singularMessage = (name: string, n: number, msg: string) =>
   fld(name, n, T.MESSAGE, OPTIONAL, `.${PKG}.${msg}`);
 
-function objectTypeMessageOptions(federationKey: string[]): MessageOptions {
-  const options = create(MessageOptionsSchema, {});
-  setExtension(
-    options,
-    extensions.object_type,
-    create(extensions.GraphqlObjectTypeOptionsSchema, {
-      federation: create(extensions.GraphqlFederationOptionsSchema, {
-        key: federationKey,
-      }),
-    }),
-  );
-  return options;
-}
-
 function messageProto(
   name: string,
   fields: FieldDescriptorProto[],
-  federationKey?: string[],
 ): DescriptorProto {
-  const options =
-    federationKey != null ? objectTypeMessageOptions(federationKey) : undefined;
-  return create(DescriptorProtoSchema, { name, field: fields, options });
+  return create(DescriptorProtoSchema, { name, field: fields });
 }
 
 /**
@@ -100,7 +81,7 @@ function buildMethod(params: {
       extensions.rpc,
       create(
         extensions.GraphqlRpcOptionsSchema,
-        params.batch != null ? { batch: params.batch } : { name: "customName" },
+        params.batch != null ? { batch: params.batch } : {},
       ),
     );
   }
@@ -148,13 +129,9 @@ const batch = (
   init: MessageInitShape<typeof extensions.GraphqlRpcBatchOptionsSchema> = {},
 ) => create(extensions.GraphqlRpcBatchOptionsSchema, init);
 
-// A `User` entity with a single-field federation key `id` (string).
-const userEntity = (opts: { federationKey?: string[] } = {}) =>
-  messageProto(
-    "User",
-    [singularScalar("id", 1), singularScalar("name", 2)],
-    opts.federationKey,
-  );
+// A `User` entity with a string `id` field, usable as an explicit entity_key.
+const userEntity = () =>
+  messageProto("User", [singularScalar("id", 1), singularScalar("name", 2)]);
 
 function expectErr(result: BatchSpecResult | null): string[] {
   expect(result).not.toBeNull();
@@ -188,12 +165,12 @@ describe("resolveBatchSpec", () => {
   });
 
   describe("inference happy path (entity mode)", () => {
-    it("infers key_field, entity_field, and entity_key from the @key", () => {
+    it("infers key_field and entity_field; entity_key is explicit", () => {
       const method = buildMethod({
         requestFields: [repeatedScalar("ids", 1)],
         responseFields: [repeatedMessage("users", 1, "User")],
-        extraMessages: [userEntity({ federationKey: ["id"] })],
-        batch: batch(),
+        extraMessages: [userEntity()],
+        batch: batch({ entityKey: "id" }),
       });
       const spec = expectOk(resolveBatchSpec(method));
       expect(spec.keyField.name).toBe("ids");
@@ -257,8 +234,8 @@ describe("resolveBatchSpec", () => {
     });
   });
 
-  describe("@key fallback errors (V5 / V7)", () => {
-    it("errors when the entity has no federation @key (V5)", () => {
+  describe("V5: entity_key is required in entity mode (no @key fallback yet)", () => {
+    it("errors when entity mode omits entity_key", () => {
       const method = buildMethod({
         requestFields: [repeatedScalar("ids", 1)],
         responseFields: [repeatedMessage("users", 1, "User")],
@@ -266,33 +243,9 @@ describe("resolveBatchSpec", () => {
         batch: batch(),
       });
       const [err] = expectErr(resolveBatchSpec(method));
-      expect(err).toContain("federation.key");
+      expect(err).toContain("requires an explicit entity_key");
+      expect(err).toContain("federation");
       expect(err).toContain('"id"'); // candidate scalar field
-      expect(err).toContain("option (graphql.rpc).batch = { entity_key:");
-    });
-
-    it("errors when the entity declares multiple @key sets (V5)", () => {
-      const method = buildMethod({
-        requestFields: [repeatedScalar("ids", 1)],
-        responseFields: [repeatedMessage("users", 1, "User")],
-        extraMessages: [userEntity({ federationKey: ["id", "name"] })],
-        batch: batch(),
-      });
-      const [err] = expectErr(resolveBatchSpec(method));
-      expect(err).toContain("multiple federation key sets");
-      expect(err).toContain("option (graphql.rpc).batch = { entity_key:");
-    });
-
-    it("errors on a composite @key (V7)", () => {
-      const method = buildMethod({
-        requestFields: [repeatedScalar("ids", 1)],
-        responseFields: [repeatedMessage("users", 1, "User")],
-        extraMessages: [userEntity({ federationKey: ["id name"] })],
-        batch: batch(),
-      });
-      const [err] = expectErr(resolveBatchSpec(method));
-      expect(err).toContain("composite key");
-      expect(err).toContain("Only single-field keys are supported");
       expect(err).toContain("option (graphql.rpc).batch = { entity_key:");
     });
   });
@@ -302,7 +255,7 @@ describe("resolveBatchSpec", () => {
       const method = buildMethod({
         requestFields: [repeatedScalar("ids", 1)],
         responseFields: [repeatedMessage("users", 1, "User")],
-        extraMessages: [userEntity({ federationKey: ["id"] })],
+        extraMessages: [userEntity()],
         batch: batch(),
         streaming: "server",
       });
@@ -317,7 +270,7 @@ describe("resolveBatchSpec", () => {
       const method = buildMethod({
         requestFields: [singularScalar("id", 1)],
         responseFields: [repeatedMessage("users", 1, "User")],
-        extraMessages: [userEntity({ federationKey: ["id"] })],
+        extraMessages: [userEntity()],
         batch: batch(),
       });
       const [err] = expectErr(resolveBatchSpec(method));
@@ -330,7 +283,7 @@ describe("resolveBatchSpec", () => {
       const method = buildMethod({
         requestFields: [repeatedScalar("ids", 1), repeatedScalar("tags", 2)],
         responseFields: [repeatedMessage("users", 1, "User")],
-        extraMessages: [userEntity({ federationKey: ["id"] })],
+        extraMessages: [userEntity()],
         batch: batch(),
       });
       const [err] = expectErr(resolveBatchSpec(method));
@@ -344,7 +297,7 @@ describe("resolveBatchSpec", () => {
       const method = buildMethod({
         requestFields: [repeatedScalar("ids", 1)],
         responseFields: [repeatedMessage("users", 1, "User")],
-        extraMessages: [userEntity({ federationKey: ["id"] })],
+        extraMessages: [userEntity()],
         batch: batch({ keyField: "missing" }),
       });
       const [err] = expectErr(resolveBatchSpec(method));
@@ -357,7 +310,7 @@ describe("resolveBatchSpec", () => {
       const method = buildMethod({
         requestFields: [repeatedMessage("items", 1, "User")],
         responseFields: [repeatedMessage("users", 2, "User")],
-        extraMessages: [userEntity({ federationKey: ["id"] })],
+        extraMessages: [userEntity()],
         batch: batch({ keyField: "items" }),
       });
       const [err] = expectErr(resolveBatchSpec(method));
@@ -371,7 +324,7 @@ describe("resolveBatchSpec", () => {
       const method = buildMethod({
         requestFields: [repeatedScalar("ids", 1)],
         responseFields: [repeatedScalar("names", 1)],
-        extraMessages: [userEntity({ federationKey: ["id"] })],
+        extraMessages: [userEntity()],
         batch: batch(),
       });
       const [err] = expectErr(resolveBatchSpec(method));
@@ -387,7 +340,7 @@ describe("resolveBatchSpec", () => {
           repeatedMessage("users", 1, "User"),
           repeatedMessage("admins", 2, "User"),
         ],
-        extraMessages: [userEntity({ federationKey: ["id"] })],
+        extraMessages: [userEntity()],
         batch: batch(),
       });
       const [err] = expectErr(resolveBatchSpec(method));
@@ -401,7 +354,7 @@ describe("resolveBatchSpec", () => {
       const method = buildMethod({
         requestFields: [repeatedScalar("ids", 1)],
         responseFields: [repeatedScalar("names", 1)],
-        extraMessages: [userEntity({ federationKey: ["id"] })],
+        extraMessages: [userEntity()],
         batch: batch({ entityField: "names" }),
       });
       const [err] = expectErr(resolveBatchSpec(method));
@@ -509,7 +462,7 @@ describe("resolveBatchSpec", () => {
       const method = buildMethod({
         requestFields: [repeatedScalar("flags", 1, T.BOOL)],
         responseFields: [repeatedMessage("users", 1, "User")],
-        extraMessages: [userEntity({ federationKey: ["id"] })],
+        extraMessages: [userEntity()],
         batch: batch(),
       });
       const [err] = expectErr(resolveBatchSpec(method));
@@ -523,8 +476,8 @@ describe("resolveBatchSpec", () => {
       const method = buildMethod({
         requestFields: [repeatedScalar("ids", 1), singularScalar("filter", 2)],
         responseFields: [repeatedMessage("users", 1, "User")],
-        extraMessages: [userEntity({ federationKey: ["id"] })],
-        batch: batch(),
+        extraMessages: [userEntity()],
+        batch: batch({ entityKey: "id" }),
       });
       const spec = expectOk(resolveBatchSpec(method));
       expect(spec.paramFields.map((f) => f.name)).toEqual(["filter"]);
@@ -542,11 +495,8 @@ describe("resolveBatchSpec", () => {
           singularMessage("mask", 2, "Mask"),
         ],
         responseFields: [repeatedMessage("users", 1, "User")],
-        extraMessages: [
-          userEntity({ federationKey: ["id"] }),
-          messageProto("Mask", []),
-        ],
-        batch: batch(),
+        extraMessages: [userEntity(), messageProto("Mask", [])],
+        batch: batch({ entityKey: "id" }),
       });
       const spec = expectOk(resolveBatchSpec(method));
       expect(spec.paramFields.map((f) => f.name)).toEqual(["mask"]);

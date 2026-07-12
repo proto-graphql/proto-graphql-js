@@ -6,11 +6,7 @@ import {
 } from "@bufbuild/protobuf";
 import type { GraphqlRpcBatchOptions } from "../__generated__/extensions/graphql/schema_pb.js";
 import { scalarMapLabelByType } from "./types.js";
-import {
-  getFederationKeyFieldsets,
-  getRpcOptions,
-  isRequiredField,
-} from "./util.js";
+import { getRpcOptions, isRequiredField } from "./util.js";
 
 /**
  * The TypeScript type a batch key maps to. Determined by the proto element
@@ -259,8 +255,14 @@ function resolveEntityField(
   return { ok: true, field, message: field.message };
 }
 
-// V4/V5/V6/V7: resolve `entity_key` (scalar on entity), including the
-// single-field `@key` fallback and key type-compatibility check.
+// V4/V5/V6: resolve `entity_key` (scalar on entity) and its
+// key type-compatibility check. `entity_key` is required in both entity and
+// group mode for now: the proto has no `(graphql.object_type).federation.key`
+// to fall back to yet (per-track landing — federation options land with
+// federation support, see docs/design/protoc-gen-dataloader/design.md §3 V5).
+// Once that lands, entity mode is planned to fall back to a single-field
+// federation `@key` when `entity_key` is omitted (V7's composite-key check
+// revives at the same time).
 function resolveEntityKey(
   batch: GraphqlRpcBatchOptions,
   rpcRef: string,
@@ -277,39 +279,20 @@ function resolveEntityKey(
         ["entity_key", quote(scalarFields[0]?.name ?? "id")],
       ]);
 
-  let name: string;
-  if (batch.entityKey !== "") {
-    name = batch.entityKey;
-  } else if (batch.group) {
-    // V6: the parent key is not the entity's own @key, so it cannot be inferred.
+  if (batch.entityKey === "") {
+    if (batch.group) {
+      // V6: the parent key is not the entity's own @key, so it cannot be inferred.
+      return err(
+        `(graphql.rpc).batch on ${rpcRef} is a group loader (group: true) and requires an explicit entity_key, because the grouping key is not the entity's own @key. Scalar fields on ${entityMessage.name}: [${fieldNameList(scalarFields)}]. Example: ${example}`,
+      );
+    }
+    // V5: no `@key` fallback exists yet (planned once federation support
+    // lands), so entity mode requires an explicit entity_key too, for now.
     return err(
-      `(graphql.rpc).batch on ${rpcRef} is a group loader (group: true) and requires an explicit entity_key, because the grouping key is not the entity's own @key. Scalar fields on ${entityMessage.name}: [${fieldNameList(scalarFields)}]. Example: ${example}`,
+      `(graphql.rpc).batch on ${rpcRef} requires an explicit entity_key: falling back to a federation \`@key\` is planned once federation support lands upstream, but is not available yet. Scalar fields on ${entityMessage.name}: [${fieldNameList(scalarFields)}]. Example: ${example}`,
     );
-  } else {
-    // V5: fall back to a single-field `(graphql.object_type).federation.key`.
-    const fieldsets = getFederationKeyFieldsets(entityMessage);
-    if (fieldsets.length === 0) {
-      return err(
-        `Cannot infer entity_key for (graphql.rpc).batch on ${rpcRef}: entity message ${entityMessage.name} has no (graphql.object_type).federation.key to fall back to. Set entity_key explicitly. Scalar fields on ${entityMessage.name}: [${fieldNameList(scalarFields)}]. Example: ${example}`,
-      );
-    }
-    if (fieldsets.length > 1) {
-      return err(
-        `Cannot infer entity_key for (graphql.rpc).batch on ${rpcRef}: entity message ${entityMessage.name} declares multiple federation key sets ([${fieldsets.map(quote).join(", ")}]). Set entity_key explicitly. Scalar fields on ${entityMessage.name}: [${fieldNameList(scalarFields)}]. Example: ${example}`,
-      );
-    }
-    const parts = fieldsets[0]
-      .trim()
-      .split(/\s+/)
-      .filter((p) => p !== "");
-    if (parts.length !== 1) {
-      // V7: composite keys (a fieldset with multiple fields) are unsupported.
-      return err(
-        `Cannot infer entity_key for (graphql.rpc).batch on ${rpcRef}: the federation key "${fieldsets[0]}" on ${entityMessage.name} is a composite key (${parts.length} fields), which is not supported in this version. Only single-field keys are supported; set a single-field entity_key explicitly. Example: ${example}`,
-      );
-    }
-    name = parts[0];
   }
+  const name = batch.entityKey;
 
   const found = entityMessage.fields.find((f) => f.name === name);
   if (found == null) {
