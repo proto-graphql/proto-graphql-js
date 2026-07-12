@@ -72,6 +72,8 @@ Phase 3: Federation(T1.3 + D3 後)           ▼
 
 ### T0.1: proto-graphql 本家へのオプション追加
 
+> **2026-07-12 改訂(per-track landing、[decision-log Q29](./decision-log.md))**: 本タスクは当初「全オプション一括追加」だったが、実際には `(graphql.rpc).batch` のみ着地済み。Step 1 系オプション(service/operation/name/expose_field/suffix 変換)は Step 1 実装 PR と同時に、federation 系は Step 2 実装 PR と同時に本家へ追加する(フィールド番号は design.md §2 の予約に従う)。
+
 - **推奨モデル**: sonnet / **作業リポジトリ**: proto-graphql 本家(このリポジトリの submodule `proto-graphql/` で編集 → 本家へ PR)
 - **依存**: なし
 - **参照**: design.md §2(オプション全文ドラフト)、protoc-gen-dataloader/design.md §2
