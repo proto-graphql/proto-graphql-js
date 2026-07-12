@@ -254,8 +254,7 @@ protoc-gen-pothos Step 2(federation): asEntity / extend フィールドの resol
 
 ## 9. 残項目
 
-- **npm パッケージ名 / bin 名**: 素の `protoc-gen-dataloader` は汎用的すぎて衝突リスクあり。候補: npm は `@proto-graphql/protoc-gen-dataloader`、bin は `protoc-gen-dataloader`。実装タスク内で npm の空き確認と buf plugin 公開の要否判断を行う
-- runtime パッケージの正式名(`@proto-graphql/connect-runtime` は仮)
+- **npm パッケージ名 / bin 名 / runtime パッケージ名(確定)**: npm 名・bin 名とも `protoc-gen-dataloader` のまま確定(空き確認済み、2026-07-12)。ランタイムも `@proto-graphql/connect-runtime` のまま確定(同日空き確認済み)
 - `map<K, V>` 型 response の対応(キーマッチが自明になる形。将来)
 - 単発 Get RPC の並列 fallback ローダー(BatchGet が無いサービス向け。スコープ外の可能性が高い)
 - 複合キー対応(§4.3 の設計余地に沿って将来)
