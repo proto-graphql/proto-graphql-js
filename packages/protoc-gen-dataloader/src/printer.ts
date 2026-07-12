@@ -57,19 +57,6 @@ export function generateFiles(
   const f = schema.generateFile(filenameFromProtoFile(file, opts));
   f.preamble(file);
 
-  // `dataloader`'s types are declared via `export = DataLoader` (a CJS
-  // export assignment merging the class with a same-named namespace for
-  // `DataLoader.Options` etc. — see node_modules/dataloader/index.d.ts), so
-  // there is no ES named export for `createImportSymbol` to bind: only a
-  // default import (`import DataLoader from "dataloader"`, resolved via
-  // `esModuleInterop`) works. `createImportSymbol` can only ever print a
-  // named `import { X } from "…"` (see @bufbuild/protoplugin's
-  // generated-file.js), so this one import is written by hand instead of
-  // through the symbol system; `printLoader` below refers to the type via
-  // the plain "DataLoader" string rather than an ImportSymbol.
-  f.print('import type DataLoader from "dataloader";');
-  f.print();
-
   for (const spec of specs) {
     printLoader(f, spec, opts);
     f.print();
@@ -95,6 +82,11 @@ function printLoader(
   const createRpcLoaderSym = createImportSymbol(
     "createRpcLoader",
     opts.runtimeModule,
+  );
+  const rpcLoaderType = createImportSymbol(
+    "RpcLoader",
+    opts.runtimeModule,
+    true,
   );
   const createSym = createImportSymbol("create", "@bufbuild/protobuf");
   const messageShapeType = createImportSymbol(
@@ -160,20 +152,33 @@ function printLoader(
   }
 
   // Every exported loader gets an explicit function-type annotation (no
-  // casts): `(ctx) => DataLoader<K,V>` / `(ctx, params?: P) => ...` /
-  // `(ctx, params: P) => ...`, per the confirmed connect-runtime contract
-  // (`createRpcLoader`'s inferred return type is otherwise too specific to
-  // narrow cleanly at the call site — see the D3 report).
-  parts.push("export const ", loaderName, ": (ctx: ", ctxType);
+  // casts): `(ctx) => RpcLoader<K,V>` / `(ctx) => RpcLoader<K,V,[params?:P]>`
+  // / `(ctx) => RpcLoader<K,V,[params:P]>`, per the confirmed
+  // connect-runtime contract (`createRpcLoader`'s inferred return type is
+  // otherwise too specific to narrow cleanly at the call site — see the D3
+  // report). Non-key params are supplied to `RpcLoader`'s `load`/`loadMany`
+  // at call time, not to the accessor.
+  parts.push(
+    "export const ",
+    loaderName,
+    ": (ctx: ",
+    ctxType,
+    ") => ",
+    rpcLoaderType,
+    "<",
+    spec.keyTsType,
+    ", ",
+    valueType,
+  );
   if (hasParams) {
     parts.push(
-      ", params",
+      ", [params",
       spec.paramsRequired ? "" : "?",
       ": ",
       paramsTypeName,
+      "]",
     );
   }
-  parts.push(") => DataLoader<", spec.keyTsType, ", ", valueType);
   parts.push("> = ", createRpcLoaderSym, "({\n");
   parts.push("  service: ", serviceSym, ",\n");
   parts.push("  method: ", jsStringLit(method.localName), ",\n");

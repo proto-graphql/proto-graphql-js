@@ -321,7 +321,10 @@ describe("protocGenDataloader", () => {
       // @generated from file user_and_review.proto (package protoc_gen_dataloader.printer_test.success, syntax proto3)
       /* eslint-disable */
 
-      import type { ProtoGraphqlConnectContext } from "@proto-graphql/connect-runtime";
+      import type {
+        ProtoGraphqlConnectContext,
+        RpcLoader,
+      } from "@proto-graphql/connect-runtime";
       import { createRpcLoader } from "@proto-graphql/connect-runtime";
       import type { MessageInitShape, MessageShape } from "@bufbuild/protobuf";
       import { create } from "@bufbuild/protobuf";
@@ -335,11 +338,9 @@ describe("protocGenDataloader", () => {
         UserService,
       } from "./user_and_review_pb";
 
-      import type DataLoader from "dataloader";
-
       export const batchGetUsersLoader: (
         ctx: ProtoGraphqlConnectContext,
-      ) => DataLoader<string, MessageShape<typeof UserSchema> | null> =
+      ) => RpcLoader<string, MessageShape<typeof UserSchema> | null> =
         createRpcLoader({
           service: UserService,
           method: "batchGetUsers",
@@ -359,27 +360,26 @@ describe("protocGenDataloader", () => {
 
       export const batchGetUsersWithViewLoader: (
         ctx: ProtoGraphqlConnectContext,
-        params: BatchGetUsersWithViewLoaderParams,
-      ) => DataLoader<string, MessageShape<typeof UserSchema> | null> =
-        createRpcLoader({
-          service: UserService,
-          method: "batchGetUsersWithView",
-          requestSchema: BatchGetUsersWithViewRequestSchema,
-          call: (client, keys, params, opts) =>
-            client.batchGetUsersWithView(
-              create(BatchGetUsersWithViewRequestSchema, {
-                ...params,
-                ids: [...keys],
-              }),
-              opts,
-            ),
-          extractEntities: (res) => res.users,
-          extractKey: (user: MessageShape<typeof UserSchema>) => user.id,
-        });
+      ) => RpcLoader<
+        string,
+        MessageShape<typeof UserSchema> | null,
+        [params: BatchGetUsersWithViewLoaderParams]
+      > = createRpcLoader({
+        service: UserService,
+        method: "batchGetUsersWithView",
+        requestSchema: BatchGetUsersWithViewRequestSchema,
+        call: (client, keys, params, opts) =>
+          client.batchGetUsersWithView(
+            create(BatchGetUsersWithViewRequestSchema, { ...params, ids: [...keys] }),
+            opts,
+          ),
+        extractEntities: (res) => res.users,
+        extractKey: (user: MessageShape<typeof UserSchema>) => user.id,
+      });
 
       export const batchListReviewsByUsersLoader: (
         ctx: ProtoGraphqlConnectContext,
-      ) => DataLoader<string, MessageShape<typeof ReviewSchema>[]> = createRpcLoader({
+      ) => RpcLoader<string, MessageShape<typeof ReviewSchema>[]> = createRpcLoader({
         service: ReviewService,
         method: "batchListReviewsByUsers",
         requestSchema: BatchListReviewsByUsersRequestSchema,
