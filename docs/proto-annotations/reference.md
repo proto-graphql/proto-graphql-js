@@ -222,6 +222,68 @@ enum Role {
 }
 ```
 
+## Service Options
+
+### (graphql.service)
+
+Options for GraphQL operation generation from a service's RPCs.
+
+> The `operation`/`name`/`expose_field`/`federation` fields on the sibling `(graphql.rpc)` option (and `(graphql.service)` itself beyond `ignore`) are reserved for upcoming service→GraphQL-operation support and have no consumer yet, so they are not documented here.
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `ignore` | `bool` | Do not generate Query/Mutation fields for this service's RPCs |
+
+## RPC Options
+
+### (graphql.rpc).batch
+
+> **EXPERIMENTAL.** Declares an RPC as a batch-loader generation target for [protoc-gen-dataloader](../protoc-gen-dataloader/README.md), independent of whether the RPC is exposed as a GraphQL operation — no `(graphql.service)`/`(graphql.rpc)` opt-in is required for `batch` to take effect.
+
+```protobuf
+import "graphql/schema.proto";
+
+service UserService {
+  rpc BatchGetUsers(BatchGetUsersRequest) returns (BatchGetUsersResponse) {
+    option (graphql.rpc).batch = {};
+  }
+}
+```
+
+**Fields**
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `key_field` | `string` | Repeated key-list field on the request. Omit to auto-infer (only valid when the request has exactly one repeated field). |
+| `entity_field` | `string` | Repeated entity-list field on the response. Omit to auto-infer (only valid when the response has exactly one repeated *message* field). |
+| `entity_key` | `string` | Scalar field on the entity, used to match entities back to requested keys. Entity mode: omit to fall back to the entity's `(graphql.object_type).federation.key` (see below). Group mode: always required. |
+| `group` | `bool` | Generate a group loader (`DataLoader<K, Entity[]>`, one key → N entities) instead of an entity loader (`DataLoader<K, Entity \| null>`, one key → at most 1 entity). Default `false`. |
+| `max_batch_size` | `uint32` | Maximum number of keys sent in a single RPC call (DataLoader's `maxBatchSize`). `0` (default) means unlimited. |
+
+**Inference rules**
+
+- `batch` is only valid on unary RPCs; a streaming RPC is a codegen error.
+- `key_field`, if omitted, is inferred as the request's only repeated field, which must be a repeated *scalar* field. Zero, or more than one, repeated field is an error (set `key_field` explicitly to disambiguate).
+- `entity_field`, if omitted, is inferred as the response's only repeated *message* field. Zero, or more than one, repeated message field is an error.
+- `entity_key` must be a scalar field on the entity message whose proto type maps to the same TypeScript key type as `key_field` does (see [Generated Code Reference](../protoc-gen-dataloader/generated-code-reference.md#key-type-mapping)).
+  - **Entity mode**, when omitted: falls back to `(graphql.object_type).federation.key` on the entity message, but only when the entity declares exactly one key set consisting of exactly one field. No `@key`, more than one key set, or a composite (multi-field) key set is a codegen error requiring an explicit `entity_key`.
+  - **Group mode**: `entity_key` is always required explicitly — the grouping key is conceptually the *parent's* key, not the entity's own `@key`, so there is nothing to fall back to.
+- Composite (multi-field) keys are not supported in this version, whether via an explicit `entity_key` or the `@key` fallback.
+- Request fields other than `key_field` become loader parameters (see [Generated Code Reference](../protoc-gen-dataloader/generated-code-reference.md#params-variants)). A parameter is type-level required on the generated loader accessor whenever its field is required under the same rules as Input type generation (`isRequiredField`): proto3 implicit-presence scalar fields are required by default; adding `optional`, or setting `(graphql.field).input_nullability = NULLABLE`, makes a field non-required. Message/enum fields are non-required by default unless marked `// Required.` or `input_nullability = NON_NULL`.
+
+**Validation error behavior**
+
+- All rules above are validated at codegen time, across every method in every file of the `buf generate` request, before the plugin emits anything — a single run reports every invalid `batch` declaration at once rather than stopping at the first one.
+- Error messages always name the offending RPC, state what was wrong, list the actual candidate fields found on the relevant message, and include a concrete `option (graphql.rpc).batch = { ... };` example, e.g.:
+
+  ```
+  Cannot infer key_field for (graphql.rpc).batch on UserService.BatchGetUsers: request message BatchGetUsersRequest has multiple repeated fields (["ids", "tags"]). Set key_field explicitly to disambiguate. Example: option (graphql.rpc).batch = { key_field: "ids" };
+  ```
+
+- Because a protoc plugin invocation cannot partially succeed, any validation failure aborts code generation for the entire `buf generate` run; fix every reported RPC and regenerate.
+
+See [protoc-gen-dataloader](../protoc-gen-dataloader/README.md) for the full generated-code contract this option drives.
+
 ## Field Behavior Comments
 
 Special comments that affect field generation:

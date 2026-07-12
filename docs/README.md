@@ -12,6 +12,13 @@ Generate GraphQL schema definitions from Protocol Buffer definitions.
 - [Buf Setup](./protoc-gen-pothos/buf-setup.md) - Configuration with Buf
 - [Generated Code Reference](./protoc-gen-pothos/generated-code-reference/README.md) - Detailed generated code examples
 
+### protoc-gen-dataloader (EXPERIMENTAL)
+
+- [Overview](./protoc-gen-dataloader/README.md) - What the plugin generates
+- [Getting Started](./protoc-gen-dataloader/getting-started.md) - Quick start guide for new users
+- [Configuration](./protoc-gen-dataloader/configuration.md) - Complete options reference
+- [Generated Code Reference](./protoc-gen-dataloader/generated-code-reference.md) - Detailed generated code examples
+
 ### Type Mapping Rules
 
 - [Overview](./type-mapping/README.md) - How Protobuf types map to GraphQL

@@ -17,6 +17,7 @@ export default {
     title: "Code Generators",
   },
   "protoc-gen-pothos": "protoc-gen-pothos",
+  "protoc-gen-dataloader": "protoc-gen-dataloader (experimental)",
   development: {
     display: "hidden",
   },
