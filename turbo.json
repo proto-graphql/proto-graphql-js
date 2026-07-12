@@ -13,6 +13,12 @@
     },
     "//#gen:testapis": {
       "cache": false
+    },
+    "@proto-graphql/golden-dataloader--testapis.dataloader.entity#test": {
+      "dependsOn": ["^build", "protoc-gen-dataloader#test"]
+    },
+    "@proto-graphql/golden-dataloader--testapis.dataloader.group#test": {
+      "dependsOn": ["^build", "protoc-gen-dataloader#test"]
     }
   }
 }
