@@ -181,8 +181,13 @@ export function createRpcLoader<S extends GenService, K, E, P>(config: {
 - request に key_field 以外のフィールドがある場合、params 型を生成して accessor の第 2 引数にする:
 
 ```ts
+// 実装時修正: 当初案の Omit<..., "ids"> は protobuf-es v2 の MessageInitShape が
+// union 型のため型不整合を起こす(Omit が union を collapse して $typeName が
+// 広がり、runtime の RpcLoaderAccessor に代入不能)。params 型は完全な init shape
+// とし、key_field は含まれていても call が常にバッチのキーで上書きするため無害
+// (paramsKey が分かれてバッチ分割の無駄が出るだけで正しさは保たれる)。
 export type BatchGetUsersLoaderParams =
-  Omit<MessageInitShape<typeof BatchGetUsersRequestSchema>, "ids">;
+  MessageInitShape<typeof BatchGetUsersRequestSchema>;
 
 export const batchGetUsersLoader: (
   ctx: ProtoGraphqlConnectContext,

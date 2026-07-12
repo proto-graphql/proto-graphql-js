@@ -268,6 +268,12 @@ design.md §7 および protoc-gen-dataloader/design.md の残項目を参照。
 - 帰結: federation 経由(entity_resolver / extend)は params を渡せないため、**required な非キーフィールドを持つ RPC は codegen エラー(F10)**、optional は unset。将来の extend フィールド GraphQL 引数化では args → params が受け皿になる。固定値注入(`request_defaults`)は将来検討
 - 反映先: dataloader design §3(V9)/ §4.5、federation-design §3(F10)、実装計画 D1/D2/D3/D5/T3.1
 
+### 実装フェーズで確定した設計修正(2026-07-12)
+
+- **`<Rpc>LoaderParams` の Omit 廃止**(D5 の golden 型チェックで発覚): protobuf-es v2 の `MessageInitShape` は union 型で `Omit` が分配されず型不整合になるため、params 型は**完全な request init shape**とする。key_field が params に混入しても `call` が常に上書きするため正しさは保たれる(dataloader design §4.5 に反映)
+- **`DataLoader` 型の import**: `dataloader` は CJS export assignment のため protoplugin の `createImportSymbol`(named import 専用)が使えず、`import type DataLoader from "dataloader";` を生成ファイル毎に直接出力する
+- golden ルートは `tests/golden-dataloader/`(pothos の resolveConfig が `tests/golden/` 直下の未知ディレクトリで throw するため分離)
+
 ### 実装委譲の前提
 
 - 実装タスクは「依頼票」形式(目的 / 前提 / 参照 / 成果物 / 受け入れ基準 / 実装ヒント / 推奨モデル)に分解し、opus または sonnet の subagent に依頼する
