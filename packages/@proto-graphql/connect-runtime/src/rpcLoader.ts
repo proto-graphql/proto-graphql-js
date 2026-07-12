@@ -23,8 +23,8 @@ export type RpcLoaderKey = string | number | bigint;
 
 /**
  * Config for `createRpcLoader`. `Group` selects the loader's shape: unset or
- * `false` produces an entity loader (`DataLoader<K, E | null>`), `true`
- * produces a group loader (`DataLoader<K, E[]>`).
+ * `false` produces an entity loader (`RpcLoader<K, E | null, ...>`), `true`
+ * produces a group loader (`RpcLoader<K, E[], ...>`).
  */
 export interface CreateRpcLoaderConfig<
   S extends GenService<GenServiceMethods>,
@@ -89,33 +89,47 @@ export interface CreateRpcLoaderConfig<
   maxBatchSize?: number;
 }
 
-/** Accessor returned for entity-mode loaders (`group` unset or `false`). */
-export type RpcLoaderAccessor<
+/**
+ * The value returned by a `createRpcLoader` accessor: a thin, per-`ctx`
+ * wrapper around a family of per-params `DataLoader`s.
+ *
+ * `load`/`loadMany` take the RPC's non-key params (if any) as trailing
+ * arguments (`PArgs`) and resolve — creating on first sight — the
+ * `DataLoader` for that exact params value (design.md §4.5). `loader` is
+ * the same resolution, exposed directly for `.prime()` / `.clear()` /
+ * `.clearAll()`.
+ *
+ * `PArgs` is always `[params?: MessageInitShape<...>]` as inferred from
+ * `createRpcLoader`'s config; generated code narrows the exported const's
+ * annotation to `[]` (no params), `[params?: X]` (optional params), or
+ * `[params: X]` (required params) depending on the RPC's request shape —
+ * `load`/`loadMany`/`loader` are declared with method syntax specifically
+ * so that narrowing (checked bivariantly) type-checks in all three
+ * directions (confirmed by the golden typecheck).
+ */
+export interface RpcLoader<
   K extends RpcLoaderKey,
-  E,
-  Req extends Message,
-> = (
-  ctx: ProtoGraphqlConnectContext,
-  params?: MessageInitShape<GenMessage<Req>>,
-) => DataLoader<K, E | null>;
-
-/** Accessor returned for group-mode loaders (`group: true`). */
-export type GroupRpcLoaderAccessor<
-  K extends RpcLoaderKey,
-  E,
-  Req extends Message,
-> = (
-  ctx: ProtoGraphqlConnectContext,
-  params?: MessageInitShape<GenMessage<Req>>,
-) => DataLoader<K, E[]>;
+  V,
+  PArgs extends readonly unknown[] = [],
+> {
+  /** Resolves `key` through the `DataLoader` for `args`' params (created on first sight). */
+  load(key: K, ...args: PArgs): Promise<V>;
+  /** Resolves `keys` through the `DataLoader` for `args`' params (created on first sight). */
+  loadMany(keys: readonly K[], ...args: PArgs): Promise<(V | Error)[]>;
+  /** Escape hatch: the raw per-params `DataLoader`, e.g. for `.prime()` / `.clear()` / `.clearAll()`. */
+  loader(...args: PArgs): DataLoader<K, V>;
+}
 
 /**
- * Builds a loader accessor for a batch RPC: `(ctx, params?) => DataLoader`.
+ * Builds a loader accessor for a batch RPC: `(ctx) => RpcLoader`.
  *
- * The accessor maintains a two-level per-context cache (`ctx` -> `params`
- * key -> `DataLoader`), so concurrent `.load()` calls for the same `ctx`
- * and the same `params` (by value) merge into a single RPC call, while
- * different contexts or different params never share a batch.
+ * The accessor maintains a per-context cache (`WeakMap<ctx, RpcLoader>`),
+ * so repeated `accessor(ctx)` calls for the same `ctx` are cheap and return
+ * the same wrapper. That wrapper, in turn, maintains its own per-params
+ * cache (`Map<paramsKey, DataLoader>`), so concurrent `.load()`/`.loadMany()`
+ * calls for the same `ctx` and the same params (by value) merge into a
+ * single RPC call, while different contexts or different params never
+ * share a batch.
  *
  * See docs/design/protoc-gen-dataloader/design.md §4.3 for the full
  * contract this implements (key-matching, params normalization, error
@@ -130,29 +144,60 @@ export function createRpcLoader<
   Group extends boolean = false,
 >(
   config: CreateRpcLoaderConfig<S, K, E, Req, Res, Group>,
-): Group extends true
-  ? GroupRpcLoaderAccessor<K, E, Req>
-  : RpcLoaderAccessor<K, E, Req> {
-  // ctx -> paramsKey -> DataLoader. Two-level so concurrent load() calls for
-  // the same ctx + params merge into one batch, while a different ctx or
-  // different params never share a batch (design.md §4.3-1).
-  const loadersByCtx = new WeakMap<
+): (
+  ctx: ProtoGraphqlConnectContext,
+) => RpcLoader<
+  K,
+  Group extends true ? E[] : E | null,
+  [params?: MessageInitShape<GenMessage<Req>>]
+> {
+  // ctx -> RpcLoader wrapper. One wrapper per ctx (memoized), so repeated
+  // accessor calls are cheap and `loader()` instances stay stable across
+  // calls with the same params (design.md §4.3-1).
+  const wrappersByCtx = new WeakMap<
     object,
-    Map<string, DataLoader<RpcLoaderKey, unknown>>
+    RpcLoader<RpcLoaderKey, unknown, [params?: Record<string, unknown>]>
   >();
 
-  const accessor = (
+  const accessor = (ctx: ProtoGraphqlConnectContext) => {
+    let wrapper = wrappersByCtx.get(ctx);
+    if (!wrapper) {
+      wrapper = createWrapper(config, ctx);
+      wrappersByCtx.set(ctx, wrapper);
+    }
+    return wrapper;
+  };
+
+  // The accessor's real shape is determined by the caller-visible return
+  // type above; this cast is the one place that collapses the internal,
+  // type-erased wrapper shape back to that public type.
+  return accessor as (
     ctx: ProtoGraphqlConnectContext,
-    params?: Record<string, unknown>,
-  ) => {
+  ) => RpcLoader<
+    K,
+    Group extends true ? E[] : E | null,
+    [params?: MessageInitShape<GenMessage<Req>>]
+  >;
+}
+
+// `any` generics here are safe: this internal helper is only ever called
+// with a config that was already checked against the public generics at
+// createRpcLoader's call site.
+function createWrapper(
+  config: CreateRpcLoaderConfig<any, any, any, any, any, boolean>,
+  ctx: ProtoGraphqlConnectContext,
+): RpcLoader<RpcLoaderKey, unknown, [params?: Record<string, unknown>]> {
+  // paramsKey -> DataLoader, scoped to this ctx (design.md §4.3-1). Created
+  // lazily: the DataLoader for a given params value only comes into being
+  // the first time `load`/`loadMany`/`loader` sees that params value.
+  const loadersByParamsKey = new Map<
+    string,
+    DataLoader<RpcLoaderKey, unknown>
+  >();
+
+  const resolveLoader = (params?: Record<string, unknown>) => {
     const effectiveParams = params ?? {};
     const paramsKey = computeParamsKey(config.requestSchema, effectiveParams);
-
-    let loadersByParamsKey = loadersByCtx.get(ctx);
-    if (!loadersByParamsKey) {
-      loadersByParamsKey = new Map();
-      loadersByCtx.set(ctx, loadersByParamsKey);
-    }
 
     let loader = loadersByParamsKey.get(paramsKey);
     if (!loader) {
@@ -167,12 +212,11 @@ export function createRpcLoader<
     return loader;
   };
 
-  // The accessor's real shape is determined by the caller-visible
-  // conditional return type above; this cast is the one place that
-  // collapses it back to a concrete type for the implementation body.
-  return accessor as Group extends true
-    ? GroupRpcLoaderAccessor<K, E, Req>
-    : RpcLoaderAccessor<K, E, Req>;
+  return {
+    load: (key, params) => resolveLoader(params).load(key),
+    loadMany: (keys, params) => resolveLoader(params).loadMany(keys),
+    loader: (params) => resolveLoader(params),
+  };
 }
 
 // `any` generics here are safe: this internal helper is only ever called

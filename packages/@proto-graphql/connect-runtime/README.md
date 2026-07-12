@@ -37,7 +37,7 @@ const res = await client.getUser({ id: "1" });
 
 ## `createRpcLoader`
 
-Builds a per-context, per-params-memoized [DataLoader](https://github.com/graphql/dataloader) accessor for a batch RPC. This is the primitive `protoc-gen-dataloader` generates calls to — see that package's [Generated Code Reference](https://js.proto-graphql.dev/protoc-gen-dataloader/generated-code-reference) for the full generated shape, and its [Getting Started](https://js.proto-graphql.dev/protoc-gen-dataloader/getting-started) guide for an end-to-end walkthrough. Hand-writing a `createRpcLoader` config directly is also supported for RPCs outside of codegen:
+Builds a per-context-memoized `RpcLoader` accessor for a batch RPC: `(ctx) => RpcLoader`, where the `RpcLoader` wrapper resolves (creating on first sight) a per-params [DataLoader](https://github.com/graphql/dataloader) for `.load()`/`.loadMany()`/`.loader()`. This is the primitive `protoc-gen-dataloader` generates calls to — see that package's [Generated Code Reference](https://js.proto-graphql.dev/protoc-gen-dataloader/generated-code-reference) for the full generated shape, and its [Getting Started](https://js.proto-graphql.dev/protoc-gen-dataloader/getting-started) guide for an end-to-end walkthrough. Hand-writing a `createRpcLoader` config directly is also supported for RPCs outside of codegen:
 
 ```typescript
 import { createRpcLoader } from "@proto-graphql/connect-runtime";
@@ -55,13 +55,17 @@ export const batchGetUsersLoader = createRpcLoader({
 });
 
 const user = await batchGetUsersLoader(ctx).load("user-1"); // User | null
+// non-key request fields (if any) are passed at load/loadMany time, not accessor time:
+// await batchGetUsersLoader(ctx).load("user-1", { view: "FULL" });
 ```
 
 Behavior in brief (see the JSDoc on `createRpcLoader` for the full contract):
 
-- Concurrent `.load()` calls for the same `ctx` (and the same `params`, by content) merge into a single RPC call.
+- `accessor(ctx)` is memoized per `ctx`, returning the same `RpcLoader` wrapper on every call.
+- Concurrent `.load()`/`.loadMany()` calls for the same `ctx` (and the same params, by content) merge into a single RPC call.
 - A missing key resolves to `null` (or `[]` when `group: true`); an RPC error rejects every key in that batch.
 - `maxBatchSize` caps how many keys go into one RPC call; DataLoader splits the rest into further calls automatically.
+- `.loader(...)` is an escape hatch to the raw per-params `DataLoader`, for `.prime()` / `.clear()` / `.clearAll()`.
 
 ## Author
 

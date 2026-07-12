@@ -3,7 +3,6 @@ export type { ProtoGraphqlConnectContext } from "./context.js";
 export {
   type CreateRpcLoaderConfig,
   createRpcLoader,
-  type GroupRpcLoaderAccessor,
-  type RpcLoaderAccessor,
+  type RpcLoader,
   type RpcLoaderKey,
 } from "./rpcLoader.js";

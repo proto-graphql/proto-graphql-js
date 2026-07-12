@@ -53,6 +53,42 @@ const batchGetPostsLoader = createRpcLoader({
   extractKey: (post: PostResponse) => post.id,
 });
 
+// NOTE: CreatePostRequestSchema/PostResponseSchema are reused purely as a
+// vehicle for a `body: string` / `id: bigint` params field — createRpcLoader
+// only ever uses `requestSchema` to compute the params cache key, so it does
+// not need to match the request `call` actually sends over the wire. Module
+// scope (not just the "params handling" describe below) so the "accessor"
+// describe block can also build a params-carrying wrapper.
+function createStringParamsLoader() {
+  return createRpcLoader({
+    service: PostsService,
+    method: "batchGetPosts",
+    requestSchema: CreatePostRequestSchema,
+    call: (client, keys, _params, opts) =>
+      client.batchGetPosts(
+        create(BatchGetPostsRequestSchema, { id: [...keys] }),
+        opts,
+      ),
+    extractEntities: (res) => res.posts,
+    extractKey: (post: PostResponse) => post.id,
+  });
+}
+
+function createBigintParamsLoader() {
+  return createRpcLoader({
+    service: PostsService,
+    method: "batchGetPosts",
+    requestSchema: PostResponseSchema,
+    call: (client, keys, _params, opts) =>
+      client.batchGetPosts(
+        create(BatchGetPostsRequestSchema, { id: [...keys] }),
+        opts,
+      ),
+    extractEntities: (res) => res.posts,
+    extractKey: (post: PostResponse) => post.id,
+  });
+}
+
 describe("createRpcLoader (entity mode)", () => {
   test("matches entities back to keys regardless of response order", async () => {
     const { ctx } = createFakePostsService((req) => ({
@@ -256,51 +292,61 @@ describe("createRpcLoader (group mode)", () => {
   });
 });
 
-describe("createRpcLoader params handling", () => {
-  // NOTE: CreatePostRequestSchema/PostResponseSchema are reused purely as a
-  // vehicle for a `body: string` / `id: bigint` params field — createRpcLoader
-  // only ever uses `requestSchema` to compute the params cache key, so it
-  // does not need to match the request `call` actually sends over the wire.
-  function createStringParamsLoader() {
-    return createRpcLoader({
-      service: PostsService,
-      method: "batchGetPosts",
-      requestSchema: CreatePostRequestSchema,
-      call: (client, keys, _params, opts) =>
-        client.batchGetPosts(
-          create(BatchGetPostsRequestSchema, { id: [...keys] }),
-          opts,
-        ),
-      extractEntities: (res) => res.posts,
-      extractKey: (post: PostResponse) => post.id,
-    });
-  }
+describe("createRpcLoader accessor (ctx -> RpcLoader wrapper)", () => {
+  test("memoizes the wrapper per ctx: repeated accessor calls return the same instance", async () => {
+    const { ctx } = createFakePostsService((req) => ({
+      posts: req.id.map((id) => ({ id, body: `post-${id}` })),
+    }));
 
-  function createBigintParamsLoader() {
-    return createRpcLoader({
-      service: PostsService,
-      method: "batchGetPosts",
-      requestSchema: PostResponseSchema,
-      call: (client, keys, _params, opts) =>
-        client.batchGetPosts(
-          create(BatchGetPostsRequestSchema, { id: [...keys] }),
-          opts,
-        ),
-      extractEntities: (res) => res.posts,
-      extractKey: (post: PostResponse) => post.id,
-    });
-  }
+    expect(batchGetPostsLoader(ctx)).toBe(batchGetPostsLoader(ctx));
+  });
 
-  test("undefined params and {} share the same batch", async () => {
+  test("loader() resolves the same DataLoader instance load() uses, so prime() pre-fills what load() sees", async () => {
     const { ctx, calls } = createFakePostsService((req) => ({
       posts: req.id.map((id) => ({ id, body: `post-${id}` })),
     }));
-    const loader = createStringParamsLoader();
+    const wrapper = batchGetPostsLoader(ctx);
+
+    wrapper
+      .loader()
+      .prime(1n, create(PostResponseSchema, { id: 1n, body: "primed" }));
+    const post = await wrapper.load(1n);
+
+    expect(post?.body).toBe("primed");
+    expect(calls.length).toBe(0);
+  });
+
+  test("loader(params) resolves the same DataLoader instance load(key, params) uses, keyed by that params value", async () => {
+    const { ctx, calls } = createFakePostsService((req) => ({
+      posts: req.id.map((id) => ({ id, body: `post-${id}` })),
+    }));
+    const wrapper = createStringParamsLoader()(ctx);
+
+    wrapper
+      .loader({ body: "shared" })
+      .prime(1n, create(PostResponseSchema, { id: 1n, body: "primed" }));
+    const primed = await wrapper.load(1n, { body: "shared" });
+    // A different params value is a different DataLoader (design.md §4.3-1)
+    // — prime() above must not leak into it.
+    const notPrimed = await wrapper.load(2n, { body: "other" });
+
+    expect(primed?.body).toBe("primed");
+    expect(notPrimed?.body).toBe("post-2");
+    expect(calls.length).toBe(1);
+  });
+});
+
+describe("createRpcLoader params handling", () => {
+  test("omitted params, {}, and undefined all share the same batch", async () => {
+    const { ctx, calls } = createFakePostsService((req) => ({
+      posts: req.id.map((id) => ({ id, body: `post-${id}` })),
+    }));
+    const wrapper = createStringParamsLoader()(ctx);
 
     await Promise.all([
-      loader(ctx).load(1n),
-      loader(ctx, {}).load(2n),
-      loader(ctx, undefined).load(3n),
+      wrapper.load(1n),
+      wrapper.load(2n, {}),
+      wrapper.load(3n, undefined),
     ]);
 
     expect(calls.length).toBe(1);
@@ -310,25 +356,25 @@ describe("createRpcLoader params handling", () => {
     const { ctx, calls } = createFakePostsService((req) => ({
       posts: req.id.map((id) => ({ id, body: `post-${id}` })),
     }));
-    const loader = createStringParamsLoader();
+    const wrapper = createStringParamsLoader()(ctx);
 
     await Promise.all([
-      loader(ctx, { body: "shared" }).load(1n),
-      loader(ctx, { body: "shared" }).load(2n),
+      wrapper.load(1n, { body: "shared" }),
+      wrapper.load(2n, { body: "shared" }),
     ]);
 
     expect(calls.length).toBe(1);
   });
 
-  test("different params split into separate batches", async () => {
+  test("load(k1, paramsA) and load(k2, paramsB) in the same tick split into separate batches", async () => {
     const { ctx, calls } = createFakePostsService((req) => ({
       posts: req.id.map((id) => ({ id, body: `post-${id}` })),
     }));
-    const loader = createStringParamsLoader();
+    const wrapper = createStringParamsLoader()(ctx);
 
     await Promise.all([
-      loader(ctx, { body: "a" }).load(1n),
-      loader(ctx, { body: "b" }).load(2n),
+      wrapper.load(1n, { body: "a" }),
+      wrapper.load(2n, { body: "b" }),
     ]);
 
     expect(calls.length).toBe(2);
@@ -338,11 +384,11 @@ describe("createRpcLoader params handling", () => {
     const { ctx, calls } = createFakePostsService((req) => ({
       posts: req.id.map((id) => ({ id, body: `post-${id}` })),
     }));
-    const loader = createBigintParamsLoader();
+    const wrapper = createBigintParamsLoader()(ctx);
 
     await Promise.all([
-      loader(ctx, { id: 42n }).load(1n),
-      loader(ctx, { id: 42n }).load(2n),
+      wrapper.load(1n, { id: 42n }),
+      wrapper.load(2n, { id: 42n }),
     ]);
 
     expect(calls.length).toBe(1);
@@ -352,13 +398,31 @@ describe("createRpcLoader params handling", () => {
     const { ctx, calls } = createFakePostsService((req) => ({
       posts: req.id.map((id) => ({ id, body: `post-${id}` })),
     }));
-    const loader = createBigintParamsLoader();
+    const wrapper = createBigintParamsLoader()(ctx);
 
     await Promise.all([
-      loader(ctx, { id: 42n }).load(1n),
-      loader(ctx, { id: 43n }).load(2n),
+      wrapper.load(1n, { id: 42n }),
+      wrapper.load(2n, { id: 43n }),
     ]);
 
     expect(calls.length).toBe(2);
+  });
+
+  test("required-vs-optional params is a type-level distinction only: createRpcLoader never enforces it at runtime", async () => {
+    const { ctx, calls } = createFakePostsService((req) => ({
+      posts: req.id.map((id) => ({ id, body: `post-${id}` })),
+    }));
+    // CreatePostRequestSchema has a `body` field that generated code could
+    // mark "required" (design.md §3 V9) and reflect in the exported const's
+    // annotation, but createRpcLoader's own `RpcLoader` always types params
+    // as optional (`PArgs` is `[params?: ...]`) — omitting it here never
+    // throws, proving the requiredness is enforced by the generated
+    // annotation (checked by the golden typecheck), not by this runtime.
+    const wrapper = createStringParamsLoader()(ctx);
+
+    const post = await wrapper.load(1n);
+
+    expect(post?.id).toBe(1n);
+    expect(calls.length).toBe(1);
   });
 });
