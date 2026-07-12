@@ -5,14 +5,10 @@ package testapis.dataloader.entity;
 import "graphql/schema.proto";
 
 message User {
-  option (graphql.object_type).federation = { key: ["id"] };
-
   string id = 1 [(graphql.field).id = true];
   string name = 2;
 }
 
-// No federation `@key`, so `BatchGetOrders` below must set `entity_key`
-// explicitly (V5 has nothing to fall back to).
 message Order {
   int64 id = 1;
   string product_name = 2;
@@ -48,24 +44,23 @@ message BatchGetOrdersResponse {
 
 service UserService {
   // Full inference: key_field=ids (only repeated field), entity_field=users
-  // (only repeated message field), entity_key falls back to User's
-  // single-field federation `@key` ("id").
+  // (only repeated message field). entity_key is explicit ("id"): the
+  // `@key` fallback isn't available yet (it lands with federation support).
   rpc BatchGetUsers(BatchGetUsersRequest) returns (BatchGetUsersResponse) {
-    option (graphql.rpc).batch = {};
+    option (graphql.rpc).batch = { entity_key: "id" };
   }
 
   // Same inference as BatchGetUsers, plus an optional non-key param.
   rpc BatchGetUsersWithLocale(BatchGetUsersWithLocaleRequest) returns (BatchGetUsersResponse) {
-    option (graphql.rpc).batch = {};
+    option (graphql.rpc).batch = { entity_key: "id" };
   }
 
   // Same inference as BatchGetUsers, plus a required non-key param.
   rpc BatchGetUsersInTenant(BatchGetUsersInTenantRequest) returns (BatchGetUsersResponse) {
-    option (graphql.rpc).batch = {};
+    option (graphql.rpc).batch = { entity_key: "id" };
   }
 
-  // bigint keys (int64), explicit entity_key (Order has no federation @key),
-  // and max_batch_size chunking.
+  // bigint keys (int64) and max_batch_size chunking.
   rpc BatchGetOrders(BatchGetOrdersRequest) returns (BatchGetOrdersResponse) {
     option (graphql.rpc).batch = { entity_key: "id", max_batch_size: 2 };
   }
