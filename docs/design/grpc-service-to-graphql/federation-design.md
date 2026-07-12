@@ -94,8 +94,8 @@ builder.objectField(User$Ref, "reviews", (t) =>
 
 | 条件 | 生成される resolver |
 |---|---|
-| 同一 RPC に `batch { group: true }` あり | group loader 経由(`DataLoader<K, V[]>`)。N+1 なし |
-| 同一 RPC に `batch {}`(entity モード)あり | entity loader 経由(`DataLoader<K, V \| null>`) |
+| 同一 RPC に `batch { group: true }` あり | group loader 経由(`RpcLoader<K, V[]>`)。N+1 なし |
+| 同一 RPC に `batch {}`(entity モード)あり | entity loader 経由(`RpcLoader<K, V \| null>`) |
 | `batch` なし | per-parent の直接 RPC 呼び出し(`getClient` + `callRpc`)。並列実行されるが N+1(docs で明記し、group loader を推奨) |
 
 - `keys` mapping(`parent_field` → `request_field`)により、parent のフィールド値を request に詰める。batch あり時は loader のキーに渡す(単一 mapping のみ。複数はエラー = 複合キー扱い)

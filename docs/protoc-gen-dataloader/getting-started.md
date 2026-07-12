@@ -153,7 +153,7 @@ Concurrent `.load()` calls against the same `ctx` within a tick merge into a sin
 
 ## Loader Params
 
-If the RPC's request has fields besides the key list, the loader accessor takes a second `params` argument. Whether `params` is optional or required mirrors the field's presence in the request (see [Generated Code Reference](./generated-code-reference.md#params-variants)):
+If the RPC's request has fields besides the key list, `load`/`loadMany`/`loader` take the params as a trailing argument — **not** the accessor itself, which always takes just `ctx`. Whether params is optional or required mirrors the field's presence in the request (see [Generated Code Reference](./generated-code-reference.md#params-variants)):
 
 ```protobuf
 message BatchGetUsersWithLocaleRequest {
@@ -167,10 +167,10 @@ message BatchGetUsersWithLocaleRequest {
 await batchGetUsersWithLocaleLoader(ctx).load("user-1");
 
 // a distinct params value (by content) starts a separate batch
-await batchGetUsersWithLocaleLoader(ctx, { locale: "ja" }).load("user-1");
+await batchGetUsersWithLocaleLoader(ctx).load("user-1", { locale: "ja" });
 ```
 
-Calling the same loader with varying params effectively splits it into one batch per distinct params value — see [Generated Code Reference](./generated-code-reference.md) for the full semantics.
+Calling the same loader with varying params effectively splits it into one batch per distinct params value — see [Generated Code Reference](./generated-code-reference.md) for the full semantics. `batchGetUsersWithLocaleLoader(ctx)` itself is cheap to call repeatedly (it's memoized per `ctx`), so there's no need to hold onto the returned wrapper — though doing so is fine too.
 
 ## Next Steps
 

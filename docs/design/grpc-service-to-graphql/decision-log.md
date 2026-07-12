@@ -294,6 +294,21 @@ design.md §7 および protoc-gen-dataloader/design.md の残項目を参照。
   - **`GraphqlFederationOptions` が upstream に存在しないため、batch の entity_key `@key` フォールバック(protoc-gen-dataloader design §3 V5)が実装できない**。entity_key は entity モード・group モードともに当面必須とし、フォールバックは federation 対応(Step 2)の PR で `GraphqlFederationOptions` と同時に追加する。federation-design.md の F4(entity_resolver ↔ batch の整合チェック)も同様に Step 2 まで休眠する
 - 反映先: [protoc-gen-dataloader/design.md](../protoc-gen-dataloader/design.md) §2/§3(V5)、[design.md](./design.md) §2、[federation-design.md](./federation-design.md) §1
 
+### Q30. loader パラメータの受け渡しタイミング(accessor time → load time、2026-07-13)
+
+- 背景: ユーザー要望により、Q28 で決めた「params を accessor の第 2 引数で渡す」設計を見直した。accessor time 方式は `batchGetUsersLoader(ctx, params)` のように呼び出す毎に新しい参照を作れてしまい、同一 ctx でも params の異なる呼び出しを取り違えやすい・呼び出し側が「1 回だけ ctx で解決してから複数キーを load する」自然なパターンと相性が悪い、という指摘があった
+- 選択肢:
+  - (a) 現状維持(accessor time: `(ctx, params?) => DataLoader`)
+  - (b) **wrapper オブジェクト化(採用)**: accessor は `(ctx) => RpcLoader` のみを返し、`RpcLoader.load(key, ...params)` / `loadMany(keys, ...params)` / `loader(...params)` で params を load time に渡す。wrapper 内部で ctx → paramsKey → DataLoader の二段キャッシュを維持
+  - (c) 複合キー単一 DataLoader 化: key と params をまとめた複合キー(`{ key, paramsKey }`)を 1 つの DataLoader に渡し、batch 関数側で paramsKey ごとにグルーピングして複数 RPC を発行する
+- **決定: (b) wrapper オブジェクト化**
+- (c) を却下した理由:
+  - **`maxBatchSize` の意味論が濁る**: `maxBatchSize` は「1 RPC あたりの最大キー数」のはずだが、複合キーを 1 つの DataLoader に通すと「1 バッチ(= 1 tick 分の複合キー集合)」と「1 RPC(= paramsKey でグルーピングした後の実際の呼び出し単位)」がずれる。`maxBatchSize` を複合キー単位で切ると同一 paramsKey 内の RPC 分割数が意図と食い違い、paramsKey 単位で切ろうとすると DataLoader 標準の `maxBatchSize` オプションでは表現できず自前のバッチ分割ロジックが要る
+  - **グループ単位のエラー伝搬が複雑になる**: DataLoader は「1 バッチ = 1 batch 関数呼び出し = 1 reject 単位」が前提。複合キー単一 DataLoader では 1 tick に複数 paramsKey が混在しうるため、batch 関数内で paramsKey ごとに RPC を分けて呼び、それぞれの成否を元の複合キー配列の対応する位置に再マッピングする必要がある。これは今 wrapper 側でやっている「paramsKey ごとに素の DataLoader を分ける」ことを batch 関数の中に押し込めるだけで、実装が複雑になる上に「RPC 呼び出しが 1 回」という Q12 のエラー変換ポリシー(呼び出し側が reject をそのまま扱える)の前提が崩れる
+  - (b) は Q28 の「paramsKey ごとに DataLoader を分ける」二段キャッシュ構造をそのまま保てるため、`maxBatchSize` は DataLoader 標準機能のまま・エラー伝搬も DataLoader 単位のままで済む
+- 副次効果: 生成ファイルの const アノテーションが `DataLoader<K, V>` から `RpcLoader<K, V, PArgs>` に変わったことで、**生成ファイルが `dataloader` パッケージの型を直接 import しなくなった**(実装フェーズで確定した設計修正の「`DataLoader` 型の import」を参照)。`RpcLoader.loader(...)` が `.prime()`/`.clear()` 用に生の `DataLoader` を返すが、その型は `@proto-graphql/connect-runtime` 経由でのみ参照される
+- 反映先: [protoc-gen-dataloader/design.md](../protoc-gen-dataloader/design.md) §1.1/§4.2/§4.3/§4.5、`@proto-graphql/connect-runtime` の `RpcLoader` 型・`createRpcLoader`、生成物の const アノテーション、golden テスト・実行テスト
+
 ## 7. 将来課題への申し送り(protoc-gen-gqlkit)
 
 本 PoC の知見を protoc-gen-gqlkit に還元する際、research.md §3 の gqlkit 精査結果が前提になる。特に:

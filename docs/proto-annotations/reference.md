@@ -249,7 +249,7 @@ service UserService {
 | `key_field` | `string` | Repeated key-list field on the request. Omit to auto-infer (only valid when the request has exactly one repeated field). |
 | `entity_field` | `string` | Repeated entity-list field on the response. Omit to auto-infer (only valid when the response has exactly one repeated *message* field). |
 | `entity_key` | `string` | Scalar field on the entity, used to match entities back to requested keys. Required in both entity and group mode (see below). |
-| `group` | `bool` | Generate a group loader (`DataLoader<K, Entity[]>`, one key → N entities) instead of an entity loader (`DataLoader<K, Entity \| null>`, one key → at most 1 entity). Default `false`. |
+| `group` | `bool` | Generate a group loader (`RpcLoader<K, Entity[]>`, one key → N entities) instead of an entity loader (`RpcLoader<K, Entity \| null>`, one key → at most 1 entity). Default `false`. |
 | `max_batch_size` | `uint32` | Maximum number of keys sent in a single RPC call (DataLoader's `maxBatchSize`). `0` (default) means unlimited. |
 
 **Inference rules**

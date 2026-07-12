@@ -70,7 +70,7 @@ message GraphqlRpcBatchOptions {
   string key_field = 1;      // request 中のキーリスト(唯一の repeated なら省略可)
   string entity_field = 2;   // response 中の entity リスト(唯一の repeated message なら省略可)
   string entity_key = 3;     // entity 側のキーフィールド(省略時 @key にフォールバック。group 時は必須)
-  bool group = 4;            // 1 キー → N entities(DataLoader<K, V[]> を生成)
+  bool group = 4;            // 1 キー → N entities(RpcLoader<K, V[]> を生成)
   uint32 max_batch_size = 5; // 1 回の RPC に載せる最大キー数(0 = 無制限)
 }
 
@@ -204,7 +204,7 @@ interface ProtoGraphqlConnectContext {
 
 function getClient<S extends GenService>(ctx, service: S): Client<S>; // per-service memoize (WeakMap)
 function callRpc<T>(ctx, fn: (opts: CallOptions) => Promise<T>): Promise<T>; // callOptions 適用 + エラー変換
-function createRpcLoader(...): (ctx) => DataLoader<K, V | null>;      // protoc-gen-dataloader 用
+function createRpcLoader(...): (ctx) => RpcLoader<K, V | null>;       // protoc-gen-dataloader 用。params は load 呼び出し時に渡す(Q30)
 ```
 
 - context 型が規約を満たさない場合、生成コードが型エラーになる(コンパイル時検出)
@@ -282,7 +282,7 @@ service ReviewService {
 ```
 
 - スタブは Pothos の `externalRef` として生成(キーフィールドは `@external`)
-- **extend 対象がローカル message の場合も同一機構**で、既存 `objectRef` へのフィールド追加として生成する(自 subgraph 内リレーション: `User.posts` 等)。バッチングが必要な場合は同じ RPC に `batch { group: true }` を宣言し、group loader(`DataLoader<K, V[]>`)経由で解決する。batch 宣言がなければ per-parent の並列呼び出しにフォールバック
+- **extend 対象がローカル message の場合も同一機構**で、既存 `objectRef` へのフィールド追加として生成する(自 subgraph 内リレーション: `User.posts` 等)。バッチングが必要な場合は同じ RPC に `batch { group: true }` を宣言し、group loader(`RpcLoader<K, V[]>`)経由で解決する。batch 宣言がなければ per-parent の並列呼び出しにフォールバック
 - キーの型が proto の型システムで表現されるため、型不一致は codegen 時に検証可能
 
 ### 4.3 builder / server 組み立て(ユーザーコード)

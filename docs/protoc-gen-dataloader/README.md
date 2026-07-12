@@ -8,7 +8,7 @@ A protoc plugin that generates [DataLoader](https://github.com/graphql/dataloade
 
 For each `.proto` file that has at least one RPC annotated with `(graphql.rpc).batch`, the plugin generates a `.pb.dataloader.ts` file containing one loader accessor per annotated RPC.
 
-Generated code depends only on [Connect-ES](https://connectrpc.com/docs/web/getting-started), [protobuf-es](https://github.com/bufbuild/protobuf-es) v2, and [`dataloader`](https://github.com/graphql/dataloader) — **it has no dependency on GraphQL or Pothos**. Declaring `(graphql.rpc).batch` is independent of `(graphql.service)` / `(graphql.rpc)`'s other options: a loader is generated purely from the `batch` annotation, whether or not the RPC is ever exposed as a GraphQL field.
+Generated code depends only on [Connect-ES](https://connectrpc.com/docs/web/getting-started), [protobuf-es](https://github.com/bufbuild/protobuf-es) v2, and `@proto-graphql/connect-runtime` (which itself wraps [`dataloader`](https://github.com/graphql/dataloader)) — **it has no dependency on GraphQL or Pothos**. Declaring `(graphql.rpc).batch` is independent of `(graphql.service)` / `(graphql.rpc)`'s other options: a loader is generated purely from the `batch` annotation, whether or not the RPC is ever exposed as a GraphQL field.
 
 ```protobuf
 import "graphql/schema.proto";
@@ -25,7 +25,7 @@ service UserService {
 // user_service.pb.dataloader.ts
 export const batchGetUsersLoader: (
   ctx: ProtoGraphqlConnectContext,
-) => DataLoader<string, MessageShape<typeof UserSchema> | null> = createRpcLoader({ /* ... */ });
+) => RpcLoader<string, MessageShape<typeof UserSchema> | null> = createRpcLoader({ /* ... */ });
 
 // usage
 const user = await batchGetUsersLoader(ctx).load("user-1"); // User | null
@@ -37,8 +37,8 @@ See [Getting Started](./getting-started.md) for the full setup, and the [`(graph
 
 | Mode | Declaration | Generated type | Missing key resolves to | Typical use |
 |---|---|---|---|---|
-| **entity** | `batch: {}` | `DataLoader<K, Entity \| null>` | `null` | BatchGet RPC (1 key → at most 1 entity). Federation `resolveReference`. |
-| **group** | `batch: { group: true }` | `DataLoader<K, Entity[]>` | `[]` | 1 key → N entities (e.g. `userId` → `Review[]`). Relation / `extend` fields. |
+| **entity** | `batch: {}` | `RpcLoader<K, Entity \| null>` | `null` | BatchGet RPC (1 key → at most 1 entity). Federation `resolveReference`. |
+| **group** | `batch: { group: true }` | `RpcLoader<K, Entity[]>` | `[]` | 1 key → N entities (e.g. `userId` → `Review[]`). Relation / `extend` fields. |
 
 ## Use Cases
 
