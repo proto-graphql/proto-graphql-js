@@ -69,8 +69,6 @@ package example;
 import "graphql/schema.proto";
 
 message User {
-  option (graphql.object_type).federation = { key: ["id"] };
-
   string id = 1;
   string name = 2;
 }
@@ -84,11 +82,12 @@ message BatchGetUsersResponse {
 }
 
 service UserService {
-  // key_field ("ids"), entity_field ("users"), and entity_key (User's
-  // federation `@key`, "id") are all inferred here — no explicit fields
-  // needed. See the annotation reference for when inference fails.
+  // key_field ("ids") and entity_field ("users") are inferred here — no
+  // explicit fields needed for those. entity_key must be set explicitly for
+  // now (a `@key`-based fallback is planned once federation support lands
+  // upstream). See the annotation reference for when inference fails.
   rpc BatchGetUsers(BatchGetUsersRequest) returns (BatchGetUsersResponse) {
-    option (graphql.rpc).batch = {};
+    option (graphql.rpc).batch = { entity_key: "id" };
   }
 }
 ```

@@ -16,7 +16,7 @@ import "graphql/schema.proto";
 service UserService {
   // ids -> User (1:1)
   rpc BatchGetUsers(BatchGetUsersRequest) returns (BatchGetUsersResponse) {
-    option (graphql.rpc).batch = {};
+    option (graphql.rpc).batch = { entity_key: "id" };
   }
 }
 ```

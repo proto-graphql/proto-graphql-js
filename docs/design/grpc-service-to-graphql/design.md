@@ -35,6 +35,8 @@
 
 proto-graphql 本家 `graphql/schema.proto` への追加。**experimental を明記**し、PoC 期間中の semantics 変更余地を宣言する。Go binding (`graphqlpb`) を同時再生成し、本リポジトリは submodule 更新 + `pnpm gen:extensions` で追従する。
 
+> **Landing 状況**: per-track landing 方針([decision-log Q29](./decision-log.md))により、upstream には現時点で `(graphql.rpc).batch`(`GraphqlRpcBatchOptions` と `GraphqlRpcOptions.batch = 5`、および `rpc = 2056` extension)のみが着地済み。以下のドラフトのうち `GraphqlRpcOptions` のフィールド番号 1-4(ignore/operation/name/expose_field)・10(federation)、`GraphqlObjectTypeOptions.federation`(field 5)、`GraphqlSchemaOptions` の 5-6(requests_as_inputs/responses_as_payloads)は**コンシューマ実装 PR が着地するまでフィールド番号を予約するのみ**で proto には未定義。`GraphqlServiceOptions` / `GraphqlOperation` / `GraphqlRpcFederationOptions` / `GraphqlExtendOptions` / `GraphqlKeyMapping` / `GraphqlFederationOptions` の各メッセージと `service = 2056` extension も同様に未着地(それぞれ Step 1 / Step 2 の PR で追加される)。
+
 ```proto
 // ============ Service / Method (Step 1) ============
 

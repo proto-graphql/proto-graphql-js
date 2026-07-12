@@ -224,28 +224,20 @@ enum Role {
 
 ## Service Options
 
-### (graphql.service)
-
-Options for GraphQL operation generation from a service's RPCs.
-
-> The `operation`/`name`/`expose_field`/`federation` fields on the sibling `(graphql.rpc)` option (and `(graphql.service)` itself beyond `ignore`) are reserved for upcoming service→GraphQL-operation support and have no consumer yet, so they are not documented here.
-
-| Option | Type | Description |
-|--------|------|-------------|
-| `ignore` | `bool` | Do not generate Query/Mutation fields for this service's RPCs |
+`(graphql.service)` (opt-in for service→GraphQL-operation generation, and the sibling `(graphql.rpc)` fields `operation`/`name`/`expose_field`/`federation`) is planned but **not yet part of the proto** — it lands together with service→GraphQL-operation support. `(graphql.rpc).batch`, documented below, does not require it: `batch` is the only field currently defined on `(graphql.rpc)`, and it takes effect on its own.
 
 ## RPC Options
 
 ### (graphql.rpc).batch
 
-> **EXPERIMENTAL.** Declares an RPC as a batch-loader generation target for [protoc-gen-dataloader](../protoc-gen-dataloader/README.md), independent of whether the RPC is exposed as a GraphQL operation — no `(graphql.service)`/`(graphql.rpc)` opt-in is required for `batch` to take effect.
+> **EXPERIMENTAL.** Declares an RPC as a batch-loader generation target for [protoc-gen-dataloader](../protoc-gen-dataloader/README.md), independent of whether the RPC is (or will later be) exposed as a GraphQL operation — `batch` takes effect with no other opt-in.
 
 ```protobuf
 import "graphql/schema.proto";
 
 service UserService {
   rpc BatchGetUsers(BatchGetUsersRequest) returns (BatchGetUsersResponse) {
-    option (graphql.rpc).batch = {};
+    option (graphql.rpc).batch = { entity_key: "id" };
   }
 }
 ```
@@ -256,7 +248,7 @@ service UserService {
 |--------|------|-------------|
 | `key_field` | `string` | Repeated key-list field on the request. Omit to auto-infer (only valid when the request has exactly one repeated field). |
 | `entity_field` | `string` | Repeated entity-list field on the response. Omit to auto-infer (only valid when the response has exactly one repeated *message* field). |
-| `entity_key` | `string` | Scalar field on the entity, used to match entities back to requested keys. Entity mode: omit to fall back to the entity's `(graphql.object_type).federation.key` (see below). Group mode: always required. |
+| `entity_key` | `string` | Scalar field on the entity, used to match entities back to requested keys. Required in both entity and group mode (see below). |
 | `group` | `bool` | Generate a group loader (`DataLoader<K, Entity[]>`, one key → N entities) instead of an entity loader (`DataLoader<K, Entity \| null>`, one key → at most 1 entity). Default `false`. |
 | `max_batch_size` | `uint32` | Maximum number of keys sent in a single RPC call (DataLoader's `maxBatchSize`). `0` (default) means unlimited. |
 
@@ -266,9 +258,8 @@ service UserService {
 - `key_field`, if omitted, is inferred as the request's only repeated field, which must be a repeated *scalar* field. Zero, or more than one, repeated field is an error (set `key_field` explicitly to disambiguate).
 - `entity_field`, if omitted, is inferred as the response's only repeated *message* field. Zero, or more than one, repeated message field is an error.
 - `entity_key` must be a scalar field on the entity message whose proto type maps to the same TypeScript key type as `key_field` does (see [Generated Code Reference](../protoc-gen-dataloader/generated-code-reference.md#key-type-mapping)).
-  - **Entity mode**, when omitted: falls back to `(graphql.object_type).federation.key` on the entity message, but only when the entity declares exactly one key set consisting of exactly one field. No `@key`, more than one key set, or a composite (multi-field) key set is a codegen error requiring an explicit `entity_key`.
-  - **Group mode**: `entity_key` is always required explicitly — the grouping key is conceptually the *parent's* key, not the entity's own `@key`, so there is nothing to fall back to.
-- Composite (multi-field) keys are not supported in this version, whether via an explicit `entity_key` or the `@key` fallback.
+  - **Entity mode and group mode both require `entity_key` explicitly, for now.** A planned fallback — inferring it from the entity's `(graphql.object_type).federation.key` in entity mode — lands once federation support is added upstream; group mode will keep requiring it explicitly either way, since the grouping key is conceptually the *parent's* key, not the entity's own `@key`.
+- Composite (multi-field) keys are not supported in this version.
 - Request fields other than `key_field` become loader parameters (see [Generated Code Reference](../protoc-gen-dataloader/generated-code-reference.md#params-variants)). A parameter is type-level required on the generated loader accessor whenever its field is required under the same rules as Input type generation (`isRequiredField`): proto3 implicit-presence scalar fields are required by default; adding `optional`, or setting `(graphql.field).input_nullability = NULLABLE`, makes a field non-required. Message/enum fields are non-required by default unless marked `// Required.` or `input_nullability = NON_NULL`.
 
 **Validation error behavior**

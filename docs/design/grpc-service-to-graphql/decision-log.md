@@ -279,6 +279,21 @@ design.md §7 および protoc-gen-dataloader/design.md の残項目を参照。
 - 実装タスクは「依頼票」形式(目的 / 前提 / 参照 / 成果物 / 受け入れ基準 / 実装ヒント / 推奨モデル)に分解し、opus または sonnet の subagent に依頼する
 - 詳細は [implementation-plan.md](./implementation-plan.md) と [protoc-gen-dataloader/implementation-plan.md](../protoc-gen-dataloader/implementation-plan.md)
 
+### Q29. proto オプションの per-track landing(2026-07-12)
+
+- 背景: `add-service-rpc-options` ブランチ(proto-graphql 本家 PR)は当初 service/operation/federation/batch の全 experimental オプションを一括追加していた。しかし本リポジトリ側でコンシューマ実装が存在するのは protoc-gen-dataloader が消費する `(graphql.rpc).batch` のみで、service→operation 変換(Step 1)・federation(Step 2)はまだ実装 PR が着地していない
+- 選択肢: (a) 全オプションを一括で upstream に着地させる / (b) **各トラックのコンシューマ実装 PR と同時に、そのトラックのオプションだけを着地させる per-track landing(推奨)**
+- **決定: (b) per-track landing**。upstream PR を `(graphql.rpc).batch`(`GraphqlRpcBatchOptions` + `GraphqlRpcOptions.batch = 5` + `rpc = 2056` extension)のみに絞り、service/operation/federation 関連のメッセージ・フィールドは対応する PR(Step 1 / Step 2)まで追加しない
+- 理由:
+  - **未消費・未確定形状のオプションを proto に着地させない**: service→operation・federation はまだ実装で仕様が固まっておらず、実装中に API shape が変わりうる。消費者のいない experimental option を先に確定させても、実装時の手戻りで結局 upstream を再改訂することになりやすく、無消費の期間だけ「触ってはいけない/意味のない」proto 表面が増える
+  - **proto への追加は後方互換であり、先送りは無料(free)**: 新しい message/field はいつでも追加でき、既存ユーザーへの影響もない。「今のうちに全部足しておく」ことに実利がなく、コンシューマと同時に着地させたほうが 1 PR あたりのレビュー単位も小さくなる
+  - トラック間の依存を proto レベルで作らない(dataloader トラックの upstream PR が、federation トラックの設計未確定を理由にブロックされずに済む)
+- 帰結:
+  - `GraphqlRpcOptions` は `batch` フィールド(5)のみを持つ。1-4(ignore/operation/name/expose_field)・10(federation)はコンシューマ実装 PR で埋める前提の**慣行上の予約**であり、proto の `reserved` キーワードでは予約していない
+  - `GraphqlObjectTypeOptions.federation`(field 5)、`GraphqlSchemaOptions` の 5-6(requests_as_inputs/responses_as_payloads)も同様に未定義
+  - **`GraphqlFederationOptions` が upstream に存在しないため、batch の entity_key `@key` フォールバック(protoc-gen-dataloader design §3 V5)が実装できない**。entity_key は entity モード・group モードともに当面必須とし、フォールバックは federation 対応(Step 2)の PR で `GraphqlFederationOptions` と同時に追加する。federation-design.md の F4(entity_resolver ↔ batch の整合チェック)も同様に Step 2 まで休眠する
+- 反映先: [protoc-gen-dataloader/design.md](../protoc-gen-dataloader/design.md) §2/§3(V5)、[design.md](./design.md) §2、[federation-design.md](./federation-design.md) §1
+
 ## 7. 将来課題への申し送り(protoc-gen-gqlkit)
 
 本 PoC の知見を protoc-gen-gqlkit に還元する際、research.md §3 の gqlkit 精査結果が前提になる。特に:

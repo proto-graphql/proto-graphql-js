@@ -41,17 +41,17 @@ Entity/request/response types are referenced through protobuf-es v2's `MessageSh
 
 ## Entity Mode
 
-Declared with `batch: {}`. From the source proto:
+Declared with `batch` and no `group: true`. From the source proto:
 
 ```protobuf
 service UserService {
   rpc BatchGetUsers(BatchGetUsersRequest) returns (BatchGetUsersResponse) {
-    option (graphql.rpc).batch = {};
+    option (graphql.rpc).batch = { entity_key: "id" };
   }
 }
 ```
 
-`key_field` (`ids`), `entity_field` (`users`), and `entity_key` (User's single-field federation `@key`, `id`) are all inferred. Generated code:
+`key_field` (`ids`) and `entity_field` (`users`) are inferred. `entity_key` must be explicit for now — inferring it from the entity's federation `@key` is a fallback planned once federation support lands upstream (see [`(graphql.rpc).batch` annotation reference](../proto-annotations/reference.md)). Generated code:
 
 ```typescript
 export const batchGetUsersLoader: (
@@ -75,7 +75,7 @@ A missing key resolves to `null`: `await batchGetUsersLoader(ctx).load("unknown-
 
 ### bigint Keys and max_batch_size
 
-`Order` has no federation `@key`, so `entity_key` must be explicit. `max_batch_size` caps how many keys go into one RPC call — DataLoader splits a larger request into multiple calls automatically:
+`max_batch_size` caps how many keys go into one RPC call — DataLoader splits a larger request into multiple calls automatically:
 
 ```protobuf
 rpc BatchGetOrders(BatchGetOrdersRequest) returns (BatchGetOrdersResponse) {

@@ -3,6 +3,7 @@
 > 関連: [design.md](./design.md)(全体設計)/ [implementation-plan.md](./implementation-plan.md) / [protoc-gen-dataloader](../protoc-gen-dataloader/design.md)
 
 - Status: 詳細設計済み(2026-07-11)。Pothos plugin-federation 4.4.x の API をソースレベルで裏取り済み(§8 に検証済み事実)
+- **proto オプションは未 upstream**: `GraphqlFederationOptions` / `GraphqlRpcFederationOptions` / `GraphqlExtendOptions` / `GraphqlKeyMapping` などの federation 関連 proto オプションは per-track landing 方針によりまだ proto-graphql 本家に無く([decision-log Q29](../grpc-service-to-graphql/decision-log.md))、本 Step 2 の PR で追加する。それまで protoc-gen-dataloader 側の `@key` フォールバック(V5)と F4 の整合チェックは休眠している
 
 ## 1. スコープ
 

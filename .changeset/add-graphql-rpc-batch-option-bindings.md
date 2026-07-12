@@ -2,6 +2,6 @@
 "@proto-graphql/codegen-core": minor
 ---
 
-feat: add experimental `(graphql.service)`/`(graphql.rpc)` option bindings and a `BatchSpec` resolver
+feat: add experimental `(graphql.rpc).batch` option binding and a `BatchSpec` resolver
 
-Adds `getServiceOptions`/`getRpcOptions` getters for the new (experimental) `(graphql.service)` and `(graphql.rpc)` proto options, and `resolveBatchSpec`, which validates a `(graphql.rpc).batch` declaration (key/entity field inference, entity-key resolution including its federation `@key` fallback, and key type mapping) and produces the `BatchSpec` that `protoc-gen-dataloader` generates loaders from. Not yet consumed by protoc-gen-pothos.
+Adds `getRpcOptions`, a getter for the new (experimental) `(graphql.rpc)` proto option, and `resolveBatchSpec`, which validates a `(graphql.rpc).batch` declaration (key/entity field inference, entity-key resolution, and key type mapping) and produces the `BatchSpec` that `protoc-gen-dataloader` generates loaders from. `entity_key` is required in both entity and group mode for now; a fallback to the entity's federation `@key` is planned once federation support lands. Not yet consumed by protoc-gen-pothos.
