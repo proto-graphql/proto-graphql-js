@@ -33,6 +33,7 @@
   },
   "files": [
     "bin/",
+    "docs/",
     "src/",
     "dist/",
     "!src/**/*.test.ts",
@@ -59,8 +60,8 @@
     "@vitest/coverage-v8": "^4.0.0"
   },
   "scripts": {
-    "build": "tsup",
-    "clean": "rm -rf dist",
+    "build": "tsup && cp -r ../../docs/protoc-gen-dataloader docs",
+    "clean": "rm -rf dist docs",
     "test": "vitest run --passWithNoTests",
     "test:coverage": "vitest run --coverage"
   }
