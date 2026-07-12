@@ -2,7 +2,10 @@
 // @generated from file testapis/dataloader/group/group.proto (package testapis.dataloader.group, syntax proto3)
 /* eslint-disable */
 
-import type { ProtoGraphqlConnectContext } from "@proto-graphql/connect-runtime";
+import type {
+  ProtoGraphqlConnectContext,
+  RpcLoader,
+} from "@proto-graphql/connect-runtime";
 import { createRpcLoader } from "@proto-graphql/connect-runtime";
 import type { MessageShape } from "@bufbuild/protobuf";
 import { create } from "@bufbuild/protobuf";
@@ -12,11 +15,9 @@ import {
   ReviewService,
 } from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/dataloader/group/group_pb";
 
-import type DataLoader from "dataloader";
-
 export const batchListReviewsByUsersLoader: (
   ctx: ProtoGraphqlConnectContext,
-) => DataLoader<string, MessageShape<typeof ReviewSchema>[]> = createRpcLoader({
+) => RpcLoader<string, MessageShape<typeof ReviewSchema>[]> = createRpcLoader({
   service: ReviewService,
   method: "batchListReviewsByUsers",
   requestSchema: BatchListReviewsByUsersRequestSchema,

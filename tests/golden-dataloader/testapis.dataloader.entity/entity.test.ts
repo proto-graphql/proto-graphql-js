@@ -230,16 +230,20 @@ describe("batchGetOrdersLoader (entity mode, bigint keys, max_batch_size: 2)", (
 });
 
 describe("batchGetUsersWithLocaleLoader (entity mode, optional params)", () => {
+  // Params move from accessor time to load time (design.md §4.5): the
+  // accessor is called once per ctx and returns a wrapper shared by every
+  // `.load()` call, which resolves its own per-params DataLoader lazily.
   test("same params (by value) share a batch even from different object instances", async () => {
     const { ctx, calls } = createFakeUserService({
       batchGetUsersWithLocale: (req) => ({
         users: req.ids.map((id) => ({ id, name: `user-${id}` })),
       }),
     });
+    const loader = batchGetUsersWithLocaleLoader(ctx);
 
     await Promise.all([
-      batchGetUsersWithLocaleLoader(ctx, { locale: "en" }).load("1"),
-      batchGetUsersWithLocaleLoader(ctx, { locale: "en" }).load("2"),
+      loader.load("1", { locale: "en" }),
+      loader.load("2", { locale: "en" }),
     ]);
 
     expect(calls.batchGetUsersWithLocale.length).toBe(1);
@@ -251,10 +255,11 @@ describe("batchGetUsersWithLocaleLoader (entity mode, optional params)", () => {
         users: req.ids.map((id) => ({ id, name: `user-${id}` })),
       }),
     });
+    const loader = batchGetUsersWithLocaleLoader(ctx);
 
     await Promise.all([
-      batchGetUsersWithLocaleLoader(ctx, { locale: "en" }).load("1"),
-      batchGetUsersWithLocaleLoader(ctx, { locale: "ja" }).load("2"),
+      loader.load("1", { locale: "en" }),
+      loader.load("2", { locale: "ja" }),
     ]);
 
     expect(calls.batchGetUsersWithLocale.length).toBe(2);
@@ -266,14 +271,32 @@ describe("batchGetUsersWithLocaleLoader (entity mode, optional params)", () => {
         users: req.ids.map((id) => ({ id, name: `user-${id}` })),
       }),
     });
+    const loader = batchGetUsersWithLocaleLoader(ctx);
 
     await Promise.all([
-      batchGetUsersWithLocaleLoader(ctx).load("1"),
-      batchGetUsersWithLocaleLoader(ctx, {}).load("2"),
-      batchGetUsersWithLocaleLoader(ctx, undefined).load("3"),
+      loader.load("1"),
+      loader.load("2", {}),
+      loader.load("3", undefined),
     ]);
 
     expect(calls.batchGetUsersWithLocale.length).toBe(1);
+  });
+
+  test("same wrapper: distinct params in one tick issue separate RPC calls, while a same-value fresh params object merges into an existing batch", async () => {
+    const { ctx, calls } = createFakeUserService({
+      batchGetUsersWithLocale: (req) => ({
+        users: req.ids.map((id) => ({ id, name: `user-${id}` })),
+      }),
+    });
+    const loader = batchGetUsersWithLocaleLoader(ctx);
+
+    await Promise.all([
+      loader.load("1", { locale: "en" }),
+      loader.load("2", { locale: "en" }), // same value, fresh object -> merges with "1"
+      loader.load("3", { locale: "ja" }), // distinct value -> separate batch
+    ]);
+
+    expect(calls.batchGetUsersWithLocale.length).toBe(2);
   });
 });
 
@@ -287,9 +310,9 @@ describe("batchGetUsersInTenantLoader (entity mode, required params)", () => {
       }),
     });
 
-    const user = await batchGetUsersInTenantLoader(ctx, {
+    const user = await batchGetUsersInTenantLoader(ctx).load("1", {
       tenantId: "acme",
-    }).load("1");
+    });
 
     expect(user?.id).toBe("1");
     expect(calls.batchGetUsersInTenant[0]?.tenantId).toBe("acme");

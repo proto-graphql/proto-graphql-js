@@ -347,9 +347,6 @@ importers:
       '@proto-graphql/tsconfig':
         specifier: workspace:*
         version: link:../../../devPackages/tsconfig
-      dataloader:
-        specifier: 'catalog:'
-        version: 2.2.3
 
   tests/golden-dataloader/testapis.dataloader.group:
     dependencies:
@@ -368,9 +365,6 @@ importers:
       '@proto-graphql/tsconfig':
         specifier: workspace:*
         version: link:../../../devPackages/tsconfig
-      dataloader:
-        specifier: 'catalog:'
-        version: 2.2.3
 
   tests/golden/protobuf-es-v1/testapis.basic.empty:
     dependencies:

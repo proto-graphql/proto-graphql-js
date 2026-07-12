@@ -7,8 +7,7 @@
     "@connectrpc/connect": "catalog:",
     "@proto-graphql/connect-runtime": "workspace:*",
     "@proto-graphql/e2e-testapis-protobuf-es-v2": "workspace:*",
-    "@proto-graphql/tsconfig": "workspace:*",
-    "dataloader": "catalog:"
+    "@proto-graphql/tsconfig": "workspace:*"
   },
   "scripts": {
     "test": "vitest run --passWithNoTests"

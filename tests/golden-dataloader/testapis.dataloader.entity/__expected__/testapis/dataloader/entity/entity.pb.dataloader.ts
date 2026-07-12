@@ -2,7 +2,10 @@
 // @generated from file testapis/dataloader/entity/entity.proto (package testapis.dataloader.entity, syntax proto3)
 /* eslint-disable */
 
-import type { ProtoGraphqlConnectContext } from "@proto-graphql/connect-runtime";
+import type {
+  ProtoGraphqlConnectContext,
+  RpcLoader,
+} from "@proto-graphql/connect-runtime";
 import { createRpcLoader } from "@proto-graphql/connect-runtime";
 import type { MessageInitShape, MessageShape } from "@bufbuild/protobuf";
 import { create } from "@bufbuild/protobuf";
@@ -16,11 +19,9 @@ import {
   UserService,
 } from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/dataloader/entity/entity_pb";
 
-import type DataLoader from "dataloader";
-
 export const batchGetUsersLoader: (
   ctx: ProtoGraphqlConnectContext,
-) => DataLoader<string, MessageShape<typeof UserSchema> | null> =
+) => RpcLoader<string, MessageShape<typeof UserSchema> | null> =
   createRpcLoader({
     service: UserService,
     method: "batchGetUsers",
@@ -40,23 +41,25 @@ export type BatchGetUsersWithLocaleLoaderParams = MessageInitShape<
 
 export const batchGetUsersWithLocaleLoader: (
   ctx: ProtoGraphqlConnectContext,
-  params?: BatchGetUsersWithLocaleLoaderParams,
-) => DataLoader<string, MessageShape<typeof UserSchema> | null> =
-  createRpcLoader({
-    service: UserService,
-    method: "batchGetUsersWithLocale",
-    requestSchema: BatchGetUsersWithLocaleRequestSchema,
-    call: (client, keys, params, opts) =>
-      client.batchGetUsersWithLocale(
-        create(BatchGetUsersWithLocaleRequestSchema, {
-          ...params,
-          ids: [...keys],
-        }),
-        opts,
-      ),
-    extractEntities: (res) => res.users,
-    extractKey: (user: MessageShape<typeof UserSchema>) => user.id,
-  });
+) => RpcLoader<
+  string,
+  MessageShape<typeof UserSchema> | null,
+  [params?: BatchGetUsersWithLocaleLoaderParams]
+> = createRpcLoader({
+  service: UserService,
+  method: "batchGetUsersWithLocale",
+  requestSchema: BatchGetUsersWithLocaleRequestSchema,
+  call: (client, keys, params, opts) =>
+    client.batchGetUsersWithLocale(
+      create(BatchGetUsersWithLocaleRequestSchema, {
+        ...params,
+        ids: [...keys],
+      }),
+      opts,
+    ),
+  extractEntities: (res) => res.users,
+  extractKey: (user: MessageShape<typeof UserSchema>) => user.id,
+});
 
 export type BatchGetUsersInTenantLoaderParams = MessageInitShape<
   typeof BatchGetUsersInTenantRequestSchema
@@ -64,27 +67,26 @@ export type BatchGetUsersInTenantLoaderParams = MessageInitShape<
 
 export const batchGetUsersInTenantLoader: (
   ctx: ProtoGraphqlConnectContext,
-  params: BatchGetUsersInTenantLoaderParams,
-) => DataLoader<string, MessageShape<typeof UserSchema> | null> =
-  createRpcLoader({
-    service: UserService,
-    method: "batchGetUsersInTenant",
-    requestSchema: BatchGetUsersInTenantRequestSchema,
-    call: (client, keys, params, opts) =>
-      client.batchGetUsersInTenant(
-        create(BatchGetUsersInTenantRequestSchema, {
-          ...params,
-          ids: [...keys],
-        }),
-        opts,
-      ),
-    extractEntities: (res) => res.users,
-    extractKey: (user: MessageShape<typeof UserSchema>) => user.id,
-  });
+) => RpcLoader<
+  string,
+  MessageShape<typeof UserSchema> | null,
+  [params: BatchGetUsersInTenantLoaderParams]
+> = createRpcLoader({
+  service: UserService,
+  method: "batchGetUsersInTenant",
+  requestSchema: BatchGetUsersInTenantRequestSchema,
+  call: (client, keys, params, opts) =>
+    client.batchGetUsersInTenant(
+      create(BatchGetUsersInTenantRequestSchema, { ...params, ids: [...keys] }),
+      opts,
+    ),
+  extractEntities: (res) => res.users,
+  extractKey: (user: MessageShape<typeof UserSchema>) => user.id,
+});
 
 export const batchGetOrdersLoader: (
   ctx: ProtoGraphqlConnectContext,
-) => DataLoader<bigint, MessageShape<typeof OrderSchema> | null> =
+) => RpcLoader<bigint, MessageShape<typeof OrderSchema> | null> =
   createRpcLoader({
     service: UserService,
     method: "batchGetOrders",
