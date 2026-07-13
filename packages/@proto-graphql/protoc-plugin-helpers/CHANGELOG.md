@@ -1,5 +1,18 @@
 # @proto-graphql/protoc-plugin-helpers
 
+## 0.6.0
+
+### Minor Changes
+
+- [#538](https://github.com/proto-graphql/proto-graphql-js/pull/538) [`5c20dd0`](https://github.com/proto-graphql/proto-graphql-js/commit/5c20dd089d263577901baeb61bf0567dde4c9408) Thanks [@izumin5210](https://github.com/izumin5210)! - feat: add `parseDataloaderOptions` for protoc-gen-dataloader's plugin parameters
+
+  Parses `import_prefix`, `filename_suffix`, `runtime_module`, `format`, and `emit_imported_files`, following the same `key=value` parsing conventions as `parsePothosOptions`.
+
+### Patch Changes
+
+- Updated dependencies [[`5c20dd0`](https://github.com/proto-graphql/proto-graphql-js/commit/5c20dd089d263577901baeb61bf0567dde4c9408)]:
+  - @proto-graphql/codegen-core@0.8.0
+
 ## 0.5.2
 
 ### Patch Changes

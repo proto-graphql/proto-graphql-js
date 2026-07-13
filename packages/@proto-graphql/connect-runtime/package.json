@@ -1,6 +1,6 @@
 {
   "name": "@proto-graphql/connect-runtime",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Connect RPC runtime helpers (context convention, client resolution, DataLoader batch loaders) shared by proto-graphql's code generators",
   "keywords": [
     "graphql",
