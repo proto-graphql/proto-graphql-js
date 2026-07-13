@@ -16,10 +16,13 @@ import { getObjectFieldType } from "./types.js";
 import {
   exceptRequestOrResponse,
   getRpcOptions,
+  getSchemaOptions,
   getServiceOptions,
   isIgnoredInputType,
   isIgnoredType,
   isInterface,
+  isRequestAsInputOnly,
+  isResponseAsPayloadOnly,
   isServiceOptedIn,
   isSquashedUnion,
 } from "./util.js";
@@ -165,6 +168,30 @@ export function collectOperationsFromFile(
   const warnings: string[] = [];
   const errors: string[] = [];
 
+  // Precedence warning (design.md §7, schema.proto doc comments): ignore_* wins
+  // silently at the type-collection layer (it has no warning channel), so this
+  // is the one place — a per-file collector that already reads the file's
+  // `GraphqlSchemaOptions` — that can surface it, once per file rather than
+  // once per matched message.
+  const schemaOpts = getSchemaOptions(file);
+  if (schemaOpts.ignoreRequests && schemaOpts.requestsAsInputs) {
+    warnings.push(
+      `${file.name}: (graphql.schema).ignore_requests and (graphql.schema).requests_as_inputs are both set. ignore_requests takes precedence — matching request messages are dropped entirely (no Input type generated) rather than renamed to *Input.`,
+    );
+  }
+  if (schemaOpts.ignoreResponses && schemaOpts.responsesAsPayloads) {
+    warnings.push(
+      `${file.name}: (graphql.schema).ignore_responses and (graphql.schema).responses_as_payloads are both set. ignore_responses takes precedence — matching response messages are dropped entirely (no Object type generated) rather than renamed to *Payload.`,
+    );
+  }
+
+  // `requests_as_inputs`/`responses_as_payloads` need `files` to resolve
+  // (the same matching rule `exceptRequestOrResponse` uses) — merge it into
+  // `options` once so every `InputObjectType`/`ObjectType` built below (and
+  // every type reached transitively through their fields) picks up the
+  // transform. Mirrors `collectTypesFromFile`'s merge in types.ts.
+  const opts: TypeOptions = { ...options, files };
+
   for (const service of file.services) {
     if (!isServiceOptedIn(service)) continue;
     if (getServiceOptions(service).ignore) continue;
@@ -191,7 +218,7 @@ export function collectOperationsFromFile(
         continue;
       }
 
-      const result = resolveOperation(method, rpcOpts, options, files);
+      const result = resolveOperation(method, rpcOpts, opts, files);
       if (!result.ok) {
         errors.push(...result.errors);
         continue;
@@ -383,17 +410,24 @@ function resolveReturn(
 }
 
 // Mirrors `buildInputObjectTypes`' filter: an Input type is generated unless
-// the message is ignored as an input, or filtered out by `ignore_requests`.
+// the message is ignored as an input, filtered out by `ignore_requests`, or
+// excluded by `responses_as_payloads` (a matched response generates only its
+// Object type).
 function isInputTypeGenerated(
   msg: DescMethod["input"],
   files: readonly DescFile[],
 ): boolean {
-  return !isIgnoredInputType(msg) && exceptRequestOrResponse(files)(msg);
+  return (
+    !isIgnoredInputType(msg) &&
+    exceptRequestOrResponse(files)(msg) &&
+    !isResponseAsPayloadOnly(msg, files)
+  );
 }
 
 // Mirrors `buildObjectTypes`' filter: an Object type is generated unless the
-// message is ignored, an interface, a squashed union, or filtered out by
-// `ignore_responses`.
+// message is ignored, an interface, a squashed union, filtered out by
+// `ignore_responses`, or excluded by `requests_as_inputs` (a matched request
+// generates only its Input type).
 function isObjectTypeGenerated(
   msg: DescMethod["output"],
   files: readonly DescFile[],
@@ -402,7 +436,8 @@ function isObjectTypeGenerated(
     !isIgnoredType(msg) &&
     !isInterface(msg) &&
     !isSquashedUnion(msg) &&
-    exceptRequestOrResponse(files)(msg)
+    exceptRequestOrResponse(files)(msg) &&
+    !isRequestAsInputOnly(msg, files)
   );
 }
 

@@ -17,7 +17,7 @@ export class InputObjectType extends TypeBase<DescMessage> {
    * @override
    */
   override get typeName(): string {
-    return `${gqlTypeName(this.proto)}Input`;
+    return `${gqlTypeName(this.proto, this.options.files)}Input`;
   }
 
   get fields(): InputObjectField<ScalarType | EnumType | InputObjectType>[] {
@@ -51,7 +51,7 @@ export class InputObjectType extends TypeBase<DescMessage> {
 
 class PartialInputObjectType extends InputObjectType {
   override get typeName(): string {
-    return `${gqlTypeName(this.proto)}PartialInput`;
+    return `${gqlTypeName(this.proto, this.options.files)}PartialInput`;
   }
 
   override get fields() {

@@ -1,7 +1,22 @@
-import { ScalarType } from "@bufbuild/protobuf";
+import { type DescFile, ScalarType } from "@bufbuild/protobuf";
 
 export interface TypeOptions {
   partialInputs: boolean;
+  /**
+   * All files in the run (e.g. `schema.allFiles`), needed to resolve the
+   * `requests_as_inputs` / `responses_as_payloads` suffix transform (a
+   * message is only transformed if it exact-matches some method's
+   * request/response name across the whole run — the same rule
+   * `exceptRequestOrResponse` uses).
+   *
+   * This is internal plumbing, not a user-facing setting: `collectTypesFromFile`
+   * and `collectOperationsFromFile` populate it themselves from their own
+   * `files` parameter. Left `undefined` (e.g. when a `TypeOptions` is built by
+   * hand for a single type, without going through either collector), the
+   * suffix transform simply never matches — every existing call site that
+   * doesn't know about this field keeps working unchanged.
+   */
+  files?: readonly DescFile[];
   /**
    * @defaultValue
    * * Protobuf's 64-bit integer types to `String`
