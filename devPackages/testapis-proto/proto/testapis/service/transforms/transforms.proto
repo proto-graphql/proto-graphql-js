@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package testapis.service.transforms;
+
+import "graphql/schema.proto";
+
+// `requests_as_inputs`/`responses_as_payloads` (design.md §2, §7): every
+// matched `XxxRequest`/`XxxResponse` message in this file is renamed to
+// `XxxInput`/`XxxPayload` and generates only the corresponding GraphQL type
+// (Input-only / Object-only), instead of the default Object+Input pair.
+option (graphql.schema) = {
+  requests_as_inputs: true
+  responses_as_payloads: true
+};
+
+service TaskService {
+  option (graphql.service) = {};
+
+  // Defaults to Mutation. Single `input` arg referencing `CreateTaskInput`
+  // (the transformed `CreateTaskRequest`); returns `CreateTaskPayload` (the
+  // transformed `CreateTaskResponse`).
+  rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse);
+
+  // Query: flattens `ListTasksRequest` into args; returns `ListTasksPayload`.
+  rpc ListTasks(ListTasksRequest) returns (ListTasksResponse) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+  }
+}
+
+message Task {
+  string id = 1 [(graphql.field).id = true];
+  string title = 2;
+}
+
+message CreateTaskRequest {
+  string title = 1;
+}
+
+message CreateTaskResponse {
+  Task task = 1;
+}
+
+message ListTasksRequest {
+  optional string filter = 1;
+}
+
+message ListTasksResponse {
+  repeated Task tasks = 1;
+}
