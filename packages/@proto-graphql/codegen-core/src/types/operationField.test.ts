@@ -681,6 +681,90 @@ describe("collectOperationsFromFile", () => {
       expect(result.errors[0]).toContain("GetUser");
     });
   });
+
+  describe("R5.1/R5.2: requests_as_inputs / responses_as_payloads", () => {
+    it("names the mutation's input type `<Base>Input` when requests_as_inputs is set", () => {
+      const op = only(
+        collect({
+          methods: [{ name: "CreateUser" }],
+          schemaOptions: { requestsAsInputs: true },
+        }),
+      );
+      if (op.args.kind !== "input") throw new Error("expected input args");
+      expect(op.args.type.typeName).toBe("CreateUserInput");
+    });
+
+    it("names the default return type `<Base>Payload` when responses_as_payloads is set", () => {
+      const op = only(
+        collect({
+          methods: [{ name: "GetUser" }],
+          schemaOptions: { responsesAsPayloads: true },
+        }),
+      );
+      if (op.returnType.kind !== "object") {
+        throw new Error("expected object return");
+      }
+      expect(op.returnType.type.typeName).toBe("GetUserPayload");
+    });
+
+    it("combines both options for the same RPC's input and return types", () => {
+      const op = only(
+        collect({
+          methods: [{ name: "CreateUser" }],
+          schemaOptions: { requestsAsInputs: true, responsesAsPayloads: true },
+        }),
+      );
+      if (op.args.kind !== "input") throw new Error("expected input args");
+      if (op.returnType.kind !== "object") {
+        throw new Error("expected object return");
+      }
+      expect(op.args.type.typeName).toBe("CreateUserInput");
+      expect(op.returnType.type.typeName).toBe("CreateUserPayload");
+    });
+
+    describe("ignore_* precedence", () => {
+      it("ignore_requests wins over requests_as_inputs (mutation errors) and warns once per file", () => {
+        const result = collect({
+          methods: [{ name: "CreateUser" }],
+          schemaOptions: { requestsAsInputs: true, ignoreRequests: true },
+        });
+        expect(result.operations).toEqual([]);
+        expect(result.errors).toHaveLength(1);
+        expect(result.errors[0]).toContain("Cannot generate a mutation");
+        expect(result.warnings).toHaveLength(1);
+        expect(result.warnings[0]).toContain("ignore_requests");
+        expect(result.warnings[0]).toContain("requests_as_inputs");
+      });
+
+      it("ignore_responses wins over responses_as_payloads (return type errors) and warns once per file", () => {
+        const result = collect({
+          methods: [{ name: "GetUser" }],
+          schemaOptions: { responsesAsPayloads: true, ignoreResponses: true },
+        });
+        expect(result.operations).toEqual([]);
+        expect(result.errors).toHaveLength(1);
+        expect(result.warnings).toHaveLength(1);
+        expect(result.warnings[0]).toContain("ignore_responses");
+        expect(result.warnings[0]).toContain("responses_as_payloads");
+      });
+
+      it("warns exactly once per file even across multiple opted-in methods", () => {
+        const result = collect({
+          methods: [{ name: "CreateUser" }, { name: "UpdateUser" }],
+          schemaOptions: { requestsAsInputs: true, ignoreRequests: true },
+        });
+        expect(result.warnings).toHaveLength(1);
+      });
+
+      it("does not warn when only one of the pair is set", () => {
+        const result = collect({
+          methods: [{ name: "CreateUser" }],
+          schemaOptions: { requestsAsInputs: true },
+        });
+        expect(result.warnings).toEqual([]);
+      });
+    });
+  });
 });
 
 describe("fileHasOptedInServices", () => {

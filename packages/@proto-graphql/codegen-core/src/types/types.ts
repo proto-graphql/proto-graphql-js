@@ -26,6 +26,8 @@ import {
   isIgnoredInputType,
   isIgnoredType,
   isInterface,
+  isRequestAsInputOnly,
+  isResponseAsPayloadOnly,
   isSquashedUnion,
 } from "./util.js";
 
@@ -43,18 +45,26 @@ export function collectTypesFromFile(
   options: TypeOptions,
   files: readonly DescFile[],
 ) {
+  // `files` carries the request/response matching context that
+  // `requests_as_inputs` / `responses_as_payloads` need (see `TypeOptions.files`).
+  // Merging it in here, once, means every type instance built below — and
+  // every type reached transitively through their fields — resolves names
+  // through the same `options` object, so a transformed name is visible
+  // wherever it's referenced.
+  const opts: TypeOptions = { ...options, files };
+
   const [msgs, enums] = collectDescsRecursively({
     nestedMessages: file.messages,
     nestedEnums: file.enums,
   });
 
   return [
-    ...buildObjectTypes(msgs, options, files),
-    ...buildInputObjectTypes(msgs, options, files),
-    ...buildInterfaceType(msgs, options, files),
-    ...buildSquashedOneofUnionTypes(msgs, options),
-    ...buildOneofUnionTypes(msgs, options),
-    ...buildEnumTypes(enums, options),
+    ...buildObjectTypes(msgs, opts, files),
+    ...buildInputObjectTypes(msgs, opts, files),
+    ...buildInterfaceType(msgs, opts, files),
+    ...buildSquashedOneofUnionTypes(msgs, opts),
+    ...buildOneofUnionTypes(msgs, opts),
+    ...buildEnumTypes(enums, opts),
   ];
 }
 
@@ -82,12 +92,16 @@ function buildObjectTypes(
   options: TypeOptions,
   files: readonly DescFile[],
 ): ObjectType[] {
-  return msgs
-    .filter((m) => !isIgnoredType(m))
-    .filter((m) => !isSquashedUnion(m))
-    .filter((m) => !isInterface(m))
-    .filter(exceptRequestOrResponse(files))
-    .map((m) => new ObjectType(m, options));
+  return (
+    msgs
+      .filter((m) => !isIgnoredType(m))
+      .filter((m) => !isSquashedUnion(m))
+      .filter((m) => !isInterface(m))
+      .filter(exceptRequestOrResponse(files))
+      // requests_as_inputs: a matched request generates only its Input type.
+      .filter((m) => !isRequestAsInputOnly(m, files))
+      .map((m) => new ObjectType(m, options))
+  );
 }
 
 function buildInputObjectTypes(
@@ -95,15 +109,20 @@ function buildInputObjectTypes(
   options: TypeOptions,
   files: readonly DescFile[],
 ): InputObjectType[] {
-  return msgs
-    .filter((m) => !isIgnoredInputType(m))
-    .filter(exceptRequestOrResponse(files))
-    .map((m) => new InputObjectType(m, options))
-    .flatMap((t) =>
-      options.partialInputs && t.hasPartialInput()
-        ? [t, t.toPartialInput()]
-        : t,
-    );
+  return (
+    msgs
+      .filter((m) => !isIgnoredInputType(m))
+      .filter(exceptRequestOrResponse(files))
+      // responses_as_payloads: a matched response generates only its Object
+      // type (no Input, no partial Input).
+      .filter((m) => !isResponseAsPayloadOnly(m, files))
+      .map((m) => new InputObjectType(m, options))
+      .flatMap((t) =>
+        options.partialInputs && t.hasPartialInput()
+          ? [t, t.toPartialInput()]
+          : t,
+      )
+  );
 }
 
 function buildInterfaceType(
@@ -111,12 +130,17 @@ function buildInterfaceType(
   options: TypeOptions,
   files: readonly DescFile[],
 ): InterfaceType[] {
-  return msgs
-    .filter((m) => !isIgnoredType(m))
-    .filter((m) => !isSquashedUnion(m))
-    .filter((m) => isInterface(m))
-    .filter(exceptRequestOrResponse(files))
-    .map((m) => new InterfaceType(m, options));
+  return (
+    msgs
+      .filter((m) => !isIgnoredType(m))
+      .filter((m) => !isSquashedUnion(m))
+      .filter((m) => isInterface(m))
+      .filter(exceptRequestOrResponse(files))
+      // requests_as_inputs: a matched request generates only its Input type,
+      // even if it's also marked as a GraphQL interface.
+      .filter((m) => !isRequestAsInputOnly(m, files))
+      .map((m) => new InterfaceType(m, options))
+  );
 }
 
 function buildSquashedOneofUnionTypes(
