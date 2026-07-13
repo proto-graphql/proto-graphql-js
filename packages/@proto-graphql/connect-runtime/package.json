@@ -26,6 +26,16 @@
         "types": "./dist/index.d.ts",
         "default": "./dist/index.cjs"
       }
+    },
+    "./graphql": {
+      "import": {
+        "types": "./dist/graphql.d.ts",
+        "default": "./dist/graphql.js"
+      },
+      "require": {
+        "types": "./dist/graphql.d.ts",
+        "default": "./dist/graphql.cjs"
+      }
     }
   },
   "files": [
@@ -47,13 +57,20 @@
   },
   "peerDependencies": {
     "@bufbuild/protobuf": "catalog:",
-    "@connectrpc/connect": "catalog:"
+    "@connectrpc/connect": "catalog:",
+    "graphql": "^16.0.0"
+  },
+  "peerDependenciesMeta": {
+    "graphql": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@bufbuild/protobuf": "catalog:",
     "@connectrpc/connect": "catalog:",
     "@proto-graphql/e2e-testapis-protobuf-es-v2": "workspace:*",
-    "@proto-graphql/tsconfig": "workspace:*"
+    "@proto-graphql/tsconfig": "workspace:*",
+    "graphql": "catalog:test"
   },
   "scripts": {
     "build": "tsup",

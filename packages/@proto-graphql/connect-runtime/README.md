@@ -67,6 +67,23 @@ Behavior in brief (see the JSDoc on `createRpcLoader` for the full contract):
 - `maxBatchSize` caps how many keys go into one RPC call; DataLoader splits the rest into further calls automatically.
 - `.loader(...)` is an escape hatch to the raw per-params `DataLoader`, for `.prime()` / `.clear()` / `.clearAll()`.
 
+## `callRpc` / `defaultConnectErrorHandler` (`@proto-graphql/connect-runtime/graphql`)
+
+The root entry (above) never imports `graphql`, so that GraphQL-free consumers (e.g. `protoc-gen-dataloader`'s generated code) don't pull it in. `callRpc` and its error-conversion helper live on a separate subpath instead, for use by generated GraphQL resolvers:
+
+```typescript
+import { callRpc } from "@proto-graphql/connect-runtime/graphql";
+import { getClient } from "@proto-graphql/connect-runtime";
+import { UserService } from "./gen/user_service_pb";
+
+const client = getClient(ctx, UserService);
+const res = await callRpc(ctx, (opts) => client.getUser({ id: args.userId }, opts));
+```
+
+`callRpc` applies `ctx.protoGraphql.callOptions?.(ctx)` (defaulting to `{}`) and invokes `fn` with the result. If `fn` throws or rejects with an actual `ConnectError` (checked via `instanceof`, never coerced from an arbitrary error), the error is converted via `ctx.protoGraphql.errorHandler` — or `defaultConnectErrorHandler` when unset — and the conversion result is thrown instead. Any other error propagates unchanged.
+
+`defaultConnectErrorHandler(err)` returns `new GraphQLError(err.rawMessage, { extensions: { code } })`, where `code` is the SCREAMING_SNAKE_CASE form of the Connect `Code` name (e.g. `Code.NotFound` -> `"NOT_FOUND"`). Error `details` are intentionally omitted to avoid leaking backend-internal information by default; pass a custom `errorHandler` via `ProtoGraphqlConnectContext` to include them.
+
 ## Author
 
 - Masayuki Izumi ([github: @izumin5210](https://github.com/izumin5210))

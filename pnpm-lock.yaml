@@ -183,6 +183,9 @@ importers:
       '@proto-graphql/tsconfig':
         specifier: workspace:*
         version: link:../../../devPackages/tsconfig
+      graphql:
+        specifier: catalog:test
+        version: 16.9.0
 
   packages/@proto-graphql/protoc-plugin-helpers:
     dependencies:
