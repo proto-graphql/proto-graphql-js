@@ -98,6 +98,8 @@ Phase 3: Federation(T1.3 + D3 後)           ▼
 
 ## Phase 1: Step 1(RPC → Query/Mutation)
 
+> **完了(2026-07-14)**: T0.1〜T1.6 すべて完了。M1(Phase 0 + Phase 1)達成 — service/operation オプションの binding、`@proto-graphql/connect-runtime`、operation printer、`requests_as_inputs`/`responses_as_payloads`、fixtures/golden/実行テスト、docs 一式。実装過程の細部判断・実行テストで判明した既存不具合は [decision-log.md §6「Step 1 実装フェーズの記録」](./decision-log.md)を参照。proto オプションは本リポジトリの submodule ローカルブランチ `add-service-operation-options` に定義済みで、upstream 本家への PR は未送出(pending、design.md §2)。protoc-gen-pothos の minor リリース(experimental 明記)はドラフト PR として準備中 — Federation(Phase 3)は未着手
+
 ### T1.1: runtime パッケージ新設
 
 - **推奨モデル**: sonnet

@@ -309,6 +309,16 @@ design.md §7 および protoc-gen-dataloader/design.md の残項目を参照。
 - 副次効果: 生成ファイルの const アノテーションが `DataLoader<K, V>` から `RpcLoader<K, V, PArgs>` に変わったことで、**生成ファイルが `dataloader` パッケージの型を直接 import しなくなった**(実装フェーズで確定した設計修正の「`DataLoader` 型の import」を参照)。`RpcLoader.loader(...)` が `.prime()`/`.clear()` 用に生の `DataLoader` を返すが、その型は `@proto-graphql/connect-runtime` 経由でのみ参照される
 - 反映先: [protoc-gen-dataloader/design.md](../protoc-gen-dataloader/design.md) §1.1/§4.2/§4.3/§4.5、`@proto-graphql/connect-runtime` の `RpcLoader` 型・`createRpcLoader`、生成物の const アノテーション、golden テスト・実行テスト
 
+### Step 1 実装フェーズの記録(2026-07-14)
+
+T0.2〜T1.6(codegen-core の operation 抽象・printer・fixtures/golden/実行テスト・docs)を実装した過程で確定した細部・発見事項。設計そのものの変更ではなく、design.md に明記のなかった実装判断とテストで見つかった既存の不具合の記録。
+
+- **戻り値 nullability の判断**: response message 型を返す operation は**デフォルトで non-null**(RPC は値を返すか throw するかのいずれかで、`NOT_FOUND` 等は `null` ではなくエラーとして表出する — Q12 の帰結)。`expose_field` 使用時は unwrap したフィールド自身の output nullability(`isRequiredField(field, "output")`)にそのまま従う。`google.protobuf.Empty` レスポンスは常に non-null `Boolean`。実装は `codegen-core/src/types/operationField.ts` の `OperationField.nullable` / `resolveReturn`
+- **oneof の XOR バリデーションは v1 では生成しない**: Query flatten 時、oneof メンバーは個別の optional 引数としてそのまま並ぶだけで、複数同時指定を拒否する runtime チェックは生成されない(design.md §7 の未決事項どおり据え置き)。**arg 単位の deprecation も出力しない**: `OperationField.deprecationReason` は operation フィールド自体には反映されるが、flatten 引数(`t.arg(...)`)側は `type`/`required` のみで `deprecationReason` を持たない — Pothos の `t.arg` が deprecation 相当の API を持つか未検証のため、今回は見送り
+- **ignore と suffix 変換(`requests_as_inputs`/`responses_as_payloads`)の併用優先順位**: `ignore_requests`/`ignore_responses` が勝つ(design.md §7 で「実装時に定義」としていた項目の確定)。この組み合わせを検出した警告は、型収集層(`buildInputObjectTypes`/`buildObjectTypes`)には警告チャネルがないため、`collectOperationsFromFile`(ファイル単位で `GraphqlSchemaOptions` を読む唯一の場所)がファイルにつき 1 回だけ出す形にした
+- **KNOWN ISSUE(Step 1 起因ではない既存不具合、実行テストで発覚)**: squashed-oneof-union printer は、oneof の 2 つ以上のメンバーが同一 message 型を指す場合に `union X = T | T` という不正な GraphQL(union のメンバー型は一意でなければならない)を生成する。`protoc-gen-pothos` の golden スイートはこれまで `printSchema` の結果を SDL snapshot するだけで `validateSchema` を一切通していなかったため検出されず、今回 S1-F の実行テストが初めて `graphql()`(内部でスキーマを validate する)を呼んだことで表面化した。同型の重複は `printer.test.ts` の既存スモークテスト(`oneof pick { Address addr_a; Address addr_b; }` → `union GetUserRequestPick = Address | Address`)にも以前から存在しており、今回新規に持ち込んだ欠陥ではない。テスト用 fixture(`SearchUsersRequest.filter`)は `work` を別の `WorkAddress` 型にすることで回避した(commit `9684f89b`)。printer 自体の修正はスコープ外 — follow-up 候補として (a) squashed union printer 側での重複型検出/エラー化、(b) golden ハーネスに schema-validation ステージ(`validateSchema` 呼び出し)を追加し、この種の不正スキーマを型チェック段階で検出できるようにする、の 2 点を残す
+- **ts-proto 側 fixture 生成の `outputServices=none` 化**: `testapis/service/*` は本 PoC で初めて `stream` RPC を含む fixture になったため、ts-proto のデフォルトのサービス stub 出力が `rxjs` 型依存を引き込んでしまう(本リポジトリは未導入)。RPC→GraphQL 生成は protobuf-es v2 専用(design.md §1.1)で ts-proto 側にサービス stub は元々不要なため、`buf.gen.testapis.yaml` に `outputServices=none` を追加して回避した(commit `afcab638`)
+
 ## 7. 将来課題への申し送り(protoc-gen-gqlkit)
 
 本 PoC の知見を protoc-gen-gqlkit に還元する際、research.md §3 の gqlkit 精査結果が前提になる。特に:

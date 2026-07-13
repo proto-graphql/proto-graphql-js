@@ -2,7 +2,7 @@
 
 > 関連: [requirements.md](./requirements.md) / [decision-log.md](./decision-log.md)(意思決定の経緯)/ [research.md](./research.md)(前提調査)/ [protoc-gen-dataloader 設計](../protoc-gen-dataloader/design.md)
 
-- Status: 設計合意済み(2026-07-11)。`batch` オプション独立化・group loader 追加・単一キー限定は同日の詳細設計フェーズで承認済み([decision-log.md §6](./decision-log.md))
+- Status: 設計合意済み(2026-07-11)。`batch` オプション独立化・group loader 追加・単一キー限定は同日の詳細設計フェーズで承認済み([decision-log.md §6](./decision-log.md))。**Step 1(RPC → Query/Mutation)は実装完了(2026-07-14、[implementation-plan.md](./implementation-plan.md) T0.2〜T1.6)**。細部の実装判断・実行テストで判明した既存不具合は [decision-log.md §6「Step 1 実装フェーズの記録」](./decision-log.md)を参照。Step 2(Federation)は未着手
 
 ## 1. 全体アーキテクチャ
 
@@ -35,7 +35,7 @@
 
 proto-graphql 本家 `graphql/schema.proto` への追加。**experimental を明記**し、PoC 期間中の semantics 変更余地を宣言する。Go binding (`graphqlpb`) を同時再生成し、本リポジトリは submodule 更新 + `pnpm gen:extensions` で追従する。
 
-> **Landing 状況**: per-track landing 方針([decision-log Q29](./decision-log.md))により、upstream には現時点で `(graphql.rpc).batch`(`GraphqlRpcBatchOptions` と `GraphqlRpcOptions.batch = 5`、および `rpc = 2056` extension)のみが着地済み。以下のドラフトのうち `GraphqlRpcOptions` のフィールド番号 1-4(ignore/operation/name/expose_field)・10(federation)、`GraphqlObjectTypeOptions.federation`(field 5)、`GraphqlSchemaOptions` の 5-6(requests_as_inputs/responses_as_payloads)は**コンシューマ実装 PR が着地するまでフィールド番号を予約するのみ**で proto には未定義。`GraphqlServiceOptions` / `GraphqlOperation` / `GraphqlRpcFederationOptions` / `GraphqlExtendOptions` / `GraphqlKeyMapping` / `GraphqlFederationOptions` の各メッセージと `service = 2056` extension も同様に未着地(それぞれ Step 1 / Step 2 の PR で追加される)。
+> **Landing 状況(2026-07-14 更新)**: per-track landing 方針([decision-log Q29](./decision-log.md))により、upstream(proto-graphql 本家)には引き続き `(graphql.rpc).batch`(`GraphqlRpcBatchOptions` と `GraphqlRpcOptions.batch = 5`、および `rpc = 2056` extension)のみが着地済み。**Step 1 のオプション**(`GraphqlServiceOptions` / `GraphqlOperation` / `GraphqlRpcOptions` のフィールド 1-4 = ignore/operation/name/expose_field、および `service = 2056` extension)は、本リポジトリの submodule `proto-graphql/` 内のローカルブランチ **`add-service-operation-options`**(commit `34527a9`)には定義済みで、本リポジトリはこのブランチを指す submodule 参照から `pnpm gen:extensions` して Step 1 実装を進めた。ただし**upstream 本家への PR はまだ送出していない**(pending) — per-track landing 方針どおり、Step 1 の実装(このドキュメントの実装)が固まった段階でのアップストリーム化を予定している。`GraphqlRpcOptions` のフィールド番号 10(federation)、`GraphqlObjectTypeOptions.federation`(field 5)、`GraphqlSchemaOptions` の 5-6(requests_as_inputs/responses_as_payloads)は同ローカルブランチには未定義で、`GraphqlRpcFederationOptions` / `GraphqlExtendOptions` / `GraphqlKeyMapping` / `GraphqlFederationOptions` の各メッセージも同様に未着地(Step 2 の PR で追加される)。**`requests_as_inputs`/`responses_as_payloads`(`GraphqlSchemaOptions` 5-6)は Step 1 実装で必要になったため、Step 1 のローカルブランチ側に含めて定義済み**(T1.4 実装時に確定。詳細は decision-log §6「Step 1 実装フェーズの記録」)。
 
 ```proto
 // ============ Service / Method (Step 1) ============
