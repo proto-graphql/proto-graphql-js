@@ -2,6 +2,9 @@
   "name": "@proto-graphql/golden-pothos--testapis.service.basic--protobuf-es",
   "version": "0.0.0",
   "private": true,
+  "scripts": {
+    "test": "vitest run --passWithNoTests"
+  },
   "dependencies": {
     "@pothos/core": "catalog:test",
     "@proto-graphql/tsconfig": "workspace:*",

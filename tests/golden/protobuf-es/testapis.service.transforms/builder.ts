@@ -1,4 +1,4 @@
-import type { Transport } from "@connectrpc/connect";
+import type { CallOptions, ConnectError, Transport } from "@connectrpc/connect";
 import SchemaBuilder from "@pothos/core";
 import { GraphQLScalarType } from "graphql";
 
@@ -16,10 +16,14 @@ const int64Scalar = passthroughScalar("Int64");
 
 // Structurally satisfies `ProtoGraphqlConnectContext` (design.md §3.3):
 // generated resolvers call `getClient(ctx, Service)` / `callRpc(ctx, ...)`,
-// which only need `ctx.protoGraphql.transport` (plus the optional hooks).
+// which only need `ctx.protoGraphql.transport`. The optional hooks below
+// mirror the full runtime contract so execution tests can exercise them.
 export interface Context {
   protoGraphql: {
     transport: Transport;
+    transports?: Map<string, Transport>;
+    callOptions?: (ctx: unknown) => CallOptions;
+    errorHandler?: (err: ConnectError) => Error;
   };
 }
 
