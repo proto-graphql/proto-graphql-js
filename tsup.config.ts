@@ -4,6 +4,7 @@ import { defineConfig } from "tsup";
 export default defineConfig({
   entry: [
     "src/index.ts",
+    "src/graphql.ts",
     "src/protoc-gen-pothos.ts",
     "src/protoc-gen-nexus.ts",
     "src/protoc-gen-dataloader.ts",

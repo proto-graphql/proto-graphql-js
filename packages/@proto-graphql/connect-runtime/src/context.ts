@@ -30,12 +30,13 @@ export interface ProtoGraphqlConnectContext {
     callOptions?: (ctx: unknown) => CallOptions;
     /**
      * Overrides how a `ConnectError` raised by an RPC call is converted
-     * before it reaches the caller.
+     * before it reaches the caller. Used by `callRpc` from the
+     * `@proto-graphql/connect-runtime/graphql` entry (defaults to
+     * `defaultConnectErrorHandler`, which maps to `GraphQLError`).
      *
-     * NOT used by this package yet — reserved for a later phase (e.g.
-     * mapping to `GraphQLError` in generated resolvers). The type is
-     * exposed now so context types and generated code can already declare
-     * it without a breaking change later.
+     * The type is declared here, on this GraphQL-free root entry, so
+     * context types and generated code can declare it without depending on
+     * `graphql` themselves.
      */
     errorHandler?: (err: ConnectError) => Error;
   };
