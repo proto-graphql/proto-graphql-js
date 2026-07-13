@@ -7,6 +7,7 @@ import {
   MethodOptionsSchema,
   ServiceDescriptorProtoSchema,
   type ServiceOptions,
+  ServiceOptionsSchema,
 } from "@bufbuild/protobuf/wkt";
 import {
   getTestapisFileDescriptorSet,
@@ -17,6 +18,7 @@ import * as extensions from "../__generated__/extensions/graphql/schema_pb.js";
 import {
   exceptRequestOrResponse,
   getRpcOptions,
+  getServiceOptions,
   isRequiredField,
 } from "./util";
 
@@ -137,13 +139,12 @@ describe("exceptRequestOrResponse", () => {
   });
 });
 
-// `(graphql.rpc)` is not part of any `@proto-graphql/testapis-proto` fixture
-// yet (adding one requires regenerating the testapis FileDescriptorSet,
-// which is out of scope here). Build a minimal FileDescriptorProto with a
-// service/method in-code instead, resolving its `graphql/schema.proto`
-// dependency straight from the generated extensions module. `serviceOptions`
-// is accepted for generality (e.g. a future `(graphql.service)`-shaped
-// option), though nothing sets it today.
+// `(graphql.service)` / `(graphql.rpc)` are not part of any
+// `@proto-graphql/testapis-proto` fixture yet (adding one requires
+// regenerating the testapis FileDescriptorSet, which is out of scope here).
+// Build a minimal FileDescriptorProto with a service/method in-code instead,
+// resolving its `graphql/schema.proto` dependency straight from the
+// generated extensions module.
 function buildServiceRegistry(options?: {
   serviceOptions?: ServiceOptions;
   methodOptions?: MethodOptions;
@@ -180,6 +181,32 @@ function buildServiceRegistry(options?: {
   );
 }
 
+describe("getServiceOptions", () => {
+  it("returns the EMPTY singleton when the service has no (graphql.service) option", () => {
+    const registry = buildServiceRegistry();
+    const svc = registry.getService("codegen_core.util_test.TestService");
+    if (svc == null) throw new Error("TestService not found");
+
+    expect(getServiceOptions(svc)).toEqual(
+      create(extensions.GraphqlServiceOptionsSchema, {}),
+    );
+  });
+
+  it("returns the parsed options when (graphql.service) is set", () => {
+    const serviceOptions = create(ServiceOptionsSchema, {});
+    setExtension(
+      serviceOptions,
+      extensions.service,
+      create(extensions.GraphqlServiceOptionsSchema, { ignore: true }),
+    );
+    const registry = buildServiceRegistry({ serviceOptions });
+    const svc = registry.getService("codegen_core.util_test.TestService");
+    if (svc == null) throw new Error("TestService not found");
+
+    expect(getServiceOptions(svc).ignore).toBe(true);
+  });
+});
+
 describe("getRpcOptions", () => {
   it("returns the EMPTY singleton when the RPC has no (graphql.rpc) option", () => {
     const registry = buildServiceRegistry();
@@ -197,6 +224,8 @@ describe("getRpcOptions", () => {
       methodOptions,
       extensions.rpc,
       create(extensions.GraphqlRpcOptionsSchema, {
+        name: "customName",
+        operation: extensions.GraphqlOperation.MUTATION,
         batch: create(extensions.GraphqlRpcBatchOptionsSchema, {
           group: true,
           entityKey: "userId",
@@ -208,6 +237,8 @@ describe("getRpcOptions", () => {
     if (svc == null) throw new Error("TestService not found");
 
     const opts = getRpcOptions(svc.methods[0]);
+    expect(opts.name).toBe("customName");
+    expect(opts.operation).toBe(extensions.GraphqlOperation.MUTATION);
     expect(opts.batch?.group).toBe(true);
     expect(opts.batch?.entityKey).toBe("userId");
   });

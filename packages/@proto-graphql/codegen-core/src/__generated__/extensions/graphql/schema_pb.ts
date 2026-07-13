@@ -4,7 +4,7 @@
 
 import type { GenEnum, GenExtension, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { enumDesc, extDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { EnumOptions, EnumValueOptions, FieldOptions, FileOptions, MessageOptions, MethodOptions, OneofOptions } from "@bufbuild/protobuf/wkt";
+import type { EnumOptions, EnumValueOptions, FieldOptions, FileOptions, MessageOptions, MethodOptions, OneofOptions, ServiceOptions } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_descriptor } from "@bufbuild/protobuf/wkt";
 import type { Message } from "@bufbuild/protobuf";
 
@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file graphql/schema.proto.
  */
 export const file_graphql_schema: GenFile = /*@__PURE__*/
-  fileDesc("ChRncmFwaHFsL3NjaGVtYS5wcm90bxIHZ3JhcGhxbCJuChRHcmFwaHFsU2NoZW1hT3B0aW9ucxITCgt0eXBlX3ByZWZpeBgBIAEoCRIXCg9pZ25vcmVfcmVxdWVzdHMYAiABKAgSGAoQaWdub3JlX3Jlc3BvbnNlcxgDIAEoCBIOCgZpZ25vcmUYBCABKAgiYQoYR3JhcGhxbE9iamVjdFR5cGVPcHRpb25zEg4KBmlnbm9yZRgBIAEoCBIUCgxzcXVhc2hfdW5pb24YAiABKAgSEQoJaW50ZXJmYWNlGAMgASgIEgwKBG5hbWUYBCABKAkiPQoXR3JhcGhxbElucHV0VHlwZU9wdGlvbnMSEgoKbm9fcGFydGlhbBgBIAEoCBIOCgZpZ25vcmUYAiABKAgi8gEKE0dyYXBocWxGaWVsZE9wdGlvbnMSDgoGaWdub3JlGAEgASgIEgwKBG5hbWUYAiABKAkSFQoNc2tpcF9yZXNvbHZlchgDIAEoCBIKCgJpZBgEIAEoCBIwChJvdXRwdXRfbnVsbGFiaWxpdHkYCyABKA4yFC5ncmFwaHFsLk51bGxhYmlsaXR5Ei8KEWlucHV0X251bGxhYmlsaXR5GAwgASgOMhQuZ3JhcGhxbC5OdWxsYWJpbGl0eRI3ChlwYXJ0aWFsX2lucHV0X251bGxhYmlsaXR5GA0gASgOMhQuZ3JhcGhxbC5OdWxsYWJpbGl0eSIlChNHcmFwaHFsT25lb2ZPcHRpb25zEg4KBmlnbm9yZRgBIAEoCCIyChJHcmFwaHFsRW51bU9wdGlvbnMSDgoGaWdub3JlGAEgASgIEgwKBG5hbWUYBCABKAkiKQoXR3JhcGhxbEVudW1WYWx1ZU9wdGlvbnMSDgoGaWdub3JlGAEgASgIIkMKEUdyYXBocWxScGNPcHRpb25zEi4KBWJhdGNoGAUgASgLMh8uZ3JhcGhxbC5HcmFwaHFsUnBjQmF0Y2hPcHRpb25zInwKFkdyYXBocWxScGNCYXRjaE9wdGlvbnMSEQoJa2V5X2ZpZWxkGAEgASgJEhQKDGVudGl0eV9maWVsZBgCIAEoCRISCgplbnRpdHlfa2V5GAMgASgJEg0KBWdyb3VwGAQgASgIEhYKDm1heF9iYXRjaF9zaXplGAUgASgNKkYKC051bGxhYmlsaXR5EhsKF05VTExBQklMSVRZX1VOU1BFQ0lGSUVEEAASDAoITlVMTEFCTEUQARIMCghOT05fTlVMTBACOlQKBnNjaGVtYRIcLmdvb2dsZS5wcm90b2J1Zi5GaWxlT3B0aW9ucxiIECABKAsyHS5ncmFwaHFsLkdyYXBocWxTY2hlbWFPcHRpb25zUgZzY2hlbWE6ZAoLb2JqZWN0X3R5cGUSHy5nb29nbGUucHJvdG9idWYuTWVzc2FnZU9wdGlvbnMYiBAgASgLMiEuZ3JhcGhxbC5HcmFwaHFsT2JqZWN0VHlwZU9wdGlvbnNSCm9iamVjdFR5cGU6YQoKaW5wdXRfdHlwZRIfLmdvb2dsZS5wcm90b2J1Zi5NZXNzYWdlT3B0aW9ucxiJECABKAsyIC5ncmFwaHFsLkdyYXBocWxJbnB1dFR5cGVPcHRpb25zUglpbnB1dFR5cGU6UgoFZmllbGQSHS5nb29nbGUucHJvdG9idWYuRmllbGRPcHRpb25zGIgQIAEoCzIcLmdyYXBocWwuR3JhcGhxbEZpZWxkT3B0aW9uc1IFZmllbGQ6UgoFb25lb2YSHS5nb29nbGUucHJvdG9idWYuT25lb2ZPcHRpb25zGIgQIAEoCzIcLmdyYXBocWwuR3JhcGhxbE9uZW9mT3B0aW9uc1IFb25lb2Y6VwoJZW51bV90eXBlEhwuZ29vZ2xlLnByb3RvYnVmLkVudW1PcHRpb25zGIgQIAEoCzIbLmdyYXBocWwuR3JhcGhxbEVudW1PcHRpb25zUghlbnVtVHlwZTpjCgplbnVtX3ZhbHVlEiEuZ29vZ2xlLnByb3RvYnVmLkVudW1WYWx1ZU9wdGlvbnMYiBAgASgLMiAuZ3JhcGhxbC5HcmFwaHFsRW51bVZhbHVlT3B0aW9uc1IJZW51bVZhbHVlOk0KA3JwYxIeLmdvb2dsZS5wcm90b2J1Zi5NZXRob2RPcHRpb25zGIgQIAEoCzIaLmdyYXBocWwuR3JhcGhxbFJwY09wdGlvbnNSA3JwY0I1WjNnaXRodWIuY29tL3Byb3RvLWdyYXBocWwvcHJvdG8tZ3JhcGhxbC9nby9ncmFwaHFscGJiBnByb3RvMw", [file_google_protobuf_descriptor]);
+  fileDesc("ChRncmFwaHFsL3NjaGVtYS5wcm90bxIHZ3JhcGhxbCKpAQoUR3JhcGhxbFNjaGVtYU9wdGlvbnMSEwoLdHlwZV9wcmVmaXgYASABKAkSFwoPaWdub3JlX3JlcXVlc3RzGAIgASgIEhgKEGlnbm9yZV9yZXNwb25zZXMYAyABKAgSDgoGaWdub3JlGAQgASgIEhoKEnJlcXVlc3RzX2FzX2lucHV0cxgFIAEoCBIdChVyZXNwb25zZXNfYXNfcGF5bG9hZHMYBiABKAgiYQoYR3JhcGhxbE9iamVjdFR5cGVPcHRpb25zEg4KBmlnbm9yZRgBIAEoCBIUCgxzcXVhc2hfdW5pb24YAiABKAgSEQoJaW50ZXJmYWNlGAMgASgIEgwKBG5hbWUYBCABKAkiPQoXR3JhcGhxbElucHV0VHlwZU9wdGlvbnMSEgoKbm9fcGFydGlhbBgBIAEoCBIOCgZpZ25vcmUYAiABKAgi8gEKE0dyYXBocWxGaWVsZE9wdGlvbnMSDgoGaWdub3JlGAEgASgIEgwKBG5hbWUYAiABKAkSFQoNc2tpcF9yZXNvbHZlchgDIAEoCBIKCgJpZBgEIAEoCBIwChJvdXRwdXRfbnVsbGFiaWxpdHkYCyABKA4yFC5ncmFwaHFsLk51bGxhYmlsaXR5Ei8KEWlucHV0X251bGxhYmlsaXR5GAwgASgOMhQuZ3JhcGhxbC5OdWxsYWJpbGl0eRI3ChlwYXJ0aWFsX2lucHV0X251bGxhYmlsaXR5GA0gASgOMhQuZ3JhcGhxbC5OdWxsYWJpbGl0eSIlChNHcmFwaHFsT25lb2ZPcHRpb25zEg4KBmlnbm9yZRgBIAEoCCIyChJHcmFwaHFsRW51bU9wdGlvbnMSDgoGaWdub3JlGAEgASgIEgwKBG5hbWUYBCABKAkiKQoXR3JhcGhxbEVudW1WYWx1ZU9wdGlvbnMSDgoGaWdub3JlGAEgASgIIicKFUdyYXBocWxTZXJ2aWNlT3B0aW9ucxIOCgZpZ25vcmUYASABKAgipQEKEUdyYXBocWxScGNPcHRpb25zEg4KBmlnbm9yZRgBIAEoCBIsCglvcGVyYXRpb24YAiABKA4yGS5ncmFwaHFsLkdyYXBocWxPcGVyYXRpb24SDAoEbmFtZRgDIAEoCRIUCgxleHBvc2VfZmllbGQYBCABKAkSLgoFYmF0Y2gYBSABKAsyHy5ncmFwaHFsLkdyYXBocWxScGNCYXRjaE9wdGlvbnMifAoWR3JhcGhxbFJwY0JhdGNoT3B0aW9ucxIRCglrZXlfZmllbGQYASABKAkSFAoMZW50aXR5X2ZpZWxkGAIgASgJEhIKCmVudGl0eV9rZXkYAyABKAkSDQoFZ3JvdXAYBCABKAgSFgoObWF4X2JhdGNoX3NpemUYBSABKA0qRgoLTnVsbGFiaWxpdHkSGwoXTlVMTEFCSUxJVFlfVU5TUEVDSUZJRUQQABIMCghOVUxMQUJMRRABEgwKCE5PTl9OVUxMEAIqTgoQR3JhcGhxbE9wZXJhdGlvbhIhCh1HUkFQSFFMX09QRVJBVElPTl9VTlNQRUNJRklFRBAAEgkKBVFVRVJZEAESDAoITVVUQVRJT04QAjpUCgZzY2hlbWESHC5nb29nbGUucHJvdG9idWYuRmlsZU9wdGlvbnMYiBAgASgLMh0uZ3JhcGhxbC5HcmFwaHFsU2NoZW1hT3B0aW9uc1IGc2NoZW1hOmQKC29iamVjdF90eXBlEh8uZ29vZ2xlLnByb3RvYnVmLk1lc3NhZ2VPcHRpb25zGIgQIAEoCzIhLmdyYXBocWwuR3JhcGhxbE9iamVjdFR5cGVPcHRpb25zUgpvYmplY3RUeXBlOmEKCmlucHV0X3R5cGUSHy5nb29nbGUucHJvdG9idWYuTWVzc2FnZU9wdGlvbnMYiRAgASgLMiAuZ3JhcGhxbC5HcmFwaHFsSW5wdXRUeXBlT3B0aW9uc1IJaW5wdXRUeXBlOlIKBWZpZWxkEh0uZ29vZ2xlLnByb3RvYnVmLkZpZWxkT3B0aW9ucxiIECABKAsyHC5ncmFwaHFsLkdyYXBocWxGaWVsZE9wdGlvbnNSBWZpZWxkOlIKBW9uZW9mEh0uZ29vZ2xlLnByb3RvYnVmLk9uZW9mT3B0aW9ucxiIECABKAsyHC5ncmFwaHFsLkdyYXBocWxPbmVvZk9wdGlvbnNSBW9uZW9mOlcKCWVudW1fdHlwZRIcLmdvb2dsZS5wcm90b2J1Zi5FbnVtT3B0aW9ucxiIECABKAsyGy5ncmFwaHFsLkdyYXBocWxFbnVtT3B0aW9uc1IIZW51bVR5cGU6YwoKZW51bV92YWx1ZRIhLmdvb2dsZS5wcm90b2J1Zi5FbnVtVmFsdWVPcHRpb25zGIgQIAEoCzIgLmdyYXBocWwuR3JhcGhxbEVudW1WYWx1ZU9wdGlvbnNSCWVudW1WYWx1ZTpaCgdzZXJ2aWNlEh8uZ29vZ2xlLnByb3RvYnVmLlNlcnZpY2VPcHRpb25zGIgQIAEoCzIeLmdyYXBocWwuR3JhcGhxbFNlcnZpY2VPcHRpb25zUgdzZXJ2aWNlOk0KA3JwYxIeLmdvb2dsZS5wcm90b2J1Zi5NZXRob2RPcHRpb25zGIgQIAEoCzIaLmdyYXBocWwuR3JhcGhxbFJwY09wdGlvbnNSA3JwY0I1WjNnaXRodWIuY29tL3Byb3RvLWdyYXBocWwvcHJvdG8tZ3JhcGhxbC9nby9ncmFwaHFscGJiBnByb3RvMw", [file_google_protobuf_descriptor]);
 
 /**
  * @generated from message graphql.GraphqlSchemaOptions
@@ -37,6 +37,30 @@ export type GraphqlSchemaOptions = Message<"graphql.GraphqlSchemaOptions"> & {
    * @generated from field: bool ignore = 4;
    */
   ignore: boolean;
+
+  /**
+   * EXPERIMENTAL: this option is under active development and may change without notice.
+   * Renames `XxxRequest` messages to `XxxInput` and generates only the Input
+   * type for them (suffix-transform variant of `ignore_requests`). If both
+   * `ignore_requests` and `requests_as_inputs` are set for the same
+   * message, `ignore_requests` wins and the codegen tool should warn about
+   * the combination.
+   *
+   * @generated from field: bool requests_as_inputs = 5;
+   */
+  requestsAsInputs: boolean;
+
+  /**
+   * EXPERIMENTAL: this option is under active development and may change without notice.
+   * Renames `XxxResponse` messages to `XxxPayload` and generates only the
+   * Object type for them (suffix-transform variant of `ignore_responses`).
+   * If both `ignore_responses` and `responses_as_payloads` are set for the
+   * same message, `ignore_responses` wins and the codegen tool should warn
+   * about the combination.
+   *
+   * @generated from field: bool responses_as_payloads = 6;
+   */
+  responsesAsPayloads: boolean;
 };
 
 /**
@@ -297,14 +321,73 @@ export const GraphqlEnumValueOptionsSchema: GenMessage<GraphqlEnumValueOptions> 
 
 /**
  * EXPERIMENTAL: this option is under active development and may change without notice.
+ * Presence of this option on a service (regardless of `ignore`) opts its
+ * unary RPCs into Query/Mutation generation; services without this option
+ * are skipped entirely. Set `ignore` to keep the service opted in while
+ * temporarily halting generation.
+ *
+ * @generated from message graphql.GraphqlServiceOptions
+ */
+export type GraphqlServiceOptions = Message<"graphql.GraphqlServiceOptions"> & {
+  /**
+   * Do not generate Query/Mutation fields for this service's RPCs. The
+   * option itself is kept so generation can be re-enabled later.
+   *
+   * @generated from field: bool ignore = 1;
+   */
+  ignore: boolean;
+};
+
+/**
+ * Describes the message graphql.GraphqlServiceOptions.
+ * Use `create(GraphqlServiceOptionsSchema)` to create a new message.
+ */
+export const GraphqlServiceOptionsSchema: GenMessage<GraphqlServiceOptions> = /*@__PURE__*/
+  messageDesc(file_graphql_schema, 7);
+
+/**
+ * EXPERIMENTAL: this option is under active development and may change without notice.
+ * Presence of `(graphql.service)` on a service (see `GraphqlServiceOptions`)
+ * opts its unary RPCs into Query/Mutation generation; this message then
+ * controls how each individual RPC is generated.
  *
  * @generated from message graphql.GraphqlRpcOptions
  */
 export type GraphqlRpcOptions = Message<"graphql.GraphqlRpcOptions"> & {
   /**
-   * Field numbers 1-4 are planned for service->operation support
-   * (ignore/operation/name/expose_field) and 10 for federation support;
-   * they are intentionally not defined yet and land with their consumers.
+   * Do not generate a Query/Mutation field for this RPC.
+   *
+   * @generated from field: bool ignore = 1;
+   */
+  ignore: boolean;
+
+  /**
+   * Overrides the operation type inferred from `idempotency_level`. See
+   * `GraphqlOperation` for the default rule when unspecified.
+   *
+   * @generated from field: graphql.GraphqlOperation operation = 2;
+   */
+  operation: GraphqlOperation;
+
+  /**
+   * Overrides the field name. Defaults to the camelCase of the RPC name.
+   *
+   * @generated from field: string name = 3;
+   */
+  name: string;
+
+  /**
+   * Unwraps the specified field of the response and uses it as the return
+   * value.
+   *
+   * @generated from field: string expose_field = 4;
+   */
+  exposeField: string;
+
+  /**
+   * Declares this RPC as a batch loader generation target, independent of
+   * federation. Consumed by protoc-gen-dataloader; see
+   * docs/design/protoc-gen-dataloader/design.md for details.
    *
    * @generated from field: graphql.GraphqlRpcBatchOptions batch = 5;
    */
@@ -316,7 +399,7 @@ export type GraphqlRpcOptions = Message<"graphql.GraphqlRpcOptions"> & {
  * Use `create(GraphqlRpcOptionsSchema)` to create a new message.
  */
 export const GraphqlRpcOptionsSchema: GenMessage<GraphqlRpcOptions> = /*@__PURE__*/
-  messageDesc(file_graphql_schema, 7);
+  messageDesc(file_graphql_schema, 8);
 
 /**
  * EXPERIMENTAL: this option is under active development and may change without notice.
@@ -373,7 +456,7 @@ export type GraphqlRpcBatchOptions = Message<"graphql.GraphqlRpcBatchOptions"> &
  * Use `create(GraphqlRpcBatchOptionsSchema)` to create a new message.
  */
 export const GraphqlRpcBatchOptionsSchema: GenMessage<GraphqlRpcBatchOptions> = /*@__PURE__*/
-  messageDesc(file_graphql_schema, 8);
+  messageDesc(file_graphql_schema, 9);
 
 /**
  * @generated from enum graphql.Nullability
@@ -400,6 +483,37 @@ export enum Nullability {
  */
 export const NullabilitySchema: GenEnum<Nullability> = /*@__PURE__*/
   enumDesc(file_graphql_schema, 0);
+
+/**
+ * EXPERIMENTAL: this option is under active development and may change without notice.
+ *
+ * @generated from enum graphql.GraphqlOperation
+ */
+export enum GraphqlOperation {
+  /**
+   * Convention default: derived from `idempotency_level`
+   * (`NO_SIDE_EFFECTS` becomes QUERY, anything else becomes MUTATION).
+   *
+   * @generated from enum value: GRAPHQL_OPERATION_UNSPECIFIED = 0;
+   */
+  GRAPHQL_OPERATION_UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: QUERY = 1;
+   */
+  QUERY = 1,
+
+  /**
+   * @generated from enum value: MUTATION = 2;
+   */
+  MUTATION = 2,
+}
+
+/**
+ * Describes the enum graphql.GraphqlOperation.
+ */
+export const GraphqlOperationSchema: GenEnum<GraphqlOperation> = /*@__PURE__*/
+  enumDesc(file_graphql_schema, 1);
 
 /**
  * @generated from extension: graphql.GraphqlSchemaOptions schema = 2056;
@@ -444,8 +558,14 @@ export const enum_value: GenExtension<EnumValueOptions, GraphqlEnumValueOptions>
   extDesc(file_graphql_schema, 6);
 
 /**
+ * @generated from extension: graphql.GraphqlServiceOptions service = 2056;
+ */
+export const service: GenExtension<ServiceOptions, GraphqlServiceOptions> = /*@__PURE__*/
+  extDesc(file_graphql_schema, 7);
+
+/**
  * @generated from extension: graphql.GraphqlRpcOptions rpc = 2056;
  */
 export const rpc: GenExtension<MethodOptions, GraphqlRpcOptions> = /*@__PURE__*/
-  extDesc(file_graphql_schema, 7);
+  extDesc(file_graphql_schema, 8);
 
