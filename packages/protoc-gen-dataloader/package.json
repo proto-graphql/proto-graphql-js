@@ -1,0 +1,68 @@
+{
+  "name": "protoc-gen-dataloader",
+  "version": "0.0.0",
+  "description": "Generate DataLoader-based batch loaders for gRPC/Connect RPCs from Protocol Buffers IDL",
+  "keywords": [
+    "connect",
+    "dataloader",
+    "grpc",
+    "protobuf",
+    "typescript"
+  ],
+  "bin": {
+    "protoc-gen-dataloader": "./bin/protoc-gen-dataloader.cjs"
+  },
+  "repository": "git@github.com:proto-graphql/proto-graphql-js.git",
+  "author": "izumin5210 <m@izum.in>",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "bin/",
+    "docs/",
+    "src/",
+    "dist/",
+    "!src/**/*.test.ts",
+    "!src/**/__tests__/"
+  ],
+  "sideEffects": false,
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">= 14.0.0"
+  },
+  "dependencies": {
+    "@bufbuild/protobuf": "catalog:",
+    "@bufbuild/protoplugin": "catalog:",
+    "@proto-graphql/codegen-core": "workspace:*",
+    "@proto-graphql/protoc-plugin-helpers": "workspace:*",
+    "dprint-node": "catalog:"
+  },
+  "devDependencies": {
+    "@proto-graphql/golden-test-harness": "workspace:*",
+    "@proto-graphql/tsconfig": "workspace:*",
+    "@vitest/coverage-v8": "^4.0.0"
+  },
+  "scripts": {
+    "build": "tsup && cp -r ../../docs/protoc-gen-dataloader docs",
+    "clean": "rm -rf dist docs",
+    "test": "vitest run --passWithNoTests",
+    "test:coverage": "vitest run --coverage"
+  }
+}

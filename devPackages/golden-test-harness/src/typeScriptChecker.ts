@@ -1,6 +1,5 @@
 import { join } from "node:path";
 import ts from "typescript";
-import type { TestCase } from "./testCaseDiscovery.js";
 
 export interface TypeCheckDiagnostic {
   file: string;
@@ -16,8 +15,13 @@ export interface TypeCheckResult {
   formattedErrors: string;
 }
 
-export function runTypeCheck(testCase: TestCase): TypeCheckResult {
-  const configPath = join(testCase.dir, "tsconfig.json");
+/**
+ * Type-checks a golden test case against its per-case `tsconfig.json` using the
+ * TypeScript Compiler API. The case directory is injected so this is reusable
+ * across plugins.
+ */
+export function runTypeCheck(caseDir: string): TypeCheckResult {
+  const configPath = join(caseDir, "tsconfig.json");
 
   const configFile = ts.readConfigFile(configPath, ts.sys.readFile);
   if (configFile.error) {
@@ -43,7 +47,7 @@ export function runTypeCheck(testCase: TestCase): TypeCheckResult {
   const parsedConfig = ts.parseJsonConfigFileContent(
     configFile.config,
     ts.sys,
-    testCase.dir,
+    caseDir,
   );
 
   if (parsedConfig.errors.length > 0) {
@@ -57,7 +61,7 @@ export function runTypeCheck(testCase: TestCase): TypeCheckResult {
     return {
       success: false,
       diagnostics,
-      formattedErrors: formatDiagnostics(diagnostics, testCase.dir),
+      formattedErrors: formatDiagnostics(diagnostics, caseDir),
     };
   }
 
@@ -92,7 +96,7 @@ export function runTypeCheck(testCase: TestCase): TypeCheckResult {
   return {
     success: diagnostics.length === 0,
     diagnostics,
-    formattedErrors: formatDiagnostics(diagnostics, testCase.dir),
+    formattedErrors: formatDiagnostics(diagnostics, caseDir),
   };
 }
 

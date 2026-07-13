@@ -17,6 +17,39 @@ export type Options<DSL extends PrinterOptions["dsl"]> = {
   format: boolean;
 };
 
+/**
+ * Parsed `protoc-gen-dataloader` plugin parameters. See
+ * docs/design/protoc-gen-dataloader/design.md §5.
+ */
+export interface DataloaderOptions {
+  /** protobuf-es v2 generated module import path prefix. */
+  importPrefix: string | null;
+  /** Output file suffix, appended to the proto file's path. */
+  filenameSuffix: string;
+  /** Module `createRpcLoader` / `ProtoGraphqlConnectContext` are imported from. */
+  runtimeModule: string;
+  /** protoc-gen-pothos-compatible `emit_imported_files` semantics. */
+  emitImportedFiles: boolean;
+  /**
+   * When false, skip the in-plugin formatter pass over the generated
+   * TypeScript. Defaults to true.
+   */
+  format: boolean;
+}
+
+// Shared by parsePothosOptions / parseDataloaderOptions so both plugins parse
+// `key=value` protoc plugin parameters the same way.
+function boolParam(name: string, v: string): boolean {
+  if (v === "" || v === "true") return true;
+  if (v === "false") return false;
+  throw new Error(`${name} should be bool, got string: ${v}`);
+}
+
+function stringParam(name: string, v: string | undefined): string {
+  if (!v) throw new Error(`${name} should be string`);
+  return v;
+}
+
 export function parsePothosOptions(
   rawOptions: { key: string; value: string }[],
 ): Options<"pothos"> {
@@ -35,16 +68,6 @@ export function parsePothosOptions(
       pothos: { builderPath: "./builder" },
     } as Extract<PrinterOptions, { dsl: "pothos" }>,
     format: true,
-  };
-
-  const boolParam = (name: string, v: string): boolean => {
-    if (v === "" || v === "true") return true;
-    if (v === "false") return false;
-    throw new Error(`${name} should be bool, got string: ${v}`);
-  };
-  const stringParam = (name: string, v: string | undefined): string => {
-    if (!v) throw new Error(`${name} should be string`);
-    return v;
   };
 
   function checkEnum<T extends string>(
@@ -115,6 +138,51 @@ export function parsePothosOptions(
       : defaultScalarMappingForTsProto),
     ...params.type.scalarMapping,
   };
+
+  return params;
+}
+
+export function parseDataloaderOptions(
+  rawOptions: { key: string; value: string }[],
+): DataloaderOptions {
+  const params: DataloaderOptions = {
+    importPrefix: null,
+    filenameSuffix: ".pb.dataloader.ts",
+    runtimeModule: "@proto-graphql/connect-runtime",
+    emitImportedFiles: false,
+    format: true,
+  };
+
+  for (const { key: k, value: v } of rawOptions) {
+    switch (k) {
+      case "import_prefix": {
+        params.importPrefix = stringParam(k, v);
+        break;
+      }
+      case "filename_suffix": {
+        params.filenameSuffix = stringParam(k, v);
+        break;
+      }
+      case "runtime_module": {
+        params.runtimeModule = stringParam(k, v);
+        break;
+      }
+      case "emit_imported_files": {
+        params.emitImportedFiles = boolParam(k, v);
+        break;
+      }
+      case "format": {
+        params.format = boolParam(k, v);
+        break;
+      }
+      case "target":
+        // used by @bufbuild/protoplugin
+        // no-op
+        break;
+      default:
+        throw new Error(`unknown param: ${k}=${v}`);
+    }
+  }
 
   return params;
 }

@@ -6,6 +6,7 @@ export default defineConfig({
     "src/index.ts",
     "src/protoc-gen-pothos.ts",
     "src/protoc-gen-nexus.ts",
+    "src/protoc-gen-dataloader.ts",
     "!src/__tests__/**",
     "!src/**/*.test.*",
   ],

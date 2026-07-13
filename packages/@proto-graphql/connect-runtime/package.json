@@ -1,0 +1,62 @@
+{
+  "name": "@proto-graphql/connect-runtime",
+  "version": "0.0.1",
+  "description": "Connect RPC runtime helpers (context convention, client resolution, DataLoader batch loaders) shared by proto-graphql's code generators",
+  "keywords": [
+    "graphql",
+    "grpc",
+    "connect",
+    "protobuf",
+    "typescript"
+  ],
+  "repository": "git@github.com:proto-graphql/proto-graphql-js.git",
+  "author": "izumin5210 <m@izum.in>",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "src/",
+    "dist/",
+    "!src/**/*.test.ts",
+    "!src/**/__tests__/"
+  ],
+  "sideEffects": false,
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">= 14.0.0"
+  },
+  "dependencies": {
+    "dataloader": "catalog:"
+  },
+  "peerDependencies": {
+    "@bufbuild/protobuf": "catalog:",
+    "@connectrpc/connect": "catalog:"
+  },
+  "devDependencies": {
+    "@bufbuild/protobuf": "catalog:",
+    "@connectrpc/connect": "catalog:",
+    "@proto-graphql/e2e-testapis-protobuf-es-v2": "workspace:*",
+    "@proto-graphql/tsconfig": "workspace:*"
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run --passWithNoTests"
+  }
+}

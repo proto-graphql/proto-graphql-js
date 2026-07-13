@@ -5,6 +5,7 @@ import {
   type DescField,
   type DescFile,
   type DescMessage,
+  type DescMethod,
   type DescOneof,
   getExtension,
 } from "@bufbuild/protobuf";
@@ -376,6 +377,9 @@ const EMPTY_ENUM_OPTIONS = Object.freeze(
 const EMPTY_ENUM_VALUE_OPTIONS = Object.freeze(
   create(extensions.GraphqlEnumValueOptionsSchema, {}),
 );
+const EMPTY_RPC_OPTIONS = Object.freeze(
+  create(extensions.GraphqlRpcOptionsSchema, {}),
+);
 
 function getSchemaOptions(
   desc: DescMessage | DescEnum,
@@ -420,4 +424,9 @@ function getEnumValueOptions(
 ): extensions.GraphqlEnumValueOptions {
   if (desc.proto.options == null) return EMPTY_ENUM_VALUE_OPTIONS;
   return getExtension(desc.proto.options, extensions.enum_value);
+}
+
+export function getRpcOptions(desc: DescMethod): extensions.GraphqlRpcOptions {
+  if (desc.proto.options == null) return EMPTY_RPC_OPTIONS;
+  return getExtension(desc.proto.options, extensions.rpc);
 }

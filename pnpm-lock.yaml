@@ -15,12 +15,18 @@ catalogs:
     '@bufbuild/protoplugin':
       specifier: 2.10.2
       version: 2.10.2
+    '@connectrpc/connect':
+      specifier: 2.1.2
+      version: 2.1.2
     case-anything:
       specifier: ^2.1.13
       version: 2.1.13
     change-case:
       specifier: ^4.1.2
       version: 4.1.2
+    dataloader:
+      specifier: 2.2.3
+      version: 2.2.3
     dprint-node:
       specifier: ^1.0.8
       version: 1.0.8
@@ -96,6 +102,25 @@ importers:
         specifier: 4.1.0
         version: 4.1.0(@types/node@24.13.2)(vite@7.3.1(@types/node@24.13.2)(tsx@4.22.4)(yaml@2.8.2))
 
+  devPackages/golden-test-harness:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: 'catalog:'
+        version: 2.10.2
+      '@bufbuild/protoplugin':
+        specifier: 'catalog:'
+        version: 2.10.2
+      '@proto-graphql/testapis-proto':
+        specifier: workspace:*
+        version: link:../testapis-proto
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+    devDependencies:
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+
   devPackages/testapis-proto:
     dependencies:
       '@bufbuild/protobuf':
@@ -136,6 +161,25 @@ importers:
       '@proto-graphql/testapis-proto':
         specifier: workspace:*
         version: link:../../../devPackages/testapis-proto
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../devPackages/tsconfig
+
+  packages/@proto-graphql/connect-runtime:
+    dependencies:
+      dataloader:
+        specifier: 'catalog:'
+        version: 2.2.3
+    devDependencies:
+      '@bufbuild/protobuf':
+        specifier: 'catalog:'
+        version: 2.10.2
+      '@connectrpc/connect':
+        specifier: 'catalog:'
+        version: 2.1.2(@bufbuild/protobuf@2.10.2)
+      '@proto-graphql/e2e-testapis-protobuf-es-v2':
+        specifier: workspace:*
+        version: link:../../../tests/testapis/protobuf-es-v2
       '@proto-graphql/tsconfig':
         specifier: workspace:*
         version: link:../../../devPackages/tsconfig
@@ -203,6 +247,34 @@ importers:
         specifier: 5.9.3
         version: 5.9.3
 
+  packages/protoc-gen-dataloader:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: 'catalog:'
+        version: 2.10.2
+      '@bufbuild/protoplugin':
+        specifier: 'catalog:'
+        version: 2.10.2
+      '@proto-graphql/codegen-core':
+        specifier: workspace:*
+        version: link:../@proto-graphql/codegen-core
+      '@proto-graphql/protoc-plugin-helpers':
+        specifier: workspace:*
+        version: link:../@proto-graphql/protoc-plugin-helpers
+      dprint-node:
+        specifier: 'catalog:'
+        version: 1.0.8
+    devDependencies:
+      '@proto-graphql/golden-test-harness':
+        specifier: workspace:*
+        version: link:../../devPackages/golden-test-harness
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../devPackages/tsconfig
+      '@vitest/coverage-v8':
+        specifier: ^4.0.0
+        version: 4.0.18(vitest@4.1.0(@types/node@24.13.2)(vite@7.3.1(@types/node@24.13.2)(tsx@4.22.4)(yaml@2.8.2)))
+
   packages/protoc-gen-pothos:
     dependencies:
       '@bufbuild/protobuf':
@@ -236,6 +308,9 @@ importers:
       '@proto-graphql/e2e-testapis-ts-proto-with-forcelong-number':
         specifier: workspace:*
         version: link:../../tests/testapis/ts-proto-with-forcelong-number
+      '@proto-graphql/golden-test-harness':
+        specifier: workspace:*
+        version: link:../../devPackages/golden-test-harness
       '@proto-graphql/testapis-proto':
         specifier: workspace:*
         version: link:../../devPackages/testapis-proto
@@ -254,6 +329,42 @@ importers:
       tsx:
         specifier: ^4.21.0
         version: 4.21.0
+
+  tests/golden-dataloader/testapis.dataloader.entity:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: 'catalog:'
+        version: 2.10.2
+      '@connectrpc/connect':
+        specifier: 'catalog:'
+        version: 2.1.2(@bufbuild/protobuf@2.10.2)
+      '@proto-graphql/connect-runtime':
+        specifier: workspace:*
+        version: link:../../../packages/@proto-graphql/connect-runtime
+      '@proto-graphql/e2e-testapis-protobuf-es-v2':
+        specifier: workspace:*
+        version: link:../../testapis/protobuf-es-v2
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../devPackages/tsconfig
+
+  tests/golden-dataloader/testapis.dataloader.group:
+    dependencies:
+      '@bufbuild/protobuf':
+        specifier: 'catalog:'
+        version: 2.10.2
+      '@connectrpc/connect':
+        specifier: 'catalog:'
+        version: 2.1.2(@bufbuild/protobuf@2.10.2)
+      '@proto-graphql/connect-runtime':
+        specifier: workspace:*
+        version: link:../../../packages/@proto-graphql/connect-runtime
+      '@proto-graphql/e2e-testapis-protobuf-es-v2':
+        specifier: workspace:*
+        version: link:../../testapis/protobuf-es-v2
+      '@proto-graphql/tsconfig':
+        specifier: workspace:*
+        version: link:../../../devPackages/tsconfig
 
   tests/golden/protobuf-es-v1/testapis.basic.empty:
     dependencies:
@@ -1563,6 +1674,11 @@ packages:
 
   '@chevrotain/utils@11.0.3':
     resolution: {integrity: sha512-YslZMgtJUyuMbZ+aKvfF3x1f5liK4mWNxghFRv7jqRR9C3R3fAOGTTKvxXDa2Y1s9zSbcpuO0cAxDYsc9SrXoQ==}
+
+  '@connectrpc/connect@2.1.2':
+    resolution: {integrity: sha512-MXkBijtcX09R10Eb6sFeIetc6w6746eio6xtfuyVOH7oQAacT1X0GzMIQFux6Qy8cq3W/T5qX5Bei8YbFtmRGA==}
+    peerDependencies:
+      '@bufbuild/protobuf': ^2.7.0
 
   '@emnapi/runtime@1.8.1':
     resolution: {integrity: sha512-mehfKSMWjjNol8659Z8KxEMrdSJDDot5SXMq00dM8BN4o+CLNXQ0xH2V7EchNHV4RmbZLmmPdEaXZc5H2FXmDg==}
@@ -3238,6 +3354,9 @@ packages:
 
   dataloader@1.4.0:
     resolution: {integrity: sha512-68s5jYdlvasItOJnCuI2Q9s4q98g0pCyL3HrcKJu8KNugUl8ahgmZYg38ysLTgQjjXX3H8CJLkAvWrclWfcalw==}
+
+  dataloader@2.2.3:
+    resolution: {integrity: sha512-y2krtASINtPFS1rSDjacrFgn1dcUuoREVabwlOGOe4SdxenREqwjwjElAdwvbGM7kgZz9a3KVicWR7vcz8rnzA==}
 
   dayjs@1.11.19:
     resolution: {integrity: sha512-t5EcLVS6QPBNqM2z8fakk/NKel+Xzshgt8FFKAn+qwlD1pzZWxh0nVCrvFK7ZDb6XucZeF9z8C7CBWTRIVApAw==}
@@ -5169,6 +5288,10 @@ snapshots:
 
   '@chevrotain/utils@11.0.3': {}
 
+  '@connectrpc/connect@2.1.2(@bufbuild/protobuf@2.10.2)':
+    dependencies:
+      '@bufbuild/protobuf': 2.10.2
+
   '@emnapi/runtime@1.8.1':
     dependencies:
       tslib: 2.6.2
@@ -6167,6 +6290,20 @@ snapshots:
       tinyrainbow: 3.0.3
       vitest: 4.1.0(@types/node@24.13.2)(vite@7.3.1(@types/node@24.13.2)(tsx@4.21.0)(yaml@2.8.2))
 
+  '@vitest/coverage-v8@4.0.18(vitest@4.1.0(@types/node@24.13.2)(vite@7.3.1(@types/node@24.13.2)(tsx@4.22.4)(yaml@2.8.2)))':
+    dependencies:
+      '@bcoe/v8-coverage': 1.0.2
+      '@vitest/utils': 4.0.18
+      ast-v8-to-istanbul: 0.3.10
+      istanbul-lib-coverage: 3.2.2
+      istanbul-lib-report: 3.0.1
+      istanbul-reports: 3.2.0
+      magicast: 0.5.1
+      obug: 2.1.1
+      std-env: 3.10.0
+      tinyrainbow: 3.0.3
+      vitest: 4.1.0(@types/node@24.13.2)(vite@7.3.1(@types/node@24.13.2)(tsx@4.22.4)(yaml@2.8.2))
+
   '@vitest/expect@4.1.0':
     dependencies:
       '@standard-schema/spec': 1.1.0
@@ -6614,6 +6751,8 @@ snapshots:
       lodash-es: 4.17.23
 
   dataloader@1.4.0: {}
+
+  dataloader@2.2.3: {}
 
   dayjs@1.11.19: {}
 

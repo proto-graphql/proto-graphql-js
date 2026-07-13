@@ -1,5 +1,9 @@
-import { access, readdir, readFile } from "node:fs/promises";
+import { access } from "node:fs/promises";
 import { join } from "node:path";
+import {
+  discoverGoldenCases,
+  mergeParams,
+} from "@proto-graphql/golden-test-harness";
 
 export type Runtime = "ts-proto" | "protobuf-es-v1" | "protobuf-es";
 
@@ -17,13 +21,6 @@ export interface TestCase {
   dir: string;
   hasQuery: boolean;
   config: TestCaseConfig;
-}
-
-interface GoldenTestConfigJson {
-  package?: string;
-  runtime?: Runtime;
-  additionalParams?: string[];
-  prefixMatch?: boolean;
 }
 
 interface RuntimeVariantMapping {
@@ -61,31 +58,6 @@ export function resolveConfig(
   };
 }
 
-async function readConfigJson(
-  caseDir: string,
-): Promise<GoldenTestConfigJson | null> {
-  try {
-    const content = await readFile(join(caseDir, "config.json"), "utf-8");
-    return JSON.parse(content) as GoldenTestConfigJson;
-  } catch {
-    return null;
-  }
-}
-
-function mergeParams(
-  baseParam: string | undefined,
-  additionalParams: string[] | undefined,
-): string | undefined {
-  const allParams: string[] = [];
-  if (baseParam) {
-    allParams.push(baseParam);
-  }
-  if (additionalParams && additionalParams.length > 0) {
-    allParams.push(...additionalParams);
-  }
-  return allParams.length > 0 ? allParams.join(",") : undefined;
-}
-
 async function hasQueryFile(caseDir: string): Promise<boolean> {
   try {
     await access(join(caseDir, "query.graphql"));
@@ -98,58 +70,27 @@ async function hasQueryFile(caseDir: string): Promise<boolean> {
 export async function discoverTestCases(
   goldenDir: string,
 ): Promise<TestCase[]> {
-  const testCases: TestCase[] = [];
+  const rawCases = await discoverGoldenCases(goldenDir);
 
-  const runtimeVariantEntries = (
-    await readdir(goldenDir, {
-      withFileTypes: true,
-    })
-  )
-    .filter((entry) => entry.isDirectory() && !entry.name.startsWith("_"))
-    .sort((a, b) => a.name.localeCompare(b.name));
+  return Promise.all(
+    rawCases.map(
+      async ({ name, dir, runtimeVariant, packageName, configJson }) => {
+        const baseConfig = resolveConfig(runtimeVariant, packageName, dir);
 
-  for (const runtimeVariantEntry of runtimeVariantEntries) {
-    const runtimeVariant = runtimeVariantEntry.name;
-    const runtimeVariantDir = join(goldenDir, runtimeVariant);
+        const config: TestCaseConfig = {
+          ...baseConfig,
+          param: mergeParams(baseConfig.param, configJson?.additionalParams),
+          prefixMatch: configJson?.prefixMatch,
+        };
+        const hasQuery = await hasQueryFile(dir);
 
-    if (!runtimeVariantMappings[runtimeVariant]) {
-      const validVariants = Object.keys(runtimeVariantMappings).join(", ");
-      throw new Error(
-        `Unknown runtime-variant: "${runtimeVariant}". Valid variants are: ${validVariants}`,
-      );
-    }
-
-    const packageEntries = (
-      await readdir(runtimeVariantDir, {
-        withFileTypes: true,
-      })
-    )
-      .filter((entry) => entry.isDirectory() && !entry.name.startsWith("_"))
-      .sort((a, b) => a.name.localeCompare(b.name));
-
-    for (const packageEntry of packageEntries) {
-      const packageName = packageEntry.name;
-      const caseDir = join(runtimeVariantDir, packageName);
-      const name = `${runtimeVariant}/${packageName}`;
-
-      const baseConfig = resolveConfig(runtimeVariant, packageName, caseDir);
-      const configJson = await readConfigJson(caseDir);
-
-      const config: TestCaseConfig = {
-        ...baseConfig,
-        param: mergeParams(baseConfig.param, configJson?.additionalParams),
-        prefixMatch: configJson?.prefixMatch,
-      };
-      const hasQuery = await hasQueryFile(caseDir);
-
-      testCases.push({
-        name,
-        dir: caseDir,
-        hasQuery,
-        config,
-      });
-    }
-  }
-
-  return testCases;
+        return {
+          name,
+          dir,
+          hasQuery,
+          config,
+        };
+      },
+    ),
+  );
 }

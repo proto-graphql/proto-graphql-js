@@ -4,7 +4,7 @@
 
 import type { GenEnum, GenExtension, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { enumDesc, extDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { EnumOptions, EnumValueOptions, FieldOptions, FileOptions, MessageOptions, OneofOptions } from "@bufbuild/protobuf/wkt";
+import type { EnumOptions, EnumValueOptions, FieldOptions, FileOptions, MessageOptions, MethodOptions, OneofOptions } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_descriptor } from "@bufbuild/protobuf/wkt";
 import type { Message } from "@bufbuild/protobuf";
 
@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file graphql/schema.proto.
  */
 export const file_graphql_schema: GenFile = /*@__PURE__*/
-  fileDesc("ChRncmFwaHFsL3NjaGVtYS5wcm90bxIHZ3JhcGhxbCJuChRHcmFwaHFsU2NoZW1hT3B0aW9ucxITCgt0eXBlX3ByZWZpeBgBIAEoCRIXCg9pZ25vcmVfcmVxdWVzdHMYAiABKAgSGAoQaWdub3JlX3Jlc3BvbnNlcxgDIAEoCBIOCgZpZ25vcmUYBCABKAgiYQoYR3JhcGhxbE9iamVjdFR5cGVPcHRpb25zEg4KBmlnbm9yZRgBIAEoCBIUCgxzcXVhc2hfdW5pb24YAiABKAgSEQoJaW50ZXJmYWNlGAMgASgIEgwKBG5hbWUYBCABKAkiPQoXR3JhcGhxbElucHV0VHlwZU9wdGlvbnMSEgoKbm9fcGFydGlhbBgBIAEoCBIOCgZpZ25vcmUYAiABKAgi8gEKE0dyYXBocWxGaWVsZE9wdGlvbnMSDgoGaWdub3JlGAEgASgIEgwKBG5hbWUYAiABKAkSFQoNc2tpcF9yZXNvbHZlchgDIAEoCBIKCgJpZBgEIAEoCBIwChJvdXRwdXRfbnVsbGFiaWxpdHkYCyABKA4yFC5ncmFwaHFsLk51bGxhYmlsaXR5Ei8KEWlucHV0X251bGxhYmlsaXR5GAwgASgOMhQuZ3JhcGhxbC5OdWxsYWJpbGl0eRI3ChlwYXJ0aWFsX2lucHV0X251bGxhYmlsaXR5GA0gASgOMhQuZ3JhcGhxbC5OdWxsYWJpbGl0eSIlChNHcmFwaHFsT25lb2ZPcHRpb25zEg4KBmlnbm9yZRgBIAEoCCIyChJHcmFwaHFsRW51bU9wdGlvbnMSDgoGaWdub3JlGAEgASgIEgwKBG5hbWUYBCABKAkiKQoXR3JhcGhxbEVudW1WYWx1ZU9wdGlvbnMSDgoGaWdub3JlGAEgASgIKkYKC051bGxhYmlsaXR5EhsKF05VTExBQklMSVRZX1VOU1BFQ0lGSUVEEAASDAoITlVMTEFCTEUQARIMCghOT05fTlVMTBACOlQKBnNjaGVtYRIcLmdvb2dsZS5wcm90b2J1Zi5GaWxlT3B0aW9ucxiIECABKAsyHS5ncmFwaHFsLkdyYXBocWxTY2hlbWFPcHRpb25zUgZzY2hlbWE6ZAoLb2JqZWN0X3R5cGUSHy5nb29nbGUucHJvdG9idWYuTWVzc2FnZU9wdGlvbnMYiBAgASgLMiEuZ3JhcGhxbC5HcmFwaHFsT2JqZWN0VHlwZU9wdGlvbnNSCm9iamVjdFR5cGU6YQoKaW5wdXRfdHlwZRIfLmdvb2dsZS5wcm90b2J1Zi5NZXNzYWdlT3B0aW9ucxiJECABKAsyIC5ncmFwaHFsLkdyYXBocWxJbnB1dFR5cGVPcHRpb25zUglpbnB1dFR5cGU6UgoFZmllbGQSHS5nb29nbGUucHJvdG9idWYuRmllbGRPcHRpb25zGIgQIAEoCzIcLmdyYXBocWwuR3JhcGhxbEZpZWxkT3B0aW9uc1IFZmllbGQ6UgoFb25lb2YSHS5nb29nbGUucHJvdG9idWYuT25lb2ZPcHRpb25zGIgQIAEoCzIcLmdyYXBocWwuR3JhcGhxbE9uZW9mT3B0aW9uc1IFb25lb2Y6VwoJZW51bV90eXBlEhwuZ29vZ2xlLnByb3RvYnVmLkVudW1PcHRpb25zGIgQIAEoCzIbLmdyYXBocWwuR3JhcGhxbEVudW1PcHRpb25zUghlbnVtVHlwZTpjCgplbnVtX3ZhbHVlEiEuZ29vZ2xlLnByb3RvYnVmLkVudW1WYWx1ZU9wdGlvbnMYiBAgASgLMiAuZ3JhcGhxbC5HcmFwaHFsRW51bVZhbHVlT3B0aW9uc1IJZW51bVZhbHVlQjVaM2dpdGh1Yi5jb20vcHJvdG8tZ3JhcGhxbC9wcm90by1ncmFwaHFsL2dvL2dyYXBocWxwYmIGcHJvdG8z", [file_google_protobuf_descriptor]);
+  fileDesc("ChRncmFwaHFsL3NjaGVtYS5wcm90bxIHZ3JhcGhxbCJuChRHcmFwaHFsU2NoZW1hT3B0aW9ucxITCgt0eXBlX3ByZWZpeBgBIAEoCRIXCg9pZ25vcmVfcmVxdWVzdHMYAiABKAgSGAoQaWdub3JlX3Jlc3BvbnNlcxgDIAEoCBIOCgZpZ25vcmUYBCABKAgiYQoYR3JhcGhxbE9iamVjdFR5cGVPcHRpb25zEg4KBmlnbm9yZRgBIAEoCBIUCgxzcXVhc2hfdW5pb24YAiABKAgSEQoJaW50ZXJmYWNlGAMgASgIEgwKBG5hbWUYBCABKAkiPQoXR3JhcGhxbElucHV0VHlwZU9wdGlvbnMSEgoKbm9fcGFydGlhbBgBIAEoCBIOCgZpZ25vcmUYAiABKAgi8gEKE0dyYXBocWxGaWVsZE9wdGlvbnMSDgoGaWdub3JlGAEgASgIEgwKBG5hbWUYAiABKAkSFQoNc2tpcF9yZXNvbHZlchgDIAEoCBIKCgJpZBgEIAEoCBIwChJvdXRwdXRfbnVsbGFiaWxpdHkYCyABKA4yFC5ncmFwaHFsLk51bGxhYmlsaXR5Ei8KEWlucHV0X251bGxhYmlsaXR5GAwgASgOMhQuZ3JhcGhxbC5OdWxsYWJpbGl0eRI3ChlwYXJ0aWFsX2lucHV0X251bGxhYmlsaXR5GA0gASgOMhQuZ3JhcGhxbC5OdWxsYWJpbGl0eSIlChNHcmFwaHFsT25lb2ZPcHRpb25zEg4KBmlnbm9yZRgBIAEoCCIyChJHcmFwaHFsRW51bU9wdGlvbnMSDgoGaWdub3JlGAEgASgIEgwKBG5hbWUYBCABKAkiKQoXR3JhcGhxbEVudW1WYWx1ZU9wdGlvbnMSDgoGaWdub3JlGAEgASgIIkMKEUdyYXBocWxScGNPcHRpb25zEi4KBWJhdGNoGAUgASgLMh8uZ3JhcGhxbC5HcmFwaHFsUnBjQmF0Y2hPcHRpb25zInwKFkdyYXBocWxScGNCYXRjaE9wdGlvbnMSEQoJa2V5X2ZpZWxkGAEgASgJEhQKDGVudGl0eV9maWVsZBgCIAEoCRISCgplbnRpdHlfa2V5GAMgASgJEg0KBWdyb3VwGAQgASgIEhYKDm1heF9iYXRjaF9zaXplGAUgASgNKkYKC051bGxhYmlsaXR5EhsKF05VTExBQklMSVRZX1VOU1BFQ0lGSUVEEAASDAoITlVMTEFCTEUQARIMCghOT05fTlVMTBACOlQKBnNjaGVtYRIcLmdvb2dsZS5wcm90b2J1Zi5GaWxlT3B0aW9ucxiIECABKAsyHS5ncmFwaHFsLkdyYXBocWxTY2hlbWFPcHRpb25zUgZzY2hlbWE6ZAoLb2JqZWN0X3R5cGUSHy5nb29nbGUucHJvdG9idWYuTWVzc2FnZU9wdGlvbnMYiBAgASgLMiEuZ3JhcGhxbC5HcmFwaHFsT2JqZWN0VHlwZU9wdGlvbnNSCm9iamVjdFR5cGU6YQoKaW5wdXRfdHlwZRIfLmdvb2dsZS5wcm90b2J1Zi5NZXNzYWdlT3B0aW9ucxiJECABKAsyIC5ncmFwaHFsLkdyYXBocWxJbnB1dFR5cGVPcHRpb25zUglpbnB1dFR5cGU6UgoFZmllbGQSHS5nb29nbGUucHJvdG9idWYuRmllbGRPcHRpb25zGIgQIAEoCzIcLmdyYXBocWwuR3JhcGhxbEZpZWxkT3B0aW9uc1IFZmllbGQ6UgoFb25lb2YSHS5nb29nbGUucHJvdG9idWYuT25lb2ZPcHRpb25zGIgQIAEoCzIcLmdyYXBocWwuR3JhcGhxbE9uZW9mT3B0aW9uc1IFb25lb2Y6VwoJZW51bV90eXBlEhwuZ29vZ2xlLnByb3RvYnVmLkVudW1PcHRpb25zGIgQIAEoCzIbLmdyYXBocWwuR3JhcGhxbEVudW1PcHRpb25zUghlbnVtVHlwZTpjCgplbnVtX3ZhbHVlEiEuZ29vZ2xlLnByb3RvYnVmLkVudW1WYWx1ZU9wdGlvbnMYiBAgASgLMiAuZ3JhcGhxbC5HcmFwaHFsRW51bVZhbHVlT3B0aW9uc1IJZW51bVZhbHVlOk0KA3JwYxIeLmdvb2dsZS5wcm90b2J1Zi5NZXRob2RPcHRpb25zGIgQIAEoCzIaLmdyYXBocWwuR3JhcGhxbFJwY09wdGlvbnNSA3JwY0I1WjNnaXRodWIuY29tL3Byb3RvLWdyYXBocWwvcHJvdG8tZ3JhcGhxbC9nby9ncmFwaHFscGJiBnByb3RvMw", [file_google_protobuf_descriptor]);
 
 /**
  * @generated from message graphql.GraphqlSchemaOptions
@@ -296,6 +296,86 @@ export const GraphqlEnumValueOptionsSchema: GenMessage<GraphqlEnumValueOptions> 
   messageDesc(file_graphql_schema, 6);
 
 /**
+ * EXPERIMENTAL: this option is under active development and may change without notice.
+ *
+ * @generated from message graphql.GraphqlRpcOptions
+ */
+export type GraphqlRpcOptions = Message<"graphql.GraphqlRpcOptions"> & {
+  /**
+   * Field numbers 1-4 are planned for service->operation support
+   * (ignore/operation/name/expose_field) and 10 for federation support;
+   * they are intentionally not defined yet and land with their consumers.
+   *
+   * @generated from field: graphql.GraphqlRpcBatchOptions batch = 5;
+   */
+  batch?: GraphqlRpcBatchOptions;
+};
+
+/**
+ * Describes the message graphql.GraphqlRpcOptions.
+ * Use `create(GraphqlRpcOptionsSchema)` to create a new message.
+ */
+export const GraphqlRpcOptionsSchema: GenMessage<GraphqlRpcOptions> = /*@__PURE__*/
+  messageDesc(file_graphql_schema, 7);
+
+/**
+ * EXPERIMENTAL: this option is under active development and may change without notice.
+ * Consumed by protoc-gen-dataloader; see
+ * docs/design/protoc-gen-dataloader/design.md for details.
+ *
+ * @generated from message graphql.GraphqlRpcBatchOptions
+ */
+export type GraphqlRpcBatchOptions = Message<"graphql.GraphqlRpcBatchOptions"> & {
+  /**
+   * The repeated key-list field on the request. May be omitted if the
+   * request has exactly one repeated field (auto-inferred).
+   *
+   * @generated from field: string key_field = 1;
+   */
+  keyField: string;
+
+  /**
+   * The repeated entity-list field on the response. May be omitted if the
+   * response has exactly one repeated message field (auto-inferred).
+   *
+   * @generated from field: string entity_field = 2;
+   */
+  entityField: string;
+
+  /**
+   * The key field on the entity, used for key matching. Required in both
+   * entity and group mode for now. Planned: entity mode will fall back to
+   * the entity's `(graphql.object_type).federation.key` when this is
+   * omitted, once federation support lands.
+   *
+   * @generated from field: string entity_key = 3;
+   */
+  entityKey: string;
+
+  /**
+   * Generates a group loader: one key maps to N entities.
+   *
+   * @generated from field: bool group = 4;
+   */
+  group: boolean;
+
+  /**
+   * The maximum number of keys to send in a single RPC call (DataLoader's
+   * `maxBatchSize`). 0 means unlimited.
+   *
+   * @generated from field: uint32 max_batch_size = 5;
+   */
+  maxBatchSize: number;
+};
+
+/**
+ * Describes the message graphql.GraphqlRpcBatchOptions.
+ * Use `create(GraphqlRpcBatchOptionsSchema)` to create a new message.
+ */
+export const GraphqlRpcBatchOptionsSchema: GenMessage<GraphqlRpcBatchOptions> = /*@__PURE__*/
+  messageDesc(file_graphql_schema, 8);
+
+/**
  * @generated from enum graphql.Nullability
  */
 export enum Nullability {
@@ -362,4 +442,10 @@ export const enum_type: GenExtension<EnumOptions, GraphqlEnumOptions> = /*@__PUR
  */
 export const enum_value: GenExtension<EnumValueOptions, GraphqlEnumValueOptions> = /*@__PURE__*/
   extDesc(file_graphql_schema, 6);
+
+/**
+ * @generated from extension: graphql.GraphqlRpcOptions rpc = 2056;
+ */
+export const rpc: GenExtension<MethodOptions, GraphqlRpcOptions> = /*@__PURE__*/
+  extDesc(file_graphql_schema, 7);
 

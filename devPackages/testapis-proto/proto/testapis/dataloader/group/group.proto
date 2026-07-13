@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package testapis.dataloader.group;
+
+import "graphql/schema.proto";
+
+message Review {
+  string id = 1;
+  string user_id = 2;
+  string body = 3;
+}
+
+message BatchListReviewsByUsersRequest {
+  repeated string user_ids = 1;
+}
+
+message BatchListReviewsByUsersResponse {
+  repeated Review reviews = 1;
+}
+
+service ReviewService {
+  // Group loader: 1 user_id -> N reviews. entity_key is required in group
+  // mode (V6) since the grouping key ("user_id") is not Review's own @key.
+  rpc BatchListReviewsByUsers(BatchListReviewsByUsersRequest) returns (BatchListReviewsByUsersResponse) {
+    option (graphql.rpc).batch = { group: true, entity_key: "user_id" };
+  }
+}

@@ -1,3 +1,4 @@
+export * from "./batchSpec.js";
 export * from "./EnumType.js";
 export * from "./InputObjectField.js";
 export * from "./InputObjectType.js";
