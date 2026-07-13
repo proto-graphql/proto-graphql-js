@@ -20,6 +20,7 @@ import {
   getRpcOptions,
   getServiceOptions,
   isRequiredField,
+  isServiceOptedIn,
 } from "./util";
 
 describe("isRequiredField", () => {
@@ -241,5 +242,55 @@ describe("getRpcOptions", () => {
     expect(opts.operation).toBe(extensions.GraphqlOperation.MUTATION);
     expect(opts.batch?.group).toBe(true);
     expect(opts.batch?.entityKey).toBe("userId");
+  });
+});
+
+describe("isServiceOptedIn", () => {
+  it("is false when the service has no options at all", () => {
+    const registry = buildServiceRegistry();
+    const svc = registry.getService("codegen_core.util_test.TestService");
+    if (svc == null) throw new Error("TestService not found");
+
+    expect(isServiceOptedIn(svc)).toBe(false);
+  });
+
+  it("is false when options are present but (graphql.service) is absent", () => {
+    // ServiceOptions object exists (so `proto.options != null`) but carries no
+    // `(graphql.service)` extension — must NOT count as opted in.
+    const registry = buildServiceRegistry({
+      serviceOptions: create(ServiceOptionsSchema, {}),
+    });
+    const svc = registry.getService("codegen_core.util_test.TestService");
+    if (svc == null) throw new Error("TestService not found");
+
+    expect(isServiceOptedIn(svc)).toBe(false);
+  });
+
+  it("is true when an empty (graphql.service) = {} is set (presence opts in)", () => {
+    const serviceOptions = create(ServiceOptionsSchema, {});
+    setExtension(
+      serviceOptions,
+      extensions.service,
+      create(extensions.GraphqlServiceOptionsSchema, {}),
+    );
+    const registry = buildServiceRegistry({ serviceOptions });
+    const svc = registry.getService("codegen_core.util_test.TestService");
+    if (svc == null) throw new Error("TestService not found");
+
+    expect(isServiceOptedIn(svc)).toBe(true);
+  });
+
+  it("stays true even when (graphql.service).ignore = true", () => {
+    const serviceOptions = create(ServiceOptionsSchema, {});
+    setExtension(
+      serviceOptions,
+      extensions.service,
+      create(extensions.GraphqlServiceOptionsSchema, { ignore: true }),
+    );
+    const registry = buildServiceRegistry({ serviceOptions });
+    const svc = registry.getService("codegen_core.util_test.TestService");
+    if (svc == null) throw new Error("TestService not found");
+
+    expect(isServiceOptedIn(svc)).toBe(true);
   });
 });

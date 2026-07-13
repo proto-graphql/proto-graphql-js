@@ -7,6 +7,7 @@ export * from "./ObjectField.js";
 export * from "./ObjectOneofField.js";
 export * from "./ObjectType.js";
 export * from "./OneofUnionType.js";
+export * from "./operationField.js";
 export * from "./options.js";
 export * from "./registry.js";
 export * from "./ScalarType.js";
