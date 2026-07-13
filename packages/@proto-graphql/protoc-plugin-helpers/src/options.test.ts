@@ -73,6 +73,25 @@ describe("parsePothosOptions", () => {
       parsePothosOptions([{ key: "format", value: "maybe" }]),
     ).toThrow(/format should be bool/);
   });
+
+  it("defaults runtimeModule to @proto-graphql/connect-runtime", () => {
+    expect(parsePothosOptions([]).runtimeModule).toEqual(
+      "@proto-graphql/connect-runtime",
+    );
+  });
+
+  it("parses runtime_module", () => {
+    expect(
+      parsePothosOptions([{ key: "runtime_module", value: "@acme/runtime" }])
+        .runtimeModule,
+    ).toEqual("@acme/runtime");
+  });
+
+  it("throws an error when runtime_module is empty", () => {
+    expect(() => {
+      parsePothosOptions([{ key: "runtime_module", value: "" }]);
+    }).toThrow();
+  });
 });
 
 describe("parseDataloaderOptions", () => {
