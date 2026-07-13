@@ -4,6 +4,7 @@ import {
   InputObjectType,
   ObjectType,
   OneofUnionType,
+  type OperationField,
   SquashedOneofUnionType,
 } from "@proto-graphql/codegen-core";
 
@@ -12,6 +13,7 @@ import { createEnumTypeCode } from "./enumType.js";
 import { createInputObjectTypeCode } from "./inputObjectType.js";
 import { createObjectTypeCode } from "./objectType.js";
 import { createOneofUnionTypeCode } from "./oneofUnionType.js";
+import { createOperationCode } from "./operationField.js";
 import type { PothosPrinterOptions } from "./util.js";
 
 export function createTypeDslPrintables(
@@ -45,4 +47,12 @@ export function createTypeDslPrintables(
     const _exhaustiveCheck: never = type;
     throw "unreachable";
   });
+}
+
+export function createOperationDslPrintables(
+  operations: readonly OperationField[],
+  opts: PothosPrinterOptions,
+  runtimeModule: string,
+): Printable[][] {
+  return operations.map((op) => createOperationCode(op, opts, runtimeModule));
 }

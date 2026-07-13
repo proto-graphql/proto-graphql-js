@@ -1,13 +1,18 @@
 import type { DescFile } from "@bufbuild/protobuf";
 import type { Schema } from "@bufbuild/protoplugin";
 import {
+  collectOperationsFromFile,
   collectTypesFromFile,
   createRegistryFromSchema,
+  fileHasOptedInServices,
   filenameFromProtoFile,
 } from "@proto-graphql/codegen-core";
 import type { Options } from "@proto-graphql/protoc-plugin-helpers";
 
-import { createTypeDslPrintables } from "./dslgen/index.js";
+import {
+  createOperationDslPrintables,
+  createTypeDslPrintables,
+} from "./dslgen/index.js";
 
 const allowedProtobufs = ["ts-proto", "protobuf-es-v1", "protobuf-es"];
 
@@ -21,12 +26,41 @@ export function generateFiles(
     opts.printer.protobuf = "ts-proto"; // default
   }
 
+  // R1.4: `(graphql.service)` requires the protobuf-es v2 runtime (Connect-ES
+  // v2). Detect the opt-in before collecting so any other runtime fails with a
+  // clear message instead of emitting broken resolvers.
+  if (fileHasOptedInServices(file) && opts.printer.protobuf !== "protobuf-es") {
+    throw new Error(
+      `${file.name}: (graphql.service) requires protobuf_lib=protobuf-es (protobuf-es v2), but protobuf_lib=${opts.printer.protobuf}. RPC-to-Query/Mutation generation only supports protobuf-es v2 (Connect-ES v2). Remove (graphql.service) from the file's services, or switch the plugin to protobuf_lib=protobuf-es.`,
+    );
+  }
+
   const registry = createRegistryFromSchema(schema);
   const types = collectTypesFromFile(file, opts.type, schema.allFiles);
+
+  const { operations, warnings, errors } = collectOperationsFromFile(
+    file,
+    opts.type,
+    schema.allFiles,
+  );
+  // Each error already carries its `<service>.<method>` reference (S1-C).
+  if (errors.length > 0) {
+    throw new Error(errors.join("\n"));
+  }
+  // protoc plugins may write freely to stderr; surface every skipped/streaming
+  // RPC without failing the run.
+  for (const warning of warnings) {
+    process.stderr.write(`${warning}\n`);
+  }
 
   const f = schema.generateFile(filenameFromProtoFile(file, opts.printer));
   const printables = [
     ...createTypeDslPrintables(types, registry, opts.printer),
+    ...createOperationDslPrintables(
+      operations,
+      opts.printer,
+      opts.runtimeModule,
+    ),
   ];
 
   // ヘッダー出力（preamble プロパティに格納される）
