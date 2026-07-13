@@ -1,6 +1,6 @@
 {
   "name": "@proto-graphql/golden-dataloader--testapis.dataloader.group",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "dependencies": {
     "@bufbuild/protobuf": "catalog:",

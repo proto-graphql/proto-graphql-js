@@ -1,6 +1,6 @@
 {
   "name": "protoc-gen-dataloader",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Generate DataLoader-based batch loaders for gRPC/Connect RPCs from Protocol Buffers IDL",
   "keywords": [
     "connect",
