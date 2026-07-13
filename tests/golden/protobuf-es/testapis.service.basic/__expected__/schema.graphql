@@ -75,7 +75,7 @@ input ProfileInput {
 type Query {
   getUser(userId: String!): User!
   pingUser(userId: String!): Boolean!
-  searchUsers(address: AddressInput, home: AddressInput, limit: Int, queryText: String!, role: Role, work: AddressInput): [User!]
+  searchUsers(address: AddressInput, home: AddressInput, limit: Int, queryText: String!, role: Role, work: WorkAddressInput): [User!]
 }
 
 type RenameUserRequest {
@@ -95,13 +95,22 @@ enum Role {
 
 type SearchUsersRequest {
   address: Address
+
+  """
+  `work` uses a distinct message type from `home` (GraphQL union member
+   types must be unique).
+  """
   filter: SearchUsersRequestFilter
   limit: Int
   queryText: String!
   role: Role
 }
 
-union SearchUsersRequestFilter = Address | Address
+"""
+`work` uses a distinct message type from `home` (GraphQL union member
+ types must be unique).
+"""
+union SearchUsersRequestFilter = Address | WorkAddress
 
 input SearchUsersRequestInput {
   address: AddressInput
@@ -109,7 +118,7 @@ input SearchUsersRequestInput {
   limit: Int
   queryText: String!
   role: Role
-  work: AddressInput
+  work: WorkAddressInput
 }
 
 type SearchUsersResponse {
@@ -141,4 +150,14 @@ input UserInput {
   phoneContact: PhoneContactInput
   profile: ProfileInput
   role: Role
+}
+
+type WorkAddress {
+  city: String!
+  zip: String!
+}
+
+input WorkAddressInput {
+  city: String!
+  zip: String!
 }

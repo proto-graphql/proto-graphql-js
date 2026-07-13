@@ -29,6 +29,8 @@ import {
   User,
   UserSchema,
   UserService,
+  WorkAddress,
+  WorkAddressSchema,
 } from "@proto-graphql/e2e-testapis-protobuf-es-v2/lib/testapis/service/basic/basic_pb";
 import { EnumRef, InputObjectRef } from "@pothos/core";
 import { getClient } from "@proto-graphql/connect-runtime";
@@ -309,10 +311,12 @@ builder.objectType(SearchUsersRequest$Ref, {
     filter: t.field({
       type: SearchUsersRequestFilter$Ref,
       nullable: true,
+      description:
+        "`work` uses a distinct message type from `home` (GraphQL union member\n types must be unique).",
       resolve: (source) => {
         return (source.filter.value ?? null) as
           | Address
-          | Address
+          | WorkAddress
           | undefined
           | null;
       },
@@ -326,6 +330,35 @@ builder.objectType(SearchUsersRequest$Ref, {
     protobufMessage: {
       fullName: "testapis.service.basic.SearchUsersRequest",
       name: "SearchUsersRequest",
+      package: "testapis.service.basic",
+    },
+  },
+});
+
+export const WorkAddress$Ref = builder.objectRef<
+  MessageShape<typeof WorkAddressSchema>
+>("WorkAddress");
+builder.objectType(WorkAddress$Ref, {
+  name: "WorkAddress",
+  fields: (t) => ({
+    city: t.expose("city", {
+      type: "String",
+      nullable: false,
+      extensions: { protobufField: { name: "city", typeFullName: "string" } },
+    }),
+    zip: t.expose("zip", {
+      type: "String",
+      nullable: false,
+      extensions: { protobufField: { name: "zip", typeFullName: "string" } },
+    }),
+  }),
+  isTypeOf: (source) => {
+    return isMessage(source, WorkAddressSchema);
+  },
+  extensions: {
+    protobufMessage: {
+      fullName: "testapis.service.basic.WorkAddress",
+      name: "WorkAddress",
       package: "testapis.service.basic",
     },
   },
@@ -745,7 +778,7 @@ export type SearchUsersRequestInput$Shape = {
   role?: SearchUsersRequest["role"] | null;
   address?: AddressInput$Shape | null;
   home?: AddressInput$Shape | null;
-  work?: AddressInput$Shape | null;
+  work?: WorkAddressInput$Shape | null;
 };
 
 export const SearchUsersRequestInput$Ref: InputObjectRef<
@@ -796,12 +829,12 @@ export const SearchUsersRequestInput$Ref: InputObjectRef<
         },
       }),
       work: t.field({
-        type: AddressInput$Ref,
+        type: WorkAddressInput$Ref,
         required: false,
         extensions: {
           protobufField: {
             name: "work",
-            typeFullName: "testapis.service.basic.Address",
+            typeFullName: "testapis.service.basic.WorkAddress",
           },
         },
       }),
@@ -826,8 +859,45 @@ export function SearchUsersRequestInput$toProto(
     filter: input?.home
       ? { case: "home", value: AddressInput$toProto(input.home) }
       : input?.work
-      ? { case: "work", value: AddressInput$toProto(input.work) }
+      ? { case: "work", value: WorkAddressInput$toProto(input.work) }
       : undefined,
+  });
+}
+
+export type WorkAddressInput$Shape = {
+  city: WorkAddress["city"];
+  zip: WorkAddress["zip"];
+};
+
+export const WorkAddressInput$Ref: InputObjectRef<WorkAddressInput$Shape> =
+  builder.inputRef<WorkAddressInput$Shape>("WorkAddressInput").implement({
+    fields: (t) => ({
+      city: t.field({
+        type: "String",
+        required: true,
+        extensions: { protobufField: { name: "city", typeFullName: "string" } },
+      }),
+      zip: t.field({
+        type: "String",
+        required: true,
+        extensions: { protobufField: { name: "zip", typeFullName: "string" } },
+      }),
+    }),
+    extensions: {
+      protobufMessage: {
+        fullName: "testapis.service.basic.WorkAddress",
+        name: "WorkAddress",
+        package: "testapis.service.basic",
+      },
+    },
+  }) as InputObjectRef<WorkAddressInput$Shape>;
+
+export function WorkAddressInput$toProto(
+  input: WorkAddressInput$Shape | null | undefined,
+): WorkAddress {
+  return create(WorkAddressSchema, {
+    city: input?.city ?? undefined,
+    zip: input?.zip ?? undefined,
   });
 }
 
@@ -1011,7 +1081,9 @@ export const UserContact$Ref = builder.unionType("UserContact", {
 export const SearchUsersRequestFilter$Ref = builder.unionType(
   "SearchUsersRequestFilter",
   {
-    types: [Address$Ref, Address$Ref],
+    types: [Address$Ref, WorkAddress$Ref],
+    description:
+      "`work` uses a distinct message type from `home` (GraphQL union member\n types must be unique).",
     extensions: {
       protobufOneof: {
         fullName: "testapis.service.basic.SearchUsersRequest.filter",
@@ -1020,7 +1092,7 @@ export const SearchUsersRequestFilter$Ref = builder.unionType(
         package: "testapis.service.basic",
         fields: [{ name: "home", type: "testapis.service.basic.Address" }, {
           name: "work",
-          type: "testapis.service.basic.Address",
+          type: "testapis.service.basic.WorkAddress",
         }],
       },
     },
@@ -1086,7 +1158,7 @@ builder.queryField(
         role: t.arg({ type: Role$Ref, required: false }),
         address: t.arg({ type: AddressInput$Ref, required: false }),
         home: t.arg({ type: AddressInput$Ref, required: false }),
-        work: t.arg({ type: AddressInput$Ref, required: false }),
+        work: t.arg({ type: WorkAddressInput$Ref, required: false }),
       },
       resolve: async (_root, args, ctx) => {
         const client = getClient(ctx, UserService);
@@ -1102,7 +1174,7 @@ builder.queryField(
               filter: args.home
                 ? { case: "home", value: AddressInput$toProto(args.home) }
                 : args.work
-                ? { case: "work", value: AddressInput$toProto(args.work) }
+                ? { case: "work", value: WorkAddressInput$toProto(args.work) }
                 : undefined,
             }),
             opts,

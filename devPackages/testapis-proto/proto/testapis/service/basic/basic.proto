@@ -108,10 +108,17 @@ message SearchUsersRequest {
   optional int32 limit = 2;
   Role role = 3;
   Address address = 4;
+  // `work` uses a distinct message type from `home` (GraphQL union member
+  // types must be unique).
   oneof filter {
     Address home = 5;
-    Address work = 6;
+    WorkAddress work = 6;
   }
+}
+
+message WorkAddress {
+  string city = 1;
+  string zip = 2;
 }
 
 message SearchUsersResponse {
