@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file graphql/schema.proto.
  */
 export const file_graphql_schema: GenFile = /*@__PURE__*/
-  fileDesc("ChRncmFwaHFsL3NjaGVtYS5wcm90bxIHZ3JhcGhxbCJuChRHcmFwaHFsU2NoZW1hT3B0aW9ucxITCgt0eXBlX3ByZWZpeBgBIAEoCRIXCg9pZ25vcmVfcmVxdWVzdHMYAiABKAgSGAoQaWdub3JlX3Jlc3BvbnNlcxgDIAEoCBIOCgZpZ25vcmUYBCABKAgiYQoYR3JhcGhxbE9iamVjdFR5cGVPcHRpb25zEg4KBmlnbm9yZRgBIAEoCBIUCgxzcXVhc2hfdW5pb24YAiABKAgSEQoJaW50ZXJmYWNlGAMgASgIEgwKBG5hbWUYBCABKAkiPQoXR3JhcGhxbElucHV0VHlwZU9wdGlvbnMSEgoKbm9fcGFydGlhbBgBIAEoCBIOCgZpZ25vcmUYAiABKAgi8gEKE0dyYXBocWxGaWVsZE9wdGlvbnMSDgoGaWdub3JlGAEgASgIEgwKBG5hbWUYAiABKAkSFQoNc2tpcF9yZXNvbHZlchgDIAEoCBIKCgJpZBgEIAEoCBIwChJvdXRwdXRfbnVsbGFiaWxpdHkYCyABKA4yFC5ncmFwaHFsLk51bGxhYmlsaXR5Ei8KEWlucHV0X251bGxhYmlsaXR5GAwgASgOMhQuZ3JhcGhxbC5OdWxsYWJpbGl0eRI3ChlwYXJ0aWFsX2lucHV0X251bGxhYmlsaXR5GA0gASgOMhQuZ3JhcGhxbC5OdWxsYWJpbGl0eSIlChNHcmFwaHFsT25lb2ZPcHRpb25zEg4KBmlnbm9yZRgBIAEoCCIyChJHcmFwaHFsRW51bU9wdGlvbnMSDgoGaWdub3JlGAEgASgIEgwKBG5hbWUYBCABKAkiKQoXR3JhcGhxbEVudW1WYWx1ZU9wdGlvbnMSDgoGaWdub3JlGAEgASgIIkMKEUdyYXBocWxScGNPcHRpb25zEi4KBWJhdGNoGAUgASgLMh8uZ3JhcGhxbC5HcmFwaHFsUnBjQmF0Y2hPcHRpb25zInwKFkdyYXBocWxScGNCYXRjaE9wdGlvbnMSEQoJa2V5X2ZpZWxkGAEgASgJEhQKDGVudGl0eV9maWVsZBgCIAEoCRISCgplbnRpdHlfa2V5GAMgASgJEg0KBWdyb3VwGAQgASgIEhYKDm1heF9iYXRjaF9zaXplGAUgASgNKkYKC051bGxhYmlsaXR5EhsKF05VTExBQklMSVRZX1VOU1BFQ0lGSUVEEAASDAoITlVMTEFCTEUQARIMCghOT05fTlVMTBACOlQKBnNjaGVtYRIcLmdvb2dsZS5wcm90b2J1Zi5GaWxlT3B0aW9ucxiIECABKAsyHS5ncmFwaHFsLkdyYXBocWxTY2hlbWFPcHRpb25zUgZzY2hlbWE6ZAoLb2JqZWN0X3R5cGUSHy5nb29nbGUucHJvdG9idWYuTWVzc2FnZU9wdGlvbnMYiBAgASgLMiEuZ3JhcGhxbC5HcmFwaHFsT2JqZWN0VHlwZU9wdGlvbnNSCm9iamVjdFR5cGU6YQoKaW5wdXRfdHlwZRIfLmdvb2dsZS5wcm90b2J1Zi5NZXNzYWdlT3B0aW9ucxiJECABKAsyIC5ncmFwaHFsLkdyYXBocWxJbnB1dFR5cGVPcHRpb25zUglpbnB1dFR5cGU6UgoFZmllbGQSHS5nb29nbGUucHJvdG9idWYuRmllbGRPcHRpb25zGIgQIAEoCzIcLmdyYXBocWwuR3JhcGhxbEZpZWxkT3B0aW9uc1IFZmllbGQ6UgoFb25lb2YSHS5nb29nbGUucHJvdG9idWYuT25lb2ZPcHRpb25zGIgQIAEoCzIcLmdyYXBocWwuR3JhcGhxbE9uZW9mT3B0aW9uc1IFb25lb2Y6VwoJZW51bV90eXBlEhwuZ29vZ2xlLnByb3RvYnVmLkVudW1PcHRpb25zGIgQIAEoCzIbLmdyYXBocWwuR3JhcGhxbEVudW1PcHRpb25zUghlbnVtVHlwZTpjCgplbnVtX3ZhbHVlEiEuZ29vZ2xlLnByb3RvYnVmLkVudW1WYWx1ZU9wdGlvbnMYiBAgASgLMiAuZ3JhcGhxbC5HcmFwaHFsRW51bVZhbHVlT3B0aW9uc1IJZW51bVZhbHVlOk0KA3JwYxIeLmdvb2dsZS5wcm90b2J1Zi5NZXRob2RPcHRpb25zGIgQIAEoCzIaLmdyYXBocWwuR3JhcGhxbFJwY09wdGlvbnNSA3JwY0I1WjNnaXRodWIuY29tL3Byb3RvLWdyYXBocWwvcHJvdG8tZ3JhcGhxbC9nby9ncmFwaHFscGJiBnByb3RvMw", [file_google_protobuf_descriptor]);
+  fileDesc("ChRncmFwaHFsL3NjaGVtYS5wcm90bxIHZ3JhcGhxbCKpAQoUR3JhcGhxbFNjaGVtYU9wdGlvbnMSEwoLdHlwZV9wcmVmaXgYASABKAkSFwoPaWdub3JlX3JlcXVlc3RzGAIgASgIEhgKEGlnbm9yZV9yZXNwb25zZXMYAyABKAgSDgoGaWdub3JlGAQgASgIEhoKEnJlcXVlc3RzX2FzX2lucHV0cxgFIAEoCBIdChVyZXNwb25zZXNfYXNfcGF5bG9hZHMYBiABKAgiYQoYR3JhcGhxbE9iamVjdFR5cGVPcHRpb25zEg4KBmlnbm9yZRgBIAEoCBIUCgxzcXVhc2hfdW5pb24YAiABKAgSEQoJaW50ZXJmYWNlGAMgASgIEgwKBG5hbWUYBCABKAkiPQoXR3JhcGhxbElucHV0VHlwZU9wdGlvbnMSEgoKbm9fcGFydGlhbBgBIAEoCBIOCgZpZ25vcmUYAiABKAgi8gEKE0dyYXBocWxGaWVsZE9wdGlvbnMSDgoGaWdub3JlGAEgASgIEgwKBG5hbWUYAiABKAkSFQoNc2tpcF9yZXNvbHZlchgDIAEoCBIKCgJpZBgEIAEoCBIwChJvdXRwdXRfbnVsbGFiaWxpdHkYCyABKA4yFC5ncmFwaHFsLk51bGxhYmlsaXR5Ei8KEWlucHV0X251bGxhYmlsaXR5GAwgASgOMhQuZ3JhcGhxbC5OdWxsYWJpbGl0eRI3ChlwYXJ0aWFsX2lucHV0X251bGxhYmlsaXR5GA0gASgOMhQuZ3JhcGhxbC5OdWxsYWJpbGl0eSIlChNHcmFwaHFsT25lb2ZPcHRpb25zEg4KBmlnbm9yZRgBIAEoCCIyChJHcmFwaHFsRW51bU9wdGlvbnMSDgoGaWdub3JlGAEgASgIEgwKBG5hbWUYBCABKAkiKQoXR3JhcGhxbEVudW1WYWx1ZU9wdGlvbnMSDgoGaWdub3JlGAEgASgIIqUBChFHcmFwaHFsUnBjT3B0aW9ucxIOCgZpZ25vcmUYASABKAgSLAoJb3BlcmF0aW9uGAIgASgOMhkuZ3JhcGhxbC5HcmFwaHFsT3BlcmF0aW9uEgwKBG5hbWUYAyABKAkSFAoMZXhwb3NlX2ZpZWxkGAQgASgJEi4KBWJhdGNoGAUgASgLMh8uZ3JhcGhxbC5HcmFwaHFsUnBjQmF0Y2hPcHRpb25zInwKFkdyYXBocWxScGNCYXRjaE9wdGlvbnMSEQoJa2V5X2ZpZWxkGAEgASgJEhQKDGVudGl0eV9maWVsZBgCIAEoCRISCgplbnRpdHlfa2V5GAMgASgJEg0KBWdyb3VwGAQgASgIEhYKDm1heF9iYXRjaF9zaXplGAUgASgNKkYKC051bGxhYmlsaXR5EhsKF05VTExBQklMSVRZX1VOU1BFQ0lGSUVEEAASDAoITlVMTEFCTEUQARIMCghOT05fTlVMTBACKk4KEEdyYXBocWxPcGVyYXRpb24SIQodR1JBUEhRTF9PUEVSQVRJT05fVU5TUEVDSUZJRUQQABIJCgVRVUVSWRABEgwKCE1VVEFUSU9OEAI6VAoGc2NoZW1hEhwuZ29vZ2xlLnByb3RvYnVmLkZpbGVPcHRpb25zGIgQIAEoCzIdLmdyYXBocWwuR3JhcGhxbFNjaGVtYU9wdGlvbnNSBnNjaGVtYTpkCgtvYmplY3RfdHlwZRIfLmdvb2dsZS5wcm90b2J1Zi5NZXNzYWdlT3B0aW9ucxiIECABKAsyIS5ncmFwaHFsLkdyYXBocWxPYmplY3RUeXBlT3B0aW9uc1IKb2JqZWN0VHlwZTphCgppbnB1dF90eXBlEh8uZ29vZ2xlLnByb3RvYnVmLk1lc3NhZ2VPcHRpb25zGIkQIAEoCzIgLmdyYXBocWwuR3JhcGhxbElucHV0VHlwZU9wdGlvbnNSCWlucHV0VHlwZTpSCgVmaWVsZBIdLmdvb2dsZS5wcm90b2J1Zi5GaWVsZE9wdGlvbnMYiBAgASgLMhwuZ3JhcGhxbC5HcmFwaHFsRmllbGRPcHRpb25zUgVmaWVsZDpSCgVvbmVvZhIdLmdvb2dsZS5wcm90b2J1Zi5PbmVvZk9wdGlvbnMYiBAgASgLMhwuZ3JhcGhxbC5HcmFwaHFsT25lb2ZPcHRpb25zUgVvbmVvZjpXCgllbnVtX3R5cGUSHC5nb29nbGUucHJvdG9idWYuRW51bU9wdGlvbnMYiBAgASgLMhsuZ3JhcGhxbC5HcmFwaHFsRW51bU9wdGlvbnNSCGVudW1UeXBlOmMKCmVudW1fdmFsdWUSIS5nb29nbGUucHJvdG9idWYuRW51bVZhbHVlT3B0aW9ucxiIECABKAsyIC5ncmFwaHFsLkdyYXBocWxFbnVtVmFsdWVPcHRpb25zUgllbnVtVmFsdWU6TQoDcnBjEh4uZ29vZ2xlLnByb3RvYnVmLk1ldGhvZE9wdGlvbnMYiBAgASgLMhouZ3JhcGhxbC5HcmFwaHFsUnBjT3B0aW9uc1IDcnBjQjVaM2dpdGh1Yi5jb20vcHJvdG8tZ3JhcGhxbC9wcm90by1ncmFwaHFsL2dvL2dyYXBocWxwYmIGcHJvdG8z", [file_google_protobuf_descriptor]);
 
 /**
  * @generated from message graphql.GraphqlSchemaOptions
@@ -37,6 +37,30 @@ export type GraphqlSchemaOptions = Message<"graphql.GraphqlSchemaOptions"> & {
    * @generated from field: bool ignore = 4;
    */
   ignore: boolean;
+
+  /**
+   * EXPERIMENTAL: this option is under active development and may change without notice.
+   * Renames `XxxRequest` messages to `XxxInput` and generates only the Input
+   * type for them (suffix-transform variant of `ignore_requests`). If both
+   * `ignore_requests` and `requests_as_inputs` are set for the same
+   * message, `ignore_requests` wins and the codegen tool should warn about
+   * the combination.
+   *
+   * @generated from field: bool requests_as_inputs = 5;
+   */
+  requestsAsInputs: boolean;
+
+  /**
+   * EXPERIMENTAL: this option is under active development and may change without notice.
+   * Renames `XxxResponse` messages to `XxxPayload` and generates only the
+   * Object type for them (suffix-transform variant of `ignore_responses`).
+   * If both `ignore_responses` and `responses_as_payloads` are set for the
+   * same message, `ignore_responses` wins and the codegen tool should warn
+   * about the combination.
+   *
+   * @generated from field: bool responses_as_payloads = 6;
+   */
+  responsesAsPayloads: boolean;
 };
 
 /**
@@ -297,14 +321,49 @@ export const GraphqlEnumValueOptionsSchema: GenMessage<GraphqlEnumValueOptions> 
 
 /**
  * EXPERIMENTAL: this option is under active development and may change without notice.
+ * Controls whether and how an individual RPC is generated as a GraphQL
+ * Query/Mutation field. Each RPC declares its own exposure via `operation`.
  *
  * @generated from message graphql.GraphqlRpcOptions
  */
 export type GraphqlRpcOptions = Message<"graphql.GraphqlRpcOptions"> & {
   /**
-   * Field numbers 1-4 are planned for service->operation support
-   * (ignore/operation/name/expose_field) and 10 for federation support;
-   * they are intentionally not defined yet and land with their consumers.
+   * Disables generation for this RPC while keeping the declaration (e.g.
+   * `operation`) in place, so it can be re-enabled later without losing the
+   * annotation.
+   *
+   * @generated from field: bool ignore = 1;
+   */
+  ignore: boolean;
+
+  /**
+   * Setting this to QUERY or MUTATION opts this RPC into Query/Mutation
+   * generation. Left unset (GRAPHQL_OPERATION_UNSPECIFIED), the RPC is not
+   * generated.
+   *
+   * @generated from field: graphql.GraphqlOperation operation = 2;
+   */
+  operation: GraphqlOperation;
+
+  /**
+   * Overrides the field name. Defaults to the camelCase of the RPC name.
+   *
+   * @generated from field: string name = 3;
+   */
+  name: string;
+
+  /**
+   * Unwraps the specified field of the response and uses it as the return
+   * value.
+   *
+   * @generated from field: string expose_field = 4;
+   */
+  exposeField: string;
+
+  /**
+   * Declares this RPC as a batch loader generation target, independent of
+   * federation. Consumed by protoc-gen-dataloader; see
+   * docs/design/protoc-gen-dataloader/design.md for details.
    *
    * @generated from field: graphql.GraphqlRpcBatchOptions batch = 5;
    */
@@ -400,6 +459,38 @@ export enum Nullability {
  */
 export const NullabilitySchema: GenEnum<Nullability> = /*@__PURE__*/
   enumDesc(file_graphql_schema, 0);
+
+/**
+ * EXPERIMENTAL: this option is under active development and may change without notice.
+ * The kind of GraphQL operation an RPC is exposed as. Future kinds may be
+ * added here (e.g. a field-targeting kind for federation-style `extend`).
+ *
+ * @generated from enum graphql.GraphqlOperation
+ */
+export enum GraphqlOperation {
+  /**
+   * Not exposed as a GraphQL operation (the default).
+   *
+   * @generated from enum value: GRAPHQL_OPERATION_UNSPECIFIED = 0;
+   */
+  GRAPHQL_OPERATION_UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: QUERY = 1;
+   */
+  QUERY = 1,
+
+  /**
+   * @generated from enum value: MUTATION = 2;
+   */
+  MUTATION = 2,
+}
+
+/**
+ * Describes the enum graphql.GraphqlOperation.
+ */
+export const GraphqlOperationSchema: GenEnum<GraphqlOperation> = /*@__PURE__*/
+  enumDesc(file_graphql_schema, 1);
 
 /**
  * @generated from extension: graphql.GraphqlSchemaOptions schema = 2056;

@@ -92,12 +92,14 @@
 - **決定: (b)** `idempotency_level = NO_SIDE_EFFECTS` → Query、それ以外 → Mutation、`(graphql.rpc).operation` で上書き(推奨に反する選択)
 - 理由: idempotency_level は proto 標準の副作用シグナル(Connect も HTTP GET 対応に使用)。アノテーション量を抑える
 - 「全 RPC 自動公開事故」の懸念は Q8 の opt-in で担保する前提
+- **[2026-07-14 追記] Q31 でこの決定は覆された**: 規約デフォルトは撤廃され、`(graphql.rpc).operation` の明示指定のみが Query/Mutation を決定する。詳細は [Q31](#q31-operation-の明示指定を唯一のオプトイン条件にする2026-07-14) を参照
 
 ### Q8. 生成対象のオプトイン単位
 
 - 選択肢: **(a) service オプション(推奨)** / (b) プラグインパラメータ / (c) 両方
 - **決定: (a)** `(graphql.service)` を付けたサービスのみ生成
 - 理由: proto が唯一の真実。同一ファイル内で公開/非公開サービスを共存できる。プラグインパラメータ追加不要。個別 RPC の除外は `(graphql.rpc).ignore`
+- **[2026-07-14 追記] Q31 でこの決定は覆された**: `(graphql.service)` オプション自体を撤廃し、RPC 単位の `(graphql.rpc).operation` 明示指定がオプトインを兼ねる。詳細は [Q31](#q31-operation-の明示指定を唯一のオプトイン条件にする2026-07-14) を参照
 
 ### Q9. フィールド名の導出
 
@@ -308,6 +310,36 @@ design.md §7 および protoc-gen-dataloader/design.md の残項目を参照。
   - (b) は Q28 の「paramsKey ごとに DataLoader を分ける」二段キャッシュ構造をそのまま保てるため、`maxBatchSize` は DataLoader 標準機能のまま・エラー伝搬も DataLoader 単位のままで済む
 - 副次効果: 生成ファイルの const アノテーションが `DataLoader<K, V>` から `RpcLoader<K, V, PArgs>` に変わったことで、**生成ファイルが `dataloader` パッケージの型を直接 import しなくなった**(実装フェーズで確定した設計修正の「`DataLoader` 型の import」を参照)。`RpcLoader.loader(...)` が `.prime()`/`.clear()` 用に生の `DataLoader` を返すが、その型は `@proto-graphql/connect-runtime` 経由でのみ参照される
 - 反映先: [protoc-gen-dataloader/design.md](../protoc-gen-dataloader/design.md) §1.1/§4.2/§4.3/§4.5、`@proto-graphql/connect-runtime` の `RpcLoader` 型・`createRpcLoader`、生成物の const アノテーション、golden テスト・実行テスト
+
+### Step 1 実装フェーズの記録(2026-07-14)
+
+T0.2〜T1.6(codegen-core の operation 抽象・printer・fixtures/golden/実行テスト・docs)を実装した過程で確定した細部・発見事項。設計そのものの変更ではなく、design.md に明記のなかった実装判断とテストで見つかった既存の不具合の記録。
+
+- **戻り値 nullability の判断**: response message 型を返す operation は**デフォルトで non-null**(RPC は値を返すか throw するかのいずれかで、`NOT_FOUND` 等は `null` ではなくエラーとして表出する — Q12 の帰結)。`expose_field` 使用時は unwrap したフィールド自身の output nullability(`isRequiredField(field, "output")`)にそのまま従う。`google.protobuf.Empty` レスポンスは常に non-null `Boolean`。実装は `codegen-core/src/types/operationField.ts` の `OperationField.nullable` / `resolveReturn`
+- **oneof の XOR バリデーションは v1 では生成しない**: Query flatten 時、oneof メンバーは個別の optional 引数としてそのまま並ぶだけで、複数同時指定を拒否する runtime チェックは生成されない(design.md §7 の未決事項どおり据え置き)。**arg 単位の deprecation も出力しない**: `OperationField.deprecationReason` は operation フィールド自体には反映されるが、flatten 引数(`t.arg(...)`)側は `type`/`required` のみで `deprecationReason` を持たない — Pothos の `t.arg` が deprecation 相当の API を持つか未検証のため、今回は見送り
+- **ignore と suffix 変換(`requests_as_inputs`/`responses_as_payloads`)の併用優先順位**: `ignore_requests`/`ignore_responses` が勝つ(design.md §7 で「実装時に定義」としていた項目の確定)。この組み合わせを検出した警告は、型収集層(`buildInputObjectTypes`/`buildObjectTypes`)には警告チャネルがないため、`collectOperationsFromFile`(ファイル単位で `GraphqlSchemaOptions` を読む唯一の場所)がファイルにつき 1 回だけ出す形にした
+- **KNOWN ISSUE(Step 1 起因ではない既存不具合、実行テストで発覚)**: squashed-oneof-union printer は、oneof の 2 つ以上のメンバーが同一 message 型を指す場合に `union X = T | T` という不正な GraphQL(union のメンバー型は一意でなければならない)を生成する。`protoc-gen-pothos` の golden スイートはこれまで `printSchema` の結果を SDL snapshot するだけで `validateSchema` を一切通していなかったため検出されず、今回 S1-F の実行テストが初めて `graphql()`(内部でスキーマを validate する)を呼んだことで表面化した。同型の重複は `printer.test.ts` の既存スモークテスト(`oneof pick { Address addr_a; Address addr_b; }` → `union GetUserRequestPick = Address | Address`)にも以前から存在しており、今回新規に持ち込んだ欠陥ではない。テスト用 fixture(`SearchUsersRequest.filter`)は `work` を別の `WorkAddress` 型にすることで回避した(commit `9684f89b`)。printer 自体の修正はスコープ外 — follow-up 候補として (a) squashed union printer 側での重複型検出/エラー化、(b) golden ハーネスに schema-validation ステージ(`validateSchema` 呼び出し)を追加し、この種の不正スキーマを型チェック段階で検出できるようにする、の 2 点を残す
+- **ts-proto 側 fixture 生成の `outputServices=none` 化**: `testapis/service/*` は本 PoC で初めて `stream` RPC を含む fixture になったため、ts-proto のデフォルトのサービス stub 出力が `rxjs` 型依存を引き込んでしまう(本リポジトリは未導入)。RPC→GraphQL 生成は protobuf-es v2 専用(design.md §1.1)で ts-proto 側にサービス stub は元々不要なため、`buf.gen.testapis.yaml` に `outputServices=none` を追加して回避した(commit `afcab638`)
+
+### Q31. `operation` の明示指定を唯一のオプトイン条件にする(2026-07-14)
+
+- 背景: Step 1 実装(basic/transforms fixtures)を見たユーザーから、standalone(非 federation)利用を想定すると空の `option (graphql.service) = {};` によるオプトインが直感的でない、という指摘があった。「サービスを丸ごとオプトインしてから個々の RPC の挙動を規約 + オーバーライドで決める」という二段構えではなく、「各 RPC が自分自身の生成物を明示的に宣言する」形のほうが読んでそのまま分かる
+- 選択肢:
+  - (a) 現状維持(Q7 の規約デフォルト + Q8 の service opt-in)
+  - **(b) `(graphql.rpc).operation` を QUERY/MUTATION に明示設定した RPC だけが生成対象になる、単一の宣言点に一本化(採用)**。`GraphqlServiceOptions` と `service = 2056` の ServiceOptions extension は本家から削除し、`idempotency_level` は一切参照しない
+  - (c) service opt-in は残しつつ、規約デフォルト(idempotency_level → Query)だけ廃止して RPC 単位では明示必須にする(ハイブリッド)
+- **決定: (b)**。Q7(規約デフォルト)・Q8(service opt-in)の両方を上書きする
+- 理由:
+  - **「空オプションで意味が変わる」設計は直感に反する**: `option (graphql.service) = {};` のように値を持たないオプションの「付いているかどうか」だけが意味を持つ設計は、proto を読むだけでは気づきにくい(Q8 の決定時点でも `getServiceOptions` ではなく `hasExtension` を使う特殊対応が必要だった=実装上のコード臭でもあった)
+  - **RPC 単位の宣言のほうが「何が Query/Mutation になるか」を RPC 自身の定義だけで判断できる**: 現状は「このサービスは opt-in されているか」→「この RPC は ignore されていないか」→「idempotency_level は何か」→「operation で上書きされていないか」の 4 段階を追わないと結論が出ない。(b) は「operation に QUERY/MUTATION が入っているか」の 1 段階で完結する
+  - **将来の kind 拡張と自然に接続する**: Step 2 で federation 向けに「既存型のフィールドとして extend する」種類の宣言(`extend` 相当)を追加する可能性があるが、それも「RPC が自分の生成物の種類を宣言する」という同じ形に乗る。service opt-in という別レイヤーの概念を維持する理由がなくなる
+  - **idempotency_level は「安全な再試行」を表す proto 標準シグナルであり、「GraphQL に公開するかどうか」の意味論を持たせるのは責務の混在**(Q7 で「アノテーション量を抑える」ために採用した規約だが、実際に fixture を書いてみると「Query にしたいから idempotency_level を設定する」という本末転倒が起きやすいことが分かった)
+- 帰結:
+  - `(graphql.rpc).ignore` は維持: `operation` が設定されていても `ignore = true` なら生成しない(「宣言を残したまま一時的に無効化する」という他オプションと一貫した意味論)
+  - streaming RPC への挙動: `operation` を明示した streaming RPC はエラー(変更なし)。`operation` 未設定の streaming RPC は単に非公開になる(旧来の「警告」は消える — 未注釈 RPC 全般の扱いと統一されたため)
+  - protoc-gen-pothos の protobuf-es 専用ガード(旧 R1.4)のトリガーは「opt-in されたサービスがある」から「`operation` を設定した RPC がある」に置き換え
+  - upstream(`proto-graphql` submodule)の是正コミットは `make-rpc-operation-explicit` ブランチで用意し、Step 1 で着地済みの `GraphqlServiceOptions` を削除する(Q29 の per-track landing 方針とは別に、着地済みオプションの訂正として扱う)
+- 反映先: [design.md](./design.md) §2(オプション草案)/§3.1(マッピング表)、[requirements.md](./requirements.md) R1/R2、`packages/@proto-graphql/codegen-core`(`operationField.ts`/`util.ts`)、`protoc-gen-pothos`(`printer.ts` ガード)、`devPackages/testapis-proto` の service fixtures、[rpc-operations.md](../../protoc-gen-pothos/rpc-operations.md)、[proto-annotations/reference.md](../../proto-annotations/reference.md)
 
 ## 7. 将来課題への申し送り(protoc-gen-gqlkit)
 

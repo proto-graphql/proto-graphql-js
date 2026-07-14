@@ -19,6 +19,12 @@
     },
     "@proto-graphql/golden-dataloader--testapis.dataloader.group#test": {
       "dependsOn": ["^build", "protoc-gen-dataloader#test"]
+    },
+    "@proto-graphql/golden-pothos--testapis.service.basic--protobuf-es#test": {
+      "dependsOn": ["^build", "protoc-gen-pothos#test"]
+    },
+    "@proto-graphql/golden-pothos--testapis.service.transforms--protobuf-es#test": {
+      "dependsOn": ["^build", "protoc-gen-pothos#test"]
     }
   }
 }

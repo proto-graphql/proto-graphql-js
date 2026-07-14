@@ -1,0 +1,151 @@
+syntax = "proto3";
+
+package testapis.service.basic;
+
+import "google/protobuf/empty.proto";
+import "graphql/schema.proto";
+
+// Each RPC below declares its own exposure via `(graphql.rpc).operation`
+// (Q31) — there is no service-level opt-in. `InternalSync` sets `operation`
+// AND `(graphql.rpc).ignore = true` (ignore wins). `WatchUsers` and
+// `LookupUser` are left unannotated and are therefore not exposed.
+service UserService {
+  // Explicit `operation = QUERY` (Q31) — `idempotency_level` is not
+  // consulted.
+  rpc GetUser(GetUserRequest) returns (User) {
+    option (graphql.rpc).operation = QUERY;
+  }
+
+  // Flattened Query args covering a scalar, an optional scalar, an enum, a
+  // message, and a message-typed oneof (R4.1). `expose_field` unwraps the
+  // repeated `users` field as the return (R5.4).
+  rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse) {
+    option (graphql.rpc).operation = QUERY;
+    option (graphql.rpc).expose_field = "users";
+  }
+
+  // Explicit `operation = MUTATION` (Q31). Single `input` arg (R4.2).
+  rpc CreateUser(CreateUserRequest) returns (User) {
+    option (graphql.rpc).operation = MUTATION;
+  }
+
+  // `(graphql.rpc).name` overrides the default camelCase field name (R3).
+  rpc RenameUser(RenameUserRequest) returns (User) {
+    option (graphql.rpc).operation = MUTATION;
+    option (graphql.rpc).name = "updateUserName";
+  }
+
+  // Explicit `operation = QUERY`. `google.protobuf.Empty` response ->
+  // non-null Boolean, always `true` (R5.5).
+  rpc PingUser(GetUserRequest) returns (google.protobuf.Empty) {
+    option (graphql.rpc).operation = QUERY;
+  }
+
+  // Explicit `operation = MUTATION`; `google.protobuf.Empty` response ->
+  // Boolean (R5.5).
+  rpc DeleteUser(GetUserRequest) returns (google.protobuf.Empty) {
+    option (graphql.rpc).operation = MUTATION;
+  }
+
+  // `operation` is set, but `(graphql.rpc).ignore = true` disables
+  // generation while keeping the declaration (Q31) -> not generated.
+  rpc InternalSync(InternalSyncRequest) returns (google.protobuf.Empty) {
+    option (graphql.rpc).operation = MUTATION;
+    option (graphql.rpc).ignore = true;
+  }
+
+  // Server-streaming RPC with no explicit `operation` -> simply unexposed,
+  // no warning (Q31, R1.3).
+  rpc WatchUsers(GetUserRequest) returns (stream User);
+
+  // No `(graphql.rpc)` annotation at all, despite `idempotency_level =
+  // NO_SIDE_EFFECTS` -> not exposed (Q31 regression: idempotency_level is
+  // never consulted as an implicit opt-in signal).
+  rpc LookupUser(GetUserRequest) returns (User) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+  }
+}
+
+// No RPC here sets `(graphql.rpc).operation` (Q31): proves that exposure is
+// declared per-RPC, not implied by having unary RPCs that would otherwise
+// resolve just fine (R1). No Query/Mutation field is generated for GetAdmin.
+service AdminService {
+  rpc GetAdmin(GetUserRequest) returns (User);
+}
+
+message User {
+  string id = 1 [(graphql.field).id = true];
+  string name = 2;
+  optional string bio = 3;
+  Role role = 4;
+  Address address = 5;
+  Profile profile = 6;
+  oneof contact {
+    EmailContact email_contact = 7;
+    PhoneContact phone_contact = 8;
+  }
+}
+
+message Profile {
+  string headline = 1;
+  optional string avatar_url = 2;
+}
+
+message EmailContact {
+  string email = 1;
+}
+
+message PhoneContact {
+  string phone_number = 1;
+}
+
+message Address {
+  string city = 1;
+  string zip = 2;
+}
+
+enum Role {
+  ROLE_UNSPECIFIED = 0;
+  ROLE_ADMIN = 1;
+  ROLE_USER = 2;
+}
+
+message GetUserRequest {
+  string user_id = 1;
+}
+
+message SearchUsersRequest {
+  string query_text = 1;
+  optional int32 limit = 2;
+  Role role = 3;
+  Address address = 4;
+  // `work` uses a distinct message type from `home` (GraphQL union member
+  // types must be unique).
+  oneof filter {
+    Address home = 5;
+    WorkAddress work = 6;
+  }
+}
+
+message WorkAddress {
+  string city = 1;
+  string zip = 2;
+}
+
+message SearchUsersResponse {
+  repeated User users = 1;
+}
+
+message CreateUserRequest {
+  string name = 1;
+  Address address = 2;
+}
+
+message RenameUserRequest {
+  string user_id = 1;
+  string new_name = 2;
+}
+
+message InternalSyncRequest {
+  string cursor = 1;
+}

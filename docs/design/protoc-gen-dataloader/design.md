@@ -70,7 +70,7 @@ service ReviewService {
 
 ### 2.1 オプトインの独立性
 
-- **`(graphql.service)` は不要**。`batch` の宣言だけで生成対象になる(GraphQL への公開と dataloader 生成は独立した関心)
+- **`(graphql.rpc).operation` は不要**(Q31 で service opt-in オプション自体が撤廃され、`operation` が GraphQL 公開の唯一の宣言点になった)。`batch` の宣言だけで生成対象になる(GraphQL への公開と dataloader 生成は独立した関心)
 - protoc-gen-pothos 側の federation 配線(`federation.entity_resolver` / `extend`)を使う場合は、そちらの規則(service opt-in)が別途適用される
 - `batch` の名前空間が `graphql.*` に残る点は意図的: proto-graphql エコシステムのアノテーションとして一元管理し、新 extension 名前空間のコスト(利用者の import 追加、本家の管理対象増)を避ける。非 GraphQL 用途が本格化したら独立名前空間への移行を再検討する
 

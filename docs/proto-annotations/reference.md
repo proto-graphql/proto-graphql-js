@@ -22,6 +22,8 @@ File-level options applied to all types in the file.
 | `ignore_requests` | `bool` | Ignore messages ending with `Request` |
 | `ignore_responses` | `bool` | Ignore messages ending with `Response` |
 | `ignore` | `bool` | Ignore entire file |
+| `requests_as_inputs` | `bool` | **EXPERIMENTAL.** Renames `XxxRequest` messages to `XxxInput` and generates only the `Input` type for them (suffix-transform variant of `ignore_requests`). If both `ignore_requests` and `requests_as_inputs` match the same message, `ignore_requests` wins (a warning is emitted). See [RPC Operations](../protoc-gen-pothos/rpc-operations.md). |
+| `responses_as_payloads` | `bool` | **EXPERIMENTAL.** Renames `XxxResponse` messages to `XxxPayload` and generates only the `Object` type for them (suffix-transform variant of `ignore_responses`). If both `ignore_responses` and `responses_as_payloads` match the same message, `ignore_responses` wins (a warning is emitted). See [RPC Operations](../protoc-gen-pothos/rpc-operations.md). |
 
 **Example:**
 
@@ -31,6 +33,33 @@ option (graphql.schema) = {
   ignore_requests: true
   ignore_responses: true
 };
+```
+
+**`requests_as_inputs` / `responses_as_payloads` example:**
+
+```protobuf
+option (graphql.schema) = {
+  requests_as_inputs: true
+  responses_as_payloads: true
+};
+
+message CreateTaskRequest {
+  string title = 1;
+}
+
+message CreateTaskResponse {
+  Task task = 1;
+}
+```
+
+```graphql
+input CreateTaskInput {
+  title: String!
+}
+
+type CreateTaskPayload {
+  task: Task
+}
 ```
 
 ## Message Options
@@ -222,11 +251,52 @@ enum Role {
 }
 ```
 
-## Service Options
-
-`(graphql.service)` (opt-in for service→GraphQL-operation generation, and the sibling `(graphql.rpc)` fields `operation`/`name`/`expose_field`/`federation`) is planned but **not yet part of the proto** — it lands together with service→GraphQL-operation support. `(graphql.rpc).batch`, documented below, does not require it: `batch` is the only field currently defined on `(graphql.rpc)`, and it takes effect on its own.
-
 ## RPC Options
+
+`(graphql.rpc)` fields fall into two groups: `operation`/`ignore`/`name`/`expose_field` control whether and how an RPC is mapped to a GraphQL `Query`/`Mutation` field (see [RPC Operations](../protoc-gen-pothos/rpc-operations.md)); `batch` (documented separately below) declares a batch-loader generation target for [protoc-gen-dataloader](../protoc-gen-dataloader/README.md) and takes effect independently of `operation`.
+
+> **EXPERIMENTAL.** `operation`/`ignore`/`name`/`expose_field` are under active development and may change without notice.
+
+There is no service-level opt-in: an RPC generates a `Query`/`Mutation` field **iff `operation` is explicitly set to `QUERY` or `MUTATION`**. `idempotency_level` is never consulted. Requires `protobuf_lib=protobuf-es` (protobuf-es v2 / Connect-ES v2) on any file with at least one RPC that sets `operation` — using it with any other `protobuf_lib` is a codegen error.
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `operation` | `GraphqlOperation` (`QUERY` \| `MUTATION`) | Setting this to `QUERY` or `MUTATION` is what opts the RPC into Query/Mutation generation. Left unspecified, the RPC is not generated — `idempotency_level` is not a fallback. Setting this on a streaming RPC is a codegen error. |
+| `ignore` | `bool` | Disables generation for this RPC while keeping its `operation` declaration in place, so it can be re-enabled later without losing the annotation. `operation` set + `ignore = true` → not generated. |
+| `name` | `string` | Overrides the field name. Defaults to the camelCase of the RPC name. |
+| `expose_field` | `string` | Unwraps the named response field and returns it directly, instead of the whole response message. |
+
+**Examples:**
+
+```protobuf
+service UserService {
+  // operation = QUERY opts this RPC in as a Query field.
+  rpc GetUser(GetUserRequest) returns (User) {
+    option (graphql.rpc).operation = QUERY;
+  }
+
+  // (graphql.rpc).name overrides the default camelCase field name.
+  rpc RenameUser(RenameUserRequest) returns (User) {
+    option (graphql.rpc).operation = MUTATION;
+    option (graphql.rpc).name = "updateUserName";
+  }
+
+  // expose_field unwraps the repeated `users` field as the return.
+  rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse) {
+    option (graphql.rpc).operation = QUERY;
+    option (graphql.rpc).expose_field = "users";
+  }
+
+  // operation is set, but ignore = true wins: not generated.
+  rpc InternalSync(InternalSyncRequest) returns (google.protobuf.Empty) {
+    option (graphql.rpc).operation = MUTATION;
+    option (graphql.rpc).ignore = true;
+  }
+
+  // No (graphql.rpc) annotation at all -> not exposed.
+  rpc GetAdmin(GetUserRequest) returns (User);
+}
+```
 
 ### (graphql.rpc).batch
 

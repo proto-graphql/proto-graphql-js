@@ -150,6 +150,29 @@ export function protoTypeSymbol(
 }
 
 /**
+ * protobuf-es v2 用: Service シンボル (例: UserService, Nested_UserService) を生成
+ *
+ * Connect-ES / protobuf-es v2 が出力する service 定数を参照する。message/enum の
+ * ような shape 名との衝突は起きえないため、salt 解決は不要 (dataloader の
+ * `serviceConstName` と同じ簡易ロジック)。
+ */
+export function protoServiceSymbol(
+  service: DescService,
+  opts: Pick<PrinterOptions, "protobuf" | "importPrefix">,
+): ImportSymbol {
+  const pkg = service.file.proto.package ?? "";
+  const offset = pkg.length > 0 ? pkg.length + 1 : 0;
+  const symbolName = service.typeName.substring(offset).replace(/\./g, "_");
+  const { dir, name } = path.parse(service.file.name);
+  const importPath =
+    `${opts.importPrefix ? `${opts.importPrefix}/` : "./"}${dir}/${name}_pb`.replace(
+      /(?<!:)\/\//,
+      "/",
+    );
+  return createImportSymbol(symbolName, importPath);
+}
+
+/**
  * protobuf-es v2 用: Schema シンボル (例: UserSchema, Parent_ChildSchema) を生成
  *
  * protobuf-es の @bufbuild/protoplugin が行う名前衝突回避ロジックを再実装。

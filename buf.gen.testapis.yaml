@@ -9,6 +9,11 @@ plugins:
       - esModuleInterop=true
       # https://github.com/stephenh/ts-proto/issues/449
       - useExactTypes=false
+      # ts-proto runtime is message-types-only here (RPC-to-GraphQL generation
+      # is protobuf-es v2 / Connect-ES only, see design.md §1.1); disable
+      # service stub output so streaming methods don't pull in an rxjs
+      # dependency this repo never installs.
+      - outputServices=none
     out: ./tests/testapis/ts-proto/src
     strategy: all
   - local: protoc-gen-ts_proto
@@ -20,6 +25,7 @@ plugins:
       - esModuleInterop=true
       # https://github.com/stephenh/ts-proto/issues/449
       - useExactTypes=false
+      - outputServices=none
     out: ./tests/testapis/ts-proto-with-forcelong-long/src
     strategy: all
   - local: protoc-gen-ts_proto
@@ -31,6 +37,7 @@ plugins:
       - esModuleInterop=true
       # https://github.com/stephenh/ts-proto/issues/449
       - useExactTypes=false
+      - outputServices=none
     out: ./tests/testapis/ts-proto-with-forcelong-number/src
     strategy: all
   - local: ["pnpm", "-s", "--filter", "./tests/testapis/protobuf-es", "exec", "protoc-gen-es"]

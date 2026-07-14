@@ -2,7 +2,7 @@
 
 > 関連: [requirements.md](./requirements.md) / [decision-log.md](./decision-log.md)(意思決定の経緯)/ [research.md](./research.md)(前提調査)/ [protoc-gen-dataloader 設計](../protoc-gen-dataloader/design.md)
 
-- Status: 設計合意済み(2026-07-11)。`batch` オプション独立化・group loader 追加・単一キー限定は同日の詳細設計フェーズで承認済み([decision-log.md §6](./decision-log.md))
+- Status: 設計合意済み(2026-07-11)。`batch` オプション独立化・group loader 追加・単一キー限定は同日の詳細設計フェーズで承認済み([decision-log.md §6](./decision-log.md))。**Step 1(RPC → Query/Mutation)は実装完了(2026-07-14、[implementation-plan.md](./implementation-plan.md) T0.2〜T1.6)**。細部の実装判断・実行テストで判明した既存不具合は [decision-log.md §6「Step 1 実装フェーズの記録」](./decision-log.md)を参照。Step 2(Federation)は未着手
 
 ## 1. 全体アーキテクチャ
 
@@ -11,7 +11,7 @@
 - **protoc-gen-pothos の拡張**として実装する(新プラグイン化・SDL 直生成・gqlkit ベース案は検討の末、今回は見送り。経緯は [decision-log.md §2 Q3〜Q6](./decision-log.md))
 - PoC として進め、知見を将来の protoc-gen-gqlkit(および Pothos 版の正式化)に還元する
 - resolver は**フル実装を生成**する。ユーザーが書くのは builder / context / server 組み立てのみ
-- **protobuf-es v2 専用**(Connect-ES v2 が protobuf-es v2 必須のため)。`protobuf_lib=protobuf-es` 以外で `(graphql.service)` を検出したらエラー
+- **protobuf-es v2 専用**(Connect-ES v2 が protobuf-es v2 必須のため)。`protobuf_lib=protobuf-es` 以外で `(graphql.rpc).operation` を検出したらエラー(Q31 により service opt-in ではなく RPC 単位のオプトインが検出トリガーになった)
 - 2 段階リリース: **Step 1 = RPC → Query/Mutation**、**Step 2 = Federation**
 - dataloader 生成は独立プラグイン **protoc-gen-dataloader** に分離(federation と独立して開発可能。[設計はこちら](../protoc-gen-dataloader/design.md))
 
@@ -35,26 +35,23 @@
 
 proto-graphql 本家 `graphql/schema.proto` への追加。**experimental を明記**し、PoC 期間中の semantics 変更余地を宣言する。Go binding (`graphqlpb`) を同時再生成し、本リポジトリは submodule 更新 + `pnpm gen:extensions` で追従する。
 
-> **Landing 状況**: per-track landing 方針([decision-log Q29](./decision-log.md))により、upstream には現時点で `(graphql.rpc).batch`(`GraphqlRpcBatchOptions` と `GraphqlRpcOptions.batch = 5`、および `rpc = 2056` extension)のみが着地済み。以下のドラフトのうち `GraphqlRpcOptions` のフィールド番号 1-4(ignore/operation/name/expose_field)・10(federation)、`GraphqlObjectTypeOptions.federation`(field 5)、`GraphqlSchemaOptions` の 5-6(requests_as_inputs/responses_as_payloads)は**コンシューマ実装 PR が着地するまでフィールド番号を予約するのみ**で proto には未定義。`GraphqlServiceOptions` / `GraphqlOperation` / `GraphqlRpcFederationOptions` / `GraphqlExtendOptions` / `GraphqlKeyMapping` / `GraphqlFederationOptions` の各メッセージと `service = 2056` extension も同様に未着地(それぞれ Step 1 / Step 2 の PR で追加される)。
+> **Landing 状況(2026-07-14 更新、Q31 反映)**: per-track landing 方針([decision-log Q29](./decision-log.md))により、upstream(proto-graphql 本家)には引き続き `(graphql.rpc).batch`(`GraphqlRpcBatchOptions` と `GraphqlRpcOptions.batch = 5`、および `rpc = 2056` extension)のみが着地済み。**Step 1 のオプション**(`GraphqlOperation` / `GraphqlRpcOptions` のフィールド 1-4 = ignore/operation/name/expose_field)は、本リポジトリの submodule `proto-graphql/` 内のローカルブランチ **`add-service-operation-options`**(commit `34527a9`)には定義済みで、本リポジトリはこのブランチを指す submodule 参照から `pnpm gen:extensions` して Step 1 実装を進めた。その後 Q31([decision-log §6](./decision-log.md))により service opt-in(`GraphqlServiceOptions` / `service = 2056` extension)を撤廃する是正コミットを、`add-service-operation-options` から分岐した新ブランチ `make-rpc-operation-explicit` として用意した(`GraphqlOperation`/`GraphqlRpcOptions` のコメントも Q31 の意味論に合わせて更新済み)。upstream 本家への PR は**まだ送出していない**(pending) — per-track landing 方針どおり、Step 1 の実装(このドキュメントの実装)が固まった段階でのアップストリーム化を予定している。`GraphqlRpcOptions` のフィールド番号 10(federation)、`GraphqlObjectTypeOptions.federation`(field 5)、`GraphqlSchemaOptions` の 5-6(requests_as_inputs/responses_as_payloads)は同ローカルブランチには未定義で、`GraphqlRpcFederationOptions` / `GraphqlExtendOptions` / `GraphqlKeyMapping` / `GraphqlFederationOptions` の各メッセージも同様に未着地(Step 2 の PR で追加される)。**`requests_as_inputs`/`responses_as_payloads`(`GraphqlSchemaOptions` 5-6)は Step 1 実装で必要になったため、Step 1 のローカルブランチ側に含めて定義済み**(T1.4 実装時に確定。詳細は decision-log §6「Step 1 実装フェーズの記録」)。
 
 ```proto
-// ============ Service / Method (Step 1) ============
-
-// EXPERIMENTAL: 仕様は予告なく変更される可能性がある
-message GraphqlServiceOptions {
-  bool ignore = 1;  // オプション自体は残しつつ一時的に生成を止める用
-}
+// ============ Method (Step 1) ============
+// Q31: service opt-in(GraphqlServiceOptions / service = 2056 extension)は撤廃。
+// operation の明示指定が唯一のオプトイン条件になる。詳細は decision-log Q31。
 
 enum GraphqlOperation {
-  GRAPHQL_OPERATION_UNSPECIFIED = 0;  // 規約デフォルト(idempotency_level 由来)
+  GRAPHQL_OPERATION_UNSPECIFIED = 0;  // GraphQL operation として公開しない(規約デフォルトなし)
   QUERY = 1;
   MUTATION = 2;
 }
 
 // EXPERIMENTAL
 message GraphqlRpcOptions {
-  bool ignore = 1;
-  GraphqlOperation operation = 2;  // 未指定時: NO_SIDE_EFFECTS → QUERY, else MUTATION
+  bool ignore = 1;                 // operation を設定したまま一時的に生成を止める用
+  GraphqlOperation operation = 2;  // QUERY/MUTATION を明示した RPC だけが生成対象になる。idempotency_level は参照しない
   string name = 3;                 // フィールド名上書き(デフォルト: rpc 名の camelCase)
   string expose_field = 4;         // response の指定フィールドを戻り値として unwrap
 
@@ -104,7 +101,6 @@ message GraphqlFederationOptions {
   bool extends = 2;
 }
 
-extend google.protobuf.ServiceOptions { GraphqlServiceOptions service = 2056; }
 extend google.protobuf.MethodOptions  { GraphqlRpcOptions rpc = 2056; }
 // GraphqlObjectTypeOptions { ... GraphqlFederationOptions federation = 5; }
 ```
@@ -126,8 +122,8 @@ message GraphqlSchemaOptions {
 
 | 項目 | 規則 |
 |---|---|
-| 対象 | `(graphql.service)` 付きサービスの unary RPC(`ignore` 除く) |
-| operation | 明示 `operation` > `idempotency_level=NO_SIDE_EFFECTS` → Query > それ以外 Mutation |
+| 対象 | `(graphql.rpc).operation` に `QUERY`/`MUTATION` を明示した unary RPC(`ignore` 除く)。service 単位のオプトインはない(Q31) |
+| operation | `operation` の値がそのまま Query/Mutation を決定。`idempotency_level` は参照しない(Q31) |
 | フィールド名 | camelCase(rpc 名)、`name` で上書き |
 | Query 引数 | request フィールドを flatten(message フィールドは `FooInput` 参照、oneof は optional 展開) |
 | Mutation 引数 | `input: XxxInput!` の単一引数 |
@@ -216,7 +212,7 @@ function createRpcLoader(...): (ctx) => RpcLoader<K, V | null>;       // protoc-
 |---|---|
 | `proto-graphql/proto/graphql/schema.proto`(本家) | §2 のオプション追加 |
 | `codegen-core/src/__generated__/extensions/` | `pnpm gen:extensions` で再生成 |
-| `codegen-core/src/types/util.ts` | `getServiceOptions` / `getRpcOptions` 追加(既存 getter 群・`EMPTY_*_OPTIONS` パターンに倣う)。`exceptRequestOrResponse` を suffix 変換対応に拡張 |
+| `codegen-core/src/types/util.ts` | `getRpcOptions` 追加(既存 getter 群・`EMPTY_*_OPTIONS` パターンに倣う)。`exceptRequestOrResponse` を suffix 変換対応に拡張。**Q31 で `getServiceOptions`/`isServiceOptedIn` は削除**(service opt-in の撤廃に伴う) |
 | `codegen-core/src/types/` | `OperationField`(仮)等、`DescMethod` を包む型抽象を追加。`collectTypesFromFile` 相当の operation 収集を追加 |
 | `protoc-gen-pothos/src/dslgen/printers/` | operation printer(queryField/mutationField + resolver)追加 |
 | `protoc-plugin-helpers/src/options.ts` | 必要なら plugin パラメータ追加(基本は proto オプション駆動で不要の想定) |
@@ -233,7 +229,6 @@ message User {
 }
 
 service UserService {
-  option (graphql.service) = {};
   rpc BatchGetUsers(BatchGetUsersRequest) returns (BatchGetUsersResponse) {
     option (graphql.rpc) = {
       batch: {}                       // フィールド対応は自動推論(protoc-gen-dataloader が消費)
@@ -271,7 +266,6 @@ message User {
 }
 
 service ReviewService {
-  option (graphql.service) = {};
   rpc ListReviewsByUser(ListReviewsByUserRequest) returns (ListReviewsByUserResponse) {
     option (graphql.rpc).federation.extend = {
       type: "example.reviews.User", field: "reviews",
@@ -308,8 +302,8 @@ golden test framework(`tests/golden/`)を拡張する:
 ## 6. 後方互換・ガード
 
 - 新オプション未使用の既存ユーザーの出力は完全に不変(R12)
-- `(graphql.service)` + `protobuf_lib != protobuf-es` → エラー
-- streaming RPC + 明示 `operation` → エラー、暗黙は警告スキップ
+- `(graphql.rpc).operation` を設定した RPC を含むファイル + `protobuf_lib != protobuf-es` → エラー(Q31)
+- streaming RPC + 明示 `operation` → エラー、暗黙(未注釈)は他の未注釈 RPC と同様サイレントに非公開(Q31 で警告は廃止)
 
 ## 7. 実装時に確定する残項目
 

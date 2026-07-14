@@ -10,6 +10,12 @@ export type Options<DSL extends PrinterOptions["dsl"]> = {
   type: TypeOptions;
   printer: Extract<PrinterOptions, { dsl: DSL }>;
   /**
+   * Module the generated RPC operation resolvers import their runtime helpers
+   * from: `getClient` from `<runtimeModule>` and `callRpc` from
+   * `<runtimeModule>/graphql`. Defaults to `@proto-graphql/connect-runtime`.
+   */
+  runtimeModule: string;
+  /**
    * When false, skip the in-plugin formatter pass over the generated
    * TypeScript. Useful when downstream tooling (Biome / Prettier) will format
    * the output anyway. Defaults to true.
@@ -67,6 +73,7 @@ export function parsePothosOptions(
       filenameSuffix: ".pb.pothos.ts",
       pothos: { builderPath: "./builder" },
     } as Extract<PrinterOptions, { dsl: "pothos" }>,
+    runtimeModule: "@proto-graphql/connect-runtime",
     format: true,
   };
 
@@ -116,6 +123,10 @@ export function parsePothosOptions(
       }
       case "ignore_non_message_oneof_fields": {
         params.type.ignoreNonMessageOneofFields = true;
+        break;
+      }
+      case "runtime_module": {
+        params.runtimeModule = stringParam(k, v);
         break;
       }
       case "format": {

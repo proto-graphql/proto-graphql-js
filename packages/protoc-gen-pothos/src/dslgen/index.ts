@@ -1,1 +1,4 @@
-export { createTypeDslPrintables } from "./printers/index.js";
+export {
+  createOperationDslPrintables,
+  createTypeDslPrintables,
+} from "./printers/index.js";

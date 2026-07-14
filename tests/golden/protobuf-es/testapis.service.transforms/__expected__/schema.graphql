@@ -1,0 +1,39 @@
+scalar Byte
+
+input CreateTaskInput {
+  title: String!
+}
+
+type CreateTaskPayload {
+  task: Task
+}
+
+scalar DateTime
+
+scalar Int64
+
+input ListTasksInput {
+  filter: String
+}
+
+type ListTasksPayload {
+  tasks: [Task!]
+}
+
+type Mutation {
+  createTask(input: CreateTaskInput!): CreateTaskPayload!
+}
+
+type Query {
+  listTasks(filter: String): ListTasksPayload!
+}
+
+type Task {
+  id: String!
+  title: String!
+}
+
+input TaskInput {
+  id: String!
+  title: String!
+}

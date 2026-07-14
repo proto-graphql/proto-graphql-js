@@ -1,0 +1,163 @@
+type Address {
+  city: String!
+  zip: String!
+}
+
+input AddressInput {
+  city: String!
+  zip: String!
+}
+
+scalar Byte
+
+type CreateUserRequest {
+  address: Address
+  name: String!
+}
+
+input CreateUserRequestInput {
+  address: AddressInput
+  name: String!
+}
+
+scalar DateTime
+
+type EmailContact {
+  email: String!
+}
+
+input EmailContactInput {
+  email: String!
+}
+
+type GetUserRequest {
+  userId: String!
+}
+
+input GetUserRequestInput {
+  userId: String!
+}
+
+scalar Int64
+
+type InternalSyncRequest {
+  cursor: String!
+}
+
+input InternalSyncRequestInput {
+  cursor: String!
+}
+
+type Mutation {
+  createUser(input: CreateUserRequestInput!): User!
+  deleteUser(input: GetUserRequestInput!): Boolean!
+  updateUserName(input: RenameUserRequestInput!): User!
+}
+
+type PhoneContact {
+  phoneNumber: String!
+}
+
+input PhoneContactInput {
+  phoneNumber: String!
+}
+
+type Profile {
+  avatarUrl: String
+  headline: String!
+}
+
+input ProfileInput {
+  avatarUrl: String
+  headline: String!
+}
+
+type Query {
+  getUser(userId: String!): User!
+  pingUser(userId: String!): Boolean!
+  searchUsers(address: AddressInput, home: AddressInput, limit: Int, queryText: String!, role: Role, work: WorkAddressInput): [User!]
+}
+
+type RenameUserRequest {
+  newName: String!
+  userId: String!
+}
+
+input RenameUserRequestInput {
+  newName: String!
+  userId: String!
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+type SearchUsersRequest {
+  address: Address
+
+  """
+  `work` uses a distinct message type from `home` (GraphQL union member
+   types must be unique).
+  """
+  filter: SearchUsersRequestFilter
+  limit: Int
+  queryText: String!
+  role: Role
+}
+
+"""
+`work` uses a distinct message type from `home` (GraphQL union member
+ types must be unique).
+"""
+union SearchUsersRequestFilter = Address | WorkAddress
+
+input SearchUsersRequestInput {
+  address: AddressInput
+  home: AddressInput
+  limit: Int
+  queryText: String!
+  role: Role
+  work: WorkAddressInput
+}
+
+type SearchUsersResponse {
+  users: [User!]
+}
+
+input SearchUsersResponseInput {
+  users: [UserInput!]
+}
+
+type User {
+  address: Address
+  bio: String
+  contact: UserContact
+  id: String!
+  name: String!
+  profile: Profile
+  role: Role
+}
+
+union UserContact = EmailContact | PhoneContact
+
+input UserInput {
+  address: AddressInput
+  bio: String
+  emailContact: EmailContactInput
+  id: String!
+  name: String!
+  phoneContact: PhoneContactInput
+  profile: ProfileInput
+  role: Role
+}
+
+type WorkAddress {
+  city: String!
+  zip: String!
+}
+
+input WorkAddressInput {
+  city: String!
+  zip: String!
+}

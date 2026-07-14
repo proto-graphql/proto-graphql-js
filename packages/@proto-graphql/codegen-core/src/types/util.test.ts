@@ -6,7 +6,6 @@ import {
   type MethodOptions,
   MethodOptionsSchema,
   ServiceDescriptorProtoSchema,
-  type ServiceOptions,
 } from "@bufbuild/protobuf/wkt";
 import {
   getTestapisFileDescriptorSet,
@@ -141,13 +140,8 @@ describe("exceptRequestOrResponse", () => {
 // yet (adding one requires regenerating the testapis FileDescriptorSet,
 // which is out of scope here). Build a minimal FileDescriptorProto with a
 // service/method in-code instead, resolving its `graphql/schema.proto`
-// dependency straight from the generated extensions module. `serviceOptions`
-// is accepted for generality (e.g. a future `(graphql.service)`-shaped
-// option), though nothing sets it today.
-function buildServiceRegistry(options?: {
-  serviceOptions?: ServiceOptions;
-  methodOptions?: MethodOptions;
-}) {
+// dependency straight from the generated extensions module.
+function buildServiceRegistry(options?: { methodOptions?: MethodOptions }) {
   const fileProto = create(FileDescriptorProtoSchema, {
     name: "util_test_service.proto",
     package: "codegen_core.util_test",
@@ -160,7 +154,6 @@ function buildServiceRegistry(options?: {
     service: [
       create(ServiceDescriptorProtoSchema, {
         name: "TestService",
-        options: options?.serviceOptions,
         method: [
           create(MethodDescriptorProtoSchema, {
             name: "TestMethod",
@@ -197,6 +190,8 @@ describe("getRpcOptions", () => {
       methodOptions,
       extensions.rpc,
       create(extensions.GraphqlRpcOptionsSchema, {
+        name: "customName",
+        operation: extensions.GraphqlOperation.MUTATION,
         batch: create(extensions.GraphqlRpcBatchOptionsSchema, {
           group: true,
           entityKey: "userId",
@@ -208,6 +203,8 @@ describe("getRpcOptions", () => {
     if (svc == null) throw new Error("TestService not found");
 
     const opts = getRpcOptions(svc.methods[0]);
+    expect(opts.name).toBe("customName");
+    expect(opts.operation).toBe(extensions.GraphqlOperation.MUTATION);
     expect(opts.batch?.group).toBe(true);
     expect(opts.batch?.entityKey).toBe("userId");
   });

@@ -1,0 +1,7 @@
+---
+"protoc-gen-pothos": minor
+---
+
+feat: generate GraphQL Query/Mutation fields with full resolvers from RPC services (experimental)
+
+Unary RPCs whose `(graphql.rpc).operation` is explicitly set to `QUERY` or `MUTATION` are generated as `builder.queryField`/`builder.mutationField` calls, including a complete resolver that assembles the request, calls the RPC via `@proto-graphql/connect-runtime`'s `getClient`/`callRpc`, and maps the response (or a thrown `ConnectError`, converted to a `GraphQLError` with `extensions.code`) back into GraphQL. There is no service-level opt-in — each RPC declares its own exposure via `operation`, and `idempotency_level` is never consulted; an RPC with no `operation` set is silently not generated. Field names default to camelCase of the RPC name (overridable via `name`), Query arguments are flattened while Mutations take a single `input`, and `(graphql.rpc).expose_field`/`ignore` are supported (`ignore` disables generation while keeping the `operation` declaration). Streaming RPCs with no explicit `operation` are silently skipped; one with an explicit `operation` is a codegen error. Requires `protobuf_lib=protobuf-es` (protobuf-es v2 / Connect-ES v2) on any file with at least one RPC that sets `operation` — using it with any other runtime is a codegen error. Fully additive: output for files/RPCs that never set `(graphql.rpc).operation` is unchanged. See [RPC Operations](https://github.com/proto-graphql/proto-graphql-js/blob/main/docs/protoc-gen-pothos/rpc-operations.md).

@@ -9,6 +9,7 @@ Generate GraphQL schema definitions from Protocol Buffer definitions.
 - [Overview](./protoc-gen-pothos/README.md) - What the plugin generates
 - [Getting Started](./protoc-gen-pothos/getting-started.md) - Quick start guide for new users
 - [Configuration](./protoc-gen-pothos/configuration.md) - Complete options reference
+- [RPC Operations](./protoc-gen-pothos/rpc-operations.md) (EXPERIMENTAL) - Generate Query/Mutation fields with resolvers from RPCs
 - [Buf Setup](./protoc-gen-pothos/buf-setup.md) - Configuration with Buf
 - [Generated Code Reference](./protoc-gen-pothos/generated-code-reference/README.md) - Detailed generated code examples
 

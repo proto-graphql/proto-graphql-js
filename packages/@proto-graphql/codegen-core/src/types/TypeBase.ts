@@ -10,7 +10,7 @@ export abstract class TypeBase<P extends DescMessage | DescEnum | DescOneof> {
   ) {}
 
   get typeName(): string {
-    return gqlTypeName(this.proto);
+    return gqlTypeName(this.proto, this.options.files);
   }
 
   get description(): string | null {

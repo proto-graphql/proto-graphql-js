@@ -127,6 +127,22 @@ opt:
   - scalar=google.protobuf.UInt64Value=BigInt
 ```
 
+### runtime_module
+
+> **EXPERIMENTAL.** Only relevant when generating [RPC operations](./rpc-operations.md).
+
+Module specifier the generated RPC operation resolvers import their runtime helpers from.
+
+- **Type:** `string`
+- **Default:** `@proto-graphql/connect-runtime`
+
+```yaml
+opt:
+  - runtime_module=@acme/runtime
+```
+
+Generated resolvers import `getClient` from `<runtime_module>` and `callRpc` from `<runtime_module>/graphql`. Only takes effect for files with at least one RPC carrying an explicit `(graphql.rpc).operation`; see [RPC Operations](./rpc-operations.md) for the full feature.
+
 ## Complete Example
 
 ```yaml
