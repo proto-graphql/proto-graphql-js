@@ -14,16 +14,17 @@ option (graphql.schema) = {
 };
 
 service TaskService {
-  option (graphql.service) = {};
+  // Explicit `operation = MUTATION` (Q31). Single `input` arg referencing
+  // `CreateTaskInput` (the transformed `CreateTaskRequest`); returns
+  // `CreateTaskPayload` (the transformed `CreateTaskResponse`).
+  rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse) {
+    option (graphql.rpc).operation = MUTATION;
+  }
 
-  // Defaults to Mutation. Single `input` arg referencing `CreateTaskInput`
-  // (the transformed `CreateTaskRequest`); returns `CreateTaskPayload` (the
-  // transformed `CreateTaskResponse`).
-  rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse);
-
-  // Query: flattens `ListTasksRequest` into args; returns `ListTasksPayload`.
+  // Explicit `operation = QUERY`: flattens `ListTasksRequest` into args;
+  // returns `ListTasksPayload`.
   rpc ListTasks(ListTasksRequest) returns (ListTasksResponse) {
-    option idempotency_level = NO_SIDE_EFFECTS;
+    option (graphql.rpc).operation = QUERY;
   }
 }
 

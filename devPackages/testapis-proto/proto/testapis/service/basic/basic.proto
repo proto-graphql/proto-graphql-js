@@ -5,58 +5,69 @@ package testapis.service.basic;
 import "google/protobuf/empty.proto";
 import "graphql/schema.proto";
 
-// Opted in via `(graphql.service)`: every unary RPC below (except
-// `InternalSync`, which sets `(graphql.rpc).ignore = true`) is generated as a
-// GraphQL Query or Mutation field (design.md §3.1).
+// Each RPC below declares its own exposure via `(graphql.rpc).operation`
+// (Q31) — there is no service-level opt-in. `InternalSync` sets `operation`
+// AND `(graphql.rpc).ignore = true` (ignore wins). `WatchUsers` and
+// `LookupUser` are left unannotated and are therefore not exposed.
 service UserService {
-  option (graphql.service) = {};
-
-  // No explicit `(graphql.rpc).operation`: `idempotency_level =
-  // NO_SIDE_EFFECTS` is the convention default for Query (R2).
+  // Explicit `operation = QUERY` (Q31) — `idempotency_level` is not
+  // consulted.
   rpc GetUser(GetUserRequest) returns (User) {
-    option idempotency_level = NO_SIDE_EFFECTS;
+    option (graphql.rpc).operation = QUERY;
   }
 
   // Flattened Query args covering a scalar, an optional scalar, an enum, a
   // message, and a message-typed oneof (R4.1). `expose_field` unwraps the
   // repeated `users` field as the return (R5.4).
   rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse) {
-    option idempotency_level = NO_SIDE_EFFECTS;
+    option (graphql.rpc).operation = QUERY;
     option (graphql.rpc).expose_field = "users";
   }
 
-  // No idempotency/operation option set -> defaults to Mutation (R2). Single
-  // `input` arg (R4.2).
-  rpc CreateUser(CreateUserRequest) returns (User);
+  // Explicit `operation = MUTATION` (Q31). Single `input` arg (R4.2).
+  rpc CreateUser(CreateUserRequest) returns (User) {
+    option (graphql.rpc).operation = MUTATION;
+  }
 
   // `(graphql.rpc).name` overrides the default camelCase field name (R3).
   rpc RenameUser(RenameUserRequest) returns (User) {
+    option (graphql.rpc).operation = MUTATION;
     option (graphql.rpc).name = "updateUserName";
   }
 
-  // Explicit `operation = QUERY` overrides the (missing) idempotency default,
-  // which would otherwise be Mutation (R2). `google.protobuf.Empty` response
-  // -> non-null Boolean, always `true` (R5.5).
+  // Explicit `operation = QUERY`. `google.protobuf.Empty` response ->
+  // non-null Boolean, always `true` (R5.5).
   rpc PingUser(GetUserRequest) returns (google.protobuf.Empty) {
     option (graphql.rpc).operation = QUERY;
   }
 
-  // Defaults to Mutation; `google.protobuf.Empty` response -> Boolean (R5.5).
-  rpc DeleteUser(GetUserRequest) returns (google.protobuf.Empty);
+  // Explicit `operation = MUTATION`; `google.protobuf.Empty` response ->
+  // Boolean (R5.5).
+  rpc DeleteUser(GetUserRequest) returns (google.protobuf.Empty) {
+    option (graphql.rpc).operation = MUTATION;
+  }
 
-  // `(graphql.rpc).ignore = true` excludes this RPC from generation, even
-  // though its service is opted in (R1).
+  // `operation` is set, but `(graphql.rpc).ignore = true` disables
+  // generation while keeping the declaration (Q31) -> not generated.
   rpc InternalSync(InternalSyncRequest) returns (google.protobuf.Empty) {
+    option (graphql.rpc).operation = MUTATION;
     option (graphql.rpc).ignore = true;
   }
 
-  // Server-streaming RPC with no explicit `operation` -> skipped with a
-  // warning only (R1.3).
+  // Server-streaming RPC with no explicit `operation` -> simply unexposed,
+  // no warning (Q31, R1.3).
   rpc WatchUsers(GetUserRequest) returns (stream User);
+
+  // No `(graphql.rpc)` annotation at all, despite `idempotency_level =
+  // NO_SIDE_EFFECTS` -> not exposed (Q31 regression: idempotency_level is
+  // never consulted as an implicit opt-in signal).
+  rpc LookupUser(GetUserRequest) returns (User) {
+    option idempotency_level = NO_SIDE_EFFECTS;
+  }
 }
 
-// Not opted in (no `(graphql.service)` option): proves that opting a service
-// in is required, not implied by having unary RPCs that would otherwise
+// No RPC here sets `(graphql.rpc).operation` (Q31): proves that exposure is
+// declared per-RPC, not implied by having unary RPCs that would otherwise
 // resolve just fine (R1). No Query/Mutation field is generated for GetAdmin.
 service AdminService {
   rpc GetAdmin(GetUserRequest) returns (User);

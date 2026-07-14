@@ -31,10 +31,10 @@ import { collectTypesFromFile, type GlType } from "./types.js";
 // resulting `.typeName`s), generation filtering (which shapes are built), the
 // `ignore_requests`/`ignore_responses` precedence, and the collision guard.
 //
-// `(graphql.service)`/`(graphql.rpc)` aren't part of any
-// `@proto-graphql/testapis-proto` fixture (see util.test.ts's identical note),
-// so build a minimal FileDescriptorProto with a service/method in-code —
-// only enough of one is needed here to make a message match the
+// `(graphql.rpc)` isn't part of any `@proto-graphql/testapis-proto` fixture
+// (see util.test.ts's identical note), so build a minimal FileDescriptorProto
+// with a service/method in-code — only enough of one is needed here to make
+// a message match the
 // request/response naming rule; the operation itself is not collected.
 
 const PKG = "codegen_core.types_test";
