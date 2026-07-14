@@ -251,47 +251,18 @@ enum Role {
 }
 ```
 
-## Service Options
-
-### (graphql.service)
-
-> **EXPERIMENTAL.** This option, and RPC-to-GraphQL-operation generation as a whole, is under active development and may change without notice. See [RPC Operations](../protoc-gen-pothos/rpc-operations.md) for the full feature (mapping rules, builder/context requirements, runtime wiring).
-
-Presence of this option on a service (regardless of `ignore`) opts its unary RPCs into `Query`/`Mutation` generation; services without this option are skipped entirely. Requires `protobuf_lib=protobuf-es` (protobuf-es v2 / Connect-ES v2) — using it with any other `protobuf_lib` is a codegen error.
-
-| Option | Type | Description |
-|--------|------|-------------|
-| `ignore` | `bool` | Do not generate Query/Mutation fields for this service's RPCs. The option itself is kept so generation can be re-enabled later. |
-
-**Example:**
-
-```protobuf
-import "graphql/schema.proto";
-
-service UserService {
-  option (graphql.service) = {};
-
-  rpc GetUser(GetUserRequest) returns (User) {
-    option idempotency_level = NO_SIDE_EFFECTS;
-  }
-}
-
-// Not opted in: no Query/Mutation field is generated for GetAdmin.
-service AdminService {
-  rpc GetAdmin(GetUserRequest) returns (User);
-}
-```
-
 ## RPC Options
 
-`(graphql.rpc)` fields fall into two groups: `ignore`/`operation`/`name`/`expose_field` control how an RPC on a `(graphql.service)`-opted-in service is mapped to a GraphQL `Query`/`Mutation` field (see [RPC Operations](../protoc-gen-pothos/rpc-operations.md)); `batch` (documented separately below) declares a batch-loader generation target for [protoc-gen-dataloader](../protoc-gen-dataloader/README.md) and takes effect independently of `(graphql.service)`.
+`(graphql.rpc)` fields fall into two groups: `operation`/`ignore`/`name`/`expose_field` control whether and how an RPC is mapped to a GraphQL `Query`/`Mutation` field (see [RPC Operations](../protoc-gen-pothos/rpc-operations.md)); `batch` (documented separately below) declares a batch-loader generation target for [protoc-gen-dataloader](../protoc-gen-dataloader/README.md) and takes effect independently of `operation`.
 
-> **EXPERIMENTAL.** `ignore`/`operation`/`name`/`expose_field` are under active development and may change without notice.
+> **EXPERIMENTAL.** `operation`/`ignore`/`name`/`expose_field` are under active development and may change without notice.
+
+There is no service-level opt-in: an RPC generates a `Query`/`Mutation` field **iff `operation` is explicitly set to `QUERY` or `MUTATION`**. `idempotency_level` is never consulted. Requires `protobuf_lib=protobuf-es` (protobuf-es v2 / Connect-ES v2) on any file with at least one RPC that sets `operation` — using it with any other `protobuf_lib` is a codegen error.
 
 | Option | Type | Description |
 |--------|------|-------------|
-| `ignore` | `bool` | Do not generate a Query/Mutation field for this RPC. |
-| `operation` | `GraphqlOperation` (`QUERY` \| `MUTATION`) | Overrides the operation kind inferred from `idempotency_level`. Unspecified: `idempotency_level = NO_SIDE_EFFECTS` → `Query`, otherwise `Mutation`. Setting this on a streaming RPC is a codegen error. |
+| `operation` | `GraphqlOperation` (`QUERY` \| `MUTATION`) | Setting this to `QUERY` or `MUTATION` is what opts the RPC into Query/Mutation generation. Left unspecified, the RPC is not generated — `idempotency_level` is not a fallback. Setting this on a streaming RPC is a codegen error. |
+| `ignore` | `bool` | Disables generation for this RPC while keeping its `operation` declaration in place, so it can be re-enabled later without losing the annotation. `operation` set + `ignore = true` → not generated. |
 | `name` | `string` | Overrides the field name. Defaults to the camelCase of the RPC name. |
 | `expose_field` | `string` | Unwraps the named response field and returns it directly, instead of the whole response message. |
 
@@ -299,31 +270,31 @@ service AdminService {
 
 ```protobuf
 service UserService {
-  option (graphql.service) = {};
+  // operation = QUERY opts this RPC in as a Query field.
+  rpc GetUser(GetUserRequest) returns (User) {
+    option (graphql.rpc).operation = QUERY;
+  }
 
   // (graphql.rpc).name overrides the default camelCase field name.
   rpc RenameUser(RenameUserRequest) returns (User) {
+    option (graphql.rpc).operation = MUTATION;
     option (graphql.rpc).name = "updateUserName";
-  }
-
-  // Explicit operation = QUERY overrides the (missing) idempotency default,
-  // which would otherwise be Mutation. google.protobuf.Empty response ->
-  // non-null Boolean, always true.
-  rpc PingUser(GetUserRequest) returns (google.protobuf.Empty) {
-    option (graphql.rpc).operation = QUERY;
   }
 
   // expose_field unwraps the repeated `users` field as the return.
   rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse) {
-    option idempotency_level = NO_SIDE_EFFECTS;
+    option (graphql.rpc).operation = QUERY;
     option (graphql.rpc).expose_field = "users";
   }
 
-  // ignore excludes this RPC from generation, even though its service is
-  // opted in.
+  // operation is set, but ignore = true wins: not generated.
   rpc InternalSync(InternalSyncRequest) returns (google.protobuf.Empty) {
+    option (graphql.rpc).operation = MUTATION;
     option (graphql.rpc).ignore = true;
   }
+
+  // No (graphql.rpc) annotation at all -> not exposed.
+  rpc GetAdmin(GetUserRequest) returns (User);
 }
 ```
 

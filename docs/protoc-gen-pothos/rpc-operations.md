@@ -2,81 +2,64 @@
 
 > **EXPERIMENTAL.** This feature, its proto options, and the shape of its generated code are under active development and may change without notice in any release. Pin an exact version if you depend on it.
 
-protoc-gen-pothos can generate `Query`/`Mutation` fields — including full resolver implementations that call a [Connect](https://connectrpc.com/) RPC — directly from a proto `service` definition. You annotate the service, and the plugin emits the field, its arguments, and a resolver that assembles the request, calls the RPC, and maps the response (or a thrown error) back into GraphQL.
+protoc-gen-pothos can generate `Query`/`Mutation` fields — including full resolver implementations that call a [Connect](https://connectrpc.com/) RPC — directly from a proto `service` definition. You annotate each RPC you want exposed, and the plugin emits the field, its arguments, and a resolver that assembles the request, calls the RPC, and maps the response (or a thrown error) back into GraphQL.
 
-**Requires `protobuf_lib=protobuf-es`** (protobuf-es v2 / Connect-ES v2). Using `(graphql.service)` with `protobuf_lib=ts-proto` or `protobuf_lib=protobuf-es-v1` is a codegen error:
+**Requires `protobuf_lib=protobuf-es`** (protobuf-es v2 / Connect-ES v2). Using `(graphql.rpc).operation` with `protobuf_lib=ts-proto` or `protobuf_lib=protobuf-es-v1` is a codegen error:
 
 ```
-<file>: (graphql.service) requires protobuf_lib=protobuf-es (protobuf-es v2), but protobuf_lib=<value>. RPC-to-Query/Mutation generation only supports protobuf-es v2 (Connect-ES v2). Remove (graphql.service) from the file's services, or switch the plugin to protobuf_lib=protobuf-es.
+<file>: (graphql.rpc).operation requires protobuf_lib=protobuf-es (protobuf-es v2), but protobuf_lib=<value>. RPC-to-Query/Mutation generation only supports protobuf-es v2 (Connect-ES v2). Remove (graphql.rpc).operation from the file's RPCs, or switch the plugin to protobuf_lib=protobuf-es.
 ```
 
 ## Opting In
 
-Nothing is generated unless a service carries `(graphql.service)`. This keeps the feature fully additive: existing users who never set the option see no change in output.
+An RPC generates a `Query`/`Mutation` field **iff `(graphql.rpc).operation` is explicitly set to `QUERY` or `MUTATION`**. There is no service-level opt-in, and `idempotency_level` is never consulted — an RPC with no `operation` set is silently not exposed, no matter what else is true about it. This keeps the feature fully additive: existing users who never set `operation` see no change in output.
 
 ```protobuf
 import "graphql/schema.proto";
 
 service UserService {
-  option (graphql.service) = {};
-
   rpc GetUser(GetUserRequest) returns (User) {
-    option idempotency_level = NO_SIDE_EFFECTS;
+    option (graphql.rpc).operation = QUERY;
   }
 }
 
-// Not opted in: no Query/Mutation field is generated for GetAdmin, even
-// though the RPC itself would otherwise resolve just fine.
+// No RPC here sets `(graphql.rpc).operation`: no Query/Mutation field is
+// generated for GetAdmin, even though the RPC itself would otherwise
+// resolve just fine.
 service AdminService {
   rpc GetAdmin(GetUserRequest) returns (User);
 }
 ```
 
-`(graphql.service).ignore = true` keeps a service conceptually opted in while halting generation for all of its RPCs — useful for temporarily disabling generation without removing the option.
-
-Per-RPC, `(graphql.rpc).ignore = true` excludes just that RPC:
+`(graphql.rpc).ignore = true` disables generation for an RPC while keeping its `operation` declaration in place — useful for temporarily halting generation without losing the annotation:
 
 ```protobuf
 service UserService {
-  option (graphql.service) = {};
-
-  // Excluded from generation, even though its service is opted in.
+  // `operation` is set, but `ignore = true` wins: not generated.
   rpc InternalSync(InternalSyncRequest) returns (google.protobuf.Empty) {
+    option (graphql.rpc).operation = MUTATION;
     option (graphql.rpc).ignore = true;
   }
 }
 ```
 
+> **Future direction.** `operation` is currently the single declaration point for exposing an RPC. A later addition may introduce a field-targeting kind (e.g. an `extend`-style annotation for federation) alongside `QUERY`/`MUTATION` — this is not implemented yet.
+
 ## Query vs. Mutation
 
-The operation kind is resolved in this order:
-
-1. Explicit `(graphql.rpc).operation = QUERY` or `MUTATION` — always wins.
-2. Otherwise, `idempotency_level = NO_SIDE_EFFECTS` on the RPC → `Query`.
-3. Otherwise → `Mutation`.
+The operation kind is simply whichever of `QUERY` or `MUTATION` you set on `(graphql.rpc).operation` — there is no inference from `idempotency_level` or the RPC name (no `Get*` → Query heuristic), so an RPC like `GetOrCreateSession` cannot be misclassified.
 
 ```protobuf
 service UserService {
-  option (graphql.service) = {};
-
-  // No explicit operation: idempotency_level = NO_SIDE_EFFECTS is the
-  // convention default for Query.
   rpc GetUser(GetUserRequest) returns (User) {
-    option idempotency_level = NO_SIDE_EFFECTS;
+    option (graphql.rpc).operation = QUERY;
   }
 
-  // No idempotency_level and no operation set -> defaults to Mutation.
-  rpc CreateUser(CreateUserRequest) returns (User);
-
-  // Explicit operation overrides the (missing) idempotency default, which
-  // would otherwise resolve to Mutation.
-  rpc PingUser(GetUserRequest) returns (google.protobuf.Empty) {
-    option (graphql.rpc).operation = QUERY;
+  rpc CreateUser(CreateUserRequest) returns (User) {
+    option (graphql.rpc).operation = MUTATION;
   }
 }
 ```
-
-There is no naming-convention-based inference (no `Get*` → Query heuristic) — only `idempotency_level` and the explicit override are considered, to avoid misclassifying RPCs like `GetOrCreateSession`.
 
 ## Field Naming
 
@@ -104,13 +87,14 @@ type Mutation {
 // Flattened Query args covering a scalar, an optional scalar, an enum, a
 // message, and a message-typed oneof.
 rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse) {
-  option idempotency_level = NO_SIDE_EFFECTS;
+  option (graphql.rpc).operation = QUERY;
   option (graphql.rpc).expose_field = "users";
 }
 
-// No idempotency/operation option set -> defaults to Mutation. Single
-// `input` arg.
-rpc CreateUser(CreateUserRequest) returns (User);
+// Explicit operation = MUTATION. Single `input` arg.
+rpc CreateUser(CreateUserRequest) returns (User) {
+  option (graphql.rpc).operation = MUTATION;
+}
 ```
 
 ```graphql
@@ -191,7 +175,7 @@ Set `(graphql.rpc).expose_field` to unwrap a single response field and return it
 
 ```protobuf
 rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse) {
-  option idempotency_level = NO_SIDE_EFFECTS;
+  option (graphql.rpc).operation = QUERY;
   option (graphql.rpc).expose_field = "users";
 }
 ```
@@ -221,8 +205,10 @@ rpc PingUser(GetUserRequest) returns (google.protobuf.Empty) {
   option (graphql.rpc).operation = QUERY;
 }
 
-// Defaults to Mutation; google.protobuf.Empty response -> Boolean.
-rpc DeleteUser(GetUserRequest) returns (google.protobuf.Empty);
+// Explicit operation = MUTATION; google.protobuf.Empty response -> Boolean.
+rpc DeleteUser(GetUserRequest) returns (google.protobuf.Empty) {
+  option (graphql.rpc).operation = MUTATION;
+}
 ```
 
 ```graphql
@@ -254,16 +240,11 @@ builder.queryField("pingUser", (t) =>
 
 ## Streaming RPCs Are Skipped
 
-Server-, client-, and bidi-streaming RPCs have no single request/response pair to map to a GraphQL field, so they are excluded from generation with a warning:
+Server-, client-, and bidi-streaming RPCs have no single request/response pair to map to a GraphQL field. Like any other unannotated RPC, one with no explicit `operation` is simply not exposed — silently, with no warning:
 
 ```protobuf
-// Server-streaming RPC with no explicit `operation` -> skipped with a
-// warning only.
+// Server-streaming RPC with no explicit `operation` -> simply unexposed.
 rpc WatchUsers(GetUserRequest) returns (stream User);
-```
-
-```
-Skipping UserService.WatchUsers: server_streaming (streaming) RPCs are not supported and will not be generated as GraphQL operations. Set (graphql.rpc).ignore = true on this RPC to silence this warning.
 ```
 
 If a streaming RPC sets an explicit `(graphql.rpc).operation`, that is a codegen **error** instead (it asks for a mapping that cannot exist):
@@ -285,12 +266,12 @@ option (graphql.schema) = {
 };
 
 service TaskService {
-  option (graphql.service) = {};
-
   // Single `input` arg referencing `CreateTaskInput` (the transformed
   // `CreateTaskRequest`); returns `CreateTaskPayload` (the transformed
   // `CreateTaskResponse`).
-  rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse);
+  rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse) {
+    option (graphql.rpc).operation = MUTATION;
+  }
 }
 
 message CreateTaskRequest {
@@ -411,7 +392,7 @@ Because the return type is non-null by default, an error on a non-null field wit
 
 ## See Also
 
-- [Proto Annotations Reference](../proto-annotations/reference.md) — full `(graphql.service)` / `(graphql.rpc)` field reference
+- [Proto Annotations Reference](../proto-annotations/reference.md) — full `(graphql.rpc)` field reference
 - [Configuration](./configuration.md) — the `runtime_module` plugin parameter
 - [`@proto-graphql/connect-runtime` README](https://github.com/proto-graphql/proto-graphql-js/blob/main/packages/%40proto-graphql/connect-runtime/README.md) — `getClient` / `callRpc` / context convention in full
 - [Design Doc](../design/grpc-service-to-graphql/README.md) — the full design and decision log behind this feature

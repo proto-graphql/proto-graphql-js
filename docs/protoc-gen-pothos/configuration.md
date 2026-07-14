@@ -141,7 +141,7 @@ opt:
   - runtime_module=@acme/runtime
 ```
 
-Generated resolvers import `getClient` from `<runtime_module>` and `callRpc` from `<runtime_module>/graphql`. Only takes effect for files with at least one service carrying `(graphql.service)`; see [RPC Operations](./rpc-operations.md) for the full feature.
+Generated resolvers import `getClient` from `<runtime_module>` and `callRpc` from `<runtime_module>/graphql`. Only takes effect for files with at least one RPC carrying an explicit `(graphql.rpc).operation`; see [RPC Operations](./rpc-operations.md) for the full feature.
 
 ## Complete Example
 
