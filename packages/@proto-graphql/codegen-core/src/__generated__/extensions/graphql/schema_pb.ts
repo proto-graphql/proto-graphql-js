@@ -322,8 +322,7 @@ export const GraphqlEnumValueOptionsSchema: GenMessage<GraphqlEnumValueOptions> 
 /**
  * EXPERIMENTAL: this option is under active development and may change without notice.
  * Controls whether and how an individual RPC is generated as a GraphQL
- * Query/Mutation field. There is no service-level opt-in: each RPC declares
- * its own exposure via `operation`.
+ * Query/Mutation field. Each RPC declares its own exposure via `operation`.
  *
  * @generated from message graphql.GraphqlRpcOptions
  */
@@ -338,9 +337,9 @@ export type GraphqlRpcOptions = Message<"graphql.GraphqlRpcOptions"> & {
   ignore: boolean;
 
   /**
-   * Setting this to QUERY or MUTATION is what opts this RPC into
-   * Query/Mutation generation. Left unset (GRAPHQL_OPERATION_UNSPECIFIED),
-   * the RPC is not generated. `idempotency_level` is not consulted.
+   * Setting this to QUERY or MUTATION opts this RPC into Query/Mutation
+   * generation. Left unset (GRAPHQL_OPERATION_UNSPECIFIED), the RPC is not
+   * generated.
    *
    * @generated from field: graphql.GraphqlOperation operation = 2;
    */
@@ -463,18 +462,14 @@ export const NullabilitySchema: GenEnum<Nullability> = /*@__PURE__*/
 
 /**
  * EXPERIMENTAL: this option is under active development and may change without notice.
- * There is no convention default: an RPC is exposed as a GraphQL
- * Query/Mutation field only when `(graphql.rpc).operation` is explicitly set
- * to QUERY or MUTATION. Future kinds may be added here (e.g. a
- * field-targeting kind for federation-style `extend`).
+ * The kind of GraphQL operation an RPC is exposed as. Future kinds may be
+ * added here (e.g. a field-targeting kind for federation-style `extend`).
  *
  * @generated from enum graphql.GraphqlOperation
  */
 export enum GraphqlOperation {
   /**
-   * Not exposed as a GraphQL operation. This is the default for every RPC;
-   * there is no implicit opt-in based on service options or
-   * `idempotency_level`.
+   * Not exposed as a GraphQL operation (the default).
    *
    * @generated from enum value: GRAPHQL_OPERATION_UNSPECIFIED = 0;
    */
