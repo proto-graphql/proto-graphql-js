@@ -27,8 +27,6 @@ import {
   MethodOptionsSchema,
   OneofDescriptorProtoSchema,
   ServiceDescriptorProtoSchema,
-  type ServiceOptions,
-  ServiceOptionsSchema,
 } from "@bufbuild/protobuf/wkt";
 import { describe, expect, it } from "vitest";
 import * as extensions from "../__generated__/extensions/graphql/schema_pb.js";
@@ -36,11 +34,14 @@ import { InputObjectType } from "./InputObjectType.js";
 import { ObjectType } from "./ObjectType.js";
 import {
   collectOperationsFromFile,
-  fileHasOptedInServices,
+  fileHasExposedRpcs,
   type OperationCollectionResult,
   type OperationField,
 } from "./operationField.js";
 import { defaultScalarMapping, type TypeOptions } from "./options.js";
+
+const QUERY = extensions.GraphqlOperation.QUERY;
+const MUTATION = extensions.GraphqlOperation.MUTATION;
 
 const PKG = "codegen_core.operation_test";
 const T = FieldDescriptorProto_Type;
@@ -175,8 +176,6 @@ interface MethodSpec {
 }
 
 function build(params: {
-  service?: "absent" | "no-ext" | "opted-in";
-  serviceIgnore?: boolean;
   methods: MethodSpec[];
   extraMessages?: DescriptorProto[];
   extraEnums?: EnumDescriptorProto[];
@@ -229,20 +228,6 @@ function build(params: {
     });
   });
 
-  let serviceOptions: ServiceOptions | undefined;
-  if (params.service === "no-ext") {
-    serviceOptions = create(ServiceOptionsSchema, {});
-  } else if ((params.service ?? "opted-in") === "opted-in") {
-    serviceOptions = create(ServiceOptionsSchema, {});
-    setExtension(
-      serviceOptions,
-      extensions.service,
-      create(extensions.GraphqlServiceOptionsSchema, {
-        ignore: params.serviceIgnore ?? false,
-      }),
-    );
-  }
-
   let fileOptions: FileOptions | undefined;
   if (params.schemaOptions != null) {
     fileOptions = create(FileOptionsSchema, {});
@@ -271,7 +256,6 @@ function build(params: {
     service: [
       create(ServiceDescriptorProtoSchema, {
         name: "TestService",
-        options: serviceOptions,
         method: methodProtos,
       }),
     ],
@@ -303,66 +287,76 @@ function only(result: OperationCollectionResult): OperationField {
 }
 
 describe("collectOperationsFromFile", () => {
-  describe("R1.1: opt-in selection", () => {
-    it("skips a service with no options at all (absent)", () => {
-      const result = collect({
-        service: "absent",
-        methods: [{ name: "GetUser" }],
-      });
+  describe("Q31: explicit operation is the sole opt-in", () => {
+    it("does not collect an RPC with no (graphql.rpc) option at all", () => {
+      const result = collect({ methods: [{ name: "GetUser" }] });
       expect(result.operations).toEqual([]);
       expect(result.warnings).toEqual([]);
       expect(result.errors).toEqual([]);
     });
 
-    it("skips a service whose options are set but carry no (graphql.service)", () => {
-      const result = collect({
-        service: "no-ext",
-        methods: [{ name: "GetUser" }],
-      });
+    it("does not collect an RPC whose (graphql.rpc) is present but operation is unspecified", () => {
+      const result = collect({ methods: [{ name: "GetUser", rpc: {} }] });
       expect(result.operations).toEqual([]);
+      expect(result.warnings).toEqual([]);
+      expect(result.errors).toEqual([]);
     });
 
-    it("includes a service with an empty (graphql.service) = {} (presence opts in)", () => {
-      const result = collect({
-        service: "opted-in",
-        methods: [{ name: "GetUser" }],
-      });
-      expect(result.operations).toHaveLength(1);
+    it("collects an RPC with operation = QUERY", () => {
+      const op = only(
+        collect({ methods: [{ name: "GetUser", rpc: { operation: QUERY } }] }),
+      );
+      expect(op.kind).toBe("query");
     });
 
-    it("skips the whole service when (graphql.service).ignore = true", () => {
+    it("collects an RPC with operation = MUTATION", () => {
+      const op = only(
+        collect({
+          methods: [{ name: "CreateUser", rpc: { operation: MUTATION } }],
+        }),
+      );
+      expect(op.kind).toBe("mutation");
+    });
+
+    // Regression (Q31): idempotency_level is no longer consulted at all —
+    // it must not act as an implicit opt-in signal on its own.
+    it("does not collect an RPC with idempotency_level = NO_SIDE_EFFECTS but no operation", () => {
       const result = collect({
-        service: "opted-in",
-        serviceIgnore: true,
-        methods: [{ name: "GetUser" }],
+        methods: [
+          {
+            name: "LookupUser",
+            idempotency: MethodOptions_IdempotencyLevel.NO_SIDE_EFFECTS,
+          },
+        ],
       });
       expect(result.operations).toEqual([]);
+      expect(result.warnings).toEqual([]);
       expect(result.errors).toEqual([]);
     });
   });
 
   describe("R1.2: per-RPC ignore", () => {
-    it("skips an RPC with (graphql.rpc).ignore = true", () => {
+    it("skips an RPC with operation set and ignore = true, silently", () => {
       const result = collect({
         methods: [
-          { name: "GetUser", rpc: { ignore: true } },
-          { name: "ListUsers" },
+          { name: "GetUser", rpc: { operation: QUERY, ignore: true } },
+          { name: "ListUsers", rpc: { operation: QUERY } },
         ],
       });
       expect(result.operations.map((o) => o.name)).toEqual(["listUsers"]);
+      expect(result.warnings).toEqual([]);
+      expect(result.errors).toEqual([]);
     });
   });
 
   describe("R1.3: streaming", () => {
-    it("skips a streaming RPC with a warning", () => {
+    it("silently skips an unannotated streaming RPC (no warning)", () => {
       const result = collect({
         methods: [{ name: "Watch", streaming: "server" }],
       });
       expect(result.operations).toEqual([]);
       expect(result.errors).toEqual([]);
-      expect(result.warnings).toHaveLength(1);
-      expect(result.warnings[0]).toContain("Skipping TestService.Watch");
-      expect(result.warnings[0]).toContain("server_streaming");
+      expect(result.warnings).toEqual([]);
     });
 
     it("errors when a streaming RPC explicitly sets operation", () => {
@@ -371,7 +365,7 @@ describe("collectOperationsFromFile", () => {
           {
             name: "Watch",
             streaming: "bidi",
-            rpc: { operation: extensions.GraphqlOperation.QUERY },
+            rpc: { operation: QUERY },
           },
         ],
       });
@@ -383,48 +377,23 @@ describe("collectOperationsFromFile", () => {
   });
 
   describe("R2: operation kind", () => {
-    it("defaults to mutation", () => {
-      expect(only(collect({ methods: [{ name: "CreateUser" }] })).kind).toBe(
-        "mutation",
-      );
-    });
-
-    it("maps NO_SIDE_EFFECTS to query", () => {
-      const op = only(
-        collect({
-          methods: [
-            {
-              name: "GetUser",
-              idempotency: MethodOptions_IdempotencyLevel.NO_SIDE_EFFECTS,
-            },
-          ],
-        }),
-      );
-      expect(op.kind).toBe("query");
-    });
-
     it("honours an explicit operation = QUERY even for a side-effecting RPC", () => {
       const op = only(
         collect({
-          methods: [
-            {
-              name: "DoThing",
-              rpc: { operation: extensions.GraphqlOperation.QUERY },
-            },
-          ],
+          methods: [{ name: "DoThing", rpc: { operation: QUERY } }],
         }),
       );
       expect(op.kind).toBe("query");
     });
 
-    it("honours an explicit operation = MUTATION over NO_SIDE_EFFECTS", () => {
+    it("honours an explicit operation = MUTATION regardless of idempotency_level", () => {
       const op = only(
         collect({
           methods: [
             {
               name: "GetUser",
               idempotency: MethodOptions_IdempotencyLevel.NO_SIDE_EFFECTS,
-              rpc: { operation: extensions.GraphqlOperation.MUTATION },
+              rpc: { operation: MUTATION },
             },
           ],
         }),
@@ -435,14 +404,22 @@ describe("collectOperationsFromFile", () => {
 
   describe("R3: field name", () => {
     it("defaults to camelCase of the RPC name", () => {
-      expect(only(collect({ methods: [{ name: "GetUser" }] })).name).toBe(
-        "getUser",
-      );
+      expect(
+        only(collect({ methods: [{ name: "GetUser", rpc: { operation: MUTATION } }] }))
+          .name,
+      ).toBe("getUser");
     });
 
     it("is overridden by (graphql.rpc).name", () => {
       const op = only(
-        collect({ methods: [{ name: "GetUser", rpc: { name: "viewer" } }] }),
+        collect({
+          methods: [
+            {
+              name: "GetUser",
+              rpc: { name: "viewer", operation: MUTATION },
+            },
+          ],
+        }),
       );
       expect(op.name).toBe("viewer");
     });
@@ -467,7 +444,7 @@ describe("collectOperationsFromFile", () => {
           {
             name: "GetThing",
             request: req,
-            idempotency: MethodOptions_IdempotencyLevel.NO_SIDE_EFFECTS,
+            rpc: { operation: QUERY },
           },
         ],
         extraMessages: [messageProto("Filter", [scalar("q", 1)])],
@@ -501,7 +478,7 @@ describe("collectOperationsFromFile", () => {
           {
             name: "GetThing",
             request: req,
-            idempotency: MethodOptions_IdempotencyLevel.NO_SIDE_EFFECTS,
+            rpc: { operation: QUERY },
           },
         ],
         extraMessages: [
@@ -517,7 +494,11 @@ describe("collectOperationsFromFile", () => {
 
   describe("R4.2: mutation single input", () => {
     it("uses a single input arg referencing the request Input type", () => {
-      const op = only(collect({ methods: [{ name: "CreateUser" }] }));
+      const op = only(
+        collect({
+          methods: [{ name: "CreateUser", rpc: { operation: MUTATION } }],
+        }),
+      );
       expect(op.kind).toBe("mutation");
       if (op.args.kind !== "input") throw new Error("expected input args");
       expect(op.args.type).toBeInstanceOf(InputObjectType);
@@ -529,7 +510,9 @@ describe("collectOperationsFromFile", () => {
         inputTypeIgnore: true,
       });
       const result = collect({
-        methods: [{ name: "CreateUser", request: req }],
+        methods: [
+          { name: "CreateUser", request: req, rpc: { operation: MUTATION } },
+        ],
       });
       expect(result.operations).toEqual([]);
       expect(result.errors).toHaveLength(1);
@@ -539,7 +522,7 @@ describe("collectOperationsFromFile", () => {
 
     it("errors when the request is filtered out by ignore_requests", () => {
       const result = collect({
-        methods: [{ name: "CreateUser" }],
+        methods: [{ name: "CreateUser", rpc: { operation: MUTATION } }],
         schemaOptions: { ignoreRequests: true },
       });
       expect(result.errors).toHaveLength(1);
@@ -549,7 +532,9 @@ describe("collectOperationsFromFile", () => {
 
   describe("R5.3: default object return", () => {
     it("returns the response message ObjectType, non-null", () => {
-      const op = only(collect({ methods: [{ name: "GetUser" }] }));
+      const op = only(
+        collect({ methods: [{ name: "GetUser", rpc: { operation: QUERY } }] }),
+      );
       expect(op.returnType.kind).toBe("object");
       if (op.returnType.kind !== "object") throw new Error("unreachable");
       expect(op.returnType.type).toBeInstanceOf(ObjectType);
@@ -562,7 +547,7 @@ describe("collectOperationsFromFile", () => {
         objectTypeIgnore: true,
       });
       const result = collect({
-        methods: [{ name: "GetUser", response: res }],
+        methods: [{ name: "GetUser", response: res, rpc: { operation: QUERY } }],
       });
       expect(result.operations).toEqual([]);
       expect(result.errors).toHaveLength(1);
@@ -578,7 +563,11 @@ describe("collectOperationsFromFile", () => {
       ]);
       const result = collect({
         methods: [
-          { name: "GetUser", response: res, rpc: { exposeField: "user" } },
+          {
+            name: "GetUser",
+            response: res,
+            rpc: { exposeField: "user", operation: QUERY },
+          },
         ],
         extraMessages: [messageProto("User", [scalar("id", 1)])],
       });
@@ -598,7 +587,11 @@ describe("collectOperationsFromFile", () => {
       ]);
       const result = collect({
         methods: [
-          { name: "GetUser", response: res, rpc: { exposeField: "nope" } },
+          {
+            name: "GetUser",
+            response: res,
+            rpc: { exposeField: "nope", operation: QUERY },
+          },
         ],
         extraMessages: [messageProto("User", [scalar("id", 1)])],
       });
@@ -618,7 +611,7 @@ describe("collectOperationsFromFile", () => {
             {
               name: "Ping",
               request: "empty",
-              idempotency: MethodOptions_IdempotencyLevel.NO_SIDE_EFFECTS,
+              rpc: { operation: QUERY },
             },
           ],
         }),
@@ -628,7 +621,11 @@ describe("collectOperationsFromFile", () => {
 
     it("maps an Empty request to zero args even for a mutation", () => {
       const op = only(
-        collect({ methods: [{ name: "Reset", request: "empty" }] }),
+        collect({
+          methods: [
+            { name: "Reset", request: "empty", rpc: { operation: MUTATION } },
+          ],
+        }),
       );
       expect(op.kind).toBe("mutation");
       expect(op.args.kind).toBe("none");
@@ -636,7 +633,15 @@ describe("collectOperationsFromFile", () => {
 
     it("maps an Empty response to a non-null Boolean", () => {
       const op = only(
-        collect({ methods: [{ name: "DeleteUser", response: "empty" }] }),
+        collect({
+          methods: [
+            {
+              name: "DeleteUser",
+              response: "empty",
+              rpc: { operation: MUTATION },
+            },
+          ],
+        }),
       );
       expect(op.returnType.kind).toBe("boolean");
       expect(op.nullable).toBe(false);
@@ -646,14 +651,20 @@ describe("collectOperationsFromFile", () => {
   describe("deprecation", () => {
     it("carries a deprecation reason for a deprecated RPC", () => {
       const op = only(
-        collect({ methods: [{ name: "GetUser", deprecated: true }] }),
+        collect({
+          methods: [
+            { name: "GetUser", deprecated: true, rpc: { operation: QUERY } },
+          ],
+        }),
       );
       expect(op.deprecationReason).toContain("TestService.GetUser");
       expect(op.deprecationReason).toContain("deprecated");
     });
 
     it("has a null deprecation reason otherwise", () => {
-      const op = only(collect({ methods: [{ name: "GetUser" }] }));
+      const op = only(
+        collect({ methods: [{ name: "GetUser", rpc: { operation: QUERY } }] }),
+      );
       expect(op.deprecationReason).toBeNull();
     });
   });
@@ -665,12 +676,9 @@ describe("collectOperationsFromFile", () => {
       });
       const result = collect({
         methods: [
-          {
-            name: "ListUsers",
-            idempotency: MethodOptions_IdempotencyLevel.NO_SIDE_EFFECTS,
-          },
-          { name: "GetUser", response: res },
-          { name: "CreateUser" },
+          { name: "ListUsers", rpc: { operation: QUERY } },
+          { name: "GetUser", response: res, rpc: { operation: QUERY } },
+          { name: "CreateUser", rpc: { operation: MUTATION } },
         ],
       });
       expect(result.operations.map((o) => o.name).sort()).toEqual([
@@ -686,7 +694,7 @@ describe("collectOperationsFromFile", () => {
     it("names the mutation's input type `<Base>Input` when requests_as_inputs is set", () => {
       const op = only(
         collect({
-          methods: [{ name: "CreateUser" }],
+          methods: [{ name: "CreateUser", rpc: { operation: MUTATION } }],
           schemaOptions: { requestsAsInputs: true },
         }),
       );
@@ -697,7 +705,7 @@ describe("collectOperationsFromFile", () => {
     it("names the default return type `<Base>Payload` when responses_as_payloads is set", () => {
       const op = only(
         collect({
-          methods: [{ name: "GetUser" }],
+          methods: [{ name: "GetUser", rpc: { operation: QUERY } }],
           schemaOptions: { responsesAsPayloads: true },
         }),
       );
@@ -710,7 +718,7 @@ describe("collectOperationsFromFile", () => {
     it("combines both options for the same RPC's input and return types", () => {
       const op = only(
         collect({
-          methods: [{ name: "CreateUser" }],
+          methods: [{ name: "CreateUser", rpc: { operation: MUTATION } }],
           schemaOptions: { requestsAsInputs: true, responsesAsPayloads: true },
         }),
       );
@@ -725,7 +733,7 @@ describe("collectOperationsFromFile", () => {
     describe("ignore_* precedence", () => {
       it("ignore_requests wins over requests_as_inputs (mutation errors) and warns once per file", () => {
         const result = collect({
-          methods: [{ name: "CreateUser" }],
+          methods: [{ name: "CreateUser", rpc: { operation: MUTATION } }],
           schemaOptions: { requestsAsInputs: true, ignoreRequests: true },
         });
         expect(result.operations).toEqual([]);
@@ -738,7 +746,7 @@ describe("collectOperationsFromFile", () => {
 
       it("ignore_responses wins over responses_as_payloads (return type errors) and warns once per file", () => {
         const result = collect({
-          methods: [{ name: "GetUser" }],
+          methods: [{ name: "GetUser", rpc: { operation: QUERY } }],
           schemaOptions: { responsesAsPayloads: true, ignoreResponses: true },
         });
         expect(result.operations).toEqual([]);
@@ -748,17 +756,33 @@ describe("collectOperationsFromFile", () => {
         expect(result.warnings[0]).toContain("responses_as_payloads");
       });
 
-      it("warns exactly once per file even across multiple opted-in methods", () => {
+      it("warns exactly once per file even across multiple explicitly-annotated methods", () => {
         const result = collect({
-          methods: [{ name: "CreateUser" }, { name: "UpdateUser" }],
+          methods: [
+            { name: "CreateUser", rpc: { operation: MUTATION } },
+            { name: "UpdateUser", rpc: { operation: MUTATION } },
+          ],
           schemaOptions: { requestsAsInputs: true, ignoreRequests: true },
         });
         expect(result.warnings).toHaveLength(1);
       });
 
-      it("does not warn when only one of the pair is set", () => {
+      it("warns even when the file has no explicitly-annotated RPCs (file-level precedence check)", () => {
+        // The ignore_*/transform precedence warning is computed from the
+        // file's schema options alone, independent of whether any RPC opts
+        // in via `operation` — it still surfaces so the author sees the
+        // conflicting file-level options even if no operation is generated.
         const result = collect({
           methods: [{ name: "CreateUser" }],
+          schemaOptions: { requestsAsInputs: true, ignoreRequests: true },
+        });
+        expect(result.operations).toEqual([]);
+        expect(result.warnings).toHaveLength(1);
+      });
+
+      it("does not warn when only one of the pair is set", () => {
+        const result = collect({
+          methods: [{ name: "CreateUser", rpc: { operation: MUTATION } }],
           schemaOptions: { requestsAsInputs: true },
         });
         expect(result.warnings).toEqual([]);
@@ -767,21 +791,25 @@ describe("collectOperationsFromFile", () => {
   });
 });
 
-describe("fileHasOptedInServices", () => {
-  it("is false when no service carries (graphql.service)", () => {
+describe("fileHasExposedRpcs", () => {
+  it("is false when no RPC has an explicit (graphql.rpc).operation", () => {
     const { file } = build({
-      service: "no-ext",
       methods: [{ name: "GetUser" }],
     });
-    expect(fileHasOptedInServices(file)).toBe(false);
+    expect(fileHasExposedRpcs(file)).toBe(false);
   });
 
-  it("is true when a service carries (graphql.service), even if ignored", () => {
+  it("is false when (graphql.rpc) is present but operation is unspecified", () => {
     const { file } = build({
-      service: "opted-in",
-      serviceIgnore: true,
-      methods: [{ name: "GetUser" }],
+      methods: [{ name: "GetUser", rpc: {} }],
     });
-    expect(fileHasOptedInServices(file)).toBe(true);
+    expect(fileHasExposedRpcs(file)).toBe(false);
+  });
+
+  it("is true when an RPC has operation set, even if ignored", () => {
+    const { file } = build({
+      methods: [{ name: "GetUser", rpc: { operation: QUERY, ignore: true } }],
+    });
+    expect(fileHasExposedRpcs(file)).toBe(true);
   });
 });

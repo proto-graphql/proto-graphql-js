@@ -18,8 +18,6 @@ import {
   MethodOptionsSchema,
   OneofDescriptorProtoSchema,
   ServiceDescriptorProtoSchema,
-  type ServiceOptions,
-  ServiceOptionsSchema,
 } from "@bufbuild/protobuf/wkt";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { protocGenPothos } from "./plugin.js";
@@ -33,19 +31,21 @@ const QUERY = 1;
 const MUTATION = 2;
 
 // ---------------------------------------------------------------------------
-// (graphql.service) / (graphql.rpc) option fixtures
+// (graphql.rpc) option fixtures
 //
-// A wire-compatible, locally-declared subset of graphql/schema.proto's
-// `service`/`rpc` extensions (field number 2056 on Service/MethodOptions).
-// Declared here (rather than reaching into codegen-core's deliberately
-// unexported generated extensions) so the fixtures are self-contained;
-// extensions match by field number on the wire, so a Service/MethodOptions
-// built with this registry round-trips through codegen-core's real
-// `getServiceOptions` / `getRpcOptions`. Mirrors protoc-gen-dataloader's
+// A wire-compatible, locally-declared subset of graphql/schema.proto's `rpc`
+// extension (field number 2056 on MethodOptions). Declared here (rather than
+// reaching into codegen-core's deliberately unexported generated extensions)
+// so the fixtures are self-contained; extensions match by field number on the
+// wire, so a MethodOptions built with this registry round-trips through
+// codegen-core's real `getRpcOptions`. Mirrors protoc-gen-dataloader's
 // printer.test.ts.
+//
+// Q31: there is no service-level opt-in construct anymore — each RPC declares
+// its own exposure via `(graphql.rpc).operation`, so these fixtures only need
+// to model `rpc`, not `service`.
 // ---------------------------------------------------------------------------
 const OPTPKG = "pothos_op_test.opts";
-const SERVICE_EXTENSION_NUMBER = 2056;
 const RPC_EXTENSION_NUMBER = 2056;
 
 function fld(
@@ -93,10 +93,6 @@ function buildGraphqlOptsRegistry() {
     ],
     messageType: [
       create(DescriptorProtoSchema, {
-        name: "GraphqlServiceOptions",
-        field: [fld("ignore", 1, T.BOOL, OPTIONAL)],
-      }),
-      create(DescriptorProtoSchema, {
         name: "GraphqlRpcOptions",
         field: [
           fld("ignore", 1, T.BOOL, OPTIONAL),
@@ -109,10 +105,6 @@ function buildGraphqlOptsRegistry() {
       }),
     ],
     extension: [
-      fld("service", SERVICE_EXTENSION_NUMBER, T.MESSAGE, OPTIONAL, {
-        typeName: `.${OPTPKG}.GraphqlServiceOptions`,
-        extendee: ".google.protobuf.ServiceOptions",
-      }),
       fld("rpc", RPC_EXTENSION_NUMBER, T.MESSAGE, OPTIONAL, {
         typeName: `.${OPTPKG}.GraphqlRpcOptions`,
         extendee: ".google.protobuf.MethodOptions",
@@ -127,16 +119,6 @@ function buildGraphqlOptsRegistry() {
 }
 
 const optsRegistry = buildGraphqlOptsRegistry();
-
-function serviceOptions(o: { ignore?: boolean } = {}): ServiceOptions {
-  const ext = optsRegistry.getExtension(`${OPTPKG}.service`);
-  const desc = optsRegistry.getMessage(`${OPTPKG}.GraphqlServiceOptions`);
-  if (ext == null || desc == null) throw new Error("bad opts registry");
-  const value = create(desc, { ignore: o.ignore ?? false });
-  const so = create(ServiceOptionsSchema, {});
-  setExtension(so, ext, value);
-  return so;
-}
 
 function rpcOptions(o: {
   ignore?: boolean;
@@ -253,7 +235,6 @@ describe("protocGenPothos operations", () => {
       service: [
         create(ServiceDescriptorProtoSchema, {
           name: "UserService",
-          options: serviceOptions(),
           method: [
             method(
               "GetUser",
@@ -653,7 +634,6 @@ describe("protocGenPothos operations", () => {
       service: [
         create(ServiceDescriptorProtoSchema, {
           name: "UserService",
-          options: serviceOptions(),
           method: [
             method(
               "CreateUser",
@@ -858,7 +838,6 @@ describe("protocGenPothos operations", () => {
       service: [
         create(ServiceDescriptorProtoSchema, {
           name: "AddressService",
-          options: serviceOptions(),
           method: [
             method(
               "GetAddress",
@@ -1271,7 +1250,6 @@ describe("protocGenPothos operations", () => {
       service: [
         create(ServiceDescriptorProtoSchema, {
           name: "PingService",
-          options: serviceOptions(),
           method: [
             method(
               "Ping",
@@ -1408,7 +1386,7 @@ describe("protocGenPothos operations", () => {
     `);
   });
 
-  it("skips streaming RPCs with a warning to stderr", () => {
+  it("silently skips an unannotated streaming RPC (no warning, Q31)", () => {
     const pkg = "pothos_op_test.streaming";
     const file = create(FileDescriptorProtoSchema, {
       name: "watch.proto",
@@ -1418,7 +1396,6 @@ describe("protocGenPothos operations", () => {
       service: [
         create(ServiceDescriptorProtoSchema, {
           name: "WatchService",
-          options: serviceOptions(),
           method: [
             method("Watch", `.${pkg}.Item`, `.${pkg}.Item`, rpcOptions({}), {
               server: true,
@@ -1434,9 +1411,9 @@ describe("protocGenPothos operations", () => {
     const resp = run([file], file.name, PB_ES);
 
     expect(resp.error).toBeFalsy();
-    const warnings = stderr.mock.calls.map((c) => String(c[0])).join("");
-    expect(warnings).toContain("WatchService.Watch");
-    expect(warnings).toContain("streaming");
+    // Q31: an unannotated RPC — streaming or not — is simply unexposed;
+    // there is no longer a warning channel for this case.
+    expect(stderr).not.toHaveBeenCalled();
     // Types are still generated; no operation is emitted.
     expect(resp.file[0]?.content).toContain("Item$Ref");
     expect(resp.file[0]?.content).not.toContain("queryField");
@@ -1456,7 +1433,6 @@ describe("protocGenPothos operations", () => {
       service: [
         create(ServiceDescriptorProtoSchema, {
           name: "UserService",
-          options: serviceOptions(),
           method: [
             method(
               "GetUser",
@@ -1490,7 +1466,6 @@ describe("protocGenPothos operations", () => {
       service: [
         create(ServiceDescriptorProtoSchema, {
           name: "WatchService",
-          options: serviceOptions(),
           method: [
             method(
               "Watch",
@@ -1511,7 +1486,7 @@ describe("protocGenPothos operations", () => {
     );
   });
 
-  it("errors when (graphql.service) is used without protobuf_lib=protobuf-es", () => {
+  it("errors when (graphql.rpc).operation is used without protobuf_lib=protobuf-es", () => {
     const pkg = "pothos_op_test.guard";
     const file = create(FileDescriptorProtoSchema, {
       name: "guard.proto",
@@ -1524,7 +1499,6 @@ describe("protocGenPothos operations", () => {
       service: [
         create(ServiceDescriptorProtoSchema, {
           name: "UserService",
-          options: serviceOptions(),
           method: [
             method(
               "GetUser",
@@ -1539,7 +1513,7 @@ describe("protocGenPothos operations", () => {
 
     // Default runtime is ts-proto (no protobuf_lib param).
     expect(() => run([file], file.name, "")).toThrowErrorMatchingInlineSnapshot(
-      `[Error: guard: (graphql.service) requires protobuf_lib=protobuf-es (protobuf-es v2), but protobuf_lib=ts-proto. RPC-to-Query/Mutation generation only supports protobuf-es v2 (Connect-ES v2). Remove (graphql.service) from the file's services, or switch the plugin to protobuf_lib=protobuf-es.]`,
+      `[Error: guard: (graphql.rpc).operation requires protobuf_lib=protobuf-es (protobuf-es v2), but protobuf_lib=ts-proto. RPC-to-Query/Mutation generation only supports protobuf-es v2 (Connect-ES v2). Remove (graphql.rpc).operation from the file's RPCs, or switch the plugin to protobuf_lib=protobuf-es.]`,
     );
   });
 

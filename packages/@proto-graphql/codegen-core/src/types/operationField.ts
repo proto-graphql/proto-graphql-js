@@ -1,5 +1,4 @@
 import type { DescFile, DescMethod, DescService } from "@bufbuild/protobuf";
-import { MethodOptions_IdempotencyLevel } from "@bufbuild/protobuf/wkt";
 import { camelCase } from "change-case";
 import * as extensions from "../__generated__/extensions/graphql/schema_pb.js";
 import { isMessageField } from "../proto/util.js";
@@ -17,13 +16,11 @@ import {
   exceptRequestOrResponse,
   getRpcOptions,
   getSchemaOptions,
-  getServiceOptions,
   isIgnoredInputType,
   isIgnoredType,
   isInterface,
   isRequestAsInputOnly,
   isResponseAsPayloadOnly,
-  isServiceOptedIn,
   isSquashedUnion,
 } from "./util.js";
 
@@ -90,9 +87,10 @@ export type OperationReturnType =
   | { readonly kind: "boolean" };
 
 /**
- * A resolved, printable model of one opted-in unary RPC as a GraphQL Query or
- * Mutation field. Produced by {@link collectOperationsFromFile}; consumed by
- * the protoc-gen-pothos operation printer (T1.3).
+ * A resolved, printable model of one explicitly-annotated unary RPC as a
+ * GraphQL Query or Mutation field. Produced by
+ * {@link collectOperationsFromFile}; consumed by the protoc-gen-pothos
+ * operation printer (T1.3).
  */
 export interface OperationField {
   readonly kind: OperationKind;
@@ -131,23 +129,34 @@ export interface OperationCollectionResult {
 
 /**
  * Cheap predicate for the plugin's `protobuf_lib=protobuf-es` guard (R1.4):
- * `true` iff the file contains at least one service carrying `(graphql.service)`
- * (presence, ignoring `service.ignore`). The plugin uses this to decide whether
- * to error when the runtime is not protobuf-es, *before* running collection.
+ * `true` iff the file contains at least one RPC with an explicit
+ * `(graphql.rpc).operation` (QUERY or MUTATION). The plugin uses this to
+ * decide whether to error when the runtime is not protobuf-es, *before*
+ * running collection.
+ *
+ * Ignores `(graphql.rpc).ignore`: an ignored-but-annotated RPC still declares
+ * intent to be exposed (generation is only temporarily halted), so it still
+ * requires the protobuf-es-only annotation surface.
  */
-export function fileHasOptedInServices(file: DescFile): boolean {
-  return file.services.some(isServiceOptedIn);
+export function fileHasExposedRpcs(file: DescFile): boolean {
+  return file.services.some((service) =>
+    service.methods.some((method) =>
+      hasExplicitOperation(getRpcOptions(method)),
+    ),
+  );
 }
 
 /**
- * Resolves opted-in services' unary RPCs in `file` into printable
+ * Resolves `file`'s explicitly-annotated RPCs into printable
  * {@link OperationField} models.
  *
- * Selection (R1): only services with a present `(graphql.service)` option are
- * considered; a service with `ignore = true` is skipped entirely (stays opted
- * in conceptually). Per-RPC `(graphql.rpc).ignore` skips that RPC. Streaming
- * (non-unary) RPCs are skipped with a warning, or produce an error when they
- * explicitly set `operation`.
+ * Selection (Q31): there is no service-level opt-in. An RPC generates a
+ * Query/Mutation field iff `(graphql.rpc).operation` is explicitly QUERY or
+ * MUTATION; `idempotency_level` is never consulted, and unannotated RPCs
+ * (including unannotated streaming RPCs) are silently skipped. Per-RPC
+ * `(graphql.rpc).ignore` disables generation while keeping the declaration
+ * (operation set + ignore=true -> not generated, silently). Streaming RPCs
+ * with an explicit `operation` are a contradiction -> error.
  *
  * `files` is the full set of files in the run (e.g. `schema.allFiles`), needed
  * to decide whether a request's Input / response's Object type is generated
@@ -193,28 +202,22 @@ export function collectOperationsFromFile(
   const opts: TypeOptions = { ...options, files };
 
   for (const service of file.services) {
-    if (!isServiceOptedIn(service)) continue;
-    if (getServiceOptions(service).ignore) continue;
-
     for (const method of service.methods) {
       const rpcOpts = getRpcOptions(method);
+      // Q31: no explicit operation -> not exposed, silently (no warning, even
+      // for streaming RPCs).
+      if (!hasExplicitOperation(rpcOpts)) continue;
       if (rpcOpts.ignore) continue;
 
       const rpcRef = `${service.name}.${method.name}`;
 
       // R1.3: streaming RPCs have no single request/response pair to map, so
-      // they are skipped. An explicit `operation` on a streaming RPC is a
-      // contradiction (it asks for a mapping that cannot exist) -> error.
+      // an explicit `operation` on one is a contradiction (it asks for a
+      // mapping that cannot exist) -> error.
       if (method.methodKind !== "unary") {
-        if (hasExplicitOperation(rpcOpts)) {
-          errors.push(
-            `(graphql.rpc).operation is set on ${rpcRef}, but ${rpcRef} is a ${method.methodKind} RPC. Streaming RPCs cannot be mapped to a GraphQL Query/Mutation. Remove the operation option, or set (graphql.rpc).ignore = true to exclude this RPC.`,
-          );
-        } else {
-          warnings.push(
-            `Skipping ${rpcRef}: ${method.methodKind} (streaming) RPCs are not supported and will not be generated as GraphQL operations. Set (graphql.rpc).ignore = true on this RPC to silence this warning.`,
-          );
-        }
+        errors.push(
+          `(graphql.rpc).operation is set on ${rpcRef}, but ${rpcRef} is a ${method.methodKind} RPC. Streaming RPCs cannot be mapped to a GraphQL Query/Mutation. Remove the operation option, or set (graphql.rpc).ignore = true to exclude this RPC.`,
+        );
         continue;
       }
 
@@ -247,7 +250,7 @@ function resolveOperation(
   options: TypeOptions,
   files: readonly DescFile[],
 ): OperationResult {
-  const kind = resolveOperationKind(method, rpcOpts);
+  const kind = resolveOperationKind(rpcOpts);
 
   const errors: string[] = [];
   const argsRes = resolveArgs(method, kind, options, files);
@@ -276,9 +279,11 @@ function resolveOperation(
   };
 }
 
-// R2: explicit `operation` wins; otherwise NO_SIDE_EFFECTS -> Query, else Mutation.
+// Q31: `operation` is the sole declaration point — callers only reach this
+// function after `collectOperationsFromFile` has confirmed
+// `hasExplicitOperation(rpcOpts)`, so QUERY/MUTATION are the only reachable
+// cases. `idempotency_level` is never consulted.
 function resolveOperationKind(
-  method: DescMethod,
   rpcOpts: extensions.GraphqlRpcOptions,
 ): OperationKind {
   switch (rpcOpts.operation) {
@@ -286,11 +291,12 @@ function resolveOperationKind(
       return "query";
     case extensions.GraphqlOperation.MUTATION:
       return "mutation";
-    default:
-      return method.idempotency ===
-        MethodOptions_IdempotencyLevel.NO_SIDE_EFFECTS
-        ? "query"
-        : "mutation";
+    case extensions.GraphqlOperation.GRAPHQL_OPERATION_UNSPECIFIED:
+      throw "unreachable";
+    default: {
+      const _exhaustiveCheck: never = rpcOpts.operation;
+      throw "unreachable";
+    }
   }
 }
 

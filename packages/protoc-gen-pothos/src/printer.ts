@@ -4,7 +4,7 @@ import {
   collectOperationsFromFile,
   collectTypesFromFile,
   createRegistryFromSchema,
-  fileHasOptedInServices,
+  fileHasExposedRpcs,
   filenameFromProtoFile,
 } from "@proto-graphql/codegen-core";
 import type { Options } from "@proto-graphql/protoc-plugin-helpers";
@@ -26,12 +26,13 @@ export function generateFiles(
     opts.printer.protobuf = "ts-proto"; // default
   }
 
-  // R1.4: `(graphql.service)` requires the protobuf-es v2 runtime (Connect-ES
-  // v2). Detect the opt-in before collecting so any other runtime fails with a
-  // clear message instead of emitting broken resolvers.
-  if (fileHasOptedInServices(file) && opts.printer.protobuf !== "protobuf-es") {
+  // R1.4: `(graphql.rpc).operation` requires the protobuf-es v2 runtime
+  // (Connect-ES v2). Detect any explicitly-annotated RPC before collecting so
+  // any other runtime fails with a clear message instead of emitting broken
+  // resolvers.
+  if (fileHasExposedRpcs(file) && opts.printer.protobuf !== "protobuf-es") {
     throw new Error(
-      `${file.name}: (graphql.service) requires protobuf_lib=protobuf-es (protobuf-es v2), but protobuf_lib=${opts.printer.protobuf}. RPC-to-Query/Mutation generation only supports protobuf-es v2 (Connect-ES v2). Remove (graphql.service) from the file's services, or switch the plugin to protobuf_lib=protobuf-es.`,
+      `${file.name}: (graphql.rpc).operation requires protobuf_lib=protobuf-es (protobuf-es v2), but protobuf_lib=${opts.printer.protobuf}. RPC-to-Query/Mutation generation only supports protobuf-es v2 (Connect-ES v2). Remove (graphql.rpc).operation from the file's RPCs, or switch the plugin to protobuf_lib=protobuf-es.`,
     );
   }
 

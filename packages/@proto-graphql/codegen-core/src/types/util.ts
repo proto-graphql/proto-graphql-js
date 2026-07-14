@@ -7,9 +7,7 @@ import {
   type DescMessage,
   type DescMethod,
   type DescOneof,
-  type DescService,
   getExtension,
-  hasExtension,
 } from "@bufbuild/protobuf";
 import {
   FieldDescriptorProto_Label,
@@ -615,9 +613,6 @@ const EMPTY_ENUM_OPTIONS = Object.freeze(
 const EMPTY_ENUM_VALUE_OPTIONS = Object.freeze(
   create(extensions.GraphqlEnumValueOptionsSchema, {}),
 );
-const EMPTY_SERVICE_OPTIONS = Object.freeze(
-  create(extensions.GraphqlServiceOptionsSchema, {}),
-);
 const EMPTY_RPC_OPTIONS = Object.freeze(
   create(extensions.GraphqlRpcOptionsSchema, {}),
 );
@@ -675,33 +670,7 @@ function getEnumValueOptions(
   return getExtension(desc.proto.options, extensions.enum_value);
 }
 
-export function getServiceOptions(
-  desc: DescService,
-): extensions.GraphqlServiceOptions {
-  if (desc.proto.options == null) return EMPTY_SERVICE_OPTIONS;
-  return getExtension(desc.proto.options, extensions.service);
-}
-
 export function getRpcOptions(desc: DescMethod): extensions.GraphqlRpcOptions {
   if (desc.proto.options == null) return EMPTY_RPC_OPTIONS;
   return getExtension(desc.proto.options, extensions.rpc);
-}
-
-/**
- * A service is opted into Query/Mutation generation iff the `(graphql.service)`
- * extension is *present* on it (R1.1).
- *
- * This must use `hasExtension` rather than `getServiceOptions`: the latter
- * returns the shared frozen `EMPTY_SERVICE_OPTIONS` singleton for services that
- * carry no `(graphql.service)` option, so an all-defaults opt-in (`option
- * (graphql.service) = {};`) is indistinguishable from "no option at all" by its
- * field values alone. Only presence of the extension carries the opt-in signal.
- *
- * `service.ignore` does *not* affect opt-in: an ignored service stays opted in
- * conceptually (its mere presence still requires the `protobuf-es` guard at the
- * plugin layer, R1.4) — it simply produces no operations.
- */
-export function isServiceOptedIn(desc: DescService): boolean {
-  const options = desc.proto.options;
-  return options != null && hasExtension(options, extensions.service);
 }
