@@ -405,8 +405,11 @@ describe("collectOperationsFromFile", () => {
   describe("R3: field name", () => {
     it("defaults to camelCase of the RPC name", () => {
       expect(
-        only(collect({ methods: [{ name: "GetUser", rpc: { operation: MUTATION } }] }))
-          .name,
+        only(
+          collect({
+            methods: [{ name: "GetUser", rpc: { operation: MUTATION } }],
+          }),
+        ).name,
       ).toBe("getUser");
     });
 
@@ -547,7 +550,9 @@ describe("collectOperationsFromFile", () => {
         objectTypeIgnore: true,
       });
       const result = collect({
-        methods: [{ name: "GetUser", response: res, rpc: { operation: QUERY } }],
+        methods: [
+          { name: "GetUser", response: res, rpc: { operation: QUERY } },
+        ],
       });
       expect(result.operations).toEqual([]);
       expect(result.errors).toHaveLength(1);

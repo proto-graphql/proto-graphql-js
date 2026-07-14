@@ -141,9 +141,7 @@ describe("exceptRequestOrResponse", () => {
 // which is out of scope here). Build a minimal FileDescriptorProto with a
 // service/method in-code instead, resolving its `graphql/schema.proto`
 // dependency straight from the generated extensions module.
-function buildServiceRegistry(options?: {
-  methodOptions?: MethodOptions;
-}) {
+function buildServiceRegistry(options?: { methodOptions?: MethodOptions }) {
   const fileProto = create(FileDescriptorProtoSchema, {
     name: "util_test_service.proto",
     package: "codegen_core.util_test",
