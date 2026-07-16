@@ -22,7 +22,7 @@
     "@changesets/changelog-github": "0.7.0",
     "@changesets/cli": "2.31.0",
     "@proto-graphql/tsconfig": "workspace:*",
-    "@types/node": "24.13.2",
+    "@types/node": "24.13.3",
     "minimatch": "10.2.5",
     "ts-proto": "2.2.0",
     "tsup": "8.5.1",
